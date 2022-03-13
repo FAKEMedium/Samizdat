@@ -13,7 +13,10 @@ create a disk image that can be downloaded as a torrent file.
 * How you can [contribute](./pages/contributing/index.md)
 
 ### Directory structure
-...
+* bin - Scripts
+* lib - Perl modules
+* pages - Markdown files that will be processed
+* public - Static files. Processed files go here too
+* sources.d - yml files for different news sites
+* templates - Templates, layouts and smaller chunks
 
-### File formats
-...
