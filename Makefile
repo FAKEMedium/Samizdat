@@ -1,10 +1,12 @@
 static:
 	bin/samizdat makestatic
 
+clean:
+
 harvest:
 
-dvd:
-
-blueray:
+iso:
 
 torrent:
+
+isotorrent:

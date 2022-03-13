@@ -10,7 +10,7 @@ are filtered this repository aims to provide tools to fetch some representative 
 create a disk image that can be downloaded as a torrent file.
 
 * Learn about [usage and installation](./INSTALL.md)
-* How you can [contribute](./pages/contributing/index.md)
+* How you can [contribute](./pages/contributing/README.md)
 
 ### Directory structure
 * bin - Scripts
@@ -18,8 +18,14 @@ create a disk image that can be downloaded as a torrent file.
 * pages - Markdown files that will be processed
 * public - Static files. Processed files go here too.
 * sources.d - yml files for collecting media from different news sites
+* t - Test suite
 * templates - Templates, layouts and smaller chunks
 
 The files in the public directory are what goes into the disk image (ISO format) to be viewed locally. 
 It is also possible to use a web server and serve lightning fast content. Hopefully we'll find a Bittorrent
 solution to stream video too.
+
+
+### Personal usage piracy
+No media material should be added to this repository. Consider the code as a tool to take some of your favourite 
+content with you as you spend time on an isolated island.
