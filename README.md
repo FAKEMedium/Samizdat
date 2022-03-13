@@ -16,7 +16,10 @@ create a disk image that can be downloaded as a torrent file.
 * bin - Scripts
 * lib - Perl modules
 * pages - Markdown files that will be processed
-* public - Static files. Processed files go here too
-* sources.d - yml files for different news sites
+* public - Static files. Processed files go here too.
+* sources.d - yml files for collecting media from different news sites
 * templates - Templates, layouts and smaller chunks
 
+The files in the public directory are what goes into the disk image (ISO format) to be viewed locally. 
+It is also possible to use a web server and serve lightning fast content. Hopefully we'll find a Bittorrent
+solution to stream video too.
