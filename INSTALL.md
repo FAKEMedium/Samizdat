@@ -6,7 +6,7 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus make
+  * sudo apt install cpanminus make mkisofs
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
 

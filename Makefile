@@ -5,8 +5,9 @@ clean:
 
 harvest:
 
-iso:
+iso: harvest static
 
 torrent:
+	mkisofs ...
 
-isotorrent:
+isotorrent: iso

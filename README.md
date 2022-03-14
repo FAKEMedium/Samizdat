@@ -15,6 +15,8 @@ create a disk image that can be downloaded as a torrent file.
 ### Directory structure
 * bin - Scripts
 * lib - Perl modules
+  * Samizdat
+    * Command - Perl modules that adds options to the [samizdat command](./bin/samizdat)
 * pages - Markdown files that will be processed
 * public - Static files. Processed files go here too.
 * sources.d - yml files for collecting media from different news sites
@@ -23,7 +25,7 @@ create a disk image that can be downloaded as a torrent file.
 
 The files in the public directory are what goes into the disk image (ISO format) to be viewed locally. 
 It is also possible to use a web server and serve lightning fast content. Hopefully we'll find a Bittorrent
-solution to stream video too.
+solution to stream video too. Fakenews.com will use Samizdat for a period, and have regular updates.
 
 
 ### Personal usage piracy
