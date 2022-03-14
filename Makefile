@@ -11,3 +11,5 @@ torrent:
 	mkisofs ...
 
 isotorrent: iso
+
+devtools:

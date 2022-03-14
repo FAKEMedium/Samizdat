@@ -22,3 +22,4 @@ These tasks are defined in the Makefile and are meant to be run from the applica
 * make torrent - Makes a torrent file of the public directory. If Pirate Bay login credentials are defined 
 in [samizdat.yml](./samizdat.yml) the torrent file will be published too.
 * make isotorrent - Makes torrent files for existing ISO images.
+* make devtools - Bootstraps an Ubuntu live image with everything installed to make contributions easy

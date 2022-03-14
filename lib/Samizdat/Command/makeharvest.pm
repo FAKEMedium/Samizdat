@@ -10,7 +10,7 @@ sub run ($self, @args) {
 
 =head1 SYNOPSIS
 
-  Usage: bin/samizdat makeharvest
+  Usage: samizdat makeharvest
 
 
 =cut
