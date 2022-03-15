@@ -6,6 +6,7 @@ sub startup ($self) {
   my $config = $self->plugin('NotYAMLConfig');
 
   $self->secrets($config->{secrets});
+  push @{$self->commands->namespaces}, 'Samizdat::Command';
 
   # Router
   my $r = $self->routes;

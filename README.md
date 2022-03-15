@@ -1,7 +1,7 @@
 # Samizdat
 Documenting differences in media coverage of the war in Ukraine
 
-In the former Eastern Bloc where free speach was prohibited people used other methods. The underground 
+In the former Eastern Bloc where free speech was prohibited people used other methods. The underground 
 grassroot movement of manual reproduction and distribution of text was called samizdat.
 
 As media no longer can report freely in Russia there are incredible differences in what is reported
@@ -25,8 +25,8 @@ create a disk image that can be downloaded as a torrent file.
 
 The files in the public directory are what goes into the disk image (ISO format) to be viewed locally. 
 It is also possible to use a web server and serve lightning fast content. Hopefully we'll find a Bittorrent
-solution to stream video too. Fakenews.com will use Samizdat for a period, and have regular updates.
-
+solution to stream video too. Fakenews.com will use Samizdat for a period, and have regular updates. Satiric
+content will not be used then.
 
 ### Personal usage piracy
 No media material should be added to this repository. Consider the code as a tool to take some of your favourite 
