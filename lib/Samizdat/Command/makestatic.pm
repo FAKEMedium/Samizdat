@@ -14,3 +14,5 @@ sub run ($self, @args) {
 
 
 =cut
+
+1;

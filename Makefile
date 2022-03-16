@@ -1,9 +1,14 @@
+SHELL := /bin/bash
+PATH := bin:$(PATH)
+
+
 static:
-	bin/samizdat makestatic
+	samizdat makestatic
 
 clean:
 
 harvest:
+	samizdat makeharvest
 
 iso: harvest static
 
