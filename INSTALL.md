@@ -9,7 +9,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo apt install cpanminus make mkisofs
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
-  * sudo cpanm YAML::LoadBundle
+  * sudo cpanm Hash::Merge
 
 
 ## Operation
