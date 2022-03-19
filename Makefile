@@ -6,14 +6,14 @@ static:
 	samizdat makestatic
 
 clean:
-
+	find public/  -name "*.html" -delete
 harvest:
 	samizdat makeharvest
 
 iso: harvest static
 
 torrent:
-	mkisofs ...
+	transmission-cli -n public
 
 isotorrent: iso
 

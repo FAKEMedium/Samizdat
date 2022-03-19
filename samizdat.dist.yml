@@ -1,0 +1,7 @@
+---
+secrets:
+  - b3133e5e7c653c995aa10d604fdab9917430ff26
+sources:
+piratebay:
+  login: example
+  password: s3cr3t

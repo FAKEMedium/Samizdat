@@ -1,6 +1,12 @@
 youtube:
-  - title: "s"
-    url: "q"
-    description: "x"
-    copyright: "o"
-    publishdate: "a"
+  - title: "Russia Ukraine Conflict: Anti-war protester interrupts Russian state TV news broadcast"
+    url: "https://www.youtube.com/watch?v=hnEleanmIJw"
+    description: |
+      For much of the day, mystery surrounded the whereabouts of the journalist who briefly took over the main Russian TV news programme last night. 
+      
+      Around 12 million viewers were getting their nightly TV dose of war the way the Kremlin sees it, then one of their own team said the unsayable and wrote the unwritable.
+      
+      She was arrested, fined and released, but could she be facing more charges later?
+    copyright: "Channel 4 News"
+    publishdate: "2022-03-15"
+    prorussian: 0

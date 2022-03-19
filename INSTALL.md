@@ -3,15 +3,14 @@
 To build the disk image you need a recent version of Perl. Then grab the Mojolicious package.
 The different tasks are managed by make. These steps are suggestions:
 
-* Start with an [Ubuntu installation](https://ubuntu.com/)
+* Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus make mkisofs
+  * sudo apt install cpanminus make mkisofs xorriso growisofs transmission-cli
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge
-
-
+  
 ## Operation
 
 These tasks are defined in the Makefile and are meant to be run from the application root directory
