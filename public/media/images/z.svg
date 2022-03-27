@@ -23,7 +23,7 @@
 			<rect x="0" y="0" width="255" height="2" style="fill:white;" />
 			<rect x="0" y="190" width="255" height="2" style="fill:#d52b1e;" />
 		</g>
-		<text transform="translate(31, 0)" style="font-size: 140%">
+		<text transform="translate(31, 0)" style="font-size: 140%" fill="black">
 			<textPath xlink:href="#circle-up" startOffset="9%">Влади́мир Влади́мирович Пу́тин не фашист и не убийца</textPath>
 			<textPath id="but" xlink:href="#circle-down" startOffset="26%" fill-opacity="0.0">Но его молчаливые помощники</textPath>
 		</text>
