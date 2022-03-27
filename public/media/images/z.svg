@@ -8,8 +8,8 @@
 		<path id="circle-down" d="M0,256 A 224 224 0 1,0 448,256" />
 	</defs>
 	<g id="z-logo" fill="#555">
-		<g id="russian-flag" transform="translate(0, 64)" mask="url(#flag-mask)">
-			<rect id="white" x="0" y="0" width="512" height="138" fill="#ffffff" />
+		<g id="russian-flag" transform="translate(0, 84)" mask="url(#flag-mask)">
+			<rect id="white" x="0" y="-20" width="512" height="138" fill="#ffffff" />
 			<rect id="blue" x="0" y="118" width="512" height="118" fill="#0039a6" />
 			<rect id="red" x="0" y="236" width="512" height="138" fill="#d52b1e" />
 		</g>
