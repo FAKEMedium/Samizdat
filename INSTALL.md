@@ -10,6 +10,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge
+  * sudo cpanm Text::Markdown
   
 ## Operation
 
