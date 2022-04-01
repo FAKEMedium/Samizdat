@@ -1,17 +1,18 @@
 package Samizdat;
 use Mojo::Base 'Mojolicious', -signatures;
+use Samizdat::Model::Markdown;
+
 
 sub startup ($self) {
 
   my $config = $self->plugin('NotYAMLConfig');
 
   $self->secrets($config->{secrets});
+  $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   push @{$self->commands->namespaces}, 'Samizdat::Command';
 
-  # Router
   my $r = $self->routes;
 
-  # Normal route to controller
   $r->get('/')->to('#index');
 }
 

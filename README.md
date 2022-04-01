@@ -10,7 +10,7 @@ are filtered this repository aims to provide tools to fetch some representative 
 create a disk image that can be downloaded as a torrent file.
 
 * Learn about [usage and installation](./INSTALL.md)
-* How you can [contribute](./pages/contributing/README.md)
+* How you can [contribute](public/contributing/README.md)
 
 ### Directory structure
 * bin - Scripts

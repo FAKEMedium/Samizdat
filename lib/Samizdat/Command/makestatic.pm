@@ -5,7 +5,7 @@ has description => 'Apply templates to markdown files and dump resulting files i
 has usage => sub ($self) { $self->extract_usage };
 
 sub run ($self, @args) {
-
+  $self->app->he
 }
 
 =head1 SYNOPSIS

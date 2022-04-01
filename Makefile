@@ -15,6 +15,6 @@ iso: harvest static
 torrent:
 	transmission-cli -n public
 
-isotorrent: iso
+isotorrent: public/iso
 
 devtools:
