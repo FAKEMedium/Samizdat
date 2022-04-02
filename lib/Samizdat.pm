@@ -10,6 +10,7 @@ sub startup ($self) {
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   push @{$self->commands->namespaces}, 'Samizdat::Command';
+  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
 
   my $r = $self->routes;
 
