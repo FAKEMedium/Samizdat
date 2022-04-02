@@ -106,12 +106,7 @@
 			<h1 id="headline" class="mb-1 mb-sm-4"><%= title %></h1>
 			<section>
 				<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!"#¤%&/()=?`^*_:;,.-'"`+¡@£$€¥{[]}\±~´| ### -->
-				<div class="col-8">
-					<%= content %>
-				</div>
-				<div class="col-4">
-
-				</div>
+<% content %>
 				<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!"#¤%&/()=?`^*_:;,.-'"`+¡@£$€¥{[]}\±~´| ### -->
 			</section>
 		</main>
