@@ -19,7 +19,7 @@ sub startup ($self) {
     no_header_detect => 1,
   });
   $self->lexicon({
-    search_dirs => [qw(localedata)],
+    search_dirs => [qw(locale)],
     gettext_to_maketext => 0,
     decode => 1,
     data   => [ '*::' => '*.mo' ],

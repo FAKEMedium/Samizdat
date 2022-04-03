@@ -11,6 +11,7 @@ sub run ($self, @args) {
     my $content = {
       main => $self->app->markdown()->md2html($md),
     };
+#    say $self->render_data('index', $content);
   }
 }
 
