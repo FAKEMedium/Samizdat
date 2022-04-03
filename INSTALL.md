@@ -11,6 +11,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge
   * sudo cpanm Text::Markdown
+  * sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO
   
 ## Operation
 

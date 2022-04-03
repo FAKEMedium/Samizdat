@@ -1,11 +1,12 @@
 % layout 'default';
+
 <div class="col-8">
-<%= $content->{main} %>
+<%= $main %>
 </div>
 <div class="col-4">
-% for my $sidepanel (@{$content->{sidepanels}) {
+% for my $sidepanel (@{ $sidepanels }) {
   <div>
-
+<%= %>
   </div>
-%  }
+% }
 </div>

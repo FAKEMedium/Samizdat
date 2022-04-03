@@ -1,7 +1,7 @@
 package Samizdat::Controller;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 
-sub welcome ($self) {
+sub index ($self) {
 
   $self->render(msg => 'Some content');
 }
