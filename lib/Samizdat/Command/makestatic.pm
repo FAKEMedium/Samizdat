@@ -6,13 +6,16 @@ has description => 'Apply templates to markdown files and dump resulting files i
 has usage => sub ($self) { $self->extract_usage };
 
 sub run ($self, @args) {
+
+  my $template = Mojo::Template->new();
   foreach my $file (@{ $self->app->markdown()->list }) {
     my $md = $self->app->markdown()->readmd($file);
     my $content = {
       main => $self->app->markdown()->md2html($md),
     };
-#    say $self->render_data('index', $content);
+    say $self->app->subdispatch(GET => $file);
   }
+
 }
 
 =head1 SYNOPSIS

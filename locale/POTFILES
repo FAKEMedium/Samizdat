@@ -1,0 +1,10 @@
+../lib/Samizdat.pm
+../lib/Samizdat/Command/makeharvest.pm
+../lib/Samizdat/Command/makepotfiles.pm
+../lib/Samizdat/Command/makestatic.pm
+../lib/Samizdat/Controller.pm
+../lib/Samizdat/Model/Markdown.pm
+../templates/chunks/samizdat.html.ep
+../templates/index.html.ep
+../templates/layouts/defaul.html.ep
+../templates/twocolumn.html.ep

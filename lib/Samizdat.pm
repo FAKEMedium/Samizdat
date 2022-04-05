@@ -11,10 +11,11 @@ sub startup ($self) {
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
+  $self->plugin('Subdispatch');
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
     default => 'en',
-    languages => [qw(en-US en ru)],
+    languages => [qw(en-US en ru-RU ru)],
     support_url_langs => [ qw( en ru ) ],
     no_header_detect => 1,
   });

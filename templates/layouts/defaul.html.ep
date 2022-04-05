@@ -84,7 +84,7 @@
 							<ul class="navbar-nav" style="width:100%;">
 								<li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdownAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">About</a>
 									<ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
-										<li><a class="dropdown-item text-nowrap" href="/contributing/">Contributing</a></li>
+										<li><a class="dropdown-item text-nowrap" href="/contributing/"><%= __('Contributing') %></a></li>
 										<li><a class="dropdown-item text-nowrap" href="/advertising/">Advertising</a></li>
 									</ul>
 								</li>
