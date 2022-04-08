@@ -1,7 +1,0 @@
-LINGUAS = ru_RU sv_SE
-
-TEXTDOMAIN = com.fakenews
-
-COPYRIGHT_HOLDER = Webmaster
-
-MSGID_BUGS_ADDRESS = Webmaster <webmaster@fakenews.com>

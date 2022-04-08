@@ -18,9 +18,8 @@ isotorrent: public/iso
 
 devtools:
 
-potfiles:
-	samizdat makepotfiles
+i18n:
+	samizdat makei18n
 
 locale: potfiles
 	cd locale
-	make all

@@ -12,6 +12,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm Hash::Merge
   * sudo cpanm Text::Markdown
   * sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO
+  * sudo cpanm Locale::TextDomain::OO::Extract
   * sudo cpanm Mojolicious::Plugin::Subdispatch
   
 ## Operation
@@ -26,3 +27,4 @@ These tasks are defined in the Makefile and are meant to be run from the applica
 in [samizdat.yml](./samizdat.yml) the torrent file will be published too.
 * make isotorrent - Makes torrent files for existing ISO images.
 * make devtools - Bootstraps an Ubuntu live image with everything installed to make contributions easy
+* make i18n  - Manage script internationalization

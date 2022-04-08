@@ -47,7 +47,7 @@
 		</svg>
 		<header>
 			<div id="message" class="toast position-absolute bg-light" role="status" data-delay="5000" aria-atomic="true" style="top: 0; right: 0; z-index: 2000;"></div>
-			<a class="sr-only" href="#startdoc">Skip menu</a>
+			<a class="sr-only" href="#startdoc"><%= __("Skip menu") %></a>
 			<div class="widewrapper bg-logobar">
 				<div id="logobar" class="container bg-logobar" aria-live="polite">
 					<div class="row justify-content-between position-relative">

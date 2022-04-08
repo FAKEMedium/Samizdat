@@ -5,3 +5,6 @@ sources:
 piratebay:
   login: example
   password: s3cr3t
+textdomain: com.fakenews
+sitename: Fake News
+siteurl: https://fakenews.com/
