@@ -38,10 +38,37 @@ locale:
       Language-Team_name: Webmaster
       Language-Team_address: webmaster@fakenews.com
     sv-SE:
+    pl:
+    pl-PL:
+    zh:
+    zh-CN:
+    de:
+    de-DE:
+    fr:
+    fr-FR:
+    be:
+    be-BY:
+    uk:
+    uk-UA:
+    sr:
+    sr-RS:
+    ar:
+    ar-SY:
+    hu:
+    hu-HU:
   default_language: en
   skip_messages:
     - ru-RU
     - sv-SV
     - en-US
+    - pl-PL
+    - zh-CN
+    - de-DE
+    - fr-FR
+    - be-BY
+    - uk-UA
+    - sr-RS
+    - ar-SY
+    - hu-HU
 
 

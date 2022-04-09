@@ -29,3 +29,7 @@ msgstr ""
 msgid "Skip menu"
 msgstr ""
 
+#: lib/Samizdat/Command/makei18n.pm:21
+msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+

@@ -18,8 +18,11 @@ msgstr ""
 "charset: utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Contributing"
+msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
 msgid "Skip menu"
+msgstr ""
+
+msgid "Contributing"
 msgstr ""

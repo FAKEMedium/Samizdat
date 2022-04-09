@@ -13,11 +13,20 @@ has usage => sub ($self) { $self->extract_usage };
 sub run ($self, @args) {
   my $path;
   my $app = $self->app;
+  my $year = '2022';
 
-  my $pot = sprintf("# %s\n", 'Fake News - Samizdat');
-  $pot .= sprintf("# %s\n", 'Copyright (C) 2022 Webmaster');
-  $pot .= sprintf("# %s\n", 'This file is distributed under the same license as the Samizdat package.');
-  $pot .= sprintf("# %s\n", 'Webmaster <webmaster@fakenews.com>, 2022.');
+  my $pot = sprintf("# %s - %s\n", $app->{config}->{sitename}, $app->{config}->{locale}->{project});
+  $pot .= sprintf("# Copyright (C) %s %s\n", $year, $app->{config}->{locale}->{'Report-Msgid-Bugs-To_name'});
+  $pot .= sprintf("# %s\n",
+    $app->__x('This file is distributed under the same license as the {project} package.',
+      project => $app->{config}->{locale}->{project}
+    )
+  );
+  $pot .= sprintf("# %s <%s>, %s.\n",
+    $app->{config}->{locale}->{'Report-Msgid-Bugs-To_name'},
+    $app->{config}->{locale}->{'Report-Msgid-Bugs-To_address'},
+    $year
+  );
   $pot .= sprintf("#\n");
   $pot .= sprintf("%s\n", 'msgid ""');
   $pot .= sprintf("%s\n", 'msgstr ""');
@@ -96,7 +105,7 @@ sub run ($self, @args) {
       },
     );
 
-    # Read existing po file
+    # Read existing po file for the language
     $path = Mojo::Home->new(sprintf('locale/%s.po', $language));
     if (-f $path->to_string) {
       $process->language($language);
@@ -113,6 +122,8 @@ sub run ($self, @args) {
       $process->spew(po => $path->to_string);
 
       # Write mo files
+      Mojo::Home->new(sprintf('locale/%s/%s/', $language, $app->{config}->{locale}->{category})
+      )->make_path({mode => 0755});
       $process->spew(mo => sprintf('locale/%s/%s/%s.mo',
         $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
     }

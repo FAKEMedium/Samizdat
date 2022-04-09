@@ -29,3 +29,7 @@ msgstr "Bidra"
 msgid "Skip menu"
 msgstr "Hoppa över meny"
 
+#: lib/Samizdat/Command/makei18n.pm:21
+msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+

@@ -21,5 +21,5 @@ devtools:
 i18n:
 	samizdat makei18n
 
-locale: potfiles
-	cd locale
+server:
+	samizdat daemon
