@@ -16,10 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "Skip menu"
+msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
-msgid "This file is distributed under the same license as the {project} package."
+msgid "Skip menu"
 msgstr ""
 
 msgid "Contributing"
