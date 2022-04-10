@@ -6,6 +6,7 @@ static:
 
 clean:
 	find public/  -name "*.html" -delete
+
 harvest:
 	samizdat makeharvest
 
@@ -21,8 +22,11 @@ devtools:
 i18n:
 	samizdat makei18n
 
+debug:
+	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development samizdat daemon
+
 server:
-	MOJO_LISTEN=http://0.0.0.0:3000 samizdat daemon
+	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=production samizdat prefork
 
 routes:
 	samizdat routes -v

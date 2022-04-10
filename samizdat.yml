@@ -3,6 +3,7 @@ secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
 sitename: Fake News
 siteurl: https://fakenews.com/
+domain: fakenews.com
 sources:
 piratebay:
   login: example

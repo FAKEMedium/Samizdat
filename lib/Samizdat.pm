@@ -28,12 +28,29 @@ sub startup ($self) {
       '*:LC_MESSAGES:com.fakenews' => '*/LC_MESSAGES/com.fakenews.mo',
     ],
   });
-  $self->language('en');
   push @{$self->commands->namespaces}, 'Samizdat::Command';
   unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
+  $self->hook(before_routes => sub {
+    my $c = shift;
+    my $language = $c->cookie('language') // '';
+    if ($language =~ /^(ru|sv|en)$/) {
+      $self->language($language);
+    } else {
+      $c->cookie(language => 'en', {
+        secure => 1,
+        httponly => 0,
+        path => '/',
+        expires => time + 36000,
+        domain => $config->{domain},
+        hostonly => 1,
+      });
+      $self->language('en');
+    }
+  });
 
   my $r = $self->routes;
-  $r->any('/*url' => { url => ''} => sub ($c) {} => 'index');
+  $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', template => 'twocolumn', docpath => '/');
+  $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi', template => 'index');
 }
 
 1;

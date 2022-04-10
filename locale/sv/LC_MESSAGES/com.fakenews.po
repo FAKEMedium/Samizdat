@@ -19,13 +19,13 @@ msgstr ""
 
 #: templates/layouts/defaul.html.ep:87
 msgid "Contributing"
-msgstr ""
+msgstr "Bidra"
 
 #: templates/layouts/defaul.html.ep:50
 msgid "Skip menu"
-msgstr ""
+msgstr "Hoppa över meny"
 
 #: lib/Samizdat/Command/makei18n.pm:31
 msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
+msgstr "Denna fil distribueras under samma licens som paketet {project}."
 
