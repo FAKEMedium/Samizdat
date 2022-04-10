@@ -23,7 +23,7 @@ sub startup ($self) {
     gettext_to_maketext => 0,
     decode => 1,
     category => 'LC_MESSAGES',
-    texxtdomain =>  'com.fakenews',
+    textdomain =>  'com.fakenews',
     data   => [
       '*:LC_MESSAGES:com.fakenews' => '*/LC_MESSAGES/com.fakenews.mo',
     ],

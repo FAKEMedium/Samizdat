@@ -22,7 +22,7 @@ i18n:
 	samizdat makei18n
 
 server:
-	samizdat daemon
+	MOJO_LISTEN=http://0.0.0.0:3000 samizdat daemon
 
 routes:
 	samizdat routes -v
