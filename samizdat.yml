@@ -11,32 +11,28 @@ locale:
   textdomain: com.fakenews
   category: LC_MESSAGES
   project: Samizdat
-  Project-Id-Version: Samizdat 0.01
-  Report-Msgid-Bugs-To_name: Webmaster
-  Report-Msgid-Bugs-To_address: webmaster@fakenews.com
-  Last-Translator_name: Webmaster
-  Last-Translator_address: webmaster@fakenews.com
-  Language-Team_name: Webmaster
-  Language-Team_address: webmaster@fakenews.com
-  Language: en
+  Project-Id-Version: Samizdat
+  Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+  Last-Translator: Webmaster <webmaster@fakenews.com>
+  Language-Team: Webmaster <webmaster@fakenews.com>
+  PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE
+  POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE
   MIME-Version: 1.0
-  Content-Type: text/plain
-  charset: utf-8
+  Content-Type: text/plain; charset=UTF-8
   Content-Transfer-Encoding: 8bit
+  Language: en
   languages:
     en:
     en-US:
     ru:
-      Last-Translator_name: Webmaster
-      Last-Translator_address: webmaster@fakenews.com
-      Language-Team_name: Webmaster
-      Language-Team_address: webmaster@fakenews.com
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
     ru-RU:
     sv:
-      Last-Translator_name: Webmaster
-      Last-Translator_address: webmaster@fakenews.com
-      Language-Team_name: Webmaster
-      Language-Team_address: webmaster@fakenews.com
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
     sv-SE:
     pl:
     pl-PL:
@@ -59,7 +55,7 @@ locale:
   default_language: en
   skip_messages:
     - ru-RU
-    - sv-SV
+    - sv-SE
     - en-US
     - pl-PL
     - zh-CN

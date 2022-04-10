@@ -5,6 +5,16 @@ use Locale::TextDomain::OO::Extract::Perl;
 use Locale::TextDomain::OO::Extract::JavaScript;
 use Locale::TextDomain::OO::Extract::Process;
 
+my $plurals = {
+  zh => 'nplurals=1; plural=0;',
+  ar => 'nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);',
+  sv => 'nplurals=2; plural=(n != 1);',
+  ru => 'nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);',
+  sr => 'nplurals=4; plural=n==1? 3 : n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2',
+  be => 'nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);',
+  pl => 'nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);',
+};
+
 my $lexicon = {};
 
 has description => 'Managing updates of internationalization data.';
@@ -16,23 +26,22 @@ sub run ($self, @args) {
   my $year = '2022';
 
   my $pot = sprintf("# %s - %s\n", $app->{config}->{sitename}, $app->{config}->{locale}->{project});
-  $pot .= sprintf("# Copyright (C) %s %s\n", $year, $app->{config}->{locale}->{'Report-Msgid-Bugs-To_name'});
+  $pot .= sprintf("# Copyright (C) %s %s\n", $year, $app->{config}->{locale}->{'Language-Team'});
   $pot .= sprintf("# %s\n",
     $app->__x('This file is distributed under the same license as the {project} package.',
       project => $app->{config}->{locale}->{project}
     )
   );
-  $pot .= sprintf("# %s <%s>, %s.\n",
-    $app->{config}->{locale}->{'Report-Msgid-Bugs-To_name'},
-    $app->{config}->{locale}->{'Report-Msgid-Bugs-To_address'},
+  $pot .= sprintf("# %s, %s.\n",
+    $app->{config}->{locale}->{'Report-Msgid-Bugs-To'},
     $year
   );
   $pot .= sprintf("#\n");
   $pot .= sprintf("%s\n", 'msgid ""');
   $pot .= sprintf("%s\n", 'msgstr ""');
   for my $header (qw(
-    Project-Id-Version Report-Msgid-Bugs-To_name Report-Msgid-Bugs-To_address Last-Translator_name Last-Translator_address
-    Language-Team_name Language-Team_address Language MIME-Version Content-Type charset Content-Transfer-Encoding
+    Project-Id-Version Report-Msgid-Bugs-To Last-Translator PO-Revision-Date POT-Creation-Date
+    Language-Team MIME-Version Content-Type Content-Transfer-Encoding Language
   )) {
     $pot .= sprintf("\"%s: %s\\n\"\n", $header, $app->{config}->{locale}->{$header});
   }
@@ -92,8 +101,8 @@ sub run ($self, @args) {
   for my $language (@{ $app->{config}->{locale}->{skip_messages} }) {
     $skip->{$language} = 1;
   }
-  for my $language (keys %{ $app->{config}->{locale}->{languages} }) {
-    next if $skip->{lang};
+  for my $language (sort {$a cmp $b} keys %{ $app->{config}->{locale}->{languages} }) {
+    next if ($skip->{$language});
     my $process = Locale::TextDomain::OO::Extract::Process->new(
       category    => $app->{config}->{locale}->{category},
       domain      => $app->{config}->{locale}->{textdomain},
@@ -105,28 +114,44 @@ sub run ($self, @args) {
       },
     );
 
-    # Read existing po file for the language
-    $path = Mojo::Home->new(sprintf('locale/%s.po', $language));
-    if (-f $path->to_string) {
-      $process->language($language);
-      $process->slurp(po => $path->to_string);
+    # Make sure directory exists
+    Mojo::Home->new(sprintf('locale/%s/%s/', $language, $app->{config}->{locale}->{category}))->make_path({mode => 0755});
 
-#      $process->remove_all_reference;
-      $process->remove_all_automatic;
+    $path = Mojo::Home->new(sprintf('locale/%s/%s/%s.po',
+      $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
 
-      $process->merge_extract({
-        lexicon_ref => $lexicon,
-      });
-
-      # Write back po files
-      $process->spew(po => $path->to_string);
-
-      # Write mo files
-      Mojo::Home->new(sprintf('locale/%s/%s/', $language, $app->{config}->{locale}->{category})
-      )->make_path({mode => 0755});
-      $process->spew(mo => sprintf('locale/%s/%s/%s.mo',
-        $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
+    # Create initial po file if it dosn't exist
+    if (!-f $path->to_string) {
+      my $potcopy = $pot;
+      my $search = '"Language: en\\n"';
+      my $replace = sprintf("\"Language\: %s\\n\"\n", $language);
+      $replace .= sprintf("\"Plural-Forms: %s\\n\"",
+        exists($plurals->{$language}) ?
+          $plurals->{$language} :
+          'nplurals=2; plural=(n != 1);'
+      );
+      $potcopy =~ s /"Language: en\\n"/$replace/sm;
+      say $potcopy;
+      $path->spurt($potcopy);
     }
+
+    # Read existing po file for the language
+    $process->language($language);
+    $process->slurp(po => $path->to_string);
+
+    # $process->remove_all_reference;
+    $process->remove_all_automatic;
+
+    $process->merge_extract({
+      lexicon_ref => $lexicon,
+    });
+
+    # Write back po files
+    $process->spew(po => $path->to_string);
+
+    # Write mo files
+    $process->spew(mo => sprintf('locale/%s/%s/%s.mo',
+      $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
   }
 }
 

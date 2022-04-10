@@ -33,7 +33,7 @@ sub startup ($self) {
   unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
 
   my $r = $self->routes;
-  $r->any('/' => sub ($c) {} => 'index');
+  $r->any('/*url' => { url => ''} => sub ($c) {} => 'index');
 }
 
 1;

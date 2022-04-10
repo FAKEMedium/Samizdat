@@ -6,7 +6,7 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus make gettext mkisofs xorriso growisofs transmission-cli
+  * sudo apt install cpanminus make mkisofs xorriso growisofs transmission-cli
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge

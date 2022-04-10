@@ -23,3 +23,6 @@ i18n:
 
 server:
 	samizdat daemon
+
+routes:
+	samizdat routes -v
