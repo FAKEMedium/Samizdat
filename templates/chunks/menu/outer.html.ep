@@ -1,0 +1,5 @@
+<div id="navbarResponsive" class="collapse navbar-collapse" data-menu="<%= $menus_id %>">
+  <ul class="navbar-nav mr-auto">
+    <%== indent $wrapped, 2 =%>
+  </ul>
+</div>

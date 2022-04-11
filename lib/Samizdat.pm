@@ -19,13 +19,12 @@ sub startup ($self) {
     no_header_detect => 1,
   });
   $self->lexicon({
-    search_dirs => [qw(locale)],
+    search_dirs => [qw(./locale)],
     gettext_to_maketext => 0,
     decode => 1,
-    category => 'LC_MESSAGES',
-    textdomain =>  'com.fakenews',
-    data   => [
-      '*:LC_MESSAGES:com.fakenews' => '*/LC_MESSAGES/com.fakenews.mo',
+    data => [
+      '*::' => '*/LC_MESSAGES/com.fakenews.mo',
+      delete_lexicon => 'i-default::',
     ],
   });
   push @{$self->commands->namespaces}, 'Samizdat::Command';

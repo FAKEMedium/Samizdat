@@ -1,0 +1,4 @@
+<li id="menuitem_<%= $item->{id} %>" class="nav-item parentrow dropdown menulevel_<%= $level %>">
+  <a class="nav-item nav-link dropdown-item dropdown-toggle text-nowrap font-weight-bold" href="#" id="dropdown-<%= $item->{id} %>" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="<%= $item->{title} %>"><%= $item->{title} %></a>
+  <%== indent $wrapped, 1 =%>
+</li>

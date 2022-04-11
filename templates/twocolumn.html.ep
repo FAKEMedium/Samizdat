@@ -1,12 +1,11 @@
-% layout 'bootstrap';
-
+<% layout 'bootstrap'; =%>
 <div class="col-8">
-<%= $web->{main} %>
+  <%== indent $web->{main}, 1 =%>
 </div>
 <div class="col-4">
-% for my $sidepanel (@{ $web->{sidepanels} }) {
+<% for my $sidepanel (@{ $web->{sidepanels} }) { =%>
   <div>
-<%= $sidepanel %>
+    <%== indent $sidepanel, 2 =%>
   </div>
-% }
+<% } =%>
 </div>

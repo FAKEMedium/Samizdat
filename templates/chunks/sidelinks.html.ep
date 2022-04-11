@@ -1,0 +1,5 @@
+<a href="https://basedinsweden.se/" target="_blank" rel="noopener"><picture>
+  <source srcset="/media/images/basedinsweden.webp" type="image/webp">
+  <source srcset="/media/images/basedinsweden.png" type="image/png">
+  <img src="/media/images/basedinsweden.png" width="100" height="100" alt="Based in Sweden" />
+</picture></a>

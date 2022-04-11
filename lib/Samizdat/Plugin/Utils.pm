@@ -2,6 +2,7 @@ package Samizdat::Plugin::Utils;
 
 use strict;
 use warnings FATAL => 'all';
+no warnings 'uninitialized';
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 
@@ -9,15 +10,20 @@ sub register {
   my $self = shift;
   my $app = shift;
 
-
   $app->helper(
-    indent => sub {
-      my ($c, $content, $indents) = @_;
+    indent => sub ($c, $content, $indents) {
       my $indent = "\t" x $indents;
       $content =~ s/\n/\n$indent/gsm;
-      $content = $indent . $content;
+      $content =~s/$indent$//sm;
       chomp $content;
-      return $content;
+      return sprintf("%s%s\n", $indent, $content);
+    },
+  );
+
+  $app->helper(
+    limiter => sub {
+      my ($c) = @_;
+      return sprintf("<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->");
     },
   );
 
