@@ -30,6 +30,7 @@ sub startup ($self) {
   });
   push @{$self->commands->namespaces}, 'Samizdat::Command';
   unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
+  $self->plugin('Utils');
 
   $self->hook(before_routes => sub {
     my $c = shift;

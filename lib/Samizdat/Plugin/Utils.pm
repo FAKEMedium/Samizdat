@@ -1,4 +1,4 @@
-package Samizdat::Plugin::Cache;
+package Samizdat::Plugin::Utils;
 
 use strict;
 use warnings FATAL => 'all';
@@ -11,9 +11,13 @@ sub register {
 
 
   $app->helper(
-    testhelper => sub {
-      my $c = shift;
-      return 1;
+    indent => sub {
+      my ($c, $content, $indents) = @_;
+      my $indent = "\t" x $indents;
+      $content =~ s/\n/\n$indent/gsm;
+      $content = $indent . $content;
+      chomp $content;
+      return $content;
     },
   );
 

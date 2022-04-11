@@ -1,4 +1,4 @@
-% layout 'default';
+% layout 'bootstrap';
 
 <div class="col-8">
 <%= $web->{main} %>
