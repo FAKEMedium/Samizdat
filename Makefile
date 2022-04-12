@@ -23,7 +23,7 @@ i18n:
 	samizdat makei18n
 
 debug:
-	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development samizdat daemon
+	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ ./bin/samizdat
 
 
 server:

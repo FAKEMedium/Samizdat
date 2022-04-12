@@ -117,7 +117,6 @@ a.blacklink {
 .btco-menu li > a {
   padding: 10px 15px;
   color: #000;
-
 }
 .btco-menu .active a:focus,
 .btco-menu li a:focus ,
@@ -133,6 +132,8 @@ a.blacklink {
   stroke-width: 0;
   stroke: currentColor;
   fill: currentColor;
+  height: 16px;
+  width: 16px;
 }
 .oi-lock-locked, .oi-lock-unlocked {
   width: 0.75em;

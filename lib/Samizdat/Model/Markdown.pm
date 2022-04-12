@@ -33,7 +33,7 @@ sub list ($self) {
 
 sub readmd ($self, $path) {
   my $options = shift // {};
-  my $content = Mojo::Home->new($path)->slurp // undef;
+  my $content = Mojo::Home->new(sprintf('public/%s', $path))->slurp // undef;
 }
 
 sub writehtml ($self, $path, $content) {

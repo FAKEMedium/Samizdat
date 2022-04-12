@@ -1,3 +1,4 @@
 % layout 'bootstrap';
-
-<%= $web->{main} %>
+<div class="col-12">
+  <%== indent $web->{main}, 1 =%>
+</div>
