@@ -6,9 +6,8 @@ no warnings 'uninitialized';
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 
-sub register {
-  my $self = shift;
-  my $app = shift;
+sub register  {
+  my ($self, $app) = @_;
 
   $app->helper(
     indent => sub ($c, $content, $indents) {
@@ -21,15 +20,13 @@ sub register {
   );
 
   $app->helper(
-    limiter => sub {
-      my ($c) = @_;
+    limiter => sub ($c) {
       return sprintf("<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->");
     },
   );
 
   $app->hook(
-    after_render => sub {
-      my ($c, $output, $format) = @_;
+    after_render => sub ($c, $output, $format) {
       if ('html' eq $format) {
 
       }
