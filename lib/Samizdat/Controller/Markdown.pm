@@ -4,11 +4,10 @@ use Mojo::DOM;
 sub geturi ($self) {
   my $docpath = $self->stash('docpath');
 
-#  $docpath =~  s/\///;
 
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => $docpath);
   my $title = $self->app->__('404: Missing document');
-  my $index =  sprintf('%sREADME.md', $docpath);
+  my $index =  sprintf('/%sREADME.md', $docpath);
   my $md = $self->app->markdown->readmd($index);
 
   if ('' ne $md) {

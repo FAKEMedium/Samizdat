@@ -1,10 +1,11 @@
 package Samizdat::Plugin::Utils;
 
 use strict;
-use warnings FATAL => 'all';
+use warnings;
 no warnings 'uninitialized';
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
+use Data::Dumper;
 
 sub register  {
   my ($self, $app) = @_;
@@ -27,11 +28,8 @@ sub register  {
 
   $app->hook(
     after_render => sub ($c, $output, $format) {
-      if ('html' eq $format) {
-
-      }
-      if ('get' eq lc $c->req->method) {
-
+      if ('html' eq $format && 'get' eq lc $c->req->method) {
+#        $c->{stash}->{'mojo.captures'}->{docpath};
       }
       return 1;
     }

@@ -50,7 +50,7 @@ sub startup ($self) {
   });
 
   my $r = $self->routes;
-  $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', template => 'twocolumn', docpath => '/');
+  $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', template => 'twocolumn', docpath => '');
   $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi', template => 'index');
 }
 

@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use experimental qw(signatures);
 
+use Mojo::DOM;
 use Mojo::Home;
 use Text::MultiMarkdown;
 my $md = Text::MultiMarkdown->new(
@@ -14,13 +15,11 @@ my $md = Text::MultiMarkdown->new(
 
 sub new ($class) { bless {}, $class }
 
-sub list ($self) {
-  my $options = shift // {};
+sub list ($self, $url, $options = {}) {
   my $files = [];
-
-  my $path = Mojo::Home->new('public/');
+  my $path = Mojo::Home->new('public/')->child($url);
   my $sources = {};
-  $path->list_tree({dir => 0})->each(sub ($file, $num) {
+  $path->list({ dir => 0 })->sort(sub { uc($a) cmp uc($b) })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       push @{ $files }, $file;
       if ($options->{walk}) {
@@ -31,17 +30,24 @@ sub list ($self) {
   return $files;
 }
 
-sub readmd ($self, $path) {
-  my $options = shift // {};
+sub getpage ($self, $path, $options = {}) {
+  my $web = {
+    title => '',
+    main => '',
+    sidebars => [],
+  };
+  my $content = Mojo::Home->new(sprintf('public/%s', $path))->slurp // undef;
+  say $path;
+}
+
+sub readmd ($self, $path, $options = {}) {
   my $content = Mojo::Home->new(sprintf('public/%s', $path))->slurp // undef;
 }
 
-sub writehtml ($self, $path, $content) {
-  my $options = shift // {};
+sub writehtml ($self, $path, $content, $options = {}) {
 }
 
-sub md2html ($self, $content) {
-  my $options = shift // {};
+sub md2html ($self, $content, $options = {}) {
   return $md->markdown($content);
 }
 1;

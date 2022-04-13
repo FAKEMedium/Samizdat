@@ -1,19 +1,17 @@
 package Samizdat::Command::makestatic;
 use Mojo::Base 'Mojolicious::Command', -signatures;
-use Mojo::Template;
 
 has description => 'Apply templates to markdown files and dump resulting files in the public dir';
 has usage => sub ($self) { $self->extract_usage };
 
 sub run ($self, @args) {
 
-  my $template = Mojo::Template->new();
-  foreach my $file (@{ $self->app->markdown()->list }) {
-    my $md = $self->app->markdown()->readmd($file);
+  foreach my $file (@{ $self->app->markdown()->list('', {depth => 2}) }) {
+#    my $md = $self->app->markdown()->readmd($file);
     my $content = {
-      main => $self->app->markdown()->md2html($md),
+#      main => $self->app->markdown()->md2html($md),
     };
-    say $self->app->subdispatch(GET => $file);
+    say $file;
   }
 
 }
