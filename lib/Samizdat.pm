@@ -9,6 +9,7 @@ sub startup ($self) {
 
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
+
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('Subdispatch');

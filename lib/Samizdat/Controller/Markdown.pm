@@ -1,6 +1,6 @@
 package Samizdat::Controller::Markdown;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use Mojo::DOM;
+
 sub geturi ($self) {
   my $docpath = $self->stash('docpath');
 

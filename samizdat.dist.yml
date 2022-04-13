@@ -3,6 +3,7 @@ secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
 sitename: Fake News
 siteurl: https://fakenews.com/
+domain: fakenews.com
 sources:
 piratebay:
   login: example
@@ -11,16 +12,16 @@ locale:
   textdomain: com.fakenews
   category: LC_MESSAGES
   project: Samizdat
-  Project-Id-Version: Samizdat 0.01
+  Project-Id-Version: Samizdat
   Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
   Last-Translator: Webmaster <webmaster@fakenews.com>
   Language-Team: Webmaster <webmaster@fakenews.com>
   PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE
-  Language: en
+  POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE
   MIME-Version: 1.0
   Content-Type: text/plain; charset=UTF-8
-  charset: utf-8
   Content-Transfer-Encoding: 8bit
+  Language: en
   languages:
     en:
     en-US:
@@ -55,7 +56,7 @@ locale:
   default_language: en
   skip_messages:
     - ru-RU
-    - sv-SV
+    - sv-SE
     - en-US
     - pl-PL
     - zh-CN
@@ -66,5 +67,3 @@ locale:
     - sr-RS
     - ar-SY
     - hu-HU
-
-
