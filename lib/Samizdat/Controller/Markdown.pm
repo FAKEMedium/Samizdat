@@ -6,9 +6,12 @@ sub geturi ($self) {
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => $docpath);
   my $title = $self->app->__('404: Missing document');
 
-  my $docs = $self->app->markdown->list($docpath, {language => $self->app->language});
+  my $docs = $self->app->markdown->list($docpath, {
+    language => $self->app->language,
+    languages => $self->app->{config}->{locale}->{languages},
+  });
   my $path = sprintf("%s%s", $docpath, 'index.html');
-  if ($#{ $docs->{$path}->{subdocs} }) {
+  if ($#{ $docs->{$path}->{subdocs} } > -1) {
     my $sidebar = '';
     for my $subdoc (@{ $docs->{$path}->{subdocs} }) {
       $sidebar .= $self->render_to_string(template => 'chunks/sidecard', card => $subdoc);

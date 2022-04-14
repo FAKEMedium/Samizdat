@@ -33,7 +33,7 @@ sub startup ($self) {
 
   $self->hook(before_routes => sub {
     my $c = shift;
-    my $language = $c->cookie('language') // 'sv';
+    my $language = $c->cookie('language') // '';
     if ($language =~ /^(ru|sv|en)$/) {
       $self->language($language);
     } else {

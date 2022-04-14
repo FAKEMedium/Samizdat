@@ -29,6 +29,7 @@ sub register  {
   $app->hook(
     after_render => sub ($c, $output, $format) {
       if ('html' eq $format && 'get' eq lc $c->req->method) {
+        say Dumper $c->{stash};
 #        $c->{stash}->{'mojo.captures'}->{docpath};
       }
       return 1;
