@@ -15,7 +15,7 @@ create a disk image that can be downloaded as a torrent file.
 * bin - Scripts
 * lib - Perl modules
   * Samizdat
-    * Command - Perl modules that adds options to the [samizdat command](../../bin/samizdat)
+    * Command - Perl modules that adds options to the samizdat command.
 * pages - Markdown files that will be processed
 * public - Static files. Processed files go here too.
 * t - Test suite
