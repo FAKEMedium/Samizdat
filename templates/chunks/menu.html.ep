@@ -1,6 +1,7 @@
 <ul class="navbar-nav" style="width:100%;">
   <li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdownAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= __('About') %></a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
+      <li><a class="dropdown-item text-nowrap" href="/project/"><%= __('The Samizdat project') %></a></li>
       <li><a class="dropdown-item text-nowrap" href="/contribute/"><%= __('Contribute') %></a></li>
       <li><a class="dropdown-item text-nowrap" href="/advertising/"><%= __('Advertising') %></a></li>
     </ul>
