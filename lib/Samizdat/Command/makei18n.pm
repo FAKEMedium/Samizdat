@@ -50,7 +50,6 @@ sub run ($self, @args) {
     lexicon_ref => $lexicon,
     project     => $app->{config}->{locale}->{project},
     domain      => $app->{config}->{locale}->{textdomain},
-    category    => $app->{config}->{locale}->{category},
   );
 
   # Extract from Perl files
@@ -75,7 +74,6 @@ sub run ($self, @args) {
     lexicon_ref => $lexicon,
     project     => $app->{config}->{locale}->{project},
     domain      => $app->{config}->{locale}->{textdomain},
-    category    => $app->{config}->{locale}->{category},
   );
 
   #  Extract from javascript files
@@ -104,7 +102,6 @@ sub run ($self, @args) {
   for my $language (sort {$a cmp $b} keys %{ $app->{config}->{locale}->{languages} }) {
     next if ($skip->{$language});
     my $process = Locale::TextDomain::OO::Extract::Process->new(
-      category    => $app->{config}->{locale}->{category},
       domain      => $app->{config}->{locale}->{textdomain},
       language    => $language,
       lexicon_ref => $lexicon,
@@ -115,10 +112,10 @@ sub run ($self, @args) {
     );
 
     # Make sure directory exists
-    Mojo::Home->new(sprintf('locale/%s/%s/', $language, $app->{config}->{locale}->{category}))->make_path({mode => 0755});
+    Mojo::Home->new(sprintf('locale/%s/', $language))->make_path({mode => 0755});
 
-    $path = Mojo::Home->new(sprintf('locale/%s/%s/%s.po',
-      $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
+    $path = Mojo::Home->new(sprintf('locale/%s/%s.po',
+      $language, $app->{config}->{locale}->{textdomain}));
 
     # Create initial po file if it dosn't exist
     if (!-f $path->to_string) {
@@ -150,8 +147,8 @@ sub run ($self, @args) {
     $process->spew(po => $path->to_string);
 
     # Write mo files
-    $process->spew(mo => sprintf('locale/%s/%s/%s.mo',
-      $language, $app->{config}->{locale}->{category}, $app->{config}->{locale}->{textdomain}));
+    $process->spew(mo => sprintf('locale/%s/%s.mo',
+      $language, $app->{config}->{locale}->{textdomain}));
   }
 }
 

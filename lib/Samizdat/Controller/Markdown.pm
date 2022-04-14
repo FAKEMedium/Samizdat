@@ -3,27 +3,24 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 
 sub geturi ($self) {
   my $docpath = $self->stash('docpath');
-
-
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => $docpath);
   my $title = $self->app->__('404: Missing document');
-  my $index =  sprintf('/%sREADME.md', $docpath);
-  my $md = $self->app->markdown->readmd($index);
 
-  if ('' ne $md) {
-    $html = $self->app->markdown->md2html($md);
-    my $dom = Mojo::DOM->new($html);
-    $title = $dom->at('h1')->text;
-    $dom->at('h1')->remove;
-    $html = $dom->content;
+  my $docs = $self->app->markdown->list($docpath, {language => $self->app->language});
+  my $path = sprintf("%s%s", $docpath, 'index.html');
+  if ($#{ $docs->{$path}->{subdocs} }) {
+    my $sidebar = '';
+    for my $subdoc (@{ $docs->{$path}->{subdocs} }) {
+      $sidebar .= $self->render_to_string(template => 'chunks/sidecard', card => $subdoc);
+    }
+    $docs->{$path}->{sidebar} = $sidebar;
+    $self->stash(template => 'twocolumn');
+  } else {
+    $self->stash(template => 'index');
   }
-  my $web = {
-    sidepanels => [],
-    main => $html,
-    title => $title,
-  };
-  $self->stash(web => $web);
-  $self->stash(title => $title);
+
+  $self->stash(web => $docs->{$path});
+  $self->stash(title => $docs->{$path}->{title} // $title);
   $self->render();
 }
 

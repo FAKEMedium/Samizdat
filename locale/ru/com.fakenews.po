@@ -14,11 +14,15 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: ru\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: templates/layouts/bootstrap.html.ep:99
+#: templates/layouts/bootstrap.html.ep:124
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr ""
+
+#: lib/Samizdat/Controller/Markdown.pm:7
+msgid "404: Missing document"
 msgstr ""
 
 #: templates/chunks/menu.html.ep:2
@@ -34,6 +38,10 @@ msgid "Contact"
 msgstr ""
 
 #: templates/chunks/menu.html.ep:4
+msgid "Contribute"
+msgstr ""
+
+#: templates/chunks/menu.html.ep:4
 msgid "Contributing"
 msgstr ""
 
@@ -41,20 +49,20 @@ msgstr ""
 msgid "Email to a friend"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:33
-#: templates/layouts/bootstrap.html.ep:35
+#: templates/layouts/bootstrap.html.ep:41
+#: templates/layouts/bootstrap.html.ep:45
 msgid "Log in"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:45
+#: templates/layouts/bootstrap.html.ep:69
 msgid "Log out"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:38
+#: templates/layouts/bootstrap.html.ep:49
 msgid "Personal menu"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:44
+#: templates/layouts/bootstrap.html.ep:63
 msgid "Settings"
 msgstr ""
 
@@ -70,8 +78,12 @@ msgstr ""
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:25
+#: templates/layouts/bootstrap.html.ep:27
 msgid "Skip menu"
+msgstr ""
+
+#: lib/Samizdat/Controller/Markdown.pm:6
+msgid "The page {docpath} wasn't found."
 msgstr ""
 
 #: lib/Samizdat/Command/makei18n.pm:31

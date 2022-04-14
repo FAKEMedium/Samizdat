@@ -6,8 +6,9 @@ use experimental qw(signatures);
 
 use Mojo::DOM;
 use Mojo::Home;
-use Samizdat::Model::Web;
 use Text::MultiMarkdown;
+use Imager::File::WEBP;
+use Mojo::Util qw(decode);
 
 my $md = Text::MultiMarkdown->new(
   empty_element_suffix => ' />',
@@ -23,7 +24,7 @@ sub list ($self, $url, $options = {}) {
   $path->list({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
-      my $html = $md->markdown($content);
+      my $html = decode 'UTF-8', $md->markdown($content);
       my $dom = Mojo::DOM->new($html);
       my $title = $dom->at('h1')->text;
       $dom->at('h1')->remove;
@@ -33,11 +34,15 @@ sub list ($self, $url, $options = {}) {
 
       my $docpath = $file->to_rel('public/')->to_string;
       $docpath =~ s/README\.md/index.html/;
-      $docs->{$docpath} = Samizdat::Model::Web->new($docpath, {
-        docpath => $docpath,
-        title => $title,
-        main  => $html,
-      });
+      $docs->{$docpath} = {
+        docpath     => $docpath,
+        title       => $title,
+        main        => $html,
+        children    => [],
+        subdocs     => [],
+        description => undef,
+        keywords    => [],
+      };
     }
   });
 
@@ -53,16 +58,5 @@ sub list ($self, $url, $options = {}) {
   return $docs;
 }
 
-
-sub readmd ($self, $path, $options = {}) {
-  my $content = Mojo::Home->new(sprintf('public/%s', $path))->slurp // undef;
-}
-
-sub writehtml ($self, $path, $content, $options = {}) {
-}
-
-sub md2html ($self, $content, $options = {}) {
-  return $md->markdown($content);
-}
 
 1;

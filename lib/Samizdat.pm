@@ -12,7 +12,6 @@ sub startup ($self) {
 
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
-  $self->plugin('Subdispatch');
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
     default => 'en',
@@ -24,7 +23,7 @@ sub startup ($self) {
     gettext_to_maketext => 0,
     decode => 1,
     data => [
-      '*::' => '*/LC_MESSAGES/com.fakenews.mo',
+      '*::' => '*/com.fakenews.mo',
       delete_lexicon => 'i-default::',
     ],
   });
@@ -34,7 +33,7 @@ sub startup ($self) {
 
   $self->hook(before_routes => sub {
     my $c = shift;
-    my $language = $c->cookie('language') // '';
+    my $language = $c->cookie('language') // 'sv';
     if ($language =~ /^(ru|sv|en)$/) {
       $self->language($language);
     } else {
@@ -51,8 +50,8 @@ sub startup ($self) {
   });
 
   my $r = $self->routes;
-  $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', template => 'twocolumn', docpath => '');
-  $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi', template => 'index');
+  $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
+  $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
 }
 
 1;

@@ -14,67 +14,79 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: sv\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/layouts/bootstrap.html.ep:99
+#: templates/layouts/bootstrap.html.ep:124
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2022 &mdash; dela länk och ge en stjärna på {sitename}!"
+msgstr ""
+
+#: lib/Samizdat/Controller/Markdown.pm:7
+msgid "404: Missing document"
+msgstr ""
 
 #: templates/chunks/menu.html.ep:2
 msgid "About"
-msgstr "Om"
+msgstr ""
 
 #: templates/chunks/menu.html.ep:5
 msgid "Advertising"
-msgstr "Annonsering"
+msgstr ""
 
 #: templates/chunks/menu.html.ep:8
 msgid "Contact"
-msgstr "Kontakt"
+msgstr ""
+
+#: templates/chunks/menu.html.ep:4
+msgid "Contribute"
+msgstr ""
 
 #: templates/chunks/menu.html.ep:4
 msgid "Contributing"
-msgstr "Bidra"
+msgstr ""
 
 #: templates/chunks/sharebuttons.html.ep:4
 msgid "Email to a friend"
-msgstr "Maila en vän"
+msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:33
-#: templates/layouts/bootstrap.html.ep:35
-msgid "Log in"
-msgstr "Logga in"
-
+#: templates/layouts/bootstrap.html.ep:41
 #: templates/layouts/bootstrap.html.ep:45
+msgid "Log in"
+msgstr ""
+
+#: templates/layouts/bootstrap.html.ep:69
 msgid "Log out"
-msgstr "Logga ut"
+msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:38
+#: templates/layouts/bootstrap.html.ep:49
 msgid "Personal menu"
-msgstr "Personlig meny"
+msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:44
+#: templates/layouts/bootstrap.html.ep:63
 msgid "Settings"
-msgstr "Inställningar"
+msgstr ""
 
 #: templates/chunks/sharebuttons.html.ep:1
 msgid "Share on Facebook"
-msgstr "Dela på Facebook"
+msgstr ""
 
 #: templates/chunks/sharebuttons.html.ep:2
 msgid "Share on LinkedIn"
-msgstr "Dela på LinkedIn"
+msgstr ""
 
 #: templates/chunks/sharebuttons.html.ep:3
 msgid "Share on Twitter"
-msgstr "Dela på Twitter"
+msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:25
+#: templates/layouts/bootstrap.html.ep:27
 msgid "Skip menu"
-msgstr "Hoppa över meny"
+msgstr ""
+
+#: lib/Samizdat/Controller/Markdown.pm:6
+msgid "The page {docpath} wasn't found."
+msgstr ""
 
 #: lib/Samizdat/Command/makei18n.pm:31
 msgid "This file is distributed under the same license as the {project} package."
-msgstr "Denna fil distribueras under samma licens som paketet {project}."
+msgstr ""
 

@@ -12,7 +12,7 @@ sub register  {
 
   $app->helper(
     indent => sub ($c, $content, $indents) {
-      my $indent = "\t" x $indents;
+      my $indent = "  " x $indents;
       $content =~ s/\n/\n$indent/gsm;
       $content =~s/$indent$//sm;
       chomp $content;

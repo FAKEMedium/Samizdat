@@ -16,47 +16,53 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "About"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "Share on Facebook"
-msgstr ""
-
-msgid "Email to a friend"
+msgid "Share on Twitter"
 msgstr ""
 
 msgid "Log out"
 msgstr ""
 
+msgid "Log in"
+msgstr ""
+
 msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
-
-msgid "Personal menu"
-msgstr ""
-
-msgid "Contact"
-msgstr ""
-
-msgid "Advertising"
-msgstr ""
-
-msgid "Skip menu"
-msgstr ""
-
-msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
 msgstr ""
 
 msgid "Share on LinkedIn"
 msgstr ""
 
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Skip menu"
+msgstr ""
+
+msgid "Email to a friend"
+msgstr ""
+
+msgid "Contribute"
+msgstr ""
+
+msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr ""
+
 msgid "Settings"
 msgstr ""
 
-msgid "Contributing"
+msgid "The page {docpath} wasn't found."
 msgstr ""
 
-msgid "Share on Twitter"
+msgid "Share on Facebook"
+msgstr ""
+
+msgid "Advertising"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Personal menu"
 msgstr ""
