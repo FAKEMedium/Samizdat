@@ -4,7 +4,11 @@ secrets:
 sitename: Fake News
 siteurl: https://fakenews.com/
 domain: fakenews.com
-sources:
+hypnotoad:
+  listen:
+    - 'http://0.0.0.0:3000?reuse=1',
+    - 'http+unix://%2Ftmp%2Fsamizdat.sock'
+  workers: 10
 piratebay:
   login: example
   password: s3cr3t

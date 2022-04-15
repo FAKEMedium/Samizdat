@@ -25,9 +25,8 @@ i18n:
 debug:
 	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ ./bin/samizdat
 
-
 server:
-	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=production samizdat prefork
+	MOJO_MODE=production hypnotoad ./bin/samizdat
 
 routes:
 	samizdat routes -v
