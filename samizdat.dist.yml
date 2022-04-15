@@ -14,7 +14,6 @@ piratebay:
   password: s3cr3t
 locale:
   textdomain: com.fakenews
-  category: LC_MESSAGES
   project: Samizdat
   Project-Id-Version: Samizdat
   Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>

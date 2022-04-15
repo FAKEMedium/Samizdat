@@ -1,7 +1,7 @@
 package Samizdat;
 use Mojo::Base 'Mojolicious', -signatures;
 use Samizdat::Model::Markdown;
-
+use MojoX::MIME::Types;
 
 sub startup ($self) {
 
@@ -9,7 +9,7 @@ sub startup ($self) {
 
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
-
+  $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('LocaleTextDomainOO', {
