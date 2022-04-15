@@ -6,8 +6,8 @@ siteurl: https://fakenews.com/
 domain: fakenews.com
 hypnotoad:
   listen:
-    - 'http://0.0.0.0:3000?reuse=1',
-    - 'http+unix://%2Ftmp%2Fsamizdat.sock'
+    - http://0.0.0.0:3000?reuse=1
+    - http+unix://%2Ftmp%2Fsamizdat.sock
   workers: 10
 piratebay:
   login: example
