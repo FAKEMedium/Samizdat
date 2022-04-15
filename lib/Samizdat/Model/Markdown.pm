@@ -49,9 +49,13 @@ sub list ($self, $url, $options = {}) {
           $src,
           $types->file_type($src)
         ));
-        if ($src =~ s/\.([^\.]+)$//) {
+        my $webpsrc = $src;
+        if ($webpsrc =~ s/\.([^\.]+)$//) {
           next if ('svg' eq $1);
-          $picture->at('picture')->prepend_content(sprintf('<source srcset="%s.webp" type="image/webp" />', $src));
+          if (! -f $webpsrc) {
+
+          }
+          $picture->at('picture')->prepend_content(sprintf('<source srcset="%s.webp" type="image/webp" />', $webpsrc));
         }
         $img->replace($picture);
       });

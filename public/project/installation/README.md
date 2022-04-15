@@ -13,7 +13,8 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm Text::MultiMarkdown
   * sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO
   * sudo cpanm Locale::TextDomain::OO::Extract
-  * sudo cpanm Imager::File::WEBP MojoX::MIME::Types
+  * sudo cpanm Imager::File::WEBP
+  * sudo cpanm MojoX::MIME::Types
 * Clone the project into a suitable directory
   * git clone git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
