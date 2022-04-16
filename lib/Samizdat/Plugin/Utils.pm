@@ -24,17 +24,18 @@ sub register  {
     },
   );
 
+  # A marker to show where the generated main content is. Also a little encoding test.
   $app->helper(
     limiter => sub ($c) {
       return sprintf("<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->");
     },
   );
 
+  # Add the generated html to public as a static cache
   $app->hook(
     after_render => sub ($c, $output, $format) {
       if ('html' eq $format && 'get' eq lc $c->req->method) {
-        say $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
-#        $c->{stash}->{'mojo.captures'}->{docpath};
+        $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
       }
       return 1;
     }

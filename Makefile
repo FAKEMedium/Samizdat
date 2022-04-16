@@ -30,3 +30,6 @@ server:
 
 routes:
 	samizdat routes -v
+
+test:
+	prove -l -v

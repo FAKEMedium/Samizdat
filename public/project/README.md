@@ -11,6 +11,15 @@ create a disk image that can be downloaded as a torrent file.
 * Learn about [usage and installation](installation/)
 * How you can [contribute](../contribute/)
 
+### Highlights
+
+* Internationalization support
+* Human readable formats &mdash; YAML and Markdown
+* Speed optimization &mdash; automatic WebP images, smart caching of generated content
+* Beautiful and semantic html5
+* Mojolicious smart templates
+* Automatic one or two column layouts with concatenated side panels
+
 ### Directory structure
 * bin - Scripts
 * lib - Perl modules

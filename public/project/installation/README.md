@@ -17,7 +17,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm MojoX::MIME::Types
   * sudo cpanm Test::Harness
 * Clone the project into a suitable directory
-  * git clone git clone https://github.com/FakenewsCom/Samizdat.git
+  * git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
 * Copy samizdat.dist.yml to samizdat.yml and modify it for your needs
 
@@ -35,3 +35,7 @@ in [samizdat.yml](../../../samizdat.yml) the torrent file will be published too.
 * make devtools - Bootstraps an Ubuntu live image with everything installed to make contributions easy
 * make i18n  - Manage script internationalization
 * make debug - Start the Morbo web server. It has lots of useful information for debugging
+
+## Integration
+
+Explore [configuration examples](./etc/) to quickly deploy a fast and stable installation.

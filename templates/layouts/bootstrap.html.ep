@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="keywords" content="<%== $web->{keywords} %>" />
+    <meta name="keywords" content="<%= join ', ', @{ $web->{keywords} } %>" />
     <meta name="description" content="<%== $web->{description} %>" />
     <title><%== title %></title>
     <link rel="icon" type="image/x-icon" name="/favicon.ico" href="data:image/x-icon;base64," />
@@ -22,64 +22,10 @@
       </defs>
     </svg>
     <header>
-      <div id="message" class="toast position-absolute bg-light" role="status" data-delay="5000" aria-atomic="true"
-           style="top: 0; right: 0; z-index: 2000;"></div>
+      <div id="message" class="toast position-absolute bg-light" role="status" data-delay="5000" aria-atomic="true" style="top: 0; right: 0; z-index: 2000;"></div>
       <a class="sr-only" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
-        <div id="logobar" class="container bg-logobar" aria-live="polite">
-          <div class="row justify-content-between position-relative">
-            <div class="col-3 col-xl-3 pr-0 py-1 py-sm-2">
-              <a href="/">
-                <svg id="logotyp" class="img-fluid my-2" viewBox="0 0 508 191">
-                  <use xlink:href="#fakelogo"></use>
-                </svg>
-              </a>
-            </div>
-            <div id="memberpanel"
-                 class="col-9 col-xl-9 d-print-none d-flex align-items-center pl-0 pr-1 pr-sm-3 justify-content-end">
-              <a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1"
-                 role="button" data-toggle="modal" data-target="#modal" aria-label="<%= __('Log in') %>">
-                <svg class="oi oi-account-login" width="16" height="16">
-                  <use xlink:href="#oi-account-login"></use>
-                </svg>
-                <span class="d-sm-inline d-none ml-1"><%= __('Log in') %></span>
-              </a>
-              <div id="userbuttons" class="auth btn-success btn-group ml-sm-1 pl-2 d-none rounded-lg">
-                <button id="usernamebutton" class="btn btn-success btn-sm btn-normal-sm dropdown-toggle pl-0"
-                        aria-label="<%= __('Personal menu') %>" type="button" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                  <svg class="oi oi-person" width="16" height="16">
-                    <use xlink:href="#oi-person"></use>
-                  </svg>
-                  <span class="username d-inline d-sm-none ml-0"></span>
-                  <span class="displayname d-none d-sm-inline ml-1"></span>
-                </button>
-                <div id="userdropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="usernamebutton"
-                     style="z-index: 1000;">
-                  <a class="dropdown-item" href="/register/?action=step4">
-                    <svg class="oi oi-person">
-                      <use xlink:href="#oi-person"></use>
-                    </svg>
-                    <span class="ml-2"><%= __('Settings') %></span>
-                  </a>
-                  <a class="dropdown-item" href="/logout/">
-                    <svg class="oi oi-account-logout">
-                      <use xlink:href="#oi-account-logout"></use>
-                    </svg>
-                    <span class="ml-2"><%= __('Log out') %></span>
-                  </a>
-                </div>
-              </div>
-              <button id="menubutton" class="d-sm-none btn btn-sm btn-success rounded-lg" type="button"
-                      data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive"
-                      aria-expanded="false" aria-label="Visa meny">
-                <svg class="oi oi-menu">
-                  <use xlink:href="#oi-menu"></use>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+        <%== indent eval {include 'chunks/logobar'}, 4 =%>
       </div>
       <div class="widewrapper bg-menubar">
         <div id="menuwrapper" class="container position-relative" aria-live="polite">
@@ -121,8 +67,7 @@
       <div class="container">
         <div class="row font-weight-bold">
           <div class="col-12 col-sm-6 text-sm-left pt-2 pt-sm-0">
-            <%== __x('&copy;2022 &mdash; please share and add star on {sitename}!',
-              sitename => '<a href="https://github.com/FakenewsCom/Samizdat" target="_blank">Github</a>') %>
+            <%== __x('&copy;2022 &mdash; please share and add star on {sitename}!', sitename => '<a href="https://github.com/FakenewsCom/Samizdat" target="_blank">Github</a>') %>
           </div>
           <div class="d-print-none col-12 col-sm-6 text-sm-right pt-2 pt-sm-0">
             <div class="d-inline mr-sm-1">
