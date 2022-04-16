@@ -24,10 +24,10 @@ i18n:
 	samizdat makei18n
 
 debug:
-	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ samizdat
+	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ ./bin/samizdat
 
 server: clean zip
-	MOJO_MODE=production hypnotoad samizdat
+	MOJO_MODE=production hypnotoad ./bin/samizdat
 	chown www-data.www-data /tmp/samizdat.sock
 
 routes:
