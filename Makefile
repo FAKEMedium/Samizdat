@@ -6,6 +6,7 @@ static:
 
 clean:
 	find public/  -name "*.html" -delete
+	find public/  -name "*.gz" -delete
 
 harvest:
 	samizdat makeharvest
@@ -23,13 +24,18 @@ i18n:
 	samizdat makei18n
 
 debug:
-	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ ./bin/samizdat
+	MOJO_LISTEN=http://0.0.0.0:3000 MOJO_MODE=development morbo -v -w ./ samizdat
 
-server:
-	MOJO_MODE=production hypnotoad ./bin/samizdat
+server: clean zip
+	MOJO_MODE=production hypnotoad samizdat
+	chown www-data.www-data /tmp/samizdat.sock
 
 routes:
 	samizdat routes -v
 
 test:
 	prove -l -v
+
+zip:
+	gzip -k -9 public/css/bundle.css
+	gzip -k -9 public/js/bundle.js
