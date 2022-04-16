@@ -12,7 +12,6 @@ use Data::Dumper;
 my $public = Mojo::Home->new('public/');
 my $cacheexist = {};
 
-
 sub register  {
   my ($self, $app) = @_;
 
