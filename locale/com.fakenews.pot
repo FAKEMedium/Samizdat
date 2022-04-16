@@ -16,34 +16,40 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "Share on Twitter"
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
-
-msgid "Share on LinkedIn"
-msgstr ""
-
-msgid "404: Missing document"
-msgstr ""
-
-msgid "Skip menu"
-msgstr ""
-
-msgid "Email to a friend"
+msgid "Contact"
 msgstr ""
 
 msgid "Contribute"
 msgstr ""
 
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Email to a friend"
+msgstr ""
+
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr ""
+
+msgid "Share on LinkedIn"
+msgstr ""
+
+msgid "Share on Facebook"
+msgstr ""
+
+msgid "Personal menu"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+
+msgid "Skip menu"
 msgstr ""
 
 msgid "Settings"
@@ -52,17 +58,14 @@ msgstr ""
 msgid "The page {docpath} wasn't found."
 msgstr ""
 
-msgid "Share on Facebook"
+msgid "The Samizdat project"
 msgstr ""
 
 msgid "Advertising"
 msgstr ""
 
-msgid "Contact"
+msgid "Log in"
 msgstr ""
 
-msgid "About"
-msgstr ""
-
-msgid "Personal menu"
+msgid "Share on Twitter"
 msgstr ""

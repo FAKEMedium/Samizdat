@@ -17,72 +17,57 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: templates/layouts/bootstrap.html.ep:124
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
 msgstr "&copy;2022 &mdash; dela länk och ge en stjärna på {sitename}!"
 
-#: lib/Samizdat/Controller/Markdown.pm:7
 msgid "404: Missing document"
 msgstr "404: Sidan saknas"
 
-#: templates/chunks/menu.html.ep:2
 msgid "About"
 msgstr "Om"
 
-#: templates/chunks/menu.html.ep:5
 msgid "Advertising"
 msgstr "Annonsering"
 
-#: templates/chunks/menu.html.ep:8
 msgid "Contact"
 msgstr "Kontakt"
 
-#: templates/chunks/menu.html.ep:4
 msgid "Contribute"
 msgstr "Bidra"
 
-#: templates/chunks/sharebuttons.html.ep:4
 msgid "Email to a friend"
 msgstr "Maila en vän"
 
-#: templates/layouts/bootstrap.html.ep:41
-#: templates/layouts/bootstrap.html.ep:45
 msgid "Log in"
 msgstr "Logga in"
 
-#: templates/layouts/bootstrap.html.ep:69
 msgid "Log out"
 msgstr "Logga ut"
 
-#: templates/layouts/bootstrap.html.ep:49
 msgid "Personal menu"
 msgstr "Personlig meny"
 
-#: templates/layouts/bootstrap.html.ep:63
 msgid "Settings"
 msgstr "Inställningar"
 
-#: templates/chunks/sharebuttons.html.ep:1
 msgid "Share on Facebook"
 msgstr "Dela på Facebook"
 
-#: templates/chunks/sharebuttons.html.ep:2
 msgid "Share on LinkedIn"
 msgstr "Dela på LinkedIn"
 
-#: templates/chunks/sharebuttons.html.ep:3
 msgid "Share on Twitter"
 msgstr "Dela på Twitter"
 
-#: templates/layouts/bootstrap.html.ep:27
 msgid "Skip menu"
 msgstr "Hoppa över meny"
 
-#: lib/Samizdat/Controller/Markdown.pm:6
+msgid "The Samizdat project"
+msgstr ""
+
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
-#: lib/Samizdat/Command/makei18n.pm:31
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Denna fil distribueras under samma licens som paketet {project}."
 

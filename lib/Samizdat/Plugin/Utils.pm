@@ -36,7 +36,12 @@ sub register  {
   # Add the generated html to public as a static cache
   $app->hook(
     after_render => sub ($c, $output, $format) {
-      if (!exists($cacheexist->{$c->{stash}->{web}->{docpath}}) and 'html' eq $format and 'get' eq lc $c->req->method) {
+      if (
+        404 != $c->{stash}->{status}
+        and !exists($cacheexist->{$c->{stash}->{web}->{docpath}})
+        and 'html' eq $format
+        and 'get' eq lc $c->req->method
+      ) {
         $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
         my $z = new IO::Compress::Gzip sprintf('%s.gz',
           $public->child($c->{stash}->{web}->{docpath})->to_string),

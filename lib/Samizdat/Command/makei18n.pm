@@ -128,7 +128,7 @@ sub run ($self, @args) {
           'nplurals=2; plural=(n != 1);'
       );
       $potcopy =~ s /"Language: en\\n"/$replace/sm;
-      say $potcopy;
+      say sprintf("Created %s", $path->to_string);
       $path->spurt($potcopy);
     }
 
@@ -136,7 +136,7 @@ sub run ($self, @args) {
     $process->language($language);
     $process->slurp(po => $path->to_string);
 
-    # $process->remove_all_reference;
+    $process->remove_all_reference;
     $process->remove_all_automatic;
 
     $process->merge_extract({

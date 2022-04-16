@@ -24,6 +24,7 @@ sub new ($class) { bless {}, $class }
 sub list ($self, $url, $options = {}) {
   my $docs = {};
   my $path = Mojo::Home->new('public/')->child($url);
+  my $found = 0;
   $path->list({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
@@ -64,7 +65,9 @@ sub list ($self, $url, $options = {}) {
       $html =~s/[\s\r\n]+$//;
 
       my $docpath = $file->to_rel('public/')->to_string;
-      $docpath =~ s/README\.md/index.html/;
+      if ($docpath =~ s/README\.md/index.html/) {
+        $found = 1;
+      }
       $docs->{$docpath} = {
         docpath     => $docpath,
         title       => $title,
@@ -76,7 +79,9 @@ sub list ($self, $url, $options = {}) {
       };
     }
   });
-
+  if (!$found) {
+    return $docs;
+  }
   my $subdocs = [];
   for my $docpath (sort {$a cmp $b} keys %{ $docs }) {
     if ($docpath !~ /index\.html$/) {

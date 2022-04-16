@@ -17,76 +17,60 @@ msgstr ""
 "Language: pl\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: templates/layouts/bootstrap.html.ep:124
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
 msgstr ""
 
-#: lib/Samizdat/Controller/Markdown.pm:7
 msgid "404: Missing document"
 msgstr ""
 
-#: templates/chunks/menu.html.ep:2
 msgid "About"
 msgstr ""
 
-#: templates/chunks/menu.html.ep:5
 msgid "Advertising"
 msgstr ""
 
-#: templates/chunks/menu.html.ep:8
 msgid "Contact"
 msgstr ""
 
-#: templates/chunks/menu.html.ep:4
 msgid "Contribute"
 msgstr ""
 
-#: templates/chunks/menu.html.ep:4
 msgid "Contributing"
 msgstr ""
 
-#: templates/chunks/sharebuttons.html.ep:4
 msgid "Email to a friend"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:41
-#: templates/layouts/bootstrap.html.ep:45
 msgid "Log in"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:69
 msgid "Log out"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:49
 msgid "Personal menu"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:63
 msgid "Settings"
 msgstr ""
 
-#: templates/chunks/sharebuttons.html.ep:1
 msgid "Share on Facebook"
 msgstr ""
 
-#: templates/chunks/sharebuttons.html.ep:2
 msgid "Share on LinkedIn"
 msgstr ""
 
-#: templates/chunks/sharebuttons.html.ep:3
 msgid "Share on Twitter"
 msgstr ""
 
-#: templates/layouts/bootstrap.html.ep:27
 msgid "Skip menu"
 msgstr ""
 
-#: lib/Samizdat/Controller/Markdown.pm:6
+msgid "The Samizdat project"
+msgstr ""
+
 msgid "The page {docpath} wasn't found."
 msgstr ""
 
-#: lib/Samizdat/Command/makei18n.pm:31
 msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
