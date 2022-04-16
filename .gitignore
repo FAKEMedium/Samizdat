@@ -1,2 +1,4 @@
 /_Deparsed_XSubs.pm
 /samizdat.yml
+/public/**.html
+/public/**.gz

@@ -5,7 +5,11 @@ use warnings;
 no warnings 'uninitialized';
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
+use Mojo::Home;
 use Data::Dumper;
+
+my $public = Mojo::Home->new('public/');
+
 
 sub register  {
   my ($self, $app) = @_;
@@ -29,7 +33,7 @@ sub register  {
   $app->hook(
     after_render => sub ($c, $output, $format) {
       if ('html' eq $format && 'get' eq lc $c->req->method) {
-        say Dumper $c->{stash};
+        say $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
 #        $c->{stash}->{'mojo.captures'}->{docpath};
       }
       return 1;

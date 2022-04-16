@@ -15,6 +15,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm Locale::TextDomain::OO::Extract
   * sudo cpanm Imager::File::WEBP
   * sudo cpanm MojoX::MIME::Types
+  * sudo cpanm Test::Harness
 * Clone the project into a suitable directory
   * git clone git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
