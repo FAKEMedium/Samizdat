@@ -7,6 +7,7 @@ static:
 clean:
 	find public/  -name "*.html" -delete
 	find public/  -name "*.gz" -delete
+	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
 
 harvest:
 	samizdat makeharvest

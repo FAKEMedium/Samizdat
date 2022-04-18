@@ -7,7 +7,6 @@ use experimental qw(signatures);
 use Mojo::DOM;
 use Mojo::Home;
 use Text::MultiMarkdown;
-use Imager::File::WEBP;
 use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
 
@@ -53,9 +52,6 @@ sub list ($self, $url, $options = {}) {
         my $webpsrc = $src;
         if ($webpsrc =~ s/\.([^\.]+)$//) {
           next if ('svg' eq $1);
-          if (! -f $webpsrc) {
-
-          }
           $picture->at('picture')->prepend_content(sprintf('<source srcset="%s.webp" type="image/webp" />', $webpsrc));
         }
         $img->replace($picture);

@@ -8,40 +8,7 @@
       </a>
     </div>
     <div id="memberpanel" class="col-9 col-xl-9 d-print-none d-flex align-items-center pl-0 pr-1 pr-sm-3 justify-content-end">
-      <a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-toggle="modal" data-target="#modal" aria-label="<%= __('Log in') %>">
-        <svg class="oi oi-account-login" width="16" height="16">
-          <use xlink:href="#oi-account-login"></use>
-        </svg>
-        <span class="d-sm-inline d-none ml-1"><%= __('Log in') %></span>
-      </a>
-      <div id="userbuttons" class="auth btn-success btn-group ml-sm-1 pl-2 d-none rounded-lg">
-        <button id="usernamebutton" class="btn btn-success btn-sm btn-normal-sm dropdown-toggle pl-0" aria-label="<%= __('Personal menu') %>" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <svg class="oi oi-person" width="16" height="16">
-            <use xlink:href="#oi-person"></use>
-          </svg>
-          <span class="username d-inline d-sm-none ml-0"></span>
-          <span class="displayname d-none d-sm-inline ml-1"></span>
-        </button>
-        <div id="userdropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="usernamebutton" style="z-index: 1000;">
-          <a class="dropdown-item" href="/register/?action=step4">
-            <svg class="oi oi-person">
-              <use xlink:href="#oi-person"></use>
-            </svg>
-            <span class="ml-2"><%= __('Settings') %></span>
-          </a>
-          <a class="dropdown-item" href="/logout/">
-            <svg class="oi oi-account-logout">
-              <use xlink:href="#oi-account-logout"></use>
-            </svg>
-            <span class="ml-2"><%= __('Log out') %></span>
-          </a>
-        </div>
-      </div>
-      <button id="menubutton" class="d-sm-none btn btn-sm btn-success rounded-lg" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Visa meny">
-        <svg class="oi oi-menu">
-          <use xlink:href="#oi-menu"></use>
-        </svg>
-      </button>
+      <%== indent eval {include 'chunks/memberbuttons'}, 3 =%>
     </div>
   </div>
 </div>

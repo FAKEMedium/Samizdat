@@ -7,6 +7,7 @@ no warnings 'uninitialized';
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
 use IO::Compress::Gzip;
+use Imager::File::WEBP;
 use Data::Dumper;
 
 my $public = Mojo::Home->new('public/');
@@ -35,12 +36,8 @@ sub register  {
   # Add the generated html to public as a static cache
   $app->hook(
     after_render => sub ($c, $output, $format) {
-      if (
-        404 != $c->{stash}->{status}
-        and !exists($cacheexist->{$c->{stash}->{web}->{docpath}})
-        and 'html' eq $format
-        and 'get' eq lc $c->req->method
-      ) {
+      return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
+      if (404 != $c->{stash}->{status} and 'html' eq $format) {
         $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
         my $z = new IO::Compress::Gzip sprintf('%s.gz',
           $public->child($c->{stash}->{web}->{docpath})->to_string),
@@ -49,6 +46,8 @@ sub register  {
         $z->close;
         $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
         undef $z;
+      } elsif ($c->{stash}->{web}->{docpath} =~ /\.webp/) {
+
       }
       return 1;
     }
