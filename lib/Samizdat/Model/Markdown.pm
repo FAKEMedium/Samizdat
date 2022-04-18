@@ -50,11 +50,12 @@ sub list ($self, $url, $options = {}) {
           $types->file_type($src)
         ));
         my $webpsrc = $src;
+        my $svg = 0;
         if ($webpsrc =~ s/\.([^\.]+)$//) {
-          next if ('svg' eq $1);
+          $svg = 1 if ('svg' eq $1);
           $picture->at('picture')->prepend_content(sprintf('<source srcset="%s.webp" type="image/webp" />', $webpsrc));
         }
-        $img->replace($picture);
+        $img->replace($picture) if (!$svg);
       });
       $html = $dom->content;
       $html =~s/^[\s\r\n]+//;
