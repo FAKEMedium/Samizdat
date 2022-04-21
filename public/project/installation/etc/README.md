@@ -3,6 +3,7 @@
 This directory contains examples of how to integrate the Samizdat application on a Ubuntu 20.04 installation.
 
 #### /etc/systemd/system/samizdat.service - systemd configuration
+
 ```
 [Unit]
 Description=Samizdat
@@ -21,3 +22,9 @@ WantedBy=multi-user.target
 ```
 
 Enable and start
+
+
+```
+systemctl enable samizdat
+systemctl start samizdat
+```

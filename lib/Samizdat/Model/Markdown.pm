@@ -13,9 +13,12 @@ use MojoX::MIME::Types;
 my $types = MojoX::MIME::Types->new;
 
 my $md = Text::MultiMarkdown->new(
-  empty_element_suffix => ' />',
-  tab_width => 2,
-  use_wikilinks => 1,
+  empty_element_suffix     => ' />',
+  tab_width                => 2,
+  use_wikilinks            => 1,
+  use_metadata             => 1,
+  disable_definition_lists => 0,
+
 );
 
 sub new ($class) { bless {}, $class }
@@ -73,6 +76,7 @@ sub list ($self, $url, $options = {}) {
         subdocs     => [],
         description => undef,
         keywords    => [],
+        url         => $url,
       };
     }
   });
