@@ -18,7 +18,6 @@ my $md = Text::MultiMarkdown->new(
   use_wikilinks            => 1,
   use_metadata             => 1,
   disable_definition_lists => 0,
-
 );
 
 sub new ($class) { bless {}, $class }
