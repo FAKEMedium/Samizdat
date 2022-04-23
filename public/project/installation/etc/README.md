@@ -4,7 +4,7 @@ This directory contains examples of how to integrate the Samizdat application on
 
 #### /etc/systemd/system/samizdat.service - systemd configuration
 
-<pre><code>
+```
 [Unit]
 Description=Samizdat
 After=network.target
@@ -19,11 +19,11 @@ KillMode=process
 
 [Install]
 WantedBy=multi-user.target
-</code></pre>
+```
 
 Enable and start
 
-<pre><code>
+```
 systemctl enable samizdat
 systemctl start samizdat
-</code></pre>
+```

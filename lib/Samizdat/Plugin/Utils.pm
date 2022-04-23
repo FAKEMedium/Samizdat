@@ -33,32 +33,24 @@ sub register  {
     },
   );
 
-
-  sub undent {
-    my ($tag, $attr, $text) = @_;
-    $text =~ s/^([\s\t]+)//gm;
-    return sprintf('<%s%s>%s</%s>', $tag, $attr, $text, $tag);
-  }
-
   # Add the generated html to public as a static cache
   $app->hook(
     after_render => sub ($c, $output, $format) {
       return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
       if (404 != $c->{stash}->{status} and 'html' eq $format) {
-        $$output =~ s/<(pre|textarea)(.*)>(.*)<\/\g1>/
-          my $tag = $1;
-          my $attr = $2;
-          my $text = $3;
-          undent($tag, $attr, $text);
-        /gsmex;
+        $$output =~ s{<pre>(.+?)</pre>}[
+          my $text = $1;
+          $text =~ s/^[ ]+//gm;
+          sprintf('<pre>%s</pre>', $text);
+        ]gexsmu;
         $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
         my $z = new IO::Compress::Gzip sprintf('%s.gz',
           $public->child($c->{stash}->{web}->{docpath})->to_string),
           -Level => 9, Minimal => 1, AutoClose => 1;
         $z->print($$output);
         $z->close;
-        $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
         undef $z;
+        $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
       } elsif ($c->{stash}->{web}->{docpath} =~ /\.webp/) {
 
       }

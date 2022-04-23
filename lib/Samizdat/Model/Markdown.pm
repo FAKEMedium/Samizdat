@@ -15,7 +15,7 @@ my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
   empty_element_suffix     => ' />',
   tab_width                => 2,
-  use_wikilinks            => 1,
+  use_wikilinks            => 0,
   use_metadata             => 1,
   disable_definition_lists => 0,
 );
@@ -60,8 +60,9 @@ sub list ($self, $url, $options = {}) {
         $img->replace($picture) if (!$svg);
       });
       $html = $dom->content;
-      $html =~s/^[\s\r\n]+//;
-      $html =~s/[\s\r\n]+$//;
+      $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gms;
+      $html =~ s/^[\s\r\n]+//;
+      $html =~ s/[\s\r\n]+$//;
 
       my $docpath = $file->to_rel('public/')->to_string;
       if ($docpath =~ s/README\.md/index.html/) {
