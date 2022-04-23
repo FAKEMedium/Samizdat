@@ -60,7 +60,7 @@ sub list ($self, $url, $options = {}) {
         $img->replace($picture) if (!$svg);
       });
       $html = $dom->content;
-      $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gms;
+      $html =~ s/\`\`\`([^\`]+)\`\`\`/<pre><code>$1<\/code><\/pre>/gms;
       $html =~ s/^[\s\r\n]+//;
       $html =~ s/[\s\r\n]+$//;
 
