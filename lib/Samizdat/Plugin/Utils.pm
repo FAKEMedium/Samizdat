@@ -40,7 +40,7 @@ sub register  {
       if (404 != $c->{stash}->{status} and 'html' eq $format) {
         $$output =~ s{<pre>(.+?)</pre>}[
           my $text = $1;
-          $text =~ s/^[ ]+//gm;
+          $text =~ s/^[ ]+//gms;
           sprintf('<pre>%s</pre>', $text);
         ]gexsmu;
         $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
