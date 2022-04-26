@@ -65,19 +65,22 @@ sub list ($self, $url, $options = {}) {
       $html =~ s/[\s\r\n]+$//;
 
       my $docpath = $file->to_rel('public/')->to_string;
-      if ($docpath =~ s/README\.md/index.html/) {
-        $found = 1;
+      $docpath =~ s/_$options->{language}\.md$/.md/;
+      if ($docpath !~ /_[\.]+\.md/) {
+        if ($docpath =~ s/README\.md/index.html/) {
+          $found = 1;
+        }
+        $docs->{$docpath} = {
+          docpath     => $docpath,
+          title       => $title,
+          main        => $html,
+          children    => [],
+          subdocs     => [],
+          description => undef,
+          keywords    => [],
+          url         => $url,
+        };
       }
-      $docs->{$docpath} = {
-        docpath     => $docpath,
-        title       => $title,
-        main        => $html,
-        children    => [],
-        subdocs     => [],
-        description => undef,
-        keywords    => [],
-        url         => $url,
-      };
     }
   });
   if (!$found) {
