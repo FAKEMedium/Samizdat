@@ -66,7 +66,7 @@ sub list ($self, $url, $options = {}) {
 
       my $docpath = $file->to_rel('public/')->to_string;
       $docpath =~ s/_$options->{language}\.md$/.md/;
-      if ($docpath !~ /_[\.]+\.md/) {
+      if ($docpath !~ /_[^_\.]+\.md/) {
         if ($docpath =~ s/README\.md/index.html/) {
           $found = 1;
         }
