@@ -11,6 +11,6 @@ This directory contains some material to test the application.
 
 Video by Videographer [Shiyaz](https://www.pexels.com/@videographer-shiyaz-2356948) from Pexels.
 
-<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid pb-2" />
+<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid pb-2" width="1078" height="718" />
 
 Brown Mushroom on the Green Grass by [Bulat Khamitov](https://www.pexels.com/@bulat/) from Pexels.

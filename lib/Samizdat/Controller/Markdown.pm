@@ -17,6 +17,7 @@ sub geturi ($self) {
     $path = '404.html';
     $self->stash('status', 404);
     $docs->{'404.html'} = {
+      url         => $docpath,
       docpath     => '404.html',
       title       => $title,
       main        => $html,

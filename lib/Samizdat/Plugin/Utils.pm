@@ -7,10 +7,11 @@ no warnings 'uninitialized';
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
 use IO::Compress::Gzip;
-use Imager::File::WEBP;
+use Imager;
 use Data::Dumper;
 
 my $public = Mojo::Home->new('public/');
+my $image = Imager->new;
 my $cacheexist = {};
 
 sub register  {
@@ -34,10 +35,11 @@ sub register  {
   );
 
   # Add the generated html to public as a static cache
+  # Also adds missing webP files
   $app->hook(
     after_render => sub ($c, $output, $format) {
       return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
-      if (404 != $c->{stash}->{status} and 'html' eq $format) {
+      if (404 != $c->{stash}->{status}) {
         $$output =~ s{<pre>(.+?)</pre>}[
           my $text = $1;
           $text =~ s/^[ ]+//gms;
@@ -51,8 +53,37 @@ sub register  {
         $z->close;
         undef $z;
         $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
-      } elsif ($c->{stash}->{web}->{docpath} =~ /\.webp/) {
-
+      } elsif ($c->{stash}->{web}->{url} =~ /\.webp$/) {
+        my $webpfile = $public->child($c->{stash}->{web}->{url});
+        my $probefile = $webpfile;
+        $probefile =~ s/\.webp$//;
+        my $ext = '';
+        $webpfile->dirname->list->each( sub ($file, $num) {
+          if ($file =~ /$probefile\.(.+)$/) {
+            $ext = $1;
+          }
+        });
+        if ('' ne $ext) {
+          $image->read(file => sprintf("%s.%s",  $probefile, $ext)) or return 0;
+          my $width = $image->getwidth();
+          if ($width > 1078) {
+            $width = 1078;
+            $image = $image->scale(xpixels => $width);
+          }
+          $image->write(
+            data                 => $output,
+            type                 => 'webp',
+            webp_method          => 6,
+            webp_sns_strength    => 80,
+            webp_pass            => 10,
+            webp_quality         => 75,
+            webp_alpha_filtering => 2,
+          ) or return 0;
+          $c->stash('status', 200);
+          $format = 'image/webp';
+          $c->tx->res->headers->content_type($format);
+          $webpfile->spurt($$output);
+        }
       }
       return 1;
     }

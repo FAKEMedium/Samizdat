@@ -65,6 +65,8 @@ sub list ($self, $url, $options = {}) {
       $html =~ s/[\s\r\n]+$//;
 
       my $docpath = $file->to_rel('public/')->to_string;
+
+      # Overwrite the docpath of the default language if a file with the preferred language exists
       $docpath =~ s/_$options->{language}\.md$/.md/;
       if ($docpath !~ /_[^_\.]+\.md/) {
         if ($docpath =~ s/README\.md/index.html/) {

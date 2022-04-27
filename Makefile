@@ -33,8 +33,9 @@ server: clean zip
 routes:
 	samizdat routes -v
 
-test:
+test: clean
 	prove -l -v
+	ls -las public/test
 
 zip:
 	gzip -k -9 public/css/bundle.css
