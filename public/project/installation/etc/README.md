@@ -12,13 +12,15 @@ After=network.target
 [Service]
 Type=forking
 User=www-data
-PIDFile=/sites/Samizdat/bin/samizdat.pid
-ExecStart=hypnotoad /sites/Samizdat/bin/samizdat
-ExecReload=hypnotoad /sites/Samizdat/bin/samizdat
+WorkingDirectory=/sites/Samizdat
+PIDFile=/sites/Samizdat/bin/hypnotoad.pid
+ExecStart=hypnotoad ./bin/samizdat
+ExecReload=hypnotoad ./bin/samizdat
 KillMode=process
 
 [Install]
 WantedBy=multi-user.target
+
 ```
 
 Enable and start
