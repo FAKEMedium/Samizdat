@@ -25,7 +25,7 @@ i18n:
 	samizdat makei18n
 
 debug:
-	morbo -m development -l http://0.0.0.0:3000?reuse=1 -l http+unix://%2Ftmp%2Fsamizdat.sock -v -w ./ ./bin/samizdat
+	morbo -m development -l http://0.0.0.0:3000?reuse=1 -l http+unix://bin%2Fsamizdat.sock -v -w ./ ./bin/samizdat
 
 server: clean zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
