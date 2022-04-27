@@ -7,7 +7,7 @@ The different tasks are managed by make. These steps are suggestions:
 * Run commands to install stuff
   * sudo apt update
   * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli libwebp-dev libwebp6 libwebpdemux2 
-libwebpmux3 git make automake autoconf
+libwebpmux3 libgif-dev git make automake autoconf
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge

@@ -64,7 +64,7 @@ sub register  {
           }
         });
         if ('' ne $ext) {
-          $image->read(file => sprintf("%s.%s",  $probefile, $ext)) or return 0;
+          $image->read(file => sprintf("%s.%s",  $probefile, $ext)) or die $image->errstr;
           my $width = $image->getwidth();
           if ($width > 1078) {
             $width = 1078;
@@ -78,7 +78,7 @@ sub register  {
             webp_pass            => 10,
             webp_quality         => 75,
             webp_alpha_filtering => 2,
-          ) or return 0;
+          ) or die $image->errstr;
           $c->stash('status', 200);
           $format = 'image/webp';
           $c->tx->res->headers->content_type($format);
