@@ -6,20 +6,26 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli libwebp-dev libwebp6 libwebpdemux2 
-libwebpmux3 libgif-dev libjpeg-dev git make automake autoconf
+  * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli postgresql-client libevdev-dev libpq-dev libwebp-dev libgif-dev libjpeg-dev libpng-dev git make automake autoconf nginx-full
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge
   * sudo cpanm Text::MultiMarkdown
   * sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO
   * sudo cpanm Locale::TextDomain::OO::Extract
-  * sudo cpanm Imager::File::WEBP
+  * sudo cpanm Imager::File::JPEG
+  * sudo cpanm Imager::File::GIF
+  * sudo cpanm Imager::File::PNG
+  * sudo cpanm Imager
   * sudo cpanm MojoX::MIME::Types
   * sudo cpanm IO::Compress::Gzip
   * sudo cpanm Test::Harness
-* Clone the project into a suitable directory
-  * git clone https://github.com/FakenewsCom/Samizdat.git
+  * sudo cpanm Mojo::Pg
+  * sudo cpanm Minion
+* Clone the project into a suitable directory, we use /sites
+  * sudo mkdir /sites
+  * cd /sites
+  * sudo -u www-data git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
 * Copy samizdat.dist.yml to samizdat.yml and modify it for your needs
 

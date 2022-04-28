@@ -55,12 +55,16 @@ sub list ($self, $url, $options = {}) {
         my $svg = 0;
         if ($webpsrc =~ s/\.([^\.]+)$//) {
           $svg = 1 if ('svg' eq $1);
-          $picture->at('picture')->prepend_content(sprintf('<source srcset="%s.webp" type="image/webp" />', $webpsrc));
+          $picture->at('picture')
+            ->prepend_content(
+            sprintf('<source srcset="%s.webp" type="image/webp" media="(min-width: 300px)" />', $webpsrc));
         }
         $img->replace($picture) if (!$svg);
       });
       $html = $dom->content;
       $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gs;
+      $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gs;
+
       $html =~ s/^[\s\r\n]+//;
       $html =~ s/[\s\r\n]+$//;
 
