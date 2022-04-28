@@ -63,8 +63,6 @@ sub list ($self, $url, $options = {}) {
       });
       $html = $dom->content;
       $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gs;
-      $html =~ s/\`\`\`([^\`]+?)\`\`\`/<pre><code>$1<\/code><\/pre>/gs;
-
       $html =~ s/^[\s\r\n]+//;
       $html =~ s/[\s\r\n]+$//;
 

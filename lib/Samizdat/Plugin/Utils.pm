@@ -34,6 +34,7 @@ sub register  {
     },
   );
 
+  # Remove indentation from pre and textarea elements
   # Add the generated html to public as a static cache
   # Also adds missing webP files
   $app->hook(

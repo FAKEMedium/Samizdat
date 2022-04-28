@@ -6,7 +6,9 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli postgresql-client libevdev-dev libpq-dev libwebp-dev libgif-dev libjpeg-dev libpng-dev git make automake autoconf nginx-full
+  * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli postgresql-client libevdev-dev 
+  libpq-dev libhiredis-dev libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
+  git make automake autoconf nginx-full
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge
@@ -16,10 +18,13 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm Imager::File::JPEG
   * sudo cpanm Imager::File::GIF
   * sudo cpanm Imager::File::PNG
+  * sudo cpanm Imager::File::TIFF
+  * sudo cpanm Imager::File::HEIF
   * sudo cpanm Imager
   * sudo cpanm MojoX::MIME::Types
   * sudo cpanm IO::Compress::Gzip
   * sudo cpanm Test::Harness
+  * sudo cpanm Mojo::Redis
   * sudo cpanm Mojo::Pg
   * sudo cpanm Minion
 * Clone the project into a suitable directory, we use /sites
