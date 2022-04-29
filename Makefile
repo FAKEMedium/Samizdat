@@ -40,3 +40,9 @@ test: clean
 zip:
 	gzip -k -9 public/css/bundle.css
 	gzip -k -9 public/js/bundle.js
+
+database:
+	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
+	sudo -u postgres -i createdb --encoding=UTF-8 --template=template0 --locale=en_US.UTF-8 --owner=samizdat samizdat "Samizdat web application"
+	sudo -u postgres psql --command="CREATE EXTENSION plperl;"
+	sudo -u postgres psql --command="CREATE SCHEMA IF NOT EXISTS samizdat AUTHORIZATION samizdat;"  samizdat

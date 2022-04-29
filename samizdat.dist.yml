@@ -7,8 +7,13 @@ domain: fakenews.com
 hypnotoad:
   listen:
     - http://0.0.0.0:3000?reuse=1
-    - http+unix://%2Ftmp%2Fsamizdat.sock
+    - http+unix://bin%2Fsamizdat.sock
   workers: 10
+pgsql:
+  user: samizdat
+  password: s3cr3t
+  host: '%2Fvar%2Frun%2Fpostgresql%2F'
+  database: samizdat
 piratebay:
   login: example
   password: s3cr3t
