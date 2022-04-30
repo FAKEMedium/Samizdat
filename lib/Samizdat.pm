@@ -3,16 +3,23 @@ use Mojo::Base 'Mojolicious', -signatures;
 use Samizdat::Model::Markdown;
 use MojoX::MIME::Types;
 use Mojo::Pg;
+use Mojo::Redis;
 sub startup ($self) {
 
   my $config = $self->plugin('NotYAMLConfig');
-  my $dsn = sprintf('postgresql://%s:%s@%s/%s',
+  my $dsnpg = sprintf('postgresql://%s:%s@%s/%s',
     $config->{pgsql}->{user},
     $config->{pgsql}->{password},
     $config->{pgsql}->{host},
     $config->{pgsql}->{database}
   );
-  $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsn) });
+  my $dsnredis = sprintf('redis://%s:%s/%s',
+    $config->{redis}->{host},
+    $config->{redis}->{port},
+    $config->{redis}->{database}
+  );
+  $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsnpg) });
+  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   $self->app->pg->on(connection => sub {
@@ -20,7 +27,7 @@ sub startup ($self) {
     $dbh->query('set timezone to ?', $config->{timezone});
     $pg->max_connections(32);
   });
-  $self->plugin(Minion => {Pg => $dsn});
+  $self->plugin(Minion => {Pg => $dsnpg});
   $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
