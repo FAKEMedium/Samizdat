@@ -56,6 +56,9 @@ msgstr "Dela på Facebook"
 msgid "Share on LinkedIn"
 msgstr "Dela på LinkedIn"
 
+msgid "Share on Telegram"
+msgstr "Dela på Telegram"
+
 msgid "Share on Twitter"
 msgstr "Dela på Twitter"
 
@@ -63,7 +66,7 @@ msgid "Skip menu"
 msgstr "Hoppa över meny"
 
 msgid "The Samizdat project"
-msgstr ""
+msgstr "Projektet Samizdat"
 
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."

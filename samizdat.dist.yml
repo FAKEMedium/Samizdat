@@ -9,10 +9,12 @@ hypnotoad:
     - http://0.0.0.0:3000?reuse=1
     - http+unix://bin%2Fsamizdat.sock
   workers: 10
+timezone: Etc/UTC
 pgsql:
   user: samizdat
   password: s3cr3t
   host: '%2Fvar%2Frun%2Fpostgresql%2F'
+  port: 5432
   database: samizdat
 piratebay:
   login: example

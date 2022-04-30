@@ -2,13 +2,25 @@ package Samizdat;
 use Mojo::Base 'Mojolicious', -signatures;
 use Samizdat::Model::Markdown;
 use MojoX::MIME::Types;
-
+use Mojo::Pg;
 sub startup ($self) {
 
   my $config = $self->plugin('NotYAMLConfig');
-
+  my $dsn = sprintf('postgresql://%s:%s@%s/%s',
+    $config->{pgsql}->{user},
+    $config->{pgsql}->{password},
+    $config->{pgsql}->{host},
+    $config->{pgsql}->{database}
+  );
+  $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsn) });
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
+  $self->app->pg->on(connection => sub {
+    my ($pg, $dbh) = @_;
+    $dbh->query('set timezone to ?', $config->{timezone});
+    $pg->max_connections(32);
+  });
+  $self->plugin(Minion => {Pg => $dsn});
   $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');

@@ -16,13 +16,31 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "Contact"
+msgid "Share on Telegram"
+msgstr ""
+
+msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
 msgid "Contribute"
 msgstr ""
 
-msgid "404: Missing document"
+msgid "Share on Twitter"
+msgstr ""
+
+msgid "Advertising"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Share on Facebook"
+msgstr ""
+
+msgid "Contact"
 msgstr ""
 
 msgid "Email to a friend"
@@ -34,38 +52,23 @@ msgstr ""
 msgid "Share on LinkedIn"
 msgstr ""
 
-msgid "Share on Facebook"
+msgid "Skip menu"
 msgstr ""
 
 msgid "Personal menu"
 msgstr ""
 
-msgid "Log out"
-msgstr ""
-
 msgid "About"
-msgstr ""
-
-msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
-
-msgid "Skip menu"
-msgstr ""
-
-msgid "Settings"
 msgstr ""
 
 msgid "The page {docpath} wasn't found."
 msgstr ""
 
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
 msgid "The Samizdat project"
-msgstr ""
-
-msgid "Advertising"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "Share on Twitter"
 msgstr ""

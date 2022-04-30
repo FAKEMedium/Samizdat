@@ -59,6 +59,9 @@ msgstr ""
 msgid "Share on LinkedIn"
 msgstr ""
 
+msgid "Share on Telegram"
+msgstr ""
+
 msgid "Share on Twitter"
 msgstr ""
 

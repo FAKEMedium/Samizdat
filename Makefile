@@ -46,3 +46,5 @@ database:
 	sudo -u postgres -i createdb --encoding=UTF-8 --template=template0 --locale=en_US.UTF-8 --owner=samizdat samizdat "Samizdat web application"
 	sudo -u postgres psql --command="CREATE EXTENSION plperl;"
 	sudo -u postgres psql --command="CREATE SCHEMA IF NOT EXISTS samizdat AUTHORIZATION samizdat;"  samizdat
+	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   sameuser        all                                     md5/' {} \;
+	sudo systemctl restart postgresql
