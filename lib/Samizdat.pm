@@ -22,13 +22,12 @@ sub startup ($self) {
   $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
-
-  $self->pg->migrations->from_dir('migrations')->migrate;
   $self->app->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
-    $dbh->query('set timezone to ?', $config->{timezone});
+    $dbh->do('SET search_path TO public');
     $pg->max_connections(32);
   });
+  $self->pg->migrations->from_dir('migrations')->migrate;
   $self->plugin(Minion => {Pg => $dsnpg});
   $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');

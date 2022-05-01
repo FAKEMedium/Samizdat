@@ -1,6 +1,10 @@
-ALTER USER samizdat SET search_path TO web;
+CREATE SCHEMA web;
+ALTER SCHEMA web OWNER TO "samizdat";
 
-SET search_path TO pg_catalog,public,account,web;
+CREATE SCHEMA account;
+ALTER SCHEMA account OWNER TO "samizdat";
+
+ALTER USER samizdat SET search_path TO public;
 
 CREATE TYPE public."position" AS
     ENUM ('current','next','previous');
