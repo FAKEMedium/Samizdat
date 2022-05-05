@@ -23,10 +23,7 @@ WantedBy=multi-user.target
 
 ```
 
-Enable and start
-
-
-```
-systemctl enable samizdat
-systemctl start samizdat
-```
+### Enable and start
+    
+    systemctl enable samizdat
+    systemctl start samizdat
