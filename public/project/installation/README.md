@@ -6,8 +6,11 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus mkisofs xorriso growisofs transmission-cli postgresql-client redis-server git make automake autoconf nginx-full
-  * sudo apt installl libevdev-dev libpq-dev libhiredis-dev libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
+  * sudo apt install cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
+  * sudo apt install mkisofs xorriso growisofs transmission-cli
+  * sudo apt install libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
+  * sudo apt install postgresql-client postgresql-server redis-server libpq-dev libhiredis-dev
+  * sudo apt install nginx-full
   * sudo cpanm Mojolicious
   * sudo cpanm WWW::YouTube::Download
   * sudo cpanm Hash::Merge

@@ -7,7 +7,7 @@ domain: fakenews.com
 hypnotoad:
   listen:
     - http://0.0.0.0:3000?reuse=1
-    - http+unix://bin%2Fsamizdat.sock
+    - http+unix://bin%2Fhypertoad.sock
   workers: 10
 timezone: Etc/UTC
 pgsql:

@@ -25,7 +25,7 @@ i18n:
 	samizdat makei18n
 
 debug:
-	morbo -m development -l http://0.0.0.0:3000?reuse=1 -l http+unix://bin%2Fsamizdat.sock -v -w ./ ./bin/samizdat
+	morbo -m development -l http://0.0.0.0:3000?reuse=1 -l http+unix://bin%2Fhypertoad.sock -v -w ./ ./bin/samizdat
 
 server: clean zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
@@ -47,3 +47,12 @@ database:
 	sudo -u postgres psql --command="CREATE EXTENSION plperl;"
 	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   sameuser        all                                     md5/' {} \;
 	sudo systemctl restart postgresql
+
+multimarkdown:
+	cd src
+	wget https://github.com/fletcher/MultiMarkdown-6/archive/refs/tags/6.6.0.tar.gz
+	tar zxvf 6.6.0.tar.gz
+	cd MultiMarkdown-6-6.6.0
+	make release
+	cd build
+	make

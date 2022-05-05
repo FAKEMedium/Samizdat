@@ -19,7 +19,7 @@ sub startup ($self) {
     $config->{redis}->{database}
   );
   $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsnpg) });
-  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
+#  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   $self->app->pg->on(connection => sub {
@@ -28,7 +28,7 @@ sub startup ($self) {
     $pg->max_connections(32);
   });
   $self->pg->migrations->from_dir('migrations')->migrate;
-  $self->plugin(Minion => {Pg => $dsnpg});
+#  $self->plugin(Minion => {Pg => $dsnpg});
   $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
