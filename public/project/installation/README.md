@@ -37,6 +37,8 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo -u www-data git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
 * Copy samizdat.dist.yml to samizdat.yml and modify it for your needs
+* Start [webpack](./webpack/) file watching to minimize files
+
 
 ## Operation
 
