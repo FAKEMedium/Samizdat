@@ -6,29 +6,31 @@ The different tasks are managed by make. These steps are suggestions:
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
 * Run commands to install stuff
   * sudo apt update
-  * sudo apt install cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
-  * sudo apt install mkisofs xorriso growisofs transmission-cli
-  * sudo apt install libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
-  * sudo apt install postgresql-client postgresql-server redis-server libpq-dev libhiredis-dev
-  * sudo apt install nginx-full
-  * sudo cpanm Mojolicious
-  * sudo cpanm WWW::YouTube::Download
-  * sudo cpanm Hash::Merge
-  * sudo cpanm Text::MultiMarkdown
-  * sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO
-  * sudo cpanm Locale::TextDomain::OO::Extract
-  * sudo cpanm Imager::File::JPEG
-  * sudo cpanm Imager::File::GIF
-  * sudo cpanm Imager::File::PNG
-  * sudo cpanm Imager::File::TIFF
-  * sudo cpanm Imager::File::HEIF
-  * sudo cpanm Imager
-  * sudo cpanm MojoX::MIME::Types
-  * sudo cpanm IO::Compress::Gzip
-  * sudo cpanm Test::Harness
-  * sudo cpanm Mojo::Redis
-  * sudo cpanm Mojo::Pg
-  * sudo cpanm Minion
+  * sudo apt install --yes cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
+  * sudo apt install --yes mkisofs xorriso growisofs transmission-cli
+  * sudo apt install --yes libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
+  * sudo apt install --yes postgresql-client postgresql-12 postgresql-server-dev-all redis-server libhiredis-dev
+  * sudo apt install --yes nginx-full
+  * sudo cpanm --reinstall EV
+  * sudo cpanm --reinstall Mojolicious
+  * sudo cpanm --reinstall WWW::YouTube::Download
+  * sudo cpanm --reinstall Hash::Merge
+  * sudo cpanm --reinstall Text::MultiMarkdown
+  * sudo cpanm --reinstall Mojolicious::Plugin::LocaleTextDomainOO
+  * sudo cpanm --reinstall Locale::TextDomain::OO::Extract
+  * sudo cpanm --reinstall Imager
+  * sudo cpanm --reinstall Imager::File::JPEG
+  * sudo cpanm --reinstall Imager::File::GIF
+  * sudo cpanm --reinstall Imager::File::PNG
+  * sudo cpanm --reinstall Imager::File::TIFF
+  * sudo cpanm --reinstall Imager::File::HEIF
+  * sudo cpanm --reinstall MojoX::MIME::Types
+  * sudo cpanm --reinstall IO::Compress::Gzip
+  * sudo cpanm --reinstall Test::Harness
+  * sudo cpanm --reinstall Mojo::Redis
+  * sudo cpanm --reinstall Mojo::Pg
+  * sudo cpanm --reinstall Future::AsyncAwait
+  * sudo cpanm --reinstall Minion
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites

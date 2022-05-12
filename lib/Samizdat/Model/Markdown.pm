@@ -29,6 +29,7 @@ sub list ($self, $url, $options = {}) {
   $path->list({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
+      $content =~ s/\{\{(.+)\}\}/$1/g;
       my $html = decode 'UTF-8', $md->markdown($content);
       my $dom = Mojo::DOM->new->xml(1)->parse($html);
       my $title = $dom->at('h1')->text;
