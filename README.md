@@ -2,7 +2,7 @@
 
 Documenting differences in media coverage of the war in Ukraine
 
-Read more about the [project](public/project/README.md) in the public directory.
+Read more about the [project](./public/project/) in the public directory.
 The documentation is part of the generated site.
 [Fakenews.com](https://fakenews.com/) runs on the code and content in this repository.
 

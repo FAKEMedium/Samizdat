@@ -15,7 +15,7 @@ create a disk image that can be downloaded as a torrent file.
 
 * Internationalization support
 * Human readable formats &mdash; YAML and Markdown
-* Speed optimization &mdash; automatic WebP images, smart caching of generated content
+* Speed optimization &mdash; automatic WebP images, smart caching of generated content, minimization
 * Beautiful and semantic html5
 * Mojolicious smart templates
 * Automatic one or two column layouts with concatenated side panels
@@ -25,15 +25,13 @@ create a disk image that can be downloaded as a torrent file.
 * lib - Perl modules
   * Samizdat
     * Command - Perl modules that adds options to the samizdat command.
-* pages - Markdown files that will be processed
-* public - Static files. Processed files go here too.
+* public - Static files. Markdown. Processed files go here too as cached content.
 * t - Test suite
 * templates - Templates, layouts and smaller chunks
 
 The files in the public directory are what goes into the disk image (ISO format) to be viewed locally. 
 It is also possible to use a web server and serve lightning fast content. Hopefully I'll find a Bittorrent
-solution to stream video too. Fakenews.com will use Samizdat for a period, and have regular updates. Satiric
-content will not be used then.
+solution to stream video too. Fakenews.com will use Samizdat for a period, and have regular updates.
 
 ### Personal usage piracy
 
