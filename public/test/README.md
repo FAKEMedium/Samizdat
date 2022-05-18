@@ -13,6 +13,34 @@ This directory contains some material to test the application.
     b = a;
     a++;
 
+
+### Fenced code
+
+`
+One fence
+`
+
+
+``
+Two fence
+``
+
+
+```
+Three fence
+```
+
+
+````
+Four fence
+````
+
+
+`````
+Five fence
+`````
+
+
 ### HTML5 video
 
 <div class="embed-responsive embed-responsive-16by9">

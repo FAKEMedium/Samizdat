@@ -32,6 +32,8 @@ sub startup ($self) {
   $self->types(MojoX::MIME::Types->new);
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
+
+  # Internationalization block. Use "make i18n" to handle text strings.
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
     default => 'en',
@@ -47,10 +49,6 @@ sub startup ($self) {
       delete_lexicon => 'i-default::',
     ],
   });
-  push @{$self->commands->namespaces}, 'Samizdat::Command';
-  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
-  $self->plugin('Utils');
-
   $self->hook(before_routes => sub {
     my $c = shift;
     my $language = $c->cookie('language') // '';
@@ -69,7 +67,13 @@ sub startup ($self) {
     }
   });
 
+  push @{$self->commands->namespaces}, 'Samizdat::Command';
+  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
+  $self->plugin('Utils');
+
   my $r = $self->routes;
+
+  # Currently this application only handles text from markdown files.
   $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
   $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
 }
