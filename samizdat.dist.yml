@@ -4,12 +4,20 @@ secrets:
 sitename: Fake News
 siteurl: https://fakenews.com/
 domain: fakenews.com
+cookiedomain: .fakenews.com
 hypnotoad:
   listen:
     - http://0.0.0.0:3000?reuse=1
-    - http+unix://bin%2Fhypertoad.sock
+    - http+unix://bin%2Fsamizdat.sock
   workers: 10
 timezone: Etc/UTC
+account:
+  passwordmethods:
+    - mysql
+    - sha512
+    - pbkdf2
+    - bcrypt
+    - argon2id
 pgsql:
   user: samizdat
   password: s3cr3t

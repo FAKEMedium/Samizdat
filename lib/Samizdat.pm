@@ -72,8 +72,8 @@ sub startup ($self) {
   $self->plugin('Utils');
 
   my $r = $self->routes;
-
-  # Currently this application only handles text from markdown files.
+  $r->any([qw(GET POST)] => '/login')->to(controller => 'User', action => 'login');
+  $r->any([qw(GET)] => '/user')->to(controller => 'User');
   $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
   $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
 }

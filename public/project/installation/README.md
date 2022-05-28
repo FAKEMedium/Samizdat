@@ -31,6 +31,10 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall Mojo::Pg
   * sudo cpanm --reinstall Future::AsyncAwait
   * sudo cpanm --reinstall Minion
+  * sudo cpanm --reinstall Bytes::Random::Secure::Tiny
+  * sudo cpanm --reinstall Crypt::Argon2
+  * sudo cpanm --reinstall Crypt::PBKDF2
+  * sudo cpanm --reinstall Digest::SHA1
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites
