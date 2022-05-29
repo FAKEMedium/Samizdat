@@ -83,6 +83,7 @@ sub list ($self, $url, $options = {}) {
           description => undef,
           keywords    => [],
           url         => $url,
+          lang        => $options->{language},
         };
       }
     }
@@ -103,4 +104,17 @@ sub list ($self, $url, $options = {}) {
 }
 
 
+sub geturis ($self, $options = {}) {
+  my $uris = {};
+  my $path = Mojo::Home->new('public/');
+  $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
+    if ('md' eq $file->path->extname()) {
+
+      $uris->{ $file->to_rel('public/')->to_string } = 1;
+    }
+  });
+  return $uris;
+}
 1;
+
+__END__

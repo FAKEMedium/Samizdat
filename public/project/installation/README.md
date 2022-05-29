@@ -4,12 +4,12 @@ To build the disk image you need a recent version of Perl. Then grab the Mojolic
 The different tasks are managed by make. These steps are suggestions:
 
 * Start with an [Ubuntu installation](https://ubuntu.com/download/server)
-* Run commands to install stuff
+* Run commands to install stuff. This is a good-to-have list that needs some shortening.
   * sudo apt update
   * sudo apt install --yes cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
   * sudo apt install --yes mkisofs xorriso growisofs transmission-cli
   * sudo apt install --yes libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
-  * sudo apt install --yes postgresql-client postgresql-12 postgresql-server-dev-all redis-server libhiredis-dev
+  * sudo apt install --yes postgresql-client postgresql-12 postgresql-server-dev-all redis-server libhiredis-dev libargon2-dev
   * sudo apt install --yes nginx-full
   * sudo cpanm --reinstall EV
   * sudo cpanm --reinstall Mojolicious

@@ -1,6 +1,8 @@
 package Samizdat::Controller::User;
 
-use strict;
-use warnings FATAL => 'all';
+use Mojo::Base 'Mojolicious::Controller', -signatures;
+
+
 
 1;
+

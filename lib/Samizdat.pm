@@ -1,11 +1,13 @@
 package Samizdat;
+
 use Mojo::Base 'Mojolicious', -signatures;
 use Samizdat::Model::Markdown;
+use Samizdat::Model::Account;
 use MojoX::MIME::Types;
 use Mojo::Pg;
 use Mojo::Redis;
-sub startup ($self) {
 
+sub startup ($self) {
   my $config = $self->plugin('NotYAMLConfig');
   my $dsnpg = sprintf('postgresql://%s:%s@%s/%s',
     $config->{pgsql}->{user},
@@ -22,6 +24,8 @@ sub startup ($self) {
 #  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
   $self->secrets($config->{secrets});
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
+  $self->helper(account => sub { state $account = Samizdat::Model::Account->new });
+
   $self->app->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');
@@ -72,7 +76,7 @@ sub startup ($self) {
   $self->plugin('Utils');
 
   my $r = $self->routes;
-  $r->any([qw(GET POST)] => '/login')->to(controller => 'User', action => 'login');
+  $r->any([qw(GET POST)] => '/login')->to(controller => 'Login', action => 'login');
   $r->any([qw(GET)] => '/user')->to(controller => 'User');
   $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
   $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');

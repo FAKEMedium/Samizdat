@@ -56,6 +56,12 @@ sub savePassword {
   my $password = shift;
 }
 
+sub check {
+  my $self = shift;
+  my $username = shift;
+  my $password = shift;
+}
+
 1;
 
 

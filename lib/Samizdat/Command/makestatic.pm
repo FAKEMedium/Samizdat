@@ -6,8 +6,8 @@ has description => 'Apply templates to markdown files and dump resulting files i
 has usage => sub ($self) { $self->extract_usage };
 
 sub run ($self, @args) {
-  my $files = $self->app->markdown()->list('', {depth => 2});
-say Dumper $files;
+  my $uris = $self->app->markdown()->geturis();
+say Dumper $uris;
 
 }
 

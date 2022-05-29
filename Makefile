@@ -12,12 +12,13 @@ clean:
 harvest:
 	samizdat makeharvest
 
-iso: harvest static
+iso:
+	xorrisofs -r -hfsplus -joliet -V SAMIZDAT_`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
 
 torrent:
 	transmission-cli -n public
 
-isotorrent: public/iso
+isotorrent: public/iso/samizdat.iso
 
 devtools:
 
