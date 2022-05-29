@@ -35,6 +35,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall Crypt::Argon2
   * sudo cpanm --reinstall Crypt::PBKDF2
   * sudo cpanm --reinstall Digest::SHA1
+  * sudo cpanm --reinstall App::bmkpasswd
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites
