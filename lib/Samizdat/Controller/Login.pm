@@ -11,11 +11,6 @@ sub index ($self) {
   $self->redirect_to('panel');
 }
 
-sub logged_in ($self) {
-  return 1 if $self->session('user');
-  $self->redirect_to('index');
-  return undef;
-}
 
 sub logout ($self) {
   $self->session(expires => 1);

@@ -78,6 +78,7 @@ sub startup ($self) {
   my $r = $self->routes;
   $r->any([qw(GET POST)] => '/login')->to(controller => 'Login', action => 'login');
   $r->any([qw(GET)] => '/user')->to(controller => 'User');
+  $r->any([qw(GET)] => '/panel')->to(controller => 'Panel');
   $r->any([qw(GET)] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
   $r->any([qw(GET)] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
 }

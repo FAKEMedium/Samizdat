@@ -115,6 +115,6 @@ sub geturis ($self, $options = {}) {
   });
   return $uris;
 }
-1;
 
-__END__
+
+1;
