@@ -1,0 +1,1 @@
+<a class="dropdown-item" href="/admin.html"><%= icon 'grid-3x3-gap-fill %><span class="ml-2"><%= __('Admininistration panel') %></a></span></a>

@@ -26,7 +26,7 @@ i18n:
 	samizdat makei18n
 
 debug:
-	morbo -m development -l http://0.0.0.0:3000?reuse=1 -l http+unix://bin%2Fsamizdat.sock -v -w ./ ./bin/samizdat
+	MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./ ./bin/samizdat
 
 server: clean zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
@@ -48,3 +48,6 @@ database:
 	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/\nlocal   samizdat        samizdat                                md5//g' {} \;
 	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   samizdat        samizdat                                md5/' {} \;
 	sudo systemctl restart postgresql
+
+fetchicons:
+	git clone https://github.com/twbs/icons.git ./src/icons

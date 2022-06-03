@@ -1,15 +1,15 @@
 ---
 secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
-sitename: Fake News
-siteurl: https://fakenews.com/
-domain: fakenews.com
-cookiedomain: .fakenews.com
+sitename: The Example News
+siteurl: https://example.com/
+host: example.com
+cookiedomain: .example.com
 hypnotoad:
   listen:
     - http://0.0.0.0:3000?reuse=1
     - http+unix://bin%2Fsamizdat.sock
-  workers: 10
+  workers: 4
 timezone: Etc/UTC
 account:
   passwordmethods:
@@ -18,6 +18,10 @@ account:
     - pbkdf2
     - bcrypt
     - argon2id
+  blocktime: 60 minutes
+  blocklimit: 5
+  superadmins:
+    admin: 1
 pgsql:
   user: samizdat
   password: s3cr3t

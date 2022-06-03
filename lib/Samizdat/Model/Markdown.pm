@@ -26,7 +26,7 @@ sub list ($self, $url, $options = {}) {
   my $docs = {};
   my $path = Mojo::Home->new('public/')->child($url);
   my $found = 0;
-  $path->list({ dir => 0 })->each(sub ($file, $num) {
+  $path->list({ dir => 0 })->sort(sub { $b cmp $a })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
       $content =~ s/\{\{(.+)\}\}/$1/g;
@@ -56,9 +56,9 @@ sub list ($self, $url, $options = {}) {
         my $svg = 0;
         if ($webpsrc =~ s/\.([^\.]+)$//) {
           $svg = 1 if ('svg' eq $1);
-          $picture->at('picture')
-            ->prepend_content(
-            sprintf('<source srcset="%s.webp" type="image/webp" media="(min-width: 300px)" />', $webpsrc));
+          $picture->at('picture')->prepend_content(
+            sprintf('<source srcset="%s.webp" type="image/webp" media="(min-width: 300px)" />', $webpsrc)
+          );
         }
         $img->replace($picture) if (!$svg);
       });
@@ -70,7 +70,7 @@ sub list ($self, $url, $options = {}) {
 
       # Overwrite the docpath of the default language if a file with the preferred language exists
       $docpath =~ s/_$options->{language}\.md$/.md/;
-      if ($docpath !~ /_[^_\.]+\.md/) {
+      if ($docpath !~ /\_(.+)\.md$/) {
         if ($docpath =~ s/README\.md/index.html/) {
           $found = 1;
         }
@@ -83,7 +83,7 @@ sub list ($self, $url, $options = {}) {
           description => undef,
           keywords    => [],
           url         => $url,
-          lang        => $options->{language},
+          language    => $options->{language},
         };
       }
     }
@@ -97,8 +97,8 @@ sub list ($self, $url, $options = {}) {
       push @{ $subdocs }, delete $docs->{$docpath};
     }
   }
-  for (@{ $subdocs }) {
-    push @{ $docs->{'index.html'}->{subdocs} }, $_;
+  for my $subdoc (@{ $subdocs }) {
+    push @{ $docs->{'index.html'}->{subdocs} }, $subdoc;
   }
   return $docs;
 }
@@ -109,8 +109,7 @@ sub geturis ($self, $options = {}) {
   my $path = Mojo::Home->new('public/');
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
-
-      $uris->{ $file->to_rel('public/')->to_string } = 1;
+      $uris->{ $file->to_rel('public/')->to_string } = 0;
     }
   });
   return $uris;

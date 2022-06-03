@@ -8,7 +8,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo apt update
   * sudo apt install --yes cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
   * sudo apt install --yes mkisofs xorriso growisofs transmission-cli
-  * sudo apt install --yes libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev
+  * sudo apt install --yes libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev libgd-dev
   * sudo apt install --yes postgresql-client postgresql-12 postgresql-server-dev-all redis-server libhiredis-dev libargon2-dev
   * sudo apt install --yes nginx-full
   * sudo cpanm --reinstall EV
@@ -36,6 +36,9 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall Crypt::PBKDF2
   * sudo cpanm --reinstall Digest::SHA1
   * sudo cpanm --reinstall App::bmkpasswd
+  * sudo cpanm --reinstall Mojolicious::Plugin::Captcha
+  * sudo cpanm --reinstall Mojolicious::Plugin::Mail
+  * sudo cpanm --reinstall Mojolicious::Plugin::Memorize
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites

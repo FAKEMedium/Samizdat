@@ -25,11 +25,12 @@ sub geturi ($self) {
       subdocs     => [],
       description => undef,
       keywords    => [],
+      language => $self->app->language,
     };
   } else {
     if ($#{$docs->{$path}->{subdocs}} > -1) {
       my $sidebar = '';
-      for my $subdoc (@{$docs->{$path}->{subdocs}}) {
+      for my $subdoc (sort {$a->{docpath} cmp $b->{docpath}} @{ $docs->{$path}->{subdocs} }) {
         $sidebar .= $self->render_to_string(template => 'chunks/sidecard', card => $subdoc);
       }
       $docs->{$path}->{sidebar} = $sidebar;
