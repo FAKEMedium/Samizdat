@@ -115,7 +115,7 @@ sub getLoginFailures {
   my $result = $self->db->select('account.loginfailure',
     ['failuretime','ip','username'],
     {
-      failuretime => { '>=', ref $failuretime },
+      failuretime => { '>=', \{$failuretime} },
       ip => $options->{ip},
     },
     {

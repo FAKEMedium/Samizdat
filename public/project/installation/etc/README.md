@@ -4,6 +4,7 @@ This directory contains examples of how to integrate the Samizdat application on
 
 #### /etc/systemd/system/samizdat.service - systemd configuration
 
+    
     [Unit]
     Description=Samizdat
     After=network.target
@@ -19,22 +20,26 @@ This directory contains examples of how to integrate the Samizdat application on
     
     [Install]
     WantedBy=multi-user.target
+    
 
 ### Enable and start
+
     
     systemctl enable samizdat
     systemctl start samizdat
+    
 
 ### /etc/nginx/sites-available/samizdat
 
 We run our application behind an Nginx proxy. If they are on the same machine we can use a
 unix socket. Also, we let nginx take care of content that already is on disk.
 
+    
     upstream samizdat {
         # server 127.0.0.1:3000;
         server unix:/sites/Samizdat/bin/samizdat.sock;
     }
-
+    
     server {
         listen 443 ssl http2 backlog=4096 default_server;
         listen [::]:443 ssl http2 backlog=4096 default_server;
@@ -57,7 +62,7 @@ unix socket. Also, we let nginx take care of content that already is on disk.
             gzip_proxied expired no-cache no-store private auth;
             try_files $uri $uri/index.html @samizdat;
         }
-
+        
         location @samizdat {
             proxy_buffering off;
             proxy_pass http://samizdat;
@@ -82,7 +87,7 @@ unix socket. Also, we let nginx take care of content that already is on disk.
             access_log off;
         }
     }
-
+    
     server {
         listen 80 default_server;
         listen [::]:80 default_server;
@@ -93,9 +98,11 @@ unix socket. Also, we let nginx take care of content that already is on disk.
         access_log off;
         return 301 https://fakenews.com$request_uri;
     }
+    
 
 ### Enable and start
 
+    
     cd /sites/nginx/sites-enabled
     ln -s ../sites-availabled/samizdat .
     systemctl restart nginx

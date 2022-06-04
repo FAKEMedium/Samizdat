@@ -46,14 +46,16 @@ sub register  {
           $text =~ s/^[ ]+//gms;
           sprintf('<pre>%s</pre>', $text);
         ]gexsmu;
-        $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
-        my $z = new IO::Compress::Gzip sprintf('%s.gz',
-          $public->child($c->{stash}->{web}->{docpath})->to_string),
-          -Level => 9, Minimal => 1, AutoClose => 1;
-        $z->print($$output);
-        $z->close;
-        undef $z;
-        $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
+        if (exists $c->{stash}->{web}->{docpath}) {
+          $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
+          my $z = new IO::Compress::Gzip sprintf('%s.gz',
+            $public->child($c->{stash}->{web}->{docpath})->to_string),
+            -Level => 9, Minimal => 1, AutoClose => 1;
+          $z->print($$output);
+          $z->close;
+          undef $z;
+          $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
+        }
       } elsif ($c->{stash}->{web}->{url} =~ /\.webp$/) {
         my $webpfile = $public->child($c->{stash}->{web}->{url});
         my $probefile = $webpfile;

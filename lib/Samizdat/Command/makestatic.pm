@@ -23,11 +23,11 @@ sub run ($self, @args) {
       path   => '/'
     )
   );
-  say $language;
 
   my $uris = $self->app->markdown()->geturis();
   my $again = 1;
   my $siteurl = $self->app->{config}->{siteurl};
+  $siteurl =~ s/\/$//;
   while ($again) {
     $again = 0;
     for my $uri (keys %$uris) {
@@ -47,10 +47,11 @@ sub run ($self, @args) {
           $link = $dom->attr('src');
         }
         $link =~ s/$siteurl//;
-        next if ($link =~ /http/);
-        if (!exists($uris->{$link})) {
-          $uris->{$link} = 0;
-          $again = 1;
+        if ($link !~ /http/) {
+          if (!exists($uris->{$link})) {
+            $uris->{$link} = 0;
+            $again = 1;
+          }
         }
       });
     }

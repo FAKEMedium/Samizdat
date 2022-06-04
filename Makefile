@@ -2,7 +2,7 @@ SHELL := /bin/bash
 PATH := bin:$(PATH)
 
 static:
-	samizdat makestatic
+	LANG=en samizdat makestatic
 
 clean:
 	find public/  -name "*.html" -delete
@@ -12,7 +12,7 @@ clean:
 harvest:
 	samizdat makeharvest
 
-iso:
+iso: static
 	xorrisofs -r -hfsplus -joliet -V SAMIZDAT_`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
 
 torrent:
