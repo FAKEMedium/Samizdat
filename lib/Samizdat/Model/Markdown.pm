@@ -1,9 +1,6 @@
 package Samizdat::Model::Markdown;
 
-use strict;
-use warnings;
-use experimental qw(signatures);
-
+use Mojo::Base -base, -signatures;
 use Mojo::DOM;
 use Mojo::Home;
 use Text::MultiMarkdown;
@@ -11,7 +8,6 @@ use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
 
 my $types = MojoX::MIME::Types->new;
-
 my $md = Text::MultiMarkdown->new(
   empty_element_suffix     => ' />',
   tab_width                => 2,

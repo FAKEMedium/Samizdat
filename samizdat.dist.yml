@@ -21,7 +21,7 @@ account:
   blocktime: 60 minutes
   blocklimit: 5
   superadmins:
-    admin: 1
+    superadmin: s3cr3t_Pa55w0r6
 pgsql:
   user: samizdat
   password: s3cr3t

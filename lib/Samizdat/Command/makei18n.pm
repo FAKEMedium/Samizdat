@@ -1,4 +1,5 @@
 package Samizdat::Command::makei18n;
+
 use Mojo::Base 'Mojolicious::Command', -signatures;
 use Mojo::Home;
 use Locale::TextDomain::OO::Extract::Perl;

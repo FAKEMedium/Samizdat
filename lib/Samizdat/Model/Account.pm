@@ -1,19 +1,18 @@
 package Samizdat::Model::Account;
 
-use strict;
-use warnings FATAL => 'all';
-use experimental qw(signatures);
-use Mojo::Base -base;
+use Mojo::Base -base, -signatures;
+#use warnings;
+#use diagnostics;
 use Bytes::Random::Secure::Tiny;
 use Crypt::Argon2 qw/argon2id_pass argon2id_verify/;
 use Crypt::PBKDF2;
 use Digest::SHA1 qw/sha1 sha1_hex/;
 use App::bmkpasswd -all;
+use Data::Dumper;
 
-has 'db';
+has 'pg';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
-
 
 sub addUser {
   my $self = shift;
@@ -21,18 +20,25 @@ sub addUser {
   my $attribs = shift // undef;
   $attribs->{username} = $username;
   my $password = delete $attribs->{password};
-  my $userid = $self->db->insert('account.users', $attribs, { returning => 'id' })->hash->{id};
-  $self->db->insert('account.passwords', {
+  my $userid = $self->pg->db->insert('account.users',
+    $attribs,
+    { returning => 'id' }
+  )->hash->{id};
+  $self->pg->db->insert('account.passwords', {
     userid => $userid,
 
   });
   return $userid;
 }
 
+
 sub getUsers {
   my $self = shift;
   my $where = shift;
-  my $result = $self->db->select('account.users', undef, $where)->hashes->to_array;
+  my $result = $self->pg->db->select('account.users',
+    undef,
+    $where
+  )->hashes->to_array;
 }
 
 
@@ -40,7 +46,11 @@ sub saveUser {
   my $self = shift;
   my $userid = shift;
   my $attribs = shift // undef;
-  $self->db->update('account.users', $attribs, {userid => $userid});
+  $self->pg->db->update('account.users',
+    $attribs,
+    {userid => $userid},
+    { returning => 'id' }
+  )->hash->{id};
 }
 
 
@@ -48,8 +58,9 @@ sub deleteUser {
   my $self = shift;
   my $userid = shift;
 
-  $self->db->delete('account.user', {id => $userid});
+  $self->pg->db->delete('account.user', {id => $userid});
 }
+
 
 sub savePassword {
   my $self = shift;
@@ -57,32 +68,51 @@ sub savePassword {
   my $password = shift;
 }
 
+
 sub validatePassword {
   my $self = shift;
   my $username = shift;
   my $plain = shift;
   my $accountcfg = shift;
+  my $userid = undef;
 
-  my $result = $self->db->select(['account.users', [-left => 'account.password', id => 'userid']])->hash;
-  for my $method (@{ $accountcfg->{passwordmethods} }) {
-    if ($method eq "sha512") {
-      return passwdcmp($plain, $result->{passwordsha512});
-    }
-    elsif ($method eq "bcrypt") {
-      return passwdcmp($plain, $result->{passwordbcrypt});
-    }
-    elsif ($method eq "argon2id") {
-      return argon2id_verify($result->{passwordargon2id}, $plain);
-    }
-    elsif ($method eq "mysql") {
-      return $result->{passwordmysql} eq sprintf('*%s', uc sha1_hex(sha1($plain)));
-    }
-    elsif ($method eq "pbkdf2") {
-      return $pbkdf2->validate($result->{passwordpbkdf2}, $plain);
+  # Superadmins in the configuration file don't need to be in the database
+  if ($accountcfg->{superadmins}->{$username} eq $plain) {
+    $userid = 0; # Equivalent to unix root
+  } else {
+    my $result = $self->pg->db->select([ 'account.users', [ -left => 'account.password', id => 'userid' ] ])->hash;
+    for my $method (@{ $accountcfg->{passwordmethods} }) {
+      if ($method eq "sha512") {
+        if (passwdcmp($plain, $result->{passwordsha512})) {
+          $userid = $result->{$userid};
+          last;
+        }
+      } elsif ($method eq "bcrypt") {
+        if (passwdcmp($plain, $result->{passwordbcrypt})) {
+          $userid = $result->{$userid};
+          last;
+        }
+      } elsif ($method eq "argon2id") {
+        if (argon2id_verify($result->{passwordargon2id}, $plain)) {
+          $userid = $result->{$userid};
+          last;
+        }
+      } elsif ($method eq "mysql") {
+        if ($result->{passwordmysql} eq sprintf('*%s', uc sha1_hex(sha1($plain)))) {
+          $userid = $result->{$userid};
+          last;
+        }
+      } elsif ($method eq "pbkdf2") {
+        if ($pbkdf2->validate($result->{passwordpbkdf2}, $plain)) {
+          $userid = $result->{$userid};
+          last;
+        }
+      }
     }
   }
-  return undef;
+  return $userid;
 }
+
 
 sub cryptPassword {
   my $self = shift;
@@ -105,45 +135,44 @@ sub cryptPassword {
 }
 
 
-
 sub getLoginFailures {
   my $self = shift;
   my $limit = shift;
   my $options = shift;
-
   my $failuretime = sprintf("now() - interval '%s'", $options->{blocktime});
-  my $result = $self->db->select('account.loginfailure',
-    ['failuretime','ip','username'],
-    {
-      failuretime => { '>=', \{$failuretime} },
-      ip => $options->{ip},
-    },
-    {
-      limit => $limit,
-      order_by => { -desc => 'failuretime' },
-    }
+  my $result = $self->pg->db->query("
+    SELECT failuretime,ip,username
+    FROM account.loginfailure
+    WHERE (failuretime >= $failuretime) AND (ip = ?)
+    ORDER BY failuretime DESC
+    LIMIT ?",
+    $options->{ip},
+    $limit
   )->hashes->to_array;
   return $result;
 }
+
 
 sub insertLogin {
   my $self = shift;
   my $userid = shift;
   my $ip = shift;
-  $self->db->insert('account.login', {
+  $self->pg->db->insert('account.login', {
     userid => $userid,
     ip     => $ip,
   }, {returning => 'id'})->hash->{id};
 }
 
+
 sub insertLoginFailure {
   my $self = shift;
   my $username = shift;
   my $ip = shift;
-  $self->db->insert('account.loginfailure', {
+  $self->pg->db->insert('account.loginfailure', {
     ip       => $ip,
     username => $username,
   }, {returning => 'id'})->hash->{id};
 }
+
 
 1;

@@ -2,7 +2,7 @@ SHELL := /bin/bash
 PATH := bin:$(PATH)
 
 static:
-	LANG=en samizdat makestatic
+	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
 
 clean:
 	find public/  -name "*.html" -delete

@@ -6,6 +6,7 @@ use Samizdat::Model::Account;
 use MojoX::MIME::Types;
 use Mojo::Pg;
 use Mojo::Redis;
+use Data::Dumper;
 
 sub startup ($self) {
   my $config = $self->plugin('NotYAMLConfig');
@@ -48,26 +49,25 @@ sub startup ($self) {
     $config->{pgsql}->{host},
     $config->{pgsql}->{database}
   );
-  my $pg = Mojo::Pg->new($dsnpg);
-  $pg->on(connection => sub {
+  $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsnpg) });
+  $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');
     $pg->max_connections(32);
   });
-  $pg->migrations->from_dir('migrations')->migrate;
-  $self->helper(db => sub { state $db = $pg->db });
+  $self->pg->migrations->from_dir('migrations')->migrate;
 
-  $self->plugin('Minion' => {Pg => $dsnpg});
+  $self->plugin('Minion' => {Pg => shift->pg });
 
   my $dsnredis = sprintf('redis://%s:%s/%s',
     $config->{redis}->{host},
     $config->{redis}->{port},
     $config->{redis}->{database}
   );
+#  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
 
-  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
-  $self->helper(account => sub { state $account = Samizdat::Model::Account->new });
+  $self->helper(account => sub { state $account = Samizdat::Model::Account->new(pg => shift->pg) });
 
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
@@ -105,9 +105,9 @@ sub startup ($self) {
       $self->language('en');
     }
   });
-
   push @{$self->commands->namespaces}, 'Samizdat::Command';
   unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
+  push @{$self->renderer->paths}, '/usr/local/share/perl/5.30.0/Mojolicious/resources/templates/mojo';
   $self->plugin('Utils');
   $self->plugin('Icons');
 

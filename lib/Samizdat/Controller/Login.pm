@@ -10,9 +10,9 @@ use Data::Dumper;
 
 sub index {
   my $self = shift;
-  my $loginfailures = $self->account->getLoginFailures($self->config->{blocklimit}, {
-    ip => $self->req->headers->{'headers'}->{'x-forwarded-for'}[0],
-    blocktime => $self->config->{account}->{blocktime},
+  my $loginfailures = $self->account->getLoginFailures($self->config->{account}->{blocklimit}, {
+    ip => ${ $self->req->headers->{'headers'}->{'remote_host'} }[0] // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0] // '0.0.0.0',
+    blocktime => $self->config->{account}->{blocktime}
   });
   my $count = int @{ $loginfailures };
   if ($self->config->{account}->{blocklimit} <= $count) {
@@ -45,14 +45,15 @@ sub logout {
   });
 }
 
+
 sub login {
   my $self = shift;
   my ($username, $password);
   if ( ($self->tx->req->method eq 'POST') && CORE::index($self->req->body, '{') >= 0 ) {
     my $text = Mojo::JSON::decode_json($self->req->body);
-    ($username, $password) = ($text->{username}, $text->{password});
+    ($username, $password) = ($text->{username}, $text->{p4ss_word});
   } else {
-    ($username, $password) = ($self->param('username'), $self->param('password'));
+    ($username, $password) = ($self->param('username'), $self->param('p4ss_word'));
   }
   my $v = $self->_loginValidation;
   if ($v->has_error) {
@@ -76,6 +77,7 @@ sub login {
       'count'       => $count,
     });
   }
+
   my $userid = eval { return $self->account->validatePassword($username, $password, $self->config->{account}) };
 
   unless ($userid) {
@@ -132,7 +134,7 @@ sub login {
       hostonly => 1,
     });
 
-    $self->account->login({
+    $self->account->insertLogin({
       'userid' => $userid,
       'ip' => $self->req->headers->{'headers'}->{'x-forwarded-for'}[0],
     });
