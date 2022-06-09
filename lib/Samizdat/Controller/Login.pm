@@ -26,6 +26,7 @@ sub index {
   }
 }
 
+
 sub logout {
   my $self = shift;
   my $username = $self->session('username');
@@ -59,7 +60,7 @@ sub login {
   if ($v->has_error) {
     return $self->render(json => {
       success => 0,
-      error   => $self->app->__x('Enter username and password ({username}:{password})', username => $username, password => $password),
+      error   => $self->app->__x('Enter username and password'),
       step    => 1,
       test    => 'missing_credentials'
     }, status => 200);
@@ -82,7 +83,7 @@ sub login {
   }
 
   my $userid = eval { return $self->account->validatePassword($username, $password, $self->config->{account}) };
-  unless (defined($userid)) {
+  unless ($userid) {
     say Dumper my $failure = {
       ip => $ip,
       'username' => $username,
@@ -100,8 +101,8 @@ sub login {
     } else {
       return $self->render('login/loginblocked',
         'ip' => ${$loginfailures}[0]->{ip},
-        'username' => ${$loginfailures}[0]->{username},
-        'failuretime' => substr(${$loginfailures}[0]->{failuretime}, 11, 5),
+        'username' => ${ $loginfailures }[0]->{username},
+        'failuretime' => substr(${ $loginfailures }[0]->{failuretime}, 11, 5),
         'count' => scalar @{ $loginfailures },
         'format' => 'json'
       );
@@ -109,26 +110,20 @@ sub login {
     }
 
   } else {
-    my $user = {};
-    if ($userid) {
-      $user = ${$self->account->getUsers({ id => $userid })}[0];
-    } else {
-      $user->{username} = $username;
-      $user->{displayname} = $username;
-      $user->{id} = 0;
-    }
+    my $user = ${$self->account->getUsers({ id => $userid })}[0];
 
     $self->session(authenticated => $userid);
     $self->session(username => $user->{'username'});
     $self->session(expiration => 36000);
     $self->session(superadmin => $self->config->{account}->{superadmins}->{$user->{'username'}} // 0);
     my $value = j {
-      d => $user->{'displayname'},
-      n => $user->{'username'},
-      i => $userid,
-      e => 1,
-      t => '',
-      'm' => '',
+      'd' => $user->{'displayname'},
+      'n' => $user->{'username'},
+      'i' => $userid,
+      'e' => '1',
+      't' => '',
+      'm' => '0',
+      'l' => 'en',
       's' => $self->config->{account}->{superadmins}->{$user->{'username'}} // 0,
     };
     $value = b64_encode($value);
@@ -147,7 +142,7 @@ sub login {
     $self->account->insertLogin($userid, $ip);
     $self->app->__x('You were logged in as {username}.', 'username' => $username),
     $self->app->__x('In your personal menu you find your {panel} among other things.',
-      panel => sprintf('<a href="/panel">%s</a>', __('control panel'))
+      panel => sprintf('<a href="/panel">%s</a>', $self->app->__('control panel'))
     );
     $self->render(json => {success => 1, step => 0, 'username' => $username});
   }

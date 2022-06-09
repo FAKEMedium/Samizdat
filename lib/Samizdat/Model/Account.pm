@@ -80,7 +80,7 @@ sub validatePassword {
 
   # Superadmins in the configuration file don't need to be in the database
   if ($accountcfg->{superadmins}->{$username} eq $plain) {
-    $userid = 0; # Equivalent to unix root
+    $userid = 1; # Equivalent to unix root
   } else {
     my $result = $self->pg->db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
     for my $method (@{ $accountcfg->{passwordmethods} }) {
