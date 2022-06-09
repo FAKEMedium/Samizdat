@@ -14,17 +14,18 @@ has 'pg';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
 
+
 sub addUser {
   my $self = shift;
   my $username = shift;
   my $attribs = shift // undef;
   $attribs->{username} = $username;
   my $password = delete $attribs->{password};
-  my $userid = $self->pg->db->insert('account.users',
+  my $userid = $self->pg->db->insert('account.user',
     $attribs,
     { returning => 'id' }
   )->hash->{id};
-  $self->pg->db->insert('account.passwords', {
+  $self->pg->db->insert('account.password', {
     userid => $userid,
 
   });
@@ -35,7 +36,8 @@ sub addUser {
 sub getUsers {
   my $self = shift;
   my $where = shift;
-  my $result = $self->pg->db->select('account.users',
+
+  my $result = $self->pg->db->select('account.user',
     undef,
     $where
   )->hashes->to_array;
@@ -46,7 +48,7 @@ sub saveUser {
   my $self = shift;
   my $userid = shift;
   my $attribs = shift // undef;
-  $self->pg->db->update('account.users',
+  $self->pg->db->update('account.user',
     $attribs,
     {userid => $userid},
     { returning => 'id' }
@@ -80,7 +82,7 @@ sub validatePassword {
   if ($accountcfg->{superadmins}->{$username} eq $plain) {
     $userid = 0; # Equivalent to unix root
   } else {
-    my $result = $self->pg->db->select([ 'account.users', [ -left => 'account.password', id => 'userid' ] ])->hash;
+    my $result = $self->pg->db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
     for my $method (@{ $accountcfg->{passwordmethods} }) {
       if ($method eq "sha512") {
         if (passwdcmp($plain, $result->{passwordsha512})) {

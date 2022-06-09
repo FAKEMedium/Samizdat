@@ -51,42 +51,44 @@ sub login {
   my ($username, $password);
   if ( ($self->tx->req->method eq 'POST') && CORE::index($self->req->body, '{') >= 0 ) {
     my $text = Mojo::JSON::decode_json($self->req->body);
-    ($username, $password) = ($text->{username}, $text->{p4ss_word});
+    ($username, $password) = ($text->{username}, $text->{'password'});
   } else {
-    ($username, $password) = ($self->param('username'), $self->param('p4ss_word'));
+    ($username, $password) = ($self->param('username'), $self->param('password'));
   }
   my $v = $self->_loginValidation;
   if ($v->has_error) {
     return $self->render(json => {
       success => 0,
-      error => $self->app->__('Enter username and password'),
-      step => 1
+      error   => $self->app->__x('Enter username and password ({username}:{password})', username => $username, password => $password),
+      step    => 1,
+      test    => 'missing_credentials'
     }, status => 200);
   }
+  my $ip = ${ $self->req->headers->{'headers'}->{'remote_host'} }[0] // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0] // '0.0.0.0';
 
   my $loginfailures = $self->account->getLoginFailures($self->config->{account}->{blocklimit}, {
-    ip => $self->req->headers->{'headers'}->{'x-forwarded-for'}[0],
-    blocktime => $self->config->{account}->{blocktime},
+    ip => $ip,
+    blocktime => $self->config->{account}->{blocktime}
   });
   my $count = int @{ $loginfailures };
   if (5 < $count) {
     return $self->render(json => {
-      'ip'          => ${$loginfailures}[0]->{ip},
-      'username'    => ${$loginfailures}[0]->{username},
-      'failuretime' => substr(${$loginfailures}[0]->{failuretime}, 11, 5),
+      success => 0,
+      'ip'          => ${ $loginfailures }[0]->{ip},
+      'username'    => ${ $loginfailures }[0]->{username},
+      'failuretime' => substr(${ $loginfailures }[0]->{failuretime}, 11, 5),
       'count'       => $count,
     });
   }
 
   my $userid = eval { return $self->account->validatePassword($username, $password, $self->config->{account}) };
-
-  unless ($userid) {
-    my $failure = {
-      'ip' => $self->req->headers->{'headers'}->{'x-forwarded-for'}[0],
+  unless (defined($userid)) {
+    say Dumper my $failure = {
+      ip => $ip,
       'username' => $username,
       'failuretime' => 'now()',
     };
-    my $error = $self->app->__x('Failed login from {ip}', $failure->{ip});
+    my $error = $self->app->__x('Failed login from {ip}', $ip);
     $error = sprintf('%s <span class="badge badge-primary">%d/5</span><span class="sr-only"> %s</span>',
       $error,
       $count,
@@ -105,8 +107,16 @@ sub login {
       );
       #      return $self->render(json => {success => 0, html => $html, step => 2}, status => 200);
     }
+
   } else {
-    my $user = ${ $self->account->getUsers({userid => $userid}) }[0];
+    my $user = {};
+    if ($userid) {
+      $user = ${$self->account->getUsers({ id => $userid })}[0];
+    } else {
+      $user->{username} = $username;
+      $user->{displayname} = $username;
+      $user->{id} = 0;
+    }
 
     $self->session(authenticated => $userid);
     $self->session(username => $user->{'username'});
@@ -134,10 +144,7 @@ sub login {
       hostonly => 1,
     });
 
-    $self->account->insertLogin({
-      'userid' => $userid,
-      'ip' => $self->req->headers->{'headers'}->{'x-forwarded-for'}[0],
-    });
+    $self->account->insertLogin($userid, $ip);
     $self->app->__x('You were logged in as {username}.', 'username' => $username),
     $self->app->__x('In your personal menu you find your {panel} among other things.',
       panel => sprintf('<a href="/panel">%s</a>', __('control panel'))

@@ -12,14 +12,27 @@ hypnotoad:
   workers: 4
 timezone: Etc/UTC
 account:
+  # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
   passwordmethods:
     - mysql
     - sha512
     - pbkdf2
     - bcrypt
     - argon2id
-  blocktime: 60 minutes
-  blocklimit: 5
+
+  # Convert validated passwords to methods equal to, or better, than this methods strength
+  convertpasswordto: argon2id
+
+  # Number of minutes a user will be blocked
+  blocktime: 180
+
+  # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
+  blocklimit: 4
+
+  # Time window in minutes that unsuccessful login attempts will be counted
+  blockperiod: 10
+
+  # List of username: password that have full access to everything. CHANGE!!!
   superadmins:
     superadmin: s3cr3t_Pa55w0r6
 pgsql:

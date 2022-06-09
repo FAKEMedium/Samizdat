@@ -1,11 +1,12 @@
 package Samizdat;
 
 use Mojo::Base 'Mojolicious', -signatures;
-use Samizdat::Model::Markdown;
-use Samizdat::Model::Account;
 use MojoX::MIME::Types;
 use Mojo::Pg;
 use Mojo::Redis;
+use Samizdat::Model::Markdown;
+use Samizdat::Model::Account;
+use Samizdat::Model::RedisSession;
 use Data::Dumper;
 
 sub startup ($self) {
@@ -64,10 +65,11 @@ sub startup ($self) {
     $config->{redis}->{port},
     $config->{redis}->{database}
   );
-#  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
+  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
 
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
   $self->helper(account => sub { state $account = Samizdat::Model::Account->new(pg => shift->pg) });
+  $self->helper(redissession => sub { state $redissession = Samizdat::Model::RedisSession->new(redis => shift->redis) });
 
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
