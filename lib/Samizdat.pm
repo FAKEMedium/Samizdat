@@ -54,9 +54,11 @@ sub startup ($self) {
   $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');
+    $dbh->{pg_server_prepare} = 0;
     $pg->max_connections(32);
   });
   $self->pg->migrations->from_dir('migrations')->migrate;
+  $self->pg->db->dbh->{pg_server_prepare} = 1;
 
   $self->plugin('Minion' => {Pg => shift->pg });
 
