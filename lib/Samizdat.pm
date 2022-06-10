@@ -109,11 +109,17 @@ sub startup ($self) {
       $self->language('en');
     }
   });
+
+  # If Nginx serves files from the public directory, there's no need to have it in this application's list
+  if ($config->{nginx}) {
+
+  }
   push @{$self->commands->namespaces}, 'Samizdat::Command';
   unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
   push @{$self->renderer->paths}, '/usr/local/share/perl/5.30.0/Mojolicious/resources/templates/mojo';
   $self->plugin('Utils');
   $self->plugin('Icons');
+  $self->plugin('Flags');
 
   my $r = $self->routes;
   $r->any([qw(     POST                  )] => '/login')->to(controller => 'Login', action => 'login');

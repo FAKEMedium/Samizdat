@@ -54,3 +54,6 @@ database:
 
 fetchicons:
 	git clone https://github.com/twbs/icons.git ./src/icons
+
+fetchflags:
+	git clone https://github.com/lipis/flag-icons.git ./src/flag-icons
