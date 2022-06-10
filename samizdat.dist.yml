@@ -10,6 +10,7 @@ hypnotoad:
     - http://0.0.0.0:3000?reuse=1
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
+nginx: 1
 timezone: Etc/UTC
 account:
   # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.

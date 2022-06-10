@@ -12,8 +12,11 @@ clean:
 harvest:
 	samizdat makeharvest
 
+nginx:
+	samizdat makenginx
+
 iso: static
-	xorrisofs -r -hfsplus -joliet -V SAMIZDAT_`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
+	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
 
 torrent:
 	transmission-cli -n public
