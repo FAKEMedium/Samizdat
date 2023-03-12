@@ -1,4 +1,4 @@
-<% layout 'bootstrap'; =%>
+<% layout config->{layout}; =%>
 <div class="col-sm-8">
   <%== indent $web->{main}, 1 =%>
 </div>

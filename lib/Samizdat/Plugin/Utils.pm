@@ -14,11 +14,11 @@ my $public = Mojo::Home->new('public/');
 my $image = Imager->new;
 my $cacheexist = {};
 
-sub register  {
-  my ($self, $app) = @_;
+sub register ($self, $app, $conf) {
 
   $app->helper(
-    indent => sub ($c, $content, $indents) {
+    indent => sub ($c, $content = '', $indents = 0) {
+      no warnings 'uninitialized';
       my $indent = "  " x $indents;
       $content =~ s/\n/\n$indent/gsm;
       $content =~s/$indent$//sm;
@@ -34,11 +34,23 @@ sub register  {
     },
   );
 
+  # Inline logotype (svg)
+  $app->helper(
+    logotype => sub ($c) {
+      my $svg = '';
+      if ($svg = $public->rel_file($c->config->{logotype})->slurp) {
+        return $svg;
+      }
+    },
+  );
+
+
   # Remove indentation from pre and textarea elements
   # Add the generated html to public as a static cache
   # Also adds missing webP files
   $app->hook(
     after_render => sub ($c, $output, $format) {
+      no warnings 'uninitialized';
       return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
       if (404 != $c->{stash}->{status}) {
         $$output =~ s{<pre>(.+?)</pre>}[
@@ -46,7 +58,7 @@ sub register  {
           $text =~ s/^[ ]+//gms;
           sprintf('<pre>%s</pre>', $text);
         ]gexsmu;
-        if (exists $c->{stash}->{web}->{docpath}) {
+        if ($c->config->{cache} && exists $c->{stash}->{web}->{docpath}) {
           $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
           my $z = new IO::Compress::Gzip sprintf('%s.gz',
             $public->child($c->{stash}->{web}->{docpath})->to_string),
@@ -56,7 +68,7 @@ sub register  {
           undef $z;
           $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
         }
-      } elsif ($c->{stash}->{web}->{url} =~ /\.webp$/) {
+      } elsif ($c->config->{makewebp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
         my $webpfile = $public->child($c->{stash}->{web}->{url});
         my $probefile = $webpfile;
         $probefile =~ s/\.webp$//;

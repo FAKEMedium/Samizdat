@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/icons" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/flag-icons" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/icons" vcs="Git" />
   </component>

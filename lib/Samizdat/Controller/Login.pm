@@ -130,7 +130,7 @@ sub login {
     chomp $value;
     $value =~ s/[\r\n\=]+//g;
 
-    $self->cookie(aaadata => $value, {
+    $self->cookie(userdata => $value, {
       secure => 1,
       httponly => 0,
       path => '/',

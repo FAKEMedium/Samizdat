@@ -17,8 +17,7 @@
      /*]]>*/ </style>
   </head>
   <body>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"
-      style="display: none;">
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" class="d-none">
       <defs>
         <%== indent eval {include 'chunks/symbols'}, 4 =%>
       </defs>

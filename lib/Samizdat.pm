@@ -20,13 +20,15 @@ sub startup ($self) {
     extrajs => '',
     extracss => '',
     web => {
-      docid => 0,
-      comments => 0,
-      creator => 1,
-      published => 0,
+      docid          => 0,
+      comments       => 0,
+      creator        => 1,
+      published      => 0,
       epochpublished => 0,
-      resources_id => 0,
-      canonical => $config->{siteurl},
+      resources_id   => 0,
+      canonical      => $config->{siteurl},
+      title          => '',
+      url            => '',
     },
     user => {
       username => undef,
@@ -79,7 +81,7 @@ sub startup ($self) {
   # Internationalization block. Use "make i18n" to rebuild text lexicon.
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
-    default => 'en',
+    default => $config->{locale}->{default_language},
     languages => [qw(en ru sv)],
     no_header_detect => 1,
   });
@@ -88,7 +90,7 @@ sub startup ($self) {
     gettext_to_maketext => 0,
     decode => 1,
     data => [
-      '*::' => '*/com.fakenews.mo',
+      '*::' => sprintf('*/%s.mo', $config->{locale}->{textdomain}),
       delete_lexicon => 'i-default::',
     ],
   });
@@ -98,7 +100,7 @@ sub startup ($self) {
     if (exists($config->{locale}->{languages}->{$language})) {
       $self->language($language);
     } else {
-      $c->cookie(language => 'en', {
+      $c->cookie(language => $config->{locale}->{default_language}, {
         secure => 1,
         httponly => 0,
         path => '/',
@@ -106,7 +108,7 @@ sub startup ($self) {
         domain => $config->{domain},
         hostonly => 1,
       });
-      $self->language('en');
+      $self->language($config->{locale}->{default_language});
     }
   });
 
@@ -120,13 +122,14 @@ sub startup ($self) {
   $self->plugin('Utils');
   $self->plugin('Icons');
   $self->plugin('Flags');
+  $self->plugin('Contact');
 
   my $r = $self->routes;
   $r->any([qw(     POST                  )] => '/login')->to(controller => 'Login', action => 'login');
   $r->any([qw( GET                       )] => '/login')->to(controller => 'Login', action => 'index');
   $r->any([qw(     POST DELETE           )] => '/logout')->to(controller => 'Login', action => 'logout');
   $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
-  $r->any([qw( GET                       )] => '/panel')->to(controller => 'Panel');
+  $r->any([qw( GET                       )] => '/panel')->to(controller => 'Panel', action => 'index');
   $r->any([qw( GET                       )] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
   $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
 }

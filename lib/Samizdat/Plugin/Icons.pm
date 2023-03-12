@@ -16,8 +16,7 @@ my $cache = {};
 my $symbols = {};
 
 
-sub register  {
-  my ($self, $app) = @_;
+sub register ($self, $app, $conf) {
 
   $app->helper(
     icon => sub($c, $icon) {

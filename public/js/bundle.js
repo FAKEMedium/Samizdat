@@ -49,11 +49,11 @@ decodeBase64 = function(s) {
 
 
 function checkUsername() {
-	let aaadata = getCookie('aaadata');
-	if ('logout' === aaadata) return "";
-	if (aaadata) {
-		aaadata = decodeBase64(aaadata);
-		let u = JSON.parse(aaadata);
+	let userdata = getCookie('userdata');
+	if ('logout' === userdata) return "";
+	if (userdata) {
+		userdata = decodeBase64(userdata);
+		let u = JSON.parse(userdata);
 		userid = u.i;
 		messages = u.m;
 		username = u.n;

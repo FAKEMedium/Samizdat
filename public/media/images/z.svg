@@ -13,10 +13,10 @@
 			<rect id="blue" x="0" y="118" width="512" height="118" fill="#0039a6" />
 			<rect id="red" x="0" y="236" width="512" height="138" fill="#d52b1e" />
 		</g>
-		<g id="black-z" transform="translate(120, 162)" fill-opacity="0.0">
+		<g id="black-ss" transform="translate(120, 162)" fill-opacity="0.0">
 			<path d="M0 112 L120 0 L160 0 L72 82 L272 82 L156 188 L116 188 L202 112 Z" />
 		</g>
-		<g id="black-zz" transform="translate(128,128)">
+		<g id="black-z" transform="translate(128,128)" fill-opacity="1.0">
 			<path d="M0 0 L255 0 L255 32 L48 224 L255 224 L255 256 L0 255  L0 224 L208 32 L0 32 Z" />
 		</g>
 		<g id="fade-out" transform="translate(128, 160)" fill-opacity="0.0">
@@ -24,11 +24,11 @@
 			<rect x="0" y="190" width="255" height="2" style="fill:#d52b1e;" />
 		</g>
 		<text transform="translate(31, 0)" style="font-size: 140%;" fill="black">
-			<textPath xlink:href="#circle-up" startOffset="9%">Влади́мир Влади́мирович Пу́тин не фашист и не убийца</textPath>
-			<textPath id="but" xlink:href="#circle-down" startOffset="23%" fill-opacity="0.0">Но его молчаливые помощники - это</textPath>
+			<textPath id="put" xlink:href="#circle-up" startOffset="32%" fill-opacity="1.0">Vladimir Putin is shorter than</textPath>
+			<textPath id="but" xlink:href="#circle-down" startOffset="30%" fill-opacity="0.0">Little Sergei Shoigu with friends</textPath>
 		</text>
 	</g>
-	<animate xlink:href="#black-z" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="5s" dur="6s" additive="sum" fill="freeze" />
-	<animate xlink:href="#fade-out" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="5s" dur="6s" additive="sum" fill="freeze" />
-	<animate xlink:href="#but" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="12s" dur="1s" additive="sum" fill="freeze" />
+	<animate xlink:href="#black-ss" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="2s" dur="3s" additive="sum" fill="freeze" />
+	<animate xlink:href="#fade-out" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="1s" dur="3s" additive="sum" fill="freeze" />
+	<animate xlink:href="#but" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="1s" dur="2s" additive="sum" fill="freeze" />
 </svg>

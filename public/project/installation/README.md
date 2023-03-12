@@ -39,6 +39,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall Mojolicious::Plugin::Captcha
   * sudo cpanm --reinstall Mojolicious::Plugin::Mail
   * sudo cpanm --reinstall Mojolicious::Plugin::Memorize
+  * sudo cpanm --reinstall MojoX::Session::Store::Redis
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites
