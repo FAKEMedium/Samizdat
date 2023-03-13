@@ -24,8 +24,8 @@
 			<rect x="0" y="190" width="255" height="2" style="fill:#d52b1e;" />
 		</g>
 		<text transform="translate(31, 0)" style="font-size: 140%;" fill="black">
-			<textPath id="put" xlink:href="#circle-up" startOffset="32%" fill-opacity="1.0">Vladimir Putin is shorter than</textPath>
-			<textPath id="but" xlink:href="#circle-down" startOffset="30%" fill-opacity="0.0">Little Sergei Shoigu with friends</textPath>
+			<textPath id="put" xlink:href="#circle-up" startOffset="30%" fill-opacity="1.0">Vladimir Putin is shorter than</textPath>
+			<textPath id="but" xlink:href="#circle-down" startOffset="27%" fill-opacity="0.0">Little Sergei Shoigu with friends</textPath>
 		</text>
 	</g>
 	<animate xlink:href="#black-ss" attributeType="xml" attributeName="fill-opacity" from="0" to="1" begin="2s" dur="3s" additive="sum" fill="freeze" />

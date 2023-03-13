@@ -16,14 +16,14 @@
 .btco-menu li>a{padding:10px 15px;color:#000}
 .btco-menu .active a:focus,.btco-menu li a:focus,.navbar>.show>a:focus{background:transparent;outline:0}
 .dropdown-menu .show>.dropdown-toggle:after{transform:rotate(-90deg)}
-.green { background: #28a745; }
+.green { background: #228811; }
 .red{ background: #f00; }
 
 
 .red{ background: #f00; }
 .orange{ background: #ecc562; }
 #userbuttons, #loginbutton, #logoutbutton, #langButton {
-  background: #28a745;
+  background: #228811;
 }
 .admin {
   box-shadow: 0px 0px 4px 1px red;
@@ -50,7 +50,7 @@ main {
 	background-color: #ffffff !important;
 }
 .bg-menubar {
-	background-color: #cecece;
+	background-color: #eeeeee;
 }
 .square {
   width: 4px;
