@@ -34,6 +34,7 @@
 tr.notop td, tr.notop th {
     border-top: 0;
 }
+a { color: #101cef; }
 body {
   display: flex;
   flex-direction: column;
