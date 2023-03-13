@@ -47,8 +47,8 @@
       <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center" role="document"></div>
       </div>
-      <a id="startdoc"></a>
     </header>
+    <a id="startdoc" href="javascript:;" title="<%== __('Start') %>"></a>
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-3">
       <header class="container mb-1 mb-sm-4">
         <div class="row">
