@@ -23,11 +23,23 @@ sub geturi ($self) {
       main        => $html,
       children    => [],
       subdocs     => [],
-      description => undef,
+      description => $self->app->__('Missing file, our bad?'),
       keywords    => [],
       language => $self->app->language,
     };
   } else {
+    $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
+    $docs->{$path}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
+    $docs->{$path}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{meta}->{name}->{'twitter:url'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{meta}->{name}->{'twitter:title'} = $docs->{$path}->{title};
+    $docs->{$path}->{meta}->{itemprop}->{'name'} = $docs->{$path}->{title};
+    if (exists $docs->{$path}->{meta}->{name}->{description}) {
+      $docs->{$path}->{meta}->{property}->{'og:description'} = $docs->{$path}->{meta}->{name}->{description};
+      $docs->{$path}->{meta}->{name}->{'twitter:description'} = $docs->{$path}->{meta}->{name}->{description};
+      $docs->{$path}->{meta}->{itemprop}->{'description'} = $docs->{$path}->{meta}->{name}->{description};
+    }
     if ($#{$docs->{$path}->{subdocs}} > -1) {
       my $sidebar = '';
       for my $subdoc (sort {$a->{docpath} cmp $b->{docpath}} @{ $docs->{$path}->{subdocs} }) {

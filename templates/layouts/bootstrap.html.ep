@@ -5,13 +5,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-<% if ($#{ $web->{keywords} } > -1) { =%>
-    <meta name="keywords" content="<%= join ', ', @{ $web->{keywords} } %>" />
+<% for my $meta (keys %{ $web->{meta} }) { =%>
+  <% for my $name (keys %{ $web->{meta}->{$meta} }) { =%>
+    <meta <%== $meta %>="<%== $name %>" content="<%== $web->{meta}->{$meta}->{$name} %>" />
+  <% }  =%>
 <% }  =%>
-    <meta name="description" content="<%== $web->{description} %>" />
     <title><%== title %></title>
     <link rel="icon" type="image/x-icon" name="/favicon.ico" href="data:image/x-icon;base64," />
     <link rel="stylesheet" type="text/css" href="/css/bundle.css" />
+    <link rel="canonical" href="<%== $web->{canonical} %>" />
     <style type="text/css"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
      /*]]>*/ </style>

@@ -6,6 +6,7 @@ use Mojo::Home;
 use Text::MultiMarkdown;
 use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
+use YAML::XS;
 
 my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
@@ -22,7 +23,9 @@ sub list ($self, $url, $options = {}) {
   my $docs = {};
   my $path = Mojo::Home->new('public/')->child($url);
   my $found = 0;
+  my $meta = {};
   $path->list({ dir => 0 })->sort(sub { $b cmp $a })->each(sub ($file, $num) {
+    my $docpath = $file->to_rel('public/')->to_string;
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
       $content =~ s/\{\{(.+)\}\}/$1/g;
@@ -42,6 +45,7 @@ sub list ($self, $url, $options = {}) {
         my $picture = Mojo::DOM->new_tag('picture');
         $picture->xml(1);
         my $src = $img->attr('src');
+        my $alt = $img->attr('alt');
 
         $picture->at('picture')->content($img->to_string);
         $picture->at('picture')->prepend_content(sprintf('<source srcset="%s" type="%s" />',
@@ -62,8 +66,6 @@ sub list ($self, $url, $options = {}) {
       $html =~ s/^[\s\r\n]+//;
       $html =~ s/[\s\r\n]+$//;
 
-      my $docpath = $file->to_rel('public/')->to_string;
-
       # Overwrite the docpath of the default language if a file with the preferred language exists
       $docpath =~ s/_$options->{language}\.md$/.md/;
       if ($docpath !~ /\_(.+)\.md$/) {
@@ -76,12 +78,14 @@ sub list ($self, $url, $options = {}) {
           main        => $html,
           children    => [],
           subdocs     => [],
-          description => undef,
-          keywords    => [],
           url         => $url,
           language    => $options->{language},
         };
       }
+    } elsif ('yml' eq $file->path->extname()) {
+      my $yaml = $file->slurp;
+      my $data = Load($yaml);
+      $meta = $data->{meta};
     }
   });
   if (!$found) {
@@ -96,6 +100,7 @@ sub list ($self, $url, $options = {}) {
   for my $subdoc (@{ $subdocs }) {
     push @{ $docs->{'index.html'}->{subdocs} }, $subdoc;
   }
+  $docs->{'index.html'}->{meta} = $meta;
   return $docs;
 }
 
