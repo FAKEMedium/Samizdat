@@ -70,7 +70,7 @@
       <div class="container">
         <div class="row font-weight-bold">
           <div class="col-12 col-sm-6 text-sm-left pt-2 pt-sm-0">
-            <%== __x('&copy;2022 &mdash; please share and add star on {sitename}!', sitename => '<a href="https://github.com/FakenewsCom/Samizdat" target="_blank">Github</a>') %>
+            <%== __x('&copy;2023 &mdash; please share and add star on {sitename}!', sitename => '<a href="https://github.com/FakenewsCom/Samizdat" target="_blank">Github</a>') %>
           </div>
           <div class="d-print-none col-12 col-sm-6 text-sm-right pt-2 pt-sm-0">
             <div class="d-inline mr-sm-1">
