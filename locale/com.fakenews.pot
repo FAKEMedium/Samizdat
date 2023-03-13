@@ -1,6 +1,6 @@
-# Fake News - Samizdat
+# Fake News - 
 # Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
-# This file is distributed under the same license as the Samizdat package.
+# This file is distributed under the same license as the  package.
 # Webmaster <webmaster@fakenews.com>, 2022.
 #
 msgid ""
@@ -16,19 +16,55 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "Share on Telegram"
+msgid "Start"
+msgstr ""
+
+msgid "Admininistration panel"
+msgstr ""
+
+msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr ""
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
-msgid "Contribute"
+msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
 msgstr ""
 
-msgid "Share on Twitter"
+msgid "Share on Facebook"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Personal menu"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Personal panel"
+msgstr ""
+
+msgid "The limit is {limit}."
+msgstr ""
+
+msgid "Click to pop login dialog."
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
+msgstr ""
+
+msgid "You were logged in as {username}."
 msgstr ""
 
 msgid "Advertising"
+msgstr ""
+
+msgid "Expand personal menu."
 msgstr ""
 
 msgid "Log out"
@@ -37,38 +73,95 @@ msgstr ""
 msgid "Log in"
 msgstr ""
 
-msgid "Share on Facebook"
+msgid "Blocked ip number"
 msgstr ""
 
-msgid "Contact"
+msgid "New account"
 msgstr ""
 
-msgid "Email to a friend"
+msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
-msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr ""
-
-msgid "Share on LinkedIn"
-msgstr ""
-
-msgid "Skip menu"
-msgstr ""
-
-msgid "Personal menu"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "The page {docpath} wasn't found."
-msgstr ""
-
-msgid "404: Missing document"
+msgid "Expand menu"
 msgstr ""
 
 msgid "Settings"
 msgstr ""
 
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Enter username and password"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Share on LinkedIn"
+msgstr ""
+
+msgid "Share on Twitter"
+msgstr ""
+
+msgid "Enter username"
+msgstr ""
+
+msgid "Log out and end current session"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "login attempts"
+msgstr ""
+
+msgid "The page {docpath} wasn't found."
+msgstr ""
+
+msgid "Missing file, our bad?"
+msgstr ""
+
+msgid "Lost password?"
+msgstr ""
+
+msgid "Failed login from {ip}"
+msgstr ""
+
+msgid "Share on Telegram"
+msgstr ""
+
+msgid "Super panel"
+msgstr ""
+
+msgid "Enter password"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr ""
+
+msgid "Contribute"
+msgstr ""
+
 msgid "The Samizdat project"
+msgstr ""
+
+msgid "Logotype leading to start"
+msgstr ""
+
+msgid "Link to personal data"
+msgstr ""
+
+msgid "Skip menu"
+msgstr ""
+
+msgid "Email to a friend"
+msgstr ""
+
+msgid "control panel"
 msgstr ""
