@@ -1,0 +1,12 @@
+<div class="d-flex font-weight-bold">
+  <div class="d-print-none text-sm-left pt-2 pt-sm-0 mr-auto">
+    <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Ffakenews.com%2F" target="_blank" rel="noopener"><picture>
+        <source srcset="/media/images/pagespeed.webp" type="image/webp">
+        <source srcset="/media/images/pagespeed.png" type="image/png">
+        <img src="/media/images/pagespeed.png" class="img-fluid" width="441" height="95" alt="PageSpeed result 100 100 100 100" />
+      </picture></a>
+  </div>
+  <div class="text-sm-right pt-2 pt-sm-0 align-items-center d-flex">
+    <%== __x('&copy;2023 &mdash; please share and add star on {sitename}!', sitename => '<a href="https://github.com/FakenewsCom/Samizdat" target="_blank">Github</a>') %>
+  </div>
+</div>
