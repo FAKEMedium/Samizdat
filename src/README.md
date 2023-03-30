@@ -1,3 +1,3 @@
-# Some sources
+# Sources
 
-Nothing here at the moment.
+This directory holds customization for Webpack, and also some scripted downloads.
