@@ -24,11 +24,12 @@ sub list ($self, $url, $options = {}) {
   my $path = Mojo::Home->new('public/')->child($url);
   my $found = 0;
   my $meta = {};
+  my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $b cmp $a })->each(sub ($file, $num) {
     my $docpath = $file->to_rel('public/')->to_string;
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
-      $content =~ s/\{\{(.+)\}\}/$1/g;
+      transclude(\$content, $file->dirname);
       my $html = decode 'UTF-8', $md->markdown($content);
       my $dom = Mojo::DOM->new->xml(1)->parse($html);
       my $title = $dom->at('h1')->text;
@@ -60,7 +61,16 @@ sub list ($self, $url, $options = {}) {
             sprintf('<source srcset="%s.webp" type="image/webp" media="(min-width: 300px)" />', $webpsrc)
           );
         }
-        $img->replace($picture) if (!$svg);
+        if (!$svg) {
+          if (!exists($selectedimage->{src}) || 'selectedimage' eq $img->attr('id')) {
+            $selectedimage = {
+              src    => $src,
+              width  => $img->attr('width') // 0,
+              height => $img->attr('height') // 0
+            };
+          }
+          $img->replace($picture);
+        }
       });
       $html = $dom->content;
       $html =~ s/^[\s\r\n]+//;
@@ -88,6 +98,15 @@ sub list ($self, $url, $options = {}) {
       $meta = $data->{meta};
     }
   });
+  if ($selectedimage->{src}) {
+    $meta->{property}->{'og:image'} = $selectedimage->{src};
+  }
+  if ($selectedimage->{width}) {
+    $meta->{property}->{'og:image:width'} = $selectedimage->{width};
+  }
+  if ($selectedimage->{height}) {
+    $meta->{property}->{'og:image:height'} = $selectedimage->{height};
+  }
   if (!$found) {
     return $docs;
   }
@@ -114,6 +133,16 @@ sub geturis ($self, $options = {}) {
     }
   });
   return $uris;
+}
+
+
+sub transclude ($contentref, $dirname) {
+  $$contentref  =~ s/\{\{([^{}]+)\}\}/ includefile($dirname, $1) /ge;
+}
+
+sub includefile ($dirname, $filename) {
+  my $inclusion = Mojo::Home->new($dirname .'/')->rel_file($filename)->slurp;
+
 }
 
 

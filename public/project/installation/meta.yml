@@ -1,0 +1,4 @@
+meta:
+  name:
+    description: Commands to install the Samizdat application on a Linux server.
+    keywords: Mojolicious,perl,linux,ubuntu

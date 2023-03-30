@@ -1,10 +1,11 @@
-<ul class="navbar-nav" style="width:100%;">
-  <li class="nav-item dropdown"><a class="nav-link dropdown-toggle text-nowrap" href="#" id="navbarDropdownAbout" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= __('About') %></a>
+<ul class="navbar-nav">
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAbout" role="button" data-bs-toggle="dropdown" aria-expanded="false"><%= __('About') %></a>
     <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
       <li><a class="dropdown-item text-nowrap" href="/project/"><%= __('The Samizdat project') %></a></li>
       <li><a class="dropdown-item text-nowrap" href="/contribute/"><%= __('Contribute') %></a></li>
       <li><a class="dropdown-item text-nowrap" href="/advertising/"><%= __('Advertising') %></a></li>
     </ul>
   </li>
-  <li><a class="nav-link text-nowrap" href="/contact/"><%= __('Contact') %></a></li>
+  <li class="nav-item"><a class="nav-link text-nowrap" href="/contact/"><%= __('Contact') %></a></li>
 </ul>

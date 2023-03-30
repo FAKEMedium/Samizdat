@@ -3,6 +3,7 @@ package Samizdat::Command::makestatic;
 use Mojo::Base 'Mojolicious::Command', -signatures;
 use Data::Dumper;
 use Mojo::UserAgent;
+use Mojo::Util qw(decode encode);
 
 has description => 'Apply templates to markdown files and dump resulting files in the public dir';
 has usage => sub ($self) { $self->extract_usage };
@@ -29,6 +30,7 @@ sub run ($self, @args) {
   $siteurl =~ s/\/$//;
   while ($again) {
     $again = 0;
+    sleep 1;
     for my $uri (keys %$uris) {
       say $uri;
       my $language = '';

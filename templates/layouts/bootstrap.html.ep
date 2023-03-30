@@ -11,10 +11,12 @@
   <% }  =%>
 <% }  =%>
     <title><%== title %></title>
-    <link rel="icon" type="image/x-icon" name="/favicon.ico" href="data:image/x-icon;base64," />
-    <link rel="stylesheet" type="text/css" href="/css/bundle.css" />
+    <link rel="preload" href="/css/samizdat.css" as="style" />
+    <link rel="preload" href="/js/samizdat.js" as="script" />
+    <link rel="icon" type="image/x-icon" name="favicon" href="/media/images/f.svg" />
+    <link id="bundlecss" rel="stylesheet" type="text/css" href="/css/samizdat.css" />
     <link rel="canonical" href="<%== $web->{canonical} %>" />
-    <style type="text/css"> /*<![CDATA[*/
+    <style id="headcss"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
      /*]]>*/ </style>
   </head>
@@ -25,12 +27,12 @@
       </defs>
     </svg>
     <header>
-      <div id="message" class="toast position-absolute bg-light" role="status" data-delay="5000" aria-atomic="true" style="top: 0; right: 0; z-index: 2000;"></div>
-      <a class="sr-only" href="#startdoc"><%= __('Skip menu') %></a>
+      <div id="message" class="toast position-absolute bg-light" role="status" data-delay="3000" aria-atomic="true"></div>
+      <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
         <%== indent eval {include 'chunks/logobar'}, 4 =%>
       </div>
-      <div class="widewrapper bg-menubar">
+      <div class="widewrapper bg-menubar d-print-none">
         <div id="menuwrapper" class="container position-relative" aria-live="polite">
           <nav id="sitenav" class="navbar navbar-expand-sm col-12 col-xl-12 pl-3 pl-sm-2 font-weight-bold">
             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -44,11 +46,11 @@
           </aside>
         </div>
       </div>
-      <div id="modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center" role="document"></div>
-      </div>
     </header>
-    <a id="startdoc" href="javascript:;" title="<%== __('Start') %>"></a>
+    <a id="startdoc" href="javascript:;" class="d-print-none" title="<%== __('Start') %>"></a>
+    <div id="unimodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
+      <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center"></div>
+    </div>
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-3">
       <header class="container mb-1 mb-sm-4">
         <div class="row">
@@ -69,8 +71,8 @@
     <footer id="fakefooter" class="mt-0 py-3 container">
       <%== indent eval {include 'chunks/footer'}, 3 =%>
     </footer>
-    <script src="/js/bundle.js"></script>
-    <script type="text/javascript"> /*<![CDATA[*/
+    <script id="bundlejs" src="/js/samizdat.js" async="true"></script>
+    <script id="endjs"> /*<![CDATA[*/
       <%== indent $web->{script}, 3 =%>
     /*]]>*/ </script>
   </body>

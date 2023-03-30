@@ -1,0 +1,53 @@
+{
+  "name": "samizdat",
+  "version": "1.0.0",
+  "description": "Documenting differences in media coverage of the war in Ukraine",
+  "main": "webpack.config.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "webpack serve",
+    "build": "webpack build",
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FakenewsCom/Samizdat.git"
+  },
+  "keywords": [],
+  "author": "FakenewsCom",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/FakenewsCom/Samizdat/issues"
+  },
+  "homepage": "https://github.com/FakenewsCom/Samizdat#readme",
+  "devDependencies": {
+    "@babel/core": "^7.21.3",
+    "@babel/plugin-transform-runtime": "^7.21.0",
+    "@babel/preset-env": "^7.20.2",
+    "@fullhuman/postcss-purgecss": "^5.0.0",
+    "autoprefixer": "^10.4.14",
+    "babel-loader": "^9.1.2",
+    "css-loader": "^6.7.3",
+    "css-minimizer-webpack-plugin": "^4.2.2",
+    "glob": "^9.3.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.7.5",
+    "postcss": "^8.4.21",
+    "postcss-loader": "^7.1.0",
+    "purgecss": "^5.0.0",
+    "purgecss-webpack-plugin": "^5.0.0",
+    "sass": "^1.59.3",
+    "sass-loader": "^13.2.1",
+    "style-loader": "^3.3.2",
+    "terser-webpack-plugin": "^5.3.7",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.6",
+    "bootstrap": "^5.2.3"
+  }
+}

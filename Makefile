@@ -1,13 +1,18 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
-static:
+static: clean
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
+	NODE_ENV=production npm run build
 
 clean:
 	find public/  -name "*.html" -delete
 	find public/  -name "*.gz" -delete
 	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
+	rm -f public/js/*.{js,css}*
+	rm -f public/css/*.css*
+	cp -af public/test/README.md public/test/README.txt
+	cp -af src/js/local.js public/js/
 
 harvest:
 	samizdat makeharvest
@@ -42,8 +47,10 @@ test: clean
 	ls -las public/test
 
 zip:
-	gzip -k -9 public/css/bundle.css
-	gzip -k -9 public/js/bundle.js
+	gzip -k -9 public/css/samizdat.css
+	gzip -k -9 public/js/samizdat.js
+	gzip -k -9 public/media/images/fakenews.svg
+	gzip -k -9 public/media/images/f.svg
 
 database:
 	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
@@ -57,3 +64,15 @@ fetchicons:
 
 fetchflags:
 	git clone https://github.com/lipis/flag-icons.git ./src/flag-icons
+
+speedtest:
+	samizdat speedtest
+
+webpackinit:
+	npm init -y
+	npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin
+	npm i --save-dev autoprefixer css-loader postcss-loader sass sass-loader style-loader
+	npm i --save-dev purgecss purgecss-webpack-plugin
+	npm i --save-dev mini-css-extract-plugin
+	npm i --save-dev css-minimizer-webpack-plugin
+	npm i --save bootstrap @popperjs/core
