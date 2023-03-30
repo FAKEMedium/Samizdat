@@ -1,7 +1,7 @@
 {
   "name": "samizdat",
   "version": "1.0.0",
-  "description": "Documenting differences in media coverage of the war in Ukraine",
+  "description": "A static content hybrid generator for extreme speed and disconnected use.",
   "main": "webpack.config.js",
   "directories": {
     "lib": "lib"
@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/FakenewsCom/Samizdat.git"
   },
-  "keywords": [],
+  "keywords": [CMS,PageSpeed,Perl,static,Bootstrap5,Webpack],
   "author": "FakenewsCom",
   "license": "MIT",
   "bugs": {
@@ -26,7 +26,6 @@
     "@babel/core": "^7.21.3",
     "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
-    "@fullhuman/postcss-purgecss": "^5.0.0",
     "autoprefixer": "^10.4.14",
     "babel-loader": "^9.1.2",
     "css-loader": "^6.7.3",
