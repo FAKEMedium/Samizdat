@@ -15,7 +15,7 @@
     "type": "git",
     "url": "git+https://github.com/FakenewsCom/Samizdat.git"
   },
-  "keywords": [CMS,PageSpeed,Perl,static,Bootstrap5,Webpack],
+  "keywords": ["CMS","PageSpeed","Perl","static","Bootstrap5","Webpack"],
   "author": "FakenewsCom",
   "license": "MIT",
   "bugs": {
