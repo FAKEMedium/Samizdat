@@ -10,7 +10,7 @@ use Digest::SHA1 qw/sha1 sha1_hex/;
 use App::bmkpasswd -all;
 use Data::Dumper;
 
-has 'pg';
+has 'app';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
 
@@ -21,11 +21,11 @@ sub addUser {
   my $attribs = shift // undef;
   $attribs->{username} = $username;
   my $password = delete $attribs->{password};
-  my $userid = $self->pg->db->insert('account.user',
+  my $userid = $self->app->pg->db->insert('account.user',
     $attribs,
     { returning => 'id' }
   )->hash->{id};
-  $self->pg->db->insert('account.password', {
+  $self->app->pg->db->insert('account.password', {
     userid => $userid,
 
   });
@@ -37,7 +37,7 @@ sub getUsers {
   my $self = shift;
   my $where = shift;
 
-  my $result = $self->pg->db->select('account.user',
+  my $result = $self->app->pg->db->select('account.user',
     undef,
     $where
   )->hashes->to_array;
@@ -48,7 +48,7 @@ sub saveUser {
   my $self = shift;
   my $userid = shift;
   my $attribs = shift // undef;
-  $self->pg->db->update('account.user',
+  $self->app->pg->db->update('account.user',
     $attribs,
     {userid => $userid},
     { returning => 'id' }
@@ -60,7 +60,7 @@ sub deleteUser {
   my $self = shift;
   my $userid = shift;
 
-  $self->pg->db->delete('account.user', {id => $userid});
+  $self->app->pg->db->delete('account.user', {id => $userid});
 }
 
 
@@ -82,7 +82,7 @@ sub validatePassword {
   if ($accountcfg->{superadmins}->{$username} eq $plain) {
     $userid = 1; # Equivalent to unix root
   } else {
-    my $result = $self->pg->db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
+    my $result = $self->app->pg->db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
     for my $method (@{ $accountcfg->{passwordmethods} }) {
       if ($method eq "sha512") {
         if (passwdcmp($plain, $result->{passwordsha512})) {
@@ -142,7 +142,7 @@ sub getLoginFailures {
   my $limit = shift;
   my $options = shift;
   my $failuretime = sprintf("now() - interval '%s'", $options->{blocktime});
-  my $result = $self->pg->db->query("
+  my $result = $self->app->pg->db->query("
     SELECT failuretime,ip,username
     FROM account.loginfailure
     WHERE (failuretime >= $failuretime) AND (ip = ?)
@@ -159,7 +159,7 @@ sub insertLogin {
   my $self = shift;
   my $userid = shift;
   my $ip = shift;
-  $self->pg->db->insert('account.login', {
+  $self->app->pg->db->insert('account.login', {
     userid => $userid,
     ip     => $ip,
   }, {returning => 'id'})->hash->{id};
@@ -170,7 +170,7 @@ sub insertLoginFailure {
   my $self = shift;
   my $username = shift;
   my $ip = shift;
-  $self->pg->db->insert('account.loginfailure', {
+  $self->app->pg->db->insert('account.loginfailure', {
     ip       => $ip,
     username => $username,
   }, {returning => 'id'})->hash->{id};

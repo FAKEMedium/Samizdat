@@ -15,7 +15,14 @@
     "type": "git",
     "url": "git+https://github.com/FakenewsCom/Samizdat.git"
   },
-  "keywords": ["CMS","PageSpeed","Perl","static","Bootstrap5","Webpack"],
+  "keywords": [
+    "CMS",
+    "PageSpeed",
+    "Perl",
+    "static",
+    "Bootstrap5",
+    "Webpack"
+  ],
   "author": "FakenewsCom",
   "license": "MIT",
   "bugs": {
@@ -47,6 +54,7 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
-    "bootstrap": "^5.2.3"
+    "bootstrap": "^5.2.3",
+    "suneditor": "^2.44.6"
   }
 }

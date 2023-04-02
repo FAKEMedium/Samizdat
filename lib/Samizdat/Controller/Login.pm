@@ -65,7 +65,9 @@ sub login {
       test    => 'missing_credentials'
     }, status => 200);
   }
-  my $ip = ${ $self->req->headers->{'headers'}->{'remote_host'} }[0] // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0] // '0.0.0.0';
+  my $ip = ${ $self->req->headers->{'headers'}->{'remote_host'} }[0]
+    // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0]
+    // '0.0.0.0';
 
   my $loginfailures = $self->account->getLoginFailures($self->config->{account}->{blocklimit}, {
     ip => $ip,

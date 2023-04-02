@@ -5,6 +5,8 @@ sitename: The Example News
 siteurl: https://example.com/
 host: example.com
 cookiedomain: .example.com
+authcookiename: samizdater
+datacookiename: samizdata
 logotype: media/images/fakenews.svg
 layout: bootstrap
 hypnotoad:
@@ -15,6 +17,7 @@ hypnotoad:
 nginx: 1
 cache: 1
 makewebp: 1
+bundlename: samizdat
 timezone: Etc/UTC
 account:
   # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.

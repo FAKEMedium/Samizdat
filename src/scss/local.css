@@ -29,6 +29,7 @@ img.file-icon {max-width: 2rem;}
   #sidelinks img, #badlinks img {width: 100px;display: block;margin: 10px 0px;}
 }
 @media print {
+  a { color: #000; }
   div, card, button, a, .shadow {-webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;text-decoration: none !important;}
   #newscards {column-count: 3 !important;}
   article#content {width: 100% !important;}

@@ -3,8 +3,6 @@ PATH := bin:$(PATH)
 
 static: clean
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
-	NODE_ENV=production npm run build
-
 clean:
 	find public/  -name "*.html" -delete
 	find public/  -name "*.gz" -delete
@@ -76,3 +74,5 @@ webpackinit:
 	npm i --save-dev mini-css-extract-plugin
 	npm i --save-dev css-minimizer-webpack-plugin
 	npm i --save bootstrap @popperjs/core
+	npm i --save suneditor
+	npm i bootstrap-icons

@@ -1,15 +1,16 @@
-let docid = 0;
-let userid = 0;
-let username = "";
-let displayname = "";
-let messages = 0;
-let superadmin = 0;
+let docid = 0
+let userid = 0
+let username = ""
+let displayname = ""
+let messages = 0
+let superadmin = 0
+let suneditor = 0
 
 function setCookie(cname, cvalue, exdays) {
-    let d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    let d = new Date()
+    d.setTime(d.getTime() + (exdays*24*60*60*1000))
+    let expires = "expires="+ d.toUTCString()
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/"
 }
 
 function getCookie(cname) {
@@ -25,7 +26,7 @@ function getCookie(cname) {
 }
 
 function deleteCookie(cname) {
-    document.cookie = cname + "=logout; expires=Sat, 23 Mar 2023 13:40:42 GMT; domain=.fakenews.com; path=/; secure; SameSite=None; Max-Age=0";
+    document.cookie = cname + "=logout; expires=Sat, 23 Mar 2023 13:40:42 GMT; domain=.fakenews.com; path=/; secure; SameSite=None; Max-Age=0"
 }
 
 let decodeBase64 = function(s) {
@@ -41,7 +42,7 @@ let decodeBase64 = function(s) {
 
 
 function checkUsername() {
-    let userdata = getCookie('userdata');
+    let userdata = getCookie('samizdata');
     if ('logout' === userdata) return "";
     if (userdata) {
         userdata = decodeBase64(userdata);

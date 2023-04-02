@@ -72,7 +72,7 @@ sub startup ($self) {
   $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
 
   $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
-  $self->helper(account => sub { state $account = Samizdat::Model::Account->new(pg => shift->pg) });
+  $self->helper(account => sub { state $account = Samizdat::Model::Account->new(app => shift) });
   $self->helper(redissession => sub { state $redissession = Samizdat::Model::RedisSession->new(redis => shift->redis) });
 
   $self->plugin('DefaultHelpers');
