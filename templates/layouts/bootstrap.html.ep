@@ -48,7 +48,7 @@
       </div>
     </header>
     <a id="startdoc" href="javascript:;" class="d-print-none" title="<%== __('Start') %>"></a>
-    <div id="unimodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
+    <div id="universalmodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
       <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center"></div>
     </div>
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-3">

@@ -1,4 +1,4 @@
-<a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#unimodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
+<a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
   <svg class="oi oi-account-login" width="16" height="16">
     <use xlink:href="#oi-account-login"></use>
   </svg>

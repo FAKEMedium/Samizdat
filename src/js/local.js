@@ -103,8 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const html = document.getElementsByTagName("html")[0];
     html.classList.remove("no-js");
     html.classList.add("js");
-    const unimodal = document.getElementById('unimodal');
-    unimodal.addEventListener('shown.bs.modal', (event) => modalLoad(event));
+    const universalmodal = document.getElementById('universalmodal');
+    universalmodal.addEventListener('shown.bs.modal', (event) => modalLoad(event));
     document.querySelectorAll('.magiclink').forEach( el => {
        el.addEventListener('click', (e) => { e.preventDefault(); magiclink(e, el); } );
        el.addEventListener('submit', (e) => { e.preventDefault(); magiclink(e, el); } );
