@@ -20,7 +20,7 @@ img.file-icon {max-width: 2rem;}
   .admin {box-shadow: 0px 0px 8px 2px red !important;}
   .superadmin {box-shadow: 0px 0px 8px 2px yellow !important;}
   #fakefooter, .bg-logobar {background-color: #ffffff !important;}
-  #logotyp {height: 73px;}
+  #logotype {height: 73px;}
 }
 @media screen and (min-height:700px){#contentwrapper{min-height:600px}}
 @media screen and (min-width: 1380px) {
@@ -29,11 +29,11 @@ img.file-icon {max-width: 2rem;}
   #sidelinks img, #badlinks img {width: 100px;display: block;margin: 10px 0px;}
 }
 @media print {
-  a { color: #000; }
-  div, card, button, a, .shadow {-webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;text-decoration: none !important;}
+  a {color: #000; }
+  div,card,button,.shadow {-webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;text-decoration: none !important;}
   #newscards {column-count: 3 !important;}
   article#content {width: 100% !important;}
   aside#related {display: none !important;}
   #fadeout, #but, #blackss { fill-opacity: 1.0; }
-  .shadow,a,button,card,div{box-shadow:none!important;text-decoration:none!important}#newscards{-moz-column-count:3!important;column-count:3!important}article#content{width:100%!important}aside#related{display:none!important}
+  .shadow,button,card,div{box-shadow:none!important;text-decoration:none!important}#newscards{-moz-column-count:3!important;column-count:3!important}article#content{width:100%!important}aside#related{display:none!important}
 }

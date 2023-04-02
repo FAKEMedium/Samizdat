@@ -3,12 +3,13 @@ PATH := bin:$(PATH)
 
 static: clean
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
+
 clean:
 	find public/  -name "*.html" -delete
 	find public/  -name "*.gz" -delete
 	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
-	rm -f public/js/*.{js,css}*
-	rm -f public/css/*.css*
+#	rm -f public/js/*.{js,css}*
+#	rm -f public/css/*.css*
 	cp -af public/test/README.md public/test/README.txt
 	cp -af src/js/local.js public/js/
 

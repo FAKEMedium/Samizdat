@@ -2,7 +2,7 @@
   <div class="row justify-content-between position-relative">
     <div class="col-3 col-xl-3 pr-0 py-1 py-sm-2">
       <a href="/" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start') %>">
-        <svg id="logotyp" title="Fake News" class="img-fluid my-2" viewBox="0 0 508 191">
+        <svg id="logotype" title="<%= config->{sitename} %>>" class="img-fluid my-2" viewBox="0 0 508 191">
           <use xlink:href="#fakelogo"></use>
         </svg>
       </a>
