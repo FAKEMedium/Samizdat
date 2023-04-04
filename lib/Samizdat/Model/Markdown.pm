@@ -7,6 +7,7 @@ use Text::MultiMarkdown;
 use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
 use YAML::XS;
+use Data::Dumper;
 
 my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
@@ -80,7 +81,7 @@ sub list ($self, $url, $options = {}) {
       $docpath =~ s/_$options->{language}\.md$/.md/;
       if ($docpath !~ /\_(.+)\.md$/) {
         if ($docpath =~ s/README\.md/index.html/) {
-          $found = 1;
+          $found = $docpath;
         }
         $docs->{$docpath} = {
           docpath     => $docpath,
@@ -117,9 +118,9 @@ sub list ($self, $url, $options = {}) {
     }
   }
   for my $subdoc (@{ $subdocs }) {
-    push @{ $docs->{'index.html'}->{subdocs} }, $subdoc;
+    push @{ $docs->{$found}->{subdocs} }, $subdoc;
   }
-  $docs->{'index.html'}->{meta} = $meta;
+  $docs->{$found}->{meta} = $meta;
   return $docs;
 }
 
