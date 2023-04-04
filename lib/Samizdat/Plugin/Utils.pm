@@ -58,6 +58,20 @@ sub register ($self, $app, $conf) {
           $text =~ s/^[ ]+//gms;
           sprintf('<pre>%s</pre>', $text);
         ]gexsmu;
+
+        # Especially for converted indented markdown
+        $$output =~ s{<pre><code>(.+?)</code></pre>}[
+          my $text = $1;
+          $text =~ s/^[ ]+//gms;
+          sprintf('<pre><code>%s</code></pre>', $text);
+        ]gexsmu;
+
+        $$output =~ s{<textarea>(.+?)</textarea>}[
+          my $text = $1;
+          $text =~ s/^[ ]+//gms;
+          sprintf('<textarea>%s</textarea>', $text);
+        ]gexsmu;
+
         if ($c->config->{cache} && exists $c->{stash}->{web}->{docpath}) {
           $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
           my $z = new IO::Compress::Gzip sprintf('%s.gz',

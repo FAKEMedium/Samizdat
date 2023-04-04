@@ -9,7 +9,7 @@
 .admin {box-shadow: 0px 0px 4px 1px red;}
 .superadmin {box-shadow: 0px 0px 4px 1px blue;}
 tr.notop td, tr.notop th {border-top: 0;}
-a { color: #101cef; }
+a{color:#101cef;text-decoration:none!important}
 table.captiontop caption {font-weight: bold;caption-side:top !important;}
 .byline {background: #ffe;}
 img.file-icon {max-width: 2rem;}
@@ -35,5 +35,8 @@ img.file-icon {max-width: 2rem;}
   article#content {width: 100% !important;}
   aside#related {display: none !important;}
   #fadeout, #but, #blackss { fill-opacity: 1.0; }
-  .shadow,button,card,div{box-shadow:none!important;text-decoration:none!important}#newscards{-moz-column-count:3!important;column-count:3!important}article#content{width:100%!important}aside#related{display:none!important}
+  .shadow,button,card,div{box-shadow:none!important;}
+  #newscards{-moz-column-count:3!important;column-count:3!important}
+  article#content{width:100%!important}
+  aside#related{display:none!important}
 }
