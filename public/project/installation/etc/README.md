@@ -29,17 +29,17 @@ This directory contains examples of how to integrate the Samizdat application on
     systemctl start samizdat
     
 
-### /etc/nginx/sites-available/samizdat
+### /etc/nginx/sites-available/samizdat.conf
 
 We run our application behind an Nginx proxy. If they are on the same machine we can use a
 unix socket. Also, we let nginx take care of content that already is on disk.
 
-    {{./nginx/sites-available/samizdat}}
+    {{./nginx/sites-available/samizdat.conf}}
 
 
 ### Enable and start
 
     
     cd /etc/nginx/sites-enabled
-    ln -s ../sites-availabled/samizdat .
+    ln -s ../sites-availabled/samizdat.conf .
     systemctl restart nginx
