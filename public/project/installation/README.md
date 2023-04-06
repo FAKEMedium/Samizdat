@@ -14,4 +14,4 @@ Assets like css and javascript can be compiled and minimized. Samizdat has some 
 Samizdat offloads serving of static content to Nginx. An other way they work together is by sharing cookies through Redis.
 Some small Lua code in Nginx then helps authorization.
 
-* (Nginx / Openresty configuration)(./etc/README.md)
+* [Nginx / Openresty configuration](./etc/README.md)
