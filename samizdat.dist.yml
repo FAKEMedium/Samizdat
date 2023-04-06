@@ -71,46 +71,14 @@ locale:
   Language: en
   languages:
     en:
-    en-US:
-    ru:
       Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
       Last-Translator: Webmaster <webmaster@fakenews.com>
       Language-Team: Webmaster <webmaster@fakenews.com>
-    ru-RU:
     sv:
       Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
       Last-Translator: Webmaster <webmaster@fakenews.com>
       Language-Team: Webmaster <webmaster@fakenews.com>
-    sv-SE:
-    pl:
-    pl-PL:
-    zh:
-    zh-CN:
-    de:
-    de-DE:
-    fr:
-    fr-FR:
-    be:
-    be-BY:
-    uk:
-    uk-UA:
-    sr:
-    sr-RS:
-    ar:
-    ar-SY:
-    hu:
-    hu-HU:
   default_language: en
   skip_messages:
-    - ru-RU
     - sv-SE
     - en-US
-    - pl-PL
-    - zh-CN
-    - de-DE
-    - fr-FR
-    - be-BY
-    - uk-UA
-    - sr-RS
-    - ar-SY
-    - hu-HU
