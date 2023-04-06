@@ -21,12 +21,12 @@ server {
   access_log /var/log/samizdat.access.log combined buffer=64k flush=5m;
   error_log /var/log/samizdat.error.log;
 
-	location / {
+  location / {
     disable_symlinks on;
     gzip_static on;
     gzip_proxied expired no-cache no-store private auth;
     try_files $uri $uri/index.html @samizdat;
-	}
+  }
 
   location @samizdat {
     proxy_buffering off;
@@ -51,7 +51,6 @@ server {
     expires 8d;
     add_header Pragma public;
     add_header Cache-Control "public";
-    gzip_vary on;
   }
 
   location ~* \.(?:webp)$ {
