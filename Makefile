@@ -74,6 +74,7 @@ webpackinit:
 	npm i --save-dev purgecss purgecss-webpack-plugin
 	npm i --save-dev mini-css-extract-plugin
 	npm i --save-dev css-minimizer-webpack-plugin
+	npm i --save-dev image-minimizer-webpack-plugin svgo sharp
 	npm i --save bootstrap @popperjs/core
 	npm i --save suneditor
 	npm i bootstrap-icons

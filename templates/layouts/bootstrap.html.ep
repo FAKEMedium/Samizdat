@@ -13,6 +13,7 @@
     <title><%== title %></title>
     <link rel="preload" href="/css/samizdat.css" as="style" />
     <link rel="preload" href="/js/samizdat.js" as="script" />
+    <link rel="preload" href="/media/images/f.svg" as="icon" />
     <link rel="icon" type="image/x-icon" name="favicon" href="/media/images/f.svg" />
     <link id="bundlecss" rel="stylesheet" type="text/css" href="/css/samizdat.css" />
     <link rel="canonical" href="<%== $web->{canonical} %>" />

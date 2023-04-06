@@ -1,7 +1,7 @@
 {
   "name": "samizdat",
   "version": "1.0.0",
-  "description": "A static content hybrid generator for extreme speed and disconnected use.",
+  "description": "A fullstack static content hybrid generator for extreme speed and disconnected use.",
   "main": "webpack.config.js",
   "directories": {
     "lib": "lib"
@@ -21,7 +21,8 @@
     "Perl",
     "static",
     "Bootstrap5",
-    "Webpack"
+    "Webpack",
+    "Mojolicious"
   ],
   "author": "FakenewsCom",
   "license": "MIT",
@@ -39,6 +40,7 @@
     "css-minimizer-webpack-plugin": "^4.2.2",
     "glob": "^9.3.2",
     "html-webpack-plugin": "^5.5.0",
+    "image-minimizer-webpack-plugin": "^3.8.2",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss": "^8.4.21",
     "postcss-loader": "^7.1.0",
@@ -46,7 +48,9 @@
     "purgecss-webpack-plugin": "^5.0.0",
     "sass": "^1.59.3",
     "sass-loader": "^13.2.1",
+    "sharp": "^0.32.0",
     "style-loader": "^3.3.2",
+    "svgo": "^3.0.2",
     "terser-webpack-plugin": "^5.3.7",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
@@ -55,6 +59,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "bootstrap": "^5.2.3",
+    "bootstrap-icons": "^1.10.4",
     "suneditor": "^2.44.6"
   }
 }
