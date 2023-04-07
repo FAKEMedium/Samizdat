@@ -2,12 +2,32 @@
 secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
 sitename: The Example News
+shortsitename: Example News
+description: Example News on a fullstack static content hybrid generator for extreme speed and disconnected use.
 siteurl: https://example.com/
 host: example.com
 cookiedomain: .example.com
 authcookiename: samizdater
 datacookiename: samizdata
 logotype: media/images/fakenews.svg
+favicon: media/images/f.svg
+backgroundcolor: '#fff'
+themecolor: '#0b0'
+icons:
+  large: src/svg/fakenews.svg
+  small: src/svg/f.svg
+  sizes:
+    - 32
+    - 48
+    - 64
+    - 72
+    - 96
+    - 192
+    - 256
+    - 512
+robots: |
+  User-agent: *
+  allow: /
 layout: bootstrap
 hypnotoad:
   listen:

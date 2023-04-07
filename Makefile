@@ -46,10 +46,10 @@ test: clean
 	ls -las public/test
 
 zip:
-	gzip -k -9 public/css/samizdat.css
-	gzip -k -9 public/js/samizdat.js
-	gzip -k -9 public/media/images/fakenews.svg
-	gzip -k -9 public/media/images/f.svg
+	gzip -f -k -9 public/css/samizdat.css
+	gzip -f -k -9 public/js/samizdat.js
+	gzip -f -k -9 public/media/images/fakenews.svg
+	gzip -f -k -9 public/media/images/f.svg
 
 database:
 	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
@@ -77,4 +77,16 @@ webpackinit:
 	npm i --save-dev image-minimizer-webpack-plugin svgo sharp
 	npm i --save bootstrap @popperjs/core
 	npm i --save suneditor
-	npm i bootstrap-icons
+	npm i --save bootstrap-icons
+
+favicon:
+	convert src/svg/f.svg -background none -bordercolor white -border 0 \
+	  \( -clone 0 -resize 16x16 \) \
+	  \( -clone 0 -resize 32x32 \) \
+	  \( -clone 0 -resize 48x48 \) \
+	  \( -clone 0 -resize 64x64 \) \
+      -alpha off -colors 256 -delete 0 public/favicon.ico
+	gzip -f -k -9 public/favicon.ico
+
+icons:
+	samizdat makeicons

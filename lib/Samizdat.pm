@@ -130,8 +130,10 @@ sub startup ($self) {
   $r->any([qw(     POST DELETE           )] => '/logout')->to(controller => 'Login', action => 'logout');
   $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
   $r->any([qw( GET                       )] => '/panel')->to(controller => 'Panel', action => 'index');
-  $r->any([qw( GET                       )] => '/')->to(controller => 'Markdown', action => 'geturi', docpath => '');
-  $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Markdown', action => 'geturi');
+  $r->any([qw( GET                       )] => '/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
+  $r->any([qw( GET                       )] => '/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
+  $r->any([qw( GET                       )] => '/')->to(controller => 'Web', action => 'geturi', docpath => '');
+  $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Web', action => 'geturi');
 }
 
 1;

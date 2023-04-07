@@ -1,4 +1,4 @@
-package Samizdat::Controller::Markdown;
+package Samizdat::Controller::Web;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 
 sub geturi ($self) {
@@ -8,12 +8,13 @@ sub geturi ($self) {
 
   my $docs = $self->app->markdown->list($docpath, {
     language => $self->app->language,
-    languages => $self->app->{config}->{locale}->{languages},
+    languages => $self->config->{locale}->{languages},
   });
   my $path = sprintf("%s%s", $docpath, 'index.html');
   $self->stash(template => 'index');
 
   if (!exists($docs->{$path})) {
+    banbot($docpath, $self->tx->remote_address);
     $path = '404.html';
     $self->stash('status', 404);
     $docs->{'404.html'} = {
@@ -23,9 +24,13 @@ sub geturi ($self) {
       main        => $html,
       children    => [],
       subdocs     => [],
-      description => $self->app->__('Missing file, our bad?'),
-      keywords    => [],
-      language => $self->app->language,
+      meta        => {
+                       name => {
+                         description => $self->app->__('Missing file, our bad?'),
+                         keywords    => ["error","404"]
+                       }
+                     },
+      language => $self->app->language
     };
   } else {
     $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
@@ -53,5 +58,53 @@ sub geturi ($self) {
   $self->stash(title => $docs->{$path}->{title} // $title);
   $self->render();
 }
+
+sub manifest ($self) {
+  my $icons = [{
+    src   => '/favicon.ico',
+    sizes => '16x16 32x32 48x48 64x64'
+  }];
+  for my $size (@{ $self->app->config->{icons}->{sizes} }) {
+    my $src = sprintf('/media/images/icon.%04d.png', $size);
+    push @{ $icons }, {
+      src     => $src,
+      sizes   => sprintf('%dx%d', $size, $size),
+      type    => 'image/png',
+      purpose => 'maskable'
+    };
+  }
+  push @{ $icons }, {
+    src   => $self->app->config->{logotype},
+    sizes => 'any',
+    type  => 'image/svg'
+  };
+  $self->render(json => {
+    name             => $self->config->{sitename},
+    short_name       => $self->config->{shortsitename},
+    start_url        => $self->config->{siteurl},
+    display          => 'standalone',
+    orientation      => 'any',
+    scope            => '/',
+    background_color => $self->config->{backgroundcolor},
+    theme_color      => $self->config->{themecolor},
+    description      => $self->config->{description},
+    icons            => $icons
+  }, web => { docpath => 'manifest.json' });
+}
+
+
+sub robots ($self) {
+  $self->render(text => $self->config->{robots}, web => {docpath => 'robots.txt'}, format => 'txt');
+}
+
+# Gather exploiting bots
+sub banbot ($docpath, $ip){
+  if ($docpath =~ /
+    xmlrpc.php
+  /ixx) {
+    say sprintf("%s\t%s\t%s", time, $ip, $docpath);
+  }
+}
+
 
 1;
