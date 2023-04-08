@@ -14,7 +14,6 @@
     <title><%== title %></title>
     <link rel="preload" href="/css/samizdat.css" as="style" />
     <link rel="preload" href="/js/samizdat.js" as="script" />
-    <link rel="preload" href="/favicon.ico" as="image" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/media/images/icon.0192.png" />
