@@ -10,6 +10,8 @@ clean:
 	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
 	rm -f public/js/*.{js,css}*
 	rm -f public/css/*.css*
+	rm -f public/robots.*
+	rm -f public/manifest.*
 	cp -af public/test/README.md public/test/README.txt
 	cp -af src/js/local.js public/js/
 	cp -af src/js/sw.js public/js/
