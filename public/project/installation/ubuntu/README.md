@@ -48,7 +48,8 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo -u www-data git clone https://github.com/FakenewsCom/Samizdat.git
   * cd Samizdat
 * Copy samizdat.dist.yml to samizdat.yml and modify it for your needs
-
+* If you intend to use [Webpack](./webpack/) for optimization:
+  * curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - && sudo apt-get install -y nodejs
 
 ## Operation
 

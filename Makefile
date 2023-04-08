@@ -99,3 +99,4 @@ icons:
 	samizdat makeicons
 
 install: favicon icons static webpack zip
+	chown -R www-data:www-data .
