@@ -57,7 +57,6 @@ sub run ($self, @args) {
             }
           }
         });
-        sleep 1;
       }
     }
   };

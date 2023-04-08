@@ -1,7 +1,7 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
-static: clean
+static:
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
 
 clean:
@@ -86,6 +86,7 @@ webpackinit:
 	npm i --save bootstrap-icons
 
 webpack:
+	npm install
 	NODE_ENV=production npm run build
 
 favicon:
@@ -100,5 +101,5 @@ favicon:
 icons:
 	samizdat makeicons
 
-install: favicon icons static webpack zip
+install: clean favicon icons static webpack zip
 	chown -R www-data:www-data .

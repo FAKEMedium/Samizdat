@@ -87,7 +87,7 @@ sub manifest ($self) {
     start_url        => $self->config->{siteurl},
     display          => 'standalone',
     orientation      => 'any',
-    scope            => '/',
+    scope            => $self->config->{siteurl},
     background_color => $self->config->{backgroundcolor},
     theme_color      => $self->config->{themecolor},
     description      => $self->config->{description},
