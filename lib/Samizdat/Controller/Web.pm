@@ -75,9 +75,10 @@ sub manifest ($self) {
     };
   }
   push @{ $icons }, {
-    src   => '/' . $self->app->config->{logotype},
-    sizes => 'any',
-    type  => 'image/svg'
+    src     => '/' . $self->app->config->{logotype},
+    sizes   => 'any',
+    type    => 'image/svg',
+    purpose => 'any'
   };
 
   my $manifest = encode_json {
