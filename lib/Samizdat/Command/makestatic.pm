@@ -39,8 +39,7 @@ sub run ($self, @args) {
       }
       $uri =~ s/README\.md//;
       if (!$uris->{$uri}) {
-        my $res;
-        { $res = $ua->get(sprintf('%s/%s', ${ $self->app->config->{hypnotoad}->{listen} }[0], $uri))->result; }
+        my $res = $ua->get(sprintf('%s/%s', ${ $self->app->config->{hypnotoad}->{listen} }[0], $uri))->result;
         $uris->{$uri} = 1;
         $res->dom('img, a')->each(sub($dom, $i) {
           my $link = '';
