@@ -1,5 +1,6 @@
 package Samizdat::Controller::Web;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use Mojo::JSON qw(encode_json);
 
 sub geturi ($self) {
   my $docpath = $self->stash('docpath');
@@ -74,11 +75,13 @@ sub manifest ($self) {
     };
   }
   push @{ $icons }, {
-    src   => $self->app->config->{logotype},
+    src   => '/' . $self->app->config->{logotype},
     sizes => 'any',
     type  => 'image/svg'
   };
-  $self->render(json => {
+
+  my $manifest = encode_json {
+    manifest_version   => "2",
     name             => $self->config->{sitename},
     short_name       => $self->config->{shortsitename},
     start_url        => $self->config->{siteurl},
@@ -88,8 +91,15 @@ sub manifest ($self) {
     background_color => $self->config->{backgroundcolor},
     theme_color      => $self->config->{themecolor},
     description      => $self->config->{description},
-    icons            => $icons
-  }, web => { docpath => 'manifest.json' });
+    icons            => $icons,
+    default_locale   => $self->config->{locale}->{default_language},
+    screenshots      => $self->config->{screenshots}
+  };
+
+  # Slashes get escaped in Mojo::JSON. Undo that!
+  $manifest =~ s/\\//g;
+
+  $self->render(text => $manifest, web => { docpath => 'manifest.json' }, format => 'json');
 }
 
 

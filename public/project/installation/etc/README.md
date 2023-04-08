@@ -34,8 +34,9 @@ This directory contains examples of how to integrate the Samizdat application on
 We run our application behind an Nginx proxy. If they are on the same machine we can use a
 unix socket. Also, we let nginx take care of content that already is on disk.
 
+<pre>
     {{./nginx/sites-available/samizdat.conf}}
-
+</pre>
 
 ### Enable and start
 

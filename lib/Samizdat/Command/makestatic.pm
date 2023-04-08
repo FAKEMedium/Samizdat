@@ -19,19 +19,19 @@ sub run ($self, @args) {
     Mojo::Cookie::Response->new(
       name   => 'language',
       value  => $language,
-      domain => $self->app->{config}->{cookiedomain},
+      domain => $self->app->config->{cookiedomain},
       path   => '/'
     )
   );
 
   my $uris = $self->app->markdown->geturis;
   my $again = 1;
-  my $siteurl = $self->app->{config}->{siteurl};
+  my $siteurl = $self->app->config->{siteurl};
   $siteurl =~ s/\/$//;
   while ($again) {
     $again = 0;
-    sleep 1;
     for my $uri (keys %$uris) {
+      next if ($uri =~ /^#/);
       say $uri;
       my $language = '';
       if ($uri =~ s/_([^_\.]+)\.md/.md/) {
@@ -39,8 +39,9 @@ sub run ($self, @args) {
       }
       $uri =~ s/README\.md//;
       if (!$uris->{$uri}) {
-        my $res = $ua->get(sprintf('%s/%s', ${$self->app->{config}->{hypnotoad}->{listen}}[0], $uri))->result;
-        $uris->{uri} = 1;
+        my $res;
+        { $res = $ua->get(sprintf('%s/%s', ${ $self->app->config->{hypnotoad}->{listen} }[0], $uri))->result; }
+        $uris->{$uri} = 1;
         $res->dom('img, a')->each(sub($dom, $i) {
           my $link = '';
           if ('a' eq $dom->tag) {
@@ -56,6 +57,7 @@ sub run ($self, @args) {
             }
           }
         });
+        sleep 1;
       }
     }
   };

@@ -25,6 +25,17 @@ icons:
     - 192
     - 256
     - 512
+screenshots:
+  -
+    src: /media/images/notrust.jpg
+    type: image/jpeg
+    sizes: 711x441
+    form_factor: wide
+  -
+    src: /media/images/notrust.jpg
+    type: image/jpeg
+    sizes: 441x711
+    form_factor: narrow
 robots: |
   User-agent: *
   allow: /

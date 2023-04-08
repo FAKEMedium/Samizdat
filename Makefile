@@ -8,10 +8,11 @@ clean:
 	find public/  -name "*.html" -delete
 	find public/  -name "*.gz" -delete
 	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
-#	rm -f public/js/*.{js,css}*
-#	rm -f public/css/*.css*
+	rm -f public/js/*.{js,css}*
+	rm -f public/css/*.css*
 	cp -af public/test/README.md public/test/README.txt
 	cp -af src/js/local.js public/js/
+	cp -af src/js/sw.js public/js/
 
 harvest:
 	samizdat makeharvest
@@ -48,8 +49,11 @@ test: clean
 zip:
 	gzip -f -k -9 public/css/samizdat.css
 	gzip -f -k -9 public/js/samizdat.js
+	gzip -f -k -9 public/js/sw.js
+	gzip -f -k -9 public/js/local.js
 	gzip -f -k -9 public/media/images/fakenews.svg
 	gzip -f -k -9 public/media/images/f.svg
+	gzip -f -k -9 public/favicon.ico
 
 database:
 	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
@@ -79,6 +83,9 @@ webpackinit:
 	npm i --save suneditor
 	npm i --save bootstrap-icons
 
+webpack:
+	NODE_ENV=production npm run build
+
 favicon:
 	convert src/svg/f.svg -background none -bordercolor white -border 0 \
 	  \( -clone 0 -resize 16x16 \) \
@@ -90,3 +97,5 @@ favicon:
 
 icons:
 	samizdat makeicons
+
+install: favicon icons static webpack zip

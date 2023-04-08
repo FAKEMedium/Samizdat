@@ -4,7 +4,7 @@ Samizdat is supposed to be installed by the superuser on a VPS or on bare metal.
 If you prefer easy installation and smooth software upgrades, go with the Ubuntu preparation.
 If speed and fine tuning is what you desire, plus you're a skilled sysop, go with the FreeBSD ports setup.
 
-* [Ubuntu](./ubuntu/README.md)
+* [Ubuntu Linux](./ubuntu/README.md)
 * [FreeBSD](./freebsd/README.md)
 
 Assets like css and javascript can be compiled and minimized. Samizdat has some customizations of the Bootstrap 5 code too.
