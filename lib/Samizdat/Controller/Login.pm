@@ -85,8 +85,15 @@ sub login {
       'count'       => $count,
     });
   }
-
-  my $userid = eval { return $self->account->validatePassword($username, $password, $self->config->{account}) };
+  my $userid;
+  if (
+    exists($self->config->{account}->{superadmins}->{$username})
+      && ($self->config->{account}->{superadmins}->{$username} eq $password)
+  ) {
+    $userid = 1;
+  } else {
+    $userid = eval {return $self->account->validatePassword($username, $password, $self->config->{account})};
+  }
   unless ($userid) {
     say Dumper my $failure = {
       ip => $ip,

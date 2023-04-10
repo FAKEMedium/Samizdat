@@ -62,7 +62,7 @@ Video by Videographer [Shiyaz](https://www.pexels.com/@videographer-shiyaz-23569
 
 ## Adding WebP alternatives
 
-<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid pb-2" width="1078" height="718" />
+<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid pb-2 alert-dange admin superadminr" width="1078" height="718" />
 
 Brown Mushroom on the Green Grass by [Bulat Khamitov](https://www.pexels.com/@bulat/) from Pexels.
 The Samizdat application adds the picture tag and also creates a copy in webp format.

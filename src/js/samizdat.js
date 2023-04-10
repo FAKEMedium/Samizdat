@@ -1,4 +1,8 @@
 import '../scss/samizdat.scss'
 import { Modal, Collapse, Dropdown } from 'bootstrap'
+import './user.js'
 import './local.js'
 import './register.js'
+// import './copytext'
+// import './sprintf'
+// import './tablesorter'

@@ -1,8 +1,8 @@
 const loginform = document.getElementById('loginform')
 loginform.addEventListener('submit', (event) => {
     event.preventDefault()
-    const url = self.attr('href') || self.attr('action')
-    const method = this.data('method')
+    const url = loginform.action
+    const method = loginform.action
     response = await fetch(url, { method: method});
 
     if (1 === response.success)
@@ -12,7 +12,7 @@ loginform.addEventListener('submit', (event) => {
             window.location.reload(true)
     else
         if (2 === response.step)
-            this.innerHTML = response.error
+            loginform.innerHTML = response.error
         else
-            $document.getElementById('loginalert').classList.add('alert-danger').innerHTML = response.error
+            document.getElementById('loginalert').classList.add('alert-danger').innerHTML = response.error
 })
