@@ -6,12 +6,16 @@ no warnings 'uninitialized';
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
+use Mojo::Template;
 use IO::Compress::Gzip;
 use Imager;
 use Data::Dumper;
 
 my $public = Mojo::Home->new('public/');
+my $templates = Mojo::Home->new('templates/');
+my $mt = Mojo::Template->new();
 my $image = Imager->new;
+
 my $cacheexist = {};
 
 sub register ($self, $app, $conf) {
@@ -42,8 +46,29 @@ sub register ($self, $app, $conf) {
         return $svg;
       }
     },
-  );
 
+    $app->helper(
+      includeany => sub ($c, $file = undef, $type = 'javascript', $insert = 0) {
+        my $content = $templates->rel_file($file)->slurp if ($file and -e $templates->rel_file($file)->to_string) // '';
+        if ($insert) {
+          my $web = $c->stash('web');
+          if ('javascript' eq $type) {
+            $web->{script} .= $c->app->indent($content, 3);
+          } elsif ('css' eq $type) {
+            $web->{css} .= $c->app->indent($content, 3);
+          }
+          $content = '';
+        } else {
+          if ('javascript' eq $type) {
+            $content = sprintf("<script>\n%s</script>", $c->app->indent($content, 1));
+          } elsif ('css' eq $type) {
+            $content = sprintf("<style>\n\t%s</style>", $c->app->indent($content, 1));
+          }
+        }
+        return $content;
+      }
+    )
+  );
 
   # Remove indentation from pre and textarea elements
   # Add the generated html to public as a static cache

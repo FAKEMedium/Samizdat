@@ -29,7 +29,7 @@ function deleteCookie(cname) {
     document.cookie = cname + "=logout; expires=Sat, 23 Mar 2023 13:40:42 GMT; domain=.fakenews.com; path=/; secure; SameSite=None; Max-Age=0"
 }
 
-let decodeBase64 = function(s) {
+function decodeBase64(s) {
     let e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length;
     let A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
     for(i=0;i<64;i++){e[A.charAt(i)]=i;}

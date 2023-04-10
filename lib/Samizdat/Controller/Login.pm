@@ -11,7 +11,9 @@ use Data::Dumper;
 sub index {
   my $self = shift;
   my $loginfailures = $self->account->getLoginFailures($self->config->{account}->{blocklimit}, {
-    ip => ${ $self->req->headers->{'headers'}->{'remote_host'} }[0] // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0] // '0.0.0.0',
+    ip => ${ $self->req->headers->{'headers'}->{'remote_host'} }[0]
+      // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0]
+      // '0.0.0.0',
     blocktime => $self->config->{account}->{blocktime}
   });
   my $count = int @{ $loginfailures };
@@ -112,7 +114,7 @@ sub login {
     }
 
   } else {
-    my $user = ${$self->account->getUsers({ id => $userid })}[0];
+    my $user = ${ $self->account->getUsers({ id => $userid }) }[0];
 
     $self->session(authenticated => $userid);
     $self->session(username => $user->{'username'});

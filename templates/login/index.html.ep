@@ -27,22 +27,4 @@
     <a href="/login/lostpassword.html" style="float: right;"><%= __('Lost password?') %></a>
   </div>
 </form>
-<!--script>
-    const loginform = document.getElementById('loginform');
-
-    loginform.addEventListener('submit', (event) => {
-      event.preventDefault();
-
-    const ref = event.relatedTarget;
-    const url = ref.attr('href') || ref.attr('action');
-    const method = ref.data('method');
-
-      if (1 === response.success) {
-        if ('/' === window.location.pathname) { location.assign("/panel/") }
-        else { window.location.reload(true) }
-      } else {
-        if (2 === response.step) {$('#loginform').html(response.error);}
-        else { $('#loginalert').addClass('alert-danger').html(response.error);}
-      }
-})
-</script-->
+<%== includeany 'login/index.js' %>
