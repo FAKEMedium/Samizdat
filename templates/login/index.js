@@ -2,7 +2,7 @@ const loginform = document.getElementById('loginform')
 loginform.addEventListener('submit', (event) => {
     event.preventDefault()
     const url = loginform.action
-    const method = loginform.action
+    const method = loginform.method
     response = await fetch(url, { method: method});
 
     if (1 === response.success)
