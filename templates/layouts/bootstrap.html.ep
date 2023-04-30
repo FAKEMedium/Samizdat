@@ -19,8 +19,6 @@
     <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/media/images/icon.0192.png" />
     <link rel="author" type="text/plain" href="/humans.txt" />
-    <link rel="author" type="text/plain" href="/ads.txt" />
-    <link rel="author" type="text/plain" href="/security.txt" />
     <link rel="stylesheet" type="text/css" href="/css/samizdat.css" />
     <style id="headcss"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
