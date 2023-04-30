@@ -12,13 +12,16 @@
 <% }  =%>
     <meta name="theme-color" content="<%= config->{themecolor} %>" />
     <title><%== title %></title>
+    <link rel="canonical" href="<%== $web->{canonical} %>" />
     <link rel="preload" href="/css/samizdat.css" as="style" />
     <link rel="preload" href="/js/samizdat.js" as="script" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/media/images/icon.0192.png" />
-    <link rel="canonical" href="<%== $web->{canonical} %>" />
-    <link id="bundlecss" rel="stylesheet" type="text/css" href="/css/samizdat.css" />
+    <link rel="author" type="text/plain" href="/humans.txt" />
+    <link rel="author" type="text/plain" href="/ads.txt" />
+    <link rel="author" type="text/plain" href="/security.txt" />
+    <link rel="stylesheet" type="text/css" href="/css/samizdat.css" />
     <style id="headcss"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
      /*]]>*/ </style>
@@ -65,9 +68,7 @@
       </header>
       <section class="container">
         <div class="row">
-          <%== indent limiter, 5 =%>
           <%== indent content, 5 =%>
-          <%== indent limiter, 5 =%>
         </div>
       </section>
     </main>

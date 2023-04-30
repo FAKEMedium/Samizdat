@@ -19,6 +19,10 @@ This [link](./editable/ class="magiclink") is supposed to be editable.
     b = a;
     a++;
 
+## Special indentation
+
+<textarea>Samizdat makes indented html that is very readable.
+Textarea and Pre content should however not be indented.</textarea>
 
 ## Fenced code
 
@@ -26,28 +30,6 @@ This [link](./editable/ class="magiclink") is supposed to be editable.
 One fence
 continue
 `
-
-
-``
-Two fence
-continue
-``
-
-
-```
-Three fence
-```
-
-
-````
-Four fence
-````
-
-
-`````
-Five fence
-`````
-
 
 ## HTML5 video
 

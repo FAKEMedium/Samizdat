@@ -20,7 +20,7 @@
       <input type="checkbox" class="form-check-input" name="rememberme" id="rememberme" />
       <label class="form-check-label" for="rememberme"><%= __('Keep me logged in') %></label>
     </div>
-    <button type="submit" class="btn btn-primary"><%= __('Log in') %></button>
+    <button type="submit" id="submitlogin" class="btn btn-primary"><%= __('Log in') %></button>
   </div>
   <div class="modal-footer">
     <a href="/user/register.html"><%= __('New account') %></a>

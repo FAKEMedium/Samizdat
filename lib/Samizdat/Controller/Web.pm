@@ -103,16 +103,29 @@ sub manifest ($self) {
   $self->render(text => $manifest, web => { docpath => 'manifest.json' }, format => 'json');
 }
 
-
 sub robots ($self) {
   $self->render(text => $self->config->{robots}, web => {docpath => 'robots.txt'}, format => 'txt');
 }
 
+sub humans ($self) {
+  $self->render(text => $self->config->{humans}, web => {docpath => 'humans.txt'}, format => 'txt');
+}
+
+sub ads ($self) {
+  $self->render(text => $self->config->{ads}, web => {docpath => 'ads.txt'}, format => 'txt');
+}
+
+sub security ($self) {
+  $self->render(text => $self->config->{security}, web => {docpath => '.well-known/security.txt'}, format => 'txt');
+}
+
 # Gather exploiting bots
 sub banbot ($docpath, $ip){
-  if ($docpath =~ /
-    xmlrpc.php
-  /ixx) {
+  if ($docpath =~ /(
+    xmlrpc.php |
+    wp-login.php |
+    wp-admin
+  )/ixx) {
     say sprintf("%s\t%s\t%s", time, $ip, $docpath);
   }
 }

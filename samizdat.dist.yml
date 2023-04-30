@@ -39,6 +39,37 @@ screenshots:
 robots: |
   User-agent: *
   allow: /
+humans: |
+  /* DEVELOPERS */
+    Lead: Hans Svensson
+    Contact: hans[at]fakenews.com
+    From: Lund, Sweden
+  
+    You could be listed here too. Make your contributions on https://github.com/FakenewsCom/Samizdat.
+  
+  /* SITE */
+    Language: English / Swedish
+    Doctype: HTML5 (valid XML)
+    Programming languages: Perl, Javascript, SQL, Shellscript, Lua, Makefile, SCSS, CSS
+    IDE: Intellij IDEA Ultimate Edition
+ads: |
+  placeholder.example.com, placeholder, DIRECT, placeholder
+security: |
+  # Our security address
+  Contact: mailto:security@example.com
+  
+  # Our OpenPGP key
+  Encryption: https://example.com/security/pgp-key.txt
+  
+  # Our security policy
+  Policy: https://example.com/security
+  
+  # Our security acknowledgements
+  Acknowledgements: https://example.com/security/acknowledgements
+  
+  Preferred-Languages: en,sv
+  
+  Canonical: https://example.com/.well-known/security.txt
 layout: bootstrap
 hypnotoad:
   listen:
@@ -88,12 +119,12 @@ piratebay:
   login: example
   password: s3cr3t
 locale:
-  textdomain: com.fakenews
+  textdomain: com.example
   project: Samizdat
   Project-Id-Version: Samizdat
-  Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
-  Last-Translator: Webmaster <webmaster@fakenews.com>
-  Language-Team: Webmaster <webmaster@fakenews.com>
+  Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
+  Last-Translator: Webmaster <webmaster@example.com>
+  Language-Team: Webmaster <webmaster@example.com>
   PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE
   POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE
   MIME-Version: 1.0
@@ -102,13 +133,13 @@ locale:
   Language: en
   languages:
     en:
-      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
-      Last-Translator: Webmaster <webmaster@fakenews.com>
-      Language-Team: Webmaster <webmaster@fakenews.com>
+      Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
+      Last-Translator: Webmaster <webmaster@example.com>
+      Language-Team: Webmaster <webmaster@example.com>
     sv:
-      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
-      Last-Translator: Webmaster <webmaster@fakenews.com>
-      Language-Team: Webmaster <webmaster@fakenews.com>
+      Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
+      Last-Translator: Webmaster <webmaster@example.com>
+      Language-Team: Webmaster <webmaster@example.com>
   default_language: en
   skip_messages:
     - sv-SE

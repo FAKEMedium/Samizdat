@@ -1,4 +1,4 @@
 <% layout config->{layout}; %>
-<div class="col-12">
+<div class="col-12" id="editable">
   <%== indent $web->{main}, 1 =%>
 </div>

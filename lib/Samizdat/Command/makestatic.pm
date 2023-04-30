@@ -32,6 +32,7 @@ sub run ($self, @args) {
     $again = 0;
     for my $uri (keys %$uris) {
       next if ($uri =~ /^#/);
+      next if ($uri =~ /\.(jpg)/);
       say $uri;
       my $language = '';
       if ($uri =~ s/_([^_\.]+)\.md/.md/) {
