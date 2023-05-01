@@ -39,7 +39,7 @@ sub run ($self, @args) {
         $language = $1;
       }
       $uri =~ s/README\.md//;
-      $uri =~ s/[\/]{1,}/\//g;
+      $uri =~ s/\/\//\//g;
       $uri =~ s/\/\.\//\//g;
       if (!$uris->{$uri}) {
         my $res = $ua->get(sprintf('%s/%s', ${ $self->app->config->{hypnotoad}->{listen} }[0], $uri))->result;
