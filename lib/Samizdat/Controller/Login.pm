@@ -33,7 +33,7 @@ sub logout {
   my $self = shift;
   my $username = $self->session('username');
   $self->session(expires => 1);
-  $self->cookie(aaadata => '', {
+  $self->cookie($self->config->{datacookiename} => '', {
     secure => 1,
     httponly => 0,
     path => '/',
@@ -141,7 +141,7 @@ sub login {
     chomp $value;
     $value =~ s/[\r\n\=]+//g;
 
-    $self->cookie(userdata => $value, {
+    $self->cookie($self->config->{datacookiename} => $value, {
       secure => 1,
       httponly => 0,
       path => '/',

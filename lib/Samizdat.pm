@@ -127,7 +127,7 @@ sub startup ($self) {
   my $r = $self->routes;
   $r->any([qw(     POST                  )] => '/login')->to(controller => 'Login', action => 'login');
   $r->any([qw( GET                       )] => '/login')->to(controller => 'Login', action => 'index');
-  $r->any([qw(     POST DELETE           )] => '/logout')->to(controller => 'Login', action => 'logout');
+  $r->any([qw( GET POST DELETE           )] => '/logout')->to(controller => 'Login', action => 'logout');
   $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
   $r->any([qw( GET                       )] => '/panel')->to(controller => 'Panel', action => 'index');
   $r->any([qw( GET                       )] => '/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
