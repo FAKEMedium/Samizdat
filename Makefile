@@ -11,7 +11,7 @@ static:
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
 
 clean:
-	rm -f public/*
+	rm -rf public/*
 	mkdir -p public/assets
 	cp -af src/public/test/README.md src/public/test/README.txt
 	cp -af src/js/sw.js public/assets/
