@@ -79,15 +79,16 @@ sub startup ($self) {
   $self->plugin('Web');
   $self->plugin('Account');
   $self->plugin('Public');
-  $self->plugin('Rymdweb');
   $self->plugin('Poll');
   $self->plugin('Utils');
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');
+=pod
+  $self->plugin('Rymdweb');
   $self->plugin('Pdflatex');
   $self->plugin('Fortnox');
-
+=cut
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('Captcha', {
