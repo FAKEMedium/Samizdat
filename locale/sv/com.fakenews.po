@@ -17,68 +17,510 @@ msgstr ""
 "Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr ""
+
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
 msgstr "&copy;2022 &mdash; dela länk och ge en stjärna på {sitename}!"
 
 msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
 msgstr ""
 
+msgid "&copy;{year}&nbsp;{author}"
+msgstr ""
+
+msgid "1 database"
+msgid_plural "{number} databases"
+msgstr[0] "1 databas"
+msgstr[1] "{number} databaser"
+
+msgid "1 dns domain"
+msgid_plural "{number} dns domains"
+msgstr[0] "1 dns-domän"
+msgstr[1] "{number} dns-domäner"
+
+msgid "1 domain"
+msgid_plural "{number} domains"
+msgstr[0] "1 domän"
+msgstr[1] "{number} domäner"
+
+msgid "1 invoice"
+msgid_plural "{number} invoices"
+msgstr[0] "1 faktura"
+msgstr[1] "{number} fakturor"
+
+msgid "1 invoice item"
+msgid_plural "{number} invoice items"
+msgstr[0] "1 fakturarad"
+msgstr[1] "{number} fakturarader"
+
+msgid "1 mail domain"
+msgid_plural "{number} mail domains"
+msgstr[0] "1 maildomän"
+msgstr[1] "{number} maildomäner"
+
+msgid "1 site"
+msgid_plural "{number} sites"
+msgstr[0] "1 webbplats"
+msgstr[1] "{number} webbplatser"
+
 msgid "404: Missing document"
 msgstr "404: Sidan saknas"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr ""
+
+msgid "A {rate} interest will be charged on overdue payments"
+msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
 msgid "About"
 msgstr "Om"
 
-msgid "Admininistration panel"
+msgid "Add customer"
+msgstr "Ny kund"
+
+msgid "Add database"
+msgstr "Ny databas"
+
+msgid "Add domain"
+msgstr "Ny domän"
+
+msgid "Add product"
+msgstr "Ny produkt"
+
+msgid "Add subscription"
 msgstr ""
+
+msgid "Add voucher"
+msgstr "Ny verifikation"
+
+msgid "Add website"
+msgstr "Ny webbplats"
+
+msgid "Address"
+msgstr "Adress"
+
+msgid "Address (billing)"
+msgstr ""
+
+msgid "Address check"
+msgstr "Adresskontroll"
+
+msgid "Admininistration panel"
+msgstr "Kontrollpanel"
 
 msgid "Advertising"
 msgstr "Annonsering"
 
+msgid "Amount"
+msgstr "Summa"
+
+msgid "Amount incl. VAT"
+msgstr "Summa inkl. moms"
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr "Belopp att betala inkl. moms: {rounded} {currency}"
+
+msgid "Article"
+msgstr "Artikel"
+
+msgid "BIC/Swift"
+msgstr ""
+
+msgid "BIC/Swift address"
+msgstr ""
+
+msgid "Back"
+msgstr "Tillbaka"
+
+msgid "Bankgiro"
+msgstr ""
+
+msgid "Barred"
+msgstr "Spärrade"
+
+msgid "Billing"
+msgstr "Ekonomi"
+
+msgid "Blocked"
+msgstr "Blockerad"
+
 msgid "Blocked ip number"
+msgstr "Blockerat ip-nummer"
+
+msgid "Bootstrap icons"
+msgstr ""
+
+msgid "Bootstrap icons helper"
+msgstr "Hjälpfunktion Bootstrap-ikoner"
+
+msgid "Buddy price"
+msgstr "Kompispris"
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr ""
+
+msgid "Captcha code from image"
+msgstr "Kod från captcha-bild"
+
+msgid "Captcha image"
+msgstr "Captcha-bild"
+
+msgid "Captcha was wrong"
+msgstr "Felaktig captcha"
+
+msgid "Choose language"
+msgstr "Välj språk"
+
+msgid "City"
+msgstr "Stad"
+
+msgid "City (billing)"
 msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr ""
 
 msgid "Close"
+msgstr "Stäng"
+
+msgid "Company"
+msgstr "Företag"
+
+msgid "Confirm poll signature"
+msgstr ""
+
+msgid "Confirmation request sent"
 msgstr ""
 
 msgid "Contact"
 msgstr "Kontakt"
 
+msgid "Continue"
+msgstr "Fortsätt"
+
+msgid "Continues on next page..."
+msgstr "Fortsätter nästa sida..."
+
 msgid "Contribute"
 msgstr "Bidra"
+
+msgid "Corporate identity number"
+msgstr "Organisationsnummer"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Country (billing)"
+msgstr ""
+
+msgid "Country selector"
+msgstr "Landsväljare"
+
+msgid "Create contact"
+msgstr "Skapa kontakt"
+
+msgid "Create customer"
+msgstr ""
+
+msgid "Created {created} by {creator}"
+msgstr "Skapad {created} av {creator}"
+
+msgid "Credit trustability"
+msgstr "Kreditvärdighet"
+
+msgid "Creditability"
+msgstr "Kreditvärdighet"
+
+msgid "Customer"
+msgstr ""
+
+msgid "Customer #{customerid}"
+msgstr "Kund #{customerid}"
+
+msgid "Customer Id"
+msgstr "Kundnummer"
+
+msgid "Customer newsletter"
+msgstr "Kundnyhetsbrev"
+
+msgid "Customers"
+msgstr "Kunder"
+
+msgid "DNS domains"
+msgstr "DNS-domäner"
+
+msgid "Data usage: {usage}"
+msgstr "Dataanvändning: {usage}"
+
+msgid "Database"
+msgstr "Databas"
+
+msgid "Databases"
+msgstr "Databaser"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Destroyed"
+msgstr "Makulerade"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr ""
+
+msgid "Domain"
+msgstr "Domän"
+
+msgid "Domain registration"
+msgstr "Domänregistrering"
+
+msgid "Domains"
+msgstr "Domäner"
+
+msgid "Due to"
+msgstr "Förfallodatum"
+
+msgid "EPP"
+msgstr ""
+
+msgid "Economy"
+msgstr "Ekonomi"
+
+msgid "Edit customer {customerid}"
+msgstr "Redigera kund {customerid}"
+
+msgid "Email"
+msgstr "Epost"
+
+msgid "Email (billing)"
+msgstr ""
+
+msgid "Email not valid"
+msgstr "Ogiltig epost"
+
+msgid "Email someone about {what}"
+msgstr ""
 
 msgid "Email to a friend"
 msgstr "Maila en vän"
 
-msgid "Enter password"
+msgid "Empty VAT"
 msgstr ""
+
+msgid "Empty VAT number"
+msgstr ""
+
+msgid "Empty address"
+msgstr ""
+
+msgid "Empty billingaddress"
+msgstr ""
+
+msgid "Empty city"
+msgstr ""
+
+msgid "Empty code"
+msgstr "Kod saknas"
+
+msgid "Empty company name"
+msgstr "Företag saknas"
+
+msgid "Empty country"
+msgstr ""
+
+msgid "Empty first name"
+msgstr ""
+
+msgid "Empty freetext"
+msgstr ""
+
+msgid "Empty last name"
+msgstr ""
+
+msgid "Empty message"
+msgstr "Tomt meddelande"
+
+msgid "Empty mobile"
+msgstr "Mobiltelefon saknas"
+
+msgid "Empty name"
+msgstr "Namn saknas"
+
+msgid "Empty postal code"
+msgstr "Postnummer saknas"
+
+msgid "Empty recommendation"
+msgstr ""
+
+msgid "Empty reference"
+msgstr ""
+
+msgid "Empty subject"
+msgstr "Ämne saknas"
+
+msgid "Empty surname"
+msgstr "Förnam saknas"
+
+msgid "Empty telephone"
+msgstr "Telefon saknas"
+
+msgid "English"
+msgstr "Engelska"
+
+msgid "Enter password"
+msgstr "Ange lösenord"
 
 msgid "Enter username"
-msgstr ""
+msgstr "Ange användarnamn"
 
 msgid "Enter username and password"
+msgstr "Ange användarnamn och lösenord"
+
+msgid "Enter valid email"
+msgstr "Ange giltig epostadress"
+
+msgid "Euro"
+msgstr ""
+
+msgid "Examples"
 msgstr ""
 
 msgid "Expand menu"
-msgstr ""
+msgstr "Expandera meny"
 
 msgid "Expand personal menu."
+msgstr "Expandera personlig meny"
+
+msgid "Expires"
+msgstr "Förfaller"
+
+msgid "Expiring domains"
+msgstr "Förfallande domäner"
+
+msgid "FAKE Media"
+msgstr ""
+
+msgid "FAKE News by country"
 msgstr ""
 
 msgid "Failed login from {ip}"
+msgstr "Misslyckad inloggning från {ip}"
+
+msgid "Fill the form correctly!"
 msgstr ""
+
+msgid "First name"
+msgstr "Förnamn"
+
+msgid "From"
+msgstr "Från"
+
+msgid "Full"
+msgstr ""
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr ""
+
+msgid "Gross"
+msgstr "Brutto"
+
+msgid "HTML result"
+msgstr ""
+
+msgid "Halfyear"
+msgstr "Halvår"
+
+msgid "IBAN"
+msgstr ""
+
+msgid "Identification code"
+msgstr "Personnummer/Organisationsnummer"
 
 msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice address"
+msgstr "Faktureringsadress"
+
+msgid "Invoice currency"
+msgstr "Valuta"
+
+msgid "Invoice currency is {currency}."
+msgstr "Fakturering i {currency}"
+
+msgid "Invoice customer #{customerid}"
+msgstr "Faktura kund #{customerid}"
+
+msgid "Invoice customer {customerid}"
+msgstr "Faktura kund {customerid}"
+
+msgid "Invoice number"
+msgstr "Fakturanummer"
+
+msgid "Invoice period"
+msgstr "Fakturaperiod"
+
+msgid "Invoice questions"
+msgstr "Fakturafrågor"
+
+msgid "Invoice questions:"
+msgstr "Fakturafrågor:"
+
+msgid "Invoice type"
+msgstr "Fakturatyp"
+
+msgid "Invoice {number}"
+msgstr "Faktura {number}"
+
+msgid "Invoice {number}, customer #{customerid}"
+msgstr "Faktura {number}, kund #{customerid}"
+
+msgid "Invoices"
+msgstr "Fakturor"
+
+msgid "Invoices, customer #{customerid}"
+msgstr "Fakturor, kund #{customerid}"
+
+msgid "Invoicing"
+msgstr "Fakturering"
+
+msgid "Invoicing, 1 item"
+msgid_plural "Invoicing, {number} items"
+msgstr[0] "Fakturering, 1 rad"
+msgstr[1] "Fakturering, {number} rader"
+
 msgid "Keep me logged in"
+msgstr "Håll mig inloggad"
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr ""
 
+msgid "Kunder"
+msgstr "Customers"
+
+msgid "Kuvert"
+msgstr "Envelope"
+
+msgid "Language"
+msgstr "Språk"
+
+msgid "Last name"
+msgstr "Efternamn"
+
+msgid "Latest"
+msgstr "Senaste"
+
 msgid "Link to personal data"
-msgstr ""
+msgstr "Länk till personlig data"
+
+msgid "Lista fakturor"
+msgstr "List invoices"
 
 msgid "Log in"
 msgstr "Logga in"
@@ -87,30 +529,285 @@ msgid "Log out"
 msgstr "Logga ut"
 
 msgid "Log out and end current session"
-msgstr ""
+msgstr "Logga ut och avsluta sessionen"
 
 msgid "Login"
-msgstr ""
+msgstr "Logga in"
 
 msgid "Logotype leading to start"
 msgstr ""
 
-msgid "Lost password?"
+msgid "Logotype leading to start page"
 msgstr ""
+
+msgid "Lost password?"
+msgstr "Förlorat lösenordet?"
+
+msgid "MB"
+msgstr ""
+
+msgid "MOSS"
+msgstr ""
+
+msgid "MX records"
+msgstr "MX-poster"
+
+msgid "Mail"
+msgstr "Epost"
+
+msgid "Mail domains"
+msgstr "Maildomäner"
+
+msgid "Make invoice"
+msgstr "Skapa faktura"
+
+msgid "Manuals"
+msgstr "Manualer"
+
+msgid "Message"
+msgstr "Meddelande"
+
+msgid "Message sent"
+msgstr "Meddelandet skickades"
 
 msgid "Missing file, our bad?"
-msgstr ""
+msgstr "Filen saknas, vårt fel?"
+
+msgid "Mobile"
+msgstr "Mobiltelefon"
+
+msgid "Modifications were saved."
+msgstr "Ändringarna sparades"
+
+msgid "Month"
+msgstr "Månad"
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Net amount"
+msgstr "Nettobelopp"
+
+msgid "Net amount:"
+msgstr "Summa netto:"
 
 msgid "New account"
+msgstr "Nytt konto"
+
+msgid "New customer"
+msgstr "Ny kund"
+
+msgid "New invoice for customer #{customerid}"
+msgstr "Ny faktura för kund #{customerid}"
+
+msgid "New invoice pack"
+msgstr "Ny samlingsfaktura"
+
+msgid "Newest"
 msgstr ""
 
-msgid "Password"
+msgid "Newsletter"
+msgstr "Nyhetsbrev"
+
+msgid "No customer #{customerid}."
 msgstr ""
+
+msgid "No invoice template."
+msgstr ""
+
+msgid "No invoicing"
+msgstr "Faktureras inte"
+
+msgid "No selected customer."
+msgstr "Ingen kund vald."
+
+msgid "Normal"
+msgstr ""
+
+msgid "Notes"
+msgstr "Anteckningar"
+
+msgid "Number"
+msgstr "Nummer"
+
+msgid "Open invoice"
+msgstr "Öppen faktura"
+
+msgid "Open invoice for customer"
+msgstr "Öppen faktura för kund"
+
+msgid "Open invoice for customer #{customerid}"
+msgstr "Öppen faktura för kund {customerid}#"
+
+msgid "Open invoice items"
+msgstr ""
+
+msgid "Open invoices"
+msgstr "Öppna fakturor"
+
+msgid "Open list"
+msgstr "Öppna lista"
+
+msgid "Options"
+msgstr ""
+
+msgid "Org. Id"
+msgstr "Org. nr"
+
+msgid "Organizational number"
+msgstr "Organisationsnummer"
+
+msgid "Our reference"
+msgstr "Vår referens"
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
+
+msgid "Ownership"
+msgstr "Ägarbyte"
+
+msgid "Page {number} of {total}"
+msgstr "Sida {number} av  {total}"
+
+msgid "Paid"
+msgstr "Betalad"
+
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Payment terms"
+msgstr "Betalningsvillkor"
+
+msgid "Paypal"
+msgstr ""
+
+msgid "Personal"
+msgstr "Personlig"
 
 msgid "Personal menu"
 msgstr "Personlig meny"
 
 msgid "Personal panel"
+msgstr "Personlig panel"
+
+msgid "Posta faktura"
+msgstr "Mail invoice"
+
+msgid "Postal code"
+msgstr "Postnummer"
+
+msgid "Postal code (billing)"
+msgstr ""
+
+msgid "Postal mail"
+msgstr "Snigelpost"
+
+msgid "Price"
+msgstr "Pris"
+
+msgid "Products"
+msgstr "Produkter"
+
+msgid "Qty"
+msgstr "Ant."
+
+msgid "Qty."
+msgstr "Ant."
+
+msgid "Quantity"
+msgstr "Antal"
+
+msgid "Quarter"
+msgstr "Kvartal"
+
+msgid "Recent signatures"
+msgstr "Senaste underskrifterna"
+
+msgid "Recommended by"
+msgstr "Rekommenderad av"
+
+msgid "Register"
+msgstr "Registrera"
+
+msgid "Registered for F-tax"
+msgstr "Registrerad för F-skatt"
+
+msgid "Registered office"
+msgstr "Styrelsens säte"
+
+msgid "Resources"
+msgstr "Resurser"
+
+msgid "Roomservice"
+msgstr ""
+
+msgid "Round off"
+msgstr "Avrundning"
+
+msgid "SEK"
+msgstr "kr"
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr ""
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search for customer"
+msgstr "Sök kund"
+
+msgid "Search for database"
+msgstr "Sök databas"
+
+msgid "Search for domain"
+msgstr "Sök domän"
+
+msgid "Search for invoice"
+msgstr "Sök faktura"
+
+msgid "Search for mail domain"
+msgstr "Sök maildomän"
+
+msgid "Search for product"
+msgstr "Sök produkt"
+
+msgid "Search for website"
+msgstr "Sök webbplats"
+
+msgid "Select"
+msgstr "Välj"
+
+msgid "Select art.no."
+msgstr "Välj art.nr."
+
+msgid "Select country"
+msgstr "Välj land"
+
+msgid "Select country or click flags to see detail"
+msgstr ""
+
+msgid "Select invoice pack"
+msgstr "Välj samlingsfaktura"
+
+msgid "Send now"
+msgstr "Skicka nu"
+
+msgid "Servers"
+msgstr "Servrar"
+
+msgid "Set the height attribute."
+msgstr ""
+
+msgid "Set the id attribute."
+msgstr ""
+
+msgid "Set the title attribute."
+msgstr ""
+
+msgid "Set the width attribute."
 msgstr ""
 
 msgid "Settings"
@@ -128,19 +825,82 @@ msgstr "Dela på Telegram"
 msgid "Share on Twitter"
 msgstr "Dela på Twitter"
 
+msgid "Share {what} on {where}"
+msgstr "Dela {what} på {where}"
+
+msgid "Shown as"
+msgstr "Visas som"
+
+msgid "Sign poll to kick Sergei Shoigu!"
+msgstr ""
+
+msgid "Site"
+msgstr "Webbplats"
+
 msgid "Skip menu"
 msgstr "Hoppa över meny"
+
+msgid "Snapback evaluation"
+msgstr "Snapbackutvärdering"
+
+msgid "Snapback only"
+msgstr "Endast snapback"
+
+msgid "Snapback scheduler"
+msgstr "Snapbackschemaläggning"
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr ""
+
+msgid "Special price"
+msgstr "Rabatt"
 
 msgid "Start"
 msgstr ""
 
+msgid "Stuff"
+msgstr "Blandat"
+
+msgid "Subject"
+msgstr "Ämne"
+
 msgid "Super panel"
 msgstr ""
+
+msgid "Surname"
+msgstr "Förnamn"
+
+msgid "Swedish"
+msgstr "Svenska"
+
+msgid "Technical questions"
+msgstr "Teknikfrågor"
+
+msgid "Technical questions:"
+msgstr "Teknikfrågor:"
+
+msgid "Telephone"
+msgstr "Telefon"
+
+msgid "Test"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Thank you for contacting us."
+msgstr "Tack för att du kontaktar oss."
 
 msgid "The Samizdat project"
 msgstr "Projektet Samizdat"
 
+msgid "The default is used for the Bootstrap icons set."
+msgstr ""
+
 msgid "The limit is {limit}."
+msgstr "Gränsen är {limit}."
+
+msgid "The login function uses javascript, cookies and AJAX."
 msgstr ""
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
@@ -149,24 +909,153 @@ msgstr ""
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr ""
+
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Denna fil distribueras under samma licens som paketet {project}."
 
 msgid "Toggle menu"
+msgstr "Visa meny"
+
+msgid "Transfer"
+msgstr "Överföring"
+
+msgid "Unpaid"
+msgstr "Obetalade"
+
+msgid "Update"
+msgstr "Uppdatera"
+
+msgid "Update and send page."
 msgstr ""
+
+msgid "Update and send."
+msgstr "Uppdatera och skcka."
+
+msgid "Update customer"
+msgstr ""
+
+msgid "Update invoice, customer #{customerid}"
+msgstr ""
+
+msgid "Updated customer"
+msgstr ""
+
+msgid "Updated invoice"
+msgstr ""
+
+msgid "Updated {updated} by {updater}"
+msgstr "Uppdaterad {updated} av {updater}"
+
+msgid "Usage"
+msgstr ""
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr ""
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr ""
+
+msgid "Used to make class names."
+msgstr ""
+
+msgid "User manual"
+msgstr "Användarmanual"
 
 msgid "Username"
+msgstr "Användarnamn"
+
+msgid "VAT"
+msgstr "Moms"
+
+msgid "VAT Id"
+msgstr "Momsreg. nr"
+
+msgid "VAT lookup, {vatno}"
+msgstr "Momsregistreringsnummer, {vatno}"
+
+msgid "VAT number"
+msgstr "Momsregistreringsnummer"
+
+msgid "VAT number lookup"
+msgstr "Kontroll av momsregistreringsnummer"
+
+msgid "VAT percentage"
+msgstr "Momssats"
+
+msgid "VAT {rate}\\%"
+msgstr "Moms {rate}\\%"
+
+msgid "Value for the class attribute."
 msgstr ""
+
+msgid "We will reply as soon as possible."
+msgstr "Vi svarar så fort vi kan."
+
+msgid "Web sites"
+msgstr ""
+
+msgid "Websites"
+msgstr "Webbplatser"
+
+msgid "Wrong captcha"
+msgstr "Felaktig captcha"
+
+msgid "Year"
+msgstr "År"
 
 msgid "You were logged in as {username}."
+msgstr "Du var inloggad som {username}."
+
+msgid "Your VAT Id"
+msgstr "Ert momsreg. nr"
+
+msgid "Your contact"
+msgstr "Er kontakt"
+
+msgid "Your email"
+msgstr "Din epostadress"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "Ditt ip-nummer kommer synas i meddelandet."
+
+msgid "Your message appears below."
 msgstr ""
+
+msgid "Your name"
+msgstr "Ditt namn"
+
+msgid "add 3\\%"
+msgstr "lägg till 3\\%"
 
 msgid "control panel"
-msgstr ""
+msgstr "kontrollpanel"
 
 msgid "login attempts"
+msgstr "inloggningsförsök"
+
+msgid "main firewall"
+msgstr "huvudbrandvägg"
+
+msgid "standby firewall"
+msgstr "standbybrandvägg"
+
+msgid "{cost}"
+msgstr ""
+
+msgid "{cost} {currency}"
 msgstr ""
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr ""
+
+msgid "{number} days"
+msgstr "{number} dagar"
+
+msgid "{number} signatures since {date}"
+msgstr "{number} underskrifter sedan {date}"
+
+msgid "{sitename} in {country}"
 msgstr ""
 

@@ -1,0 +1,55 @@
+% my $countries = countrylist;
+<div class="col-sm-4 col-md-9">
+  <form class="row g-3 needs-validation" id="pollform" method="post">
+    <div class="form-floating col-md-4">
+      <input type="text" class="form-control<%= $valid->{firstname} %>" id="firstname" name="firstname" value="<%== $form->{firstname} %>" aria-describedby="firstname invalidfirstname">
+      <label for="firstname" class="form-label"><%== __('First name') %></label>
+      <div id="invalidfirstname" class="invalid-feedback"><%= __('Empty first name') %></div>
+    </div>
+    <div class="form-floating col-md-4">
+      <input type="text" class="form-control<%= $valid->{lastname} %>" id="lastname" name="lastname" value="<%== $form->{lastname} %>" aria-describedby="lastname invalidlastname">
+      <label for="lastname" class="form-label"><%== __('Surname') %></label>
+      <div id="invalidlastname" class="invalid-feedback"><%= __('Empty surname') %></div>
+    </div>
+    <div class="form-floating col-md-4">
+      <input type="email" class="form-control<%= $valid->{email} %>" id="email" name="email" value="<%== $form->{email} %>" aria-describedby="email invalidemail">
+      <label for="email" class="form-label"><%== __('Email') %></label>
+      <div id="invalidemail" class="invalid-feedback"><%= __('Email not valid') %></div>
+    </div>
+    <div class="form-floating col-md-2">
+      <input type="text" class="form-control<%= $valid->{pc} %>" id="pc" name="pc" value="<%== $form->{pc} %>" aria-describedby="invalidpc">
+      <label for="pc" class="form-label"><%== __('Postal code') %></label>
+      <div id="invalidpc" class="invalid-feedback"><%= __('Empty postal code') %></div>
+    </div>
+    <div class="form-floating col-md-4">
+      <input type="text" class="form-control<%= $valid->{city} %>" id="city" name="city" value="<%== $form->{city} %>" aria-describedby="invalidcity" />
+      <label for="city" class="form-label"><%== __('City') %></label>
+      <div id="invalidcity" class="invalid-feedback"><%= __('Empty city') %></div>
+    </div>
+    <div class="form-floating col-md-6">
+      <select id="cc" name="cc" class="form-select<%= $valid->{cc} %>" aria-describedby="invalidcc">
+        <option value=""><%== __('Select country') %></option>
+% for my $country (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+        <option value="<%= $country %>"<%= eval {' selected="true"' if ($form->{cc} eq $country); } %>><%= $countries->{$country} %></option>
+% }
+      </select>
+      <label for="cc" class="form-label"><%== __('Country') %></label>
+      <div id="invalidcc" class="invalid-feedback"><%= __('Empty country') %></div>
+    </div>
+    <div class="form-floating mb-3 col-md-6">
+      <input type="text" class="form-control<%= $valid->{captcha} %>" id="captcha" name="captcha" placeholder="captcha" aria-describedby="invalidcaptcha" />
+      <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
+      <div id="invalidcaptcha" class="invalid-feedback"><%= __('Wrong captcha') %></div>
+    </div>
+    <div class="mb-3 col-md-6">
+      <img src="/captcha.png" class="img-fluid" alt="<%== __('Captcha image') %>" height="<%= config->{captcha}->{height} %>" width="<%= config->{captcha}->{width} %>" />
+    </div>
+    <button type="submit" class="btn btn-primary">
+      <span class="mx-2"><%== __('Continue') %></span>
+      <%== icon 'send-fill', {} %>
+    </button>
+  </form>
+</div>
+<div class="col-sm-4 col-md-3">
+  <%== indent eval {include 'poll/signatures'}, 1 =%>
+</div>

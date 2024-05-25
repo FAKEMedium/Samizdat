@@ -1,0 +1,11 @@
+<a href="https://basedinsweden.se/" target="_blank" rel="noopener"><%== anysvg
+  'basedinsweden',
+  'public/media/images/basedinsweden.svg',
+  {
+    id         => 'basedinsweden',
+    prefix     => 'anysvg',
+    extraclass => 'img-fluid my-2',
+    title      => 'Based in Sweden',
+    height     => 395,
+    width      => 360,
+  } %></a>

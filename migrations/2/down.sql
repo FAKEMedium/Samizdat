@@ -1,1 +1,1 @@
-TRUNCATE public.languagename, public.languagevariant, public.language, account.contact, account.user RESTART IDENTITY CASCADE;
+DROP SCHEMA account CASCADE;

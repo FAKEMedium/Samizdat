@@ -1,0 +1,6 @@
+const popover = bootstrap.Popover.getOrCreateInstance('#example')
+
+popover.setContent({
+    '.popover-header': 'another title',
+    '.popover-body': 'another content'
+})

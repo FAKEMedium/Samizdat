@@ -1,4 +1,4 @@
-# Fake News - 
+# FAKE News - Samizdat
 # Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
 # This file is distributed under the same license as the  package.
 # Webmaster <webmaster@fakenews.com>, 2022.
@@ -16,152 +16,914 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "Start"
+msgid "Domains"
 msgstr ""
 
-msgid "Admininistration panel"
+msgid "&copy;{year}&nbsp;{author}"
 msgstr ""
 
-msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgid "Empty freetext"
 msgstr ""
 
-msgid "This file is distributed under the same license as the {project} package."
+msgid "Company"
 msgstr ""
 
-msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
+msgid "Euro"
 msgstr ""
 
-msgid "Share on Facebook"
+msgid "MOSS"
 msgstr ""
 
-msgid "Close"
-msgstr ""
-
-msgid "Personal menu"
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-msgid "Personal panel"
-msgstr ""
-
-msgid "The limit is {limit}."
-msgstr ""
-
-msgid "Click to pop login dialog."
-msgstr ""
-
-msgid "Contact"
-msgstr ""
-
-msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr ""
-
-msgid "You were logged in as {username}."
-msgstr ""
-
-msgid "Advertising"
-msgstr ""
-
-msgid "Expand personal menu."
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "Blocked ip number"
-msgstr ""
-
-msgid "New account"
-msgstr ""
-
-msgid "In your personal menu you find your {panel} among other things."
-msgstr ""
-
-msgid "Expand menu"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Keep me logged in"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "Enter username and password"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "404: Missing document"
-msgstr ""
-
-msgid "Share on LinkedIn"
-msgstr ""
-
-msgid "Share on Twitter"
-msgstr ""
-
-msgid "Enter username"
-msgstr ""
-
-msgid "Log out and end current session"
-msgstr ""
-
-msgid "Username"
-msgstr ""
-
-msgid "login attempts"
-msgstr ""
-
-msgid "The page {docpath} wasn't found."
-msgstr ""
-
-msgid "Missing file, our bad?"
-msgstr ""
-
-msgid "Lost password?"
-msgstr ""
-
-msgid "Failed login from {ip}"
-msgstr ""
-
-msgid "Share on Telegram"
-msgstr ""
-
-msgid "Super panel"
-msgstr ""
-
-msgid "Enter password"
+msgid "Search for product"
 msgstr ""
 
 msgid "Toggle menu"
 msgstr ""
 
-msgid "Contribute"
+msgid "No invoicing"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Surname"
+msgstr ""
+
+msgid "Recent signatures"
+msgstr ""
+
+msgid "Lost password?"
+msgstr ""
+
+msgid "Admininistration panel"
+msgstr ""
+
+msgid "Select country"
+msgstr ""
+
+msgid "Economy"
+msgstr ""
+
+msgid "Credit trustability"
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Quantity"
+msgstr ""
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr ""
 
 msgid "The Samizdat project"
 msgstr ""
 
-msgid "Logotype leading to start"
+msgid "Mobile"
+msgstr ""
+
+msgid "Paid"
+msgstr ""
+
+msgid "We will reply as soon as possible."
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "VAT percentage"
+msgstr ""
+
+msgid "Page {number} of {total}"
+msgstr ""
+
+msgid "Empty name"
+msgstr ""
+
+msgid "Open invoices"
+msgstr ""
+
+msgid "Empty last name"
+msgstr ""
+
+msgid "Products"
+msgstr ""
+
+msgid "Failed login from {ip}"
+msgstr ""
+
+msgid "Your contact"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Email not valid"
+msgstr ""
+
+msgid "Send now"
+msgstr ""
+
+msgid "Choose language"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Invoices, customer #{customerid}"
+msgstr ""
+
+msgid "Open invoice"
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Select invoice pack"
 msgstr ""
 
 msgid "Link to personal data"
 msgstr ""
 
+msgid "Invoice"
+msgstr ""
+
+msgid "Registered for F-tax"
+msgstr ""
+
+msgid "Lista fakturor"
+msgstr ""
+
+msgid "Updated {updated} by {updater}"
+msgstr ""
+
+msgid "Update and send page."
+msgstr ""
+
+msgid "{number} signatures since {date}"
+msgstr ""
+
+msgid "Quarter"
+msgstr ""
+
+msgid "VAT number lookup"
+msgstr ""
+
+msgid "Invoice questions"
+msgstr ""
+
+msgid "Special price"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Updated invoice"
+msgstr ""
+
+msgid "Examples"
+msgstr ""
+
+msgid "Search for database"
+msgstr ""
+
+msgid "Roomservice"
+msgstr ""
+
+msgid "Invoice currency"
+msgstr ""
+
+msgid "Enter username"
+msgstr ""
+
+msgid "Contribute"
+msgstr ""
+
+msgid "Stuff"
+msgstr ""
+
+msgid "Payment terms"
+msgstr ""
+
+msgid "Bootstrap icons"
+msgstr ""
+
+msgid "Amount incl. VAT"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search for website"
+msgstr ""
+
+msgid "Expiring domains"
+msgstr ""
+
+msgid "Add customer"
+msgstr ""
+
+msgid "Select country or click flags to see detail"
+msgstr ""
+
+msgid "Create customer"
+msgstr ""
+
+msgid "Make invoice"
+msgstr ""
+
+msgid "Expires"
+msgstr ""
+
+msgid "MX records"
+msgstr ""
+
+msgid "Settings"
+msgstr ""
+
+msgid "Sign poll to kick Sergei Shoigu!"
+msgstr ""
+
+msgid "Advertising"
+msgstr ""
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr ""
+
+msgid "Click to pop login dialog."
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Postal mail"
+msgstr ""
+
+msgid "Captcha image"
+msgstr ""
+
+msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Posta faktura"
+msgstr ""
+
+msgid "Net"
+msgstr ""
+
+msgid "Your message appears below."
+msgstr ""
+
+msgid "BIC/Swift address"
+msgstr ""
+
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr ""
+
+msgid "Updated customer"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Search for invoice"
+msgstr ""
+
+msgid "Due to"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Your VAT Id"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Personal menu"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "standby firewall"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Organizational number"
+msgstr ""
+
+msgid "VAT lookup, {vatno}"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Customer newsletter"
+msgstr ""
+
+msgid "Newest"
+msgstr ""
+
+msgid "Snapback evaluation"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Registered office"
+msgstr ""
+
+msgid "Postal code (billing)"
+msgstr ""
+
+msgid "IBAN"
+msgstr ""
+
+msgid "Country (billing)"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Address (billing)"
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "Ownership"
+msgstr ""
+
+msgid "Empty first name"
+msgstr ""
+
+msgid "Halfyear"
+msgstr ""
+
+msgid "Search for mail domain"
+msgstr ""
+
+msgid "New account"
+msgstr ""
+
+msgid "Continues on next page..."
+msgstr ""
+
+msgid "Open invoice for customer"
+msgstr ""
+
+msgid "Logotype leading to start page"
+msgstr ""
+
+msgid "Open list"
+msgstr ""
+
+msgid "Used to make class names."
+msgstr ""
+
+msgid "Empty VAT number"
+msgstr ""
+
+msgid "You were logged in as {username}."
+msgstr ""
+
+msgid "Fill the form correctly!"
+msgstr ""
+
+msgid "Update customer"
+msgstr ""
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr ""
+
+msgid "Add product"
+msgstr ""
+
+msgid "Set the height attribute."
+msgstr ""
+
+msgid "Set the id attribute."
+msgstr ""
+
+msgid "Captcha was wrong"
+msgstr ""
+
+msgid "Invoice customer #{customerid}"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "SEK"
+msgstr ""
+
+msgid "Search for customer"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Empty billingaddress"
+msgstr ""
+
+msgid "Empty country"
+msgstr ""
+
+msgid "Invoice period"
+msgstr ""
+
+msgid "Personal panel"
+msgstr ""
+
+msgid "Mail domains"
+msgstr ""
+
+msgid "Customer Id"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "Value for the class attribute."
+msgstr ""
+
 msgid "Skip menu"
 msgstr ""
 
-msgid "Email to a friend"
+msgid "User manual"
+msgstr ""
+
+msgid "Enter valid email"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "main firewall"
+msgstr ""
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr ""
+
+msgid "Destroyed"
+msgstr ""
+
+msgid "Empty company name"
+msgstr ""
+
+msgid "Missing file, our bad?"
+msgstr ""
+
+msgid "{sitename} in {country}"
+msgstr ""
+
+msgid "Create contact"
+msgstr ""
+
+msgid "Set the width attribute."
+msgstr ""
+
+msgid "Open invoice items"
+msgstr ""
+
+msgid "Technical questions"
+msgstr ""
+
+msgid "Domain registration"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "The page {docpath} wasn't found."
+msgstr ""
+
+msgid "Invoice address"
+msgstr ""
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr ""
+
+msgid "Billing"
+msgstr ""
+
+msgid "Set the title attribute."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Identification code"
+msgstr ""
+
+msgid "Net amount"
+msgstr ""
+
+msgid "Message sent"
+msgstr ""
+
+msgid "DNS domains"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Buddy price"
+msgstr ""
+
+msgid "Bootstrap icons helper"
+msgstr ""
+
+msgid "Expand personal menu."
+msgstr ""
+
+msgid "Logotype leading to start"
+msgstr ""
+
+msgid "Add database"
+msgstr ""
+
+msgid "Servers"
+msgstr ""
+
+msgid "Our reference"
+msgstr ""
+
+msgid "Kunder"
+msgstr ""
+
+msgid "Recommended by"
+msgstr ""
+
+msgid "Websites"
+msgstr ""
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr ""
+
+msgid "FAKE News by country"
+msgstr ""
+
+msgid "VAT number"
+msgstr ""
+
+msgid "Gross"
+msgstr ""
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr ""
+
+msgid "Customer #{customerid}"
+msgstr ""
+
+msgid "First name"
+msgstr ""
+
+msgid "VAT"
+msgstr ""
+
+msgid "Shown as"
+msgstr ""
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr ""
+
+msgid "Kuvert"
+msgstr ""
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "Test"
+msgstr ""
+
+msgid "Edit customer {customerid}"
+msgstr ""
+
+msgid "<a href="{url}" target="_blank">{url}</a>"
+msgstr ""
+
+msgid "Add voucher"
+msgstr ""
+
+msgid "Add domain"
+msgstr ""
+
+msgid "login attempts"
+msgstr ""
+
+msgid "Thank you for contacting us."
+msgstr ""
+
+msgid "Search for domain"
+msgstr ""
+
+msgid "New customer"
+msgstr ""
+
+msgid "Empty address"
+msgstr ""
+
+msgid "Barred"
+msgstr ""
+
+msgid "Invoices"
+msgstr ""
+
+msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr ""
+
+msgid "New invoice pack"
+msgstr ""
+
+msgid "Empty subject"
+msgstr ""
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr ""
+
+msgid "Blocked ip number"
+msgstr ""
+
+msgid "{cost}"
 msgstr ""
 
 msgid "control panel"
+msgstr ""
+
+msgid "Invoice number"
+msgstr ""
+
+msgid "Created {created} by {creator}"
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Modifications were saved."
+msgstr ""
+
+msgid "Confirm poll signature"
+msgstr ""
+
+msgid "Mail"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Super panel"
+msgstr ""
+
+msgid "Postal code"
+msgstr ""
+
+msgid "Expand menu"
+msgstr ""
+
+msgid "Invoice {number}"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Databases"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Personal"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Enter username and password"
+msgstr ""
+
+msgid "Empty telephone"
+msgstr ""
+
+msgid "Manuals"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "The limit is {limit}."
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
+msgid "Add subscription"
+msgstr ""
+
+msgid "Captcha code from image"
+msgstr ""
+
+msgid "Snapback scheduler"
+msgstr ""
+
+msgid "Enter password"
+msgstr ""
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Creditability"
+msgstr ""
+
+msgid "Web sites"
+msgstr ""
+
+msgid "Invoice currency is {currency}."
+msgstr ""
+
+msgid "Empty postal code"
+msgstr ""
+
+msgid "HTML result"
+msgstr ""
+
+msgid "Empty surname"
+msgstr ""
+
+msgid "Empty city"
+msgstr ""
+
+msgid "Add website"
+msgstr ""
+
+msgid "Data usage: {usage}"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Site"
+msgstr ""
+
+msgid "Snapback only"
+msgstr ""
+
+msgid "City (billing)"
+msgstr ""
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr ""
+
+msgid "EPP"
+msgstr ""
+
+msgid "Empty message"
+msgstr ""
+
+msgid "Qty"
+msgstr ""
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr ""
+
+msgid "Customers"
+msgstr ""
+
+msgid "Email (billing)"
+msgstr ""
+
+msgid "Address check"
+msgstr ""
+
+msgid "Invoice type"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Blocked"
+msgstr ""
+
+msgid "Unpaid"
+msgstr ""
+
+msgid "Empty VAT"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "Telephone"
+msgstr ""
+
+msgid "Empty mobile"
+msgstr ""
+
+msgid "{number} days"
+msgstr ""
+
+msgid "Confirmation request sent"
+msgstr ""
+
+msgid "Round off"
+msgstr ""
+
+msgid "Empty recommendation"
+msgstr ""
+
+msgid "In your personal menu you find your {panel} among other things."
+msgstr ""
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr ""
+
+msgid "Bankgiro"
+msgstr ""
+
+msgid "VAT {rate}\%"
+msgstr ""
+
+msgid "Empty reference"
+msgstr ""
+
+msgid "Share {what} on {where}"
+msgstr ""
+
+msgid "Empty code"
+msgstr ""
+
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "Country selector"
+msgstr ""
+
+msgid "Paypal"
+msgstr ""
+
+msgid "Email someone about {what}"
+msgstr ""
+
+msgid "Wrong captcha"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "add 3\%"
+msgstr ""
+
+msgid "Log out and end current session"
 msgstr ""

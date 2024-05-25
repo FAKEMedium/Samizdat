@@ -13,9 +13,11 @@ my $mt = Mojo::Template->new;
 $mt->parse('');
 
 sub register ($self, $app, $conf = {}) {
+  my $r = $app->routes;
+  $r->any([qw( GET POST                  )] => '/contact')->to(controller => 'Contact', action => 'index');
 
   $app->helper(
-    contactform => sub($c, $recipient, $subject = '') {
+    sendmail => sub($c, $recipient, $subject = '', $options =  {}) {
 
     }
   );

@@ -1,17 +1,15 @@
 package Samizdat::Plugin::Utils;
 
-use strict;
-use warnings;
-no warnings 'uninitialized';
-
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
 use Mojo::Template;
+use Mojo::Util qw(decode);
 use IO::Compress::Gzip;
 use Imager;
 use Data::Dumper;
 
 my $public = Mojo::Home->new('public/');
+my $srcpublic = Mojo::Home->new('src/public/');
 my $templates = Mojo::Home->new('templates/');
 my $mt = Mojo::Template->new();
 my $image = Imager->new;
@@ -21,6 +19,12 @@ my $cacheexist = {};
 sub register ($self, $app, $conf) {
 
   $app->helper(
+    accept_language => sub ($c) {
+      my $language = $c->req->headers->accept_language;
+    }
+  );
+
+  $app->helper(
     indent => sub ($c, $content = '', $indents = 0) {
       no warnings 'uninitialized';
       my $indent = "  " x $indents;
@@ -28,46 +32,45 @@ sub register ($self, $app, $conf) {
       $content =~s/$indent$//sm;
       chomp $content;
       return sprintf("%s%s\n", $indent, $content);
-    },
+    }
   );
 
   # A marker to show where the generated main content is. Also a little encoding test.
   $app->helper(
     limiter => sub ($c) {
       return sprintf("<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->");
-    },
+    }
   );
 
   # Inline logotype (svg)
   $app->helper(
-    logotype => sub ($c) {
-      my $svg = '';
-      if ($svg = $public->rel_file($c->config->{logotype})->slurp) {
-        return $svg;
-      }
-    },
+    languageselector => sub ($c) {
+      my $out = '';
 
-    $app->helper(
-      includeany => sub ($c, $file = undef, $type = 'javascript', $insert = 0) {
-        my $content = $templates->rel_file($file)->slurp if ($file and -e $templates->rel_file($file)->to_string) // '';
-        if ($insert) {
-          my $web = $c->stash('web');
-          if ('javascript' eq $type) {
-            $web->{script} .= $c->app->indent($content, 3);
-          } elsif ('css' eq $type) {
-            $web->{css} .= $c->app->indent($content, 3);
-          }
-          $content = '';
-        } else {
-          if ('javascript' eq $type) {
-            $content = sprintf("<script>\n%s</script>", $c->app->indent($content, 1));
-          } elsif ('css' eq $type) {
-            $content = sprintf("<style>\n\t%s</style>", $c->app->indent($content, 1));
-          }
+    }
+  );
+
+  $app->helper(
+    includeany => sub ($c, $file = undef, $type = 'javascript', $insert = 0) {
+      my $content = $templates->rel_file($file)->slurp if ($file and -e $templates->rel_file($file)->to_string) // '';
+      $content = decode 'UTF-8', $content;
+      if ($insert) {
+        my $web = $c->stash('web');
+        if ('javascript' eq $type) {
+          $web->{script} .= $content;
+        } elsif ('css' eq $type) {
+          $web->{css} .= $content;
         }
-        return $content;
+        $content = '';
+      } else {
+        if ('javascript' eq $type) {
+          $content = sprintf("<script>\n%s</script>", $c->app->indent($content, 1));
+        } elsif ('css' eq $type) {
+          $content = sprintf("<style>\n\t%s</style>", $c->app->indent($content, 1));
+        }
       }
-    )
+      return $content;
+    }
   );
 
   # Remove indentation from pre and textarea elements
@@ -76,29 +79,36 @@ sub register ($self, $app, $conf) {
   $app->hook(
     after_render => sub ($c, $output, $format) {
       no warnings 'uninitialized';
+      $$output =~ s{        <!-- symbols -->\n}[
+        $c->app->indent(join("\n", sort {$a cmp $b} map $app->{symbols}->{$_}, keys %{ $app->{symbols} }), 4)
+      ]eu;
       return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
       if (404 != $c->{stash}->{status}) {
-        $$output =~ s{<pre>(.+?)</pre>}[
-          my $text = $1;
+        $$output =~ s{<pre([^>]*?)>(.*?)</pre>}[
+          my $attribs = $1;
+          my $text = $2;
           $text =~ s/^[ ]+//gms;
-          sprintf('<pre>%s</pre>', $text);
+          sprintf('<pre%s>%s</pre>', $attribs, $text);
         ]gexsmu;
 
         # Especially for converted indented markdown
-        $$output =~ s{<pre><code>(.+?)</code></pre>}[
+        $$output =~ s{<pre><code>(.*?)</code></pre>}[
           my $text = $1;
           $text =~ s/^[ ]+//gms;
           sprintf('<pre><code>%s</code></pre>', $text);
         ]gexsmu;
 
-        $$output =~ s{<textarea>(.+?)</textarea>}[
-          my $text = $1;
+        $$output =~ s{(^[\s]*)<textarea([^>]*?)>(.*?)</textarea>}[
+          my $indent = $1;
+          my $attribs = $2;
+          my $text = $3;
           $text =~ s/^[ ]+//gms;
-          sprintf('<textarea>%s</textarea>', $text);
+          sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
         ]gexsmu;
 
         if ($c->config->{cache} && exists $c->{stash}->{web}->{docpath}) {
-          $public->child($c->{stash}->{web}->{docpath})->spurt($$output);
+          $public->child($c->{stash}->{web}->{docpath})->dirname->make_path;
+          $public->child($c->{stash}->{web}->{docpath})->spew($$output);
           my $z = new IO::Compress::Gzip sprintf('%s.gz',
             $public->child($c->{stash}->{web}->{docpath})->to_string),
             -Level => 9, Minimal => 1, AutoClose => 1;
@@ -108,11 +118,11 @@ sub register ($self, $app, $conf) {
           $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
         }
       } elsif ($c->config->{makewebp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
-        my $webpfile = $public->child($c->{stash}->{web}->{url});
-        my $probefile = $webpfile;
+        my $srcfile = $srcpublic->child($c->{stash}->{web}->{url});
+        my $probefile = $srcfile;
         $probefile =~ s/\.webp$//;
         my $ext = '';
-        $webpfile->dirname->list->each( sub ($file, $num) {
+        $srcfile->dirname->list->each( sub ($file, $num) {
           if ($file =~ /$probefile\.(.+)$/) {
             $ext = $1;
           }
@@ -136,6 +146,7 @@ sub register ($self, $app, $conf) {
           $c->stash('status', 200);
           $format = 'image/webp';
           $c->tx->res->headers->content_type($format);
+          my $webpfile = $public->child($c->{stash}->{web}->{url});
           $webpfile->spurt($$output);
         }
       }

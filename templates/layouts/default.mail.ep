@@ -1,0 +1,21 @@
+<div style="background: #ffffff; padding: 10px;">
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="display: none;">
+    <defs>
+      <!-- symbols -->
+    </defs>
+  </svg>
+  <div>
+    <a href="<%= config->{siteurl} %>" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
+        'logotype',
+        'public/' . config->{logotype},
+        {
+          id         => 'maillogotype',
+          prefix     => 'anysvg',
+          title      => config->{sitename},
+          height     => 73,
+          width      => 194,
+        }
+        %></a>
+  </div>
+  <%== indent content, 1 =%>
+</div>

@@ -1,34 +1,24 @@
 <a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
-  <svg class="oi oi-account-login" width="16" height="16">
-    <use xlink:href="#oi-account-login"></use>
-  </svg>
+  <%== icon 'box-arrow-in-right'; %>
   <span class="d-sm-inline d-none ml-1"><%= __('Log in') %></span>
 </a>
 <div id="userbuttons" class="auth btn-success btn-group ml-sm-1 pl-2 d-none rounded-lg">
   <button id="usernamebutton" class="btn btn-success btn-sm btn-normal-sm dropdown-toggle pl-0" title="<%= __('Expand personal menu.') %>" aria-label="<%= __('Personal menu') %>" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <svg class="oi oi-person" width="16" height="16">
-      <use xlink:href="#oi-person"></use>
-    </svg>
+    <%== icon 'person-circle'; %>
     <span class="username d-inline d-sm-none ml-0"></span>
     <span class="displayname d-none d-sm-inline ml-1"></span>
   </button>
   <div id="userdropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="usernamebutton" style="z-index: 1000;">
     <a class="dropdown-item" href="/register/?action=step4" title="<%=  __('Link to personal data') %>">
-      <svg class="oi oi-person">
-        <use xlink:href="#oi-person"></use>
-      </svg>
+      <%== icon 'person-circle'; %>
       <span class="ml-2"><%= __('Settings') %></span>
     </a>
     <a class="dropdown-item" href="/logout/" title="<%= __('Log out and end current session') %>" aria-label="<%= __('Log out') %>">
-      <svg class="oi oi-account-logout">
-        <use xlink:href="#oi-account-logout"></use>
-      </svg>
+      <%== icon 'box-arrow-left'; %>
       <span class="ml-2"><%= __('Log out') %></span>
     </a>
   </div>
 </div>
 <button id="menubutton" title="<%= __('Expand menu') %>" class="d-sm-none btn btn-sm btn-success rounded-lg" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="<%= __('Toggle menu') %>">
-  <svg class="oi oi-menu">
-    <use xlink:href="#oi-menu"></use>
-  </svg>
+  <%== icon 'list-ul'; %>
 </button>

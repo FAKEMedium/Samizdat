@@ -16,7 +16,7 @@ sub run ($self, @args) {
 
 =head1 SYNOPSIS
 
-  Usage: samizdat makeharvest
+  Usage: samizdat makenginx
 
 
 =cut

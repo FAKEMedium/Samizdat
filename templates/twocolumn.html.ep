@@ -1,7 +1,0 @@
-<% layout config->{layout}; =%>
-<div class="col-sm-8" id="editable">
-  <%== indent $web->{main}, 1 =%>
-</div>
-<div class="col-sm-4">
-  <%== indent $web->{sidebar}, 1 =%>
-</div>

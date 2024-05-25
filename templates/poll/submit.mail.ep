@@ -1,0 +1,2 @@
+<%== __x('Go to {confirmationlink} to confirm your signature and claim your image.',
+  confirmationlink => $confirmationlink) %>

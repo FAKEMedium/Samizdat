@@ -1,0 +1,5 @@
+<div class="col-sm-4 col-md-9">
+</div>
+<div class="col-sm-4 col-md-3">
+<%== indent eval {include 'poll/signatures'}, 1 =%>
+</div>

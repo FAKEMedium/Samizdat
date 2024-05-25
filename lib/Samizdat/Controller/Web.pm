@@ -1,4 +1,5 @@
 package Samizdat::Controller::Web;
+
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::JSON qw(encode_json);
 
@@ -7,12 +8,11 @@ sub geturi ($self) {
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);
   my $title = $self->app->__('404: Missing document');
 
-  my $docs = $self->app->markdown->list($docpath, {
+  my $docs = $self->app->web->getlist($docpath, {
     language => $self->app->language,
     languages => $self->config->{locale}->{languages},
   });
   my $path = sprintf("%s%s", $docpath, 'index.html');
-  $self->stash(template => 'index');
 
   if (!exists($docs->{$path})) {
     banbot($docpath, $self->tx->remote_address);
@@ -26,11 +26,11 @@ sub geturi ($self) {
       children    => [],
       subdocs     => [],
       meta        => {
-                       name => {
-                         description => $self->app->__('Missing file, our bad?'),
-                         keywords    => ["error","404"]
-                       }
-                     },
+        name => {
+          description => $self->app->__('Missing file, our bad?'),
+          keywords    => ["error","404"]
+        }
+      },
       language => $self->app->language
     };
   } else {
@@ -52,13 +52,13 @@ sub geturi ($self) {
         $sidebar .= $self->render_to_string(template => 'chunks/sidecard', card => $subdoc);
       }
       $docs->{$path}->{sidebar} = $sidebar;
-      $self->stash(template => 'twocolumn');
     }
   }
   $self->stash(web => $docs->{$path});
   $self->stash(title => $docs->{$path}->{title} // $title);
   $self->render();
 }
+
 
 sub manifest ($self) {
   my $icons = [{

@@ -1,0 +1,4 @@
+var ws  = new WebSocket('<%= url_for('channel')->to_abs %>');
+ws.onmessage = function (e) {
+  document.getElementById('log').innerHTML += '<p>' + e.data + '</p>';
+};

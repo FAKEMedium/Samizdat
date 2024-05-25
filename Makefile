@@ -1,26 +1,30 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
+fortnox:
+	samizdat makefortnox
+
+dump:
+	samizdat makedump
+
 static:
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
 
 clean:
-	find public/  -name "*.html" -delete
-	find public/  -name "*.gz" -delete
-	rm -f public/test/Brown_Mushroom_on_the_Green_Grass.webp
-	rm -f public/js/*.{js,css}*
-	rm -f public/css/*.css*
-	rm -f public/robots.*
-	rm -f public/manifest.*
-	cp -af public/test/README.md public/test/README.txt
-	cp -af src/js/local.js public/js/
-	cp -af src/js/sw.js public/js/
+	rm -f public/*
+	mkdir -p public/assets
+	cp -af src/public/test/README.md src/public/test/README.txt
+	cp -af src/js/sw.js public/assets/
 
 harvest:
 	samizdat makeharvest
 
 nginx:
 	samizdat makenginx
+
+eplinks:
+	find templates/ -type l -delete
+	find templates/ -type f | grep -P '.(js|tex|css)$$' | xargs -iö ln -s -r ö ö.ep
 
 iso: static
 	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
@@ -36,7 +40,7 @@ i18n:
 	samizdat makei18n
 
 debug:
-	MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./ ./bin/samizdat
+	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
 
 server: clean zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
@@ -49,19 +53,14 @@ test: clean
 	ls -las public/test
 
 zip:
-	gzip -f -k -9 public/css/samizdat.css
-	gzip -f -k -9 public/js/samizdat.js
-	gzip -f -k -9 public/js/sw.js
-	gzip -f -k -9 public/js/local.js
-	gzip -f -k -9 public/media/images/fakenews.svg
-	gzip -f -k -9 public/media/images/f.svg
-	gzip -f -k -9 public/favicon.ico
+	find public/assets -type f -name "*.css" -exec gzip -f -k -9 {} \;
+	find public/assets -type f -name "*.js" -exec gzip -f -k -9 {} \;
 
 database:
-	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
+#	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
 	sudo -u postgres -i createdb --encoding=UTF-8 --template=template0 --locale=en_US.UTF-8 --owner=samizdat samizdat "Samizdat web application"
-	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/\nlocal   samizdat        samizdat                                md5//g' {} \;
-	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   samizdat        samizdat                                md5/' {} \;
+#	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/\nlocal   samizdat        samizdat                      scram-sha-256//g' {} \;
+#	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   samizdat        samizdat                      scram-sha-256/' {} \;
 	sudo systemctl restart postgresql
 
 fetchicons:
@@ -69,6 +68,12 @@ fetchicons:
 
 fetchflags:
 	git clone https://github.com/lipis/flag-icons.git ./src/flag-icons
+
+fetchcountries:
+	git clone https://github.com/countries/countries-data-json.git ./src/countries-data-json
+
+fetchlanguages:
+	git clone https://github.com/cospired/i18n-iso-languages.git ./src/i18n-iso-languages
 
 speedtest:
 	samizdat speedtest
@@ -84,10 +89,12 @@ webpackinit:
 	npm i --save bootstrap @popperjs/core
 	npm i --save suneditor
 	npm i --save bootstrap-icons
+	npm i --save sprintf-js
 
 webpack:
+	mkdir -p public/assets
 	npm install
-	NODE_ENV=production npm run build
+	MOJO_MODE=production npm run build
 
 favicon:
 	convert src/svg/f.svg -background none -bordercolor white -border 0 \
@@ -102,4 +109,15 @@ icons:
 	samizdat makeicons
 
 install: clean favicon icons static webpack zip
-	chown -R www-data:www-data .
+#	chown -R www-data:www-data .
+
+import:
+	samizdat makeimport
+
+installdata:
+	samizdat makeinstalldata
+
+purgedata:
+	sudo systemctl restart postgresql
+#	sudo -u postgres psql -c 'TRUNCATE account.user RESTART IDENTITY;' -d samizdat -e
+	sudo -u postgres psql -c 'DROP DATABASE samizdat;' -e

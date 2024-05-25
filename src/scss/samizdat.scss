@@ -1,13 +1,11 @@
 $enable-gradients: false;
 $enable-shadows: true;
-
+$enable-cssgrid: false;
 $offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
-
+$enable-dark-mode: false;
 $success: #228811;
 $body-color: #000;
 $body-bg: #fff;
-$border-radius: .4rem;
-
 // Required
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";
@@ -16,7 +14,22 @@ $border-radius: .4rem;
 @import "bootstrap/scss/utilities";
 @import "bootstrap/scss/root";
 @import "bootstrap/scss/reboot";
-
+$border-radius: .4rem;
+$container-max-widths: (
+        sm: 540px,
+        md: 720px,
+        lg: 960px,
+        xl: 1140px,
+        xxl: 1320px
+);
+$grid-breakpoints: (
+        xs: 0,
+        sm: 576px,
+        md: 768px,
+        lg: 992px,
+        xl: 1200px,
+        xxl: 1400px
+);
 @import "bootstrap/scss/type";
 @import "bootstrap/scss/images";
 @import "bootstrap/scss/containers";
@@ -33,27 +46,23 @@ $border-radius: .4rem;
 // @import "bootstrap/scss/breadcrumb";
 // @import "bootstrap/scss/accordion";
 @import "bootstrap/scss/pagination";
-// @import "bootstrap/scss/badge";
+@import "bootstrap/scss/badge";
 @import "bootstrap/scss/alert";
 // @import "bootstrap/scss/progress";
-// @import "bootstrap/scss/list-group";
+@import "bootstrap/scss/list-group";
 @import "bootstrap/scss/close";
-// @import "bootstrap/scss/toasts";
+@import "bootstrap/scss/toasts";
 @import "bootstrap/scss/modal"; // Requires transitions
 // @import "bootstrap/scss/tooltip";
 // @import "bootstrap/scss/popover";
 // @import "bootstrap/scss/carousel";
 // @import "bootstrap/scss/spinners";
-// @import "bootstrap/scss/offcanvas"; // Requires transitions
+@import "bootstrap/scss/offcanvas"; // Requires transitions
 // @import "bootstrap/scss/placeholders";
-
 // Helpers
 @import "bootstrap/scss/helpers";
-
 // Utilities
 @import "bootstrap/scss/utilities/api";
 
-
 // @import "icon-list";
-
 @import "./local.css";

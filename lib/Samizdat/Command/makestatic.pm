@@ -1,9 +1,10 @@
 package Samizdat::Command::makestatic;
 
 use Mojo::Base 'Mojolicious::Command', -signatures;
-use Data::Dumper;
 use Mojo::UserAgent;
+use Time::HiRes qw(usleep);
 use Mojo::Util qw(decode encode);
+use Data::Dumper;
 
 has description => 'Apply templates to markdown files and dump resulting files in the public dir';
 has usage => sub ($self) { $self->extract_usage };
@@ -24,15 +25,20 @@ sub run ($self, @args) {
     )
   );
 
-  my $uris = $self->app->markdown->geturis;
+  my $uris = $self->app->web->geturis;
   my $again = 1;
   my $siteurl = $self->app->config->{siteurl};
   $siteurl =~ s/\/$//;
   while ($again) {
     $again = 0;
-    for my $uri (keys %$uris) {
+    for my $uri (sort {$a cmp $b} keys %$uris) {
       next if ($uri =~ /^#/);
-      next if ($uri =~ /\.(jpg|png|ico|pdf|gif|svg|mp4|webp)/);
+      next if ($uri =~ /\.(jpg|jpeg|png|ico|pdf|gif|svg|mp4|webp)/);
+      next if ($uri =~ /^\/\//);
+      next if ($uri =~ /^country/);
+      next if ($uri =~ /^mailto/);
+      next if ($uri =~ /^javascript/);
+
       say $uri;
       my $language = '';
       if ($uri =~ s/_([^_\.]+)\.md/.md/) {
@@ -47,15 +53,17 @@ sub run ($self, @args) {
         $res->dom('img, a')->each(sub($dom, $i) {
           my $link = '';
           if ('a' eq $dom->tag) {
-            $link = $dom->attr('href');
+            $link = $dom->attr('href') // '';
           } elsif ('img' eq $dom->tag) {
-            $link = $dom->attr('src');
+            $link = $dom->attr('src') // '';
           }
-          $link =~ s/$siteurl//;
-          if ($link !~ /http/) {
-            if (!exists($uris->{$link})) {
-              $uris->{$link} = 0;
-              $again = 1;
+          if ('' ne $link) {
+            $link =~ s/$siteurl//;
+            if ($link !~ /http/) {
+              if (!exists($uris->{$link})) {
+                $uris->{$link} = 0;
+                $again = 1;
+              }
             }
           }
         });

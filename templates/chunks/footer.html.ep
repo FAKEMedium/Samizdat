@@ -3,10 +3,10 @@
     <a href="https://github.com/FakenewsCom/Samizdat" target="_blank" rel="noopener"><picture>
         <source srcset="/media/images/pagespeed.webp" type="image/webp">
         <source srcset="/media/images/pagespeed.png" type="image/png">
-        <img src="/media/images/pagespeed.png" class="img-fluid" width="441" height="95" alt="PageSpeed result 100 100 100 100" />
+        <img src="/media/images/pagespeed.png" class="img-fluid" width="441" height="95" alt="PageSpeed result 100 100 100 100">
       </picture></a>
   </div>
   <div class="col-4 col-auto text-end align-self-center">
-    <%== __x('&copy;{year}&nbsp;{author}', year => 2023, author => config->{'sitename'}) %>
+    <%== __x('&copy;{year}&nbsp;{author}', year => (localtime(time))[5] + 1900, author => config->{'sitename'}) %>
   </div>
 </div>

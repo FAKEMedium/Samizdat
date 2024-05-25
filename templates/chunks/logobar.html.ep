@@ -1,13 +1,21 @@
 <div id="logobar" class="container bg-logobar" aria-live="polite">
   <div class="row justify-content-between position-relative">
     <div class="col-3 col-xl-3 pr-0 py-1 py-sm-2">
-      <a href="/" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start') %>">
-        <svg id="logotype" title="<%= config->{sitename} %>>" class="img-fluid my-2" viewBox="0 0 508 191">
-          <use xlink:href="#fakelogo"></use>
-        </svg>
-      </a>
+      <a href="/" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
+          'logotype',
+          'src/public/' . config->{logotype},
+          {
+            id         => 'logotype',
+            prefix     => 'anysvg',
+            extraclass => 'img-fluid my-2',
+            title      => config->{sitename},
+            height     => 73,
+            width      => 194,
+          }
+          %></a>
     </div>
     <div id="memberpanel" class="col-9 col-xl-9 d-print-none d-flex align-items-center pl-0 pr-1 pr-sm-3 justify-content-end">
+      <%== indent eval {include 'chunks/language'}, 3 =%>
       <%== indent eval {include 'chunks/memberbuttons'}, 3 =%>
     </div>
   </div>

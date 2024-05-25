@@ -1,37 +1,40 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html class="no-js" lang="<%== language %>">
   <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <% for my $meta (keys %{ $web->{meta} }) { =%>
   <% for my $name (keys %{ $web->{meta}->{$meta} }) { =%>
-    <meta <%== $meta %>="<%== $name %>" content="<%== $web->{meta}->{$meta}->{$name} %>" />
+    <meta <%== $meta %>="<%== $name %>" content="<%== $web->{meta}->{$meta}->{$name} %>">
   <% }  =%>
 <% }  =%>
-    <meta name="theme-color" content="<%= config->{themecolor} %>" />
+    <meta name="theme-color" content="<%= config->{themecolor} %>">
     <title><%== title %></title>
-    <link rel="canonical" href="<%== $web->{canonical} %>" />
-    <link rel="preload" href="/css/samizdat.css" as="style" />
-    <link rel="preload" href="/js/samizdat.js" as="script" />
-    <link rel="manifest" href="/manifest.json" />
-    <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/media/images/icon.0192.png" />
-    <link rel="author" type="text/plain" href="/humans.txt" />
-    <link rel="stylesheet" type="text/css" href="/css/samizdat.css" />
+% if (exists($web->{canonical})) {
+    <link rel="canonical" href="<%== $web->{canonical} %>">
+% }
+    <%= asset_tag '/samizdat.css', rel => 'preload', as => 'style' %>
+    <link rel="manifest" href="/manifest.json">
+    <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico">
+    <link rel="apple-touch-icon" href="/media/images/icon.0192.png">
+    <link rel="author" type="text/plain" href="/humans.txt">
+    <%= asset_tag '/samizdat.css' %>
     <style id="headcss"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
      /*]]>*/ </style>
   </head>
   <body>
-    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" class="d-none">
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" class="d-none">
       <defs>
-        <%== indent eval {include 'chunks/symbols'}, 4 =%>
+        <!-- symbols -->
       </defs>
     </svg>
+    <aside aria-live="polite" aria-atomic="true" class="sticky-top">
+      <div id="toast-messages" class="toast-container top-0 start-0 p-3">
+      </div>
+    </aside>
     <header>
-      <div id="message" class="toast position-absolute bg-light" role="status" data-delay="3000" aria-atomic="true"></div>
       <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
         <%== indent eval {include 'chunks/logobar'}, 4 =%>
@@ -43,39 +46,51 @@
               <%== indent eval {include 'chunks/menu'}, 7 =%>
             </div>
           </nav>
-          <aside id="badlinks">
+          <aside id="leftlinks">
+            <%== indent eval {include 'chunks/leftlinks'}, 6 =%>
           </aside>
-          <aside id="sidelinks">
-            <%== indent eval {include 'chunks/sidelinks'}, 6 =%>
+          <aside id="rightlinks">
+            <%== indent eval {include 'chunks/rightlinks'}, 6 =%>
           </aside>
         </div>
       </div>
     </header>
     <a id="startdoc" href="javascript:;" class="d-print-none" title="<%== __('Start') %>"></a>
     <div id="universalmodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
-      <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center"></div>
+      <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center">
+      </div>
     </div>
-    <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-3">
-      <header class="container mb-1 mb-sm-4">
+    <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0">
+      <header class="container mb-1 mb-sm-4 px-0">
         <div class="row">
           <h1 id="headline" class="col-sm-9"><%== title %></h1>
-          <ul class="nav px-2 col-sm-3 d-print-none">
-            <%== indent eval {include 'chunks/sharebuttons'}, 6 =%>
+          <ul class="nav px-2 col-sm-3 justify-content-sm-end d-flex d-print-none">
+            <%== indent eval {include sprintf('chunks/%s', $headlinebuttons)}, 6 =%>
           </ul>
         </div>
       </header>
-      <section class="container">
+      <section class="container px-0"<%== eval {return ' id="thecontent"' if (!exists $web->{sidebar});} %>>
+% if (exists $web->{sidebar}) {
         <div class="row">
-          <%== indent content, 5 =%>
+          <div class="col-sm-8 editable" id="thecontent">
+            <%== indent content, 6 =%>
+          </div>
+          <div class="col-sm-4">
+            <%== indent $web->{sidebar}, 6 =%>
+          </div>
         </div>
+% } else {
+        <%== indent content, 4 =%>
+% }
       </section>
     </main>
-    <footer id="fakefooter" class="mt-0 py-3 container">
+    <footer id="mainfooter" class="mt-0 py-3 container">
       <%== indent eval {include 'chunks/footer'}, 3 =%>
     </footer>
-    <script id="bundlejs" src="/js/samizdat.js" async="true"></script>
+    <%= asset_tag '/samizdat.js', id => 'bundlejs' %>
     <script id="endjs"> /*<![CDATA[*/
       <%== indent $web->{script}, 3 =%>
+      <%== indent eval {include 'chunks/analytics'}, 3 =%>
     /*]]>*/ </script>
   </body>
 </html>

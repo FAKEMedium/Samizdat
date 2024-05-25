@@ -15,40 +15,58 @@ has 'app';
 my $pbkdf2 = Crypt::PBKDF2->new();
 
 
-sub addUser {
-  my $self = shift;
-  my $username = shift;
-  my $attribs = shift // undef;
+sub addUser ($self, $username, $attribs = undef) {
+  my $db = $self->app->mysql->db;
+
   $attribs->{username} = $username;
   my $password = delete $attribs->{password};
-  my $userid = $self->app->pg->db->insert('account.user',
+=pod
+  my $userid = $db->insert('account.user',
     $attribs,
     { returning => 'id' }
   )->hash->{id};
-  $self->app->pg->db->insert('account.password', {
+  $db->insert('account.password', {
     userid => $userid,
+  });
+=cut
 
+  my $userid = $db->insert('snapusers',
+    $attribs,
+    { returning => 'id' }
+  )->hash->{id};
+  $db->insert('passwords', {
+    userid => $userid,
   });
   return $userid;
 }
 
 
-sub getUsers {
-  my $self = shift;
-  my $where = shift;
+sub getUsers ($self, $where){
+  my $db = $self->app->mysql->db;
+=pod
+  my $result = $db->select('account.user',
+    undef,
+    $where
+  )->hashes->to_array;
+=cut
 
-  my $result = $self->app->pg->db->select('account.user',
+  my $result = $db->select('snapusers',
     undef,
     $where
   )->hashes->to_array;
 }
 
 
-sub saveUser {
-  my $self = shift;
-  my $userid = shift;
-  my $attribs = shift // undef;
-  $self->app->pg->db->update('account.user',
+sub saveUser ($self, $userid, $attribs = undef) {
+  my $db = $self->app->mysql->db;
+=pod
+  $db->update('account.user',
+    $attribs,
+    {userid => $userid},
+    { returning => 'id' }
+  )->hash->{id};
+=cut
+  $db->update('snapusers',
     $attribs,
     {userid => $userid},
     { returning => 'id' }
@@ -56,34 +74,41 @@ sub saveUser {
 }
 
 
-sub deleteUser {
-  my $self = shift;
-  my $userid = shift;
+sub deleteUser ($self, $userid) {
+  my $db = $self->app->mysql->db;
 
-  $self->app->pg->db->delete('account.user', {id => $userid});
+#  $db->delete('account.user', {id => $userid});
+  $db->delete('snapusers', {id => $userid});
+
 }
 
 
-sub savePassword {
-  my $self = shift;
-  my $userid = shift;
-  my $password = shift;
+sub savePassword ($self, $userid, $password) {
+  my $db = $self->app->mysql->db;
+  my $attribs = {};
+  for my $method (@{ $self->app->config->{account}->{passwordmethods} }) {
+    $attribs->{'password' . $method} = $self->hashPassword($password, $method);
+  }
+  $db->update('passwords',
+    $attribs,
+    {userid => $userid},
+    { returning => 'id' }
+  )->hash->{id};
 }
 
 
-sub validatePassword {
-  my $self = shift;
-  my $username = shift;
-  my $plain = shift;
-  my $accountcfg = shift;
-  my $userid = undef;
+sub validatePassword ($self, $username, $plain) {
+  my $userid = 0;
+  my $db = $self->app->mysql->db;
 
   # Superadmins in the configuration file don't need to be in the database
-  if ($accountcfg->{superadmins}->{$username} eq $plain) {
-    $userid = 1; # Equivalent to unix root
+  if ($self->app->config->{account}->{superadmins}->{$username} eq $plain) {
+    $userid = 1;
   } else {
-    my $result = $self->app->pg->db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
-    for my $method (@{ $accountcfg->{passwordmethods} }) {
+#    my $result = $db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
+    my $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
+
+    for my $method (@{ $self->app->config->{account}->{passwordmethods} }) {
       if ($method eq "sha512") {
         if (passwdcmp($plain, $result->{passwordsha512})) {
           $userid = $result->{$userid};
@@ -116,9 +141,7 @@ sub validatePassword {
 }
 
 
-sub cryptPassword {
-  my $self = shift;
-  my ($password, $method) = @_;
+sub hashPassword ($self, $password, $method) {
   if ($method eq "sha512") {
     return mkpasswd($password, 'sha512');
   } elsif ($method eq "bcrypt") {
@@ -137,43 +160,58 @@ sub cryptPassword {
 }
 
 
-sub getLoginFailures {
-  my $self = shift;
-  my $limit = shift;
-  my $options = shift;
-  my $failuretime = sprintf("now() - interval '%s'", $options->{blocktime});
-  my $result = $self->app->pg->db->query("
-    SELECT failuretime,ip,username
-    FROM account.loginfailure
-    WHERE (failuretime >= $failuretime) AND (ip = ?)
-    ORDER BY failuretime DESC
-    LIMIT ?",
-    $options->{ip},
-    $limit
-  )->hashes->to_array;
-  return $result;
-}
 
 
-sub insertLogin {
-  my $self = shift;
-  my $userid = shift;
-  my $ip = shift;
-  $self->app->pg->db->insert('account.login', {
+sub insertLogin ($self, $ip, $username, $value) {
+  my $db = $self->app->mysql->db;
+=pod
+  $db->insert('account.login', {
     userid => $userid,
     ip     => $ip,
   }, {returning => 'id'})->hash->{id};
+=cut
+  $db->insert('snapallsessions', {
+    userlogin   => $username,
+    remote_host => $ip,
+    value       => $value
+  }, {returning => 'allsessionid'})->hash->{allsessionid};
 }
 
 
-sub insertLoginFailure {
-  my $self = shift;
-  my $username = shift;
-  my $ip = shift;
-  $self->app->pg->db->insert('account.loginfailure', {
+sub insertLoginFailure ($self, $ip, $username) {
+  my $db = $self->app->mysql->db;
+=pod
+  $db->insert('account.loginfailure', {
     ip       => $ip,
     username => $username,
   }, {returning => 'id'})->hash->{id};
+=cut
+
+  $db->insert('loginfailures', {
+    ip       => $ip,
+    username => $username
+  }, {returning => 'loginfailureid'})->hash->{loginfailureid};
+}
+
+
+sub getLoginFailures ($self, $ip) {
+  my $db = $self->app->mysql->db;
+=pod
+  my $result = $db->query("SELECT failuretime,ip,username FROM account.loginfailure WHERE (failuretime >= $failuretime) AND (ip = ?) ORDER BY failuretime DESC LIMIT ?",
+    $options->{ip}, $limit
+  )->hashes->to_array;
+  return $result;
+=cut
+  my $result = $db->query("
+    SELECT failuretime
+    FROM loginfailures
+    WHERE (failuretime >=  now() - interval ? minute) AND (ip = ?)
+    ORDER BY failuretime DESC LIMIT ?",
+      $self->app->config->{account}->{blocktime},
+      $ip,
+      $self->app->config->{account}->{blocklimit}
+  )->hashes->to_array;
+  return $result;
 }
 
 

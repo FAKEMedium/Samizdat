@@ -1,13 +1,13 @@
 ---
 secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
-sitename: The Example News
-shortsitename: Example News
-description: Example News on a fullstack static content hybrid generator for extreme speed and disconnected use.
-siteurl: https://example.com/
-host: example.com
-cookiedomain: .example.com
-authcookiename: samizdater
+sitename: Example
+shortsitename: Example
+description: Example, a fullstack static content hybrid generator for extreme speed and optional disconnected use.
+siteurl: https://fakenews.com/
+host: fakenews.com
+cookiedomain: .fakenews.com
+authcookiename: samizauth
 datacookiename: samizdata
 logotype: media/images/fakenews.svg
 favicon: media/images/f.svg
@@ -53,29 +53,47 @@ humans: |
     Programming languages: Perl, Javascript, SQL, Shellscript, Lua, Makefile, SCSS, CSS
     IDE: Intellij IDEA Ultimate Edition
 ads: |
-  placeholder.example.com, placeholder, DIRECT, placeholder
+  placeholder.fakenews.com, placeholder, DIRECT, placeholder
 security: |
   # Our security address
-  Contact: mailto:security@example.com
+  Contact: mailto:security@fakenews.com
   
   # Our OpenPGP key
-  Encryption: https://example.com/security/pgp-key.txt
+  Encryption: https://fakenews.com/security/pgp-key.txt
   
   # Our security policy
-  Policy: https://example.com/security
+  Policy: https://fakenews.com/security
   
   # Our security acknowledgements
-  Acknowledgements: https://example.com/security/acknowledgements
+  Acknowledgements: https://fakenews.com/security/acknowledgements
   
   Preferred-Languages: en,sv
   
-  Canonical: https://example.com/.well-known/security.txt
+  Canonical: https://fakenews.com/.well-known/security.txt
 layout: bootstrap
+captcha:
+  session_name: captcha_string
+  font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
+  ptsize: 24
+  width: 460
+  height: 60
+mail:
+  from: noreply@fakenews.com
+  type: text/html
+  how: smtp
+  howargs:
+    - smtp.fakenews.com
+    - AuthUser
+    - account@fakenews.com
+    - AuthPass
+    - s3cr3t
 hypnotoad:
   listen:
     - http://0.0.0.0:3000?reuse=1
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
+extratemplates:
+  - /usr/local/share/perl/5.30.0/Mojolicious/resources/templates/mojo
 nginx: 1
 cache: 1
 makewebp: 1
@@ -116,15 +134,15 @@ redis:
   port: 6379
   database: 1
 piratebay:
-  login: example
+  login: username
   password: s3cr3t
 locale:
-  textdomain: com.example
+  textdomain: com.fakenews
   project: Samizdat
   Project-Id-Version: Samizdat
-  Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
-  Last-Translator: Webmaster <webmaster@example.com>
-  Language-Team: Webmaster <webmaster@example.com>
+  Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+  Last-Translator: Webmaster <webmaster@fakenews.com>
+  Language-Team: Webmaster <webmaster@fakenews.com>
   PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE
   POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE
   MIME-Version: 1.0
@@ -133,14 +151,24 @@ locale:
   Language: en
   languages:
     en:
-      Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
-      Last-Translator: Webmaster <webmaster@example.com>
-      Language-Team: Webmaster <webmaster@example.com>
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
     sv:
-      Report-Msgid-Bugs-To: Webmaster <webmaster@example.com>
-      Last-Translator: Webmaster <webmaster@example.com>
-      Language-Team: Webmaster <webmaster@example.com>
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+    ru:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: ru
+      name: русский
   default_language: en
   skip_messages:
     - sv-SE
     - en-US
+    - en-GB
+    - ru-RU
+google:
+#  tag: YOUR-TAG

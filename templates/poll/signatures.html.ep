@@ -1,0 +1,13 @@
+<div class="card mb-3">
+  <h2 class="card-header p-1 p-sm-2"><%== __('Recent signatures') %></h2>
+  <div class="card-body p-1 p-sm-2">
+    <img alt="Animated transition between Z and SS with number of signatures" src="/poll/signatures.svg" class="img-fluid">
+    <ul id="signatures">
+% my $i = 0;
+% for my $signer (@{ poll->signers }) {
+      <li id="signature_<%= $i %>"></li>
+%   $i++;
+% }
+    </ul>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="mb-3">
+  <%= __('Thank you for contacting us.') %>
+  <%= __('We will reply as soon as possible.') %>
+  <%= __('Your message appears below.') %>
+</div>
+<div class="row g-2">
+  <div class="col-2 fw-bold"><%= __('From') %>:</div>
+  <div class="col-10">"<%= $formdata->{name} %>" &lt;<%= $formdata->{email} %>&gt;</div>
+
+  <div class="col-2 fw-bold"><%= __('Subject') %>:</div>
+  <div class="col-10"><%= $formdata->{subject} %></div>
+
+  <div class="col-2 fw-bold"><%= __('Message') %>:</div>
+  <div class="col-10"><%= $formdata->{message} %></div>
+</div>

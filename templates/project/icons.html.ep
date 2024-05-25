@@ -1,0 +1,71 @@
+% layout config->{layout};
+<p class="pb-3">
+  <%== __('This demonstration shows the result of Samizdat\'s SVG template helper.') %>
+  <%== __x('Samizdat uses the Bootstrap icons from {link}.',
+    link => __x('<a href="{url}" target="_blank">{url}</a>',
+      url => "https://github.com/twbs/icons/")) %>
+  <%== __('Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it.') %>
+</p>
+
+<h5><%== __('Usage') %></h5>
+<div class="pb-3">
+  <code>&lt;%== icon $iconname, \%options %&gt;</code>
+</div>
+
+<h5><%== __('Examples') %></h5>
+<dl class="mx-2 pb-3">
+  <dt>&lt;%== icon 'info-circle-fill', {extraclass => 'mx-2 text-primary', title => 'Information'} %&gt;</dt>
+  <dd class="mx-2">
+    <div class="pt-2">
+      <h6><%== __('HTML result') %>:</h6>
+      <%= icon 'info-circle-fill', {extraclass => 'mx-2 text-primary', title => 'Information'} %>
+    </div>
+    <div class="pt-2">
+      <h6><%== __('Shown as') %>:</h6>
+      <%== icon 'info-circle-fill', {extraclass => 'mx-2 text-primary', title => 'Information'} %>
+    </div>
+  </dd>
+</dl>
+
+<h5><%== __('Options') %></h5>
+<dl class="mx-2 pb-3">
+  <dt>prefix (bi)</dt>
+  <dd class="mx-2">
+    <%== __('Used to make class names.') %>
+    <%== __('The default is used for the Bootstrap icons set.') %>
+  </dd>
+
+  <dt>class</dt>
+  <dd class="mx-2">
+    <%== __('Value for the class attribute.') %>
+    <%== __('Use this if you don\'t need the prefixed default classes.') %>
+  </dd>
+
+  <dt>extraclass</dt>
+  <dd class="mx-2"><%== __('Space separated list of extra classes to append the prefixed default classes.') %></dd>
+
+  <dt>id</dt>
+  <dd class="mx-2"><%== __('Set the id attribute.') %></dd>
+
+  <dt>width</dt>
+  <dd class="mx-2"><%== __('Set the width attribute.') %></dd>
+
+  <dt>height</dt>
+  <dd class="mx-2"><%== __('Set the height attribute.') %></dd>
+
+  <dt>title</dt>
+  <dd class="mx-2"><%== __('Set the title attribute.') %></dd>
+
+  <dt>what (bi)</dt>
+  <dd class="mx-2">
+    <%== __('Determines what subdirectory to load svg files from. The default is Bootstrap icons.') %>
+    <%== __('Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application\'s home.') %>
+  </dd>
+</dl>
+
+<h4><%== __('Bootstrap icons') %></h4>
+<div id="bootstrapicons">
+% for my $icon (sort {$a cmp $b} @{ $icons }) {
+  <a title="<%= $icon %>" class="p-1"><%== icon $icon %></a>
+% }
+</div>

@@ -3,22 +3,32 @@ package Samizdat;
 use Mojo::Base 'Mojolicious', -signatures;
 use MojoX::MIME::Types;
 use Mojo::Pg;
+use Mojo::mysql;
 use Mojo::Redis;
-use Samizdat::Model::Markdown;
-use Samizdat::Model::Account;
-use Samizdat::Model::RedisSession;
+use Data::UUID;
+use Hash::Merge;
 use Data::Dumper;
+
 
 sub startup ($self) {
   my $config = $self->plugin('NotYAMLConfig');
+  push @{$self->commands->namespaces}, 'Samizdat::Command';
+  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
+  push @{$self->renderer->paths}, @{ $config->{extratemplates} };
+  push @{$self->static->paths}, 'src/public';
   $self->secrets($config->{secrets});
   $self->types(MojoX::MIME::Types->new);
 
   $self->defaults(
+    layout => $config->{layout},
+    template => 'index',
+    languages => {},
+    countries => {},
     themecolor => '',
     headtitle => '',
     extrajs => '',
     extracss => '',
+    headlinebuttons => 'sharebuttons',
     web => {
       docid          => 0,
       comments       => 0,
@@ -45,14 +55,8 @@ sub startup ($self) {
       activated => 0,
     },
   );
-
-  my $dsnpg = sprintf('postgresql://%s:%s@%s/%s',
-    $config->{pgsql}->{user},
-    $config->{pgsql}->{password},
-    $config->{pgsql}->{host},
-    $config->{pgsql}->{database}
-  );
-  $self->helper(pg => sub { state $pg = Mojo::Pg->new($dsnpg) });
+  $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}) });
+  $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}) });
   $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');
@@ -62,27 +66,62 @@ sub startup ($self) {
   $self->pg->migrations->from_dir('migrations')->migrate;
   $self->pg->db->dbh->{pg_server_prepare} = 1;
 
-  $self->plugin('Minion' => {Pg => shift->pg });
-
-  my $dsnredis = sprintf('redis://%s:%s/%s',
-    $config->{redis}->{host},
-    $config->{redis}->{port},
-    $config->{redis}->{database}
-  );
-  $self->helper(redis => sub { state $redis = Mojo::Redis->new($dsnredis) });
-
-  $self->helper(markdown => sub { state $markdown = Samizdat::Model::Markdown->new });
-  $self->helper(account => sub { state $account = Samizdat::Model::Account->new(app => shift) });
-  $self->helper(redissession => sub { state $redissession = Samizdat::Model::RedisSession->new(redis => shift->redis) });
+#  $self->plugin('Minion' => {Pg => shift->pg });
+  $self->helper(merger => sub { state $merger = Hash::Merge->new() });
+  $self->helper(uuid => sub { state $uuid = Data::UUID->new });
+  if (exists($config->{import}->{dsn})) {
+    $self->helper(mysql => sub { state $mysql = Mojo::mysql->new($config->{import}->{dsn}) });
+    $self->mysql->on(connection => sub {
+      my ($mysql, $dbh) = @_;
+      $mysql->max_connections(5);
+    });
+  }
+  $self->plugin('Web');
+  $self->plugin('Account');
+  $self->plugin('Public');
+  $self->plugin('Rymdweb');
+  $self->plugin('Poll');
+  $self->plugin('Utils');
+  $self->plugin('Icons');
+  $self->plugin('Contact');
+  $self->plugin('Shortbytes');
+  $self->plugin('Pdflatex');
+  $self->plugin('Fortnox');
 
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
-
+  $self->plugin('Captcha', {
+    session_name => $config->{captcha}->{session_name},
+    out          => {force => 'png'},
+    particle     => [ 500, 0 ],
+    create       => ['ttf', 'ellipse', '#ff0000'],
+    new          => {
+      rndmax     => 1,
+      rnd_data   => [ '2', '3', '4', '6', '7', '9', 'A', 'C', 'E', 'F', 'H', 'J' ... 'N', 'P', 'R', 'T' ... 'Y' ],
+      width      => $config->{captcha}->{width},
+      height     => $config->{captcha}->{height},
+      lines      => 20,
+      font       => $config->{captcha}->{font},
+      ptsize     => $config->{captcha}->{ptsize},
+      scramble   => 1,
+      bgcolor    => '#ffffff',
+      frame      => 1,
+      send_ctobg => 1,
+    }
+  });
+  $self->plugin('Mail', $config->{mail});
+  $self->plugin('Util::RandomString', {
+    entropy => 256,
+    printable => {
+      alphabet => '2345679bdfhmnprtFGHJLMNPRT',
+      length   => 20
+    }
+  });
   # Internationalization block. Use "make i18n" to rebuild text lexicon.
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
     default => $config->{locale}->{default_language},
-    languages => [qw(en ru sv)],
+    languages => [ keys %{$config->{locale}->{languages}} ],
     no_header_detect => 1,
   });
   $self->lexicon({
@@ -101,12 +140,13 @@ sub startup ($self) {
       $self->language($language);
     } else {
       $c->cookie(language => $config->{locale}->{default_language}, {
-        secure => 1,
+        secure   => 1,
         httponly => 0,
-        path => '/',
-        expires => time + 36000,
-        domain => $config->{domain},
+        path     => '/',
+        expires  => time + 36000,
+        domain   => $config->{domain},
         hostonly => 1,
+        samesite => 'None',
       });
       $self->language($config->{locale}->{default_language});
     }
@@ -116,25 +156,12 @@ sub startup ($self) {
   if ($config->{nginx}) {
 
   }
-  push @{$self->commands->namespaces}, 'Samizdat::Command';
-  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
-  push @{$self->renderer->paths}, '/usr/local/share/perl/5.30.0/Mojolicious/resources/templates/mojo';
-  $self->plugin('Utils');
-  $self->plugin('Icons');
-  $self->plugin('Flags');
-  $self->plugin('Contact');
 
   my $r = $self->routes;
-  $r->any([qw(     POST                  )] => '/login')->to(controller => 'Login', action => 'login');
-  $r->any([qw( GET                       )] => '/login')->to(controller => 'Login', action => 'index');
-  $r->any([qw( GET POST DELETE           )] => '/logout')->to(controller => 'Login', action => 'logout');
   $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
-  $r->any([qw( GET                       )] => '/panel')->to(controller => 'Panel', action => 'index');
-  $r->any([qw( GET                       )] => '/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
-  $r->any([qw( GET                       )] => '/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
-  $r->any([qw( GET                       )] => '/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');
-  $r->any([qw( GET                       )] => '/ads.txt')->to(controller => 'Web', action => 'ads', docpath => 'ads.txt');
-  $r->any([qw( GET                       )] => '/.well-known/security.txt')->to(controller => 'Web', action => 'security', docpath => '.well-known/security.txt');
+  $r->any([qw( GET                       )] => '/captcha.png')->to(controller => 'Captcha', action => 'index');
+
+  # Most routes are defined in the plugins
   $r->any([qw( GET                       )] => '/')->to(controller => 'Web', action => 'geturi', docpath => '');
   $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Web', action => 'geturi');
 }

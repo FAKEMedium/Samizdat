@@ -1,0 +1,3 @@
+% title __x('{code}: No authorization', code => 403);
+
+<%== __('Please logout and login as a user with proper authorization instead.') %>

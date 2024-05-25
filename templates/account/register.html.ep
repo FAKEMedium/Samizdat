@@ -1,0 +1,37 @@
+<form action="<%= $scriptname %>" id="registrationform" method="post">
+  <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
+  <div class="alert alert-light" role="alert" id="registrationalert"></div>
+  <div class="mb-3">
+    <div class="d-flex justify-content-between">
+      <label for="newusername"><%= __('Username') %></label>
+      <%== __('Choose a username.') %>
+    </div>
+    <input type="text" class="form-control" name="newusername" id="newusername" placeholder="<%= __('Enter username') %>" aria-describedby="newusername invalidusername">
+  </div>
+  <div class="mb-3">
+    <div class="d-flex justify-content-between">
+      <label for="newpassword"><%= __('Password') %></label>
+      <%== __('Choose a password.') %>
+    </div>
+    <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="<%= __('Enter password') %>" aria-describedby="newpassword invalidpassword">
+  </div>
+  <div class="mb-3">
+    <div class="d-flex justify-content-between">
+      <label for="email"><%= __('Your email') %></label>
+      <%== __('We will email a confirmation request.') %>
+    </div>
+    <input type="text" class="form-control" name="email" id="email" placeholder="<%= __('Enter your email') %>">
+  </div>
+  <div class="mb-3">
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" name="terms" id="terms" value="1">
+      <label class="form-check-label" for="terms"><%= __('I accept the terms for registration.') %></label>
+    </div>
+  </div>
+  <div class="d-flex justify-content-between">
+    <div>
+      <%== __('') %>
+    </div>
+    <button type="submit" id="registerlogin" class="btn btn-primary" onclick="register();"><%= __('Register') %></button>
+  </div>
+</form>

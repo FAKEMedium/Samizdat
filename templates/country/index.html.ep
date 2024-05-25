@@ -1,0 +1,23 @@
+% layout config->{layout};
+% my $countries = countrylist;
+% my $lang = language;
+<select id="country" class="form-select" aria-label="<%== __('Country selector') %>">
+  <option value="0"><%== __('Select country or click flags to see detail') %></option>
+% for my $cc (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+  <option value="<%= $cc %>"><%= $countries->{$cc} %></option>
+% }
+</select>
+<div class="row row-cols-1 row-cols-md-4 row-cols-lg-5 row-cols-xl-7 g-2">
+% for my $cc (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+%   my $country = country $cc;
+  <div class="col">
+    <div class="card h-100 justify-content-start d-flex">
+      <a href="./<%= app->{countries}->{translations}->{$lang}->{$cc} %>" class="mt-2" title="<%= $cc %>"><%== flag $cc, { extraclass => 'card-img-top start-0 img-fluid' } %></a>
+      <div class="card-body">
+        <h5 class="card-title"><%= $countries->{$cc} %></h5>
+        <p class="card-text"><%= $country->{$cc}->{iso_long_name} %></p>
+      </div>
+    </div>
+  </div>
+% }
+</div>

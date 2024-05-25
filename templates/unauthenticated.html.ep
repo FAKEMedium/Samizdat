@@ -1,0 +1,3 @@
+% title __x('{code}: Authentication required', code => 401);
+
+<%== __('Please login to access resource.') %>

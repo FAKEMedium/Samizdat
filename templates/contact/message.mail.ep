@@ -1,0 +1,3 @@
+<%== $formdata->{message} %>
+--
+This message was submitted from <%= $formdata->{ip} %>.

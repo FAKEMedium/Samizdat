@@ -1,0 +1,11 @@
+% if ('' ne $web->{css}) {
+        <style id="modalcss"> /*<![CDATA[*/
+           <%== indent $web->{css}, 1 =%>
+         /*]]>*/ </style>
+% }
+        <%== indent content, 4 =%>
+% if ('' ne $web->{script}) {
+        <script id="modalscript"> /*<![CDATA[*/
+          <%== indent $web->{script}, 1 =%>
+        /*]]>*/ </script>
+% }

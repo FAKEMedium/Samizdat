@@ -26,7 +26,7 @@ sub run ($self, @args) {
   my $app = $self->app;
   my $year = '2022';
 
-  my $pot = sprintf("# %s - %s\n", $app->{config}->{sitename}, $app->{config}->{locale}->{project});
+  my $pot = sprintf("# %s - %s\n", $app->{config}->{sitename}, $app->{config}->{locale}->{'Project-Id-Version'});
   $pot .= sprintf("# Copyright (C) %s %s\n", $year, $app->{config}->{locale}->{'Language-Team'});
   $pot .= sprintf("# %s\n",
     $app->__x('This file is distributed under the same license as the {project} package.',
