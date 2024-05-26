@@ -10,7 +10,7 @@ sub register ($self, $app, $conf) {
     printinvoice => sub($c, $tex, $formdata) {
       my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $formdata->{invoice}->{uuid}));
       my $pdfpath = Mojo::Home->new()->rel_file(sprintf('public/invoice/%s.pdf', $formdata->{invoice}->{uuid}));
-      $texpath->spurt($tex);
+      $texpath->spew($tex);
 
       my $command = [
         'latexmk',

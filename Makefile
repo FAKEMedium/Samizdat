@@ -14,7 +14,6 @@ clean:
 	rm -rf public/*
 	mkdir -p public/assets
 	cp -af src/public/test/README.md src/public/test/README.txt
-	cp -af src/js/sw.js public/assets/
 
 harvest:
 	samizdat makeharvest

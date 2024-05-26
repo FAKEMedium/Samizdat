@@ -94,7 +94,7 @@ sub run ($self, @args) {
     }
   }
 
-  Mojo::Home->new(sprintf('locale/%s.pot', $app->{config}->{locale}->{textdomain}))->spurt($pot);
+  Mojo::Home->new(sprintf('locale/%s.pot', $app->{config}->{locale}->{textdomain}))->spew($pot);
 
   my $skip = { };
   for my $language (@{ $app->{config}->{locale}->{skip_messages} }) {
@@ -130,7 +130,7 @@ sub run ($self, @args) {
       );
       $potcopy =~ s /"Language: en\\n"/$replace/sm;
       say sprintf("Created %s", $path->to_string);
-      $path->spurt($potcopy);
+      $path->spew($potcopy);
     }
 
     # Read existing po file for the language

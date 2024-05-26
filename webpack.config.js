@@ -11,17 +11,7 @@ const srcDir = path.resolve(__dirname, 'src');
 const PATHS = {
   public: path.join(__dirname, "public")
 };
-/*
-import Path from '@mojojs/path';
-import {glob} from "glob";
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
-import autoprefixer from "autoprefixer";
-import TerserPlugin from "terser-webpack-plugin";
-import {PurgeCSSPlugin} from "purgecss-webpack-plugin";
-*/
-//const isDev = process.env.MOJO_MODE === 'development';
-const isDev = true;
+const isDev = process.env.MOJO_MODE === 'development';
 const config = {
   devtool: 'source-map',
   output: {

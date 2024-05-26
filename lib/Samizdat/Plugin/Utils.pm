@@ -147,7 +147,7 @@ sub register ($self, $app, $conf) {
           $format = 'image/webp';
           $c->tx->res->headers->content_type($format);
           my $webpfile = $public->child($c->{stash}->{web}->{url});
-          $webpfile->spurt($$output);
+          $webpfile->spew($$output);
         }
       }
       return 1;
