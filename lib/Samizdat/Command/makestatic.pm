@@ -35,7 +35,6 @@ sub run ($self, @args) {
       next if ($uri =~ /^#/);
       next if ($uri =~ /\.(jpg|jpeg|png|ico|pdf|gif|svg|mp4|webp)/);
       next if ($uri =~ /^\/\//);
-      next if ($uri =~ /^country/);
       next if ($uri =~ /^mailto/);
       next if ($uri =~ /^javascript/);
 
