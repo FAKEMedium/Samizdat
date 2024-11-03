@@ -1,4 +1,4 @@
-<a href="https://basedinsweden.se/" target="_blank" rel="noopener"><%== anysvg
+<a href="https://basedinsweden.se/" target="_blank" rel="noopener" title="Based in Sweden"><%== anysvg
   'basedinsweden',
   'public/media/images/basedinsweden.svg',
   {

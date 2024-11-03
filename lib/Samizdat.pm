@@ -84,11 +84,11 @@ sub startup ($self) {
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');
-=pod
+#=pod
   $self->plugin('Rymdweb');
   $self->plugin('Pdflatex');
   $self->plugin('Fortnox');
-=cut
+#=cut
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('Captcha', {
@@ -110,6 +110,7 @@ sub startup ($self) {
       send_ctobg => 1,
     }
   });
+#  $self->plugin('OpenAPI', {});
   $self->plugin('Mail', $config->{mail});
   $self->plugin('Util::RandomString', {
     entropy => 256,

@@ -1,5 +1,13 @@
-<li class="nav-item"><a class="nav-link" href="//facebook.com/sharer/sharer.php?u=<%= config->{siteurl} %>" target="_blank" title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'Facebook') %>"><%== icon 'facebook' %></a></li>
-<li class="nav-item"><a class="nav-link" href="//linkedin.com/shareArticle?url=<%= config->{siteurl} %>&mini=true" target="_blank" title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'LinkedIn') %>"><%== icon 'linkedin' %></a></li>
+<li class="nav-item"><a class="nav-link" target="_blank"
+  href="//facebook.com/sharer/sharer.php?u=<%= config->{siteurl} %>"
+  title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'Facebook') %>"><%== icon 'facebook' %></a></li>
+<li class="nav-item"><a class="nav-link" target="_blank"
+  href="//linkedin.com/shareArticle?url=<%= config->{siteurl} %>&mini=true"
+  title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'LinkedIn') %>"><%== icon 'linkedin' %></a></li>
 <!--li class="nav-item"><a class="nav-link" href="//twitter.com/intent/tweet?url=<%= config->{siteurl} %>" target="_blank" title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'X') %>"><%== icon 'twitter' %></a></li-->
-<li class="nav-item"><a class="nav-link" href="//t.me/share/url?url=<%= config->{siteurl} %><%== $web->{url} %>&text=<%== $web->{title} %>" target="_blank" title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'Telegram') %>"><%== icon 'telegram' %></a></li>
-<li class="nav-item"><a class="nav-link" href="mailto:;?subject=The%20Samizdat%20project%20at%20<%= config->{host} %>&amp;body=<%= config->{siteurl} %>" title="<%== __x('Email someone about {what}', what => config->{sitename}) %>"><%== icon 'envelope-at-fill' %></a></li>
+<li class="nav-item"><a class="nav-link" target="_blank"
+  href="//t.me/share/url?url=<%= config->{siteurl} %><%== $web->{url} %>&text=<%== $web->{title} %>"
+  title="<%== __x('Share {what} on {where}', what => config->{sitename}, where => 'Telegram') %>"><%== icon 'telegram' %></a></li>
+<li class="nav-item"><a class="nav-link"
+  href="mailto:;?subject=The%20Samizdat%20project%20at%20<%= config->{host} %>&amp;body=<%= config->{siteurl} %>"
+  title="<%== __x('Email someone about {what}', what => config->{sitename}) %>"><%== icon 'envelope-at-fill' %></a></li>

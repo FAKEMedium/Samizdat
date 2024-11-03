@@ -9,7 +9,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo apt install --yes cpanminus git make automake autoconf cmake wget libevdev-dev libhtml-tidy-perl
   * sudo apt install --yes mkisofs xorriso growisofs transmission-cli
   * sudo apt install --yes libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev libgd-dev uuid-dev
-  * sudo apt install --yes postgresql-client postgresql-12 postgresql-server-dev-all redis-server libhiredis-dev libargon2-dev
+  * sudo apt install --yes postgresql-client postgresql-server-dev-all redis-server libhiredis-dev libargon2-dev
   * sudo apt install --yes imagemagick librsvg2-bin librsvg2-dev pngquant
   * sudo apt install --yes nginx-full apache2-utils
   * sudo cpanm --reinstall EV
