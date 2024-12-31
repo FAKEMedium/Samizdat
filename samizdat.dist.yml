@@ -9,6 +9,8 @@ host: fakenews.com
 cookiedomain: .fakenews.com
 authcookiename: samizauth
 datacookiename: samizdata
+extraplugins:
+  - Example
 logotype: media/images/fakenews.svg
 favicon: media/images/f.svg
 backgroundcolor: '#fff'

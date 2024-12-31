@@ -84,11 +84,10 @@ sub startup ($self) {
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');
-=pod
-  $self->plugin('Rymdweb');
-  $self->plugin('Pdflatex');
-  $self->plugin('Fortnox');
-=cut
+  # Add your local plugins in your extraplugins setting
+  for my $plugin (@{ $config->{extraplugins} }) {
+    $self->plugin($plugin);
+  }
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('Captcha', {
