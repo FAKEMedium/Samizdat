@@ -1,0 +1,291 @@
+%% Comments start with %%
+%%
+% my $customer = $formdata->{customer};
+% my $invoice = $formdata->{invoice};
+% my $invoiceitems = $formdata->{invoiceitems};
+% my $currency = { sek => 'kr', eur => '\euro'};
+% my $countries = countrylist;
+% my $vat = $formdata->{vat};
+\documentclass[11pt,a4paper,onecolumn,notitlepage]{article}
+\usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,eurosym,ltablex,geometry,ae,aecompl,enumerate,helvet}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\graphicspath{{../public/media/images}{../../src}}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{PTSansNarrow}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+\pagestyle {fancy}
+\setlength \voffset {15mm -1in}
+\topmargin = 0pt
+\setlength \headsep {5mm}
+\setlength \headheight {1cm}
+\topmargin = 0pt
+\marginparsep = 0pt
+\marginparwidth = 0pt
+\footskip = 0pt
+\evensidemargin = 0pt
+\oddsidemargin = 0pt
+\setlength \paperheight {297mm}
+\setlength \paperwidth {210mm}
+\setlength \textwidth {17.420cm}
+\setlength \headwidth {17.420cm}
+\setlength \textheight {25.00cm}
+\parindent=0pt
+\parskip=0pt
+\parsep=0pt
+\fboxsep=0pt
+\linespread {1.2}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse
+\else
+	\pdftrue
+\fi
+\ifpdf
+	\pdfcompresslevel=9
+	\pdfinfo {
+		/Title (<%= $invoice->{title} %>)
+		/Creator (<%== config->{siteurl} %>)
+		/Author (<%== config->{sitename} %>)
+		/CreationDate (D:<%== $invoice->{pdfdate} %>)
+		/ModDate (D:<%== $invoice->{pdfdate} %>)
+		/Producer (Rymdweb, Perl, latexmk)
+		/Subject (<%= $invoice->{title} %>)
+	}
+\fi
+\definecolor {gray1} {rgb} {0.9,0.9,0.9}
+\definecolor {black} {rgb} {0,0,0}
+\definecolor {white} {rgb} {1,1,1}
+\renewcommand {\headrulewidth} {0.0pt}
+\renewcommand {\footrulewidth} {0.0pt}
+\newcommand*{\topfont}{\fontfamily{PTSansCaption-TLF}\selectfont}
+\fancyhead {}
+\fancyfoot {}
+% if (exists(config->{roomservice}->{invoice}->{logotype}) && ('' ne config->{roomservice}->{invoice}->{logotype})) {
+\lhead {\includegraphics[width=2cm] {<%== config->{roomservice}->{invoice}->{logotype} %>}}
+% } else {
+\lhead {}
+% }
+\rhead {<%== __x('Page {number} of {total}', number => '\thepage\ ', total => '\pageref{LastPage}') %>}
+\chead {<%= $invoice->{title} %>}
+\thispagestyle {empty}
+%%
+%% Box at the top with main headline
+%%
+\newsavebox {\invoicebox}
+\newlength {\invoiceboxboxheight}
+\sbox {\invoicebox} {\parbox[t] {106mm} {\topfont {%
+\begin {huge}
+<%= $invoice->{title} %>
+\end {huge}\newline
+\textbf {<%== __('Date') %>:} <%== $invoice->{invoicedate} %>}}}
+\settoheight {\invoiceboxboxheight} {\usebox {\invoicebox}}
+%%
+%% Box for customer's address
+%%
+\newsavebox {\addressbox}
+\newlength {\addressboxheight}
+\sbox {\addressbox} {\parbox[t][44mm][t] {106mm} {\topfont {%
+% if ('' ne $customer->{company}) {
+<%== $customer->{company} %>\newline
+% } else {
+<%== sprintf('%s %s', $customer->{firstname}, $customer->{lastname}) %>\newline
+% }
+% for my $streetpart (split("[\n\r]+", $customer->{address})) {
+<%== $streetpart %>\newline
+% }
+<%== $customer->{zip} %> \ <%== $customer->{city} %>\
+% if (('' ne $customer->{country}) && ("SE" ne $customer->{country})) {
+\newline
+<%== $countries->{ $customer->{country} } %>\
+% }
+}}}
+\settoheight {\addressboxheight} {\usebox {\addressbox}}
+%%
+%% Box for customer details like VAT etc.
+%%
+\newsavebox {\yourrefbox}
+\newlength {\yourrefboxheight}
+\sbox {\yourrefbox} {\parbox[t] {106mm} {\topfont {%
+\footnotesize {\textbf {<%== __('Customer Id') %>:} <%= $customer->{customerid} %>}
+% if ('' ne $customer->{vatno}) {
+\newline \footnotesize {\textbf {<%== __('VAT number') %>:} <%= $customer->{vatno} %>}
+% }
+% if ('' ne $customer->{company}) {
+%   if ($customer->{firstname} ne '' || $customer->{lastname} ne '') {
+\newline \footnotesize {\textbf {<%== __('Your contact') %>:} <%== $customer->{firstname} %> <%== $customer->{lastname} %>}
+%   }
+% }
+}}}
+\settoheight {\yourrefboxheight} {\usebox {\yourrefbox}}
+%%
+%% Box for our address
+%%
+\newsavebox {\refbox}
+\newlength {\refboxheight}
+\sbox {\refbox} {\parbox[t] {146mm} {\topfont {%
+% my $address = join("\\newline\n", split("[\n\r]+", config->{roomservice}->{invoice}->{address}));
+% $address =~ s/ /\\ /g;
+<%== $address %>\
+% if (('' ne $customer->{country}) && ("SE" ne $customer->{country})) {
+\newline
+<%== $countries->{ 'SE' } %>\
+% }
+}}}
+\settoheight {\refboxheight} {\usebox {\refbox}}
+%%
+%% Box for billing details
+%%
+\newsavebox {\billbox}
+\newlength {\billboxheight}
+\sbox {\billbox} {\parbox[t][80mm][t] {170mm} {\topfont {%
+% if (exists(config->{roomservice}->{invoice}->{orgno}) && ('' ne config->{roomservice}->{invoice}->{orgno})) {
+\footnotesize {\textbf {<%= __('Organizational number') %>:} <%== config->{roomservice}->{invoice}->{orgno} %>}\newline
+% }
+% if (exists(config->{roomservice}->{invoice}->{vatno}) && ('' ne config->{roomservice}->{invoice}->{vatno})) {
+\footnotesize {\textbf {<%= __('VAT number') %>:} <%== config->{roomservice}->{invoice}->{vatno} %>}\newline
+% }
+% if ('SE' eq $customer->{country}) {
+%   if (exists(config->{roomservice}->{invoice}->{bankgiro}) && ('' ne config->{roomservice}->{invoice}->{bankgiro})) {
+\footnotesize {\textbf {<%= __('Bankgiro') %>:} <%== config->{roomservice}->{invoice}->{bankgiro} %>}\newline
+%   }
+%   if (exists(config->{roomservice}->{invoice}->{plusgiro}) && ('' ne config->{roomservice}->{invoice}->{plusgiro})) {
+\footnotesize {\textbf {<%= __('Plusgiro') %>:} <%== config->{roomservice}->{invoice}->{plusgiro} %>}\newline
+%   }
+% } else {
+%   if (exists(config->{roomservice}->{invoice}->{bicswift}) && ('' ne config->{roomservice}->{invoice}->{bicswift})) {
+\footnotesize {\textbf {<%= __('BIC/Swift address') %>:} <%== config->{roomservice}->{invoice}->{bicswift} %>}\newline
+%   }
+%   if (exists(config->{roomservice}->{invoice}->{iban}) && ('' ne config->{roomservice}->{invoice}->{iban})) {
+\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{roomservice}->{invoice}->{bicswift} %>}\newline
+%   }
+%   if (exists(config->{roomservice}->{invoice}->{paypal}) && ('' ne config->{roomservice}->{invoice}->{paypal})) {
+\footnotesize {\textbf {<%= __('Paypal') %>:} <%== config->{roomservice}->{invoice}->{paypal} %>\
+%     if (exists(config->{roomservice}->{invoice}->{paypalfee}) && (config->{roomservice}->{invoice}->{paypalfee})) {
+%       my $fee = config->{roomservice}->{invoice}->{paypalfee};
+%       $fee =~ s/\%/\\%/g;
+, <%= __x('add {fee}', fee => $fee) %>
+%     }
+}\newline
+%   }
+% }
+% if (exists(config->{roomservice}->{invoice}->{contact}) && ('' ne config->{roomservice}->{invoice}->{contact})) {
+\footnotesize {\textbf {<%= __('Contact') %>:} <%== config->{roomservice}->{invoice}->{contact} %>}\newline
+% }
+% if (exists(config->{roomservice}->{invoice}->{billingcontact}) && ('' ne config->{roomservice}->{invoice}->{billingcontact})) {
+\footnotesize {\textbf {<%= __('Invoicing') %>:} <%== config->{roomservice}->{invoice}->{billingcontact} %>}\newline
+% }
+% if (exists(config->{roomservice}->{invoice}->{office}) && ('' ne config->{roomservice}->{invoice}->{office})) {
+\footnotesize {\textbf {<%= __('Registered office') %>:} <%== config->{roomservice}->{invoice}->{office} %>}\newline
+% }
+% if (exists(config->{roomservice}->{invoice}->{ftax}) && (config->{roomservice}->{invoice}->{ftax})) {
+\footnotesize {<%== __('Registered for F-tax') %>}\newline
+% }
+\vfill
+% if ('sv_SE' eq $customer->{lang}) {
+%   $invoice->{rounded} =~ tr/\./,/;
+%   $invoice->{vatcost} =~ tr/\./,/;
+%   $invoice->{diff} =~ tr/\./,/;
+%   $invoice->{costsum} =~ tr/\./,/;
+%   $vat =~ tr/\./,/;
+% }
+% if ('eur' eq $customer->{currency} && 'sv_SE' ne $customer->{lang}) {
+\begin{huge}\textbf {\
+<%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+}\end{huge}\newline
+\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+%
+%	} else {
+\begin{huge}\textbf {\
+<%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+}\end{huge}\newline
+\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+%   if ($invoice->{diff}) {
+\footnotesize {\textbf {<%== __('Round off') %>:} <%== $invoice->{diff} %> <%=$currency->{ $customer->{currency} } %>}\newline
+%   }
+% }
+\footnotesize {\textbf {<%== __('Payment terms') %>:} <%== __x('{number} days', number => config->{roomservice}->{invoice}->{duedays}) %>}\newline
+\footnotesize {\textbf {<%== __('Due to') %>:} <%== $invoice->{duedate} %>}\newline
+\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => '8\%') %>}}}}
+\settoheight {\billboxheight} {\usebox {\billbox}}
+%%
+\begin {document}
+\title {<%= $invoice->{title} %>}
+\author {<%== config->{author} %>}
+\date {\textbf {<%== __('Date') %>:} <%== sprintf('%s%s', $invoice->{invoicedate}, ('snailmail' eq $customer->{invoicetype}) ? '.' : '') %>}
+\setlength {\unitlength} {1cm}
+\begin {picture}(17.42, 11.7)(0.0, 0.0)
+\put(0.0, 11.7) {\includegraphics[width=5cm] {<%== config->{roomservice}->{invoice}->{logotype} %>}}
+\put(9.0, 12.8) {\usebox {\invoicebox}}
+\put(0.0, 10.4) {\usebox {\refbox}}
+%% When printed on A4, and folded,  the address box should appear in the window of a C5 H2 envelope
+\put(9.0, 10.4) {\usebox {\addressbox}}
+\put(0.0, 7.50) {\usebox {\billbox}}
+\put(9.0, 7.50) {\usebox {\yourrefbox}}
+\end {picture}
+\begin {center}
+\keepXColumns
+\begin {tabularx} {\linewidth} {lXrrrrr}
+\rowcolor {black}\color {white}\small { \textbf {<%== __('Description') %>}} & & \
+\color {white}\small { \textbf {<%== __('Qty') %>}} & \
+\color {white}\small { \textbf {<%== __('Price') %>}} & \
+\color {white}\small { \textbf {<%== __('Net') %>}} & \
+\color {white}\small { \textbf {<%== __('VAT') %>}} & \
+\color {white}\small { \textbf {<%== __('Gross') %>}}\endhead
+\multicolumn {7} {r} {\color {black}\small {\textbf {<%== __('Continues on next page...') %>}}} \endfoot
+\endlastfoot
+% my $i = 0;
+% for my $invoiceitemid (sort {$a cmp $b} keys %$invoiceitems) {
+%   my $invoiceitem = $invoiceitems->{$invoiceitemid};
+%
+%   my $cost = $invoiceitem->{price};
+%   my $net = $invoiceitem->{price} * $invoiceitem->{number};
+%	  my $vatcost = $net * $invoice->{vat};
+%	  my $gross = $net + $vatcost;
+%
+%   if ($cost =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $cost = sprintf("%.2f", $cost);
+%   }
+%   if ($net =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $net = sprintf("%.2f", $net);
+%   }
+%   if ($vatcost =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $vatcost = sprintf("%.2f", $vatcost);
+%   }
+%   if ($gross =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $gross = sprintf("%.2f", $gross);
+%   }
+%
+%   if ('sv_SE' eq $customer->{lang}) {
+%     $cost =~ tr/\./,/;
+%     $net =~ tr/\./,/;
+%     $vatcost =~ tr/\./,/;
+%     $gross =~ tr/\./,/;
+%   } else {
+%     $cost =~ tr/\,/./;
+%     $net =~ tr/\,/./;
+%     $vatcost =~ tr/\,/./;
+%     $gross =~ tr/\,/./;
+%   }
+%   if (($i % 2) && ($i != scalar keys %$invoiceitems)) {
+\rowcolor {gray1}\
+%   }
+\small {<%== $invoiceitem->{invoiceitemtext} %>} & & \
+%   if (1 == $invoiceitem->{number}) {
+& \
+%   } else {
+\small {<%= $invoiceitem->{number} %>} & \
+%   }
+\small {<%== __x('{cost}', cost => $cost, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $net, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $vatcost, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $gross, currency => $currency->{ $customer->{currency} }) %>}\\\
+
+%   $i++;
+% }
+\end {tabularx}
+\end {center}
+\end {document}

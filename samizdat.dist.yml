@@ -1,12 +1,13 @@
 ---
 secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
+organization: FAKE Media
 sitename: Example
 shortsitename: Example
 description: Example, a fullstack static content hybrid generator for extreme speed and optional disconnected use.
-siteurl: https://fakenews.com/
-host: fakenews.com
-cookiedomain: .fakenews.com
+siteurl: https://example.com/
+host: example.com
+cookiedomain: .example.com
 authcookiename: samizauth
 datacookiename: samizdata
 extraplugins:
@@ -55,23 +56,23 @@ humans: |
     Programming languages: Perl, Javascript, SQL, Shellscript, Lua, Makefile, SCSS, CSS
     IDE: Intellij IDEA Ultimate Edition
 ads: |
-  placeholder.fakenews.com, placeholder, DIRECT, placeholder
+  placeholder.example.com, placeholder, DIRECT, placeholder
 security: |
   # Our security address
-  Contact: mailto:security@fakenews.com
+  Contact: mailto:security@example.com
   
   # Our OpenPGP key
-  Encryption: https://fakenews.com/security/pgp-key.txt
+  Encryption: https://exampl4.com/security/pgp-key.txt
   
   # Our security policy
-  Policy: https://fakenews.com/security
+  Policy: https://example.com/security
   
   # Our security acknowledgements
-  Acknowledgements: https://fakenews.com/security/acknowledgements
+  Acknowledgements: https://example.com/security/acknowledgements
   
   Preferred-Languages: en,sv
   
-  Canonical: https://fakenews.com/.well-known/security.txt
+  Canonical: https://example.com/.well-known/security.txt
 layout: bootstrap
 captcha:
   session_name: captcha_string
@@ -80,13 +81,17 @@ captcha:
   width: 460
   height: 60
 mail:
-  from: noreply@fakenews.com
+  from: noreply@example.com
   type: text/html
   how: smtp
   howargs:
-    - smtp.fakenews.com
+    - smtp.example.com
+    - Port
+    - 465
+    - SSL
+    - 1
     - AuthUser
-    - account@fakenews.com
+    - account@example.com
     - AuthPass
     - s3cr3t
 hypnotoad:

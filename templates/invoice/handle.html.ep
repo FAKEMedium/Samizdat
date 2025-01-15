@@ -1,0 +1,9 @@
+<form class="row" method="post" id="dataform">
+  <input type="hidden" name="invoiceid" id="invoiceid" value="">
+  <input type="hidden" name="customerid" id="customerid" value="">
+  <button type="submit" class="btn btn-primary mb-3" onclick="remindInvoice();"><%== __('Remind') %></button>
+  <button type="submit" class="btn btn-primary mb-3" onclick="reprintInvoice();"><%== __('Reprint') %></button>
+  <button type="submit" class="btn btn-primary mb-3" onclick="resendInvoice();"><%== __('Resend') %></button>
+  <button type="submit" class="btn btn-primary mb-3" onclick="markpaidInvoice();"><%== __('Mark paid') %></button>
+  <button type="submit" class="btn btn-primary mb-3" onclick="makecreditInvoice();"><%== __('Make credit invoice') %></button>
+</form>

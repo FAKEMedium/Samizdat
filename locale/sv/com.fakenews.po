@@ -89,7 +89,7 @@ msgid "Add product"
 msgstr "Ny produkt"
 
 msgid "Add subscription"
-msgstr ""
+msgstr "Ny prenumeration"
 
 msgid "Add voucher"
 msgstr "Ny verifikation"
@@ -120,6 +120,12 @@ msgstr "Summa inkl. moms"
 
 msgid "Amount to pay incl. VAT: {rounded} {currency}"
 msgstr "Belopp att betala inkl. moms: {rounded} {currency}"
+
+msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgstr "Belopp att betala inklusive {percent} moms: {costsum} {currency}"
+
+msgid "Amount to pay: {costsum} {currency}"
+msgstr "Belopp att betala: {costsum} {currency}"
 
 msgid "Article"
 msgstr "Artikel"
@@ -169,6 +175,18 @@ msgstr "Captcha-bild"
 msgid "Captcha was wrong"
 msgstr "Felaktig captcha"
 
+msgid "Change password"
+msgstr "Ändra lösenord"
+
+msgid "Changed status."
+msgstr ""
+
+msgid "Choose a password."
+msgstr "Välj ett lösenord"
+
+msgid "Choose a username."
+msgstr "Välj ett användarnamn"
+
 msgid "Choose language"
 msgstr "Välj språk"
 
@@ -200,7 +218,7 @@ msgid "Continue"
 msgstr "Fortsätt"
 
 msgid "Continues on next page..."
-msgstr "Fortsätter nästa sida..."
+msgstr "Fortsätter på nästa sida..."
 
 msgid "Contribute"
 msgstr "Bidra"
@@ -221,7 +239,7 @@ msgid "Create contact"
 msgstr "Skapa kontakt"
 
 msgid "Create customer"
-msgstr ""
+msgstr "Skapa kund"
 
 msgid "Created {created} by {creator}"
 msgstr "Skapad {created} av {creator}"
@@ -233,7 +251,7 @@ msgid "Creditability"
 msgstr "Kreditvärdighet"
 
 msgid "Customer"
-msgstr ""
+msgstr "Kund"
 
 msgid "Customer #{customerid}"
 msgstr "Kund #{customerid}"
@@ -261,6 +279,9 @@ msgstr "Databaser"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Debt"
+msgstr "Skuld"
 
 msgid "Description"
 msgstr "Beskrivning"
@@ -382,11 +403,14 @@ msgstr "Ange användarnamn och lösenord"
 msgid "Enter valid email"
 msgstr "Ange giltig epostadress"
 
+msgid "Enter your email"
+msgstr ""
+
 msgid "Euro"
 msgstr ""
 
 msgid "Examples"
-msgstr ""
+msgstr "Exempel"
 
 msgid "Expand menu"
 msgstr "Expandera meny"
@@ -412,6 +436,9 @@ msgstr "Misslyckad inloggning från {ip}"
 msgid "Fill the form correctly!"
 msgstr ""
 
+msgid "Find your invoice attached as PDF."
+msgstr "Fakturan bifogas som PDF."
+
 msgid "First name"
 msgstr "Förnamn"
 
@@ -433,6 +460,9 @@ msgstr ""
 msgid "Halfyear"
 msgstr "Halvår"
 
+msgid "I accept the terms for registration."
+msgstr "Jag accepterar registreringsvillkoren"
+
 msgid "IBAN"
 msgstr ""
 
@@ -452,7 +482,7 @@ msgid "Invoice currency"
 msgstr "Valuta"
 
 msgid "Invoice currency is {currency}."
-msgstr "Fakturering i {currency}"
+msgstr "Fakturering görs i {currency}"
 
 msgid "Invoice customer #{customerid}"
 msgstr "Faktura kund #{customerid}"
@@ -460,8 +490,14 @@ msgstr "Faktura kund #{customerid}"
 msgid "Invoice customer {customerid}"
 msgstr "Faktura kund {customerid}"
 
+msgid "Invoice for completed services"
+msgstr "Faktura för utförda tjänster"
+
 msgid "Invoice number"
 msgstr "Fakturanummer"
+
+msgid "Invoice number: {fakturanummer}"
+msgstr "Fakturanummer: {fakturanummer}"
 
 msgid "Invoice period"
 msgstr "Fakturaperiod"
@@ -469,11 +505,17 @@ msgstr "Fakturaperiod"
 msgid "Invoice questions"
 msgstr "Fakturafrågor"
 
+msgid "Invoice questions can be directed to {url}."
+msgstr "Fakturafrågor kan skickas till {url}."
+
 msgid "Invoice questions:"
 msgstr "Fakturafrågor:"
 
 msgid "Invoice type"
 msgstr "Fakturatyp"
+
+msgid "Invoice {fakturanummer}"
+msgstr "Faktura {fakturanummer}"
 
 msgid "Invoice {number}"
 msgstr "Faktura {number}"
@@ -494,6 +536,9 @@ msgid "Invoicing, 1 item"
 msgid_plural "Invoicing, {number} items"
 msgstr[0] "Fakturering, 1 rad"
 msgstr[1] "Fakturering, {number} rader"
+
+msgid "It's also available at"
+msgstr "Den finns också på"
 
 msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
@@ -534,11 +579,17 @@ msgstr "Logga ut och avsluta sessionen"
 msgid "Login"
 msgstr "Logga in"
 
-msgid "Logotype leading to start"
+msgid "Login blocked"
 msgstr ""
 
-msgid "Logotype leading to start page"
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr ""
+
+msgid "Logotype leading to start"
+msgstr "Logotypen leder till start"
+
+msgid "Logotype leading to start page"
+msgstr "Logotypen leder till startsidan"
 
 msgid "Lost password?"
 msgstr "Förlorat lösenordet?"
@@ -573,6 +624,9 @@ msgstr "Meddelandet skickades"
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
 
+msgid "Missing username or password"
+msgstr ""
+
 msgid "Mobile"
 msgstr "Mobiltelefon"
 
@@ -604,7 +658,7 @@ msgid "New invoice pack"
 msgstr "Ny samlingsfaktura"
 
 msgid "Newest"
-msgstr ""
+msgstr "Nyast"
 
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
@@ -640,7 +694,7 @@ msgid "Open invoice for customer #{customerid}"
 msgstr "Öppen faktura för kund {customerid}#"
 
 msgid "Open invoice items"
-msgstr ""
+msgstr "Ofakturerade rader"
 
 msgid "Open invoices"
 msgstr "Öppna fakturor"
@@ -649,7 +703,7 @@ msgid "Open list"
 msgstr "Öppna lista"
 
 msgid "Options"
-msgstr ""
+msgstr "Variabler"
 
 msgid "Org. Id"
 msgstr "Org. nr"
@@ -672,8 +726,17 @@ msgstr "Sida {number} av  {total}"
 msgid "Paid"
 msgstr "Betalad"
 
+msgid "Panel"
+msgstr ""
+
 msgid "Password"
 msgstr "Lösenord"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr ""
+
+msgid "Payment due to: {duedate}"
+msgstr "Förfallodatum: {duedate}"
 
 msgid "Payment terms"
 msgstr "Betalningsvillkor"
@@ -689,6 +752,15 @@ msgstr "Personlig meny"
 
 msgid "Personal panel"
 msgstr "Personlig panel"
+
+msgid "Please login to access resource."
+msgstr ""
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr ""
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
 
 msgid "Posta faktura"
 msgstr "Mail invoice"
@@ -709,7 +781,7 @@ msgid "Products"
 msgstr "Produkter"
 
 msgid "Qty"
-msgstr "Ant."
+msgstr "Antal"
 
 msgid "Qty."
 msgstr "Ant."
@@ -728,6 +800,9 @@ msgstr "Rekommenderad av"
 
 msgid "Register"
 msgstr "Registrera"
+
+msgid "Register account"
+msgstr "Registrera konto"
 
 msgid "Registered for F-tax"
 msgstr "Registrerad för F-skatt"
@@ -791,6 +866,9 @@ msgstr ""
 
 msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
+
+msgid "Send invoice questions to {url}."
+msgstr "Skicka fakturafrågor till {url}."
 
 msgid "Send now"
 msgstr "Skicka nu"
@@ -864,6 +942,9 @@ msgstr "Blandat"
 msgid "Subject"
 msgstr "Ämne"
 
+msgid "Summa"
+msgstr "Amount"
+
 msgid "Super panel"
 msgstr ""
 
@@ -872,6 +953,9 @@ msgstr "Förnamn"
 
 msgid "Swedish"
 msgstr "Svenska"
+
+msgid "Technical"
+msgstr "Teknik"
 
 msgid "Technical questions"
 msgstr "Teknikfrågor"
@@ -897,6 +981,12 @@ msgstr "Projektet Samizdat"
 msgid "The default is used for the Bootstrap icons set."
 msgstr ""
 
+msgid "The invoice is also available at"
+msgstr "Fakturan finns också på"
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr ""
+
 msgid "The limit is {limit}."
 msgstr "Gränsen är {limit}."
 
@@ -918,6 +1008,9 @@ msgstr "Denna fil distribueras under samma licens som paketet {project}."
 msgid "Toggle menu"
 msgstr "Visa meny"
 
+msgid "Tot"
+msgstr ""
+
 msgid "Transfer"
 msgstr "Överföring"
 
@@ -934,22 +1027,22 @@ msgid "Update and send."
 msgstr "Uppdatera och skcka."
 
 msgid "Update customer"
-msgstr ""
+msgstr "Uppdaterade faktura, kund #{customerid}"
 
 msgid "Update invoice, customer #{customerid}"
-msgstr ""
+msgstr "Uppdatera faktura, kund #{customerid}"
 
 msgid "Updated customer"
-msgstr ""
+msgstr "Uppdaterade kund"
 
 msgid "Updated invoice"
-msgstr ""
+msgstr "Uppdaterade faktura"
 
 msgid "Updated {updated} by {updater}"
 msgstr "Uppdaterad {updated} av {updater}"
 
 msgid "Usage"
-msgstr ""
+msgstr "Förbrukning"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
 msgstr ""
@@ -990,6 +1083,9 @@ msgstr "Moms {rate}\\%"
 msgid "Value for the class attribute."
 msgstr ""
 
+msgid "We will email a confirmation request."
+msgstr ""
+
 msgid "We will reply as soon as possible."
 msgstr "Vi svarar så fort vi kan."
 
@@ -999,11 +1095,17 @@ msgstr ""
 msgid "Websites"
 msgstr "Webbplatser"
 
+msgid "Write the invoice number as message when you pay."
+msgstr "Skriv fakturanumret som meddelande vid betalning."
+
 msgid "Wrong captcha"
 msgstr "Felaktig captcha"
 
 msgid "Year"
 msgstr "År"
+
+msgid "You have {remaining} tries left."
+msgstr ""
 
 msgid "You were logged in as {username}."
 msgstr "Du var inloggad som {username}."
@@ -1029,6 +1131,9 @@ msgstr "Ditt namn"
 msgid "add 3\\%"
 msgstr "lägg till 3\\%"
 
+msgid "add {fee}"
+msgstr "lägg till {fee}"
+
 msgid "control panel"
 msgstr "kontrollpanel"
 
@@ -1040,6 +1145,12 @@ msgstr "huvudbrandvägg"
 
 msgid "standby firewall"
 msgstr "standbybrandvägg"
+
+msgid "{code}: Authentication required"
+msgstr ""
+
+msgid "{code}: No authorization"
+msgstr ""
 
 msgid "{cost}"
 msgstr ""

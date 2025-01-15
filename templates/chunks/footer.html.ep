@@ -7,6 +7,6 @@
       </picture></a>
   </div>
   <div class="col-4 col-auto text-end align-self-center">
-    <%== __x('&copy;{year}&nbsp;{author}', year => (localtime(time))[5] + 1900, author => config->{'sitename'}) %>
+    <%== __x('&copy;{year}&nbsp;{author}', year => (localtime(time))[5] + 1900, author => config->{organization}) %>
   </div>
 </div>

@@ -1,0 +1,47 @@
+<form class="row needs-validation grid gap-0 row-gap-3 px-0 g-0" id="customer" method="post">
+  <input name="customerid" id="customerid" type="hidden" value="<%== $customer->{customerid} %>" />
+  <div class="col-md-8 gx-0 gap-0">
+  </div>
+
+  <div class="col-md-4 gx-0 gap-0">
+    <div class="form-floating mb-2">
+      <textarea rows="3" style="height: 100px;" class="form-control" id="billingaddress" name="billingaddress" aria-describedby="invalidbillingaddress"><%== $customer->{billingaddress} =%></textarea>
+      <label for="billingaddress" class="form-label"><%== __('Address (billing)') %></label>
+      <div id="invalidbillingaddress" class="invalid-feedback"><%= __('Empty billingaddress') %></div>
+    </div>
+    <div class="row gx-0 gap-0 mb-2">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="billingzip" name="billingzip" value="<%== $customer->{billingzip} %>" aria-describedby="invalidbillingzip" />
+          <label for="billingzip" class="form-label"><%== __('Postal code (billing)') %></label>
+          <div id="invalidbillingzip" class="invalid-feedback"><%= __('Empty postal code') %></div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="billingcity" name="billingcity" value="<%== $customer->{billingcity} %>" aria-describedby="invalidbillingcity" />
+          <label for="billingcity" class="form-label"><%== __('City (billing)') %></label>
+          <div id="invalidbillingcity" class="invalid-feedback"><%= __('Empty city') %></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <select id="billingcountry" name="billingcountry" class="form-select" aria-describedby="invalidbillingcountry">
+        <option value=""><%== __('Select country') %></option>
+% my $countries = countrylist;
+% for my $country (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+%   my $selected = $customer->{billingcountry} eq $country ? ' selected="selected"' : '';
+        <option value="<%= $country %>"<%== $selected %>><%= $countries->{$country} %></option>
+% }
+      </select>
+      <label for="billingcountry" class="form-label"><%== __('Country (billing)') %></label>
+      <div id="invalidbillingcountry" class="invalid-feedback"><%= __('Empty country') %></div>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="billingemail" class="form-control" id="billingemail" name="billingemail" value="<%== $customer->{billingemail} %>" aria-describedby="billingemail invalidbillingemail" />
+      <label for="billingemail" class="form-label"><%== __('Email (billing)') %></label>
+      <div id="invalidbillingemail" class="invalid-feedback"><%= __('Email not valid') %></div>
+    </div>
+    <button type="submit" class="btn btn-primary my-3 form-control"><span class="mx-2"><%== __('Save') %></span>&nbsp;<%== icon 'send-fill', {} %></button>
+  </div>
+</form>

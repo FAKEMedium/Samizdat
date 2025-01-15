@@ -30,7 +30,7 @@ msgid "Admininistration panel"
 msgstr ""
 
 msgid "Advertising"
-msgstr ""
+msgstr "Annonsering"
 
 msgid "Blocked ip number"
 msgstr ""
@@ -39,10 +39,10 @@ msgid "Click to pop login dialog."
 msgstr ""
 
 msgid "Close"
-msgstr ""
+msgstr "Stäng"
 
 msgid "Contact"
-msgstr ""
+msgstr "Kontakt"
 
 msgid "Contribute"
 msgstr ""
@@ -72,7 +72,7 @@ msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
 msgid "Keep me logged in"
-msgstr ""
+msgstr "Håll"
 
 msgid "Link to personal data"
 msgstr ""

@@ -1,0 +1,22 @@
+% my $trusts = {'blocked' => __('Blocked'), 'normal' => __('Normal'), 'trusted' => __('Full')};
+<table class="table table-sm table-striped sortable" id="customers">
+  <thead>
+    <tr>
+      <th><%== __('Customer Id') %></th>
+      <th><%== __('Company') %></th>
+      <th><%== __('First name') %></th>
+      <th><%== __('Last name') %></th>
+    </tr>
+  </thead>
+  <tbody>
+% for my $customer (sort {$a->{customerid} <=> $b->{customerid}} @{$customers}) {
+    <tr onclick="window.location='<%= config->{managerurl} %>customers/<%= $customer->{customerid} %>'">
+      <td><%= $customer->{customerid} %></td>
+      <td><%== $customer->{company} %></td>
+      <td><%== $customer->{firstname} %></td>
+      <td><%== $customer->{lastname} %></td>
+      <td><%== $trusts->{ $customer->{trust} } %></td>
+    </tr>
+% }
+  </tbody>
+</table>

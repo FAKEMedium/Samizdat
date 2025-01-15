@@ -1,0 +1,22 @@
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="personal-tab" data-bs-toggle="tab" data-bs-target="#personal-tab-pane" type="button" role="tab" aria-controls="personal-tab-pane" aria-selected="true"><%== __('Personal') %></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="invoice-tab" data-bs-toggle="tab" data-bs-target="#invoice-tab-pane" type="button" role="tab" aria-controls="invoice-tab-pane" aria-selected="false"><%== __('Invoice') %></button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="domain-tab" data-bs-toggle="tab" data-bs-target="#domain-tab-pane" type="button" role="tab" aria-controls="domain-tab-pane" aria-selected="false"><%== __('Domains') %></button>
+  </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+  <div class="tab-pane fade show active" id="personal-tab-pane" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
+    <%== indent eval { include 'customer/profile' }, 2 %>
+  </div>
+  <div class="tab-pane fade" id="invoice-tab-pane" role="tabpanel" aria-labelledby="invoice-tab" tabindex="0">
+    <%== indent eval { include 'customer/invoices' }, 2 %>
+  </div>
+  <div class="tab-pane fade" id="domain-tab-pane" role="tabpanel" aria-labelledby="domain-tab" tabindex="0">
+    <%== indent eval { include 'customer/domains' }, 2 %>
+  </div>
+</div>

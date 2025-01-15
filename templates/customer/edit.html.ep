@@ -1,0 +1,470 @@
+<form class="row" method="post" id="dataform">
+  <input name="customerid" id="customerid" type="hidden" />
+  <div class="col-md-4 col-xl-5">
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="firstname" name="firstname" aria-describedby="lastname invalidfirstname" />
+          <label for="firstname" class="form-label"><%== __('First name') %></label>
+          <div id="invalidfirstname" class="invalid-feedback"><%= __('Empty first name') %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="lastname" name="lastname" aria-describedby="lastname invalidlastname" />
+          <label for="lastname" class="form-label"><%== __('Last name') %></label>
+          <div id="invalidlastname" class="invalid-feedback"><%= __('Empty last name') %></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="text" class="form-control" id="company" name="company" aria-describedby="company invalidcompany" />
+      <label for="company" class="form-label"><%== __('Company') %></label>
+      <div id="invalidcompany" class="invalid-feedback"><%= __('Empty company name') %></div>
+    </div>
+    <div class="form-floating mb-2">
+      <textarea rows="2" style="height: 70px;" class="form-control" id="address" name="address" aria-describedby="invalidaddress"></textarea>
+      <label for="address" class="form-label"><%== __('Address') %></label>
+      <div id="invalidaddress" class="invalid-feedback"><%= __('Empty address') %></div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="zip" name="zip" aria-describedby="invalidzip" />
+          <label for="zip" class="form-label"><%== __('Postal code') %></label>
+          <div id="invalidzip" class="invalid-feedback"><%= __('Empty postal code') %></div>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="city" name="city" aria-describedby="invalidcity" />
+          <label for="city" class="form-label"><%== __('City') %></label>
+          <div id="invalidcity" class="invalid-feedback"><%= __('Empty city') %></div>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-8">
+        <div class="form-floating">
+          <select id="country" name="country" class="form-select" aria-describedby="invalidcountry">
+            <option value=""><%== __('Select country') %></option>
+% my $countries = countrylist;
+% for my $country (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+            <option value="<%= $country %>"><%= $countries->{$country} %></option>
+% }
+          </select>
+          <label for="country" class="form-label"><%== __('Country') %></label>
+          <div id="invalidcountry" class="invalid-feedback"><%= __('Empty country') %></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select class="form-select" id="lang" name="lang" aria-label="<%== __('Language') %>">
+% my $languages = { 'en_GB' => __('English'), 'sv_SE' => __('Swedish') };
+% for my $lang (keys %$languages) {
+            <option value="<%== $lang %>"><%== $languages->{$lang} %></option>
+% }
+          </select>
+          <label for="lang"><%== __('Language') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <div class="position-absolute top-0 end-0 translate-middle-y d-print-none" style="width: 18px;">
+        <a id="mailto" class="reset"><%== icon 'envelope-fill' %></a>
+      </div>
+      <input type="contactemail" class="form-control" id="contactemail" name="contactemail" aria-describedby="contactemail invalidcontactemail" />
+      <label for="contactemail" class="form-label"><%== __('Email') %></label>
+      <div id="invalidcontactemail" class="invalid-feedback"><%= __('Email not valid') %></div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <div class="position-absolute top-0 end-0 translate-middle-y d-print-none tel1" style="width: 18px;">
+            <a id="tel1" class="reset"><%== icon 'telephone-forward-fill' %></a>
+          </div>
+          <input type="text" class="form-control" id="phone1" name="phone1" aria-describedby="invalidphone1" />
+          <label for="phone1" class="form-label"><%== __('Telephone') %></label>
+          <div id="invalidphone1" class="invalid-feedback"><%= __('Empty telephone') %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <div class="position-absolute top-0 end-0 translate-middle-y d-print-none tel2">
+            <a id="sms" class="reset"><%== icon 'send-fill' %></a>
+            <a id="tel2" class="reset"><%== icon 'telephone-forward-fill' %></a>
+          </div>
+          <input type="text" class="form-control" id="phone2" name="phone2" aria-describedby="invalidphone2" />
+          <label for="phone2" class="form-label"><%== __('Mobile') %></label>
+          <div id="invalidphone2" class="invalid-feedback"><%= __('Empty mobile') %></div>
+        </div>
+      </div>
+    </div>
+  </div>
+%
+  <div class="col-md-4 col-xl-5">
+    <div class="form-floating mb-2 text-break">
+      <div class="position-absolute top-0 end-0 translate-middle-y d-print-none">
+        <a target="lookup" id="upplysning" class="reset"><%== icon 'person-fill' %></a>
+        <a target="lookup" id="allabolag" class="reset"><%== icon 'people-fill' %></a>
+        <a target="lookup" id="brreg" class="reset"><%== icon 'people-fill' %></a>
+        <a target="lookup" id="ejustice" class="reset"><%== icon 'people-fill' %></a>
+      </div>
+      <input type="text" class="form-control" id="orgno" name="orgno" aria-describedby="orgno invalidorgno" />
+      <label for="orgno" class="form-label"><%== __('Identification code') %></label>
+      <div id="invalidorgno" class="invalid-feedback"><%= __('Empty code') %></div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-8">
+        <div class="form-floating">
+          <div class="position-absolute top-0 end-0 translate-middle-y d-print-none">
+            <a target="lookup" id="vatlookup" class="reset"><%== icon 'search' %></a>
+          </div>
+          <input type="text" class="form-control" id="vatno" name="vatno" aria-describedby="vatno invalidvatno" />
+          <label for="vatno" class="form-label"><%== __('VAT number') %></label>
+          <div id="invalidvatno" class="invalid-feedback"><%= __('Empty VAT number') %></div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="vat" name="vat" aria-describedby="invalidvat" />
+          <label for="vat" class="form-label"><%== __('VAT percentage') %></label>
+          <div id="invalidvat" class="invalid-feedback"><%= __('Empty VAT') %></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <textarea rows="2" style="height: 70px;" class="form-control" id="freetext" name="freetext" aria-describedby="invalidfreetext"></textarea>
+      <label for="freetext" class="form-label"><%== __('Notes') %></label>
+      <div id="invalidfreetext" class="invalid-feedback"><%= __('Empty freetext') %></div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="reference" name="reference" aria-describedby="reference invalidreference" />
+          <label for="reference" class="form-label"><%== __('Our reference') %></label>
+          <div id="invalidreference" class="invalid-feedback"><%= __('Empty reference') %></div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="recommendedby" name="recommendedby" aria-describedby="recommendedby invalidrecommendedby" />
+          <label for="recommendedby" class="form-label"><%== __('Recommended by') %></label>
+          <div id="invalidrecommendedby" class="invalid-feedback"><%= __('Empty recommendation') %></div>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <select class="form-select" id="trust" name="trust" aria-label="<%== __('Credit trustability') %>">
+% my $trusts = [ {'blocked' => __('Blocked') }, {'normal' => __('Normal')}, {'trusted' => __('Full')} ];
+% for my $item (@$trusts) {
+%   my ($trust, $trustname) = each %$item;
+        <option value="<%== $trust %>"<%== eval { return ' class="text-white bg-danger"' if ('blocked' eq $trust); } %>><%== $trustname %></option>
+% }
+      </select>
+      <label for="trust"><%== __('Credit trustability') %></label>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select class="form-select" id="currency" name="currency" aria-label="<%== __('Invoice currency') %>">
+% my $currencies = [ {'sek' => __('SEK') }, {'eur' => __('Euro')} ];
+% for my $item (@$currencies) {
+%   my ($type, $typename) = each %$item;
+            <option value="<%== $type %>"><%== $typename %></option>
+% }
+          </select>
+          <label for="currency"><%== __('Invoice currency') %></label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select class="form-select" id="period" name="period" aria-label="<%== __('Invoice period') %>">
+% my $periods = [ {'monthly' => __('Month') }, {'quarterly' => __('Quarter')}, {halfyear => __('Halfyear')}, {yearly => __('Year')}, {nopay => __('No invoicing')} ];
+% for my $item (@$periods) {
+%   my ($period, $periodname) = each %$item;
+            <option value="<%== $period %>"><%== $periodname %></option>
+% }
+          </select>
+          <label for="period"><%== __('Invoice period') %></label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select class="form-select" id="invoicetype" name="invoicetype" aria-label="<%== __('Invoice type') %>">
+% my $types = [ {'email' => __('Email') }, {'snailmail' => __('Postal mail')} ];
+% for my $item (@$types) {
+%   my ($type, $typename) = each %$item;
+            <option value="<%== $type %>"><%== $typename %></option>
+% }
+          </select>
+          <label for="invoicetype"><%== __('Invoice type') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2 d-print-none">
+      <div class="form-check col-md-4">
+        <input class="form-check-input" type="checkbox" value="1" id="snapbackonly" name="snapbackonly" />
+        <label class="form-check-label" for="snapbackonly"><%== __('Snapback only') %></label>
+      </div>
+      <div class="form-check col-md-4">
+        <input class="form-check-input" type="checkbox" value="1" id="newsletter" name="newsletter" />
+        <label class="form-check-label" for="newsletter"><%== __('Newsletter') %></label>
+      </div>
+      <div class="form-check col-md-4">
+        <input class="form-check-input" type="checkbox" value="1" id="moss" name="moss" />
+        <label class="form-check-label" for="moss"><%== __('MOSS') %></label>
+      </div>
+      <div class="form-check col-md-4">
+        <input class="form-check-input" type="checkbox" value="1" id="rabatt" name="rabatt" />
+        <label class="form-check-label" for="rabatt"><%== __('Special price') %></label>
+      </div>
+      <div class="form-check col-md-4">
+        <input class="form-check-input" type="checkbox" value="1" id="kompispris" name="kompispris" />
+        <label class="form-check-label" for="kompispris"><%== __('Buddy price') %></label>
+      </div>
+    </div>
+  </div>
+%
+  <div class="col-md-4 col-xl-2">
+    <div class="offcanvas offcanvas-start" id="invoicelist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Invoices') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-header">
+        <span class="currencynote"></span>
+        <a href="invoices"><%== __('Open list') %></a>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="invoices">
+          <thead>
+            <tr>
+              <th> </th>
+              <th><%== __('Number') %></th>
+              <th><%== __('Date') %></th>
+              <th><%== __('Amount') %></th>
+              <th><%== __('Paid') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="invoiceitemlist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Open invoice') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-header">
+        <span class="currencynote"></span>
+        <a href="#" class="openinvoicelink"><%== __('Update and send page.') %></a>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="invoiceitems">
+          <thead>
+            <tr>
+              <th><%== __('Description') %></th>
+              <th class="text-end"><%== __('Amount') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+          <tfoot>
+            <tr>
+              <th><%== __('Amount') %>:</th>
+              <td id="amount" class="text-end blank"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="domainlist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Domains') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-header">
+        <a href="#" id="domainlistlink"><%== __('Open list') %></a>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="domains">
+          <thead>
+            <tr>
+              <th><%== __('Domain') %></th>
+              <th class="text-end"><%== __('Expires') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="dnsdomainlist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('DNS domains') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="dnsdomains">
+          <thead>
+            <tr><th><%== __('Domain') %></th></tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="sitelist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Websites') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="sites">
+          <thead>
+            <tr>
+              <th><%== __('Site') %></th>
+              <th class="text-end"><%== __('MB') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="maildomainlist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Mail domains') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="maildomains">
+          <thead>
+            <tr>
+              <th><%== __('Domain') %></th>
+              <th class="text-end"><%== __('MB') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank">
+          </tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="offcanvas offcanvas-start" id="databaselist" data-bs-scroll="true" data-bs-backdrop="false">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title"><%== __('Databases') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="offcanvas-body">
+        <table class="table table-striped table-sm sortable" id="databases">
+          <thead>
+            <tr>
+              <th> </th>
+              <th><%== __('Database') %></th>
+              <th><%== __('Username') %></th>
+              <th class="text-end"><%== __('MB') %></th>
+            </tr>
+          </thead>
+          <tbody class="blank"></tbody>
+        </table>
+      </div>
+    </div>
+%
+    <div class="card mb-3">
+      <div class="card-header">
+        <%== __('Billing') %>
+        <div class="position-absolute top-0 me-2 end-0 text-break">
+          <a href="#" id="addproductlink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+        </div>
+      </div>
+      <ul class="list-group list-group-flush" id="subscriptions">
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#invoicelist" aria-expanded="false" aria-controls="invoicelist">
+            <%== __('Invoices') %>
+            <span id="due" class="badge rounded-pill bg-danger text-white blank"></span>
+            <span id="notdue" class="badge rounded-pill bg-warning text-dark blank"></span>
+            <span id="paid" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#invoiceitemlist" aria-expanded="false" aria-controls="invoiceitemlist">
+            <%== __('Open invoice items') %>
+            <span id="nrinvoiceitems" class="badge rounded-pill bg-warning text-dark blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" class="openinvoicelink"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+      </ul>
+    </div>
+%
+    <div class="card mb-3">
+      <div class="card-header"><%== __('Resources') %></div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#domainlist" aria-expanded="false" aria-controls="domainlist">
+            <%== __('Domains') %>
+            <span id="duedomains" class="badge rounded-pill bg-danger text-white blank"></span>
+            <span id="nrdomains" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" id="adddomainlink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#dnsdomainlist" aria-expanded="false" aria-controls="dnsdomainlist">
+            <%== __('DNS domains') %>
+            <span id="nrdnsdomains" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" id="adddnsdomainlink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#sitelist" aria-expanded="false" aria-controls="sitelist">
+            <%== __('Web sites') %>
+            <span id="nrsites" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" id="addsitelink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#maildomainlist" aria-expanded="false" aria-controls="maildomainlist">
+            <%== __('Mail domains') %>
+            <span id="nrmaildomains" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" id="addmaildomainlink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+        <li class="list-group-item">
+          <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#databaselist" aria-expanded="false" aria-controls="databaselist">
+            <%== __('Databases') %>
+            <span id="nrdatabases" class="badge rounded-pill bg-success text-white blank"></span>
+          </a>
+          <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">
+            <a href="#" id="adddatabaselink" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'plus-circle' %></a>
+          </div>
+        </li>
+      </ul>
+      <div class="card-footer"><span id="datausage" class="blank"></span></div>
+    </div>
+  </div>
+  <div class="col-md-4 d-print-none"></div>
+  <div class="col-md-4 d-print-none">
+    <button id="submitbutton" type="submit" onclick="updateCustomer();" class="btn btn-primary form-control d-print-none"><%== __('Save') %></button>
+  </div>
+  <div class="col-md-4 d-print-none">
+    <div class="text-end blank" id="creator"></div>
+    <div class="text-end blank" id="updater"></div>
+  </div>
+</form>

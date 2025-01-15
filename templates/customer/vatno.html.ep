@@ -1,0 +1,7 @@
+% for my $key (sort {$a cmp $b} keys %$info) {
+  <%== $key %>: <%== $info->{$key} %><br>
+% }
+<form>
+  <input type="text" name="vatno" id="vatno" value="<%== $vatno %>">
+</form>
+<div><%== $error %></div>

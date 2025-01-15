@@ -1,0 +1,32 @@
+<form id="dataform" action="/<%== $scriptname %>" method="post">
+  <table id="invoices" class="table table-sm table-striped sortable">
+    <thead>
+      <tr>
+        <th> </th>
+        <th><%== __('Invoice number') %></th>
+        <th class=""><%== __('Paid') %></th>
+        <th><%== __('Date') %></th>
+        <th class="text-end"><%== __('Amount') %></th>
+        <th class="text-end"><%== __('Debt') %></th>
+      </tr>
+    </thead>
+    <tbody>
+% for my $invoice (sort {$a->{invoiceid} <=> $b->{invoiceid}} @{$invoices}) {
+      <tr onclick="window.location='<%= config->{managerurl} %>invoices/<%= $invoice->{invoiceid} %>'">
+        <td><a href="/invoice/<%= $invoice->{uuid} %>.pdf"><%== icon 'file-pdf' %></a></td>
+        <td><%= $invoice->{fakturanummer} %></td>
+        <td><%== substr($invoice->{paydate}, 0, 10) %></td>
+        <td><%== substr($invoice->{invoicedate}, 0, 10) %></td>
+        <td class="text-end"><%== $invoice->{costsum} %></td>
+        <td class="text-end"><%== $invoice->{costsum} %></td>
+      </tr>
+% }
+    </tbody>
+    <tfoot>
+      <tr>
+        <th colspan="2" class="text-end"><%== __('Summa') %>:</th>
+        <th colspan="4" class="text-end"><span id="euro"></span> <span id="sek"></span></th>
+      </tr>
+    </tfoot>
+  </table>
+</form>
