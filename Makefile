@@ -23,7 +23,7 @@ nginx:
 
 eplinks:
 	find templates/ -type l -delete
-	find templates/ -type f | grep -E '.(js|tex|css)$$' | xargs -iö ln -s -r ö ö.ep
+	find templates/ -type f | grep -E '.(js|tex|css)$$' | xargs -Iö ln -s -r ö ö.ep
 
 iso: static
 	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
