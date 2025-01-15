@@ -2,10 +2,10 @@ SHELL := /bin/bash
 PATH := bin:$(PATH)
 
 fortnox:
-	samizdat makefortnox
+	bin/samizdat makefortnox
 
 dump:
-	samizdat makedump
+	bin/samizdat makedump
 
 static:
 	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
@@ -16,14 +16,14 @@ clean:
 	cp -af src/public/test/README.md src/public/test/README.txt
 
 harvest:
-	samizdat makeharvest
+	bin/samizdat makeharvest
 
 nginx:
-	samizdat makenginx
+	bin/samizdat makenginx
 
 eplinks:
 	find templates/ -type l -delete
-	samizdat makeeplinks
+	bin/samizdat makeeplinks
 
 iso: static
 	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
@@ -36,7 +36,7 @@ isotorrent: public/iso/samizdat.iso
 devtools:
 
 i18n:
-	samizdat makei18n
+	bin/samizdat makei18n
 
 debug:
 	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
@@ -45,7 +45,7 @@ server: clean zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
 
 routes:
-	samizdat routes -v
+	bin/samizdat routes -v
 
 test: clean
 	prove -l -v
@@ -77,7 +77,7 @@ fetchlanguages:
 fetchall: fetchicons fetchflags fetchcountries fetchlanguages
 
 speedtest:
-	samizdat speedtest
+	bin/samizdat speedtest
 
 webpackinit:
 	npm init -y
@@ -107,16 +107,16 @@ favicon:
 	gzip -f -k -9 public/favicon.ico
 
 icons:
-	samizdat makeicons
+	bin/samizdat makeicons
 
 install: clean favicon icons static webpack zip
 #	chown -R www-data:www-data .
 
 import:
-	samizdat makeimport
+	bin/samizdat makeimport
 
 installdata:
-	samizdat makeinstalldata
+	bin/samizdat makeinstalldata
 
 purgedata:
 	sudo systemctl restart postgresql
