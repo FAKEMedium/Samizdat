@@ -8,7 +8,7 @@ dump:
 	bin/samizdat makedump
 
 static:
-	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 samizdat makestatic
+	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 bin/samizdat makestatic
 
 clean:
 	rm -rf public/*
