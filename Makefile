@@ -74,6 +74,8 @@ fetchcountries:
 fetchlanguages:
 	git clone https://github.com/cospired/i18n-iso-languages.git ./src/i18n-iso-languages
 
+fetchall: fetchicons fetchflags fetchcountries fetchlanguages
+
 speedtest:
 	samizdat speedtest
 
