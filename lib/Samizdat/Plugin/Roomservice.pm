@@ -11,7 +11,7 @@ sub register ($self, $app, $conf) {
     controller => 'Account',
     action     => 'authorize',
     require    => {
-      users => $app->config->{account}->{admins}
+#      users => $app->config->{account}->{admins}
     }
   );
 
