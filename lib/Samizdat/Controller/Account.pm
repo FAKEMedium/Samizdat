@@ -187,7 +187,6 @@ sub password ($self) {
 
 sub authorize ($self) {
   my $authcookie = $self->signed_cookie($self->config->{authcookiename});
-  return 1;
   if ($authcookie) {
     my $db = $self->redis->db;
     my $session = $db->hgetall("samizdat:$authcookie");
