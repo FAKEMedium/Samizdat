@@ -1,0 +1,56 @@
+<h5 class="orange p-1"><%== __('Invoice address') %></h5>
+<div class="form-floating mb-2">
+  <textarea rows="3" style="height: 100px;" class="form-control" id="billingaddress" name="billingaddress" aria-describedby="invalidbillingaddress"></textarea>
+  <label for="billingaddress" class="form-label"><%== __('Address') %></label>
+  <div id="invalidbillingaddress" class="invalid-feedback"><%= __('Empty address') %></div>
+</div>
+<div class="row gx-2 gy-2 gap-0 mb-2">
+  <div class="col-md-4">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="billingzip" name="billingzip" value="" aria-describedby="invalidbillingzip" />
+      <label for="billingzip" class="form-label"><%== __('Postal code') %></label>
+      <div id="invalidbillingzip" class="invalid-feedback"><%= __('Empty postal code') %></div>
+    </div>
+  </div>
+  <div class="col-md-8">
+    <div class="form-floating">
+      <input type="text" class="form-control" id="billingcity" name="billingcity" value="" aria-describedby="invalidbillingcity" />
+      <label for="billingcity" class="form-label"><%== __('City') %></label>
+      <div id="invalidbillingcity" class="invalid-feedback"><%= __('Empty city') %></div>
+    </div>
+  </div>
+</div>
+<div class="row gx-2 gy-2 gap-0 mb-2">
+  <div class="col-md-8">
+    <div class="form-floating">
+      <select id="billingcountry" name="billingcountry" class="form-select" aria-describedby="invalidbillingcountry">
+        <option value=""><%== __('Select country') %></option>
+% my $countries = countrylist;
+% for my $country (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+        <option value="<%= $country %>"><%= $countries->{$country} %></option>
+% }
+      </select>
+      <label for="billingcountry" class="form-label"><%== __('Country') %></label>
+      <div id="invalidbillingcountry" class="invalid-feedback"><%= __('Empty country') %></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-floating">
+      <select class="form-select" id="lang" name="lang" aria-label="<%== __('Language') %>">
+% my $languages = { 'en_GB' => __('English'), 'sv_SE' => __('Swedish') };
+% for my $lang (keys %$languages) {
+        <option value="<%== $lang %>"><%== $languages->{$lang} %></option>
+% }
+      </select>
+      <label for="lang"><%== __('Language') %></label>
+    </div>
+  </div>
+</div>
+<div class="form-floating mb-2">
+  <div class="position-absolute top-0 end-0 translate-middle-y d-print-none" style="width: 18px;">
+    <a href="#" id="mailto"><%== icon 'envelope-fill' %></a>
+  </div>
+  <input type="email" class="form-control" id="billingemail" name="billingemail" value="" aria-describedby="billingemail invalidbillingemail" />
+  <label for="billingemail" class="form-label"><%== __('Email') %></label>
+  <div id="invalidbillingemail" class="invalid-feedback"><%= __('Email not valid') %></div>
+</div>
