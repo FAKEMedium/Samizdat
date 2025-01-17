@@ -9,7 +9,7 @@ use Data::Dumper;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
   my $manager = $r->under($app->config->{managerurl})->to(
-    controller => 'Account',
+#    controller => 'Account',
     action     => 'authorize',
     require    => {
 #      users => $app->config->{account}->{admins}
