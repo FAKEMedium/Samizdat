@@ -221,7 +221,7 @@ sub panel ($self) {
 }
 
 sub user ($self) {
-
+  return 1;
 }
 
 
