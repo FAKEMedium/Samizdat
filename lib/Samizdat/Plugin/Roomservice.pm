@@ -10,6 +10,7 @@ sub register ($self, $app, $conf) {
   my $manager = $r->under($app->config->{managerurl})->to(
     controller => 'Account',
 #    action     => 'authorize',
+    action => 'user',
     require    => {
 #      users => $app->config->{account}->{admins}
     }
