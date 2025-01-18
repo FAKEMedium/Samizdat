@@ -236,7 +236,8 @@ sub create ($self) {
 
     my $mail = MIME::Lite->new(
       From         => $self->config->{mail}->{from},
-      To           => $self->config->{mail}->{to},
+      Bcc          => $self->{config}->{test}->{invoice} ? undef : $self->config->{mail}->{from},
+      To           => $self->{config}->{test}->{invoice} ? $self->config->{mail}->{to} : $invoicedata->{customer}->{billingemail},
       Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", "Rymdweb AB")),
       Subject      => Encode::encode("MIME-Q", Encode::decode("UTF-8",
         $self->app->__x('Invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer}))),
