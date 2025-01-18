@@ -9,6 +9,7 @@
 \documentclass[11pt,a4paper,onecolumn,notitlepage]{article}
 \usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,eurosym,ltablex,geometry,ae,aecompl,enumerate,helvet}
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
 \usepackage[swedish]{babel}
 \graphicspath{{../public/media/images}{../../src}}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
@@ -16,7 +17,6 @@
 \usepackage{paratype}
 \renewcommand{\sfdefault}{fptn}
 \renewcommand*\familydefault{\sfdefault}
-\usepackage[T1]{fontenc}
 \pagestyle {fancy}
 \setlength \voffset {15mm -1in}
 \topmargin = 0pt
