@@ -188,6 +188,7 @@ sub create ($self) {
       }),
       customer     => $formdata->{customer}
     };
+    $invoicedata->{invoice}->{invoicedate} = $formdata->{invoice}->{invoicedate};
     $invoicedata->{invoice}->{state} = 'fakturerad';
     $invoicedata->{invoice}->{uuid} = $uuid;
     $invoicedata->{invoice}->{fakturanummer} = $nextnumber;
