@@ -61,7 +61,7 @@
 \renewcommand {\headrulewidth} {0.0pt}
 \renewcommand {\footrulewidth} {0.0pt}
 %%\newcommand*{\topfont}{\fontfamily{PTSansCaption-TLF}\selectfont}
-\newcommand*{\topfont}{\fontfamily{T1+PTSansCaption-TLF}\selectfont}
+\newcommand*{\topfont}{\fontfamily{T1/PTSansCaption-TLF}\selectfont}
 \fancyhead {}
 \fancyfoot {}
 % if (exists(config->{roomservice}->{invoice}->{logotype}) && ('' ne config->{roomservice}->{invoice}->{logotype})) {
