@@ -13,14 +13,14 @@
 \usepackage[swedish]{babel}
 \graphicspath{{../public/media/images}{../../src}}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
-%%\usepackage{PTSansNarrow}
-\usepackage{paratype}
+\usepackage{PTSansNarrow}
+%%\usepackage{paratype}
 %%\DeclareFontFamily{T1}{fptc}{}
 %%\DeclareFontShape{T1}{fptc}{m}{n}{<-> s * ptssc8t}{}
 %%\DeclareFontShape{T1}{fptc}{m}{it}{<-> s * ptssci8t}{}
 %%\DeclareFontShape{T1}{fptc}{b}{n}{<-> s * ptsscb8t}{}
 %%\DeclareFontShape{T1}{fptc}{b}{it}{<-> s * ptsscbi8t}{}
-\renewcommand{\sfdefault}{PTSansNarrow-TLF}
+%%\renewcommand{\sfdefault}{PTSansNarrow-TLF}
 \renewcommand*\familydefault{\sfdefault}
 \pagestyle {fancy}
 \setlength \voffset {15mm -1in}
