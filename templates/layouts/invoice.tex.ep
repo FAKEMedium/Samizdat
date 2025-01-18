@@ -20,7 +20,7 @@
 %%\DeclareFontShape{T1}{fptc}{m}{it}{<-> s * ptssci8t}{}
 %%\DeclareFontShape{T1}{fptc}{b}{n}{<-> s * ptsscb8t}{}
 %%\DeclareFontShape{T1}{fptc}{b}{it}{<-> s * ptsscbi8t}{}
-%%\renewcommand{\sfdefault}{fptn}
+\renewcommand{\sfdefault}{PTSansNarrow-TLF}
 \renewcommand*\familydefault{\sfdefault}
 \pagestyle {fancy}
 \setlength \voffset {15mm -1in}
