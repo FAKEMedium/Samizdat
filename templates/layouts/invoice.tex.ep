@@ -158,7 +158,7 @@
 \footnotesize {\textbf {<%= __('BIC/Swift address') %>:} <%== config->{roomservice}->{invoice}->{bicswift} %>}\newline
 %   }
 %   if (exists(config->{roomservice}->{invoice}->{iban}) && ('' ne config->{roomservice}->{invoice}->{iban})) {
-\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{roomservice}->{invoice}->{bicswift} %>}\newline
+\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{roomservice}->{invoice}->{iban} %>}\newline
 %   }
 %   if (exists(config->{roomservice}->{invoice}->{paypal}) && ('' ne config->{roomservice}->{invoice}->{paypal})) {
 \footnotesize {\textbf {<%= __('Paypal') %>:} <%== config->{roomservice}->{invoice}->{paypal} %>\
