@@ -170,8 +170,10 @@ sub create ($self) {
     $formdata->{customer}->{city} ='\ ' . $formdata->{customer}->{city};
   }
 
+  if ($#{ $formdata->{invoiceitems} } < 0) {
+    return;
+  }
   $self->stash(formdata => $formdata);
-
   my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/print');
   $tex = encode 'UTF-8', $tex;
   if ($self->render(data => $self->app->printinvoice($tex, $formdata), format => 'pdf')) {

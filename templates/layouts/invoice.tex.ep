@@ -238,7 +238,7 @@
 \multicolumn {7} {r} {\color {black}\small {\textbf {<%== __('Continues on next page...') %>}}} \endfoot
 \endlastfoot
 % my $i = 0;
-% for my $invoiceitemid (sort {$a cmp $b} keys %$invoiceitems) {
+% for my $invoiceitemid (sort {$invoiceitems->{$a} cmp $invoiceitems->{$b}} keys %$invoiceitems) {
 %   my $invoiceitem = $invoiceitems->{$invoiceitemid};
 %
 %   my $cost = $invoiceitem->{price};
