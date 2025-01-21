@@ -92,13 +92,13 @@
 % } else {
 <%== sprintf('%s %s', $customer->{firstname}, $customer->{lastname}) %>\newline
 % }
-% for my $streetpart (split("[\n\r]+", $customer->{address})) {
+% for my $streetpart (split("[\n\r]+", $customer->{billingaddress})) {
 <%== $streetpart %>\newline
 % }
-<%== $customer->{zip} %> \ <%== $customer->{city} %>\
-% if (('' ne $customer->{country}) && ("SE" ne $customer->{country})) {
+<%== $customer->{billingzip} %> \ <%== $customer->{billingcity} %>\
+% if (('' ne $customer->{billingcountry}) && ("SE" ne $customer->{billingcountry})) {
 \newline
-<%== $countries->{ $customer->{country} } %>\
+<%== $countries->{ $customer->{billingcountry} } %>\
 % }
 }}}
 \settoheight {\addressboxheight} {\usebox {\addressbox}}
