@@ -170,7 +170,7 @@ sub create ($self) {
     $formdata->{customer}->{city} ='\ ' . $formdata->{customer}->{city};
   }
 
-  if ($#{ $formdata->{invoiceitems} } < 0) {
+  if (keys %{$formdata->{invoiceitems}} < 1) {
     return;
   }
   $self->stash(formdata => $formdata);
