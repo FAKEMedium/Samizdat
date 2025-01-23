@@ -1,0 +1,13 @@
+% layout config->{layout};
+% use vars qw($web);
+<a class="d-block" href=".."><%= __('Back') %></a>
+% $web->{invoices}->each(sub {
+%   my $invoice = shift;
+<div class="row">
+
+  <div class="col-3"><%= $invoice->{fakturanummer} %></div>
+  <div class="col-3"><%= $invoice->{invoicedate} %></div>
+
+  <div class="col-3"><%= $invoice->{costsum} %></div>
+</div>
+% });

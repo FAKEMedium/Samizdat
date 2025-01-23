@@ -1,0 +1,32 @@
+<% layout config->{layout}; %>
+<% use vars qw($web); %>
+
+<%= metaInfo($web->{Accounts}->{MetaInformation}, 'Kontoplan') %>
+<ul>
+<% for my $account (@{ $web->{Accounts}->{Accounts} }) { %>
+<%   if ('true' eq $account->{Active}) { %>
+  <li><%= sprintf('%s: %s', $account->{Number}, $account->{Description}) %></li>
+<%   } %>
+<% } %>
+</ul>
+
+<%= metaInfo($web->{PreDefinedAccounts}->{MetaInformation}, 'Fördefinierade konton') %>
+<ul>
+<% for my $pda (sort {$a->{Account} <=> $b->{Account}} @{ $web->{PreDefinedAccounts}->{PreDefinedAccounts} }) { %>
+  <li><%= sprintf('%s: %s', $pda->{Account}, $pda->{Name}) %></li>
+  <% } %>
+</ul>
+
+<%= metaInfo($web->{VoucherSeries}->{MetaInformation}, 'Verifikationsserier') %>
+<ul>
+<% for my $vs (@{ $web->{VoucherSeries}->{VoucherSeriesCollection} }) { %>
+  <li><%= sprintf('%s: %s', $vs->{Code}, $vs->{Description}) %></li>
+  <% } %>
+</ul>
+
+<%= metaInfo($web->{Vouchers}->{MetaInformation}, 'Verifikationer') %>
+<ul>
+<% for my $v (@{ $web->{Vouchers}->{Vouchers} }) { %>
+  <li><%= sprintf('%s %s: %s', $v->{VoucherSeries}, $v->{VoucherNumber}, $v->{Description}) %></li>
+  <% } %>
+</ul>

@@ -1,0 +1,10 @@
+<% layout config->{layout}; %>
+<ul>
+
+  <li><a href="listinvoices/"><%= __('Lista fakturor') %></a></li>
+  <li><a href="envelope/"><%= __('Kuvert') %></a></li>
+  <li><a href="test/"><%= __('Test') %></a></li>
+  <li><a href="postinvoice/"><%= __('Posta faktura') %></a></li>
+  <li><a href="customer/"><%= __('Kunder') %></a></li>
+  <li><a href="domain/"><%= __('EPP') %></a></li>
+</ul>
