@@ -3,11 +3,11 @@
 % my $customer = $formdata->{customer};
 % my $invoice = $formdata->{invoice};
 % my $invoiceitems = $formdata->{invoiceitems};
-% my $currency = { sek => 'kr', eur => '\euro'};
+% my $currency = { sek => 'kr', eur => '\texteuro'};
 % my $countries = countrylist;
 % my $vat = $formdata->{vat};
 \documentclass[11pt,a4paper,onecolumn,notitlepage]{article}
-\usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,eurosym,ltablex,geometry,ae,aecompl,enumerate,helvet}
+\usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,ltablex,geometry,ae,aecompl,enumerate,helvet}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[swedish]{babel}
