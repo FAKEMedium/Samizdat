@@ -83,6 +83,10 @@ function populateForm(formdata, method) {
   document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid});`);
   document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid});`);
 
+  thisurl = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}`;
+  history.pushState(stateObj, "ajax page loaded...", thisurl);
+  document.querySelector('#dataform').action = thisurl;
+
   document.querySelector('#customerid').value = customer.customerid;
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
   document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
@@ -140,6 +144,7 @@ function populateForm(formdata, method) {
   document.querySelectorAll('.currency').forEach((el) => {
     el.innerHTML = invoice.currency;
   });
+
   return true;
 }
 
