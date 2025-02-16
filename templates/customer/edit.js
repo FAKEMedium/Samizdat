@@ -2,6 +2,7 @@ const form = document.querySelector("#dataform");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
+
 async function sendData(method, customerid = 0) {
   if (customerid > 0) {
     form.action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid;
@@ -84,6 +85,7 @@ function populateForm(formdata, method) {
   let sites = formdata.sites;
   let maildomains = formdata.maildomains;
   let subscriptions = formdata.subscriptions;
+  let userlogins = formdata.userlogins;
 
   // Customer data, including default values for new customer
   for (const field of [<%== join ", ", map "\"$_\"" => @{$fields} %>]) {
@@ -172,6 +174,12 @@ function populateForm(formdata, method) {
       document.querySelector('#ejustice').href = `https://e-justice.europa.eu/content_find_a_company-489-en.do?companyRegNumber=${customer.orgno}&amp;searchCountries=${customer.country}`;
       document.querySelector('#ejustice').classList.remove("d-none");
     }
+  }
+
+  // Userlogins
+  for (const userlogin of userlogins) {
+    document.querySelector('#userlogin').innerHTML = userlogin.userlogin;
+    document.querySelector('#impersonate').href = `/login/?action=impersonate&amp;impersonate=${userlogin.userlogin}`;
   }
 
   // Invoices

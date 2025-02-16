@@ -1,0 +1,3 @@
+<li class="nav-item mx-0 mx-sm-1"><a class="nav-link" id="previd"><%== icon 'caret-left-fill', {} %></a></li>
+<li class="nav-item mx-0 mx-sm-1"><a class="nav-link" id="nextid"><%== icon 'caret-right-fill', {} %></a></li>
+<li class="nav-item mx-0 mx-sm-1"><a class="nav-link" data-bs-toggle="offcanvas" data-bs-target="#pdfoffcanvas" aria-expanded="false" aria-controls="pdfoffcanvas"><%== icon 'file-pdf', {} %></a></li>

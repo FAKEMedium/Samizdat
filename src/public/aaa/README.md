@@ -203,3 +203,17 @@ badge rounded-pill rounded-circle">
     <img src="/media/images/pexels-markus-winkler-4144772.jpg" class="img-fluid" />
   </div>
 </div>
+<form class="row row-cols-lg-auto g-3 align-items-center" id="dataform">
+  <div class="col-12">
+    <div class="input-group">
+      <input type="date" class="form-control">
+      <input type="text" class="form-control">
+      <button type="submit" class="btn btn-primary mb-3"></button>
+    </div>
+  </div>
+  <div class="col-12 col-me col-auto">
+    <div class="input-group">
+      <button type="submit" class="btn btn-primary mb-3"></button>
+    </div>
+  </div>
+</form>

@@ -7,7 +7,7 @@ use Data::Dumper;
 my $scriptname = 'customers';
 my $fields = [qw(customerid company firstname lastname address zip city contactemail country orgno phone1 phone2 freetext)];
 push @{$fields}, qw(reference recommendedby period currency invoicetype lang trust vatno vat);
-my $checkfields = [qw(snapbackonly newsletter moss rabatt kompispris)];
+my $checkfields = [qw(snapbackonly newsletter moss)];
 my $setfields = [qw(created creator updated updater)];
 my $eucountries = [qw(AT BE BG CY CZ DE DK EE ES FI FR EL HR HU IE IT LI LV LT LU MT NL PL PT RO SE SI SK)];
 
@@ -198,6 +198,7 @@ sub _getdata ($self, $customerid) {
     sites         => $self->app->customer->sites($params),
     domains       => $self->app->domain->get($params),
     maildomains   => $self->app->domain->maildomains($params),
+    userlogins    => $self->app->customer->userlogins($params),
   };
 
   $params->{where}->{dns} = 1;

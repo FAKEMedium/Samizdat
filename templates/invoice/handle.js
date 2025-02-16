@@ -3,9 +3,8 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-async function sendData(method) {
+async function sendData(method, customerid = 0, invoiceid = 0) {
   const url = form.action || "";
-  const target = form.target || "";
   const formData = new FormData(form);
   const request = {
     method: method,
@@ -15,6 +14,9 @@ async function sendData(method) {
     request.body = formData;
   }
   if (method == 'POST') {
+    request.headers.Accept = 'application/json, application/pdf';
+  }
+  if (method == 'PUT') {
     request.headers.Accept = 'application/json, application/pdf';
   }
   try {
@@ -29,8 +31,122 @@ async function sendData(method) {
   }
 }
 
-function makecreditInvoice() {
-  sendData('PUT');
+
+// https://deano.me/javascript-change-address-bar-url-when-loading-content-with-ajax/
+window.onpopstate = function(event) {
+//  alert("location: " + document.location + ", state: " + JSON.stringify(event.state));
+  if (event.state != undefined) {
+//    loadPage(document.location.toString(),1);
+  }
+};
+var stateObj = { foo: 1000 + Math.random()*1001 };
+
+async function getId(what, customerid = 0, invoiceid = 0) {
+  let url = '<%== config->{managerurl} %>';
+  customerid = parseInt(customerid);
+  if (customerid) {
+    url += 'customers/'
+    url += customerid;
+    url += '/'
+  }
+  url += 'invoices/';
+  invoiceid = parseInt(invoiceid);
+  if (invoiceid > 1000) {
+    url += invoiceid;
+    url += '/';
+  }
+  url += what;
+  const request = {
+    method: 'GET',
+    headers: {Accept: 'application/json'}
+  };
+  try {
+    const response = await fetch(url, request);
+    if (response.error) {
+      alert(error);
+    } else {
+      populateForm(await response.json(), 'GET');
+      return true;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+
+function populateForm(formdata, method) {
+  let customer = formdata.customer;
+  let invoice = formdata.invoice;
+  let payments = formdata.payments;
+  let invoiceitems = formdata.invoiceitems;
+
+  document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid});`);
+  document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid});`);
+
+  document.querySelector('#customerid').value = customer.customerid;
+  document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
+  document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
+  document.querySelector('#headline').innerHTML = `<%==__('Invoice') %> ${invoice.fakturanummer}`;
+  document.querySelector('#invoiceid').value = invoice.invoiceid;
+  if (invoice.debt == 0) {
+    document.querySelector('#dataform').classList.add('d-none');
+  } else {
+    document.querySelector('#duedate').innerHTML = invoice.duedate;
+    document.querySelector('#duebox').classList.remove('d-none');
+  }
+  document.querySelector('#amount').value = invoice.debt;
+  document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
+  document.querySelector('#costsum').innerHTML = invoice.costsum;
+  document.querySelector('#vat').innerHTML = invoice.costsum * invoice.vat;
+
+  var pdfoffcanvas = document.getElementById('pdfoffcanvas');
+  var pdfiframe = document.getElementById('pdfinvoice');
+  let pdfsrc = '<%== sprintf("%s/invoice/", 'https://www.rymdweb.com') %>' + invoice.uuid + '.pdf';
+  if (pdfoffcanvas.classList.contains('show')) {
+    pdfiframe.setAttribute('src', pdfsrc);
+  }
+  pdfoffcanvas.addEventListener('shown.bs.offcanvas', function () {
+    if (!pdfiframe.getAttribute('src')) {
+      pdfiframe.setAttribute('src', pdfsrc);
+    }
+  });
+
+  let paymentssnippet = '';
+  payments = payments.sortBy('-paydate');
+  for (const payment of payments) {
+    paymentssnippet += `
+      <div><b><%== __('Payment') %></b>: ${payment.paydate} ${payment.amount} <span class="currency"></span></div>`;
+  }
+  document.querySelector('#payments').innerHTML = paymentssnippet;
+
+  let i = 1;
+  let itemssnippet = '';
+  for (let invoiceitemid in invoiceitems) {
+    if (invoiceitems.hasOwnProperty(invoiceitemid)) {
+      let invoiceitem = invoiceitems[invoiceitemid];
+      itemssnippet += `
+        <tr class="invoiceitem" data-invoiceitemid="${invoiceitemid}">
+          <td>${invoiceitem.articlenumber}</td>
+          <td>${invoiceitem.invoiceitemtext}</td>
+          <td class="text-end px-2">${invoiceitem.number}</td>
+          <td class="text-end px-2">${invoiceitem.price}</td>
+          <td class="text-end px-2" id="cost_${invoiceitemid}">${invoiceitem.number * invoiceitem.price}</td>
+          <td class="text-end px-2" id="sum_${invoiceitemid}">${(1+invoiceitem.vat) * invoiceitem.number * invoiceitem.price} <span class="currency"></span></td>
+        </tr>`;
+    }
+    i++;
+  }
+  document.querySelector('#invoiceitems').innerHTML = itemssnippet;
+  document.querySelectorAll('.currency').forEach((el) => {
+    el.innerHTML = invoice.currency;
+  });
+  return true;
+}
+
+function makeCreditInvoice() {
+  form.action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid + '/' + invoiceid + '/creditinvoice';
+
+  sendData('POST');
 }
 
 function remindInvoice() {
@@ -48,3 +164,9 @@ function resendInvoice() {
 function markpaidInvoice() {
 
 }
+
+function getInvoice(customerid = 0, invoiceid = 0){
+  sendData('GET', customerid, invoiceid);
+}
+
+getInvoice();

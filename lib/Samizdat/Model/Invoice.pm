@@ -17,8 +17,10 @@ sub get ($self, $params = {}) {
     $self->app->config->{roomservice}->{invoice}->{duedays} // 30,
     $self->app->config->{roomservice}->{invoice}->{duedaysremind} // 10
   );
-
-  my $invoices = $db->select('invoice', "*, $due", $where, $limit)->hashes;
+  my $duedate = sprintf("IF(state = 'fakturerad', DATE_FORMAT(DATE_ADD(invoicedate, INTERVAL %d DAY), '%%Y-%%m-%%d', 'CET'), 0) AS duedate",
+    $self->app->config->{roomservice}->{invoice}->{duedays} // 30
+  );
+  my $invoices = $db->select('invoice', "*, $due, $duedate", $where, $limit)->hashes;
   return $invoices;
 }
 
@@ -33,6 +35,56 @@ sub nextnumber ($self) {
   }
   return $nextnumber;
 }
+
+sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0) {
+  my $db = $self->app->mysql->db;
+  my $sign = '>';
+  my $orderby = { '-asc' => 'fakturanummer' };
+  if ('prev' eq $to) {
+    $sign = '<';
+    $orderby = { '-desc' => 'fakturanummer' };
+  }
+
+  my $where = {};
+  $invoiceid = int $invoiceid;
+  $where->{invoiceid} = $invoiceid if ($invoiceid);
+  $where->{customerid} = $customerid if ($customerid);
+  $where->{state} = { '=' => ['fakturerad','bokford','raderad'] };
+
+  my $invoice = {};
+  my $results = $db->select('invoice', '*', $where);
+  while (my $result = $results->hash) {
+    $invoice = $result;
+    my $fakturanummer = int $invoice->{fakturanummer};
+    delete $where->{invoiceid};
+    if ('prev' eq $to) {
+      $fakturanummer--;
+    } else {
+      $fakturanummer++;
+    }
+    $where->{fakturanummer} = $fakturanummer;
+    $results->finish;
+    last;
+  }
+  # Try the adjacent invoice number first
+  $results = $db->select('invoice', '*', $where);
+  while (my $result = $results->hash) {
+    $results->finish;
+    return $result;
+  }
+
+  # Then try comparing/sorting
+  $where->{fakturanummer} = { $sign => $invoice->{fakturanummer} };
+  $results = $db->select('invoice', '*', $where, $orderby);
+  while (my $result = $results->hash) {
+    $results->finish;
+    return $result;
+    last; # LIMIT isn't available
+  }
+
+  return $invoice;
+}
+
 
 sub newinvoice ($self) {
 
@@ -132,12 +184,21 @@ sub addinvoiceitem ($self, $invoiceitem = {}) {
   return $db->insert('invoiceitem', $invoiceitem, {returning => 'invoiceitemid'});
 }
 
-sub invoicepayments ($self, $params = {}) {
+sub payments ($self, $params = {}) {
   my $db = $self->app->mysql->db;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
-  my $invoicepayments = $db->select('invoicepayment', '*', $where, $limit)->hashes;
+  my $invoicepayments = $db->select('payments', '*', $where, $limit)->hashes;
   return $invoicepayments;
 }
 
+sub addpayment ($self, $payment = {}) {
+  my $db = $self->app->mysql->db;
+  return 0 if (!exists($payment->{invoiceid}) || (0 == int $payment->{invoiceid}));
+
+  # Less than 1 currency is not an allowed payment
+  return 0 if (!exists($payment->{amount}) || (0 == int $payment->{amount}));
+
+  return $db->insert('payments', $payment, {returning => 'paymentid'});
+}
 1;

@@ -69,6 +69,9 @@ sub index ($self) {
   }
 }
 
+sub creditinvoice ($self) {
+
+}
 
 sub create ($self) {
   my $formdata = $self->update(0);
@@ -344,7 +347,7 @@ sub edit ($self) {
 
 
 sub handle ($self) {
-  my $title = $self->app->__('Open invoice');
+  my $title = $self->app->__x('Invoice');
   my $web = {title => $title};
   my $toast = $self->render_to_string(
     template => 'chunks/toast',
@@ -360,13 +363,35 @@ sub handle ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(template => 'invoice/handle', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/handle', headlinebuttons => 'editlinks');
+    return $self->render(web => $web, title => $title, template => 'invoice/handle', headlinebuttons => 'handleinvoicelinks');
   } else {
     my $formdata = $self->_getdata();
     return $self->render(json => $formdata);
   }
 }
 
+
+sub nav ($self) {
+  my $invoiceid = int $self->stash('invoiceid');
+  my $customerid = int $self->stash('customerid');
+  my $to = $self->stash('to');
+  my $args = [$to, $invoiceid, $customerid];
+  my $invoice = $self->app->invoice->nav($to, $invoiceid, $customerid);
+  if ($invoice->{invoiceid}) {
+    $self->stash(invoiceid => $invoice->{invoiceid});
+  }
+  if ($invoice->{customerid}) {
+    $self->stash(customerid => $invoice->{customerid});
+  }
+  say Dumper $invoice;
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{managerurl}, $customerid, $invoice->{invoiceid}));
+  } else {
+    my $json = $self->_getdata({includearticles => 0});
+    return $self->render(json => $json);
+  }
+}
 
 sub open ($self) {
   my $title = $self->app->__('Open invoices');
@@ -430,9 +455,9 @@ sub _formdata ($self) {
 }
 
 
-sub _getdata ($self) {
-  my $customerid = int $self->param('customerid') || return 0;
-  my $invoiceid = int $self->param('invoiceid');
+sub _getdata ($self, $options = { includearticles => 1, includepayments => 1 }) {
+  my $customerid = int $self->stash('customerid') || return 0;
+  my $invoiceid = int $self->stash('invoiceid');
   if (!$invoiceid) {
     $invoiceid = $self->app->invoice->get({
       where => {
@@ -441,12 +466,17 @@ sub _getdata ($self) {
       }
     })->[0]->{invoiceid};
   }
+  my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+  $customer->{name} = $self->app->customer->name($customer);
   my $formdata = {
-    customer      => $self->app->customer->get({where => { customerid => $customerid }})->[0],
-    invoice       => $self->app->invoice->get({where => { invoiceid => $invoiceid, customerid => $customerid }})->[0],
-    invoiceitems  => $self->app->invoice->invoiceitems({where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid }}),
-    articles      => $self->_articles(),
+    customer     => $customer,
+    invoice      => $self->app->invoice->get({ where => { invoiceid => $invoiceid, customerid => $customerid } })->[0],
+    invoiceitems => $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid } }),
+    articles     => {},
+    payments     => [],
   };
+  $formdata->{articles} = $self->_articles() if ($options->{includearticles});
+  $formdata->{payments} = $self->app->invoice->payments({ where => { invoiceid => $invoiceid } }) if ($options->{includepayments});
   return $formdata;
 }
 

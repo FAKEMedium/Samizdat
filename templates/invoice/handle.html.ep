@@ -1,9 +1,56 @@
-<form class="row" method="post" id="dataform">
-  <input type="hidden" name="invoiceid" id="invoiceid" value="">
-  <input type="hidden" name="customerid" id="customerid" value="">
-  <button type="submit" class="btn btn-primary mb-3" onclick="remindInvoice();"><%== __('Remind') %></button>
-  <button type="submit" class="btn btn-primary mb-3" onclick="reprintInvoice();"><%== __('Reprint') %></button>
-  <button type="submit" class="btn btn-primary mb-3" onclick="resendInvoice();"><%== __('Resend') %></button>
-  <button type="submit" class="btn btn-primary mb-3" onclick="markpaidInvoice();"><%== __('Mark paid') %></button>
-  <button type="submit" class="btn btn-primary mb-3" onclick="makecreditInvoice();"><%== __('Make credit invoice') %></button>
+<div class="mb-3" id="details">
+  <div><b><%== __('Customer') %></b>: <a id="customer"></a></div>
+  <div><b><%== __('Invoice date') %></b>: <span id="invoicedate"></span></div>
+  <div class="d-none" id="duebox"><b><%== __('Due date') %></b>: <span id="duedate"></span></div>
+  <div><b><%== __('Amount') %></b>: <span id="costsum"></span> <span class="currency"></span></div>
+  <div><b><%== __('Including VAT') %></b>: <span id="vat"></span> <span class="currency"></span></div>
+</div>
+
+<div id="payments">
+</div>
+
+<form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+  <input type="hidden" name="invoiceid" id="invoiceid">
+  <input type="hidden" name="customerid" id="customerid">
+  <div class="col-auto">
+    <div class="input-group">
+      <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
+      <input type="text" class="form-control" name="amount" id="amount" placeholder="<%== __('Amount') %>">
+      <input type="date" class="form-control" name="paydate" id="paydate" placeholder="<%== __('Paydate') %>">
+      <button type="submit" class="btn btn-primary" onclick="markpaidInvoice();"><%== __('Mark payment') %></button>
+    </div>
+  </div>
+  <div class="col-auto me-auto">
+    <div class="input-group text-end">
+      <button type="submit" class="btn btn-primary mx-1" onclick="makeCreditInvoice();"><%== __('Credit invoice') %></button>
+      <button type="submit" class="btn btn-primary mx-1" onclick="remindInvoice();"><%== __('Remind') %></button>
+      <button type="submit" class="btn btn-primary mx-1" onclick="resendInvoice();"><%== __('Resend') %></button>
+      <button type="submit" class="btn btn-primary mx-1" onclick="reprintInvoice();"><%== __('Reprint') %></button>
+    </div>
+  </div>
 </form>
+
+<table class="table table-sm table-striped align-middle">
+  <thead>
+    <tr class="orange">
+      <th><%== __('Article') %></th>
+      <th><%== __('Description') %></th>
+      <th class="text-end px-2"><%== __('Qty') %></th>
+      <th class="text-end px-2"><%== __('Price') %></th>
+      <th class="text-end px-2"><%== __('Net') %></th>
+      <th class="text-end px-2"><%== __('Gross') %></th>
+    </tr>
+  </thead>
+  <tbody id="invoiceitems">
+  </tbody>
+</table>
+
+<div class="offcanvas offcanvas-start" id="pdfoffcanvas" style="width: 50%;" data-bs-scroll="true" data-bs-backdrop="false" aria-labelledby="pdfOffcanvasLabel">
+  <div class="offcanvas-header">
+    <h5 id="pdfOffcanvasLabel" class="offcanvas-title"><%== __('PDF viewer') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
+  </div>
+  <div class="offcanvas-body">
+    <iframe id="pdfinvoice" width="100%" height="100%" style="border: none;"></iframe>
+  </div>
+</div>

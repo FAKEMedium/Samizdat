@@ -22,6 +22,10 @@ sub register ($self, $app, $conf) {
   $manager->put('customers/:customerid/invoices/open')->to('Invoice#update');
   $manager->post('customers/:customerid/invoices/open')->to('Invoice#create');
   $manager->get('customers/:customerid/invoices/:invoiceid')->to('Invoice#handle');
+
+  $manager->get('customers/:customerid/invoices/:invoiceid/:to')->to('Invoice#nav');
+  $manager->get('customers/:customerid/invoices/:invoiceid/creditinvoice')->to('Invoice#creditinvoice');
+
   $manager->get('customers/:customerid/invoices')->to('Invoice#index');
   $manager->get('customers/:customerid/products/subscribe')->to('Customer#products');
   $manager->post('customers/:customerid/products')->to('Customer#subscribe');

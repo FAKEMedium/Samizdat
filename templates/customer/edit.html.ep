@@ -202,26 +202,26 @@
         </div>
       </div>
     </div>
-    <div class="row gx-2 gy-2 gap-0 mb-2 d-print-none">
-      <div class="form-check col-md-4">
-        <input class="form-check-input" type="checkbox" value="1" id="snapbackonly" name="snapbackonly" />
-        <label class="form-check-label" for="snapbackonly"><%== __('Snapback only') %></label>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-4">
+        <div class="form-check col-md-12">
+          <input class="form-check-input" type="checkbox" value="1" id="newsletter" name="newsletter" />
+          <label class="form-check-label" for="newsletter"><%== __('Newsletter') %></label>
+        </div>
+        <div class="form-check col-md-12">
+          <input class="form-check-input" type="checkbox" value="1" id="moss" name="moss" />
+          <label class="form-check-label" for="moss"><%== __('MOSS') %></label>
+        </div>
       </div>
-      <div class="form-check col-md-4">
-        <input class="form-check-input" type="checkbox" value="1" id="newsletter" name="newsletter" />
-        <label class="form-check-label" for="newsletter"><%== __('Newsletter') %></label>
+      <div class="col-md-4">
+        <div class="form-check col-md-12">
+          <input class="form-check-input" type="checkbox" value="1" id="snapbackonly" name="snapbackonly" />
+          <label class="form-check-label" for="snapbackonly"><%== __('Snapback only') %></label>
+        </div>
       </div>
-      <div class="form-check col-md-4">
-        <input class="form-check-input" type="checkbox" value="1" id="moss" name="moss" />
-        <label class="form-check-label" for="moss"><%== __('MOSS') %></label>
-      </div>
-      <div class="form-check col-md-4">
-        <input class="form-check-input" type="checkbox" value="1" id="rabatt" name="rabatt" />
-        <label class="form-check-label" for="rabatt"><%== __('Special price') %></label>
-      </div>
-      <div class="form-check col-md-4">
-        <input class="form-check-input" type="checkbox" value="1" id="kompispris" name="kompispris" />
-        <label class="form-check-label" for="kompispris"><%== __('Buddy price') %></label>
+      <div class="col-md-4">
+        <a class="d-block" id="impersonate" title="<%== __('Impersonate') %>"><%== __('Impersonate') %></a>
+        <a class="d-block" id="userlogin" title="<%== __('Login') %>"></a>
       </div>
     </div>
   </div>
@@ -459,11 +459,10 @@
       <div class="card-footer"><span id="datausage" class="blank"></span></div>
     </div>
   </div>
-  <div class="col-md-4 d-print-none"></div>
   <div class="col-md-4 d-print-none">
-    <button id="submitbutton" type="submit" onclick="updateCustomer();" class="btn btn-primary form-control d-print-none"><%== __('Save') %></button>
+    <button id="submitbutton" type="submit" onclick="updateCustomer();" class="btn btn-primary form-control"><%== __('Save') %></button>
   </div>
-  <div class="col-md-4 d-print-none">
+  <div class="col-md-8 d-print-none">
     <div class="text-end blank" id="creator"></div>
     <div class="text-end blank" id="updater"></div>
   </div>

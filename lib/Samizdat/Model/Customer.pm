@@ -23,9 +23,12 @@ sub get ($self, $params = {}) {
 }
 
 sub name ($self, $customer) {
-  my $name = trim( sprintf('%s %s', $customer->{firstname}, $customer->{lastname}) );
-  return trim( $customer->{company} ) if ('' eq $name);
-  return $name = '' ne $customer->{company} ? trim( sprintf('%s, %s', $name, $customer->{company})) : $name;
+  my $name = trim $customer->{company};
+  if ('' eq $name) {
+    $name = trim(sprintf('%s %s', $customer->{firstname}, $customer->{lastname}));
+  }
+  $name =~ s/ {2,}/ /g;
+  return $name;
 }
 
 sub add ($self, $customer) {
@@ -57,6 +60,12 @@ sub sites ($self, $params =  {}) {
   my $db = $self->app->mysql->db;
   my $where = $params->{where} // {};
   return $db->select('Domain', '*', $where)->hashes;
+}
+
+sub userlogins ($self, $params =  {}) {
+  my $db = $self->app->mysql->db;
+  my $where = $params->{where} // {};
+  return $db->select('snapusers', '*', $where)->hashes;
 }
 
 sub neighbours ($self, $customerid) {
