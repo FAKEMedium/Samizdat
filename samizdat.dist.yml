@@ -16,6 +16,45 @@ logotype: media/images/fakenews.svg
 favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
+roomservice:
+  invoice:
+    sender: billing@example.com
+    sendername: Invoicing example
+    # invoicedir is an absolute path
+    invoicedir: /tmp/invoice
+    invoiceurl: invoice/
+    logotype: filename
+    duedays: 30
+    # Days after due day when we remind
+    duedaysremind: 10
+    debug: 0
+    bankgiro: xxxxx
+    plusgiro: xxxxxx-x
+    iban: NNXX XXXX XXXX XXXX XXXX XXXX
+    bicswift: NNNNNN
+    paypal: billing@example.com
+    paypalfee: 3%
+    orgno: XXXXXX-XXXX
+    vatno: NNXXXXXXXXXX
+    office: Big City
+    ftax: 1
+    phone:
+      loc: XXXXXXXXX
+      int: +XX XXXXXXXXX
+    address: |
+      Example
+      Street 
+      XXXXX Big City
+    contact: contact@example.com
+    billingcontact: billing@example.com
+  customer:
+    country: SE
+    lang: sv_SE
+    currency: sek
+    vat: 25
+    period: quarterly
+    invoicetype: email
+    trust: normal
 icons:
   large: src/svg/fakenews.svg
   small: src/svg/f.svg

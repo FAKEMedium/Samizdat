@@ -101,11 +101,11 @@ function populateForm(formdata, method) {
   document.querySelector('#amount').value = invoice.debt;
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
   document.querySelector('#costsum').innerHTML = invoice.costsum;
-  document.querySelector('#vat').innerHTML = invoice.costsum * invoice.vat;
+  document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1/(1 + invoice.vat)));
 
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
-  let pdfsrc = '<%== sprintf("%s/invoice/", 'https://www.rymdweb.com') %>' + invoice.uuid + '.pdf';
+  let pdfsrc = '<%== sprintf("%s/invoice/", config->{siteurl}) %>' + invoice.uuid + '.pdf';
   if (pdfoffcanvas.classList.contains('show')) {
     pdfiframe.setAttribute('src', pdfsrc);
   }

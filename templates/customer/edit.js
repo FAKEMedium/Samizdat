@@ -178,7 +178,8 @@ function populateForm(formdata, method) {
 
   // Userlogins
   for (const userlogin of userlogins) {
-    document.querySelector('#userlogin').innerHTML = userlogin.userlogin;
+    document.querySelector('#userlogin').innerHTML = `${userlogin.userlogin}`;
+//    document.querySelector('#userlogin').href = `/phpmyadmin/tbl_change.php?db=system2&table=snapusers&where_clause=%60snapusers%60.%60userlogin%60%3D%27${userlogin..userlogin}%27&clause_is_unique=1&sql_query=SELECT%20%2A%20FROM%20%60systems%60.%60snapusers%60%20AS%20%60snapusers%60&goto=sql.php&default_action=update`;
     document.querySelector('#impersonate').href = `/login/?action=impersonate&amp;impersonate=${userlogin.userlogin}`;
   }
 
@@ -205,7 +206,7 @@ function populateForm(formdata, method) {
     }
     snippet += `
                 <tr data-invoiceid="${invoice.invoiceid}">
-                  <td><a href="https://www.rymdweb.com/invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
+                  <td><a href="<%== config->{siteurl} %>/invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
                   <td><a class="w-auto" href="<%== sprintf('%s%s/', config->{managerurl}, 'customers') %>${customer.customerid}/invoices/${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
                   <td>${invoice.invoicedate.substring(10, 0)}</td>
                   <td class="text-end">${invoice.costsum}</td>
@@ -292,7 +293,7 @@ function populateForm(formdata, method) {
   for (const dnsdomain of dnsdomains) {
     nrdnsdomains++;
     snippet += `
-                <tr data-domainid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== sprintf('https://www.rymdweb.com/powerdnsadmin/domain/') %>${dnsdomain.domainname}">${dnsdomain.domainname}</a></td></tr>`;
+                <tr data-domainid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== sprintf('%s/powerdnsadmin/domain/', config->{siteurl}) %>${dnsdomain.domainname}">${dnsdomain.domainname}</a></td></tr>`;
   }
   document.querySelector('#dnsdomains tbody').innerHTML = snippet;
   if (nrdnsdomains > 0) {
@@ -354,7 +355,7 @@ function populateForm(formdata, method) {
     datausage += database.db_usage;
     snippet += `
                 <tr data-databasename="${database.databasename}">
-                  <td><a href="<%== sprintf('https://www.rymdweb.com/phpmyadmin/index.php?route=/database/structure&server=1&db=') %>${database.databasename}"><%== icon 'link' %></a></td>
+                  <td><a href="<%== sprintf('/phpmyadmin/index.php?route=/database/structure&server=1&db=', config->{siteurl}) %>${database.databasename}"><%== icon 'link' %></a></td>
                   <td><a class="d-block" href="<%== sprintf('%s%s/', config->{managerurl}, 'customers') %>${customer.customerid}/databases/${database.databasename}">${database.databasename}</a></td>
                   <td>${database.username}</td>
                   <td class="text-end">${shortbytes(database.db_usage)}</td>
