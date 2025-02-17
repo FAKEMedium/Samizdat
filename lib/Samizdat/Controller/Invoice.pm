@@ -461,14 +461,14 @@ sub _formdata ($self) {
 sub _getdata ($self, $options = { includearticles => 1, includepayments => 1 }) {
   my $customerid = int $self->stash('customerid');
   my $invoiceid = int $self->stash('invoiceid');
-  my $options = {};
+  my $args = {};
   if ($invoiceid) {
-    $options->{where} = { invoiceid => $invoiceid };
-    $options->{where}->{customerid} = $customerid if ($customerid);
+    $args->{where} = { invoiceid => $invoiceid };
+    $args->{where}->{customerid} = $customerid if ($customerid);
   } else {
-    $options->{where} = { state => 'obehandlad', customerid => $customerid };
+    $args->{where} = { state => 'obehandlad', customerid => $customerid };
   }
-  my $invoice = $self->app->invoice->get($options)->[0];
+  my $invoice = $self->app->invoice->get($args)->[0];
   $invoiceid = $invoice->{invoiceid};
   my $percustomer = $self->stash('percustomer') // 1;
   if (!$customerid) {
