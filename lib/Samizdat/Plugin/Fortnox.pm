@@ -10,18 +10,23 @@ use Data::Dumper;
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
+  my $manager = $r->under($app->config->{managerurl})->to(
+    controller => 'Account',
+    action     => 'authorize',
+    require    => {
+      users => $app->config->{account}->{admins}
+    }
+  );
 
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox'))->to('Fortnox#index');
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/auth'))->to('Fortnox#auth');
-
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/customers'))->to('Fortnox#customer');
-
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/customers/:customerid'))->to('Fortnox#customer');
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/work'))->to('Fortnox#work');
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/test'))->to('Fortnox#test');
-  $r->post(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/invoices'))->to('Fortnox#postinvoice');
-  $r->get(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/invoices'))->to('Fortnox#listinvoices');
-  $r->any(sprintf('%s%s', $app->config->{managerurl}, 'fortnox/logout'))->to('Fortnox#logout');
+  $manager->any(sprintf('%s', 'fortnox/auth'))->to('Fortnox#auth');
+  $manager->any(sprintf('%s', 'fortnox/customers'))->to('Fortnox#customer');
+  $manager->any(sprintf('%s', 'fortnox/customers/:customerid'))->to('Fortnox#customer');
+  $manager->any(sprintf('%s', 'fortnox/work'))->to('Fortnox#work');
+  $manager->any(sprintf('%s', 'fortnox/test'))->to('Fortnox#test');
+  $manager->post(sprintf('%s', 'fortnox/invoices'))->to('Fortnox#postinvoice');
+  $manager->get(sprintf('%s', 'fortnox/invoices'))->to('Fortnox#listinvoices');
+  $manager->any(sprintf('%s', 'fortnox/logout'))->to('Fortnox#logout');
+  $manager->any(sprintf('%s', 'fortnox'))->to('Fortnox#index');
 
   $app->helper(fortnox => sub { state $fortnox = Samizdat::Model::Fortnox->new({app => shift}) });
   $app->helper(
