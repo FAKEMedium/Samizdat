@@ -220,7 +220,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <a class="d-block" id="impersonate" title="<%== __('Impersonate') %>"><%== __('Impersonate') %></a>
+        <a class="d-block" id="impersonate" title="<%== __('Impersonate') %>"><%== icon 'person-fill', {extraclasses => 'mx-2'} %><%== __('Impersonate') %></a>
         <a class="d-block" id="userlogin" title="<%== __('Login') %>"></a>
       </div>
     </div>
@@ -459,10 +459,10 @@
       <div class="card-footer"><span id="datausage" class="blank"></span></div>
     </div>
   </div>
-  <div class="col-md-4 d-print-none">
+  <div class="col-md-5 d-print-none">
     <button id="submitbutton" type="submit" onclick="updateCustomer();" class="btn btn-primary form-control"><%== __('Save') %></button>
   </div>
-  <div class="col-md-8 d-print-none">
+  <div class="col-md-7 d-print-none">
     <div class="text-end blank" id="creator"></div>
     <div class="text-end blank" id="updater"></div>
   </div>

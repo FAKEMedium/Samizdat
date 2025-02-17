@@ -375,21 +375,24 @@ sub nav ($self) {
   my $invoiceid = int $self->stash('invoiceid');
   my $customerid = int $self->stash('customerid');
   my $to = $self->stash('to');
-  my $args = [$to, $invoiceid, $customerid];
+  $self->stash(percustomer => $customerid);
   my $invoice = $self->app->invoice->nav($to, $invoiceid, $customerid);
   if ($invoice->{invoiceid}) {
     $self->stash(invoiceid => $invoice->{invoiceid});
   }
   if ($invoice->{customerid}) {
-    $self->stash(customerid => $invoice->{customerid});
+#    $self->stash(customerid => $invoice->{customerid});
   }
-  say Dumper $invoice;
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
-  if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{managerurl}, $customerid, $invoice->{invoiceid}));
-  } else {
-    my $json = $self->_getdata({includearticles => 0});
-    return $self->render(json => $json);
+  $self->handle;
+  if (0) {
+
+    my $accept = $self->req->headers->{headers}->{accept}->[0];
+    if ($accept !~ /json/) {
+      $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{managerurl}, $customerid, $invoice->{invoiceid}));
+    } else {
+      my $json = $self->_getdata({ includearticles => 0 });
+      return $self->render(json => $json);
+    }
   }
 }
 
@@ -456,24 +459,31 @@ sub _formdata ($self) {
 
 
 sub _getdata ($self, $options = { includearticles => 1, includepayments => 1 }) {
-  my $customerid = int $self->stash('customerid') || return 0;
+  my $customerid = int $self->stash('customerid');
   my $invoiceid = int $self->stash('invoiceid');
-  if (!$invoiceid) {
-    $invoiceid = $self->app->invoice->get({
-      where => {
-        state => { '=', 'obehandlad' },
-        customerid => $customerid
-      }
-    })->[0]->{invoiceid};
+  my $options = {};
+  if ($invoiceid) {
+    $options->{where} = { invoiceid => $invoiceid };
+    $options->{where}->{customerid} = $customerid if ($customerid);
+  } else {
+    $options->{where} = { state => 'obehandlad', customerid => $customerid };
+  }
+  my $invoice = $self->app->invoice->get($options)->[0];
+  $invoiceid = $invoice->{invoiceid};
+  my $percustomer = $self->stash('percustomer') // 1;
+  if (!$customerid) {
+    $percustomer = 0;
+    $customerid = $invoice->{customerid};
   }
   my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
   $customer->{name} = $self->app->customer->name($customer);
   my $formdata = {
     customer     => $customer,
-    invoice      => $self->app->invoice->get({ where => { invoiceid => $invoiceid, customerid => $customerid } })->[0],
+    invoice      => $invoice,
     invoiceitems => $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid } }),
     articles     => {},
     payments     => [],
+    percustomer => $percustomer,
   };
   $formdata->{articles} = $self->_articles() if ($options->{includearticles});
   $formdata->{payments} = $self->app->invoice->payments({ where => { invoiceid => $invoiceid } }) if ($options->{includepayments});

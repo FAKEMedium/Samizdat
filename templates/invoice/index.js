@@ -68,8 +68,8 @@ function populateForm(formdata, method) {
     }
     snippet += `
                 <tr data-invoiceid="${invoice.invoiceid}">
-                  <td><a href="https://www.rymdweb.com/invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
-                  <td><a class="w-auto" href="<%== sprintf('%s%s/', config->{managerurl}, 'customers') %>${invoice.customerid}/invoices/${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
+                  <td><a href="<%== config->{sitesurl} %>invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
+                  <td><a class="w-auto" href="<%== sprintf("%s%s", config->{managerurl}, 'invoices/') %>${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
                   <td>${invoice.paydate.substring(10, 0)}</td>
                   <td>${invoice.invoicedate.substring(10, 0)}</td>
                   <td class="text-end">${invoice.costsum}</td>

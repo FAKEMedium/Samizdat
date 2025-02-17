@@ -41,13 +41,15 @@ window.onpopstate = function(event) {
 };
 var stateObj = { foo: 1000 + Math.random()*1001 };
 
-async function getId(what, customerid = 0, invoiceid = 0) {
+async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0) {
   let url = '<%== config->{managerurl} %>';
-  customerid = parseInt(customerid);
-  if (customerid) {
-    url += 'customers/'
-    url += customerid;
-    url += '/'
+  if (percustomer) {
+    customerid = parseInt(customerid);
+    if (customerid) {
+      url += 'customers/'
+      url += customerid;
+      url += '/'
+    }
   }
   url += 'invoices/';
   invoiceid = parseInt(invoiceid);
@@ -79,15 +81,19 @@ function populateForm(formdata, method) {
   let invoice = formdata.invoice;
   let payments = formdata.payments;
   let invoiceitems = formdata.invoiceitems;
+  let percustomer = formdata.percustomer; // Are we under invoices/ or custumor/customerid/invoices/
 
-  document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid});`);
-  document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid});`);
+  document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
+  document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
 
-  thisurl = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}`;
+  if (percustomer) {
+    thisurl = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}`;
+  } else {
+    thisurl = `<%== sprintf("%s%s/", config->{managerurl}, "invoices") %>${invoice.invoiceid}`;
+  }
   history.pushState(stateObj, "ajax page loaded...", thisurl);
   document.querySelector('#dataform').action = thisurl;
 
-  document.querySelector('#customerid').value = customer.customerid;
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
   document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
   document.querySelector('#headline').innerHTML = `<%==__('Invoice') %> ${invoice.fakturanummer}`;
@@ -128,14 +134,18 @@ function populateForm(formdata, method) {
   for (let invoiceitemid in invoiceitems) {
     if (invoiceitems.hasOwnProperty(invoiceitemid)) {
       let invoiceitem = invoiceitems[invoiceitemid];
+      let net = sprintf('%.2f', invoiceitem.number * invoiceitem.price);
+      let vat = sprintf('%.2f', invoiceitem.vat * invoiceitem.number * invoiceitem.price);
+      let gross = sprintf('%.2f', (1+invoiceitem.vat) * invoiceitem.number * invoiceitem.price);
       itemssnippet += `
         <tr class="invoiceitem" data-invoiceitemid="${invoiceitemid}">
           <td>${invoiceitem.articlenumber}</td>
           <td>${invoiceitem.invoiceitemtext}</td>
           <td class="text-end px-2">${invoiceitem.number}</td>
           <td class="text-end px-2">${invoiceitem.price}</td>
-          <td class="text-end px-2" id="cost_${invoiceitemid}">${invoiceitem.number * invoiceitem.price}</td>
-          <td class="text-end px-2" id="sum_${invoiceitemid}">${(1+invoiceitem.vat) * invoiceitem.number * invoiceitem.price} <span class="currency"></span></td>
+          <td class="text-end px-2">${net}</td>
+          <td class="text-end px-2">${vat}</td>
+          <td class="text-end px-2">${gross} <span class="currency"></span></td>
         </tr>`;
     }
     i++;

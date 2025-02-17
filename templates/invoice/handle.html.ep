@@ -11,7 +11,6 @@
 
 <form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
   <input type="hidden" name="invoiceid" id="invoiceid">
-  <input type="hidden" name="customerid" id="customerid">
   <div class="col-auto">
     <div class="input-group">
       <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
@@ -38,6 +37,7 @@
       <th class="text-end px-2"><%== __('Qty') %></th>
       <th class="text-end px-2"><%== __('Price') %></th>
       <th class="text-end px-2"><%== __('Net') %></th>
+      <th class="text-end px-2"><%== __('VAT') %></th>
       <th class="text-end px-2"><%== __('Gross') %></th>
     </tr>
   </thead>
