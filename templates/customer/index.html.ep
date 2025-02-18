@@ -9,14 +9,6 @@
     </tr>
   </thead>
   <tbody>
-% for my $customer (sort {$a->{customerid} <=> $b->{customerid}} @{$customers}) {
-    <tr onclick="window.location='<%= config->{managerurl} %>customers/<%= $customer->{customerid} %>'">
-      <td><%= $customer->{customerid} %></td>
-      <td><%== $customer->{company} %></td>
-      <td><%== $customer->{firstname} %></td>
-      <td><%== $customer->{lastname} %></td>
-      <td><%== $trusts->{ $customer->{trust} } %></td>
-    </tr>
-% }
+    <!-- Data will be injected here by JavaScript -->
   </tbody>
 </table>

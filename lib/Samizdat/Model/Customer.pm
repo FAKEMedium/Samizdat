@@ -54,7 +54,7 @@ sub archive ($self, $customerid) {
 sub databases ($self, $params =  {}) {
   my $db = $self->app->mysql->db;
   my $where = $params->{where} // {};
-  return $db->select('atabases', '*', $where)->hashes;
+  return $db->select('databases', '*', $where)->hashes;
 }
 
 sub sites ($self, $params =  {}) {

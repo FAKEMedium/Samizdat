@@ -248,6 +248,7 @@
             </tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
         </table>
       </div>
@@ -271,6 +272,7 @@
             </tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
           <tfoot>
             <tr>
@@ -299,6 +301,7 @@
             </tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
         </table>
       </div>
@@ -315,6 +318,7 @@
             <tr><th><%== __('Domain') %></th></tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
         </table>
       </div>
@@ -334,6 +338,7 @@
             </tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
         </table>
       </div>
@@ -353,6 +358,7 @@
             </tr>
           </thead>
           <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
           </tbody>
         </table>
       </div>
@@ -373,7 +379,9 @@
               <th class="text-end"><%== __('MB') %></th>
             </tr>
           </thead>
-          <tbody class="blank"></tbody>
+          <tbody class="blank">
+            <!-- Data will be injected here by JavaScript -->
+          </tbody>
         </table>
       </div>
     </div>

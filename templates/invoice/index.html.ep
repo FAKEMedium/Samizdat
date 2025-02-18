@@ -12,6 +12,7 @@
       </tr>
     </thead>
     <tbody>
+      <!-- Data will be injected here by JavaScript -->
     </tbody>
     <tfoot>
       <tr>

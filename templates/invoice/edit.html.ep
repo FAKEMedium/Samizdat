@@ -19,6 +19,7 @@
         </tr>
       </thead>
       <tbody id="invoiceitems">
+        <!-- Data will be injected here by JavaScript -->
       </tbody>
       <tfoot>
         <tr id="summering">
