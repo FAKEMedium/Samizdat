@@ -17,6 +17,7 @@ sub get ($self, $params = {}) {
     $customer->{billingzip} = $customer->{zip} if ('' eq $customer->{billingzip});
     $customer->{billingaddress} = $customer->{address} if ('' eq $customer->{billingaddress});
     $customer->{billingcountry} = $customer->{country} if ('' eq $customer->{billingcountry});
+    $customer->{billinglang} = $customer->{lang} if ('' eq $customer->{billinglang});
     push @$customers, $customer;
   });
   return $customers;

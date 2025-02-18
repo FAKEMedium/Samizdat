@@ -161,7 +161,7 @@ sub create ($self) {
   $formdata->{invoice}->{title} = $self->app->__x('Invoice {number}', number => $nextnumber);
 
   # Prepare customer data
-  for my $field ('firstname', 'lastname', 'company', 'address', 'city') {
+  for my $field ('firstname', 'lastname', 'company', 'address', 'city', 'lang') {
     $self->_texescape(\$formdata->{customer}->{$field});
   }
   if ('SE' eq uc $formdata->{customer}->{country}) {
@@ -442,7 +442,7 @@ sub _formdata ($self) {
     if ($key =~ $regexp) {
       $formdata->{invoiceitems}->{$2}->{$1} = $result->{$key};
     }
-    if ($key =~ /^(billing(email|address|zip|country))$/) {
+    if ($key =~ /^(billing(email|address|zip|country|lang))$/) {
       $formdata->{customer}->{$key} = $result->{$key};
     }
   }

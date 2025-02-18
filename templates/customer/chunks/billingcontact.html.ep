@@ -36,7 +36,7 @@
   </div>
   <div class="col-md-4">
     <div class="form-floating">
-      <select class="form-select" id="lang" name="lang" aria-label="<%== __('Language') %>">
+      <select class="form-select" id="billinglang" name="billinglang" aria-label="<%== __('Language') %>">
 % my $languages = { 'en_GB' => __('English'), 'sv_SE' => __('Swedish') };
 % for my $lang (keys %$languages) {
         <option value="<%== $lang %>"><%== $languages->{$lang} %></option>
