@@ -52,6 +52,7 @@ function populateForm(formdata, method) {
   document.querySelector('#billingaddress').value = customer.billingaddress;
   document.querySelector('#billingcountry').value = customer.billingcountry;
   document.querySelector('#mailto').href = 'mailto:' + customer.billingemail;
+  document.querySelector('#billinglang').value = customer.billinglang;
   document.querySelector('#headline').innerHTML = `<%==__('Open invoice for customer') %> #${customer.customerid}`;
 
   let invoice = formdata.invoice;
