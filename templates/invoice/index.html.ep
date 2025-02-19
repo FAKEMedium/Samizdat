@@ -1,5 +1,4 @@
 <form id="dataform" action="/<%== $scriptname %>" method="post">
-
   <table id="invoices" class="table table-sm table-striped sortable">
     <thead>
       <tr>

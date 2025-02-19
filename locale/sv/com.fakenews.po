@@ -241,8 +241,14 @@ msgstr "Skapa kontakt"
 msgid "Create customer"
 msgstr "Skapa kund"
 
+msgid "Create new record"
+msgstr ""
+
 msgid "Created {created} by {creator}"
 msgstr "Skapad {created} av {creator}"
+
+msgid "Credit invoice"
+msgstr ""
 
 msgid "Credit trustability"
 msgstr "Kreditvärdighet"
@@ -300,6 +306,9 @@ msgstr "Domänregistrering"
 
 msgid "Domains"
 msgstr "Domäner"
+
+msgid "Due date"
+msgstr ""
 
 msgid "Due to"
 msgstr "Förfallodatum"
@@ -460,6 +469,9 @@ msgstr ""
 msgid "Halfyear"
 msgstr "Halvår"
 
+msgid "Handled invoice"
+msgstr ""
+
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
 
@@ -469,7 +481,13 @@ msgstr ""
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
 
+msgid "Impersonate"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
+msgstr ""
+
+msgid "Including VAT"
 msgstr ""
 
 msgid "Invoice"
@@ -489,6 +507,9 @@ msgstr "Faktura kund #{customerid}"
 
 msgid "Invoice customer {customerid}"
 msgstr "Faktura kund {customerid}"
+
+msgid "Invoice date"
+msgstr ""
 
 msgid "Invoice for completed services"
 msgstr "Faktura för utförda tjänster"
@@ -615,6 +636,9 @@ msgstr "Skapa faktura"
 msgid "Manuals"
 msgstr "Manualer"
 
+msgid "Mark payment"
+msgstr ""
+
 msgid "Message"
 msgstr "Meddelande"
 
@@ -720,11 +744,17 @@ msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
 msgid "Ownership"
 msgstr "Ägarbyte"
 
+msgid "PDF viewer"
+msgstr ""
+
 msgid "Page {number} of {total}"
 msgstr "Sida {number} av  {total}"
 
 msgid "Paid"
 msgstr "Betalad"
+
+msgid "Paid amount"
+msgstr ""
 
 msgid "Panel"
 msgstr ""
@@ -733,6 +763,12 @@ msgid "Password"
 msgstr "Lösenord"
 
 msgid "Password was wrong or username doesn't exist."
+msgstr ""
+
+msgid "Paydate"
+msgstr ""
+
+msgid "Payment"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -809,6 +845,15 @@ msgstr "Registrerad för F-skatt"
 
 msgid "Registered office"
 msgstr "Styrelsens säte"
+
+msgid "Remind"
+msgstr ""
+
+msgid "Reprint"
+msgstr ""
+
+msgid "Resend"
+msgstr ""
 
 msgid "Resources"
 msgstr "Resurser"

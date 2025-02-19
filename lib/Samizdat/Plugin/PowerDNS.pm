@@ -1,12 +1,14 @@
 package Samizdat::Plugin::PowerDNS;
+
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
+use Samizdat::Model::PowerDNS;
 
 sub register ($self, $app, $conf) {
   # Helper for accessing the PowerDNS API model.
   $app->helper(powerdns_api => sub ($c) {
     return Samizdat::Model::PowerDNS->new(
-      api_url => $app->config('powerdns_api_url'),
-      api_key => $app->config('powerdns_api_key'),
+      api_url => $c->config->{powerdns}->{api_url},
+      api_key => $c->config->{powerdns}->{api_key},
     );
   });
 

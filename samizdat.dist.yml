@@ -55,6 +55,9 @@ roomservice:
     period: quarterly
     invoicetype: email
     trust: normal
+powerdns:
+  api_url: https://ns.example.com:8081/
+  api_key: s3cr3tk3y
 icons:
   large: src/svg/fakenews.svg
   small: src/svg/f.svg

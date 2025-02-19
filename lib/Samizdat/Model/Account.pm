@@ -14,6 +14,10 @@ has 'app';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
 
+sub username ($self, $cookie) {
+  my $db = $self->app->mysql->db;
+  return 1; # Temporary solution
+}
 
 sub addUser ($self, $username, $attribs = undef) {
   my $db = $self->app->mysql->db;

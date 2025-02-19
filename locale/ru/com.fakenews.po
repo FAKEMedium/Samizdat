@@ -248,7 +248,13 @@ msgstr ""
 msgid "Create customer"
 msgstr ""
 
+msgid "Create new record"
+msgstr ""
+
 msgid "Created {created} by {creator}"
+msgstr ""
+
+msgid "Credit invoice"
 msgstr ""
 
 msgid "Credit trustability"
@@ -321,6 +327,9 @@ msgid "DomÃ¤nregistrering"
 msgstr ""
 
 msgid "Domänregistrering"
+msgstr ""
+
+msgid "Due date"
 msgstr ""
 
 msgid "Due to"
@@ -485,6 +494,9 @@ msgstr ""
 msgid "Halfyear"
 msgstr ""
 
+msgid "Handled invoice"
+msgstr ""
+
 msgid "I accept the terms for registration."
 msgstr ""
 
@@ -497,7 +509,13 @@ msgstr ""
 msgid "Identification code"
 msgstr ""
 
+msgid "Impersonate"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
+msgstr ""
+
+msgid "Including VAT"
 msgstr ""
 
 msgid "Invoice"
@@ -516,6 +534,9 @@ msgid "Invoice customer #{customerid}"
 msgstr ""
 
 msgid "Invoice customer {customerid}"
+msgstr ""
+
+msgid "Invoice date"
 msgstr ""
 
 msgid "Invoice for completed services"
@@ -653,6 +674,9 @@ msgstr ""
 msgid "Manuals"
 msgstr ""
 
+msgid "Mark payment"
+msgstr ""
+
 msgid "Message"
 msgstr ""
 
@@ -764,10 +788,16 @@ msgstr ""
 msgid "Ownership"
 msgstr ""
 
+msgid "PDF viewer"
+msgstr ""
+
 msgid "Page {number} of {total}"
 msgstr ""
 
 msgid "Paid"
+msgstr ""
+
+msgid "Paid amount"
 msgstr ""
 
 msgid "Panel"
@@ -777,6 +807,12 @@ msgid "Password"
 msgstr ""
 
 msgid "Password was wrong or username doesn't exist."
+msgstr ""
+
+msgid "Paydate"
+msgstr ""
+
+msgid "Payment"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -864,6 +900,15 @@ msgid "Registered office"
 msgstr ""
 
 msgid "Registered office:"
+msgstr ""
+
+msgid "Remind"
+msgstr ""
+
+msgid "Reprint"
+msgstr ""
+
+msgid "Resend"
 msgstr ""
 
 msgid "Resources"
