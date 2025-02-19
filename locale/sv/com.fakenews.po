@@ -155,7 +155,7 @@ msgid "Blocked ip number"
 msgstr "Blockerat ip-nummer"
 
 msgid "Bootstrap icons"
-msgstr ""
+msgstr "Bootstrapikoner"
 
 msgid "Bootstrap icons helper"
 msgstr "Hjälpfunktion Bootstrap-ikoner"
@@ -179,7 +179,7 @@ msgid "Change password"
 msgstr "Ändra lösenord"
 
 msgid "Changed status."
-msgstr ""
+msgstr "Ändrade status."
 
 msgid "Choose a password."
 msgstr "Välj ett lösenord"
@@ -197,7 +197,7 @@ msgid "City (billing)"
 msgstr ""
 
 msgid "Click to pop login dialog."
-msgstr ""
+msgstr "Klicka för att öppna inloggningsfönstret."
 
 msgid "Close"
 msgstr "Stäng"
@@ -209,7 +209,7 @@ msgid "Confirm poll signature"
 msgstr ""
 
 msgid "Confirmation request sent"
-msgstr ""
+msgstr "Bekräftelse skickad"
 
 msgid "Contact"
 msgstr "Kontakt"
@@ -242,13 +242,13 @@ msgid "Create customer"
 msgstr "Skapa kund"
 
 msgid "Create new record"
-msgstr ""
+msgstr "Skapa ny post"
 
 msgid "Created {created} by {creator}"
 msgstr "Skapad {created} av {creator}"
 
 msgid "Credit invoice"
-msgstr ""
+msgstr "Kreditfaktura"
 
 msgid "Credit trustability"
 msgstr "Kreditvärdighet"
@@ -308,7 +308,7 @@ msgid "Domains"
 msgstr "Domäner"
 
 msgid "Due date"
-msgstr ""
+msgstr "Förfallodatum"
 
 msgid "Due to"
 msgstr "Förfallodatum"
@@ -332,7 +332,7 @@ msgid "Email not valid"
 msgstr "Ogiltig epost"
 
 msgid "Email someone about {what}"
-msgstr ""
+msgstr "Maila någon om {what}"
 
 msgid "Email to a friend"
 msgstr "Maila en vän"
@@ -413,7 +413,7 @@ msgid "Enter valid email"
 msgstr "Ange giltig epostadress"
 
 msgid "Enter your email"
-msgstr ""
+msgstr "Skriv in din epostadress"
 
 msgid "Euro"
 msgstr ""
@@ -443,7 +443,7 @@ msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
 msgid "Fill the form correctly!"
-msgstr ""
+msgstr "Fyll i formuläret ordentligt!"
 
 msgid "Find your invoice attached as PDF."
 msgstr "Fakturan bifogas som PDF."
@@ -464,13 +464,13 @@ msgid "Gross"
 msgstr "Brutto"
 
 msgid "HTML result"
-msgstr ""
+msgstr "HTML-resultat"
 
 msgid "Halfyear"
 msgstr "Halvår"
 
 msgid "Handled invoice"
-msgstr ""
+msgstr "Hanterade faktura"
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
@@ -482,13 +482,13 @@ msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
 
 msgid "Impersonate"
-msgstr ""
+msgstr "Agera som"
 
 msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
 msgid "Including VAT"
-msgstr ""
+msgstr "Inklusive moms"
 
 msgid "Invoice"
 msgstr "Faktura"
@@ -509,7 +509,7 @@ msgid "Invoice customer {customerid}"
 msgstr "Faktura kund {customerid}"
 
 msgid "Invoice date"
-msgstr ""
+msgstr "Fakturadatum"
 
 msgid "Invoice for completed services"
 msgstr "Faktura för utförda tjänster"
@@ -601,10 +601,10 @@ msgid "Login"
 msgstr "Logga in"
 
 msgid "Login blocked"
-msgstr ""
+msgstr "Inloggning blockerad"
 
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
-msgstr ""
+msgstr "Inloggning är tillfälligt blockerad pga upprepade misslyckade försök från {ip}."
 
 msgid "Logotype leading to start"
 msgstr "Logotypen leder till start"
@@ -637,7 +637,7 @@ msgid "Manuals"
 msgstr "Manualer"
 
 msgid "Mark payment"
-msgstr ""
+msgstr "Markera betalning"
 
 msgid "Message"
 msgstr "Meddelande"
@@ -649,7 +649,7 @@ msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
 
 msgid "Missing username or password"
-msgstr ""
+msgstr "Användarnamn eller lösenord saknas"
 
 msgid "Mobile"
 msgstr "Mobiltelefon"
@@ -688,7 +688,7 @@ msgid "Newsletter"
 msgstr "Nyhetsbrev"
 
 msgid "No customer #{customerid}."
-msgstr ""
+msgstr "Ingen kund #{customerid}."
 
 msgid "No invoice template."
 msgstr ""
@@ -745,7 +745,7 @@ msgid "Ownership"
 msgstr "Ägarbyte"
 
 msgid "PDF viewer"
-msgstr ""
+msgstr "PDF-visare"
 
 msgid "Page {number} of {total}"
 msgstr "Sida {number} av  {total}"
@@ -754,7 +754,7 @@ msgid "Paid"
 msgstr "Betalad"
 
 msgid "Paid amount"
-msgstr ""
+msgstr "Betaalad summa"
 
 msgid "Panel"
 msgstr ""
@@ -763,19 +763,22 @@ msgid "Password"
 msgstr "Lösenord"
 
 msgid "Password was wrong or username doesn't exist."
-msgstr ""
+msgstr "Lösenordet var fel eller användarnamnet finns inte."
 
 msgid "Paydate"
-msgstr ""
+msgstr "Betaldatum"
 
 msgid "Payment"
-msgstr ""
+msgstr "Betalning"
 
 msgid "Payment due to: {duedate}"
 msgstr "Förfallodatum: {duedate}"
 
 msgid "Payment terms"
 msgstr "Betalningsvillkor"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "Det kan ta upp till en vecka innan betalningar blir synliga i kontrollpanelen."
 
 msgid "Paypal"
 msgstr ""
@@ -790,10 +793,10 @@ msgid "Personal panel"
 msgstr "Personlig panel"
 
 msgid "Please login to access resource."
-msgstr ""
+msgstr "Logga in för att få åtkomst."
 
 msgid "Please logout and login as a user with proper authorization instead."
-msgstr ""
+msgstr "Logga in som en användare med rätt behörighet istället."
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
@@ -820,7 +823,7 @@ msgid "Qty"
 msgstr "Antal"
 
 msgid "Qty."
-msgstr "Ant."
+msgstr "Antal"
 
 msgid "Quantity"
 msgstr "Antal"
@@ -847,13 +850,13 @@ msgid "Registered office"
 msgstr "Styrelsens säte"
 
 msgid "Remind"
-msgstr ""
+msgstr "Påminn"
 
 msgid "Reprint"
-msgstr ""
+msgstr "Regenerera"
 
 msgid "Resend"
-msgstr ""
+msgstr "Skicka igen"
 
 msgid "Resources"
 msgstr "Resurser"
@@ -868,7 +871,7 @@ msgid "SEK"
 msgstr "kr"
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
-msgstr ""
+msgstr "Samizdat använder Bootstrapikonerna från {link}."
 
 msgid "Save"
 msgstr "Spara"
@@ -1030,13 +1033,13 @@ msgid "The invoice is also available at"
 msgstr "Fakturan finns också på"
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
-msgstr ""
+msgstr "Gränsen är satt till {blocklimit} försök på {blocktime} minuter."
 
 msgid "The limit is {limit}."
 msgstr "Gränsen är {limit}."
 
 msgid "The login function uses javascript, cookies and AJAX."
-msgstr ""
+msgstr "Inloggningsfuktionen använder javascript, cookies och AJAX."
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
 msgstr ""
@@ -1054,7 +1057,7 @@ msgid "Toggle menu"
 msgstr "Visa meny"
 
 msgid "Tot"
-msgstr ""
+msgstr "Tot"
 
 msgid "Transfer"
 msgstr "Överföring"
@@ -1066,10 +1069,10 @@ msgid "Update"
 msgstr "Uppdatera"
 
 msgid "Update and send page."
-msgstr ""
+msgstr "Uppdatera och skicka sida."
 
 msgid "Update and send."
-msgstr "Uppdatera och skcka."
+msgstr "Uppdatera och skicka."
 
 msgid "Update customer"
 msgstr "Uppdaterade faktura, kund #{customerid}"
@@ -1129,13 +1132,13 @@ msgid "Value for the class attribute."
 msgstr ""
 
 msgid "We will email a confirmation request."
-msgstr ""
+msgstr "Vi kommer maila en bekräftelselänk."
 
 msgid "We will reply as soon as possible."
 msgstr "Vi svarar så fort vi kan."
 
 msgid "Web sites"
-msgstr ""
+msgstr "Webbplatser"
 
 msgid "Websites"
 msgstr "Webbplatser"
@@ -1150,7 +1153,7 @@ msgid "Year"
 msgstr "År"
 
 msgid "You have {remaining} tries left."
-msgstr ""
+msgstr "Du har {remaining} försök kvar."
 
 msgid "You were logged in as {username}."
 msgstr "Du var inloggad som {username}."
@@ -1168,7 +1171,7 @@ msgid "Your ip {ip} will be appended to the message."
 msgstr "Ditt ip-nummer kommer synas i meddelandet."
 
 msgid "Your message appears below."
-msgstr ""
+msgstr "Ditt meddelande syns nedanför."
 
 msgid "Your name"
 msgstr "Ditt namn"

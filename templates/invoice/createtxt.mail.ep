@@ -39,3 +39,4 @@
 
 <%== __('Write the invoice number as message when you pay.')%>
 <%== __x('Invoice questions can be directed to {url}.', url => config->{roomservice}->{invoice}->{sender}) %>
+<%== __('Payments may take up to one week to become visible in the control panel.') %>

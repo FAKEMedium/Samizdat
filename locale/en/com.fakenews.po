@@ -825,6 +825,9 @@ msgstr ""
 msgid "Payment terms:"
 msgstr ""
 
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr ""
+
 msgid "Paypal"
 msgstr ""
 

@@ -42,6 +42,9 @@
     costsum  => $invoicedata->{invoice}->{costsum},
     currency => $invoicedata->{invoice}->{currency}) %></h3>
 
-  <p><%== __('Write the invoice number as message when you pay.')%> <%== __x('Invoice questions can be directed to {url}.',
-    url => sprintf('<a href="mailto:%s">%s</a>', config->{roomservice}->{invoice}->{sender}, config->{roomservice}->{invoice}->{sender})) %></p>
+  <p>
+    <%== __('Write the invoice number as message when you pay.')%> <%== __x('Invoice questions can be directed to {url}.',
+      url => sprintf('<a href="mailto:%s">%s</a>', config->{roomservice}->{invoice}->{sender}, config->{roomservice}->{invoice}->{sender})) %>
+    <%== __('Payments may take up to one week to become visible in the control panel.') %>
+  </p>
 </div>
