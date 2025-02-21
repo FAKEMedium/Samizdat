@@ -42,8 +42,8 @@ roomservice:
       loc: XXXXXXXXX
       int: +XX XXXXXXXXX
     address: |
-      Example
-      Street 
+      Example Inc.
+      Street XX
       XXXXX Big City
     contact: contact@example.com
     billingcontact: billing@example.com
@@ -57,7 +57,7 @@ roomservice:
     trust: normal
 powerdns:
   api:
-    url: http://ns.example.com:8081
+    url: http://ns.example.com:8081/api/v1/servers/localhost
     key: s3cr3tk3y
 icons:
   large: src/svg/fakenews.svg
@@ -87,8 +87,8 @@ robots: |
   allow: /
 humans: |
   /* DEVELOPERS */
-    Lead: Hans Svensson
-    Contact: hans[at]fakenews.com
+    Lead: Zaphod 1 && 2
+    Contact: beeblebrox[at]example.com
     From: Lund, Sweden
   
     You could be listed here too. Make your contributions on https://github.com/FakenewsCom/Samizdat.
@@ -97,7 +97,6 @@ humans: |
     Language: English / Swedish
     Doctype: HTML5 (valid XML)
     Programming languages: Perl, Javascript, SQL, Shellscript, Lua, Makefile, SCSS, CSS
-    IDE: Intellij IDEA Ultimate Edition
 ads: |
   placeholder.example.com, placeholder, DIRECT, placeholder
 security: |

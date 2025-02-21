@@ -32,7 +32,6 @@
         if (record.name.endsWith('.')) {
           record.name = record.name.slice(0, -1);
         }
-
         let recordid = rrset.type + '_' + rrset.name;
         snippet += `
       <tr data-recordid="${recordid}">
@@ -41,8 +40,8 @@
         <td>${truncateText(record.content, 100)}</td>
         <td>${rrset.ttl}</td>
         <td>
-          <a href="/powerdns/${data.zone_id}/records/${rrset.name}/edit" class="btn btn-sm btn-secondary">Edit</a>
-          <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete">Delete</button>
+          <a href="/powerdns/${data.zone_id}/records/${rrset.name}/edit" class="btn btn-sm btn-secondary" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></a>
+          <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
         </td>
       </tr>`;
       })
