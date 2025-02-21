@@ -1,0 +1,18 @@
+<div id="error-message" class="alert alert-danger d-none"></div>
+<form id="zone-form" action="" method="post">
+  <!-- For edit mode, a hidden zone id is used; otherwise, it remains blank -->
+  <input type="hidden" id="zone-id" name="id" value="">
+  <div class="mb-3">
+    <label for="zone-name" class="form-label">Zone Name</label>
+    <input type="text" id="zone-name" name="name" class="form-control" value="">
+  </div>
+  <div class="mb-3">
+    <label for="zone-kind" class="form-label">Zone Kind</label>
+    <select id="zone-kind" name="kind" class="form-select">
+      <option value="Master">Master</option>
+      <option value="Slave">Slave</option>
+    </select>
+  </div>
+  <button type="submit" class="btn btn-primary"><%== __('Submit') %></button>
+  <a href="/powerdns" class="btn btn-secondary"><%== __('Cancel') %></a>
+</form>

@@ -1,15 +1,15 @@
+# lib/Samizdat/Model/PowerDNS.pm
 package Samizdat::Model::PowerDNS;
-
 use Mojo::Base -base, -signatures;
 use Mojo::UserAgent;
 use Mojo::JSON qw(encode_json decode_json);
+use Data::Dumper;
 
 has api_url => sub { die "api_url required" };
 has api_key => sub { die "api_key required" };
 has ua      => sub { Mojo::UserAgent->new };
 
-
-# Set API headers
+# Helper to set API headers.
 sub _headers ($self) {
   return {
     'X-API-Key'    => $self->api_key,
@@ -17,28 +17,35 @@ sub _headers ($self) {
   };
 }
 
-### Zone methods
+### Zone Methods
 
-sub list_zones ($self) {
-  my $url = $self->api_url . '/servers/localhost/zones';
-  my $tx  = $self->ua->get($url, $self->_headers);
+# List zones. Accepts optional query parameters.
+# The "rrsets" parameter defaults to "true".
+sub list_zones ($self, $params = {}) {
+  $params->{dnssec} //= 'false';
+  my $url = $self->api_url . '/zones';
+  my $tx  = $self->ua->get($url, $self->_headers, form => $params);
   if (my $res = $tx->result) {
     return $res->is_success ? $res->json : [];
   }
   return [];
 }
 
-sub get_zone ($self, $zone_id) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id;
-  my $tx  = $self->ua->get($url, $self->_headers);
+# Get details for a specific zone.
+# The "rrsets" parameter defaults to "true".
+sub get_zone ($self, $zone_id, $params = {}) {
+  $params->{rrsets} //= 'false';
+  my $url = $self->api_url . '/zones/' . $zone_id;
+  my $tx  = $self->ua->get($url, $self->_headers, form => $params);
   if (my $res = $tx->result) {
     return $res->is_success ? $res->json : undef;
   }
   return undef;
 }
 
+# Create a new zone. Expects a hashref with keys like name and kind.
 sub create_zone ($self, $zone_data) {
-  my $url = $self->api_url . '/servers/localhost/zones';
+  my $url = $self->api_url . '/zones';
   my $payload = {
     name       => $zone_data->{name},
     kind       => $zone_data->{kind} // 'Master',
@@ -51,8 +58,9 @@ sub create_zone ($self, $zone_data) {
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
+# Update an existing zone.
 sub update_zone ($self, $zone_id, $zone_data) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id;
+  my $url = $self->api_url . '/zones/' . $zone_id;
   my $payload = {
     name => $zone_data->{name},
     kind => $zone_data->{kind},
@@ -64,56 +72,87 @@ sub update_zone ($self, $zone_id, $zone_data) {
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
+# Delete a zone.
 sub delete_zone ($self, $zone_id) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id;
-  my $tx = $self->ua->delete($url, $self->_headers);
+  my $url = $self->api_url . '/zones/' . $zone_id;
+  my $tx  = $self->ua->delete($url, $self->_headers);
   my $res = $tx->result;
   return ($res && $res->is_success)
     ? { success => 1 }
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
-### Record methods
+### Record Methods (Records are managed as part of the zone object)
 
-sub list_records ($self, $zone_id) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id . '/records';
-  my $tx  = $self->ua->get($url, $self->_headers);
-  if (my $res = $tx->result) {
-    return $res->is_success ? $res->json : [];
+# List records for a zone. Optionally filter the records (e.g. by type or name).
+sub list_rrsets ($self, $zone_id, $filter = {}) {
+  my $zone = $self->get_zone($zone_id, { rrsets => 'true' });
+  my $records = [];
+  my $rrsets = $zone->{rrsets} // [];
+  if (%$filter) {
+    $rrsets = [ grep {
+      my $ok = 1;
+      $ok &&= ($_->{type} eq $filter->{type}) if exists $filter->{type};
+      $ok &&= ($_->{name} eq $filter->{name}) if exists $filter->{name};
+      $ok;
+    } @$rrsets ];
   }
-  return [];
+  return $rrsets;
 }
 
+# Get a specific record from a zone.
 sub get_record ($self, $zone_id, $record_id) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id . '/records/' . $record_id;
-  my $tx  = $self->ua->get($url, $self->_headers);
-  if (my $res = $tx->result) {
-    return $res->is_success ? $res->json : undef;
+  my $records = $self->list_records($zone_id);
+  for my $rec (@$records) {
+    return $rec if defined $rec->{id} && $rec->{id} eq $record_id;
   }
   return undef;
 }
 
+# Create a record by adding it to the zone's records array and updating the zone.
 sub create_record ($self, $zone_id, $record_data) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id . '/records';
-  my $tx = $self->ua->post($url, $self->_headers, json => $record_data);
+  my $url = $self->api_url . '/zones/' . $zone_id;
+  my $zone_tx = $self->ua->get($url, $self->_headers);
+  my $zone = $zone_tx->result->json;
+  push @{ $zone->{records} //= [] }, $record_data;
+  my $tx = $self->ua->patch($url, $self->_headers, json => $zone);
   my $res = $tx->result;
   return ($res && $res->is_success)
     ? { success => 1 }
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
+# Update an existing record in a zone.
 sub update_record ($self, $zone_id, $record_id, $record_data) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id . '/records/' . $record_id;
-  my $tx = $self->ua->patch($url, $self->_headers, json => $record_data);
+  my $url = $self->api_url . '/zones/' . $zone_id;
+  my $zone_tx = $self->ua->get($url, $self->_headers);
+  my $zone = $zone_tx->result->json;
+  my $found;
+  for my $rec (@{ $zone->{records} // [] }) {
+    if (defined $rec->{id} && $rec->{id} eq $record_id) {
+      $rec = { %$rec, %$record_data };
+      $found = 1;
+      last;
+    }
+  }
+  return { success => 0, error => "Record not found" } unless $found;
+  my $tx = $self->ua->patch($url, $self->_headers, json => $zone);
   my $res = $tx->result;
   return ($res && $res->is_success)
     ? { success => 1 }
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
+# Delete a record by removing it from the zone's records array and updating the zone.
 sub delete_record ($self, $zone_id, $record_id) {
-  my $url = $self->api_url . '/servers/localhost/zones/' . $zone_id . '/records/' . $record_id;
-  my $tx = $self->ua->delete($url, $self->_headers);
+  my $url = $self->api_url . '/zones/' . $zone_id;
+  my $zone_tx = $self->ua->get($url, $self->_headers);
+  my $zone = $zone_tx->result->json;
+  my $records = $zone->{records} // [];
+  my $original_count = scalar(@$records);
+  @$records = grep { !(defined $_->{id} && $_->{id} eq $record_id) } @$records;
+  return { success => 0, error => "Record not found" } if scalar(@$records) == $original_count;
+  my $tx = $self->ua->patch($url, $self->_headers, json => $zone);
   my $res = $tx->result;
   return ($res && $res->is_success)
     ? { success => 1 }

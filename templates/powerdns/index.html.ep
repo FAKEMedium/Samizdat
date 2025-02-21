@@ -3,9 +3,7 @@
 <table id="zones" class="table table-striped">
   <thead>
     <tr>
-      <th>ID</th>
       <th>Name</th>
-      <th>Kind</th>
       <th>Actions</th>
     </tr>
   </thead>

@@ -19,12 +19,10 @@
     zones.sort((a, b) => b.id - a.id).forEach(zone => {
       snippet += `
       <tr data-zoneid="${zone.id}">
-        <td><a href="/powerdns/zone/${zone.id}/edit">${zone.id}</a></td>
-        <td>${zone.name}</td>
-        <td>${zone.kind}</td>
+        <td><a href="/powerdns/zones/${zone.id}/edit">${zone.name}</a></td>
         <td>
-          <a href="/powerdns/zone/${zone.id}/edit" class="btn btn-sm btn-secondary">Edit</a>
-          <a href="/powerdns/zone/${zone.id}/records" class="btn btn-sm btn-info">Records</a>
+          <a href="/powerdns/zones/${zone.id}/edit" class="btn btn-sm btn-secondary">Edit</a>
+          <a href="/powerdns/zones/${zone.id}/records" class="btn btn-sm btn-info">Records</a>
           <button data-zoneid="${zone.id}" class="btn btn-sm btn-danger btn-delete">Delete</button>
         </td>
       </tr>
@@ -36,7 +34,7 @@
         if (!confirm('Are you sure you want to delete this zone?')) return;
         const zoneId = btn.getAttribute('data-zoneid');
         try {
-          const response = await fetch(`/powerdns/zone/${zoneId}`, {
+          const response = await fetch(`/powerdns/zones/${zoneId}`, {
             method: 'DELETE',
             headers: {'Accept': 'application/json'}
           });

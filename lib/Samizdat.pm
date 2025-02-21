@@ -162,10 +162,10 @@ sub startup ($self) {
 
   my $r = $self->routes;
   $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
-  $r->any([qw( GET                       )] => '/captcha.png')->to(controller => 'Captcha', action => 'index');
+  $r->any([qw( GET                       )] => '/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
 
   # Most routes are defined in the plugins
-  $r->any([qw( GET                       )] => '/')->to(controller => 'Web', action => 'geturi', docpath => '');
+  $r->any([qw( GET                       )] => '/')->to(controller => 'Web', action => 'geturi', docpath => '')->name('home');
   $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Web', action => 'geturi');
 }
 

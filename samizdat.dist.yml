@@ -56,8 +56,9 @@ roomservice:
     invoicetype: email
     trust: normal
 powerdns:
-  api_url: https://ns.example.com:8081/
-  api_key: s3cr3tk3y
+  api:
+    url: http://ns.example.com:8081
+    key: s3cr3tk3y
 icons:
   large: src/svg/fakenews.svg
   small: src/svg/f.svg

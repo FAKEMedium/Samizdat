@@ -1,6 +1,4 @@
 (function () {
-  const zoneId = "<%= stash('zone_id') %>";
-
   async function fetchRecords() {
     try {
       const response = await fetch(window.location.href, {headers: {'Accept': 'application/json'}});
@@ -15,24 +13,39 @@
     }
   }
 
+  function truncateText(text, limit = 80) {
+    return text.length > limit ? text.slice(0, limit) + '...' : text;
+  }
+
   function populate(data) {
-    const records = data.records || [];
+    const rrsets = data.rrsets || [];
     let snippet = '';
-    records.sort((a, b) => b.id - a.id).forEach(record => {
-      snippet += `
-      <tr data-recordid="${record.id}">
-        <td>${record.id}</td>
+    rrsets.sort((a, b) => b.name - a.name).forEach(rrset => {
+      rrset.records.forEach(record => {
+        record.name = rrset.name;
+        if (record.name.endsWith(data.zone_id)) {
+          record.name = record.name.slice(0, -data.zone_id.length);
+        }
+        if (record.name === "") {
+          record.name = "@";
+        }
+        if (record.name.endsWith('.')) {
+          record.name = record.name.slice(0, -1);
+        }
+
+        let recordid = rrset.type + '_' + rrset.name;
+        snippet += `
+      <tr data-recordid="${recordid}">
         <td>${record.name}</td>
-        <td>${record.type}</td>
-        <td>${record.content}</td>
-        <td>${record.ttl}</td>
-        <td>${record.priority}</td>
+        <td>${rrset.type}</td>
+        <td>${truncateText(record.content, 100)}</td>
+        <td>${rrset.ttl}</td>
         <td>
-          <a href="/powerdns/zone/${zoneId}/record/${record.id}/edit" class="btn btn-sm btn-secondary">Edit</a>
-          <button data-recordid="${record.id}" class="btn btn-sm btn-danger btn-delete">Delete</button>
+          <a href="/powerdns/${data.zone_id}/records/${rrset.name}/edit" class="btn btn-sm btn-secondary">Edit</a>
+          <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete">Delete</button>
         </td>
-      </tr>
-      `;
+      </tr>`;
+      })
     });
     document.querySelector('#records tbody').innerHTML = snippet;
     document.querySelectorAll('.btn-delete').forEach(btn => {
@@ -40,7 +53,7 @@
         if (!confirm('Are you sure you want to delete this record?')) return;
         const recordId = btn.getAttribute('data-recordid');
         try {
-          const response = await fetch(`/powerdns/zone/${zoneId}/record/${recordId}`, {
+          const response = await fetch(`/powerdns/${data.zone_id}/records/${recordId}`, {
             method: 'DELETE',
             headers: {'Accept': 'application/json'}
           });

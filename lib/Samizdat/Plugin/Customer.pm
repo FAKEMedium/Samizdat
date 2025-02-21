@@ -16,18 +16,17 @@ sub register ($self, $app, $conf) {
     }
   );
 
-  $manager->get('customers')->to('Customer#index');
-  $manager->get('vatno/:vatno')->to('Customer#vatno');
-  $manager->get('customers')->to('Customer#index');
-  $manager->get('customers/first')->to('Customer#first');
-  $manager->get('customers/newest')->to('Customer#newest');
-  $manager->get('customers/:customerid/prev')->to('Customer#prev');
-  $manager->get('customers/:customerid/next')->to('Customer#next');
-  $manager->get('customers/new')->to(controller => 'Customer', action => 'edit', customerid => 0);
-  $manager->post('customers/new')->to(controller => 'Customer', action => 'create', customerid => 0);
-  $manager->get('customers/:customerid')->to(controller => 'Customer', action => 'edit');
-  $manager->put('customers/:customerid')->to(controller => 'Customer', action => 'update');
-  $manager->any('customers/sync')->to('Customer#sync');
+  $manager->get('vatno/:vatno')->to('Customer#vatno')->name('customer_vatno');
+  $manager->get('customers/first')->to('Customer#first')->name('customer_first');
+  $manager->get('customers/newest')->to('Customer#newest')->name('customer_newest');
+  $manager->get('customers/new')->to(controller => 'Customer', action => 'edit', customerid => 0)->name('customer_new');
+  $manager->post('customers/new')->to(controller => 'Customer', action => 'create', customerid => 0)->name('customer_create');
+  $manager->get('customers/:customerid/prev')->to('Customer#prev')->name('customer_prev');
+  $manager->get('customers/:customerid/next')->to('Customer#next')->name('customer_next');
+  $manager->get('customers/:customerid')->to(controller => 'Customer', action => 'edit')->name('customer_edit');
+  $manager->put('customers/:customerid')->to(controller => 'Customer', action => 'update')->name('customer_update');
+  $manager->any('customers/sync')->to('Customer#sync')->name('customer_sync');
+  $manager->get('customers')->to('Customer#index')->name('customer_index');
 
   $app->helper(customer => sub { state $customer = Samizdat::Model::Customer->new({app => shift}) });
 
