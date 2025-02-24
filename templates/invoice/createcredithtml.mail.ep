@@ -1,0 +1,15 @@
+% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{roomservice}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
+<div style="background: #fff; padding: 1em;">
+  <img src="data:image/svg+xml;base64,<%== $invoicedata->{svglogotype} %>" width="100" style="width: 100px; margin-bottom: 2ex" />
+  <h2><%== __('Credit invoice') %></h2>
+
+  <p>
+    <%== __x('Invoice {fakturanummer} has been credited.', fakturanummer => $invoicedata->{invoice}->{kreditfakturaavser}) %>
+    <%== __('Find the credit invoice attached as PDF.') %>
+    <%== __x("It's also available at {url}.", url => sprintf('<a href="%s">%s</a>', $link, __('our web'))) %>
+  </p>
+  <p>
+    <%== __x('Invoice questions can be directed to {url}.',
+      url => sprintf('<a href="mailto:%s">%s</a>', config->{roomservice}->{invoice}->{sender}, config->{roomservice}->{invoice}->{sender})) %>
+  </p>
+</div>

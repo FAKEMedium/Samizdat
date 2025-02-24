@@ -172,6 +172,9 @@ msgstr ""
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
+msgid "Cancel"
+msgstr ""
+
 msgid "Captcha code from image"
 msgstr ""
 
@@ -259,10 +262,19 @@ msgstr ""
 msgid "Credit invoice"
 msgstr ""
 
+msgid "Credit invoice {fakturanummer}"
+msgstr ""
+
+msgid "Credit invoice {number}"
+msgstr ""
+
 msgid "Credit trustability"
 msgstr ""
 
 msgid "Creditability"
+msgstr ""
+
+msgid "Credited invoice"
 msgstr ""
 
 msgid "Customer"
@@ -281,6 +293,9 @@ msgid "Customer newsletter"
 msgstr ""
 
 msgid "Customers"
+msgstr ""
+
+msgid "DNS Zones"
 msgstr ""
 
 msgid "DNS domains"
@@ -302,6 +317,9 @@ msgid "Date:"
 msgstr ""
 
 msgid "Debt"
+msgstr ""
+
+msgid "Delete"
 msgstr ""
 
 msgid "Description"
@@ -341,6 +359,9 @@ msgid "EPP"
 msgstr ""
 
 msgid "Economy"
+msgstr ""
+
+msgid "Edit"
 msgstr ""
 
 msgid "Edit customer {customerid}"
@@ -472,6 +493,9 @@ msgstr ""
 msgid "Fill the form correctly!"
 msgstr ""
 
+msgid "Find the credit invoice attached as PDF."
+msgstr ""
+
 msgid "Find your invoice attached as PDF."
 msgstr ""
 
@@ -568,6 +592,9 @@ msgstr ""
 msgid "Invoice {fakturanummer}"
 msgstr ""
 
+msgid "Invoice {fakturanummer} has been credited."
+msgstr ""
+
 msgid "Invoice {invoiceid, customer {customerid}"
 msgstr ""
 
@@ -598,6 +625,9 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "It's also available at"
+msgstr ""
+
+msgid "It's also available at {url}."
 msgstr ""
 
 msgid "Keep me logged in"
@@ -721,6 +751,9 @@ msgid "New invoice for customer {customerid}"
 msgstr ""
 
 msgid "New invoice pack"
+msgstr ""
+
+msgid "New zone"
 msgstr ""
 
 msgid "Newest"
@@ -1050,6 +1083,9 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
+msgid "Submit"
+msgstr ""
+
 msgid "Summa"
 msgstr ""
 
@@ -1254,6 +1290,9 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
+msgid "Zone records"
+msgstr ""
+
 msgid "add 3\\%"
 msgstr ""
 
@@ -1267,6 +1306,9 @@ msgid "login attempts"
 msgstr ""
 
 msgid "main firewall"
+msgstr ""
+
+msgid "our web"
 msgstr ""
 
 msgid "standby firewall"

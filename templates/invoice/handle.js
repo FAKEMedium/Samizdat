@@ -3,7 +3,7 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-async function sendData(method, customerid = 0, invoiceid = 0) {
+async function sendData(method) {
   const url = form.action || "";
   const formData = new FormData(form);
   const request = {
@@ -98,6 +98,8 @@ function populateForm(formdata, method) {
   document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
   document.querySelector('#headline').innerHTML = `<%==__('Invoice') %> ${invoice.fakturanummer}`;
   document.querySelector('#invoiceid').value = invoice.invoiceid;
+  document.querySelector('#customerid').value = invoice.customerid;
+
   if (invoice.debt == 0) {
     document.querySelector('#dataform').classList.add('d-none');
   } else {
@@ -108,7 +110,11 @@ function populateForm(formdata, method) {
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
   document.querySelector('#costsum').innerHTML = invoice.costsum;
   document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1/(1 + invoice.vat)));
-
+  if (invoice.state !== 'fakturerad') {
+    document.querySelector('#dataform').classList.add('d-none');
+  } else {
+    document.querySelector('#dataform').classList.remove('d-none');
+  }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
   let pdfsrc = '<%== sprintf("%s/invoice/", config->{siteurl}) %>' + invoice.uuid + '.pdf';
@@ -159,8 +165,9 @@ function populateForm(formdata, method) {
 }
 
 function makeCreditInvoice() {
-  form.action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid + '/' + invoiceid + '/creditinvoice';
-
+  let customerid = document.querySelector('#customerid').value;
+  let invoiceid = document.querySelector('#invoiceid').value;
+  form.action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid + '/invoices/' + invoiceid + '/creditinvoice';
   sendData('POST');
 }
 
@@ -176,12 +183,12 @@ function resendInvoice() {
 
 }
 
-function markpaidInvoice() {
+function markPaymentInvoice() {
 
 }
 
-function getInvoice(customerid = 0, invoiceid = 0){
-  sendData('GET', customerid, invoiceid);
+function getInvoice() {
+  sendData('GET');
 }
 
 getInvoice();

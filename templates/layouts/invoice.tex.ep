@@ -79,6 +79,9 @@
 \begin {huge}
 <%= $invoice->{title} %>
 \end {huge}\newline
+% if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+\textbf {<%== __('Credited invoice') %>:} <%== $invoice->{kreditfakturaavser} %>\newline
+% }
 \textbf {<%== __('Date') %>:} <%== $invoice->{invoicedate} %>}}}
 \settoheight {\invoiceboxboxheight} {\usebox {\invoicebox}}
 %%

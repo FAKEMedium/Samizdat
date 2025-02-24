@@ -166,6 +166,9 @@ msgstr "Kompispris"
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
+msgid "Cancel"
+msgstr "Avbryt"
+
 msgid "Captcha code from image"
 msgstr "Kod från captcha-bild"
 
@@ -250,11 +253,20 @@ msgstr "Skapad {created} av {creator}"
 msgid "Credit invoice"
 msgstr "Kreditfaktura"
 
+msgid "Credit invoice {fakturanummer}"
+msgstr "Kreditfaktura {fakturanummer}"
+
+msgid "Credit invoice {number}"
+msgstr "Kreditfaktura {number}"
+
 msgid "Credit trustability"
 msgstr "Kreditvärdighet"
 
 msgid "Creditability"
 msgstr "Kreditvärdighet"
+
+msgid "Credited invoice"
+msgstr "Krediterad faktura"
 
 msgid "Customer"
 msgstr "Kund"
@@ -270,6 +282,9 @@ msgstr "Kundnyhetsbrev"
 
 msgid "Customers"
 msgstr "Kunder"
+
+msgid "DNS Zones"
+msgstr "DNS-zoner"
 
 msgid "DNS domains"
 msgstr "DNS-domäner"
@@ -288,6 +303,9 @@ msgstr "Datum"
 
 msgid "Debt"
 msgstr "Skuld"
+
+msgid "Delete"
+msgstr "Ta bort"
 
 msgid "Description"
 msgstr "Beskrivning"
@@ -318,6 +336,9 @@ msgstr ""
 
 msgid "Economy"
 msgstr "Ekonomi"
+
+msgid "Edit"
+msgstr "Redigera"
 
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
@@ -445,6 +466,9 @@ msgstr "Misslyckad inloggning från {ip}"
 msgid "Fill the form correctly!"
 msgstr "Fyll i formuläret ordentligt!"
 
+msgid "Find the credit invoice attached as PDF."
+msgstr ""
+
 msgid "Find your invoice attached as PDF."
 msgstr "Fakturan bifogas som PDF."
 
@@ -538,6 +562,9 @@ msgstr "Fakturatyp"
 msgid "Invoice {fakturanummer}"
 msgstr "Faktura {fakturanummer}"
 
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "Faktura {fakturanummer} har krediterats."
+
 msgid "Invoice {number}"
 msgstr "Faktura {number}"
 
@@ -560,6 +587,9 @@ msgstr[1] "Fakturering, {number} rader"
 
 msgid "It's also available at"
 msgstr "Den finns också på"
+
+msgid "It's also available at {url}."
+msgstr "Den finns också på {url}."
 
 msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
@@ -680,6 +710,9 @@ msgstr "Ny faktura för kund #{customerid}"
 
 msgid "New invoice pack"
 msgstr "Ny samlingsfaktura"
+
+msgid "New zone"
+msgstr "Ny zon"
 
 msgid "Newest"
 msgstr "Nyast"
@@ -990,6 +1023,9 @@ msgstr "Blandat"
 msgid "Subject"
 msgstr "Ämne"
 
+msgid "Submit"
+msgstr "Skicka"
+
 msgid "Summa"
 msgstr "Amount"
 
@@ -1042,7 +1078,7 @@ msgid "The login function uses javascript, cookies and AJAX."
 msgstr "Inloggningsfuktionen använder javascript, cookies och AJAX."
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
-msgstr ""
+msgstr "Den äldsta gjordes {failuretime} av &quot;{username}&quot;."
 
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
@@ -1176,6 +1212,9 @@ msgstr "Ditt meddelande syns nedanför."
 msgid "Your name"
 msgstr "Ditt namn"
 
+msgid "Zone records"
+msgstr "Zoninnehåll"
+
 msgid "add 3\\%"
 msgstr "lägg till 3\\%"
 
@@ -1191,14 +1230,17 @@ msgstr "inloggningsförsök"
 msgid "main firewall"
 msgstr "huvudbrandvägg"
 
+msgid "our web"
+msgstr "vår webbplats"
+
 msgid "standby firewall"
 msgstr "standbybrandvägg"
 
 msgid "{code}: Authentication required"
-msgstr ""
+msgstr "{code}: Inloggning krävs"
 
 msgid "{code}: No authorization"
-msgstr ""
+msgstr "{code}: Behörighet saknas"
 
 msgid "{cost}"
 msgstr ""
@@ -1207,7 +1249,7 @@ msgid "{cost} {currency}"
 msgstr ""
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
-msgstr ""
+msgstr "{count} misslyckade inloggningsförsök har gjorts från {ip} senaste {minutes} minuterna."
 
 msgid "{number} days"
 msgstr "{number} dagar"
@@ -1216,5 +1258,5 @@ msgid "{number} signatures since {date}"
 msgstr "{number} underskrifter sedan {date}"
 
 msgid "{sitename} in {country}"
-msgstr ""
+msgstr "{sitename} i {country}"
 

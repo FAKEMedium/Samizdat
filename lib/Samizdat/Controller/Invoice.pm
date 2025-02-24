@@ -70,11 +70,19 @@ sub index ($self) {
 }
 
 sub creditinvoice ($self) {
-
+  $self->create(1);
 }
 
-sub create ($self) {
-  my $formdata = $self->update(0);
+sub create ($self, $credit =  0) {
+  my $formdata = {};
+  my $creditedinvoice = { invoiceid => undef, fakturanummer => undef, state => 'raderad' };
+  if ($credit) {
+    $formdata = $self->_getdata({ includearticles => 0, includepayments => 0 });
+    $formdata->{invoice}->{kreditfakturaavser} = $formdata->{invoice}->{fakturanummer};
+    $creditedinvoice = { invoiceid => $formdata->{invoice}->{invoiceid}, fakturanummer => $formdata->{invoice}->{fakturanummer} };
+  } else {
+    $formdata = $self->update(0);
+  }
   delete $formdata->{invoiceitems}->{extra};
   my $lang = 'en';
   if ($formdata->{customer}->{lang} =~ /^(.+)_(.+)$/) {
@@ -85,13 +93,15 @@ sub create ($self) {
   my $customerid = $formdata->{customer}->{customerid};
   my $costsum = 0;
   for my $invoiceitemid (keys %{$formdata->{invoiceitems}}) {
-    if (
-      (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{articlenumber}) ||
-      (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{number}) ||
-      ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{invoiceitemtext}) ||
-      ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{price})
-    ) {
-      return $self->render(json => { error => $self->app->__('Fill the form correctly!')});
+    if (!$credit) {
+      if (
+        (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{articlenumber}) ||
+          (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{number}) ||
+          ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{invoiceitemtext}) ||
+          ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{price})
+      ) {
+        return $self->render(json => { error => $self->app->__('Fill the form correctly!') });
+      }
     }
     if (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{include}) {
       delete $formdata->{invoiceitems}->{$invoiceitemid};
@@ -102,7 +112,7 @@ sub create ($self) {
     }
   }
 
-  my $vat = $formdata->{customer}->{vat};
+  my $vat = $formdata->{invoice}->{vat};
   $vat *= 100;
   $vat =~ s/[0]+$// if ($vat =~ /\./);
   if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
@@ -158,7 +168,11 @@ sub create ($self) {
     uuid()
   );
   $formdata->{invoice}->{uuid} = $uuid;
-  $formdata->{invoice}->{title} = $self->app->__x('Invoice {number}', number => $nextnumber);
+  if ($credit) {
+    $formdata->{invoice}->{title} = $self->app->__x('Credit invoice {number}', number => $nextnumber);
+  } else {
+    $formdata->{invoice}->{title} = $self->app->__x('Invoice {number}', number => $nextnumber);
+  }
 
   # Prepare customer data
   for my $field ('firstname', 'lastname', 'company', 'address', 'city', 'lang') {
@@ -179,11 +193,8 @@ sub create ($self) {
   $self->stash(formdata => $formdata);
   my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/print');
   $tex = encode 'UTF-8', $tex;
-  if ($self->render(data => $self->app->printinvoice($tex, $formdata), format => 'pdf')) {
-    $self->res->headers->header('Content-Disposition' =>
-      sprintf('inline; filename="%s_%s.pdf"', 'Rymdweb', $formdata->{invoice}->{uuid})
-    );
-    $self->res->headers->content_type('application/pdf');
+  my $data = $self->app->printinvoice($tex, $formdata);
+  if ($data) {
     my $invoicedata = {
       invoice      => $self->app->invoice->get({
         where => { invoiceid => $formdata->{invoice}->{invoiceid}, customerid => $customerid }
@@ -194,7 +205,6 @@ sub create ($self) {
       customer     => $formdata->{customer}
     };
     $invoicedata->{invoice}->{invoicedate} = $formdata->{invoice}->{invoicedate};
-    $invoicedata->{invoice}->{state} = 'fakturerad';
     $invoicedata->{invoice}->{uuid} = $uuid;
     $invoicedata->{invoice}->{fakturanummer} = $nextnumber;
     $invoicedata->{invoice}->{costsum} = $formdata->{invoice}->{rounded};
@@ -206,17 +216,22 @@ sub create ($self) {
     delete $invoicedata->{invoice}->{title};
     delete $invoicedata->{invoice}->{bookingdate};
     delete $invoicedata->{invoice}->{rev};
-    delete $invoicedata->{invoice}->{kreditfakturaavser};
-
-#    say Dumper $formdata->{invoice};
+    if (!$credit) {
+      delete $invoicedata->{invoice}->{kreditfakturaavser};
+      $invoicedata->{invoice}->{state} = 'fakturerad';
+    } else {
+      $invoicedata->{invoice}->{state} = 'raderad';
+      $self->app->invoice->updateinvoice($creditedinvoice->{invoiceid}, $creditedinvoice);
+    }
+    #    say Dumper $formdata->{invoice};
     $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
     my $newinvoiceid = $self->app->invoice->addinvoice($formdata->{customer});
 
-    for my $invoiceitemid (keys %{ $invoicedata->{invoiceitems} }) {
+    for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
       my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
       if (!$invoiceitem->{include}) {
         # Move unincluded invoice items to the newly created open invoice
-        $self->app->invoice->updateinvoiceitem($invoiceitemid, {invoiceid => $newinvoiceid});
+        $self->app->invoice->updateinvoiceitem($invoiceitemid, { invoiceid => $newinvoiceid });
       } else {
         # If item is a subscription, update the last invoicedate of the subscription
         $self->app->invoice->updatesubscription($customerid, $invoiceitem->{productid});
@@ -232,36 +247,56 @@ sub create ($self) {
     $invoicedata->{svglogotype} = $svg;
     $invoicedata->{vat} = $vat;
 
-    my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
-
-    my $htmldata = $self->render_mail(template => 'invoice/createhtml', invoicedata => $invoicedata);
-    $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
-
-    my $txtdata = $self->render_mail(template => 'invoice/createtxt', invoicedata => $invoicedata);
-    $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
+    my $subject = my $htmldata = my $txtdata = '';
+    if ($credit) {
+      $htmldata = $self->render_mail(template => 'invoice/createcredithtml', invoicedata => $invoicedata);
+      $txtdata = $self->render_mail(template => 'invoice/createcredittxt', invoicedata => $invoicedata);
+      $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
+        $self->app->__x('Credit invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer})));
+    } else {
+      $htmldata = $self->render_mail(template => 'invoice/createhtml', invoicedata => $invoicedata);
+      $txtdata = $self->render_mail(template => 'invoice/createtxt', invoicedata => $invoicedata);
+      $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
+        $self->app->__x('Invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer})));
+    }
 
     my $mail = MIME::Lite->new(
       From         => $self->config->{mail}->{from},
-      Bcc          => $self->{config}->{test}->{invoice} ? undef : $self->config->{mail}->{from},
-      To           => $self->{config}->{test}->{invoice} ? $self->config->{mail}->{to} : $invoicedata->{customer}->{billingemail},
+      Bcc          => $self->config->{test}->{invoice} ? undef : $self->config->{mail}->{from},
+      To           => $self->config->{test}->{invoice} ? $self->config->{mail}->{to} : $invoicedata->{customer}->{billingemail},
       Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", "Rymdweb AB")),
-      Subject      => Encode::encode("MIME-Q", Encode::decode("UTF-8",
-        $self->app->__x('Invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer}))),
+      Subject      => $subject,
       Type         => 'multipart/mixed',
       'X-Mailer'   => "Rymdwebs faktureringssystem",
     );
+
+    # Attach plain text and html variants
+    my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
+    $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
+    $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
     $mail->attach($alternative);
+
+    # Attach PDF
     $mail->attach(
       Path        => sprintf('%s/%s.pdf', $self->config->{roomservice}->{invoice}->{invoicedir}, $invoicedata->{invoice}->{uuid}),
       Filename    => sprintf('%s.pdf', $invoicedata->{invoice}->{uuid}),
       Type        => 'application/pdf',
       Disposition => 'attachment'
     );
-    say $mail->send($self->config->{mail}->{how}, @{ $self->config->{mail}->{howargs} });
 
-    return 1;
-  } else {
-
+    $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
+    if ($credit) {
+      $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
+        $self->config->{managerurl}, $invoicedata->{invoice}->{customerid}, $invoicedata->{invoice}->{invoiceid}
+      ));
+    } else {
+      $self->render(data => $data, format => 'pdf');
+      $self->res->headers->header('Content-Disposition' =>
+        sprintf('inline; filename="%s_%s.pdf"', 'Rymdweb', $formdata->{invoice}->{uuid})
+      );
+      $self->res->headers->content_type('application/pdf');
+      return 1;
+    }
   }
 }
 

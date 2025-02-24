@@ -10,13 +10,14 @@
 </div>
 
 <form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+  <input type="hidden" name="customerid" id="customerid">
   <input type="hidden" name="invoiceid" id="invoiceid">
   <div class="col-auto">
     <div class="input-group">
       <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
       <input type="text" class="form-control" name="amount" id="amount" placeholder="<%== __('Amount') %>">
       <input type="date" class="form-control" name="paydate" id="paydate" placeholder="<%== __('Paydate') %>">
-      <button type="submit" class="btn btn-primary" onclick="markpaidInvoice();"><%== __('Mark payment') %></button>
+      <button type="submit" class="btn btn-primary" onclick="markPaymentInvoice();"><%== __('Mark payment') %></button>
     </div>
   </div>
   <div class="col-auto me-auto">
