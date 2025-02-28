@@ -76,13 +76,15 @@
 \newsavebox {\invoicebox}
 \newlength {\invoiceboxboxheight}
 \sbox {\invoicebox} {\parbox[t] {106mm} {\topfont {%
-\begin {huge}
-<%= $invoice->{title} %>
-\end {huge}\newline
 % if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+{\LARGE <%= $invoice->{title} %>}\newline
 \textbf {<%== __('Credited invoice') %>:} <%== $invoice->{kreditfakturaavser} %>\newline
+% } else {
+\begin{huge}
+<%= $invoice->{title} %>
+\end{huge}\newline
 % }
-\textbf {<%== __('Date') %>:} <%== $invoice->{invoicedate} %>}}}
+\textbf {<%== __('Date') %>:} <%== substr($invoice->{invoicedate}, 0, 10) %>}}}
 \settoheight {\invoiceboxboxheight} {\usebox {\invoicebox}}
 %%
 %% Box for customer's address
@@ -194,31 +196,41 @@
 %   $vat =~ tr/\./,/;
 % }
 % if ('eur' eq $customer->{currency} && 'sv_SE' ne $customer->{lang}) {
-\begin{huge}\textbf {\
+{\huge \textbf {\
+%   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+<%== __x('Credited amount incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+%   } else {
 <%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
-}\end{huge}\newline
+%   }
+}}\newline
 \footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
 \footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
-%
-%	} else {
-\begin{huge}\textbf {\
+% } else {
+{\huge \textbf {\
+%   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+<%== __x('Credited amount incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+%   } else {
 <%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
-}\end{huge}\newline
+%   }
+}}\newline
 \footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
 \footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
 %   if ($invoice->{diff}) {
 \footnotesize {\textbf {<%== __('Round off') %>:} <%== $invoice->{diff} %> <%=$currency->{ $customer->{currency} } %>}\newline
 %   }
 % }
+% if (!(exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser})) {
 \footnotesize {\textbf {<%== __('Payment terms') %>:} <%== __x('{number} days', number => config->{roomservice}->{invoice}->{duedays}) %>}\newline
 \footnotesize {\textbf {<%== __('Due to') %>:} <%== $invoice->{duedate} %>}\newline
-\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => '8\%') %>}}}}
+\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => config->{roomservice}->{invoice}->{overdueinterest} . '\%') %>}
+% }
+}}}
 \settoheight {\billboxheight} {\usebox {\billbox}}
 %%
 \begin {document}
 \title {<%= $invoice->{title} %>}
 \author {<%== config->{author} %>}
-\date {\textbf {<%== __('Date') %>:} <%== sprintf('%s%s', $invoice->{invoicedate}, ('snailmail' eq $customer->{invoicetype}) ? '.' : '') %>}
+\date {\textbf {<%== __('Date') %>:} <%== sprintf('%s%s', substr($invoice->{invoicedate}, 0, 10), ('snailmail' eq $customer->{invoicetype}) ? '.' : '') %>}
 \setlength {\unitlength} {1cm}
 \begin {picture}(17.42, 11.7)(0.0, 0.0)
 \put(0.0, 11.7) {\includegraphics[width=5cm] {<%== config->{roomservice}->{invoice}->{logotype} %>}}

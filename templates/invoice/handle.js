@@ -1,9 +1,11 @@
-const form = document.querySelector("#dataform");
-form.addEventListener("submit", (event) => {
-  event.preventDefault();
+document.querySelectorAll('form').forEach((el) => {
+  el.addEventListener("submit", (event) => {
+    event.preventDefault();
+  })
 });
 
-async function sendData(method) {
+async function sendForm(method, dataform='#dataform') {
+  const form = document.querySelector(dataform);
   const url = form.action || "";
   const formData = new FormData(form);
   const request = {
@@ -24,7 +26,8 @@ async function sendData(method) {
     if (response.error) {
       alert(error);
     } else {
-      populateForm(await response.json(), method);
+      let formdata = await response.json();
+      populateForm(formdata, method, dataform);
     }
   } catch (e) {
     console.error(e);
@@ -41,7 +44,7 @@ window.onpopstate = function(event) {
 };
 var stateObj = { foo: 1000 + Math.random()*1001 };
 
-async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0) {
+async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0, dataform = '#dataform') {
   let url = '<%== config->{managerurl} %>';
   if (percustomer) {
     customerid = parseInt(customerid);
@@ -67,7 +70,7 @@ async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0) {
     if (response.error) {
       alert(error);
     } else {
-      populateForm(await response.json(), 'GET');
+      populateForm(await response.json(), 'GET', dataform);
       return true;
     }
   } catch (e) {
@@ -76,7 +79,7 @@ async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0) {
 }
 
 
-function populateForm(formdata, method) {
+function populateForm(formdata, method, dataform) {
   let customer = formdata.customer;
   let invoice = formdata.invoice;
   let payments = formdata.payments;
@@ -92,28 +95,46 @@ function populateForm(formdata, method) {
     thisurl = `<%== sprintf("%s%s/", config->{managerurl}, "invoices") %>${invoice.invoiceid}`;
   }
   history.pushState(stateObj, "ajax page loaded...", thisurl);
-  document.querySelector('#dataform').action = thisurl;
+  document.querySelector(dataform).action = thisurl;
 
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
   document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
   document.querySelector('#headline').innerHTML = `<%==__('Invoice') %> ${invoice.fakturanummer}`;
   document.querySelector('#invoiceid').value = invoice.invoiceid;
   document.querySelector('#customerid').value = invoice.customerid;
+  document.querySelector('#duedate').innerHTML = `${invoice.duedate}`;
+  document.querySelector('#duebox').classList.add('d-none');
 
-  if (invoice.debt == 0) {
-    document.querySelector('#dataform').classList.add('d-none');
-  } else {
-    document.querySelector('#duedate').innerHTML = invoice.duedate;
+  if (parseInt(invoice.due) > 0) {
     document.querySelector('#duebox').classList.remove('d-none');
+  } else {
+    document.querySelector(dataform).classList.add('d-none');
+  }
+  document.querySelector('#creditedbox').classList.add('d-none');
+  document.querySelector('#creditedinvoice').innerHTML = '';
+
+  if (invoice.state === 'raderad') {
+    document.querySelector('#duebox').classList.add('d-none');
+    if (parseInt(invoice.kreditfakturaavser) === 0) {
+      document.querySelector('#duedate').innerHTML = `<%== __('Invoice credited m') %>`;
+      document.querySelector('#headline').innerHTML = `<%==__('Invoice (credited)') %> ${invoice.fakturanummer}`;
+    } else {
+      document.querySelector('#creditedbox').classList.remove('d-none');
+      document.querySelector('#creditedinvoice').innerHTML = `${invoice.kreditfakturaavser}`;
+      document.querySelector('#headline').innerHTML = `<%==__('Credit invoice') %> ${invoice.fakturanummer}`;
+    }
   }
   document.querySelector('#amount').value = invoice.debt;
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
   document.querySelector('#costsum').innerHTML = invoice.costsum;
   document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1/(1 + invoice.vat)));
   if (invoice.state !== 'fakturerad') {
-    document.querySelector('#dataform').classList.add('d-none');
+    document.querySelector(dataform).classList.add('d-none');
+    document.querySelector('#remindbutton').href = '#';
   } else {
-    document.querySelector('#dataform').classList.remove('d-none');
+    document.querySelector(dataform).classList.remove('d-none');
+    document.querySelector('#duebox').classList.remove('d-none');
+    document.querySelector('#remindbutton').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}/remind`;
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
@@ -127,13 +148,13 @@ function populateForm(formdata, method) {
     }
   });
 
-  let paymentssnippet = '';
+  let infoboxsnippet = '';
   payments = payments.sortBy('-paydate');
   for (const payment of payments) {
-    paymentssnippet += `
-      <div><b><%== __('Payment') %></b>: ${payment.paydate} ${payment.amount} <span class="currency"></span></div>`;
+    infoboxsnippet += `
+      <div><b class="d-sm-inline d-none"><%== __('Payment') %>: </b>${payment.paydate} ${payment.amount} <span class="currency"></span></div>`;
   }
-  document.querySelector('#payments').innerHTML = paymentssnippet;
+  document.querySelector('#infobox').innerHTML = infoboxsnippet;
 
   let i = 1;
   let itemssnippet = '';
@@ -164,15 +185,19 @@ function populateForm(formdata, method) {
   return true;
 }
 
-function makeCreditInvoice() {
-  let customerid = document.querySelector('#customerid').value;
-  let invoiceid = document.querySelector('#invoiceid').value;
-  form.action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid + '/invoices/' + invoiceid + '/creditinvoice';
-  sendData('POST');
+function makeCreditInvoice(dataform) {
+  if (confirm('<%== __("Do you want to credit the invoice?") %>')) {
+    let customerid = document.querySelector('#customerid').value;
+    let invoiceid = document.querySelector('#invoiceid').value;
+    document.querySelector(dataform).action = '<%== sprintf("%s%s/", config->{managerurl}, "customers") %>' + customerid + '/invoices/' + invoiceid + '/creditinvoice';
+    sendForm('POST', dataform);
+  }
 }
 
 function remindInvoice() {
-
+  let customerid = document.querySelector('#customerid').value;
+  let invoiceid = document.querySelector('#invoiceid').value;
+  document.querySelector('#remindbutton').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${customerid}/invoices/${invoiceid}/remind`;
 }
 
 function reprintInvoice() {
@@ -187,8 +212,8 @@ function markPaymentInvoice() {
 
 }
 
-function getInvoice() {
-  sendData('GET');
+function getInvoice(dataform) {
+  sendForm('GET', dataform);
 }
 
-getInvoice();
+getInvoice('#dataform');

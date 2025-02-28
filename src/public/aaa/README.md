@@ -10,7 +10,7 @@ myModal.show();
     <div class="card h-100 alert-danger">
       <h5 class="card-header orange border-0">u</h5>
       <div class="card-body m-0 p-2 input-group gx-0 gy-2 gap-2 mb-1 gx-2">
-        <a class="badge rounded-pill text-bg-primary" href="/fortnox/work">y</a>
+        <a class="d-md-inline badge rounded-pill text-bg-primary" href="/fortnox/work">y</a>
         <form name="searchcustomer" method="post" action="customer/">
           <input type="hidden" name="what" value="customer" />
           <div class="form-group row">

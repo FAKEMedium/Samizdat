@@ -5,6 +5,7 @@ window.bootstrap = { Modal, Collapse, Dropdown, Offcanvas, Toast };
 import './user.js';
 import './sortby.js';
 import './tablesorter.js';
+// import './sendform.js';
 import './local.js';
 import './serviceworker.js';
 import { setlanguage } from "./language.js";

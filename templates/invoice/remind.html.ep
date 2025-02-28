@@ -1,0 +1,36 @@
+<form id="remindform" method="post" class="modal-content">
+  <input type="hidden" name="not_empty" value="Aecoh9rit2cah">
+  <div class="modal-header">
+    <h5 class="modal-title mr-auto" id="modaltitle"><%== title %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('Close') %>"></button>
+  </div>
+  <div class="modal-body" id="remindbody">
+    <div class="alert alert-light" role="alert" id="remindalert"></div>
+    <div class="mb-3">
+      <label for="billingemail" class="form-label"><%== __('Receiver') %></label>
+      <input type="text" class="form-control" id="billingemail" name="billingemail" placeholder="">
+    </div>
+    <div class="mb-3">
+      <label for="subject" class="form-label"><%== __('Subject') %></label>
+      <input type="text" class="form-control" id="subject" name="subject" placeholder="">
+    </div>
+    <div class="mb-3">
+      <label for="message"><%= __('Message') %></label>
+      <textarea class="form-control" id="mailmessage" name="mailmessage" rows="25" cols="70" wrap="soft"></textarea>
+    </div>
+    <div class="mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="severity" id="severitymild" value="mild">
+        <label class="form-check-label" for="severitymild"><%== __('Mild') %></label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="severity" id="severitytough" value="tough">
+        <label class="form-check-label" for="severitymild"><%== __('Tough') %></label>
+      </div>
+    </div>
+    <button type="submit" id="submitremind" class="btn btn-primary" onclick="remind();"><%= __('Send reminder') %></button>
+  </div>
+  <div class="modal-footer">
+  <%== __('billing@rymdweb.com') %>
+  </div>
+</form>

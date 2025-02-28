@@ -35,7 +35,7 @@ sub auth ($self) {
     say $redirect;
     return $self->redirect_to($redirect);
   }
-  $self->render(title => $self->__('Economy'));
+  $self->redirect_to(sprintf('%s', $self->app->{config}->{managerurl}));
 }
 
 sub work ($self) {

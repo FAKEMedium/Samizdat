@@ -208,6 +208,18 @@ msgstr ""
 msgid "Click to pop login dialog."
 msgstr ""
 
+msgid "Click to pop reminder dialog."
+msgstr ""
+
+msgid "Click to regenerate PDF."
+msgstr ""
+
+msgid "Click to send a credit invoice."
+msgstr ""
+
+msgid "Click to send agin."
+msgstr ""
+
 msgid "Close"
 msgstr ""
 
@@ -274,7 +286,13 @@ msgstr ""
 msgid "Creditability"
 msgstr ""
 
+msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgstr ""
+
 msgid "Credited invoice"
+msgstr ""
+
+msgid "Credited invoice: {number}"
 msgstr ""
 
 msgid "Customer"
@@ -329,6 +347,9 @@ msgid "Destroyed"
 msgstr ""
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr ""
+
+msgid "Do you want to credit the invoice?"
 msgstr ""
 
 msgid "Domain"
@@ -547,7 +568,13 @@ msgstr ""
 msgid "Invoice"
 msgstr ""
 
+msgid "Invoice (credited)"
+msgstr ""
+
 msgid "Invoice address"
+msgstr ""
+
+msgid "Invoice credited m"
 msgstr ""
 
 msgid "Invoice currency"
@@ -1008,10 +1035,16 @@ msgstr ""
 msgid "Select invoice pack"
 msgstr ""
 
+msgid "Send again"
+msgstr ""
+
 msgid "Send invoice questions to {url}."
 msgstr ""
 
 msgid "Send now"
+msgstr ""
+
+msgid "Send reminder"
 msgstr ""
 
 msgid "Servers"
@@ -1297,6 +1330,9 @@ msgid "add 3\\%"
 msgstr ""
 
 msgid "add {fee}"
+msgstr ""
+
+msgid "billing@rymdweb.com"
 msgstr ""
 
 msgid "control panel"

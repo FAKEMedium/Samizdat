@@ -202,6 +202,18 @@ msgstr ""
 msgid "Click to pop login dialog."
 msgstr "Klicka för att öppna inloggningsfönstret."
 
+msgid "Click to pop reminder dialog."
+msgstr ""
+
+msgid "Click to regenerate PDF."
+msgstr ""
+
+msgid "Click to send a credit invoice."
+msgstr ""
+
+msgid "Click to send agin."
+msgstr ""
+
 msgid "Close"
 msgstr "Stäng"
 
@@ -209,7 +221,7 @@ msgid "Company"
 msgstr "Företag"
 
 msgid "Confirm poll signature"
-msgstr ""
+msgstr "Bekräfta underskrift"
 
 msgid "Confirmation request sent"
 msgstr "Bekräftelse skickad"
@@ -265,8 +277,14 @@ msgstr "Kreditvärdighet"
 msgid "Creditability"
 msgstr "Kreditvärdighet"
 
+msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgstr "Krediterat belopp inkl. moms: {rounded} {currency}"
+
 msgid "Credited invoice"
 msgstr "Krediterad faktura"
+
+msgid "Credited invoice: {number}"
+msgstr "Krediterade faktura: {number}"
 
 msgid "Customer"
 msgstr "Kund"
@@ -315,6 +333,9 @@ msgstr "Makulerade"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
 msgstr ""
+
+msgid "Do you want to credit the invoice?"
+msgstr "Vill du kreditera fakturan?"
 
 msgid "Domain"
 msgstr "Domän"
@@ -467,7 +488,7 @@ msgid "Fill the form correctly!"
 msgstr "Fyll i formuläret ordentligt!"
 
 msgid "Find the credit invoice attached as PDF."
-msgstr ""
+msgstr "Den krediterade fakturan bifogas som PDF."
 
 msgid "Find your invoice attached as PDF."
 msgstr "Fakturan bifogas som PDF."
@@ -517,8 +538,14 @@ msgstr "Inklusive moms"
 msgid "Invoice"
 msgstr "Faktura"
 
+msgid "Invoice (credited)"
+msgstr ""
+
 msgid "Invoice address"
 msgstr "Faktureringsadress"
+
+msgid "Invoice credited m"
+msgstr ""
 
 msgid "Invoice currency"
 msgstr "Valuta"
@@ -948,11 +975,17 @@ msgstr ""
 msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
 
+msgid "Send again"
+msgstr ""
+
 msgid "Send invoice questions to {url}."
 msgstr "Skicka fakturafrågor till {url}."
 
 msgid "Send now"
 msgstr "Skicka nu"
+
+msgid "Send reminder"
+msgstr ""
 
 msgid "Servers"
 msgstr "Servrar"
@@ -1111,7 +1144,7 @@ msgid "Update and send."
 msgstr "Uppdatera och skicka."
 
 msgid "Update customer"
-msgstr "Uppdaterade faktura, kund #{customerid}"
+msgstr "Uppdatera kund"
 
 msgid "Update invoice, customer #{customerid}"
 msgstr "Uppdatera faktura, kund #{customerid}"
@@ -1220,6 +1253,9 @@ msgstr "lägg till 3\\%"
 
 msgid "add {fee}"
 msgstr "lägg till {fee}"
+
+msgid "billing@rymdweb.com"
+msgstr ""
 
 msgid "control panel"
 msgstr "kontrollpanel"

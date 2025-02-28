@@ -69,17 +69,23 @@ sub index ($self) {
   }
 }
 
+
 sub creditinvoice ($self) {
   $self->create(1);
 }
 
-sub create ($self, $credit =  0) {
+
+sub create ($self, $credit = 0) {
   my $formdata = {};
-  my $creditedinvoice = { invoiceid => undef, fakturanummer => undef, state => 'raderad' };
+  my $creditedinvoice = { invoiceid => undef, fakturanummer => undef };
   if ($credit) {
     $formdata = $self->_getdata({ includearticles => 0, includepayments => 0 });
     $formdata->{invoice}->{kreditfakturaavser} = $formdata->{invoice}->{fakturanummer};
-    $creditedinvoice = { invoiceid => $formdata->{invoice}->{invoiceid}, fakturanummer => $formdata->{invoice}->{fakturanummer} };
+    $creditedinvoice = {
+      invoiceid     => $formdata->{invoice}->{invoiceid},
+      fakturanummer => $formdata->{invoice}->{fakturanummer},
+      state         => 'raderad'
+    };
   } else {
     $formdata = $self->update(0);
   }
@@ -147,10 +153,13 @@ sub create ($self, $credit =  0) {
   if ($costsum =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
     $costsum = sprintf("%.2f", $costsum);
   }
-  $formdata->{invoice}->{invoicedate} = sprintf('%4d-%02d-%02d',
+  $formdata->{invoice}->{invoicedate} = sprintf('%4d-%02d-%02d %02d:%02d:%02d',
     (localtime(time))[5] + 1900,
     (localtime(time))[4] + 1,
-    (localtime(time))[3]
+    (localtime(time))[3],
+    (localtime(time))[2],
+    (localtime(time))[1],
+    (localtime(time))[0]
   );
   my $duedate = time2str("%Y-%m-%d", time + $self->app->config->{roomservice}->{invoice}->{duedays}*24*3600, 'CET');
   $formdata->{invoice}->{duedate} = $duedate;
@@ -216,27 +225,37 @@ sub create ($self, $credit =  0) {
     delete $invoicedata->{invoice}->{title};
     delete $invoicedata->{invoice}->{bookingdate};
     delete $invoicedata->{invoice}->{rev};
-    if (!$credit) {
-      delete $invoicedata->{invoice}->{kreditfakturaavser};
-      $invoicedata->{invoice}->{state} = 'fakturerad';
-    } else {
-      $invoicedata->{invoice}->{state} = 'raderad';
-      $self->app->invoice->updateinvoice($creditedinvoice->{invoiceid}, $creditedinvoice);
-    }
-    #    say Dumper $formdata->{invoice};
-    $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
+
     my $newinvoiceid = $self->app->invoice->addinvoice($formdata->{customer});
 
-    for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
-      my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
-      if (!$invoiceitem->{include}) {
-        # Move unincluded invoice items to the newly created open invoice
-        $self->app->invoice->updateinvoiceitem($invoiceitemid, { invoiceid => $newinvoiceid });
-      } else {
-        # If item is a subscription, update the last invoicedate of the subscription
-        $self->app->invoice->updatesubscription($customerid, $invoiceitem->{productid});
+    if ($credit) {
+      for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
+        my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
+        $invoiceitem->{invoiceid} = $newinvoiceid;
+        delete $invoiceitem->{invoiceitemid};
+        $self->app->invoice->addinvoiceitem($invoiceitem, $newinvoiceid);
+      }
+      $invoicedata->{invoice}->{invoiceid} = $newinvoiceid;
+      $invoicedata->{invoice}->{state} = 'raderad';
+      $invoicedata->{invoice}->{kreditfakturaavser} = $creditedinvoice->{fakturanummer};
+      say Dumper $creditedinvoice;
+      $self->app->invoice->updateinvoice($creditedinvoice->{invoiceid}, $creditedinvoice);
+    } else {
+      $invoicedata->{invoice}->{state} = 'fakturerad';
+      delete $invoicedata->{invoice}->{kreditfakturaavser};
+      for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
+        my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
+        if (!$invoiceitem->{include}) {
+          # Move unincluded invoice items to the newly created open invoice
+          $self->app->invoice->updateinvoiceitem($invoiceitemid, { invoiceid => $newinvoiceid });
+        } else {
+          # If item is a subscription, update the last invoicedate of the subscription
+          $self->app->invoice->updatesubscription($customerid, $invoiceitem->{productid});
+        }
       }
     }
+    $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
+    say Dumper $invoicedata->{invoice};
     $invoicedata->{invoice}->{duedate} = $duedate;
 
     my $anyrepo = Mojo::Home->new();
@@ -252,12 +271,12 @@ sub create ($self, $credit =  0) {
       $htmldata = $self->render_mail(template => 'invoice/createcredithtml', invoicedata => $invoicedata);
       $txtdata = $self->render_mail(template => 'invoice/createcredittxt', invoicedata => $invoicedata);
       $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
-        $self->app->__x('Credit invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer})));
+        $self->app->__x('Credited invoice: {number}', number => $invoicedata->{invoice}->{kreditfakturaavser})));
     } else {
       $htmldata = $self->render_mail(template => 'invoice/createhtml', invoicedata => $invoicedata);
       $txtdata = $self->render_mail(template => 'invoice/createtxt', invoicedata => $invoicedata);
       $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
-        $self->app->__x('Invoice {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer})));
+        $self->app->__x('Invoice {number}', number => $invoicedata->{invoice}->{fakturanummer})));
     }
 
     my $mail = MIME::Lite->new(
@@ -311,7 +330,7 @@ sub update ($self, $makejson = 1) {
   my $extra = $formdata->{invoiceitems}->{extra};
   $extra->{customerid} = $formdata->{customer}->{customerid};
   $extra->{invoiceid} = $formdata->{invoice}->{invoiceid};
-#  say Dumper $extra;
+
   if ((int $extra->{number} > 0) && ('' ne $extra->{invoiceitemtext}) && ($extra->{price} > 0.0)) {
     $self->app->invoice->addinvoiceitem($extra);
   }
@@ -431,6 +450,7 @@ sub nav ($self) {
   }
 }
 
+
 sub open ($self) {
   my $title = $self->app->__('Open invoices');
   my $web = {title => $title};
@@ -454,6 +474,75 @@ sub open ($self) {
       $customers->{$customerid}->{invoices}->{$invoiceid}->{invoiceitems}->{$invoiceitemid} = $invoiceitem;
     };
     return $self->render(json => { customers => $customers });
+  }
+}
+
+
+sub remind ($self) {
+  my $title = $self->app->__('Send reminder');
+  my $web = {title => $title};
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $invoiceid = int $self->stash('invoiceid') // 0;
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->app->indent($self->render_to_string(template => 'invoice/remind', format => 'js'), 4);
+    return $self->render(template => 'invoice/remind', layout => 'modal', web => $web, title => $title);
+  } else {
+    my $invoice = {};
+    my $customer = {};
+    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
+      my $customerid = $invoice->{customerid} // 0;
+      if ($customer) {
+        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+        $customer->{name} = $self->app->customer->name($customer);
+      }
+      return $self->render(json => { });
+    }
+  }
+}
+
+
+sub resend ($self) {
+  my $title = $self->app->__('Send reminder');
+  my $web = {title => $title};
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $invoiceid = int $self->stash('invoiceid') // 0;
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/remind');
+  } else {
+    my $invoice = {};
+    my $customer = {};
+    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
+      my $customerid = $invoice->{customerid} // 0;
+      if ($customer) {
+        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+        $customer->{name} = $self->app->customer->name($customer);
+      }
+      return $self->render(json => { });
+    }
+  }
+}
+
+
+sub reprint ($self) {
+  my $title = $self->app->__('Send reminder');
+  my $web = {title => $title};
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $invoiceid = int $self->stash('invoiceid') // 0;
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/remind');
+  } else {
+    my $invoice = {};
+    my $customer = {};
+    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
+      my $customerid = $invoice->{customerid} // 0;
+      if ($customer) {
+        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+        $customer->{name} = $self->app->customer->name($customer);
+      }
+      return $self->render(json => { });
+    }
   }
 }
 

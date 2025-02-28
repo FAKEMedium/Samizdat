@@ -25,8 +25,12 @@ sub register ($self, $app, $conf) {
   $manager->put('customers/:customerid/invoices/open')->to('Invoice#update')->name('invoice_uppdate');
   $manager->post('customers/:customerid/invoices/open')->to('Invoice#create')->name('invoice_create');
   $manager->get('customers/:customerid/invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
-  $manager->get('customers/:customerid/invoices/:invoiceid/:to')->to('Invoice#nav')->name('invoice_nav');
   $manager->post('customers/:customerid/invoices/:invoiceid/creditinvoice')->to('Invoice#creditinvoice')->name('invoice_creditinvoice');
+  $manager->get('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
+  $manager->post('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
+  $manager->post('customers/:customerid/invoices/:invoiceid/resend')->to('Invoice#resend')->name('invoice_resend');
+  $manager->post('customers/:customerid/invoices/:invoiceid/reprint')->to('Invoice#reprint')->name('invoice_reprint');
+  $manager->get('customers/:customerid/invoices/:invoiceid/:to')->to('Invoice#nav')->name('invoice_nav');
   $manager->get('customers/:customerid/invoices')->to('Invoice#index')->name('invoice_index');
 
   $manager->get('customers/:customerid/products/subscribe')->to('Customer#products');

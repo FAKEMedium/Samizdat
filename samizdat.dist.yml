@@ -23,8 +23,9 @@ roomservice:
     # invoicedir is an absolute path
     invoicedir: /tmp/invoice
     invoiceurl: invoice/
-    logotype: filename
+    logotype: fakenews
     duedays: 30
+    overdueinterest: 8
     # Days after due day when we remind
     duedaysremind: 10
     debug: 0

@@ -146,14 +146,15 @@ sub addinvoice ($self, $customer =  {}) {
       state      => 'obehandlad',
       vat        => $customer->{vat},
       currency   => $customer->{currency},
-      costsum    => 0
+      costsum    => 0,
+      debt       => 0
     },
     { returning => 'invoiceid' }
   )->hash->{invoiceid};
 }
 
 
-sub updateinvoice ($self, $invoiceid =  0, $invoicedata = {}) {
+sub updateinvoice ($self, $invoiceid = 0, $invoicedata = {}) {
   return 0 if (! int $invoiceid);
   delete $invoicedata->{duedate};
   delete $invoicedata->{pdfdate};
@@ -164,23 +165,26 @@ sub updateinvoice ($self, $invoiceid =  0, $invoicedata = {}) {
   return $db->update('invoice', $invoicedata, $where);
 }
 
-sub updateinvoiceitem ($self, $invoiceitemid =  0, $invoiceitem = {}) {
+sub updateinvoiceitem ($self, $invoiceitemid = 0, $invoiceitem = {}) {
   return 0 if (! int $invoiceitemid);
   my $db = $self->app->mysql->db;
   my $where = {invoiceitemid => $invoiceitemid};
   return $db->update('invoiceitem', $invoiceitem, $where);
 }
 
-sub addinvoiceitem ($self, $invoiceitem = {}) {
+sub addinvoiceitem ($self, $invoiceitem = {}, $invoiceid = 0) {
   my $db = $self->app->mysql->db;
   return 0 if (!exists($invoiceitem->{customerid}) || (0 == int $invoiceitem->{customerid}));
   delete $invoiceitem->{invoiceitemid};
-  delete $invoiceitem->{invoiceid}; # Only one open invoice per customer
-  my $invoiceid = int $db->select('invoice', "invoiceid", { state => 'obehandlad', customerid => $invoiceitem->{customerid}})
-    ->hash
-    ->{invoiceid};
-  return 0 if (!$invoiceid);
-  $invoiceitem->{invoiceid} = $invoiceid;
+  if (!$invoiceid) {
+    # Credited invoice items
+    delete $invoiceitem->{invoiceid};
+    $invoiceid = int $db->select('invoice', "invoiceid", { state => 'obehandlad', customerid => $invoiceitem->{customerid} })
+      ->hash
+      ->{invoiceid};
+    return 0 if (!$invoiceid);
+    $invoiceitem->{invoiceid} = $invoiceid;
+  }
   return $db->insert('invoiceitem', $invoiceitem, {returning => 'invoiceitemid'});
 }
 
