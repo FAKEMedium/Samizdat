@@ -162,8 +162,8 @@ function populateForm(formdata, method, dataform) {
     if (invoiceitems.hasOwnProperty(invoiceitemid)) {
       let invoiceitem = invoiceitems[invoiceitemid];
       let net = sprintf('%.2f', invoiceitem.number * invoiceitem.price);
-      let vat = sprintf('%.2f', invoiceitem.vat * invoiceitem.number * invoiceitem.price);
-      let gross = sprintf('%.2f', (1+invoiceitem.vat) * invoiceitem.number * invoiceitem.price);
+      let vat = sprintf('%.2f', invoice.vat * invoiceitem.number * invoiceitem.price);
+      let gross = sprintf('%.2f', (1+invoice.vat) * invoiceitem.number * invoiceitem.price);
       itemssnippet += `
         <tr class="invoiceitem" data-invoiceitemid="${invoiceitemid}">
           <td>${invoiceitem.articlenumber}</td>
