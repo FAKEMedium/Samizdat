@@ -1,13 +1,15 @@
-<div class="mb-3 col-9" id="details">
-  <div class="d-none" id="creditedbox"><b><%== __('Credited invoice') %></b>: <span id="creditedinvoice"></span></div>
-  <div><b><%== __('Customer') %></b>: <a id="customer"></a></div>
-  <div><b><%== __('Invoice date') %></b>: <span id="invoicedate"></span></div>
-  <div class="d-none" id="duebox"><b><%== __('Due date') %></b>: <span id="duedate"></span></div>
-  <div><b><%== __('Amount') %></b>: <span id="costsum"></span> <span class="currency"></span></div>
-  <div><b><%== __('Including VAT') %></b>: <span id="vat"></span> <span class="currency"></span></div>
-</div>
-
-<div class="mb-3 col-3" id="infobox">
+<div class="row">
+  <div class="mb-3 col-9" id="details">
+    <div class="d-none" id="creditedbox"><b><%== __('Credited invoice') %></b>: <span id="creditedinvoice"></span></div>
+    <div><b><%== __('Customer') %></b>: <a id="customer"></a></div>
+    <div><b><%== __('Invoice date') %></b>: <span id="invoicedate"></span></div>
+    <div class="d-none" id="duebox"><b><%== __('Due date') %></b>: <span id="duedate"></span></div>
+    <div><b><%== __('Amount') %></b>: <span id="costsum"></span> <span class="currency"></span></div>
+    <div><b><%== __('Including VAT') %></b>: <span id="vat"></span> <span class="currency"></span></div>
+    <div class="d-none" id="debt-box"><b><%== __('Debt') %></b>: <span id="debt"></span> <span class="currency"></span></div>
+  </div>
+  <ul class="mb-3 col-3 " id="payments">
+  </ul>
 </div>
 
 <form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
@@ -18,20 +20,22 @@
       <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
       <input type="text" class="form-control" name="amount" id="amount" placeholder="<%== __('Amount') %>">
       <input type="date" class="form-control" name="paydate" id="paydate" placeholder="<%== __('Paydate') %>">
-      <button type="submit"
-              class="btn btn-primary"
-              onclick="markPaymentInvoice('#dataform');">
+      <button
+         id="paymentbutton"
+         type="submit"
+         class="btn btn-primary"
+         title="<%==  __('Click to pop payment dialog.') %>"
+         onclick="markPayment('#dataform');">
         <%== icon 'clipboard-plus-fill', {} %>
         <span class="d-sm-inline d-none"><%== __('Mark payment') %></span>
       </button>
     </div>
   </div>
-  <div class="col-auto me-auto">
+  <div class="col-auto me-auto justify-content-sm-end d-flex">
     <div class="input-group text-end">
       <button type="submit"
               class="btn btn-primary mx-1"
-              aria-label="<%== __('Credit invoice') %>"
-              title="<%==  __('Click to send a credit invoice.') %>>"
+              title="<%==  __('Click to send a credit invoice.') %>"
               onclick="makeCreditInvoice('#dataform');">
         <%== icon 'trash-fill', {} %>
         <span class="d-sm-inline d-none ml-0"><%== __('Credit invoice') %></span>
@@ -41,16 +45,19 @@
          role="button"
          class="btn btn-primary mx-1 modal-lg"
          aria-label="<%== __('Remind') %>"
-         title="<%==  __('Click to pop reminder dialog.') %>>"
+         title="<%==  __('Click to pop reminder dialog.') %>"
          data-bs-toggle="modal"
          data-bs-target="#universalmodal">
+        <div class="position-absolute top-0 end-0 translate-middle-y d-print-none">
+          <span id="remindercount" class="badge rounded-pill bg-danger text-white blank reset"></span>
+        </div>
         <%== icon 'exclamation-circle-fill', {} %>
         <span class="d-sm-inline d-none ml-1"><%== __('Remind') %></span>
       </a>
       <button type="submit"
               class="btn btn-primary mx-1"
               aria-label="<%== __('Send again') %>"
-              title="<%==  __('Click to send agin.') %>>"
+              title="<%==  __('Click to send agin.') %>"
               onclick="resendInvoice('#dataform');">
         <%== icon 'send-plus-fill', {} %>
         <span class="d-sm-inline d-none ml-1"><%== __('Resend') %></span>
@@ -58,7 +65,7 @@
       <button type="submit"
               class="btn btn-primary mx-1"
               aria-label="<%== __('Reprint') %>"
-              title="<%==  __('Click to regenerate PDF.') %>>"
+              title="<%==  __('Click to regenerate PDF.') %>"
               onclick="reprintInvoice('#dataform');">
         <%== icon 'printer-fill', {} %>
         <span class="d-sm-inline d-none ml-1"><%== __('Reprint') %></span>

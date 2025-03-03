@@ -1,3 +1,8 @@
+billingemail = '';
+fakturanummer = '';
+debt = '';
+invoicedate = '';
+
 document.querySelectorAll('form').forEach((el) => {
   el.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -82,8 +87,9 @@ async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0, dataf
 function populateForm(formdata, method, dataform) {
   let customer = formdata.customer;
   let invoice = formdata.invoice;
-  let payments = formdata.payments;
   let invoiceitems = formdata.invoiceitems;
+  let payments = formdata.payments;
+  let reminders = formdata.reminders;
   let percustomer = formdata.percustomer; // Are we under invoices/ or custumor/customerid/invoices/
 
   document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
@@ -96,6 +102,14 @@ function populateForm(formdata, method, dataform) {
   }
   history.pushState(stateObj, "ajax page loaded...", thisurl);
   document.querySelector(dataform).action = thisurl;
+  if (customer.billingemail !== '') {
+    billingemail = customer.billingemail;
+  } else {
+    billingemail = customer.email;
+  }
+  fakturanummer = invoice.fakturanummer;
+  invoicedate = invoice.invoicedate;
+  debt = invoice.debt;
 
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
   document.querySelector('#customer').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>` + customer.customerid;
@@ -127,13 +141,15 @@ function populateForm(formdata, method, dataform) {
   document.querySelector('#amount').value = invoice.debt;
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
   document.querySelector('#costsum').innerHTML = invoice.costsum;
-  document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1/(1 + invoice.vat)));
+  document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1 / (1 + invoice.vat)));
   if (invoice.state !== 'fakturerad') {
     document.querySelector(dataform).classList.add('d-none');
     document.querySelector('#remindbutton').href = '#';
+//    document.querySelector('#paymentbutton').href = '#';
   } else {
     document.querySelector(dataform).classList.remove('d-none');
     document.querySelector('#duebox').classList.remove('d-none');
+//    document.querySelector('#paymentbutton').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}/payment`;
     document.querySelector('#remindbutton').href = `<%== sprintf("%s%s/", config->{managerurl}, "customers") %>${invoice.customerid}/invoices/${invoice.invoiceid}/remind`;
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
@@ -148,13 +164,31 @@ function populateForm(formdata, method, dataform) {
     }
   });
 
-  let infoboxsnippet = '';
+  let paymentssnippet = '';
   payments = payments.sortBy('-paydate');
   for (const payment of payments) {
-    infoboxsnippet += `
-      <div><b class="d-sm-inline d-none"><%== __('Payment') %>: </b>${payment.paydate} ${payment.amount} <span class="currency"></span></div>`;
+    paymentssnippet += `
+      <li><b class="d-sm-inline d-none"><%== __('Payment') %>: </b>${payment.paydate} ${payment.amount} <span class="currency"></span></li>`;
   }
-  document.querySelector('#infobox').innerHTML = infoboxsnippet;
+  document.querySelector('#payments').innerHTML = paymentssnippet;
+
+  const tooltip = new bootstrap.Tooltip(document.querySelector('#remindbutton'), {
+    html: true
+  });
+  if (reminders.length) {
+    let remindersnippet = '';
+    reminders = reminders.sortBy('-reminderdate');
+    for (const reminder of reminders) {
+      remindersnippet += `
+        <li class="dropdown-item">${reminder.reminderdate}</li>`;
+    }
+    document.querySelector('#remindercount').innerHTML = reminders.length;
+    document.querySelector('#remindercount').d
+    tooltip.setContent({ '.tooltip-inner':remindersnippet});
+  } else {
+    document.querySelector('#remindercount').innerHTML = '';
+//    document.querySelector('#reminders').innerHTML = '';
+  }
 
   let i = 1;
   let itemssnippet = '';
@@ -208,7 +242,7 @@ function resendInvoice() {
 
 }
 
-function markPaymentInvoice() {
+function markPayment() {
 
 }
 

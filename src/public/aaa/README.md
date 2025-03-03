@@ -21,7 +21,7 @@ myModal.show();
               <input class="form-control btn btn-primary btn-sm rounded-lg" type="submit" value="Sök" />
             </div>
             <div class="form-check form-check-inline mx-2 pt-2 col-xl-2">
-              <input class="form-check-input" type="checkbox" id="makulerade" name="makulerade" value="1" />
+              <input class="form-check-input form-check-inline" type="checkbox" id="makulerade" name="makulerade" value="1" />
               <label class="form-check-label" for="makulerade">Makulerade</label>
             </div>
           </div>

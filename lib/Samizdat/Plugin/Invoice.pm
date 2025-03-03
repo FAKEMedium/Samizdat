@@ -26,6 +26,8 @@ sub register ($self, $app, $conf) {
   $manager->post('customers/:customerid/invoices/open')->to('Invoice#create')->name('invoice_create');
   $manager->get('customers/:customerid/invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
   $manager->post('customers/:customerid/invoices/:invoiceid/creditinvoice')->to('Invoice#creditinvoice')->name('invoice_creditinvoice');
+  $manager->get('customers/:customerid/invoices/:invoiceid/payment')->to('Invoice#payment')->name('invoice_payment');
+  $manager->post('customers/:customerid/invoices/:invoiceid/payment')->to('Invoice#payment')->name('invoice_payment');
   $manager->get('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
   $manager->post('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
   $manager->post('customers/:customerid/invoices/:invoiceid/resend')->to('Invoice#resend')->name('invoice_resend');

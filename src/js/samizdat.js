@@ -1,6 +1,6 @@
 import '../scss/samizdat.scss';
-import { Modal, Collapse, Dropdown, Offcanvas, Toast } from 'bootstrap';
-window.bootstrap = { Modal, Collapse, Dropdown, Offcanvas, Toast };
+import { Modal, Collapse, Dropdown, Offcanvas, Toast, Tooltip } from 'bootstrap';
+window.bootstrap = { Modal, Collapse, Dropdown, Offcanvas, Toast, Tooltip };
 
 import './user.js';
 import './sortby.js';

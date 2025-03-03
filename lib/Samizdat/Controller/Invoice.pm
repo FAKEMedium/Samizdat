@@ -79,7 +79,7 @@ sub create ($self, $credit = 0) {
   my $formdata = {};
   my $creditedinvoice = { invoiceid => undef, fakturanummer => undef };
   if ($credit) {
-    $formdata = $self->_getdata({ includearticles => 0, includepayments => 0 });
+    $formdata = $self->_getdata({ includearticles => 0, includepayments => 0, includereminders => 0 });
     $formdata->{invoice}->{kreditfakturaavser} = $formdata->{invoice}->{fakturanummer};
     $creditedinvoice = {
       invoiceid     => $formdata->{invoice}->{invoiceid},
@@ -477,6 +477,27 @@ sub open ($self) {
   }
 }
 
+sub payment ($self) {
+  my $title = $self->app->__('Mark payment');
+  my $web = {title => $title};
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $invoiceid = int $self->stash('invoiceid') // 0;
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->app->indent($self->render_to_string(template => 'invoice/payment', format => 'js'), 4);
+    return $self->render(template => 'invoice/payment', layout => 'modal', web => $web, title => $title);
+  } else {
+    my $invoice = {};
+    my $customer = {};
+    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
+      my $customerid = $invoice->{customerid} // 0;
+      if ($customer) {
+        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+        $customer->{name} = $self->app->customer->name($customer);
+      }
+      return $self->render(json => { });
+    }
+  }
+}
 
 sub remind ($self) {
   my $title = $self->app->__('Send reminder');
@@ -582,7 +603,7 @@ sub _formdata ($self) {
 }
 
 
-sub _getdata ($self, $options = { includearticles => 1, includepayments => 1 }) {
+sub _getdata ($self, $options = { includearticles => 1, includepayments => 1, includereminders => 1 }) {
   my $customerid = int $self->stash('customerid');
   my $invoiceid = int $self->stash('invoiceid');
   my $args = {};
@@ -607,10 +628,12 @@ sub _getdata ($self, $options = { includearticles => 1, includepayments => 1 }) 
     invoiceitems => $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid } }),
     articles     => {},
     payments     => [],
-    percustomer => $percustomer,
+    reminders    => [],
+    percustomer  => $percustomer,
   };
   $formdata->{articles} = $self->_articles() if ($options->{includearticles});
   $formdata->{payments} = $self->app->invoice->payments({ where => { invoiceid => $invoiceid } }) if ($options->{includepayments});
+  $formdata->{reminders} = $self->app->invoice->reminders($invoiceid) if ($options->{includereminders});
   return $formdata;
 }
 

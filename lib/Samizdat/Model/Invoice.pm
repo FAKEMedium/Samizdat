@@ -192,7 +192,7 @@ sub payments ($self, $params = {}) {
   my $db = $self->app->mysql->db;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
-  my $invoicepayments = $db->select('payments', '*', $where, $limit)->hashes;
+  my $invoicepayments = $db->select('invoicepayment', '*', $where, $limit)->hashes;
   return $invoicepayments;
 }
 
@@ -203,6 +203,28 @@ sub addpayment ($self, $payment = {}) {
   # Less than 1 currency is not an allowed payment
   return 0 if (!exists($payment->{amount}) || (0 == int $payment->{amount}));
 
-  return $db->insert('payments', $payment, {returning => 'paymentid'});
+  return $db->insert('invoicepayment', $payment, {returning => 'paymentid'});
 }
+
+
+sub reminders ($self, $invoiceid = 0) {
+  my $db = $self->app->mysql->db;
+  $invoiceid = int $invoiceid;
+  return [] if (!$invoiceid);
+  my $where = { invoiceid => $invoiceid };
+  my $invoicereminders = $db->select('invoicereminder', '*', $where)->hashes;
+  return $invoicereminders;
+}
+
+
+sub addreminder ($self, $invoiceid =  0) {
+  my $db = $self->app->mysql->db;
+  $invoiceid = int $invoiceid;
+  return 0 if (!$invoiceid);
+  my $invoice = $self->get({ where => { invoiceid => $invoiceid }})->[0];
+  return 0 if (exists($invoice->{customerid}));
+  return $db->insert('invoicereminder', {invoiceid => $invoiceid, customerid => $invoice->{customerid}}, {returning => 'reminderid'});
+}
+
+
 1;
