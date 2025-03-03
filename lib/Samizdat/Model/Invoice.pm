@@ -114,7 +114,7 @@ sub updatesubscription ($self, $customerid = 0, $productid = 0) {
   return 0 if (! int $productid);
   my $db = $self->app->mysql->db;
   my $where = {customerid => $customerid, productid => $productid};
-  return $db->update('subscription', {lastinvoice => 'NOW()'}, $where);
+  return $db->update('subscription', {lastinvoice => \['NOW()']}, $where);
 }
 
 sub invoiceitems ($self, $params = {}) {
