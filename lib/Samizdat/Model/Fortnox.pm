@@ -7,6 +7,30 @@ use Mojo::JSON qw(decode_json);
 
 has 'app';
 
+sub _getAuthorizationCode ($self) {
+
+}
+
+sub _getToken ($self) {
+
+}
+
+sub _getAccessToken ($self) {
+
+}
+
+sub _getRefreshToken ($self) {
+
+}
+
+sub _revokeAccessToken ($self) {
+
+}
+
+sub _request ($self) {
+
+}
+
 sub list ($self, $what) {
   return 1;
 }

@@ -4,10 +4,8 @@
     <ul class="dropdown-menu" aria-labelledby="navbarDropdownAbout">
       <li><a class="dropdown-item text-nowrap" href="/project/"><%= __('The Samizdat project') %></a></li>
       <li><a class="dropdown-item text-nowrap" href="/contribute/"><%= __('Contribute') %></a></li>
-      <li><a class="dropdown-item text-nowrap" href="/advertising/"><%= __('Advertising') %></a></li>
     </ul>
   </li>
   <li class="nav-item"><a class="nav-link text-nowrap" href="/contact/"><%= __('Contact') %></a></li>
   <!--li class="nav-item"><a class="nav-link text-nowrap" href="/roomservice/"><%= __('Roomservice') %></a></li-->
-
 </ul>
