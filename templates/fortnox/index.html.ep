@@ -1,10 +1,47 @@
-<% layout config->{layout}; %>
-<ul>
+<div class="row row-cols-1 row-cols-md-3 g-4" xmlns="http://www.w3.org/1999/html">
 
-  <li><a href="listinvoices/"><%= __('Lista fakturor') %></a></li>
-  <li><a href="envelope/"><%= __('Kuvert') %></a></li>
-  <li><a href="test/"><%= __('Test') %></a></li>
-  <li><a href="postinvoice/"><%= __('Posta faktura') %></a></li>
-  <li><a href="customer/"><%= __('Kunder') %></a></li>
-  <li><a href="domain/"><%= __('EPP') %></a></li>
-</ul>
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('Development') %></h5>
+      <div class="card-body m-0 p-2">
+        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>fortnox/customers/3323"><%== __('Test customer') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>fortnox/logout"><%== __('Log out') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="https://apps.fortnox.se/apidocs"><%== __('API docs') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="https://fortnox.se/developer"><%== __('Developer docs') %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('File archive') %></h5>
+      <div class="card-body m-0 p-2">
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('Payments') %></h5>
+      <div class="card-body m-0 p-2">
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('Supplier invoices') %></h5>
+      <div class="card-body m-0 p-2">
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('Invoices') %></h5>
+      <div class="card-body m-0 p-2">
+      </div>
+    </div>
+  </div>
+
+</div>

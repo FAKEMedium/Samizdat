@@ -626,7 +626,7 @@ sub _getdata ($self, $options = { includearticles => 1, includepayments => 1, in
     customer     => $customer,
     invoice      => $invoice,
     invoiceitems => $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid } }),
-    articles     => {},
+    articles     => [],
     payments     => [],
     reminders    => [],
     percustomer  => $percustomer,
@@ -643,7 +643,7 @@ sub _articles ($self) {
   if (exists $articles->{Articles}) {
     $articles = $articles->{Articles};
   } else {
-    $articles = {};
+    $articles = [];
   }
   return $articles;
 }

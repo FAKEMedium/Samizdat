@@ -9,7 +9,6 @@ my $fields = [qw(customerid company firstname lastname address zip city contacte
 push @{$fields}, qw(reference recommendedby period currency invoicetype lang trust vatno vat);
 my $checkfields = [qw(snapbackonly newsletter moss)];
 my $setfields = [qw(created creator updated updater)];
-my $eucountries = [qw(AT BE BG CY CZ DE DK EE ES FI FR EL HR HU IE IT LI LV LT LU MT NL PL PT RO SE SI SK)];
 
 sub index ($self) {
   $self->stash(scriptname => $scriptname);
@@ -89,7 +88,7 @@ sub edit ($self) {
       fields          => $fields,
       checkfields     => $checkfields,
       setfields       => $setfields,
-      eucountries    => $eucountries,
+      eucountries     => $self->app->customer->eucountries,
     );
     $web->{docpath} = sprintf('%s%s/edit.html', $self->config->{managerurl}, $scriptname);
     $web->{script} .= $self->render_to_string(template => 'customer/edit', format => 'js', toast => $toast);

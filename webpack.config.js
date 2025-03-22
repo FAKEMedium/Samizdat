@@ -2,6 +2,7 @@ const fs = require('fs');
 const pkg = require('./package.json');
 const path = require('path');
 const glob = require('glob');
+const merge = require('webpack-merge');
 const autoprefixer = require('autoprefixer');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -28,7 +29,7 @@ const config = {
 
 config.entry['samizdat'] = './src/js/samizdat.js';
 config.entry['sw'] = './src/js/sw.js';
-// config.entry['editor'] = './src/js/editor.js';
+//config.entry['suneditor'] = './src/js/editor.js';
 
 if (!isDev) {
   config.optimization.minimizer.push(

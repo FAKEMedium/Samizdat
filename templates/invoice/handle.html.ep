@@ -57,7 +57,7 @@
       <button type="submit"
               class="btn btn-primary mx-1"
               aria-label="<%== __('Send again') %>"
-              title="<%==  __('Click to send agin.') %>"
+              title="<%==  __('Click to send again.') %>"
               onclick="resendInvoice('#dataform');">
         <%== icon 'send-plus-fill', {} %>
         <span class="d-sm-inline d-none ml-1"><%== __('Resend') %></span>

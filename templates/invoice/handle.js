@@ -130,7 +130,7 @@ function populateForm(formdata, method, dataform) {
   if (invoice.state === 'raderad') {
     document.querySelector('#duebox').classList.add('d-none');
     if (parseInt(invoice.kreditfakturaavser) === 0) {
-      document.querySelector('#duedate').innerHTML = `<%== __('Invoice credited m') %>`;
+      document.querySelector('#duedate').innerHTML = `<%== __('Invoice is credited') %>`;
       document.querySelector('#headline').innerHTML = `<%==__('Invoice (credited)') %> ${invoice.fakturanummer}`;
     } else {
       document.querySelector('#creditedbox').classList.remove('d-none');

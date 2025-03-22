@@ -53,7 +53,7 @@ sub index($self) {
     };
     $self->stash(template => 'poll/index');
     my $web = { docpath => 'poll/index.html' };
-    my $title = $self->app->__('Sign poll to kick Sergei Shoigu!');
+    my $title = $self->app->__('Sign poll!');
 
     if ('post' eq $method) {
       my $v = $self->validation;

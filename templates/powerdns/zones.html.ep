@@ -1,0 +1,12 @@
+<a href="<%= url_for('powerdns_zone_new') %>" class="btn btn-primary mb-3">Create New Zone</a>
+<table id="zones" class="table table-striped">
+  <thead>
+    <tr class="orange">
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Zone data will be dynamically populated via AJAX -->
+  </tbody>
+</table>

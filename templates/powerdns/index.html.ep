@@ -1,13 +1,12 @@
+<div class="row row-cols-1 row-cols-md-3 g-4" xmlns="http://www.w3.org/1999/html">
 
-<a href="<%= url_for('powerdns_zone_new') %>" class="btn btn-primary mb-3">Create New Zone</a>
-<table id="zones" class="table table-striped">
-  <thead>
-    <tr class="orange">
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- Zone data will be dynamically populated via AJAX -->
-  </tbody>
-</table>
+  <div class="col">
+    <div class="card">
+      <h5 class="card-header orange border-0"><%== __('Zone management') %></h5>
+      <div class="card-body m-0 p-2">
+        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>powerdns/zones"><%== __('List zones') %></a>
+      </div>
+    </div>
+  </div>
+
+</div>

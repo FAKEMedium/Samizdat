@@ -74,7 +74,13 @@ msgstr ""
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr ""
 
+msgid "API docs"
+msgstr ""
+
 msgid "About"
+msgstr ""
+
+msgid "According to our notes invoice {number} remains unpaid."
 msgstr ""
 
 msgid "Add customer"
@@ -170,6 +176,9 @@ msgstr ""
 msgid "Buddy price"
 msgstr ""
 
+msgid "Buy {user} a coffee"
+msgstr ""
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
@@ -209,6 +218,9 @@ msgstr ""
 msgid "Click to pop login dialog."
 msgstr ""
 
+msgid "Click to pop payment dialog."
+msgstr ""
+
 msgid "Click to pop reminder dialog."
 msgstr ""
 
@@ -216,6 +228,9 @@ msgid "Click to regenerate PDF."
 msgstr ""
 
 msgid "Click to send a credit invoice."
+msgstr ""
+
+msgid "Click to send again."
 msgstr ""
 
 msgid "Click to send agin."
@@ -234,6 +249,9 @@ msgid "Confirmation request sent"
 msgstr ""
 
 msgid "Contact"
+msgstr ""
+
+msgid "Contact {sender} if you have questions."
 msgstr ""
 
 msgid "Continue"
@@ -317,6 +335,9 @@ msgstr ""
 msgid "DNS domains"
 msgstr ""
 
+msgid "DNS management"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr ""
 
@@ -345,6 +366,12 @@ msgid "Destroyed"
 msgstr ""
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr ""
+
+msgid "Developer docs"
+msgstr ""
+
+msgid "Development"
 msgstr ""
 
 msgid "Do you want to credit the invoice?"
@@ -509,10 +536,16 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr ""
 
+msgid "File archive"
+msgstr ""
+
 msgid "Fill the form correctly!"
 msgstr ""
 
 msgid "Find the credit invoice attached as PDF."
+msgstr ""
+
+msgid "Find the invoice attached as PDF."
 msgstr ""
 
 msgid "Find your invoice attached as PDF."
@@ -521,10 +554,16 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
+msgid "Fortnox panel"
+msgstr ""
+
 msgid "From"
 msgstr ""
 
 msgid "Full"
+msgstr ""
+
+msgid "Give small financial support to {user} at buymeacoffee"
 msgstr ""
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
@@ -593,6 +632,9 @@ msgstr ""
 msgid "Invoice for completed services"
 msgstr ""
 
+msgid "Invoice is credited"
+msgstr ""
+
 msgid "Invoice number"
 msgstr ""
 
@@ -609,6 +651,9 @@ msgid "Invoice questions can be directed to {url}."
 msgstr ""
 
 msgid "Invoice questions:"
+msgstr ""
+
+msgid "Invoice reminder, {number}"
 msgstr ""
 
 msgid "Invoice type"
@@ -680,6 +725,9 @@ msgstr ""
 msgid "Link to personal data"
 msgstr ""
 
+msgid "List zones"
+msgstr ""
+
 msgid "Lista fakturor"
 msgstr ""
 
@@ -738,6 +786,9 @@ msgid "Message"
 msgstr ""
 
 msgid "Message sent"
+msgstr ""
+
+msgid "Mild"
 msgstr ""
 
 msgid "Missing file, our bad?"
@@ -884,6 +935,9 @@ msgstr ""
 msgid "Payment terms:"
 msgstr ""
 
+msgid "Payments"
+msgstr ""
+
 msgid "Payments may take up to one week to become visible in the control panel."
 msgstr ""
 
@@ -944,10 +998,16 @@ msgstr ""
 msgid "Quarter"
 msgstr ""
 
+msgid "Receiver"
+msgstr ""
+
 msgid "Recent signatures"
 msgstr ""
 
 msgid "Recommended by"
+msgstr ""
+
+msgid "Regards"
 msgstr ""
 
 msgid "Register"
@@ -963,6 +1023,9 @@ msgid "Registered office"
 msgstr ""
 
 msgid "Registered office:"
+msgstr ""
+
+msgid "Remaining amount to pay: {amount} {currency}"
 msgstr ""
 
 msgid "Remind"
@@ -1073,6 +1136,9 @@ msgstr ""
 msgid "Sign poll to kick Sergei Shoigu!"
 msgstr ""
 
+msgid "Sign poll!"
+msgstr ""
+
 msgid "Site"
 msgstr ""
 
@@ -1112,6 +1178,9 @@ msgstr ""
 msgid "Super panel"
 msgstr ""
 
+msgid "Supplier invoices"
+msgstr ""
+
 msgid "Surname"
 msgstr ""
 
@@ -1133,6 +1202,9 @@ msgstr ""
 msgid "Test"
 msgstr ""
 
+msgid "Test customer"
+msgstr ""
+
 msgid "Text"
 msgstr ""
 
@@ -1146,6 +1218,9 @@ msgid "The default is used for the Bootstrap icons set."
 msgstr ""
 
 msgid "The invoice is also available at"
+msgstr ""
+
+msgid "The invoice was due to {duedate}."
 msgstr ""
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
@@ -1176,6 +1251,9 @@ msgid "Toggle menu"
 msgstr ""
 
 msgid "Tot"
+msgstr ""
+
+msgid "Tough"
 msgstr ""
 
 msgid "Transfer"
@@ -1308,6 +1386,9 @@ msgid "Your message appears below."
 msgstr ""
 
 msgid "Your name"
+msgstr ""
+
+msgid "Zone management"
 msgstr ""
 
 msgid "Zone records"

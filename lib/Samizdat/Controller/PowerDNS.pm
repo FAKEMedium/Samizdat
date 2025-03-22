@@ -11,10 +11,9 @@ sub check_auth($self) {
   return undef;
 }
 
-### Zone CRUD
 
 sub index($self) {
-  my $title = $self->app->__('DNS Zones');
+  my $title = $self->app->__('DNS management');
   my $web = { title => $title };
   my $zones = $self->powerdns_api->list_zones;
   if ($self->req->headers->accept =~ m{application/json}) {
@@ -23,6 +22,21 @@ sub index($self) {
     $web->{script} .= $self->render_to_string(template => 'powerdns/index', format => 'js');
     $self->stash(web => $web);
     $self->render(template => 'powerdns/index');
+  }
+}
+
+### Zone CRUD
+
+sub zones($self) {
+  my $title = $self->app->__('DNS Zones');
+  my $web = { title => $title };
+  my $zones = $self->powerdns_api->list_zones;
+  if ($self->req->headers->accept =~ m{application/json}) {
+    $self->render(json => { zones => $zones });
+  } else {
+    $web->{script} .= $self->render_to_string(template => 'powerdns/zones', format => 'js');
+    $self->stash(web => $web);
+    $self->render(template => 'powerdns/zones');
   }
 }
 

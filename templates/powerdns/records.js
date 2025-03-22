@@ -52,7 +52,7 @@
         if (!confirm('Are you sure you want to delete this record?')) return;
         const recordId = btn.getAttribute('data-recordid');
         try {
-          const response = await fetch(`/powerdns/${data.zone_id}/records/${recordId}`, {
+          const response = await fetch(`../${data.zone_id}/records/${recordId}`, {
             method: 'DELETE',
             headers: {'Accept': 'application/json'}
           });

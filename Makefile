@@ -81,12 +81,12 @@ speedtest:
 
 webpackinit:
 	npm init -y
-	npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin
+	npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin webpack-merge
 	npm i --save-dev autoprefixer css-loader postcss-loader sass sass-loader style-loader
 	npm i --save-dev purgecss purgecss-webpack-plugin
 	npm i --save-dev mini-css-extract-plugin
-	npm i --save-dev css-minimizer-webpack-plugin
-	npm i --save-dev image-minimizer-webpack-plugin svgo sharp
+	npm i --save-dev css-minimizer-webpack-plugin clean-webpack-plugin
+	npm i --save-dev image-minimizer-webpack-plugin svgo sharp katex
 	npm i --save bootstrap @popperjs/core
 	npm i --save suneditor
 	npm i --save bootstrap-icons

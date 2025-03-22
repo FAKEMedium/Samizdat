@@ -73,8 +73,14 @@ msgstr ""
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
+msgid "API docs"
+msgstr ""
+
 msgid "About"
 msgstr "Om"
+
+msgid "According to our notes invoice {number} remains unpaid."
+msgstr "Enligt våra noteringar är faktura {number} fortfarande obetald."
 
 msgid "Add customer"
 msgstr "Ny kund"
@@ -163,6 +169,9 @@ msgstr "Hjälpfunktion Bootstrap-ikoner"
 msgid "Buddy price"
 msgstr "Kompispris"
 
+msgid "Buy {user} a coffee"
+msgstr "Köp en kaffe till {user}"
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
@@ -202,17 +211,20 @@ msgstr ""
 msgid "Click to pop login dialog."
 msgstr "Klicka för att öppna inloggningsfönstret."
 
+msgid "Click to pop payment dialog."
+msgstr "Klicka för att öppna betalningsfönstret."
+
 msgid "Click to pop reminder dialog."
-msgstr ""
+msgstr "Klicka för att öppna påminnelsefönstret."
 
 msgid "Click to regenerate PDF."
-msgstr ""
+msgstr "Klicka för att återskapa PDF."
 
 msgid "Click to send a credit invoice."
-msgstr ""
+msgstr "Klicka för att skicka kreditfaktura."
 
-msgid "Click to send agin."
-msgstr ""
+msgid "Click to send again."
+msgstr "Klicka för att skicka igen."
 
 msgid "Close"
 msgstr "Stäng"
@@ -228,6 +240,9 @@ msgstr "Bekräftelse skickad"
 
 msgid "Contact"
 msgstr "Kontakt"
+
+msgid "Contact {sender} if you have questions."
+msgstr "Kontakta {sender} om du har frågor."
 
 msgid "Continue"
 msgstr "Fortsätt"
@@ -307,6 +322,9 @@ msgstr "DNS-zoner"
 msgid "DNS domains"
 msgstr "DNS-domäner"
 
+msgid "DNS management"
+msgstr "DNS-hantering"
+
 msgid "Data usage: {usage}"
 msgstr "Dataanvändning: {usage}"
 
@@ -333,6 +351,12 @@ msgstr "Makulerade"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
 msgstr ""
+
+msgid "Developer docs"
+msgstr "Utvecklardokument"
+
+msgid "Development"
+msgstr "Utveckling"
 
 msgid "Do you want to credit the invoice?"
 msgstr "Vill du kreditera fakturan?"
@@ -484,11 +508,17 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
+msgid "File archive"
+msgstr "Filarkiv"
+
 msgid "Fill the form correctly!"
 msgstr "Fyll i formuläret ordentligt!"
 
 msgid "Find the credit invoice attached as PDF."
 msgstr "Den krediterade fakturan bifogas som PDF."
+
+msgid "Find the invoice attached as PDF."
+msgstr "Fakturan bifogas som PDF."
 
 msgid "Find your invoice attached as PDF."
 msgstr "Fakturan bifogas som PDF."
@@ -496,11 +526,17 @@ msgstr "Fakturan bifogas som PDF."
 msgid "First name"
 msgstr "Förnamn"
 
+msgid "Fortnox panel"
+msgstr "Fortnoxpanel"
+
 msgid "From"
 msgstr "Från"
 
 msgid "Full"
 msgstr ""
+
+msgid "Give small financial support to {user} at buymeacoffee"
+msgstr "Ge ett litet ekonomiskt bidrag till {user} via buymeacoffee"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
 msgstr ""
@@ -530,7 +566,7 @@ msgid "Impersonate"
 msgstr "Agera som"
 
 msgid "In your personal menu you find your {panel} among other things."
-msgstr ""
+msgstr "I din personliga meny hittar du bl.a. din panel."
 
 msgid "Including VAT"
 msgstr "Inklusive moms"
@@ -539,13 +575,10 @@ msgid "Invoice"
 msgstr "Faktura"
 
 msgid "Invoice (credited)"
-msgstr ""
+msgstr "Faktura (krediterad)"
 
 msgid "Invoice address"
 msgstr "Faktureringsadress"
-
-msgid "Invoice credited m"
-msgstr ""
 
 msgid "Invoice currency"
 msgstr "Valuta"
@@ -565,6 +598,9 @@ msgstr "Fakturadatum"
 msgid "Invoice for completed services"
 msgstr "Faktura för utförda tjänster"
 
+msgid "Invoice is credited"
+msgstr "Fakturan är krediterad"
+
 msgid "Invoice number"
 msgstr "Fakturanummer"
 
@@ -582,6 +618,9 @@ msgstr "Fakturafrågor kan skickas till {url}."
 
 msgid "Invoice questions:"
 msgstr "Fakturafrågor:"
+
+msgid "Invoice reminder, {number}"
+msgstr "Fakturapåminnelse, {number}"
 
 msgid "Invoice type"
 msgstr "Fakturatyp"
@@ -642,6 +681,9 @@ msgstr "Senaste"
 msgid "Link to personal data"
 msgstr "Länk till personlig data"
 
+msgid "List zones"
+msgstr "Lista zoner"
+
 msgid "Lista fakturor"
 msgstr "List invoices"
 
@@ -701,6 +743,9 @@ msgstr "Meddelande"
 
 msgid "Message sent"
 msgstr "Meddelandet skickades"
+
+msgid "Mild"
+msgstr ""
 
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
@@ -817,7 +862,7 @@ msgid "Paid amount"
 msgstr "Betaalad summa"
 
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 msgid "Password"
 msgstr "Lösenord"
@@ -836,6 +881,9 @@ msgstr "Förfallodatum: {duedate}"
 
 msgid "Payment terms"
 msgstr "Betalningsvillkor"
+
+msgid "Payments"
+msgstr "Betalningar"
 
 msgid "Payments may take up to one week to become visible in the control panel."
 msgstr "Det kan ta upp till en vecka innan betalningar blir synliga i kontrollpanelen."
@@ -891,11 +939,17 @@ msgstr "Antal"
 msgid "Quarter"
 msgstr "Kvartal"
 
+msgid "Receiver"
+msgstr "Mottagare"
+
 msgid "Recent signatures"
 msgstr "Senaste underskrifterna"
 
 msgid "Recommended by"
 msgstr "Rekommenderad av"
+
+msgid "Regards"
+msgstr "Vänligen"
 
 msgid "Register"
 msgstr "Registrera"
@@ -908,6 +962,9 @@ msgstr "Registrerad för F-skatt"
 
 msgid "Registered office"
 msgstr "Styrelsens säte"
+
+msgid "Remaining amount to pay: {amount} {currency}"
+msgstr "Kvar att betala: {amount} {currency}"
 
 msgid "Remind"
 msgstr "Påminn"
@@ -976,7 +1033,7 @@ msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
 
 msgid "Send again"
-msgstr ""
+msgstr "Skicka igen"
 
 msgid "Send invoice questions to {url}."
 msgstr "Skicka fakturafrågor till {url}."
@@ -985,7 +1042,7 @@ msgid "Send now"
 msgstr "Skicka nu"
 
 msgid "Send reminder"
-msgstr ""
+msgstr "Skicka påminnelse"
 
 msgid "Servers"
 msgstr "Servrar"
@@ -1023,7 +1080,7 @@ msgstr "Dela {what} på {where}"
 msgid "Shown as"
 msgstr "Visas som"
 
-msgid "Sign poll to kick Sergei Shoigu!"
+msgid "Sign poll!"
 msgstr ""
 
 msgid "Site"
@@ -1065,6 +1122,9 @@ msgstr "Amount"
 msgid "Super panel"
 msgstr ""
 
+msgid "Supplier invoices"
+msgstr "Lererantörsfakturor"
+
 msgid "Surname"
 msgstr "Förnamn"
 
@@ -1086,6 +1146,9 @@ msgstr "Telefon"
 msgid "Test"
 msgstr ""
 
+msgid "Test customer"
+msgstr "Testkund"
+
 msgid "Text"
 msgstr ""
 
@@ -1100,6 +1163,9 @@ msgstr ""
 
 msgid "The invoice is also available at"
 msgstr "Fakturan finns också på"
+
+msgid "The invoice was due to {duedate}."
+msgstr "Fakturan förföll {duedate}."
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
 msgstr "Gränsen är satt till {blocklimit} försök på {blocktime} minuter."
@@ -1127,6 +1193,9 @@ msgstr "Visa meny"
 
 msgid "Tot"
 msgstr "Tot"
+
+msgid "Tough"
+msgstr "Tuff"
 
 msgid "Transfer"
 msgstr "Överföring"
@@ -1244,6 +1313,9 @@ msgstr "Ditt meddelande syns nedanför."
 
 msgid "Your name"
 msgstr "Ditt namn"
+
+msgid "Zone management"
+msgstr "Zonhantering"
 
 msgid "Zone records"
 msgstr "Zoninnehåll"

@@ -6,6 +6,10 @@ use Data::Dumper;
 
 has 'app';
 
+sub eucountries ($self) {
+  return [qw(AT BE BG CY CZ DE DK EE ES FI FR EL HR HU IE IT LI LV LT LU MT NL PL PT RO SE SI SK)];
+}
+
 sub get ($self, $params = {}) {
   my $db = $self->app->mysql->db;
   my $where = $params->{where} // {};

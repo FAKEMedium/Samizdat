@@ -55,7 +55,6 @@ sub startup ($self) {
       activated => 0,
     },
   );
-  say Mojo::URL->new->host("/var/run/redis/redis.sock")->path("/4");
 
   $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}) });
   $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}) });

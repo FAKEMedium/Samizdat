@@ -28,7 +28,10 @@ sub register ($self, $app, $conf) {
   $manager->any('customers/sync')->to('Customer#sync')->name('customer_sync');
   $manager->get('customers')->to('Customer#index')->name('customer_index');
 
-  $app->helper(customer => sub { state $customer = Samizdat::Model::Customer->new({app => shift}) });
+  $app->helper(customer => sub {
+    state $customer = Samizdat::Model::Customer->new({app => shift});
+    return $customer;
+  });
 
 }
 
