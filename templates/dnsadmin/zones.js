@@ -19,11 +19,11 @@
     zones.sort((a, b) => b.id - a.id).forEach(zone => {
       snippet += `
       <tr data-zoneid="${zone.id}">
-        <td><a href="./${zone.id}/edit">${zone.name}</a></td>
+        <td>${zone.name}</td>
         <td>
-          <a href="./${zone.id}/edit" class="btn btn-sm btn-secondary">Edit</a>
-          <a href="./${zone.id}/records" class="btn btn-sm btn-info">Records</a>
-          <button data-zoneid="${zone.id}" class="btn btn-sm btn-danger btn-delete">Delete</button>
+          <a href="./zones/${zone.id}/edit" class="btn btn-sm btn-secondary"><%== __('Edit') %> <%== icon 'pencil-fill', {} %></a>
+          <a href="./zones/${zone.id}/records" class="btn btn-sm btn-info"><%== __('Records') %> <%== icon 'stack', {} %></a>
+          <button data-zoneid="${zone.id}" class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== __('Delete') %> <%== icon 'trash-fill', {} %></button>
         </td>
       </tr>
       `;
@@ -34,7 +34,7 @@
         if (!confirm('Are you sure you want to delete this zone?')) return;
         const zoneId = btn.getAttribute('data-zoneid');
         try {
-          const response = await fetch(`./${zoneId}`, {
+          const response = await fetch(`./zones/${zoneId}`, {
             method: 'DELETE',
             headers: {'Accept': 'application/json'}
           });

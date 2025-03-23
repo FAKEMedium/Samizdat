@@ -43,10 +43,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const path = window.location.pathname;
   const editMatch = path.match(/\/zone\/(\d+)\/edit/);
 
-  // If the URL indicates edit mode (e.g. /powerdns/zone/123/edit)
+  // If the URL indicates edit mode (e.g. /dnsadmin/zone/123/edit)
   if (editMatch) {
     const zoneId = editMatch[1];
-    form.action = '/powerdns/zone/' + zoneId;
+    form.action = '<%== config->{managerurl} %>dnsadmin/zone/' + zoneId;
 
     // Insert a hidden _method field to override POST to PUT
     const methodInput = document.createElement('input');
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.appendChild(methodInput);
 
     // Fetch zone data via AJAX/JSON and populate the form
-    fetch('/powerdns/zone/' + zoneId, { headers: { 'Accept': 'application/json' } })
+    fetch('<%== config->{managerurl} %>/dnsadmin/zone/' + zoneId, { headers: { 'Accept': 'application/json' } })
       .then(response => response.json())
       .then(data => {
         if (data.error) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   } else {
     // New zone mode
-    form.action = '/powerdns/zone';
+    form.action = '<%== config->{managerurl} %>/dnsadmin/zone';
     document.getElementById('form-title').textContent = 'New Zone';
   }
 
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function () {
         showToast(result.toast || 'Operation completed.');
         if (result.success) {
           // Optionally redirect to the zones index after a short delay
-          setTimeout(() => { window.location.href = '/powerdns'; }, 2000);
+          setTimeout(() => { window.location.href = '<%== config->{managerurl} %>/dnsadmin'; }, 2000);
         }
       })
       .catch(error => {

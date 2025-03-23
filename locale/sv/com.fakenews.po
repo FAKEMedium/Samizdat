@@ -244,6 +244,9 @@ msgstr "Kontakt"
 msgid "Contact {sender} if you have questions."
 msgstr "Kontakta {sender} om du har frågor."
 
+msgid "Content"
+msgstr ""
+
 msgid "Continue"
 msgstr "Fortsätt"
 
@@ -316,6 +319,9 @@ msgstr "Kundnyhetsbrev"
 msgid "Customers"
 msgstr "Kunder"
 
+msgid "DNS Admin"
+msgstr ""
+
 msgid "DNS Zones"
 msgstr "DNS-zoner"
 
@@ -387,6 +393,9 @@ msgstr "Redigera"
 
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
+
+msgid "Edit zone"
+msgstr ""
 
 msgid "Email"
 msgstr "Epost"
@@ -507,6 +516,24 @@ msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
+
+msgid "Failed to create record"
+msgstr ""
+
+msgid "Failed to create zone"
+msgstr ""
+
+msgid "Failed to delete record"
+msgstr ""
+
+msgid "Failed to delete zone"
+msgstr ""
+
+msgid "Failed to update record"
+msgstr ""
+
+msgid "Failed to update zone"
+msgstr ""
 
 msgid "File archive"
 msgstr "Filarkiv"
@@ -900,6 +927,9 @@ msgstr "Personlig meny"
 msgid "Personal panel"
 msgstr "Personlig panel"
 
+msgid "Please log in to access that page"
+msgstr ""
+
 msgid "Please login to access resource."
 msgstr "Logga in för att få åtkomst."
 
@@ -924,6 +954,9 @@ msgstr "Snigelpost"
 msgid "Price"
 msgstr "Pris"
 
+msgid "Priority"
+msgstr ""
+
 msgid "Products"
 msgstr "Produkter"
 
@@ -947,6 +980,24 @@ msgstr "Senaste underskrifterna"
 
 msgid "Recommended by"
 msgstr "Rekommenderad av"
+
+msgid "Record Name"
+msgstr ""
+
+msgid "Record Type"
+msgstr ""
+
+msgid "Record created successfully"
+msgstr ""
+
+msgid "Record deleted successfully"
+msgstr ""
+
+msgid "Record updated successfully"
+msgstr ""
+
+msgid "Records"
+msgstr ""
 
 msgid "Regards"
 msgstr "Vänligen"
@@ -1314,11 +1365,23 @@ msgstr "Ditt meddelande syns nedanför."
 msgid "Your name"
 msgstr "Ditt namn"
 
+msgid "Zone created successfully"
+msgstr ""
+
+msgid "Zone deleted successfully"
+msgstr ""
+
 msgid "Zone management"
 msgstr "Zonhantering"
 
+msgid "Zone not found"
+msgstr ""
+
 msgid "Zone records"
 msgstr "Zoninnehåll"
+
+msgid "Zone updated successfully"
+msgstr ""
 
 msgid "add 3\\%"
 msgstr "lägg till 3\\%"

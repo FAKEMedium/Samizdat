@@ -56,7 +56,8 @@ roomservice:
     period: quarterly
     invoicetype: email
     trust: normal
-powerdns:
+dnsadmin:
+  type: powerdns
   api:
     url: http://ns.example.com:8081/api/v1/servers/localhost
     key: s3cr3tk3y

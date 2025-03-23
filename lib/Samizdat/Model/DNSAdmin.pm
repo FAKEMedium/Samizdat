@@ -1,5 +1,5 @@
-# lib/Samizdat/Model/PowerDNS.pm
-package Samizdat::Model::PowerDNS;
+# lib/Samizdat/Model/DNSAdmin.pm
+package Samizdat::Model::DNSAdmin;
 use Mojo::Base -base, -signatures;
 use Mojo::UserAgent;
 use Mojo::JSON qw(encode_json decode_json);
@@ -102,7 +102,8 @@ sub list_rrsets ($self, $zone_id, $filter = {}) {
 
 # Get a specific record from a zone.
 sub get_record ($self, $zone_id, $record_id) {
-  my $records = $self->list_records($zone_id);
+#  my $records = $self->list_records($zone_id);
+  my $records = $self->list_rrsets($zone_id, { name => $record_id});
   for my $rec (@$records) {
     return $rec if defined $rec->{id} && $rec->{id} eq $record_id;
   }

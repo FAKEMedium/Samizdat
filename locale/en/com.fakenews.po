@@ -253,6 +253,9 @@ msgstr ""
 msgid "Contact {sender} if you have questions."
 msgstr ""
 
+msgid "Content"
+msgstr ""
+
 msgid "Continue"
 msgstr ""
 
@@ -329,6 +332,9 @@ msgid "Customer newsletter"
 msgstr ""
 
 msgid "Customers"
+msgstr ""
+
+msgid "DNS Admin"
 msgstr ""
 
 msgid "DNS Zones"
@@ -413,6 +419,9 @@ msgid "Edit"
 msgstr ""
 
 msgid "Edit customer {customerid}"
+msgstr ""
+
+msgid "Edit zone"
 msgstr ""
 
 msgid "Ekonomi"
@@ -536,6 +545,24 @@ msgid "FAKE News by country"
 msgstr ""
 
 msgid "Failed login from {ip}"
+msgstr ""
+
+msgid "Failed to create record"
+msgstr ""
+
+msgid "Failed to create zone"
+msgstr ""
+
+msgid "Failed to delete record"
+msgstr ""
+
+msgid "Failed to delete zone"
+msgstr ""
+
+msgid "Failed to update record"
+msgstr ""
+
+msgid "Failed to update zone"
 msgstr ""
 
 msgid "File archive"
@@ -957,6 +984,9 @@ msgstr ""
 msgid "Personal panel"
 msgstr ""
 
+msgid "Please log in to access that page"
+msgstr ""
+
 msgid "Please login to access resource."
 msgstr ""
 
@@ -984,6 +1014,9 @@ msgstr ""
 msgid "Price"
 msgstr ""
 
+msgid "Priority"
+msgstr ""
+
 msgid "Products"
 msgstr ""
 
@@ -1006,6 +1039,24 @@ msgid "Recent signatures"
 msgstr ""
 
 msgid "Recommended by"
+msgstr ""
+
+msgid "Record Name"
+msgstr ""
+
+msgid "Record Type"
+msgstr ""
+
+msgid "Record created successfully"
+msgstr ""
+
+msgid "Record deleted successfully"
+msgstr ""
+
+msgid "Record updated successfully"
+msgstr ""
+
+msgid "Records"
 msgstr ""
 
 msgid "Regards"
@@ -1401,10 +1452,22 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
+msgid "Zone created successfully"
+msgstr ""
+
+msgid "Zone deleted successfully"
+msgstr ""
+
 msgid "Zone management"
 msgstr ""
 
+msgid "Zone not found"
+msgstr ""
+
 msgid "Zone records"
+msgstr ""
+
+msgid "Zone updated successfully"
 msgstr ""
 
 msgid "add 3\\%"

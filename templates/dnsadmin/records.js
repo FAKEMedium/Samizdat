@@ -40,7 +40,7 @@
         <td>${truncateText(record.content, 100)}</td>
         <td>${rrset.ttl}</td>
         <td>
-          <a href="/powerdns/${data.zone_id}/records/${rrset.name}/edit" class="btn btn-sm btn-secondary" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></a>
+          <a href="<%== config->{managerurl} %>dnsadmin/zones/${data.zone_id}/records/${rrset.name}" class="btn btn-sm btn-secondary" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></a>
           <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
         </td>
       </tr>`;
@@ -52,7 +52,7 @@
         if (!confirm('Are you sure you want to delete this record?')) return;
         const recordId = btn.getAttribute('data-recordid');
         try {
-          const response = await fetch(`../${data.zone_id}/records/${recordId}`, {
+          const response = await fetch(`<%== config->{managerurl} %>dnsadmin/${data.zone_id}/records/${recordId}`, {
             method: 'DELETE',
             headers: {'Accept': 'application/json'}
           });

@@ -1,12 +1,10 @@
 <div class="row row-cols-1 row-cols-md-3 g-4" xmlns="http://www.w3.org/1999/html">
-
   <div class="col">
     <div class="card">
       <h5 class="card-header orange border-0"><%== __('Zone management') %></h5>
       <div class="card-body m-0 p-2">
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>powerdns/zones"><%== __('List zones') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>dnsadmin/zones"><%== __('List zones') %></a>
       </div>
     </div>
   </div>
-
 </div>
