@@ -28,7 +28,7 @@ sub startup ($self) {
     headtitle => '',
     extrajs => '',
     extracss => '',
-    headlinebuttons => 'sharebuttons',
+    headlinebuttons => undef,
     web => {
       docid          => 0,
       comments       => 0,
@@ -80,7 +80,6 @@ sub startup ($self) {
   $self->plugin('Web');
   $self->plugin('Account');
   $self->plugin('Public');
-  $self->plugin('Poll');
   $self->plugin('Utils');
   $self->plugin('Icons');
   $self->plugin('Contact');
@@ -97,7 +96,7 @@ sub startup ($self) {
     particle     => [ 500, 0 ],
     create       => ['ttf', 'ellipse', '#ff0000'],
     new          => {
-      rndmax     => 1,
+      rndmax     => $config->{captcha}->{length} // 3,
       rnd_data   => [ '2', '3', '4', '6', '7', '9', 'A', 'C', 'E', 'F', 'H', 'J' ... 'N', 'P', 'R', 'T' ... 'Y' ],
       width      => $config->{captcha}->{width},
       height     => $config->{captcha}->{height},

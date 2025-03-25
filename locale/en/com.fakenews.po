@@ -82,6 +82,9 @@ msgstr ""
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr ""
 
+msgid "Actions"
+msgstr ""
+
 msgid "Add customer"
 msgstr ""
 
@@ -89,6 +92,9 @@ msgid "Add database"
 msgstr ""
 
 msgid "Add domain"
+msgstr ""
+
+msgid "Add mail domain"
 msgstr ""
 
 msgid "Add product"
@@ -133,6 +139,9 @@ msgstr ""
 msgid "Amount to pay: {costsum} {currency}"
 msgstr ""
 
+msgid "Are you sure you want to delete this record?"
+msgstr ""
+
 msgid "Article"
 msgstr ""
 
@@ -173,6 +182,9 @@ msgid "Bootstrap icons helper"
 msgstr ""
 
 msgid "Buddy price"
+msgstr ""
+
+msgid "Buy {slug} a coffee"
 msgstr ""
 
 msgid "Buy {user} a coffee"
@@ -224,6 +236,12 @@ msgid "Click to pop reminder dialog."
 msgstr ""
 
 msgid "Click to regenerate PDF."
+msgstr ""
+
+msgid "Click to search matching records."
+msgstr ""
+
+msgid "Click to search matching zones."
 msgstr ""
 
 msgid "Click to send a credit invoice."
@@ -334,6 +352,9 @@ msgstr ""
 msgid "Customers"
 msgstr ""
 
+msgid "DNS"
+msgstr ""
+
 msgid "DNS Admin"
 msgstr ""
 
@@ -344,6 +365,12 @@ msgid "DNS domains"
 msgstr ""
 
 msgid "DNS management"
+msgstr ""
+
+msgid "DNS zone"
+msgstr ""
+
+msgid "DNS zones"
 msgstr ""
 
 msgid "Data usage: {usage}"
@@ -508,6 +535,9 @@ msgstr ""
 msgid "Enter password"
 msgstr ""
 
+msgid "Enter record name"
+msgstr ""
+
 msgid "Enter username"
 msgstr ""
 
@@ -518,6 +548,9 @@ msgid "Enter valid email"
 msgstr ""
 
 msgid "Enter your email"
+msgstr ""
+
+msgid "Enter zone name"
 msgstr ""
 
 msgid "Euro"
@@ -590,6 +623,9 @@ msgid "From"
 msgstr ""
 
 msgid "Full"
+msgstr ""
+
+msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr ""
 
 msgid "Give small financial support to {user} at buymeacoffee"
@@ -798,6 +834,9 @@ msgstr ""
 msgid "Mail"
 msgstr ""
 
+msgid "Mail admin"
+msgstr ""
+
 msgid "Mail domains"
 msgstr ""
 
@@ -834,6 +873,9 @@ msgstr ""
 msgid "Month"
 msgstr ""
 
+msgid "Name"
+msgstr ""
+
 msgid "Net"
 msgstr ""
 
@@ -856,6 +898,9 @@ msgid "New invoice for customer {customerid}"
 msgstr ""
 
 msgid "New invoice pack"
+msgstr ""
+
+msgid "New record"
 msgstr ""
 
 msgid "New zone"
@@ -1113,6 +1158,9 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Search field for {what}"
+msgstr ""
+
 msgid "Search for customer"
 msgstr ""
 
@@ -1132,6 +1180,9 @@ msgid "Search for product"
 msgstr ""
 
 msgid "Search for website"
+msgstr ""
+
+msgid "Search for zone"
 msgstr ""
 
 msgid "Select"
@@ -1323,6 +1374,9 @@ msgstr ""
 msgid "Transfer"
 msgstr ""
 
+msgid "Type"
+msgstr ""
+
 msgid "Unpaid"
 msgstr ""
 
@@ -1452,6 +1506,12 @@ msgstr ""
 msgid "Your name"
 msgstr ""
 
+msgid "Zone Kind"
+msgstr ""
+
+msgid "Zone Name"
+msgstr ""
+
 msgid "Zone created successfully"
 msgstr ""
 
@@ -1482,7 +1542,22 @@ msgstr ""
 msgid "control panel"
 msgstr ""
 
+msgid "customer"
+msgstr ""
+
+msgid "database"
+msgstr ""
+
+msgid "domain"
+msgstr ""
+
+msgid "invoice"
+msgstr ""
+
 msgid "login attempts"
+msgstr ""
+
+msgid "mail domain"
 msgstr ""
 
 msgid "main firewall"
@@ -1491,7 +1566,16 @@ msgstr ""
 msgid "our web"
 msgstr ""
 
+msgid "product"
+msgstr ""
+
 msgid "standby firewall"
+msgstr ""
+
+msgid "website"
+msgstr ""
+
+msgid "wensite"
 msgstr ""
 
 msgid "{code}: Authentication required"
@@ -1513,6 +1597,12 @@ msgid "{number} days"
 msgstr ""
 
 msgid "{number} signatures since {date}"
+msgstr ""
+
+msgid "{server}, main firewall"
+msgstr ""
+
+msgid "{server}, standby firewall"
 msgstr ""
 
 msgid "{sitename} in {country}"

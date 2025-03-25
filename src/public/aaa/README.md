@@ -5,7 +5,7 @@ Denna fil hjälper Webpack.
 const myModal = new bootstrap.Modal('#universalmodal');
 myModal.show();
 </script>
-<div class="row row-cols-1 row-cols-md-3 g-4 g-0 gap-0 row-gap-3">
+<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 gy-5 g-4 g-0 gap-0 row-gap-3">
   <div class="col-md-5 alert alert-light">
     <div class="card h-100 alert-danger">
       <h5 class="card-header orange border-0">u</h5>
@@ -211,7 +211,7 @@ badge rounded-pill rounded-circle">
       <button type="submit" class="btn btn-primary mb-3"></button>
     </div>
   </div>
-  <div class="col-12 col-me col-auto">
+  <div class="col-12 col-me col-auto justify-content-sm-end">
     <div class="input-group">
       <button type="submit" class="btn btn-primary mb-3"></button>
     </div>

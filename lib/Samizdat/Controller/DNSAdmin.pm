@@ -15,7 +15,7 @@ sub check_auth($self) {
 sub index($self) {
   my $title = $self->app->__('DNS management');
   my $web = { title => $title };
-  my $zones = $self->dnsadmin_api->list_zones;
+  my $zones = $self->dnsadmin->list_zones;
   if ($self->req->headers->accept =~ m{application/json}) {
     $self->render(json => { zones => $zones });
   } else {
@@ -30,12 +30,12 @@ sub index($self) {
 sub zones($self) {
   my $title = $self->app->__('DNS Zones');
   my $web = { title => $title };
-  my $zones = $self->dnsadmin_api->list_zones;
+  my $zones = $self->dnsadmin->list_zones;
   if ($self->req->headers->accept =~ m{application/json}) {
     $self->render(json => { zones => $zones });
   } else {
     $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones', format => 'js');
-    $self->stash(web => $web);
+    $self->stash(web => $web, title => $title);
     $self->render(template => 'dnsadmin/zones');
   }
 }
@@ -64,7 +64,7 @@ sub create_zone ($self) {
     name => $self->param('name'),
     kind => $self->param('kind') // 'Master',
   };
-  my $result = $self->dnsadmin_api->create_zone($zone_data);
+  my $result = $self->dnsadmin->create_zone($zone_data);
 
   if ($self->is_json_request) {
     return $self->render(json => {
@@ -88,7 +88,7 @@ sub create_zone ($self) {
 # Edit an existing zone.
 sub edit_zone ($self) {
   my $zone_id = $self->stash('zone_id') // '';
-  my $zone    = $self->dnsadmin_api->get_zone($zone_id);
+  my $zone    = $self->dnsadmin->get_zone($zone_id);
 
   unless ($zone) {
     if ($self->is_json_request) {
@@ -113,7 +113,7 @@ sub update_zone ($self) {
     name => $self->param('name'),
     kind => $self->param('kind'),
   };
-  my $result = $self->dnsadmin_api->update_zone($zone_id, $zone_data);
+  my $result = $self->dnsadmin->update_zone($zone_id, $zone_data);
 
   if ($self->is_json_request) {
     return $self->render(json => {
@@ -140,7 +140,7 @@ sub update_zone ($self) {
 
 sub delete_zone($self) {
   my $zone_id = $self->stash('zone_id') // '';
-  my $result = $self->dnsadmin_api->delete_zone($zone_id);
+  my $result = $self->dnsadmin->delete_zone($zone_id);
   $self->flash(message => $result->{success}
     ? $self->app->__('Zone deleted successfully')
     : ($result->{error} // $self->app->__('Failed to delete zone'))
@@ -150,17 +150,17 @@ sub delete_zone($self) {
 
 ### Record CRUD (for a given zone)
 
-sub list_records($self) {
+sub records($self) {
   my $title = $self->app->__('Zone records');
   my $web = { title => $title };
   my $zone_id = $self->stash('zone_id');
-  my $rrsets = $self->dnsadmin_api->list_rrsets($zone_id);
+  my $rrsets = $self->dnsadmin->list_rrsets($zone_id);
   say Dumper $rrsets;
   if ($self->req->headers->accept =~ m{application/json}) {
     $self->render(json => { zone_id => $zone_id, rrsets => $rrsets });
   } else {
     $web->{script} .= $self->render_to_string(template => 'dnsadmin/records', format => 'js');
-    $self->stash(web => $web);
+    $self->stash(web => $web, title => $title);
     $self->render(template => 'dnsadmin/records');
   }
 }
@@ -180,7 +180,7 @@ sub create_record($self) {
     ttl      => $self->param('ttl') || 3600,
     priority => $self->param('priority') || 0,
   };
-  my $result = $self->dnsadmin_api->create_record($zone_id, $record_data);
+  my $result = $self->dnsadmin->create_record($zone_id, $record_data);
   if ($result->{success}) {
     $self->flash(message => $self->app->__('Record created successfully'));
     return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
@@ -193,7 +193,7 @@ sub create_record($self) {
 sub edit_record($self) {
   my $zone_id = $self->stash('zone_id');
   my $record_id = $self->stash('record_id');
-  my $record = $self->dnsadmin_api->get_record($zone_id, $record_id);
+  my $record = $self->dnsadmin->get_record($zone_id, $record_id);
   unless ($record) {
     $self->flash(error => 'Record not found');
     return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
@@ -212,7 +212,7 @@ sub update_record($self) {
     ttl      => $self->param('ttl'),
     priority => $self->param('priority'),
   };
-  my $result = $self->dnsadmin_api->update_record($zone_id, $record_id, $record_data);
+  my $result = $self->dnsadmin->update_record($zone_id, $record_id, $record_data);
   if ($result->{success}) {
     $self->flash(message => $self->app->__('Record updated successfully'));
     return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
@@ -225,7 +225,7 @@ sub update_record($self) {
 sub delete_record($self) {
   my $zone_id = $self->stash('zone_id');
   my $record_id = $self->stash('record_id');
-  my $result = $self->dnsadmin_api->delete_record($zone_id, $record_id);
+  my $result = $self->dnsadmin->delete_record($zone_id, $record_id);
   $self->flash(message => $result->{success}
     ? $self->app->__('Record deleted successfully')
     : ($result->{error} // $self->app->__('Failed to delete record'))

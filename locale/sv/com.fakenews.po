@@ -82,6 +82,9 @@ msgstr "Om"
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Enligt våra noteringar är faktura {number} fortfarande obetald."
 
+msgid "Actions"
+msgstr "Åtgärder"
+
 msgid "Add customer"
 msgstr "Ny kund"
 
@@ -90,6 +93,9 @@ msgstr "Ny databas"
 
 msgid "Add domain"
 msgstr "Ny domän"
+
+msgid "Add mail domain"
+msgstr "Ny maildomän"
 
 msgid "Add product"
 msgstr "Ny produkt"
@@ -133,6 +139,9 @@ msgstr "Belopp att betala inklusive {percent} moms: {costsum} {currency}"
 msgid "Amount to pay: {costsum} {currency}"
 msgstr "Belopp att betala: {costsum} {currency}"
 
+msgid "Are you sure you want to delete this record?"
+msgstr ""
+
 msgid "Article"
 msgstr "Artikel"
 
@@ -169,8 +178,8 @@ msgstr "Hjälpfunktion Bootstrap-ikoner"
 msgid "Buddy price"
 msgstr "Kompispris"
 
-msgid "Buy {user} a coffee"
-msgstr "Köp en kaffe till {user}"
+msgid "Buy {slug} a coffee"
+msgstr "Köp en kaffe till {slug}"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
@@ -220,6 +229,12 @@ msgstr "Klicka för att öppna påminnelsefönstret."
 msgid "Click to regenerate PDF."
 msgstr "Klicka för att återskapa PDF."
 
+msgid "Click to search matching records."
+msgstr "Klicka för matchande poster."
+
+msgid "Click to search matching zones."
+msgstr "Klicka för matchande zoner."
+
 msgid "Click to send a credit invoice."
 msgstr "Klicka för att skicka kreditfaktura."
 
@@ -245,7 +260,7 @@ msgid "Contact {sender} if you have questions."
 msgstr "Kontakta {sender} om du har frågor."
 
 msgid "Content"
-msgstr ""
+msgstr "Innehåll"
 
 msgid "Continue"
 msgstr "Fortsätt"
@@ -319,6 +334,9 @@ msgstr "Kundnyhetsbrev"
 msgid "Customers"
 msgstr "Kunder"
 
+msgid "DNS"
+msgstr ""
+
 msgid "DNS Admin"
 msgstr ""
 
@@ -330,6 +348,12 @@ msgstr "DNS-domäner"
 
 msgid "DNS management"
 msgstr "DNS-hantering"
+
+msgid "DNS zone"
+msgstr "DNS-zon"
+
+msgid "DNS zones"
+msgstr "DNS-zoner"
 
 msgid "Data usage: {usage}"
 msgstr "Dataanvändning: {usage}"
@@ -395,7 +419,7 @@ msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
 
 msgid "Edit zone"
-msgstr ""
+msgstr "Redigera zon"
 
 msgid "Email"
 msgstr "Epost"
@@ -478,6 +502,9 @@ msgstr "Engelska"
 msgid "Enter password"
 msgstr "Ange lösenord"
 
+msgid "Enter record name"
+msgstr "Ange namn på post"
+
 msgid "Enter username"
 msgstr "Ange användarnamn"
 
@@ -489,6 +516,9 @@ msgstr "Ange giltig epostadress"
 
 msgid "Enter your email"
 msgstr "Skriv in din epostadress"
+
+msgid "Enter zone name"
+msgstr "Ange namn på zon"
 
 msgid "Euro"
 msgstr ""
@@ -518,22 +548,22 @@ msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
 msgid "Failed to create record"
-msgstr ""
+msgstr "Misslyckades skapa post"
 
 msgid "Failed to create zone"
-msgstr ""
+msgstr "Misslyckades skapa zon"
 
 msgid "Failed to delete record"
-msgstr ""
+msgstr "Misslyckades ta bort post"
 
 msgid "Failed to delete zone"
-msgstr ""
+msgstr "Misslyckades ta bort zon"
 
 msgid "Failed to update record"
-msgstr ""
+msgstr "Misslyckades uppdatera post"
 
 msgid "Failed to update zone"
-msgstr ""
+msgstr "Misslyckades uppdatera zon"
 
 msgid "File archive"
 msgstr "Filarkiv"
@@ -562,8 +592,8 @@ msgstr "Från"
 msgid "Full"
 msgstr ""
 
-msgid "Give small financial support to {user} at buymeacoffee"
-msgstr "Ge ett litet ekonomiskt bidrag till {user} via buymeacoffee"
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "Ge ett litet ekonomiskt bidrag till {slug} via buymeacoffee"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
 msgstr ""
@@ -753,6 +783,9 @@ msgstr "MX-poster"
 msgid "Mail"
 msgstr "Epost"
 
+msgid "Mail admin"
+msgstr "Mailadmin"
+
 msgid "Mail domains"
 msgstr "Maildomäner"
 
@@ -789,6 +822,9 @@ msgstr "Ändringarna sparades"
 msgid "Month"
 msgstr "Månad"
 
+msgid "Name"
+msgstr "Namn"
+
 msgid "Net"
 msgstr "Netto"
 
@@ -809,6 +845,9 @@ msgstr "Ny faktura för kund #{customerid}"
 
 msgid "New invoice pack"
 msgstr "Ny samlingsfaktura"
+
+msgid "New record"
+msgstr "Ny post"
 
 msgid "New zone"
 msgstr "Ny zon"
@@ -928,7 +967,7 @@ msgid "Personal panel"
 msgstr "Personlig panel"
 
 msgid "Please log in to access that page"
-msgstr ""
+msgstr "Logga in för att komma åt sidan"
 
 msgid "Please login to access resource."
 msgstr "Logga in för att få åtkomst."
@@ -955,7 +994,7 @@ msgid "Price"
 msgstr "Pris"
 
 msgid "Priority"
-msgstr ""
+msgstr "Prioritet"
 
 msgid "Products"
 msgstr "Produkter"
@@ -982,22 +1021,22 @@ msgid "Recommended by"
 msgstr "Rekommenderad av"
 
 msgid "Record Name"
-msgstr ""
+msgstr "Post-namn"
 
 msgid "Record Type"
-msgstr ""
+msgstr "Post-typ"
 
 msgid "Record created successfully"
-msgstr ""
+msgstr "Lyckades skapa post"
 
 msgid "Record deleted successfully"
-msgstr ""
+msgstr "Tog bort post"
 
 msgid "Record updated successfully"
-msgstr ""
+msgstr "Uppdaterade post"
 
 msgid "Records"
-msgstr ""
+msgstr "Poster"
 
 msgid "Regards"
 msgstr "Vänligen"
@@ -1047,6 +1086,9 @@ msgstr "Spara"
 msgid "Search"
 msgstr "Sök"
 
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
 msgid "Search for customer"
 msgstr "Sök kund"
 
@@ -1067,6 +1109,9 @@ msgstr "Sök produkt"
 
 msgid "Search for website"
 msgstr "Sök webbplats"
+
+msgid "Search for zone"
+msgstr "Sök zon"
 
 msgid "Select"
 msgstr "Välj"
@@ -1251,6 +1296,9 @@ msgstr "Tuff"
 msgid "Transfer"
 msgstr "Överföring"
 
+msgid "Type"
+msgstr "Typ"
+
 msgid "Unpaid"
 msgstr "Obetalade"
 
@@ -1365,23 +1413,29 @@ msgstr "Ditt meddelande syns nedanför."
 msgid "Your name"
 msgstr "Ditt namn"
 
+msgid "Zone Kind"
+msgstr "Zon-typ"
+
+msgid "Zone Name"
+msgstr "Zonens namn"
+
 msgid "Zone created successfully"
-msgstr ""
+msgstr "Lyckades skapa zon"
 
 msgid "Zone deleted successfully"
-msgstr ""
+msgstr "Zonen togs bort"
 
 msgid "Zone management"
 msgstr "Zonhantering"
 
 msgid "Zone not found"
-msgstr ""
+msgstr "Zon hittades inte"
 
 msgid "Zone records"
 msgstr "Zoninnehåll"
 
 msgid "Zone updated successfully"
-msgstr ""
+msgstr "Zonuppdatering lyckades"
 
 msgid "add 3\\%"
 msgstr "lägg till 3\\%"
@@ -1395,8 +1449,23 @@ msgstr ""
 msgid "control panel"
 msgstr "kontrollpanel"
 
+msgid "customer"
+msgstr "kund"
+
+msgid "database"
+msgstr "databas"
+
+msgid "domain"
+msgstr "domän"
+
+msgid "invoice"
+msgstr "faktura"
+
 msgid "login attempts"
 msgstr "inloggningsförsök"
+
+msgid "mail domain"
+msgstr "maildomän"
 
 msgid "main firewall"
 msgstr "huvudbrandvägg"
@@ -1404,8 +1473,14 @@ msgstr "huvudbrandvägg"
 msgid "our web"
 msgstr "vår webbplats"
 
+msgid "product"
+msgstr "produkt"
+
 msgid "standby firewall"
 msgstr "standbybrandvägg"
+
+msgid "website"
+msgstr "webbplats"
 
 msgid "{code}: Authentication required"
 msgstr "{code}: Inloggning krävs"
@@ -1427,6 +1502,12 @@ msgstr "{number} dagar"
 
 msgid "{number} signatures since {date}"
 msgstr "{number} underskrifter sedan {date}"
+
+msgid "{server}, main firewall"
+msgstr ""
+
+msgid "{server}, standby firewall"
+msgstr ""
 
 msgid "{sitename} in {country}"
 msgstr "{sitename} i {country}"

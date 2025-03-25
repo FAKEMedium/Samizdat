@@ -53,6 +53,7 @@ sub geturi ($self) {
       }
       $docs->{$path}->{sidebar} = $sidebar;
     }
+    $self->stash(headlinebuttons => 'chunks/sharebuttons');
   }
   $self->stash(web => $docs->{$path});
   $self->stash(title => $docs->{$path}->{title} // $title);

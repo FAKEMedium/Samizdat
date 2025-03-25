@@ -309,7 +309,7 @@
 %
     <div class="offcanvas offcanvas-start" id="dnsdomainlist" data-bs-scroll="true" data-bs-backdrop="false">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title"><%== __('DNS domains') %></h5>
+        <h5 class="offcanvas-title"><%== __('DNS zones') %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
       </div>
       <div class="offcanvas-body">
@@ -429,7 +429,7 @@
         </li>
         <li class="list-group-item">
           <a href="#" class="d-block d-print-none" type="button" tabindex="-1" data-bs-toggle="offcanvas" data-bs-target="#dnsdomainlist" aria-expanded="false" aria-controls="dnsdomainlist">
-            <%== __('DNS domains') %>
+            <%== __('DNS zones') %>
             <span id="nrdnsdomains" class="badge rounded-pill bg-success text-white blank"></span>
           </a>
           <div class="position-absolute top-50 me-2 end-0 translate-middle-y text-break">

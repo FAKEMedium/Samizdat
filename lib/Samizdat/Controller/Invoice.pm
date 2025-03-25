@@ -381,7 +381,7 @@ sub edit ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(template => 'invoice/edit', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/edit', headlinebuttons => 'editlinks');
+    return $self->render(web => $web, title => $title, template => 'invoice/edit', headlinebuttons => 'chunks/editlinks');
   } else {
     my $formdata = $self->_getdata();
     $formdata->{invoiceitems}->{extra} = {
@@ -417,7 +417,7 @@ sub handle ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(template => 'invoice/handle', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/handle', headlinebuttons => 'handleinvoicelinks');
+    return $self->render(web => $web, title => $title, template => 'invoice/handle', headlinebuttons => 'invoice/chunks/handleinvoicelinks');
   } else {
     my $formdata = $self->_getdata();
     return $self->render(json => $formdata);

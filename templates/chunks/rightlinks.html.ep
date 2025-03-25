@@ -1,6 +1,6 @@
 <a href="https://basedinsweden.se/" target="_blank" rel="noopener" title="Based in Sweden"><%== anysvg
   'basedinsweden',
-  'public/media/images/basedinsweden.svg',
+  'src/public/media/images/basedinsweden.svg',
   {
     id         => 'basedinsweden',
     prefix     => 'anysvg',

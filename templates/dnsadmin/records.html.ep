@@ -1,12 +1,36 @@
-<a href="new" class="btn btn-primary mb-3"><%== __('Create new record') %></a>
+<form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+  <input type="hidden" name="customerid" id="customerid">
+  <input type="hidden" name="zoneid" id="zoneid">
+  <div class="col">
+    <div class="input-group">
+      <input type="text" class="form-control" name="recordid" id="recordid" placeholder="<%== __('Enter record name') %>">
+      <button
+        id="searchbutton"
+        type="submit"
+        class="btn btn-primary"
+        title="<%==  __('Click to search matching records.') %>"
+        onclick="searchRecords('#dataform');">
+        <%== icon 'search', {} %>
+        <span class="d-sm-inline d-none mx-1"><%== __('Search') %></span>
+      </button>
+    </div>
+  </div>
+  <div class="col justify-content-sm-end input-group d-flex">
+    <a href="new" class="btn btn-primary">
+    <%== icon 'plus-circle-fill', {} %>
+      <span class="d-sm-inline d-none mx-1"><%== __('New record') %></span>
+    </a>
+  </div>
+</form>
+
 <table id="records" class="table table-striped table-sm sortable">
   <thead>
     <tr class="orange">
-      <th>Name</th>
-      <th>Type</th>
-      <th>Content</th>
-      <th>TTL</th>
-      <th>Actions</th>
+      <th class="px-2"><%== __('Name') %></th>
+      <th><%== __('Type') %></th>
+      <th><%== __('Content') %></th>
+      <th class="text-end">TTL</th>
+      <th class="text-end px-2"><%== __('Actions') %></th>
     </tr>
   </thead>
   <tbody>

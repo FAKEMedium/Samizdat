@@ -41,12 +41,12 @@ document.addEventListener('DOMContentLoaded', function () {
   // Get reference to the form element
   const form = document.getElementById('zone-form');
   const path = window.location.pathname;
-  const editMatch = path.match(/\/zone\/(\d+)\/edit/);
+  const editMatch = path.match(/\/(\d+)\/edit/);
 
   // If the URL indicates edit mode (e.g. /dnsadmin/zone/123/edit)
   if (editMatch) {
     const zoneId = editMatch[1];
-    form.action = '<%== config->{managerurl} %>dnsadmin/zone/' + zoneId;
+    form.action = '<%== config->{managerurl} %>dnsadmin/' + zoneId;
 
     // Insert a hidden _method field to override POST to PUT
     const methodInput = document.createElement('input');
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.appendChild(methodInput);
 
     // Fetch zone data via AJAX/JSON and populate the form
-    fetch('<%== config->{managerurl} %>/dnsadmin/zone/' + zoneId, { headers: { 'Accept': 'application/json' } })
+    fetch('<%== config->{managerurl} %>/dnsadmin/' + zoneId, { headers: { 'Accept': 'application/json' } })
       .then(response => response.json())
       .then(data => {
         if (data.error) {
@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
   } else {
     // New zone mode
-    form.action = '<%== config->{managerurl} %>/dnsadmin/zone';
+    form.action = '<%== config->{managerurl} %>/dnsadmin';
     document.getElementById('form-title').textContent = 'New Zone';
   }
 

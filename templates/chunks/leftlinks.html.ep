@@ -1,3 +1,5 @@
-<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{user} %>" target="_blank" rel="noopener" aria-label="<%== __x('Give small financial support to {user} at buymeacoffee', user => config->{buymeacoffee}->{user}) %>">
-  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=alipang&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" alt="<%== __x('Buy {user} a coffee', user => config->{buymeacoffee}->{user}) %>" />
+% if (config->{buymeacoffee}->{slug}) {
+<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%== __x('Give small financial support to {slug} at buymeacoffee', slug => config->{buymeacoffee}->{slug}) %>">
+  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=<%== config->{buymeacoffee}->{slug} %>&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" alt="<%== __x('Buy {slug} a coffee', slug => config->{buymeacoffee}->{slug}) %>" />
 </a>
+% }

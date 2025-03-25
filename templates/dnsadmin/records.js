@@ -38,9 +38,9 @@
         <td>${record.name}</td>
         <td>${rrset.type}</td>
         <td>${truncateText(record.content, 100)}</td>
-        <td>${rrset.ttl}</td>
-        <td>
-          <a href="<%== config->{managerurl} %>dnsadmin/zones/${data.zone_id}/records/${rrset.name}" class="btn btn-sm btn-secondary" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></a>
+        <td class="text-end">${rrset.ttl}</td>
+        <td class="text-end">
+          <a href="<%== config->{managerurl} %>dnsadmin/${data.zone_id}/records/${rrset.name}" class="btn btn-sm btn-secondary" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></a>
           <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
         </td>
       </tr>`;
@@ -49,7 +49,7 @@
     document.querySelector('#records tbody').innerHTML = snippet;
     document.querySelectorAll('.btn-delete').forEach(btn => {
       btn.addEventListener('click', async () => {
-        if (!confirm('Are you sure you want to delete this record?')) return;
+        if (!confirm('<%== __("Are you sure you want to delete this record?") %>')) return;
         const recordId = btn.getAttribute('data-recordid');
         try {
           const response = await fetch(`<%== config->{managerurl} %>dnsadmin/${data.zone_id}/records/${recordId}`, {
@@ -60,7 +60,7 @@
           if (result.success) {
             btn.closest('tr').remove();
           } else {
-            alert(result.error || 'Failed to delete record');
+            alert(result.error || '<%== __("Failed to delete record") %>');
           }
         } catch (error) {
           console.error(error);

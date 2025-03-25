@@ -124,6 +124,7 @@ captcha:
   ptsize: 24
   width: 460
   height: 60
+  length: 3
 mail:
   from: noreply@example.com
   type: text/html
@@ -224,4 +225,4 @@ locale:
 google:
 #  tag: YOUR-TAG
 buymeacoffee:
-  user: alipang
+  slug: alipang

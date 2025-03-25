@@ -1,8 +1,5 @@
 package Samizdat::Plugin::Contact;
 
-use strict;
-use warnings FATAL => 'all';
-
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
 use Mojo::Template;

@@ -1,9 +1,32 @@
-<a href="<%= url_for('dnsadmin_zone_new') %>" class="btn btn-primary mb-3"><%== __('Create New Zone') %></a>
+<form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+  <input type="hidden" name="customerid" id="customerid">
+  <div class="col">
+    <div class="input-group">
+      <input type="text" class="form-control" name="zoneid" id="zoneid" placeholder="<%== __('Enter zone name') %>">
+      <button
+        id="searchbutton"
+        type="submit"
+        class="btn btn-primary"
+        title="<%==  __('Click to search matching zones.') %>"
+        onclick="searchZones('#dataform');">
+        <%== icon 'search', {} %>
+        <span class="d-sm-inline d-none mx-1"><%== __('Search') %></span>
+      </button>
+    </div>
+  </div>
+  <div class="col justify-content-sm-end input-group d-flex">
+    <a href="<%= url_for('dnsadmin_zone_new') %>" class="btn btn-primary">
+      <%== icon 'plus-circle-fill', {} %>
+      <span class="d-sm-inline d-none mx-1"><%== __('New zone') %></span>
+    </a>
+  </div>
+</form>
+
 <table id="zones" class="table table-striped table-sm sortable">
   <thead>
     <tr class="orange">
-      <th><%== __('Name') %></th>
-      <th><%== __('Actions') %></th>
+      <th class="px-2"><%== __('Name') %></th>
+      <th class="text-end px-2"><%== __('Actions') %></th>
     </tr>
   </thead>
   <tbody>

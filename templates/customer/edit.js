@@ -293,7 +293,7 @@ function populateForm(formdata, method) {
   for (const dnsdomain of dnsdomains) {
     nrdnsdomains++;
     snippet += `
-                <tr data-domainid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== sprintf('%s/powerdnsadmin/domain/', config->{siteurl}) %>${dnsdomain.domainname}">${dnsdomain.domainname}</a></td></tr>`;
+                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== config->{managerurl} %>dnsadmin/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
   }
   document.querySelector('#dnsdomains tbody').innerHTML = snippet;
   if (nrdnsdomains > 0) {

@@ -12,7 +12,6 @@ use Data::Dumper;
 has 'config';
 has 'cache' => sub ($self) {
   state $cache = Cache($self->config->{cachefile});
-#  say Dumper $cache;
   return $cache;
 };
 has 'merger' => sub {
@@ -91,7 +90,6 @@ sub getLogin($self) {
     state         => $self->cache->{state},
     response_type => 'code',
   })->result;
-#  say Dumper $response;
   if ($response->headers->header('Location')) {
     $self->cache->{state} = 'code';
     $self->saveCache;
@@ -202,7 +200,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
       $self->cache->{refresh} = '';
       $self->saveCache;
       $done = 1;
-      return 403;
+      return {};
     } elsif (404 == $tx->result->code) {
       $done = 1;
       return 404;

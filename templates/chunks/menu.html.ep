@@ -7,5 +7,4 @@
     </ul>
   </li>
   <li class="nav-item"><a class="nav-link text-nowrap" href="/contact/"><%= __('Contact') %></a></li>
-  <!--li class="nav-item"><a class="nav-link text-nowrap" href="/roomservice/"><%= __('Roomservice') %></a></li-->
 </ul>
