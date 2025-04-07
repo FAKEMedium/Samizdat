@@ -10,109 +10,123 @@ use Digest::SHA1 qw/sha1 sha1_hex/;
 use App::bmkpasswd -all;
 use Data::Dumper;
 
-has 'app';
+has 'config';
+has 'database'; # Mojo::Pg or Mojo::mysql
+has 'redis';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
 
 sub username ($self, $cookie) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database->db;
   return 1; # Temporary solution
 }
 
 sub addUser ($self, $username, $attribs = undef) {
-  my $db = $self->app->mysql->db;
-
+  my $db = $self->database->db;
+  my $userid = 0;
   $attribs->{username} = $username;
-  my $password = delete $attribs->{password};
-=pod
-  my $userid = $db->insert('account.user',
-    $attribs,
-    { returning => 'id' }
-  )->hash->{id};
-  $db->insert('account.password', {
-    userid => $userid,
-  });
-=cut
-
-  my $userid = $db->insert('snapusers',
-    $attribs,
-    { returning => 'id' }
-  )->hash->{id};
-  $db->insert('passwords', {
-    userid => $userid,
-  });
+  delete $attribs->{password};
+  if ('mysql' eq $self->config->{databasetype}) {
+    $userid = $db->insert('snapusers',
+      $attribs,
+      { returning => 'id' }
+    )->hash->{id};
+    $db->insert('passwords', {
+      userid => $userid,
+    });
+  } else {
+    $userid = $db->insert('account.users',
+      $attribs,
+      { returning => 'id' }
+    )->hash->{id};
+    $db->insert('account.password', {
+      userid => $userid,
+    });
+  }
   return $userid;
 }
 
 
 sub getUsers ($self, $where){
-  my $db = $self->app->mysql->db;
-=pod
-  my $result = $db->select('account.user',
-    undef,
-    $where
-  )->hashes->to_array;
-=cut
-
-  my $result = $db->select('snapusers',
-    undef,
-    $where
-  )->hashes->to_array;
+  my $db = $self->database->db;
+  my $result;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $result = $db->select('snapusers',
+      undef,
+      $where
+    )->hashes->to_array;
+  } else {
+   $result = $db->select('account.users',
+      undef,
+      $where
+    )->hashes->to_array;
+  }
+  retun $result;
 }
 
 
 sub saveUser ($self, $userid, $attribs = undef) {
-  my $db = $self->app->mysql->db;
-=pod
-  $db->update('account.user',
-    $attribs,
-    {userid => $userid},
-    { returning => 'id' }
-  )->hash->{id};
-=cut
-  $db->update('snapusers',
-    $attribs,
-    {userid => $userid},
-    { returning => 'id' }
-  )->hash->{id};
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $db->update('snapusers',
+      $attribs,
+      {userid => $userid},
+      { returning => 'id' }
+    )->hash->{id};
+  } else {
+    $db->update('account.users',
+      $attribs,
+      { userid => $userid },
+      { returning => 'id' }
+    )->hash->{id};
+  }
 }
 
 
 sub deleteUser ($self, $userid) {
-  my $db = $self->app->mysql->db;
-
-#  $db->delete('account.user', {id => $userid});
-  $db->delete('snapusers', {id => $userid});
-
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $db->delete('snapusers', { id => $userid });
+  } else {
+    $db->delete('account.users', { id => $userid });
+  }
 }
 
 
 sub savePassword ($self, $userid, $password) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database->db;
   my $attribs = {};
-  for my $method (@{ $self->app->config->{account}->{passwordmethods} }) {
+  for my $method (@{ $self->config->{passwordmethods} }) {
     $attribs->{'password' . $method} = $self->hashPassword($password, $method);
   }
-  $db->update('passwords',
-    $attribs,
-    {userid => $userid},
-    { returning => 'id' }
-  )->hash->{id};
+
+  if ('mysql' eq $self->config->{databasetype}) {
+  } else {
+    $db->update('account.passwords',
+      $attribs,
+      { userid => $userid },
+      { returning => 'id' }
+    )->hash->{id};
+  }
 }
 
 
 sub validatePassword ($self, $username, $plain) {
   my $userid = 0;
-  my $db = $self->app->mysql->db;
+  my $db = $self->database->db;
 
   # Superadmins in the configuration file don't need to be in the database
-  if ($self->app->config->{account}->{superadmins}->{$username} eq $plain) {
+  if ($self->config->{superadmins}->{$username} eq $plain) {
     $userid = 1;
   } else {
-#    my $result = $db->select([ 'account.user', [ -left => 'account.password', id => 'userid' ] ])->hash;
-    my $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
+    my $result;
+    if ('mysql' eq $self->config->{databasetype}) {
+      $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
+    } else {
+      $result = $db->select([ 'account.users', [ -left => 'account.password', id => 'userid' ] ])->hash;
+    }
 
-    for my $method (@{ $self->app->config->{account}->{passwordmethods} }) {
+    for my $method (@{ $self->config->{passwordmethods} }) {
       if ($method eq "sha512") {
         if (passwdcmp($plain, $result->{passwordsha512})) {
           $userid = $result->{$userid};
@@ -163,58 +177,80 @@ sub hashPassword ($self, $password, $method) {
   }
 }
 
+sub session ($self, $authcookie) {
+  my $session = $self->redis->db->hgetall("samizdat:$authcookie");
+  $self->redis->db->del("samizdat:$authcookie");
+  return $session;
+}
 
+sub logout ($self, $authcookie) {
+  my $session = $self->redis->db->hgetall("samizdat:$authcookie");
+  $self->redis->db->del("samizdat:$authcookie");
+  return $session;
+}
 
+sub login ($self, $authcookie, $data) {
+  $self->redis->db->hmset("samizdat:$authcookie", %$data);
+  $self->redis->db->expire("samizdat:$authcookie", 3600);
+}
 
-sub insertLogin ($self, $ip, $username, $value) {
-  my $db = $self->app->mysql->db;
-=pod
-  $db->insert('account.login', {
-    userid => $userid,
-    ip     => $ip,
-  }, {returning => 'id'})->hash->{id};
-=cut
-  $db->insert('snapallsessions', {
-    userlogin   => $username,
-    remote_host => $ip,
-    value       => $value
-  }, {returning => 'allsessionid'})->hash->{allsessionid};
+sub insertLogin ($self, $ip, $userid, $value) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $db->insert('snapallsessions', {
+      userlogin   => $userid,
+      remote_host => $ip,
+      value       => $value
+    }, {returning => 'allsessionid'})->hash->{allsessionid};
+  } else {
+    $db->insert('account.logins', {
+      userid => $userid,
+      ip     => $ip,
+    }, { returning => 'id' })->hash->{id};
+  }
 }
 
 
 sub insertLoginFailure ($self, $ip, $username) {
-  my $db = $self->app->mysql->db;
-=pod
-  $db->insert('account.loginfailure', {
-    ip       => $ip,
-    username => $username,
-  }, {returning => 'id'})->hash->{id};
-=cut
-
-  $db->insert('loginfailures', {
-    ip       => $ip,
-    username => $username
-  }, {returning => 'loginfailureid'})->hash->{loginfailureid};
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $db->insert('loginfailures', {
+      ip       => $ip,
+      username => $username
+    }, {returning => 'loginfailureid'})->hash->{loginfailureid};
+  } else {
+    $db->insert('account.loginfailures', {
+      ip       => $ip,
+      username => $username,
+    }, { returning => 'id' })->hash->{id};
+  }
 }
 
 
 sub getLoginFailures ($self, $ip) {
-  my $db = $self->app->mysql->db;
-=pod
-  my $result = $db->query("SELECT failuretime,ip,username FROM account.loginfailure WHERE (failuretime >= $failuretime) AND (ip = ?) ORDER BY failuretime DESC LIMIT ?",
-    $options->{ip}, $limit
-  )->hashes->to_array;
-  return $result;
-=cut
-  my $result = $db->query("
-    SELECT failuretime
-    FROM loginfailures
-    WHERE (failuretime >=  now() - interval ? minute) AND (ip = ?)
-    ORDER BY failuretime DESC LIMIT ?",
-      $self->app->config->{account}->{blocktime},
-      $ip,
-      $self->app->config->{account}->{blocklimit}
-  )->hashes->to_array;
+  my $db = $self->database->db;
+  my $result;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $result = $db->query("
+      SELECT failuretime,ip,username
+      FROM loginfailures
+      WHERE (failuretime >=  now() - interval ? minute) AND (ip = ?)
+      ORDER BY failuretime DESC LIMIT ?",
+        $self->config->{blocktime},
+        $ip,
+        $self->config->{blocklimit}
+    )->hashes->to_array;
+  } else {
+    $result = $db->query("
+      SELECT failuretime,ip,username
+      FROM account.loginfailures
+      WHERE failuretime >= now() - (? * interval '1 minute') AND (ip = ?)
+      ORDER BY failuretime DESC LIMIT ?",
+        $self->config->{blocktime},
+        $ip,
+        $self->config->{blocklimit}
+    )->hashes->to_array;
+  }
   return $result;
 }
 

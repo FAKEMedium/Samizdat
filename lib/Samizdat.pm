@@ -56,8 +56,8 @@ sub startup ($self) {
     },
   );
 
-  $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}) });
-  $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}) });
+  $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}); return $redis; });
+  $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}); return $pg; });
   $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');

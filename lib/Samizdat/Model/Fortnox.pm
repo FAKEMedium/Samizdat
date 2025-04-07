@@ -304,6 +304,13 @@ sub externalInvoice ($self, $DocumentNumber = 0) {
   }
 }
 
+sub creditInvoice ($self, $DocumentNumber = 0) {
+  if ($DocumentNumber) {
+    my $result = $self->callAPI('Invoices', 'put', 0, {}, 'credit');
+    say Dumper $result;
+  }
+}
+
 sub getInvoice ($self, $DocumentNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $list = $self->callAPI('Invoices', 'get', $DocumentNumber, $options);
 }

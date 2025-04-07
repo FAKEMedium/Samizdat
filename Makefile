@@ -1,6 +1,9 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
+syncinvoices:
+	bin/samizdat makesyncinvoices
+
 fortnox:
 	bin/samizdat makefortnox
 

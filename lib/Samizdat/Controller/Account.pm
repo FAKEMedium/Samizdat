@@ -28,7 +28,7 @@ sub login ($self) {
 
   # Check if blocklimit failed attempts been made last blocktime minutes from remote host
   my $ip = $self->_getip();
-  my $loginfailures = $self->account->getLoginFailures($ip);
+  my $loginfailures = $self->app->account->getLoginFailures($ip);
   my $count = scalar @{ $loginfailures };
   if ($count >= $self->config->{account}->{blocklimit}) {
     return $self->render(json => { error => { reason => 'blocked' },
@@ -55,9 +55,9 @@ sub login ($self) {
       displayname => 'Super admin',
     };
   } else {
-    $userid = eval {return $self->account->validatePassword($username, $password)};
+    $userid = eval {return $self->app->account->validatePassword($username, $password)};
     if ($userid) {
-      $user = ${$self->account->getUsers({ id => $userid })}[0];
+      $user = ${$self->app->account->getUsers({ id => $userid })}[0];
     }
   }
 
@@ -76,39 +76,37 @@ sub login ($self) {
     my $value = b64_encode(j $userdata);
     chomp $value;
     $value =~ s/[\r\n]+//g;
-    my $db = $self->redis->db;
     my $authcookie = $self->app->uuid->create_str();
 
-    $db->hmset("samizdat:$authcookie",
+    $self->app->account->login($authcookie, {
       userid     => $userid,
       username   => $user->{username},
       superadmin => $user->{superadmin},
       value      => $value,
       ip         => $ip,
-    );
-    $db->expire("samizdat:$authcookie", 3600);
+    });
 
-    $self->signed_cookie($self->config->{authcookiename} => $authcookie, {
+    $self->signed_cookie($self->config->{account}->{authcookiename} => $authcookie, {
       secure => 0,
       httponly => 0,
       path => '/',
       expires => time + 3600,
-      domain => $self->config->{cookiedomain},
+      domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
     });
-    $self->cookie($self->config->{datacookiename} => $value, {
+    $self->cookie($self->config->{account}->{datacookiename} => $value, {
       secure => 0,
       httponly => 0,
       path => '/',
       expires => time + 3600,
-      domain => $self->config->{cookiedomain},
+      domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
     });
-    $self->account->insertLogin($ip, $userid, $value);
+    $self->app->account->insertLogin($ip, $userid, $value);
     $self->render(json => { userdata => $userdata }, status => 200);
 
   } else {
-    $self->account->insertLoginFailure($ip, $username);
+    $self->app->account->insertLoginFailure($ip, $username);
     return $self->render(json => { error => { reason => 'password', count => $count },
       ip         => $ip,
       blocklimit => $self->config->{account}->{blocklimit},
@@ -118,44 +116,50 @@ sub login ($self) {
 }
 
 sub logout ($self) {
-  my $authcookie = $self->signed_cookie($self->config->{authcookiename});
-  my $db = $self->redis->db;
-  my $session = $db->hgetall("samizdat:$authcookie");
-
+  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
+  my $session = $self->app->account->logout($authcookie);
   my $username = $session->{username};
-  $self->cookie($self->config->{authcookiename} => '', {
+  $self->cookie($self->config->{account}->{authcookiename} => '', {
     secure => 0,
     httponly => 0,
     path => '/',
     expires => 1,
-    domain => $self->config->{cookiedomain},
+    domain => $self->config->{account}->{cookiedomain},
     hostonly => 1,
   });
-  $self->cookie($self->config->{datacookiename} => '', {
+  $self->cookie($self->config->{account}->{datacookiename} => '', {
     secure => 0,
     httponly => 0,
     path => '/',
     expires => 1,
-    domain => $self->config->{cookiedomain},
+    domain => $self->config->{account}->{cookiedomain},
     hostonly => 1,
   });
   return $self->redirect_to('/');
 }
 
 sub register ($self) {
+  my $valid = {};
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Register account');
     my $web = { title => $title };
     $self->stash(scriptname => '/register');
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register', format => 'js'), 4);
-    return $self->render(template => 'account/register', web => $web, title => $title);
+    return $self->render(template => 'account/register', web => $web, title => $title, valid => $valid, ip => $self->_getip());
   }
 
+  my $formdata = {};
   my $v = $self->validation;
-  $v->required('not_empty', 'not_empty');
-  $v->required('username', 'not_empty');
-  $v->required('password', 'not_empty');
-  $v->required('email', 'not_empty');
+  for my $field (qw(username password email captcha)) {
+    $formdata->{$field} = $self->param($field);
+    $valid->{$field} = $v->required($field, 'trim', 'not_empty')->is_valid ? " is-valid" : " is-invalid";
+  }
+  $valid->{captcha} = " is-valid";
+  if (!$self->validate_captcha($formdata->{captcha})) {
+    $v->error(captcha => [ 'Captcha was wrong' ]);
+    $valid->{captcha} = " is-invalid";
+  }
+
   if ($v->has_error) {
     return $self->render(json => { error => { reason => 'incomplete' } }, status => 200);
   }
@@ -168,7 +172,7 @@ sub password ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Change password');
     my $web = { title => $title };
-    $self->stash(scriptname => '/register/password');
+    $self->stash(scriptname => $self->app->url_for('password'));
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/password', format => 'js'), 4);
     return $self->render(template => 'account/password', web => $web, title => $title);
   }
@@ -186,11 +190,10 @@ sub password ($self) {
 
 
 sub authorize ($self) {
-  my $authcookie = $self->signed_cookie($self->config->{authcookiename});
+  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
   return 1;
   if ($authcookie) {
-    my $db = $self->redis->db;
-    my $session = $db->hgetall("samizdat:$authcookie");
+    my $session = $self>app->account->session($authcookie);
     say Dumper $session;
     if ($session->{superadmin}) {
       return 1;
@@ -222,6 +225,11 @@ sub panel ($self) {
 }
 
 sub user ($self) {
+  return 1;
+}
+
+
+sub users ($self) {
   return 1;
 }
 

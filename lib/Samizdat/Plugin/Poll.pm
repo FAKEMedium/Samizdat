@@ -5,7 +5,13 @@ use Samizdat::Model::Poll;
 
 
 sub register ($self, $app, $conf) {
-  $app->helper(poll => sub { state $poll = Samizdat::Model::Poll->new(pg => shift->pg) });
+  $app->helper(poll => sub {
+    state $poll = Samizdat::Model::Poll->new({
+      config   => $self->app->config->{poll},
+      database => shift->pg,
+    });
+    return $poll;
+  });
 
   my $r = $app->routes;
   my $polls = $r->under('poll');

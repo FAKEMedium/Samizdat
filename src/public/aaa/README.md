@@ -12,6 +12,7 @@ myModal.show();
       <div class="card-body m-0 p-2 input-group gx-0 gy-2 gap-2 mb-1 gx-2">
         <a class="d-md-inline badge rounded-pill text-bg-primary" href="/fortnox/work">y</a>
         <form name="searchcustomer" method="post" action="customer/">
+          <img src="/captcha.png" class="img-fluid" />
           <input type="hidden" name="what" value="customer" />
           <div class="form-group row">
             <div class="custom-control custom-control-inline col-xl-5 text-primary">
