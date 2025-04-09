@@ -12,7 +12,7 @@ use Data::Dumper;
 sub login ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Log in');
-    my $web = { title => $title };
+    my $web = { title => $title, docpath => => '/login/index.html' };
     $self->stash(scriptname => '/login');
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login', format => 'js'), 4);
     return $self->render(template => 'account/login', layout => 'modal', web => $web, title => $title);
@@ -142,7 +142,7 @@ sub register ($self) {
   my $valid = {};
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Register account');
-    my $web = { title => $title };
+    my $web = { title => $title, docpath => '/register/index.html' };
     $self->stash(scriptname => '/register');
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register', format => 'js'), 4);
     return $self->render(template => 'account/register', web => $web, title => $title, valid => $valid, ip => $self->_getip());

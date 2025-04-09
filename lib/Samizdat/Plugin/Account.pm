@@ -30,9 +30,9 @@ sub register ($self, $app, $conf) {
     state $account = Samizdat::Model::Account->new({
       config       => $self->app->config->{account},
       database     => $self->app->pg,
-      redis        => $self->app->redis
+      redis        => $self->app->redis,
     });
-    return $account
+    return $account;
   });
 
 }

@@ -29,6 +29,8 @@ sub run ($self, @args) {
   my $again = 1;
   my $siteurl = $self->app->config->{siteurl};
   $siteurl =~ s/\/$//;
+  my $server = ${ $self->app->config->{hypnotoad}->{listen} }[0];
+  $server =~ s/\?.*//;
   while ($again) {
     $again = 0;
     for my $uri (sort {$a cmp $b} keys %$uris) {
@@ -37,8 +39,8 @@ sub run ($self, @args) {
       next if ($uri =~ /^\/\//);
       next if ($uri =~ /^mailto/);
       next if ($uri =~ /^javascript/);
+      next if ($uri =~ /^country/);
 
-      say $uri;
       my $language = '';
       if ($uri =~ s/_([^_\.]+)\.md/.md/) {
         $language = $1;
@@ -47,7 +49,8 @@ sub run ($self, @args) {
       $uri =~ s/^\///g;
       $uri =~ s/^\.\///g;
       if (!$uris->{$uri}) {
-        my $res = $ua->get(sprintf('%s/%s', ${ $self->app->config->{hypnotoad}->{listen} }[0], $uri))->result;
+        my $res = $ua->get(sprintf('%s/%s', $server, $uri))->result;
+        say sprintf('%s/%s %3d', $server, $uri, $res->code);
         $uris->{$uri} = 1;
         $res->dom('img, a')->each(sub($dom, $i) {
           my $link = '';

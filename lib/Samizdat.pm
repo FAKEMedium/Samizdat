@@ -77,7 +77,6 @@ sub startup ($self) {
       $mysql->max_connections(5);
     });
   }
-  $self->plugin('Web');
   $self->plugin('Account');
   $self->plugin('Public');
   $self->plugin('Utils');
@@ -109,7 +108,8 @@ sub startup ($self) {
       send_ctobg => 1,
     }
   });
-#  $self->plugin('OpenAPI', {});
+  $self->routes->get('/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
+
   $self->plugin('Mail', $config->{mail});
   $self->plugin('Util::RandomString', {
     entropy => 256,
@@ -118,6 +118,7 @@ sub startup ($self) {
       length   => 20
     }
   });
+
   # Internationalization block. Use "make i18n" to rebuild text lexicon.
   $self->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
@@ -158,13 +159,7 @@ sub startup ($self) {
 
   }
 
-  my $r = $self->routes;
-  $r->any([qw( GET                       )] => '/user')->to(controller => 'User');
-  $r->any([qw( GET                       )] => '/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
-
-  # Most routes are defined in the plugins
-  $r->any([qw( GET                       )] => '/')->to(controller => 'Web', action => 'geturi', docpath => '')->name('home');
-  $r->any([qw( GET                       )] => '/*docpath')->to(controller => 'Web', action => 'geturi');
+  $self->plugin('Web'); # Routes not covered by other plugins go here
 }
 
 1;

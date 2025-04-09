@@ -6,8 +6,9 @@ sub index ($self) {
   my $method = lc $self->req->method;
   my $valid = {};
   my $title = $self->app->__('Contact');
-  my $web = { title => $title };
-  my $formdata = { ip => $self->tx->remote_address, method => lc $self->req->method };
+  my $web = { title => $title, docpath => '/contact/index.html' };
+  my $formdata = { ip => $self->tx->remote_address, method => $method };
+
   if ('post' eq $method) {
     my $v = $self->validation;
     for my $field (qw(name email subject message captcha)) {

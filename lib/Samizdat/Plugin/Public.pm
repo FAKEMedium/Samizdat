@@ -9,6 +9,10 @@ use Data::Dumper;
 my $countriesrepo = Mojo::Home->new('src/countries-data-json/data/');
 
 sub register ($self, $app, $conf) {
+  my $r = $app->routes;
+  $r->get('/country')->to(controller => 'Public', action => 'countries');
+  $r->get('/country/#country')->to(controller => 'Public', action => 'country');
+
   # Store some data in the app
   $app->{countries} = { translations => {}, countrydata => {}, reverse => {} };
   for my $lang (sort {$a cmp $b} keys %{ $app->config->{locale}->{languages} }) {
@@ -46,11 +50,11 @@ sub register ($self, $app, $conf) {
   );
 
 
-  $app->helper(public => sub { state $public = Samizdat::Model::Public->new(pg => $app->pg) });
+  $app->helper(public => sub {
+    state $public = Samizdat::Model::Public->new(pg => $app->pg);
+    return $public;
+  });
 
-  my $r = $app->routes;
-  $r->any([qw( GET POST                  )] => '/country')->to(controller => 'Public', action => 'countries');
-  $r->any([qw( GET POST                  )] => '/country/#country')->to(controller => 'Public', action => 'country');
 }
 
 

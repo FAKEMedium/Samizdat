@@ -120,6 +120,49 @@ badge rounded-pill rounded-circle">
   <div class="toast-body bg-success text-white" onclick="sprintf('Hi %.2f', 3.141); alert(shortbytes(12234556));">o
   </div>
 </div>
+
+<div class="row">
+  <div class="col-md-8" id="compose">
+    <form class="row g-3 needs-validation" id="contactform" method="post">
+      <div class="form-floating mb-3 col-md-6">
+        <input type="text" class="form-control is-invalid" id="name" name="name" value="" placeholder="Your name" aria-describedby="name invalidname">
+        <label for="name" class="form-label">Your name</label>
+        <div id="invalidname" class="invalid-feedback">Empty name</div>
+      </div>
+      <div class="form-floating mb-3 col-md-6">
+        <input type="email" class="form-control is-invalid" id="email" name="email" value="" placeholder="me@example.com" aria-describedby="email invalidemail">
+        <label for="email" class="form-label">Your email</label>
+        <div id="invalidemail" class="invalid-feedback">Enter valid email</div>
+      </div>
+      <div class="form-floating mb-3 col-md-12">
+        <input type="text" class="form-control is-invalid" id="subject" name="subject" value="" placeholder="Subject" aria-describedby="invalidsubject">
+        <label for="subject" class="form-label">Subject</label>
+        <div id="invalidsubject" class="invalid-feedback">Empty subject</div>
+      </div>
+      <div class="form-floating mb-3 col-md-12 sgrow-wrap">
+        <textarea class="form-control is-invalid" id="message" name="message" style="height: 200px" placeholder="Message" aria-describedby="invalidmessage"></textarea>
+        <label for="message">Message</label>
+        <div id="invalidmessage" class="invalid-feedback">Empty message</div>
+      </div>
+      <div class="form-floating mb-3 col-md-12">
+        <img src="/captcha.png" class="img-fluid" alt="Captcha image">
+      </div>
+      <div class="form-floating mb-3 col-md-12">
+        <input type="text" class="form-control is-invalid" id="captcha" name="captcha" placeholder="Enter code" aria-describedby="invalidcaptcha">
+        <label for="captcha" class="form-label">Captcha code from image</label>
+        <div id="invalidcaptcha" class="invalid-feedback">Captcha was wrong</div>
+      </div>
+      <div class="col-12" id="ip">Your ip 127.0.0.1 will be appended to the message.</div>
+      <button type="submit" class="btn btn-primary">
+        <span class="mx-2">Send now</span>
+        <svg class="bi bi-send-fill"><use xlink:href="#bi-send-fill"></use></svg>
+      </button>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <img src="/media/images/pexels-markus-winkler-4144772.jpg" class="img-fluid">
+  </div>
+</div>
 <script>
   var data = [
     { name: { first: 'Josh', last: 'Jones' }, age: 30 },

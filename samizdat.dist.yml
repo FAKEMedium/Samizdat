@@ -118,12 +118,13 @@ security: |
   
   Canonical: https://example.com/.well-known/security.txt
 layout: bootstrap
+publicsrc: src/public
 captcha:
   session_name: captcha_string
   font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
-  ptsize: 24
-  width: 460
-  height: 60
+  ptsize: 26
+  width: 873
+  height: 10/0
   length: 3
 mail:
   from: noreply@example.com

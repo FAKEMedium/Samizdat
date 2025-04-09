@@ -13,7 +13,6 @@ sub geturi ($self) {
     languages => $self->config->{locale}->{languages},
   });
   my $path = sprintf("%s%s", $docpath, 'index.html');
-
   if (!exists($docs->{$path})) {
     banbot($docpath, $self->tx->remote_address);
     $path = '404.html';
@@ -66,7 +65,7 @@ sub manifest ($self) {
     src   => '/favicon.ico',
     sizes => '16x16 32x32 48x48 64x64'
   }];
-  for my $size (@{ $self->app->config->{icons}->{sizes} }) {
+  for my $size (@{ $self->config->{icons}->{sizes} }) {
     my $src = sprintf('/media/images/icon.%04d.png', $size);
     push @{ $icons }, {
       src     => $src,
@@ -76,7 +75,7 @@ sub manifest ($self) {
     };
   }
   push @{ $icons }, {
-    src     => '/' . $self->app->config->{logotype},
+    src     => '/' . $self->config->{logotype},
     sizes   => 'any',
     type    => 'image/svg',
     purpose => 'any'

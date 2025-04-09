@@ -105,7 +105,6 @@ sub register ($self, $app, $conf) {
           $text =~ s/^[ ]+//gms;
           sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
         ]gexsmu;
-
         if ($c->config->{cache} && exists $c->{stash}->{web}->{docpath}) {
           $public->child($c->{stash}->{web}->{docpath})->dirname->make_path;
           $public->child($c->{stash}->{web}->{docpath})->spew($$output);
@@ -147,6 +146,7 @@ sub register ($self, $app, $conf) {
           $format = 'image/webp';
           $c->tx->res->headers->content_type($format);
           my $webpfile = $public->child($c->{stash}->{web}->{url});
+          $webpfile->dirname->make_path({mode => 0750});
           $webpfile->spew($$output);
         }
       }

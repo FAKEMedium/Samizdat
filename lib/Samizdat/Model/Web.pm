@@ -23,17 +23,17 @@ my $md = Text::MultiMarkdown->new(
 
 sub getlist ($self, $url, $options = {}) {
   my $docs = {};
-  my $path = Mojo::Home->new('src/public/')->child($url);
+  my $path = Mojo::Home->new($self->app->config->{publicsrc})->child($url);
   my $found = 0;
   my $meta = {};
   my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
-    my $docpath = $file->to_rel('src/public/')->to_string;
+    my $docpath = $file->to_rel($self->app->config->{publicsrc})->to_string;
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
       transclude(\$content, $file->dirname);
       my $html = decode 'UTF-8', $md->markdown($content);
-      my $dom = Mojo::DOM->new->xml(1)->parse($html);
+      my $dom = Mojo::DOM->new->xml(0)->parse($html);
       my $title = $dom->at('h1')->text;
       $dom->at('h1')->remove;
 
@@ -45,9 +45,9 @@ sub getlist ($self, $url, $options = {}) {
       });
 
       $dom->find('img')->each( sub ($img, $num) {
-        $img->xml(1);
+        $img->xml(0);
         my $picture = Mojo::DOM->new_tag('picture');
-        $picture->xml(1);
+        $picture->xml(0);
         my $src = $img->attr('src');
         my $alt = $img->attr('alt');
 
@@ -131,10 +131,10 @@ sub getlist ($self, $url, $options = {}) {
 # Find every README.md markdown file
 sub geturis ($self, $options = {}) {
   my $uris = {};
-  my $path = Mojo::Home->new('src/public/');
+  my $path = Mojo::Home->new($self->app->config->{publicsrc});
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
-      my $filename = $file->to_rel('src/public/')->to_string;
+      my $filename = $file->to_rel($self->app->config->{publicsrc})->to_string;
       if ($filename =~ /README[^\/]*\.md$/) {
           $uris->{$filename} = 0;
       }
