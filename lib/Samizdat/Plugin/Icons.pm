@@ -37,7 +37,7 @@ my $anyrepo = Mojo::Home->new();
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
-  $r->any([qw( GET POST                  )] => '/project/icons')->to(controller => 'Icons', action => 'icons');
+  $r->any([qw( GET POST )] => '/project/icons')->to(controller => 'Icons', action => 'icons');
 
   $app->helper(
     icon => sub($c, $icon, $options = {}) {

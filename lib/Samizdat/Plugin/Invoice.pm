@@ -38,9 +38,9 @@ sub register ($self, $app, $conf) {
   $manager->get('customers/:customerid/products/subscribe')->to('Customer#products');
   $manager->post('customers/:customerid/products')->to('Customer#subscribe');
 
-  $app->helper(invoice => sub {
+  $app->helper(invoice => sub ($self) {
     state $invoice = Samizdat::Model::Invoice->new({
-      app => shift
+      app => self->app,
     });
     return $invoice;
   });

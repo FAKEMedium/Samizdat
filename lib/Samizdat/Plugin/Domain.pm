@@ -20,7 +20,14 @@ sub register ($self, $app, $conf) {
   $manager->get('customers/:customerid/domains')->to('Domain#index');
   $manager->get('domains')->to('Domain#index');
 
-  $app->helper(domain => sub {state $domain = Samizdat::Model::Domain->new({ app => shift })});
+  $app->helper(domain => sub ($self) {
+    state $domain = Samizdat::Model::Domain->new({
+      config => $self->config->{domain},
+      pg     => $self->pg,
+      mysql  => $self->mysql,
+    });
+    return $domain;
+  });
 }
 
 1;
