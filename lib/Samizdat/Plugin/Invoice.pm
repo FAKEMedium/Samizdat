@@ -38,7 +38,13 @@ sub register ($self, $app, $conf) {
   $manager->get('customers/:customerid/products/subscribe')->to('Customer#products');
   $manager->post('customers/:customerid/products')->to('Customer#subscribe');
 
-  $app->helper(invoice => sub { state $invoice = Samizdat::Model::Invoice->new({app => shift}) });
+  $app->helper(invoice => sub {
+    state $invoice = Samizdat::Model::Invoice->new({
+      app => shift
+    });
+    return $invoice;
+  });
+
   $app->helper(
     printinvoice => sub($c, $tex, $formdata) {
       my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $formdata->{invoice}->{uuid}));
@@ -61,7 +67,9 @@ sub register ($self, $app, $conf) {
 
       $texpath->dirname->rel_file(sprintf('%s.pdf', $formdata->{invoice}->{uuid}))->move_to($pdfpath);
       my $pdf = $pdfpath->slurp || 0;
-      $texpath->dirname->remove_tree({ keep_root => 1 });
+      if (!$self->app->config->{test}->{invoice}) {
+        $texpath->dirname->remove_tree({ keep_root => 1 });
+      }
       return $pdf;
     }
   );

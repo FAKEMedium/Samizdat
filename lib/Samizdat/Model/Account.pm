@@ -222,7 +222,7 @@ sub insertLoginFailure ($self, $ip, $username) {
     $db->insert('account.loginfailures', {
       ip       => $ip,
       username => $username,
-    }, { returning => 'id' })->hash->{id};
+    }, { returning => 'loginfailureid' })->hash->{loginfailureid};
   }
 }
 

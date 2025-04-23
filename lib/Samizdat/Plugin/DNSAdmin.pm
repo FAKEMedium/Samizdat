@@ -29,8 +29,7 @@ sub register($self, $app, $conf) {
   # Helper for accessing the DNSAdmin API model.
   $app->helper(dnsadmin => sub($c) {
     state $dnsadmin = Samizdat::Model::DNSAdmin->new({
-      api_url => $c->config->{dnsadmin}->{api}->{url},
-      api_key => $c->config->{dnsadmin}->{api}->{key},
+      config => $c->config->{dnsadmin},
     });
   });
 

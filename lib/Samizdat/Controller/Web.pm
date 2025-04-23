@@ -32,6 +32,7 @@ sub geturi ($self) {
       },
       language => $self->app->language
     };
+    return $self->reply->not_found;
   } else {
     $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
     $docs->{$path}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};

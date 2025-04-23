@@ -187,13 +187,13 @@ sub create ($self, $credit = 0) {
   for my $field ('firstname', 'lastname', 'company', 'address', 'city', 'lang') {
     $self->_texescape(\$formdata->{customer}->{$field});
   }
-  if ('SE' eq uc $formdata->{customer}->{country}) {
+  if ('SE' eq uc $formdata->{customer}->{billingcountry}) {
     $formdata->{customer}->{zip} =~ s/\s+//g;
     $formdata->{customer}->{zip} = sprintf('%s\ %s',
       substr($formdata->{customer}->{zip}, 0, 3),
       substr($formdata->{customer}->{zip}, 3, 2)
     );
-    $formdata->{customer}->{city} ='\ ' . $formdata->{customer}->{city};
+    $formdata->{customer}->{city} = '\ ' . $formdata->{customer}->{city};
   }
 
   if (keys %{$formdata->{invoiceitems}} < 1) {

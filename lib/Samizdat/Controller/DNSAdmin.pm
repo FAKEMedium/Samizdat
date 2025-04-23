@@ -30,8 +30,9 @@ sub index($self) {
 sub zones($self) {
   my $title = $self->app->__('DNS Zones');
   my $web = { title => $title };
-  my $zones = $self->dnsadmin->list_zones;
   if ($self->req->headers->accept =~ m{application/json}) {
+    my $searchtern = $self->param('searchterm') // undef;
+    my $zones = $self->dnsadmin->list_zones({ searchterm => $searchtern });
     $self->render(json => { zones => $zones });
   } else {
     $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones', format => 'js');

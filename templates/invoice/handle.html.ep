@@ -12,10 +12,10 @@
   </ul>
 </div>
 
-<form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+<form class="align-items-center d-print-none mb-3 d-flex justify-content-between" id="dataform">
   <input type="hidden" name="customerid" id="customerid">
   <input type="hidden" name="invoiceid" id="invoiceid">
-  <div class="col">
+  <div class="col me-auto">
     <div class="input-group">
       <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
       <input type="text" class="form-control" name="amount" id="amount" placeholder="<%== __('Amount') %>">
@@ -31,7 +31,7 @@
       </button>
     </div>
   </div>
-  <div class="col justify-content-sm-end input-group d-flex">
+  <div class="col justify-content-sm-end input-group">
     <button type="submit"
             class="btn btn-primary mx-1"
             title="<%==  __('Click to send a credit invoice.') %>"

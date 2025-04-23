@@ -1,8 +1,8 @@
-<form class="row row-cols-lg-auto g-3 align-items-center d-print-none mb-3" id="dataform">
+<form class="align-items-center d-print-none mb-3 d-flex justify-content-between" id="dataform">
   <input type="hidden" name="customerid" id="customerid">
-  <div class="col">
+  <div class="col me-auto">
     <div class="input-group">
-      <input type="text" class="form-control" name="zoneid" id="zoneid" placeholder="<%== __('Enter zone name') %>">
+      <input type="text" class="form-control" name="searchterm" id="searchterm" placeholder="<%== __('Enter zone name') %>">
       <button
         id="searchbutton"
         type="submit"

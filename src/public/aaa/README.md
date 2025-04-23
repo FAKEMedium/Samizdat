@@ -48,6 +48,11 @@ Mails <span class="position-absolute top-0 start-100 translate-middle badge roun
 Alerts <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2"><span class="visually-hidden">unread messages</span></span>
 </button>
 
+<div class="position-relative">
+  <div class="position-absolute top-50 start-50 translate-middle">
+    <img src="/media/images/not_found.png" style="width: 30%;" class="top-100 start-50 translate-middle">
+  </div>
+</div>
 
 <select class="form-select form-select-sm" aria-label="Small select example">
   <option selected>Open this select menu</option>
