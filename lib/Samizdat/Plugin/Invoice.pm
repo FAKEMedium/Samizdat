@@ -11,9 +11,7 @@ sub register ($self, $app, $conf) {
   my $manager = $r->under($app->config->{managerurl})->to(
     controller => 'Account',
     action     => 'authorize',
-    require    => {
-      users => $app->config->{account}->{admins}
-    }
+    level      => 'superadmin',
   );
 
   $manager->get('invoices/open')->to('Invoice#open')->name('invoice_open');
@@ -40,7 +38,9 @@ sub register ($self, $app, $conf) {
 
   $app->helper(invoice => sub ($self) {
     state $invoice = Samizdat::Model::Invoice->new({
-      app => self->app,
+      config => $self->config->{roomservice}->{invoice},
+      pg     => $self->app->pg,
+      mysql  => $self->app->mysql,
     });
     return $invoice;
   });

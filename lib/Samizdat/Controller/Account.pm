@@ -214,7 +214,6 @@ sub authorize ($self, $level = 0) {
   my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
-    say Dumper $session;
     if ($session->{superadmin}) {
       return 1;
     } else {
