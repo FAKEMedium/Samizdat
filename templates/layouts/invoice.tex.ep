@@ -100,7 +100,7 @@
 % for my $streetpart (split("[\n\r]+", $customer->{billingaddress})) {
 <%== $streetpart %>\newline
 % }
-<%== $customer->{billingzip} %> \ <%== $customer->{billingcity} %>\
+<%== $customer->{billingzip} %> <%== $customer->{billingcity} %>\
 % if (('' ne $customer->{billingcountry}) && ("SE" ne $customer->{billingcountry})) {
 \newline
 <%== $countries->{ $customer->{billingcountry} } %>\

@@ -46,7 +46,7 @@ sub register ($self, $app, $conf) {
   });
 
   $app->helper(
-    printinvoice => sub($c, $tex, $formdata) {
+    printinvoice => sub($self, $tex, $formdata) {
       my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $formdata->{invoice}->{uuid}));
       my $pdfpath = Mojo::File->new(sprintf('%s/%s.pdf',
         $app->config->{roomservice}->{invoice}->{invoicedir},
