@@ -7,24 +7,29 @@ use Samizdat::Model::Account;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  $r->get('/register')->to(controller => 'Account', action => 'register')->name('register_account');
-  $r->post('/register')->to(controller => 'Account', action => 'register')->name('create_account');
-  $r->get('/register/:secret')->to(controller => 'Account', action => 'confirm_email')->name('confirm_email');
-  $r->put('/register/:secret')->to(controller => 'Account', action => 'confirm_email')->name('confirm_email');
-
-  $r->put('/account')->to(controller => 'Account', action => 'register')->name('update_account');
-  $r->get('/account/password')->to(controller => 'Account', action => 'password')->name('password');
-  $r->put('/account/password')->to(controller => 'Account', action => 'password')->name('update_password');
-
-  $r->get('/login')->to(controller => 'Account', action => 'login')->name('login_form');
-  $r->post('/login')->to(controller => 'Account', action => 'login')->name('login');
-
-  $r->any([qw( GET POST DELETE )] => '/logout')->to(controller => 'Account', action => 'logout')->name('logout');
   $r->get('/users')->to(controller => 'Account', action => 'listusers')->name('listusers');
   $r->get('/user/:uuid')->to(controller => 'Account', action => 'user')->name('user');
 
-  my $panel = $r->under('panel')->to(controller => 'Account', action => 'authorize');
-  $panel->get('/panel')->to(controller => 'Account', action => 'panel');
+  my $account = $r->under('/account');
+
+  $account->get('/register')->to(controller => 'Account', action => 'register')->name('account_register');
+  $account->post('/register')->to(controller => 'Account', action => 'register');
+  $account->get('/email/:secret')->to(controller => 'Account', action => 'confirm_email')->name('account_confirm_email');
+  $account->put('/email/:secret')->to(controller => 'Account', action => 'confirm_email');
+
+  $account->get('/settings')->to(controller => 'Account', action => 'settings')->name('account_settings');
+  $account->put('/settings')->to(controller => 'Account', action => 'settings');
+  $account->get('/password')->to(controller => 'Account', action => 'password')->name('account_password');
+  $account->put('/password')->to(controller => 'Account', action => 'password');
+
+  $account->get('/login')->to(controller => 'Account', action => 'login')->name('account_login');
+  $account->post('/login')->to(controller => 'Account', action => 'login');
+
+  $account->any([qw( GET POST DELETE )] => '/logout')->to(controller => 'Account', action => 'logout')->name('account_logout');
+  $account->get('/')->to(controller => 'Account', action => 'index')->name('account_index');
+
+  my $panel = $account->under('/panel')->to(controller => 'Account', action => 'authorize');
+  $panel->get('/')->to(controller => 'Account', action => 'panel')->name('account_panel');
 
   $app->helper(account => sub ($self) {
     state $account = Samizdat::Model::Account->new({

@@ -7,7 +7,7 @@ async function login () {
     const modaltitle = document.querySelector('#modaltitle');
     try {
         const formdata = new FormData(loginform);
-        const response = await fetch('<%== $scriptname %>', {
+        const response = await fetch('<%= url_for("account_login") %>', {
             method: 'POST',
             mode: "cors",
             cache: "no-cache",
@@ -24,7 +24,7 @@ async function login () {
         const jsonData = await response.json();
         if (jsonData.userdata) {
             if ('/' === window.location.pathname) {
-                location.assign("/panel/");
+                location.assign("<%= url_for('account_panel') %>");
             } else {
                 window.location.reload(true);
             }

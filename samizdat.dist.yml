@@ -173,7 +173,10 @@ account:
   # Time window in minutes that unsuccessful login attempts will be counted
   blockperiod: 10
 
-  # List of username: password that have full access to everything. CHANGE!!!
+  # Session timeout in seconds
+  sessiontimeout: 3600
+
+  # List of username: password that have full access to everything, mainly for bootstrapping. CHANGE!!!
   superadmins:
 #    superadmin: s3cr3t_Pa55w0r6
 pgsql:

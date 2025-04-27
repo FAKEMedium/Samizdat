@@ -1,8 +1,6 @@
 package Samizdat::Model::Account;
 
 use Mojo::Base -base, -signatures;
-#use warnings;
-#use diagnostics;
 use Bytes::Random::Secure::Tiny;
 use Crypt::Argon2 qw/argon2id_pass argon2id_verify/;
 use Crypt::PBKDF2;
@@ -18,6 +16,10 @@ my $pbkdf2 = Crypt::PBKDF2->new();
 
 sub username ($self, $cookie) {
   my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+  } else {
+
+  }
   return 1; # Temporary solution
 }
 
@@ -37,8 +39,8 @@ sub addUser ($self, $username, $attribs = undef) {
   } else {
     $userid = $db->insert('account.users',
       $attribs,
-      { returning => 'id' }
-    )->hash->{id};
+      { returning => 'userid' }
+    )->hash->{userid};
     $db->insert('account.password', {
       userid => $userid,
     });
@@ -77,8 +79,8 @@ sub saveUser ($self, $userid, $attribs = undef) {
     $db->update('account.users',
       $attribs,
       { userid => $userid },
-      { returning => 'id' }
-    )->hash->{id};
+      { returning => 'userid' }
+    )->hash->{userid};
   }
 }
 
@@ -88,7 +90,7 @@ sub deleteUser ($self, $userid) {
   if ('mysql' eq $self->config->{databasetype}) {
     $db->delete('snapusers', { id => $userid });
   } else {
-    $db->delete('account.users', { id => $userid });
+    $db->delete('account.users', { userid => $userid });
   }
 }
 
@@ -101,12 +103,17 @@ sub savePassword ($self, $userid, $password) {
   }
 
   if ('mysql' eq $self->config->{databasetype}) {
-  } else {
-    $db->update('account.passwords',
+    $db->update('passwords',
       $attribs,
       { userid => $userid },
       { returning => 'id' }
     )->hash->{id};
+  } else {
+    $db->update('account.passwords',
+      $attribs,
+      { userid => $userid },
+      { returning => 'passwordid' }
+    )->hash->{passwordid};
   }
 }
 
@@ -178,8 +185,7 @@ sub hashPassword ($self, $password, $method) {
 }
 
 sub session ($self, $authcookie) {
-  my $session = $self->redis->db->hgetall("samizdat:$authcookie");
-  $self->redis->db->del("samizdat:$authcookie");
+  my $session = $self->redis->db->hgetall("samizdat:$authcookie") // undef;
   return $session;
 }
 
@@ -190,8 +196,8 @@ sub logout ($self, $authcookie) {
 }
 
 sub login ($self, $authcookie, $data) {
-  $self->redis->db->hmset("samizdat:$authcookie", %$data);
-  $self->redis->db->expire("samizdat:$authcookie", 3600);
+  my $res = $self->redis->db->hmset("samizdat:$authcookie", %$data);
+  $self->redis->db->expire("samizdat:$authcookie", $self->config->{sessiontimeout});
 }
 
 sub insertLogin ($self, $ip, $userid, $value) {
@@ -206,7 +212,7 @@ sub insertLogin ($self, $ip, $userid, $value) {
     $db->insert('account.logins', {
       userid => $userid,
       ip     => $ip,
-    }, { returning => 'id' })->hash->{id};
+    }, { returning => 'loginid' })->hash->{loginid};
   }
 }
 

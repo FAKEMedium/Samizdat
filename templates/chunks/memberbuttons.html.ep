@@ -1,4 +1,4 @@
-<a href="/login/" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
+<a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
   <%== icon 'box-arrow-in-right'; %>
   <span class="d-sm-inline d-none ml-1"><%= __('Log in') %></span>
 </a>
@@ -9,11 +9,15 @@
     <span class="displayname d-none d-sm-inline ml-1"></span>
   </button>
   <div id="userdropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="usernamebutton" style="z-index: 1000;">
-    <a class="dropdown-item" href="/register/?action=step4" title="<%=  __('Link to personal data') %>">
+    <a class="dropdown-item" href="<%== url_for('account_settings') %>" title="<%=  __('Link to personal settings') %>">
       <%== icon 'person-circle'; %>
       <span class="ml-2"><%= __('Settings') %></span>
     </a>
-    <a class="dropdown-item" href="/logout/" title="<%= __('Log out and end current session') %>" aria-label="<%= __('Log out') %>">
+    <a class="dropdown-item" href="<%== url_for('account_panel') %>/" title="<%=  __('Link to control panel') %>">
+      <%== icon 'grid-3x3-gap-fill'; %>
+      <span class="ml-2"><%= __('Personal panel') %></span>
+    </a>
+    <a class="dropdown-item" href="<%== url_for('account_logout') %>" title="<%= __('Log out and end current session') %>" aria-label="<%= __('Log out') %>">
       <%== icon 'box-arrow-left'; %>
       <span class="ml-2"><%= __('Log out') %></span>
     </a>

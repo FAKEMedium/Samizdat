@@ -2,7 +2,7 @@
 
 <div class="row">
   <div class="col-md-8">
-    <form action="<%= $scriptname %>" id="registrationform" method="post">
+    <form action="<%= url_for('account_register') %>" id="registrationform" method="post">
       <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
       <div class="alert alert-light" role="alert" id="registrationalert"></div>
       <div class="mb-3">

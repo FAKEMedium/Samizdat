@@ -8,12 +8,26 @@ use DateTime::TimeZone;
 use Date::Calc qw(Today Add_Delta_Days Date_to_Text Parse_Date Date_to_Days Delta_Days);
 use Data::Dumper;
 
+my $levels = {
+  'unauthenticated' => 0,
+  'user'           => 99,
+  'admin'          => 999,
+  'superadmin'     => 9999,
+};
+
+sub index ($self) {
+  if ($self->authenticated_user()) {
+    return $self->redirect_to($self->url_for('account_panel'));
+  } else {
+    return $self->redirect_to($self->url_for('account_register'));
+  }
+}
+
 
 sub login ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Log in');
-    my $web = { title => $title, docpath => => '/login/index.html' };
-    $self->stash(scriptname => '/login');
+    my $web = { title => $title, docpath => => '/account/login/index.html' };
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login', format => 'js'), 4);
     return $self->render(template => 'account/login', layout => 'modal', web => $web, title => $title);
   }
@@ -90,7 +104,7 @@ sub login ($self) {
       secure => 0,
       httponly => 0,
       path => '/',
-      expires => time + 3600,
+      expires => time + $self->config->{account}->{sessiontimeout},
       domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
     });
@@ -98,7 +112,7 @@ sub login ($self) {
       secure => 0,
       httponly => 0,
       path => '/',
-      expires => time + 3600,
+      expires => time + $self->config->{account}->{sessiontimeout},
       domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
     });
@@ -142,8 +156,7 @@ sub register ($self) {
   my $valid = {};
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Register account');
-    my $web = { title => $title, docpath => '/register/index.html' };
-    $self->stash(scriptname => '/register');
+    my $web = { title => $title, docpath => '/account/register/index.html' };
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register', format => 'js'), 4);
     return $self->render(template => 'account/register', web => $web, title => $title, valid => $valid, ip => $self->_getip());
   }
@@ -172,7 +185,6 @@ sub password ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Change password');
     my $web = { title => $title };
-    $self->stash(scriptname => $self->app->url_for('password'));
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/password', format => 'js'), 4);
     return $self->render(template => 'account/password', web => $web, title => $title);
   }
@@ -189,11 +201,19 @@ sub password ($self) {
 }
 
 
-sub authorize ($self) {
+sub authenticated_user ($self) {
   my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
-  return 1;
   if ($authcookie) {
-    my $session = $self>app->account->session($authcookie);
+    return $self->app->account->session($authcookie);
+  }
+  return undef;
+}
+
+
+sub authorize ($self, $level = 0) {
+  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
+  if ($authcookie) {
+    my $session = $self->app->account->session($authcookie);
     say Dumper $session;
     if ($session->{superadmin}) {
       return 1;
@@ -202,10 +222,12 @@ sub authorize ($self) {
       return undef;
     }
   }
+  my $title = $self->app->__('Unauthenticated');
   my $web = {
-    script => $self->app->indent($self->render_to_string(template => 'unauthenticated', format => 'js'), 0)
+    script => $self->app->indent($self->render_to_string(template => 'unauthenticated', format => 'js'), 0),
+    title  => $title,
   };
-  $self->render(template => 'unauthenticated', status => 401, web => $web);
+  $self->render(template => 'unauthenticated', status => 401, web => $web, title => $title);
   return undef;
 }
 
@@ -216,13 +238,15 @@ sub _getip ($self) {
     // '0.0.0.0';
 }
 
+
 sub panel ($self) {
   my $title = $self->app->__('Panel');
   my $web = { title => $title };
-  $self->stash(scriptname => '/panel');
+  $self->stash(user => $self->authenticated_user());
   $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/panel', format => 'js'), 4);
-  return $self->render(template => 'account/panel', web => $web, title => $title, docpath => 'panel/index.html');
+  return $self->render(template => 'account/panel', web => $web, title => $title, docpath => 'account/panel.html');
 }
+
 
 sub user ($self) {
   return 1;
@@ -233,6 +257,11 @@ sub users ($self) {
   return 1;
 }
 
+sub settings ($self) {
+  $self->stash(user => $self->authenticated_user());
+
+  return 1;
+}
 
 1;
 
@@ -252,7 +281,7 @@ alipang E<lt>hans@fakemedia.seE<gt>
 
 =head1 COPYRIGHT
 
-Copyright 2024 Hans Svensson
+Copyright 2025 Hans Svensson
 
 =head1 LICENSE
 
