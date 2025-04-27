@@ -1,56 +1,73 @@
 <h5 class="text-danger"><%== __('Registration is currently non-functional') %></h5>
-
 <div class="row">
   <div class="col-md-8">
-    <form action="<%= url_for('account_register') %>" id="registrationform" method="post">
+    <div>
+      <%== __('Register to create and publish content.') %>
+      <%== __('You can also post in our discussions.') %>
+      <%== __('Decide which parts of your personal data you want to show different groups.') %>
+      <%== __('By default no information about you is shared.') %>
+    </div>
+
+    <form action="<%= url_for('account_register') %>" id="dataform" method="post">
       <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
       <div class="alert alert-light" role="alert" id="registrationalert"></div>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <label for="newusername"><%= __('Username') %></label>
-          <%== __('Choose a username.') %>
-        </div>
-        <input type="text" class="form-control" name="newusername" id="newusername" placeholder="<%= __('Enter username') %>" aria-describedby="newusername invalidusername">
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="newusername" id="newusername"
+               placeholder="<%== __('Enter username') %>" aria-describedby="newusername invalidnewusername">
+        <label for="newusername" class="form-label"><%== __('Choose a username') %></label>
+        <div id="newusernameHelp" class="form-text"><%== __('At least 3 characters from a-z 0-9 -, must start with a-z') %></div>
+        <div id="invalidnewusername" class="invalid-feedback"><%= __('Invalid username') %></div>
       </div>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <label for="newpassword"><%= __('Password') %></label>
-          <%== __('Choose a password.') %>
-        </div>
-        <input type="password" class="form-control" name="newpassword" id="newpassword" placeholder="<%= __('Enter password') %>" aria-describedby="newpassword invalidpassword">
+
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" name="newpassword" id="newpassword"
+               placeholder="<%= __('Enter password') %>" aria-describedby="newpassword invalidnewpassword">
+        <label for="newpassword" class="form-label"><%== __('Choose a password') %></label>
+        <div id="newpasswordHelp" class="form-text"><%== __('At least 8 characters including capitals and digits') %></div>
+        <div id="invalidnewpassword" class="invalid-feedback"><%= __('Invalid password') %></div>
       </div>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <label for="email"><%= __('Your email') %></label>
-          <%== __('We will email a confirmation request.') %>
-        </div>
+
+      <div class="form-floating mb-3">
         <input type="text" class="form-control" name="email" id="email" placeholder="<%= __('Enter your email') %>">
+        <label for="email" class="form-label"><%= __('Your email') %></label>
+        <div id="emailHelp" class="form-text"><%== __('We will email a confirmation request.') %></div>
+        <div id="invalidemail" class="invalid-feedback"><%= __('Invalid email') %></div>
       </div>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <label for="captcha" class="form-label"><%= __('Captcha image') %></label>
-          <%== __('Press Register to regenerate') %>
-        </div>
-        <img src="/captcha.png" class="img-fluid" alt="<%== __('Captcha image') %>" heigght="<%= config->{captcha}->{height} %>" wsidth="<%= config->{captcha}->{width} %>" />
+
+      <div class="form-floating mb-3">
+        <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>" heigght="<%= config->{captcha}->{height} %>" wsidth="<%= config->{captcha}->{width} %>">
+        <div id="captchaimageHelp" class="form-text"><%== __('Press Register to regenerate') %></div>
+        <label for="captchaimage" class="form-label"><%= __('Captcha image') %></label>
       </div>
-      <div class="mb-3">
-        <div class="d-flex justify-content-between">
-          <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
-          <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
-        </div>
-        <input type="text" class="form-control<%= $valid->{captcha} %>" id="captcha" name="captcha" placeholder="captcha" aria-describedby="invalidcaptcha" />
+
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control<%= $valid->{captcha} %>" id="captcha" name="captcha"
+               placeholder="captcha" aria-describedby="invalidcaptcha" />
+        <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
+        <div id="captchaHelp" class="form-text"><%== __('Enter code from captcha image') %></div>
+        <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
       </div>
-      <div class="mb-3">
+
+      <div class="form-floating mb-3">
         <div class="form-check">
           <input type="checkbox" class="form-check-input" name="terms" id="terms" value="1">
-          <label class="form-check-label" for="terms"><%= __('I accept the terms for registration.') %></label>
+          <label class="form-check-label ml-2" for="terms"><%= __('I accept the terms for registration.') %></label>
+          <a href="" target="_blank"><%== icon 'link' %></a>
         </div>
       </div>
+
       <button type="submit" id="registerlogin" class="btn btn-primary mb-3" onclick="register();"><%= __('Register') %></button>
-      <div id="ip"><%= __x('Your ip {ip} will be appended to the confirmation request.', ip => $ip) %></div>
+
+      <div id="ip" class="mb-3">
+        <%== __x('Your ip {ip} will be appended to the confirmation request.', ip => $ip) %>
+        <%== __('We will also store it for statistics and to prevent robot registrations.') %>
+      </div>
+
+      <div><%== __('After registration you can add more data about yourself, loosen your sharing policy, and customize your experience.') %></div>
     </form>
   </div>
   <div class="col-md-4">
-    <img src="<%= $scriptname %>/register.png" class="img-fluid" />
+    <img src="<%= url_for('account_register') %>.png" class="img-fluid">
   </div>
 </div>
