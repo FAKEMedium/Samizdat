@@ -22,7 +22,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(domain => sub ($self) {
     state $domain = Samizdat::Model::Domain->new({
-      config => $self->config->{domain},
+      config => $self->config->{roomservice}->{domain},
       pg     => $self->pg,
       mysql  => $self->mysql,
     });

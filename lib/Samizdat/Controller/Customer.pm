@@ -196,7 +196,7 @@ sub _getdata ($self, $customerid) {
     databases     => $self->app->customer->databases($params),
     sites         => $self->app->customer->sites($params),
     domains       => $self->app->domain->get($params),
-    maildomains   => $self->app->domain->maildomains($params),
+    maildomains   => $self->app->email->get($params),
     userlogins    => $self->app->customer->userlogins($params),
   };
 
