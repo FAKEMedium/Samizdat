@@ -1,41 +1,69 @@
 package Samizdat::Controller::Contact;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use MIME::Lite;
+use Mojo::JSON qw(decode_json encode_json);
+use Mojo::Util qw(decode encode b64_encode trim);
 
 sub index ($self) {
-  my $method = lc $self->req->method;
-  my $valid = {};
-  my $title = $self->app->__('Contact');
-  my $web = { title => $title, docpath => '/contact/index.html' };
-  my $formdata = { ip => $self->tx->remote_address, method => $method };
-
-  if ('post' eq $method) {
+  my $formdata = { ip => $self->tx->remote_address };
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept =~ /json/) {
+    my $valid = {};
+    my $errors = {};
     my $v = $self->validation;
+
     for my $field (qw(name email subject message captcha)) {
-      $formdata->{$field} = $self->param($field);
-      $valid->{$field} = $v->required($field, 'trim', 'not_empty')->is_valid ? " is-valid" : " is-invalid";
+      $formdata->{$field} = trim $self->param($field);
+      if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
+        $valid->{$field} = "is-invalid";
+        $errors->{$field} = $self->app->__('This field is required');
+      } else {
+        $valid->{$field} = "is-valid";
+        $errors->{$field} = '';
+      }
     }
-    $valid->{captcha} = " is-valid";
+
     if (!$self->validate_captcha($formdata->{captcha})) {
       $v->error(captcha => [ 'Captcha was wrong' ]);
-      $valid->{captcha} = " is-invalid";
+      $errors->{captcha} = $self->app->__('Captcha was wrong');
+      $valid->{captcha} = "is-invalid";
+    } else {
+      $valid->{captcha} = "is-valid";
+      $errors->{captcha} = '';
     }
-    if (!$v->has_error) {
-      $self->mail(
-        to       => $self->config->{mail}->{to},
-        reply_to => $formdata->{email},
-        subject  => $formdata->{subject},
-        template => 'contact/message',
-        format   => 'mail',
-        type     => 'text/plain',
-        formdata => $formdata,
+
+    $formdata->{errors} = $errors;
+    $formdata->{valid} = $valid;
+    if ($v->has_error) {
+      $formdata->{success} = 0;
+      return $self->render(json => $formdata);
+
+    } else {
+      my $maildata = $self->render_mail(template => 'contact/message', formdata => $formdata);
+      my $subject = Encode::encode("MIME-Q", $formdata->{subject});
+      $formdata->{$maildata } = $maildata;
+      my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $formdata->{name}, $formdata->{email}));
+      my $mail = MIME::Lite->new(
+        From         => $from,
+        To           => $self->config->{mail}->{to},
+        Subject      => $subject,
+        'X-Mailer'   => "Samizdat",
+        Data         => $maildata,
       );
-      $title = $self->app->__('Message sent');
-      $web = { title => $title };
-      return $self->render(template => 'contact/sent', formdata => $formdata, web => $web, title => $title);
+      $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
+      $formdata->{success} = 1;
+      $formdata->{sent} = Encode::decode 'UTF-8', Encode::encode 'UTF-8',
+          $self->render_to_string(template => 'contact/sent', layout => undef, formdata => $formdata);
+      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+      return $self->render(json => $formdata, status => 200);
     }
   }
-  return $self->render(web => $web, title => $title, template => 'contact/index', formdata => $formdata, valid => $valid);
+
+  my $title = $self->app->__('Contact');
+  my $web = { title => $title, docpath => '/contact/index.html' };
+  $web->{script} .= $self->render_to_string(template => 'contact/index', format => 'js');
+  return $self->render(web => $web, title => $title, template => 'contact/index', formdata => {}, status => 200);
 }
 
 

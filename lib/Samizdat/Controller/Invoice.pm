@@ -238,7 +238,6 @@ sub create ($self, $credit = 0) {
       $invoicedata->{invoice}->{invoiceid} = $newinvoiceid;
       $invoicedata->{invoice}->{state} = 'raderad';
       $invoicedata->{invoice}->{kreditfakturaavser} = $creditedinvoice->{fakturanummer};
-      say Dumper $creditedinvoice;
       $self->app->invoice->updateinvoice($creditedinvoice->{invoiceid}, $creditedinvoice);
     } else {
       $invoicedata->{invoice}->{state} = 'fakturerad';
@@ -255,7 +254,6 @@ sub create ($self, $credit = 0) {
       }
     }
     $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
-    say Dumper $invoicedata->{invoice};
     $invoicedata->{invoice}->{duedate} = $duedate;
 
     my $anyrepo = Mojo::Home->new();
@@ -283,10 +281,10 @@ sub create ($self, $credit = 0) {
       From         => $self->config->{mail}->{from},
       Bcc          => $self->config->{test}->{invoice} ? undef : $self->config->{mail}->{from},
       To           => $self->config->{test}->{invoice} ? $self->config->{mail}->{to} : $invoicedata->{customer}->{billingemail},
-      Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", "Rymdweb AB")),
+      Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
       Subject      => $subject,
       Type         => 'multipart/mixed',
-      'X-Mailer'   => "Rymdwebs faktureringssystem",
+      'X-Mailer'   => "Samizdat",
     );
 
     # Attach plain text and html variants

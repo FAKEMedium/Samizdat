@@ -31,7 +31,11 @@
     </table>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary mb-3" onclick="updateInvoice();"><%== __('Update') %></button>
-    <button type="submit" class="btn btn-primary mb-3" onclick="makeInvoice();"><%== __('Make invoice') %></button>
+    <button type="submit" class="btn btn-primary mb-3" onclick="updateInvoice();">
+      <span><%== __('Update') %></span>
+    </button>
+    <button type="submit" class="btn btn-primary mb-3" onclick="makeInvoice();">
+      <span><%== __('Make invoice') %></span>
+    </button>
   </div>
 </form>

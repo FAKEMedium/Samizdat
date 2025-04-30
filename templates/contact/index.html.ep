@@ -1,26 +1,26 @@
 <div class="row">
   <div class="col-md-8" id="compose">
-    <form class="row g-3 needs-validation" id="contactform" method="post">
+    <form class="row g-3 needs-validation" id="contactform" method="post" action="<%== url_for('contact_index') %>">
       <div class="form-floating mb-3 col-md-6">
-        <input type="text" class="form-control<%= $valid->{name} %>" id="name" name="name" value="<%== $formdata->{name} %>"
+        <input type="text" class="form-control<%= $formdata->{valid}->{name} %>" id="name" name="name" value="<%== $formdata->{name} %>"
                placeholder="<%= __('Your name') %>" aria-describedby="name invalidname">
         <label for="name" class="form-label"><%= __('Your name') %></label>
         <div id="invalidname" class="invalid-feedback"><%= __('Empty name') %></div>
       </div>
       <div class="form-floating mb-3 col-md-6">
-        <input type="email" class="form-control<%= $valid->{email} %>" id="email" name="email" value="<%== $formdata->{email} %>"
+        <input type="email" class="form-control<%= $formdata->{valid}->{email} %>" id="email" name="email" value="<%== $formdata->{email} %>"
                placeholder="me@example.com" aria-describedby="email invalidemail">
         <label for="email" class="form-label"><%= __('Your email') %></label>
         <div id="invalidemail" class="invalid-feedback"><%= __('Enter valid email') %></div>
       </div>
       <div class="form-floating mb-3 col-md-12">
-        <input type="text" class="form-control<%= $valid->{subject} %>" id="subject" name="subject" value="<%== $formdata->{subject} %>"
+        <input type="text" class="form-control<%= $formdata->{valid}->{subject} %>" id="subject" name="subject" value="<%== $formdata->{subject} %>"
                placeholder="<%= __('Subject') %>" aria-describedby="invalidsubject">
         <label for="subject" class="form-label"><%= __('Subject') %></label>
         <div id="invalidsubject" class="invalid-feedback"><%= __('Empty subject') %></div>
       </div>
       <div class="form-floating mb-3 col-md-12 sgrow-wrap">
-        <textarea class="form-control<%= $valid->{message} %>"  id="message" name="message" style="height: 200px"
+        <textarea class="form-control<%= $formdata->{valid}->{message} %>"  id="message" name="message" style="height: 200px"
                   placeholder="<%= __('Message') %>" aria-describedby="invalidmessage"><%== $formdata->{message} %></textarea>
         <label for="message"><%= __('Message') %></label>
         <div id="invalidmessage" class="invalid-feedback"><%= __('Empty message') %></div>
@@ -29,7 +29,7 @@
         <img src="/captcha.png" class="img-fluid" alt="<%== __('Captcha image') %>">
       </div>
       <div class="form-floating mb-3 col-md-12">
-        <input type="text" class="form-control<%= $valid->{captcha} %>" id="captcha" name="captcha"
+        <input type="text" class="form-control<%= $formdata->{valid}->{captcha} %>" id="captcha" name="captcha"
                placeholder="<%= __('Enter code') %>" aria-describedby="invalidcaptcha">
         <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
         <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
