@@ -1,6 +1,6 @@
 <h5 class="text-danger"><%== __('Registration is currently non-functional') %></h5>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8" id="register">
     <div>
       <%== __('Register to create and publish content.') %>
       <%== __('You can also post in our discussions.') %>
@@ -13,7 +13,7 @@
       <div class="alert alert-light" role="alert" id="registrationalert"></div>
 
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="newusername" id="newusername"
+        <input type="text" class="form-control<%= $formdata->{valid}->{newusername} %>" name="newusername" id="newusername"
                placeholder="<%== __('Enter username') %>" aria-describedby="newusername invalidnewusername">
         <label for="newusername" class="form-label"><%== __('Choose a username') %></label>
         <div id="newusernameHelp" class="form-text"><%== __('At least 3 characters from a-z 0-9 -, must start with a-z') %></div>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="form-floating mb-3">
-        <input type="password" class="form-control" name="newpassword" id="newpassword"
+        <input type="password" class="form-control<%= $formdata->{valid}->{newpassword} %>" name="newpassword" id="newpassword"
                placeholder="<%= __('Enter password') %>" aria-describedby="newpassword invalidnewpassword">
         <label for="newpassword" class="form-label"><%== __('Choose a password') %></label>
         <div id="newpasswordHelp" class="form-text"><%== __('At least 8 characters including capitals and digits') %></div>
@@ -29,21 +29,22 @@
       </div>
 
       <div class="form-floating mb-3">
-        <input type="text" class="form-control" name="email" id="email" placeholder="<%= __('Enter your email') %>">
+        <input type="text" class="form-control<%= $formdata->{valid}->{email} %>" name="email" id="email"
+               placeholder="<%= __('Enter your email') %>" aria-describedby="email invalidemail">
         <label for="email" class="form-label"><%= __('Your email') %></label>
         <div id="emailHelp" class="form-text"><%== __('We will email a confirmation request.') %></div>
         <div id="invalidemail" class="invalid-feedback"><%= __('Invalid email') %></div>
       </div>
 
       <div class="form-floating mb-3">
-        <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>" heigght="<%= config->{captcha}->{height} %>" wsidth="<%= config->{captcha}->{width} %>">
+        <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>">
         <div id="captchaimageHelp" class="form-text"><%== __('Press Register to regenerate') %></div>
         <label for="captchaimage" class="form-label"><%= __('Captcha image') %></label>
       </div>
 
       <div class="form-floating mb-3">
-        <input type="text" class="form-control<%= $valid->{captcha} %>" id="captcha" name="captcha"
-               placeholder="captcha" aria-describedby="invalidcaptcha" />
+        <input type="text" class="form-control<%= $formdata->{valid}->{captcha} %>" id="captcha" name="captcha"
+               placeholder="captcha" aria-describedby="invalidcaptcha">
         <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
         <div id="captchaHelp" class="form-text"><%== __('Enter code from captcha image') %></div>
         <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
@@ -51,16 +52,21 @@
 
       <div class="form-floating mb-3">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" name="terms" id="terms" value="1">
+          <input type="checkbox" class="form-check-input<%= $formdata->{valid}->{terms} %>" name="terms" id="terms" value="1"
+                 aria-describedby="invalidterms">
           <label class="form-check-label ml-2" for="terms"><%= __('I accept the terms for registration.') %></label>
-          <a href="" target="_blank"><%== icon 'link' %></a>
+          <a href="legal" target="_blank"><%== icon 'arrow-up-right-square-fill' %></a>
+          <div id="invalidterms" class="invalid-feedback"><%= __('You need to accept registration terms.') %></div>
         </div>
       </div>
 
-      <button type="submit" id="registerlogin" class="btn btn-primary mb-3" onclick="register();"><%= __('Register') %></button>
+      <button type="submit" id="registerlogin" class="btn btn-primary mb-3">
+        <span class="mx-2"><%== __('Register') %></span>
+        <%== icon 'rocket-takeoff-fill', {} %>
+      </button>
 
-      <div id="ip" class="mb-3">
-        <%== __x('Your ip {ip} will be appended to the confirmation request.', ip => $ip) %>
+      <div class="mb-3">
+        <span id="ip"><%== __x('Your ip {ip} will be appended to the confirmation request.', ip => $formdata->{ip}) %></span>
         <%== __('We will also store it for statistics and to prevent robot registrations.') %>
       </div>
 

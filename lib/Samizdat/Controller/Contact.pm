@@ -63,7 +63,7 @@ sub index ($self) {
   my $title = $self->app->__('Contact');
   my $web = { title => $title, docpath => '/contact/index.html' };
   $web->{script} .= $self->render_to_string(template => 'contact/index', format => 'js');
-  return $self->render(web => $web, title => $title, template => 'contact/index', formdata => {}, status => 200);
+  return $self->render(web => $web, title => $title, template => 'contact/index', formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
 

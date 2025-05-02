@@ -1,8 +1,9 @@
 package Samizdat::Controller::Account;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use Mojo::JSON qw(j);
-use Mojo::Util qw(b64_encode);
+use MIME::Lite;
+use Mojo::JSON qw(decode_json encode_json j);
+use Mojo::Util qw(decode encode b64_encode trim);
 use DateTime;
 use DateTime::TimeZone;
 use Date::Calc qw(Today Add_Delta_Days Date_to_Text Parse_Date Date_to_Days Delta_Days);
@@ -152,32 +153,68 @@ sub logout ($self) {
   return $self->redirect_to('/');
 }
 
+
 sub register ($self) {
-  my $valid = {};
-  if (lc $self->req->method eq 'get') {
-    my $title = $self->app->__('Register account');
-    my $web = { title => $title, docpath => '/account/register/index.html' };
-    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register', format => 'js'), 4);
-    return $self->render(template => 'account/register', web => $web, title => $title, valid => $valid, ip => $self->_getip());
+  my $formdata = { ip => $self->tx->remote_address };
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept =~ /json/) {
+    my $valid = {};
+    my $errors = {};
+    my $v = $self->validation;
+
+    for my $field (qw(newusername newpassword email terms captcha)) {
+      $formdata->{$field} = trim $self->param($field);
+      if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
+        $valid->{$field} = "is-invalid";
+        $errors->{$field} = $self->app->__('This field is required');
+      } else {
+        $valid->{$field} = "is-valid";
+        $errors->{$field} = '';
+      }
+    }
+
+    if (!$self->validate_captcha($formdata->{captcha})) {
+      $v->error(captcha => [ 'Captcha was wrong' ]);
+      $errors->{captcha} = $self->app->__('Captcha was wrong');
+      $valid->{captcha} = "is-invalid";
+    } else {
+      $valid->{captcha} = "is-valid";
+      $errors->{captcha} = '';
+    }
+
+    $formdata->{errors} = $errors;
+    $formdata->{valid} = $valid;
+    if ($v->has_error) {
+      $formdata->{success} = 0;
+      return $self->render(json => $formdata);
+
+    } else {
+      my $maildata = $self->render_mail(template => 'account/confirm', formdata => $formdata);
+      my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
+      $formdata->{$maildata } = $maildata;
+      my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
+      my $mail = MIME::Lite->new(
+        From         => $from,
+        To           => $formdata->{email},
+        Subject      => $subject,
+        'X-Mailer'   => "Samizdat",
+        Data         => $maildata,
+      );
+      $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
+      $formdata->{success} = 1;
+      $formdata->{submitted} = Encode::decode 'UTF-8', Encode::encode 'UTF-8',
+        $self->render_to_string(template => 'account/submitted', layout => undef, formdata => $formdata);
+      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+      return $self->render(json => $formdata, status => 200);
+    }
   }
 
-  my $formdata = {};
-  my $v = $self->validation;
-  for my $field (qw(username password email captcha)) {
-    $formdata->{$field} = $self->param($field);
-    $valid->{$field} = $v->required($field, 'trim', 'not_empty')->is_valid ? " is-valid" : " is-invalid";
-  }
-  $valid->{captcha} = " is-valid";
-  if (!$self->validate_captcha($formdata->{captcha})) {
-    $v->error(captcha => [ 'Captcha was wrong' ]);
-    $valid->{captcha} = " is-invalid";
-  }
-
-  if ($v->has_error) {
-    return $self->render(json => { error => { reason => 'incomplete' } }, status => 200);
-  }
-
-  my $ip = $self->_getip();
+  my $title = $self->app->__('Register account');
+  my $web = { title => $title, docpath => '/account/register/index.html' };
+  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register',
+    formdata => { ip => 'REPLACEIP' }, format => 'js'), 4);
+  return $self->render(web => $web, title => $title, template => 'account/register',
+    formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
 

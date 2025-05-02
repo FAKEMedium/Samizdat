@@ -17,6 +17,10 @@ favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
 roomservice:
+  email:
+    databasetype: mysql
+  domain:
+    databasetype: mysql
   invoice:
     sender: billing@example.com
     sendername: Invoicing example

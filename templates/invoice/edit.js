@@ -5,7 +5,6 @@ form.addEventListener("submit", (event) => {
 
 async function sendData(method) {
   const url = form.action || "";
-  const target = form.target || "";
   const formData = new FormData(form);
   const request = {
     method: method,
