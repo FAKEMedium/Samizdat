@@ -33,13 +33,40 @@ sub index ($self) {
       $errors->{captcha} = '';
     }
 
+    # Fill in some fields if user is logged in
+    if ('GET' eq uc $self->req->method) {
+      if ($self->helpers->can('account')) {
+        my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
+        my $user = undef;
+        my $username = undef;
+        if ($authcookie) {
+          $user = $self->app->account->session($authcookie);
+          if ($user) {
+            $username = $user->{username};
+          }
+        }
+        if ($username) {
+          my $contacts = $self->app->account->getUsers({ 'users.username' => $username });
+          if (0 == scalar @$contacts) {
+            my $contact = $contacts->[0];
+            if ('' eq $formdata->{email} && $contacts) {
+              $formdata->{email} = $contact->{email};
+            }
+            if ('' eq $formdata->{name} && $contacts) {
+              $formdata->{name} = sprintf('%s %s', $contact->{givenname}, $contact->{commonname});
+            }
+          }
+        }
+      }
+    }
+
     $formdata->{errors} = $errors;
     $formdata->{valid} = $valid;
     if ($v->has_error) {
       $formdata->{success} = 0;
-      return $self->render(json => $formdata);
-
     } else {
+      $formdata->{success} = 1;
+      $formdata->{whois} = qx!whois $formdata->{ip}!;
       my $maildata = $self->render_mail(template => 'contact/message', formdata => $formdata);
       my $subject = Encode::encode("MIME-Q", $formdata->{subject});
       $formdata->{$maildata } = $maildata;
@@ -52,17 +79,16 @@ sub index ($self) {
         Data         => $maildata,
       );
       $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
-      $formdata->{success} = 1;
       $formdata->{sent} = Encode::decode 'UTF-8', Encode::encode 'UTF-8',
           $self->render_to_string(template => 'contact/sent', layout => undef, formdata => $formdata);
-      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-      return $self->render(json => $formdata, status => 200);
     }
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
   }
 
   my $title = $self->app->__('Contact');
   my $web = { title => $title, docpath => '/contact/index.html' };
-  $web->{script} .= $self->render_to_string(template => 'contact/index', format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'contact/index', formdata => { ip => 'REPLACEIP' }, format => 'js');
   return $self->render(web => $web, title => $title, template => 'contact/index', formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 

@@ -34,7 +34,7 @@
         <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
         <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
       </div>
-      <div class="col-12" id="ip"><%= __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %></div>
+      <div class="col-12 mb-3" id="ip"><%= __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %></div>
       <button type="submit" class="btn btn-primary">
         <span class="mx-2"><%== __('Send now') %></span>
         <%== icon 'send-fill', {} %>

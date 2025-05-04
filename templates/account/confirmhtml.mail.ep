@@ -1,0 +1,21 @@
+<img src="data:image/svg+xml;base64,<%== $formdata->{svglogotype} %>" width="100" style="width: 100px; margin-bottom: 2ex" />
+
+<h4><%== __('User registration') %></h4>
+
+<p>
+  <%== __x('You have registered a new user account on {site}.', site => config->{sitename}) %>
+  <%== __('Please confirm your email address by clicking the following link:') %>
+</p>
+
+<a href="<%== url_for('account_confirm') %>" target="_blank">
+  <%== __('Confirm your email address') %>
+</a>
+
+<p>
+  <%== __('If you did not register an account, please ignore this email.') %>
+  <%== __x('The form was submitted from {ip}', ip => $formdata->{ip} ) %>
+</p>
+
+<h5><%== __x('Whois data for {ip}', ip => $formdata->{ip}) %></h5>
+
+<pre><%== $formdata->{whois}  %></pre>

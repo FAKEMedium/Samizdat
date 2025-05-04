@@ -82,6 +82,9 @@ msgstr ""
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr ""
 
+msgid "Account confirmation"
+msgstr ""
+
 msgid "Actions"
 msgstr ""
 
@@ -124,6 +127,9 @@ msgstr ""
 msgid "Advertising"
 msgstr ""
 
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr ""
+
 msgid "Amount"
 msgstr ""
 
@@ -143,6 +149,12 @@ msgid "Are you sure you want to delete this record?"
 msgstr ""
 
 msgid "Article"
+msgstr ""
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr ""
+
+msgid "At least 8 characters including capitals and digits"
 msgstr ""
 
 msgid "BIC/Swift"
@@ -190,6 +202,9 @@ msgstr ""
 msgid "Buy {user} a coffee"
 msgstr ""
 
+msgid "By default no information about you is shared."
+msgstr ""
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
@@ -211,7 +226,13 @@ msgstr ""
 msgid "Changed status."
 msgstr ""
 
+msgid "Choose a password"
+msgstr ""
+
 msgid "Choose a password."
+msgstr ""
+
+msgid "Choose a username"
 msgstr ""
 
 msgid "Choose a username."
@@ -260,6 +281,9 @@ msgid "Company"
 msgstr ""
 
 msgid "Confirm poll signature"
+msgstr ""
+
+msgid "Confirm your email address"
 msgstr ""
 
 msgid "Confirmation request sent"
@@ -389,6 +413,9 @@ msgid "Date:"
 msgstr ""
 
 msgid "Debt"
+msgstr ""
+
+msgid "Decide which parts of your personal data you want to show different groups."
 msgstr ""
 
 msgid "Delete"
@@ -532,6 +559,12 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+msgid "Enter code"
+msgstr ""
+
+msgid "Enter code from captcha image"
+msgstr ""
+
 msgid "Enter password"
 msgstr ""
 
@@ -658,6 +691,9 @@ msgstr ""
 msgid "Identification code"
 msgstr ""
 
+msgid "If you did not register an account, please ignore this email."
+msgstr ""
+
 msgid "Impersonate"
 msgstr ""
 
@@ -665,6 +701,15 @@ msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
 msgid "Including VAT"
+msgstr ""
+
+msgid "Invalid email"
+msgstr ""
+
+msgid "Invalid password"
+msgstr ""
+
+msgid "Invalid username"
 msgstr ""
 
 msgid "Invoice"
@@ -786,7 +831,13 @@ msgstr ""
 msgid "Latest"
 msgstr ""
 
+msgid "Link to control panel"
+msgstr ""
+
 msgid "Link to personal data"
+msgstr ""
+
+msgid "Link to personal settings"
 msgstr ""
 
 msgid "List zones"
@@ -1029,6 +1080,9 @@ msgstr ""
 msgid "Personal panel"
 msgstr ""
 
+msgid "Please confirm your email address by clicking the following link:"
+msgstr ""
+
 msgid "Please log in to access that page"
 msgstr ""
 
@@ -1054,6 +1108,9 @@ msgid "Postal mail"
 msgstr ""
 
 msgid "Postgiro"
+msgstr ""
+
+msgid "Press Register to regenerate"
 msgstr ""
 
 msgid "Price"
@@ -1113,6 +1170,9 @@ msgstr ""
 msgid "Register account"
 msgstr ""
 
+msgid "Register to create and publish content."
+msgstr ""
+
 msgid "Registered for F-tax"
 msgstr ""
 
@@ -1120,6 +1180,9 @@ msgid "Registered office"
 msgstr ""
 
 msgid "Registered office:"
+msgstr ""
+
+msgid "Registration is currently non-functional"
 msgstr ""
 
 msgid "Remaining amount to pay: {amount} {currency}"
@@ -1332,6 +1395,9 @@ msgstr ""
 msgid "The default is used for the Bootstrap icons set."
 msgstr ""
 
+msgid "The form was submitted from {ip}"
+msgstr ""
+
 msgid "The invoice is also available at"
 msgstr ""
 
@@ -1356,6 +1422,9 @@ msgstr ""
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr ""
 
+msgid "This field is required"
+msgstr ""
+
 msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
 
@@ -1375,6 +1444,9 @@ msgid "Transfer"
 msgstr ""
 
 msgid "Type"
+msgstr ""
+
+msgid "Unauthenticated"
 msgstr ""
 
 msgid "Unpaid"
@@ -1422,6 +1494,9 @@ msgstr ""
 msgid "User manual"
 msgstr ""
 
+msgid "User registration"
+msgstr ""
+
 msgid "Username"
 msgstr ""
 
@@ -1455,6 +1530,9 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr ""
 
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr ""
+
 msgid "We will email a confirmation request."
 msgstr ""
 
@@ -1467,6 +1545,9 @@ msgstr ""
 msgid "Websites"
 msgstr ""
 
+msgid "Whois data for {ip}"
+msgstr ""
+
 msgid "Write the invoice number as message when you pay."
 msgstr ""
 
@@ -1476,7 +1557,16 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
+msgid "You can also post in our discussions."
+msgstr ""
+
+msgid "You have registered a new user account on {site}."
+msgstr ""
+
 msgid "You have {remaining} tries left."
+msgstr ""
+
+msgid "You need to accept registration terms."
 msgstr ""
 
 msgid "You were logged in as {username}."
@@ -1495,6 +1585,9 @@ msgid "Your contact:"
 msgstr ""
 
 msgid "Your email"
+msgstr ""
+
+msgid "Your ip {ip} will be appended to the confirmation request."
 msgstr ""
 
 msgid "Your ip {ip} will be appended to the message."
@@ -1582,6 +1675,9 @@ msgid "{code}: Authentication required"
 msgstr ""
 
 msgid "{code}: No authorization"
+msgstr ""
+
+msgid "{code}: Not in this universe"
 msgstr ""
 
 msgid "{cost}"

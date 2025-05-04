@@ -41,9 +41,9 @@ sub addUser ($self, $username, $attribs = undef) {
       $attribs,
       { returning => 'userid' }
     )->hash->{userid};
-    $db->insert('account.password', {
-      userid => $userid,
-    });
+    $db->insert('account.password',
+      { userid => $userid }
+    );
   }
   return $userid;
 }
@@ -58,12 +58,12 @@ sub getUsers ($self, $where){
       $where
     )->hashes->to_array;
   } else {
-   $result = $db->select('account.users',
+   $result = $db->select(['account.users', ['account.contacts', 'contacts.contactid' => 'users.contactid']],
       undef,
       $where
     )->hashes->to_array;
   }
-  retun $result;
+  return $result;
 }
 
 
@@ -78,7 +78,7 @@ sub saveUser ($self, $userid, $attribs = undef) {
   } else {
     $db->update('account.users',
       $attribs,
-      { userid => $userid },
+      { 'users.userid' => $userid },
       { returning => 'userid' }
     )->hash->{userid};
   }
@@ -90,7 +90,7 @@ sub deleteUser ($self, $userid) {
   if ('mysql' eq $self->config->{databasetype}) {
     $db->delete('snapusers', { id => $userid });
   } else {
-    $db->delete('account.users', { userid => $userid });
+    $db->delete('account.users', { 'users.userid' => $userid });
   }
 }
 
@@ -111,7 +111,7 @@ sub savePassword ($self, $userid, $password) {
   } else {
     $db->update('account.passwords',
       $attribs,
-      { userid => $userid },
+      { 'passwords.userid' => $userid },
       { returning => 'passwordid' }
     )->hash->{passwordid};
   }
@@ -130,7 +130,7 @@ sub validatePassword ($self, $username, $plain) {
     if ('mysql' eq $self->config->{databasetype}) {
       $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
     } else {
-      $result = $db->select([ 'account.users', [ -left => 'account.password', id => 'userid' ] ])->hash;
+      $result = $db->select([ 'account.users', [ -left => 'account.password', 'passwords.userid' => 'users.userid' ] ])->hash;
     }
 
     for my $method (@{ $self->config->{passwordmethods} }) {

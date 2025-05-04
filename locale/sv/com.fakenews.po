@@ -1,7 +1,7 @@
 # Fake News - Samizdat
 # Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
 # This file is distributed under the same license as the Samizdat package.
-# Webmaster <webmaster@fakenews.com>, 2022.
+# Webmaster <webmaster@fakenews.com>, 2025.
 #
 msgid ""
 msgstr ""
@@ -18,16 +18,16 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
-msgstr ""
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
 
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2022 &mdash; dela länk och ge en stjärna på {sitename}!"
+msgstr "&copy;2022 &mdash; vänligen dela länk och ge en stjärna på {sitename}!"
 
 msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr ""
+msgstr "&copy;2023 &mdash; vänligen dela länk och ge en stjärna på {sitename}!"
 
 msgid "&copy;{year}&nbsp;{author}"
-msgstr ""
+msgstr "&copy;{year}&nbsp;{author}"
 
 msgid "1 database"
 msgid_plural "{number} databases"
@@ -68,19 +68,22 @@ msgid "404: Missing document"
 msgstr "404: Sidan saknas"
 
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
-msgstr ""
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
 msgid "API docs"
-msgstr ""
+msgstr "API-dokument"
 
 msgid "About"
 msgstr "Om"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Enligt våra noteringar är faktura {number} fortfarande obetald."
+
+msgid "Account confirmation"
+msgstr "Kontobekräftelse"
 
 msgid "Actions"
 msgstr "Åtgärder"
@@ -113,7 +116,7 @@ msgid "Address"
 msgstr "Adress"
 
 msgid "Address (billing)"
-msgstr ""
+msgstr "Adress (faktura)"
 
 msgid "Address check"
 msgstr "Adresskontroll"
@@ -123,6 +126,9 @@ msgstr "Kontrollpanel"
 
 msgid "Advertising"
 msgstr "Annonsering"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "Efter registrering kan du lägga till mer information om dig själv, lätta på din delningspolicy och anpassa din upplevelse."
 
 msgid "Amount"
 msgstr "Summa"
@@ -140,22 +146,28 @@ msgid "Amount to pay: {costsum} {currency}"
 msgstr "Belopp att betala: {costsum} {currency}"
 
 msgid "Are you sure you want to delete this record?"
-msgstr ""
+msgstr "Är du säker på att du vill ta bort denna post?"
 
 msgid "Article"
 msgstr "Artikel"
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr "Åtminstone 3 tecken från a-z 0-9 -, måste börja med a-z"
+
+msgid "At least 8 characters including capitals and digits"
+msgstr "Åtminstone 8 tecken inklusive versaler och siffror"
 
 msgid "BIC/Swift"
 msgstr ""
 
 msgid "BIC/Swift address"
-msgstr ""
+msgstr "BIC/Swift-adress"
 
 msgid "Back"
 msgstr "Tillbaka"
 
 msgid "Bankgiro"
-msgstr ""
+msgstr "Bankgiro"
 
 msgid "Barred"
 msgstr "Spärrade"
@@ -181,8 +193,11 @@ msgstr "Kompispris"
 msgid "Buy {slug} a coffee"
 msgstr "Köp en kaffe till {slug}"
 
+msgid "By default no information about you is shared."
+msgstr "Standardinställningen är att ingen information om dig delas."
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
-msgstr ""
+msgstr "Anrop av hjälpfunktionen lägger till svg-koden i symboltabellen i början av dokumentet, plus en inline-referens till den."
 
 msgid "Cancel"
 msgstr "Avbryt"
@@ -202,8 +217,14 @@ msgstr "Ändra lösenord"
 msgid "Changed status."
 msgstr "Ändrade status."
 
+msgid "Choose a password"
+msgstr "Välj ett lösenord"
+
 msgid "Choose a password."
 msgstr "Välj ett lösenord"
+
+msgid "Choose a username"
+msgstr "Välj ett användarnamn"
 
 msgid "Choose a username."
 msgstr "Välj ett användarnamn"
@@ -215,7 +236,7 @@ msgid "City"
 msgstr "Stad"
 
 msgid "City (billing)"
-msgstr ""
+msgstr "Ort (faktura)"
 
 msgid "Click to pop login dialog."
 msgstr "Klicka för att öppna inloggningsfönstret."
@@ -250,6 +271,9 @@ msgstr "Företag"
 msgid "Confirm poll signature"
 msgstr "Bekräfta underskrift"
 
+msgid "Confirm your email address"
+msgstr ""
+
 msgid "Confirmation request sent"
 msgstr "Bekräftelse skickad"
 
@@ -278,7 +302,7 @@ msgid "Country"
 msgstr "Land"
 
 msgid "Country (billing)"
-msgstr ""
+msgstr "Land (faktura)"
 
 msgid "Country selector"
 msgstr "Landsväljare"
@@ -335,10 +359,10 @@ msgid "Customers"
 msgstr "Kunder"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid "DNS Admin"
-msgstr ""
+msgstr "DNS-admin"
 
 msgid "DNS Zones"
 msgstr "DNS-zoner"
@@ -370,6 +394,9 @@ msgstr "Datum"
 msgid "Debt"
 msgstr "Skuld"
 
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "Bestäm vilka delar av din personliga information du vill visa olika grupper."
+
 msgid "Delete"
 msgstr "Ta bort"
 
@@ -380,7 +407,7 @@ msgid "Destroyed"
 msgstr "Makulerade"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
-msgstr ""
+msgstr "Avgör vilken undermapp som svg-filer ska laddas från. Standard är Bootstrap-ikoner."
 
 msgid "Developer docs"
 msgstr "Utvecklardokument"
@@ -425,7 +452,7 @@ msgid "Email"
 msgstr "Epost"
 
 msgid "Email (billing)"
-msgstr ""
+msgstr "Epost (faktura)"
 
 msgid "Email not valid"
 msgstr "Ogiltig epost"
@@ -437,19 +464,19 @@ msgid "Email to a friend"
 msgstr "Maila en vän"
 
 msgid "Empty VAT"
-msgstr ""
+msgstr "Tomt momsnummer"
 
 msgid "Empty VAT number"
-msgstr ""
+msgstr "Tomt momsnummer"
 
 msgid "Empty address"
-msgstr ""
+msgstr "Tom adress"
 
 msgid "Empty billingaddress"
-msgstr ""
+msgstr "Tom faktureringsadress"
 
 msgid "Empty city"
-msgstr ""
+msgstr "Tom stad"
 
 msgid "Empty code"
 msgstr "Kod saknas"
@@ -458,16 +485,16 @@ msgid "Empty company name"
 msgstr "Företag saknas"
 
 msgid "Empty country"
-msgstr ""
+msgstr "Tomt land"
 
 msgid "Empty first name"
-msgstr ""
+msgstr "Tomt förnamn"
 
 msgid "Empty freetext"
-msgstr ""
+msgstr "Tom fritext"
 
 msgid "Empty last name"
-msgstr ""
+msgstr "Tomt efternamn"
 
 msgid "Empty message"
 msgstr "Tomt meddelande"
@@ -482,10 +509,10 @@ msgid "Empty postal code"
 msgstr "Postnummer saknas"
 
 msgid "Empty recommendation"
-msgstr ""
+msgstr "Tom rekommendation"
 
 msgid "Empty reference"
-msgstr ""
+msgstr "Tom referens"
 
 msgid "Empty subject"
 msgstr "Ämne saknas"
@@ -498,6 +525,12 @@ msgstr "Telefon saknas"
 
 msgid "English"
 msgstr "Engelska"
+
+msgid "Enter code"
+msgstr "Skriv in koden"
+
+msgid "Enter code from captcha image"
+msgstr "Skriv in koden från captcha-bild"
 
 msgid "Enter password"
 msgstr "Ange lösenord"
@@ -521,7 +554,7 @@ msgid "Enter zone name"
 msgstr "Ange namn på zon"
 
 msgid "Euro"
-msgstr ""
+msgstr "Euro"
 
 msgid "Examples"
 msgstr "Exempel"
@@ -596,7 +629,7 @@ msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr "Ge ett litet ekonomiskt bidrag till {slug} via buymeacoffee"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
-msgstr ""
+msgstr "Besök {confirmationlink} för att bekräfta din underskrift och hämta din bild."
 
 msgid "Gross"
 msgstr "Brutto"
@@ -619,6 +652,9 @@ msgstr ""
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
 
+msgid "If you did not register an account, please ignore this email."
+msgstr ""
+
 msgid "Impersonate"
 msgstr "Agera som"
 
@@ -627,6 +663,15 @@ msgstr "I din personliga meny hittar du bl.a. din panel."
 
 msgid "Including VAT"
 msgstr "Inklusive moms"
+
+msgid "Invalid email"
+msgstr "Ogiltig epostadress"
+
+msgid "Invalid password"
+msgstr "Ogiltigt lösenord"
+
+msgid "Invalid username"
+msgstr "Ogiltigt användarnamn"
 
 msgid "Invoice"
 msgstr "Faktura"
@@ -718,7 +763,7 @@ msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr ""
+msgstr "Avsätt ryska försvarsministern Sergei Shoigu!"
 
 msgid "Kunder"
 msgstr "Customers"
@@ -735,8 +780,14 @@ msgstr "Efternamn"
 msgid "Latest"
 msgstr "Senaste"
 
+msgid "Link to control panel"
+msgstr "Länk till kontrollpanelen"
+
 msgid "Link to personal data"
 msgstr "Länk till personlig data"
+
+msgid "Link to personal settings"
+msgstr "Länk till personliga inställningar"
 
 msgid "List zones"
 msgstr "Lista zoner"
@@ -805,7 +856,7 @@ msgid "Message sent"
 msgstr "Meddelandet skickades"
 
 msgid "Mild"
-msgstr ""
+msgstr "Mild"
 
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
@@ -862,7 +913,7 @@ msgid "No customer #{customerid}."
 msgstr "Ingen kund #{customerid}."
 
 msgid "No invoice template."
-msgstr ""
+msgstr "Ingen fakturamall."
 
 msgid "No invoicing"
 msgstr "Faktureras inte"
@@ -871,7 +922,7 @@ msgid "No selected customer."
 msgstr "Ingen kund vald."
 
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgid "Notes"
 msgstr "Anteckningar"
@@ -955,7 +1006,7 @@ msgid "Payments may take up to one week to become visible in the control panel."
 msgstr "Det kan ta upp till en vecka innan betalningar blir synliga i kontrollpanelen."
 
 msgid "Paypal"
-msgstr ""
+msgstr "Paypal"
 
 msgid "Personal"
 msgstr "Personlig"
@@ -965,6 +1016,9 @@ msgstr "Personlig meny"
 
 msgid "Personal panel"
 msgstr "Personlig panel"
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr ""
 
 msgid "Please log in to access that page"
 msgstr "Logga in för att komma åt sidan"
@@ -985,10 +1039,13 @@ msgid "Postal code"
 msgstr "Postnummer"
 
 msgid "Postal code (billing)"
-msgstr ""
+msgstr "Postnummer (faktura)"
 
 msgid "Postal mail"
 msgstr "Snigelpost"
+
+msgid "Press Register to regenerate"
+msgstr "Tryck Registrera för ny captcha"
 
 msgid "Price"
 msgstr "Pris"
@@ -1047,11 +1104,17 @@ msgstr "Registrera"
 msgid "Register account"
 msgstr "Registrera konto"
 
+msgid "Register to create and publish content."
+msgstr "Registrera för att skapa och publicera innehåll."
+
 msgid "Registered for F-tax"
 msgstr "Registrerad för F-skatt"
 
 msgid "Registered office"
 msgstr "Styrelsens säte"
+
+msgid "Registration is currently non-functional"
+msgstr "Registrering funkar inte än"
 
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "Kvar att betala: {amount} {currency}"
@@ -1069,7 +1132,7 @@ msgid "Resources"
 msgstr "Resurser"
 
 msgid "Roomservice"
-msgstr ""
+msgstr "Rumservice"
 
 msgid "Round off"
 msgstr "Avrundning"
@@ -1123,7 +1186,7 @@ msgid "Select country"
 msgstr "Välj land"
 
 msgid "Select country or click flags to see detail"
-msgstr ""
+msgstr "Välj land eller klicka på flaggor för detaljer"
 
 msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
@@ -1144,16 +1207,16 @@ msgid "Servers"
 msgstr "Servrar"
 
 msgid "Set the height attribute."
-msgstr ""
+msgstr "Sätt height-attributet."
 
 msgid "Set the id attribute."
-msgstr ""
+msgstr "Sätt id-attributet."
 
 msgid "Set the title attribute."
-msgstr ""
+msgstr "Sätt title-attributet."
 
 msgid "Set the width attribute."
-msgstr ""
+msgstr "Sätt width-attributet."
 
 msgid "Settings"
 msgstr "Inställningar"
@@ -1177,7 +1240,7 @@ msgid "Shown as"
 msgstr "Visas som"
 
 msgid "Sign poll!"
-msgstr ""
+msgstr "Skriv under upprop!"
 
 msgid "Site"
 msgstr "Webbplats"
@@ -1195,13 +1258,13 @@ msgid "Snapback scheduler"
 msgstr "Snapbackschemaläggning"
 
 msgid "Space separated list of extra classes to append the prefixed default classes."
-msgstr ""
+msgstr "Lista separerad med mellanslag av extra klasser som ska läggas till de fördefinierade klasserna."
 
 msgid "Special price"
 msgstr "Rabatt"
 
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 msgid "Stuff"
 msgstr "Blandat"
@@ -1216,7 +1279,7 @@ msgid "Summa"
 msgstr "Amount"
 
 msgid "Super panel"
-msgstr ""
+msgstr "Superpanel"
 
 msgid "Supplier invoices"
 msgstr "Lererantörsfakturor"
@@ -1240,13 +1303,13 @@ msgid "Telephone"
 msgstr "Telefon"
 
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 msgid "Test customer"
 msgstr "Testkund"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 msgid "Thank you for contacting us."
 msgstr "Tack för att du kontaktar oss."
@@ -1255,6 +1318,9 @@ msgid "The Samizdat project"
 msgstr "Projektet Samizdat"
 
 msgid "The default is used for the Bootstrap icons set."
+msgstr "Standardinställningen används för Bootstrap-ikoner."
+
+msgid "The form was submitted from {ip}"
 msgstr ""
 
 msgid "The invoice is also available at"
@@ -1279,7 +1345,10 @@ msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
-msgstr ""
+msgstr "Detta exempel visar resultatet av Samizdats SVG-mallhjälp."
+
+msgid "This field is required"
+msgstr "Detta fält är obligatoriskt"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Denna fil distribueras under samma licens som paketet {project}."
@@ -1298,6 +1367,9 @@ msgstr "Överföring"
 
 msgid "Type"
 msgstr "Typ"
+
+msgid "Unauthenticated"
+msgstr "Oautentiserad"
 
 msgid "Unpaid"
 msgstr "Obetalade"
@@ -1330,16 +1402,19 @@ msgid "Usage"
 msgstr "Förbrukning"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
-msgstr ""
+msgstr "Använd <code>flags</code> för flagg-ikoner eller <code>anysvg</code> för applikationens startsida."
 
 msgid "Use this if you don't need the prefixed default classes."
-msgstr ""
+msgstr "Använd detta om du inte behöver de fördefinierade klasserna."
 
 msgid "Used to make class names."
-msgstr ""
+msgstr "Används för att skapa klassnamn."
 
 msgid "User manual"
 msgstr "Användarmanual"
+
+msgid "User registration"
+msgstr ""
 
 msgid "Username"
 msgstr "Användarnamn"
@@ -1366,7 +1441,10 @@ msgid "VAT {rate}\\%"
 msgstr "Moms {rate}\\%"
 
 msgid "Value for the class attribute."
-msgstr ""
+msgstr "Värde för klass-attributet."
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "Vi kommer också lagra det för statistik och för att förhindra robotregistreringar."
 
 msgid "We will email a confirmation request."
 msgstr "Vi kommer maila en bekräftelselänk."
@@ -1380,6 +1458,9 @@ msgstr "Webbplatser"
 msgid "Websites"
 msgstr "Webbplatser"
 
+msgid "Whois data for {ip}"
+msgstr ""
+
 msgid "Write the invoice number as message when you pay."
 msgstr "Skriv fakturanumret som meddelande vid betalning."
 
@@ -1389,8 +1470,17 @@ msgstr "Felaktig captcha"
 msgid "Year"
 msgstr "År"
 
+msgid "You can also post in our discussions."
+msgstr "Du kan också posta i våra diskussioner."
+
+msgid "You have registered a new user account on {site}."
+msgstr ""
+
 msgid "You have {remaining} tries left."
 msgstr "Du har {remaining} försök kvar."
+
+msgid "You need to accept registration terms."
+msgstr "Du behöver acceptera registreringsvillkoren."
 
 msgid "You were logged in as {username}."
 msgstr "Du var inloggad som {username}."
@@ -1404,8 +1494,11 @@ msgstr "Er kontakt"
 msgid "Your email"
 msgstr "Din epostadress"
 
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "Ditt ip-nummer {ip} kommer synas i bekräftelseförfrågan."
+
 msgid "Your ip {ip} will be appended to the message."
-msgstr "Ditt ip-nummer kommer synas i meddelandet."
+msgstr "Ditt ip-nummer {ip} kommer synas i meddelandet."
 
 msgid "Your message appears below."
 msgstr "Ditt meddelande syns nedanför."
@@ -1488,11 +1581,14 @@ msgstr "{code}: Inloggning krävs"
 msgid "{code}: No authorization"
 msgstr "{code}: Behörighet saknas"
 
+msgid "{code}: Not in this universe"
+msgstr "{code}: Inte i detta universum"
+
 msgid "{cost}"
-msgstr ""
+msgstr "{cost}"
 
 msgid "{cost} {currency}"
-msgstr ""
+msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "{count} misslyckade inloggningsförsök har gjorts från {ip} senaste {minutes} minuterna."
@@ -1504,10 +1600,10 @@ msgid "{number} signatures since {date}"
 msgstr "{number} underskrifter sedan {date}"
 
 msgid "{server}, main firewall"
-msgstr ""
+msgstr "{server}, huvudbrandvägg"
 
 msgid "{server}, standby firewall"
-msgstr ""
+msgstr "{server}, standbybrandvägg"
 
 msgid "{sitename} in {country}"
 msgstr "{sitename} i {country}"

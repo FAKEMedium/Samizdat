@@ -49,4 +49,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   });
+
+
+  async function loadData() {
+    const url = form.action || "";
+    const request = {
+      method: 'GET',
+      headers: {Accept: 'application/json'}
+    };
+    try {
+      const response = await fetch(url, request);
+      if (response.error) {
+        alert(error);
+      } else {
+        const result = await response.json();
+        document.querySelector('#ip').innerHTML = `<%== __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %>`
+          .replace('REPLACEIP', result.ip);
+        document.querySelector('#name').value = result.name;
+        document.querySelector('#email').value = result.email;
+        document.querySelector('#subject').value = result.subject;
+        document.querySelector('#message').value = result.message;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  loadData();
 });

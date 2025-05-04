@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use MIME::Lite;
 use Mojo::JSON qw(decode_json encode_json j);
 use Mojo::Util qw(decode encode b64_encode trim);
+use Mojo::Home;
 use DateTime;
 use DateTime::TimeZone;
 use Date::Calc qw(Today Add_Delta_Days Date_to_Text Parse_Date Date_to_Days Delta_Days);
@@ -186,27 +187,35 @@ sub register ($self) {
     $formdata->{valid} = $valid;
     if ($v->has_error) {
       $formdata->{success} = 0;
-      return $self->render(json => $formdata);
-
     } else {
-      my $maildata = $self->render_mail(template => 'account/confirm', formdata => $formdata);
+      $formdata->{success} = 1;
+      $formdata->{whois} = qx!whois $formdata->{ip}!;
+      my $anyrepo = Mojo::Home->new();
+      my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
+      $svg = b64_encode($svg);
+      $svg =~ s/[\r\n\s]+//g;
+      chomp $svg;
+      $formdata->{svglogotype} = $svg;
+      my $maildatahtml = $self->render_mail(template => 'account/confirmhtml', layout => 'default', formdata => $formdata);
       my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
-      $formdata->{$maildata } = $maildata;
+      $formdata->{$maildatahtml} = $maildatahtml;
       my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
       my $mail = MIME::Lite->new(
         From         => $from,
         To           => $formdata->{email},
+        BCC         => $self->config->{mail}->{to},
         Subject      => $subject,
+        Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
         'X-Mailer'   => "Samizdat",
-        Data         => $maildata,
+        Type        => 'text/html',
+        Data         => $maildatahtml,
       );
       $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
-      $formdata->{success} = 1;
       $formdata->{submitted} = Encode::decode 'UTF-8', Encode::encode 'UTF-8',
         $self->render_to_string(template => 'account/submitted', layout => undef, formdata => $formdata);
-      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-      return $self->render(json => $formdata, status => 200);
     }
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
   }
 
   my $title = $self->app->__('Register account');
