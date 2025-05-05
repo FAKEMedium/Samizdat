@@ -183,37 +183,54 @@ sub register ($self) {
       $errors->{captcha} = '';
     }
 
-    $formdata->{errors} = $errors;
-    $formdata->{valid} = $valid;
     if ($v->has_error) {
       $formdata->{success} = 0;
     } else {
-      $formdata->{success} = 1;
-      $formdata->{whois} = qx!whois $formdata->{ip}!;
-      my $anyrepo = Mojo::Home->new();
-      my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
-      $svg = b64_encode($svg);
-      $svg =~ s/[\r\n\s]+//g;
-      chomp $svg;
-      $formdata->{svglogotype} = $svg;
-      my $maildatahtml = $self->render_mail(template => 'account/confirmhtml', layout => 'default', formdata => $formdata);
-      my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
-      $formdata->{$maildatahtml} = $maildatahtml;
-      my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
-      my $mail = MIME::Lite->new(
-        From         => $from,
-        To           => $formdata->{email},
-        BCC         => $self->config->{mail}->{to},
-        Subject      => $subject,
-        Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
-        'X-Mailer'   => "Samizdat",
-        Type        => 'text/html',
-        Data         => $maildatahtml,
-      );
-      $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
-      $formdata->{submitted} = Encode::decode 'UTF-8', Encode::encode 'UTF-8',
-        $self->render_to_string(template => 'account/submitted', layout => undef, formdata => $formdata);
+      my $userid = $self->app->account->addUser($formdata->{newusername}, {
+        username    => $formdata->{newusername},
+        password    => $formdata->{newpassword},
+        email       => $formdata->{email},
+      });
+      if ($userid) {
+        my $users = $self->app->account->getUsers({ 'users.userid' => $userid });
+        if ($users) {
+          $formdata->{useruuid} = ${$users}[0]->{useruuid};
+        }
+        $formdata->{success} = 1;
+        $formdata->{whois} = qx!whois $formdata->{ip}!;
+        my $anyrepo = Mojo::Home->new();
+        my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
+        $svg = b64_encode($svg);
+        $svg =~ s/[\r\n\s]+//g;
+        chomp $svg;
+        $formdata->{svglogotype} = $svg;
+        my $maildatahtml = $self->render_mail(template => 'account/confirmhtml', layout => 'default', formdata => $formdata);
+        my $maildatatxt = $self->render_mail(template => 'account/confirmtxt', formdata => $formdata);
+
+        my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
+        $formdata->{$maildatahtml} = $maildatahtml;
+        $formdata->{$maildatatxt} = $maildatatxt;
+        my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
+        my $mail = MIME::Lite->new(
+          From         => $from,
+          To           => $formdata->{email},
+          BCC          => $self->config->{mail}->{to},
+          Subject      => $subject,
+          Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
+          'X-Mailer'   => "Samizdat",
+          Type         => 'text/html',
+          Data         => $maildatahtml,
+        );
+        $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
+      } else {
+        $formdata->{success} = 0;
+        $formdata->{error} = { reason => 'username' };
+        $errors->{newusername} = $self->app->__('Database error');
+        $valid->{newusername} = "is-invalid";
+      }
     }
+    $formdata->{errors} = $errors;
+    $formdata->{valid} = $valid;
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => $formdata, status => 200);
   }
@@ -226,6 +243,21 @@ sub register ($self) {
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
+sub confirm ($self) {
+  my $useruuid = $self->stash('useruuid');
+  my $user = $self->app->account->getUsers({ useruuid => $useruuid });
+  if ($user) {
+    my $userid = $user->[0]->{userid};
+    my $username = $user->[0]->{username};
+    my $email = $user->[0]->{email};
+    my $ip = $self->_getip();
+    my $result = $self->app->account->confirm($userid, { email => $email, ip => $ip });
+    if ($result) {
+      return $self->redirect_to('/account/login');
+    }
+  }
+  return $self->render(template => 'account/confirm', status => 200);
+}
 
 sub password ($self) {
   if (lc $self->req->method eq 'get') {

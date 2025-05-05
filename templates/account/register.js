@@ -16,7 +16,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const result = await response.json();
 
     if (result.success) {
-      document.querySelector('#register').innerHTML = result.submitted;
+      document.querySelector('#register').innerHTML = `
+      <p><%== __x('A confirmation link was mailed to {email}.', email => 'REPLACEEMAIL') %></p>`
+      .replace('REPLACEEMAIL', result.email);
+
       // Scoll to start of content
       const el = document.querySelector('#startdoc');
       if (el) {

@@ -14,8 +14,9 @@ sub register ($self, $app, $conf) {
 
   $account->get('/register')->to(controller => 'Account', action => 'register')->name('account_register');
   $account->post('/register')->to(controller => 'Account', action => 'register');
-  $account->get('/email/:secret')->to(controller => 'Account', action => 'confirm_email')->name('account_confirm_email');
-  $account->put('/email/:secret')->to(controller => 'Account', action => 'confirm_email');
+  $account->get('/confirm/:useruuid')->to(controller => 'Account', action => 'confirm')->name('account_confirm');
+  $account->get('/email/:useruuid')->to(controller => 'Account', action => 'confirm_email')->name('account_confirm_email');
+  $account->put('/email/:useruuid')->to(controller => 'Account', action => 'confirm_email');
 
   $account->get('/settings')->to(controller => 'Account', action => 'settings')->name('account_settings');
   $account->put('/settings')->to(controller => 'Account', action => 'settings');

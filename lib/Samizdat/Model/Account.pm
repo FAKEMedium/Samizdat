@@ -6,6 +6,7 @@ use Crypt::Argon2 qw/argon2id_pass argon2id_verify/;
 use Crypt::PBKDF2;
 use Digest::SHA1 qw/sha1 sha1_hex/;
 use App::bmkpasswd -all;
+use UUID qw(uuid);
 use Data::Dumper;
 
 has 'config';
@@ -37,13 +38,33 @@ sub addUser ($self, $username, $attribs = undef) {
       userid => $userid,
     });
   } else {
-    $userid = $db->insert('account.users',
-      $attribs,
-      { returning => 'userid' }
-    )->hash->{userid};
-    $db->insert('account.password',
-      { userid => $userid }
-    );
+    my $password = delete $attribs->{password} // 'RANDOM' . uuid();
+    my $contactattribs = {
+      email => delete $attribs->{email},
+    };
+    my $contactid = $db->insert('account.contacts',
+      $contactattribs,
+      { returning => 'contactid' }
+    )->hash->{contactid};
+    if ($contactid) {
+      $attribs->{contactid} = $contactid;
+      $userid = $db->insert('account.users',
+        $attribs,
+        { returning => 'userid' }
+      )->hash->{userid};
+      if ($userid) {
+        my $passwordid = $db->insert('account.passwords',
+          { userid => $userid },
+          { returning => 'passwordid' }
+        )->hash->{passwordid};
+        if ($passwordid) {
+          $self->savePassword($userid, $password);
+        } else {
+          $db->delete('account.users', { userid => $userid });
+          $db->delete('account.contacts', { contactid => $contactid });
+        }
+      }
+    }
   }
   return $userid;
 }
@@ -59,7 +80,7 @@ sub getUsers ($self, $where){
     )->hashes->to_array;
   } else {
    $result = $db->select(['account.users', ['account.contacts', 'contacts.contactid' => 'users.contactid']],
-      undef,
+      'users.*, contacts.*',
       $where
     )->hashes->to_array;
   }
