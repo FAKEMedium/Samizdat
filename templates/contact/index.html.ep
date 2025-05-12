@@ -7,34 +7,41 @@
         <label for="name" class="form-label"><%= __('Your name') %></label>
         <div id="invalidname" class="invalid-feedback"><%= __('Empty name') %></div>
       </div>
+
       <div class="form-floating mb-3 col-md-6">
         <input type="email" class="form-control<%= $formdata->{valid}->{email} %>" id="email" name="email" value="<%== $formdata->{email} %>"
                placeholder="me@example.com" aria-describedby="email invalidemail">
         <label for="email" class="form-label"><%= __('Your email') %></label>
         <div id="invalidemail" class="invalid-feedback"><%= __('Enter valid email') %></div>
       </div>
+
       <div class="form-floating mb-3 col-md-12">
         <input type="text" class="form-control<%= $formdata->{valid}->{subject} %>" id="subject" name="subject" value="<%== $formdata->{subject} %>"
                placeholder="<%= __('Subject') %>" aria-describedby="invalidsubject">
         <label for="subject" class="form-label"><%= __('Subject') %></label>
         <div id="invalidsubject" class="invalid-feedback"><%= __('Empty subject') %></div>
       </div>
+
       <div class="form-floating mb-3 col-md-12 sgrow-wrap">
-        <textarea class="form-control<%= $formdata->{valid}->{message} %>"  id="message" name="message" style="height: 200px"
+        <textarea class="form-control<%= $formdata->{valid}->{message} %>" id="message" name="message" style="height: 200px"
                   placeholder="<%= __('Message') %>" aria-describedby="invalidmessage"><%== $formdata->{message} %></textarea>
         <label for="message"><%= __('Message') %></label>
         <div id="invalidmessage" class="invalid-feedback"><%= __('Empty message') %></div>
       </div>
+
       <div class="form-floating mb-3 col-md-12">
-        <img src="/captcha.png" class="img-fluid" alt="<%== __('Captcha image') %>">
+        <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>">
       </div>
+
       <div class="form-floating mb-3 col-md-12">
         <input type="text" class="form-control<%= $formdata->{valid}->{captcha} %>" id="captcha" name="captcha"
                placeholder="<%= __('Enter code') %>" aria-describedby="invalidcaptcha">
         <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
         <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
       </div>
+
       <div class="col-12 mb-3" id="ip"><%= __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %></div>
+
       <button type="submit" class="btn btn-primary">
         <span class="mx-2"><%== __('Send now') %></span>
         <%== icon 'send-fill', {} %>

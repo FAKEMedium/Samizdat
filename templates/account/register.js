@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', () => {
           errorDiv.textContent = error;
           errorDiv.classList.remove('d-none');
         }
+
+        // Replace the captcha image if code was wrong
+        if (field === 'captcha' && error !== '') {
+          const el = document.querySelector(`#captchaimage`);
+          if (el) {
+            el.src= `/captcha.png?${Math.random()}`;
+          }
+        }
       }
 
       for (const [field, value] of Object.entries(result.valid)) {

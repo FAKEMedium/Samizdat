@@ -3,6 +3,25 @@ package Samizdat::Controller::Web;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::JSON qw(encode_json);
 
+sub index ($self) {
+  my $docpath = $self->stash('docpath');
+  my $title = $self->app->__('Manage site');
+  my $web = {
+    docpath => $docpath,
+    title   => $title,
+    meta    => {
+      name => {
+        description => $self->app->__('Manage site'),
+        keywords    => ["manage","site"]
+      }
+    },
+  };
+  $web->{script} .= $self->render_to_string(template => 'web/index', format => 'js');
+  $web->{css} .= $self->render_to_string(template => 'web/tree', format => 'css');
+  $self->render( template => 'web/index', web => $web, title => $title );
+}
+
+
 sub geturi ($self) {
   my $docpath = $self->stash('docpath');
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);

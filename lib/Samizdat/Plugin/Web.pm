@@ -6,6 +6,14 @@ use Samizdat::Model::Web;
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
+
+  my $manager = $r->under($app->config->{managerurl})->under('web')->to(
+    controller => 'Account',
+    action     => 'authorize',
+    level      => 'superadmin',
+  );
+  $manager->get('/')->to(controller => 'Web', action => 'index', docpath => '/web/index.html')->name('web_index');
+
   $r->get('/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
   $r->get('/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
   $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');

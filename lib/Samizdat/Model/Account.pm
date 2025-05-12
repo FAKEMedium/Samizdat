@@ -39,9 +39,14 @@ sub addUser ($self, $username, $attribs = undef) {
     });
   } else {
     my $password = delete $attribs->{password} // 'RANDOM' . uuid();
+    my $email = delete $attribs->{email} // '';
     my $contactattribs = {
-      email => delete $attribs->{email},
+      countryid => undef,
+      languageid => undef,
+      stateid => undef,
+      email => '',
     };
+
     my $contactid = $db->insert('account.contacts',
       $contactattribs,
       { returning => 'contactid' }
@@ -70,6 +75,44 @@ sub addUser ($self, $username, $attribs = undef) {
 }
 
 
+sub addEmailConfirmationRequest ($self, $userid, $contactid, $newemail, $ip) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    return $db->insert('snapemailconfirmations', {
+      userid => $userid,
+      newemail  => $newemail
+    }, {returning => 'id'})->hash->{id};
+  } else {
+    return $db->insert('account.emailconfirmationrequests', {
+      userid    => $userid,
+      contactid => $contactid,
+      newemail     => $newemail,
+      ip        => $ip,
+    }, {returning => 'confirmationuuid'})->hash->{confirmationuuid};
+  }
+}
+
+
+sub getEmailConfirmationRequest ($self, $confirmationuuid) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    return $db->select('snapemailconfirmations', '*', { confirmationuuid => $confirmationuuid })->hash;
+  } else {
+    return $db->select('account.emailconfirmationrequests', '*', { confirmationuuid => $confirmationuuid })->hash;
+  }
+}
+
+
+sub deleteEmailConfirmationRequest ($self, $confirmationuuid) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    return $db->delete('snapemailconfirmations', { confirmationuuid => $confirmationuuid });
+  } else {
+    return $db->delete('account.emailconfirmationrequests', { confirmationuuid => $confirmationuuid });
+  }
+}
+
+
 sub getUsers ($self, $where){
   my $db = $self->database->db;
   my $result;
@@ -88,12 +131,29 @@ sub getUsers ($self, $where){
 }
 
 
-sub saveUser ($self, $userid, $attribs = undef) {
+sub updateContact ($self, $contactid, $attribs = undef) {
   my $db = $self->database->db;
   if ('mysql' eq $self->config->{databasetype}) {
     $db->update('snapusers',
       $attribs,
-      {userid => $userid},
+      {contactid => $contactid},
+      { returning => 'contactid' }
+    )->hash->{contactid};
+  } else {
+    $db->update('account.contacts',
+      $attribs,
+      { 'contacts.contactid' => $contactid },
+      { returning => 'contactid' }
+    )->hash->{contactid};
+  }
+}
+
+sub updateUser ($self, $userid, $attribs = undef) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $db->update('snapusers',
+      $attribs,
+      { id => $userid },
       { returning => 'id' }
     )->hash->{id};
   } else {
@@ -104,7 +164,6 @@ sub saveUser ($self, $userid, $attribs = undef) {
     )->hash->{userid};
   }
 }
-
 
 sub deleteUser ($self, $userid) {
   my $db = $self->database->db;

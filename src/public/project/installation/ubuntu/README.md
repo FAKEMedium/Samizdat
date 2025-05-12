@@ -15,6 +15,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall EV
   * sudo cpanm --reinstall Mojolicious
   * sudo cpanm --reinstall Data::UUID
+  * sudo cpanm --reinstall DateTime
   * sudo cpanm --reinstall WWW::YouTube::Download
   * sudo cpanm --reinstall Hash::Merge
   * sudo cpanm --reinstall Text::MultiMarkdown
@@ -32,6 +33,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall Test::Harness
   * sudo cpanm --reinstall Mojo::Redis
   * sudo cpanm --reinstall Mojo::Pg
+  * sudo cpanm --reinstall Business::Tax::VAT::Validation
   * sudo cpanm --reinstall Future::AsyncAwait
   * sudo cpanm --reinstall Bytes::Random::Secure::Tiny
   * sudo cpanm --reinstall Crypt::Argon2
@@ -40,6 +42,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall App::bmkpasswd
   * sudo cpanm --reinstall Mojolicious::Plugin::Captcha
   * sudo cpanm --reinstall Mojolicious::Plugin::Mail
+  * sudo cpanm --reinstall Mojolicious::Plugin::Util::RandomString
 * Clone the project into a suitable directory, we use /sites
   * sudo mkdir /sites
   * cd /sites

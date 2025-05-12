@@ -189,12 +189,12 @@ sub register ($self) {
       my $userid = $self->app->account->addUser($formdata->{newusername}, {
         username    => $formdata->{newusername},
         password    => $formdata->{newpassword},
-        email       => $formdata->{email},
       });
       if ($userid) {
         my $users = $self->app->account->getUsers({ 'users.userid' => $userid });
         if ($users) {
-          $formdata->{useruuid} = ${$users}[0]->{useruuid};
+          my $contactid = ${$users}[0]->{contactid};
+          $formdata->{confirmtionuuid} = $self->app->account->addEmailConfirmationRequest($userid, $contactid, $formdata->{email}, $formdata->{ip});
         }
         $formdata->{success} = 1;
         $formdata->{whois} = qx!whois $formdata->{ip}!;
@@ -243,21 +243,50 @@ sub register ($self) {
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
+
 sub confirm ($self) {
-  my $useruuid = $self->stash('useruuid');
-  my $user = $self->app->account->getUsers({ useruuid => $useruuid });
-  if ($user) {
-    my $userid = $user->[0]->{userid};
-    my $username = $user->[0]->{username};
-    my $email = $user->[0]->{email};
-    my $ip = $self->_getip();
-    my $result = $self->app->account->confirm($userid, { email => $email, ip => $ip });
-    if ($result) {
-      return $self->redirect_to('/account/login');
+  my $confirmationuuid = $self->stash('confirmationuuid');
+  my $formdata = {};
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Email confirmation');
+    my $web = { title => $title, docpath => '/account/confirm/index.html' };
+    $web->{script} .= $self->render_to_string(template => 'account/confirm', format => 'js');
+    $self->session(confirmationuuid => $confirmationuuid);
+    return $self->render(web => $web, title => $title, template => 'account/confirm', formdata => $formdata, headlinebuttons => undef);
+  } else {
+    my $method = uc $self->req->method;
+    if ($method eq "PUT") {
+      my $emailconfirmationrequest = $self->app->account->getEmailConfirmationRequest($confirmationuuid);
+      if ($emailconfirmationrequest) {
+        my $userid = $emailconfirmationrequest->{userid};
+        my $contactid = $emailconfirmationrequest->{contactid};
+        my $email = $emailconfirmationrequest->{email};
+        if ($self->app->account->updateContact($contactid, { email => $email })) {
+          $self->app->account->deleteEmailConfirmationRequest($confirmationuuid);
+          $self->app->account->updateUser($userid, { activated => 1, modified => 'NOW()' });
+          $formdata->{success} = 1;
+          $formdata->{message} = sprintf($self->app->__('Email %s verified'), $email);
+        } else {
+          $formdata->{success} = 0;
+          $formdata->{error} = { reason => 'database' };
+          $formdata->{confirmationuuid} = $confirmationuuid;
+        }
+      } else {
+        $formdata->{success} = 0;
+        $formdata->{error} = { reason => 'uuid' };
+        $formdata->{confirmationuuid} = $confirmationuuid;
+      }
+    } else {
+      $formdata->{success} = 0;
+      $formdata->{error} = { reason => 'uuid' };
+      $formdata->{confirmationuuid} = $confirmationuuid;
     }
+
+    return $self->render(json => $formdata);
   }
-  return $self->render(template => 'account/confirm', status => 200);
 }
+
 
 sub password ($self) {
   if (lc $self->req->method eq 'get') {

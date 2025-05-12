@@ -14,14 +14,10 @@ sub register ($self, $app, $conf) {
 
   $account->get('/register')->to(controller => 'Account', action => 'register')->name('account_register');
   $account->post('/register')->to(controller => 'Account', action => 'register');
-  $account->get('/confirm/:useruuid')->to(controller => 'Account', action => 'confirm')->name('account_confirm');
-  $account->get('/email/:useruuid')->to(controller => 'Account', action => 'confirm_email')->name('account_confirm_email');
-  $account->put('/email/:useruuid')->to(controller => 'Account', action => 'confirm_email');
+  $account->any([qw( GET PUT )] => '/confirm/:confirmationuuid')->to(controller => 'Account', action => 'confirm')->name('account_confirm');
 
-  $account->get('/settings')->to(controller => 'Account', action => 'settings')->name('account_settings');
-  $account->put('/settings')->to(controller => 'Account', action => 'settings');
-  $account->get('/password')->to(controller => 'Account', action => 'password')->name('account_password');
-  $account->put('/password')->to(controller => 'Account', action => 'password');
+  $account->any([qw( GET PUT )] => '/settings')->to(controller => 'Account', action => 'settings')->name('account_settings');
+  $account->any([qw( GET PUT )] => '/password')->to(controller => 'Account', action => 'password')->name('account_password');
 
   $account->get('/login')->to(controller => 'Account', action => 'login')->name('account_login');
   $account->post('/login')->to(controller => 'Account', action => 'login');
