@@ -8,7 +8,7 @@ import './tablesorter.js';
 // import './sendform.js';
 import './local.js';
 import './serviceworker.js';
-import { setlanguage } from "./language.js";
+import './language.js';
 import 'sprintf-js';
 import './shortbytes.js';
 

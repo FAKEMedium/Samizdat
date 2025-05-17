@@ -70,6 +70,9 @@ msgstr ""
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr ""
 
+msgid "A confirmation link was mailed to {email}."
+msgstr ""
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr ""
 
@@ -128,6 +131,9 @@ msgid "Advertising"
 msgstr ""
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr ""
+
+msgid "Allow cookies to paste confirmation code from email"
 msgstr ""
 
 msgid "Amount"
@@ -280,10 +286,16 @@ msgstr ""
 msgid "Company"
 msgstr ""
 
+msgid "Confirm"
+msgstr ""
+
 msgid "Confirm poll signature"
 msgstr ""
 
 msgid "Confirm your email address"
+msgstr ""
+
+msgid "Confirmation code"
 msgstr ""
 
 msgid "Confirmation request sent"
@@ -311,6 +323,9 @@ msgid "Contributing"
 msgstr ""
 
 msgid "Corporate identity number"
+msgstr ""
+
+msgid "Couldn't use code for verification."
 msgstr ""
 
 msgid "Country"
@@ -403,6 +418,9 @@ msgstr ""
 msgid "Database"
 msgstr ""
 
+msgid "Database error"
+msgstr ""
+
 msgid "Databases"
 msgstr ""
 
@@ -484,7 +502,13 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+msgid "Email %s verified"
+msgstr ""
+
 msgid "Email (billing)"
+msgstr ""
+
+msgid "Email confirmation"
 msgstr ""
 
 msgid "Email not valid"
@@ -892,6 +916,9 @@ msgid "Mail domains"
 msgstr ""
 
 msgid "Make invoice"
+msgstr ""
+
+msgid "Manage site"
 msgstr ""
 
 msgid "Manuals"
@@ -1320,6 +1347,9 @@ msgstr ""
 msgid "Site"
 msgstr ""
 
+msgid "Site content"
+msgstr ""
+
 msgid "Skip menu"
 msgstr ""
 
@@ -1699,6 +1729,9 @@ msgid "{server}, main firewall"
 msgstr ""
 
 msgid "{server}, standby firewall"
+msgstr ""
+
+msgid "{sitename} by country"
 msgstr ""
 
 msgid "{sitename} in {country}"

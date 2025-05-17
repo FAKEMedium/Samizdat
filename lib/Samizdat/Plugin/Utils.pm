@@ -42,11 +42,19 @@ sub register ($self, $app, $conf) {
     }
   );
 
+  # Helper to check if a language is RTL
+  $app->helper(
+    is_rtl => sub ($c, $lang = undef) {
+      $lang = $c->language unless defined $lang;
+      return $lang =~ /^(ar|he|fa)$/ ? 1 : 0;
+    }
+  );
+
   # Inline logotype (svg)
   $app->helper(
     languageselector => sub ($c) {
       my $out = '';
-
+      
     }
   );
 

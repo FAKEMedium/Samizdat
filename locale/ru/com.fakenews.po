@@ -1,6 +1,6 @@
 # FAKE Media - 
 # Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
-# This file is distributed under the same license as the  package.
+# This file is distributed under the same license as the Samizdat package.
 # Webmaster <webmaster@fakenews.com>, 2022.
 #
 msgid ""
@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: Samizdat\n"
 "Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
 "Last-Translator: Webmaster <webmaster@fakenews.com>\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2025-05-17\n"
+"POT-Creation-Date: 2022-01-01\n"
 "Language-Team: Webmaster <webmaster@fakenews.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,1676 +18,1730 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
-msgstr ""
+msgstr "№{number}: {firstname} {lastname}, {city}, {country}"
+
+msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2022 &mdash; пожалуйста, поделитесь ссылкой и поставьте звезду на {sitename}!"
+
+msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2023 &mdash; пожалуйста, поделитесь ссылкой и поставьте звезду на {sitename}!"
 
 msgid "&copy;{year}&nbsp;{author}"
-msgstr ""
+msgstr "&copy;{year}&nbsp;{author}"
 
 msgid "1 database"
 msgid_plural "{number} databases"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 база данных"
+msgstr[1] "{number} базы данных"
+msgstr[2] "{number} баз данных"
 
 msgid "1 dns domain"
 msgid_plural "{number} dns domains"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 DNS-домен"
+msgstr[1] "{number} DNS-домена"
+msgstr[2] "{number} DNS-доменов"
 
 msgid "1 domain"
 msgid_plural "{number} domains"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 домен"
+msgstr[1] "{number} домена"
+msgstr[2] "{number} доменов"
 
 msgid "1 invoice"
 msgid_plural "{number} invoices"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 счет"
+msgstr[1] "{number} счета"
+msgstr[2] "{number} счетов"
 
 msgid "1 invoice item"
 msgid_plural "{number} invoice items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 позиция счета"
+msgstr[1] "{number} позиции счета"
+msgstr[2] "{number} позиций счета"
 
 msgid "1 mail domain"
 msgid_plural "{number} mail domains"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 почтовый домен"
+msgstr[1] "{number} почтовых домена"
+msgstr[2] "{number} почтовых доменов"
 
 msgid "1 site"
 msgid_plural "{number} sites"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "1 сайт"
+msgstr[1] "{number} сайта"
+msgstr[2] "{number} сайтов"
 
 msgid "404: Missing document"
-msgstr ""
+msgstr "404: Страница не найдена"
 
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
 msgstr ""
 
 msgid "A {rate} interest will be charged on overdue payments"
-msgstr ""
+msgstr "За просрочку платежа взимается комиссия и {rate} процентов"
 
 msgid "API docs"
-msgstr ""
+msgstr "Документация API"
 
 msgid "About"
-msgstr ""
+msgstr "О нас"
 
 msgid "According to our notes invoice {number} remains unpaid."
-msgstr ""
+msgstr "По нашим данным, счет {number} до сих пор не оплачен."
 
 msgid "Account confirmation"
-msgstr ""
+msgstr "Подтверждение аккаунта"
 
 msgid "Actions"
-msgstr ""
+msgstr "Действия"
 
 msgid "Add customer"
-msgstr ""
+msgstr "Новый клиент"
 
 msgid "Add database"
-msgstr ""
+msgstr "Новая база данных"
 
 msgid "Add domain"
-msgstr ""
+msgstr "Новый домен"
 
 msgid "Add mail domain"
-msgstr ""
+msgstr "Новый почтовый домен"
 
 msgid "Add product"
-msgstr ""
+msgstr "Новый продукт"
 
 msgid "Add subscription"
-msgstr ""
+msgstr "Новая подписка"
 
 msgid "Add voucher"
-msgstr ""
+msgstr "Новый ваучер"
 
 msgid "Add website"
-msgstr ""
+msgstr "Новый сайт"
 
 msgid "Address"
-msgstr ""
+msgstr "Адрес"
 
 msgid "Address (billing)"
-msgstr ""
+msgstr "Адрес (для счетов)"
 
 msgid "Address check"
-msgstr ""
+msgstr "Проверка адреса"
 
 msgid "Admininistration panel"
-msgstr ""
+msgstr "Панель управления"
 
 msgid "Advertising"
-msgstr ""
+msgstr "Реклама"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "После регистрации вы сможете добавить больше данных о себе, изменить настройки доступа и настроить свой опыт."
+
+msgid "Allow cookies to paste confirmation code from email"
 msgstr ""
 
 msgid "Amount"
-msgstr ""
+msgstr "Сумма"
 
 msgid "Amount incl. VAT"
-msgstr ""
+msgstr "Сумма с НДС"
 
 msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr ""
+msgstr "Сумма к оплате с НДС: {rounded} {currency}"
 
 msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr ""
+msgstr "Сумма к оплате, включая {percent} НДС: {costsum} {currency}"
 
 msgid "Amount to pay: {costsum} {currency}"
-msgstr ""
+msgstr "Сумма к оплате: {costsum} {currency}"
 
 msgid "Are you sure you want to delete this record?"
-msgstr ""
+msgstr "Вы уверены, что хотите удалить эту запись?"
 
 msgid "Article"
-msgstr ""
+msgstr "Статья"
 
 msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
-msgstr ""
+msgstr "Минимум 3 символа из a-z 0-9 -, должно начинаться с a-z"
 
 msgid "At least 8 characters including capitals and digits"
-msgstr ""
+msgstr "Минимум 8 символов, включая заглавные буквы и цифры"
 
 msgid "BIC/Swift"
-msgstr ""
+msgstr "БИК/Swift"
 
 msgid "BIC/Swift address"
-msgstr ""
+msgstr "Адрес БИК/Swift"
 
 msgid "BIC/Swift address:"
-msgstr ""
+msgstr "Адрес БИК/Swift:"
 
 msgid "Back"
-msgstr ""
+msgstr "Назад"
 
 msgid "Bankgiro"
-msgstr ""
+msgstr "Bankgiro"
 
 msgid "Bankgiro:"
-msgstr ""
+msgstr "Bankgiro:"
 
 msgid "Barred"
-msgstr ""
+msgstr "Заблокировано"
 
 msgid "Billing"
-msgstr ""
+msgstr "Финансы"
 
 msgid "Blocked"
-msgstr ""
+msgstr "Заблокирован"
 
 msgid "Blocked ip number"
-msgstr ""
+msgstr "Заблокированный IP-адрес"
 
 msgid "Bootstrap icons"
-msgstr ""
+msgstr "Иконки Bootstrap"
 
 msgid "Bootstrap icons helper"
-msgstr ""
+msgstr "Помощник иконок Bootstrap"
 
 msgid "Buddy price"
-msgstr ""
+msgstr "Цена для друзей"
 
 msgid "Buy {slug} a coffee"
-msgstr ""
+msgstr "Купить {slug} кофе"
 
 msgid "Buy {user} a coffee"
-msgstr ""
+msgstr "Купить {user} кофе"
 
 msgid "By default no information about you is shared."
-msgstr ""
+msgstr "По умолчанию информация о вас не передается третьим лицам."
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
-msgstr ""
+msgstr "Вызов помощника добавляет SVG-код в таблицу символов в начале документа, а также встроенную ссылку на него."
 
 msgid "Cancel"
-msgstr ""
+msgstr "Отмена"
 
 msgid "Captcha code from image"
-msgstr ""
+msgstr "Код с картинки капчи"
 
 msgid "Captcha image"
-msgstr ""
+msgstr "Изображение капчи"
 
 msgid "Captcha was wrong"
-msgstr ""
+msgstr "Неверная капча"
 
 msgid "Change password"
-msgstr ""
+msgstr "Изменить пароль"
 
 msgid "Changed status."
-msgstr ""
+msgstr "Статус изменен."
 
 msgid "Choose a password"
-msgstr ""
+msgstr "Выберите пароль"
 
 msgid "Choose a password."
-msgstr ""
+msgstr "Выберите пароль."
 
 msgid "Choose a username"
-msgstr ""
+msgstr "Выберите имя пользователя"
 
 msgid "Choose a username."
-msgstr ""
+msgstr "Выберите имя пользователя."
 
 msgid "Choose language"
-msgstr ""
+msgstr "Выберите язык"
 
 msgid "City"
-msgstr ""
+msgstr "Город"
 
 msgid "City (billing)"
-msgstr ""
+msgstr "Город (для счетов)"
 
 msgid "Click to pop login dialog."
-msgstr ""
+msgstr "Нажмите, чтобы открыть окно входа."
 
 msgid "Click to pop payment dialog."
-msgstr ""
+msgstr "Нажмите, чтобы открыть окно оплаты."
 
 msgid "Click to pop reminder dialog."
-msgstr ""
+msgstr "Нажмите, чтобы открыть окно напоминания."
 
 msgid "Click to regenerate PDF."
-msgstr ""
+msgstr "Нажмите, чтобы пересоздать PDF."
 
 msgid "Click to search matching records."
-msgstr ""
+msgstr "Нажмите для поиска соответствующих записей."
 
 msgid "Click to search matching zones."
-msgstr ""
+msgstr "Нажмите для поиска соответствующих зон."
 
 msgid "Click to send a credit invoice."
-msgstr ""
+msgstr "Нажмите, чтобы отправить кредитный счет."
 
 msgid "Click to send again."
-msgstr ""
+msgstr "Нажмите, чтобы отправить снова."
 
 msgid "Click to send agin."
-msgstr ""
+msgstr "Нажмите, чтобы отправить снова."
 
 msgid "Close"
-msgstr ""
+msgstr "Закрыть"
 
 msgid "Company"
+msgstr "Компания"
+
+msgid "Confirm"
 msgstr ""
 
 msgid "Confirm poll signature"
-msgstr ""
+msgstr "Подтвердить подпись"
 
 msgid "Confirm your email address"
+msgstr "Подтвердите ваш адрес электронной почты"
+
+msgid "Confirmation code"
 msgstr ""
 
 msgid "Confirmation request sent"
-msgstr ""
+msgstr "Запрос подтверждения отправлен"
 
 msgid "Contact"
-msgstr ""
+msgstr "Контакт"
 
 msgid "Contact {sender} if you have questions."
-msgstr ""
+msgstr "Свяжитесь с {sender}, если у вас есть вопросы."
 
 msgid "Content"
-msgstr ""
+msgstr "Содержание"
 
 msgid "Continue"
-msgstr ""
+msgstr "Продолжить"
 
 msgid "Continues on next page..."
-msgstr ""
+msgstr "Продолжение на следующей странице..."
 
 msgid "Contribute"
-msgstr ""
+msgstr "Внести вклад"
 
 msgid "Corporate identity number"
+msgstr "ИНН"
+
+msgid "Couldn't use code for verification."
 msgstr ""
 
 msgid "Country"
-msgstr ""
+msgstr "Страна"
 
 msgid "Country (billing)"
-msgstr ""
+msgstr "Страна (для счетов)"
 
 msgid "Country selector"
-msgstr ""
+msgstr "Выбор страны"
 
 msgid "Create contact"
-msgstr ""
+msgstr "Создать контакт"
 
 msgid "Create customer"
-msgstr ""
+msgstr "Создать клиента"
 
 msgid "Create new record"
-msgstr ""
+msgstr "Создать новую запись"
 
 msgid "Created {created} by {creator}"
-msgstr ""
+msgstr "Создано {created} пользователем {creator}"
 
 msgid "Credit invoice"
-msgstr ""
+msgstr "Кредитный счет"
 
 msgid "Credit invoice {fakturanummer}"
-msgstr ""
+msgstr "Кредитный счет {fakturanummer}"
 
 msgid "Credit invoice {number}"
-msgstr ""
+msgstr "Кредитный счет {number}"
 
 msgid "Credit trustability"
-msgstr ""
+msgstr "Кредитоспособность"
 
 msgid "Creditability"
-msgstr ""
+msgstr "Кредитоспособность"
 
 msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr ""
+msgstr "Кредитованная сумма с НДС: {rounded} {currency}"
 
 msgid "Credited invoice"
-msgstr ""
+msgstr "Кредитованный счет"
 
 msgid "Credited invoice: {number}"
-msgstr ""
+msgstr "Кредитованный счет: {number}"
 
 msgid "Customer"
-msgstr ""
+msgstr "Клиент"
 
 msgid "Customer #{customerid}"
-msgstr ""
+msgstr "Клиент #{customerid}"
 
 msgid "Customer Id"
-msgstr ""
+msgstr "Номер клиента"
 
 msgid "Customer Id:"
-msgstr ""
+msgstr "Номер клиента:"
 
 msgid "Customer newsletter"
-msgstr ""
+msgstr "Рассылка для клиентов"
 
 msgid "Customers"
-msgstr ""
+msgstr "Клиенты"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid "DNS Admin"
-msgstr ""
+msgstr "DNS-админ"
 
 msgid "DNS Zones"
-msgstr ""
+msgstr "DNS-зоны"
 
 msgid "DNS domains"
-msgstr ""
+msgstr "DNS-домены"
 
 msgid "DNS management"
-msgstr ""
+msgstr "Управление DNS"
 
 msgid "DNS zone"
-msgstr ""
+msgstr "DNS-зона"
 
 msgid "DNS zones"
-msgstr ""
+msgstr "DNS-зоны"
 
 msgid "Data usage: {usage}"
-msgstr ""
+msgstr "Использование данных: {usage}"
 
 msgid "Database"
+msgstr "База данных"
+
+msgid "Database error"
 msgstr ""
 
 msgid "Databases"
-msgstr ""
+msgstr "Базы данных"
 
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 msgid "Date:"
-msgstr ""
+msgstr "Дата:"
 
 msgid "Debt"
-msgstr ""
+msgstr "Долг"
 
 msgid "Decide which parts of your personal data you want to show different groups."
-msgstr ""
+msgstr "Выберите, какие части ваших личных данных вы хотите показывать разным группам."
 
 msgid "Delete"
-msgstr ""
+msgstr "Удалить"
 
 msgid "Description"
-msgstr ""
+msgstr "Описание"
 
 msgid "Destroyed"
-msgstr ""
+msgstr "Уничтожено"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
-msgstr ""
+msgstr "Определяет, из какой подпапки загружать SVG-файлы. По умолчанию используются иконки Bootstrap."
 
 msgid "Developer docs"
-msgstr ""
+msgstr "Документация для разработчиков"
 
 msgid "Development"
-msgstr ""
+msgstr "Разработка"
 
 msgid "Do you want to credit the invoice?"
-msgstr ""
+msgstr "Вы хотите выдать кредит по счету?"
 
 msgid "Domain"
-msgstr ""
+msgstr "Домен"
 
 msgid "Domain registration"
-msgstr ""
+msgstr "Регистрация домена"
 
 msgid "Domain registtration"
-msgstr ""
+msgstr "Регистрация домена"
 
 msgid "Domains"
-msgstr ""
+msgstr "Домены"
 
 msgid "DomÃ¤nregistrering"
-msgstr ""
+msgstr "Регистрация домена"
 
 msgid "Domänregistrering"
-msgstr ""
+msgstr "Регистрация домена"
 
 msgid "Due date"
-msgstr ""
+msgstr "Срок оплаты"
 
 msgid "Due to"
-msgstr ""
+msgstr "Срок оплаты"
 
 msgid "Due to:"
-msgstr ""
+msgstr "Срок оплаты:"
 
 msgid "EPP"
-msgstr ""
+msgstr "EPP"
 
 msgid "Economy"
-msgstr ""
+msgstr "Финансы"
 
 msgid "Edit"
-msgstr ""
+msgstr "Редактировать"
 
 msgid "Edit customer {customerid}"
-msgstr ""
+msgstr "Редактировать клиента {customerid}"
 
 msgid "Edit zone"
-msgstr ""
+msgstr "Редактировать зону"
 
 msgid "Ekonomi"
-msgstr ""
+msgstr "Финансы"
 
 msgid "Email"
+msgstr "Эл. почта"
+
+msgid "Email %s verified"
 msgstr ""
 
 msgid "Email (billing)"
+msgstr "Эл. почта (для счетов)"
+
+msgid "Email confirmation"
 msgstr ""
 
 msgid "Email not valid"
-msgstr ""
+msgstr "Недействительный адрес эл. почты"
 
 msgid "Email someone about {what}"
-msgstr ""
+msgstr "Отправить эл. письмо о {what}"
+
+msgid "Email to a friend"
+msgstr "Отправить другу"
 
 msgid "Empty VAT"
-msgstr ""
+msgstr "Пустой номер НДС"
 
 msgid "Empty VAT number"
-msgstr ""
+msgstr "Пустой номер НДС"
 
 msgid "Empty address"
-msgstr ""
+msgstr "Пустой адрес"
 
 msgid "Empty billingaddress"
-msgstr ""
+msgstr "Пустой адрес для счетов"
 
 msgid "Empty city"
-msgstr ""
+msgstr "Пустой город"
 
 msgid "Empty code"
-msgstr ""
+msgstr "Пустой код"
 
 msgid "Empty company name"
-msgstr ""
+msgstr "Пустое название компании"
 
 msgid "Empty country"
-msgstr ""
+msgstr "Пустая страна"
 
 msgid "Empty first name"
-msgstr ""
+msgstr "Пустое имя"
 
 msgid "Empty freetext"
-msgstr ""
+msgstr "Пустой свободный текст"
 
 msgid "Empty last name"
-msgstr ""
+msgstr "Пустая фамилия"
 
 msgid "Empty message"
-msgstr ""
+msgstr "Пустое сообщение"
 
 msgid "Empty mobile"
-msgstr ""
+msgstr "Пустой мобильный телефон"
 
 msgid "Empty name"
-msgstr ""
+msgstr "Пустое имя"
 
 msgid "Empty postal code"
-msgstr ""
+msgstr "Пустой почтовый индекс"
 
 msgid "Empty recommendation"
-msgstr ""
+msgstr "Пустая рекомендация"
 
 msgid "Empty reference"
-msgstr ""
+msgstr "Пустая ссылка"
 
 msgid "Empty subject"
-msgstr ""
+msgstr "Пустая тема"
 
 msgid "Empty surname"
-msgstr ""
+msgstr "Пустая фамилия"
 
 msgid "Empty telephone"
-msgstr ""
+msgstr "Пустой телефон"
 
 msgid "English"
-msgstr ""
+msgstr "Английский"
 
 msgid "Enter code"
-msgstr ""
+msgstr "Введите код"
 
 msgid "Enter code from captcha image"
-msgstr ""
+msgstr "Введите код с изображения капчи"
 
 msgid "Enter password"
-msgstr ""
+msgstr "Введите пароль"
 
 msgid "Enter record name"
-msgstr ""
+msgstr "Введите имя записи"
 
 msgid "Enter username"
-msgstr ""
+msgstr "Введите имя пользователя"
 
 msgid "Enter username and password"
-msgstr ""
+msgstr "Введите имя пользователя и пароль"
 
 msgid "Enter valid email"
-msgstr ""
+msgstr "Введите действительный адрес эл. почты"
 
 msgid "Enter your email"
-msgstr ""
+msgstr "Введите ваш адрес эл. почты"
 
 msgid "Enter zone name"
-msgstr ""
+msgstr "Введите имя зоны"
 
 msgid "Euro"
-msgstr ""
+msgstr "Евро"
 
 msgid "Examples"
-msgstr ""
+msgstr "Примеры"
 
 msgid "Expand menu"
-msgstr ""
+msgstr "Развернуть меню"
 
 msgid "Expand personal menu."
-msgstr ""
+msgstr "Развернуть личное меню"
 
 msgid "Expires"
-msgstr ""
+msgstr "Истекает"
 
 msgid "Expiring domains"
-msgstr ""
+msgstr "Истекающие домены"
 
 msgid "FAKE Media"
-msgstr ""
+msgstr "FAKE Media"
 
 msgid "FAKE News by country"
-msgstr ""
+msgstr "FAKE News по странам"
 
 msgid "Failed login from {ip}"
-msgstr ""
+msgstr "Неудачная попытка входа с {ip}"
 
 msgid "Failed to create record"
-msgstr ""
+msgstr "Не удалось создать запись"
 
 msgid "Failed to create zone"
-msgstr ""
+msgstr "Не удалось создать зону"
 
 msgid "Failed to delete record"
-msgstr ""
+msgstr "Не удалось удалить запись"
 
 msgid "Failed to delete zone"
-msgstr ""
+msgstr "Не удалось удалить зону"
 
 msgid "Failed to update record"
-msgstr ""
+msgstr "Не удалось обновить запись"
 
 msgid "Failed to update zone"
-msgstr ""
+msgstr "Не удалось обновить зону"
 
 msgid "File archive"
-msgstr ""
+msgstr "Архив файлов"
 
 msgid "Fill the form correctly!"
-msgstr ""
+msgstr "Заполните форму правильно!"
 
 msgid "Find the credit invoice attached as PDF."
-msgstr ""
+msgstr "Кредитный счет прилагается в формате PDF."
 
 msgid "Find the invoice attached as PDF."
-msgstr ""
+msgstr "Счет прилагается в формате PDF."
 
 msgid "Find your invoice attached as PDF."
-msgstr ""
+msgstr "Ваш счет прилагается в формате PDF."
 
 msgid "First name"
-msgstr ""
+msgstr "Имя"
 
 msgid "Fortnox panel"
-msgstr ""
+msgstr "Панель Fortnox"
 
 msgid "From"
-msgstr ""
+msgstr "От"
 
 msgid "Full"
-msgstr ""
+msgstr "Полный"
 
 msgid "Give small financial support to {slug} at buymeacoffee"
-msgstr ""
+msgstr "Оказать небольшую финансовую поддержку {slug} на buymeacoffee"
 
 msgid "Give small financial support to {user} at buymeacoffee"
-msgstr ""
+msgstr "Оказать небольшую финансовую поддержку {user} на buymeacoffee"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
-msgstr ""
+msgstr "Перейдите по ссылке {confirmationlink}, чтобы подтвердить подпись и получить ваше изображение."
 
 msgid "Gross"
-msgstr ""
+msgstr "Брутто"
 
 msgid "HTML result"
-msgstr ""
+msgstr "Результат HTML"
 
 msgid "Halfyear"
-msgstr ""
+msgstr "Полгода"
 
 msgid "Handled invoice"
-msgstr ""
+msgstr "Обработанный счет"
 
 msgid "I accept the terms for registration."
-msgstr ""
+msgstr "Я принимаю условия регистрации."
 
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 msgid "IBAN:"
-msgstr ""
+msgstr "IBAN:"
 
 msgid "Identification code"
-msgstr ""
+msgstr "Идентификационный код"
 
 msgid "If you did not register an account, please ignore this email."
-msgstr ""
+msgstr "Если вы не регистрировали аккаунт, пожалуйста, проигнорируйте это письмо."
 
 msgid "Impersonate"
-msgstr ""
+msgstr "Действовать от имени"
 
 msgid "In your personal menu you find your {panel} among other things."
-msgstr ""
+msgstr "В вашем личном меню вы найдете вашу {panel} среди прочего."
 
 msgid "Including VAT"
-msgstr ""
+msgstr "Включая НДС"
 
 msgid "Invalid email"
-msgstr ""
+msgstr "Недействительный адрес эл. почты"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Недействительный пароль"
 
 msgid "Invalid username"
-msgstr ""
+msgstr "Недействительное имя пользователя"
 
 msgid "Invoice"
-msgstr ""
+msgstr "Счет"
 
 msgid "Invoice (credited)"
-msgstr ""
+msgstr "Счет (кредитован)"
 
 msgid "Invoice address"
-msgstr ""
+msgstr "Адрес для счетов"
 
 msgid "Invoice credited m"
-msgstr ""
+msgstr "Счет кредитован"
 
 msgid "Invoice currency"
-msgstr ""
+msgstr "Валюта счета"
 
 msgid "Invoice currency is {currency}."
-msgstr ""
+msgstr "Валюта счета - {currency}."
 
 msgid "Invoice customer #{customerid}"
-msgstr ""
+msgstr "Счет клиента #{customerid}"
 
 msgid "Invoice customer {customerid}"
-msgstr ""
+msgstr "Счет клиента {customerid}"
 
 msgid "Invoice date"
-msgstr ""
+msgstr "Дата счета"
 
 msgid "Invoice for completed services"
-msgstr ""
+msgstr "Счет за выполненные услуги"
 
 msgid "Invoice is credited"
-msgstr ""
+msgstr "Счет кредитован"
 
 msgid "Invoice number"
-msgstr ""
+msgstr "Номер счета"
 
 msgid "Invoice number: {fakturanummer}"
-msgstr ""
+msgstr "Номер счета: {fakturanummer}"
 
 msgid "Invoice period"
-msgstr ""
+msgstr "Период счета"
 
 msgid "Invoice questions"
-msgstr ""
+msgstr "Вопросы по счету"
 
 msgid "Invoice questions can be directed to {url}."
-msgstr ""
+msgstr "Вопросы по счету можно направлять на {url}."
 
 msgid "Invoice questions:"
-msgstr ""
+msgstr "Вопросы по счету:"
 
 msgid "Invoice reminder, {number}"
-msgstr ""
+msgstr "Напоминание о счете, {number}"
 
 msgid "Invoice type"
-msgstr ""
+msgstr "Тип счета"
 
 msgid "Invoice {fakturanummer}"
-msgstr ""
+msgstr "Счет {fakturanummer}"
 
 msgid "Invoice {fakturanummer} has been credited."
-msgstr ""
+msgstr "Счет {fakturanummer} был кредитован."
 
 msgid "Invoice {invoiceid, customer {customerid}"
-msgstr ""
+msgstr "Счет {invoiceid}, клиент {customerid}"
 
 msgid "Invoice {invoiceid}, customer #{customerid}"
-msgstr ""
+msgstr "Счет {invoiceid}, клиент #{customerid}"
 
 msgid "Invoice {number}"
-msgstr ""
+msgstr "Счет {number}"
 
 msgid "Invoice {number}, customer #{customerid}"
-msgstr ""
+msgstr "Счет {number}, клиент #{customerid}"
 
 msgid "Invoices"
-msgstr ""
+msgstr "Счета"
 
 msgid "Invoices, customer #{customerid}"
-msgstr ""
+msgstr "Счета, клиент #{customerid}"
 
 msgid "Invoices, customer {customerid}"
-msgstr ""
+msgstr "Счета, клиент {customerid}"
 
 msgid "Invoicing"
-msgstr ""
+msgstr "Выставление счетов"
 
 msgid "Invoicing, 1 item"
 msgid_plural "Invoicing, {number} items"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Выставление счета, 1 позиция"
+msgstr[1] "Выставление счета, {number} позиции"
+msgstr[2] "Выставление счета, {number} позиций"
 
 msgid "It's also available at"
-msgstr ""
+msgstr "Также доступно на"
 
 msgid "It's also available at {url}."
-msgstr ""
+msgstr "Также доступно на {url}."
 
 msgid "Keep me logged in"
-msgstr ""
+msgstr "Оставаться в системе"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr ""
+msgstr "Увольте министра обороны России Сергея Шойгу!"
 
 msgid "Kunder"
-msgstr ""
+msgstr "Клиенты"
 
 msgid "Kuvert"
-msgstr ""
+msgstr "Конверт"
 
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 msgid "Last name"
-msgstr ""
+msgstr "Фамилия"
 
 msgid "Latest"
-msgstr ""
+msgstr "Последние"
 
 msgid "Link to control panel"
-msgstr ""
+msgstr "Ссылка на панель управления"
 
 msgid "Link to personal data"
-msgstr ""
+msgstr "Ссылка на личные данные"
 
 msgid "Link to personal settings"
-msgstr ""
+msgstr "Ссылка на личные настройки"
 
 msgid "List zones"
-msgstr ""
+msgstr "Список зон"
 
 msgid "Lista fakturor"
-msgstr ""
+msgstr "Список счетов"
 
 msgid "Log in"
-msgstr ""
+msgstr "Войти"
 
 msgid "Log out"
-msgstr ""
+msgstr "Выйти"
 
 msgid "Log out and end current session"
-msgstr ""
+msgstr "Выйти и завершить текущую сессию"
 
 msgid "Login"
-msgstr ""
+msgstr "Вход"
 
 msgid "Login blocked"
-msgstr ""
+msgstr "Вход заблокирован"
 
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
-msgstr ""
+msgstr "Вход временно заблокирован из-за чрезмерного количества неудачных попыток с {ip}."
 
 msgid "Logotype leading to start"
-msgstr ""
+msgstr "Логотип ведет на главную"
 
 msgid "Logotype leading to start page"
-msgstr ""
+msgstr "Логотип ведет на главную страницу"
 
 msgid "Lost password?"
-msgstr ""
+msgstr "Забыли пароль?"
 
 msgid "MB"
-msgstr ""
+msgstr "МБ"
 
 msgid "MOSS"
-msgstr ""
+msgstr "MOSS"
 
 msgid "MX records"
-msgstr ""
+msgstr "MX-записи"
 
 msgid "Mail"
-msgstr ""
+msgstr "Почта"
 
 msgid "Mail admin"
-msgstr ""
+msgstr "Почтовый админ"
 
 msgid "Mail domains"
-msgstr ""
+msgstr "Почтовые домены"
 
 msgid "Make invoice"
+msgstr "Создать счет"
+
+msgid "Manage site"
 msgstr ""
 
 msgid "Manuals"
-msgstr ""
+msgstr "Руководства"
 
 msgid "Mark payment"
-msgstr ""
+msgstr "Отметить оплату"
 
 msgid "Message"
-msgstr ""
+msgstr "Сообщение"
 
 msgid "Message sent"
-msgstr ""
+msgstr "Сообщение отправлено"
 
 msgid "Mild"
-msgstr ""
+msgstr "Мягкий"
 
 msgid "Missing file, our bad?"
-msgstr ""
+msgstr "Отсутствующий файл, наша ошибка?"
 
 msgid "Missing username or password"
-msgstr ""
+msgstr "Отсутствует имя пользователя или пароль"
 
 msgid "Mobile"
-msgstr ""
+msgstr "Мобильный"
 
 msgid "Modifications were saved."
-msgstr ""
+msgstr "Изменения сохранены."
 
 msgid "Month"
-msgstr ""
+msgstr "Месяц"
 
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
 msgid "Net"
-msgstr ""
+msgstr "Нетто"
 
 msgid "Net amount"
-msgstr ""
+msgstr "Сумма нетто"
 
 msgid "Net amount:"
-msgstr ""
+msgstr "Сумма нетто:"
 
 msgid "New account"
-msgstr ""
+msgstr "Новый аккаунт"
 
 msgid "New customer"
-msgstr ""
+msgstr "Новый клиент"
 
 msgid "New invoice for customer #{customerid}"
-msgstr ""
+msgstr "Новый счет для клиента #{customerid}"
 
 msgid "New invoice for customer {customerid}"
-msgstr ""
+msgstr "Новый счет для клиента {customerid}"
 
 msgid "New invoice pack"
-msgstr ""
+msgstr "Новый пакет счетов"
 
 msgid "New record"
-msgstr ""
+msgstr "Новая запись"
 
 msgid "New zone"
-msgstr ""
+msgstr "Новая зона"
 
 msgid "Newest"
-msgstr ""
+msgstr "Новейшие"
 
 msgid "Newsletter"
-msgstr ""
+msgstr "Рассылка"
 
 msgid "No customer #{customerid}."
-msgstr ""
+msgstr "Нет клиента #{customerid}."
 
 msgid "No invoice template."
-msgstr ""
+msgstr "Нет шаблона счета."
 
 msgid "No invoicing"
-msgstr ""
+msgstr "Без выставления счетов"
 
 msgid "No selected customer."
-msgstr ""
+msgstr "Клиент не выбран."
 
 msgid "Normal"
-msgstr ""
+msgstr "Обычный"
 
 msgid "Notes"
-msgstr ""
+msgstr "Примечания"
 
 msgid "Number"
-msgstr ""
+msgstr "Номер"
 
 msgid "Open invoice"
-msgstr ""
+msgstr "Открыть счет"
 
 msgid "Open invoice for customer"
-msgstr ""
+msgstr "Открыть счет для клиента"
 
 msgid "Open invoice for customer #{customerid}"
-msgstr ""
+msgstr "Открыть счет для клиента #{customerid}"
 
 msgid "Open invoice items"
-msgstr ""
+msgstr "Неоплаченные позиции"
 
 msgid "Open invoices"
-msgstr ""
+msgstr "Открытые счета"
 
 msgid "Open list"
-msgstr ""
+msgstr "Открыть список"
 
 msgid "Options"
-msgstr ""
+msgstr "Параметры"
 
 msgid "Org. Id"
-msgstr ""
+msgstr "ИНН"
 
 msgid "Org. Id:"
-msgstr ""
+msgstr "ИНН:"
 
 msgid "Organizational number"
-msgstr ""
+msgstr "ИНН"
 
 msgid "Our reference"
-msgstr ""
+msgstr "Наша ссылка"
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
-msgstr ""
+msgstr "За просроченные платежи взимается комиссия за напоминание и {rate} проценты."
 
 msgid "Ownership"
-msgstr ""
+msgstr "Владение"
 
 msgid "PDF viewer"
-msgstr ""
+msgstr "Просмотр PDF"
 
 msgid "Page {number} of {total}"
-msgstr ""
+msgstr "Страница {number} из {total}"
 
 msgid "Paid"
-msgstr ""
+msgstr "Оплачено"
 
 msgid "Paid amount"
-msgstr ""
+msgstr "Оплаченная сумма"
 
 msgid "Panel"
-msgstr ""
+msgstr "Панель"
 
 msgid "Password"
-msgstr ""
+msgstr "Пароль"
 
 msgid "Password was wrong or username doesn't exist."
-msgstr ""
+msgstr "Неверный пароль или имя пользователя не существует."
 
 msgid "Paydate"
-msgstr ""
+msgstr "Дата оплаты"
 
 msgid "Payment"
-msgstr ""
+msgstr "Оплата"
 
 msgid "Payment due to: {duedate}"
-msgstr ""
+msgstr "Срок оплаты: {duedate}"
 
 msgid "Payment terms"
-msgstr ""
+msgstr "Условия оплаты"
 
 msgid "Payment terms:"
-msgstr ""
+msgstr "Условия оплаты:"
 
 msgid "Payments"
-msgstr ""
+msgstr "Платежи"
 
 msgid "Payments may take up to one week to become visible in the control panel."
-msgstr ""
+msgstr "Платежи могут появиться в панели управления в течение одной недели."
 
 msgid "Paypal"
-msgstr ""
+msgstr "Paypal"
 
 msgid "Paypal:"
-msgstr ""
+msgstr "Paypal:"
 
 msgid "Personal"
-msgstr ""
+msgstr "Личный"
 
 msgid "Personal menu"
-msgstr ""
+msgstr "Личное меню"
 
 msgid "Personal panel"
-msgstr ""
+msgstr "Личная панель"
 
 msgid "Please confirm your email address by clicking the following link:"
-msgstr ""
+msgstr "Пожалуйста, подтвердите ваш адрес электронной почты, нажав на следующую ссылку:"
 
 msgid "Please log in to access that page"
-msgstr ""
+msgstr "Пожалуйста, войдите, чтобы получить доступ к этой странице"
 
 msgid "Please login to access resource."
-msgstr ""
+msgstr "Пожалуйста, войдите, чтобы получить доступ к ресурсу."
 
 msgid "Please logout and login as a user with proper authorization instead."
-msgstr ""
+msgstr "Пожалуйста, выйдите и войдите как пользователь с соответствующими правами."
 
 msgid "Plusgiro"
-msgstr ""
+msgstr "Plusgiro"
 
 msgid "Posta faktura"
-msgstr ""
+msgstr "Отправить счет"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Почтовый индекс"
 
 msgid "Postal code (billing)"
-msgstr ""
+msgstr "Почтовый индекс (для счетов)"
 
 msgid "Postal mail"
-msgstr ""
+msgstr "Обычная почта"
 
 msgid "Postgiro"
-msgstr ""
+msgstr "Postgiro"
 
 msgid "Press Register to regenerate"
-msgstr ""
+msgstr "Нажмите Регистрация для новой капчи"
 
 msgid "Price"
-msgstr ""
+msgstr "Цена"
 
 msgid "Priority"
-msgstr ""
+msgstr "Приоритет"
 
 msgid "Products"
-msgstr ""
+msgstr "Продукты"
 
 msgid "Qty"
-msgstr ""
+msgstr "Кол-во"
 
 msgid "Qty."
-msgstr ""
+msgstr "Кол-во"
 
 msgid "Quantity"
-msgstr ""
+msgstr "Количество"
 
 msgid "Quarter"
-msgstr ""
+msgstr "Квартал"
 
 msgid "Receiver"
-msgstr ""
+msgstr "Получатель"
 
 msgid "Recent signatures"
-msgstr ""
+msgstr "Последние подписи"
 
 msgid "Recommended by"
-msgstr ""
+msgstr "Рекомендовано"
 
 msgid "Record Name"
-msgstr ""
+msgstr "Имя записи"
 
 msgid "Record Type"
-msgstr ""
+msgstr "Тип записи"
 
 msgid "Record created successfully"
-msgstr ""
+msgstr "Запись успешно создана"
 
 msgid "Record deleted successfully"
-msgstr ""
+msgstr "Запись успешно удалена"
 
 msgid "Record updated successfully"
-msgstr ""
+msgstr "Запись успешно обновлена"
 
 msgid "Records"
-msgstr ""
+msgstr "Записи"
 
 msgid "Regards"
-msgstr ""
+msgstr "С уважением"
 
 msgid "Register"
-msgstr ""
+msgstr "Регистрация"
 
 msgid "Register account"
-msgstr ""
+msgstr "Зарегистрировать аккаунт"
 
 msgid "Register to create and publish content."
-msgstr ""
+msgstr "Зарегистрируйтесь, чтобы создавать и публиковать контент."
 
 msgid "Registered for F-tax"
-msgstr ""
+msgstr "Зарегистрирован для уплаты НДС"
 
 msgid "Registered office"
-msgstr ""
+msgstr "Юридический адрес"
 
 msgid "Registered office:"
-msgstr ""
+msgstr "Юридический адрес:"
 
 msgid "Registration is currently non-functional"
-msgstr ""
+msgstr "Регистрация в настоящее время не работает"
 
 msgid "Remaining amount to pay: {amount} {currency}"
-msgstr ""
+msgstr "Осталось оплатить: {amount} {currency}"
 
 msgid "Remind"
-msgstr ""
+msgstr "Напомнить"
 
 msgid "Reprint"
-msgstr ""
+msgstr "Пересоздать"
 
 msgid "Resend"
-msgstr ""
+msgstr "Отправить повторно"
 
 msgid "Resources"
-msgstr ""
+msgstr "Ресурсы"
 
 msgid "Roomservice"
-msgstr ""
+msgstr "Обслуживание номеров"
 
 msgid "Round off"
-msgstr ""
+msgstr "Округление"
 
 msgid "Round off:"
-msgstr ""
+msgstr "Округление:"
 
 msgid "SEK"
-msgstr ""
+msgstr "SEK"
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
-msgstr ""
+msgstr "Samizdat использует иконки Bootstrap от {link}."
 
 msgid "Save"
-msgstr ""
+msgstr "Сохранить"
 
 msgid "Search"
-msgstr ""
+msgstr "Поиск"
 
 msgid "Search field for {what}"
-msgstr ""
+msgstr "Поле поиска для {what}"
 
 msgid "Search for customer"
-msgstr ""
+msgstr "Поиск клиента"
 
 msgid "Search for database"
-msgstr ""
+msgstr "Поиск базы данных"
 
 msgid "Search for domain"
-msgstr ""
+msgstr "Поиск домена"
 
 msgid "Search for invoice"
-msgstr ""
+msgstr "Поиск счета"
 
 msgid "Search for mail domain"
-msgstr ""
+msgstr "Поиск почтового домена"
 
 msgid "Search for product"
-msgstr ""
+msgstr "Поиск продукта"
 
 msgid "Search for website"
-msgstr ""
+msgstr "Поиск веб-сайта"
 
 msgid "Search for zone"
-msgstr ""
+msgstr "Поиск зоны"
 
 msgid "Select"
-msgstr ""
+msgstr "Выбрать"
 
 msgid "Select art.no."
-msgstr ""
+msgstr "Выбрать арт. №"
 
 msgid "Select country"
-msgstr ""
+msgstr "Выбрать страну"
 
 msgid "Select country or click flags to see detail"
-msgstr ""
+msgstr "Выберите страну или нажмите на флаги для просмотра деталей"
 
 msgid "Select invoice pack"
-msgstr ""
+msgstr "Выбрать пакет счетов"
 
 msgid "Send again"
-msgstr ""
+msgstr "Отправить снова"
 
 msgid "Send invoice questions to {url}."
-msgstr ""
+msgstr "Отправляйте вопросы по счету на {url}."
 
 msgid "Send now"
-msgstr ""
+msgstr "Отправить сейчас"
 
 msgid "Send reminder"
-msgstr ""
+msgstr "Отправить напоминание"
 
 msgid "Servers"
-msgstr ""
+msgstr "Серверы"
 
 msgid "Set the height attribute."
-msgstr ""
+msgstr "Установить атрибут height."
 
 msgid "Set the id attribute."
-msgstr ""
+msgstr "Установить атрибут id."
 
 msgid "Set the title attribute."
-msgstr ""
+msgstr "Установить атрибут title."
 
 msgid "Set the width attribute."
-msgstr ""
+msgstr "Установить атрибут width."
 
 msgid "Settings"
-msgstr ""
+msgstr "Настройки"
+
+msgid "Share on Facebook"
+msgstr "Поделиться на Facebook"
+
+msgid "Share on LinkedIn"
+msgstr "Поделиться на LinkedIn"
+
+msgid "Share on Telegram"
+msgstr "Поделиться в Telegram"
+
+msgid "Share on Twitter"
+msgstr "Поделиться в Twitter"
 
 msgid "Share {what} on {where}"
-msgstr ""
+msgstr "Поделиться {what} на {where}"
 
 msgid "Shown as"
-msgstr ""
+msgstr "Отображается как"
 
 msgid "Sign poll to kick Sergei Shoigu!"
-msgstr ""
+msgstr "Подпишите петицию за увольнение Сергея Шойгу!"
 
 msgid "Sign poll!"
-msgstr ""
+msgstr "Подпишите петицию!"
 
 msgid "Site"
+msgstr "Сайт"
+
+msgid "Site content"
 msgstr ""
 
 msgid "Skip menu"
-msgstr ""
+msgstr "Пропустить меню"
 
 msgid "Snapback evaluation"
-msgstr ""
+msgstr "Оценка Snapback"
 
 msgid "Snapback only"
-msgstr ""
+msgstr "Только Snapback"
 
 msgid "Snapback scheduler"
-msgstr ""
+msgstr "Планировщик Snapback"
 
 msgid "Space separated list of extra classes to append the prefixed default classes."
-msgstr ""
+msgstr "Список дополнительных классов через пробел для добавления к стандартным классам с префиксом."
 
 msgid "Special price"
-msgstr ""
+msgstr "Специальная цена"
 
 msgid "Start"
-msgstr ""
+msgstr "Начало"
 
 msgid "Stuff"
-msgstr ""
+msgstr "Разное"
 
 msgid "Subject"
-msgstr ""
+msgstr "Тема"
 
 msgid "Submit"
-msgstr ""
+msgstr "Отправить"
 
 msgid "Summa"
-msgstr ""
+msgstr "Сумма"
 
 msgid "Super panel"
-msgstr ""
+msgstr "Супер-панель"
 
 msgid "Supplier invoices"
-msgstr ""
+msgstr "Счета поставщиков"
 
 msgid "Surname"
-msgstr ""
+msgstr "Фамилия"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Шведский"
 
 msgid "Technical"
-msgstr ""
+msgstr "Техническое"
 
 msgid "Technical questions"
-msgstr ""
+msgstr "Технические вопросы"
 
 msgid "Technical questions:"
-msgstr ""
+msgstr "Технические вопросы:"
 
 msgid "Telephone"
-msgstr ""
+msgstr "Телефон"
 
 msgid "Test"
-msgstr ""
+msgstr "Тест"
 
 msgid "Test customer"
-msgstr ""
+msgstr "Тестовый клиент"
 
 msgid "Text"
-msgstr ""
+msgstr "Текст"
 
 msgid "Thank you for contacting us."
-msgstr ""
+msgstr "Спасибо, что связались с нами."
 
 msgid "The Samizdat project"
-msgstr ""
+msgstr "Проект Samizdat"
 
 msgid "The default is used for the Bootstrap icons set."
-msgstr ""
+msgstr "По умолчанию используется набор иконок Bootstrap."
 
 msgid "The form was submitted from {ip}"
-msgstr ""
+msgstr "Форма была отправлена с IP {ip}"
 
 msgid "The invoice is also available at"
-msgstr ""
+msgstr "Счет также доступен на"
 
 msgid "The invoice was due to {duedate}."
-msgstr ""
+msgstr "Срок оплаты счета истек {duedate}."
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
-msgstr ""
+msgstr "Ограничение: {blocklimit} попыток за {blocktime} минут."
 
 msgid "The limit is {limit}."
-msgstr ""
+msgstr "Ограничение: {limit}."
 
 msgid "The login function uses javascript, cookies and AJAX."
-msgstr ""
+msgstr "Функция входа использует JavaScript, cookies и AJAX."
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
-msgstr ""
+msgstr "Самая старая попытка была сделана {failuretime} пользователем &quot;{username}&quot;."
 
 msgid "The page {docpath} wasn't found."
-msgstr ""
+msgstr "Страница {docpath} не найдена."
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
-msgstr ""
+msgstr "Эта демонстрация показывает результат работы SVG-помощника Samizdat."
 
 msgid "This field is required"
-msgstr ""
+msgstr "Это поле обязательно для заполнения"
 
 msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
+msgstr "Этот файл распространяется под той же лицензией, что и пакет {project}."
 
 msgid "Tillbaka"
-msgstr ""
+msgstr "Назад"
 
 msgid "Toggle menu"
-msgstr ""
+msgstr "Переключить меню"
 
 msgid "Tot"
-msgstr ""
+msgstr "Всего"
 
 msgid "Tough"
-msgstr ""
+msgstr "Жесткий"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Перевод"
 
 msgid "Type"
-msgstr ""
+msgstr "Тип"
 
 msgid "Unauthenticated"
-msgstr ""
+msgstr "Не аутентифицирован"
 
 msgid "Unpaid"
-msgstr ""
+msgstr "Неоплаченные"
 
 msgid "Update"
-msgstr ""
+msgstr "Обновить"
 
 msgid "Update and send page."
-msgstr ""
+msgstr "Обновить и отправить страницу."
 
 msgid "Update and send."
-msgstr ""
+msgstr "Обновить и отправить."
 
 msgid "Update customer"
-msgstr ""
+msgstr "Обновить клиента"
 
 msgid "Update invoice, customer #{customerid}"
-msgstr ""
+msgstr "Обновить счет, клиент #{customerid}"
 
 msgid "Updated customer"
-msgstr ""
+msgstr "Клиент обновлен"
 
 msgid "Updated invoice"
-msgstr ""
+msgstr "Счет обновлен"
 
 msgid "Updated {updated} by {updater}"
-msgstr ""
+msgstr "Обновлено {updated} пользователем {updater}"
 
 msgid "Usage"
-msgstr ""
+msgstr "Использование"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
-msgstr ""
+msgstr "Используйте <code>flags</code> для иконок флагов или <code>anysvg</code> для домашней страницы приложения."
 
 msgid "Use the invoice number as message when you pay."
-msgstr ""
+msgstr "Укажите номер счета в качестве сообщения при оплате."
 
 msgid "Use this if you don't need the prefixed default classes."
-msgstr ""
+msgstr "Используйте это, если вам не нужны классы по умолчанию с префиксом."
 
 msgid "Used to make class names."
-msgstr ""
+msgstr "Используется для создания имен классов."
 
 msgid "User manual"
-msgstr ""
+msgstr "Руководство пользователя"
 
 msgid "User registration"
-msgstr ""
+msgstr "Регистрация пользователя"
 
 msgid "Username"
-msgstr ""
+msgstr "Имя пользователя"
 
 msgid "VAT"
-msgstr ""
+msgstr "НДС"
 
 msgid "VAT Id"
-msgstr ""
+msgstr "Номер НДС"
 
 msgid "VAT Id:"
-msgstr ""
+msgstr "Номер НДС:"
 
 msgid "VAT lookup, {vatno}"
-msgstr ""
+msgstr "Проверка номера НДС, {vatno}"
 
 msgid "VAT number"
-msgstr ""
+msgstr "Номер НДС"
 
 msgid "VAT number lookup"
-msgstr ""
+msgstr "Проверка номера НДС"
 
 msgid "VAT percentage"
-msgstr ""
+msgstr "Процент НДС"
 
 msgid "VAT {rate}\\%"
-msgstr ""
+msgstr "НДС {rate}\\%"
 
 msgid "VAT:"
-msgstr ""
+msgstr "НДС:"
 
 msgid "Value for the class attribute."
-msgstr ""
+msgstr "Значение для атрибута class."
 
 msgid "We will also store it for statistics and to prevent robot registrations."
-msgstr ""
+msgstr "Мы также сохраним это для статистики и предотвращения регистрации роботов."
 
 msgid "We will email a confirmation request."
-msgstr ""
+msgstr "Мы отправим запрос на подтверждение по электронной почте."
 
 msgid "We will reply as soon as possible."
-msgstr ""
+msgstr "Мы ответим как можно скорее."
 
 msgid "Web sites"
-msgstr ""
+msgstr "Веб-сайты"
 
 msgid "Websites"
-msgstr ""
+msgstr "Веб-сайты"
 
 msgid "Whois data for {ip}"
-msgstr ""
+msgstr "Данные Whois для {ip}"
 
 msgid "Write the invoice number as message when you pay."
-msgstr ""
+msgstr "Укажите номер счета в качестве сообщения при оплате."
 
 msgid "Wrong captcha"
-msgstr ""
+msgstr "Неверная капча"
 
 msgid "Year"
-msgstr ""
+msgstr "Год"
 
 msgid "You can also post in our discussions."
-msgstr ""
+msgstr "Вы также можете оставить сообщение в наших обсуждениях."
 
 msgid "You have registered a new user account on {site}."
-msgstr ""
+msgstr "Вы зарегистрировали новый аккаунт пользователя на {site}."
 
 msgid "You have {remaining} tries left."
-msgstr ""
+msgstr "У вас осталось {remaining} попыток."
 
 msgid "You need to accept registration terms."
-msgstr ""
+msgstr "Вам необходимо принять условия регистрации."
 
 msgid "You were logged in as {username}."
-msgstr ""
+msgstr "Вы вошли как {username}."
 
 msgid "Your VAT Id"
-msgstr ""
+msgstr "Ваш номер НДС"
 
 msgid "Your VAT Id:"
-msgstr ""
+msgstr "Ваш номер НДС:"
 
 msgid "Your contact"
-msgstr ""
+msgstr "Ваш контакт"
 
 msgid "Your contact:"
-msgstr ""
+msgstr "Ваш контакт:"
 
 msgid "Your email"
-msgstr ""
+msgstr "Ваш адрес эл. почты"
 
 msgid "Your ip {ip} will be appended to the confirmation request."
-msgstr ""
+msgstr "Ваш IP {ip} будет добавлен к запросу подтверждения."
 
 msgid "Your ip {ip} will be appended to the message."
-msgstr ""
+msgstr "Ваш IP {ip} будет добавлен к сообщению."
 
 msgid "Your message appears below."
-msgstr ""
+msgstr "Ваше сообщение приведено ниже."
 
 msgid "Your name"
-msgstr ""
+msgstr "Ваше имя"
 
 msgid "Zone Kind"
-msgstr ""
+msgstr "Тип зоны"
 
 msgid "Zone Name"
-msgstr ""
+msgstr "Имя зоны"
 
 msgid "Zone created successfully"
-msgstr ""
+msgstr "Зона успешно создана"
 
 msgid "Zone deleted successfully"
-msgstr ""
+msgstr "Зона успешно удалена"
 
 msgid "Zone management"
-msgstr ""
+msgstr "Управление зоной"
 
 msgid "Zone not found"
-msgstr ""
+msgstr "Зона не найдена"
 
 msgid "Zone records"
-msgstr ""
+msgstr "Записи зоны"
 
 msgid "Zone updated successfully"
-msgstr ""
+msgstr "Зона успешно обновлена"
 
 msgid "add 3\\%"
-msgstr ""
+msgstr "добавить 3\\%"
 
 msgid "add {fee}"
-msgstr ""
+msgstr "добавить {fee}"
 
 msgid "billing@rymdweb.com"
-msgstr ""
+msgstr "billing@rymdweb.com"
 
 msgid "control panel"
-msgstr ""
+msgstr "панель управления"
 
 msgid "customer"
-msgstr ""
+msgstr "клиент"
 
 msgid "database"
-msgstr ""
+msgstr "база данных"
 
 msgid "domain"
-msgstr ""
+msgstr "домен"
 
 msgid "invoice"
-msgstr ""
+msgstr "счет"
 
 msgid "login attempts"
-msgstr ""
+msgstr "попытки входа"
 
 msgid "mail domain"
-msgstr ""
+msgstr "почтовый домен"
 
 msgid "main firewall"
-msgstr ""
+msgstr "основной файрвол"
 
 msgid "our web"
-msgstr ""
+msgstr "наш сайт"
 
 msgid "product"
-msgstr ""
+msgstr "продукт"
 
 msgid "standby firewall"
-msgstr ""
+msgstr "резервный файрвол"
 
 msgid "website"
-msgstr ""
+msgstr "веб-сайт"
 
 msgid "wensite"
-msgstr ""
+msgstr "веб-сайт"
 
 msgid "{code}: Authentication required"
-msgstr ""
+msgstr "{code}: Требуется авторизация"
 
 msgid "{code}: No authorization"
-msgstr ""
+msgstr "{code}: Нет прав доступа"
 
 msgid "{code}: Not in this universe"
-msgstr ""
+msgstr "{code}: Не в этой вселенной"
 
 msgid "{cost}"
-msgstr ""
+msgstr "{cost}"
 
 msgid "{cost} {currency}"
-msgstr ""
+msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
-msgstr ""
+msgstr "{count} неудачных попыток входа было совершено с {ip} за последние {minutes} минут."
 
 msgid "{number} days"
-msgstr ""
+msgstr "{number} дней"
 
 msgid "{number} signatures since {date}"
-msgstr ""
+msgstr "{number} подписей с {date}"
 
 msgid "{server}, main firewall"
-msgstr ""
+msgstr "{server}, основной файрвол"
 
 msgid "{server}, standby firewall"
+msgstr "{server}, резервный файрвол"
+
+msgid "{sitename} by country"
 msgstr ""
 
 msgid "{sitename} in {country}"
-msgstr ""
+msgstr "{sitename} в {country}"
 

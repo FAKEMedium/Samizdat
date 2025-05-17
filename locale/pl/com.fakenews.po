@@ -1,0 +1,1747 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
+
+msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2022 &mdash; udostępnij i dodaj gwiazdkę na {sitename}!"
+
+msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2023 &mdash; udostępnij i dodaj gwiazdkę na {sitename}!"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "1 database"
+msgid_plural "{number} databases"
+msgstr[0] "1 baza danych"
+msgstr[1] "{number} bazy danych"
+msgstr[2] "{number} baz danych"
+
+msgid "1 dns domain"
+msgid_plural "{number} dns domains"
+msgstr[0] "1 domena DNS"
+msgstr[1] "{number} domeny DNS"
+msgstr[2] "{number} domen DNS"
+
+msgid "1 domain"
+msgid_plural "{number} domains"
+msgstr[0] "1 domena"
+msgstr[1] "{number} domeny"
+msgstr[2] "{number} domen"
+
+msgid "1 invoice"
+msgid_plural "{number} invoices"
+msgstr[0] "1 faktura"
+msgstr[1] "{number} faktury"
+msgstr[2] "{number} faktur"
+
+msgid "1 invoice item"
+msgid_plural "{number} invoice items"
+msgstr[0] "1 pozycja faktury"
+msgstr[1] "{number} pozycje faktury"
+msgstr[2] "{number} pozycji faktury"
+
+msgid "1 mail domain"
+msgid_plural "{number} mail domains"
+msgstr[0] "1 domena pocztowa"
+msgstr[1] "{number} domeny pocztowe"
+msgstr[2] "{number} domen pocztowych"
+
+msgid "1 site"
+msgid_plural "{number} sites"
+msgstr[0] "1 strona"
+msgstr[1] "{number} strony"
+msgstr[2] "{number} stron"
+
+msgid "404: Missing document"
+msgstr "404: Brakujący dokument"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "Link potwierdzający został wysłany na adres {email}."
+
+msgid "A {rate} interest will be charged on overdue payments"
+msgstr "Opóźnione płatności będą obciążone odsetkami w wysokości {rate}"
+
+msgid "API docs"
+msgstr "Dokumentacja API"
+
+msgid "About"
+msgstr "O nas"
+
+msgid "According to our notes invoice {number} remains unpaid."
+msgstr "Według naszych notatek faktura {number} pozostaje niezapłacona."
+
+msgid "Account confirmation"
+msgstr "Potwierdzenie konta"
+
+msgid "Actions"
+msgstr "Akcje"
+
+msgid "Add customer"
+msgstr "Dodaj klienta"
+
+msgid "Add database"
+msgstr "Dodaj bazę danych"
+
+msgid "Add domain"
+msgstr "Dodaj domenę"
+
+msgid "Add mail domain"
+msgstr "Dodaj domenę pocztową"
+
+msgid "Add product"
+msgstr "Dodaj produkt"
+
+msgid "Add subscription"
+msgstr "Dodaj subskrypcję"
+
+msgid "Add voucher"
+msgstr "Dodaj voucher"
+
+msgid "Add website"
+msgstr "Dodaj stronę internetową"
+
+msgid "Address"
+msgstr "Adres"
+
+msgid "Address (billing)"
+msgstr "Adres (fakturowy)"
+
+msgid "Address check"
+msgstr "Sprawdzenie adresu"
+
+msgid "Admininistration panel"
+msgstr "Panel administracyjny"
+
+msgid "Advertising"
+msgstr "Reklama"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "Po rejestracji możesz dodać więcej danych o sobie, poluzować politykę udostępniania i dostosować swoje doświadczenie."
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "Zezwól na pliki cookie, aby wkleić kod potwierdzający z e-maila"
+
+msgid "Amount"
+msgstr "Kwota"
+
+msgid "Amount incl. VAT"
+msgstr "Kwota z VAT"
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr "Kwota do zapłaty z VAT: {rounded} {currency}"
+
+msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgstr "Kwota do zapłaty z {percent} VAT: {costsum} {currency}"
+
+msgid "Amount to pay: {costsum} {currency}"
+msgstr "Kwota do zapłaty: {costsum} {currency}"
+
+msgid "Are you sure you want to delete this record?"
+msgstr "Czy na pewno chcesz usunąć ten rekord?"
+
+msgid "Article"
+msgstr "Artykuł"
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr "Co najmniej 3 znaki z a-z 0-9 -, musi zaczynać się od a-z"
+
+msgid "At least 8 characters including capitals and digits"
+msgstr "Co najmniej 8 znaków, w tym wielkie litery i cyfry"
+
+msgid "BIC/Swift"
+msgstr "BIC/Swift"
+
+msgid "BIC/Swift address"
+msgstr "Adres BIC/Swift"
+
+msgid "BIC/Swift address:"
+msgstr "Adres BIC/Swift:"
+
+msgid "Back"
+msgstr "Wstecz"
+
+msgid "Bankgiro"
+msgstr "Bankgiro"
+
+msgid "Bankgiro:"
+msgstr "Bankgiro:"
+
+msgid "Barred"
+msgstr "Zablokowany"
+
+msgid "Billing"
+msgstr "Fakturowanie"
+
+msgid "Blocked"
+msgstr "Zablokowany"
+
+msgid "Blocked ip number"
+msgstr "Zablokowany numer IP"
+
+msgid "Bootstrap icons"
+msgstr "Ikony Bootstrap"
+
+msgid "Bootstrap icons helper"
+msgstr "Pomocnik ikon Bootstrap"
+
+msgid "Buddy price"
+msgstr "Cena przyjacielska"
+
+msgid "Buy {slug} a coffee"
+msgstr "Kup {slug} kawę"
+
+msgid "Buy {user} a coffee"
+msgstr "Kup {user} kawę"
+
+msgid "By default no information about you is shared."
+msgstr "Domyślnie żadne informacje o Tobie nie są udostępniane."
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "Wywołanie pomocnika dodaje kod svg do tabeli symboli na początku dokumentu oraz odniesienie inline do niego."
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Captcha code from image"
+msgstr "Kod captcha z obrazka"
+
+msgid "Captcha image"
+msgstr "Obraz captcha"
+
+msgid "Captcha was wrong"
+msgstr "Captcha była nieprawidłowa"
+
+msgid "Change password"
+msgstr "Zmień hasło"
+
+msgid "Changed status."
+msgstr "Zmieniono status."
+
+msgid "Choose a password"
+msgstr "Wybierz hasło"
+
+msgid "Choose a password."
+msgstr "Wybierz hasło."
+
+msgid "Choose a username"
+msgstr "Wybierz nazwę użytkownika"
+
+msgid "Choose a username."
+msgstr "Wybierz nazwę użytkownika."
+
+msgid "Choose language"
+msgstr "Wybierz język"
+
+msgid "City"
+msgstr "Miasto"
+
+msgid "City (billing)"
+msgstr "Miasto (fakturowe)"
+
+msgid "Click to pop login dialog."
+msgstr "Kliknij, aby wyświetlić okno logowania."
+
+msgid "Click to pop payment dialog."
+msgstr "Kliknij, aby wyświetlić okno płatności."
+
+msgid "Click to pop reminder dialog."
+msgstr "Kliknij, aby wyświetlić okno przypomnienia."
+
+msgid "Click to regenerate PDF."
+msgstr "Kliknij, aby ponownie wygenerować PDF."
+
+msgid "Click to search matching records."
+msgstr "Kliknij, aby wyszukać pasujące rekordy."
+
+msgid "Click to search matching zones."
+msgstr "Kliknij, aby wyszukać pasujące strefy."
+
+msgid "Click to send a credit invoice."
+msgstr "Kliknij, aby wysłać fakturę korygującą."
+
+msgid "Click to send again."
+msgstr "Kliknij, aby wysłać ponownie."
+
+msgid "Click to send agin."
+msgstr "Kliknij, aby wysłać ponownie."
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Company"
+msgstr "Firma"
+
+msgid "Confirm"
+msgstr "Potwierdź"
+
+msgid "Confirm poll signature"
+msgstr "Potwierdź podpis ankiety"
+
+msgid "Confirm your email address"
+msgstr "Potwierdź swój adres e-mail"
+
+msgid "Confirmation code"
+msgstr "Kod potwierdzający"
+
+msgid "Confirmation request sent"
+msgstr "Wysłano prośbę o potwierdzenie"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact {sender} if you have questions."
+msgstr "Skontaktuj się z {sender}, jeśli masz pytania."
+
+msgid "Content"
+msgstr "Zawartość"
+
+msgid "Continue"
+msgstr "Kontynuuj"
+
+msgid "Continues on next page..."
+msgstr "Kontynuacja na następnej stronie..."
+
+msgid "Contribute"
+msgstr "Wspieraj"
+
+msgid "Contributing"
+msgstr "Wspieranie"
+
+msgid "Corporate identity number"
+msgstr "Numer identyfikacyjny firmy"
+
+msgid "Couldn't use code for verification."
+msgstr "Nie można użyć kodu do weryfikacji."
+
+msgid "Country"
+msgstr "Kraj"
+
+msgid "Country (billing)"
+msgstr "Kraj (fakturowy)"
+
+msgid "Country selector"
+msgstr "Wybór kraju"
+
+msgid "Create contact"
+msgstr "Utwórz kontakt"
+
+msgid "Create customer"
+msgstr "Utwórz klienta"
+
+msgid "Create new record"
+msgstr "Utwórz nowy rekord"
+
+msgid "Created {created} by {creator}"
+msgstr "Utworzono {created} przez {creator}"
+
+msgid "Credit invoice"
+msgstr "Faktura korygująca"
+
+msgid "Credit invoice {fakturanummer}"
+msgstr "Faktura korygująca {fakturanummer}"
+
+msgid "Credit invoice {number}"
+msgstr "Faktura korygująca {number}"
+
+msgid "Credit trustability"
+msgstr "Wiarygodność kredytowa"
+
+msgid "Creditability"
+msgstr "Wiarygodność"
+
+msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgstr "Kwota uznana z VAT: {rounded} {currency}"
+
+msgid "Credited invoice"
+msgstr "Skorygowana faktura"
+
+msgid "Credited invoice: {number}"
+msgstr "Skorygowana faktura: {number}"
+
+msgid "Customer"
+msgstr "Klient"
+
+msgid "Customer #{customerid}"
+msgstr "Klient #{customerid}"
+
+msgid "Customer Id"
+msgstr "ID klienta"
+
+msgid "Customer Id:"
+msgstr "ID klienta:"
+
+msgid "Customer newsletter"
+msgstr "Newsletter dla klientów"
+
+msgid "Customers"
+msgstr "Klienci"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid "DNS Admin"
+msgstr "Administrator DNS"
+
+msgid "DNS Zones"
+msgstr "Strefy DNS"
+
+msgid "DNS domains"
+msgstr "Domeny DNS"
+
+msgid "DNS management"
+msgstr "Zarządzanie DNS"
+
+msgid "DNS zone"
+msgstr "Strefa DNS"
+
+msgid "DNS zones"
+msgstr "Strefy DNS"
+
+msgid "Data usage: {usage}"
+msgstr "Wykorzystanie danych: {usage}"
+
+msgid "Database"
+msgstr "Baza danych"
+
+msgid "Database error"
+msgstr "Błąd bazy danych"
+
+msgid "Databases"
+msgstr "Bazy danych"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Date:"
+msgstr "Data:"
+
+msgid "Debt"
+msgstr "Dług"
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "Zdecyduj, które części Twoich danych osobowych chcesz pokazywać różnym grupom."
+
+msgid "Delete"
+msgstr "Usuń"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Destroyed"
+msgstr "Zniszczony"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "Określa, z którego podkatalogu ładować pliki svg. Domyślnie są to ikony Bootstrap."
+
+msgid "Developer docs"
+msgstr "Dokumentacja dla deweloperów"
+
+msgid "Development"
+msgstr "Rozwój"
+
+msgid "Do you want to credit the invoice?"
+msgstr "Czy chcesz skorygować fakturę?"
+
+msgid "Domain"
+msgstr "Domena"
+
+msgid "Domain registration"
+msgstr "Rejestracja domeny"
+
+msgid "Domain registtration"
+msgstr "Rejestracja domeny"
+
+msgid "Domains"
+msgstr "Domeny"
+
+msgid "DomÃ¤nregistrering"
+msgstr "Rejestracja domeny"
+
+msgid "Due date"
+msgstr "Termin płatności"
+
+msgid "Due to"
+msgstr "Termin"
+
+msgid "Due to:"
+msgstr "Termin:"
+
+msgid "EPP"
+msgstr "EPP"
+
+msgid "Economy"
+msgstr "Ekonomia"
+
+msgid "Edit"
+msgstr "Edytuj"
+
+msgid "Edit customer {customerid}"
+msgstr "Edytuj klienta {customerid}"
+
+msgid "Edit zone"
+msgstr "Edytuj strefę"
+
+msgid "Ekonomi"
+msgstr "Ekonomia"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Email %s verified"
+msgstr "E-mail %s zweryfikowany"
+
+msgid "Email (billing)"
+msgstr "E-mail (fakturowy)"
+
+msgid "Email confirmation"
+msgstr "Potwierdzenie e-mail"
+
+msgid "Email not valid"
+msgstr "E-mail nieprawidłowy"
+
+msgid "Email someone about {what}"
+msgstr "Wyślij e-mail do kogoś o {what}"
+
+msgid "Email to a friend"
+msgstr "Wyślij e-mail do znajomego"
+
+msgid "Empty VAT"
+msgstr "Pusty VAT"
+
+msgid "Empty VAT number"
+msgstr "Pusty numer VAT"
+
+msgid "Empty address"
+msgstr "Pusty adres"
+
+msgid "Empty billingaddress"
+msgstr "Pusty adres fakturowy"
+
+msgid "Empty city"
+msgstr "Puste miasto"
+
+msgid "Empty code"
+msgstr "Pusty kod"
+
+msgid "Empty company name"
+msgstr "Pusta nazwa firmy"
+
+msgid "Empty country"
+msgstr "Pusty kraj"
+
+msgid "Empty first name"
+msgstr "Puste imię"
+
+msgid "Empty freetext"
+msgstr "Pusty tekst wolny"
+
+msgid "Empty last name"
+msgstr "Puste nazwisko"
+
+msgid "Empty message"
+msgstr "Pusta wiadomość"
+
+msgid "Empty mobile"
+msgstr "Pusty telefon komórkowy"
+
+msgid "Empty name"
+msgstr "Pusta nazwa"
+
+msgid "Empty postal code"
+msgstr "Pusty kod pocztowy"
+
+msgid "Empty recommendation"
+msgstr "Pusta rekomendacja"
+
+msgid "Empty reference"
+msgstr "Pusta referencja"
+
+msgid "Empty subject"
+msgstr "Pusty temat"
+
+msgid "Empty surname"
+msgstr "Puste nazwisko"
+
+msgid "Empty telephone"
+msgstr "Pusty telefon"
+
+msgid "English"
+msgstr "Angielski"
+
+msgid "Enter code"
+msgstr "Wprowadź kod"
+
+msgid "Enter code from captcha image"
+msgstr "Wprowadź kod z obrazka captcha"
+
+msgid "Enter password"
+msgstr "Wprowadź hasło"
+
+msgid "Enter record name"
+msgstr "Wprowadź nazwę rekordu"
+
+msgid "Enter username"
+msgstr "Wprowadź nazwę użytkownika"
+
+msgid "Enter username and password"
+msgstr "Wprowadź nazwę użytkownika i hasło"
+
+msgid "Enter valid email"
+msgstr "Wprowadź prawidłowy e-mail"
+
+msgid "Enter your email"
+msgstr "Wprowadź swój e-mail"
+
+msgid "Enter zone name"
+msgstr "Wprowadź nazwę strefy"
+
+msgid "Euro"
+msgstr "Euro"
+
+msgid "Examples"
+msgstr "Przykłady"
+
+msgid "Expand menu"
+msgstr "Rozwiń menu"
+
+msgid "Expand personal menu."
+msgstr "Rozwiń menu osobiste."
+
+msgid "Expires"
+msgstr "Wygasa"
+
+msgid "Expiring domains"
+msgstr "Wygasające domeny"
+
+msgid "FAKE Media"
+msgstr "FAKE Media"
+
+msgid "FAKE News by country"
+msgstr "FAKE News według kraju"
+
+msgid "Failed login from {ip}"
+msgstr "Nieudane logowanie z {ip}"
+
+msgid "Failed to create record"
+msgstr "Nie udało się utworzyć rekordu"
+
+msgid "Failed to create zone"
+msgstr "Nie udało się utworzyć strefy"
+
+msgid "Failed to delete record"
+msgstr "Nie udało się usunąć rekordu"
+
+msgid "Failed to delete zone"
+msgstr "Nie udało się usunąć strefy"
+
+msgid "Failed to update record"
+msgstr "Nie udało się zaktualizować rekordu"
+
+msgid "Failed to update zone"
+msgstr "Nie udało się zaktualizować strefy"
+
+msgid "File archive"
+msgstr "Archiwum plików"
+
+msgid "Fill the form correctly!"
+msgstr "Wypełnij formularz poprawnie!"
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "Znajdź załączoną fakturę korygującą w formacie PDF."
+
+msgid "Find the invoice attached as PDF."
+msgstr "Znajdź załączoną fakturę w formacie PDF."
+
+msgid "Find your invoice attached as PDF."
+msgstr "Znajdź załączoną fakturę w formacie PDF."
+
+msgid "First name"
+msgstr "Imię"
+
+msgid "Fortnox panel"
+msgstr "Panel Fortnox"
+
+msgid "From"
+msgstr "Od"
+
+msgid "Full"
+msgstr "Pełny"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "Przekaż małe wsparcie finansowe dla {slug} na buymeacoffee"
+
+msgid "Give small financial support to {user} at buymeacoffee"
+msgstr "Przekaż małe wsparcie finansowe dla {user} na buymeacoffee"
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr "Przejdź do {confirmationlink}, aby potwierdzić swój podpis i odebrać swój obraz."
+
+msgid "Gross"
+msgstr "Brutto"
+
+msgid "HTML result"
+msgstr "Wynik HTML"
+
+msgid "Halfyear"
+msgstr "Półrocze"
+
+msgid "Handled invoice"
+msgstr "Obsługiwana faktura"
+
+msgid "I accept the terms for registration."
+msgstr "Akceptuję warunki rejestracji."
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "IBAN:"
+msgstr "IBAN:"
+
+msgid "Identification code"
+msgstr "Kod identyfikacyjny"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "Jeśli nie zarejestrowałeś konta, zignoruj tego e-maila."
+
+msgid "Impersonate"
+msgstr "Udawaj"
+
+msgid "In your personal menu you find your {panel} among other things."
+msgstr "W menu osobistym znajdziesz swój {panel} wśród innych rzeczy."
+
+msgid "Including VAT"
+msgstr "Z VAT"
+
+msgid "Invalid email"
+msgstr "Nieprawidłowy e-mail"
+
+msgid "Invalid password"
+msgstr "Nieprawidłowe hasło"
+
+msgid "Invalid username"
+msgstr "Nieprawidłowa nazwa użytkownika"
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice (credited)"
+msgstr "Faktura (skorygowana)"
+
+msgid "Invoice address"
+msgstr "Adres do faktury"
+
+msgid "Invoice credited m"
+msgstr "Faktura skorygowana"
+
+msgid "Invoice currency"
+msgstr "Waluta faktury"
+
+msgid "Invoice currency is {currency}."
+msgstr "Waluta faktury to {currency}."
+
+msgid "Invoice customer #{customerid}"
+msgstr "Faktura klienta #{customerid}"
+
+msgid "Invoice customer {customerid}"
+msgstr "Faktura klienta {customerid}"
+
+msgid "Invoice date"
+msgstr "Data faktury"
+
+msgid "Invoice for completed services"
+msgstr "Faktura za zakończone usługi"
+
+msgid "Invoice is credited"
+msgstr "Faktura jest skorygowana"
+
+msgid "Invoice number"
+msgstr "Numer faktury"
+
+msgid "Invoice number: {fakturanummer}"
+msgstr "Numer faktury: {fakturanummer}"
+
+msgid "Invoice period"
+msgstr "Okres fakturowania"
+
+msgid "Invoice questions"
+msgstr "Pytania dotyczące faktury"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "Pytania dotyczące faktury można kierować na {url}."
+
+msgid "Invoice questions:"
+msgstr "Pytania dotyczące faktury:"
+
+msgid "Invoice reminder, {number}"
+msgstr "Przypomnienie o fakturze, {number}"
+
+msgid "Invoice type"
+msgstr "Typ faktury"
+
+msgid "Invoice {fakturanummer}"
+msgstr "Faktura {fakturanummer}"
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "Faktura {fakturanummer} została skorygowana."
+
+msgid "Invoice {invoiceid, customer {customerid}"
+msgstr "Faktura {invoiceid}, klient {customerid}"
+
+msgid "Invoice {invoiceid}, customer #{customerid}"
+msgstr "Faktura {invoiceid}, klient #{customerid}"
+
+msgid "Invoice {number}"
+msgstr "Faktura {number}"
+
+msgid "Invoice {number}, customer #{customerid}"
+msgstr "Faktura {number}, klient #{customerid}"
+
+msgid "Invoices"
+msgstr "Faktury"
+
+msgid "Invoices, customer #{customerid}"
+msgstr "Faktury, klient #{customerid}"
+
+msgid "Invoices, customer {customerid}"
+msgstr "Faktury, klient {customerid}"
+
+msgid "Invoicing"
+msgstr "Fakturowanie"
+
+msgid "Invoicing, 1 item"
+msgid_plural "Invoicing, {number} items"
+msgstr[0] "Fakturowanie, 1 pozycja"
+msgstr[1] "Fakturowanie, {number} pozycje"
+msgstr[2] "Fakturowanie, {number} pozycji"
+
+msgid "It's also available at"
+msgstr "Jest również dostępne na"
+
+msgid "It's also available at {url}."
+msgstr "Jest również dostępne na {url}."
+
+msgid "Keep me logged in"
+msgstr "Pozostaw mnie zalogowanym"
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr "Wyrzuć rosyjskiego ministra obrony Siergieja Szojgu!"
+
+msgid "Kunder"
+msgstr "Klienci"
+
+msgid "Kuvert"
+msgstr "Koperta"
+
+msgid "Language"
+msgstr "Język"
+
+msgid "Last name"
+msgstr "Nazwisko"
+
+msgid "Latest"
+msgstr "Najnowsze"
+
+msgid "Link to control panel"
+msgstr "Link do panelu sterowania"
+
+msgid "Link to personal data"
+msgstr "Link do danych osobowych"
+
+msgid "Link to personal settings"
+msgstr "Link do ustawień osobistych"
+
+msgid "List zones"
+msgstr "Lista stref"
+
+msgid "Lista fakturor"
+msgstr "Lista faktur"
+
+msgid "Log in"
+msgstr "Zaloguj się"
+
+msgid "Log out"
+msgstr "Wyloguj się"
+
+msgid "Log out and end current session"
+msgstr "Wyloguj się i zakończ bieżącą sesję"
+
+msgid "Login"
+msgstr "Logowanie"
+
+msgid "Login blocked"
+msgstr "Logowanie zablokowane"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "Logowanie jest tymczasowo zablokowane z powodu zbyt wielu nieudanych prób z {ip}."
+
+msgid "Logotype leading to start"
+msgstr "Logotyp prowadzący do startu"
+
+msgid "Logotype leading to start page"
+msgstr "Logotyp prowadzący do strony startowej"
+
+msgid "Lost password?"
+msgstr "Zapomniane hasło?"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "MOSS"
+msgstr "MOSS"
+
+msgid "MX records"
+msgstr "Rekordy MX"
+
+msgid "Mail"
+msgstr "Poczta"
+
+msgid "Mail admin"
+msgstr "Administrator poczty"
+
+msgid "Mail domains"
+msgstr "Domeny pocztowe"
+
+msgid "Make invoice"
+msgstr "Utwórz fakturę"
+
+msgid "Manage site"
+msgstr "Zarządzaj stroną"
+
+msgid "Manuals"
+msgstr "Podręczniki"
+
+msgid "Mark payment"
+msgstr "Oznacz płatność"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "Message sent"
+msgstr "Wiadomość wysłana"
+
+msgid "Mild"
+msgstr "Łagodne"
+
+msgid "Missing file, our bad?"
+msgstr "Brakujący plik, nasza wina?"
+
+msgid "Missing username or password"
+msgstr "Brak nazwy użytkownika lub hasła"
+
+msgid "Mobile"
+msgstr "Komórka"
+
+msgid "Modifications were saved."
+msgstr "Zmiany zostały zapisane."
+
+msgid "Month"
+msgstr "Miesiąc"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Net amount"
+msgstr "Kwota netto"
+
+msgid "Net amount:"
+msgstr "Kwota netto:"
+
+msgid "New account"
+msgstr "Nowe konto"
+
+msgid "New customer"
+msgstr "Nowy klient"
+
+msgid "New invoice for customer #{customerid}"
+msgstr "Nowa faktura dla klienta #{customerid}"
+
+msgid "New invoice for customer {customerid}"
+msgstr "Nowa faktura dla klienta {customerid}"
+
+msgid "New invoice pack"
+msgstr "Nowy pakiet faktur"
+
+msgid "New record"
+msgstr "Nowy rekord"
+
+msgid "New zone"
+msgstr "Nowa strefa"
+
+msgid "Newest"
+msgstr "Najnowsze"
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "No customer #{customerid}."
+msgstr "Brak klienta #{customerid}."
+
+msgid "No invoice template."
+msgstr "Brak szablonu faktury."
+
+msgid "No invoicing"
+msgstr "Brak fakturowania"
+
+msgid "No selected customer."
+msgstr "Brak wybranego klienta."
+
+msgid "Normal"
+msgstr "Normalny"
+
+msgid "Notes"
+msgstr "Notatki"
+
+msgid "Number"
+msgstr "Numer"
+
+msgid "Open invoice"
+msgstr "Otwarta faktura"
+
+msgid "Open invoice for customer"
+msgstr "Otwarta faktura dla klienta"
+
+msgid "Open invoice for customer #{customerid}"
+msgstr "Otwarta faktura dla klienta #{customerid}"
+
+msgid "Open invoice items"
+msgstr "Otwarte pozycje faktury"
+
+msgid "Open invoices"
+msgstr "Otwarte faktury"
+
+msgid "Open list"
+msgstr "Otwórz listę"
+
+msgid "Options"
+msgstr "Opcje"
+
+msgid "Org. Id"
+msgstr "Id organizacji"
+
+msgid "Org. Id:"
+msgstr "Id organizacji:"
+
+msgid "Organizational number"
+msgstr "Numer organizacyjny"
+
+msgid "Our reference"
+msgstr "Nasz numer referencyjny"
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "Za opóźnione płatności zostanie naliczona opłata za przypomnienie i odsetki w wysokości {rate}."
+
+msgid "Ownership"
+msgstr "Właściciel"
+
+msgid "PDF viewer"
+msgstr "Przeglądarka PDF"
+
+msgid "Page {number} of {total}"
+msgstr "Strona {number} z {total}"
+
+msgid "Paid"
+msgstr "Zapłacono"
+
+msgid "Paid amount"
+msgstr "Zapłacona kwota"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Password"
+msgstr "Hasło"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "Hasło było nieprawidłowe lub nazwa użytkownika nie istnieje."
+
+msgid "Paydate"
+msgstr "Data płatności"
+
+msgid "Payment"
+msgstr "Płatność"
+
+msgid "Payment due to: {duedate}"
+msgstr "Termin płatności: {duedate}"
+
+msgid "Payment terms"
+msgstr "Warunki płatności"
+
+msgid "Payment terms:"
+msgstr "Warunki płatności:"
+
+msgid "Payments"
+msgstr "Płatności"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "Płatności mogą być widoczne w panelu sterowania do tygodnia."
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Paypal:"
+msgstr "Paypal:"
+
+msgid "Personal"
+msgstr "Osobiste"
+
+msgid "Personal menu"
+msgstr "Menu osobiste"
+
+msgid "Personal panel"
+msgstr "Panel osobisty"
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "Prosimy o potwierdzenie adresu e-mail, klikając w poniższy link:"
+
+msgid "Please log in to access that page"
+msgstr "Zaloguj się, aby uzyskać dostęp do tej strony"
+
+msgid "Please login to access resource."
+msgstr "Zaloguj się, aby uzyskać dostęp do zasobu."
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "Wyloguj się i zaloguj jako użytkownik z odpowiednimi uprawnieniami."
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
+
+msgid "Posta faktura"
+msgstr "Wyślij fakturę"
+
+msgid "Postal code"
+msgstr "Kod pocztowy"
+
+msgid "Postal code (billing)"
+msgstr "Kod pocztowy (fakturowy)"
+
+msgid "Postal mail"
+msgstr "Poczta"
+
+msgid "Postgiro"
+msgstr "Postgiro"
+
+msgid "Press Register to regenerate"
+msgstr "Naciśnij Rejestruj, aby ponownie wygenerować"
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Priority"
+msgstr "Priorytet"
+
+msgid "Products"
+msgstr "Produkty"
+
+msgid "Qty"
+msgstr "Ilość"
+
+msgid "Qty."
+msgstr "Ilość."
+
+msgid "Quantity"
+msgstr "Ilość"
+
+msgid "Quarter"
+msgstr "Kwartał"
+
+msgid "Receiver"
+msgstr "Odbiorca"
+
+msgid "Recent signatures"
+msgstr "Ostatnie podpisy"
+
+msgid "Recommended by"
+msgstr "Polecany przez"
+
+msgid "Record Name"
+msgstr "Nazwa rekordu"
+
+msgid "Record Type"
+msgstr "Typ rekordu"
+
+msgid "Record created successfully"
+msgstr "Rekord utworzony pomyślnie"
+
+msgid "Record deleted successfully"
+msgstr "Rekord usunięty pomyślnie"
+
+msgid "Record updated successfully"
+msgstr "Rekord zaktualizowany pomyślnie"
+
+msgid "Records"
+msgstr "Rekordy"
+
+msgid "Regards"
+msgstr "Pozdrowienia"
+
+msgid "Register"
+msgstr "Zarejestruj"
+
+msgid "Register account"
+msgstr "Zarejestruj konto"
+
+msgid "Register to create and publish content."
+msgstr "Zarejestruj się, aby tworzyć i publikować treści."
+
+msgid "Registered for F-tax"
+msgstr "Zarejestrowany do F-tax"
+
+msgid "Registered office"
+msgstr "Siedziba zarejestrowana"
+
+msgid "Registered office:"
+msgstr "Siedziba zarejestrowana:"
+
+msgid "Registration is currently non-functional"
+msgstr "Rejestracja jest obecnie niedostępna"
+
+msgid "Remaining amount to pay: {amount} {currency}"
+msgstr "Pozostała kwota do zapłaty: {amount} {currency}"
+
+msgid "Remind"
+msgstr "Przypomnij"
+
+msgid "Reprint"
+msgstr "Wydrukuj ponownie"
+
+msgid "Resend"
+msgstr "Wyślij ponownie"
+
+msgid "Resources"
+msgstr "Zasoby"
+
+msgid "Roomservice"
+msgstr "Obsługa pokoi"
+
+msgid "Round off"
+msgstr "Zaokrąglenie"
+
+msgid "Round off:"
+msgstr "Zaokrąglenie:"
+
+msgid "SEK"
+msgstr "SEK"
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "Samizdat używa ikon Bootstrap z {link}."
+
+msgid "Save"
+msgstr "Zapisz"
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Search field for {what}"
+msgstr "Pole wyszukiwania dla {what}"
+
+msgid "Search for customer"
+msgstr "Szukaj klienta"
+
+msgid "Search for database"
+msgstr "Szukaj bazy danych"
+
+msgid "Search for domain"
+msgstr "Szukaj domeny"
+
+msgid "Search for invoice"
+msgstr "Szukaj faktury"
+
+msgid "Search for mail domain"
+msgstr "Szukaj domeny pocztowej"
+
+msgid "Search for product"
+msgstr "Szukaj produktu"
+
+msgid "Search for website"
+msgstr "Szukaj strony internetowej"
+
+msgid "Search for zone"
+msgstr "Szukaj strefy"
+
+msgid "Select"
+msgstr "Wybierz"
+
+msgid "Select art.no."
+msgstr "Wybierz nr art."
+
+msgid "Select country"
+msgstr "Wybierz kraj"
+
+msgid "Select country or click flags to see detail"
+msgstr "Wybierz kraj lub kliknij flagi, aby zobaczyć szczegóły"
+
+msgid "Select invoice pack"
+msgstr "Wybierz pakiet faktur"
+
+msgid "Send again"
+msgstr "Wyślij ponownie"
+
+msgid "Send invoice questions to {url}."
+msgstr "Wyślij pytania dotyczące faktury na {url}."
+
+msgid "Send now"
+msgstr "Wyślij teraz"
+
+msgid "Send reminder"
+msgstr "Wyślij przypomnienie"
+
+msgid "Servers"
+msgstr "Serwery"
+
+msgid "Set the height attribute."
+msgstr "Ustaw atrybut wysokości."
+
+msgid "Set the id attribute."
+msgstr "Ustaw atrybut id."
+
+msgid "Set the title attribute."
+msgstr "Ustaw atrybut title."
+
+msgid "Set the width attribute."
+msgstr "Ustaw atrybut szerokości."
+
+msgid "Settings"
+msgstr "Ustawienia"
+
+msgid "Share on Facebook"
+msgstr "Udostępnij na Facebooku"
+
+msgid "Share on LinkedIn"
+msgstr "Udostępnij na LinkedIn"
+
+msgid "Share on Telegram"
+msgstr "Udostępnij na Telegramie"
+
+msgid "Share on Twitter"
+msgstr "Udostępnij na Twitterze"
+
+msgid "Share {what} on {where}"
+msgstr "Udostępnij {what} na {where}"
+
+msgid "Shown as"
+msgstr "Pokazane jako"
+
+msgid "Sign poll to kick Sergei Shoigu!"
+msgstr "Podpisz ankietę, aby wyrzucić Siergieja Szojgu!"
+
+msgid "Sign poll!"
+msgstr "Podpisz ankietę!"
+
+msgid "Site"
+msgstr "Strona"
+
+msgid "Site content"
+msgstr "Zawartość strony"
+
+msgid "Skip menu"
+msgstr "Pomiń menu"
+
+msgid "Snapback evaluation"
+msgstr "Ocena Snapback"
+
+msgid "Snapback only"
+msgstr "Tylko Snapback"
+
+msgid "Snapback scheduler"
+msgstr "Harmonogram Snapback"
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "Lista dodatkowych klas oddzielonych spacjami, które mają być dołączone do domyślnych klas z prefiksem."
+
+msgid "Special price"
+msgstr "Cena specjalna"
+
+msgid "Start"
+msgstr "Start"
+
+msgid "Stuff"
+msgstr "Rzeczy"
+
+msgid "Subject"
+msgstr "Temat"
+
+msgid "Submit"
+msgstr "Wyślij"
+
+msgid "Summa"
+msgstr "Suma"
+
+msgid "Super panel"
+msgstr "Super panel"
+
+msgid "Supplier invoices"
+msgstr "Faktury dostawców"
+
+msgid "Surname"
+msgstr "Nazwisko"
+
+msgid "Swedish"
+msgstr "Szwedzki"
+
+msgid "Technical"
+msgstr "Techniczne"
+
+msgid "Technical questions"
+msgstr "Pytania techniczne"
+
+msgid "Technical questions:"
+msgstr "Pytania techniczne:"
+
+msgid "Telephone"
+msgstr "Telefon"
+
+msgid "Test"
+msgstr "Test"
+
+msgid "Test customer"
+msgstr "Testowy klient"
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Thank you for contacting us."
+msgstr "Dziękujemy za kontakt."
+
+msgid "The Samizdat project"
+msgstr "Projekt Samizdat"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "Domyślnie używany jest zestaw ikon Bootstrap."
+
+msgid "The form was submitted from {ip}"
+msgstr "Formularz został wysłany z {ip}"
+
+msgid "The invoice is also available at"
+msgstr "Faktura jest również dostępna na"
+
+msgid "The invoice was due to {duedate}."
+msgstr "Termin płatności faktury upłynął {duedate}."
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "Limit to {blocklimit} prób na {blocktime} minut."
+
+msgid "The limit is {limit}."
+msgstr "Limit wynosi {limit}."
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "Funkcja logowania wykorzystuje javascript, pliki cookie i AJAX."
+
+msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
+msgstr "Najstarsza została wykonana {failuretime} przez &quot;{username}&quot;."
+
+msgid "The page {docpath} wasn't found."
+msgstr "Strona {docpath} nie została znaleziona."
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "Ta demonstracja pokazuje rezultat pomocnika szablonu SVG Samizdat."
+
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr "Ten plik jest rozpowszechniany na tych samych warunkach co pakiet {project}."
+
+msgid "Tillbaka"
+msgstr "Wstecz"
+
+msgid "Toggle menu"
+msgstr "Przełącz menu"
+
+msgid "Tot"
+msgstr "Razem"
+
+msgid "Tough"
+msgstr "Trudne"
+
+msgid "Transfer"
+msgstr "Przelew"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unauthenticated"
+msgstr "Nieuwierzytelniony"
+
+msgid "Unpaid"
+msgstr "Niezapłacone"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Update and send page."
+msgstr "Aktualizuj i wyślij stronę."
+
+msgid "Update and send."
+msgstr "Aktualizuj i wyślij."
+
+msgid "Update customer"
+msgstr "Aktualizuj klienta"
+
+msgid "Update invoice, customer #{customerid}"
+msgstr "Aktualizuj fakturę, klient #{customerid}"
+
+msgid "Updated customer"
+msgstr "Zaktualizowany klient"
+
+msgid "Updated invoice"
+msgstr "Zaktualizowana faktura"
+
+msgid "Updated {updated} by {updater}"
+msgstr "Zaktualizowano {updated} przez {updater}"
+
+msgid "Usage"
+msgstr "Użycie"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "Użyj <code>flags</code> dla ikon flag lub <code>anysvg</code> dla strony głównej aplikacji."
+
+msgid "Use the invoice number as message when you pay."
+msgstr "Użyj numeru faktury jako wiadomości przy płatności."
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "Użyj tego, jeśli nie potrzebujesz domyślnych klas z prefiksem."
+
+msgid "Used to make class names."
+msgstr "Używane do tworzenia nazw klas."
+
+msgid "User manual"
+msgstr "Instrukcja użytkownika"
+
+msgid "User registration"
+msgstr "Rejestracja użytkownika"
+
+msgid "Username"
+msgstr "Nazwa użytkownika"
+
+msgid "VAT"
+msgstr "VAT"
+
+msgid "VAT Id"
+msgstr "Nr VAT"
+
+msgid "VAT Id:"
+msgstr "Nr VAT:"
+
+msgid "VAT lookup, {vatno}"
+msgstr "Wyszukiwanie VAT, {vatno}"
+
+msgid "VAT number"
+msgstr "Numer VAT"
+
+msgid "VAT number lookup"
+msgstr "Wyszukiwanie numeru VAT"
+
+msgid "VAT percentage"
+msgstr "Procent VAT"
+
+msgid "VAT {rate}\\%"
+msgstr "VAT {rate}\\%"
+
+msgid "VAT:"
+msgstr "VAT:"
+
+msgid "Value for the class attribute."
+msgstr "Wartość dla atrybutu class."
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "Będziemy to również przechowywać do celów statystycznych i zapobiegania rejestracjom robotów."
+
+msgid "We will email a confirmation request."
+msgstr "Wyślemy prośbę o potwierdzenie e-mailem."
+
+msgid "We will reply as soon as possible."
+msgstr "Odpowiemy tak szybko, jak to możliwe."
+
+msgid "Web sites"
+msgstr "Strony internetowe"
+
+msgid "Websites"
+msgstr "Strony internetowe"
+
+msgid "Whois data for {ip}"
+msgstr "Dane Whois dla {ip}"
+
+msgid "Write the invoice number as message when you pay."
+msgstr "Wpisz numer faktury jako wiadomość podczas płatności."
+
+msgid "Wrong captcha"
+msgstr "Nieprawidłowa captcha"
+
+msgid "Year"
+msgstr "Rok"
+
+msgid "You can also post in our discussions."
+msgstr "Możesz też publikować w naszych dyskusjach."
+
+msgid "You have registered a new user account on {site}."
+msgstr "Zarejestrowałeś nowe konto użytkownika na {site}."
+
+msgid "You have {remaining} tries left."
+msgstr "Pozostało Ci {remaining} prób."
+
+msgid "You need to accept registration terms."
+msgstr "Musisz zaakceptować warunki rejestracji."
+
+msgid "You were logged in as {username}."
+msgstr "Byłeś zalogowany jako {username}."
+
+msgid "Your VAT Id"
+msgstr "Twój nr VAT"
+
+msgid "Your VAT Id:"
+msgstr "Twój nr VAT:"
+
+msgid "Your contact"
+msgstr "Twój kontakt"
+
+msgid "Your contact:"
+msgstr "Twój kontakt:"
+
+msgid "Your email"
+msgstr "Twój e-mail"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "Twoje IP {ip} zostanie dołączone do prośby o potwierdzenie."
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "Twoje IP {ip} zostanie dołączone do wiadomości."
+
+msgid "Your message appears below."
+msgstr "Twoja wiadomość pojawia się poniżej."
+
+msgid "Your name"
+msgstr "Twoje imię"
+
+msgid "Zone Kind"
+msgstr "Rodzaj strefy"
+
+msgid "Zone Name"
+msgstr "Nazwa strefy"
+
+msgid "Zone created successfully"
+msgstr "Strefa utworzona pomyślnie"
+
+msgid "Zone deleted successfully"
+msgstr "Strefa usunięta pomyślnie"
+
+msgid "Zone management"
+msgstr "Zarządzanie strefami"
+
+msgid "Zone not found"
+msgstr "Nie znaleziono strefy"
+
+msgid "Zone records"
+msgstr "Rekordy strefy"
+
+msgid "Zone updated successfully"
+msgstr "Strefa zaktualizowana pomyślnie"
+
+msgid "add 3\\%"
+msgstr "dodaj 3\\%"
+
+msgid "add {fee}"
+msgstr "dodaj {fee}"
+
+msgid "billing@rymdweb.com"
+msgstr "billing@rymdweb.com"
+
+msgid "control panel"
+msgstr "panel sterowania"
+
+msgid "customer"
+msgstr "klient"
+
+msgid "database"
+msgstr "baza danych"
+
+msgid "domain"
+msgstr "domena"
+
+msgid "invoice"
+msgstr "faktura"
+
+msgid "login attempts"
+msgstr "próby logowania"
+
+msgid "mail domain"
+msgstr "domena pocztowa"
+
+msgid "main firewall"
+msgstr "główna zapora"
+
+msgid "our web"
+msgstr "nasza strona"
+
+msgid "product"
+msgstr "produkt"
+
+msgid "standby firewall"
+msgstr "zapora zapasowa"
+
+msgid "website"
+msgstr "strona internetowa"
+
+msgid "wensite"
+msgstr "strona internetowa"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: Wymagana autentykacja"
+
+msgid "{code}: No authorization"
+msgstr "{code}: Brak autoryzacji"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: Nie w tym wszechświecie"
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{cost} {currency}"
+msgstr "{cost} {currency}"
+
+msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr "W ciągu ostatnich {minutes} minut dokonano {count} nieudanych prób logowania z {ip}."
+
+msgid "{number} days"
+msgstr "{number} dni"
+
+msgid "{number} signatures since {date}"
+msgstr "{number} podpisów od {date}"
+
+msgid "{server}, main firewall"
+msgstr "{server}, główna zapora"
+
+msgid "{server}, standby firewall"
+msgstr "{server}, zapora zapasowa"
+
+msgid "{sitename} by country"
+msgstr "{sitename} według kraju"
+
+msgid "{sitename} in {country}"
+msgstr "{sitename} w {country}"
+

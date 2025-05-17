@@ -8,7 +8,9 @@ sub countries ($self) {
   my $docpath = $self->stash('docpath');
   my $web = { docpath => 'country/index.html' };
   $self->stash('status', 200);
-  my $title = $self->app->__('FAKE News by country');
+  my $title = $self->app->__x('{sitename} by country',
+    sitename => $self->app->{config}->{sitename}
+  );
   $self->stash(title => $title);
   $self->render(web => $web, template => 'country/index');
 }

@@ -192,7 +192,6 @@ piratebay:
   password: s3cr3t
 locale:
   textdomain: com.fakenews
-  project: Samizdat
   Project-Id-Version: Samizdat
   Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
   Last-Translator: Webmaster <webmaster@fakenews.com>
@@ -208,22 +207,82 @@ locale:
       Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
       Last-Translator: Webmaster <webmaster@fakenews.com>
       Language-Team: Webmaster <webmaster@fakenews.com>
-    sv:
+      flag: gb
+      name: English
+    de:
       Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
       Last-Translator: Webmaster <webmaster@fakenews.com>
       Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: de
+      name: Deutsch
+    es:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: es
+      name: Español
+    fr:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: fr
+      name: Français
     ru:
       Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
       Last-Translator: Webmaster <webmaster@fakenews.com>
       Language-Team: Webmaster <webmaster@fakenews.com>
       flag: ru
       name: русский
+    sv:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: se
+      name: Svenska
+    pl:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: pl
+      name: Polski
+    pt:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: br
+      name: Português
+    ar:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: sa
+      name: العربية
   default_language: en
   skip_messages:
+    - default_language
     - sv-SE
     - en-US
-    - en-GB
     - ru-RU
+    - de-DE
+    - de-AT
+    - de-CH
+    - es-ES
+    - es-MX
+    - es-AR
+    - es-CO
+    - fr-FR
+    - fr-CA
+    - fr-BE
+    - fr-CH
+    - pl-PL
+    - pt-BR
+    - pt-PT
+    - ar-SA
+    - ar-AE
+    - ar-EG
+    - ar-MA
+    - ar-IQ
+    - ar-DZ
 google:
 #  tag: YOUR-TAG
 buymeacoffee:

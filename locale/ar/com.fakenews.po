@@ -1,0 +1,1771 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ar\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr "#{number}: {firstname} {lastname}، {city}، {country}"
+
+msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2022 &mdash; يرجى المشاركة وإضافة نجمة على {sitename}!"
+
+msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2023 &mdash; يرجى المشاركة وإضافة نجمة على {sitename}!"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "1 database"
+msgid_plural "{number} databases"
+msgstr[0] "لا توجد قواعد بيانات"
+msgstr[1] "قاعدة بيانات واحدة"
+msgstr[2] "قاعدتا بيانات"
+msgstr[3] "{number} قواعد بيانات"
+msgstr[4] "{number} قاعدة بيانات"
+msgstr[5] "{number} قاعدة بيانات"
+
+msgid "1 dns domain"
+msgid_plural "{number} dns domains"
+msgstr[0] "لا توجد نطاقات DNS"
+msgstr[1] "نطاق DNS واحد"
+msgstr[2] "نطاقا DNS"
+msgstr[3] "{number} نطاقات DNS"
+msgstr[4] "{number} نطاق DNS"
+msgstr[5] "{number} نطاق DNS"
+
+msgid "1 domain"
+msgid_plural "{number} domains"
+msgstr[0] "لا توجد نطاقات"
+msgstr[1] "نطاق واحد"
+msgstr[2] "نطاقان"
+msgstr[3] "{number} نطاقات"
+msgstr[4] "{number} نطاق"
+msgstr[5] "{number} نطاق"
+
+msgid "1 invoice"
+msgid_plural "{number} invoices"
+msgstr[0] "لا توجد فواتير"
+msgstr[1] "فاتورة واحدة"
+msgstr[2] "فاتورتان"
+msgstr[3] "{number} فواتير"
+msgstr[4] "{number} فاتورة"
+msgstr[5] "{number} فاتورة"
+
+msgid "1 invoice item"
+msgid_plural "{number} invoice items"
+msgstr[0] "لا توجد عناصر فاتورة"
+msgstr[1] "عنصر فاتورة واحد"
+msgstr[2] "عنصرا فاتورة"
+msgstr[3] "{number} عناصر فاتورة"
+msgstr[4] "{number} عنصر فاتورة"
+msgstr[5] "{number} عنصر فاتورة"
+
+msgid "1 mail domain"
+msgid_plural "{number} mail domains"
+msgstr[0] "لا توجد نطاقات بريد"
+msgstr[1] "نطاق بريد واحد"
+msgstr[2] "نطاقا بريد"
+msgstr[3] "{number} نطاقات بريد"
+msgstr[4] "{number} نطاق بريد"
+msgstr[5] "{number} نطاق بريد"
+
+msgid "1 site"
+msgid_plural "{number} sites"
+msgstr[0] "لا توجد مواقع"
+msgstr[1] "موقع واحد"
+msgstr[2] "موقعان"
+msgstr[3] "{number} مواقع"
+msgstr[4] "{number} موقع"
+msgstr[5] "{number} موقع"
+
+msgid "404: Missing document"
+msgstr "404: مستند مفقود"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "تم إرسال رابط تأكيد إلى {email}."
+
+msgid "A {rate} interest will be charged on overdue payments"
+msgstr "سيتم فرض فائدة بنسبة {rate} على المدفوعات المتأخرة"
+
+msgid "API docs"
+msgstr "وثائق API"
+
+msgid "About"
+msgstr "حول"
+
+msgid "According to our notes invoice {number} remains unpaid."
+msgstr "وفقًا لملاحظاتنا، الفاتورة {number} لا تزال غير مدفوعة."
+
+msgid "Account confirmation"
+msgstr "تأكيد الحساب"
+
+msgid "Actions"
+msgstr "إجراءات"
+
+msgid "Add customer"
+msgstr "إضافة عميل"
+
+msgid "Add database"
+msgstr "إضافة قاعدة بيانات"
+
+msgid "Add domain"
+msgstr "إضافة نطاق"
+
+msgid "Add mail domain"
+msgstr "إضافة نطاق بريد"
+
+msgid "Add product"
+msgstr "إضافة منتج"
+
+msgid "Add subscription"
+msgstr "إضافة اشتراك"
+
+msgid "Add voucher"
+msgstr "إضافة قسيمة"
+
+msgid "Add website"
+msgstr "إضافة موقع"
+
+msgid "Address"
+msgstr "العنوان"
+
+msgid "Address (billing)"
+msgstr "العنوان (الفواتير)"
+
+msgid "Address check"
+msgstr "التحقق من العنوان"
+
+msgid "Admininistration panel"
+msgstr "لوحة الإدارة"
+
+msgid "Advertising"
+msgstr "الإعلان"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "بعد التسجيل، يمكنك إضافة المزيد من البيانات عن نفسك، وتخفيف سياسة المشاركة، وتخصيص تجربتك."
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "السماح بملفات تعريف الارتباط للصق رمز التأكيد من البريد الإلكتروني"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Amount incl. VAT"
+msgstr "المبلغ شامل ضريبة القيمة المضافة"
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr "المبلغ المستحق شامل ضريبة القيمة المضافة: {rounded} {currency}"
+
+msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgstr "المبلغ المستحق بما في ذلك {percent} ضريبة القيمة المضافة: {costsum} {currency}"
+
+msgid "Amount to pay: {costsum} {currency}"
+msgstr "المبلغ المستحق: {costsum} {currency}"
+
+msgid "Are you sure you want to delete this record?"
+msgstr "هل أنت متأكد أنك تريد حذف هذا السجل؟"
+
+msgid "Article"
+msgstr "مقال"
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr "على الأقل 3 أحرف من a-z 0-9 -، يجب أن تبدأ بـ a-z"
+
+msgid "At least 8 characters including capitals and digits"
+msgstr "8 أحرف على الأقل بما في ذلك الأحرف الكبيرة والأرقام"
+
+msgid "BIC/Swift"
+msgstr "BIC/Swift"
+
+msgid "BIC/Swift address"
+msgstr "عنوان BIC/Swift"
+
+msgid "BIC/Swift address:"
+msgstr "عنوان BIC/Swift:"
+
+msgid "Back"
+msgstr "رجوع"
+
+msgid "Bankgiro"
+msgstr "Bankgiro"
+
+msgid "Bankgiro:"
+msgstr "Bankgiro:"
+
+msgid "Barred"
+msgstr "محظور"
+
+msgid "Billing"
+msgstr "الفواتير"
+
+msgid "Blocked"
+msgstr "محظور"
+
+msgid "Blocked ip number"
+msgstr "رقم IP محظور"
+
+msgid "Bootstrap icons"
+msgstr "أيقونات Bootstrap"
+
+msgid "Bootstrap icons helper"
+msgstr "مساعد أيقونات Bootstrap"
+
+msgid "Buddy price"
+msgstr "سعر الصديق"
+
+msgid "Buy {slug} a coffee"
+msgstr "اشترِ قهوة لـ {slug}"
+
+msgid "Buy {user} a coffee"
+msgstr "اشترِ قهوة لـ {user}"
+
+msgid "By default no information about you is shared."
+msgstr "افتراضيًا، لا تتم مشاركة أي معلومات عنك."
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "استدعاء المساعد يضيف رمز svg إلى جدول الرموز في بداية المستند، بالإضافة إلى مرجع مضمن له."
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Captcha code from image"
+msgstr "رمز الكابتشا من الصورة"
+
+msgid "Captcha image"
+msgstr "صورة الكابتشا"
+
+msgid "Captcha was wrong"
+msgstr "الكابتشا كانت خاطئة"
+
+msgid "Change password"
+msgstr "تغيير كلمة المرور"
+
+msgid "Changed status."
+msgstr "تم تغيير الحالة."
+
+msgid "Choose a password"
+msgstr "اختر كلمة مرور"
+
+msgid "Choose a password."
+msgstr "اختر كلمة مرور."
+
+msgid "Choose a username"
+msgstr "اختر اسم مستخدم"
+
+msgid "Choose a username."
+msgstr "اختر اسم مستخدم."
+
+msgid "Choose language"
+msgstr "اختر اللغة"
+
+msgid "City"
+msgstr "المدينة"
+
+msgid "City (billing)"
+msgstr "المدينة (الفواتير)"
+
+msgid "Click to pop login dialog."
+msgstr "انقر لفتح مربع حوار تسجيل الدخول."
+
+msgid "Click to pop payment dialog."
+msgstr "انقر لفتح مربع حوار الدفع."
+
+msgid "Click to pop reminder dialog."
+msgstr "انقر لفتح مربع حوار التذكير."
+
+msgid "Click to regenerate PDF."
+msgstr "انقر لإعادة إنشاء PDF."
+
+msgid "Click to search matching records."
+msgstr "انقر للبحث عن سجلات مطابقة."
+
+msgid "Click to search matching zones."
+msgstr "انقر للبحث عن مناطق مطابقة."
+
+msgid "Click to send a credit invoice."
+msgstr "انقر لإرسال فاتورة ائتمان."
+
+msgid "Click to send again."
+msgstr "انقر للإرسال مرة أخرى."
+
+msgid "Click to send agin."
+msgstr "انقر للإرسال مرة أخرى."
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Company"
+msgstr "الشركة"
+
+msgid "Confirm"
+msgstr "تأكيد"
+
+msgid "Confirm poll signature"
+msgstr "تأكيد توقيع الاستطلاع"
+
+msgid "Confirm your email address"
+msgstr "تأكيد عنوان بريدك الإلكتروني"
+
+msgid "Confirmation code"
+msgstr "رمز التأكيد"
+
+msgid "Confirmation request sent"
+msgstr "تم إرسال طلب التأكيد"
+
+msgid "Contact"
+msgstr "اتصال"
+
+msgid "Contact {sender} if you have questions."
+msgstr "اتصل بـ {sender} إذا كانت لديك أسئلة."
+
+msgid "Content"
+msgstr "المحتوى"
+
+msgid "Continue"
+msgstr "متابعة"
+
+msgid "Continues on next page..."
+msgstr "يستمر في الصفحة التالية..."
+
+msgid "Contribute"
+msgstr "المساهمة"
+
+msgid "Contributing"
+msgstr "المساهمة"
+
+msgid "Corporate identity number"
+msgstr "رقم هوية الشركة"
+
+msgid "Couldn't use code for verification."
+msgstr "تعذر استخدام الرمز للتحقق."
+
+msgid "Country"
+msgstr "البلد"
+
+msgid "Country (billing)"
+msgstr "البلد (الفواتير)"
+
+msgid "Country selector"
+msgstr "محدد البلد"
+
+msgid "Create contact"
+msgstr "إنشاء جهة اتصال"
+
+msgid "Create customer"
+msgstr "إنشاء عميل"
+
+msgid "Create new record"
+msgstr "إنشاء سجل جديد"
+
+msgid "Created {created} by {creator}"
+msgstr "تم الإنشاء في {created} بواسطة {creator}"
+
+msgid "Credit invoice"
+msgstr "فاتورة ائتمان"
+
+msgid "Credit invoice {fakturanummer}"
+msgstr "فاتورة ائتمان {fakturanummer}"
+
+msgid "Credit invoice {number}"
+msgstr "فاتورة ائتمان {number}"
+
+msgid "Credit trustability"
+msgstr "موثوقية الائتمان"
+
+msgid "Creditability"
+msgstr "المصداقية"
+
+msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgstr "المبلغ المعتمد شامل ضريبة القيمة المضافة: {rounded} {currency}"
+
+msgid "Credited invoice"
+msgstr "فاتورة معتمدة"
+
+msgid "Credited invoice: {number}"
+msgstr "فاتورة معتمدة: {number}"
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "Customer #{customerid}"
+msgstr "العميل #{customerid}"
+
+msgid "Customer Id"
+msgstr "معرف العميل"
+
+msgid "Customer Id:"
+msgstr "معرف العميل:"
+
+msgid "Customer newsletter"
+msgstr "النشرة الإخبارية للعملاء"
+
+msgid "Customers"
+msgstr "العملاء"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid "DNS Admin"
+msgstr "إدارة DNS"
+
+msgid "DNS Zones"
+msgstr "مناطق DNS"
+
+msgid "DNS domains"
+msgstr "نطاقات DNS"
+
+msgid "DNS management"
+msgstr "إدارة DNS"
+
+msgid "DNS zone"
+msgstr "منطقة DNS"
+
+msgid "DNS zones"
+msgstr "مناطق DNS"
+
+msgid "Data usage: {usage}"
+msgstr "استخدام البيانات: {usage}"
+
+msgid "Database"
+msgstr "قاعدة البيانات"
+
+msgid "Database error"
+msgstr "خطأ في قاعدة البيانات"
+
+msgid "Databases"
+msgstr "قواعد البيانات"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Date:"
+msgstr "التاريخ:"
+
+msgid "Debt"
+msgstr "الدين"
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "حدد أجزاء بياناتك الشخصية التي تريد إظهارها لمجموعات مختلفة."
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Destroyed"
+msgstr "تم تدميره"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "يحدد المجلد الفرعي الذي يتم تحميل ملفات svg منه. الافتراضي هو أيقونات Bootstrap."
+
+msgid "Developer docs"
+msgstr "وثائق المطور"
+
+msgid "Development"
+msgstr "التطوير"
+
+msgid "Do you want to credit the invoice?"
+msgstr "هل تريد اعتماد الفاتورة؟"
+
+msgid "Domain"
+msgstr "النطاق"
+
+msgid "Domain registration"
+msgstr "تسجيل النطاق"
+
+msgid "Domain registtration"
+msgstr "تسجيل النطاق"
+
+msgid "Domains"
+msgstr "النطاقات"
+
+msgid "DomÃ¤nregistrering"
+msgstr "تسجيل النطاق"
+
+msgid "Due date"
+msgstr "تاريخ الاستحقاق"
+
+msgid "Due to"
+msgstr "بسبب"
+
+msgid "Due to:"
+msgstr "بسبب:"
+
+msgid "EPP"
+msgstr "EPP"
+
+msgid "Economy"
+msgstr "الاقتصاد"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit customer {customerid}"
+msgstr "تعديل العميل {customerid}"
+
+msgid "Edit zone"
+msgstr "تعديل المنطقة"
+
+msgid "Ekonomi"
+msgstr "الاقتصاد"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Email %s verified"
+msgstr "تم التحقق من البريد الإلكتروني %s"
+
+msgid "Email (billing)"
+msgstr "البريد الإلكتروني (الفواتير)"
+
+msgid "Email confirmation"
+msgstr "تأكيد البريد الإلكتروني"
+
+msgid "Email not valid"
+msgstr "البريد الإلكتروني غير صالح"
+
+msgid "Email someone about {what}"
+msgstr "إرسال بريد إلكتروني إلى شخص ما حول {what}"
+
+msgid "Email to a friend"
+msgstr "إرسال بريد إلكتروني إلى صديق"
+
+msgid "Empty VAT"
+msgstr "ضريبة القيمة المضافة فارغة"
+
+msgid "Empty VAT number"
+msgstr "رقم ضريبة القيمة المضافة فارغ"
+
+msgid "Empty address"
+msgstr "العنوان فارغ"
+
+msgid "Empty billingaddress"
+msgstr "عنوان الفواتير فارغ"
+
+msgid "Empty city"
+msgstr "المدينة فارغة"
+
+msgid "Empty code"
+msgstr "الرمز فارغ"
+
+msgid "Empty company name"
+msgstr "اسم الشركة فارغ"
+
+msgid "Empty country"
+msgstr "البلد فارغ"
+
+msgid "Empty first name"
+msgstr "الاسم الأول فارغ"
+
+msgid "Empty freetext"
+msgstr "النص الحر فارغ"
+
+msgid "Empty last name"
+msgstr "اسم العائلة فارغ"
+
+msgid "Empty message"
+msgstr "الرسالة فارغة"
+
+msgid "Empty mobile"
+msgstr "الجوال فارغ"
+
+msgid "Empty name"
+msgstr "الاسم فارغ"
+
+msgid "Empty postal code"
+msgstr "الرمز البريدي فارغ"
+
+msgid "Empty recommendation"
+msgstr "التوصية فارغة"
+
+msgid "Empty reference"
+msgstr "المرجع فارغ"
+
+msgid "Empty subject"
+msgstr "الموضوع فارغ"
+
+msgid "Empty surname"
+msgstr "اسم العائلة فارغ"
+
+msgid "Empty telephone"
+msgstr "الهاتف فارغ"
+
+msgid "English"
+msgstr "الإنجليزية"
+
+msgid "Enter code"
+msgstr "أدخل الرمز"
+
+msgid "Enter code from captcha image"
+msgstr "أدخل الرمز من صورة الكابتشا"
+
+msgid "Enter password"
+msgstr "أدخل كلمة المرور"
+
+msgid "Enter record name"
+msgstr "أدخل اسم السجل"
+
+msgid "Enter username"
+msgstr "أدخل اسم المستخدم"
+
+msgid "Enter username and password"
+msgstr "أدخل اسم المستخدم وكلمة المرور"
+
+msgid "Enter valid email"
+msgstr "أدخل بريدًا إلكترونيًا صالحًا"
+
+msgid "Enter your email"
+msgstr "أدخل بريدك الإلكتروني"
+
+msgid "Enter zone name"
+msgstr "أدخل اسم المنطقة"
+
+msgid "Euro"
+msgstr "يورو"
+
+msgid "Examples"
+msgstr "أمثلة"
+
+msgid "Expand menu"
+msgstr "توسيع القائمة"
+
+msgid "Expand personal menu."
+msgstr "توسيع القائمة الشخصية."
+
+msgid "Expires"
+msgstr "تنتهي الصلاحية"
+
+msgid "Expiring domains"
+msgstr "نطاقات منتهية الصلاحية"
+
+msgid "FAKE Media"
+msgstr "FAKE Media"
+
+msgid "FAKE News by country"
+msgstr "FAKE News حسب البلد"
+
+msgid "Failed login from {ip}"
+msgstr "فشل تسجيل الدخول من {ip}"
+
+msgid "Failed to create record"
+msgstr "فشل إنشاء السجل"
+
+msgid "Failed to create zone"
+msgstr "فشل إنشاء المنطقة"
+
+msgid "Failed to delete record"
+msgstr "فشل حذف السجل"
+
+msgid "Failed to delete zone"
+msgstr "فشل حذف المنطقة"
+
+msgid "Failed to update record"
+msgstr "فشل تحديث السجل"
+
+msgid "Failed to update zone"
+msgstr "فشل تحديث المنطقة"
+
+msgid "File archive"
+msgstr "أرشيف الملفات"
+
+msgid "Fill the form correctly!"
+msgstr "املأ النموذج بشكل صحيح!"
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "ستجد فاتورة الائتمان مرفقة بصيغة PDF."
+
+msgid "Find the invoice attached as PDF."
+msgstr "ستجد الفاتورة مرفقة بصيغة PDF."
+
+msgid "Find your invoice attached as PDF."
+msgstr "ستجد فاتورتك مرفقة بصيغة PDF."
+
+msgid "First name"
+msgstr "الاسم الأول"
+
+msgid "Fortnox panel"
+msgstr "لوحة Fortnox"
+
+msgid "From"
+msgstr "من"
+
+msgid "Full"
+msgstr "كامل"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "قدم دعمًا ماليًا صغيرًا لـ {slug} على buymeacoffee"
+
+msgid "Give small financial support to {user} at buymeacoffee"
+msgstr "قدم دعمًا ماليًا صغيرًا لـ {user} على buymeacoffee"
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr "انتقل إلى {confirmationlink} لتأكيد توقيعك والمطالبة بصورتك."
+
+msgid "Gross"
+msgstr "إجمالي"
+
+msgid "HTML result"
+msgstr "نتيجة HTML"
+
+msgid "Halfyear"
+msgstr "نصف سنة"
+
+msgid "Handled invoice"
+msgstr "فاتورة تمت معالجتها"
+
+msgid "I accept the terms for registration."
+msgstr "أوافق على شروط التسجيل."
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "IBAN:"
+msgstr "IBAN:"
+
+msgid "Identification code"
+msgstr "رمز التعريف"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "إذا لم تسجل حسابًا، يرجى تجاهل هذا البريد الإلكتروني."
+
+msgid "Impersonate"
+msgstr "انتحال الشخصية"
+
+msgid "In your personal menu you find your {panel} among other things."
+msgstr "في قائمتك الشخصية تجد {panel} من بين أشياء أخرى."
+
+msgid "Including VAT"
+msgstr "شامل ضريبة القيمة المضافة"
+
+msgid "Invalid email"
+msgstr "بريد إلكتروني غير صالح"
+
+msgid "Invalid password"
+msgstr "كلمة مرور غير صالحة"
+
+msgid "Invalid username"
+msgstr "اسم مستخدم غير صالح"
+
+msgid "Invoice"
+msgstr "فاتورة"
+
+msgid "Invoice (credited)"
+msgstr "فاتورة (معتمدة)"
+
+msgid "Invoice address"
+msgstr "عنوان الفاتورة"
+
+msgid "Invoice credited m"
+msgstr "تم اعتماد الفاتورة"
+
+msgid "Invoice currency"
+msgstr "عملة الفاتورة"
+
+msgid "Invoice currency is {currency}."
+msgstr "عملة الفاتورة هي {currency}."
+
+msgid "Invoice customer #{customerid}"
+msgstr "عميل الفاتورة #{customerid}"
+
+msgid "Invoice customer {customerid}"
+msgstr "عميل الفاتورة {customerid}"
+
+msgid "Invoice date"
+msgstr "تاريخ الفاتورة"
+
+msgid "Invoice for completed services"
+msgstr "فاتورة للخدمات المكتملة"
+
+msgid "Invoice is credited"
+msgstr "تم اعتماد الفاتورة"
+
+msgid "Invoice number"
+msgstr "رقم الفاتورة"
+
+msgid "Invoice number: {fakturanummer}"
+msgstr "رقم الفاتورة: {fakturanummer}"
+
+msgid "Invoice period"
+msgstr "فترة الفاتورة"
+
+msgid "Invoice questions"
+msgstr "أسئلة الفاتورة"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "يمكن توجيه أسئلة الفاتورة إلى {url}."
+
+msgid "Invoice questions:"
+msgstr "أسئلة الفاتورة:"
+
+msgid "Invoice reminder, {number}"
+msgstr "تذكير بالفاتورة، {number}"
+
+msgid "Invoice type"
+msgstr "نوع الفاتورة"
+
+msgid "Invoice {fakturanummer}"
+msgstr "الفاتورة {fakturanummer}"
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "تم اعتماد الفاتورة {fakturanummer}."
+
+msgid "Invoice {invoiceid, customer {customerid}"
+msgstr "الفاتورة {invoiceid}، العميل {customerid}"
+
+msgid "Invoice {invoiceid}, customer #{customerid}"
+msgstr "الفاتورة {invoiceid}، العميل #{customerid}"
+
+msgid "Invoice {number}"
+msgstr "الفاتورة {number}"
+
+msgid "Invoice {number}, customer #{customerid}"
+msgstr "الفاتورة {number}، العميل #{customerid}"
+
+msgid "Invoices"
+msgstr "الفواتير"
+
+msgid "Invoices, customer #{customerid}"
+msgstr "الفواتير، العميل #{customerid}"
+
+msgid "Invoices, customer {customerid}"
+msgstr "الفواتير، العميل {customerid}"
+
+msgid "Invoicing"
+msgstr "الفوترة"
+
+msgid "Invoicing, 1 item"
+msgid_plural "Invoicing, {number} items"
+msgstr[0] "الفوترة، لا توجد عناصر"
+msgstr[1] "الفوترة، عنصر واحد"
+msgstr[2] "الفوترة، عنصران"
+msgstr[3] "الفوترة، {number} عناصر"
+msgstr[4] "الفوترة، {number} عنصر"
+msgstr[5] "الفوترة، {number} عنصر"
+
+msgid "It's also available at"
+msgstr "متوفر أيضًا في"
+
+msgid "It's also available at {url}."
+msgstr "متوفر أيضًا في {url}."
+
+msgid "Keep me logged in"
+msgstr "البقاء متصلًا"
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr "اطرد وزير الدفاع الروسي سيرغي شويغو!"
+
+msgid "Kunder"
+msgstr "العملاء"
+
+msgid "Kuvert"
+msgstr "ظرف"
+
+msgid "Language"
+msgstr "اللغة"
+
+msgid "Last name"
+msgstr "اسم العائلة"
+
+msgid "Latest"
+msgstr "الأحدث"
+
+msgid "Link to control panel"
+msgstr "رابط إلى لوحة التحكم"
+
+msgid "Link to personal data"
+msgstr "رابط إلى البيانات الشخصية"
+
+msgid "Link to personal settings"
+msgstr "رابط إلى الإعدادات الشخصية"
+
+msgid "List zones"
+msgstr "قائمة المناطق"
+
+msgid "Lista fakturor"
+msgstr "قائمة الفواتير"
+
+msgid "Log in"
+msgstr "تسجيل الدخول"
+
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+msgid "Log out and end current session"
+msgstr "تسجيل الخروج وإنهاء الجلسة الحالية"
+
+msgid "Login"
+msgstr "تسجيل الدخول"
+
+msgid "Login blocked"
+msgstr "تسجيل الدخول محظور"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "تم حظر تسجيل الدخول مؤقتًا بسبب محاولات فاشلة متكررة من {ip}."
+
+msgid "Logotype leading to start"
+msgstr "الشعار يؤدي إلى البداية"
+
+msgid "Logotype leading to start page"
+msgstr "الشعار يؤدي إلى صفحة البداية"
+
+msgid "Lost password?"
+msgstr "فقدت كلمة المرور؟"
+
+msgid "MB"
+msgstr "ميجابايت"
+
+msgid "MOSS"
+msgstr "MOSS"
+
+msgid "MX records"
+msgstr "سجلات MX"
+
+msgid "Mail"
+msgstr "البريد"
+
+msgid "Mail admin"
+msgstr "إدارة البريد"
+
+msgid "Mail domains"
+msgstr "نطاقات البريد"
+
+msgid "Make invoice"
+msgstr "إنشاء فاتورة"
+
+msgid "Manage site"
+msgstr "إدارة الموقع"
+
+msgid "Manuals"
+msgstr "الأدلة"
+
+msgid "Mark payment"
+msgstr "تحديد الدفع"
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgid "Message sent"
+msgstr "تم إرسال الرسالة"
+
+msgid "Mild"
+msgstr "خفيف"
+
+msgid "Missing file, our bad?"
+msgstr "ملف مفقود، خطأنا؟"
+
+msgid "Missing username or password"
+msgstr "اسم المستخدم أو كلمة المرور مفقودة"
+
+msgid "Mobile"
+msgstr "الجوال"
+
+msgid "Modifications were saved."
+msgstr "تم حفظ التعديلات."
+
+msgid "Month"
+msgstr "شهر"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Net"
+msgstr "صافي"
+
+msgid "Net amount"
+msgstr "المبلغ الصافي"
+
+msgid "Net amount:"
+msgstr "المبلغ الصافي:"
+
+msgid "New account"
+msgstr "حساب جديد"
+
+msgid "New customer"
+msgstr "عميل جديد"
+
+msgid "New invoice for customer #{customerid}"
+msgstr "فاتورة جديدة للعميل #{customerid}"
+
+msgid "New invoice for customer {customerid}"
+msgstr "فاتورة جديدة للعميل {customerid}"
+
+msgid "New invoice pack"
+msgstr "حزمة فواتير جديدة"
+
+msgid "New record"
+msgstr "سجل جديد"
+
+msgid "New zone"
+msgstr "منطقة جديدة"
+
+msgid "Newest"
+msgstr "الأحدث"
+
+msgid "Newsletter"
+msgstr "النشرة الإخبارية"
+
+msgid "No customer #{customerid}."
+msgstr "لا يوجد عميل #{customerid}."
+
+msgid "No invoice template."
+msgstr "لا يوجد قالب فاتورة."
+
+msgid "No invoicing"
+msgstr "لا توجد فوترة"
+
+msgid "No selected customer."
+msgstr "لم يتم تحديد عميل."
+
+msgid "Normal"
+msgstr "عادي"
+
+msgid "Notes"
+msgstr "ملاحظات"
+
+msgid "Number"
+msgstr "الرقم"
+
+msgid "Open invoice"
+msgstr "فتح الفاتورة"
+
+msgid "Open invoice for customer"
+msgstr "فتح الفاتورة للعميل"
+
+msgid "Open invoice for customer #{customerid}"
+msgstr "فتح الفاتورة للعميل #{customerid}"
+
+msgid "Open invoice items"
+msgstr "فتح عناصر الفاتورة"
+
+msgid "Open invoices"
+msgstr "فتح الفواتير"
+
+msgid "Open list"
+msgstr "فتح القائمة"
+
+msgid "Options"
+msgstr "خيارات"
+
+msgid "Org. Id"
+msgstr "معرف المؤسسة"
+
+msgid "Org. Id:"
+msgstr "معرف المؤسسة:"
+
+msgid "Organizational number"
+msgstr "الرقم التنظيمي"
+
+msgid "Our reference"
+msgstr "مرجعنا"
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "سيتم فرض رسوم تذكير وفائدة {rate} على المدفوعات المتأخرة."
+
+msgid "Ownership"
+msgstr "الملكية"
+
+msgid "PDF viewer"
+msgstr "عارض PDF"
+
+msgid "Page {number} of {total}"
+msgstr "الصفحة {number} من {total}"
+
+msgid "Paid"
+msgstr "مدفوع"
+
+msgid "Paid amount"
+msgstr "المبلغ المدفوع"
+
+msgid "Panel"
+msgstr "اللوحة"
+
+msgid "Password"
+msgstr "كلمة المرور"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "كلمة المرور خاطئة أو اسم المستخدم غير موجود."
+
+msgid "Paydate"
+msgstr "تاريخ الدفع"
+
+msgid "Payment"
+msgstr "الدفع"
+
+msgid "Payment due to: {duedate}"
+msgstr "الدفع مستحق في: {duedate}"
+
+msgid "Payment terms"
+msgstr "شروط الدفع"
+
+msgid "Payment terms:"
+msgstr "شروط الدفع:"
+
+msgid "Payments"
+msgstr "المدفوعات"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "قد تستغرق المدفوعات ما يصل إلى أسبوع واحد لتصبح مرئية في لوحة التحكم."
+
+msgid "Paypal"
+msgstr "باي بال"
+
+msgid "Paypal:"
+msgstr "باي بال:"
+
+msgid "Personal"
+msgstr "شخصي"
+
+msgid "Personal menu"
+msgstr "القائمة الشخصية"
+
+msgid "Personal panel"
+msgstr "اللوحة الشخصية"
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "يرجى تأكيد عنوان بريدك الإلكتروني بالنقر على الرابط التالي:"
+
+msgid "Please log in to access that page"
+msgstr "يرجى تسجيل الدخول للوصول إلى تلك الصفحة"
+
+msgid "Please login to access resource."
+msgstr "يرجى تسجيل الدخول للوصول إلى المورد."
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "يرجى تسجيل الخروج وتسجيل الدخول كمستخدم بتفويض مناسب بدلا من ذلك."
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
+
+msgid "Posta faktura"
+msgstr "فاتورة بريدية"
+
+msgid "Postal code"
+msgstr "الرمز البريدي"
+
+msgid "Postal code (billing)"
+msgstr "الرمز البريدي (الفواتير)"
+
+msgid "Postal mail"
+msgstr "البريد البريدي"
+
+msgid "Postgiro"
+msgstr "Postgiro"
+
+msgid "Press Register to regenerate"
+msgstr "اضغط على تسجيل لإعادة الإنشاء"
+
+msgid "Price"
+msgstr "السعر"
+
+msgid "Priority"
+msgstr "الأولوية"
+
+msgid "Products"
+msgstr "المنتجات"
+
+msgid "Qty"
+msgstr "الكمية"
+
+msgid "Qty."
+msgstr "الكمية."
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "Quarter"
+msgstr "ربع سنة"
+
+msgid "Receiver"
+msgstr "المستلم"
+
+msgid "Recent signatures"
+msgstr "التوقيعات الحديثة"
+
+msgid "Recommended by"
+msgstr "موصى به من قبل"
+
+msgid "Record Name"
+msgstr "اسم السجل"
+
+msgid "Record Type"
+msgstr "نوع السجل"
+
+msgid "Record created successfully"
+msgstr "تم إنشاء السجل بنجاح"
+
+msgid "Record deleted successfully"
+msgstr "تم حذف السجل بنجاح"
+
+msgid "Record updated successfully"
+msgstr "تم تحديث السجل بنجاح"
+
+msgid "Records"
+msgstr "السجلات"
+
+msgid "Regards"
+msgstr "مع تحياتي"
+
+msgid "Register"
+msgstr "تسجيل"
+
+msgid "Register account"
+msgstr "تسجيل حساب"
+
+msgid "Register to create and publish content."
+msgstr "سجل لإنشاء ونشر المحتوى."
+
+msgid "Registered for F-tax"
+msgstr "مسجل لضريبة F"
+
+msgid "Registered office"
+msgstr "المكتب المسجل"
+
+msgid "Registered office:"
+msgstr "المكتب المسجل:"
+
+msgid "Registration is currently non-functional"
+msgstr "التسجيل غير متاح حاليًا"
+
+msgid "Remaining amount to pay: {amount} {currency}"
+msgstr "المبلغ المتبقي للدفع: {amount} {currency}"
+
+msgid "Remind"
+msgstr "تذكير"
+
+msgid "Reprint"
+msgstr "إعادة طباعة"
+
+msgid "Resend"
+msgstr "إعادة إرسال"
+
+msgid "Resources"
+msgstr "الموارد"
+
+msgid "Roomservice"
+msgstr "خدمة الغرف"
+
+msgid "Round off"
+msgstr "تقريب"
+
+msgid "Round off:"
+msgstr "تقريب:"
+
+msgid "SEK"
+msgstr "كرونة سويدية"
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "يستخدم Samizdat أيقونات Bootstrap من {link}."
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search field for {what}"
+msgstr "حقل البحث عن {what}"
+
+msgid "Search for customer"
+msgstr "البحث عن عميل"
+
+msgid "Search for database"
+msgstr "البحث عن قاعدة بيانات"
+
+msgid "Search for domain"
+msgstr "البحث عن نطاق"
+
+msgid "Search for invoice"
+msgstr "البحث عن فاتورة"
+
+msgid "Search for mail domain"
+msgstr "البحث عن نطاق بريد"
+
+msgid "Search for product"
+msgstr "البحث عن منتج"
+
+msgid "Search for website"
+msgstr "البحث عن موقع ويب"
+
+msgid "Search for zone"
+msgstr "البحث عن منطقة"
+
+msgid "Select"
+msgstr "اختيار"
+
+msgid "Select art.no."
+msgstr "اختر رقم الفن."
+
+msgid "Select country"
+msgstr "اختر البلد"
+
+msgid "Select country or click flags to see detail"
+msgstr "اختر البلد أو انقر على الأعلام لرؤية التفاصيل"
+
+msgid "Select invoice pack"
+msgstr "اختر حزمة الفواتير"
+
+msgid "Send again"
+msgstr "إرسال مرة أخرى"
+
+msgid "Send invoice questions to {url}."
+msgstr "أرسل أسئلة الفاتورة إلى {url}."
+
+msgid "Send now"
+msgstr "إرسال الآن"
+
+msgid "Send reminder"
+msgstr "إرسال تذكير"
+
+msgid "Servers"
+msgstr "الخوادم"
+
+msgid "Set the height attribute."
+msgstr "تعيين سمة الارتفاع."
+
+msgid "Set the id attribute."
+msgstr "تعيين سمة المعرف."
+
+msgid "Set the title attribute."
+msgstr "تعيين سمة العنوان."
+
+msgid "Set the width attribute."
+msgstr "تعيين سمة العرض."
+
+msgid "Settings"
+msgstr "الإعدادات"
+
+msgid "Share on Facebook"
+msgstr "مشاركة على فيسبوك"
+
+msgid "Share on LinkedIn"
+msgstr "مشاركة على لينكد إن"
+
+msgid "Share on Telegram"
+msgstr "مشاركة على تيليجرام"
+
+msgid "Share on Twitter"
+msgstr "مشاركة على تويتر"
+
+msgid "Share {what} on {where}"
+msgstr "مشاركة {what} على {where}"
+
+msgid "Shown as"
+msgstr "يظهر كـ"
+
+msgid "Sign poll to kick Sergei Shoigu!"
+msgstr "وقع على الاستطلاع لطرد سيرغي شويغو!"
+
+msgid "Sign poll!"
+msgstr "وقع على الاستطلاع!"
+
+msgid "Site"
+msgstr "الموقع"
+
+msgid "Site content"
+msgstr "محتوى الموقع"
+
+msgid "Skip menu"
+msgstr "تخطي القائمة"
+
+msgid "Snapback evaluation"
+msgstr "تقييم الاسترجاع"
+
+msgid "Snapback only"
+msgstr "الاسترجاع فقط"
+
+msgid "Snapback scheduler"
+msgstr "جدولة الاسترجاع"
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "قائمة مفصولة بمسافات من الفئات الإضافية لإلحاقها بالفئات الافتراضية المسبقة."
+
+msgid "Special price"
+msgstr "سعر خاص"
+
+msgid "Start"
+msgstr "البدء"
+
+msgid "Stuff"
+msgstr "أشياء"
+
+msgid "Subject"
+msgstr "الموضوع"
+
+msgid "Submit"
+msgstr "إرسال"
+
+msgid "Summa"
+msgstr "المجموع"
+
+msgid "Super panel"
+msgstr "لوحة فائقة"
+
+msgid "Supplier invoices"
+msgstr "فواتير المورد"
+
+msgid "Surname"
+msgstr "اسم العائلة"
+
+msgid "Swedish"
+msgstr "السويدية"
+
+msgid "Technical"
+msgstr "تقني"
+
+msgid "Technical questions"
+msgstr "أسئلة تقنية"
+
+msgid "Technical questions:"
+msgstr "أسئلة تقنية:"
+
+msgid "Telephone"
+msgstr "الهاتف"
+
+msgid "Test"
+msgstr "اختبار"
+
+msgid "Test customer"
+msgstr "عميل اختبار"
+
+msgid "Text"
+msgstr "نص"
+
+msgid "Thank you for contacting us."
+msgstr "شكرًا لاتصالك بنا."
+
+msgid "The Samizdat project"
+msgstr "مشروع Samizdat"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "يتم استخدام الافتراضي لمجموعة أيقونات Bootstrap."
+
+msgid "The form was submitted from {ip}"
+msgstr "تم إرسال النموذج من {ip}"
+
+msgid "The invoice is also available at"
+msgstr "الفاتورة متاحة أيضًا في"
+
+msgid "The invoice was due to {duedate}."
+msgstr "كانت الفاتورة مستحقة في {duedate}."
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "الحد هو {blocklimit} محاولات لكل {blocktime} دقائق."
+
+msgid "The limit is {limit}."
+msgstr "الحد هو {limit}."
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "تستخدم وظيفة تسجيل الدخول جافا سكريبت وملفات تعريف الارتباط وAJAX."
+
+msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
+msgstr "تم إجراء أقدم محاولة في {failuretime} بواسطة &quot;{username}&quot;."
+
+msgid "The page {docpath} wasn't found."
+msgstr "لم يتم العثور على الصفحة {docpath}."
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "يوضح هذا العرض التوضيحي نتيجة مساعد قالب SVG من Samizdat."
+
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr "يتم توزيع هذا الملف تحت نفس الترخيص مثل حزمة {project}."
+
+msgid "Tillbaka"
+msgstr "رجوع"
+
+msgid "Toggle menu"
+msgstr "تبديل القائمة"
+
+msgid "Tot"
+msgstr "المجموع"
+
+msgid "Tough"
+msgstr "صعب"
+
+msgid "Transfer"
+msgstr "تحويل"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Unauthenticated"
+msgstr "غير مصادق"
+
+msgid "Unpaid"
+msgstr "غير مدفوع"
+
+msgid "Update"
+msgstr "تحديث"
+
+msgid "Update and send page."
+msgstr "تحديث وإرسال الصفحة."
+
+msgid "Update and send."
+msgstr "تحديث وإرسال."
+
+msgid "Update customer"
+msgstr "تحديث العميل"
+
+msgid "Update invoice, customer #{customerid}"
+msgstr "تحديث الفاتورة، العميل #{customerid}"
+
+msgid "Updated customer"
+msgstr "تم تحديث العميل"
+
+msgid "Updated invoice"
+msgstr "تم تحديث الفاتورة"
+
+msgid "Updated {updated} by {updater}"
+msgstr "تم التحديث في {updated} بواسطة {updater}"
+
+msgid "Usage"
+msgstr "الاستخدام"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "استخدم <code>flags</code> لأيقونات الأعلام أو <code>anysvg</code> للصفحة الرئيسية للتطبيق."
+
+msgid "Use the invoice number as message when you pay."
+msgstr "استخدم رقم الفاتورة كرسالة عند الدفع."
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "استخدم هذا إذا كنت لا تحتاج إلى فئات افتراضية مسبقة."
+
+msgid "Used to make class names."
+msgstr "تستخدم لإنشاء أسماء الفئات."
+
+msgid "User manual"
+msgstr "دليل المستخدم"
+
+msgid "User registration"
+msgstr "تسجيل المستخدم"
+
+msgid "Username"
+msgstr "اسم المستخدم"
+
+msgid "VAT"
+msgstr "ضريبة القيمة المضافة"
+
+msgid "VAT Id"
+msgstr "معرف ضريبة القيمة المضافة"
+
+msgid "VAT Id:"
+msgstr "معرف ضريبة القيمة المضافة:"
+
+msgid "VAT lookup, {vatno}"
+msgstr "البحث عن ضريبة القيمة المضافة، {vatno}"
+
+msgid "VAT number"
+msgstr "رقم ضريبة القيمة المضافة"
+
+msgid "VAT number lookup"
+msgstr "البحث عن رقم ضريبة القيمة المضافة"
+
+msgid "VAT percentage"
+msgstr "نسبة ضريبة القيمة المضافة"
+
+msgid "VAT {rate}\\%"
+msgstr "ضريبة القيمة المضافة {rate}\\%"
+
+msgid "VAT:"
+msgstr "ضريبة القيمة المضافة:"
+
+msgid "Value for the class attribute."
+msgstr "قيمة لسمة الفئة."
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "سنقوم أيضًا بتخزينه للإحصائيات ولمنع تسجيلات الروبوت."
+
+msgid "We will email a confirmation request."
+msgstr "سنرسل طلب تأكيد عبر البريد الإلكتروني."
+
+msgid "We will reply as soon as possible."
+msgstr "سنرد في أقرب وقت ممكن."
+
+msgid "Web sites"
+msgstr "مواقع الويب"
+
+msgid "Websites"
+msgstr "مواقع الويب"
+
+msgid "Whois data for {ip}"
+msgstr "بيانات Whois لـ {ip}"
+
+msgid "Write the invoice number as message when you pay."
+msgstr "اكتب رقم الفاتورة كرسالة عند الدفع."
+
+msgid "Wrong captcha"
+msgstr "كابتشا خاطئة"
+
+msgid "Year"
+msgstr "سنة"
+
+msgid "You can also post in our discussions."
+msgstr "يمكنك أيضًا النشر في مناقشاتنا."
+
+msgid "You have registered a new user account on {site}."
+msgstr "لقد سجلت حساب مستخدم جديد على {site}."
+
+msgid "You have {remaining} tries left."
+msgstr "لديك {remaining} محاولات متبقية."
+
+msgid "You need to accept registration terms."
+msgstr "تحتاج إلى قبول شروط التسجيل."
+
+msgid "You were logged in as {username}."
+msgstr "لقد سجلت الدخول باسم {username}."
+
+msgid "Your VAT Id"
+msgstr "معرف ضريبة القيمة المضافة الخاص بك"
+
+msgid "Your VAT Id:"
+msgstr "معرف ضريبة القيمة المضافة الخاص بك:"
+
+msgid "Your contact"
+msgstr "جهة الاتصال الخاصة بك"
+
+msgid "Your contact:"
+msgstr "جهة الاتصال الخاصة بك:"
+
+msgid "Your email"
+msgstr "بريدك الإلكتروني"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "سيتم إضافة عنوان IP الخاص بك {ip} إلى طلب التأكيد."
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "سيتم إضافة عنوان IP الخاص بك {ip} إلى الرسالة."
+
+msgid "Your message appears below."
+msgstr "تظهر رسالتك أدناه."
+
+msgid "Your name"
+msgstr "اسمك"
+
+msgid "Zone Kind"
+msgstr "نوع المنطقة"
+
+msgid "Zone Name"
+msgstr "اسم المنطقة"
+
+msgid "Zone created successfully"
+msgstr "تم إنشاء المنطقة بنجاح"
+
+msgid "Zone deleted successfully"
+msgstr "تم حذف المنطقة بنجاح"
+
+msgid "Zone management"
+msgstr "إدارة المنطقة"
+
+msgid "Zone not found"
+msgstr "لم يتم العثور على المنطقة"
+
+msgid "Zone records"
+msgstr "سجلات المنطقة"
+
+msgid "Zone updated successfully"
+msgstr "تم تحديث المنطقة بنجاح"
+
+msgid "add 3\\%"
+msgstr "إضافة 3\\%"
+
+msgid "add {fee}"
+msgstr "إضافة {fee}"
+
+msgid "billing@rymdweb.com"
+msgstr "billing@rymdweb.com"
+
+msgid "control panel"
+msgstr "لوحة التحكم"
+
+msgid "customer"
+msgstr "العميل"
+
+msgid "database"
+msgstr "قاعدة البيانات"
+
+msgid "domain"
+msgstr "النطاق"
+
+msgid "invoice"
+msgstr "الفاتورة"
+
+msgid "login attempts"
+msgstr "محاولات تسجيل الدخول"
+
+msgid "mail domain"
+msgstr "نطاق البريد"
+
+msgid "main firewall"
+msgstr "جدار الحماية الرئيسي"
+
+msgid "our web"
+msgstr "موقعنا"
+
+msgid "product"
+msgstr "المنتج"
+
+msgid "standby firewall"
+msgstr "جدار الحماية الاحتياطي"
+
+msgid "website"
+msgstr "موقع الويب"
+
+msgid "wensite"
+msgstr "موقع الويب"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: المصادقة مطلوبة"
+
+msgid "{code}: No authorization"
+msgstr "{code}: لا يوجد تفويض"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: ليس في هذا الكون"
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{cost} {currency}"
+msgstr "{cost} {currency}"
+
+msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr "تم إجراء {count} محاولات تسجيل دخول فاشلة من {ip} في آخر {minutes} دقائق."
+
+msgid "{number} days"
+msgstr "{number} أيام"
+
+msgid "{number} signatures since {date}"
+msgstr "{number} توقيعات منذ {date}"
+
+msgid "{server}, main firewall"
+msgstr "{server}، جدار الحماية الرئيسي"
+
+msgid "{server}, standby firewall"
+msgstr "{server}، جدار الحماية الاحتياطي"
+
+msgid "{sitename} by country"
+msgstr "{sitename} حسب البلد"
+
+msgid "{sitename} in {country}"
+msgstr "{sitename} في {country}"
+

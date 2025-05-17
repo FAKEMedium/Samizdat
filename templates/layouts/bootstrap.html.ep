@@ -1,5 +1,11 @@
 <!DOCTYPE html>
-<html class="no-js" lang="<%== language %>">
+<%
+  my $dir = 'ltr';
+  if (language eq 'ar' || language eq 'he' || language eq 'fa') {
+    $dir = 'rtl';
+  }
+%>
+<html class="no-js" lang="<%== language %>" dir="<%== $dir %>">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

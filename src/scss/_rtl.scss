@@ -1,0 +1,106 @@
+// RTL-specific styles
+[dir="rtl"] {
+  // Text alignment
+  .text-left {
+    text-align: right !important;
+  }
+  
+  .text-right {
+    text-align: left !important;
+  }
+  
+  // Float utilities
+  .float-start {
+    float: right !important;
+  }
+  
+  .float-end {
+    float: left !important;
+  }
+  
+  // Margin and padding
+  .ms-0, .ms-1, .ms-2, .ms-3, .ms-4, .ms-5, .ms-auto {
+    margin-right: var(--bs-margin-start) !important;
+    margin-left: 0 !important;
+  }
+  
+  .me-0, .me-1, .me-2, .me-3, .me-4, .me-5, .me-auto {
+    margin-left: var(--bs-margin-end) !important;
+    margin-right: 0 !important;
+  }
+  
+  .ps-0, .ps-1, .ps-2, .ps-3, .ps-4, .ps-5 {
+    padding-right: var(--bs-padding-start) !important;
+    padding-left: 0 !important;
+  }
+  
+  .pe-0, .pe-1, .pe-2, .pe-3, .pe-4, .pe-5 {
+    padding-left: var(--bs-padding-end) !important;
+    padding-right: 0 !important;
+  }
+  
+  // Border radius
+  .rounded-start {
+    border-top-right-radius: var(--bs-border-radius) !important;
+    border-bottom-right-radius: var(--bs-border-radius) !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  
+  .rounded-end {
+    border-top-left-radius: var(--bs-border-radius) !important;
+    border-bottom-left-radius: var(--bs-border-radius) !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  // Position
+  .start-0, .start-50, .start-100 {
+    right: var(--bs-start) !important;
+    left: auto !important;
+  }
+  
+  .end-0, .end-50, .end-100 {
+    left: var(--bs-end) !important;
+    right: auto !important;
+  }
+  
+  // Form controls
+  .form-check {
+    padding-right: 1.5em !important;
+    padding-left: 0 !important;
+    
+    .form-check-input {
+      float: right !important;
+      margin-right: -1.5em !important;
+      margin-left: 0 !important;
+    }
+  }
+  
+  // Dropdown
+  .dropdown-menu {
+    text-align: right !important;
+  }
+  
+  // Flipping icons that indicate direction
+  .bi-chevron-right, .bi-arrow-right, .bi-caret-right {
+    transform: scaleX(-1);
+  }
+  
+  .bi-chevron-left, .bi-arrow-left, .bi-caret-left {
+    transform: scaleX(-1);
+  }
+  
+  // List groups
+  .list-group {
+    padding-right: 0 !important;
+  }
+  
+  // Don't flip leftlinks and rightlinks since we want to preserve the layout
+  
+  // Other specific adjustments needed for your UI
+  .toast-container.top-0.start-0 {
+    right: 0 !important;
+    left: auto !important;
+  }
+}

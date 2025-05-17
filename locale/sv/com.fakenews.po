@@ -70,6 +70,9 @@ msgstr "404: Sidan saknas"
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
+msgid "A confirmation link was mailed to {email}."
+msgstr ""
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
@@ -129,6 +132,9 @@ msgstr "Annonsering"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Efter registrering kan du lägga till mer information om dig själv, lätta på din delningspolicy och anpassa din upplevelse."
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr ""
 
 msgid "Amount"
 msgstr "Summa"
@@ -268,10 +274,16 @@ msgstr "Stäng"
 msgid "Company"
 msgstr "Företag"
 
+msgid "Confirm"
+msgstr ""
+
 msgid "Confirm poll signature"
 msgstr "Bekräfta underskrift"
 
 msgid "Confirm your email address"
+msgstr ""
+
+msgid "Confirmation code"
 msgstr ""
 
 msgid "Confirmation request sent"
@@ -297,6 +309,9 @@ msgstr "Bidra"
 
 msgid "Corporate identity number"
 msgstr "Organisationsnummer"
+
+msgid "Couldn't use code for verification."
+msgstr ""
 
 msgid "Country"
 msgstr "Land"
@@ -385,6 +400,9 @@ msgstr "Dataanvändning: {usage}"
 msgid "Database"
 msgstr "Databas"
 
+msgid "Database error"
+msgstr ""
+
 msgid "Databases"
 msgstr "Databaser"
 
@@ -451,8 +469,14 @@ msgstr "Redigera zon"
 msgid "Email"
 msgstr "Epost"
 
+msgid "Email %s verified"
+msgstr ""
+
 msgid "Email (billing)"
 msgstr "Epost (faktura)"
+
+msgid "Email confirmation"
+msgstr ""
 
 msgid "Email not valid"
 msgstr "Ogiltig epost"
@@ -842,6 +866,9 @@ msgstr "Maildomäner"
 
 msgid "Make invoice"
 msgstr "Skapa faktura"
+
+msgid "Manage site"
+msgstr ""
 
 msgid "Manuals"
 msgstr "Manualer"
@@ -1245,6 +1272,9 @@ msgstr "Skriv under upprop!"
 msgid "Site"
 msgstr "Webbplats"
 
+msgid "Site content"
+msgstr ""
+
 msgid "Skip menu"
 msgstr "Hoppa över meny"
 
@@ -1604,6 +1634,9 @@ msgstr "{server}, huvudbrandvägg"
 
 msgid "{server}, standby firewall"
 msgstr "{server}, standbybrandvägg"
+
+msgid "{sitename} by country"
+msgstr ""
 
 msgid "{sitename} in {country}"
 msgstr "{sitename} i {country}"
