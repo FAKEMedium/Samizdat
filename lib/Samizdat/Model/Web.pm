@@ -102,7 +102,7 @@ sub getlist ($self, $url, $options = {}) {
       $meta = $data->{meta};
     }
   });
-#  say Dumper $docs;
+ # say Dumper $docs;
   if ($selectedimage->{src}) {
     $meta->{property}->{'og:image'} = $selectedimage->{src};
   }
