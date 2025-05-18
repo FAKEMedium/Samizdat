@@ -1056,6 +1056,9 @@ msgstr "Visionneuse PDF"
 msgid "Page {number} of {total}"
 msgstr "Page {number} sur {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "Payé"
 
@@ -1208,6 +1211,9 @@ msgstr "Siège social"
 
 msgid "Registered office:"
 msgstr "Siège social :"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "L'inscription n'est actuellement pas fonctionnelle"

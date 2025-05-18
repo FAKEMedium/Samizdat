@@ -1,7 +1,7 @@
 <form action="<%= url_for('account_login') %>" id="loginform" method="post" class="modal-content">
   <input type="hidden" name="not_empty" value="Aecoh9rit2cah">
   <div class="modal-header">
-    <h5 class="modal-title mr-auto" id="modaltitle"><%== title %></h5>
+    <h5 class="modal-title me-auto" id="modaltitle"><%== title %></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('Close') %>"></button>
   </div>
   <div class="modal-body" id="loginbody">

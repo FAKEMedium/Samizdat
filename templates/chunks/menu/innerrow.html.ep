@@ -1,5 +1,5 @@
 % if ($item->{children} < 0) {
-<li id="menuitem_<%= $item->{id} %>" class="nav-item menuinnerrow"><a class="nav-link text-nowrap ml-5 ml-sm-0" href="/<%= $item->{path} %>" title="<%= $item->{title} %>"><%= $item->{title} %></a></li>
+<li id="menuitem_<%= $item->{id} %>" class="nav-item menuinnerrow"><a class="nav-link text-nowrap ms-5 ms-sm-0" href="/<%= $item->{path} %>" title="<%= $item->{title} %>"><%= $item->{title} %></a></li>
 % } else {
-<li id="menuitem_<%= $item->{id} %>" class="nav-item menuinnerrow"><a class="nav-link text-nowrap ml-5 ml-sm-0" href="/<%= $item->{path} %>.html" title="<%= $item->{title} %>"><%= $item->{title} %></a></li>
+<li id="menuitem_<%= $item->{id} %>" class="nav-item menuinnerrow"><a class="nav-link text-nowrap ms-5 ms-sm-0" href="/<%= $item->{path} %>.html" title="<%= $item->{title} %>"><%= $item->{title} %></a></li>
 % }

@@ -1064,6 +1064,9 @@ msgstr "Просмотр PDF"
 msgid "Page {number} of {total}"
 msgstr "Страница {number} из {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "Оплачено"
 
@@ -1216,6 +1219,9 @@ msgstr "Юридический адрес"
 
 msgid "Registered office:"
 msgstr "Юридический адрес:"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "Регистрация в настоящее время не работает"

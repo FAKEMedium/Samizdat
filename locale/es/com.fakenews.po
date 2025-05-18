@@ -1056,6 +1056,9 @@ msgstr "Visor PDF"
 msgid "Page {number} of {total}"
 msgstr "Página {number} de {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "Pagado"
 
@@ -1208,6 +1211,9 @@ msgstr "Domicilio social"
 
 msgid "Registered office:"
 msgstr "Domicilio social:"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "El registro actualmente no está en funcionamiento"

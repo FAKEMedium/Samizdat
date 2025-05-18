@@ -999,6 +999,9 @@ msgstr "PDF-visare"
 msgid "Page {number} of {total}"
 msgstr "Sida {number} av  {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "Betalad"
 
@@ -1139,6 +1142,9 @@ msgstr "Registrerad för F-skatt"
 
 msgid "Registered office"
 msgstr "Styrelsens säte"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "Registrering funkar inte än"

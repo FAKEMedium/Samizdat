@@ -15,6 +15,7 @@ The different tasks are managed by make. These steps are suggestions:
   * sudo cpanm --reinstall EV
   * sudo cpanm --reinstall Mojolicious
   * sudo cpanm --reinstall Data::UUID
+  * sudo cpanm --reinstall UUID
   * sudo cpanm --reinstall DateTime
   * sudo cpanm --reinstall WWW::YouTube::Download
   * sudo cpanm --reinstall Hash::Merge

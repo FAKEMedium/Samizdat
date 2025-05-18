@@ -1,0 +1,1738 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: hi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
+
+msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2022 &mdash; कृपया {sitename} पर शेयर करें और स्टार जोड़ें!"
+
+msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
+msgstr "&copy;2023 &mdash; कृपया {sitename} पर शेयर करें और स्टार जोड़ें!"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "1 database"
+msgid_plural "{number} databases"
+msgstr[0] "1 डेटाबेस"
+msgstr[1] "{number} डेटाबेस"
+
+msgid "1 dns domain"
+msgid_plural "{number} dns domains"
+msgstr[0] "1 डीएनएस डोमेन"
+msgstr[1] "{number} डीएनएस डोमेन"
+
+msgid "1 domain"
+msgid_plural "{number} domains"
+msgstr[0] "1 डोमेन"
+msgstr[1] "{number} डोमेन"
+
+msgid "1 invoice"
+msgid_plural "{number} invoices"
+msgstr[0] "1 इनवॉइस"
+msgstr[1] "{number} इनवॉइस"
+
+msgid "1 invoice item"
+msgid_plural "{number} invoice items"
+msgstr[0] "1 इनवॉइस आइटम"
+msgstr[1] "{number} इनवॉइस आइटम"
+
+msgid "1 mail domain"
+msgid_plural "{number} mail domains"
+msgstr[0] "1 मेल डोमेन"
+msgstr[1] "{number} मेल डोमेन"
+
+msgid "1 site"
+msgid_plural "{number} sites"
+msgstr[0] "1 साइट"
+msgstr[1] "{number} साइट"
+
+msgid "404: Missing document"
+msgstr "404: अनुपलब्ध दस्तावेज़"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "एक पुष्टिकरण लिंक {email} पर भेजा गया है।"
+
+msgid "A {rate} interest will be charged on overdue payments"
+msgstr "देर से भुगतान पर {rate} ब्याज लगाया जाएगा"
+
+msgid "API docs"
+msgstr "API दस्तावेज़"
+
+msgid "About"
+msgstr "परिचय"
+
+msgid "According to our notes invoice {number} remains unpaid."
+msgstr "हमारे रिकॉर्ड के अनुसार इनवॉइस {number} अभी तक अवैतनिक है।"
+
+msgid "Account confirmation"
+msgstr "खाता पुष्टिकरण"
+
+msgid "Actions"
+msgstr "कार्य"
+
+msgid "Add customer"
+msgstr "ग्राहक जोड़ें"
+
+msgid "Add database"
+msgstr "डेटाबेस जोड़ें"
+
+msgid "Add domain"
+msgstr "डोमेन जोड़ें"
+
+msgid "Add mail domain"
+msgstr "मेल डोमेन जोड़ें"
+
+msgid "Add product"
+msgstr "उत्पाद जोड़ें"
+
+msgid "Add subscription"
+msgstr "सदस्यता जोड़ें"
+
+msgid "Add voucher"
+msgstr "वाउचर जोड़ें"
+
+msgid "Add website"
+msgstr "वेबसाइट जोड़ें"
+
+msgid "Address"
+msgstr "पता"
+
+msgid "Address (billing)"
+msgstr "पता (बिलिंग)"
+
+msgid "Address check"
+msgstr "पता जांच"
+
+msgid "Admininistration panel"
+msgstr "प्रशासन पैनल"
+
+msgid "Advertising"
+msgstr "विज्ञापन"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "पंजीकरण के बाद आप अपने बारे में अधिक जानकारी जोड़ सकते हैं, अपनी शेयरिंग नीति को बदल सकते हैं और अपने अनुभव को अनुकूलित कर सकते हैं।"
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "ईमेल से पुष्टिकरण कोड पेस्ट करने के लिए कुकीज़ की अनुमति दें"
+
+msgid "Amount"
+msgstr "राशि"
+
+msgid "Amount incl. VAT"
+msgstr "राशि (वैट सहित)"
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr "भुगतान राशि (वैट सहित): {rounded} {currency}"
+
+msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgstr "भुगतान राशि {percent} वैट सहित: {costsum} {currency}"
+
+msgid "Amount to pay: {costsum} {currency}"
+msgstr "भुगतान राशि: {costsum} {currency}"
+
+msgid "Are you sure you want to delete this record?"
+msgstr "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?"
+
+msgid "Article"
+msgstr "लेख"
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr "कम से कम 3 अक्षर a-z 0-9 - से, a-z से शुरू होना चाहिए"
+
+msgid "At least 8 characters including capitals and digits"
+msgstr "कम से कम 8 अक्षर, बड़े अक्षर और अंक शामिल"
+
+msgid "BIC/Swift"
+msgstr "BIC/स्विफ्ट"
+
+msgid "BIC/Swift address"
+msgstr "BIC/स्विफ्ट पता"
+
+msgid "BIC/Swift address:"
+msgstr "BIC/स्विफ्ट पता:"
+
+msgid "Back"
+msgstr "वापस"
+
+msgid "Bankgiro"
+msgstr "बैंकगिरो"
+
+msgid "Bankgiro:"
+msgstr "बैंकगिरो:"
+
+msgid "Barred"
+msgstr "बाधित"
+
+msgid "Billing"
+msgstr "बिलिंग"
+
+msgid "Blocked"
+msgstr "अवरुद्ध"
+
+msgid "Blocked ip number"
+msgstr "अवरुद्ध आईपी नंबर"
+
+msgid "Bootstrap icons"
+msgstr "बूटस्ट्रैप आइकन"
+
+msgid "Bootstrap icons helper"
+msgstr "बूटस्ट्रैप आइकन हेल्पर"
+
+msgid "Buddy price"
+msgstr "बडी प्राइस"
+
+msgid "Buy {slug} a coffee"
+msgstr "{slug} को एक कॉफी खरीदें"
+
+msgid "Buy {user} a coffee"
+msgstr "{user} को एक कॉफी खरीदें"
+
+msgid "By default no information about you is shared."
+msgstr "डिफ़ॉल्ट रूप से आपके बारे में कोई जानकारी साझा नहीं की जाती है।"
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "हेल्पर को कॉल करने से svg कोड दस्तावेज़ की शुरुआत में प्रतीक तालिका में जोड़ा जाता है, साथ ही इसका इनलाइन संदर्भ भी।"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Captcha code from image"
+msgstr "छवि से कैप्चा कोड"
+
+msgid "Captcha image"
+msgstr "कैप्चा छवि"
+
+msgid "Captcha was wrong"
+msgstr "कैप्चा गलत था"
+
+msgid "Change password"
+msgstr "पासवर्ड बदलें"
+
+msgid "Changed status."
+msgstr "स्थिति बदली गई।"
+
+msgid "Choose a password"
+msgstr "पासवर्ड चुनें"
+
+msgid "Choose a password."
+msgstr "पासवर्ड चुनें।"
+
+msgid "Choose a username"
+msgstr "उपयोगकर्ता नाम चुनें"
+
+msgid "Choose a username."
+msgstr "उपयोगकर्ता नाम चुनें।"
+
+msgid "Choose language"
+msgstr "भाषा चुनें"
+
+msgid "City"
+msgstr "शहर"
+
+msgid "City (billing)"
+msgstr "शहर (बिलिंग)"
+
+msgid "Click to pop login dialog."
+msgstr "लॉगिन डायलॉग खोलने के लिए क्लिक करें।"
+
+msgid "Click to pop payment dialog."
+msgstr "भुगतान डायलॉग खोलने के लिए क्लिक करें।"
+
+msgid "Click to pop reminder dialog."
+msgstr "रिमाइंडर डायलॉग खोलने के लिए क्लिक करें।"
+
+msgid "Click to regenerate PDF."
+msgstr "PDF फिर से बनाने के लिए क्लिक करें।"
+
+msgid "Click to search matching records."
+msgstr "मिलते-जुलते रिकॉर्ड खोजने के लिए क्लिक करें।"
+
+msgid "Click to search matching zones."
+msgstr "मिलते-जुलते ज़ोन खोजने के लिए क्लिक करें।"
+
+msgid "Click to send a credit invoice."
+msgstr "क्रेडिट इनवॉइस भेजने के लिए क्लिक करें।"
+
+msgid "Click to send again."
+msgstr "फिर से भेजने के लिए क्लिक करें।"
+
+msgid "Click to send agin."
+msgstr "फिर से भेजने के लिए क्लिक करें।"
+
+msgid "Close"
+msgstr "बंद करें"
+
+msgid "Company"
+msgstr "कंपनी"
+
+msgid "Confirm"
+msgstr "पुष्टि करें"
+
+msgid "Confirm poll signature"
+msgstr "पोल हस्ताक्षर की पुष्टि करें"
+
+msgid "Confirm your email address"
+msgstr "अपने ईमेल पते की पुष्टि करें"
+
+msgid "Confirmation code"
+msgstr "पुष्टिकरण कोड"
+
+msgid "Confirmation request sent"
+msgstr "पुष्टिकरण अनुरोध भेजा गया"
+
+msgid "Contact"
+msgstr "संपर्क"
+
+msgid "Contact {sender} if you have questions."
+msgstr "यदि आपके कोई प्रश्न हैं तो {sender} से संपर्क करें।"
+
+msgid "Content"
+msgstr "सामग्री"
+
+msgid "Continue"
+msgstr "जारी रखें"
+
+msgid "Continues on next page..."
+msgstr "अगले पृष्ठ पर जारी..."
+
+msgid "Contribute"
+msgstr "योगदान दें"
+
+msgid "Contributing"
+msgstr "योगदान"
+
+msgid "Corporate identity number"
+msgstr "कॉर्पोरेट पहचान संख्या"
+
+msgid "Couldn't use code for verification."
+msgstr "सत्यापन के लिए कोड का उपयोग नहीं किया जा सका।"
+
+msgid "Country"
+msgstr "देश"
+
+msgid "Country (billing)"
+msgstr "देश (बिलिंग)"
+
+msgid "Country selector"
+msgstr "देश चयनकर्ता"
+
+msgid "Create contact"
+msgstr "संपर्क बनाएं"
+
+msgid "Create customer"
+msgstr "ग्राहक बनाएं"
+
+msgid "Create new record"
+msgstr "नया रिकॉर्ड बनाएं"
+
+msgid "Created {created} by {creator}"
+msgstr "{creator} द्वारा {created} को बनाया गया"
+
+msgid "Credit invoice"
+msgstr "क्रेडिट इनवॉइस"
+
+msgid "Credit invoice {fakturanummer}"
+msgstr "क्रेडिट इनवॉइस {fakturanummer}"
+
+msgid "Credit invoice {number}"
+msgstr "क्रेडिट इनवॉइस {number}"
+
+msgid "Credit trustability"
+msgstr "क्रेडिट विश्वसनीयता"
+
+msgid "Creditability"
+msgstr "साख"
+
+msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgstr "क्रेडिट राशि VAT सहित: {rounded} {currency}"
+
+msgid "Credited invoice"
+msgstr "क्रेडिट किया गया इनवॉइस"
+
+msgid "Credited invoice: {number}"
+msgstr "क्रेडिट किया गया इनवॉइस: {number}"
+
+msgid "Customer"
+msgstr "ग्राहक"
+
+msgid "Customer #{customerid}"
+msgstr "ग्राहक #{customerid}"
+
+msgid "Customer Id"
+msgstr "ग्राहक आईडी"
+
+msgid "Customer Id:"
+msgstr "ग्राहक आईडी:"
+
+msgid "Customer newsletter"
+msgstr "ग्राहक न्यूज़लेटर"
+
+msgid "Customers"
+msgstr "ग्राहक"
+
+msgid "DNS"
+msgstr "डीएनएस"
+
+msgid "DNS Admin"
+msgstr "डीएनएस एडमिन"
+
+msgid "DNS Zones"
+msgstr "डीएनएस ज़ोन"
+
+msgid "DNS domains"
+msgstr "डीएनएस डोमेन"
+
+msgid "DNS management"
+msgstr "डीएनएस प्रबंधन"
+
+msgid "DNS zone"
+msgstr "डीएनएस ज़ोन"
+
+msgid "DNS zones"
+msgstr "डीएनएस ज़ोन"
+
+msgid "Data usage: {usage}"
+msgstr "डेटा उपयोग: {usage}"
+
+msgid "Database"
+msgstr "डेटाबेस"
+
+msgid "Database error"
+msgstr "डेटाबेस त्रुटि"
+
+msgid "Databases"
+msgstr "डेटाबेस"
+
+msgid "Date"
+msgstr "तिथि"
+
+msgid "Date:"
+msgstr "तिथि:"
+
+msgid "Debt"
+msgstr "कर्ज"
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "तय करें कि आप अपने व्यक्तिगत डेटा के कौन से भाग विभिन्न समूहों को दिखाना चाहते हैं।"
+
+msgid "Delete"
+msgstr "हटाएं"
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Destroyed"
+msgstr "नष्ट किया गया"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "निर्धारित करता है कि svg फ़ाइलों को किस सबडायरेक्टरी से लोड किया जाए। डिफ़ॉल्ट बूटस्ट्रैप आइकन हैं।"
+
+msgid "Developer docs"
+msgstr "डेवलपर दस्तावेज़"
+
+msgid "Development"
+msgstr "विकास"
+
+msgid "Do you want to credit the invoice?"
+msgstr "क्या आप इनवॉइस को क्रेडिट करना चाहते हैं?"
+
+msgid "Domain"
+msgstr "डोमेन"
+
+msgid "Domain registration"
+msgstr "डोमेन पंजीकरण"
+
+msgid "Domain registtration"
+msgstr "डोमेन पंजीकरण"
+
+msgid "Domains"
+msgstr "डोमेन"
+
+msgid "DomÃ¤nregistrering"
+msgstr "डोमेन पंजीकरण"
+
+msgid "Due date"
+msgstr "नियत तारीख"
+
+msgid "Due to"
+msgstr "कारण"
+
+msgid "Due to:"
+msgstr "कारण:"
+
+msgid "EPP"
+msgstr "ईपीपी"
+
+msgid "Economy"
+msgstr "अर्थव्यवस्था"
+
+msgid "Edit"
+msgstr "संपादित करें"
+
+msgid "Edit customer {customerid}"
+msgstr "ग्राहक {customerid} संपादित करें"
+
+msgid "Edit zone"
+msgstr "ज़ोन संपादित करें"
+
+msgid "Ekonomi"
+msgstr "अर्थव्यवस्था"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Email %s verified"
+msgstr "ईमेल %s सत्यापित"
+
+msgid "Email (billing)"
+msgstr "ईमेल (बिलिंग)"
+
+msgid "Email confirmation"
+msgstr "ईमेल पुष्टिकरण"
+
+msgid "Email not valid"
+msgstr "ईमेल मान्य नहीं है"
+
+msgid "Email someone about {what}"
+msgstr "{what} के बारे में किसी को ईमेल करें"
+
+msgid "Email to a friend"
+msgstr "मित्र को ईमेल करें"
+
+msgid "Empty VAT"
+msgstr "खाली वैट"
+
+msgid "Empty VAT number"
+msgstr "खाली वैट नंबर"
+
+msgid "Empty address"
+msgstr "खाली पता"
+
+msgid "Empty billingaddress"
+msgstr "खाली बिलिंग पता"
+
+msgid "Empty city"
+msgstr "खाली शहर"
+
+msgid "Empty code"
+msgstr "खाली कोड"
+
+msgid "Empty company name"
+msgstr "खाली कंपनी नाम"
+
+msgid "Empty country"
+msgstr "खाली देश"
+
+msgid "Empty first name"
+msgstr "खाली पहला नाम"
+
+msgid "Empty freetext"
+msgstr "खाली फ्री टेक्स्ट"
+
+msgid "Empty last name"
+msgstr "खाली अंतिम नाम"
+
+msgid "Empty message"
+msgstr "खाली संदेश"
+
+msgid "Empty mobile"
+msgstr "खाली मोबाइल"
+
+msgid "Empty name"
+msgstr "खाली नाम"
+
+msgid "Empty postal code"
+msgstr "खाली पोस्टल कोड"
+
+msgid "Empty recommendation"
+msgstr "खाली अनुशंसा"
+
+msgid "Empty reference"
+msgstr "खाली संदर्भ"
+
+msgid "Empty subject"
+msgstr "खाली विषय"
+
+msgid "Empty surname"
+msgstr "खाली उपनाम"
+
+msgid "Empty telephone"
+msgstr "खाली टेलीफोन"
+
+msgid "English"
+msgstr "अंग्रेज़ी"
+
+msgid "Enter code"
+msgstr "कोड दर्ज करें"
+
+msgid "Enter code from captcha image"
+msgstr "कैप्चा छवि से कोड दर्ज करें"
+
+msgid "Enter password"
+msgstr "पासवर्ड दर्ज करें"
+
+msgid "Enter record name"
+msgstr "रिकॉर्ड नाम दर्ज करें"
+
+msgid "Enter username"
+msgstr "उपयोगकर्ता नाम दर्ज करें"
+
+msgid "Enter username and password"
+msgstr "उपयोगकर्ता नाम और पासवर्ड दर्ज करें"
+
+msgid "Enter valid email"
+msgstr "मान्य ईमेल दर्ज करें"
+
+msgid "Enter your email"
+msgstr "अपना ईमेल दर्ज करें"
+
+msgid "Enter zone name"
+msgstr "ज़ोन नाम दर्ज करें"
+
+msgid "Euro"
+msgstr "यूरो"
+
+msgid "Examples"
+msgstr "उदाहरण"
+
+msgid "Expand menu"
+msgstr "मेनू विस्तारित करें"
+
+msgid "Expand personal menu."
+msgstr "व्यक्तिगत मेनू विस्तारित करें।"
+
+msgid "Expires"
+msgstr "समाप्त होता है"
+
+msgid "Expiring domains"
+msgstr "समाप्त हो रहे डोमेन"
+
+msgid "FAKE Media"
+msgstr "नकली मीडिया"
+
+msgid "FAKE News by country"
+msgstr "देश द्वारा नकली समाचार"
+
+msgid "Failed login from {ip}"
+msgstr "{ip} से लॉगिन विफल"
+
+msgid "Failed to create record"
+msgstr "रिकॉर्ड बनाने में विफल"
+
+msgid "Failed to create zone"
+msgstr "ज़ोन बनाने में विफल"
+
+msgid "Failed to delete record"
+msgstr "रिकॉर्ड हटाने में विफल"
+
+msgid "Failed to delete zone"
+msgstr "ज़ोन हटाने में विफल"
+
+msgid "Failed to update record"
+msgstr "रिकॉर्ड अपडेट करने में विफल"
+
+msgid "Failed to update zone"
+msgstr "ज़ोन अपडेट करने में विफल"
+
+msgid "File archive"
+msgstr "फ़ाइल आर्काइव"
+
+msgid "Fill the form correctly!"
+msgstr "फॉर्म सही तरीके से भरें!"
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "संलग्न PDF के रूप में क्रेडिट इनवॉइस देखें।"
+
+msgid "Find the invoice attached as PDF."
+msgstr "संलग्न PDF के रूप में इनवॉइस देखें।"
+
+msgid "Find your invoice attached as PDF."
+msgstr "अपना इनवॉइस संलग्न PDF के रूप में देखें।"
+
+msgid "First name"
+msgstr "पहला नाम"
+
+msgid "Fortnox panel"
+msgstr "फोर्टनॉक्स पैनल"
+
+msgid "From"
+msgstr "से"
+
+msgid "Full"
+msgstr "पूर्ण"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "buymeacoffee पर {slug} को थोड़ा वित्तीय समर्थन दें"
+
+msgid "Give small financial support to {user} at buymeacoffee"
+msgstr "buymeacoffee पर {user} को थोड़ा वित्तीय समर्थन दें"
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr "अपने हस्ताक्षर की पुष्टि करने और अपनी छवि का दावा करने के लिए {confirmationlink} पर जाएं।"
+
+msgid "Gross"
+msgstr "सकल"
+
+msgid "HTML result"
+msgstr "HTML परिणाम"
+
+msgid "Halfyear"
+msgstr "अर्धवार्षिक"
+
+msgid "Handled invoice"
+msgstr "संभाला गया इनवॉइस"
+
+msgid "I accept the terms for registration."
+msgstr "मैं पंजीकरण के नियमों को स्वीकार करता हूं।"
+
+msgid "IBAN"
+msgstr "आईबीएएन"
+
+msgid "IBAN:"
+msgstr "आईबीएएन:"
+
+msgid "Identification code"
+msgstr "पहचान कोड"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "यदि आपने खाता पंजीकृत नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।"
+
+msgid "Impersonate"
+msgstr "प्रतिरूपण"
+
+msgid "In your personal menu you find your {panel} among other things."
+msgstr "अपने व्यक्तिगत मेनू में आप अन्य चीज़ों के अलावा अपना {panel} पाएंगे।"
+
+msgid "Including VAT"
+msgstr "वैट सहित"
+
+msgid "Invalid email"
+msgstr "अमान्य ईमेल"
+
+msgid "Invalid password"
+msgstr "अमान्य पासवर्ड"
+
+msgid "Invalid username"
+msgstr "अमान्य उपयोगकर्ता नाम"
+
+msgid "Invoice"
+msgstr "इनवॉइस"
+
+msgid "Invoice (credited)"
+msgstr "इनवॉइस (क्रेडिट किया गया)"
+
+msgid "Invoice address"
+msgstr "इनवॉइस पता"
+
+msgid "Invoice credited m"
+msgstr "इनवॉइस क्रेडिट किया गया"
+
+msgid "Invoice currency"
+msgstr "इनवॉइस मुद्रा"
+
+msgid "Invoice currency is {currency}."
+msgstr "इनवॉइस मुद्रा {currency} है।"
+
+msgid "Invoice customer #{customerid}"
+msgstr "इनवॉइस ग्राहक #{customerid}"
+
+msgid "Invoice customer {customerid}"
+msgstr "इनवॉइस ग्राहक {customerid}"
+
+msgid "Invoice date"
+msgstr "इनवॉइस तिथि"
+
+msgid "Invoice for completed services"
+msgstr "पूर्ण सेवाओं के लिए इनवॉइस"
+
+msgid "Invoice is credited"
+msgstr "इनवॉइस क्रेडिट किया गया है"
+
+msgid "Invoice number"
+msgstr "इनवॉइस नंबर"
+
+msgid "Invoice number: {fakturanummer}"
+msgstr "इनवॉइस नंबर: {fakturanummer}"
+
+msgid "Invoice period"
+msgstr "इनवॉइस अवधि"
+
+msgid "Invoice questions"
+msgstr "इनवॉइस प्रश्न"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "इनवॉइस प्रश्न {url} पर निर्देशित किए जा सकते हैं।"
+
+msgid "Invoice questions:"
+msgstr "इनवॉइस प्रश्न:"
+
+msgid "Invoice reminder, {number}"
+msgstr "इनवॉइस रिमाइंडर, {number}"
+
+msgid "Invoice type"
+msgstr "इनवॉइस प्रकार"
+
+msgid "Invoice {fakturanummer}"
+msgstr "इनवॉइस {fakturanummer}"
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "इनवॉइस {fakturanummer} को क्रेडिट कर दिया गया है।"
+
+msgid "Invoice {invoiceid, customer {customerid}"
+msgstr "इनवॉइस {invoiceid, ग्राहक {customerid}"
+
+msgid "Invoice {invoiceid}, customer #{customerid}"
+msgstr "इनवॉइस {invoiceid}, ग्राहक #{customerid}"
+
+msgid "Invoice {number}"
+msgstr "इनवॉइस {number}"
+
+msgid "Invoice {number}, customer #{customerid}"
+msgstr "इनवॉइस {number}, ग्राहक #{customerid}"
+
+msgid "Invoices"
+msgstr "इनवॉइस"
+
+msgid "Invoices, customer #{customerid}"
+msgstr "इनवॉइस, ग्राहक #{customerid}"
+
+msgid "Invoices, customer {customerid}"
+msgstr "इनवॉइस, ग्राहक {customerid}"
+
+msgid "Invoicing"
+msgstr "बिलिंग"
+
+msgid "Invoicing, 1 item"
+msgid_plural "Invoicing, {number} items"
+msgstr[0] "बिलिंग, 1 आइटम"
+msgstr[1] "बिलिंग, {number} आइटम"
+
+msgid "It's also available at"
+msgstr "यह यहां भी उपलब्ध है"
+
+msgid "It's also available at {url}."
+msgstr "यह {url} पर भी उपलब्ध है।"
+
+msgid "Keep me logged in"
+msgstr "मुझे लॉग इन रखें"
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr "रूसी रक्षा मंत्री सर्गेई शोइगु को किक करें!"
+
+msgid "Kunder"
+msgstr "ग्राहक"
+
+msgid "Kuvert"
+msgstr "लिफाफा"
+
+msgid "Language"
+msgstr "भाषा"
+
+msgid "Last name"
+msgstr "अंतिम नाम"
+
+msgid "Latest"
+msgstr "नवीनतम"
+
+msgid "Link to control panel"
+msgstr "कंट्रोल पैनल का लिंक"
+
+msgid "Link to personal data"
+msgstr "व्यक्तिगत डेटा का लिंक"
+
+msgid "Link to personal settings"
+msgstr "व्यक्तिगत सेटिंग्स का लिंक"
+
+msgid "List zones"
+msgstr "ज़ोन सूची"
+
+msgid "Lista fakturor"
+msgstr "इनवॉइस सूची"
+
+msgid "Log in"
+msgstr "लॉग इन करें"
+
+msgid "Log out"
+msgstr "लॉग आउट करें"
+
+msgid "Log out and end current session"
+msgstr "लॉग आउट करें और वर्तमान सत्र समाप्त करें"
+
+msgid "Login"
+msgstr "लॉगिन"
+
+msgid "Login blocked"
+msgstr "लॉगिन अवरुद्ध"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "{ip} से अत्यधिक विफल प्रयासों के कारण लॉगिन अस्थायी रूप से अवरुद्ध है।"
+
+msgid "Logotype leading to start"
+msgstr "लोगोटाइप शुरुआत की ओर ले जाता है"
+
+msgid "Logotype leading to start page"
+msgstr "लोगोटाइप शुरुआती पृष्ठ की ओर ले जाता है"
+
+msgid "Lost password?"
+msgstr "पासवर्ड खो गया?"
+
+msgid "MB"
+msgstr "एमबी"
+
+msgid "MOSS"
+msgstr "एमओएसएस"
+
+msgid "MX records"
+msgstr "एमएक्स रिकॉर्ड"
+
+msgid "Mail"
+msgstr "मेल"
+
+msgid "Mail admin"
+msgstr "मेल एडमिन"
+
+msgid "Mail domains"
+msgstr "मेल डोमेन"
+
+msgid "Make invoice"
+msgstr "इनवॉइस बनाएं"
+
+msgid "Manage site"
+msgstr "साइट प्रबंधित करें"
+
+msgid "Manuals"
+msgstr "मैनुअल"
+
+msgid "Mark payment"
+msgstr "भुगतान चिह्नित करें"
+
+msgid "Message"
+msgstr "संदेश"
+
+msgid "Message sent"
+msgstr "संदेश भेजा गया"
+
+msgid "Mild"
+msgstr "मृदु"
+
+msgid "Missing file, our bad?"
+msgstr "फ़ाइल अनुपलब्ध, हमारी गलती?"
+
+msgid "Missing username or password"
+msgstr "उपयोगकर्ता नाम या पासवर्ड अनुपलब्ध"
+
+msgid "Mobile"
+msgstr "मोबाइल"
+
+msgid "Modifications were saved."
+msgstr "संशोधन सहेजे गए।"
+
+msgid "Month"
+msgstr "महीना"
+
+msgid "Name"
+msgstr "नाम"
+
+msgid "Net"
+msgstr "निवल"
+
+msgid "Net amount"
+msgstr "निवल राशि"
+
+msgid "Net amount:"
+msgstr "निवल राशि:"
+
+msgid "New account"
+msgstr "नया खाता"
+
+msgid "New customer"
+msgstr "नया ग्राहक"
+
+msgid "New invoice for customer #{customerid}"
+msgstr "ग्राहक #{customerid} के लिए नया इनवॉइस"
+
+msgid "New invoice for customer {customerid}"
+msgstr "ग्राहक {customerid} के लिए नया इनवॉइस"
+
+msgid "New invoice pack"
+msgstr "नया इनवॉइस पैक"
+
+msgid "New record"
+msgstr "नया रिकॉर्ड"
+
+msgid "New zone"
+msgstr "नया ज़ोन"
+
+msgid "Newest"
+msgstr "नवीनतम"
+
+msgid "Newsletter"
+msgstr "न्यूज़लेटर"
+
+msgid "No customer #{customerid}."
+msgstr "कोई ग्राहक नहीं #{customerid}।"
+
+msgid "No invoice template."
+msgstr "कोई इनवॉइस टेम्प्लेट नहीं।"
+
+msgid "No invoicing"
+msgstr "कोई बिलिंग नहीं"
+
+msgid "No selected customer."
+msgstr "कोई ग्राहक चयनित नहीं।"
+
+msgid "Normal"
+msgstr "सामान्य"
+
+msgid "Notes"
+msgstr "नोट्स"
+
+msgid "Number"
+msgstr "संख्या"
+
+msgid "Open invoice"
+msgstr "ओपन इनवॉइस"
+
+msgid "Open invoice for customer"
+msgstr "ग्राहक के लिए ओपन इनवॉइस"
+
+msgid "Open invoice for customer #{customerid}"
+msgstr "ग्राहक #{customerid} के लिए ओपन इनवॉइस"
+
+msgid "Open invoice items"
+msgstr "ओपन इनवॉइस आइटम"
+
+msgid "Open invoices"
+msgstr "ओपन इनवॉइस"
+
+msgid "Open list"
+msgstr "ओपन सूची"
+
+msgid "Options"
+msgstr "विकल्प"
+
+msgid "Org. Id"
+msgstr "संगठन आईडी"
+
+msgid "Org. Id:"
+msgstr "संगठन आईडी:"
+
+msgid "Organizational number"
+msgstr "संगठनात्मक संख्या"
+
+msgid "Our reference"
+msgstr "हमारा संदर्भ"
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "बकाया भुगतानों पर एक रिमाइंडर शुल्क और {rate} ब्याज लगाया जाएगा।"
+
+msgid "Ownership"
+msgstr "स्वामित्व"
+
+msgid "PDF viewer"
+msgstr "पीडीएफ व्यूअर"
+
+msgid "Page {number} of {total}"
+msgstr "पृष्ठ {number} / {total}"
+
+msgid "Paid"
+msgstr "भुगतान किया गया"
+
+msgid "Paid amount"
+msgstr "भुगतान राशि"
+
+msgid "Panel"
+msgstr "पैनल"
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "पासवर्ड गलत था या उपयोगकर्ता नाम मौजूद नहीं है।"
+
+msgid "Paydate"
+msgstr "भुगतान तिथि"
+
+msgid "Payment"
+msgstr "भुगतान"
+
+msgid "Payment due to: {duedate}"
+msgstr "भुगतान नियत तिथि: {duedate}"
+
+msgid "Payment terms"
+msgstr "भुगतान शर्तें"
+
+msgid "Payment terms:"
+msgstr "भुगतान शर्तें:"
+
+msgid "Payments"
+msgstr "भुगतान"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "भुगतान को कंट्रोल पैनल में दिखाई देने में एक सप्ताह तक का समय लग सकता है।"
+
+msgid "Paypal"
+msgstr "पेपाल"
+
+msgid "Paypal:"
+msgstr "पेपाल:"
+
+msgid "Personal"
+msgstr "व्यक्तिगत"
+
+msgid "Personal menu"
+msgstr "व्यक्तिगत मेनू"
+
+msgid "Personal panel"
+msgstr "व्यक्तिगत पैनल"
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "कृपया निम्न लिंक पर क्लिक करके अपने ईमेल पते की पुष्टि करें:"
+
+msgid "Please log in to access that page"
+msgstr "कृपया उस पृष्ठ तक पहुंचने के लिए लॉग इन करें"
+
+msgid "Please login to access resource."
+msgstr "कृपया संसाधन तक पहुंचने के लिए लॉगिन करें।"
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "कृपया लॉगआउट करें और उचित प्राधिकरण वाले उपयोगकर्ता के रूप में लॉगिन करें।"
+
+msgid "Plusgiro"
+msgstr "प्लसगिरो"
+
+msgid "Posta faktura"
+msgstr "डाक इनवॉइस"
+
+msgid "Postal code"
+msgstr "पोस्टल कोड"
+
+msgid "Postal code (billing)"
+msgstr "पोस्टल कोड (बिलिंग)"
+
+msgid "Postal mail"
+msgstr "डाक मेल"
+
+msgid "Postgiro"
+msgstr "पोस्टगिरो"
+
+msgid "Press Register to regenerate"
+msgstr "पुनः उत्पन्न करने के लिए रजिस्टर दबाएं"
+
+msgid "Price"
+msgstr "मूल्य"
+
+msgid "Priority"
+msgstr "प्राथमिकता"
+
+msgid "Products"
+msgstr "उत्पाद"
+
+msgid "Qty"
+msgstr "मात्रा"
+
+msgid "Qty."
+msgstr "मात्रा"
+
+msgid "Quantity"
+msgstr "मात्रा"
+
+msgid "Quarter"
+msgstr "तिमाही"
+
+msgid "Receiver"
+msgstr "प्राप्तकर्ता"
+
+msgid "Recent signatures"
+msgstr "हाल के हस्ताक्षर"
+
+msgid "Recommended by"
+msgstr "द्वारा अनुशंसित"
+
+msgid "Record Name"
+msgstr "रिकॉर्ड नाम"
+
+msgid "Record Type"
+msgstr "रिकॉर्ड प्रकार"
+
+msgid "Record created successfully"
+msgstr "रिकॉर्ड सफलतापूर्वक बनाया गया"
+
+msgid "Record deleted successfully"
+msgstr "रिकॉर्ड सफलतापूर्वक हटाया गया"
+
+msgid "Record updated successfully"
+msgstr "रिकॉर्ड सफलतापूर्वक अपडेट किया गया"
+
+msgid "Records"
+msgstr "रिकॉर्ड"
+
+msgid "Regards"
+msgstr "सादर"
+
+msgid "Register"
+msgstr "पंजीकरण करें"
+
+msgid "Register account"
+msgstr "खाता पंजीकृत करें"
+
+msgid "Register to create and publish content."
+msgstr "सामग्री बनाने और प्रकाशित करने के लिए पंजीकरण करें।"
+
+msgid "Registered for F-tax"
+msgstr "F-टैक्स के लिए पंजीकृत"
+
+msgid "Registered office"
+msgstr "पंजीकृत कार्यालय"
+
+msgid "Registered office:"
+msgstr "पंजीकृत कार्यालय:"
+
+msgid "Registration is currently non-functional"
+msgstr "पंजीकरण वर्तमान में गैर-कार्यात्मक है"
+
+msgid "Remaining amount to pay: {amount} {currency}"
+msgstr "भुगतान के लिए शेष राशि: {amount} {currency}"
+
+msgid "Remind"
+msgstr "याद दिलाएं"
+
+msgid "Reprint"
+msgstr "पुन: प्रिंट करें"
+
+msgid "Resend"
+msgstr "पुनः भेजें"
+
+msgid "Resources"
+msgstr "संसाधन"
+
+msgid "Roomservice"
+msgstr "रूम सर्विस"
+
+msgid "Round off"
+msgstr "राउंड ऑफ"
+
+msgid "Round off:"
+msgstr "राउंड ऑफ:"
+
+msgid "SEK"
+msgstr "एसईके"
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "समिज़दात {link} से बूटस्ट्रैप आइकन का उपयोग करता है।"
+
+msgid "Save"
+msgstr "सहेजें"
+
+msgid "Search"
+msgstr "खोजें"
+
+msgid "Search field for {what}"
+msgstr "{what} के लिए खोज फील्ड"
+
+msgid "Search for customer"
+msgstr "ग्राहक खोजें"
+
+msgid "Search for database"
+msgstr "डेटाबेस खोजें"
+
+msgid "Search for domain"
+msgstr "डोमेन खोजें"
+
+msgid "Search for invoice"
+msgstr "इनवॉइस खोजें"
+
+msgid "Search for mail domain"
+msgstr "मेल डोमेन खोजें"
+
+msgid "Search for product"
+msgstr "उत्पाद खोजें"
+
+msgid "Search for website"
+msgstr "वेबसाइट खोजें"
+
+msgid "Search for zone"
+msgstr "ज़ोन खोजें"
+
+msgid "Select"
+msgstr "चुनें"
+
+msgid "Select art.no."
+msgstr "कला संख्या चुनें।"
+
+msgid "Select country"
+msgstr "देश चुनें"
+
+msgid "Select country or click flags to see detail"
+msgstr "देश चुनें या विवरण देखने के लिए ध्वज पर क्लिक करें"
+
+msgid "Select invoice pack"
+msgstr "इनवॉइस पैक चुनें"
+
+msgid "Send again"
+msgstr "फिर से भेजें"
+
+msgid "Send invoice questions to {url}."
+msgstr "इनवॉइस प्रश्न {url} पर भेजें।"
+
+msgid "Send now"
+msgstr "अभी भेजें"
+
+msgid "Send reminder"
+msgstr "रिमाइंडर भेजें"
+
+msgid "Servers"
+msgstr "सर्वर"
+
+msgid "Set the height attribute."
+msgstr "ऊंचाई विशेषता सेट करें।"
+
+msgid "Set the id attribute."
+msgstr "आईडी विशेषता सेट करें।"
+
+msgid "Set the title attribute."
+msgstr "शीर्षक विशेषता सेट करें।"
+
+msgid "Set the width attribute."
+msgstr "चौड़ाई विशेषता सेट करें।"
+
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+msgid "Share on Facebook"
+msgstr "फेसबुक पर शेयर करें"
+
+msgid "Share on LinkedIn"
+msgstr "लिंक्डइन पर शेयर करें"
+
+msgid "Share on Telegram"
+msgstr "टेलीग्राम पर शेयर करें"
+
+msgid "Share on Twitter"
+msgstr "ट्विटर पर शेयर करें"
+
+msgid "Share {what} on {where}"
+msgstr "{what} को {where} पर शेयर करें"
+
+msgid "Shown as"
+msgstr "इस रूप में दिखाया गया"
+
+msgid "Sign poll to kick Sergei Shoigu!"
+msgstr "सर्गेई शोइगु को किक करने के लिए पोल पर हस्ताक्षर करें!"
+
+msgid "Sign poll!"
+msgstr "पोल पर हस्ताक्षर करें!"
+
+msgid "Site"
+msgstr "साइट"
+
+msgid "Site content"
+msgstr "साइट सामग्री"
+
+msgid "Skip menu"
+msgstr "मेनू छोड़ें"
+
+msgid "Snapback evaluation"
+msgstr "स्नैपबैक मूल्यांकन"
+
+msgid "Snapback only"
+msgstr "केवल स्नैपबैक"
+
+msgid "Snapback scheduler"
+msgstr "स्नैपबैक शेड्यूलर"
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "प्रीफिक्स्ड डिफ़ॉल्ट क्लासेज़ में जोड़ने के लिए अतिरिक्त क्लासेज़ की स्पेस से अलग की गई सूची।"
+
+msgid "Special price"
+msgstr "विशेष मूल्य"
+
+msgid "Start"
+msgstr "शुरू करें"
+
+msgid "Stuff"
+msgstr "सामान"
+
+msgid "Subject"
+msgstr "विषय"
+
+msgid "Submit"
+msgstr "सबमिट करें"
+
+msgid "Summa"
+msgstr "योग"
+
+msgid "Super panel"
+msgstr "सुपर पैनल"
+
+msgid "Supplier invoices"
+msgstr "आपूर्तिकर्ता इनवॉइस"
+
+msgid "Surname"
+msgstr "उपनाम"
+
+msgid "Swedish"
+msgstr "स्वीडिश"
+
+msgid "Technical"
+msgstr "तकनीकी"
+
+msgid "Technical questions"
+msgstr "तकनीकी प्रश्न"
+
+msgid "Technical questions:"
+msgstr "तकनीकी प्रश्न:"
+
+msgid "Telephone"
+msgstr "टेलीफोन"
+
+msgid "Test"
+msgstr "परीक्षण"
+
+msgid "Test customer"
+msgstr "परीक्षण ग्राहक"
+
+msgid "Text"
+msgstr "पाठ"
+
+msgid "Thank you for contacting us."
+msgstr "हमसे संपर्क करने के लिए धन्यवाद।"
+
+msgid "The Samizdat project"
+msgstr "समिज़दात प्रोजेक्ट"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "डिफ़ॉल्ट बूटस्ट्रैप आइकन सेट के लिए उपयोग किया जाता है।"
+
+msgid "The form was submitted from {ip}"
+msgstr "फॉर्म {ip} से सबमिट किया गया था"
+
+msgid "The invoice is also available at"
+msgstr "इनवॉइस यहां भी उपलब्ध है"
+
+msgid "The invoice was due to {duedate}."
+msgstr "इनवॉइस {duedate} तक देय था।"
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "सीमा {blocktime} मिनट में {blocklimit} प्रयास है।"
+
+msgid "The limit is {limit}."
+msgstr "सीमा {limit} है।"
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "लॉगिन फ़ंक्शन जावास्क्रिप्ट, कुकीज़ और AJAX का उपयोग करता है।"
+
+msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
+msgstr "सबसे पुराना &quot;{username}&quot; द्वारा {failuretime} को बनाया गया था।"
+
+msgid "The page {docpath} wasn't found."
+msgstr "पृष्ठ {docpath} नहीं मिला।"
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "यह प्रदर्शन समिज़दात के SVG टेम्पलेट हेल्पर के परिणाम दिखाता है।"
+
+msgid "This field is required"
+msgstr "यह फ़ील्ड आवश्यक है"
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr "यह फ़ाइल {project} पैकेज के समान लाइसेंस के तहत वितरित की जाती है।"
+
+msgid "Tillbaka"
+msgstr "वापस"
+
+msgid "Toggle menu"
+msgstr "मेनू टॉगल करें"
+
+msgid "Tot"
+msgstr "कुल"
+
+msgid "Tough"
+msgstr "कठिन"
+
+msgid "Transfer"
+msgstr "ट्रांसफर"
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "Unauthenticated"
+msgstr "अप्रमाणित"
+
+msgid "Unpaid"
+msgstr "अवैतनिक"
+
+msgid "Update"
+msgstr "अपडेट करें"
+
+msgid "Update and send page."
+msgstr "पृष्ठ अपडेट करें और भेजें।"
+
+msgid "Update and send."
+msgstr "अपडेट करें और भेजें।"
+
+msgid "Update customer"
+msgstr "ग्राहक अपडेट करें"
+
+msgid "Update invoice, customer #{customerid}"
+msgstr "इनवॉइस अपडेट करें, ग्राहक #{customerid}"
+
+msgid "Updated customer"
+msgstr "अपडेट किया गया ग्राहक"
+
+msgid "Updated invoice"
+msgstr "अपडेट किया गया इनवॉइस"
+
+msgid "Updated {updated} by {updater}"
+msgstr "{updater} द्वारा {updated} को अपडेट किया गया"
+
+msgid "Usage"
+msgstr "उपयोग"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "ध्वज-आइकन के लिए <code>flags</code> या एप्लिकेशन के घर के लिए <code>anysvg</code> का उपयोग करें।"
+
+msgid "Use the invoice number as message when you pay."
+msgstr "भुगतान करते समय संदेश के रूप में इनवॉइस नंबर का उपयोग करें।"
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "इसका उपयोग करें यदि आपको प्रीफिक्स्ड डिफ़ॉल्ट क्लासेज़ की आवश्यकता नहीं है।"
+
+msgid "Used to make class names."
+msgstr "क्लास नाम बनाने के लिए उपयोग किया जाता है।"
+
+msgid "User manual"
+msgstr "उपयोगकर्ता मैनुअल"
+
+msgid "User registration"
+msgstr "उपयोगकर्ता पंजीकरण"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "VAT"
+msgstr "वैट"
+
+msgid "VAT Id"
+msgstr "वैट आईडी"
+
+msgid "VAT Id:"
+msgstr "वैट आईडी:"
+
+msgid "VAT lookup, {vatno}"
+msgstr "वैट लुकअप, {vatno}"
+
+msgid "VAT number"
+msgstr "वैट नंबर"
+
+msgid "VAT number lookup"
+msgstr "वैट नंबर लुकअप"
+
+msgid "VAT percentage"
+msgstr "वैट प्रतिशत"
+
+msgid "VAT {rate}\\%"
+msgstr "वैट {rate}\\%"
+
+msgid "VAT:"
+msgstr "वैट:"
+
+msgid "Value for the class attribute."
+msgstr "क्लास विशेषता के लिए मान।"
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "हम इसे आंकड़ों के लिए और रोबोट पंजीकरण को रोकने के लिए भी स्टोर करेंगे।"
+
+msgid "We will email a confirmation request."
+msgstr "हम एक पुष्टिकरण अनुरोध ईमेल करेंगे।"
+
+msgid "We will reply as soon as possible."
+msgstr "हम जल्द से जल्द उत्तर देंगे।"
+
+msgid "Web sites"
+msgstr "वेब साइट"
+
+msgid "Websites"
+msgstr "वेबसाइट"
+
+msgid "Whois data for {ip}"
+msgstr "{ip} के लिए Whois डेटा"
+
+msgid "Write the invoice number as message when you pay."
+msgstr "भुगतान करते समय संदेश के रूप में इनवॉइस नंबर लिखें।"
+
+msgid "Wrong captcha"
+msgstr "गलत कैप्चा"
+
+msgid "Year"
+msgstr "वर्ष"
+
+msgid "You can also post in our discussions."
+msgstr "आप हमारी चर्चाओं में भी पोस्ट कर सकते हैं।"
+
+msgid "You have registered a new user account on {site}."
+msgstr "आपने {site} पर एक नया उपयोगकर्ता खाता पंजीकृत किया है।"
+
+msgid "You have {remaining} tries left."
+msgstr "आपके पास {remaining} प्रयास शेष हैं।"
+
+msgid "You need to accept registration terms."
+msgstr "आपको पंजीकरण शर्तों को स्वीकार करना होगा।"
+
+msgid "You were logged in as {username}."
+msgstr "आप {username} के रूप में लॉग इन थे।"
+
+msgid "Your VAT Id"
+msgstr "आपकी वैट आईडी"
+
+msgid "Your VAT Id:"
+msgstr "आपकी वैट आईडी:"
+
+msgid "Your contact"
+msgstr "आपका संपर्क"
+
+msgid "Your contact:"
+msgstr "आपका संपर्क:"
+
+msgid "Your email"
+msgstr "आपका ईमेल"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "आपका आईपी {ip} पुष्टिकरण अनुरोध में जोड़ा जाएगा।"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "आपका आईपी {ip} संदेश में जोड़ा जाएगा।"
+
+msgid "Your message appears below."
+msgstr "आपका संदेश नीचे दिखाई देता है।"
+
+msgid "Your name"
+msgstr "आपका नाम"
+
+msgid "Zone Kind"
+msgstr "ज़ोन प्रकार"
+
+msgid "Zone Name"
+msgstr "ज़ोन नाम"
+
+msgid "Zone created successfully"
+msgstr "ज़ोन सफलतापूर्वक बनाया गया"
+
+msgid "Zone deleted successfully"
+msgstr "ज़ोन सफलतापूर्वक हटाया गया"
+
+msgid "Zone management"
+msgstr "ज़ोन प्रबंधन"
+
+msgid "Zone not found"
+msgstr "ज़ोन नहीं मिला"
+
+msgid "Zone records"
+msgstr "ज़ोन रिकॉर्ड"
+
+msgid "Zone updated successfully"
+msgstr "ज़ोन सफलतापूर्वक अपडेट किया गया"
+
+msgid "add 3\\%"
+msgstr "3\\% जोड़ें"
+
+msgid "add {fee}"
+msgstr "{fee} जोड़ें"
+
+msgid "billing@rymdweb.com"
+msgstr "billing@rymdweb.com"
+
+msgid "control panel"
+msgstr "कंट्रोल पैनल"
+
+msgid "customer"
+msgstr "ग्राहक"
+
+msgid "database"
+msgstr "डेटाबेस"
+
+msgid "domain"
+msgstr "डोमेन"
+
+msgid "invoice"
+msgstr "इनवॉइस"
+
+msgid "login attempts"
+msgstr "लॉगिन प्रयास"
+
+msgid "mail domain"
+msgstr "मेल डोमेन"
+
+msgid "main firewall"
+msgstr "मुख्य फायरवॉल"
+
+msgid "our web"
+msgstr "हमारी वेब"
+
+msgid "product"
+msgstr "उत्पाद"
+
+msgid "standby firewall"
+msgstr "स्टैंडबाय फायरवॉल"
+
+msgid "website"
+msgstr "वेबसाइट"
+
+msgid "wensite"
+msgstr "वेबसाइट"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: प्रमाणीकरण आवश्यक"
+
+msgid "{code}: No authorization"
+msgstr "{code}: कोई प्राधिकरण नहीं"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: इस ब्रह्मांड में नहीं"
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{cost} {currency}"
+msgstr "{cost} {currency}"
+
+msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr "पिछले {minutes} मिनटों में {ip} से {count} विफल लॉगिन प्रयास किए गए हैं।"
+
+msgid "{number} days"
+msgstr "{number} दिन"
+
+msgid "{number} signatures since {date}"
+msgstr "{date} से {number} हस्ताक्षर"
+
+msgid "{server}, main firewall"
+msgstr "{server}, मुख्य फायरवॉल"
+
+msgid "{server}, standby firewall"
+msgstr "{server}, स्टैंडबाय फायरवॉल"
+
+msgid "{sitename} by country"
+msgstr "देश द्वारा {sitename}"
+
+msgid "{sitename} in {country}"
+msgstr "{country} में {sitename}"

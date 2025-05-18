@@ -179,7 +179,7 @@ badge rounded-pill rounded-circle">
 <form action="/login" id="loginform" method="post" data-method="post" class="modal-content">
   <input type="hidden" name="test" value="get_login_like" />
   <div class="modal-header">
-    <h5 class="modal-title mr-auto" id="modaltitle"><%= __('Login') %></h5>
+    <h5 class="modal-title me-auto" id="modaltitle"><%= __('Login') %></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('Close') %>"></button>
   </div>
   <div class="modal-body">

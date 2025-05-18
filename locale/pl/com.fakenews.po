@@ -1064,6 +1064,9 @@ msgstr "Przeglądarka PDF"
 msgid "Page {number} of {total}"
 msgstr "Strona {number} z {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "Zapłacono"
 
@@ -1216,6 +1219,9 @@ msgstr "Siedziba zarejestrowana"
 
 msgid "Registered office:"
 msgstr "Siedziba zarejestrowana:"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "Rejestracja jest obecnie niedostępna"

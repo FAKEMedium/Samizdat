@@ -1,25 +1,25 @@
-<a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ml-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
+<a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ms-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
   <%== icon 'box-arrow-in-right'; %>
-  <span class="d-sm-inline d-none ml-1"><%= __('Log in') %></span>
+  <span class="d-sm-inline d-none ms-1"><%= __('Log in') %></span>
 </a>
-<div id="userbuttons" class="auth btn-success btn-group ml-sm-1 pl-2 d-none rounded-lg">
+<div id="userbuttons" class="auth btn-success btn-group ms-sm-1 pl-2 d-none rounded-lg">
   <button id="usernamebutton" class="btn btn-success btn-sm btn-normal-sm dropdown-toggle pl-0" title="<%= __('Expand personal menu.') %>" aria-label="<%= __('Personal menu') %>" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <%== icon 'person-circle'; %>
-    <span class="username d-inline d-sm-none ml-0"></span>
-    <span class="displayname d-none d-sm-inline ml-1"></span>
+    <span class="username d-inline d-sm-none ms-0"></span>
+    <span class="displayname d-none d-sm-inline ms-1"></span>
   </button>
   <div id="userdropdown" class="dropdown-menu dropdown-menu-right" aria-labelledby="usernamebutton" style="z-index: 1000;">
     <a class="dropdown-item" href="<%== url_for('account_settings') %>" title="<%=  __('Link to personal settings') %>">
       <%== icon 'person-circle'; %>
-      <span class="ml-2"><%= __('Settings') %></span>
+      <span class="ms-2"><%= __('Settings') %></span>
     </a>
     <a class="dropdown-item" href="<%== url_for('account_panel') %>/" title="<%=  __('Link to control panel') %>">
       <%== icon 'grid-3x3-gap-fill'; %>
-      <span class="ml-2"><%= __('Personal panel') %></span>
+      <span class="ms-2"><%= __('Personal panel') %></span>
     </a>
     <a class="dropdown-item" href="<%== url_for('account_logout') %>" title="<%= __('Log out and end current session') %>" aria-label="<%= __('Log out') %>">
       <%== icon 'box-arrow-left'; %>
-      <span class="ml-2"><%= __('Log out') %></span>
+      <span class="ms-2"><%= __('Log out') %></span>
     </a>
   </div>
 </div>

@@ -110,7 +110,7 @@ security: |
   Contact: mailto:security@example.com
   
   # Our OpenPGP key
-  Encryption: https://exampl4.com/security/pgp-key.txt
+  Encryption: https://example.com/security/pgp-key.txt
   
   # Our security policy
   Policy: https://example.com/security
@@ -164,22 +164,22 @@ account:
     - pbkdf2
     - bcrypt
     - argon2id
-
+  #
   # Convert validated passwords to methods equal to, or better, than this methods strength
   convertpasswordto: argon2id
-
+  #
   # Number of minutes a user will be blocked
   blocktime: 180
-
+  #
   # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
   blocklimit: 4
-
+  #
   # Time window in minutes that unsuccessful login attempts will be counted
   blockperiod: 10
-
+  #
   # Session timeout in seconds
   sessiontimeout: 3600
-
+  #
   # List of username: password that have full access to everything, mainly for bootstrapping. CHANGE!!!
   superadmins:
 #    superadmin: s3cr3t_Pa55w0r6
@@ -257,6 +257,12 @@ locale:
       Language-Team: Webmaster <webmaster@fakenews.com>
       flag: sa
       name: العربية
+  hi:
+    Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+    Last-Translator: Webmaster <webmaster@fakenews.com>
+    Language-Team: Webmaster <webmaster@fakenews.com>
+    flag: in
+    name: हिन्दी
   default_language: en
   skip_messages:
     - default_language
@@ -283,6 +289,8 @@ locale:
     - ar-MA
     - ar-IQ
     - ar-DZ
+    - hi-IN
+    - hi-PK
 google:
 #  tag: YOUR-TAG
 buymeacoffee:

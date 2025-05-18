@@ -37,7 +37,7 @@
             title="<%==  __('Click to send a credit invoice.') %>"
             onclick="makeCreditInvoice('#dataform');">
       <%== icon 'trash-fill', {} %>
-      <span class="d-sm-inline d-none ml-0"><%== __('Credit invoice') %></span>
+      <span class="d-sm-inline d-none ms-0"><%== __('Credit invoice') %></span>
     </button>
     <a href="#"
        id="remindbutton"
@@ -51,7 +51,7 @@
         <span id="remindercount" class="badge rounded-pill bg-danger text-white blank reset"></span>
       </div>
       <%== icon 'exclamation-circle-fill', {} %>
-      <span class="d-sm-inline d-none ml-1"><%== __('Remind') %></span>
+      <span class="d-sm-inline d-none ms-1"><%== __('Remind') %></span>
     </a>
     <button type="submit"
             class="btn btn-primary mx-1"
@@ -59,7 +59,7 @@
             title="<%==  __('Click to send again.') %>"
             onclick="resendInvoice('#dataform');">
       <%== icon 'send-plus-fill', {} %>
-      <span class="d-sm-inline d-none ml-1"><%== __('Resend') %></span>
+      <span class="d-sm-inline d-none ms-1"><%== __('Resend') %></span>
     </button>
     <button type="submit"
             class="btn btn-primary mx-1"
@@ -67,7 +67,7 @@
             title="<%==  __('Click to regenerate PDF.') %>"
             onclick="reprintInvoice('#dataform');">
         <%== icon 'printer-fill', {} %>
-        <span class="d-sm-inline d-none ml-1"><%== __('Reprint') %></span>
+        <span class="d-sm-inline d-none ms-1"><%== __('Reprint') %></span>
     </button>
   </div>
 </form>

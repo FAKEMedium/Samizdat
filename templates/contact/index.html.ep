@@ -42,7 +42,7 @@
 
       <div class="col-12 mb-3" id="ip"><%= __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %></div>
 
-      <button type="submit" class="btn btn-primary">
+      <button type="submit" class="btn btn-primary mb-3">
         <span class="mx-2"><%== __('Send now') %></span>
         <%== icon 'send-fill', {} %>
       </button>

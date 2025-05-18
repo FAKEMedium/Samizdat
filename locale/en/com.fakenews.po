@@ -1056,6 +1056,9 @@ msgstr ""
 msgid "Page {number} of {total}"
 msgstr ""
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr ""
 
@@ -1207,6 +1210,9 @@ msgid "Registered office"
 msgstr ""
 
 msgid "Registered office:"
+msgstr ""
+
+msgid "Registrar"
 msgstr ""
 
 msgid "Registration is currently non-functional"

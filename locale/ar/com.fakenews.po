@@ -1088,6 +1088,9 @@ msgstr "عارض PDF"
 msgid "Page {number} of {total}"
 msgstr "الصفحة {number} من {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "مدفوع"
 
@@ -1240,6 +1243,9 @@ msgstr "المكتب المسجل"
 
 msgid "Registered office:"
 msgstr "المكتب المسجل:"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "التسجيل غير متاح حاليًا"
