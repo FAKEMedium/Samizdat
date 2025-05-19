@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Språkspecifikt innehåll test - Svenska</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .language-badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Språkspecifikt innehåll test</h1>
+    <p><span class="language-badge">Svenska</span></p>
+    
+    <p>
+        Detta är den svenska versionen av exempelsidan. Du ser detta innehåll eftersom:
+    </p>
+    
+    <ol>
+        <li>Din webbläsare har en <code>language=sv</code> cookie inställd</li>
+        <li>Nginx är konfigurerat med i18n-stöd</li>
+        <li>Filnamnet matchar mönstret <code>example_sv.html</code></li>
+    </ol>
+    
+    <h2>Så här fungerar det</h2>
+    
+    <p>
+        Nginx kontrollerar <code>language</code>-cookien i din förfrågan och försöker hitta en fil med motsvarande språk-suffix 
+        (<code>_sv</code> för svenska) innan den går tillbaka till standardversionen.
+    </p>
+    
+    <p>
+        Du kan växla språk genom att ändra cookien i din webbläsare. Till exempel, i Utvecklarverktyg > Konsol:
+    </p>
+    
+    <pre><code>document.cookie = "language=en; path=/; max-age=31536000"</code></pre>
+    
+    <p>
+        <a href="example.html">Tillbaka till standardsidan</a>
+    </p>
+</body>
+</html>

@@ -153,11 +153,13 @@ sub includefile ($dirname, $filename) {
 
 }
 
+# Get the menu items for a given menu in a tree structure
 sub menuitems ($self, $menuid = 1) {
   my $db = $self->app->pg->db;
   my $childrenof = {};
   $db->select(['menuitems', ['menuitemtitles', 'menuitemid' => 'menuitemid']],
-    '*', {'menuitems.menuid' => $menuid}, { order_by => {-asc => 'menuitemid', -asc => 'position'} })->hashes->each(
+    '*',
+    {'menuitems.menuid' => $menuid}, { order_by => {-asc => 'menuitemid', -asc => 'position'} })->hashes->each(
     sub($item, $num) {
       if (defined($item->{parent})) {
         push @{ $childrenof->{ $item->{parent} }}, $item;

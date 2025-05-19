@@ -3,6 +3,7 @@ package Samizdat::Controller::Web;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::JSON qw(encode_json);
 
+# Render site management panel
 sub index ($self) {
   my $docpath = $self->stash('docpath');
   my $title = $self->app->__('Manage site');
@@ -22,7 +23,9 @@ sub index ($self) {
 }
 
 
-sub geturi ($self) {
+# This is the main entry point for all web pages that sit in the src/public directory.
+# It will also try to lookup the uri in the database.
+sub getdoc ($self) {
   my $docpath = $self->stash('docpath');
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);
   my $title = $self->app->__('404: Missing document');
@@ -51,7 +54,9 @@ sub geturi ($self) {
       },
       language => $self->app->language
     };
-    return $self->reply->not_found;
+    if ($docpath !~ /\.(webp)$/) {
+      return $self->reply->not_found;
+    }
   } else {
     $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
     $docs->{$path}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};

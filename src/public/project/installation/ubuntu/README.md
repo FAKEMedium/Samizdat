@@ -72,3 +72,13 @@ in [samizdat.yml](../../../../samizdat.yml) the torrent file will be published t
 ## Integration
 
 Explore [configuration examples](./etc/) to quickly deploy a fast and stable installation.
+
+## Multilingual Support
+
+Samizdat includes internationalization (i18n) features that allow serving content in multiple languages. For Nginx configuration:
+
+1. Use the specialized [i18n configuration](../etc/nginx/sites-available/samizdat-i18n.conf) which detects the user's language preference via cookies
+2. Read the [i18n documentation](../etc/nginx/README_i18n.md) for detailed information on how the language-specific content serving works
+3. View the [example files](../etc/nginx/test/) to see how multilingual content is organized
+
+This configuration allows Nginx to serve language-specific content files before falling back to default files, creating a seamless multilingual experience for users.

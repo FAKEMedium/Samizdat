@@ -8,7 +8,7 @@ Il y a une histoire captivante d'une réunion à la Maison Blanche entre l'ancie
 
 Nous avons vérifié cette belle anecdote et avons découvert qu'elle était fausse. Biden et Löfvén ne se sont jamais rencontrés à la Maison Blanche.
 Le texte est apparu dans un journal suédois, et l'auteur Per Wirtén a laissé entendre qu'il était inventé. Le message était
-que [Bidenomics](https://en.wikipedia.org/wiki/Economic_policy_of_the_Joe_Biden_administration) n'a pas été 
+que [Bidenomics](https://fr.wikipedia.org/wiki/Politique_économique_de_Joe_Biden) n'a pas été 
 si mauvaise &mdash; faible chômage, forte baisse de la pauvreté infantile,
 et une forte croissance du PIB où les comparaisons montrent que les États-Unis surpassent de nombreuses économies comparables dans les mesures de reprise.
 

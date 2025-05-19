@@ -19,8 +19,8 @@ sub register ($self, $app, $conf) {
   $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');
   $r->get('/ads.txt')->to(controller => 'Web', action => 'ads', docpath => 'ads.txt');
   $r->get('/.well-known/security.txt')->to(controller => 'Web', action => 'security', docpath => '.well-known/security.txt');
-  $r->get('/')->to(controller => 'Web', action => 'geturi', docpath => '');
-  $r->get('/*docpath')->to(controller => 'Web', action => 'geturi');
+  $r->get('/')->to(controller => 'Web', action => 'getdoc', docpath => '');
+  $r->get('/*docpath')->to(controller => 'Web', action => 'getdoc');
 
   $app->helper(web => sub ($self) {
     state $web = Samizdat::Model::Web->new(app => $app);

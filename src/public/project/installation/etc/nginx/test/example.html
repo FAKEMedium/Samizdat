@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language-specific Content Test - English</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .language-badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <h1>Language-specific Content Test</h1>
+    <p><span class="language-badge">English</span></p>
+    
+    <p>
+        This is the default (English) version of the example page. You're seeing this content because:
+    </p>
+    
+    <ol>
+        <li>Either your browser has no <code>language</code> cookie set, or it's set to <code>en</code></li>
+        <li>Nginx is configured with i18n support</li>
+        <li>The filename matches the default pattern <code>example.html</code></li>
+    </ol>
+    
+    <h2>How It Works</h2>
+    
+    <p>
+        Nginx checks the <code>language</code> cookie in your request and tries to find a file with the corresponding 
+        language suffix (like <code>_sv</code> for Swedish) before falling back to the default version.
+    </p>
+    
+    <p>
+        You can switch languages by changing the cookie in your browser. For example, in Developer Tools > Console:
+    </p>
+    
+    <pre><code>document.cookie = "language=sv; path=/; max-age=31536000"</code></pre>
+    
+    <h2>Available Languages</h2>
+    
+    <ul>
+        <li><a href="#" onclick="document.cookie = 'language=sv; path=/; max-age=31536000'; window.location.reload(); return false;">Swedish</a></li>
+        <li><a href="#" onclick="document.cookie = 'language=de; path=/; max-age=31536000'; window.location.reload(); return false;">German</a> (example file not created yet)</li>
+        <li><a href="#" onclick="document.cookie = 'language=fr; path=/; max-age=31536000'; window.location.reload(); return false;">French</a> (example file not created yet)</li>
+        <li><a href="#" onclick="document.cookie = 'language=en; path=/; max-age=31536000'; window.location.reload(); return false;">English</a> (default)</li>
+        <li><a href="#" onclick="document.cookie = 'language=ar; path=/; max-age=31536000'; window.location.reload(); return false;">Arabic</a> (example file not created yet)</li>
+    </ul>
+</body>
+</html>
