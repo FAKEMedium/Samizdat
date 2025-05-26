@@ -241,7 +241,7 @@ sub postInbox ($self, $file, $folderid = 'inbox_kf') {
     });
 #    say Dumper $tx;
     $tx = $self->ua->start($tx);
-    say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
+#    say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
 
     if (201 == $tx->result->code) {
       return decode_json($tx->result->body);
@@ -273,10 +273,10 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
   }
   $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->cache->{access}));
   $tx = $self->ua->start($tx);
-  say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
+#  say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
 
   if (200 == $tx->result->code) {
-    say Dumper $tx->result->body;
+#    say Dumper $tx->result->body;
     my $result = decode_json($tx->result->body);
     #          say Dumper $result;
     return $result;
@@ -295,19 +295,23 @@ sub accounts ($self) {
 
 sub postInvoice ($self, $payload) {
   my $result = $self->callAPI('Invoices', 'post', 0, $payload);
+#  say Dumper $result;
+  return $result;
 }
 
 sub externalInvoice ($self, $DocumentNumber = 0) {
   if ($DocumentNumber) {
-    my $result = $self->callAPI('Invoices', 'put', 0, {}, 'externalprint');
-    say Dumper $result;
+    my $result = $self->callAPI('Invoices', 'put', $DocumentNumber, {}, 'externalprint');
+#    say Dumper $result;
+    return $result;
   }
 }
 
 sub creditInvoice ($self, $DocumentNumber = 0) {
   if ($DocumentNumber) {
-    my $result = $self->callAPI('Invoices', 'put', 0, {}, 'credit');
+    my $result = $self->callAPI('Invoices', 'put', $DocumentNumber, {}, 'credit');
     say Dumper $result;
+    return $result;
   }
 }
 
@@ -352,6 +356,14 @@ sub getAccount ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page =>
   my $result = $self->callAPI('Accounts', 'get', $Number, $options);
 }
 
+sub putAccount ($self, $Number = 0, $data = {}) {
+  my $result = $self->callAPI('Accounts', 'put', $Number, $data);
+}
+
+sub postAccount ($self, $data = {}) {
+  my $result = $self->callAPI('Accounts', 'post', 0, $data);
+}
+
 sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   if ($ArticleNumber) {
     return $self->callAPI('Articles', 'get', $ArticleNumber, $options);
@@ -360,18 +372,11 @@ sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, 
   }
 }
 
-sub postArticle ($self, $article) {
-  my $payload = {
-    Article => {
-      'ArticleNumber' => $article->{number},
-      'Description'   => $article->{description},
-      'Type'          => 'SERVICE',
-#      'SalesAccount'  => $article->{account},
-#      'EUVATAccount'  => $article->{euvataccount},
-#      'ExportAccount'  => $article->{exportaccount},
-    }
-  };
-  my $result = $self->callAPI('Articles', 'post', 0, $payload);
+sub postArticle ($self, $article = {}) {
+  return 0 if (!exists($article->{Article}));
+  return 0 if (!exists($article->{Article}->{ArticleNumber}));
+  $article->{Article}->{Type} = 'SERVICE' if (!exists($article->{Article}->{Type}));
+  my $result = $self->callAPI('Articles', 'post', 0, $article);
 }
 
 

@@ -1,12 +1,20 @@
 # lib/Samizdat/Model/DNSAdmin.pm
 package Samizdat::Model::DNSAdmin;
+
 use Mojo::Base -base, -signatures;
+use Mojo::JSON qw(decode_json encode_json from_json);
+use Mojo::Collection qw(c);
 use Mojo::UserAgent;
-use Mojo::JSON qw(encode_json decode_json);
+use Mojo::File qw(path);
+use Hash::Merge;
 use Data::Dumper;
 
 has 'config';
 has ua => sub { Mojo::UserAgent->new };
+has 'cache' => sub ($self) {
+  state $cache = Cache($self->config->{cachefile});
+  return $cache;
+};
 
 # Helper to set API headers.
 sub _headers ($self) {
@@ -157,6 +165,31 @@ sub delete_record ($self, $zone_id, $record_id) {
   return ($res && $res->is_success)
     ? { success => 1 }
     : { success => 0, error => $res ? $res->message : "No response" };
+}
+
+sub Cache ($cachefile, $cache = undef) {
+  if ($cache) {
+    return path($cachefile)->spew(encode_json($cache));
+  } elsif (-f $cachefile) {
+    my $json = path($cachefile)->slurp;
+    if ($json) {
+      return decode_json($json);
+    }
+  }
+  return {
+  };
+}
+
+sub saveCache ($self) {
+  return Cache($self->config->{cachefile}, $self->cache);
+}
+
+sub updateCache ($self, $data = undef) {
+}
+
+sub removeCache ($self) {
+  unlink $self->config->{cachefile} if (-e $self->config->{cachefile});
+  state $cache = undef;
 }
 
 1;
