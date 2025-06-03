@@ -1,3 +1,0 @@
-# Login
-
-Directory placeholder

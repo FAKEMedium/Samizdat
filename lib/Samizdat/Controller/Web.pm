@@ -23,6 +23,7 @@ sub index ($self) {
 }
 
 
+
 # This is the main entry point for all web pages that sit in the src/public directory.
 # It will also try to lookup the uri in the database.
 sub getdoc ($self) {
@@ -79,7 +80,7 @@ sub getdoc ($self) {
     }
     $self->stash(headlinebuttons => 'chunks/sharebuttons');
   }
-  $self->stash(web => $docs->{$path});
+  $self->stash(web => $docs->{$path}, docpath => $docs->{$path}->{docpath});
   $self->stash(title => $docs->{$path}->{title} // $title);
   $self->render();
 }

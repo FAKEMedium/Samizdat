@@ -1,4 +1,0 @@
-# User presentations
-
-User presentations and listings should be routed to the User controller, and this text is not supposed
-to show up in the web browser.

@@ -17,7 +17,7 @@ sub register ($self, $app, $conf) {
     }
   );
 =cut
-  $manager->any('/')->to(controller => 'Roomservice', action=> 'index')->name('roomservice');
+  $manager->any('/')->to(controller => 'Roomservice', action=> 'index', docpath => 'index.html')->name('roomservice');
 }
 
 1;

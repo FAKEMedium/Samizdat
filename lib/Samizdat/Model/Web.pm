@@ -81,7 +81,7 @@ sub getlist ($self, $url, $options = {}) {
       $html =~ s/[\s\r\n]+$//;
 
       # Overwrite the docpath of the default language if a file with the preferred language exists
-      $docpath =~ s/_$options->{language}\.md$/.md/;
+      $docpath =~ s/_($options->{language})\.md$/.md/;
       if ($docpath !~ /\_(.+)\.md$/) {
         if ($docpath =~ s/README\.md/index.html/) {
           $found = $docpath;
@@ -96,6 +96,7 @@ sub getlist ($self, $url, $options = {}) {
           language    => $options->{language},
         };
       }
+#=cut
     } elsif ('yml' eq $file->path->extname()) {
       my $yaml = $file->slurp;
       my $data = Load($yaml);
@@ -127,6 +128,7 @@ sub getlist ($self, $url, $options = {}) {
   $docs->{$found}->{meta} = $meta;
   return $docs;
 }
+
 
 # Find every README.md markdown file
 sub geturis ($self, $options = {}) {

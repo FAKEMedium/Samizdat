@@ -90,7 +90,7 @@ sub register ($self, $app, $conf) {
       $$output =~ s{        <!-- symbols -->\n}[
         $c->app->indent(join("\n", sort {$a cmp $b} map $app->{symbols}->{$_}, keys %{ $app->{symbols} }), 4)
       ]eu;
-      return 1 if (exists($cacheexist->{$c->{stash}->{web}->{docpath}}));
+      return 1 if (exists($cacheexist->{$c->{stash}->{docpath}}));
       if (404 != $c->{stash}->{status}) {
         $$output =~ s{<pre([^>]*?)>(.*?)</pre>}[
           my $attribs = $1;
@@ -113,16 +113,21 @@ sub register ($self, $app, $conf) {
           $text =~ s/^[ ]+//gms;
           sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
         ]gexsmu;
-        if ($c->config->{cache} && exists $c->{stash}->{web}->{docpath}) {
-          $public->child($c->{stash}->{web}->{docpath})->dirname->make_path;
-          $public->child($c->{stash}->{web}->{docpath})->spew($$output);
+        my $docpath = $c->{stash}->{docpath} // '';
+        if ($c->config->{cache} && $docpath ne '') {
+          my $language = $c->app->language;
+          if ($c->config->{locale}->{default_language} ne $language) {
+            $docpath =~ s/\.html$/.$language.html/;
+          }
+          $public->child($docpath)->dirname->make_path;
+          $public->child($docpath)->spew($$output);
           my $z = new IO::Compress::Gzip sprintf('%s.gz',
-            $public->child($c->{stash}->{web}->{docpath})->to_string),
+            $public->child($docpath)->to_string),
             -Level => 9, Minimal => 1, AutoClose => 1;
           $z->print($$output);
           $z->close;
           undef $z;
-          $cacheexist->{$c->{stash}->{web}->{docpath}} = 1;
+          $cacheexist->{$docpath} = 1;
         }
       } elsif ($c->config->{makewebp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
         my $srcfile = $srcpublic->child($c->{stash}->{web}->{url});

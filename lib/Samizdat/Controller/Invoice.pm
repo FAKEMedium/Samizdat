@@ -256,6 +256,25 @@ sub create ($self, $credit = 0) {
     $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
     $invoicedata->{invoice}->{duedate} = $duedate;
 
+    if ($self->app->fortnox and $self->config->{roomservice}->{invoice}->{usefortnox}) {
+      my $fortnoxinvoice = {
+        CustomerNumber            => $invoicedata->{invoice}->{customerid},
+        InvoiceDate               => substr($invoicedata->{invoice}->{invoicedate}, 0, 10),
+        Currency                  => uc($invoicedata->{invoice}->{currency}),
+        DocumentNumber            => $invoicedata->{invoice}->{fakturanummer},
+        InvoiceType               => 'INVOICE',
+        InvoiceRows               => [],
+        Language                  => uc substr($invoicedata->{customer}->{ $invoicedata->{invoice}->{customerid} }->{lang}, 0, 2),
+        ExternalInvoiceReference1 => $invoicedata->{invoice}->{fakturanummer},
+        ExternalInvoiceReference2 => $invoicedata->{invoice}->{uuid}
+      };
+#      my $status = $self->app->fortnox->postInvoice($invoicedata->{invoice}, $invoicedata->{invoiceitems}, $formdata->{customer});
+#      if ($status) {
+#        $invoicedata->{invoice}->{fortnox} = $status;
+#      } else {
+#        $invoicedata->{invoice}->{fortnox} = { error => $self->app->__('Failed to send invoice to Fortnox') };
+#      }
+    }
     my $anyrepo = Mojo::Home->new();
     my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
     $svg = b64_encode($svg);

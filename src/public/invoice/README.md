@@ -1,3 +1,0 @@
-# Invoice
-
-Directory placeholder

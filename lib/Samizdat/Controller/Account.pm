@@ -29,9 +29,11 @@ sub index ($self) {
 sub login ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Log in');
-    my $web = { title => $title, docpath => => '/account/login/index.html' };
+    my $web = { title => $title };
     $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login', format => 'js'), 4);
     return $self->render(template => 'account/login', layout => 'modal', web => $web, title => $title);
+  } else {
+    $self->stash(docpath => undef);
   }
 
   my $v = $self->validation;
@@ -162,6 +164,7 @@ sub register ($self) {
     my $valid = {};
     my $errors = {};
     my $v = $self->validation;
+    $self->stash(docpath => undef);
 
     for my $field (qw(newusername newpassword email terms captcha)) {
       $formdata->{$field} = trim $self->param($field);
@@ -236,7 +239,7 @@ sub register ($self) {
   }
 
   my $title = $self->app->__('Register account');
-  my $web = { title => $title, docpath => '/account/register/index.html' };
+  my $web = { title => $title };
   $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register',
     formdata => { ip => 'REPLACEIP' }, format => 'js'), 4);
   return $self->render(web => $web, title => $title, template => 'account/register',
@@ -250,7 +253,7 @@ sub confirm ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     my $title = $self->app->__('Email confirmation');
-    my $web = { title => $title, docpath => '/account/confirm/index.html' };
+    my $web = { title => $title };
     $web->{script} .= $self->render_to_string(template => 'account/confirm', format => 'js');
     $self->session(confirmationuuid => $confirmationuuid);
     return $self->render(web => $web, title => $title, template => 'account/confirm', formdata => $formdata, headlinebuttons => undef);

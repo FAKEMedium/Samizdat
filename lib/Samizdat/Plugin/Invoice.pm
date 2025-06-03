@@ -14,12 +14,16 @@ sub register ($self, $app, $conf) {
     level      => 'superadmin',
   );
 
-  $manager->get('invoices/open')->to('Invoice#open')->name('invoice_open');
+  $manager->get('invoices/open')
+    ->to(controller => 'Invoice', action => 'open', docpath => '/invoice/open/index.html')
+    ->name('invoice_open');
   $manager->get('invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
   $manager->get('invoices/:invoiceid/:to')->to('Invoice#nav')->name('invoice_nav');
   $manager->get('invoices')->to('Invoice#index')->name('invoice_index');
 
-  $manager->get('customers/:customerid/invoices/open')->to('Invoice#edit')->name('invoice_edit');
+  $manager->get('customers/:customerid/invoices/open')
+    ->to(controller => 'Invoice', action => 'edit', docpath => '/invoice/open/edit.html')
+    ->name('invoice_edit');
   $manager->put('customers/:customerid/invoices/open')->to('Invoice#update')->name('invoice_uppdate');
   $manager->post('customers/:customerid/invoices/open')->to('Invoice#create')->name('invoice_create');
   $manager->get('customers/:customerid/invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
