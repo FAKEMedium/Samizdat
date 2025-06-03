@@ -137,7 +137,7 @@ sub geturis ($self, $options = {}) {
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
       my $filename = $file->to_rel($self->app->config->{publicsrc})->to_string;
-      if ($filename =~ /README[^\/]*\.md$/) {
+      if ($filename =~ s/README[^\/]*\.md$/README.md/) {
           $uris->{$filename} = 0;
       }
     }
