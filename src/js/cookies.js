@@ -9,11 +9,11 @@ export  function decodeBase64(s) {
     return r;
 };
 
-export function setCookie(cname, cvalue, exdays) {
+export function setCookie(cname, cvalue, exdays, path = '/') {
     let d = new Date();
     d.setTime(d.getTime() + (exdays*24*60*60*1000));
     let expires = "expires="+ d.toUTCString();
-    document.cookie = `${cname}=${cvalue};${expires};path=/`;
+    document.cookie = `${cname}=${cvalue};${expires};path=${path};secure;SameSite=None;`;
 }
 
 export function getCookie(cname) {

@@ -14,1735 +14,1727 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
-msgstr ""
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
 
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr ""
+msgstr "&copy;2022 &mdash; 请分享并在{sitename}上加星！"
 
 msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr ""
+msgstr "&copy;2023 &mdash; 请分享并在{sitename}上加星！"
 
 msgid "&copy;{year}&nbsp;{author}"
-msgstr ""
+msgstr "&copy;{year}&nbsp;{author}"
 
 msgid "1 database"
 msgid_plural "{number} databases"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个数据库"
 
 msgid "1 dns domain"
 msgid_plural "{number} dns domains"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个DNS域名"
 
 msgid "1 domain"
 msgid_plural "{number} domains"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个域名"
 
 msgid "1 invoice"
 msgid_plural "{number} invoices"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 张发票"
 
 msgid "1 invoice item"
 msgid_plural "{number} invoice items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个发票项目"
 
 msgid "1 mail domain"
 msgid_plural "{number} mail domains"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个邮件域名"
 
 msgid "1 site"
 msgid_plural "{number} sites"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "{number} 个网站"
 
 msgid "404: Missing document"
-msgstr ""
+msgstr "404：文档未找到"
 
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
-msgstr ""
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
 msgid "A confirmation link was mailed to {email}."
-msgstr ""
+msgstr "确认链接已发送至 {email}。"
 
 msgid "A {rate} interest will be charged on overdue payments"
-msgstr ""
+msgstr "逾期付款将收取 {rate} 的利息"
 
 msgid "API docs"
-msgstr ""
+msgstr "API 文档"
 
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 msgid "According to our notes invoice {number} remains unpaid."
-msgstr ""
+msgstr "根据我们的记录，发票 {number} 仍未付款。"
 
 msgid "Account confirmation"
-msgstr ""
+msgstr "账户确认"
 
 msgid "Actions"
-msgstr ""
+msgstr "操作"
 
 msgid "Add customer"
-msgstr ""
+msgstr "添加客户"
 
 msgid "Add database"
-msgstr ""
+msgstr "添加数据库"
 
 msgid "Add domain"
-msgstr ""
+msgstr "添加域名"
 
 msgid "Add mail domain"
-msgstr ""
+msgstr "添加邮件域名"
 
 msgid "Add product"
-msgstr ""
+msgstr "添加产品"
 
 msgid "Add subscription"
-msgstr ""
+msgstr "添加订阅"
 
 msgid "Add voucher"
-msgstr ""
+msgstr "添加凭证"
 
 msgid "Add website"
-msgstr ""
+msgstr "添加网站"
 
 msgid "Address"
-msgstr ""
+msgstr "地址"
 
 msgid "Address (billing)"
-msgstr ""
+msgstr "账单地址"
 
 msgid "Address check"
-msgstr ""
+msgstr "地址检查"
 
 msgid "Admininistration panel"
-msgstr ""
+msgstr "管理面板"
 
 msgid "Advertising"
-msgstr ""
+msgstr "广告"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
-msgstr ""
+msgstr "注册后您可以添加更多个人信息，调整分享策略，并自定义您的体验。"
 
 msgid "Allow cookies to paste confirmation code from email"
-msgstr ""
+msgstr "允许使用 cookie 从邮件粘贴确认码"
 
 msgid "Amount"
-msgstr ""
+msgstr "金额"
 
 msgid "Amount incl. VAT"
-msgstr ""
+msgstr "含税金额"
 
 msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr ""
+msgstr "含税应付金额：{rounded} {currency}"
 
 msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr ""
+msgstr "含 {percent} 增值税的应付金额：{costsum} {currency}"
 
 msgid "Amount to pay: {costsum} {currency}"
-msgstr ""
+msgstr "应付金额：{costsum} {currency}"
 
 msgid "Are you sure you want to delete this record?"
-msgstr ""
+msgstr "您确定要删除此记录吗？"
 
 msgid "Article"
-msgstr ""
+msgstr "文章"
 
 msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
-msgstr ""
+msgstr "至少3个字符，包含 a-z 0-9 -，必须以 a-z 开头"
 
 msgid "At least 8 characters including capitals and digits"
-msgstr ""
+msgstr "至少8个字符，包含大写字母和数字"
 
 msgid "BIC/Swift"
-msgstr ""
+msgstr "BIC/Swift"
 
 msgid "BIC/Swift address"
-msgstr ""
+msgstr "BIC/Swift 地址"
 
 msgid "BIC/Swift address:"
-msgstr ""
+msgstr "BIC/Swift 地址："
 
 msgid "Back"
-msgstr ""
+msgstr "返回"
 
 msgid "Bankgiro"
-msgstr ""
+msgstr "银行汇票"
 
 msgid "Bankgiro:"
-msgstr ""
+msgstr "银行汇票："
 
 msgid "Barred"
-msgstr ""
+msgstr "已禁止"
 
 msgid "Billing"
-msgstr ""
+msgstr "账单"
 
 msgid "Blocked"
-msgstr ""
+msgstr "已封锁"
 
 msgid "Blocked ip number"
-msgstr ""
+msgstr "已封锁的IP地址"
 
 msgid "Bootstrap icons"
-msgstr ""
+msgstr "Bootstrap 图标"
 
 msgid "Bootstrap icons helper"
-msgstr ""
+msgstr "Bootstrap 图标助手"
 
 msgid "Buddy price"
-msgstr ""
+msgstr "优惠价格"
 
 msgid "Buy {slug} a coffee"
-msgstr ""
+msgstr "请{slug}喝咖啡"
 
 msgid "Buy {user} a coffee"
-msgstr ""
+msgstr "请{user}喝咖啡"
 
 msgid "By default no information about you is shared."
-msgstr ""
+msgstr "默认情况下不会分享您的任何信息。"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
-msgstr ""
+msgstr "调用助手会将 SVG 代码添加到文档开头的符号表中，并添加内联引用。"
 
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 msgid "Captcha code from image"
-msgstr ""
+msgstr "图片验证码"
 
 msgid "Captcha image"
-msgstr ""
+msgstr "验证码图片"
 
 msgid "Captcha was wrong"
-msgstr ""
+msgstr "验证码错误"
 
 msgid "Change password"
-msgstr ""
+msgstr "更改密码"
 
 msgid "Changed status."
-msgstr ""
+msgstr "状态已更改。"
 
 msgid "Choose a password"
-msgstr ""
+msgstr "选择密码"
 
 msgid "Choose a password."
-msgstr ""
+msgstr "选择密码。"
 
 msgid "Choose a username"
-msgstr ""
+msgstr "选择用户名"
 
 msgid "Choose a username."
-msgstr ""
+msgstr "选择用户名。"
 
 msgid "Choose language"
-msgstr ""
+msgstr "选择语言"
 
 msgid "City"
-msgstr ""
+msgstr "城市"
 
 msgid "City (billing)"
-msgstr ""
+msgstr "城市（账单）"
 
 msgid "Click to pop login dialog."
-msgstr ""
+msgstr "点击弹出登录对话框。"
 
 msgid "Click to pop payment dialog."
-msgstr ""
+msgstr "点击弹出付款对话框。"
 
 msgid "Click to pop reminder dialog."
-msgstr ""
+msgstr "点击弹出提醒对话框。"
 
 msgid "Click to regenerate PDF."
-msgstr ""
+msgstr "点击重新生成 PDF。"
 
 msgid "Click to search matching records."
-msgstr ""
+msgstr "点击搜索匹配的记录。"
 
 msgid "Click to search matching zones."
-msgstr ""
+msgstr "点击搜索匹配的区域。"
 
 msgid "Click to send a credit invoice."
-msgstr ""
+msgstr "点击发送贷记发票。"
 
 msgid "Click to send again."
-msgstr ""
+msgstr "点击重新发送。"
 
 msgid "Click to send agin."
-msgstr ""
+msgstr "点击重新发送。"
 
 msgid "Close"
-msgstr ""
+msgstr "关闭"
 
 msgid "Company"
-msgstr ""
+msgstr "公司"
 
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 msgid "Confirm poll signature"
-msgstr ""
+msgstr "确认投票签名"
 
 msgid "Confirm your email address"
-msgstr ""
+msgstr "确认您的电子邮件地址"
 
 msgid "Confirmation code"
-msgstr ""
+msgstr "确认码"
 
 msgid "Confirmation request sent"
-msgstr ""
+msgstr "确认请求已发送"
 
 msgid "Contact"
-msgstr ""
+msgstr "联系"
 
 msgid "Contact {sender} if you have questions."
-msgstr ""
+msgstr "如有疑问，请联系 {sender}。"
 
 msgid "Content"
-msgstr ""
+msgstr "内容"
 
 msgid "Continue"
-msgstr ""
+msgstr "继续"
 
 msgid "Continues on next page..."
-msgstr ""
+msgstr "下一页继续..."
 
 msgid "Contribute"
-msgstr ""
+msgstr "贡献"
 
 msgid "Contributing"
-msgstr ""
+msgstr "贡献"
 
 msgid "Corporate identity number"
-msgstr ""
+msgstr "企业识别号"
 
 msgid "Couldn't use code for verification."
-msgstr ""
+msgstr "无法使用代码进行验证。"
 
 msgid "Country"
-msgstr ""
+msgstr "国家"
 
 msgid "Country (billing)"
-msgstr ""
+msgstr "国家（账单）"
 
 msgid "Country selector"
-msgstr ""
+msgstr "国家选择器"
 
 msgid "Create contact"
-msgstr ""
+msgstr "创建联系人"
 
 msgid "Create customer"
-msgstr ""
+msgstr "创建客户"
 
 msgid "Create new record"
-msgstr ""
+msgstr "创建新记录"
 
 msgid "Created {created} by {creator}"
-msgstr ""
+msgstr "由 {creator} 于 {created} 创建"
 
 msgid "Credit invoice"
-msgstr ""
+msgstr "贷记发票"
 
 msgid "Credit invoice {fakturanummer}"
-msgstr ""
+msgstr "贷记发票 {fakturanummer}"
 
 msgid "Credit invoice {number}"
-msgstr ""
+msgstr "贷记发票 {number}"
 
 msgid "Credit trustability"
-msgstr ""
+msgstr "信用可靠性"
 
 msgid "Creditability"
-msgstr ""
+msgstr "信用度"
 
 msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr ""
+msgstr "含税贷记金额：{rounded} {currency}"
 
 msgid "Credited invoice"
-msgstr ""
+msgstr "已贷记发票"
 
 msgid "Credited invoice: {number}"
-msgstr ""
+msgstr "已贷记发票：{number}"
 
 msgid "Customer"
-msgstr ""
+msgstr "客户"
 
 msgid "Customer #{customerid}"
-msgstr ""
+msgstr "客户 #{customerid}"
 
 msgid "Customer Id"
-msgstr ""
+msgstr "客户 ID"
 
 msgid "Customer Id:"
-msgstr ""
+msgstr "客户 ID："
 
 msgid "Customer newsletter"
-msgstr ""
+msgstr "客户通讯"
 
 msgid "Customers"
-msgstr ""
+msgstr "客户"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid "DNS Admin"
-msgstr ""
+msgstr "DNS 管理"
 
 msgid "DNS Zones"
-msgstr ""
+msgstr "DNS 区域"
 
 msgid "DNS domains"
-msgstr ""
+msgstr "DNS 域名"
 
 msgid "DNS management"
-msgstr ""
+msgstr "DNS 管理"
 
 msgid "DNS zone"
-msgstr ""
+msgstr "DNS 区域"
 
 msgid "DNS zones"
-msgstr ""
+msgstr "DNS 区域"
 
 msgid "Data usage: {usage}"
-msgstr ""
+msgstr "数据使用量：{usage}"
 
 msgid "Database"
-msgstr ""
+msgstr "数据库"
 
 msgid "Database error"
-msgstr ""
+msgstr "数据库错误"
 
 msgid "Databases"
-msgstr ""
+msgstr "数据库"
 
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 msgid "Date:"
-msgstr ""
+msgstr "日期："
 
 msgid "Debt"
-msgstr ""
+msgstr "债务"
 
 msgid "Decide which parts of your personal data you want to show different groups."
-msgstr ""
+msgstr "决定您想向不同群组展示哪些个人数据。"
 
 msgid "Delete"
-msgstr ""
+msgstr "删除"
 
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 msgid "Destroyed"
-msgstr ""
+msgstr "已销毁"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
-msgstr ""
+msgstr "确定从哪个子目录加载 SVG 文件。默认为 Bootstrap 图标。"
 
 msgid "Developer docs"
-msgstr ""
+msgstr "开发者文档"
 
 msgid "Development"
-msgstr ""
+msgstr "开发"
 
 msgid "Do you want to credit the invoice?"
-msgstr ""
+msgstr "您要贷记这张发票吗？"
 
 msgid "Domain"
-msgstr ""
+msgstr "域名"
 
 msgid "Domain registration"
-msgstr ""
+msgstr "域名注册"
 
 msgid "Domain registtration"
-msgstr ""
+msgstr "域名注册"
 
 msgid "Domains"
-msgstr ""
+msgstr "域名"
 
 msgid "DomÃ¤nregistrering"
-msgstr ""
+msgstr "域名注册"
 
 msgid "Due date"
-msgstr ""
+msgstr "到期日"
 
 msgid "Due to"
-msgstr ""
+msgstr "应付至"
 
 msgid "Due to:"
-msgstr ""
+msgstr "应付至："
 
 msgid "EPP"
-msgstr ""
+msgstr "EPP"
 
 msgid "Economy"
-msgstr ""
+msgstr "经济"
 
 msgid "Edit"
-msgstr ""
+msgstr "编辑"
 
 msgid "Edit customer {customerid}"
-msgstr ""
+msgstr "编辑客户 {customerid}"
 
 msgid "Edit zone"
-msgstr ""
+msgstr "编辑区域"
 
 msgid "Ekonomi"
-msgstr ""
+msgstr "经济"
 
 msgid "Email"
-msgstr ""
+msgstr "电子邮件"
 
 msgid "Email %s verified"
-msgstr ""
+msgstr "电子邮件 %s 已验证"
 
 msgid "Email (billing)"
-msgstr ""
+msgstr "电子邮件（账单）"
 
 msgid "Email confirmation"
-msgstr ""
+msgstr "电子邮件确认"
 
 msgid "Email not valid"
-msgstr ""
+msgstr "电子邮件无效"
 
 msgid "Email someone about {what}"
-msgstr ""
+msgstr "就 {what} 发送电子邮件给某人"
 
 msgid "Email to a friend"
-msgstr ""
+msgstr "发送给朋友"
 
 msgid "Empty VAT"
-msgstr ""
+msgstr "增值税号为空"
 
 msgid "Empty VAT number"
-msgstr ""
+msgstr "增值税号为空"
 
 msgid "Empty address"
-msgstr ""
+msgstr "地址为空"
 
 msgid "Empty billingaddress"
-msgstr ""
+msgstr "账单地址为空"
 
 msgid "Empty city"
-msgstr ""
+msgstr "城市为空"
 
 msgid "Empty code"
-msgstr ""
+msgstr "代码为空"
 
 msgid "Empty company name"
-msgstr ""
+msgstr "公司名称为空"
 
 msgid "Empty country"
-msgstr ""
+msgstr "国家为空"
 
 msgid "Empty first name"
-msgstr ""
+msgstr "名字为空"
 
 msgid "Empty freetext"
-msgstr ""
+msgstr "自由文本为空"
 
 msgid "Empty last name"
-msgstr ""
+msgstr "姓氏为空"
 
 msgid "Empty message"
-msgstr ""
+msgstr "消息为空"
 
 msgid "Empty mobile"
-msgstr ""
+msgstr "手机号为空"
 
 msgid "Empty name"
-msgstr ""
+msgstr "名称为空"
 
 msgid "Empty postal code"
-msgstr ""
+msgstr "邮政编码为空"
 
 msgid "Empty recommendation"
-msgstr ""
+msgstr "推荐为空"
 
 msgid "Empty reference"
-msgstr ""
+msgstr "参考为空"
 
 msgid "Empty subject"
-msgstr ""
+msgstr "主题为空"
 
 msgid "Empty surname"
-msgstr ""
+msgstr "姓氏为空"
 
 msgid "Empty telephone"
-msgstr ""
+msgstr "电话为空"
 
 msgid "English"
-msgstr ""
+msgstr "英语"
 
 msgid "Enter code"
-msgstr ""
+msgstr "输入代码"
 
 msgid "Enter code from captcha image"
-msgstr ""
+msgstr "输入验证码图片中的代码"
 
 msgid "Enter password"
-msgstr ""
+msgstr "输入密码"
 
 msgid "Enter record name"
-msgstr ""
+msgstr "输入记录名称"
 
 msgid "Enter username"
-msgstr ""
+msgstr "输入用户名"
 
 msgid "Enter username and password"
-msgstr ""
+msgstr "输入用户名和密码"
 
 msgid "Enter valid email"
-msgstr ""
+msgstr "输入有效的电子邮件"
 
 msgid "Enter your email"
-msgstr ""
+msgstr "输入您的电子邮件"
 
 msgid "Enter zone name"
-msgstr ""
+msgstr "输入区域名称"
 
 msgid "Euro"
-msgstr ""
+msgstr "欧元"
 
 msgid "Examples"
-msgstr ""
+msgstr "示例"
 
 msgid "Expand menu"
-msgstr ""
+msgstr "展开菜单"
 
 msgid "Expand personal menu."
-msgstr ""
+msgstr "展开个人菜单。"
 
 msgid "Expires"
-msgstr ""
+msgstr "过期"
 
 msgid "Expiring domains"
-msgstr ""
+msgstr "即将过期的域名"
 
 msgid "FAKE Media"
-msgstr ""
+msgstr "FAKE Media"
 
 msgid "FAKE News by country"
-msgstr ""
+msgstr "按国家分类的 FAKE News"
 
 msgid "Failed login from {ip}"
-msgstr ""
+msgstr "来自 {ip} 的登录失败"
 
 msgid "Failed to create record"
-msgstr ""
+msgstr "创建记录失败"
 
 msgid "Failed to create zone"
-msgstr ""
+msgstr "创建区域失败"
 
 msgid "Failed to delete record"
-msgstr ""
+msgstr "删除记录失败"
 
 msgid "Failed to delete zone"
-msgstr ""
+msgstr "删除区域失败"
 
 msgid "Failed to send invoice to Fortnox"
 msgstr ""
 
 msgid "Failed to update record"
-msgstr ""
+msgstr "更新记录失败"
 
 msgid "Failed to update zone"
-msgstr ""
+msgstr "更新区域失败"
 
 msgid "File archive"
-msgstr ""
+msgstr "文件存档"
 
 msgid "Fill the form correctly!"
-msgstr ""
+msgstr "请正确填写表单！"
 
 msgid "Find the credit invoice attached as PDF."
-msgstr ""
+msgstr "请查看附件中的贷记发票 PDF。"
 
 msgid "Find the invoice attached as PDF."
-msgstr ""
+msgstr "请查看附件中的发票 PDF。"
 
 msgid "Find your invoice attached as PDF."
-msgstr ""
+msgstr "请查看附件中的您的发票 PDF。"
 
 msgid "First name"
-msgstr ""
+msgstr "名字"
 
 msgid "Fortnox panel"
-msgstr ""
+msgstr "Fortnox 面板"
 
 msgid "From"
-msgstr ""
+msgstr "从"
 
 msgid "Full"
-msgstr ""
+msgstr "完整"
 
 msgid "Give small financial support to {slug} at buymeacoffee"
-msgstr ""
+msgstr "在 buymeacoffee 上给 {slug} 小额资助"
 
 msgid "Give small financial support to {user} at buymeacoffee"
-msgstr ""
+msgstr "在 buymeacoffee 上给 {user} 小额资助"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
-msgstr ""
+msgstr "前往 {confirmationlink} 确认您的签名并获取您的图片。"
 
 msgid "Gross"
-msgstr ""
+msgstr "总额"
 
 msgid "HTML result"
-msgstr ""
+msgstr "HTML 结果"
 
 msgid "Halfyear"
-msgstr ""
+msgstr "半年"
 
 msgid "Handled invoice"
-msgstr ""
+msgstr "已处理发票"
 
 msgid "I accept the terms for registration."
-msgstr ""
+msgstr "我接受注册条款。"
 
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 msgid "IBAN:"
-msgstr ""
+msgstr "IBAN："
 
 msgid "Identification code"
-msgstr ""
+msgstr "识别码"
 
 msgid "If you did not register an account, please ignore this email."
-msgstr ""
+msgstr "如果您没有注册账户，请忽略此邮件。"
 
 msgid "Impersonate"
-msgstr ""
+msgstr "模拟"
 
 msgid "In your personal menu you find your {panel} among other things."
-msgstr ""
+msgstr "在您的个人菜单中，您可以找到您的 {panel} 等内容。"
 
 msgid "Including VAT"
-msgstr ""
+msgstr "含增值税"
 
 msgid "Invalid email"
-msgstr ""
+msgstr "无效的电子邮件"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "无效的密码"
 
 msgid "Invalid username"
-msgstr ""
+msgstr "无效的用户名"
 
 msgid "Invoice"
-msgstr ""
+msgstr "发票"
 
 msgid "Invoice (credited)"
-msgstr ""
+msgstr "发票（已贷记）"
 
 msgid "Invoice address"
-msgstr ""
+msgstr "发票地址"
 
 msgid "Invoice credited m"
-msgstr ""
+msgstr "发票已贷记"
 
 msgid "Invoice currency"
-msgstr ""
+msgstr "发票货币"
 
 msgid "Invoice currency is {currency}."
-msgstr ""
+msgstr "发票货币为 {currency}。"
 
 msgid "Invoice customer #{customerid}"
-msgstr ""
+msgstr "发票客户 #{customerid}"
 
 msgid "Invoice customer {customerid}"
-msgstr ""
+msgstr "发票客户 {customerid}"
 
 msgid "Invoice date"
-msgstr ""
+msgstr "发票日期"
 
 msgid "Invoice for completed services"
-msgstr ""
+msgstr "已完成服务的发票"
 
 msgid "Invoice is credited"
-msgstr ""
+msgstr "发票已贷记"
 
 msgid "Invoice number"
-msgstr ""
+msgstr "发票号码"
 
 msgid "Invoice number: {fakturanummer}"
-msgstr ""
+msgstr "发票号码：{fakturanummer}"
 
 msgid "Invoice period"
-msgstr ""
+msgstr "发票期间"
 
 msgid "Invoice questions"
-msgstr ""
+msgstr "发票问题"
 
 msgid "Invoice questions can be directed to {url}."
-msgstr ""
+msgstr "发票问题可发送至 {url}。"
 
 msgid "Invoice questions:"
-msgstr ""
+msgstr "发票问题："
 
 msgid "Invoice reminder, {number}"
-msgstr ""
+msgstr "发票提醒，{number}"
 
 msgid "Invoice type"
-msgstr ""
+msgstr "发票类型"
 
 msgid "Invoice {fakturanummer}"
-msgstr ""
+msgstr "发票 {fakturanummer}"
 
 msgid "Invoice {fakturanummer} has been credited."
-msgstr ""
+msgstr "发票 {fakturanummer} 已贷记。"
 
 msgid "Invoice {invoiceid, customer {customerid}"
-msgstr ""
+msgstr "发票 {invoiceid}，客户 {customerid}"
 
 msgid "Invoice {invoiceid}, customer #{customerid}"
-msgstr ""
+msgstr "发票 {invoiceid}，客户 #{customerid}"
 
 msgid "Invoice {number}"
-msgstr ""
+msgstr "发票 {number}"
 
 msgid "Invoice {number}, customer #{customerid}"
-msgstr ""
+msgstr "发票 {number}，客户 #{customerid}"
 
 msgid "Invoices"
-msgstr ""
+msgstr "发票"
 
 msgid "Invoices, customer #{customerid}"
-msgstr ""
+msgstr "发票，客户 #{customerid}"
 
 msgid "Invoices, customer {customerid}"
-msgstr ""
+msgstr "发票，客户 {customerid}"
 
 msgid "Invoicing"
-msgstr ""
+msgstr "开票"
 
 msgid "Invoicing, 1 item"
 msgid_plural "Invoicing, {number} items"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "开票，{number} 个项目"
 
 msgid "It's also available at"
-msgstr ""
+msgstr "也可在此处获取"
 
 msgid "It's also available at {url}."
-msgstr ""
+msgstr "也可在 {url} 获取。"
 
 msgid "Keep me logged in"
-msgstr ""
+msgstr "保持登录状态"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr ""
+msgstr "踢走俄罗斯国防部长谢尔盖·绍伊古！"
 
 msgid "Kunder"
-msgstr ""
+msgstr "客户"
 
 msgid "Kuvert"
-msgstr ""
+msgstr "信封"
 
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 msgid "Last name"
-msgstr ""
+msgstr "姓氏"
 
 msgid "Latest"
-msgstr ""
+msgstr "最新"
 
 msgid "Link to control panel"
-msgstr ""
+msgstr "控制面板链接"
 
 msgid "Link to personal data"
-msgstr ""
+msgstr "个人数据链接"
 
 msgid "Link to personal settings"
-msgstr ""
+msgstr "个人设置链接"
 
 msgid "List zones"
-msgstr ""
+msgstr "列出区域"
 
 msgid "Lista fakturor"
-msgstr ""
+msgstr "发票列表"
 
 msgid "Log in"
-msgstr ""
+msgstr "登录"
 
 msgid "Log out"
-msgstr ""
+msgstr "退出"
 
 msgid "Log out and end current session"
-msgstr ""
+msgstr "退出并结束当前会话"
 
 msgid "Login"
-msgstr ""
+msgstr "登录"
 
 msgid "Login blocked"
-msgstr ""
+msgstr "登录已封锁"
 
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
-msgstr ""
+msgstr "由于来自 {ip} 的过多失败尝试，登录已被暂时封锁。"
 
 msgid "Logotype leading to start"
-msgstr ""
+msgstr "指向起始页的标志"
 
 msgid "Logotype leading to start page"
-msgstr ""
+msgstr "指向起始页的标志"
 
 msgid "Lost password?"
-msgstr ""
+msgstr "忘记密码？"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MOSS"
-msgstr ""
+msgstr "MOSS"
 
 msgid "MX records"
-msgstr ""
+msgstr "MX 记录"
 
 msgid "Mail"
-msgstr ""
+msgstr "邮件"
 
 msgid "Mail admin"
-msgstr ""
+msgstr "邮件管理"
 
 msgid "Mail domains"
-msgstr ""
+msgstr "邮件域名"
 
 msgid "Make invoice"
-msgstr ""
+msgstr "创建发票"
 
 msgid "Manage site"
-msgstr ""
+msgstr "管理网站"
 
 msgid "Manuals"
-msgstr ""
+msgstr "手册"
 
 msgid "Mark payment"
-msgstr ""
+msgstr "标记付款"
 
 msgid "Message"
-msgstr ""
+msgstr "消息"
 
 msgid "Message sent"
-msgstr ""
+msgstr "消息已发送"
 
 msgid "Mild"
-msgstr ""
+msgstr "温和"
 
 msgid "Missing file, our bad?"
-msgstr ""
+msgstr "文件丢失，是我们的错吗？"
 
 msgid "Missing username or password"
-msgstr ""
+msgstr "缺少用户名或密码"
 
 msgid "Mobile"
-msgstr ""
+msgstr "手机"
 
 msgid "Modifications were saved."
-msgstr ""
+msgstr "修改已保存。"
 
 msgid "Month"
-msgstr ""
+msgstr "月"
 
 msgid "Name"
-msgstr ""
+msgstr "名称"
 
 msgid "Net"
-msgstr ""
+msgstr "净额"
 
 msgid "Net amount"
-msgstr ""
+msgstr "净金额"
 
 msgid "Net amount:"
-msgstr ""
+msgstr "净金额："
 
 msgid "New account"
-msgstr ""
+msgstr "新账户"
 
 msgid "New customer"
-msgstr ""
+msgstr "新客户"
 
 msgid "New invoice for customer #{customerid}"
-msgstr ""
+msgstr "客户 #{customerid} 的新发票"
 
 msgid "New invoice for customer {customerid}"
-msgstr ""
+msgstr "客户 {customerid} 的新发票"
 
 msgid "New invoice pack"
-msgstr ""
+msgstr "新发票包"
 
 msgid "New record"
-msgstr ""
+msgstr "新记录"
 
 msgid "New zone"
-msgstr ""
+msgstr "新区域"
 
 msgid "Newest"
-msgstr ""
+msgstr "最新"
 
 msgid "Newsletter"
-msgstr ""
+msgstr "通讯"
 
 msgid "No customer #{customerid}."
-msgstr ""
+msgstr "没有客户 #{customerid}。"
 
 msgid "No invoice template."
-msgstr ""
+msgstr "没有发票模板。"
 
 msgid "No invoicing"
-msgstr ""
+msgstr "不开票"
 
 msgid "No selected customer."
-msgstr ""
+msgstr "未选择客户。"
 
 msgid "Normal"
-msgstr ""
+msgstr "普通"
 
 msgid "Notes"
-msgstr ""
+msgstr "备注"
 
 msgid "Number"
-msgstr ""
+msgstr "号码"
 
 msgid "Open invoice"
-msgstr ""
+msgstr "未结发票"
 
 msgid "Open invoice for customer"
-msgstr ""
+msgstr "客户的未结发票"
 
 msgid "Open invoice for customer #{customerid}"
-msgstr ""
+msgstr "客户 #{customerid} 的未结发票"
 
 msgid "Open invoice items"
-msgstr ""
+msgstr "未结发票项目"
 
 msgid "Open invoices"
-msgstr ""
+msgstr "未结发票"
 
 msgid "Open list"
-msgstr ""
+msgstr "打开列表"
 
 msgid "Options"
-msgstr ""
+msgstr "选项"
 
 msgid "Org. Id"
-msgstr ""
+msgstr "组织 ID"
 
 msgid "Org. Id:"
-msgstr ""
+msgstr "组织 ID："
 
 msgid "Organizational number"
-msgstr ""
+msgstr "组织号码"
 
 msgid "Our reference"
-msgstr ""
+msgstr "我们的参考"
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
-msgstr ""
+msgstr "逾期付款将收取催款费和 {rate} 的利息。"
 
 msgid "Ownership"
-msgstr ""
+msgstr "所有权"
 
 msgid "PDF viewer"
-msgstr ""
+msgstr "PDF 查看器"
 
 msgid "Page {number} of {total}"
-msgstr ""
+msgstr "第 {number} 页，共 {total} 页"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "PageSpeed 结果 100 100 100 100"
 
 msgid "Paid"
-msgstr ""
+msgstr "已付款"
 
 msgid "Paid amount"
-msgstr ""
+msgstr "已付金额"
 
 msgid "Panel"
-msgstr ""
+msgstr "面板"
 
 msgid "Password"
-msgstr ""
+msgstr "密码"
 
 msgid "Password was wrong or username doesn't exist."
-msgstr ""
+msgstr "密码错误或用户名不存在。"
 
 msgid "Paydate"
-msgstr ""
+msgstr "付款日期"
 
 msgid "Payment"
-msgstr ""
+msgstr "付款"
 
 msgid "Payment due to: {duedate}"
-msgstr ""
+msgstr "付款截止日期：{duedate}"
 
 msgid "Payment terms"
-msgstr ""
+msgstr "付款条款"
 
 msgid "Payment terms:"
-msgstr ""
+msgstr "付款条款："
 
 msgid "Payments"
-msgstr ""
+msgstr "付款"
 
 msgid "Payments may take up to one week to become visible in the control panel."
-msgstr ""
+msgstr "付款可能需要一周时间才能在控制面板中显示。"
 
 msgid "Paypal"
-msgstr ""
+msgstr "Paypal"
 
 msgid "Paypal:"
-msgstr ""
+msgstr "Paypal："
 
 msgid "Personal"
-msgstr ""
+msgstr "个人"
 
 msgid "Personal menu"
-msgstr ""
+msgstr "个人菜单"
 
 msgid "Personal panel"
-msgstr ""
+msgstr "个人面板"
 
 msgid "Please confirm your email address by clicking the following link:"
-msgstr ""
+msgstr "请点击以下链接确认您的电子邮件地址："
 
 msgid "Please log in to access that page"
-msgstr ""
+msgstr "请登录以访问该页面"
 
 msgid "Please login to access resource."
-msgstr ""
+msgstr "请登录以访问资源。"
 
 msgid "Please logout and login as a user with proper authorization instead."
-msgstr ""
+msgstr "请退出并以具有适当授权的用户身份重新登录。"
 
 msgid "Plusgiro"
-msgstr ""
+msgstr "Plusgiro"
 
 msgid "Posta faktura"
-msgstr ""
+msgstr "邮寄发票"
 
 msgid "Postal code"
-msgstr ""
+msgstr "邮政编码"
 
 msgid "Postal code (billing)"
-msgstr ""
+msgstr "邮政编码（账单）"
 
 msgid "Postal mail"
-msgstr ""
+msgstr "邮政邮件"
 
 msgid "Postgiro"
-msgstr ""
+msgstr "Postgiro"
 
 msgid "Press Register to regenerate"
-msgstr ""
+msgstr "按注册以重新生成"
 
 msgid "Price"
-msgstr ""
+msgstr "价格"
 
 msgid "Priority"
-msgstr ""
+msgstr "优先级"
 
 msgid "Products"
-msgstr ""
+msgstr "产品"
 
 msgid "Qty"
-msgstr ""
+msgstr "数量"
 
 msgid "Qty."
-msgstr ""
+msgstr "数量"
 
 msgid "Quantity"
-msgstr ""
+msgstr "数量"
 
 msgid "Quarter"
-msgstr ""
+msgstr "季度"
 
 msgid "Receiver"
-msgstr ""
+msgstr "接收者"
 
 msgid "Recent signatures"
-msgstr ""
+msgstr "最近的签名"
 
 msgid "Recommended by"
-msgstr ""
+msgstr "推荐人"
 
 msgid "Record Name"
-msgstr ""
+msgstr "记录名称"
 
 msgid "Record Type"
-msgstr ""
+msgstr "记录类型"
 
 msgid "Record created successfully"
-msgstr ""
+msgstr "记录创建成功"
 
 msgid "Record deleted successfully"
-msgstr ""
+msgstr "记录删除成功"
 
 msgid "Record updated successfully"
-msgstr ""
+msgstr "记录更新成功"
 
 msgid "Records"
-msgstr ""
+msgstr "记录"
 
 msgid "Regards"
-msgstr ""
+msgstr "此致"
 
 msgid "Register"
-msgstr ""
+msgstr "注册"
 
 msgid "Register account"
-msgstr ""
+msgstr "注册账户"
 
 msgid "Register to create and publish content."
-msgstr ""
+msgstr "注册以创建和发布内容。"
 
 msgid "Registered for F-tax"
-msgstr ""
+msgstr "已注册F税"
 
 msgid "Registered office"
-msgstr ""
+msgstr "注册办公室"
 
 msgid "Registered office:"
-msgstr ""
+msgstr "注册办公室："
 
 msgid "Registrar"
-msgstr ""
+msgstr "注册商"
 
 msgid "Registration is currently non-functional"
-msgstr ""
+msgstr "注册功能当前不可用"
 
 msgid "Remaining amount to pay: {amount} {currency}"
-msgstr ""
+msgstr "剩余应付金额：{amount} {currency}"
 
 msgid "Remind"
-msgstr ""
+msgstr "提醒"
 
 msgid "Reprint"
-msgstr ""
+msgstr "重新打印"
 
 msgid "Resend"
-msgstr ""
+msgstr "重新发送"
 
 msgid "Resources"
-msgstr ""
+msgstr "资源"
 
 msgid "Roomservice"
-msgstr ""
+msgstr "客房服务"
 
 msgid "Round off"
-msgstr ""
+msgstr "舍入"
 
 msgid "Round off:"
-msgstr ""
+msgstr "舍入："
 
 msgid "SEK"
-msgstr ""
+msgstr "瑞典克朗"
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
-msgstr ""
+msgstr "Samizdat 使用来自 {link} 的 Bootstrap 图标。"
 
 msgid "Save"
-msgstr ""
+msgstr "保存"
 
 msgid "Search"
-msgstr ""
+msgstr "搜索"
 
 msgid "Search field for {what}"
-msgstr ""
+msgstr "{what} 的搜索字段"
 
 msgid "Search for customer"
-msgstr ""
+msgstr "搜索客户"
 
 msgid "Search for database"
-msgstr ""
+msgstr "搜索数据库"
 
 msgid "Search for domain"
-msgstr ""
+msgstr "搜索域名"
 
 msgid "Search for invoice"
-msgstr ""
+msgstr "搜索发票"
 
 msgid "Search for mail domain"
-msgstr ""
+msgstr "搜索邮件域名"
 
 msgid "Search for product"
-msgstr ""
+msgstr "搜索产品"
 
 msgid "Search for website"
-msgstr ""
+msgstr "搜索网站"
 
 msgid "Search for zone"
-msgstr ""
+msgstr "搜索区域"
 
 msgid "Select"
-msgstr ""
+msgstr "选择"
 
 msgid "Select art.no."
-msgstr ""
+msgstr "选择货号"
 
 msgid "Select country"
-msgstr ""
+msgstr "选择国家"
 
 msgid "Select country or click flags to see detail"
-msgstr ""
+msgstr "选择国家或点击旗帜查看详情"
 
 msgid "Select invoice pack"
-msgstr ""
+msgstr "选择发票包"
 
 msgid "Send again"
-msgstr ""
+msgstr "重新发送"
 
 msgid "Send invoice questions to {url}."
-msgstr ""
+msgstr "将发票问题发送至 {url}。"
 
 msgid "Send now"
-msgstr ""
+msgstr "立即发送"
 
 msgid "Send reminder"
-msgstr ""
+msgstr "发送提醒"
 
 msgid "Servers"
-msgstr ""
+msgstr "服务器"
 
 msgid "Set the height attribute."
-msgstr ""
+msgstr "设置高度属性。"
 
 msgid "Set the id attribute."
-msgstr ""
+msgstr "设置 ID 属性。"
 
 msgid "Set the title attribute."
-msgstr ""
+msgstr "设置标题属性。"
 
 msgid "Set the width attribute."
-msgstr ""
+msgstr "设置宽度属性。"
 
 msgid "Settings"
-msgstr ""
+msgstr "设置"
 
 msgid "Share on Facebook"
-msgstr ""
+msgstr "分享到 Facebook"
 
 msgid "Share on LinkedIn"
-msgstr ""
+msgstr "分享到 LinkedIn"
 
 msgid "Share on Telegram"
-msgstr ""
+msgstr "分享到 Telegram"
 
 msgid "Share on Twitter"
-msgstr ""
+msgstr "分享到 Twitter"
 
 msgid "Share {what} on {where}"
-msgstr ""
+msgstr "在 {where} 上分享 {what}"
 
 msgid "Shown as"
-msgstr ""
+msgstr "显示为"
 
 msgid "Sign poll to kick Sergei Shoigu!"
-msgstr ""
+msgstr "签署请愿踢走谢尔盖·绍伊古！"
 
 msgid "Sign poll!"
-msgstr ""
+msgstr "签署请愿！"
 
 msgid "Site"
-msgstr ""
+msgstr "网站"
 
 msgid "Site content"
-msgstr ""
+msgstr "网站内容"
 
 msgid "Skip menu"
-msgstr ""
+msgstr "跳过菜单"
 
 msgid "Snapback evaluation"
-msgstr ""
+msgstr "Snapback 评估"
 
 msgid "Snapback only"
-msgstr ""
+msgstr "仅 Snapback"
 
 msgid "Snapback scheduler"
-msgstr ""
+msgstr "Snapback 调度程序"
 
 msgid "Space separated list of extra classes to append the prefixed default classes."
-msgstr ""
+msgstr "空格分隔的额外类列表，用于附加到带前缀的默认类。"
 
 msgid "Special price"
-msgstr ""
+msgstr "特价"
 
 msgid "Start"
-msgstr ""
+msgstr "开始"
 
 msgid "Stuff"
-msgstr ""
+msgstr "物品"
 
 msgid "Subject"
-msgstr ""
+msgstr "主题"
 
 msgid "Submit"
-msgstr ""
+msgstr "提交"
 
 msgid "Summa"
-msgstr ""
+msgstr "总计"
 
 msgid "Super panel"
-msgstr ""
+msgstr "超级面板"
 
 msgid "Supplier invoices"
-msgstr ""
+msgstr "供应商发票"
 
 msgid "Surname"
-msgstr ""
+msgstr "姓氏"
 
 msgid "Swedish"
-msgstr ""
+msgstr "瑞典语"
 
 msgid "Technical"
-msgstr ""
+msgstr "技术"
 
 msgid "Technical questions"
-msgstr ""
+msgstr "技术问题"
 
 msgid "Technical questions:"
-msgstr ""
+msgstr "技术问题："
 
 msgid "Telephone"
-msgstr ""
+msgstr "电话"
 
 msgid "Test"
-msgstr ""
+msgstr "测试"
 
 msgid "Test customer"
-msgstr ""
+msgstr "测试客户"
 
 msgid "Text"
-msgstr ""
+msgstr "文本"
 
 msgid "Thank you for contacting us."
-msgstr ""
+msgstr "感谢您联系我们。"
 
 msgid "The Samizdat project"
-msgstr ""
+msgstr "Samizdat 项目"
 
 msgid "The default is used for the Bootstrap icons set."
-msgstr ""
+msgstr "默认用于 Bootstrap 图标集。"
 
 msgid "The form was submitted from {ip}"
-msgstr ""
+msgstr "表单从 {ip} 提交"
 
 msgid "The invoice is also available at"
-msgstr ""
+msgstr "发票也可在此处获取"
 
 msgid "The invoice was due to {duedate}."
-msgstr ""
+msgstr "发票应付日期为 {duedate}。"
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
-msgstr ""
+msgstr "限制为每 {blocktime} 分钟 {blocklimit} 次尝试。"
 
 msgid "The limit is {limit}."
-msgstr ""
+msgstr "限制为 {limit}。"
 
 msgid "The login function uses javascript, cookies and AJAX."
-msgstr ""
+msgstr "登录功能使用 JavaScript、cookie 和 AJAX。"
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
-msgstr ""
+msgstr "最早的尝试由 &quot;{username}&quot; 于 {failuretime} 发起。"
 
 msgid "The page {docpath} wasn't found."
-msgstr ""
+msgstr "页面 {docpath} 未找到。"
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
-msgstr ""
+msgstr "此演示展示了 Samizdat 的 SVG 模板助手的结果。"
 
 msgid "This field is required"
-msgstr ""
+msgstr "此字段为必填项"
 
 msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
+msgstr "此文件在与 {project} 软件包相同的许可下分发。"
 
 msgid "Tillbaka"
-msgstr ""
+msgstr "返回"
 
 msgid "Toggle menu"
-msgstr ""
+msgstr "切换菜单"
 
 msgid "Tot"
-msgstr ""
+msgstr "总计"
 
 msgid "Tough"
-msgstr ""
+msgstr "严厉"
 
 msgid "Transfer"
-msgstr ""
+msgstr "转账"
 
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 msgid "Unauthenticated"
-msgstr ""
+msgstr "未认证"
 
 msgid "Unpaid"
-msgstr ""
+msgstr "未付款"
 
 msgid "Update"
-msgstr ""
+msgstr "更新"
 
 msgid "Update and send page."
-msgstr ""
+msgstr "更新并发送页面。"
 
 msgid "Update and send."
-msgstr ""
+msgstr "更新并发送。"
 
 msgid "Update customer"
-msgstr ""
+msgstr "更新客户"
 
 msgid "Update invoice, customer #{customerid}"
-msgstr ""
+msgstr "更新发票，客户 #{customerid}"
 
 msgid "Updated customer"
-msgstr ""
+msgstr "已更新客户"
 
 msgid "Updated invoice"
-msgstr ""
+msgstr "已更新发票"
 
 msgid "Updated {updated} by {updater}"
-msgstr ""
+msgstr "由 {updater} 于 {updated} 更新"
 
 msgid "Usage"
-msgstr ""
+msgstr "使用"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
-msgstr ""
+msgstr "使用 <code>flags</code> 获取旗帜图标，或使用 <code>anysvg</code> 获取应用程序主页。"
 
 msgid "Use the invoice number as message when you pay."
-msgstr ""
+msgstr "付款时请使用发票号码作为留言。"
 
 msgid "Use this if you don't need the prefixed default classes."
-msgstr ""
+msgstr "如果不需要带前缀的默认类，请使用此选项。"
 
 msgid "Used to make class names."
-msgstr ""
+msgstr "用于创建类名。"
 
 msgid "User manual"
-msgstr ""
+msgstr "用户手册"
 
 msgid "User registration"
-msgstr ""
+msgstr "用户注册"
 
 msgid "Username"
-msgstr ""
+msgstr "用户名"
 
 msgid "VAT"
-msgstr ""
+msgstr "增值税"
 
 msgid "VAT Id"
-msgstr ""
+msgstr "增值税 ID"
 
 msgid "VAT Id:"
-msgstr ""
+msgstr "增值税 ID："
 
 msgid "VAT lookup, {vatno}"
-msgstr ""
+msgstr "增值税查询，{vatno}"
 
 msgid "VAT number"
-msgstr ""
+msgstr "增值税号"
 
 msgid "VAT number lookup"
-msgstr ""
+msgstr "增值税号查询"
 
 msgid "VAT percentage"
-msgstr ""
+msgstr "增值税百分比"
 
 msgid "VAT {rate}\\%"
-msgstr ""
+msgstr "增值税 {rate}\\%"
 
 msgid "VAT:"
-msgstr ""
+msgstr "增值税："
 
 msgid "Value for the class attribute."
-msgstr ""
+msgstr "类属性的值。"
 
 msgid "We will also store it for statistics and to prevent robot registrations."
-msgstr ""
+msgstr "我们还将存储它用于统计并防止机器人注册。"
 
 msgid "We will email a confirmation request."
-msgstr ""
+msgstr "我们将通过电子邮件发送确认请求。"
 
 msgid "We will reply as soon as possible."
-msgstr ""
+msgstr "我们将尽快回复。"
 
 msgid "Web sites"
-msgstr ""
+msgstr "网站"
 
 msgid "Websites"
-msgstr ""
+msgstr "网站"
 
 msgid "Whois data for {ip}"
-msgstr ""
+msgstr "{ip} 的 Whois 数据"
 
 msgid "Write the invoice number as message when you pay."
-msgstr ""
+msgstr "付款时请将发票号码写在留言中。"
 
 msgid "Wrong captcha"
-msgstr ""
+msgstr "验证码错误"
 
 msgid "Year"
-msgstr ""
+msgstr "年"
 
 msgid "You can also post in our discussions."
-msgstr ""
+msgstr "您也可以在我们的讨论中发帖。"
 
 msgid "You have registered a new user account on {site}."
-msgstr ""
+msgstr "您已在 {site} 上注册了新用户账户。"
 
 msgid "You have {remaining} tries left."
-msgstr ""
+msgstr "您还有 {remaining} 次尝试机会。"
 
 msgid "You need to accept registration terms."
-msgstr ""
+msgstr "您需要接受注册条款。"
 
 msgid "You were logged in as {username}."
-msgstr ""
+msgstr "您已作为 {username} 登录。"
 
 msgid "Your VAT Id"
-msgstr ""
+msgstr "您的增值税 ID"
 
 msgid "Your VAT Id:"
-msgstr ""
+msgstr "您的增值税 ID："
 
 msgid "Your contact"
-msgstr ""
+msgstr "您的联系人"
 
 msgid "Your contact:"
-msgstr ""
+msgstr "您的联系人："
 
 msgid "Your email"
-msgstr ""
+msgstr "您的电子邮件"
 
 msgid "Your ip {ip} will be appended to the confirmation request."
-msgstr ""
+msgstr "您的 IP {ip} 将附加到确认请求中。"
 
 msgid "Your ip {ip} will be appended to the message."
-msgstr ""
+msgstr "您的 IP {ip} 将附加到消息中。"
 
 msgid "Your message appears below."
-msgstr ""
+msgstr "您的消息如下所示。"
 
 msgid "Your name"
-msgstr ""
+msgstr "您的姓名"
 
 msgid "Zone Kind"
-msgstr ""
+msgstr "区域类型"
 
 msgid "Zone Name"
-msgstr ""
+msgstr "区域名称"
 
 msgid "Zone created successfully"
-msgstr ""
+msgstr "区域创建成功"
 
 msgid "Zone deleted successfully"
-msgstr ""
+msgstr "区域删除成功"
 
 msgid "Zone management"
-msgstr ""
+msgstr "区域管理"
 
 msgid "Zone not found"
-msgstr ""
+msgstr "未找到区域"
 
 msgid "Zone records"
-msgstr ""
+msgstr "区域记录"
 
 msgid "Zone updated successfully"
-msgstr ""
+msgstr "区域更新成功"
 
 msgid "add 3\\%"
-msgstr ""
+msgstr "加 3\\%"
 
 msgid "add {fee}"
-msgstr ""
+msgstr "加 {fee}"
 
 msgid "billing@rymdweb.com"
-msgstr ""
+msgstr "billing@rymdweb.com"
 
 msgid "control panel"
-msgstr ""
+msgstr "控制面板"
 
 msgid "customer"
-msgstr ""
+msgstr "客户"
 
 msgid "database"
-msgstr ""
+msgstr "数据库"
 
 msgid "domain"
-msgstr ""
+msgstr "域名"
 
 msgid "invoice"
-msgstr ""
+msgstr "发票"
 
 msgid "login attempts"
-msgstr ""
+msgstr "登录尝试"
 
 msgid "mail domain"
-msgstr ""
+msgstr "邮件域名"
 
 msgid "main firewall"
-msgstr ""
+msgstr "主防火墙"
 
 msgid "our web"
-msgstr ""
+msgstr "我们的网站"
 
 msgid "product"
-msgstr ""
+msgstr "产品"
 
 msgid "standby firewall"
-msgstr ""
+msgstr "备用防火墙"
 
 msgid "website"
-msgstr ""
+msgstr "网站"
 
 msgid "wensite"
-msgstr ""
+msgstr "网站"
 
 msgid "{code}: Authentication required"
-msgstr ""
+msgstr "{code}：需要身份验证"
 
 msgid "{code}: No authorization"
-msgstr ""
+msgstr "{code}：无授权"
 
 msgid "{code}: Not in this universe"
-msgstr ""
+msgstr "{code}：不在此宇宙中"
 
 msgid "{cost}"
-msgstr ""
+msgstr "{cost}"
 
 msgid "{cost} {currency}"
-msgstr ""
+msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
-msgstr ""
+msgstr "过去 {minutes} 分钟内从 {ip} 发起了 {count} 次失败的登录尝试。"
 
 msgid "{number} days"
-msgstr ""
+msgstr "{number} 天"
 
 msgid "{number} signatures since {date}"
-msgstr ""
+msgstr "自 {date} 以来的 {number} 个签名"
 
 msgid "{server}, main firewall"
-msgstr ""
+msgstr "{server}，主防火墙"
 
 msgid "{server}, standby firewall"
-msgstr ""
+msgstr "{server}，备用防火墙"
 
 msgid "{sitename} by country"
-msgstr ""
+msgstr "按国家分类的 {sitename}"
 
 msgid "{sitename} in {country}"
-msgstr ""
+msgstr "{country} 的 {sitename}"
 

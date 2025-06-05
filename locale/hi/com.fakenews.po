@@ -649,6 +649,9 @@ msgstr "रिकॉर्ड हटाने में विफल"
 msgid "Failed to delete zone"
 msgstr "ज़ोन हटाने में विफल"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "रिकॉर्ड अपडेट करने में विफल"
 
@@ -1056,6 +1059,9 @@ msgstr "पीडीएफ व्यूअर"
 msgid "Page {number} of {total}"
 msgstr "पृष्ठ {number} / {total}"
 
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
 msgid "Paid"
 msgstr "भुगतान किया गया"
 
@@ -1208,6 +1214,9 @@ msgstr "पंजीकृत कार्यालय"
 
 msgid "Registered office:"
 msgstr "पंजीकृत कार्यालय:"
+
+msgid "Registrar"
+msgstr ""
 
 msgid "Registration is currently non-functional"
 msgstr "पंजीकरण वर्तमान में गैर-कार्यात्मक है"
@@ -1736,3 +1745,4 @@ msgstr "देश द्वारा {sitename}"
 
 msgid "{sitename} in {country}"
 msgstr "{country} में {sitename}"
+

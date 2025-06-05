@@ -12,7 +12,7 @@ has usage => sub ($self) { $self->extract_usage };
 my $ua = Mojo::UserAgent->new;
 
 sub run ($self, @args) {
-  my $language = $ENV{'LANG'};
+  my $language = $ENV{'LANG'} // $self->app->config->{locale}->{default_language} // 'en_US.UTF-8';
   $language = (split(':', $language))[0];
   $language = (split('_', $language))[0];
 
@@ -33,12 +33,13 @@ sub run ($self, @args) {
       next if ($uri =~ /^javascript/);
       next if ($uri =~ /^country/);
 
-      my $language = $self->app->config->{locale}->{default_language};
+#      my $language = $self->app->config->{locale}->{default_language};
+      $ua->cookie_jar->empty;
       $ua->cookie_jar->add(
         Mojo::Cookie::Response->new(
           name   => 'language',
           value  => $language,
-          domain => $self->app->config->{cookiedomain},
+          domain => $self->app->config->{account}->{cookiedomain},
           path   => '/'
         )
       );
@@ -49,7 +50,7 @@ sub run ($self, @args) {
         my $res = $ua->get(sprintf('%s/%s', $server, $uri))->result;
         say sprintf('%s/%s %3d', $server, $uri, $res->code);
 
-        if ($uri !~ /\.(png|jpg|jpeg|gif|webp|mp3|svg|pdf|css|js)$/) {
+        if (0 && $uri !~ /\.(png|jpg|jpeg|gif|webp|mp3|svg|pdf|css|js)$/) {
           for my $language (keys %{$self->app->config->{locale}->{languages}}) {
             next if ($language eq $self->app->config->{locale}->{default_language});
             $ua->cookie_jar->empty;
@@ -57,7 +58,7 @@ sub run ($self, @args) {
               Mojo::Cookie::Response->new(
                 name   => 'language',
                 value  => $language,
-                domain => $self->app->config->{cookiedomain},
+                domain => $self->app->config->{account}->{cookiedomain},
                 path   => '/'
               )
             );

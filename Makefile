@@ -10,8 +10,37 @@ fortnox:
 dump:
 	bin/samizdat makedump
 
-static:
-	LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 bin/samizdat makestatic
+static_en:
+	env LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 bin/samizdat makestatic
+
+static_sv:
+	env LANG=sv LANGUAGE=sv.UTF-8 LC_ALL=sv_SE.UTF-8 bin/samizdat makestatic
+
+static_de:
+	env LANG=de LANGUAGE=de.UTF-8 LC_ALL=de_DE.UTF-8 bin/samizdat makestatic
+
+static_fr:
+	env LANG=fr LANGUAGE=fr.UTF-8 LC_ALL=fr_FR.UTF-8 bin/samizdat makestatic
+
+static_es:
+	env LANG=es LANGUAGE=es.UTF-8 LC_ALL=es_ES.UTF-8 bin/samizdat makestatic
+
+static_pt:
+	env LANG=pt LANGUAGE=pt.UTF-8 LC_ALL=pt_PT.UTF-8 bin/samizdat makestatic
+
+static_ru:
+	env LANG=ru LANGUAGE=ru.UTF-8 LC_ALL=ru_RU.UTF-8 bin/samizdat makestatic
+
+static_hi:
+	env LANG=hi LANGUAGE=hi.UTF-8 LC_ALL=hi_IN.UTF-8 bin/samizdat makestatic
+
+static_ar:
+	env LANG=ar LANGUAGE=ar.UTF-8 LC_ALL=ar_SA.UTF-8 bin/samizdat makestatic
+
+static_zh:
+	env LANG=zh LANGUAGE=zh.UTF-8 LC_ALL=zh_CN.UTF-8 bin/samizdat makestatic
+
+static_all: static_en static_sv static_de static_fr static_es static_pt static_ru static_hi static_ar static_zh
 
 clean:
 	rm -rf public/*
@@ -28,7 +57,7 @@ eplinks:
 	find templates/ -type l -delete
 	bin/samizdat makeeplinks
 
-iso: static
+iso: static_all
 	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
 
 torrent:
@@ -39,6 +68,7 @@ isotorrent: public/iso/samizdat.iso
 devtools:
 
 i18n:
+	ln -s -r src/countries-data-json/data/translations/countries-zh_CN.json ./src/countries-data-json/data/translations/countries-zh.json
 	bin/samizdat makei18n
 
 debug:
@@ -112,7 +142,7 @@ favicon:
 icons:
 	bin/samizdat makeicons
 
-install: clean favicon icons static webpack zip
+install: clean favicon icons static_all webpack zip
 #	chown -R www-data:www-data .
 
 import:

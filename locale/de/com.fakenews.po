@@ -649,6 +649,9 @@ msgstr "Eintrag konnte nicht gelöscht werden"
 msgid "Failed to delete zone"
 msgstr "Zone konnte nicht gelöscht werden"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Eintrag konnte nicht aktualisiert werden"
 

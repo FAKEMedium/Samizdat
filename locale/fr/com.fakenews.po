@@ -649,6 +649,9 @@ msgstr "Échec de suppression de l'enregistrement"
 msgid "Failed to delete zone"
 msgstr "Échec de suppression de la zone"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Échec de mise à jour de l'enregistrement"
 

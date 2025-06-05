@@ -656,6 +656,9 @@ msgstr "Не удалось удалить запись"
 msgid "Failed to delete zone"
 msgstr "Не удалось удалить зону"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Не удалось обновить запись"
 

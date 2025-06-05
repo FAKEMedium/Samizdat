@@ -677,6 +677,9 @@ msgstr "فشل حذف السجل"
 msgid "Failed to delete zone"
 msgstr "فشل حذف المنطقة"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "فشل تحديث السجل"
 

@@ -616,6 +616,9 @@ msgstr "Misslyckades ta bort post"
 msgid "Failed to delete zone"
 msgstr "Misslyckades ta bort zon"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Misslyckades uppdatera post"
 

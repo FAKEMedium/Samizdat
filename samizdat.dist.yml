@@ -263,6 +263,12 @@ locale:
       Language-Team: Webmaster <webmaster@fakenews.com>
       flag: in
       name: हिन्दी
+    zh:
+      Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>
+      Last-Translator: Webmaster <webmaster@fakenews.com>
+      Language-Team: Webmaster <webmaster@fakenews.com>
+      flag: cn
+      name: 中文
   default_language: en
   skip_messages:
     - default_language

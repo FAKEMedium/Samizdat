@@ -656,6 +656,9 @@ msgstr "Nie udało się usunąć rekordu"
 msgid "Failed to delete zone"
 msgstr "Nie udało się usunąć strefy"
 
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Nie udało się zaktualizować rekordu"
 
