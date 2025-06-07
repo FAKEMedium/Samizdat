@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # PROVIDE: samizdat
-# REQUIRE: LOGIN postgresql redis
+# REQUIRE: LOGIN
 # KEYWORD: shutdown
 
 # Add the following lines to /etc/rc.conf to enable samizdat:
@@ -10,6 +10,8 @@
 # samizdat_group="www"
 # samizdat_dir="/usr/local/www/samizdat"
 # samizdat_config="/usr/local/www/samizdat/samizdat.yml"
+# samizdat_pidfile="/var/run/samizdat.pid"
+# samizdat_logfile="/var/log/samizdat.log"
 
 . /etc/rc.subr
 
