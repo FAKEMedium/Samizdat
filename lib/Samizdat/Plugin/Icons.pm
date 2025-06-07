@@ -48,6 +48,7 @@ sub register ($self, $app, $conf) {
       } elsif ('anysvg' eq $what) {
         $prefix = $options->{prefix} // 'anysvg';
       }
+      my $stashsymbols = $c->stash('symbols') // {};
       if (!exists($symbols->{$icon})) {
         if ('flag' eq $what) {
           $svg = $flagsrepo->child(
@@ -75,7 +76,8 @@ sub register ($self, $app, $conf) {
         chomp $symbol;
         $symbols->{$icon} = $symbol;
       }
-      $c->{stash}->{symbols}->{$icon} = $symbols->{$icon};
+      $stashsymbols->{$icon} = $symbols->{$icon};
+      $c->stash(symbols => $stashsymbols);
       my $class = $options->{class} // sprintf('%s %s-%s', $prefix, $prefix, $icon);
       $class .= ' ' . $options->{extraclass} if (exists $options->{extraclass});
       my $iconcode = $mtsvg->process({
