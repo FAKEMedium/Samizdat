@@ -43,7 +43,8 @@ static_ar:
 static_zh:
 	env LANG=zh LANGUAGE=zh.UTF-8 LC_ALL=zh_CN.UTF-8 bin/samizdat makestatic
 
-static_all: static_en static_sv static_de static_fr static_es static_pt static_ru static_hi static_ar static_zh static_pl
+static_all: static_en static_sv static_de static_fr static_es static_pl static_pt static_ru static_hi static_ar static_zh
+	echo "All static files generated. Cache is warm."
 
 clean:
 	rm -rf public/*
