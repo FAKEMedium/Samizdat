@@ -88,7 +88,7 @@ sub register ($self, $app, $conf) {
     after_render => sub ($c, $output, $format) {
       no warnings 'uninitialized';
       $$output =~ s{        <!-- symbols -->\n}[
-        $c->app->indent(join("\n", sort {$a cmp $b} map $app->{symbols}->{$_}, keys %{ $app->{symbols} }), 4)
+        $c->app->indent(join("\n", sort {$a cmp $b} map $c->stash->{symbols}->{$_}, keys %{ $c->stash->{symbols} }), 4)
       ]eu;
       return 1 if (exists($cacheexist->{$c->{stash}->{docpath}}));
       if (404 != $c->{stash}->{status}) {

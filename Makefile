@@ -25,6 +25,9 @@ static_fr:
 static_es:
 	env LANG=es LANGUAGE=es.UTF-8 LC_ALL=es_ES.UTF-8 bin/samizdat makestatic
 
+static_pl:
+	env LANG=pl LANGUAGE=pl.UTF-8 LC_ALL=pl_PL.UTF-8 bin/samizdat makestatic
+
 static_pt:
 	env LANG=pt LANGUAGE=pt.UTF-8 LC_ALL=pt_PT.UTF-8 bin/samizdat makestatic
 
@@ -40,7 +43,7 @@ static_ar:
 static_zh:
 	env LANG=zh LANGUAGE=zh.UTF-8 LC_ALL=zh_CN.UTF-8 bin/samizdat makestatic
 
-static_all: static_en static_sv static_de static_fr static_es static_pt static_ru static_hi static_ar static_zh
+static_all: static_en static_sv static_de static_fr static_es static_pt static_ru static_hi static_ar static_zh static_pl
 
 clean:
 	rm -rf public/*
