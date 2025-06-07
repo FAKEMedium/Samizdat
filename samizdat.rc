@@ -1,0 +1,138 @@
+#!/bin/sh
+
+# PROVIDE: samizdat
+# REQUIRE: LOGIN postgresql redis
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable samizdat:
+# samizdat_enable="YES"
+# samizdat_user="www"
+# samizdat_group="www"
+# samizdat_dir="/usr/local/www/samizdat"
+# samizdat_config="/usr/local/www/samizdat/samizdat.yml"
+
+. /etc/rc.subr
+
+name="samizdat"
+rcvar=samizdat_enable
+
+load_rc_config $name
+
+: ${samizdat_enable="NO"}
+: ${samizdat_user="www"}
+: ${samizdat_group="www"}
+: ${samizdat_dir="/usr/local/www/samizdat"}
+: ${samizdat_config="${samizdat_dir}/samizdat.yml"}
+: ${samizdat_pidfile="/var/run/samizdat.pid"}
+: ${samizdat_logfile="/var/log/samizdat.log"}
+
+pidfile="${samizdat_pidfile}"
+command_interpreter="perl"
+command="${samizdat_dir}/bin/samizdat"
+command_args="daemon"
+
+# Export environment variables
+samizdat_env="MOJO_MODE=production"
+samizdat_env="${samizdat_env} MOJO_CONFIG=${samizdat_config}"
+
+# Check if config file exists
+samizdat_precmd()
+{
+    if [ ! -f "${samizdat_config}" ]; then
+        echo "Config file ${samizdat_config} not found"
+        return 1
+    fi
+    
+    if [ ! -d "${samizdat_dir}" ]; then
+        echo "Samizdat directory ${samizdat_dir} not found"
+        return 1
+    fi
+    
+    # Ensure PID file directory exists
+    install -d -o "${samizdat_user}" -g "${samizdat_group}" -m 755 "$(dirname ${samizdat_pidfile})"
+    
+    # Ensure log file exists with proper permissions
+    touch "${samizdat_logfile}"
+    chown "${samizdat_user}:${samizdat_group}" "${samizdat_logfile}"
+    chmod 640 "${samizdat_logfile}"
+}
+
+# Custom start command using hypnotoad
+samizdat_start()
+{
+    echo "Starting ${name}."
+    cd "${samizdat_dir}"
+    
+    /usr/bin/env ${samizdat_env} \
+        /usr/local/bin/hypnotoad \
+        -f "${command}" \
+        >> "${samizdat_logfile}" 2>&1 &
+    
+    echo $! > "${samizdat_pidfile}"
+    chown "${samizdat_user}:${samizdat_group}" "${samizdat_pidfile}"
+}
+
+# Custom stop command
+samizdat_stop()
+{
+    if [ -f "${samizdat_pidfile}" ]; then
+        echo "Stopping ${name}."
+        cd "${samizdat_dir}"
+        
+        /usr/bin/env ${samizdat_env} \
+            /usr/local/bin/hypnotoad \
+            -s "${command}" \
+            >> "${samizdat_logfile}" 2>&1
+        
+        rm -f "${samizdat_pidfile}"
+    else
+        echo "${name} is not running."
+    fi
+}
+
+# Custom restart command
+samizdat_restart()
+{
+    echo "Restarting ${name}."
+    cd "${samizdat_dir}"
+    
+    /usr/bin/env ${samizdat_env} \
+        /usr/local/bin/hypnotoad \
+        "${command}" \
+        >> "${samizdat_logfile}" 2>&1
+}
+
+# Custom reload command (graceful restart)
+samizdat_reload()
+{
+    samizdat_restart
+}
+
+# Custom status command
+samizdat_status()
+{
+    if [ -f "${samizdat_pidfile}" ]; then
+        pid=$(cat "${samizdat_pidfile}")
+        if ps -p "${pid}" > /dev/null 2>&1; then
+            echo "${name} is running as pid ${pid}."
+        else
+            echo "${name} is not running, but pidfile exists."
+            return 1
+        fi
+    else
+        echo "${name} is not running."
+        return 1
+    fi
+}
+
+# Override default commands
+start_cmd="samizdat_start"
+stop_cmd="samizdat_stop"
+restart_cmd="samizdat_restart"
+reload_cmd="samizdat_reload"
+status_cmd="samizdat_status"
+start_precmd="samizdat_precmd"
+
+extra_commands="reload"
+
+run_rc_command "$1"
