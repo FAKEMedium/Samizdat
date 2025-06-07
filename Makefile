@@ -11,37 +11,37 @@ dump:
 	bin/samizdat makedump
 
 static_en:
-	env LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=en LANGUAGE=en.UTF-8 LC_ALL=en_US.UTF-8 bin/samizdat makestatic
 
 static_sv:
-	env LANG=sv LANGUAGE=sv.UTF-8 LC_ALL=sv_SE.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=sv LANGUAGE=sv.UTF-8 LC_ALL=sv_SE.UTF-8 bin/samizdat makestatic
 
 static_de:
-	env LANG=de LANGUAGE=de.UTF-8 LC_ALL=de_DE.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=de LANGUAGE=de.UTF-8 LC_ALL=de_DE.UTF-8 bin/samizdat makestatic
 
 static_fr:
-	env LANG=fr LANGUAGE=fr.UTF-8 LC_ALL=fr_FR.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=fr LANGUAGE=fr.UTF-8 LC_ALL=fr_FR.UTF-8 bin/samizdat makestatic
 
 static_es:
-	env LANG=es LANGUAGE=es.UTF-8 LC_ALL=es_ES.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=es LANGUAGE=es.UTF-8 LC_ALL=es_ES.UTF-8 bin/samizdat makestatic
 
 static_pl:
-	env LANG=pl LANGUAGE=pl.UTF-8 LC_ALL=pl_PL.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=pl LANGUAGE=pl.UTF-8 LC_ALL=pl_PL.UTF-8 bin/samizdat makestatic
 
 static_pt:
-	env LANG=pt LANGUAGE=pt.UTF-8 LC_ALL=pt_PT.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=pt LANGUAGE=pt.UTF-8 LC_ALL=pt_PT.UTF-8 bin/samizdat makestatic
 
 static_ru:
-	env LANG=ru LANGUAGE=ru.UTF-8 LC_ALL=ru_RU.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=ru LANGUAGE=ru.UTF-8 LC_ALL=ru_RU.UTF-8 bin/samizdat makestatic
 
 static_hi:
-	env LANG=hi LANGUAGE=hi.UTF-8 LC_ALL=hi_IN.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=hi LANGUAGE=hi.UTF-8 LC_ALL=hi_IN.UTF-8 bin/samizdat makestatic
 
 static_ar:
-	env LANG=ar LANGUAGE=ar.UTF-8 LC_ALL=ar_SA.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=ar LANGUAGE=ar.UTF-8 LC_ALL=ar_SA.UTF-8 bin/samizdat makestatic
 
 static_zh:
-	env LANG=zh LANGUAGE=zh.UTF-8 LC_ALL=zh_CN.UTF-8 bin/samizdat makestatic
+	env -u LANG -u LANGUAGE -u LC_ALL LANG=zh LANGUAGE=zh.UTF-8 LC_ALL=zh_CN.UTF-8 bin/samizdat makestatic
 
 static_all: static_en static_sv static_de static_fr static_es static_pl static_pt static_ru static_hi static_ar static_zh
 	echo "All static files generated. Cache is warm."
@@ -78,8 +78,11 @@ i18n:
 debug:
 	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
 
-server: clean zip
+serverstart: zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
+
+serverstop:
+	hypnotoad -s ./bin/samizdat
 
 routes:
 	bin/samizdat routes -v
