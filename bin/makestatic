@@ -1,0 +1,12 @@
+#!/bin/sh
+
+make static_en
+make static_fr
+make static_es
+make static_de
+make static_pl
+make static_pt
+make static_ru
+make static_hi
+make static_zh
+make static_sv
