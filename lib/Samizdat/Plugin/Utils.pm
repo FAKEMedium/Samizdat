@@ -116,7 +116,7 @@ sub register ($self, $app, $conf) {
         ]gexsmu;
         my $docpath = $c->{stash}->{docpath} // '';
         if ($c->config->{cache} && $docpath ne '') {
-          my $language = $c->app->language;
+          my $language = $c->{stash}->{language};
           if ($c->config->{locale}->{default_language} ne $language) {
             $docpath =~ s/\.html$/.$language.html/;
           }

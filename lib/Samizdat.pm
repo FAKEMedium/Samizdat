@@ -23,6 +23,7 @@ sub startup ($self) {
     layout => $config->{layout},
     template => 'index',
     languages => {},
+    language => $config->{locale}->{default_language},
     countries => {},
     themecolor => '',
     headtitle => '',
@@ -141,6 +142,7 @@ sub startup ($self) {
     my $language = $c->cookie('language') // '';
     if (exists($config->{locale}->{languages}->{$language})) {
       $self->language($language);
+      $self->stash(language => $language);
     } else {
       $c->cookie(language => $config->{locale}->{default_language}, {
         secure   => 1,

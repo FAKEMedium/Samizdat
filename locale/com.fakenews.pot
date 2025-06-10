@@ -1,6 +1,6 @@
 # Rymdweb - Samizdat
 # Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
-# Este arquivo é distribuído sob a mesma licença que o pacote .
+# Este archivo se distribuye bajo la misma licencia que el paquete .
 # Webmaster <webmaster@fakenews.com>, 2022.
 #
 msgid ""
@@ -16,1403 +16,1403 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: en\n"
 
-msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
-msgstr ""
-
-msgid "Allow cookies to paste confirmation code from email"
-msgstr ""
-
-msgid "Personal"
-msgstr ""
-
-msgid "Options"
-msgstr ""
-
-msgid "Websites"
-msgstr ""
-
-msgid "Address (billing)"
-msgstr ""
-
-msgid "You can also post in our discussions."
-msgstr ""
-
-msgid "The Samizdat project"
-msgstr ""
-
-msgid "Find the invoice attached as PDF."
-msgstr ""
-
-msgid "Captcha code from image"
-msgstr ""
-
-msgid "Normal"
-msgstr ""
-
-msgid "Round off"
-msgstr ""
-
-msgid "Billing"
-msgstr ""
-
-msgid "Missing username or password"
-msgstr ""
-
-msgid "Continues on next page..."
-msgstr ""
-
-msgid "Message"
-msgstr ""
-
-msgid "Confirm"
-msgstr ""
-
-msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
-msgstr ""
-
-msgid "It can be configured to display everything publicly as well."
-msgstr ""
-
-msgid "Empty telephone"
-msgstr ""
-
-msgid "Our reference"
-msgstr ""
-
-msgid "our web"
-msgstr ""
-
-msgid "Password"
-msgstr ""
-
-msgid "A confirmation link was mailed to {email}."
-msgstr ""
-
-msgid "Click to pop login dialog."
-msgstr ""
-
-msgid "Zone Kind"
-msgstr ""
-
-msgid "Used to make class names."
-msgstr ""
-
-msgid "DNS management"
-msgstr ""
-
-msgid "User manual"
-msgstr ""
-
-msgid "Set the height attribute."
-msgstr ""
-
-msgid "Zone Name"
-msgstr ""
-
-msgid "Your ip {ip} will be appended to the message."
-msgstr ""
-
-msgid "User registration"
-msgstr ""
-
-msgid "Select country"
-msgstr ""
-
-msgid "Invalid username"
-msgstr ""
-
-msgid "Snapback only"
-msgstr ""
-
-msgid "DNS Zones"
-msgstr ""
-
-msgid "Skip menu"
-msgstr ""
-
-msgid "Country (billing)"
-msgstr ""
-
-msgid "VAT"
-msgstr ""
-
-msgid "Payments may take up to one week to become visible in the control panel."
-msgstr ""
-
-msgid "BIC/Swift address"
-msgstr ""
-
-msgid "City (billing)"
-msgstr ""
-
-msgid "Transfer"
-msgstr ""
-
-msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
-msgstr ""
-
-msgid "Log out"
-msgstr ""
-
-msgid "Search for mail domain"
-msgstr ""
-
-msgid "Email not valid"
-msgstr ""
-
-msgid "Register account"
-msgstr ""
-
-msgid "invoice"
-msgstr ""
-
-msgid "Open list"
-msgstr ""
-
-msgid "Add customer"
-msgstr ""
-
-msgid "Supplier invoices"
-msgstr ""
-
-msgid "Credit trustability"
-msgstr ""
-
-msgid "Usage"
-msgstr ""
-
-msgid "Decide which parts of your personal data you want to show different groups."
-msgstr ""
-
-msgid "Invoice address"
-msgstr ""
-
-msgid "Postal code (billing)"
-msgstr ""
-
-msgid "#{number}: {firstname} {lastname}, {city}, {country}"
-msgstr ""
-
-msgid "Toggle menu"
-msgstr ""
-
-msgid "Receiver"
-msgstr ""
-
-msgid "PDF viewer"
-msgstr ""
-
-msgid "Payments"
-msgstr ""
-
-msgid "Page {number} of {total}"
-msgstr ""
-
-msgid "Over time, more web hosting features have been added."
-msgstr ""
-
-msgid "Minimal local customer data is stored in Fortnox."
-msgstr ""
-
-msgid "Content"
-msgstr ""
-
-msgid "Tough"
-msgstr ""
-
-msgid "{code}: No authorization"
-msgstr ""
-
-msgid "Select"
-msgstr ""
-
-msgid "Zone deleted successfully"
-msgstr ""
-
-msgid "Confirm poll signature"
-msgstr ""
-
-msgid "DNS"
-msgstr ""
-
-msgid "Login"
-msgstr ""
-
-msgid "mail domain"
-msgstr ""
-
-msgid "Bootstrap icons"
-msgstr ""
-
-msgid "Confirmation code"
-msgstr ""
-
-msgid "Empty freetext"
-msgstr ""
-
-msgid "Credit invoice {number}"
-msgstr ""
-
-msgid "Invoice number"
-msgstr ""
-
-msgid "Your email"
-msgstr ""
-
-msgid "By default no information about you is shared."
-msgstr ""
-
-msgid "Add voucher"
-msgstr ""
-
-msgid "Description"
-msgstr ""
-
-msgid "HTML result"
-msgstr ""
-
-msgid "Subject"
-msgstr ""
-
-msgid "Zone not found"
-msgstr ""
-
-msgid "Failed to send invoice to Fortnox"
-msgstr ""
-
-msgid "Register to create and publish content."
-msgstr ""
-
-msgid "Data usage: {usage}"
-msgstr ""
-
-msgid "Zone records"
-msgstr ""
-
-msgid "Search field for {what}"
-msgstr ""
-
-msgid "Open invoices"
-msgstr ""
-
-msgid "Registered office"
-msgstr ""
-
-msgid "Fortnox integration"
-msgstr ""
-
-msgid "Mail domains"
-msgstr ""
-
-msgid "Examples"
-msgstr ""
-
-msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
-msgstr ""
-
-msgid "The login function uses javascript, cookies and AJAX."
-msgstr ""
-
-msgid "Invoice reminder, {number}"
-msgstr ""
-
-msgid "Database"
-msgstr ""
-
-msgid "PageSpeed result 100 100 100 100"
-msgstr ""
-
-msgid "Type"
-msgstr ""
-
-msgid "Stuff"
-msgstr ""
-
-msgid "Search for product"
-msgstr ""
-
-msgid "API docs"
-msgstr ""
-
-msgid "Your ip {ip} will be appended to the confirmation request."
-msgstr ""
-
-msgid "VAT number lookup"
-msgstr ""
-
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr ""
-
-msgid "Samizdat Fortnox integration"
-msgstr ""
-
-msgid "Paydate"
-msgstr ""
-
-msgid "Couldn't use code for verification."
-msgstr ""
-
-msgid "Credited invoice"
-msgstr ""
-
-msgid "The form was submitted from {ip}"
-msgstr ""
-
-msgid "Gross"
-msgstr ""
-
-msgid "Month"
-msgstr ""
-
-msgid "Use this if you don't need the prefixed default classes."
-msgstr ""
-
-msgid "Zone management"
-msgstr ""
-
-msgid "Settings"
-msgstr ""
-
-msgid "Edit customer {customerid}"
-msgstr ""
-
-msgid "Press Register to regenerate"
-msgstr ""
-
-msgid "Failed to update record"
-msgstr ""
-
-msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
-msgstr ""
-
-msgid "Failed to update zone"
-msgstr ""
-
-msgid "Space separated list of extra classes to append the prefixed default classes."
-msgstr ""
-
-msgid "Domain"
-msgstr ""
-
-msgid "Find the credit invoice attached as PDF."
-msgstr ""
-
-msgid "Add product"
-msgstr ""
-
-msgid "Login blocked"
-msgstr ""
-
-msgid "Email %s verified"
-msgstr ""
-
-msgid "Handled invoice"
-msgstr ""
-
-msgid "Notes"
-msgstr ""
-
-msgid "Invoice is credited"
-msgstr ""
-
-msgid "Captcha image"
-msgstr ""
-
-msgid "Customers"
-msgstr ""
-
-msgid "Resources"
-msgstr ""
-
-msgid "Choose a password"
-msgstr ""
-
-msgid "Search for invoice"
-msgstr ""
-
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr ""
-
-msgid "Empty message"
-msgstr ""
-
-msgid "Priority"
-msgstr ""
-
-msgid "Organizational number"
-msgstr ""
-
-msgid "SEK"
-msgstr ""
-
-msgid "Fill the form correctly!"
-msgstr ""
-
-msgid "Changed status."
-msgstr ""
-
-msgid "Search"
-msgstr ""
-
-msgid "New zone"
-msgstr ""
-
-msgid "Barred"
-msgstr ""
-
-msgid "Invoice {fakturanummer} has been credited."
-msgstr ""
-
-msgid "MB"
-msgstr ""
-
-msgid "Mobile"
-msgstr ""
-
-msgid "add {fee}"
-msgstr ""
-
-msgid "Last name"
-msgstr ""
-
-msgid "Language"
-msgstr ""
-
-msgid "Development"
-msgstr ""
-
-msgid "Click to pop payment dialog."
-msgstr ""
-
-msgid "Postal code"
-msgstr ""
-
-msgid "Resend"
-msgstr ""
-
-msgid "IBAN"
-msgstr ""
-
-msgid "Registered for F-tax"
-msgstr ""
-
-msgid "Bootstrap icons helper"
-msgstr ""
-
-msgid "It's also available at"
-msgstr ""
-
-msgid "Registration is currently non-functional"
-msgstr ""
-
-msgid "Empty surname"
-msgstr ""
-
-msgid "Debt"
-msgstr ""
-
-msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
-msgstr ""
-
-msgid "Contact {sender} if you have questions."
-msgstr ""
-
-msgid "Summa"
-msgstr ""
-
-msgid "The page {docpath} wasn't found."
-msgstr ""
-
-msgid "Domains"
-msgstr ""
-
-msgid "Choose language"
-msgstr ""
-
-msgid "Your message appears below."
-msgstr ""
-
-msgid "Record Name"
-msgstr ""
-
-msgid "English"
-msgstr ""
-
-msgid "Open invoice for customer"
-msgstr ""
-
-msgid "Record created successfully"
-msgstr ""
-
-msgid "Year"
-msgstr ""
-
-msgid "Confirmation request sent"
-msgstr ""
-
-msgid "Password was wrong or username doesn't exist."
-msgstr ""
-
-msgid "Empty billingaddress"
-msgstr ""
-
-msgid "Select country or click flags to see detail"
-msgstr ""
-
-msgid "Invoice (credited)"
-msgstr ""
-
-msgid "Country"
-msgstr ""
-
-msgid "Recent signatures"
-msgstr ""
-
-msgid "DNS zones"
-msgstr ""
-
-msgid "Invoice"
-msgstr ""
-
-msgid "{number} signatures since {date}"
-msgstr ""
-
-msgid "Account confirmation"
-msgstr ""
-
-msgid "Click to send a credit invoice."
-msgstr ""
-
-msgid "Bankgiro"
-msgstr ""
-
-msgid "VAT {rate}\%"
-msgstr ""
-
-msgid "Failed to delete record"
-msgstr ""
-
-msgid "Buy {slug} a coffee"
-msgstr ""
-
-msgid "This field is required"
-msgstr ""
-
-msgid "VAT percentage"
-msgstr ""
-
-msgid "Failed to delete zone"
-msgstr ""
-
-msgid "Enter username"
-msgstr ""
-
-msgid "Update"
-msgstr ""
-
-msgid "Search for website"
-msgstr ""
-
-msgid "Create contact"
-msgstr ""
-
-msgid "It's also available at {url}."
-msgstr ""
-
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr ""
-
-msgid "Click to regenerate PDF."
-msgstr ""
-
-msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
-msgstr ""
-
-msgid "Open invoice"
-msgstr ""
-
-msgid "Recommended by"
-msgstr ""
-
-msgid "Updated invoice"
-msgstr ""
-
-msgid "Please login to access resource."
-msgstr ""
-
-msgid "Company"
-msgstr ""
-
-msgid "Add database"
-msgstr ""
-
-msgid "Start"
-msgstr ""
-
-msgid "domain"
-msgstr ""
-
-msgid "Address"
-msgstr ""
-
-msgid "Text"
-msgstr ""
-
-msgid "{sitename} by country"
-msgstr ""
-
-msgid "Empty reference"
-msgstr ""
-
-msgid "Empty city"
-msgstr ""
-
-msgid "Set the title attribute."
-msgstr ""
-
-msgid "You have registered a new user account on {site}."
-msgstr ""
-
-msgid "database"
-msgstr ""
-
-msgid "Roomservice"
-msgstr ""
-
-msgid "Send again"
-msgstr ""
-
-msgid "Reprint"
-msgstr ""
-
-msgid "Created {created} by {creator}"
-msgstr ""
-
-msgid "Record updated successfully"
-msgstr ""
-
-msgid "Record Type"
+msgid "Unpaid"
 msgstr ""
 
 msgid "Enter your email"
 msgstr ""
 
-msgid "Invoice currency"
-msgstr ""
-
-msgid "Missing file, our bad?"
-msgstr ""
-
-msgid "Create customer"
-msgstr ""
-
-msgid "{sitename} in {country}"
-msgstr ""
-
-msgid "Remind"
-msgstr ""
-
-msgid "Plusgiro"
-msgstr ""
-
-msgid "Search for customer"
-msgstr ""
-
-msgid "Invoicing"
-msgstr ""
-
-msgid "Share {what} on {where}"
-msgstr ""
-
-msgid "Send now"
-msgstr ""
-
-msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
-msgstr ""
-
 msgid "City"
 msgstr ""
 
-msgid "Submit"
-msgstr ""
-
-msgid "Remaining amount to pay: {amount} {currency}"
-msgstr ""
-
-msgid "Ownership"
-msgstr ""
-
-msgid "Empty code"
-msgstr ""
-
-msgid "Logotype leading to start"
-msgstr ""
-
-msgid "Back"
-msgstr ""
-
-msgid "Register"
-msgstr ""
-
-msgid "Set the id attribute."
-msgstr ""
-
-msgid "VAT number"
-msgstr ""
-
-msgid "Net amount"
-msgstr ""
-
-msgid "Sign poll!"
-msgstr ""
-
-msgid "Qty"
-msgstr ""
-
-msgid "Halfyear"
-msgstr ""
-
-msgid "Link to personal settings"
-msgstr ""
-
-msgid "Thank you for contacting us."
-msgstr ""
-
-msgid "Save"
-msgstr ""
-
-msgid "Keep me logged in"
-msgstr ""
-
-msgid "Email"
-msgstr ""
-
-msgid "Your name"
-msgstr ""
-
-msgid "Username"
-msgstr ""
-
-msgid "VAT lookup, {vatno}"
-msgstr ""
-
-msgid "Empty subject"
-msgstr ""
-
-msgid "Country selector"
-msgstr ""
-
-msgid "Due date"
-msgstr ""
-
-msgid "Do you want to credit the invoice?"
-msgstr ""
-
-msgid "Snapback evaluation"
-msgstr ""
-
-msgid "{cost}"
-msgstr ""
-
-msgid "Mail admin"
-msgstr ""
-
-msgid "Address check"
-msgstr ""
-
-msgid "Empty postal code"
-msgstr ""
-
-msgid "Regards"
-msgstr ""
-
-msgid "This demonstration shows the result of Samizdat's SVG template helper."
-msgstr ""
-
-msgid "Your contact"
-msgstr ""
-
-msgid "Contribute"
-msgstr ""
-
-msgid "Full"
-msgstr ""
-
-msgid "Log out and end current session"
-msgstr ""
-
-msgid "About Fortnox"
-msgstr ""
-
-msgid "Empty address"
-msgstr ""
-
-msgid "Send reminder"
-msgstr ""
-
-msgid "Click to pop reminder dialog."
-msgstr ""
-
-msgid "Site content"
-msgstr ""
-
-msgid "New record"
-msgstr ""
-
-msgid "Updated {updated} by {updater}"
-msgstr ""
-
-msgid "Invoices"
-msgstr ""
-
-msgid "If you did not register an account, please ignore this email."
-msgstr ""
-
-msgid "Link to control panel"
-msgstr ""
-
-msgid "Enter valid email"
-msgstr ""
-
-msgid "Empty mobile"
-msgstr ""
-
-msgid "Logotype leading to start page"
-msgstr ""
-
-msgid "{server}, standby firewall"
-msgstr ""
-
-msgid "Date"
-msgstr ""
-
-msgid "Empty country"
-msgstr ""
-
-msgid "Credit invoice"
-msgstr ""
-
-msgid "Actions"
-msgstr ""
-
-msgid "MOSS"
-msgstr ""
-
-msgid "Unauthenticated"
-msgstr ""
-
-msgid "website"
-msgstr ""
-
-msgid "Records"
-msgstr ""
-
-msgid "Are you sure you want to delete this record?"
-msgstr ""
-
-msgid "Databases"
-msgstr ""
-
-msgid "Enter code"
-msgstr ""
-
-msgid "Personal menu"
-msgstr ""
-
-msgid "Products"
-msgstr ""
-
-msgid "Identification code"
-msgstr ""
-
-msgid "Postal mail"
-msgstr ""
-
-msgid "Super panel"
-msgstr ""
-
-msgid "Continue"
-msgstr ""
-
-msgid "Net"
-msgstr ""
-
-msgid "Surname"
-msgstr ""
-
-msgid "Customer Id"
-msgstr ""
-
-msgid "Newsletter"
-msgstr ""
-
-msgid "Empty first name"
-msgstr ""
-
-msgid "Destroyed"
-msgstr ""
-
-msgid "Update and send page."
-msgstr ""
-
-msgid "Enter record name"
-msgstr ""
-
-msgid "Invoice date"
-msgstr ""
-
-msgid "Article"
-msgstr ""
-
-msgid "Please logout and login as a user with proper authorization instead."
-msgstr ""
-
-msgid "Mark payment"
-msgstr ""
-
-msgid "At least 8 characters including capitals and digits"
-msgstr ""
-
-msgid "Telephone"
-msgstr ""
-
-msgid "Newest"
-msgstr ""
-
-msgid "Name"
-msgstr ""
-
-msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
-msgstr ""
-
-msgid "The invoice was due to {duedate}."
-msgstr ""
-
-msgid "Payment due to: {duedate}"
-msgstr ""
-
-msgid "According to our notes invoice {number} remains unpaid."
-msgstr ""
-
-msgid "New account"
-msgstr ""
-
-msgid "Invoice type"
-msgstr ""
-
-msgid "Servers"
-msgstr ""
-
-msgid "Whois data for {ip}"
-msgstr ""
-
-msgid "Including VAT"
-msgstr ""
-
-msgid "{code}: Not in this universe"
-msgstr ""
-
-msgid "Samizdat uses the Bootstrap icons from {link}."
-msgstr ""
-
-msgid "Test customer"
-msgstr ""
-
-msgid "Click to send again."
-msgstr ""
-
-msgid "Amount"
-msgstr ""
-
-msgid "Manage site"
-msgstr ""
-
-msgid "Registrar"
-msgstr ""
-
-msgid "Add domain"
-msgstr ""
-
-msgid "{server}, main firewall"
-msgstr ""
-
-msgid "First name"
-msgstr ""
-
-msgid "Please log in to access that page"
-msgstr ""
-
-msgid "Edit"
-msgstr ""
-
-msgid "Open invoice items"
-msgstr ""
-
-msgid "The stock is listed on Nasdaq Stockholm's main list."
-msgstr ""
-
-msgid "Update customer"
-msgstr ""
-
-msgid "Add mail domain"
-msgstr ""
-
-msgid "Developer docs"
-msgstr ""
-
-msgid "Due to"
-msgstr ""
-
-msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
-msgstr ""
-
-msgid "Contact"
-msgstr ""
-
-msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
-
-msgid "Web sites"
-msgstr ""
-
-msgid "Enter password"
-msgstr ""
-
-msgid "Edit zone"
-msgstr ""
-
-msgid "Please confirm your email address by clicking the following link:"
-msgstr ""
-
-msgid "Credited invoice: {number}"
-msgstr ""
-
-msgid "<a href="{url}" target="_blank">{url}</a>"
-msgstr ""
-
-msgid "Updated customer"
-msgstr ""
-
-msgid "I accept the terms for registration."
-msgstr ""
-
-msgid "Impersonate"
-msgstr ""
-
-msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
-msgstr ""
-
-msgid "Value for the class attribute."
-msgstr ""
-
-msgid "Give small financial support to {slug} at buymeacoffee"
-msgstr ""
-
-msgid "Invoice questions can be directed to {url}."
-msgstr ""
-
-msgid "Expires"
-msgstr ""
-
-msgid "You need to accept registration terms."
-msgstr ""
-
-msgid "Email (billing)"
-msgstr ""
-
-msgid "Unpaid"
-msgstr ""
-
-msgid "We will also store it for statistics and to prevent robot registrations."
-msgstr ""
-
-msgid "{number} days"
-msgstr ""
-
-msgid "File archive"
-msgstr ""
-
-msgid "Add website"
-msgstr ""
-
-msgid "Click to search matching records."
-msgstr ""
-
-msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
-msgstr ""
-
-msgid "Admininistration panel"
-msgstr ""
-
-msgid "Wrong captcha"
-msgstr ""
-
-msgid "Search for database"
-msgstr ""
-
-msgid "{code}: Authentication required"
-msgstr ""
-
-msgid "Find your invoice attached as PDF."
-msgstr ""
-
-msgid "Invoice customer #{customerid}"
-msgstr ""
-
-msgid "Shown as"
-msgstr ""
-
-msgid "Captcha was wrong"
-msgstr ""
-
-msgid "Delete"
-msgstr ""
-
-msgid "customer"
-msgstr ""
-
-msgid "No invoicing"
-msgstr ""
-
-msgid "We will email a confirmation request."
-msgstr ""
-
-msgid "404: Missing document"
-msgstr ""
-
-msgid "Activate Samizdat Fortnox integration"
-msgstr ""
-
-msgid "Email confirmation"
-msgstr ""
-
-msgid "Expand personal menu."
-msgstr ""
-
-msgid "Expiring domains"
-msgstr ""
-
-msgid "Empty company name"
-msgstr ""
-
-msgid "Customer"
-msgstr ""
-
-msgid "product"
-msgstr ""
-
-msgid "Go to {confirmationlink} to confirm your signature and claim your image."
-msgstr ""
-
-msgid "Database error"
-msgstr ""
-
-msgid "Modifications were saved."
-msgstr ""
-
-msgid "Snapback scheduler"
-msgstr ""
-
-msgid "Change password"
-msgstr ""
-
-msgid "Zone updated successfully"
-msgstr ""
-
-msgid "Paid amount"
-msgstr ""
-
-msgid "Payment"
-msgstr ""
-
-msgid "Empty recommendation"
-msgstr ""
-
-msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
-msgstr ""
-
-msgid "Invoice period"
-msgstr ""
-
-msgid "Make invoice"
-msgstr ""
-
-msgid "New customer"
-msgstr ""
-
-msgid "Invoice for completed services"
-msgstr ""
-
-msgid "Failed to create zone"
-msgstr ""
-
-msgid "The default is used for the Bootstrap icons set."
-msgstr ""
-
-msgid "Empty name"
+msgid "Buy {slug} a coffee"
 msgstr ""
 
 msgid "Invalid email"
 msgstr ""
 
-msgid "Paid"
+msgid "Examples"
 msgstr ""
 
-msgid "Failed to create record"
+msgid "PDF viewer"
 msgstr ""
 
-msgid "Invoice currency is {currency}."
+msgid "Select country"
 msgstr ""
 
-msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr ""
+
+msgid "Credit invoice {number}"
+msgstr ""
+
+msgid "I accept the terms for registration."
+msgstr ""
+
+msgid "Credited amount incl. VAT: {rounded} {currency}"
 msgstr ""
 
 msgid "Personal panel"
 msgstr ""
 
-msgid "Swedish"
+msgid "New record"
 msgstr ""
 
-msgid "Euro"
-msgstr ""
-
-msgid "Close"
-msgstr ""
-
-msgid "Search for zone"
-msgstr ""
-
-msgid "Email someone about {what}"
-msgstr ""
-
-msgid "Number"
-msgstr ""
-
-msgid "Site"
-msgstr ""
-
-msgid "From"
-msgstr ""
-
-msgid "Log in"
-msgstr ""
-
-msgid "Paypal"
-msgstr ""
-
-msgid "Mild"
-msgstr ""
-
-msgid "Mail"
-msgstr ""
-
-msgid "Add subscription"
-msgstr ""
-
-msgid "We will reply as soon as possible."
-msgstr ""
-
-msgid "Customer newsletter"
-msgstr ""
-
-msgid "Choose a username"
-msgstr ""
-
-msgid "Blocked"
-msgstr ""
-
-msgid "Expand menu"
-msgstr ""
-
-msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr ""
-
-msgid "&copy;{year}&nbsp;{author}"
-msgstr ""
-
-msgid "MX records"
-msgstr ""
-
-msgid "Enter code from captcha image"
+msgid "Send reminder"
 msgstr ""
 
 msgid "DNS zone"
 msgstr ""
 
-msgid "For more information, visit the Fortnox website:"
+msgid "Payment due to: {duedate}"
 msgstr ""
 
-msgid "Quarter"
+msgid "Mail domains"
 msgstr ""
 
-msgid "Click to search matching zones."
+msgid "Wrong captcha"
 msgstr ""
 
-msgid "Record deleted successfully"
+msgid "Failed to delete zone"
 msgstr ""
 
-msgid "Empty last name"
+msgid "DNS Zones"
 msgstr ""
 
-msgid "Cancel"
-msgstr ""
-
-msgid "Empty VAT"
-msgstr ""
-
-msgid "You have {remaining} tries left."
-msgstr ""
-
-msgid "List zones"
+msgid "Snapback scheduler"
 msgstr ""
 
 msgid "Invalid password"
 msgstr ""
 
-msgid "Manuals"
+msgid "Invalid username"
 msgstr ""
 
-msgid "Invoice {number}"
+msgid "Regards"
 msgstr ""
 
-msgid "Lost password?"
+msgid "Empty country"
 msgstr ""
 
-msgid "Set the width attribute."
+msgid "Empty reference"
 msgstr ""
 
-msgid "Price"
+msgid "Paypal"
 msgstr ""
 
-msgid "Write the invoice number as message when you pay."
+msgid "Set the title attribute."
 msgstr ""
 
-msgid "Empty VAT number"
+msgid "Settings"
 msgstr ""
 
-msgid "Enter zone name"
+msgid "At least 8 characters including capitals and digits"
 msgstr ""
 
-msgid "Panel"
-msgstr ""
-
-msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
-
-msgid "Search for domain"
-msgstr ""
-
-msgid "About"
-msgstr ""
-
-msgid "Payment terms"
-msgstr ""
-
-msgid "Fortnox panel"
+msgid "The default is used for the Bootstrap icons set."
 msgstr ""
 
 msgid "Zone created successfully"
 msgstr ""
 
+msgid "Recommended by"
+msgstr ""
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr ""
+
+msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgstr ""
+
+msgid "Account confirmation"
+msgstr ""
+
+msgid "Ownership"
+msgstr ""
+
+msgid "Registered office"
+msgstr ""
+
+msgid "DNS zones"
+msgstr ""
+
+msgid "About Fortnox"
+msgstr ""
+
+msgid "domain"
+msgstr ""
+
+msgid "{code}: Not in this universe"
+msgstr ""
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr ""
+
+msgid "DNS management"
+msgstr ""
+
+msgid "Our reference"
+msgstr ""
+
+msgid "Shown as"
+msgstr ""
+
+msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgstr ""
+
+msgid "Domains"
+msgstr ""
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr ""
+
+msgid "Back"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr ""
+
+msgid "Quarter"
+msgstr ""
+
+msgid "<a href="{url}" target="_blank">{url}</a>"
+msgstr ""
+
+msgid "Zone deleted successfully"
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "The invoice was due to {duedate}."
+msgstr ""
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr ""
+
+msgid "Select country or click flags to see detail"
+msgstr ""
+
+msgid "product"
+msgstr ""
+
+msgid "Zone records"
+msgstr ""
+
+msgid "Zone management"
+msgstr ""
+
+msgid "Updated invoice"
+msgstr ""
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr ""
+
+msgid "Address check"
+msgstr ""
+
+msgid "A confirmation link was mailed to {email}."
+msgstr ""
+
+msgid "Priority"
+msgstr ""
+
+msgid "Log in"
+msgstr ""
+
+msgid "Click to pop payment dialog."
+msgstr ""
+
+msgid "Content"
+msgstr ""
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr ""
+
+msgid "Search for domain"
+msgstr ""
+
+msgid "Register account"
+msgstr ""
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr ""
+
+msgid "Invoice currency"
+msgstr ""
+
+msgid "Used to make class names."
+msgstr ""
+
+msgid "Fortnox integration"
+msgstr ""
+
+msgid "Credit invoice"
+msgstr ""
+
+msgid "Enter code from captcha image"
+msgstr ""
+
+msgid "Websites"
+msgstr ""
+
+msgid "Unauthenticated"
+msgstr ""
+
+msgid "Roomservice"
+msgstr ""
+
+msgid "Handled invoice"
+msgstr ""
+
+msgid "Add subscription"
+msgstr ""
+
+msgid "Resources"
+msgstr ""
+
+msgid "Records"
+msgstr ""
+
+msgid "Gross"
+msgstr ""
+
+msgid "First name"
+msgstr ""
+
+msgid "Captcha image"
+msgstr ""
+
+msgid "Billing"
+msgstr ""
+
+msgid "Link to personal settings"
+msgstr ""
+
+msgid "mail domain"
+msgstr ""
+
+msgid "invoice"
+msgstr ""
+
+msgid "Value for the class attribute."
+msgstr ""
+
+msgid "We will email a confirmation request."
+msgstr ""
+
+msgid "Net amount"
+msgstr ""
+
+msgid "Failed to delete record"
+msgstr ""
+
+msgid "{sitename} by country"
+msgstr ""
+
+msgid "Swedish"
+msgstr ""
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr ""
+
+msgid "Create customer"
+msgstr ""
+
+msgid "Email not valid"
+msgstr ""
+
+msgid "Logotype leading to start page"
+msgstr ""
+
+msgid "Empty VAT number"
+msgstr ""
+
+msgid "Find the invoice attached as PDF."
+msgstr ""
+
+msgid "Send now"
+msgstr ""
+
+msgid "Confirm"
+msgstr ""
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr ""
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr ""
+
+msgid "Set the height attribute."
+msgstr ""
+
+msgid "Search for zone"
+msgstr ""
+
+msgid "Please login to access resource."
+msgstr ""
+
+msgid "Captcha code from image"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Plusgiro"
+msgstr ""
+
+msgid "Products"
+msgstr ""
+
+msgid "User registration"
+msgstr ""
+
+msgid "Invoice {number}"
+msgstr ""
+
+msgid "Click to send a credit invoice."
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Remind"
+msgstr ""
+
+msgid "Confirmation request sent"
+msgstr ""
+
+msgid "{server}, main firewall"
+msgstr ""
+
+msgid "Credited invoice: {number}"
+msgstr ""
+
+msgid "Empty recommendation"
+msgstr ""
+
+msgid "Usage"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "BIC/Swift address"
+msgstr ""
+
+msgid "Invoice is credited"
+msgstr ""
+
+msgid "Recent signatures"
+msgstr ""
+
+msgid "Add database"
+msgstr ""
+
+msgid "Enter code"
+msgstr ""
+
+msgid "Invoice date"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Customer newsletter"
+msgstr ""
+
+msgid "Customers"
+msgstr ""
+
+msgid "City (billing)"
+msgstr ""
+
+msgid "Site content"
+msgstr ""
+
+msgid "Click to send again."
+msgstr ""
+
+msgid "Page {number} of {total}"
+msgstr ""
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr ""
+
+msgid "Panel"
+msgstr ""
+
+msgid "Email %s verified"
+msgstr ""
+
+msgid "Enter zone name"
+msgstr ""
+
+msgid "Invoice for completed services"
+msgstr ""
+
+msgid "Postal code (billing)"
+msgstr ""
+
+msgid "It can be configured to display everything publicly as well."
+msgstr ""
+
+msgid "VAT percentage"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Failed to create zone"
+msgstr ""
+
+msgid "Empty last name"
+msgstr ""
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr ""
+
+msgid "This field is required"
+msgstr ""
+
+msgid "Round off"
+msgstr ""
+
+msgid "Organizational number"
+msgstr ""
+
+msgid "Choose language"
+msgstr ""
+
+msgid "Add mail domain"
+msgstr ""
+
+msgid "Test customer"
+msgstr ""
+
+msgid "List zones"
+msgstr ""
+
+msgid "Search for database"
+msgstr ""
+
+msgid "Personal"
+msgstr ""
+
+msgid "Payments"
+msgstr ""
+
+msgid "Update and send page."
+msgstr ""
+
+msgid "File archive"
+msgstr ""
+
+msgid "Destroyed"
+msgstr ""
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr ""
+
+msgid "Contact {sender} if you have questions."
+msgstr ""
+
+msgid "Zone Name"
+msgstr ""
+
+msgid "Paid amount"
+msgstr ""
+
+msgid "Registrar"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Failed to create record"
+msgstr ""
+
+msgid "Summa"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Empty code"
+msgstr ""
+
+msgid "Enter password"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Databases"
+msgstr ""
+
+msgid "Click to regenerate PDF."
+msgstr ""
+
+msgid "Full"
+msgstr ""
+
+msgid "Share {what} on {where}"
+msgstr ""
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr ""
+
+msgid "{sitename} in {country}"
+msgstr ""
+
+msgid "website"
+msgstr ""
+
+msgid "The form was submitted from {ip}"
+msgstr ""
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr ""
+
+msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "We will reply as soon as possible."
+msgstr ""
+
+msgid "Update customer"
+msgstr ""
+
+msgid "HTML result"
+msgstr ""
+
+msgid "Expand personal menu."
+msgstr ""
+
+msgid "Invoice number"
+msgstr ""
+
+msgid "Options"
+msgstr ""
+
+msgid "Payment"
+msgstr ""
+
+msgid "Email someone about {what}"
+msgstr ""
+
+msgid "Confirm poll signature"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "Are you sure you want to delete this record?"
+msgstr ""
+
+msgid "The page {docpath} wasn't found."
+msgstr ""
+
+msgid "Admininistration panel"
+msgstr ""
+
+msgid "Empty subject"
+msgstr ""
+
+msgid "Login"
+msgstr ""
+
+msgid "Record Name"
+msgstr ""
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "our web"
+msgstr ""
+
+msgid "Set the id attribute."
+msgstr ""
+
+msgid "Euro"
+msgstr ""
+
+msgid "Registration is currently non-functional"
+msgstr ""
+
+msgid "Invoice currency is {currency}."
+msgstr ""
+
+msgid "It's also available at {url}."
+msgstr ""
+
+msgid "Press Register to regenerate"
+msgstr ""
+
+msgid "{cost}"
+msgstr ""
+
+msgid "Change password"
+msgstr ""
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr ""
+
+msgid "Blocked"
+msgstr ""
+
+msgid "Add website"
+msgstr ""
+
+msgid "Tough"
+msgstr ""
+
+msgid "You have registered a new user account on {site}."
+msgstr ""
+
+msgid "{number} signatures since {date}"
+msgstr ""
+
+msgid "Database"
+msgstr ""
+
+msgid "Invoice customer #{customerid}"
+msgstr ""
+
+msgid "About"
+msgstr ""
+
+msgid "Search for invoice"
+msgstr ""
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr ""
+
+msgid "Record updated successfully"
+msgstr ""
+
+msgid "Servers"
+msgstr ""
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr ""
+
+msgid "Continues on next page..."
+msgstr ""
+
+msgid "Register"
+msgstr ""
+
+msgid "Bankgiro"
+msgstr ""
+
+msgid "Open invoice items"
+msgstr ""
+
+msgid "Enter valid email"
+msgstr ""
+
+msgid "It's also available at"
+msgstr ""
+
+msgid "Click to search matching records."
+msgstr ""
+
+msgid "Empty VAT"
+msgstr ""
+
+msgid "You need to accept registration terms."
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Choose a username"
+msgstr ""
+
+msgid "Impersonate"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Number"
+msgstr ""
+
+msgid "Do you want to credit the invoice?"
+msgstr ""
+
+msgid "Add customer"
+msgstr ""
+
+msgid "Invoice reminder, {number}"
+msgstr ""
+
+msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+
+msgid "Customer Id"
+msgstr ""
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr ""
+
+msgid "Manuals"
+msgstr ""
+
+msgid "Enter record name"
+msgstr ""
+
+msgid "Your contact"
+msgstr ""
+
+msgid "Make invoice"
+msgstr ""
+
 msgid "Invoice number: {fakturanummer}"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Expires"
+msgstr ""
+
+msgid "Search for customer"
+msgstr ""
+
+msgid "Open list"
+msgstr ""
+
+msgid "Sign poll!"
+msgstr ""
+
+msgid "Empty mobile"
+msgstr ""
+
+msgid "You have {remaining} tries left."
+msgstr ""
+
+msgid "MB"
+msgstr ""
+
+msgid "Empty freetext"
+msgstr ""
+
+msgid "Over time, more web hosting features have been added."
+msgstr ""
+
+msgid "Empty company name"
+msgstr ""
+
+msgid "Mail admin"
+msgstr ""
+
+msgid "{code}: No authorization"
+msgstr ""
+
+msgid "Net"
+msgstr ""
+
+msgid "Barred"
+msgstr ""
+
+msgid "Missing file, our bad?"
+msgstr ""
+
+msgid "PageSpeed result 100 100 100 100"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Updated customer"
+msgstr ""
+
+msgid "Mail"
+msgstr ""
+
+msgid "Whois data for {ip}"
+msgstr ""
+
+msgid "Set the width attribute."
+msgstr ""
+
+msgid "Find your invoice attached as PDF."
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "VAT number"
+msgstr ""
+
+msgid "Record Type"
+msgstr ""
+
+msgid "Keep me logged in"
+msgstr ""
+
+msgid "Write the invoice number as message when you pay."
+msgstr ""
+
+msgid "User manual"
+msgstr ""
+
+msgid "Telephone"
+msgstr ""
+
+msgid "Log out and end current session"
+msgstr ""
+
+msgid "Database error"
+msgstr ""
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr ""
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "Search for mail domain"
+msgstr ""
+
+msgid "Invoice questions can be directed to {url}."
+msgstr ""
+
+msgid "Snapback evaluation"
+msgstr ""
+
+msgid "Record deleted successfully"
+msgstr ""
+
+msgid "Add domain"
+msgstr ""
+
+msgid "New zone"
+msgstr ""
+
+msgid "{server}, standby firewall"
+msgstr ""
+
+msgid "Invoice period"
+msgstr ""
+
+msgid "Web sites"
+msgstr ""
+
+msgid "Surname"
+msgstr ""
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr ""
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr ""
+
+msgid "MOSS"
+msgstr ""
+
+msgid "Remaining amount to pay: {amount} {currency}"
+msgstr ""
+
+msgid "Year"
+msgstr ""
+
+msgid "Email confirmation"
+msgstr ""
+
+msgid "Text"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Credit trustability"
+msgstr ""
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr ""
+
+msgid "Due to"
+msgstr ""
+
+msgid "Search for product"
+msgstr ""
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr ""
+
+msgid "IBAN"
+msgstr ""
+
+msgid "Language"
+msgstr ""
+
+msgid "Bootstrap icons"
+msgstr ""
+
+msgid "Empty surname"
+msgstr ""
+
+msgid "Invoice address"
+msgstr ""
+
+msgid "Normal"
+msgstr ""
+
+msgid "Created {created} by {creator}"
+msgstr ""
+
+msgid "By default no information about you is shared."
+msgstr ""
+
+msgid "Credited invoice"
+msgstr ""
+
+msgid "Development"
+msgstr ""
+
+msgid "Receiver"
+msgstr ""
+
+msgid "Zone not found"
+msgstr ""
+
+msgid "English"
+msgstr ""
+
+msgid "Click to search matching zones."
+msgstr ""
+
+msgid "No invoicing"
+msgstr ""
+
+msgid "Snapback only"
+msgstr ""
+
+msgid "Update"
+msgstr ""
+
+msgid "You can also post in our discussions."
+msgstr ""
+
+msgid "Open invoices"
+msgstr ""
+
+msgid "Developer docs"
+msgstr ""
+
+msgid "Open invoice"
+msgstr ""
+
+msgid "Manage site"
+msgstr ""
+
+msgid "Empty postal code"
+msgstr ""
+
+msgid "Month"
+msgstr ""
+
+msgid "Find the credit invoice attached as PDF."
+msgstr ""
+
+msgid "Submit"
+msgstr ""
+
+msgid "Modifications were saved."
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "customer"
+msgstr ""
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Empty billingaddress"
+msgstr ""
+
+msgid "New customer"
+msgstr ""
+
+msgid "Debt"
+msgstr ""
+
+msgid "Register to create and publish content."
+msgstr ""
+
+msgid "Enter username"
+msgstr ""
+
+msgid "Paydate"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Empty name"
+msgstr ""
+
+msgid "Confirmation code"
+msgstr ""
+
+msgid "Including VAT"
+msgstr ""
+
+msgid "Open invoice for customer"
+msgstr ""
+
+msgid "Country selector"
+msgstr ""
+
+msgid "Lost password?"
+msgstr ""
+
+msgid "Couldn't use code for verification."
+msgstr ""
+
+msgid "Payment terms"
+msgstr ""
+
+msgid "Logotype leading to start"
+msgstr ""
+
+msgid "Last name"
+msgstr ""
+
+msgid "Choose a password"
+msgstr ""
+
+msgid "Link to control panel"
+msgstr ""
+
+msgid "Company"
+msgstr ""
+
+msgid "Qty"
+msgstr ""
+
+msgid "Empty message"
+msgstr ""
+
+msgid "Data usage: {usage}"
+msgstr ""
+
+msgid "{code}: Authentication required"
+msgstr ""
+
+msgid "Click to pop reminder dialog."
+msgstr ""
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Failed to send invoice to Fortnox"
+msgstr ""
+
+msgid "Click to pop login dialog."
+msgstr ""
+
+msgid "DNS"
+msgstr ""
+
+msgid "Bootstrap icons helper"
+msgstr ""
+
+msgid "Reprint"
+msgstr ""
+
+msgid "Stuff"
+msgstr ""
+
+msgid "Password was wrong or username doesn't exist."
+msgstr ""
+
+msgid "Invoice"
+msgstr ""
+
+msgid "Supplier invoices"
+msgstr ""
+
+msgid "Send again"
+msgstr ""
+
+msgid "Fortnox panel"
+msgstr ""
+
+msgid "According to our notes invoice {number} remains unpaid."
+msgstr ""
+
+msgid "API docs"
+msgstr ""
+
+msgid "Failed to update record"
+msgstr ""
+
+msgid "Address (billing)"
+msgstr ""
+
+msgid "Zone Kind"
+msgstr ""
+
+msgid "Search"
+msgstr ""
+
+msgid "Search field for {what}"
+msgstr ""
+
+msgid "Registered for F-tax"
+msgstr ""
+
+msgid "Edit customer {customerid}"
+msgstr ""
+
+msgid "Email (billing)"
+msgstr ""
+
+msgid "Personal menu"
+msgstr ""
+
+msgid "The Samizdat project"
+msgstr ""
+
+msgid "Invoicing"
+msgstr ""
+
+msgid "VAT {rate}\%"
+msgstr ""
+
+msgid "Super panel"
+msgstr ""
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr ""
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr ""
+
+msgid "VAT lookup, {vatno}"
+msgstr ""
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr ""
+
+msgid "Password"
+msgstr ""
+
+msgid "Expiring domains"
+msgstr ""
+
+msgid "Invoice type"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Due date"
+msgstr ""
+
+msgid "Updated {updated} by {updater}"
+msgstr ""
+
+msgid "If you did not register an account, please ignore this email."
+msgstr ""
+
+msgid "Zone updated successfully"
+msgstr ""
+
+msgid "VAT number lookup"
+msgstr ""
+
+msgid "Failed to update zone"
+msgstr ""
+
+msgid "For more information, visit the Fortnox website:"
+msgstr ""
+
+msgid "Create contact"
+msgstr ""
+
+msgid "Samizdat Fortnox integration"
+msgstr ""
+
+msgid "Record created successfully"
+msgstr ""
+
+msgid "Paid"
+msgstr ""
+
+msgid "Changed status."
+msgstr ""
+
+msgid "Start"
+msgstr ""
+
+msgid "Empty address"
+msgstr ""
+
+msgid "Halfyear"
+msgstr ""
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr ""
+
+msgid "Login blocked"
+msgstr ""
+
+msgid "Identification code"
+msgstr ""
+
+msgid "Expand menu"
+msgstr ""
+
+msgid "Fill the form correctly!"
+msgstr ""
+
+msgid "Thank you for contacting us."
+msgstr ""
+
+msgid "Empty city"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "add {fee}"
+msgstr ""
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr ""
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Edit zone"
+msgstr ""
+
+msgid "Username"
+msgstr ""
+
+msgid "Site"
+msgstr ""
+
+msgid "Postal mail"
+msgstr ""
+
+msgid "Add product"
+msgstr ""
+
+msgid "Mark payment"
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Resend"
+msgstr ""
+
+msgid "Captcha was wrong"
+msgstr ""
+
+msgid "Your message appears below."
+msgstr ""
+
+msgid "{number} days"
+msgstr ""
+
+msgid "Newest"
+msgstr ""
+
+msgid "SEK"
+msgstr ""
+
+msgid "Skip menu"
+msgstr ""
+
+msgid "Empty first name"
+msgstr ""
+
+msgid "Search for website"
+msgstr ""
+
+msgid "VAT"
+msgstr ""
+
+msgid "New account"
+msgstr ""
+
+msgid "database"
+msgstr ""
+
+msgid "Mobile"
+msgstr ""
+
+msgid "Country (billing)"
+msgstr ""
+
+msgid "Postal code"
+msgstr ""
+
+msgid "Notes"
+msgstr ""
+
+msgid "Newsletter"
+msgstr ""
+
+msgid "Contribute"
+msgstr ""
+
+msgid "Invoice (credited)"
+msgstr ""
+
+msgid "Missing username or password"
+msgstr ""
+
+msgid "MX records"
+msgstr ""
+
+msgid "Empty telephone"
+msgstr ""
+
+msgid "Add voucher"
+msgstr ""
+
+msgid "404: Missing document"
+msgstr ""
+
+msgid "Mild"
+msgstr ""
+
+msgid "Please log in to access that page"
+msgstr ""
+
+msgid "Invoices"
+msgstr ""
+
+msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr ""
