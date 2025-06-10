@@ -72,6 +72,7 @@ isotorrent: public/iso/samizdat.iso
 devtools:
 
 i18n:
+	rm -f ./src/countries-data-json/data/translations/countries-zh.json
 	ln -s -r src/countries-data-json/data/translations/countries-zh_CN.json ./src/countries-data-json/data/translations/countries-zh.json
 	bin/samizdat makei18n
 

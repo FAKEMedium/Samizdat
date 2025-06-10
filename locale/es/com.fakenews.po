@@ -73,6 +73,9 @@ msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgid "A confirmation link was mailed to {email}."
 msgstr "Se ha enviado un enlace de confirmación a {email}."
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "Un subobjetivo es probar la contabilidad abierta, donde las cifras pueden presentarse continuamente después de ser anonimizadas."
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Se cobrará un interés del {rate} por pagos atrasados"
 
@@ -82,6 +85,9 @@ msgstr "Documentación API"
 msgid "About"
 msgstr "Acerca de"
 
+msgid "About Fortnox"
+msgstr "Acerca de Fortnox"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Según nuestros registros, la factura {number} sigue sin pagar."
 
@@ -90,6 +96,9 @@ msgstr "Confirmación de cuenta"
 
 msgid "Actions"
 msgstr "Acciones"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Activar integración Samizdat Fortnox"
 
 msgid "Add customer"
 msgstr "Añadir cliente"
@@ -650,7 +659,7 @@ msgid "Failed to delete zone"
 msgstr "Error al eliminar zona"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "Error al enviar factura a Fortnox"
 
 msgid "Failed to update record"
 msgstr "Error al actualizar registro"
@@ -676,8 +685,20 @@ msgstr "Encuentre su factura adjunta en PDF."
 msgid "First name"
 msgstr "Nombre"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "Para más información, visite el sitio web de Fortnox:"
+
+msgid "Fortnox integration"
+msgstr "Integración Fortnox"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox es un software de contabilidad basado en la nube sueco que ofrece una gama de servicios incluyendo facturación, teneduría de libros y gestión financiera."
+
 msgid "Fortnox panel"
 msgstr "Panel Fortnox"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox fue fundada en 2001 con sede en Växjö."
 
 msgid "From"
 msgstr "De"
@@ -831,6 +852,12 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] "Facturación, 1 artículo"
 msgstr[1] "Facturación, {number} artículos"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr "También se puede configurar para mostrar todo públicamente."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "Está diseñado para ayudar a las pequeñas y medianas empresas a gestionar sus finanzas de manera eficiente."
+
 msgid "It's also available at"
 msgstr "También está disponible en"
 
@@ -938,6 +965,9 @@ msgstr "Mensaje enviado"
 
 msgid "Mild"
 msgstr "Leve"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "Los datos mínimos del cliente local se almacenan en Fortnox."
 
 msgid "Missing file, our bad?"
 msgstr "¿Archivo faltante, culpa nuestra?"
@@ -1047,6 +1077,9 @@ msgstr "Número organizacional"
 msgid "Our reference"
 msgstr "Nuestra referencia"
 
+msgid "Over time, more web hosting features have been added."
+msgstr "Con el tiempo, se han añadido más características de hosting web."
+
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "Los pagos atrasados tendrán un cargo por recordatorio y un interés del {rate}."
 
@@ -1060,7 +1093,7 @@ msgid "Page {number} of {total}"
 msgstr "Página {number} de {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "Resultado PageSpeed 100 100 100 100"
 
 msgid "Paid"
 msgstr "Pagado"
@@ -1215,8 +1248,11 @@ msgstr "Domicilio social"
 msgid "Registered office:"
 msgstr "Domicilio social:"
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "Los pagos registrados y las facturas de proveedores se recuperan de Fortnox y se muestran en la interfaz local del cliente."
+
 msgid "Registrar"
-msgstr ""
+msgstr "Registrador"
 
 msgid "Registration is currently non-functional"
 msgstr "El registro actualmente no está en funcionamiento"
@@ -1247,6 +1283,12 @@ msgstr "Redondeo:"
 
 msgid "SEK"
 msgstr "SEK"
+
+msgid "Samizdat Fortnox integration"
+msgstr "Integración Samizdat Fortnox"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat es parte de un proyecto para crear HTML estático a partir de archivos markdown subidos a GitHub."
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat utiliza los iconos Bootstrap de {link}."
@@ -1458,6 +1500,9 @@ msgstr "El más antiguo fue hecho el {failuretime} por &quot;{username}&quot;."
 msgid "The page {docpath} wasn't found."
 msgstr "La página {docpath} no se encontró."
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "La acción está listada en la lista principal de Nasdaq Estocolmo."
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Esta demostración muestra el resultado del ayudante de plantillas SVG de Samizdat."
 
@@ -1466,6 +1511,9 @@ msgstr "Este campo es obligatorio"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Este archivo se distribuye bajo la misma licencia que el paquete {project}."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "Esta integración maneja la facturación de forma independiente y sincroniza las facturas con Fortnox."
 
 msgid "Tillbaka"
 msgstr "Atrás"

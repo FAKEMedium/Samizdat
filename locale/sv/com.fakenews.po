@@ -71,7 +71,10 @@ msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
 msgid "A confirmation link was mailed to {email}."
-msgstr ""
+msgstr "En bekräftelselänk skickades till {email}."
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "Ett delmål är att testa öppen redovisning, där siffror kan presenteras kontinuerligt efter anonymisering."
 
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
@@ -82,6 +85,9 @@ msgstr "API-dokument"
 msgid "About"
 msgstr "Om"
 
+msgid "About Fortnox"
+msgstr "Om Fortnox"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Enligt våra noteringar är faktura {number} fortfarande obetald."
 
@@ -90,6 +96,9 @@ msgstr "Kontobekräftelse"
 
 msgid "Actions"
 msgstr "Åtgärder"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Aktivera Samizdat Fortnox-integration"
 
 msgid "Add customer"
 msgstr "Ny kund"
@@ -643,14 +652,26 @@ msgstr "Fakturan bifogas som PDF."
 msgid "First name"
 msgstr "Förnamn"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "För mer information, besök Fortnoxs webbplats:"
+
+msgid "Fortnox integration"
+msgstr "Fortnox-integration"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox är en svensk molnbaserad redovisningsprogramvara som erbjuder en rad tjänster inklusive fakturering, bokföring och finansiell hantering."
+
 msgid "Fortnox panel"
 msgstr "Fortnoxpanel"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 
 msgid "From"
 msgstr "Från"
 
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr "Ge ett litet ekonomiskt bidrag till {slug} via buymeacoffee"
@@ -674,13 +695,13 @@ msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
 
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
 
 msgid "If you did not register an account, please ignore this email."
-msgstr ""
+msgstr "Om du inte registrerade ett konto, ignorera detta e-postmeddelande."
 
 msgid "Impersonate"
 msgstr "Agera som"
@@ -780,6 +801,12 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] "Fakturering, 1 rad"
 msgstr[1] "Fakturering, {number} rader"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr ""
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr ""
+
 msgid "It's also available at"
 msgstr "Den finns också på"
 
@@ -850,10 +877,10 @@ msgid "Lost password?"
 msgstr "Förlorat lösenordet?"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MOSS"
-msgstr ""
+msgstr "MOSS"
 
 msgid "MX records"
 msgstr "MX-poster"
@@ -871,7 +898,7 @@ msgid "Make invoice"
 msgstr "Skapa faktura"
 
 msgid "Manage site"
-msgstr ""
+msgstr "Hantera webbplats"
 
 msgid "Manuals"
 msgstr "Manualer"
@@ -887,6 +914,9 @@ msgstr "Meddelandet skickades"
 
 msgid "Mild"
 msgstr "Mild"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr ""
 
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
@@ -990,6 +1020,9 @@ msgstr "Organisationsnummer"
 msgid "Our reference"
 msgstr "Vår referens"
 
+msgid "Over time, more web hosting features have been added."
+msgstr ""
+
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
 
@@ -1051,7 +1084,7 @@ msgid "Personal panel"
 msgstr "Personlig panel"
 
 msgid "Please confirm your email address by clicking the following link:"
-msgstr ""
+msgstr "Vänligen bekräfta din e-postadress genom att klicka på följande länk:"
 
 msgid "Please log in to access that page"
 msgstr "Logga in för att komma åt sidan"
@@ -1146,8 +1179,11 @@ msgstr "Registrerad för F-skatt"
 msgid "Registered office"
 msgstr "Styrelsens säte"
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "Registrerade betalningar och leverantörsfakturor hämtas från Fortnox och visas i det lokala kundgränssnittet."
+
 msgid "Registrar"
-msgstr ""
+msgstr "Registrator"
 
 msgid "Registration is currently non-functional"
 msgstr "Registrering funkar inte än"
@@ -1175,6 +1211,12 @@ msgstr "Avrundning"
 
 msgid "SEK"
 msgstr "kr"
+
+msgid "Samizdat Fortnox integration"
+msgstr "Samizdat Fortnox-integration"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat är en del av ett projekt för att skapa statisk HTML från markdown-filer som laddats upp till GitHub."
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat använder Bootstrapikonerna från {link}."
@@ -1383,6 +1425,9 @@ msgstr "Den äldsta gjordes {failuretime} av &quot;{username}&quot;."
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr ""
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Detta exempel visar resultatet av Samizdats SVG-mallhjälp."
 
@@ -1391,6 +1436,9 @@ msgstr "Detta fält är obligatoriskt"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Denna fil distribueras under samma licens som paketet {project}."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr ""
 
 msgid "Toggle menu"
 msgstr "Visa meny"
@@ -1453,7 +1501,7 @@ msgid "User manual"
 msgstr "Användarmanual"
 
 msgid "User registration"
-msgstr ""
+msgstr "Användarregistrering"
 
 msgid "Username"
 msgstr "Användarnamn"

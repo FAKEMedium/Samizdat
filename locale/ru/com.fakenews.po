@@ -78,7 +78,10 @@ msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
 msgid "A confirmation link was mailed to {email}."
-msgstr ""
+msgstr "Ссылка для подтверждения отправлена на {email}."
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "Подцелью является тестирование открытой отчётности, где цифры могут представляться непрерывно после анонимизации."
 
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "За просрочку платежа взимается комиссия и {rate} процентов"
@@ -89,6 +92,9 @@ msgstr "Документация API"
 msgid "About"
 msgstr "О нас"
 
+msgid "About Fortnox"
+msgstr "О Fortnox"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "По нашим данным, счет {number} до сих пор не оплачен."
 
@@ -97,6 +103,9 @@ msgstr "Подтверждение аккаунта"
 
 msgid "Actions"
 msgstr "Действия"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Активировать интеграцию Samizdat Fortnox"
 
 msgid "Add customer"
 msgstr "Новый клиент"
@@ -141,7 +150,7 @@ msgid "After registration you can add more data about yourself, loosen your shar
 msgstr "После регистрации вы сможете добавить больше данных о себе, изменить настройки доступа и настроить свой опыт."
 
 msgid "Allow cookies to paste confirmation code from email"
-msgstr ""
+msgstr "Разрешить cookies для вставки кода подтверждения из email"
 
 msgid "Amount"
 msgstr "Сумма"
@@ -294,7 +303,7 @@ msgid "Company"
 msgstr "Компания"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Подтвердить"
 
 msgid "Confirm poll signature"
 msgstr "Подтвердить подпись"
@@ -303,7 +312,7 @@ msgid "Confirm your email address"
 msgstr "Подтвердите ваш адрес электронной почты"
 
 msgid "Confirmation code"
-msgstr ""
+msgstr "Код подтверждения"
 
 msgid "Confirmation request sent"
 msgstr "Запрос подтверждения отправлен"
@@ -330,7 +339,7 @@ msgid "Corporate identity number"
 msgstr "ИНН"
 
 msgid "Couldn't use code for verification."
-msgstr ""
+msgstr "Не удалось использовать код для проверки."
 
 msgid "Country"
 msgstr "Страна"
@@ -423,7 +432,7 @@ msgid "Database"
 msgstr "База данных"
 
 msgid "Database error"
-msgstr ""
+msgstr "Ошибка базы данных"
 
 msgid "Databases"
 msgstr "Базы данных"
@@ -510,13 +519,13 @@ msgid "Email"
 msgstr "Эл. почта"
 
 msgid "Email %s verified"
-msgstr ""
+msgstr "Email %s подтвержден"
 
 msgid "Email (billing)"
 msgstr "Эл. почта (для счетов)"
 
 msgid "Email confirmation"
-msgstr ""
+msgstr "Подтверждение email"
 
 msgid "Email not valid"
 msgstr "Недействительный адрес эл. почты"
@@ -657,7 +666,7 @@ msgid "Failed to delete zone"
 msgstr "Не удалось удалить зону"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "Не удалось отправить счет в Fortnox"
 
 msgid "Failed to update record"
 msgstr "Не удалось обновить запись"
@@ -683,8 +692,20 @@ msgstr "Ваш счет прилагается в формате PDF."
 msgid "First name"
 msgstr "Имя"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "Для получения дополнительной информации посетите веб-сайт Fortnox:"
+
+msgid "Fortnox integration"
+msgstr "Интеграция Fortnox"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox — это шведское облачное программное обеспечение для ведения бухгалтерского учёта, которое предлагает широкий спектр услуг, включая выставление счетов, ведение книг и финансовое управление."
+
 msgid "Fortnox panel"
 msgstr "Панель Fortnox"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox была основана в 2001 году со штаб-квартирой в Векшё."
 
 msgid "From"
 msgstr "От"
@@ -839,6 +860,12 @@ msgstr[0] "Выставление счета, 1 позиция"
 msgstr[1] "Выставление счета, {number} позиции"
 msgstr[2] "Выставление счета, {number} позиций"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr "Также можно настроить публичное отображение всего."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "Оно разработано для помощи малым и средним предприятиям эффективно управлять своими финансами."
+
 msgid "It's also available at"
 msgstr "Также доступно на"
 
@@ -930,7 +957,7 @@ msgid "Make invoice"
 msgstr "Создать счет"
 
 msgid "Manage site"
-msgstr ""
+msgstr "Управление сайтом"
 
 msgid "Manuals"
 msgstr "Руководства"
@@ -946,6 +973,9 @@ msgstr "Сообщение отправлено"
 
 msgid "Mild"
 msgstr "Мягкий"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "Минимальные локальные данные клиентов хранятся в Fortnox."
 
 msgid "Missing file, our bad?"
 msgstr "Отсутствующий файл, наша ошибка?"
@@ -1055,6 +1085,9 @@ msgstr "ИНН"
 msgid "Our reference"
 msgstr "Наша ссылка"
 
+msgid "Over time, more web hosting features have been added."
+msgstr "Со временем было добавлено больше функций веб-хостинга."
+
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "За просроченные платежи взимается комиссия за напоминание и {rate} проценты."
 
@@ -1068,7 +1101,7 @@ msgid "Page {number} of {total}"
 msgstr "Страница {number} из {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "Результат PageSpeed 100 100 100 100"
 
 msgid "Paid"
 msgstr "Оплачено"
@@ -1223,8 +1256,11 @@ msgstr "Юридический адрес"
 msgid "Registered office:"
 msgstr "Юридический адрес:"
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "Зарегистрированные платежи и счета поставщиков извлекаются из Fortnox и отображаются в локальном клиентском интерфейсе."
+
 msgid "Registrar"
-msgstr ""
+msgstr "Регистратор"
 
 msgid "Registration is currently non-functional"
 msgstr "Регистрация в настоящее время не работает"
@@ -1255,6 +1291,12 @@ msgstr "Округление:"
 
 msgid "SEK"
 msgstr "SEK"
+
+msgid "Samizdat Fortnox integration"
+msgstr "Интеграция Samizdat Fortnox"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat является частью проекта по созданию статического HTML из markdown-файлов, загруженных на GitHub."
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat использует иконки Bootstrap от {link}."
@@ -1365,7 +1407,7 @@ msgid "Site"
 msgstr "Сайт"
 
 msgid "Site content"
-msgstr ""
+msgstr "Содержимое сайта"
 
 msgid "Skip menu"
 msgstr "Пропустить меню"
@@ -1466,6 +1508,9 @@ msgstr "Самая старая попытка была сделана {failuret
 msgid "The page {docpath} wasn't found."
 msgstr "Страница {docpath} не найдена."
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "Акции котируются на основном списке Nasdaq Stockholm."
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Эта демонстрация показывает результат работы SVG-помощника Samizdat."
 
@@ -1474,6 +1519,9 @@ msgstr "Это поле обязательно для заполнения"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "Этот файл распространяется под той же лицензией, что и пакет {project}."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "Эта интеграция обрабатывает выставление счетов независимо и синхронизирует счета с Fortnox."
 
 msgid "Tillbaka"
 msgstr "Назад"
@@ -1749,7 +1797,7 @@ msgid "{server}, standby firewall"
 msgstr "{server}, резервный файрвол"
 
 msgid "{sitename} by country"
-msgstr ""
+msgstr "{sitename} по странам"
 
 msgid "{sitename} in {country}"
 msgstr "{sitename} в {country}"

@@ -1,47 +1,35 @@
-<div class="row row-cols-1 row-cols-md-3 g-4" xmlns="http://www.w3.org/1999/html">
-
-  <div class="col">
+<div class="row">
+  <div class="col-md-8">
+    <p>
+      <%== __('Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub.') %>
+      <%== __('Over time, more web hosting features have been added.') %>
+      <%== __('A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized.') %>
+    </p>
+    <p>
+      <%== __('This integration handles invoicing independently and synchronizes invoices with Fortnox.') %>
+      <%== __('Minimal local customer data is stored in Fortnox.') %>
+      <%== __('Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface.') %>
+      <%== __('It can be configured to display everything publicly as well.') %>
+    </p>
+  </div>
+  <div class="col-md-4">
     <div class="card">
-      <h5 class="card-header orange border-0"><%== __('Development') %></h5>
+      <h5 class="card-header orange border-0"><%== __('About Fortnox') %></h5>
       <div class="card-body m-0 p-2">
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>fortnox/customers/3323"><%== __('Test customer') %></a>
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>fortnox/logout"><%== __('Log out') %></a>
-        <a class="badge rounded-pill text-bg-primary" href="https://apps.fortnox.se/apidocs"><%== __('API docs') %></a>
-        <a class="badge rounded-pill text-bg-primary" href="https://fortnox.se/developer"><%== __('Developer docs') %></a>
+        <p>
+          <%== __('Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management.') %>
+          <%== __('It is designed to help small and medium-sized businesses manage their finances efficiently.') %>
+          <%== __('Fortnox was founded in 2001 with headquarters in Växjö.') %>
+          <%== __("The stock is listed on Nasdaq Stockholm's main list.") %>
+        </p>
+        <p>
+          <%== __('For more information, visit the Fortnox website:') %><br>
+          <a href="https://www.fortnox.se" target="_blank">
+            Fortnox
+            <%== icon 'link', {} %>
+          </a>
+        </p>
       </div>
     </div>
   </div>
-
-  <div class="col">
-    <div class="card">
-      <h5 class="card-header orange border-0"><%== __('File archive') %></h5>
-      <div class="card-body m-0 p-2">
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card">
-      <h5 class="card-header orange border-0"><%== __('Payments') %></h5>
-      <div class="card-body m-0 p-2">
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card">
-      <h5 class="card-header orange border-0"><%== __('Supplier invoices') %></h5>
-      <div class="card-body m-0 p-2">
-      </div>
-    </div>
-  </div>
-
-  <div class="col">
-    <div class="card">
-      <h5 class="card-header orange border-0"><%== __('Invoices') %></h5>
-      <div class="card-body m-0 p-2">
-      </div>
-    </div>
-  </div>
-
 </div>

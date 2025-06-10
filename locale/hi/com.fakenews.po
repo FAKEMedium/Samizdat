@@ -73,6 +73,9 @@ msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgid "A confirmation link was mailed to {email}."
 msgstr "एक पुष्टिकरण लिंक {email} पर भेजा गया है।"
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "एक उप-लक्ष्य खुले लेखांकन का परीक्षण करना है, जहाँ आँकड़ों को गुमनाम करने के बाद लगातार प्रस्तुत किया जा सकता है।"
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "देर से भुगतान पर {rate} ब्याज लगाया जाएगा"
 
@@ -82,6 +85,9 @@ msgstr "API दस्तावेज़"
 msgid "About"
 msgstr "परिचय"
 
+msgid "About Fortnox"
+msgstr "Fortnox के बारे में"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "हमारे रिकॉर्ड के अनुसार इनवॉइस {number} अभी तक अवैतनिक है।"
 
@@ -90,6 +96,9 @@ msgstr "खाता पुष्टिकरण"
 
 msgid "Actions"
 msgstr "कार्य"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Samizdat Fortnox एकीकरण सक्रिय करें"
 
 msgid "Add customer"
 msgstr "ग्राहक जोड़ें"
@@ -650,7 +659,7 @@ msgid "Failed to delete zone"
 msgstr "ज़ोन हटाने में विफल"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "Fortnox को बिल भेजने में विफल"
 
 msgid "Failed to update record"
 msgstr "रिकॉर्ड अपडेट करने में विफल"
@@ -676,8 +685,20 @@ msgstr "अपना इनवॉइस संलग्न PDF के रूप 
 msgid "First name"
 msgstr "पहला नाम"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "अधिक जानकारी के लिए, Fortnox वेबसाइट पर जाएं:"
+
+msgid "Fortnox integration"
+msgstr "Fortnox एकीकरण"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox एक स्वीडिश क्लाउड-आधारित लेखांकन सॉफ्टवेयर है जो बिलिंग, बहीखाता आवरण और वित्तीय प्रबंधन सहित कई सेवाएँ प्रदान करता है।"
+
 msgid "Fortnox panel"
 msgstr "फोर्टनॉक्स पैनल"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox की स्थापना 2001 में Växjö में मुख्यालय के साथ हुई थी।"
 
 msgid "From"
 msgstr "से"
@@ -831,6 +852,12 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] "बिलिंग, 1 आइटम"
 msgstr[1] "बिलिंग, {number} आइटम"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr "इसे सब कुछ सार्वजनिक रूप से प्रदर्शित करने के लिए भी कॉन्फ़िगर किया जा सकता है।"
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "यह छोटे और मध्यम आकार के व्यवसायों को उनके वित्त का कुशलता से प्रबंधन करने में मदद करने के लिए डिज़ाइन किया गया है।"
+
 msgid "It's also available at"
 msgstr "यह यहां भी उपलब्ध है"
 
@@ -938,6 +965,9 @@ msgstr "संदेश भेजा गया"
 
 msgid "Mild"
 msgstr "मृदु"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "न्यूनतम स्थानीय ग्राहक डेटा Fortnox में संग्रहीत है।"
 
 msgid "Missing file, our bad?"
 msgstr "फ़ाइल अनुपलब्ध, हमारी गलती?"
@@ -1047,6 +1077,9 @@ msgstr "संगठनात्मक संख्या"
 msgid "Our reference"
 msgstr "हमारा संदर्भ"
 
+msgid "Over time, more web hosting features have been added."
+msgstr "समय के साथ, और वेब होस्टिंग सुविधाएं जोड़ी गई हैं।"
+
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "बकाया भुगतानों पर एक रिमाइंडर शुल्क और {rate} ब्याज लगाया जाएगा।"
 
@@ -1060,7 +1093,7 @@ msgid "Page {number} of {total}"
 msgstr "पृष्ठ {number} / {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "PageSpeed परिणाम 100 100 100 100"
 
 msgid "Paid"
 msgstr "भुगतान किया गया"
@@ -1215,8 +1248,11 @@ msgstr "पंजीकृत कार्यालय"
 msgid "Registered office:"
 msgstr "पंजीकृत कार्यालय:"
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "पंजीकृत भुगतान और आपूर्तिकर्ता बिल Fortnox से प्राप्त होते हैं और स्थानीय ग्राहक इंटरफेस में प्रदर्शित होते हैं।"
+
 msgid "Registrar"
-msgstr ""
+msgstr "रजिस्ट्रार"
 
 msgid "Registration is currently non-functional"
 msgstr "पंजीकरण वर्तमान में गैर-कार्यात्मक है"
@@ -1247,6 +1283,12 @@ msgstr "राउंड ऑफ:"
 
 msgid "SEK"
 msgstr "एसईके"
+
+msgid "Samizdat Fortnox integration"
+msgstr "Samizdat Fortnox एकीकरण"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat GitHub पर अपलोड की गई markdown फाइलों से स्थिर HTML बनाने के प्रोजेक्ट का हिस्सा है।"
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "समिज़दात {link} से बूटस्ट्रैप आइकन का उपयोग करता है।"
@@ -1458,6 +1500,9 @@ msgstr "सबसे पुराना &quot;{username}&quot; द्वार�
 msgid "The page {docpath} wasn't found."
 msgstr "पृष्ठ {docpath} नहीं मिला।"
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "शेयर Nasdaq स्टॉकहोम की मुख्य सूची में सूचीबद्ध है।"
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "यह प्रदर्शन समिज़दात के SVG टेम्पलेट हेल्पर के परिणाम दिखाता है।"
 
@@ -1466,6 +1511,9 @@ msgstr "यह फ़ील्ड आवश्यक है"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "यह फ़ाइल {project} पैकेज के समान लाइसेंस के तहत वितरित की जाती है।"
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "यह एकीकरण बिलिंग को स्वतंत्र रूप से संभालता है और Fortnox के साथ बिलों को सिंक्रोनाइज़ करता है।"
 
 msgid "Tillbaka"
 msgstr "वापस"

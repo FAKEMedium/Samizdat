@@ -152,7 +152,6 @@ sub transclude ($contentref, $dirname) {
 
 sub includefile ($dirname, $filename) {
   my $inclusion = Mojo::Home->new($dirname .'/')->rel_file($filename)->slurp;
-
 }
 
 # Get the menu items for a given menu in a tree structure

@@ -73,6 +73,9 @@ msgstr ""
 msgid "A confirmation link was mailed to {email}."
 msgstr ""
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr ""
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr ""
 
@@ -82,6 +85,9 @@ msgstr ""
 msgid "About"
 msgstr ""
 
+msgid "About Fortnox"
+msgstr ""
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr ""
 
@@ -89,6 +95,9 @@ msgid "Account confirmation"
 msgstr ""
 
 msgid "Actions"
+msgstr ""
+
+msgid "Activate Samizdat Fortnox integration"
 msgstr ""
 
 msgid "Add customer"
@@ -676,7 +685,19 @@ msgstr ""
 msgid "First name"
 msgstr ""
 
+msgid "For more information, visit the Fortnox website:"
+msgstr ""
+
+msgid "Fortnox integration"
+msgstr ""
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr ""
+
 msgid "Fortnox panel"
+msgstr ""
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
 msgstr ""
 
 msgid "From"
@@ -831,6 +852,12 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] ""
 msgstr[1] ""
 
+msgid "It can be configured to display everything publicly as well."
+msgstr ""
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr ""
+
 msgid "It's also available at"
 msgstr ""
 
@@ -939,6 +966,9 @@ msgstr ""
 msgid "Mild"
 msgstr ""
 
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr ""
+
 msgid "Missing file, our bad?"
 msgstr ""
 
@@ -1045,6 +1075,9 @@ msgid "Organizational number"
 msgstr ""
 
 msgid "Our reference"
+msgstr ""
+
+msgid "Over time, more web hosting features have been added."
 msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
@@ -1215,6 +1248,9 @@ msgstr ""
 msgid "Registered office:"
 msgstr ""
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr ""
+
 msgid "Registrar"
 msgstr ""
 
@@ -1246,6 +1282,12 @@ msgid "Round off:"
 msgstr ""
 
 msgid "SEK"
+msgstr ""
+
+msgid "Samizdat Fortnox integration"
+msgstr ""
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
 msgstr ""
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
@@ -1458,6 +1500,9 @@ msgstr ""
 msgid "The page {docpath} wasn't found."
 msgstr ""
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr ""
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr ""
 
@@ -1465,6 +1510,9 @@ msgid "This field is required"
 msgstr ""
 
 msgid "This file is distributed under the same license as the {project} package."
+msgstr ""
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 msgstr ""
 
 msgid "Tillbaka"

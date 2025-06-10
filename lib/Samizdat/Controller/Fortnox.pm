@@ -44,7 +44,7 @@ sub customer ($self) {
 
     $self->stash(
       fc       => $customer,
-      template => 'fortnox/customer'
+      template => 'fortnox/manager/customer'
     );
     my $web = { title => $title };
     $self->render(
@@ -66,6 +66,17 @@ sub _login ($self) {
 }
 
 sub index ($self) {
+  my $title = $self->app->__('Samizdat Fortnox integration');
+  my $web = { title => $title };
+
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->render_to_string(template => 'fortnox/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'fortnox/index');
+  }
+}
+
+sub manager ($self) {
   my $title = $self->app->__('Fortnox panel');
   my $fortnox = {
     archive  => [],
@@ -75,12 +86,37 @@ sub index ($self) {
 
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'fortnox/index', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'fortnox/index');
+    $web->{script} .= $self->render_to_string(template => 'fortnox/manager/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'fortnox/manager/index');
   } else {
     $fortnox->{archive} = $self->app->fortnox->getArchive();
     return $self->render(json => { fortnox => $fortnox });
   }
 }
+
+
+sub activate ($self) {
+  my $title = $self->app->__('Activate Samizdat Fortnox integration');
+  my $web = { title => $title };
+
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->render_to_string(template => 'fortnox/activate/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'fortnox/activate/index');
+  }
+}
+
+
+sub start ($self) {
+  my $title = $self->app->__('Activate Samizdat Fortnox integration');
+  my $web = { title => $title };
+
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    $web->{script} .= $self->render_to_string(template => 'fortnox/start/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'fortnox/start/index');
+  }
+}
+
 
 1;

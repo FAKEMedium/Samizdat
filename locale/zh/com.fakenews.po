@@ -66,6 +66,9 @@ msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgid "A confirmation link was mailed to {email}."
 msgstr "确认链接已发送至 {email}。"
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "一个子目标是测试开放式会计，其中数字可以在匿名化后持续呈现。"
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "逾期付款将收取 {rate} 的利息"
 
@@ -75,6 +78,9 @@ msgstr "API 文档"
 msgid "About"
 msgstr "关于"
 
+msgid "About Fortnox"
+msgstr "关于 Fortnox"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "根据我们的记录，发票 {number} 仍未付款。"
 
@@ -83,6 +89,9 @@ msgstr "账户确认"
 
 msgid "Actions"
 msgstr "操作"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "激活 Samizdat Fortnox 集成"
 
 msgid "Add customer"
 msgstr "添加客户"
@@ -643,7 +652,7 @@ msgid "Failed to delete zone"
 msgstr "删除区域失败"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "发送发票到 Fortnox 失败"
 
 msgid "Failed to update record"
 msgstr "更新记录失败"
@@ -669,8 +678,20 @@ msgstr "请查看附件中的您的发票 PDF。"
 msgid "First name"
 msgstr "名字"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "欲了解更多信息，请访问 Fortnox 网站："
+
+msgid "Fortnox integration"
+msgstr "Fortnox 集成"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox 是一款瑞典云端会计软件，提供包括发票、簿记和财务管理在内的一系列服务。"
+
 msgid "Fortnox panel"
 msgstr "Fortnox 面板"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox 成立于 2001 年，总部位于韦克舍。"
 
 msgid "From"
 msgstr "从"
@@ -823,6 +844,12 @@ msgid "Invoicing, 1 item"
 msgid_plural "Invoicing, {number} items"
 msgstr[0] "开票，{number} 个项目"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr "它也可以配置为公开显示所有内容。"
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "它旨在帮助中小企业高效管理财务。"
+
 msgid "It's also available at"
 msgstr "也可在此处获取"
 
@@ -931,6 +958,9 @@ msgstr "消息已发送"
 msgid "Mild"
 msgstr "温和"
 
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "Fortnox 中存储最少的本地客户数据。"
+
 msgid "Missing file, our bad?"
 msgstr "文件丢失，是我们的错吗？"
 
@@ -1038,6 +1068,9 @@ msgstr "组织号码"
 
 msgid "Our reference"
 msgstr "我们的参考"
+
+msgid "Over time, more web hosting features have been added."
+msgstr "随着时间的推移，增加了更多的网站托管功能。"
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "逾期付款将收取催款费和 {rate} 的利息。"
@@ -1207,6 +1240,9 @@ msgstr "注册办公室"
 msgid "Registered office:"
 msgstr "注册办公室："
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "已注册的付款和供应商发票从 Fortnox 检索并在本地客户界面中显示。"
+
 msgid "Registrar"
 msgstr "注册商"
 
@@ -1239,6 +1275,12 @@ msgstr "舍入："
 
 msgid "SEK"
 msgstr "瑞典克朗"
+
+msgid "Samizdat Fortnox integration"
+msgstr "Samizdat Fortnox 集成"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat 是一个从上传到 GitHub 的 markdown 文件创建静态 HTML 的项目的一部分。"
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat 使用来自 {link} 的 Bootstrap 图标。"
@@ -1450,6 +1492,9 @@ msgstr "最早的尝试由 &quot;{username}&quot; 于 {failuretime} 发起。"
 msgid "The page {docpath} wasn't found."
 msgstr "页面 {docpath} 未找到。"
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "该股票在纳斯达克斯德哥尔摩主板上市。"
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "此演示展示了 Samizdat 的 SVG 模板助手的结果。"
 
@@ -1458,6 +1503,9 @@ msgstr "此字段为必填项"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "此文件在与 {project} 软件包相同的许可下分发。"
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "此集成独立处理发票并与 Fortnox 同步发票。"
 
 msgid "Tillbaka"
 msgstr "返回"

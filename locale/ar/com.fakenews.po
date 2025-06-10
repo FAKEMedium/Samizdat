@@ -101,6 +101,9 @@ msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgid "A confirmation link was mailed to {email}."
 msgstr "تم إرسال رابط تأكيد إلى {email}."
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
+msgstr "الهدف الفرعي هو اختبار المحاسبة المفتوحة، حيث يمكن عرض الأرقام بشكل مستمر بعد إخفاء الهوية."
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "سيتم فرض فائدة بنسبة {rate} على المدفوعات المتأخرة"
 
@@ -110,6 +113,9 @@ msgstr "وثائق API"
 msgid "About"
 msgstr "حول"
 
+msgid "About Fortnox"
+msgstr "حول Fortnox"
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "وفقًا لملاحظاتنا، الفاتورة {number} لا تزال غير مدفوعة."
 
@@ -118,6 +124,9 @@ msgstr "تأكيد الحساب"
 
 msgid "Actions"
 msgstr "إجراءات"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "تفعيل تكامل Samizdat Fortnox"
 
 msgid "Add customer"
 msgstr "إضافة عميل"
@@ -678,7 +687,7 @@ msgid "Failed to delete zone"
 msgstr "فشل حذف المنطقة"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "فشل إرسال الفاتورة إلى Fortnox"
 
 msgid "Failed to update record"
 msgstr "فشل تحديث السجل"
@@ -704,8 +713,20 @@ msgstr "ستجد فاتورتك مرفقة بصيغة PDF."
 msgid "First name"
 msgstr "الاسم الأول"
 
+msgid "For more information, visit the Fortnox website:"
+msgstr "لمزيد من المعلومات، قم بزيارة موقع Fortnox:"
+
+msgid "Fortnox integration"
+msgstr "تكامل Fortnox"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox هو برنامج محاسبة سويدي قائم على السحابة يقدم مجموعة من الخدمات بما في ذلك الفوترة ومسك الدفاتر والإدارة المالية."
+
 msgid "Fortnox panel"
 msgstr "لوحة Fortnox"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "تأسست Fortnox في عام 2001 بمقرها الرئيسي في فيكشو."
 
 msgid "From"
 msgstr "من"
@@ -863,6 +884,12 @@ msgstr[3] "الفوترة، {number} عناصر"
 msgstr[4] "الفوترة، {number} عنصر"
 msgstr[5] "الفوترة، {number} عنصر"
 
+msgid "It can be configured to display everything publicly as well."
+msgstr "يمكن تكوينه لعرض كل شيء علنًا أيضًا."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "صُمم لمساعدة الشركات الصغيرة والمتوسطة على إدارة شؤونها المالية بكفاءة."
+
 msgid "It's also available at"
 msgstr "متوفر أيضًا في"
 
@@ -970,6 +997,9 @@ msgstr "تم إرسال الرسالة"
 
 msgid "Mild"
 msgstr "خفيف"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "يتم تخزين الحد الأدنى من بيانات العميل المحلي في Fortnox."
 
 msgid "Missing file, our bad?"
 msgstr "ملف مفقود، خطأنا؟"
@@ -1079,6 +1109,9 @@ msgstr "الرقم التنظيمي"
 msgid "Our reference"
 msgstr "مرجعنا"
 
+msgid "Over time, more web hosting features have been added."
+msgstr "بمرور الوقت، تمت إضافة المزيد من ميزات استضافة الويب."
+
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "سيتم فرض رسوم تذكير وفائدة {rate} على المدفوعات المتأخرة."
 
@@ -1092,7 +1125,7 @@ msgid "Page {number} of {total}"
 msgstr "الصفحة {number} من {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "نتيجة PageSpeed 100 100 100 100"
 
 msgid "Paid"
 msgstr "مدفوع"
@@ -1247,8 +1280,11 @@ msgstr "المكتب المسجل"
 msgid "Registered office:"
 msgstr "المكتب المسجل:"
 
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
+msgstr "يتم استرداد المدفوعات المسجلة وفواتير الموردين من Fortnox وعرضها في واجهة العميل المحلية."
+
 msgid "Registrar"
-msgstr ""
+msgstr "المسجل"
 
 msgid "Registration is currently non-functional"
 msgstr "التسجيل غير متاح حاليًا"
@@ -1279,6 +1315,12 @@ msgstr "تقريب:"
 
 msgid "SEK"
 msgstr "كرونة سويدية"
+
+msgid "Samizdat Fortnox integration"
+msgstr "تكامل Samizdat Fortnox"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat هو جزء من مشروع لإنشاء HTML ثابت من ملفات markdown المحملة على GitHub."
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "يستخدم Samizdat أيقونات Bootstrap من {link}."
@@ -1490,6 +1532,9 @@ msgstr "تم إجراء أقدم محاولة في {failuretime} بواسطة &q
 msgid "The page {docpath} wasn't found."
 msgstr "لم يتم العثور على الصفحة {docpath}."
 
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "السهم مدرج في القائمة الرئيسية لبورصة ناسداك ستوكهولم."
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "يوضح هذا العرض التوضيحي نتيجة مساعد قالب SVG من Samizdat."
 
@@ -1498,6 +1543,9 @@ msgstr "هذا الحقل مطلوب"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr "يتم توزيع هذا الملف تحت نفس الترخيص مثل حزمة {project}."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "يتعامل هذا التكامل مع الفوترة بشكل مستقل ويزامن الفواتير مع Fortnox."
 
 msgid "Tillbaka"
 msgstr "رجوع"
