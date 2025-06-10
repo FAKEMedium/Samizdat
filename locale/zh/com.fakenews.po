@@ -691,6 +691,9 @@ msgid "Fortnox panel"
 msgstr "Fortnox 面板"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr ""
+
+msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox 成立于 2001 年，总部位于韦克舍。"
 
 msgid "From"

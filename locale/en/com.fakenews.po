@@ -700,6 +700,9 @@ msgstr ""
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
 msgstr ""
 
+msgid "Fortnox was founded in 2001 with headquarters in Växjö."
+msgstr ""
+
 msgid "From"
 msgstr ""
 

@@ -143,7 +143,7 @@ msgid "After registration you can add more data about yourself, loosen your shar
 msgstr "Efter registrering kan du lägga till mer information om dig själv, lätta på din delningspolicy och anpassa din upplevelse."
 
 msgid "Allow cookies to paste confirmation code from email"
-msgstr ""
+msgstr "Tillåt cookies för att klistra in bekräftelsekod från e-post"
 
 msgid "Amount"
 msgstr "Summa"
@@ -173,7 +173,7 @@ msgid "At least 8 characters including capitals and digits"
 msgstr "Åtminstone 8 tecken inklusive versaler och siffror"
 
 msgid "BIC/Swift"
-msgstr ""
+msgstr "BIC/Swift"
 
 msgid "BIC/Swift address"
 msgstr "BIC/Swift-adress"
@@ -284,16 +284,16 @@ msgid "Company"
 msgstr "Företag"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 msgid "Confirm poll signature"
 msgstr "Bekräfta underskrift"
 
 msgid "Confirm your email address"
-msgstr ""
+msgstr "Bekräfta din e-postadress"
 
 msgid "Confirmation code"
-msgstr ""
+msgstr "Bekräftelsekod"
 
 msgid "Confirmation request sent"
 msgstr "Bekräftelse skickad"
@@ -320,7 +320,7 @@ msgid "Corporate identity number"
 msgstr "Organisationsnummer"
 
 msgid "Couldn't use code for verification."
-msgstr ""
+msgstr "Kunde inte använda kod för verifiering."
 
 msgid "Country"
 msgstr "Land"
@@ -410,7 +410,7 @@ msgid "Database"
 msgstr "Databas"
 
 msgid "Database error"
-msgstr ""
+msgstr "Databasfel"
 
 msgid "Databases"
 msgstr "Databaser"
@@ -461,7 +461,7 @@ msgid "Due to"
 msgstr "Förfallodatum"
 
 msgid "EPP"
-msgstr ""
+msgstr "EPP"
 
 msgid "Economy"
 msgstr "Ekonomi"
@@ -479,13 +479,13 @@ msgid "Email"
 msgstr "Epost"
 
 msgid "Email %s verified"
-msgstr ""
+msgstr "E-post %s verifierad"
 
 msgid "Email (billing)"
 msgstr "Epost (faktura)"
 
 msgid "Email confirmation"
-msgstr ""
+msgstr "E-postbekräftelse"
 
 msgid "Email not valid"
 msgstr "Ogiltig epost"
@@ -605,10 +605,10 @@ msgid "Expiring domains"
 msgstr "Förfallande domäner"
 
 msgid "FAKE Media"
-msgstr ""
+msgstr "FAKE Media"
 
 msgid "FAKE News by country"
-msgstr ""
+msgstr "FAKE News per land"
 
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
@@ -626,7 +626,7 @@ msgid "Failed to delete zone"
 msgstr "Misslyckades ta bort zon"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "Misslyckades att skicka faktura till Fortnox"
 
 msgid "Failed to update record"
 msgstr "Misslyckades uppdatera post"
@@ -665,6 +665,9 @@ msgid "Fortnox panel"
 msgstr "Fortnoxpanel"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr ""
+
+msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 
 msgid "From"
@@ -802,10 +805,10 @@ msgstr[0] "Fakturering, 1 rad"
 msgstr[1] "Fakturering, {number} rader"
 
 msgid "It can be configured to display everything publicly as well."
-msgstr ""
+msgstr "Det kan konfigureras för att visa allt offentligt också."
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
-msgstr ""
+msgstr "Det är utformat för att hjälpa små och medelstora företag att hantera sin ekonomi effektivt."
 
 msgid "It's also available at"
 msgstr "Den finns också på"
@@ -916,7 +919,7 @@ msgid "Mild"
 msgstr "Mild"
 
 msgid "Minimal local customer data is stored in Fortnox."
-msgstr ""
+msgstr "Minimal lokal kunddata lagras i Fortnox."
 
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
@@ -1021,7 +1024,7 @@ msgid "Our reference"
 msgstr "Vår referens"
 
 msgid "Over time, more web hosting features have been added."
-msgstr ""
+msgstr "Med tiden har fler webbhotell-funktioner lagts till."
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
@@ -1036,7 +1039,7 @@ msgid "Page {number} of {total}"
 msgstr "Sida {number} av  {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "PageSpeed-resultat 100 100 100 100"
 
 msgid "Paid"
 msgstr "Betalad"
@@ -1324,7 +1327,7 @@ msgid "Site"
 msgstr "Webbplats"
 
 msgid "Site content"
-msgstr ""
+msgstr "Webbplatsinnehåll"
 
 msgid "Skip menu"
 msgstr "Hoppa över meny"
@@ -1402,7 +1405,7 @@ msgid "The default is used for the Bootstrap icons set."
 msgstr "Standardinställningen används för Bootstrap-ikoner."
 
 msgid "The form was submitted from {ip}"
-msgstr ""
+msgstr "Formuläret skickades från {ip}"
 
 msgid "The invoice is also available at"
 msgstr "Fakturan finns också på"
@@ -1426,7 +1429,7 @@ msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
 msgid "The stock is listed on Nasdaq Stockholm's main list."
-msgstr ""
+msgstr "Aktien är noterad på Nasdaq Stockholms huvudlista."
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Detta exempel visar resultatet av Samizdats SVG-mallhjälp."
@@ -1438,7 +1441,7 @@ msgid "This file is distributed under the same license as the {project} package.
 msgstr "Denna fil distribueras under samma licens som paketet {project}."
 
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
-msgstr ""
+msgstr "Denna integration hanterar fakturering självständigt och synkroniserar fakturor med Fortnox."
 
 msgid "Toggle menu"
 msgstr "Visa meny"
@@ -1546,7 +1549,7 @@ msgid "Websites"
 msgstr "Webbplatser"
 
 msgid "Whois data for {ip}"
-msgstr ""
+msgstr "Whois-data för {ip}"
 
 msgid "Write the invoice number as message when you pay."
 msgstr "Skriv fakturanumret som meddelande vid betalning."
@@ -1561,7 +1564,7 @@ msgid "You can also post in our discussions."
 msgstr "Du kan också posta i våra diskussioner."
 
 msgid "You have registered a new user account on {site}."
-msgstr ""
+msgstr "Du har registrerat ett nytt användarkonto på {site}."
 
 msgid "You have {remaining} tries left."
 msgstr "Du har {remaining} försök kvar."
@@ -1624,7 +1627,7 @@ msgid "add {fee}"
 msgstr "lägg till {fee}"
 
 msgid "billing@rymdweb.com"
-msgstr ""
+msgstr "billing@rymdweb.com"
 
 msgid "control panel"
 msgstr "kontrollpanel"
@@ -1693,7 +1696,7 @@ msgid "{server}, standby firewall"
 msgstr "{server}, standbybrandvägg"
 
 msgid "{sitename} by country"
-msgstr ""
+msgstr "{sitename} per land"
 
 msgid "{sitename} in {country}"
 msgstr "{sitename} i {country}"

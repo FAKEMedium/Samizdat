@@ -5,6 +5,7 @@ use Mojo::Home;
 use Locale::TextDomain::OO::Extract::Perl;
 use Locale::TextDomain::OO::Extract::JavaScript;
 use Locale::TextDomain::OO::Extract::Process;
+use Encode qw(encode);
 
 my $plurals = {
   zh => 'nplurals=1; plural=0;',
@@ -94,7 +95,7 @@ sub run ($self, @args) {
     }
   }
 
-  Mojo::Home->new(sprintf('locale/%s.pot', $app->{config}->{locale}->{textdomain}))->spew($pot);
+  Mojo::Home->new(sprintf('locale/%s.pot', $app->{config}->{locale}->{textdomain}))->spew(encode('UTF-8', $pot));
 
   my $skip = { };
   for my $language (@{ $app->{config}->{locale}->{skip_messages} }) {
@@ -130,7 +131,7 @@ sub run ($self, @args) {
       );
       $potcopy =~ s /"Language: en\\n"/$replace/sm;
       say sprintf("Created %s", $path->to_string);
-      $path->spew($potcopy);
+      $path->spew(encode('UTF-8', $potcopy));
     }
 
     # Read existing po file for the language
