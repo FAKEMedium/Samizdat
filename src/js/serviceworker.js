@@ -5,6 +5,6 @@ if ('serviceWorker' in navigator) {
             '/assets/sw.js'
         )
         .then(function (reg) {
-            console.log('Service worker registration successful');
+//            console.log('Service worker registration successful');
         });
 }
