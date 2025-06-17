@@ -165,4 +165,4 @@ purgedata:
 	sudo -u postgres psql -c 'DROP DATABASE samizdat;' -e
 
 purgeuncompressed:
-	find public -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) ! -name "*.gz" -delete
+	find public -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" -o -name "*.txt" \) ! -name "*.gz" -delete

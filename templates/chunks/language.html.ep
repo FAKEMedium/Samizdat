@@ -13,6 +13,7 @@
 %   my $class = "dropdown-item d-flex align-items-center";
 %   my $current = "false";
 %   my $link = sprintf('/%s/', $language);
+%   $link = '#';  # No language scheme in url yet
 %   if ($language eq $currentlanguage) {
 %     $class .= " active fw-bold";
 %     $current = "true";
