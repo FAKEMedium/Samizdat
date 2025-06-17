@@ -91,7 +91,14 @@ sub register ($self, $app, $conf) {
       $$output =~ s{        <!-- symbols -->\n}[
         $c->app->indent(join("\n", sort {$a cmp $b} map $symbols->{$_}, keys %{ $symbols }), 4)
       ]eu;
-      return 1 if (exists($cacheexist->{$c->{stash}->{docpath}}));
+      my $docpath = $c->stash('docpath') // '';
+      my $language = $c->stash('language');
+      if ($c->config->{locale}->{default_language} ne $language) {
+        $docpath =~ s/\.html$/.$language.html/;
+      }
+      if (exists($cacheexist->{$docpath})) {
+        return 1
+      }
       if (404 != $c->{stash}->{status}) {
         $$output =~ s{<pre([^>]*?)>(.*?)</pre>}[
           my $attribs = $1;
@@ -114,12 +121,7 @@ sub register ($self, $app, $conf) {
           $text =~ s/^[ ]+//gms;
           sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
         ]gexsmu;
-        my $docpath = $c->{stash}->{docpath} // '';
         if ($c->config->{cache} && $docpath ne '') {
-          my $language = $c->{stash}->{language};
-          if ($c->config->{locale}->{default_language} ne $language) {
-            $docpath =~ s/\.html$/.$language.html/;
-          }
           $public->child($docpath)->dirname->make_path;
           $public->child($docpath)->spew($$output);
           my $z = new IO::Compress::Gzip sprintf('%s.gz',

@@ -137,23 +137,22 @@ sub startup ($self) {
       delete_lexicon => 'i-default::',
     ],
   });
-  $self->hook(before_routes => sub {
-    my $c = shift;
+  $self->hook(before_routes => sub ($c) {
     my $language = $c->cookie('language') // '';
-    if (exists($config->{locale}->{languages}->{$language})) {
-      $self->language($language);
-      $self->stash(language => $language);
+    if (exists($c->config->{locale}->{languages}->{$language})) {
+      $c->language($language);
+      $c->stash(language => $language);
     } else {
-      $c->cookie(language => $config->{locale}->{default_language}, {
+      $c->cookie(language => $c->config->{locale}->{default_language}, {
         secure   => 1,
         httponly => 0,
         path     => '/',
-        expires  => time + 36000,
-        domain   => $config->{domain},
+        expires  => time + 360000,
+        domain   => $c->config->{domain},
         hostonly => 1,
         samesite => 'None',
       });
-      $self->language($config->{locale}->{default_language});
+      $c->language($c->config->{locale}->{default_language});
     }
   });
 

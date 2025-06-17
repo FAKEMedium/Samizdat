@@ -664,8 +664,6 @@ msgstr "Fortnox är en svensk molnbaserad redovisningsprogramvara som erbjuder e
 msgid "Fortnox panel"
 msgstr "Fortnoxpanel"
 
-msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."

@@ -163,3 +163,6 @@ purgedata:
 	sudo systemctl restart postgresql
 #	sudo -u postgres psql -c 'TRUNCATE account.user RESTART IDENTITY;' -d samizdat -e
 	sudo -u postgres psql -c 'DROP DATABASE samizdat;' -e
+
+purgeuncompressed:
+	find public -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" \) ! -name "*.gz" -delete
