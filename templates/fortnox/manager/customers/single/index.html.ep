@@ -1,0 +1,168 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h4><%== __('Basic Information') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Customer Number') %></td>
+          <td id="customerNumber"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Name') %></td>
+          <td id="name"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Organisation Number') %></td>
+          <td id="organisationNumber"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('VAT Number') %></td>
+          <td id="vatNumber"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Type') %></td>
+          <td id="type"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Active') %></td>
+          <td id="active"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <h4><%== __('Contact Information') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Email') %></td>
+          <td id="email"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Phone') %></td>
+          <td id="phone"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Email Invoice') %></td>
+          <td id="emailInvoice"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Email Offer') %></td>
+          <td id="emailOffer"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Email Order') %></td>
+          <td id="emailOrder"></td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="col-md-6">
+      <h4><%== __('Financial Information') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Currency') %></td>
+          <td id="currency"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Terms of Payment') %></td>
+          <td id="termsOfPayment"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('VAT Type') %></td>
+          <td id="vatType"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Price List') %></td>
+          <td id="priceList"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Discount') %></td>
+          <td id="discount"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <h4><%== __('Address') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Address 1') %></td>
+          <td id="address1"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Address 2') %></td>
+          <td id="address2"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Zip Code') %></td>
+          <td id="zipCode"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('City') %></td>
+          <td id="city"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Country') %></td>
+          <td id="country"></td>
+        </tr>
+      </table>
+    </div>
+    
+    <div class="col-md-6">
+      <h4><%== __('Delivery Address') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Name') %></td>
+          <td id="deliveryName"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Address 1') %></td>
+          <td id="deliveryAddress1"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Address 2') %></td>
+          <td id="deliveryAddress2"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Zip Code') %></td>
+          <td id="deliveryZipCode"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('City') %></td>
+          <td id="deliveryCity"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Country') %></td>
+          <td id="deliveryCountry"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <h4><%== __('References') %></h4>
+      <table class="table table-sm">
+        <tr>
+          <td class="text-muted"><%== __('Your Reference') %></td>
+          <td id="yourReference"></td>
+        </tr>
+        <tr>
+          <td class="text-muted"><%== __('Our Reference') %></td>
+          <td id="ourReference"></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+      <h4><%== __('Comments') %></h4>
+      <div id="comments" class="p-2 bg-light"></div>
+    </div>
+  </div>
+</div>

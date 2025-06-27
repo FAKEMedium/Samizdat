@@ -11,39 +11,41 @@ use Data::Dumper;
 
 has 'config';
 has 'cache' => sub ($self) {
-  state $cache = Cache($self->config->{cachefile});
+  state $cache = $self->Cache();
   return $cache;
 };
 has 'merger' => sub {
   state $merger = Hash::Merge->new();
   return $merger;
 };
-has 'application' => 'myapplication';
 has 'ua' => sub ($self) {
   state $ua = Mojo::UserAgent->new->max_redirects(0)->connect_timeout(3)->request_timeout(2);
   return $ua;
 };
 
-
-sub Cache ($cachefile, $cache = undef) {
+sub Cache ($self, $cache = undef) {
   if ($cache) {
-    return path($cachefile)->spew(encode_json($cache));
-  } elsif (-f $cachefile) {
-    my $json = path($cachefile)->slurp;
+    path($self->config->{cachefile})->spew(encode_json($cache));
+  } elsif (-f $self->config->{cachefile}) {
+    my $json = path($self->config->{cachefile})->slurp;
     if ($json) {
-      return decode_json($json);
+      $cache = decode_json($json);
     }
   }
-  return {
-    'state'   => 'login',
-    'access'  => '',
-    'refresh' => '',
-    'code'    => ''
-  };
+  if (!exists($cache->{state})) {
+    $cache = {
+      'state'   => 'login',
+      'access'  => '',
+      'refresh' => '',
+      'code'    => ''
+    };
+    $self->saveCache;
+  }
+  return $cache;
 }
 
 sub saveCache ($self) {
-  return Cache($self->config->{cachefile}, $self->cache);
+  return $self->Cache($self->cache);
 }
 
 sub updateCache ($self, $resource = undef) {
@@ -51,10 +53,10 @@ sub updateCache ($self, $resource = undef) {
   if ($resource) {
     push @{ $resources }, $resource;
   } else {
-    push @{ $resources }, sort {$a cmp $b} keys %{ $self->config->{apps}->{$self->application}->{resources} };
+    push @{ $resources }, sort {$a cmp $b} keys %{ $self->config->{apps}->{$self->config->{selectedapp}}->{resources} };
   }
   for my $resource (@{ $resources }) {
-    my $resourceconfig = $self->config->{apps}->{$self->application}->{resources}->{$resource};
+    my $resourceconfig = $self->config->{apps}->{$self->config->{selectedapp}}->{resources}->{$resource};
     if (exists($resourceconfig->{cache}) && int $resourceconfig->{cache}) {
       my $list = [];
       my $page = 1;
@@ -67,24 +69,28 @@ sub updateCache ($self, $resource = undef) {
         }
         $page++;
       } until (!exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
-      $self->cache->{$self->application}->{$resource} = $list;
+      $self->cache->{$self->config->{selectedapp}}->{$resource} = $list;
       $self->saveCache;
     }
   }
   $self->saveCache;
-  return ($resource) ? $self->cache->{$self->application}->{$resource} : $self->cache;
+  return ($resource) ? $self->cache->{$self->config->{selectedapp}}->{$resource} : $self->cache;
 }
 
 sub removeCache ($self) {
-  unlink $self->config->{cachefile} if (-e $self->config->{cachefile});
-  state $cache = undef;
+  $self->Cache({
+    'state'   => 'login',
+    'access'  => '',
+    'refresh' => '',
+    'code'    => ''
+  });
 }
 
 sub getLogin($self) {
   $self->cache->{state} = 'login';
   my $response = $self->ua->get($self->config->{oauth2}->{url} . '/auth' => {Accept => '*/*'} => form => {
-    client_id     => $self->config->{apps}->{$self->application}->{clientid},
-    scope         => $self->config->{apps}->{$self->application}->{scope},
+    client_id     => $self->config->{apps}->{$self->config->{selectedapp}}->{clientid},
+    scope         => $self->config->{apps}->{$self->config->{selectedapp}}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
     state         => $self->cache->{state},
@@ -102,8 +108,8 @@ sub getLogin($self) {
 
 sub getToken ($self, $refresh = 0) {
   my $url = Mojo::URL->new($self->config->{oauth2}->{url} . '/token')->userinfo(sprintf('%s:%s',
-    $self->config->{apps}->{$self->application}->{clientid},
-    $self->config->{apps}->{$self->application}->{secret}
+    $self->config->{apps}->{$self->config->{selectedapp}}->{clientid},
+    $self->config->{apps}->{$self->config->{selectedapp}}->{secret}
   ));
   my $response;
   if ($refresh) {
@@ -164,7 +170,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
     $qp = $options->{qp} if (exists($options->{qp}));
   }
   while (!$done) {
-    $qp = $self->merger->merge($self->config->{apps}->{$self->application}->{resources}->{$resource}->{qp}, $qp);
+    $qp = $self->merger->merge($self->config->{apps}->{$self->config->{selectedapp}}->{resources}->{$resource}->{qp}, $qp);
     $qp = $self->merger->merge($options->{qp}, $qp);
     for my $p (qw/sortby sortorder filter limit offset page/) {
       #          delete $qp->{$p} if (exists($qp->{$p}) and ($qp->{$p} eq ''));
@@ -212,7 +218,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
       #          say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
 
       #          if (2000311 == $result->{'ErrorInformation'}->{Code}) {}
-
+      say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
       $self->cache->{access} = '';
       $self->cache->{state} = 'code';
       $self->saveCache;
@@ -284,13 +290,13 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
 }
 
 sub financialYears ($self) {
-  $self->updateCache('FinancialYears') if (!exists($self->cache->{$self->application}->{FinancialYears}));
-  return Mojo::Collection->new(@{ $self->cache->{$self->application}->{FinancialYears} });
+  $self->updateCache('FinancialYears') if (!exists($self->cache->{$self->config->{selectedapp}}->{FinancialYears}));
+  return Mojo::Collection->new(@{ $self->cache->{$self->config->{selectedapp}}->{FinancialYears} });
 }
 
 sub accounts ($self) {
-  $self->updateCache('Accounts') if (!exists($self->cache->{$self->application}->{Accounts}));
-  return Mojo::Collection->new(@{ $self->cache->{$self->application}->{Accounts} });
+  $self->updateCache('Accounts') if (!exists($self->cache->{$self->config->{selectedapp}}->{Accounts}));
+  return Mojo::Collection->new(@{ $self->cache->{$self->config->{selectedapp}}->{Accounts} });
 }
 
 sub postInvoice ($self, $payload) {
@@ -324,44 +330,61 @@ sub putInvoice ($self, $DocumentNumber = 0) {
   my $result = $self->callAPI('Invoices', 'put', $DocumentNumber);
 }
 
+sub getInvoicePayment ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
+  my $result = $self->callAPI('InvoicePayments', 'get', $Number, $options);
+  say Dumper $result;
+  return $result;
+}
+
 sub getCustomer ($self, $CustomerNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Customers', 'get', $CustomerNumber, $options);
+  say Dumper $result;
+  return $result;
 }
 
 sub putCustomer ($self, $CustomerNumber, $data = {}) {
   my $result = $self->callAPI('Customers', 'put', $CustomerNumber, $data);
+  return $result;
 }
 
 sub postCustomer ($self, $data =  {}) {
   my $result = $self->callAPI('Customers', 'post', 0, $data);
+  return $result;
 }
 
 sub deleteCustomer ($self, $CustomerNumber) {
   my $result = $self->callAPI('Customers', 'delete', $CustomerNumber);
+  return $result;
 }
 
 sub putCurrency ($self, $Currency, $data = {}) {
   my $result = $self->callAPI('Currencies', 'put', $Currency, $data);
+  return $result;
 }
 
 sub getCurrency ($self, $Currency = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Currencies', 'get', $Currency, $options);
+  return $result;
 }
 
 sub postCurrency ($self, $data = {}) {
   my $result = $self->callAPI('Currencies', 'post', 0, $data);
+  return $result;
 }
 
 sub getAccount ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Accounts', 'get', $Number, $options);
+  return $result;
 }
 
 sub putAccount ($self, $Number = 0, $data = {}) {
   my $result = $self->callAPI('Accounts', 'put', $Number, $data);
+  return $result;
 }
 
 sub postAccount ($self, $data = {}) {
   my $result = $self->callAPI('Accounts', 'post', 0, $data);
+  return $result;
 }
 
 sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
@@ -377,6 +400,7 @@ sub postArticle ($self, $article = {}) {
   return 0 if (!exists($article->{Article}->{ArticleNumber}));
   $article->{Article}->{Type} = 'SERVICE' if (!exists($article->{Article}->{Type}));
   my $result = $self->callAPI('Articles', 'post', 0, $article);
+  return $result;
 }
 
 
@@ -387,7 +411,7 @@ sub getArchive ($self, $id = 0, $options = {'qp' => {'limit' => 500, page => 1}}
   } else {
     #This is a folder with folders and files
     my $result = $self->callAPI('Archive', 'get', 0, $options);
-    say Dumper $result;
+    return $result;
   }
 }
 

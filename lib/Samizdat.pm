@@ -69,7 +69,6 @@ sub startup ($self) {
   $self->pg->migrations->from_dir('migrations')->migrate;
   $self->pg->db->dbh->{pg_server_prepare} = 1;
 
-#  $self->plugin('Minion' => {Pg => shift->pg });
   $self->helper(merger => sub { state $merger = Hash::Merge->new() });
   $self->helper(uuid => sub { state $uuid = Data::UUID->new });
   if (exists($config->{import}->{dsn})) {

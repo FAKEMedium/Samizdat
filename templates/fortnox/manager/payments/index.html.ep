@@ -1,0 +1,18 @@
+<table id="payments" class="table table-sm table-striped sortable">
+  <thead>
+    <tr class="orange">
+      <th><%== __('Invoice number') %></th>
+      <th><%== __('Customer') %></th>
+      <th><%== __('Date') %></th>
+      <th class="text-end"><%== __('Amount') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data will be injected here by JavaScript -->
+  </tbody>
+  <tfoot>
+    <tr>
+      <th colspan="4" class="text-end"></th>
+    </tr>
+  </tfoot>
+</table>

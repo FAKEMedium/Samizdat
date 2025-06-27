@@ -1,3 +1,4 @@
+% use Mojo::Util qw(url_escape);
 <div class="row">
   <div class="col-md-8">
     <p>
@@ -24,7 +25,8 @@
         </p>
         <p>
           <%== __('For more information, visit the Fortnox website:') %><br>
-          <a href="https://www.fortnox.se" target="_blank">
+          <a href="<%= sprintf('https://www.fortnox.se?utm_source=%s&amp;utm_medium=link&utm_campaign=%s',
+            url_escape('Rymdweb AB'), url_escape('https://rymdweb.com/fortnox') ) %>" target="_blank">
             Fortnox
             <%== icon 'link', {} %>
           </a>

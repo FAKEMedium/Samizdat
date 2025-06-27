@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="col-md-8" id="compose">
+    <form class="row g-3 needs-validation" id="contactform" method="post" action="<%== url_for('contact_index') %>">
+      <div class="form-floating mb-3 col-md-6">
+        <input type="text" class="form-control<%= $formdata->{valid}->{name} %>" id="name" name="name" value="<%== $formdata->{name} %>"
+               placeholder="<%= __('Your name') %>" aria-describedby="name invalidname">
+        <label for="name" class="form-label"><%= __('Your name') %></label>
+        <div id="invalidname" class="invalid-feedback"><%= __('Empty name') %></div>
+      </div>
+
+      <div class="form-floating mb-3 col-md-6">
+        <input type="email" class="form-control<%= $formdata->{valid}->{email} %>" id="email" name="email" value="<%== $formdata->{email} %>"
+               placeholder="me@example.com" aria-describedby="email invalidemail">
+        <label for="email" class="form-label"><%= __('Your email') %></label>
+        <div id="invalidemail" class="invalid-feedback"><%= __('Enter valid email') %></div>
+      </div>
+
+      <div class="form-floating mb-3 col-md-12">
+        <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>">
+      </div>
+
+      <div class="form-floating mb-3 col-md-12">
+        <input type="text" class="form-control<%= $formdata->{valid}->{captcha} %>" id="captcha" name="captcha"
+               placeholder="<%= __('Enter code') %>" aria-describedby="invalidcaptcha">
+        <label for="captcha" class="form-label"><%= __('Captcha code from image') %></label>
+        <div id="invalidcaptcha" class="invalid-feedback"><%= __('Captcha was wrong') %></div>
+      </div>
+
+      <button type="submit" class="btn btn-primary mb-3">
+        <span class="mx-2"><%== __('Activate integration') %></span>
+      <%== icon 'send-fill', {} %>
+      </button>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <img src="/media/images/pexels-markus-winkler-4144772.jpg" class="img-fluid">
+  </div>
+</div>

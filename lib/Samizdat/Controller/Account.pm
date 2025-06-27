@@ -30,8 +30,8 @@ sub login ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Log in');
     my $web = { title => $title };
-    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login', format => 'js'), 4);
-    return $self->render(template => 'account/login', layout => 'modal', web => $web, title => $title);
+    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login/index', format => 'js'), 4);
+    return $self->render(template => 'account/login/index', layout => 'modal', web => $web, title => $title);
   } else {
     $self->stash(docpath => undef);
   }
@@ -207,8 +207,8 @@ sub register ($self) {
         $svg =~ s/[\r\n\s]+//g;
         chomp $svg;
         $formdata->{svglogotype} = $svg;
-        my $maildatahtml = $self->render_mail(template => 'account/confirmhtml', layout => 'default', formdata => $formdata);
-        my $maildatatxt = $self->render_mail(template => 'account/confirmtxt', formdata => $formdata);
+        my $maildatahtml = $self->render_mail(template => 'account/confirm/texthtml', layout => 'default', formdata => $formdata);
+        my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
 
         my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
         $formdata->{$maildatahtml} = $maildatahtml;
@@ -240,9 +240,9 @@ sub register ($self) {
 
   my $title = $self->app->__('Register account');
   my $web = { title => $title };
-  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register',
+  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, format => 'js'), 4);
-  return $self->render(web => $web, title => $title, template => 'account/register',
+  return $self->render(web => $web, title => $title, template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
@@ -254,9 +254,9 @@ sub confirm ($self) {
   if ($accept !~ /json/) {
     my $title = $self->app->__('Email confirmation');
     my $web = { title => $title };
-    $web->{script} .= $self->render_to_string(template => 'account/confirm', format => 'js');
+    $web->{script} .= $self->render_to_string(template => 'account/confirm/index', format => 'js');
     $self->session(confirmationuuid => $confirmationuuid);
-    return $self->render(web => $web, title => $title, template => 'account/confirm', formdata => $formdata, headlinebuttons => undef);
+    return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, headlinebuttons => undef);
   } else {
     my $method = uc $self->req->method;
     if ($method eq "PUT") {
@@ -295,8 +295,8 @@ sub password ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Change password');
     my $web = { title => $title };
-    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/password', format => 'js'), 4);
-    return $self->render(template => 'account/password', web => $web, title => $title);
+    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/password/index', format => 'js'), 4);
+    return $self->render(template => 'account/password/index', web => $web, title => $title);
   }
 
   my $v = $self->validation;
@@ -353,8 +353,8 @@ sub panel ($self) {
   my $title = $self->app->__('Panel');
   my $web = { title => $title };
   $self->stash(user => $self->authenticated_user());
-  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/panel', format => 'js'), 4);
-  return $self->render(template => 'account/panel', web => $web, title => $title, docpath => 'account/panel.html');
+  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/panel/index', format => 'js'), 4);
+  return $self->render(template => 'account/panel/index', web => $web, title => $title);
 }
 
 

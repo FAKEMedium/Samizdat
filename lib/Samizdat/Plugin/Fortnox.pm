@@ -15,42 +15,72 @@ sub register ($self, $app, $conf) {
 
 
   # Invoice stuff
-  $manager->any(sprintf('%s', '/customers'))
-    ->to(controller => 'Fortnox', action => 'customer')
-    ->name('fortnox_customer');
-  $manager->any(sprintf('%s', '/customers/:customerid'))
-    ->to(controller => 'Fortnox', action => 'customer', template => 'fortnox/manager/customer');
-  $manager->post(sprintf('%s', '/invoices'))
-    ->to(controller => 'Fortnox', action => 'postinvoice');
-  $manager->get(sprintf('%s', '/invoices'))
-    ->to(controller => 'Fortnox', action => 'listinvoices', template => 'fortnox/manager/getinvoices')
-    ->name('fortnox_invoices');
-  $manager->any(sprintf('%s', '/logout'))
-    ->to(controller => 'Fortnox', action => 'logout')
-    ->name('fortnox_logout');
-  $manager->any(sprintf('%s', '/'))
-    ->to(controller => 'Fortnox', action => 'manager')->name('fortnox_manager');
-
+  if (1) {
+    $manager->any(sprintf('%s', '/customers'))->name('fortnox_customer')->to(
+      controller => 'Fortnox',
+      action => 'customers',
+      docpath => '/fortnox/manager/customers/index.html',
+    );
+    $manager->any(sprintf('%s', '/customers/:customerid'))->to(
+      controller => 'Fortnox',
+      action => 'customers',
+      docpath => '/fortnox/manager/customers/single/index.html',
+    );
+    $manager->post(sprintf('%s', '/invoices'))->to(
+      controller => 'Fortnox',
+      action => 'postinvoice',
+    );
+    $manager->get(sprintf('%s', '/invoices'))->name('fortnox_invoices')->to(
+      controller => 'Fortnox',
+      action => 'invoices',
+      docpath => '/fortnox/manager/invoices/index.html',
+    );
+    $manager->get(sprintf('%s', '/payments'))->name('fortnox_payments')->to(
+      controller => 'Fortnox',
+      action => 'payments',
+      docpath => '/fortnox/manager/payments/index.html',
+    );
+    $manager->get(sprintf('%s', '/payments/:number'))->to(
+      controller => 'Fortnox',
+      action => 'payments',
+      docpath => '/fortnox/manager/payments/single/index.html',
+    );
+    $manager->any(sprintf('%s', '/'))->name('fortnox_manager')->to(
+      controller => 'Fortnox',
+      action => 'manager',
+      docpath => '/fortnox/manager/index.html',
+    );
+  }
 
   # Integration stuff
-  $fortnox->any(sprintf('%s', '/auth'))
-    ->to(controller => 'Fortnox', action => 'auth')
-    ->name('fortnox_auth');
-  $fortnox->any(sprintf('%s', '/start'))
-    ->to(controller => 'Fortnox', action => 'start', docpath => '/fortnox/index/start.html')
-    ->name('fortnox_start');
-  $fortnox->any(sprintf('%s', '/activate'))
-    ->to(controller => 'Fortnox', action => 'activate', docpath => '/fortnox/index/activate.html')
-    ->name('fortnox_activate');
-  $fortnox->any(sprintf('%s', '/'))
-    ->to(controller => 'Fortnox', action => 'index', docpath => '/fortnox/index.html')
-    ->name('fortnox_index');
+  $fortnox->any(sprintf('%s', '/auth'))->name('fortnox_auth')->to(
+    controller => 'Fortnox',
+    action => 'auth',
+  );
+  $fortnox->any(sprintf('%s', '/logout'))->name('fortnox_logout')->to(
+    controller => 'Fortnox',
+    action => 'logout',
+  );
+  $fortnox->any(sprintf('%s', '/start'))->name('fortnox_start')->to(
+    controller => 'Fortnox',
+    action => 'start',
+    docpath => '/fortnox/start/index.html'
+  );
+  $fortnox->any(sprintf('%s', '/activate'))->name('fortnox_activate')->to(
+    controller => 'Fortnox',
+    action => 'activate',
+    docpath => '/fortnox/activate/index.html',
+  );
+  $fortnox->any(sprintf('%s', '/'))->name('fortnox_index')->to(
+    controller => 'Fortnox',
+    action => 'index',
+    docpath => '/fortnox/index.html',
+  );
 
 
   $app->helper(fortnox => sub {
     state $fortnox = Samizdat::Model::Fortnox->new({
       config      => $app->config->{roomservice}->{fortnox},
-      application => $app->config->{roomservice}->{fortnox}->{selectedapp},
     });
     return $fortnox;
   });

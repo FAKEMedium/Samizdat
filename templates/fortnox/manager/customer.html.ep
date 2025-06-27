@@ -1,6 +1,0 @@
-<pre>
-% use Data::Dumper;
-% for (sort {$a cmp $b} keys %$fc) {
-<%== $_ %>: <%== $fc->{$_} %>
-% }
-</pre>

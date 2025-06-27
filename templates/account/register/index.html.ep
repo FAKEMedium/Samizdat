@@ -1,3 +1,4 @@
+% my $buttontext = __('Register');
 <h5 class="text-danger"><%== __('Registration is currently non-functional') %></h5>
 <div class="row">
   <div class="col-md-8" id="register">
@@ -38,7 +39,7 @@
 
       <div class="form-floating mb-3">
         <img src="/captcha.png" class="img-fluid" id="captchaimage" alt="<%== __('Captcha image') %>">
-        <div id="captchaimageHelp" class="form-text"><%== __('Press Register to regenerate') %></div>
+        <div id="captchaimageHelp" class="form-text"><%== __x('Press "{buttontext}" to regenerate', buttontext => $buttontext) %></div>
         <label for="captchaimage" class="form-label"><%= __('Captcha image') %></label>
       </div>
 
@@ -61,7 +62,7 @@
       </div>
 
       <button type="submit" id="registerlogin" class="btn btn-primary mb-3">
-        <span class="mx-2"><%== __('Register') %></span>
+        <span class="mx-2"><%== $buttontext %></span>
         <%== icon 'rocket-takeoff-fill', {} %>
       </button>
 

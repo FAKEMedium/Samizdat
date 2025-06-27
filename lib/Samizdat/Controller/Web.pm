@@ -56,6 +56,7 @@ sub getdoc ($self) {
       language => $self->app->language
     };
     if ($docpath !~ /\.(webp)$/) {
+      $self->stash('docpath', '/404.html');
       return $self->reply->not_found;
     }
   } else {

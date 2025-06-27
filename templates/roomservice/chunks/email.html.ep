@@ -1,0 +1,20 @@
+<div class="card">
+  <h5 class="card-header orange border-0"><%== __('Mail') %></h5>
+  <div class="card-body m-0 p-2">
+    <form name="searchmaildomain" method="get" action="<%== config->{managerurl} %>maildomains">
+      <div class="row mb-3">
+        <div class="input-group">
+          <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('mail domain')) %>" placeholder="<%== __('Search for mail domain') %>..." />
+          <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+          <%== icon 'search', {} %>
+          </button>
+        </div>
+      </div>
+    </form>
+    <a class="badge rounded-pill text-bg-primary" href="#"><%== __('Add mail domain') %></a>
+    <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>maildomains/mx"><%== __('MX records') %></a>
+    <a class="badge rounded-pill text-bg-primary" href="/postfixadmin/"><%== __('Mail admin') %></a>
+    <a class="badge rounded-pill text-bg-primary" href="/rspamd/">Rspamd</a>
+    <a class="badge rounded-pill text-bg-primary" href="https://getmaster.live.com/snds/data.aspx">Outlook SNDS</a>
+  </div>
+</div>
