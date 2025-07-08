@@ -79,7 +79,7 @@ sub updateCache ($self, $resource = undef) {
 
 sub removeCache ($self) {
   $self->Cache({
-    'state'   => 'login',
+    'state'   => '',
     'access'  => '',
     'refresh' => '',
     'code'    => ''

@@ -4,16 +4,35 @@
     <p>
       <%== __('Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub.') %>
       <%== __('Over time, more web hosting features have been added.') %>
-      <%== __('A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized.') %>
+      <%== __('A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized.') %>
     </p>
     <p>
       <%== __('This integration handles invoicing independently and synchronizes invoices with Fortnox.') %>
       <%== __('Minimal local customer data is stored in Fortnox.') %>
-      <%== __('Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface.') %>
-      <%== __('It can be configured to display everything publicly as well.') %>
+      <%== __('Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface.') %>
     </p>
+    <h5><%== __('Highlights') %></h5>
+    <ul>
+      <li><%== __('Invoices are created with LATEX type setting software') %></li>
+      <li><%== __('Multiple languages and country specific modifications') %></li>
+      <li><%== __('Mail sent through own servers') %></li>
+      <li><%== __('Customers get a list of invoices and open invoice items') %></li>
+      <li>
+        <%== __('Source code on Github') %>
+        <a href="https://github.com/FAKEMedia/Samizdat" target="_blank"><%== icon 'link', {} %></a>
+      </li>
   </div>
   <div class="col-md-4">
+    <div class="card mb-3">
+      <h5 class="card-header orange border-0"><%== __('Strictly for Rymdweb') %></h5>
+      <div class="card-body m-0 p-2">
+        <p>
+          <%== __('This integration is developed and maintained by Rymdweb AB.') %>
+          <%== __('It is currently only available to Rymdweb.') %>
+        </p>
+      </div>
+    </div>
+
     <div class="card">
       <h5 class="card-header orange border-0"><%== __('About Fortnox') %></h5>
       <div class="card-body m-0 p-2">
