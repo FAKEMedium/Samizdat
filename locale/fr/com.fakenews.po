@@ -76,6 +76,9 @@ msgstr "Un lien de confirmation a été envoyé à {email}."
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
 msgstr "Un sous-objectif est de tester la comptabilité ouverte, où les chiffres peuvent être présentés en continu après avoir été anonymisés."
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "Un sous-objectif est de tester la comptabilité ouverte, où les chiffres peuvent être présentés en continu publiquement après avoir été anonymisés."
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Un intérêt de {rate} sera facturé sur les paiements en retard"
 
@@ -99,6 +102,12 @@ msgstr "Actions"
 
 msgid "Activate Samizdat Fortnox integration"
 msgstr "Activer l'intégration Samizdat Fortnox"
+
+msgid "Activate integration"
+msgstr "Activer l'intégration"
+
+msgid "Active"
+msgstr "Actif"
 
 msgid "Add customer"
 msgstr "Ajouter un client"
@@ -129,6 +138,12 @@ msgstr "Adresse"
 
 msgid "Address (billing)"
 msgstr "Adresse (facturation)"
+
+msgid "Address 1"
+msgstr "Adresse 1"
+
+msgid "Address 2"
+msgstr "Adresse 2"
 
 msgid "Address check"
 msgstr "Vérification d'adresse"
@@ -172,6 +187,9 @@ msgstr "Au moins 3 caractères de a-z 0-9 -, doit commencer par a-z"
 msgid "At least 8 characters including capitals and digits"
 msgstr "Au moins 8 caractères, y compris des majuscules et des chiffres"
 
+msgid "Authorize"
+msgstr "Autoriser"
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -192,6 +210,9 @@ msgstr "Bankgiro :"
 
 msgid "Barred"
 msgstr "Bloqué"
+
+msgid "Basic Information"
+msgstr "Informations de base"
 
 msgid "Billing"
 msgstr "Facturation"
@@ -292,6 +313,9 @@ msgstr "Cliquez pour renvoyer."
 msgid "Close"
 msgstr "Fermer"
 
+msgid "Comments"
+msgstr "Commentaires"
+
 msgid "Company"
 msgstr "Entreprise"
 
@@ -312,6 +336,9 @@ msgstr "Demande de confirmation envoyée"
 
 msgid "Contact"
 msgstr "Contact"
+
+msgid "Contact Information"
+msgstr "Informations de contact"
 
 msgid "Contact {sender} if you have questions."
 msgstr "Contactez {sender} si vous avez des questions."
@@ -382,6 +409,9 @@ msgstr "Facture créditée"
 msgid "Credited invoice: {number}"
 msgstr "Facture créditée : {number}"
 
+msgid "Currency"
+msgstr "Devise"
+
 msgid "Customer"
 msgstr "Client"
 
@@ -394,11 +424,17 @@ msgstr "Identifiant client"
 msgid "Customer Id:"
 msgstr "Identifiant client :"
 
+msgid "Customer Number"
+msgstr "Numéro de client"
+
 msgid "Customer newsletter"
 msgstr "Lettre d'information clients"
 
 msgid "Customers"
 msgstr "Clients"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "Les clients obtiennent une liste de factures et d'articles de facture ouverts"
 
 msgid "DNS"
 msgstr "DNS"
@@ -448,6 +484,9 @@ msgstr "Décidez quelles parties de vos données personnelles vous souhaitez mon
 msgid "Delete"
 msgstr "Supprimer"
 
+msgid "Delivery Address"
+msgstr "Adresse de livraison"
+
 msgid "Description"
 msgstr "Description"
 
@@ -462,6 +501,9 @@ msgstr "Documentation développeur"
 
 msgid "Development"
 msgstr "Développement"
+
+msgid "Discount"
+msgstr "Remise"
 
 msgid "Do you want to credit the invoice?"
 msgstr "Voulez-vous créditer cette facture ?"
@@ -516,6 +558,15 @@ msgstr "E-mail %s vérifié"
 
 msgid "Email (billing)"
 msgstr "E-mail (facturation)"
+
+msgid "Email Invoice"
+msgstr "Envoyer la facture par e-mail"
+
+msgid "Email Offer"
+msgstr "Envoyer l'offre par e-mail"
+
+msgid "Email Order"
+msgstr "Envoyer la commande par e-mail"
 
 msgid "Email confirmation"
 msgstr "Confirmation par e-mail"
@@ -673,6 +724,9 @@ msgstr "Archive de fichiers"
 msgid "Fill the form correctly!"
 msgstr "Remplissez correctement le formulaire !"
 
+msgid "Financial Information"
+msgstr "Informations financières"
+
 msgid "Find the credit invoice attached as PDF."
 msgstr "Trouvez la facture d'avoir ci-jointe en PDF."
 
@@ -698,7 +752,7 @@ msgid "Fortnox panel"
 msgstr "Panneau Fortnox"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox a été fondée en 2001 avec son siège à Växjö."
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox a été fondée en 2001 avec son siège à Växjö."
@@ -729,6 +783,9 @@ msgstr "Semestre"
 
 msgid "Handled invoice"
 msgstr "Facture traitée"
+
+msgid "Highlights"
+msgstr "Points forts"
 
 msgid "I accept the terms for registration."
 msgstr "J'accepte les conditions d'inscription."
@@ -841,6 +898,9 @@ msgstr "Facture {number}, client #{customerid}"
 msgid "Invoices"
 msgstr "Factures"
 
+msgid "Invoices are created with LATEX type setting software"
+msgstr "Les factures sont créées avec le logiciel de composition LATEX"
+
 msgid "Invoices, customer #{customerid}"
 msgstr "Factures, client #{customerid}"
 
@@ -857,6 +917,9 @@ msgstr[1] "Facturation, {number} articles"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "Il peut également être configuré pour tout afficher publiquement."
+
+msgid "It is currently only available to Rymdweb."
+msgstr "Il n'est actuellement disponible que pour Rymdweb."
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
 msgstr "Il est conçu pour aider les petites et moyennes entreprises à gérer leurs finances efficacement."
@@ -948,6 +1011,9 @@ msgstr "Admin courriel"
 msgid "Mail domains"
 msgstr "Domaines de courriel"
 
+msgid "Mail sent through own servers"
+msgstr "Courrier envoyé par ses propres serveurs"
+
 msgid "Make invoice"
 msgstr "Créer une facture"
 
@@ -987,6 +1053,9 @@ msgstr "Les modifications ont été enregistrées."
 msgid "Month"
 msgstr "Mois"
 
+msgid "Multiple languages and country specific modifications"
+msgstr "Plusieurs langues et modifications spécifiques au pays"
+
 msgid "Name"
 msgstr "Nom"
 
@@ -1025,6 +1094,9 @@ msgstr "Plus récent"
 
 msgid "Newsletter"
 msgstr "Bulletin d'information"
+
+msgid "No"
+msgstr "Non"
 
 msgid "No customer #{customerid}."
 msgstr "Pas de client #{customerid}."
@@ -1074,8 +1146,17 @@ msgstr "Id. organisation"
 msgid "Org. Id:"
 msgstr "Id. organisation :"
 
+msgid "Org.no."
+msgstr "N° org."
+
+msgid "Organisation Number"
+msgstr "Numéro d'organisation"
+
 msgid "Organizational number"
 msgstr "Numéro d'organisation"
+
+msgid "Our Reference"
+msgstr "Notre référence"
 
 msgid "Our reference"
 msgstr "Notre référence"
@@ -1149,6 +1230,9 @@ msgstr "Menu personnel"
 msgid "Personal panel"
 msgstr "Panneau personnel"
 
+msgid "Phone"
+msgstr "Téléphone"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Veuillez confirmer votre adresse e-mail en cliquant sur le lien suivant :"
 
@@ -1179,11 +1263,17 @@ msgstr "Courrier postal"
 msgid "Postgiro"
 msgstr "Postgiro"
 
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Appuyez sur \"{buttontext}\" pour régénérer"
+
 msgid "Press Register to regenerate"
 msgstr "Appuyez sur S'inscrire pour régénérer"
 
 msgid "Price"
 msgstr "Prix"
+
+msgid "Price List"
+msgstr "Liste de prix"
 
 msgid "Priority"
 msgstr "Priorité"
@@ -1230,6 +1320,9 @@ msgstr "Enregistrement mis à jour avec succès"
 msgid "Records"
 msgstr "Enregistrements"
 
+msgid "References"
+msgstr "Références"
+
 msgid "Regards"
 msgstr "Cordialement"
 
@@ -1253,6 +1346,9 @@ msgstr "Siège social :"
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
 msgstr "Les paiements enregistrés et les factures fournisseurs sont récupérés de Fortnox et affichés dans l'interface client locale."
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "Les paiements enregistrés et les factures fournisseurs sont récupérés de Fortnox et affichés dans l'interface locale."
 
 msgid "Registrar"
 msgstr "Bureau d'enregistrement"
@@ -1286,6 +1382,9 @@ msgstr "Arrondi :"
 
 msgid "SEK"
 msgstr "SEK"
+
+msgid "Samizdat"
+msgstr "Samizdat"
 
 msgid "Samizdat Fortnox integration"
 msgstr "Intégration Samizdat Fortnox"
@@ -1349,6 +1448,9 @@ msgstr "Renvoyer"
 
 msgid "Send invoice questions to {url}."
 msgstr "Envoyez les questions concernant la facture à {url}."
+
+msgid "Send message"
+msgstr "Envoyer un message"
 
 msgid "Send now"
 msgstr "Envoyer maintenant"
@@ -1416,6 +1518,9 @@ msgstr "Snapback uniquement"
 msgid "Snapback scheduler"
 msgstr "Planificateur Snapback"
 
+msgid "Source code on Github"
+msgstr "Code source sur Github"
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr "Liste séparée par des espaces de classes supplémentaires à ajouter aux classes par défaut préfixées."
 
@@ -1424,6 +1529,9 @@ msgstr "Prix spécial"
 
 msgid "Start"
 msgstr "Démarrer"
+
+msgid "Strictly for Rymdweb"
+msgstr "Strictement pour Rymdweb"
 
 msgid "Stuff"
 msgstr "Trucs"
@@ -1460,6 +1568,9 @@ msgstr "Questions techniques :"
 
 msgid "Telephone"
 msgstr "Téléphone"
+
+msgid "Terms of Payment"
+msgstr "Conditions de paiement"
 
 msgid "Test"
 msgstr "Test"
@@ -1518,6 +1629,9 @@ msgstr "Ce fichier est distribué sous la même licence que le paquet {project}.
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 msgstr "Cette intégration gère la facturation de manière indépendante et synchronise les factures avec Fortnox."
 
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "Cette intégration est développée et maintenue par Rymdweb AB."
+
 msgid "Tillbaka"
 msgstr "Retour"
 
@@ -1526,6 +1640,9 @@ msgstr "Basculer le menu"
 
 msgid "Tot"
 msgstr "Total"
+
+msgid "Total: {count} customers"
+msgstr "Total : {count} clients"
 
 msgid "Tough"
 msgstr "Sévère"
@@ -1599,6 +1716,12 @@ msgstr "N° TVA"
 msgid "VAT Id:"
 msgstr "N° TVA :"
 
+msgid "VAT Number"
+msgstr "Numéro de TVA"
+
+msgid "VAT Type"
+msgstr "Type de TVA"
+
 msgid "VAT lookup, {vatno}"
 msgstr "Recherche TVA, {vatno}"
 
@@ -1647,6 +1770,9 @@ msgstr "Captcha erroné"
 msgid "Year"
 msgstr "Année"
 
+msgid "Yes"
+msgstr "Oui"
+
 msgid "You can also post in our discussions."
 msgstr "Vous pouvez également publier dans nos discussions."
 
@@ -1661,6 +1787,9 @@ msgstr "Vous devez accepter les conditions d'inscription."
 
 msgid "You were logged in as {username}."
 msgstr "Vous étiez connecté en tant que {username}."
+
+msgid "Your Reference"
+msgstr "Votre référence"
 
 msgid "Your VAT Id"
 msgstr "Votre N° TVA"
@@ -1688,6 +1817,9 @@ msgstr "Votre message apparaît ci-dessous."
 
 msgid "Your name"
 msgstr "Votre nom"
+
+msgid "Zip Code"
+msgstr "Code postal"
 
 msgid "Zone Kind"
 msgstr "Type de zone"

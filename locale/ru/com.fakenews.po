@@ -83,6 +83,9 @@ msgstr "Ссылка для подтверждения отправлена на
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
 msgstr "Подцелью является тестирование открытой отчётности, где цифры могут представляться непрерывно после анонимизации."
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "Подцелью является тестирование открытой отчётности, где цифры могут представляться непрерывно в публичном доступе после анонимизации."
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "За просрочку платежа взимается комиссия и {rate} процентов"
 
@@ -106,6 +109,12 @@ msgstr "Действия"
 
 msgid "Activate Samizdat Fortnox integration"
 msgstr "Активировать интеграцию Samizdat Fortnox"
+
+msgid "Activate integration"
+msgstr "Активировать интеграцию"
+
+msgid "Active"
+msgstr "Активный"
 
 msgid "Add customer"
 msgstr "Новый клиент"
@@ -136,6 +145,12 @@ msgstr "Адрес"
 
 msgid "Address (billing)"
 msgstr "Адрес (для счетов)"
+
+msgid "Address 1"
+msgstr "Адрес 1"
+
+msgid "Address 2"
+msgstr "Адрес 2"
 
 msgid "Address check"
 msgstr "Проверка адреса"
@@ -179,6 +194,9 @@ msgstr "Минимум 3 символа из a-z 0-9 -, должно начин�
 msgid "At least 8 characters including capitals and digits"
 msgstr "Минимум 8 символов, включая заглавные буквы и цифры"
 
+msgid "Authorize"
+msgstr "Авторизовать"
+
 msgid "BIC/Swift"
 msgstr "БИК/Swift"
 
@@ -199,6 +217,9 @@ msgstr "Bankgiro:"
 
 msgid "Barred"
 msgstr "Заблокировано"
+
+msgid "Basic Information"
+msgstr "Основная информация"
 
 msgid "Billing"
 msgstr "Финансы"
@@ -299,6 +320,9 @@ msgstr "Нажмите, чтобы отправить снова."
 msgid "Close"
 msgstr "Закрыть"
 
+msgid "Comments"
+msgstr "Комментарии"
+
 msgid "Company"
 msgstr "Компания"
 
@@ -319,6 +343,9 @@ msgstr "Запрос подтверждения отправлен"
 
 msgid "Contact"
 msgstr "Контакт"
+
+msgid "Contact Information"
+msgstr "Контактная информация"
 
 msgid "Contact {sender} if you have questions."
 msgstr "Свяжитесь с {sender}, если у вас есть вопросы."
@@ -386,6 +413,9 @@ msgstr "Кредитованный счет"
 msgid "Credited invoice: {number}"
 msgstr "Кредитованный счет: {number}"
 
+msgid "Currency"
+msgstr "Валюта"
+
 msgid "Customer"
 msgstr "Клиент"
 
@@ -398,11 +428,17 @@ msgstr "Номер клиента"
 msgid "Customer Id:"
 msgstr "Номер клиента:"
 
+msgid "Customer Number"
+msgstr "Номер клиента"
+
 msgid "Customer newsletter"
 msgstr "Рассылка для клиентов"
 
 msgid "Customers"
 msgstr "Клиенты"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "Клиенты получают список счетов и открытых позиций счетов"
 
 msgid "DNS"
 msgstr "DNS"
@@ -452,6 +488,9 @@ msgstr "Выберите, какие части ваших личных данн
 msgid "Delete"
 msgstr "Удалить"
 
+msgid "Delivery Address"
+msgstr "Адрес доставки"
+
 msgid "Description"
 msgstr "Описание"
 
@@ -466,6 +505,9 @@ msgstr "Документация для разработчиков"
 
 msgid "Development"
 msgstr "Разработка"
+
+msgid "Discount"
+msgstr "Скидка"
 
 msgid "Do you want to credit the invoice?"
 msgstr "Вы хотите выдать кредит по счету?"
@@ -523,6 +565,15 @@ msgstr "Email %s подтвержден"
 
 msgid "Email (billing)"
 msgstr "Эл. почта (для счетов)"
+
+msgid "Email Invoice"
+msgstr "Отправить счет по email"
+
+msgid "Email Offer"
+msgstr "Отправить предложение по email"
+
+msgid "Email Order"
+msgstr "Отправить заказ по email"
 
 msgid "Email confirmation"
 msgstr "Подтверждение email"
@@ -680,6 +731,9 @@ msgstr "Архив файлов"
 msgid "Fill the form correctly!"
 msgstr "Заполните форму правильно!"
 
+msgid "Financial Information"
+msgstr "Финансовая информация"
+
 msgid "Find the credit invoice attached as PDF."
 msgstr "Кредитный счет прилагается в формате PDF."
 
@@ -705,7 +759,7 @@ msgid "Fortnox panel"
 msgstr "Панель Fortnox"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox была основана в 2001 году со штаб-квартирой в Векшё."
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox была основана в 2001 году со штаб-квартирой в Векшё."
@@ -736,6 +790,9 @@ msgstr "Полгода"
 
 msgid "Handled invoice"
 msgstr "Обработанный счет"
+
+msgid "Highlights"
+msgstr "Особенности"
 
 msgid "I accept the terms for registration."
 msgstr "Я принимаю условия регистрации."
@@ -848,6 +905,9 @@ msgstr "Счет {number}, клиент #{customerid}"
 msgid "Invoices"
 msgstr "Счета"
 
+msgid "Invoices are created with LATEX type setting software"
+msgstr "Счета создаются с помощью программного обеспечения для верстки LATEX"
+
 msgid "Invoices, customer #{customerid}"
 msgstr "Счета, клиент #{customerid}"
 
@@ -865,6 +925,9 @@ msgstr[2] "Выставление счета, {number} позиций"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "Также можно настроить публичное отображение всего."
+
+msgid "It is currently only available to Rymdweb."
+msgstr "В настоящее время доступно только для Rymdweb."
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
 msgstr "Оно разработано для помощи малым и средним предприятиям эффективно управлять своими финансами."
@@ -956,6 +1019,9 @@ msgstr "Почтовый админ"
 msgid "Mail domains"
 msgstr "Почтовые домены"
 
+msgid "Mail sent through own servers"
+msgstr "Почта отправляется через собственные серверы"
+
 msgid "Make invoice"
 msgstr "Создать счет"
 
@@ -995,6 +1061,9 @@ msgstr "Изменения сохранены."
 msgid "Month"
 msgstr "Месяц"
 
+msgid "Multiple languages and country specific modifications"
+msgstr "Множественные языки и модификации для конкретных стран"
+
 msgid "Name"
 msgstr "Имя"
 
@@ -1033,6 +1102,9 @@ msgstr "Новейшие"
 
 msgid "Newsletter"
 msgstr "Рассылка"
+
+msgid "No"
+msgstr "Нет"
 
 msgid "No customer #{customerid}."
 msgstr "Нет клиента #{customerid}."
@@ -1082,8 +1154,17 @@ msgstr "ИНН"
 msgid "Org. Id:"
 msgstr "ИНН:"
 
+msgid "Org.no."
+msgstr "Орг.номер"
+
+msgid "Organisation Number"
+msgstr "Номер организации"
+
 msgid "Organizational number"
 msgstr "ИНН"
+
+msgid "Our Reference"
+msgstr "Наша ссылка"
 
 msgid "Our reference"
 msgstr "Наша ссылка"
@@ -1157,6 +1238,9 @@ msgstr "Личное меню"
 msgid "Personal panel"
 msgstr "Личная панель"
 
+msgid "Phone"
+msgstr "Телефон"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Пожалуйста, подтвердите ваш адрес электронной почты, нажав на следующую ссылку:"
 
@@ -1187,11 +1271,17 @@ msgstr "Обычная почта"
 msgid "Postgiro"
 msgstr "Postgiro"
 
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Нажмите \"{buttontext}\" для новой капчи"
+
 msgid "Press Register to regenerate"
 msgstr "Нажмите Регистрация для новой капчи"
 
 msgid "Price"
 msgstr "Цена"
+
+msgid "Price List"
+msgstr "Прайс-лист"
 
 msgid "Priority"
 msgstr "Приоритет"
@@ -1238,6 +1328,9 @@ msgstr "Запись успешно обновлена"
 msgid "Records"
 msgstr "Записи"
 
+msgid "References"
+msgstr "Ссылки"
+
 msgid "Regards"
 msgstr "С уважением"
 
@@ -1261,6 +1354,9 @@ msgstr "Юридический адрес:"
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
 msgstr "Зарегистрированные платежи и счета поставщиков извлекаются из Fortnox и отображаются в локальном клиентском интерфейсе."
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "Зарегистрированные платежи и счета поставщиков извлекаются из Fortnox и отображаются в локальном интерфейсе."
 
 msgid "Registrar"
 msgstr "Регистратор"
@@ -1294,6 +1390,9 @@ msgstr "Округление:"
 
 msgid "SEK"
 msgstr "SEK"
+
+msgid "Samizdat"
+msgstr "Самиздат"
 
 msgid "Samizdat Fortnox integration"
 msgstr "Интеграция Samizdat Fortnox"
@@ -1357,6 +1456,9 @@ msgstr "Отправить снова"
 
 msgid "Send invoice questions to {url}."
 msgstr "Отправляйте вопросы по счету на {url}."
+
+msgid "Send message"
+msgstr "Отправить сообщение"
 
 msgid "Send now"
 msgstr "Отправить сейчас"
@@ -1424,6 +1526,9 @@ msgstr "Только Snapback"
 msgid "Snapback scheduler"
 msgstr "Планировщик Snapback"
 
+msgid "Source code on Github"
+msgstr "Исходный код на Github"
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr "Список дополнительных классов через пробел для добавления к стандартным классам с префиксом."
 
@@ -1432,6 +1537,9 @@ msgstr "Специальная цена"
 
 msgid "Start"
 msgstr "Начало"
+
+msgid "Strictly for Rymdweb"
+msgstr "Строго для Rymdweb"
 
 msgid "Stuff"
 msgstr "Разное"
@@ -1468,6 +1576,9 @@ msgstr "Технические вопросы:"
 
 msgid "Telephone"
 msgstr "Телефон"
+
+msgid "Terms of Payment"
+msgstr "Условия оплаты"
 
 msgid "Test"
 msgstr "Тест"
@@ -1526,6 +1637,9 @@ msgstr "Этот файл распространяется под той же л
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 msgstr "Эта интеграция обрабатывает выставление счетов независимо и синхронизирует счета с Fortnox."
 
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "Эта интеграция разработана и поддерживается компанией Rymdweb AB."
+
 msgid "Tillbaka"
 msgstr "Назад"
 
@@ -1534,6 +1648,9 @@ msgstr "Переключить меню"
 
 msgid "Tot"
 msgstr "Всего"
+
+msgid "Total: {count} customers"
+msgstr "Всего: {count} клиентов"
 
 msgid "Tough"
 msgstr "Жесткий"
@@ -1607,6 +1724,12 @@ msgstr "Номер НДС"
 msgid "VAT Id:"
 msgstr "Номер НДС:"
 
+msgid "VAT Number"
+msgstr "Номер НДС"
+
+msgid "VAT Type"
+msgstr "Тип НДС"
+
 msgid "VAT lookup, {vatno}"
 msgstr "Проверка номера НДС, {vatno}"
 
@@ -1655,6 +1778,9 @@ msgstr "Неверная капча"
 msgid "Year"
 msgstr "Год"
 
+msgid "Yes"
+msgstr "Да"
+
 msgid "You can also post in our discussions."
 msgstr "Вы также можете оставить сообщение в наших обсуждениях."
 
@@ -1669,6 +1795,9 @@ msgstr "Вам необходимо принять условия регистр
 
 msgid "You were logged in as {username}."
 msgstr "Вы вошли как {username}."
+
+msgid "Your Reference"
+msgstr "Ваша ссылка"
 
 msgid "Your VAT Id"
 msgstr "Ваш номер НДС"
@@ -1696,6 +1825,9 @@ msgstr "Ваше сообщение приведено ниже."
 
 msgid "Your name"
 msgstr "Ваше имя"
+
+msgid "Zip Code"
+msgstr "Почтовый индекс"
 
 msgid "Zone Kind"
 msgstr "Тип зоны"

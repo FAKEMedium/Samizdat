@@ -69,6 +69,9 @@ msgstr "确认链接已发送至 {email}。"
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
 msgstr "一个子目标是测试开放式会计，其中数字可以在匿名化后持续呈现。"
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "一个子目标是测试开放式会计，其中数字可以在匿名化后持续公开呈现。"
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "逾期付款将收取 {rate} 的利息"
 
@@ -92,6 +95,12 @@ msgstr "操作"
 
 msgid "Activate Samizdat Fortnox integration"
 msgstr "激活 Samizdat Fortnox 集成"
+
+msgid "Activate integration"
+msgstr "激活集成"
+
+msgid "Active"
+msgstr "活跃"
 
 msgid "Add customer"
 msgstr "添加客户"
@@ -122,6 +131,12 @@ msgstr "地址"
 
 msgid "Address (billing)"
 msgstr "账单地址"
+
+msgid "Address 1"
+msgstr "地址1"
+
+msgid "Address 2"
+msgstr "地址2"
 
 msgid "Address check"
 msgstr "地址检查"
@@ -165,6 +180,9 @@ msgstr "至少3个字符，包含 a-z 0-9 -，必须以 a-z 开头"
 msgid "At least 8 characters including capitals and digits"
 msgstr "至少8个字符，包含大写字母和数字"
 
+msgid "Authorize"
+msgstr "授权"
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -185,6 +203,9 @@ msgstr "银行汇票："
 
 msgid "Barred"
 msgstr "已禁止"
+
+msgid "Basic Information"
+msgstr "基本信息"
 
 msgid "Billing"
 msgstr "账单"
@@ -285,6 +306,9 @@ msgstr "点击重新发送。"
 msgid "Close"
 msgstr "关闭"
 
+msgid "Comments"
+msgstr "评论"
+
 msgid "Company"
 msgstr "公司"
 
@@ -305,6 +329,9 @@ msgstr "确认请求已发送"
 
 msgid "Contact"
 msgstr "联系"
+
+msgid "Contact Information"
+msgstr "联系信息"
 
 msgid "Contact {sender} if you have questions."
 msgstr "如有疑问，请联系 {sender}。"
@@ -375,6 +402,9 @@ msgstr "已贷记发票"
 msgid "Credited invoice: {number}"
 msgstr "已贷记发票：{number}"
 
+msgid "Currency"
+msgstr "货币"
+
 msgid "Customer"
 msgstr "客户"
 
@@ -387,11 +417,17 @@ msgstr "客户 ID"
 msgid "Customer Id:"
 msgstr "客户 ID："
 
+msgid "Customer Number"
+msgstr "客户编号"
+
 msgid "Customer newsletter"
 msgstr "客户通讯"
 
 msgid "Customers"
 msgstr "客户"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "客户可以获得发票列表和未结发票项目"
 
 msgid "DNS"
 msgstr "DNS"
@@ -441,6 +477,9 @@ msgstr "决定您想向不同群组展示哪些个人数据。"
 msgid "Delete"
 msgstr "删除"
 
+msgid "Delivery Address"
+msgstr "送货地址"
+
 msgid "Description"
 msgstr "描述"
 
@@ -455,6 +494,9 @@ msgstr "开发者文档"
 
 msgid "Development"
 msgstr "开发"
+
+msgid "Discount"
+msgstr "折扣"
 
 msgid "Do you want to credit the invoice?"
 msgstr "您要贷记这张发票吗？"
@@ -509,6 +551,15 @@ msgstr "电子邮件 %s 已验证"
 
 msgid "Email (billing)"
 msgstr "电子邮件（账单）"
+
+msgid "Email Invoice"
+msgstr "邮件发票"
+
+msgid "Email Offer"
+msgstr "邮件报价"
+
+msgid "Email Order"
+msgstr "邮件订单"
 
 msgid "Email confirmation"
 msgstr "电子邮件确认"
@@ -666,6 +717,9 @@ msgstr "文件存档"
 msgid "Fill the form correctly!"
 msgstr "请正确填写表单！"
 
+msgid "Financial Information"
+msgstr "财务信息"
+
 msgid "Find the credit invoice attached as PDF."
 msgstr "请查看附件中的贷记发票 PDF。"
 
@@ -691,7 +745,7 @@ msgid "Fortnox panel"
 msgstr "Fortnox 面板"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox 成立于 2001 年，总部位于韦克舍。"
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox 成立于 2001 年，总部位于韦克舍。"
@@ -722,6 +776,9 @@ msgstr "半年"
 
 msgid "Handled invoice"
 msgstr "已处理发票"
+
+msgid "Highlights"
+msgstr "亮点"
 
 msgid "I accept the terms for registration."
 msgstr "我接受注册条款。"
@@ -834,6 +891,9 @@ msgstr "发票 {number}，客户 #{customerid}"
 msgid "Invoices"
 msgstr "发票"
 
+msgid "Invoices are created with LATEX type setting software"
+msgstr "发票使用 LATEX 排版软件创建"
+
 msgid "Invoices, customer #{customerid}"
 msgstr "发票，客户 #{customerid}"
 
@@ -849,6 +909,9 @@ msgstr[0] "开票，{number} 个项目"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "它也可以配置为公开显示所有内容。"
+
+msgid "It is currently only available to Rymdweb."
+msgstr "目前仅对 Rymdweb 可用。"
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
 msgstr "它旨在帮助中小企业高效管理财务。"
@@ -940,6 +1003,9 @@ msgstr "邮件管理"
 msgid "Mail domains"
 msgstr "邮件域名"
 
+msgid "Mail sent through own servers"
+msgstr "通过自有服务器发送邮件"
+
 msgid "Make invoice"
 msgstr "创建发票"
 
@@ -979,6 +1045,9 @@ msgstr "修改已保存。"
 msgid "Month"
 msgstr "月"
 
+msgid "Multiple languages and country specific modifications"
+msgstr "多语言和国家特定修改"
+
 msgid "Name"
 msgstr "名称"
 
@@ -1017,6 +1086,9 @@ msgstr "最新"
 
 msgid "Newsletter"
 msgstr "通讯"
+
+msgid "No"
+msgstr "否"
 
 msgid "No customer #{customerid}."
 msgstr "没有客户 #{customerid}。"
@@ -1066,8 +1138,17 @@ msgstr "组织 ID"
 msgid "Org. Id:"
 msgstr "组织 ID："
 
+msgid "Org.no."
+msgstr "组织号"
+
+msgid "Organisation Number"
+msgstr "组织编号"
+
 msgid "Organizational number"
 msgstr "组织号码"
+
+msgid "Our Reference"
+msgstr "我们的参考"
 
 msgid "Our reference"
 msgstr "我们的参考"
@@ -1141,6 +1222,9 @@ msgstr "个人菜单"
 msgid "Personal panel"
 msgstr "个人面板"
 
+msgid "Phone"
+msgstr "电话"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "请点击以下链接确认您的电子邮件地址："
 
@@ -1171,11 +1255,17 @@ msgstr "邮政邮件"
 msgid "Postgiro"
 msgstr "Postgiro"
 
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "按“{buttontext}”重新生成"
+
 msgid "Press Register to regenerate"
 msgstr "按注册以重新生成"
 
 msgid "Price"
 msgstr "价格"
+
+msgid "Price List"
+msgstr "价格表"
 
 msgid "Priority"
 msgstr "优先级"
@@ -1222,6 +1312,9 @@ msgstr "记录更新成功"
 msgid "Records"
 msgstr "记录"
 
+msgid "References"
+msgstr "参考资料"
+
 msgid "Regards"
 msgstr "此致"
 
@@ -1245,6 +1338,9 @@ msgstr "注册办公室："
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
 msgstr "已注册的付款和供应商发票从 Fortnox 检索并在本地客户界面中显示。"
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "已登记的付款和供应商发票从 Fortnox 检索并在本地界面中显示。"
 
 msgid "Registrar"
 msgstr "注册商"
@@ -1278,6 +1374,9 @@ msgstr "舍入："
 
 msgid "SEK"
 msgstr "瑞典克朗"
+
+msgid "Samizdat"
+msgstr "Samizdat"
 
 msgid "Samizdat Fortnox integration"
 msgstr "Samizdat Fortnox 集成"
@@ -1341,6 +1440,9 @@ msgstr "重新发送"
 
 msgid "Send invoice questions to {url}."
 msgstr "将发票问题发送至 {url}。"
+
+msgid "Send message"
+msgstr "发送消息"
 
 msgid "Send now"
 msgstr "立即发送"
@@ -1408,6 +1510,9 @@ msgstr "仅 Snapback"
 msgid "Snapback scheduler"
 msgstr "Snapback 调度程序"
 
+msgid "Source code on Github"
+msgstr "Github 上的源代码"
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr "空格分隔的额外类列表，用于附加到带前缀的默认类。"
 
@@ -1416,6 +1521,9 @@ msgstr "特价"
 
 msgid "Start"
 msgstr "开始"
+
+msgid "Strictly for Rymdweb"
+msgstr "专为 Rymdweb 提供"
 
 msgid "Stuff"
 msgstr "物品"
@@ -1452,6 +1560,9 @@ msgstr "技术问题："
 
 msgid "Telephone"
 msgstr "电话"
+
+msgid "Terms of Payment"
+msgstr "付款条款"
 
 msgid "Test"
 msgstr "测试"
@@ -1510,6 +1621,9 @@ msgstr "此文件在与 {project} 软件包相同的许可下分发。"
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 msgstr "此集成独立处理发票并与 Fortnox 同步发票。"
 
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "此集成由 Rymdweb AB 开发和维护。"
+
 msgid "Tillbaka"
 msgstr "返回"
 
@@ -1518,6 +1632,9 @@ msgstr "切换菜单"
 
 msgid "Tot"
 msgstr "总计"
+
+msgid "Total: {count} customers"
+msgstr "总计：{count} 个客户"
 
 msgid "Tough"
 msgstr "严厉"
@@ -1591,6 +1708,12 @@ msgstr "增值税 ID"
 msgid "VAT Id:"
 msgstr "增值税 ID："
 
+msgid "VAT Number"
+msgstr "增值税号"
+
+msgid "VAT Type"
+msgstr "增值税类型"
+
 msgid "VAT lookup, {vatno}"
 msgstr "增值税查询，{vatno}"
 
@@ -1639,6 +1762,9 @@ msgstr "验证码错误"
 msgid "Year"
 msgstr "年"
 
+msgid "Yes"
+msgstr "是"
+
 msgid "You can also post in our discussions."
 msgstr "您也可以在我们的讨论中发帖。"
 
@@ -1653,6 +1779,9 @@ msgstr "您需要接受注册条款。"
 
 msgid "You were logged in as {username}."
 msgstr "您已作为 {username} 登录。"
+
+msgid "Your Reference"
+msgstr "您的参考"
 
 msgid "Your VAT Id"
 msgstr "您的增值税 ID"
@@ -1680,6 +1809,9 @@ msgstr "您的消息如下所示。"
 
 msgid "Your name"
 msgstr "您的姓名"
+
+msgid "Zip Code"
+msgstr "邮政编码"
 
 msgid "Zone Kind"
 msgstr "区域类型"

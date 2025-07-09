@@ -76,6 +76,9 @@ msgstr "एक पुष्टिकरण लिंक {email} पर भेज
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
 msgstr "एक उप-लक्ष्य खुले लेखांकन का परीक्षण करना है, जहाँ आँकड़ों को गुमनाम करने के बाद लगातार प्रस्तुत किया जा सकता है।"
 
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "एक उप-लक्ष्य खुले लेखांकन का परीक्षण करना है, जहाँ आँकड़ों को गुमनाम करने के बाद सार्वजनिक रूप से निरंतर प्रस्तुत किया जा सकता है।"
+
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "देर से भुगतान पर {rate} ब्याज लगाया जाएगा"
 
@@ -99,6 +102,12 @@ msgstr "कार्य"
 
 msgid "Activate Samizdat Fortnox integration"
 msgstr "Samizdat Fortnox एकीकरण सक्रिय करें"
+
+msgid "Activate integration"
+msgstr "एकीकरण सक्रिय करें"
+
+msgid "Active"
+msgstr "सक्रिय"
 
 msgid "Add customer"
 msgstr "ग्राहक जोड़ें"
@@ -129,6 +138,12 @@ msgstr "पता"
 
 msgid "Address (billing)"
 msgstr "पता (बिलिंग)"
+
+msgid "Address 1"
+msgstr "पता 1"
+
+msgid "Address 2"
+msgstr "पता 2"
 
 msgid "Address check"
 msgstr "पता जांच"
@@ -172,6 +187,9 @@ msgstr "कम से कम 3 अक्षर a-z 0-9 - से, a-z से श�
 msgid "At least 8 characters including capitals and digits"
 msgstr "कम से कम 8 अक्षर, बड़े अक्षर और अंक शामिल"
 
+msgid "Authorize"
+msgstr "प्राधिकृत करें"
+
 msgid "BIC/Swift"
 msgstr "BIC/स्विफ्ट"
 
@@ -192,6 +210,9 @@ msgstr "बैंकगिरो:"
 
 msgid "Barred"
 msgstr "बाधित"
+
+msgid "Basic Information"
+msgstr "मूलभूत जानकारी"
 
 msgid "Billing"
 msgstr "बिलिंग"
@@ -292,6 +313,9 @@ msgstr "फिर से भेजने के लिए क्लिक कर
 msgid "Close"
 msgstr "बंद करें"
 
+msgid "Comments"
+msgstr "टिप्पणियाँ"
+
 msgid "Company"
 msgstr "कंपनी"
 
@@ -312,6 +336,9 @@ msgstr "पुष्टिकरण अनुरोध भेजा गया"
 
 msgid "Contact"
 msgstr "संपर्क"
+
+msgid "Contact Information"
+msgstr "संपर्क जानकारी"
 
 msgid "Contact {sender} if you have questions."
 msgstr "यदि आपके कोई प्रश्न हैं तो {sender} से संपर्क करें।"
@@ -382,6 +409,9 @@ msgstr "क्रेडिट किया गया इनवॉइस"
 msgid "Credited invoice: {number}"
 msgstr "क्रेडिट किया गया इनवॉइस: {number}"
 
+msgid "Currency"
+msgstr "मुद्रा"
+
 msgid "Customer"
 msgstr "ग्राहक"
 
@@ -394,11 +424,17 @@ msgstr "ग्राहक आईडी"
 msgid "Customer Id:"
 msgstr "ग्राहक आईडी:"
 
+msgid "Customer Number"
+msgstr "ग्राहक संख्या"
+
 msgid "Customer newsletter"
 msgstr "ग्राहक न्यूज़लेटर"
 
 msgid "Customers"
 msgstr "ग्राहक"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "ग्राहकों को बिलों की सूची और खुले बिल आइटम मिलते हैं"
 
 msgid "DNS"
 msgstr "डीएनएस"
@@ -448,6 +484,9 @@ msgstr "तय करें कि आप अपने व्यक्तिग�
 msgid "Delete"
 msgstr "हटाएं"
 
+msgid "Delivery Address"
+msgstr "डिलिवरी पता"
+
 msgid "Description"
 msgstr "विवरण"
 
@@ -462,6 +501,9 @@ msgstr "डेवलपर दस्तावेज़"
 
 msgid "Development"
 msgstr "विकास"
+
+msgid "Discount"
+msgstr "छूट"
 
 msgid "Do you want to credit the invoice?"
 msgstr "क्या आप इनवॉइस को क्रेडिट करना चाहते हैं?"
@@ -516,6 +558,15 @@ msgstr "ईमेल %s सत्यापित"
 
 msgid "Email (billing)"
 msgstr "ईमेल (बिलिंग)"
+
+msgid "Email Invoice"
+msgstr "ईमेल इनवॉइस"
+
+msgid "Email Offer"
+msgstr "ईमेल प्रस्ताव"
+
+msgid "Email Order"
+msgstr "ईमेल आदेश"
 
 msgid "Email confirmation"
 msgstr "ईमेल पुष्टिकरण"
@@ -673,6 +724,9 @@ msgstr "फ़ाइल आर्काइव"
 msgid "Fill the form correctly!"
 msgstr "फॉर्म सही तरीके से भरें!"
 
+msgid "Financial Information"
+msgstr "वित्तीय जानकारी"
+
 msgid "Find the credit invoice attached as PDF."
 msgstr "संलग्न PDF के रूप में क्रेडिट इनवॉइस देखें।"
 
@@ -698,7 +752,7 @@ msgid "Fortnox panel"
 msgstr "फोर्टनॉक्स पैनल"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox की स्थापना 2001 में Växjö में मुख्यालय के साथ हुई थी।"
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox की स्थापना 2001 में Växjö में मुख्यालय के साथ हुई थी।"
@@ -729,6 +783,9 @@ msgstr "अर्धवार्षिक"
 
 msgid "Handled invoice"
 msgstr "संभाला गया इनवॉइस"
+
+msgid "Highlights"
+msgstr "मुख्य बिंदु"
 
 msgid "I accept the terms for registration."
 msgstr "मैं पंजीकरण के नियमों को स्वीकार करता हूं।"
@@ -841,6 +898,9 @@ msgstr "इनवॉइस {number}, ग्राहक #{customerid}"
 msgid "Invoices"
 msgstr "इनवॉइस"
 
+msgid "Invoices are created with LATEX type setting software"
+msgstr "बिल LATEX टाइप सेटिंग सॉफ्टवेयर से बनाए जाते हैं"
+
 msgid "Invoices, customer #{customerid}"
 msgstr "इनवॉइस, ग्राहक #{customerid}"
 
@@ -857,6 +917,9 @@ msgstr[1] "बिलिंग, {number} आइटम"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "इसे सब कुछ सार्वजनिक रूप से प्रदर्शित करने के लिए भी कॉन्फ़िगर किया जा सकता है।"
+
+msgid "It is currently only available to Rymdweb."
+msgstr "यह वर्तमान में केवल Rymdweb के लिए उपलब्ध है।"
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
 msgstr "यह छोटे और मध्यम आकार के व्यवसायों को उनके वित्त का कुशलता से प्रबंधन करने में मदद करने के लिए डिज़ाइन किया गया है।"
@@ -948,6 +1011,9 @@ msgstr "मेल एडमिन"
 msgid "Mail domains"
 msgstr "मेल डोमेन"
 
+msgid "Mail sent through own servers"
+msgstr "अपने सर्वर के माध्यम से भेजी गई मेल"
+
 msgid "Make invoice"
 msgstr "इनवॉइस बनाएं"
 
@@ -987,6 +1053,9 @@ msgstr "संशोधन सहेजे गए।"
 msgid "Month"
 msgstr "महीना"
 
+msgid "Multiple languages and country specific modifications"
+msgstr "कई भाषाएँ और देश-विशिष्ट संशोधन"
+
 msgid "Name"
 msgstr "नाम"
 
@@ -1025,6 +1094,9 @@ msgstr "नवीनतम"
 
 msgid "Newsletter"
 msgstr "न्यूज़लेटर"
+
+msgid "No"
+msgstr "नहीं"
 
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
@@ -1074,8 +1146,17 @@ msgstr "संगठन आईडी"
 msgid "Org. Id:"
 msgstr "संगठन आईडी:"
 
+msgid "Org.no."
+msgstr "संगठन नंबर"
+
+msgid "Organisation Number"
+msgstr "संगठन संख्या"
+
 msgid "Organizational number"
 msgstr "संगठनात्मक संख्या"
+
+msgid "Our Reference"
+msgstr "हमारा संदर्भ"
 
 msgid "Our reference"
 msgstr "हमारा संदर्भ"
@@ -1149,6 +1230,9 @@ msgstr "व्यक्तिगत मेनू"
 msgid "Personal panel"
 msgstr "व्यक्तिगत पैनल"
 
+msgid "Phone"
+msgstr "फोन"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "कृपया निम्न लिंक पर क्लिक करके अपने ईमेल पते की पुष्टि करें:"
 
@@ -1179,11 +1263,17 @@ msgstr "डाक मेल"
 msgid "Postgiro"
 msgstr "पोस्टगिरो"
 
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "पुनः उत्पन्न करने के लिए \"{buttontext}\" दबाएं"
+
 msgid "Press Register to regenerate"
 msgstr "पुनः उत्पन्न करने के लिए रजिस्टर दबाएं"
 
 msgid "Price"
 msgstr "मूल्य"
+
+msgid "Price List"
+msgstr "मूल्य सूची"
 
 msgid "Priority"
 msgstr "प्राथमिकता"
@@ -1230,6 +1320,9 @@ msgstr "रिकॉर्ड सफलतापूर्वक अपडेट 
 msgid "Records"
 msgstr "रिकॉर्ड"
 
+msgid "References"
+msgstr "संदर्भ"
+
 msgid "Regards"
 msgstr "सादर"
 
@@ -1253,6 +1346,9 @@ msgstr "पंजीकृत कार्यालय:"
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
 msgstr "पंजीकृत भुगतान और आपूर्तिकर्ता बिल Fortnox से प्राप्त होते हैं और स्थानीय ग्राहक इंटरफेस में प्रदर्शित होते हैं।"
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "पंजीकृत भुगतान और आपूर्तिकर्ता बिल Fortnox से प्राप्त होते हैं और स्थानीय इंटरफेस में प्रदर्शित होते हैं।"
 
 msgid "Registrar"
 msgstr "रजिस्ट्रार"
@@ -1286,6 +1382,9 @@ msgstr "राउंड ऑफ:"
 
 msgid "SEK"
 msgstr "एसईके"
+
+msgid "Samizdat"
+msgstr "समिज़दात"
 
 msgid "Samizdat Fortnox integration"
 msgstr "Samizdat Fortnox एकीकरण"
@@ -1349,6 +1448,9 @@ msgstr "फिर से भेजें"
 
 msgid "Send invoice questions to {url}."
 msgstr "इनवॉइस प्रश्न {url} पर भेजें।"
+
+msgid "Send message"
+msgstr "संदेश भेजें"
 
 msgid "Send now"
 msgstr "अभी भेजें"
@@ -1416,6 +1518,9 @@ msgstr "केवल स्नैपबैक"
 msgid "Snapback scheduler"
 msgstr "स्नैपबैक शेड्यूलर"
 
+msgid "Source code on Github"
+msgstr "Github पर स्रोत कोड"
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr "प्रीफिक्स्ड डिफ़ॉल्ट क्लासेज़ में जोड़ने के लिए अतिरिक्त क्लासेज़ की स्पेस से अलग की गई सूची।"
 
@@ -1424,6 +1529,9 @@ msgstr "विशेष मूल्य"
 
 msgid "Start"
 msgstr "शुरू करें"
+
+msgid "Strictly for Rymdweb"
+msgstr "केवल Rymdweb के लिए"
 
 msgid "Stuff"
 msgstr "सामान"
@@ -1460,6 +1568,9 @@ msgstr "तकनीकी प्रश्न:"
 
 msgid "Telephone"
 msgstr "टेलीफोन"
+
+msgid "Terms of Payment"
+msgstr "भुगतान की शर्तें"
 
 msgid "Test"
 msgstr "परीक्षण"
@@ -1518,6 +1629,9 @@ msgstr "यह फ़ाइल {project} पैकेज के समान ल
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 msgstr "यह एकीकरण बिलिंग को स्वतंत्र रूप से संभालता है और Fortnox के साथ बिलों को सिंक्रोनाइज़ करता है।"
 
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "यह एकीकरण Rymdweb AB द्वारा विकसित और रखरखाव किया जाता है।"
+
 msgid "Tillbaka"
 msgstr "वापस"
 
@@ -1526,6 +1640,9 @@ msgstr "मेनू टॉगल करें"
 
 msgid "Tot"
 msgstr "कुल"
+
+msgid "Total: {count} customers"
+msgstr "कुल: {count} ग्राहक"
 
 msgid "Tough"
 msgstr "कठिन"
@@ -1599,6 +1716,12 @@ msgstr "वैट आईडी"
 msgid "VAT Id:"
 msgstr "वैट आईडी:"
 
+msgid "VAT Number"
+msgstr "वैट संख्या"
+
+msgid "VAT Type"
+msgstr "वैट प्रकार"
+
 msgid "VAT lookup, {vatno}"
 msgstr "वैट लुकअप, {vatno}"
 
@@ -1647,6 +1770,9 @@ msgstr "गलत कैप्चा"
 msgid "Year"
 msgstr "वर्ष"
 
+msgid "Yes"
+msgstr "हाँ"
+
 msgid "You can also post in our discussions."
 msgstr "आप हमारी चर्चाओं में भी पोस्ट कर सकते हैं।"
 
@@ -1661,6 +1787,9 @@ msgstr "आपको पंजीकरण शर्तों को स्व�
 
 msgid "You were logged in as {username}."
 msgstr "आप {username} के रूप में लॉग इन थे।"
+
+msgid "Your Reference"
+msgstr "आपका संदर्भ"
 
 msgid "Your VAT Id"
 msgstr "आपकी वैट आईडी"
@@ -1688,6 +1817,9 @@ msgstr "आपका संदेश नीचे दिखाई देता �
 
 msgid "Your name"
 msgstr "आपका नाम"
+
+msgid "Zip Code"
+msgstr "पिन कोड"
 
 msgid "Zone Kind"
 msgstr "ज़ोन प्रकार"
