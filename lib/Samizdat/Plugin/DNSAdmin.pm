@@ -6,7 +6,12 @@ use Samizdat::Model::DNSAdmin;
 sub register($self, $app, $conf) {
 
   my $r = $app->routes;
-  my $dnsadmin = $r->under($app->config->{managerurl})->under('dnsadmin')->to(
+  my $manager = $r->under($app->config->{managerurl})->to(
+    controller => 'Account',
+    action     => 'authorize',
+    level      => 'superadmin',
+  );
+  my $dnsadmin = $manager->under('dnsadmin')->to(
     controller => 'Account',
     action     => 'authorize',
     require    => {
@@ -29,8 +34,9 @@ sub register($self, $app, $conf) {
   # Helper for accessing the DNSAdmin API model.
   $app->helper(dnsadmin => sub($c) {
     state $dnsadmin = Samizdat::Model::DNSAdmin->new({
-      config => $c->config->{dnsadmin},
+      config => $c->config->{roomservice}->{dnsadmin},
     });
+    return $dnsadmin;
   });
 
 }

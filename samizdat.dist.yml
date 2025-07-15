@@ -17,11 +17,17 @@ favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
 roomservice:
-  email:
-    databasetype: mysql
-  domain:
-    databasetype: mysql
+  customer:
+    cardnumber: 1
+    country: SE
+    lang: sv_SE
+    currency: sek
+    vat: 25
+    period: quarterly
+    invoicetype: email
+    trust: normal
   invoice:
+    cardnumber: 2
     sender: billing@example.com
     sendername: Invoicing example
     # invoicedir is an absolute path
@@ -52,19 +58,24 @@ roomservice:
       XXXXX Big City
     contact: contact@example.com
     billingcontact: billing@example.com
-  customer:
-    country: SE
-    lang: sv_SE
-    currency: sek
-    vat: 25
-    period: quarterly
-    invoicetype: email
-    trust: normal
-dnsadmin:
-  type: powerdns
-  api:
-    url: http://ns.example.com:8081/api/v1/servers/localhost
-    key: s3cr3tk3y
+  domain:
+    cardnumber: 3
+    databasetype: mysql
+  dnsadmin:
+    cardnumber: 4
+    type: powerdns
+    api:
+      url: http://ns.example.com:8081/api/v1/servers/localhost
+      key: s3cr3tk3y
+  website:
+    cardnumber: 5
+  database:
+    cardnumber: 6
+  email:
+    cardnumber: 7
+    databasetype: mysql
+  product:
+    cardnumber: 8
 icons:
   large: src/svg/fakenews.svg
   small: src/svg/f.svg
