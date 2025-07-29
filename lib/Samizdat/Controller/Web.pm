@@ -6,20 +6,32 @@ use Mojo::JSON qw(encode_json);
 # Render site management panel
 sub index ($self) {
   my $docpath = $self->stash('docpath');
-  my $title = $self->app->__('Manage site');
-  my $web = {
-    docpath => $docpath,
-    title   => $title,
-    meta    => {
-      name => {
-        description => $self->app->__('Manage site'),
-        keywords    => ["manage","site"]
+  my $title = $self->app->__('Site content');
+
+  if ($self->req->headers->accept =~ m{application/json}) {
+    my $searchterm = $self->param('searchterm') // undef;
+    $self->render(json => {
+      pages => $self->app->web->geturis({
+        searchterm => $searchterm,
+        language   => $self->app->language,
+        languages  => $self->config->{locale}->{languages},
+      })
+    });
+  } else {
+    my $web = {
+      docpath => $docpath,
+      title   => $title,
+      meta    => {
+        name => {
+          description => $self->app->__('Site content'),
+          keywords    => [ "manage", "site" ]
+        }
       }
-    },
-  };
-  $web->{script} .= $self->render_to_string(template => 'web/index', format => 'js');
-  $web->{css} .= $self->render_to_string(template => 'web/tree', format => 'css');
-  $self->render( template => 'web/index', web => $web, title => $title );
+    };
+    $web->{script} .= $self->render_to_string(template => 'web/index', format => 'js');
+    $web->{css} .= $self->render_to_string(template => 'web/tree', format => 'css');
+    $self->render(template => 'web/index', web => $web, title => $title, headline => 'web/chunks/headline');
+  }
 }
 
 
@@ -79,7 +91,7 @@ sub getdoc ($self) {
       }
       $docs->{$path}->{sidebar} = $sidebar;
     }
-    $self->stash(headlinebuttons => 'chunks/sharebuttons');
+    $self->stash(headline => 'chunks/sharebuttons');
   }
   $self->stash(web => $docs->{$path}, docpath => $docs->{$path}->{docpath});
   $self->stash(title => $docs->{$path}->{title} // $title);

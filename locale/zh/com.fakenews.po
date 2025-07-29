@@ -102,6 +102,12 @@ msgstr "激活集成"
 msgid "Active"
 msgstr "活跃"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "添加客户"
 
@@ -111,8 +117,14 @@ msgstr "添加数据库"
 msgid "Add domain"
 msgstr "添加域名"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "添加邮件域名"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "添加产品"
@@ -120,11 +132,17 @@ msgstr "添加产品"
 msgid "Add subscription"
 msgstr "添加订阅"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "添加凭证"
 
 msgid "Add website"
 msgstr "添加网站"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "地址"
@@ -255,6 +273,9 @@ msgstr "更改密码"
 msgid "Changed status."
 msgstr "状态已更改。"
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "选择密码"
 
@@ -275,6 +296,9 @@ msgstr "城市"
 
 msgid "City (billing)"
 msgstr "城市（账单）"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "点击弹出登录对话框。"
@@ -735,6 +759,9 @@ msgstr "名字"
 msgid "For more information, visit the Fortnox website:"
 msgstr "欲了解更多信息，请访问 Fortnox 网站："
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Fortnox 集成"
 
@@ -937,6 +964,9 @@ msgstr "信封"
 msgid "Language"
 msgstr "语言"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "姓氏"
 
@@ -1003,6 +1033,9 @@ msgstr "邮件管理"
 msgid "Mail domains"
 msgstr "邮件域名"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "通过自有服务器发送邮件"
 
@@ -1017,6 +1050,9 @@ msgstr "手册"
 
 msgid "Mark payment"
 msgstr "标记付款"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "消息"
@@ -1098,6 +1134,9 @@ msgstr "没有发票模板。"
 
 msgid "No invoicing"
 msgstr "不开票"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "未选择客户。"
@@ -1270,6 +1309,9 @@ msgstr "价格表"
 msgid "Priority"
 msgstr "优先级"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "产品"
 
@@ -1393,6 +1435,9 @@ msgstr "保存"
 msgid "Search"
 msgstr "搜索"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "{what} 的搜索字段"
 
@@ -1414,11 +1459,20 @@ msgstr "搜索邮件域名"
 msgid "Search for product"
 msgstr "搜索产品"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "搜索网站"
 
 msgid "Search for zone"
 msgstr "搜索区域"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "选择"
@@ -1521,6 +1575,9 @@ msgstr "特价"
 
 msgid "Start"
 msgstr "开始"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "专为 Rymdweb 提供"
@@ -1699,6 +1756,9 @@ msgstr "用户注册"
 msgid "Username"
 msgstr "用户名"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "增值税"
 
@@ -1846,6 +1906,9 @@ msgstr "加 {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "控制面板"
 
@@ -1878,6 +1941,9 @@ msgstr "产品"
 
 msgid "standby firewall"
 msgstr "备用防火墙"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "网站"

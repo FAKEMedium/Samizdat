@@ -52,6 +52,6 @@
 .collapsed > .tree-icon {
   transform: rotate(0deg);
 }
-.expanded > .tree-icon {
+.tree-toggle:not(.collapsed) > .tree-icon {
   transform: rotate(90deg);
 }

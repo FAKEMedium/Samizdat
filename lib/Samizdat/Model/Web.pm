@@ -9,7 +9,10 @@ use MojoX::MIME::Types;
 use YAML::XS;
 use Data::Dumper;
 
-has 'app';
+has 'config';
+has 'database';
+has 'locale';
+has 'routes';
 
 my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
@@ -23,12 +26,12 @@ my $md = Text::MultiMarkdown->new(
 
 sub getlist ($self, $url, $options = {}) {
   my $docs = {};
-  my $path = Mojo::Home->new($self->app->config->{publicsrc})->child($url);
+  my $path = Mojo::Home->new($self->config->{publicsrc})->child($url);
   my $found = 0;
   my $meta = {};
   my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
-    my $docpath = $file->to_rel($self->app->config->{publicsrc})->to_string;
+    my $docpath = $file->to_rel($self->config->{publicsrc})->to_string;
     if ('md' eq $file->path->extname()) {
       my $content = $file->slurp;
       transclude(\$content, $file->dirname);
@@ -130,15 +133,22 @@ sub getlist ($self, $url, $options = {}) {
 }
 
 
-# Find every README.md markdown file
+# Find every README.md markdown file, including the ones with language suffixes, and return a hash of URIs
 sub geturis ($self, $options = {}) {
   my $uris = {};
-  my $path = Mojo::Home->new($self->app->config->{publicsrc});
+  my $path = Mojo::Home->new($self->config->{publicsrc});
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
-      my $filename = $file->to_rel($self->app->config->{publicsrc})->to_string;
-      if ($filename =~ s/README[^\/]*\.md$/README.md/) {
-          $uris->{$filename} = 0;
+      my $filename = $file->to_rel($self->config->{publicsrc})->to_string;
+      my $size = $file->stat->size;
+      if ($filename =~ s/README([^\/]*)\.md$/README.md/) {
+        my $lang = $1;
+        $lang =~ s/^_//;
+        if ($lang) {
+          $uris->{$filename}->{$lang} = $size;
+        } else {
+          $uris->{$filename}->{$self->{locale}->{default_language}} = $size;
+        }
       }
     }
   });

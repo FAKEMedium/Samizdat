@@ -137,6 +137,12 @@ msgstr "تفعيل التكامل"
 msgid "Active"
 msgstr "نشط"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "إضافة عميل"
 
@@ -146,8 +152,14 @@ msgstr "إضافة قاعدة بيانات"
 msgid "Add domain"
 msgstr "إضافة نطاق"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "إضافة نطاق بريد"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "إضافة منتج"
@@ -155,11 +167,17 @@ msgstr "إضافة منتج"
 msgid "Add subscription"
 msgstr "إضافة اشتراك"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "إضافة قسيمة"
 
 msgid "Add website"
 msgstr "إضافة موقع"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "العنوان"
@@ -290,6 +308,9 @@ msgstr "تغيير كلمة المرور"
 msgid "Changed status."
 msgstr "تم تغيير الحالة."
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "اختر كلمة مرور"
 
@@ -310,6 +331,9 @@ msgstr "المدينة"
 
 msgid "City (billing)"
 msgstr "المدينة (الفواتير)"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "انقر لفتح مربع حوار تسجيل الدخول."
@@ -770,6 +794,9 @@ msgstr "الاسم الأول"
 msgid "For more information, visit the Fortnox website:"
 msgstr "لمزيد من المعلومات، قم بزيارة موقع Fortnox:"
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "تكامل Fortnox"
 
@@ -977,6 +1004,9 @@ msgstr "ظرف"
 msgid "Language"
 msgstr "اللغة"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "اسم العائلة"
 
@@ -1043,6 +1073,9 @@ msgstr "إدارة البريد"
 msgid "Mail domains"
 msgstr "نطاقات البريد"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "البريد المرسل عبر الخوادم الخاصة"
 
@@ -1057,6 +1090,9 @@ msgstr "الأدلة"
 
 msgid "Mark payment"
 msgstr "تحديد الدفع"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "الرسالة"
@@ -1138,6 +1174,9 @@ msgstr "لا يوجد قالب فاتورة."
 
 msgid "No invoicing"
 msgstr "لا توجد فوترة"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "لم يتم تحديد عميل."
@@ -1310,6 +1349,9 @@ msgstr "قائمة الأسعار"
 msgid "Priority"
 msgstr "الأولوية"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "المنتجات"
 
@@ -1433,6 +1475,9 @@ msgstr "حفظ"
 msgid "Search"
 msgstr "بحث"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "حقل البحث عن {what}"
 
@@ -1454,11 +1499,20 @@ msgstr "البحث عن نطاق بريد"
 msgid "Search for product"
 msgstr "البحث عن منتج"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "البحث عن موقع ويب"
 
 msgid "Search for zone"
 msgstr "البحث عن منطقة"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "اختيار"
@@ -1561,6 +1615,9 @@ msgstr "سعر خاص"
 
 msgid "Start"
 msgstr "البدء"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "حصريًا لـ Rymdweb"
@@ -1739,6 +1796,9 @@ msgstr "تسجيل المستخدم"
 msgid "Username"
 msgstr "اسم المستخدم"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "ضريبة القيمة المضافة"
 
@@ -1886,6 +1946,9 @@ msgstr "إضافة {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "لوحة التحكم"
 
@@ -1918,6 +1981,9 @@ msgstr "المنتج"
 
 msgid "standby firewall"
 msgstr "جدار الحماية الاحتياطي"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "موقع الويب"

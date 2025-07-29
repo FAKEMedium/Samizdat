@@ -9,4 +9,8 @@
   </div>
 </form>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>domains/add"><%== __('Add domain') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>epp/contact"><%== __('Create contact') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>epp/create"><%== __('Register') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>epp/transfer"><%== __('Transfer') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>domains/expiring"><%== __('Expiring domains') %></a>
 <a class="badge rounded-pill text-bg-primary" href="https://dm.realtimeregister.com/docs/api/">RR API</a>

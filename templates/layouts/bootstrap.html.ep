@@ -71,7 +71,7 @@
         <div class="row">
           <h1 id="headline" class="col-9"><%== title %></h1>
           <ul class="nav px-0 px-sm-1 px-md-2 col-3 justify-content-sm-end d-flex d-print-none">
-            <%== indent headlinebuttons($headlinebuttons), 6 =%>
+            <%== indent headline($headline), 6 =%>
           </ul>
         </div>
       </header>

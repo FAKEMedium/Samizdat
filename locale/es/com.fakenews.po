@@ -109,6 +109,12 @@ msgstr "Activar integración"
 msgid "Active"
 msgstr "Activo"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "Añadir cliente"
 
@@ -118,8 +124,14 @@ msgstr "Añadir base de datos"
 msgid "Add domain"
 msgstr "Añadir dominio"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Añadir dominio de correo"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "Añadir producto"
@@ -127,11 +139,17 @@ msgstr "Añadir producto"
 msgid "Add subscription"
 msgstr "Añadir suscripción"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "Añadir vale"
 
 msgid "Add website"
 msgstr "Añadir sitio web"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "Dirección"
@@ -262,6 +280,9 @@ msgstr "Cambiar contraseña"
 msgid "Changed status."
 msgstr "Estado cambiado."
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "Elegir una contraseña"
 
@@ -282,6 +303,9 @@ msgstr "Ciudad"
 
 msgid "City (billing)"
 msgstr "Ciudad (facturación)"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "Haga clic para abrir el diálogo de inicio de sesión."
@@ -742,6 +766,9 @@ msgstr "Nombre"
 msgid "For more information, visit the Fortnox website:"
 msgstr "Para más información, visite el sitio web de Fortnox:"
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Integración Fortnox"
 
@@ -945,6 +972,9 @@ msgstr "Sobre"
 msgid "Language"
 msgstr "Idioma"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "Apellido"
 
@@ -1011,6 +1041,9 @@ msgstr "Admin de correo"
 msgid "Mail domains"
 msgstr "Dominios de correo"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "Correo enviado a través de servidores propios"
 
@@ -1025,6 +1058,9 @@ msgstr "Manuales"
 
 msgid "Mark payment"
 msgstr "Marcar pago"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "Mensaje"
@@ -1106,6 +1142,9 @@ msgstr "No hay plantilla de factura."
 
 msgid "No invoicing"
 msgstr "Sin facturación"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "Ningún cliente seleccionado."
@@ -1278,6 +1317,9 @@ msgstr "Lista de Precios"
 msgid "Priority"
 msgstr "Prioridad"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "Productos"
 
@@ -1401,6 +1443,9 @@ msgstr "Guardar"
 msgid "Search"
 msgstr "Buscar"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "Campo de búsqueda para {what}"
 
@@ -1422,11 +1467,20 @@ msgstr "Buscar dominio de correo"
 msgid "Search for product"
 msgstr "Buscar producto"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "Buscar sitio web"
 
 msgid "Search for zone"
 msgstr "Buscar zona"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "Seleccionar"
@@ -1529,6 +1583,9 @@ msgstr "Precio especial"
 
 msgid "Start"
 msgstr "Inicio"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "Estrictamente para Rymdweb"
@@ -1707,6 +1764,9 @@ msgstr "Registro de usuario"
 msgid "Username"
 msgstr "Nombre de usuario"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "IVA"
 
@@ -1854,6 +1914,9 @@ msgstr "añadir {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "panel de control"
 
@@ -1886,6 +1949,9 @@ msgstr "producto"
 
 msgid "standby firewall"
 msgstr "cortafuegos en espera"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "sitio web"

@@ -1,1 +1,0 @@
-document.querySelector('#cardcol-<%== $service %> h5.card-header').innerHTML = `<%== __('Servers') %>`;

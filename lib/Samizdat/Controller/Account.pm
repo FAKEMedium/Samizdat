@@ -256,7 +256,7 @@ sub confirm ($self) {
     my $web = { title => $title };
     $web->{script} .= $self->render_to_string(template => 'account/confirm/index', format => 'js');
     $self->session(confirmationuuid => $confirmationuuid);
-    return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, headlinebuttons => undef);
+    return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, headline => undef);
   } else {
     my $method = uc $self->req->method;
     if ($method eq "PUT") {

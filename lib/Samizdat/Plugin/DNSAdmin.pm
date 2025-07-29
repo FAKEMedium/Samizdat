@@ -32,9 +32,9 @@ sub register($self, $app, $conf) {
 
 
   # Helper for accessing the DNSAdmin API model.
-  $app->helper(dnsadmin => sub($c) {
+  $app->helper(dnsadmin => sub($self) {
     state $dnsadmin = Samizdat::Model::DNSAdmin->new({
-      config => $c->config->{roomservice}->{dnsadmin},
+      config => $self->config->{roomservice}->{dnsadmin},
     });
     return $dnsadmin;
   });

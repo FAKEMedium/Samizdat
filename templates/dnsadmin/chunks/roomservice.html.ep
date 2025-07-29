@@ -8,4 +8,5 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>dnsadmin/"><%== __('List zones') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>dnsadmin/add"><%== __('Add zone') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>dnsadmin/check"><%== __('Check zones') %></a>

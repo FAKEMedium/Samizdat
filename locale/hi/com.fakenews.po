@@ -109,6 +109,12 @@ msgstr "एकीकरण सक्रिय करें"
 msgid "Active"
 msgstr "सक्रिय"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "ग्राहक जोड़ें"
 
@@ -118,8 +124,14 @@ msgstr "डेटाबेस जोड़ें"
 msgid "Add domain"
 msgstr "डोमेन जोड़ें"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "मेल डोमेन जोड़ें"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "उत्पाद जोड़ें"
@@ -127,11 +139,17 @@ msgstr "उत्पाद जोड़ें"
 msgid "Add subscription"
 msgstr "सदस्यता जोड़ें"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "वाउचर जोड़ें"
 
 msgid "Add website"
 msgstr "वेबसाइट जोड़ें"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "पता"
@@ -262,6 +280,9 @@ msgstr "पासवर्ड बदलें"
 msgid "Changed status."
 msgstr "स्थिति बदली गई।"
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "पासवर्ड चुनें"
 
@@ -282,6 +303,9 @@ msgstr "शहर"
 
 msgid "City (billing)"
 msgstr "शहर (बिलिंग)"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "लॉगिन डायलॉग खोलने के लिए क्लिक करें।"
@@ -742,6 +766,9 @@ msgstr "पहला नाम"
 msgid "For more information, visit the Fortnox website:"
 msgstr "अधिक जानकारी के लिए, Fortnox वेबसाइट पर जाएं:"
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Fortnox एकीकरण"
 
@@ -945,6 +972,9 @@ msgstr "लिफाफा"
 msgid "Language"
 msgstr "भाषा"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "अंतिम नाम"
 
@@ -1011,6 +1041,9 @@ msgstr "मेल एडमिन"
 msgid "Mail domains"
 msgstr "मेल डोमेन"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "अपने सर्वर के माध्यम से भेजी गई मेल"
 
@@ -1025,6 +1058,9 @@ msgstr "मैनुअल"
 
 msgid "Mark payment"
 msgstr "भुगतान चिह्नित करें"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "संदेश"
@@ -1106,6 +1142,9 @@ msgstr "कोई इनवॉइस टेम्प्लेट नहीं।
 
 msgid "No invoicing"
 msgstr "कोई बिलिंग नहीं"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "कोई ग्राहक चयनित नहीं।"
@@ -1278,6 +1317,9 @@ msgstr "मूल्य सूची"
 msgid "Priority"
 msgstr "प्राथमिकता"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "उत्पाद"
 
@@ -1401,6 +1443,9 @@ msgstr "सहेजें"
 msgid "Search"
 msgstr "खोजें"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "{what} के लिए खोज फील्ड"
 
@@ -1422,11 +1467,20 @@ msgstr "मेल डोमेन खोजें"
 msgid "Search for product"
 msgstr "उत्पाद खोजें"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "वेबसाइट खोजें"
 
 msgid "Search for zone"
 msgstr "ज़ोन खोजें"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "चुनें"
@@ -1529,6 +1583,9 @@ msgstr "विशेष मूल्य"
 
 msgid "Start"
 msgstr "शुरू करें"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "केवल Rymdweb के लिए"
@@ -1707,6 +1764,9 @@ msgstr "उपयोगकर्ता पंजीकरण"
 msgid "Username"
 msgstr "उपयोगकर्ता नाम"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "वैट"
 
@@ -1854,6 +1914,9 @@ msgstr "{fee} जोड़ें"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "कंट्रोल पैनल"
 
@@ -1886,6 +1949,9 @@ msgstr "उत्पाद"
 
 msgid "standby firewall"
 msgstr "स्टैंडबाय फायरवॉल"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "वेबसाइट"

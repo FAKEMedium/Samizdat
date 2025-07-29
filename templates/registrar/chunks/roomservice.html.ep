@@ -1,7 +1,0 @@
-<ul>
-  <li><a href="<%== config->{managerurl} %>epp/contact"><%== __('Create contact') %></a></li>
-  <li><a href="<%== config->{managerurl} %>epp/create"><%== __('Register') %></a></li>
-  <li><a href="<%== config->{managerurl} %>epp/transfer"><%== __('Transfer') %></a></li>
-  <li><a href="<%== config->{managerurl} %>domains/expiring"><%== __('Expiring domains') %></a></li>
-  <li><a href="<%== config->{managerurl} %>epp/overlatelse"><%== __('Ownership') %> beta</a></li>
-</ul>

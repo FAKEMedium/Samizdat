@@ -30,7 +30,7 @@ sub startup ($self) {
     extrajs => '',
     extracss => '',
     symbols => {},
-    headlinebuttons => undef,
+    headline => undef,
     web => {
       docid          => 0,
       comments       => 0,
@@ -80,7 +80,6 @@ sub startup ($self) {
   }
   $self->plugin('Account');
   $self->plugin('Public');
-  $self->plugin('Utils');
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');

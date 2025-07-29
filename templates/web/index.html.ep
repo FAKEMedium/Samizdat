@@ -1,0 +1,9 @@
+<div id="contentTree">
+  <ul class="tree-list" id="pagesList">
+    <!-- Tree structure will be injected here by JavaScript -->
+  </ul>
+</div>
+
+<div id="noResults" class="alert alert-info d-none">
+  <%== __('No pages found.') %>
+</div>

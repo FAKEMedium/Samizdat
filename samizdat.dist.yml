@@ -76,18 +76,11 @@ roomservice:
     databasetype: mysql
   product:
     cardnumber: 8
-icons:
-  large: src/svg/fakenews.svg
-  small: src/svg/f.svg
-  sizes:
-    - 32
-    - 48
-    - 64
-    - 72
-    - 96
-    - 192
-    - 256
-    - 512
+  web:
+    cardnumber: 9
+    publicsrc: src/public
+  user:
+    cardnumber: 10
 screenshots:
   -
     src: /media/images/notrust.jpg
@@ -133,7 +126,6 @@ security: |
   
   Canonical: https://example.com/.well-known/security.txt
 layout: bootstrap
-publicsrc: src/public
 captcha:
   session_name: captcha_string
   font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf

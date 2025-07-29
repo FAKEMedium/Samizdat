@@ -109,6 +109,12 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr ""
 
@@ -118,7 +124,13 @@ msgstr ""
 msgid "Add domain"
 msgstr ""
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
+msgstr ""
+
+msgid "Add page"
 msgstr ""
 
 msgid "Add product"
@@ -127,10 +139,16 @@ msgstr ""
 msgid "Add subscription"
 msgstr ""
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr ""
 
 msgid "Add website"
+msgstr ""
+
+msgid "Add zone"
 msgstr ""
 
 msgid "Address"
@@ -262,6 +280,9 @@ msgstr ""
 msgid "Changed status."
 msgstr ""
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr ""
 
@@ -281,6 +302,9 @@ msgid "City"
 msgstr ""
 
 msgid "City (billing)"
+msgstr ""
+
+msgid "Click to pop dialog."
 msgstr ""
 
 msgid "Click to pop login dialog."
@@ -742,6 +766,9 @@ msgstr ""
 msgid "For more information, visit the Fortnox website:"
 msgstr ""
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr ""
 
@@ -945,6 +972,9 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr ""
 
@@ -1011,6 +1041,9 @@ msgstr ""
 msgid "Mail domains"
 msgstr ""
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr ""
 
@@ -1024,6 +1057,9 @@ msgid "Manuals"
 msgstr ""
 
 msgid "Mark payment"
+msgstr ""
+
+msgid "Menus"
 msgstr ""
 
 msgid "Message"
@@ -1105,6 +1141,9 @@ msgid "No invoice template."
 msgstr ""
 
 msgid "No invoicing"
+msgstr ""
+
+msgid "No pages found."
 msgstr ""
 
 msgid "No selected customer."
@@ -1278,6 +1317,9 @@ msgstr ""
 msgid "Priority"
 msgstr ""
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr ""
 
@@ -1401,6 +1443,9 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr ""
 
@@ -1422,10 +1467,19 @@ msgstr ""
 msgid "Search for product"
 msgstr ""
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr ""
 
 msgid "Search for zone"
+msgstr ""
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
 msgstr ""
 
 msgid "Select"
@@ -1528,6 +1582,9 @@ msgid "Special price"
 msgstr ""
 
 msgid "Start"
+msgstr ""
+
+msgid "Statistics"
 msgstr ""
 
 msgid "Strictly for Rymdweb"
@@ -1707,6 +1764,9 @@ msgstr ""
 msgid "Username"
 msgstr ""
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr ""
 
@@ -1854,6 +1914,9 @@ msgstr ""
 msgid "billing@rymdweb.com"
 msgstr ""
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr ""
 
@@ -1885,6 +1948,9 @@ msgid "product"
 msgstr ""
 
 msgid "standby firewall"
+msgstr ""
+
+msgid "user"
 msgstr ""
 
 msgid "website"

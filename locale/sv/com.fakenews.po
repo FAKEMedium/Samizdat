@@ -109,6 +109,12 @@ msgstr "Aktivera integration"
 msgid "Active"
 msgstr "Aktiv"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "Ny kund"
 
@@ -118,8 +124,14 @@ msgstr "Ny databas"
 msgid "Add domain"
 msgstr "Ny domän"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Ny maildomän"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "Ny produkt"
@@ -127,11 +139,17 @@ msgstr "Ny produkt"
 msgid "Add subscription"
 msgstr "Ny prenumeration"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "Ny verifikation"
 
 msgid "Add website"
 msgstr "Ny webbplats"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "Adress"
@@ -253,6 +271,9 @@ msgstr "Ändra lösenord"
 msgid "Changed status."
 msgstr "Ändrade status."
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "Välj ett lösenord"
 
@@ -273,6 +294,9 @@ msgstr "Stad"
 
 msgid "City (billing)"
 msgstr "Ort (faktura)"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "Klicka för att öppna inloggningsfönstret."
@@ -709,6 +733,9 @@ msgstr "Förnamn"
 msgid "For more information, visit the Fortnox website:"
 msgstr "För mer information, besök Fortnoxs webbplats:"
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Fortnox-integration"
 
@@ -894,6 +921,9 @@ msgstr "Envelope"
 msgid "Language"
 msgstr "Språk"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "Efternamn"
 
@@ -960,6 +990,9 @@ msgstr "Mailadmin"
 msgid "Mail domains"
 msgstr "Maildomäner"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "Mail skickas genom egna servrar"
 
@@ -974,6 +1007,9 @@ msgstr "Manualer"
 
 msgid "Mark payment"
 msgstr "Markera betalning"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "Meddelande"
@@ -1052,6 +1088,9 @@ msgstr "Ingen fakturamall."
 
 msgid "No invoicing"
 msgstr "Faktureras inte"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "Ingen kund vald."
@@ -1212,6 +1251,9 @@ msgstr "Prislista"
 msgid "Priority"
 msgstr "Prioritet"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "Produkter"
 
@@ -1329,6 +1371,9 @@ msgstr "Spara"
 msgid "Search"
 msgstr "Sök"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "Sökfält för {what}"
 
@@ -1350,11 +1395,20 @@ msgstr "Sök maildomän"
 msgid "Search for product"
 msgstr "Sök produkt"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "Sök webbplats"
 
 msgid "Search for zone"
 msgstr "Sök zon"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "Välj"
@@ -1454,6 +1508,9 @@ msgstr "Rabatt"
 
 msgid "Start"
 msgstr "Start"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "Endast för Rymdweb"
@@ -1626,6 +1683,9 @@ msgstr "Användarregistrering"
 msgid "Username"
 msgstr "Användarnamn"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "Moms"
 
@@ -1761,6 +1821,9 @@ msgstr "lägg till {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "kontrollpanel"
 
@@ -1793,6 +1856,9 @@ msgstr "produkt"
 
 msgid "standby firewall"
 msgstr "standbybrandvägg"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "webbplats"

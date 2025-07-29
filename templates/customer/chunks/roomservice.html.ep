@@ -11,4 +11,6 @@
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>customers/new"><%== __('Add customer') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>customers/newest"><%== __('Newest') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>customers?searchterm=blocked"><%== __('Barred') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>customers?searchterm=moss">MOSS</a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>customers?searchterm=moss"><%== __('MOSS') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>mailadresser"><%== __('Mail dump') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>mailadresser/newsletter"><%== __('Newsletter') %></a>

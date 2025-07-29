@@ -83,7 +83,7 @@ sub edit ($self) {
       }
     );
     $self->stash(
-      headlinebuttons => 'customer/chunks/customernavbuttons',
+      headline => 'customer/chunks/customernavbuttons',
       scriptname      => $scriptname,
       fields          => $fields,
       checkfields     => $checkfields,
@@ -119,7 +119,7 @@ sub billing ($self) {
     $self->stash(
       customer        => $customer,
       invoices        => $invoices,
-      headlinebuttons => 'customer/chunks/customernavbuttons',
+      headline => 'customer/chunks/customernavbuttons',
       neighbours      => $self->app->customer->neighbours($customerid),
       template        => 'customer/billing',
     );

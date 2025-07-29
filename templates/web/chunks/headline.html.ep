@@ -1,0 +1,23 @@
+<form class="align-items-center d-print-none mb-3 d-flex justify-content-between" id="searchweb">
+  <div class="col justify-content-sm-end input-group">
+    <a href="/web/add"
+       id="addbutton"
+       role="button"
+       class="btn btn-primary mx-1 modal-lg"
+       aria-label="<%== __('Add page') %>"
+       title="<%==  __('Click to pop dialog.') %>"
+       data-bs-toggle="modal"
+       data-bs-target="#universalmodal">
+    <%== icon 'plus-circle', {} %>
+      <span class="d-sm-inline d-none ms-1"><%== __('Add') %></span>
+    </a>
+  </div>
+  <div class="col">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" id="searchterm" aria-label="<%== __x('Search field for {what}', what => __('content')) %>" placeholder="<%== __('Search content') %>...">
+      <button class="btn btn-primary" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>

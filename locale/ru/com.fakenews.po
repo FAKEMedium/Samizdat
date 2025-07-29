@@ -116,6 +116,12 @@ msgstr "Активировать интеграцию"
 msgid "Active"
 msgstr "Активный"
 
+msgid "Add"
+msgstr ""
+
+msgid "Add content"
+msgstr ""
+
 msgid "Add customer"
 msgstr "Новый клиент"
 
@@ -125,8 +131,14 @@ msgstr "Новая база данных"
 msgid "Add domain"
 msgstr "Новый домен"
 
+msgid "Add grop"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Новый почтовый домен"
+
+msgid "Add page"
+msgstr ""
 
 msgid "Add product"
 msgstr "Новый продукт"
@@ -134,11 +146,17 @@ msgstr "Новый продукт"
 msgid "Add subscription"
 msgstr "Новая подписка"
 
+msgid "Add user"
+msgstr ""
+
 msgid "Add voucher"
 msgstr "Новый ваучер"
 
 msgid "Add website"
 msgstr "Новый сайт"
+
+msgid "Add zone"
+msgstr ""
 
 msgid "Address"
 msgstr "Адрес"
@@ -269,6 +287,9 @@ msgstr "Изменить пароль"
 msgid "Changed status."
 msgstr "Статус изменен."
 
+msgid "Check zones"
+msgstr ""
+
 msgid "Choose a password"
 msgstr "Выберите пароль"
 
@@ -289,6 +310,9 @@ msgstr "Город"
 
 msgid "City (billing)"
 msgstr "Город (для счетов)"
+
+msgid "Click to pop dialog."
+msgstr ""
 
 msgid "Click to pop login dialog."
 msgstr "Нажмите, чтобы открыть окно входа."
@@ -749,6 +773,9 @@ msgstr "Имя"
 msgid "For more information, visit the Fortnox website:"
 msgstr "Для получения дополнительной информации посетите веб-сайт Fortnox:"
 
+msgid "Fortnox"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Интеграция Fortnox"
 
@@ -953,6 +980,9 @@ msgstr "Конверт"
 msgid "Language"
 msgstr "Язык"
 
+msgid "Languages"
+msgstr ""
+
 msgid "Last name"
 msgstr "Фамилия"
 
@@ -1019,6 +1049,9 @@ msgstr "Почтовый админ"
 msgid "Mail domains"
 msgstr "Почтовые домены"
 
+msgid "Mail dump"
+msgstr ""
+
 msgid "Mail sent through own servers"
 msgstr "Почта отправляется через собственные серверы"
 
@@ -1033,6 +1066,9 @@ msgstr "Руководства"
 
 msgid "Mark payment"
 msgstr "Отметить оплату"
+
+msgid "Menus"
+msgstr ""
 
 msgid "Message"
 msgstr "Сообщение"
@@ -1114,6 +1150,9 @@ msgstr "Нет шаблона счета."
 
 msgid "No invoicing"
 msgstr "Без выставления счетов"
+
+msgid "No pages found."
+msgstr ""
 
 msgid "No selected customer."
 msgstr "Клиент не выбран."
@@ -1286,6 +1325,9 @@ msgstr "Прайс-лист"
 msgid "Priority"
 msgstr "Приоритет"
 
+msgid "Privileges"
+msgstr ""
+
 msgid "Products"
 msgstr "Продукты"
 
@@ -1409,6 +1451,9 @@ msgstr "Сохранить"
 msgid "Search"
 msgstr "Поиск"
 
+msgid "Search content"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "Поле поиска для {what}"
 
@@ -1430,11 +1475,20 @@ msgstr "Поиск почтового домена"
 msgid "Search for product"
 msgstr "Поиск продукта"
 
+msgid "Search for user or group"
+msgstr ""
+
 msgid "Search for website"
 msgstr "Поиск веб-сайта"
 
 msgid "Search for zone"
 msgstr "Поиск зоны"
+
+msgid "Search pages..."
+msgstr ""
+
+msgid "Search web content"
+msgstr ""
 
 msgid "Select"
 msgstr "Выбрать"
@@ -1537,6 +1591,9 @@ msgstr "Специальная цена"
 
 msgid "Start"
 msgstr "Начало"
+
+msgid "Statistics"
+msgstr ""
 
 msgid "Strictly for Rymdweb"
 msgstr "Строго для Rymdweb"
@@ -1715,6 +1772,9 @@ msgstr "Регистрация пользователя"
 msgid "Username"
 msgstr "Имя пользователя"
 
+msgid "Users and groups"
+msgstr ""
+
 msgid "VAT"
 msgstr "НДС"
 
@@ -1862,6 +1922,9 @@ msgstr "добавить {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "content"
+msgstr ""
+
 msgid "control panel"
 msgstr "панель управления"
 
@@ -1894,6 +1957,9 @@ msgstr "продукт"
 
 msgid "standby firewall"
 msgstr "резервный файрвол"
+
+msgid "user"
+msgstr ""
 
 msgid "website"
 msgstr "веб-сайт"
