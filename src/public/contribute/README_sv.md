@@ -1,4 +1,4 @@
-[description]: # "Help improve Samizdat, spot fake news, and create your own."
-[keywords]: # "code,report,translate,Github"
+[description]: # "Hjälp till att förbättra Samizdat, upptäck falska nyheter och skapa dina egna."
+[keywords]: # "kod,rapport,översätt,Github"
 
 # Bidra

@@ -1,5 +1,5 @@
-[description]: # "Help improve Samizdat, spot fake news, and create your own."
-[keywords]: # "code,report,translate,Github"
+[description]: # "Ajude a melhorar o Samizdat, identifique notícias falsas e crie as suas próprias."
+[keywords]: # "código,relatório,traduzir,Github"
 
 # Contribuir
 
