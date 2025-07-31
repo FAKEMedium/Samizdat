@@ -1,3 +1,6 @@
+[description]: # "Samizdat est une nouvelle approche de l'auto-édition qui utilise la technologie moderne."
+[keywords]: # "édition,Samizdat"
+
 # Projet Samizdat
 
 Dans l'ancien bloc de l'Est où la liberté d'expression était interdite, les gens utilisaient d'autres méthodes. Le mouvement clandestin de reproduction et de distribution manuelle de textes s'appelait samizdat.

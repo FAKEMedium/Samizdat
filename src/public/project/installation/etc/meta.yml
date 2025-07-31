@@ -1,4 +1,0 @@
-meta:
-  name:
-    description: Configuration for various daemons supporting the Samizdat application.
-    keywords: etc,nginx,systemd,configuration

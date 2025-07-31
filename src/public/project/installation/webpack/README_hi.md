@@ -1,3 +1,6 @@
+[description]: # "How Samizdat minimizes assets by using Webpack and PurgeCSS"
+[keywords]: # "Webpack,optimization,PurgeCSS,treeshaking"
+
 # वेबपैक
 
 [बूटस्ट्रैप](https://getbootstrap.com/) में काफी बड़ी जावास्क्रिप्ट और सीएसएस फाइलें हैं। वेबपैक के साथ एक कस्टम पैकेज

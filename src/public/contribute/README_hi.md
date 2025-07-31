@@ -1,3 +1,6 @@
+[description]: # "Help improve Samizdat, spot fake news, and create your own."
+[keywords]: # "code,report,translate,Github"
+
 # योगदान दें
 
 आप समिज़दात एप्लिकेशन के निर्माण और परीक्षण में मदद कर सकते हैं। रिपॉजिटरी को क्लोन करें

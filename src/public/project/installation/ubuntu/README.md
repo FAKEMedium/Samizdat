@@ -1,3 +1,6 @@
+[description]: # "Commands to install the Samizdat application on a Linux server."
+[keywords]: # "Mojolicious,perl,linux,ubuntu"
+
 # Installation for Ubuntu (Linux)
 
 To build the disk image you need a recent version of Perl. Then grab the Mojolicious package.

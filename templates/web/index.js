@@ -87,14 +87,13 @@ function renderTree(tree, level = 0) {
           translationInfo.push(`${lang}: ${formatFileSize(size)}`);
         });
       }
-      const titleAttr = translationInfo.length > 0 ? `title="${translationInfo.join(', ')}"` : '';
-      
+
       // Show language indicators
-      const langBadges = Object.keys(node.translations || {}).map(lang => 
-        `<small class="text-muted ms-1">[${lang}]</small>`
-      ).join('');
+      const langBadges = Object.entries(node.translations || {}).map(([lang, size]) => 
+        `<span class="flag-icon" title="${lang}: ${formatFileSize(size)}"><svg class="flag flag-${lang} bi"><use xlink:href="#flag-${lang}"></use></svg></span>`
+      ).join(' ');
       
-      html += `<a href="${url}" class="text-decoration-none" ${titleAttr}>
+      html += `<a href="${url}" class="text-decoration-none">
         <svg class="tree-icon" style="width: 0.75em; height: 0.75em;" fill="currentColor" viewBox="0 0 20 20">
           <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"/>
         </svg>

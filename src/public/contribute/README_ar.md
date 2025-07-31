@@ -1,3 +1,6 @@
+[description]: # "Help improve Samizdat, spot fake news, and create your own."
+[keywords]: # "code,report,translate,Github"
+
 # المساهمة
 
 يمكنك المساعدة في بناء واختبار تطبيق ساميزدات. قم باستنساخ المستودع من

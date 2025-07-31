@@ -1,4 +1,0 @@
-meta:
-  name:
-    description: Commands to install the Samizdat needed base programs on a FreeBSD server.
-    keywords: FreeBSD,Perl,PostgreSQL,pkg

@@ -1,3 +1,6 @@
+[description]: # "Samizdat is a complete solution for web hosting and also contains features for invoicing and accounting."
+[keywords]: # "invoicing,accounting,Fortnox,transparency"
+
 # Samizdat
 
 Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub.

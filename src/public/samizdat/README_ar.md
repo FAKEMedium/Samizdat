@@ -1,3 +1,6 @@
+[description]: # "Samizdat �r en totall�sning f�r webhosting och inneh�ller dessutom funktioner f�r fakturering och bokf�ring."
+[keywords]: # "fakturering,bokf�ring,Fortnox,transparens"
+
 # Samizdat
 
 Samizdat هو جزء من مشروع لإنشاء HTML ثابت من ملفات markdown المحملة على GitHub.

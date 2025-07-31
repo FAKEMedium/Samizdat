@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Instalación
 
 Samizdat está diseñado para ser instalado por el superusuario en un VPS o en metal puro.

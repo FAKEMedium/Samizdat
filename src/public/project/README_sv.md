@@ -1,3 +1,6 @@
+[description]: # "Samizdat är ett nytt sätt att se på självpublicering som använder modern teknik."
+[keywords]: # "publicering,Samizdat"
+
 # Samizdat-projektet
 
 I det forna östblocket där yttrandefrihet var förbjuden använde människor andra metoder. Den underjordiska gräsrotsrörelsen för manuell reproduktion och distribution av text kallades samizdat.

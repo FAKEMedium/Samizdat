@@ -9,5 +9,7 @@
   </div>
 </form>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/add"><%== __('Add user') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/group/add"><%== __('Add grop') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/group/add"><%== __('Add group') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/privilege"><%== __('Privileges') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/privilege/set"><%== __('Privilege sets') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>user/role"><%== __('Roles') %></a>

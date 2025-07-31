@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Installation
 
 Samizdat är tänkt att installeras av superanvändaren på en VPS eller på ren hårdvara.

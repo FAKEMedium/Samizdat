@@ -1,3 +1,6 @@
+[description]: # "Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick"
+[keywords]: # "censorship,CMS,fake news,samizdat,publishing,artificial intelligence,open source"
+
 # FAKE News
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="乔·拜登会见瑞典首相斯特凡·勒文" />

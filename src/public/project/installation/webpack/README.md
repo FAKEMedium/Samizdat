@@ -1,3 +1,6 @@
+[description]: # "How Samizdat minimizes assets by using Webpack and PurgeCSS"
+[keywords]: # "Webpack,optimization,PurgeCSS,treeshaking"
+
 # Webpack
 
 [Bootstrap](https://getbootstrap.com/) has rather large javascript and css files. With Webpack it's rather easy

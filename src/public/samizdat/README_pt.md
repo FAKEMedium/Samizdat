@@ -1,3 +1,6 @@
+[description]: # "Samizdat é uma solução completa para hospedagem web e também contém recursos para faturamento e contabilidade."
+[keywords]: # "faturamento,contabilidade,Fortnox,transparência"
+
 # Samizdat
 
 Samizdat faz parte de um projeto para criar HTML estático a partir de arquivos markdown carregados no GitHub.

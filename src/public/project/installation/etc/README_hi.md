@@ -1,3 +1,6 @@
+[description]: # "Configuration for various daemons supporting the Samizdat application."
+[keywords]: # "etc,nginx,systemd,configuration"
+
 # सिस्टम एकीकरण
 
 इस डायरेक्टरी में उदाहरण हैं कि कैसे समिज़दात एप्लिकेशन को उबंटू 20.04 इंस्टॉलेशन पर एकीकृत किया जाए।

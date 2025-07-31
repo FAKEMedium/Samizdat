@@ -1,3 +1,6 @@
+[description]: # "Tudo sobre notícias falsas. Samizdat é uma plataforma de gerenciamento de conteúdo com a capacidade de manter conteúdo em um pen drive"
+[keywords]: # "censura,CMS,notícias falsas,samizdat,publicação,inteligência artificial,código aberto"
+
 # FAKE News
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="Joe Biden se encontrando com o primeiro-ministro sueco Stefan Löfvén" />

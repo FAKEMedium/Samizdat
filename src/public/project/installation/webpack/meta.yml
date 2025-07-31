@@ -1,4 +1,0 @@
-meta:
-  name:
-    description: How Samizdat minimizes assets by using Webpack and PurgeCSS
-    keywords: Webpack,optimization,PurgeCSS,treeshaking

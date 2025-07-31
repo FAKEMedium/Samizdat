@@ -1,3 +1,6 @@
+[description]: # "Commands to install the Samizdat application on a Linux server."
+[keywords]: # "Mojolicious,perl,linux,ubuntu"
+
 # उबंटू (लिनक्स) के लिए स्थापना
 
 डिस्क इमेज बनाने के लिए आपको पर्ल का नवीनतम संस्करण चाहिए। फिर मोजोलिशस पैकेज प्राप्त करें।

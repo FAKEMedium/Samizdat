@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # स्थापना
 
 समिज़दात को VPS पर या बेयर मेटल पर सुपरयूजर द्वारा स्थापित किया जाना चाहिए।

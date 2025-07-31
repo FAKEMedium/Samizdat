@@ -1,3 +1,6 @@
+[description]: # "Alles über Fake News. Samizdat ist eine Content-Management-Plattform mit der Möglichkeit, Inhalte auf einem USB-Stick zu speichern"
+[keywords]: # "Zensur,CMS,Fake News,Samizdat,Verlagswesen,künstliche Intelligenz,Open Source"
+
 # FAKE News
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="Joe Biden trifft den schwedischen Premierminister Stefan Löfvén" />

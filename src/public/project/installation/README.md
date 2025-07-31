@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Installation
 
 Samizdat is supposed to be installed by the superuser on a VPS or on bare metal.

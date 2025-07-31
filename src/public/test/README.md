@@ -1,8 +1,12 @@
+[title]: # "This is a test"
+[description]: # "Samizdat is built to be fastest in the universe."
+[keywords]: # "Mojolicious, Bootstrap, cache, speed, markdown, hacker, Perl"
+[author]: # "Companion"
 # Test
 
 <div class="col-2 col-10">
-This directory contains some material to test the application. Run `make clean` in the project root 
-to generate [a text copy](README.txt) of this file.
+  This directory contains some material to test the application. Run `make clean` in the project root 
+  to generate [a text copy](README.txt) of this file.
 </div>
 
 
@@ -13,7 +17,7 @@ This [link](./editable/ class="magiclink") is supposed to be editable.
 ## Transclusion of test.conf
 
 <pre>
-{{test.conf}}
+  {{test.conf}}
 </pre>
 
 ## Block of indented code

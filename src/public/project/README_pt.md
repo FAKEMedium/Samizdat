@@ -1,3 +1,6 @@
+[description]: # "Samizdat é uma nova abordagem para autopublicação que usa tecnologia moderna."
+[keywords]: # "publicação,Samizdat"
+
 # Projeto Samizdat
 
 No antigo Bloco Oriental, onde a liberdade de expressão era proibida, as pessoas usavam outros métodos. O movimento clandestino de base para reprodução manual e distribuição de textos era chamado samizdat.

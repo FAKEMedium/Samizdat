@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Instalacja
 
 Samizdat powinien być instalowany przez superużytkownika na VPS lub na czystym sprzęcie.

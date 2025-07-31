@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # التثبيت
 
 من المفترض أن يتم تثبيت ساميزدات بواسطة المستخدم الفائق على VPS أو على الأجهزة المادية.

@@ -1,3 +1,6 @@
+[description]: # "Commands to install the Samizdat needed base programs on a FreeBSD server."
+[keywords]: # "FreeBSD,Perl,PostgreSQL,pkg"
+
 # Installation for FreeBSD
 
 FreeBSD use of kqueue instead of epoll for dealing with kernel events should make it a little faster than Linux,

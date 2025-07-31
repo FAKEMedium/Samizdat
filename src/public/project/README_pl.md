@@ -1,3 +1,6 @@
+[description]: # "Samizdat to nowe podejście do samopublikowania, które wykorzystuje nowoczesną technologię."
+[keywords]: # "wydawnictwo,Samizdat"
+
 # Projekt Samizdat
 
 W byłym Bloku Wschodnim, gdzie wolność słowa była zakazana, ludzie używali innych metod. Podziemny ruch oddolny ręcznego powielania i dystrybucji tekstów nazywał się samizdatem.

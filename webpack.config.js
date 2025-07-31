@@ -73,7 +73,6 @@ config.plugins.push(
     paths: [
       ...glob.sync(`${PATHS.public}/**/*.html`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.html.ep`, { nodir: true }),
-      ...glob.sync(`${__dirname}/templates/**/*.js.ep`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.js`, { nodir: true })
     ],
     safelist: {

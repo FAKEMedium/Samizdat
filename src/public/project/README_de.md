@@ -1,3 +1,6 @@
+[description]: # "Samizdat ist ein neuer Ansatz für Selbstverlag, der moderne Technologie nutzt."
+[keywords]: # "Verlagswesen,Samizdat"
+
 # Samizdat-Projekt
 
 Im ehemaligen Ostblock, wo die freie Meinungsäußerung verboten war, nutzten die Menschen andere Methoden. Die Untergrund-Graswurzelbewegung der manuellen Reproduktion und Verbreitung von Texten wurde Samizdat genannt.

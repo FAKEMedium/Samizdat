@@ -4,21 +4,21 @@
   if (language eq 'ar' || language eq 'he' || language eq 'fa') {
     $dir = 'rtl';
   }
-%>
+=%>
 <html class="no-js" lang="<%== language %>" dir="<%== $dir %>">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<% for my $meta (keys %{ $web->{meta} }) { =%>
-  <% for my $name (keys %{ $web->{meta}->{$meta} }) { =%>
-    <meta <%== $meta %>="<%== $name %>" content="<%== $web->{meta}->{$meta}->{$name} %>">
+<% for my $meta (keys %{ $web->{head}->{meta} }) { =%>
+  <% for my $name (keys %{ $web->{head}->{meta}->{$meta} }) { =%>
+    <meta <%== $meta %>="<%== $name %>" content="<%== $web->{head}->{meta}->{$meta}->{$name} %>">
   <% }  =%>
 <% }  =%>
     <meta name="theme-color" content="<%= config->{themecolor} %>">
     <title><%== title %></title>
-% if (exists($web->{canonical})) {
-    <link rel="canonical" href="<%== $web->{canonical} %>">
+% if (exists($web->{head}->{canonical})) {
+    <link rel="canonical" href="<%== $web->{head}->{canonical} %>">
 % }
     <%= asset_tag '/samizdat.css', rel => 'preload', as => 'style' %>
     <link rel="manifest" href="/manifest.json">
@@ -26,9 +26,11 @@
     <link rel="apple-touch-icon" href="/media/images/icon.0192.png">
     <link rel="author" type="text/plain" href="/humans.txt">
     <%= asset_tag '/samizdat.css' %>
+% if (exists $web->{css} && '' ne $web->{css}) {
     <style id="headcss"> /*<![CDATA[*/
        <%== indent $web->{css}, 3 =%>
      /*]]>*/ </style>
+% }
   </head>
   <body>
     <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" class="d-none">

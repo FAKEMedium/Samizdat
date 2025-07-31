@@ -1,3 +1,6 @@
+[description]: # "Samizdat är en totallösning för webhosting och innehåller dessutom funktioner för fakturering och bokföring."
+[keywords]: # "fakturering,bokföring,Fortnox,transparens"
+
 # Samizdat
 
 Samizdat är en del av ett projekt för att skapa statisk HTML från markdown-filer som lagts upp på GitHub.

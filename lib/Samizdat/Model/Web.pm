@@ -23,7 +23,7 @@ my $md = Text::MultiMarkdown->new(
   disable_definition_lists => 0,
 );
 
-
+# Return a list of all markdown files in the publicsrc/url directory, with their metadata
 sub getlist ($self, $url, $options = {}) {
   my $docs = {};
   my $path = Mojo::Home->new($self->config->{publicsrc})->child($url);
@@ -33,9 +33,10 @@ sub getlist ($self, $url, $options = {}) {
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
     my $docpath = $file->to_rel($self->config->{publicsrc})->to_string;
     if ('md' eq $file->path->extname()) {
-      my $content = $file->slurp;
-      transclude(\$content, $file->dirname);
-      my $html = decode 'UTF-8', $md->markdown($content);
+      my $content = decode 'UTF-8', $file->slurp;
+      my $head = {};
+      transclude(\$content, $head, $file->dirname);
+      my $html = $md->markdown($content);
       my $dom = Mojo::DOM->new->xml(0)->parse($html);
       my $title = $dom->at('h1')->text;
       $dom->at('h1')->remove;
@@ -97,28 +98,39 @@ sub getlist ($self, $url, $options = {}) {
           subdocs     => [],
           url         => $url,
           language    => $options->{language},
+          head        => $head,
         };
       }
-#=cut
     } elsif ('yml' eq $file->path->extname()) {
+=pod
       my $yaml = $file->slurp;
       my $data = Load($yaml);
       $meta = $data->{meta};
+=cut
     }
   });
  # say Dumper $docs;
-  if ($selectedimage->{src}) {
-    $meta->{property}->{'og:image'} = $selectedimage->{src};
-  }
-  if ($selectedimage->{width}) {
-    $meta->{property}->{'og:image:width'} = $selectedimage->{width};
-  }
-  if ($selectedimage->{height}) {
-    $meta->{property}->{'og:image:height'} = $selectedimage->{height};
-  }
   if (!$found) {
     return $docs;
   }
+  
+  # Add image metadata to the main document
+  if ($selectedimage->{src}) {
+    $docs->{$found}->{head}->{meta} //= {};
+    $docs->{$found}->{head}->{meta}->{property} //= {};
+    $docs->{$found}->{head}->{meta}->{property}->{'og:image'} = $selectedimage->{src};
+  }
+  if ($selectedimage->{width}) {
+    $docs->{$found}->{head}->{meta} //= {};
+    $docs->{$found}->{head}->{meta}->{property} //= {};
+    $docs->{$found}->{head}->{meta}->{property}->{'og:image:width'} = $selectedimage->{width};
+  }
+  if ($selectedimage->{height}) {
+    $docs->{$found}->{head}->{meta} //= {};
+    $docs->{$found}->{head}->{meta}->{property} //= {};
+    $docs->{$found}->{head}->{meta}->{property}->{'og:image:height'} = $selectedimage->{height};
+  }
+  
   my $subdocs = [];
   for my $docpath (sort {$a cmp $b} keys %{ $docs }) {
     if ($docpath !~ /index\.html$/) {
@@ -128,7 +140,6 @@ sub getlist ($self, $url, $options = {}) {
   for my $subdoc (@{ $subdocs }) {
     push @{ $docs->{$found}->{subdocs} }, $subdoc;
   }
-  $docs->{$found}->{meta} = $meta;
   return $docs;
 }
 
@@ -156,12 +167,40 @@ sub geturis ($self, $options = {}) {
 }
 
 
-sub transclude ($contentref, $dirname) {
-  $$contentref  =~ s/\{\{([^{}]+)\}\}/ includefile($dirname, $1) /ge;
+sub transclude ($contentref, $head, $dirname) {
+  # Extract metadata from reference-style links like [key]: # "value"
+  while ($$contentref =~ s/^\[([^\]]+)\]:\s*#\s*"([^"]+)"\s*$//m) {
+    my $key = $1;
+    my $value = $2;
+    
+    # Initialize nested hashes if they don't exist
+    $head->{meta} //= {};
+    $head->{meta}->{name} //= {};
+    $head->{meta}->{property} //= {};
+    $head->{meta}->{itemprop} //= {};
+    
+    if ($key =~ /^(title|description|keywords)$/) {
+      $head->{meta}->{name}->{$key} = $value;
+    } elsif ($key =~ /^og:(.+)$/) {
+      $head->{meta}->{property}->{$key} = $value;
+    } elsif ($key =~ /^twitter:(.+)$/) {
+      $head->{meta}->{name}->{$key} = $value;
+    } elsif ($key =~ /^itemprop:(.+)$/) {
+      my $itemprop_key = $1;
+      $head->{meta}->{itemprop}->{$itemprop_key} = $value;
+    } else {
+      # Store other metadata directly in head
+      $head->{$key} = $value;
+    }
+  }
+
+  # Process file transclusions
+  $$contentref =~ s/\{\{([^{}]+)\}\}/ includefile($dirname, $1) /ge;
 }
 
 sub includefile ($dirname, $filename) {
   my $inclusion = Mojo::Home->new($dirname .'/')->rel_file($filename)->slurp;
+  return $inclusion;
 }
 
 # Get the menu items for a given menu in a tree structure

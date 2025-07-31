@@ -59,6 +59,7 @@ sub register ($self, $app, $conf) {
   $app->helper(
     accept_language => sub ($c) {
       my $language = $c->req->headers->accept_language;
+      return $language unless defined $language;
     }
   );
 
@@ -92,7 +93,7 @@ sub register ($self, $app, $conf) {
   $app->helper(
     languageselector => sub ($c) {
       my $out = '';
-
+      return $out;
     }
   );
 

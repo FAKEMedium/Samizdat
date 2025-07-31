@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Установка
 
 Самиздат предназначен для установки суперпользователем на VPS или на голое железо.

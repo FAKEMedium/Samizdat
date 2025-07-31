@@ -1,3 +1,6 @@
+[description]: # "Commands to install the Samizdat needed base programs on a FreeBSD server."
+[keywords]: # "FreeBSD,Perl,PostgreSQL,pkg"
+
 # FreeBSD के लिए स्थापना
 
 कर्नेल इवेंट्स को संभालने के लिए FreeBSD का epoll के बजाय kqueue का उपयोग इसे लिनक्स से थोड़ा तेज़ बना सकता है,

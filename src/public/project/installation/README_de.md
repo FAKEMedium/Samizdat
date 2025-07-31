@@ -1,3 +1,6 @@
+[description]: # "Overview of installation of the Samizdat application"
+[keywords]: # "installation"
+
 # Installation
 
 Samizdat soll vom Superuser auf einem VPS oder auf Bare Metal installiert werden.

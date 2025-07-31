@@ -21,10 +21,13 @@ sub index ($self) {
     my $web = {
       docpath => $docpath,
       title   => $title,
-      meta    => {
-        name => {
-          description => $self->app->__('Site content'),
-          keywords    => [ "manage", "site" ]
+      head    => {
+        title => $title,
+        meta => {
+          name => {
+            description => $self->app->__('Site content'),
+            keywords    => [ "manage", "site" ]
+          }
         }
       }
     };
@@ -59,10 +62,13 @@ sub getdoc ($self) {
       main        => $html,
       children    => [],
       subdocs     => [],
-      meta        => {
-        name => {
-          description => $self->app->__('Missing file, our bad?'),
-          keywords    => ["error","404"]
+      head        => {
+        title => $title,
+        meta => {
+          name => {
+            description => $self->app->__('Missing file, our bad?'),
+            keywords    => ["error","404"]
+          }
         }
       },
       language => $self->app->language

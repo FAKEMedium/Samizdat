@@ -1,3 +1,6 @@
+[description]: # "Help improve Samizdat, spot fake news, and create your own."
+[keywords]: # "code,report,translate,Github"
+
 # 贡献
 
 您可以帮助构建和测试 Samizdat 应用程序。从以下地址克隆存储库：

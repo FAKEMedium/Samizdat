@@ -1,3 +1,6 @@
+All the files i [description]: # "Samizdat is a new take on self publishing that uses modern technology."
+[keywords]: # "publishing,Samizdat"
+
 # Samizdat project
 
 In the former Eastern Bloc where free speech was prohibited people used other methods. The underground 

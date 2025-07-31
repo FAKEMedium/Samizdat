@@ -1,3 +1,6 @@
+[description]: # "Help improve Samizdat, spot fake news, and create your own."
+[keywords]: # "code,report,translate,Github"
+
 # Contribuir
 
 Puedes ayudar a construir y probar la aplicación Samizdat. Clona el repositorio desde 
