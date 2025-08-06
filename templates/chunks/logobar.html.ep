@@ -15,8 +15,8 @@
           %></a>
     </div>
     <div id="memberpanel" class="col-9 col-xl-9 d-print-none d-flex align-items-center pl-0 pr-1 pr-sm-3 justify-content-end">
-      <%== indent eval {include 'chunks/language'}, 3 =%>
-      <%== indent eval {include 'chunks/memberbuttons'}, 3 =%>
+      <%== web->indent(eval {include 'chunks/language'}, 3) =%>
+      <%== web->indent(eval {include 'chunks/memberbuttons'}, 3) =%>
     </div>
   </div>
 </div>

@@ -52,6 +52,6 @@
     </form>
   </div>
   <div class="col-md-4">
-    <img src="/media/images/pexels-markus-winkler-4144772.jpg" class="img-fluid">
+    <img src="/media/images/pexels-markus-winkler-4144772.jpg" class="img-fluid" alt="<%== __('Paper in typewriter') %>">
   </div>
 </div>

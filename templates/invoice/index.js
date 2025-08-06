@@ -80,7 +80,7 @@ function populateForm(formdata, method) {
 
   if ('PUT' == method) {
     document.querySelector('#toast-messages').innerHTML = `
-<%== indent $toast, 1 %>`;
+<%== web->indent($toast, 1) %>`;
 
     window.setTimeout(dropToast, 2000);
   }

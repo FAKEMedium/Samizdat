@@ -79,6 +79,14 @@ roomservice:
   web:
     cardnumber: 9
     publicsrc: src/public
+    imageconversion:
+      format:
+        webp: 1
+      width:
+        col1: 405
+        col4: 426
+        col8: 873
+        col12: 1320
   user:
     cardnumber: 10
 screenshots:
@@ -153,10 +161,9 @@ hypnotoad:
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
 extratemplates:
-  - /usr/local/share/perl/5.30.0/Mojolicious/resources/templates/mojo
+  - /usr/local/share/perl/5.38.0/Mojolicious/resources/templates/mojo
 nginx: 1
 cache: 1
-makewebp: 1
 bundlename: samizdat
 timezone: Etc/UTC
 account:

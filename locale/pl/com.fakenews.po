@@ -134,6 +134,9 @@ msgstr "Dodaj domenę"
 msgid "Add grop"
 msgstr ""
 
+msgid "Add group"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Dodaj domenę pocztową"
 
@@ -1235,6 +1238,9 @@ msgstr "Zapłacona kwota"
 msgid "Panel"
 msgstr "Panel"
 
+msgid "Paper in typewriter"
+msgstr ""
+
 msgid "Password"
 msgstr "Hasło"
 
@@ -1324,6 +1330,9 @@ msgstr "Cennik"
 
 msgid "Priority"
 msgstr "Priorytet"
+
+msgid "Privilege sets"
+msgstr ""
 
 msgid "Privileges"
 msgstr ""
@@ -1420,6 +1429,9 @@ msgstr "Wyślij ponownie"
 
 msgid "Resources"
 msgstr "Zasoby"
+
+msgid "Roles"
+msgstr ""
 
 msgid "Roomservice"
 msgstr "Obsługa pokoi"

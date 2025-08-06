@@ -127,6 +127,9 @@ msgstr "Ny domän"
 msgid "Add grop"
 msgstr ""
 
+msgid "Add group"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Ny maildomän"
 
@@ -1170,6 +1173,9 @@ msgstr "Betaalad summa"
 msgid "Panel"
 msgstr "Panel"
 
+msgid "Paper in typewriter"
+msgstr ""
+
 msgid "Password"
 msgstr "Lösenord"
 
@@ -1250,6 +1256,9 @@ msgstr "Prislista"
 
 msgid "Priority"
 msgstr "Prioritet"
+
+msgid "Privilege sets"
+msgstr ""
 
 msgid "Privileges"
 msgstr ""
@@ -1343,6 +1352,9 @@ msgstr "Skicka igen"
 
 msgid "Resources"
 msgstr "Resurser"
+
+msgid "Roles"
+msgstr ""
 
 msgid "Roomservice"
 msgstr "Rumservice"

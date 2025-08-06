@@ -28,47 +28,22 @@ sub getlist ($self, $url, $options = {}) {
   my $docs = {};
   my $path = Mojo::Home->new($self->config->{publicsrc})->child($url);
   my $found = 0;
-  my $meta = {};
   my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
     my $docpath = $file->to_rel($self->config->{publicsrc})->to_string;
     if ('md' eq $file->path->extname()) {
       my $content = decode 'UTF-8', $file->slurp;
       my $head = {};
-      transclude(\$content, $head, $file->dirname);
+      $self->transclude(\$content, $head, $file->dirname);
       my $html = $md->markdown($content);
       my $dom = Mojo::DOM->new->xml(0)->parse($html);
       my $title = $dom->at('h1')->text;
       $dom->at('h1')->remove;
 
-      # Locate img tags, make webp alternative, and use the picture tag to wrap things
-      # Start by reversing existing picture tags
-      $dom->find('picture')->each( sub ($picture, $num) {
-        my $img = $picture->at('img');
-        $picture->replace($img);
-      });
-
       $dom->find('img')->each( sub ($img, $num) {
         $img->xml(0);
-        my $picture = Mojo::DOM->new_tag('picture');
-        $picture->xml(0);
         my $src = $img->attr('src');
-        my $alt = $img->attr('alt');
-
-        $picture->at('picture')->content($img->to_string);
-        $picture->at('picture')->prepend_content(sprintf('<source srcset="%s" type="%s">',
-          $src,
-          $types->file_type($src)
-        ));
-        my $webpsrc = $src;
-        my $svg = 0;
-        if ($webpsrc =~ s/\.([^\.]+)$//) {
-          $svg = 1 if ('svg' eq $1);
-          $picture->at('picture')->prepend_content(
-            sprintf('<source srcset="%s.webp" type="image/webp" media="(min-width: 300px)">', $webpsrc)
-          );
-        }
-        if (!$svg) {
+        if ($src !~ m{^(http|https)?://} && $src !~ m{^data:} && $src !~ m{^/captcha\.}) {
           if (!exists($selectedimage->{src}) || 'selectedimage' eq $img->attr('id')) {
             $selectedimage = {
               src    => $src,
@@ -76,7 +51,6 @@ sub getlist ($self, $url, $options = {}) {
               height => $img->attr('height') // 0
             };
           }
-          $img->replace($picture);
         }
       });
 
@@ -101,15 +75,8 @@ sub getlist ($self, $url, $options = {}) {
           head        => $head,
         };
       }
-    } elsif ('yml' eq $file->path->extname()) {
-=pod
-      my $yaml = $file->slurp;
-      my $data = Load($yaml);
-      $meta = $data->{meta};
-=cut
     }
   });
- # say Dumper $docs;
   if (!$found) {
     return $docs;
   }
@@ -167,7 +134,7 @@ sub geturis ($self, $options = {}) {
 }
 
 
-sub transclude ($contentref, $head, $dirname) {
+sub transclude ($self, $contentref, $head, $dirname) {
   # Extract metadata from reference-style links like [key]: # "value"
   while ($$contentref =~ s/^\[([^\]]+)\]:\s*#\s*"([^"]+)"\s*$//m) {
     my $key = $1;
@@ -179,7 +146,7 @@ sub transclude ($contentref, $head, $dirname) {
     $head->{meta}->{property} //= {};
     $head->{meta}->{itemprop} //= {};
     
-    if ($key =~ /^(title|description|keywords)$/) {
+    if ($key =~ /^(description|keywords)$/) {
       $head->{meta}->{name}->{$key} = $value;
     } elsif ($key =~ /^og:(.+)$/) {
       $head->{meta}->{property}->{$key} = $value;
@@ -188,6 +155,8 @@ sub transclude ($contentref, $head, $dirname) {
     } elsif ($key =~ /^itemprop:(.+)$/) {
       my $itemprop_key = $1;
       $head->{meta}->{itemprop}->{$itemprop_key} = $value;
+    } elsif ($key =~ /^(title)$/) {
+      $head->{$key} = $value;
     } else {
       # Store other metadata directly in head
       $head->{$key} = $value;
@@ -195,17 +164,17 @@ sub transclude ($contentref, $head, $dirname) {
   }
 
   # Process file transclusions
-  $$contentref =~ s/\{\{([^{}]+)\}\}/ includefile($dirname, $1) /ge;
+  $$contentref =~ s/\{\{([^{}]+)\}\}/ $self->includefile($dirname, $1) /ge;
 }
 
-sub includefile ($dirname, $filename) {
+sub includefile ($self, $dirname, $filename) {
   my $inclusion = Mojo::Home->new($dirname .'/')->rel_file($filename)->slurp;
   return $inclusion;
 }
 
 # Get the menu items for a given menu in a tree structure
 sub menuitems ($self, $menuid = 1) {
-  my $db = $self->app->pg->db;
+  my $db = $self->database->db;
   my $childrenof = {};
   $db->select(['menuitems', ['menuitemtitles', 'menuitemid' => 'menuitemid']],
     '*',
@@ -219,6 +188,165 @@ sub menuitems ($self, $menuid = 1) {
     }
   );
   my $menuitems = [];
+}
+
+
+sub tidyup ($self, $htmlref) {
+  # Remove indentation from <pre> blocks
+  $$htmlref =~ s{<pre([^>]*?)>(.*?)</pre>}[
+    my $attribs = $1;
+    my $text = $2;
+    $text =~ s/^[ ]+//gms;
+    sprintf('<pre%s>%s</pre>', $attribs, $text);
+  ]gexsmu;
+
+  # Especially for converted indented markdown
+  $$htmlref =~ s{<pre><code>(.*?)</code></pre>}[
+    my $text = $1;
+    $text =~ s/^[ ]+//gms;
+    sprintf('<pre><code>%s</code></pre>', $text);
+  ]gexsmu;
+
+  # Remove indentation from <textarea> blocks
+  $$htmlref =~ s{(^[\s]*)<textarea([^>]*?)>(.*?)</textarea>}[
+    my $indent = $1;
+    my $attribs = $2;
+    my $text = $3;
+    $text =~ s/^[ ]+//gms;
+    sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
+  ]gexsmu;
+
+  $self->imgtopicture($htmlref);
+}
+
+
+# Convert <img> tags to <picture> with srcset and sizes attributes
+sub imgtopicture ($self, $htmlref) {
+
+  # Use DOM only for analysis, store info for each img
+  my $dom = Mojo::DOM->new($$htmlref);
+  my $img_info = {};
+
+  # First pass: analyze all images and make a hash of the ones we want to process
+  $dom->find('img')->each(sub ($img, $num) {
+    my $src = $img->attr('src') // '';
+
+    # Skip if src is empty or data URL
+    return if !$src || $src =~ /^data:/;
+
+    # Skip if src is a remote URL
+    return if $src =~ m{^https?://};
+
+    # Skip if src is local captcha
+    return if $src =~ m{^/captcha\.};
+
+    # Extract base filename
+    my $base = $src;
+    $base =~ s/\.[^.]+$//; # Remove extension
+
+    # Determine column width by checking ancestor classes
+    my $col_size = 12; # Default to full width
+    my $parent = $img;
+
+    for (1..5) {
+      $parent = $parent->parent;
+      last unless $parent;
+
+      if (my $parent_class = $parent->attr('class')) {
+        if ($parent_class =~ /col-(?:\w+-)?(\d+)/) {
+          $col_size = $1;
+          last;
+        }
+      }
+    }
+
+    # Define srcset and sizes based on column size
+    my ($srcset_webp, $sizes);
+    if ($col_size <= 4) {
+      # 4-column layout
+      $srcset_webp = "${base}_405.webp 405w, ${base}_426.webp 426w";
+      $sizes = "(min-width: 1400px) 426px, (min-width: 1200px) 426px, (min-width: 992px) 426px, (min-width: 768px) 405px, 100vw";
+    } elsif ($col_size <= 8) {
+      # 8-column layout
+      $srcset_webp = "${base}_426.webp 426w, ${base}_873.webp 873w";
+      $sizes = "(min-width: 1400px) 873px, (min-width: 1200px) 873px, (min-width: 992px) 873px, (min-width: 768px) 426px, 100vw";
+    } else {
+      # 12-column layout
+      $srcset_webp = "${base}_426.webp 426w, ${base}_873.webp 873w, ${base}_1320.webp 1320w";
+      $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1320px, (min-width: 992px) 1320px, (min-width: 768px) 873px, (min-width: 576px) 873px, 100vw";
+    }
+
+    # Store info for this src
+    $img_info->{$src} = {
+      srcset_webp => $srcset_webp,
+      sizes => $sizes,
+      base => $base,
+    };
+  });
+
+  # Second pass: use regex to replace img tags while preserving indentation
+  $$htmlref =~ s{^([\s]*)(.*)(<img\s+[^>]*?src=(["']{1})([^"']+)\4[^>]*?)(/?)>(.*)$}{
+    my $indent = $1;  # Preserve indentation
+    my $prelude = $2; # Stuff before the img tag
+    my $img_tag = $3;
+    my $src = $5;
+    my $closing = $6;
+    my $postlude = $7; # Stuff after the img tag
+
+    if (exists $img_info->{$src}) {
+      # Extract class and alt
+      my $class = $img_tag =~ /class=(["']{1})([^"']*)\1/ ? $2 : 'img-fluid';
+      my $alt = $img_tag =~ /alt=(["']{1})([^"']*)\1/ ? $2 : '';
+
+      # Remove src, class, and alt from the original attributes
+      my $other_attrs = $img_tag;
+      $other_attrs =~ s/<img\s+//;                    # Remove opening tag
+      $other_attrs =~ s/\s+src=(["']{1})[^"']*\1//;   # Remove src
+      $other_attrs =~ s/\s+class=(["']{1})[^"']*\1//; # Remove class
+      $other_attrs =~ s/\s+alt=(["']{1})[^"']*\1//;   # Remove alt
+
+      # Get srcset and sizes
+      my $info = $img_info->{$src};
+      my $srcset_webp = $info->{srcset_webp};
+      my $base = $info->{base};
+      my $sizes = $info->{sizes};
+
+      # Build the picture element on a single line
+      sprintf("%s%s<picture>\n%s\n%s\n%s</picture>%s",
+        $indent,
+        $prelude,
+        sprintf('  %s<source type="image/webp" srcset="%s" sizes="%s">',
+          $indent,
+          $srcset_webp,
+        $sizes
+        ),
+        sprintf("  %s%s",
+          $indent,
+          sprintf('<img src="%s.png"%s%s%s>',
+            $base,
+            ($class ne '') ? sprintf(' class="%s"', $class) : '',
+            ($alt ne '') ? sprintf(' alt="%s"', $alt) : '',
+            $other_attrs ? ' ' . $other_attrs : ''
+          ),
+        ),
+        $indent,
+        $postlude
+      );
+    } else {
+      # If no info available, return the original img tag
+      "$indent$prelude$img_tag$closing>$postlude";
+    }
+  }gem;
+
+}
+
+sub indent ($self, $content = '', $indents = 0) {
+  no warnings 'uninitialized';
+  my $indent = "  " x $indents;
+  $content =~ s/\n/\n$indent/gsm;
+  $content =~s/$indent$//sm;
+  chomp $content;
+  return sprintf("%s%s\n", $indent, $content);
 }
 
 1;

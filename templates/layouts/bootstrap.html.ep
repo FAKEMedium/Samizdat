@@ -28,7 +28,7 @@
     <%= asset_tag '/samizdat.css' %>
 % if (exists $web->{css} && '' ne $web->{css}) {
     <style id="headcss"> /*<![CDATA[*/
-       <%== indent $web->{css}, 3 =%>
+       <%== web->indent($web->{css}, 3) =%>
      /*]]>*/ </style>
 % }
   </head>
@@ -45,20 +45,20 @@
     <header>
       <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
-        <%== indent eval {include 'chunks/logobar'}, 4 =%>
+        <%== web->indent(eval {include 'chunks/logobar'}, 4) =%>
       </div>
       <div class="widewrapper bg-menubar d-print-none">
         <div id="menuwrapper" class="container position-relative" aria-live="polite">
           <nav id="sitenav" class="navbar navbar-expand-sm col-12 col-xl-12 pl-3 pl-sm-2 font-weight-bold">
             <div class="collapse navbar-collapse" id="navbarResponsive">
-              <%== indent eval {include 'chunks/menu'}, 7 =%>
+              <%== web->indent(eval {include 'chunks/menu'}, 7) =%>
             </div>
           </nav>
           <aside id="leftlinks">
-            <%== indent eval {include 'chunks/leftlinks'}, 6 =%>
+            <%== web->indent(eval {include 'chunks/leftlinks'}, 6) =%>
           </aside>
           <aside id="rightlinks">
-            <%== indent eval {include 'chunks/rightlinks'}, 6 =%>
+            <%== web->indent(eval {include 'chunks/rightlinks'}, 6) =%>
           </aside>
         </div>
       </div>
@@ -73,7 +73,7 @@
         <div class="row">
           <h1 id="headline" class="col-9"><%== title %></h1>
           <ul class="nav px-0 px-sm-1 px-md-2 col-3 justify-content-sm-end d-flex d-print-none">
-            <%== indent headline($headline), 6 =%>
+            <%== web->indent(headline($headline), 6) =%>
           </ul>
         </div>
       </header>
@@ -81,24 +81,24 @@
 % if (exists $web->{sidebar}) {
         <div class="row">
           <div class="col-sm-8 editable" id="thecontent">
-            <%== indent content, 6 =%>
+            <%== web->indent(content, 6) =%>
           </div>
           <div class="col-sm-4">
-            <%== indent $web->{sidebar}, 6 =%>
+            <%== web->indent($web->{sidebar}, 6) =%>
           </div>
         </div>
 % } else {
-        <%== indent content, 4 =%>
+        <%== web->indent(content, 4) =%>
 % }
       </section>
     </main>
     <footer id="mainfooter" class="mt-0 py-3 container">
-      <%== indent eval {include 'chunks/footer'}, 3 =%>
+      <%== web->indent(eval {include 'chunks/footer'}, 3) =%>
     </footer>
     <%= asset_tag '/samizdat.js', id => 'bundlejs' %>
     <script id="endjs"> /*<![CDATA[*/
-      <%== indent $web->{script}, 3 =%>
-      <%== indent eval {include 'chunks/analytics'}, 3 =%>
+      <%== web->indent($web->{script}, 3) =%>
+      <%== web->indent(eval {include 'chunks/analytics'}, 3) =%>
     /*]]>*/ </script>
   </body>
 </html>

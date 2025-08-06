@@ -45,7 +45,6 @@ sub getdoc ($self) {
   my $docpath = $self->stash('docpath');
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);
   my $title = $self->app->__('404: Missing document');
-
   my $docs = $self->app->web->getlist($docpath, {
     language => $self->app->language,
     languages => $self->config->{locale}->{languages},
@@ -79,16 +78,16 @@ sub getdoc ($self) {
     }
   } else {
     $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
-    $docs->{$path}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
-    $docs->{$path}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{meta}->{name}->{'twitter:url'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{meta}->{name}->{'twitter:title'} = $docs->{$path}->{title};
-    $docs->{$path}->{meta}->{itemprop}->{'name'} = $docs->{$path}->{title};
-    if (exists $docs->{$path}->{meta}->{name}->{description}) {
-      $docs->{$path}->{meta}->{property}->{'og:description'} = $docs->{$path}->{meta}->{name}->{description};
-      $docs->{$path}->{meta}->{name}->{'twitter:description'} = $docs->{$path}->{meta}->{name}->{description};
-      $docs->{$path}->{meta}->{itemprop}->{'description'} = $docs->{$path}->{meta}->{name}->{description};
+    $docs->{$path}->{head}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
+    $docs->{$path}->{head}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{head}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{head}->{meta}->{name}->{'twitter:url'} = $docs->{$path}->{canonical};
+    $docs->{$path}->{head}->{meta}->{name}->{'twitter:title'} = $docs->{$path}->{title};
+    $docs->{$path}->{head}->{meta}->{itemprop}->{'name'} = $docs->{$path}->{title};
+    if (exists $docs->{$path}->{head}->{meta}->{name}->{description}) {
+      $docs->{$path}->{head}->{meta}->{property}->{'og:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
+      $docs->{$path}->{head}->{meta}->{name}->{'twitter:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
+      $docs->{$path}->{head}->{meta}->{itemprop}->{'description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
     }
     if ($#{$docs->{$path}->{subdocs}} > -1) {
       my $sidebar = '';

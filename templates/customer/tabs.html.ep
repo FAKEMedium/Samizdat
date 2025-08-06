@@ -11,12 +11,12 @@
 </ul>
 <div class="tab-content" id="myTabContent">
   <div class="tab-pane fade show active" id="personal-tab-pane" role="tabpanel" aria-labelledby="personal-tab" tabindex="0">
-    <%== indent eval { include 'customer/profile' }, 2 %>
+    <%== web->indent(eval { include 'customer/profile' }, 2) %>
   </div>
   <div class="tab-pane fade" id="invoice-tab-pane" role="tabpanel" aria-labelledby="invoice-tab" tabindex="0">
-    <%== indent eval { include 'customer/invoices' }, 2 %>
+    <%== web->indent(eval { include 'customer/invoices' }, 2) %>
   </div>
   <div class="tab-pane fade" id="domain-tab-pane" role="tabpanel" aria-labelledby="domain-tab" tabindex="0">
-    <%== indent eval { include 'customer/domains' }, 2 %>
+    <%== web->indent(eval { include 'customer/domains' }, 2) %>
   </div>
 </div>

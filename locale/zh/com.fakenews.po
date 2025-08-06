@@ -120,6 +120,9 @@ msgstr "添加域名"
 msgid "Add grop"
 msgstr ""
 
+msgid "Add group"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "添加邮件域名"
 
@@ -1219,6 +1222,9 @@ msgstr "已付金额"
 msgid "Panel"
 msgstr "面板"
 
+msgid "Paper in typewriter"
+msgstr ""
+
 msgid "Password"
 msgstr "密码"
 
@@ -1308,6 +1314,9 @@ msgstr "价格表"
 
 msgid "Priority"
 msgstr "优先级"
+
+msgid "Privilege sets"
+msgstr ""
 
 msgid "Privileges"
 msgstr ""
@@ -1404,6 +1413,9 @@ msgstr "重新发送"
 
 msgid "Resources"
 msgstr "资源"
+
+msgid "Roles"
+msgstr ""
 
 msgid "Roomservice"
 msgstr "客房服务"

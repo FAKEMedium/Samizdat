@@ -2,7 +2,7 @@
   <input type="hidden" name="invoiceid" id="invoiceid" value="">
   <input type="hidden" name="customerid" id="customerid" value="">
   <div class="col-md-4 mb-3">
-    <%== indent eval {include 'customer/chunks/billingcontact'}, 2 %>
+    <%== web->indent()eval {include 'customer/chunks/billingcontact'}, 2) %>
   </div>
   <div class="col-md-8 mb-3">
     <table class="table table-sm table-striped mb-3 align-middle">

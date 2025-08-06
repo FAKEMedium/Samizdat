@@ -127,6 +127,9 @@ msgstr ""
 msgid "Add grop"
 msgstr ""
 
+msgid "Add group"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr ""
 
@@ -1227,6 +1230,9 @@ msgstr ""
 msgid "Panel"
 msgstr ""
 
+msgid "Paper in typewriter"
+msgstr ""
+
 msgid "Password"
 msgstr ""
 
@@ -1315,6 +1321,9 @@ msgid "Price List"
 msgstr ""
 
 msgid "Priority"
+msgstr ""
+
+msgid "Privilege sets"
 msgstr ""
 
 msgid "Privileges"
@@ -1411,6 +1420,9 @@ msgid "Resend"
 msgstr ""
 
 msgid "Resources"
+msgstr ""
+
+msgid "Roles"
 msgstr ""
 
 msgid "Roomservice"

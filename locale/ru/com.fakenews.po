@@ -134,6 +134,9 @@ msgstr "Новый домен"
 msgid "Add grop"
 msgstr ""
 
+msgid "Add group"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Новый почтовый домен"
 
@@ -1235,6 +1238,9 @@ msgstr "Оплаченная сумма"
 msgid "Panel"
 msgstr "Панель"
 
+msgid "Paper in typewriter"
+msgstr ""
+
 msgid "Password"
 msgstr "Пароль"
 
@@ -1324,6 +1330,9 @@ msgstr "Прайс-лист"
 
 msgid "Priority"
 msgstr "Приоритет"
+
+msgid "Privilege sets"
+msgstr ""
 
 msgid "Privileges"
 msgstr ""
@@ -1420,6 +1429,9 @@ msgstr "Отправить повторно"
 
 msgid "Resources"
 msgstr "Ресурсы"
+
+msgid "Roles"
+msgstr ""
 
 msgid "Roomservice"
 msgstr "Обслуживание номеров"

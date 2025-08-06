@@ -51,5 +51,5 @@
   </form>
 </div>
 <div class="col-sm-4 col-md-3">
-  <%== indent eval {include 'poll/signatures'}, 1 =%>
+  <%== web->indent eval {include 'poll/signatures'}, 1 =%>
 </div>

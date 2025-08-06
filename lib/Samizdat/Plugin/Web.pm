@@ -2,9 +2,8 @@ package Samizdat::Plugin::Web;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Web;
-use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
-use Mojo::Template;
+use Mojo::DOM;
 use Mojo::Util qw(decode);
 use IO::Compress::Gzip;
 use Imager;
@@ -12,10 +11,10 @@ use Data::Dumper;
 
 my $public = Mojo::Home->new('public/');
 my $templates = Mojo::Home->new('templates/');
-my $mt = Mojo::Template->new();
 my $image = Imager->new;
 
 my $cacheexist = {};
+
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
@@ -60,17 +59,6 @@ sub register ($self, $app, $conf) {
     accept_language => sub ($c) {
       my $language = $c->req->headers->accept_language;
       return $language unless defined $language;
-    }
-  );
-
-  $app->helper(
-    indent => sub ($c, $content = '', $indents = 0) {
-      no warnings 'uninitialized';
-      my $indent = "  " x $indents;
-      $content =~ s/\n/\n$indent/gsm;
-      $content =~s/$indent$//sm;
-      chomp $content;
-      return sprintf("%s%s\n", $indent, $content);
     }
   );
 
@@ -128,7 +116,7 @@ sub register ($self, $app, $conf) {
       no warnings 'uninitialized';
       my $symbols = $c->stash('symbols') // {};
       $$output =~ s{        <!-- symbols -->\n}[
-        $c->app->indent(join("\n", sort {$a cmp $b} map $symbols->{$_}, keys %{ $symbols }), 4)
+        $c->app->web->indent(join("\n", sort {$a cmp $b} map $symbols->{$_}, keys %{ $symbols }), 4)
       ]eu;
       my $docpath = $c->stash('docpath') // '';
       my $language = $c->stash('language');
@@ -138,28 +126,9 @@ sub register ($self, $app, $conf) {
       if (exists($cacheexist->{$docpath})) {
         return 1
       }
-      if (404 != $c->{stash}->{status}) {
-        $$output =~ s{<pre([^>]*?)>(.*?)</pre>}[
-          my $attribs = $1;
-          my $text = $2;
-          $text =~ s/^[ ]+//gms;
-          sprintf('<pre%s>%s</pre>', $attribs, $text);
-        ]gexsmu;
+      if ('html' eq $format && 404 != $c->{stash}->{status}) {
+        $c->app->web->tidyup($output);
 
-        # Especially for converted indented markdown
-        $$output =~ s{<pre><code>(.*?)</code></pre>}[
-          my $text = $1;
-          $text =~ s/^[ ]+//gms;
-          sprintf('<pre><code>%s</code></pre>', $text);
-        ]gexsmu;
-
-        $$output =~ s{(^[\s]*)<textarea([^>]*?)>(.*?)</textarea>}[
-          my $indent = $1;
-          my $attribs = $2;
-          my $text = $3;
-          $text =~ s/^[ ]+//gms;
-          sprintf('%s<textarea%s>%s</textarea>', $indent, $attribs, $text);
-        ]gexsmu;
         if ($c->config->{cache} && $docpath ne '') {
           $public->child($docpath)->dirname->make_path;
           $public->child($docpath)->spew($$output);
@@ -171,39 +140,74 @@ sub register ($self, $app, $conf) {
           undef $z;
           $cacheexist->{$docpath} = 1;
         }
-      } elsif ($c->config->{makewebp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
-        my $srcpublic = Mojo::Home->new($c->config->{roomservice}->{web}->{srcpublic} // 'src/public/');
-        my $srcfile = $srcpublic->child($c->{stash}->{web}->{url});
-        my $probefile = $srcfile;
-        $probefile =~ s/\.webp$//;
+      } elsif ($c->config->{roomservice}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
+        my $publicsrc = Mojo::Home->new($c->config->{roomservice}->{web}->{publicsrc} // 'src/public/');
+        my $url = $c->{stash}->{web}->{url} // '';
+        $url =~ s/\.webp$//;
+        my $wantedsize = 0;
+        if ($url =~ s/_(\d+)$//) {
+          $wantedsize = $1;
+        }
+        my $srcfile = $publicsrc->child($url);
+
         my $ext = '';
         $srcfile->dirname->list->each( sub ($file, $num) {
-          if ($file =~ /$probefile\.(.+)$/) {
+          if ($file =~ /$url\.(jpg|jpeg|png|gif|tiff|webp|heif|bmp)$/) {
             $ext = $1;
           }
         });
+
         if ('' ne $ext) {
-          $image->read(file => sprintf("%s.%s",  $probefile, $ext)) or die $image->errstr;
-          my $width = $image->getwidth();
-          if ($width > 1078) {
-            $width = 1078;
-            $image = $image->scale(xpixels => $width);
+          $image->read(file => sprintf("%s.%s",  $srcfile, $ext)) or die $image->errstr;
+          my $colwidth = my $width = $image->getwidth();
+          my $imgdata = '';
+          my $done = 0;
+          for my $col (
+            sort {$c->config->{roomservice}->{web}->{imageconversion}->{width}->{$a} <=> $c->config->{roomservice}->{web}->{imageconversion}->{width}->{$b}}
+              keys %{ $c->config->{roomservice}->{web}->{imageconversion}->{width} }
+          ) {
+            $colwidth = $c->config->{roomservice}->{web}->{imageconversion}->{width}->{$col};
+            my $converted = $image->scale(xpixels => $colwidth);
+            $converted->write(
+              data                 => \$imgdata,
+              type                 => 'webp',
+              webp_method          => 6,
+              webp_sns_strength    => 80,
+              webp_pass            => 10,
+              webp_quality         => 75,
+              webp_alpha_filtering => 2,
+            ) or die $converted->errstr;
+
+            my $webpfile = $public->child(sprintf('%s_%d.webp', $url, $colwidth));
+            $webpfile->dirname->make_path({mode => 0750});
+            $webpfile->spew($imgdata);
+            say "$colwidth $wantedsize";
+            if ($colwidth == $wantedsize) {
+              $c->stash('status', 200);
+              $c->tx->res->headers->content_type('image/webp');
+              $$output = $imgdata;
+              $done = 1;
+            }
           }
+
+          # PNG fallback with the maximum column width
+          if ($width > $colwidth) {
+            $image = $image->scale(xpixels => $colwidth);
+          }
+
           $image->write(
-            data                 => $output,
-            type                 => 'webp',
-            webp_method          => 6,
-            webp_sns_strength    => 80,
-            webp_pass            => 10,
-            webp_quality         => 75,
-            webp_alpha_filtering => 2,
+              data                 => \$imgdata,
+              type                 => 'png',
           ) or die $image->errstr;
-          $c->stash('status', 200);
-          $format = 'image/webp';
-          $c->tx->res->headers->content_type($format);
-          my $webpfile = $public->child($c->{stash}->{web}->{url});
-          $webpfile->dirname->make_path({mode => 0750});
-          $webpfile->spew($$output);
+
+          my $pngfile = $public->child(sprintf('%s.png', $url));
+          $pngfile->dirname->make_path({mode => 0750});
+          $pngfile->spew($imgdata);
+          if (!$done) {
+            $c->stash('status', 200);
+            $c->tx->res->headers->content_type('image/png');
+            $$output = $imgdata;
+          }
         }
       }
       return 1;
