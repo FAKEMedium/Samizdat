@@ -99,9 +99,9 @@ sub register ($self, $app, $conf) {
         $content = '';
       } else {
         if ('javascript' eq $type) {
-          $content = sprintf("<script>\n%s</script>", $c->app->indent($content, 1));
+          $content = sprintf("<script>\n%s</script>", $c->app->web->indent($content, 1));
         } elsif ('css' eq $type) {
-          $content = sprintf("<style>\n\t%s</style>", $c->app->indent($content, 1));
+          $content = sprintf("<style>\n\t%s</style>", $c->app->web->indent($content, 1));
         }
       }
       return $content;

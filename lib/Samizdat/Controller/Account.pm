@@ -30,7 +30,7 @@ sub login ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Log in');
     my $web = { title => $title };
-    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/login/index', format => 'js'), 4);
+    $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'account/login/index', format => 'js'), 4);
     return $self->render(template => 'account/login/index', layout => 'modal', web => $web, title => $title);
   } else {
     $self->stash(docpath => undef);
@@ -240,7 +240,7 @@ sub register ($self) {
 
   my $title = $self->app->__('Register account');
   my $web = { title => $title };
-  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/register/index',
+  $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, format => 'js'), 4);
   return $self->render(web => $web, title => $title, template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, status => 200);
@@ -295,7 +295,7 @@ sub password ($self) {
   if (lc $self->req->method eq 'get') {
     my $title = $self->app->__('Change password');
     my $web = { title => $title };
-    $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/password/index', format => 'js'), 4);
+    $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'account/password/index', format => 'js'), 4);
     return $self->render(template => 'account/password/index', web => $web, title => $title);
   }
 
@@ -334,7 +334,7 @@ sub authorize ($self, $level = 0) {
   }
   my $title = $self->app->__('Unauthenticated');
   my $web = {
-    script => $self->app->indent($self->render_to_string(template => 'unauthenticated', format => 'js'), 0),
+    script => $self->app->web->indent($self->render_to_string(template => 'unauthenticated', format => 'js'), 0),
     title  => $title,
   };
   $self->render(template => 'unauthenticated', status => 401, web => $web, title => $title);
@@ -353,7 +353,7 @@ sub panel ($self) {
   my $title = $self->app->__('Panel');
   my $web = { title => $title };
   $self->stash(user => $self->authenticated_user());
-  $web->{script} .= $self->app->indent($self->render_to_string(template => 'account/panel/index', format => 'js'), 4);
+  $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'account/panel/index', format => 'js'), 4);
   return $self->render(template => 'account/panel/index', web => $web, title => $title);
 }
 
