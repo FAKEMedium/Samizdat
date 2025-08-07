@@ -77,7 +77,7 @@ sub getdoc ($self) {
       return $self->reply->not_found;
     }
   } else {
-    $docs->{$path}->{canonical} = sprintf('%s%s', $self->config->{siteurl}, $docpath);
+    $docs->{$path}->{canonical} = sprintf('%s%s%s', $self->config->{siteurl}, $self->config->{baseurl}, $docpath);
     $docs->{$path}->{head}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
     $docs->{$path}->{head}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
     $docs->{$path}->{head}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};

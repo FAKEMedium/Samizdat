@@ -1,4 +1,5 @@
 % my $buttontext = __('Send message');
+% $web->{head}->{canonical} = sprintf('%s%s', config->{siteurl}, url_for('contact_index'));
 <div class="row">
   <div class="col-md-8" id="compose">
     <form class="row g-3 needs-validation" id="contactform" method="post" action="<%== url_for('contact_index') %>">
