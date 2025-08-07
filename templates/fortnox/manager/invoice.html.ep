@@ -1,8 +1,8 @@
 <% layout config->{layout}; %>
 <% use vars qw($web); %>
 % use Data::Dumper;
-<%== web->indent eval {include 'chunks/financialyears'}, 1 =%>
-<%== web->indent eval {include 'chunks/accounts'}, 1 =%>
+<%== web->indent(eval {include 'chunks/financialyears'}, 1) =%>
+<%== web->indent(eval {include 'chunks/accounts'}, 1) =%>
 
 <%# for my $invoice ( @{ invoices->get()->{Invoices} }) { %>
   <div class="col-12"><%#= Dumper $invoice =%></div>

@@ -46,10 +46,10 @@
     </div>
     <button type="submit" class="btn btn-primary">
       <span class="mx-2"><%== __('Continue') %></span>
-      <%== icon 'send-fill', {} %>
+        <%== icon 'send-fill', {} %>
     </button>
   </form>
 </div>
 <div class="col-sm-4 col-md-3">
-  <%== web->indent eval {include 'poll/signatures'}, 1 =%>
+  <%== web->indent(eval {include 'poll/signatures'}, 1) =%>
 </div>
