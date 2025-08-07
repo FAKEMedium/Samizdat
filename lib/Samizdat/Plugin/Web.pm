@@ -140,7 +140,8 @@ sub register ($self, $app, $conf) {
           undef $z;
           $cacheexist->{$docpath} = 1;
         }
-      } elsif ($c->config->{roomservice}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
+      }
+      if ($c->config->{roomservice}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
         my $publicsrc = Mojo::Home->new($c->config->{roomservice}->{web}->{publicsrc} // 'src/public/');
         my $url = $c->{stash}->{web}->{url} // '';
         $url =~ s/\.webp$//;
@@ -181,7 +182,6 @@ sub register ($self, $app, $conf) {
             my $webpfile = $public->child(sprintf('%s_%d.webp', $url, $colwidth));
             $webpfile->dirname->make_path({mode => 0750});
             $webpfile->spew($imgdata);
-            say "$colwidth $wantedsize";
             if ($colwidth == $wantedsize) {
               $c->stash('status', 200);
               $c->tx->res->headers->content_type('image/webp');

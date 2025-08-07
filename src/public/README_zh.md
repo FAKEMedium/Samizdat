@@ -3,7 +3,7 @@
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="乔·拜登会见瑞典首相斯特凡·勒文" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="乔·拜登会见瑞典首相斯特凡·勒文" />
 
 <blockquote>
 有一个关于白宫会议的引人入胜的故事，当时的瑞典首相斯特凡·勒文和乔·拜登会面。当他们坐在顾问、战略家和专家的包围中时，拜登以熟悉的缓慢语调向勒文倾身说道："你知道，斯特凡，我们可能是这个房间里唯一真正知道来自工人阶级是什么感觉的人。"

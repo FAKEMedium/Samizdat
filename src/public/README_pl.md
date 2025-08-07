@@ -3,7 +3,7 @@
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="Joe Biden spotykający się ze szwedzkim premierem Stefanem Löfvénem" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="Joe Biden spotykający się ze szwedzkim premierem Stefanem Löfvénem" />
 
 <blockquote>
 Istnieje fascynująca historia ze spotkania w Białym Domu między ówczesnym szwedzkim premierem Stefanem Löfvenem a Joe Bidenem. Gdy siedzieli otoczeni doradcami, strategami i ekspertami, Biden nachylił się do Löfvena z charakterystycznym, powolnym akcentem: "Wiesz, Stefan, prawdopodobnie jesteśmy jedynymi w tym pokoju, którzy naprawdę wiedzą, jak to jest pochodzić z klasy robotniczej."

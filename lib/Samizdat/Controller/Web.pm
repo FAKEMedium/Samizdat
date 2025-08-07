@@ -98,7 +98,7 @@ sub getdoc ($self) {
     }
     $self->stash(headline => 'chunks/sharebuttons');
   }
-  $self->stash(web => $docs->{$path}, docpath => $docs->{$path}->{docpath});
+  $self->stash(web => $docs->{$path}, docpath => $docs->{$path}->{docpath}, format => 'html');
   $self->stash(title => $docs->{$path}->{title} // $title);
   $self->render();
 }
@@ -148,19 +148,19 @@ sub manifest ($self) {
 }
 
 sub robots ($self) {
-  $self->render(text => $self->config->{robots}, web => {docpath => 'robots.txt'}, format => 'txt');
+  $self->render(text => $self->config->{robots}, docpath => 'robots.txt', format => 'txt');
 }
 
 sub humans ($self) {
-  $self->render(text => $self->config->{humans}, web => {docpath => 'humans.txt'}, format => 'txt');
+  $self->render(text => $self->config->{humans}, docpath => 'humans.txt', format => 'txt');
 }
 
 sub ads ($self) {
-  $self->render(text => $self->config->{ads}, web => {docpath => 'ads.txt'}, format => 'txt');
+  $self->render(text => $self->config->{ads}, docpath => 'ads.txt', format => 'txt');
 }
 
 sub security ($self) {
-  $self->render(text => $self->config->{security}, web => {docpath => '.well-known/security.txt'}, format => 'txt');
+  $self->render(text => $self->config->{security}, docpath => '.well-known/security.txt', format => 'txt');
 }
 
 # Gather exploiting bots

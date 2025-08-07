@@ -3,7 +3,7 @@
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="800" height="533" alt="Joe Biden träffar Sveriges statsminister Stefan Löfvén" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="Joe Biden träffar Sveriges statsminister Stefan Löfvén" />
 
 <blockquote>
 Det finns en fängslande historia från ett möte i Vita huset mellan dåvarande svenske statsministern Stefan Löfven och Joe Biden. När de satt omgivna av rådgivare, strateger och experter, lutade sig Biden över till Löfven med en välbekant, långsam röst: "Du vet, Stefan, vi är förmodligen de enda i det här rummet som verkligen vet hur det är att komma från arbetarklassen."
