@@ -71,8 +71,8 @@
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0">
       <header class="container mb-1 mb-sm-4 px-0">
         <div class="row">
-          <h1 id="headline" class="col-9"><%== title %></h1>
-          <ul class="nav px-0 px-sm-1 px-md-2 col-3 justify-content-sm-end d-flex d-print-none">
+          <h1 id="headline" class="col-8"><%== title %></h1>
+          <ul class="nav px-0 px-sm-1 px-md-2 col-4 justify-content-sm-end d-flex d-print-none">
             <%== web->indent(headline($headline), 6) =%>
           </ul>
         </div>

@@ -500,7 +500,7 @@ sub payment ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
-    $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'invoice/payment', format => 'js'), 4);
+    $web->{script} .= $self->render_to_string(template => 'invoice/payment', format => 'js');
     return $self->render(template => 'invoice/payment', layout => 'modal', web => $web, title => $title);
   } else {
     my $invoice = {};
@@ -522,7 +522,7 @@ sub remind ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
-    $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'invoice/remind', format => 'js'), 4);
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
     return $self->render(template => 'invoice/remind', layout => 'modal', web => $web, title => $title);
   } else {
     my $invoice = {};

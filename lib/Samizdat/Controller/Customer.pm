@@ -259,7 +259,7 @@ sub products ($self) {
   my $customerid = $self->param('customerid');
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->app->web->indent($self->render_to_string(template => 'customer/products', format => 'js'), 6);
+    $web->{script} .= $self->render_to_string(template => 'customer/products', format => 'js');
     return $self->render(web => $web, title => $title, template => 'customer/products', layout => 'modal');
   } else {
     my $products = $self->app->invoice->products({ where => { }});
