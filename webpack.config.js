@@ -72,6 +72,7 @@ config.plugins.push(
   new PurgeCSSPlugin({
     paths: [
       ...glob.sync(`${PATHS.public}/**/*.html`, { nodir: true }),
+      ...glob.sync(`${__dirname}/src/public/**/*.md`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.html.ep`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.js`, { nodir: true })
     ],

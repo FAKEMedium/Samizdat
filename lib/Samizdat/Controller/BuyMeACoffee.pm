@@ -34,8 +34,8 @@ sub webhook ($self) {
   $self->app->log->info("Buy Me a Coffee webhook: $data->{type}");
   
   # Update supporter count based on event type
-  if ($data->{type} =~ /^(donation\.created|membership\.started)$/) {
-    $self->_increment_supporters;
+  if ($data->{type} eq 'donation.created') {
+    $self->_increment_supporters($data->{data}->{donation}->{supporter});
   } elsif ($data->{type} eq 'membership.cancelled') {
     $self->_decrement_supporters;
   }
