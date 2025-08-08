@@ -7,7 +7,7 @@ use Data::Dumper;
 
 sub webhook ($self) {
   my $body = $self->req->body;
-  my $signature = $self->req->headers->header('X-BMC-Signature');
+  my $signature = $self->req->headers->header('x-signature-sha256');
   say Dumper($self->req->headers->to_hash);
 
   # Get webhook secret from config
