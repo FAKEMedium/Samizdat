@@ -15,7 +15,7 @@ sub register ($self, $app, $config = {}) {
     my $cache_key = 'buymeacoffee:supporters:' . $c->config->{buymeacoffee}->{slug};
     
     # Try to get from cache first
-    my $supporters = $c->redis->get($cache_key);
+    my $supporters = $c->app->redis->get($cache_key);
     
     if (!defined $supporters) {
       # Fetch from API if not in cache
@@ -23,8 +23,8 @@ sub register ($self, $app, $config = {}) {
       
       # Cache for 1 hour
       if (defined $supporters) {
-        $c->redis->set($cache_key => $supporters);
-        $c->redis->expire($cache_key => 3600);
+        $c->app->redis->set($cache_key => $supporters);
+        $c->app->redis->expire($cache_key => 3600);
       }
     }
     

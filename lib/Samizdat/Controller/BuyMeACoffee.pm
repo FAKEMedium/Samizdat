@@ -49,19 +49,19 @@ sub _increment_supporters ($self) {
   my $slug = $self->config->{buymeacoffee}->{slug};
   my $cache_key = "buymeacoffee:supporters:$slug";
   
-  my $current = $self->redis->db->get($cache_key) || 0;
-  $self->redis->db->set($cache_key => $current + 1);
-  $self->redis->db->expire($cache_key => 86400);
+  my $current = $self->app->redis->db->get($cache_key) || 0;
+  $self->app->redis->db->set($cache_key => $current + 1);
+  $self->app->redis->db->expire($cache_key => 86400);
 }
 
 sub _decrement_supporters ($self) {
   my $slug = $self->config->{buymeacoffee}->{slug};
   my $cache_key = "buymeacoffee:supporters:$slug";
   
-  my $current = $self->redis->db->get($cache_key) || 0;
+  my $current = $self->app->redis->db->get($cache_key) || 0;
   $current = $current - 1 if $current > 0;
-  $self->redis->db->set($cache_key => $current);
-  $self->redis->db->expire($cache_key => 86400);
+  $self->app->redis->db->set($cache_key => $current);
+  $self->app->redis->db->expire($cache_key => 86400);
 }
 
 sub _refresh_supporter_count ($self) {
