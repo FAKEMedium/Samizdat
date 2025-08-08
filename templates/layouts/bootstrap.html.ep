@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<%
-  my $dir = 'ltr';
-  if (language eq 'ar' || language eq 'he' || language eq 'fa') {
-    $dir = 'rtl';
-  }
-=%>
+<%== '<!DOCTYPE html>' %>
+% my $dir = 'ltr';
+% if (language eq 'ar' || language eq 'he' || language eq 'fa') {
+%   $dir = 'rtl';
+% }
 <html class="no-js" lang="<%== language %>" dir="<%== $dir %>">
   <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<% for my $meta (keys %{ $web->{head}->{meta} }) { =%>
+    <meta name="generator" content="Samizdat">
+  <% for my $meta (keys %{ $web->{head}->{meta} }) { =%>
   <% for my $name (keys %{ $web->{head}->{meta}->{$meta} }) { =%>
     <meta <%== $meta %>="<%== $name %>" content="<%== $web->{head}->{meta}->{$meta}->{$name} %>">
   <% }  =%>

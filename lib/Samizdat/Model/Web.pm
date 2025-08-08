@@ -302,15 +302,24 @@ sub imgtopicture ($self, $htmlref) {
 
     if (exists $img_info->{$src}) {
       # Extract class and alt
-      my $class = $img_tag =~ /class=(["']{1})([^"']*)\1/ ? $2 : 'img-fluid';
-      my $alt = $img_tag =~ /alt=(["']{1})([^"']*)\1/ ? $2 : '';
+      my $class = 'img-fluid';
+      if ($img_tag =~ /class="([^"]*)"/ || $img_tag =~ /class='([^']*)'/) {
+        $class = $1;
+      }
+      my $alt = '';
+      if ($img_tag =~ /alt="([^"]*)"/ || $img_tag =~ /alt='([^']*)'/) {
+        $alt = $1;
+      }
 
       # Remove src, class, and alt from the original attributes
       my $other_attrs = $img_tag;
-      $other_attrs =~ s/<img\s*//;                    # Remove opening tag
-      $other_attrs =~ s/\s*src=(["'])[^"']*\1//;    # Remove src
-      $other_attrs =~ s/\s*class=(["'])[^"']*\1//;  # Remove class
-      $other_attrs =~ s/\s*alt=(["'])[^"']*\1//;    # Remove alt
+      $other_attrs =~ s/<img\s*//;                  # Remove opening tag
+      $other_attrs =~ s/\s*src="[^"]*"//g;          # Remove double-quoted src
+      $other_attrs =~ s/\s*src='[^']*'//g;          # Remove single-quoted src
+      $other_attrs =~ s/\s*class="[^"]*"//g;        # Remove double-quoted class
+      $other_attrs =~ s/\s*class='[^']*'//g;        # Remove single-quoted class
+      $other_attrs =~ s/\s*alt="[^"]*"//g;          # Remove double-quoted alt
+      $other_attrs =~ s/\s*alt='[^']*'//g;          # Remove single-quoted alt
       $other_attrs =~ s/^\s+|\s+$//g;               # Trim whitespace
 
       # Get srcset and sizes
