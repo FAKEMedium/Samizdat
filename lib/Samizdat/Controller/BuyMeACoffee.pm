@@ -8,7 +8,6 @@ use Data::Dumper;
 sub webhook ($self) {
   my $body = $self->req->body;
   my $signature = $self->req->headers->header('x-signature-sha256');
-  say Dumper($self->req->headers->to_hash);
 
   # Get webhook secret from config
   my $secret = $self->config->{buymeacoffee}->{webhook_secret};
@@ -34,8 +33,8 @@ sub webhook ($self) {
   $self->app->log->info("Buy Me a Coffee webhook: $data->{type}");
   
   # Update supporter count based on event type
-  if ($data->{type} eq 'donation.created') {
-    $self->_increment_supporters($data->{data}->{donation}->{supporter});
+  if ($data->{type} =~ /^(donation\.created|membership\.started)$/) {
+    $self->_increment_supporters;
   } elsif ($data->{type} eq 'membership.cancelled') {
     $self->_decrement_supporters;
   }
