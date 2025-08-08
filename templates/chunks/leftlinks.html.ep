@@ -15,7 +15,7 @@ slug => config->{buymeacoffee}->{slug}) %>" class="btn btn-warning text-dark d-i
       width      => 40,
     } %>
 % if ($supporters > 0) {
-  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+  <span class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger">
     <%== $supporters %>
     <span class="visually-hidden"><%== __('supporters') %></span>
   </span>

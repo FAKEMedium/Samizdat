@@ -198,9 +198,9 @@ account:
   superadmins:
 #    superadmin: s3cr3t_Pa55w0r6
 dsn:
-  pg: postgresql://samizdat:secret@%2Fvar%2Frun%2Fpostgresql/samizdat
+  pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
   redis: redis://127.0.0.1:6379/1
-#  redis: "redis://:secret@%2Fvar%2Frun%2Fredis%2Fredis.sock/1"
+#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fredis%2Fredis.sock/1"
 piratebay:
   login: username
   password: s3cr3t
