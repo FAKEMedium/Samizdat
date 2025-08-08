@@ -83,9 +83,13 @@ roomservice:
       format:
         webp: 1
       width:
-        col1: 405
-        col4: 426
-        col8: 873
+        thumb: 150
+        mobile: 360
+        col4: 450
+        col6: 540
+        tablet: 720
+        col8: 760
+        desktop: 1140
         col12: 1320
   user:
     cardnumber: 10

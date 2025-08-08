@@ -270,17 +270,21 @@ sub imgtopicture ($self, $htmlref) {
     # Define srcset and sizes based on column size
     my ($srcset_webp, $sizes);
     if ($col_size <= 4) {
-      # 4-column layout
-      $srcset_webp = "${base}_405.webp 405w, ${base}_426.webp 426w";
-      $sizes = "(min-width: 1400px) 426px, (min-width: 1200px) 426px, (min-width: 992px) 426px, (min-width: 768px) 405px, 100vw";
+      # 4-column layout (1/3 width)
+      $srcset_webp = "${base}_360.webp 360w, ${base}_450.webp 450w";
+      $sizes = "(min-width: 1400px) 440px, (min-width: 1200px) 380px, (min-width: 992px) 320px, (min-width: 768px) 240px, 100vw";
+    } elsif ($col_size <= 6) {
+      # 6-column layout (1/2 width)  
+      $srcset_webp = "${base}_360.webp 360w, ${base}_540.webp 540w, ${base}_720.webp 720w";
+      $sizes = "(min-width: 1400px) 660px, (min-width: 1200px) 570px, (min-width: 992px) 480px, (min-width: 768px) 360px, 100vw";
     } elsif ($col_size <= 8) {
-      # 8-column layout
-      $srcset_webp = "${base}_426.webp 426w, ${base}_873.webp 873w";
-      $sizes = "(min-width: 1400px) 873px, (min-width: 1200px) 873px, (min-width: 992px) 873px, (min-width: 768px) 426px, 100vw";
+      # 8-column layout (2/3 width)
+      $srcset_webp = "${base}_360.webp 360w, ${base}_540.webp 540w, ${base}_760.webp 760w";
+      $sizes = "(min-width: 1400px) 880px, (min-width: 1200px) 760px, (min-width: 992px) 640px, (min-width: 768px) 480px, 100vw";
     } else {
-      # 12-column layout
-      $srcset_webp = "${base}_426.webp 426w, ${base}_873.webp 873w, ${base}_1320.webp 1320w";
-      $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1320px, (min-width: 992px) 1320px, (min-width: 768px) 873px, (min-width: 576px) 873px, 100vw";
+      # 12-column layout (full width)
+      $srcset_webp = "${base}_360.webp 360w, ${base}_720.webp 720w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";
+      $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1140px, (min-width: 992px) 960px, (min-width: 768px) 720px, 100vw";
     }
 
     # Store info for this src
