@@ -26,7 +26,7 @@ table.captiontop caption {font-weight:bold;caption-side:top !important;}
 @media screen and (min-height:768px){#contentwrapper{min-height:600px}}
 @media screen and (min-width: 1200px) {
   #rightlinks {position: absolute !important;display: inline-block;right: -120px;top: -42px;width: 100px;}
-  #leftlinks {position: absolute !important;display: inline-block;left: -160px;top: -42px;width: 100px !important;}
+  #leftlinks {position: absolute !important;display: inline-block;left: -160px;top: -22px;width: 100px !important;}
   #rightlinks img, #leftlinks img {width: 100px;display: block;margin: 10px 0px;}
 }
 @media print {
