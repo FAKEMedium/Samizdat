@@ -9,7 +9,8 @@ sub register ($self, $app, $config = {}) {
   # Add webhook route
   my $r = $app->routes;
   $r->post(sprintf('/buymeacoffee/%s', $app->config->{buymeacoffee}->{webhook}))->to('buy_me_a_coffee#webhook');
-  
+
+
   # Add helper to get cached supporter count
   $app->helper('buymeacoffee.supporters' => sub ($c) {
     my $cache_key = 'buymeacoffee:supporters:' . $c->config->{buymeacoffee}->{slug};

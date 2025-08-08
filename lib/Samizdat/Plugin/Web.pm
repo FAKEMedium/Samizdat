@@ -13,8 +13,6 @@ my $public = Mojo::Home->new('public/');
 my $templates = Mojo::Home->new('templates/');
 my $image = Imager->new;
 
-my $cacheexist = {};
-
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
@@ -123,9 +121,6 @@ sub register ($self, $app, $conf) {
       if ($c->config->{locale}->{default_language} ne $language) {
         $docpath =~ s/\.html$/.$language.html/;
       }
-      if (exists($cacheexist->{$docpath})) {
-        return 1
-      }
       if ('html' eq $format && 404 != $c->{stash}->{status}) {
         $c->app->web->tidyup($output);
 
@@ -138,7 +133,6 @@ sub register ($self, $app, $conf) {
           $z->print($$output);
           $z->close;
           undef $z;
-          $cacheexist->{$docpath} = 1;
         }
       }
       if ($c->config->{roomservice}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
