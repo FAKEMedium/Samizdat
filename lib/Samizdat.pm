@@ -71,6 +71,27 @@ sub startup ($self) {
 
   $self->helper(merger => sub { state $merger = Hash::Merge->new() });
   $self->helper(uuid => sub { state $uuid = Data::UUID->new });
+  
+  # Buy Me a Coffee supporter count helper
+  $self->helper('buymeacoffee_supporters' => sub ($c) {
+    my $slug = $c->config->{buymeacoffee}->{slug};
+    return 0 unless $slug;
+    
+    # Try Redis first
+    my $cache_key = "buymeacoffee:supporters:$slug";
+    my $supporters = $c->redis->db->get($cache_key);
+    
+    # Fall back to file cache if Redis fails
+    if (!defined $supporters) {
+      my $cache_file = "/tmp/buymeacoffee_$slug.txt";
+      if (-f $cache_file) {
+        $supporters = Mojo::File->new($cache_file)->slurp;
+        chomp $supporters if defined $supporters;
+      }
+    }
+    
+    return $supporters // 0;
+  });
   if (exists($config->{import}->{dsn})) {
     $self->helper(mysql => sub { state $mysql = Mojo::mysql->new($config->{import}->{dsn}) });
     $self->mysql->on(connection => sub {
@@ -86,6 +107,9 @@ sub startup ($self) {
   # Add your local plugins in your extraplugins setting
   for my $plugin (@{ $config->{extraplugins} }) {
     $self->plugin($plugin);
+  }
+  if (exists($config->{buymeacoffee}->{slug}) && $config->{buymeacoffee}->{slug}) {
+    $self->plugin('BuyMeACoffee', $config->{buymeacoffee});
   }
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');

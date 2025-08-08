@@ -314,4 +314,9 @@ locale:
 google:
 #  tag: YOUR-TAG
 buymeacoffee:
+  # Your Buy Me a Coffee username
   slug: alipang
+  # /buymeacoffee/webhook is our local webhook endpoint
+  webhook: webhook
+  # This is the secret we use to verify the webhook. Get it from your BMC account.
+  webhook_secret: s3cr3t

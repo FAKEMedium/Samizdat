@@ -1,5 +1,22 @@
 % if (config->{buymeacoffee}->{slug}) {
-<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%== __x('Give small financial support to {slug} at buymeacoffee', slug => config->{buymeacoffee}->{slug}) %>">
-  <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=<%== config->{buymeacoffee}->{slug} %>&button_colour=FFDD00&font_colour=000000&font_family=Bree&outline_colour=000000&coffee_colour=ffffff" alt="<%== __x('Buy {slug} a coffee', slug => config->{buymeacoffee}->{slug}) %>" />
+%   my $supporters = buymeacoffee_supporters();
+<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%== __x('Give small financial support to {slug} at buymeacoffee', slug => config->{buymeacoffee}->{slug}) %>" class="btn btn-warning text-dark d-inline-block mt-2 mb-2 position-relative">
+  <%== anysvg
+    'buymeacoffee',
+    'src/svg/bmc-logo.svg',
+    {
+      id         => 'bmclogo',
+      prefix     => 'anysvg',
+      extraclass => 'img-fluid my-2',
+      title      => __x('Buy {slug} a coffee', slug => config->{buymeacoffee}->{slug}),
+      height     => 30,
+      width      => 40,
+    } %>
+% if ($supporters > 0) {
+  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+    <%== $supporters %>
+    <span class="visually-hidden"><%== __('supporters') %></span>
+  </span>
+  % }
 </a>
 % }

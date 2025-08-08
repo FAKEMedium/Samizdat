@@ -315,6 +315,9 @@ sub imgtopicture ($self, $htmlref) {
         $alt = $1;
       }
 
+      # Check if this is the selected image (above the fold)
+      my $is_selected = ($img_tag =~ /id=["']selectedimage["']/) ? 1 : 0;
+
       # Remove src, class, and alt from the original attributes
       my $other_attrs = $img_tag;
       $other_attrs =~ s/<img\s*//;                  # Remove opening tag
@@ -343,10 +346,11 @@ sub imgtopicture ($self, $htmlref) {
         ),
         sprintf("  %s%s",
           $indent,
-          sprintf('<img src="%s.png"%s%s%s>',
+          sprintf('<img src="%s.png"%s%s%s%s>',
             $base,
             ($class ne '') ? sprintf(' class="%s"', $class) : '',
             ($alt ne '') ? sprintf(' alt="%s"', $alt) : '',
+            $is_selected ? ' fetchpriority="high"' : '',
             $other_attrs ? ' ' . $other_attrs : ''
           ),
         ),
