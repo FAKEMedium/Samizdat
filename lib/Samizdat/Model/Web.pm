@@ -42,6 +42,13 @@ sub getlist ($self, $url, $options = {}) {
 
       $dom->find('img')->each( sub ($img, $num) {
         $img->xml(0);
+        
+        # If img is the only child of a p tag, replace the p with the img
+        my $parent = $img->parent;
+        if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
+          $parent->replace($img);
+        }
+        
         my $src = $img->attr('src');
         if ($src !~ m{^(http|https)?://} && $src !~ m{^data:} && $src !~ m{^/captcha\.}) {
           if (!exists($selectedimage->{src}) || 'selectedimage' eq $img->attr('id')) {
@@ -300,10 +307,11 @@ sub imgtopicture ($self, $htmlref) {
 
       # Remove src, class, and alt from the original attributes
       my $other_attrs = $img_tag;
-      $other_attrs =~ s/<img\s+//;                    # Remove opening tag
-      $other_attrs =~ s/\s+src=(["']{1})[^"']*\1//;   # Remove src
-      $other_attrs =~ s/\s+class=(["']{1})[^"']*\1//; # Remove class
-      $other_attrs =~ s/\s+alt=(["']{1})[^"']*\1//;   # Remove alt
+      $other_attrs =~ s/<img\s*//;                    # Remove opening tag
+      $other_attrs =~ s/\s*src=(["'])[^"']*\1//;    # Remove src
+      $other_attrs =~ s/\s*class=(["'])[^"']*\1//;  # Remove class
+      $other_attrs =~ s/\s*alt=(["'])[^"']*\1//;    # Remove alt
+      $other_attrs =~ s/^\s+|\s+$//g;               # Trim whitespace
 
       # Get srcset and sizes
       my $info = $img_info->{$src};

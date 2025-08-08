@@ -1,4 +1,4 @@
-import 'sprintf-js';
+import { sprintf } from 'sprintf-js';
 !function() {
   'use strict';
 

@@ -136,7 +136,7 @@ webpackinit:
 webpack:
 	mkdir -p public/assets
 	npm install
-	npm run build
+	MOJO_MODE=production npm run build
 
 favicon:
 	convert src/svg/f.svg -background none -bordercolor white -border 0 \
