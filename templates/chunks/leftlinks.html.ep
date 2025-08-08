@@ -1,9 +1,11 @@
 % if (config->{buymeacoffee}->{slug}) {
 %   my $supporters = buymeacoffee_supporters();
-<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%== __x('Give small financial support to {slug} at buymeacoffee', slug => config->{buymeacoffee}->{slug}) %>" class="btn btn-warning text-dark d-inline-block mt-2 mb-2 position-relative">
+<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%==
+__x('Give small financial support to {slug} at buymeacoffee',
+slug => config->{buymeacoffee}->{slug}) %>" class="btn btn-warning text-dark d-inline-block mt-2 mb-2 position-relative">
   <%== anysvg
     'buymeacoffee',
-    'src/svg/bmc-logo.svg',
+    'src/public/media/images/bmc-logo.svg',
     {
       id         => 'bmclogo',
       prefix     => 'anysvg',
