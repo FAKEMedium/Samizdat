@@ -280,7 +280,12 @@ sub imgtopicture ($self, $htmlref) {
     } elsif ($col_size <= 8) {
       # 8-column layout (2/3 width)
       $srcset_webp = "${base}_360.webp 360w, ${base}_540.webp 540w, ${base}_760.webp 760w";
-      $sizes = "(min-width: 1400px) 880px, (min-width: 1200px) 760px, (min-width: 992px) 640px, (min-width: 768px) 480px, 100vw";
+      # For 8-column layout: actual display size is ~66% of container minus gutters
+      # Container sizes: 1320px@1400px, 1140px@1200px, 960px@992px, 720px@768px
+      # With Bootstrap gutters, 8 columns displays at approximately:
+      # 1400px: 66% of 1320px = 871px - gutters = ~850px, but often constrained by content to ~400px
+      # 1200px: 66% of 1140px = 752px - gutters = ~730px, but often constrained to ~400px
+      $sizes = "(min-width: 1400px) 450px, (min-width: 1200px) 450px, (min-width: 992px) 450px, (min-width: 768px) 360px, 100vw";
     } else {
       # 12-column layout (full width)
       $srcset_webp = "${base}_360.webp 360w, ${base}_720.webp 720w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";

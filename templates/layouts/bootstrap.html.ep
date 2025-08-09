@@ -80,15 +80,19 @@
 % if (exists $web->{sidebar}) {
         <div class="row">
           <div class="col-sm-8 editable" id="thecontent">
+            <%== limiter %>
             <%== web->indent(content, 6) =%>
+            <%== limiter 'end' %>
           </div>
           <div class="col-sm-4">
             <%== web->indent($web->{sidebar}, 6) =%>
           </div>
         </div>
 % } else {
+        <%== limiter %>
         <%== web->indent(content, 4) =%>
-% }
+        <%== limiter 'end' %>
+        % }
       </section>
     </main>
     <footer id="mainfooter" class="mt-0 py-3 container">

@@ -62,8 +62,10 @@ sub register ($self, $app, $conf) {
 
   # A marker to show where the generated main content is. Also a little encoding test.
   $app->helper(
-    limiter => sub ($c) {
-      return sprintf("<!-- ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->");
+    limiter => sub ($c, $what =  'start') {
+      return sprintf("<!-- ### %s ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->",
+        ($what eq 'end') ? $c->app->__('End main content') : $c->app->__('Start main content')
+      );
     }
   );
 
