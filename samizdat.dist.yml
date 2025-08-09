@@ -311,8 +311,69 @@ locale:
     - ar-DZ
     - hi-IN
     - hi-PK
-google:
-#  tag: YOUR-TAG
+analytics:
+  # Google Analytics tag
+  # If you want to use Google Analytics, uncomment the following line and set your tag
+  # If you don't want to use Google Analytics, comment out this section
+#  google:
+  #  tag: YOUR-TAG
+  # If you want to use Matomo, uncomment the following line and set your URL
+  # If you don't want to use Matomo, comment out this section
+#  matomo:
+  #  u: /matomo/
+  #  siteId: YOUR-SITE-ID
+  # If you want to use Plausible, uncomment the following line and set your domain
+  # If you don't want to use Plausible, comment out this section
+#  plausible:
+  #  domain: example.com
+  # If you want to use Fathom, uncomment the following line and set your domain
+  # If you don't want to use Fathom, comment out this section
+#  fathom:
+  #  domain: example.com
+  # If you want to use Simple Analytics, uncomment the following line and set your domain
+  # If you don't want to use Simple Analytics, comment out this section
+#  simple_analytics:
+  #  domain: example.com
+  # If you want to use Umami, uncomment the following line and set your URL
+  # If you don't want to use Umami, comment out this section
+#  umami:
+  #  url: https://umami.example.com
+  # If you want to use PostHog, uncomment the following line and set your API key
+  # If you don't want to use PostHog, comment out this section
+#  posthog:
+  #  api_key: YOUR-API-KEY
+  # If you want to use Clicky, uncomment the following line and set your site ID
+  # If you don't want to use Clicky, comment out this section
+#  clicky:
+  #  site_id: YOUR-SITE-ID
+  # If you want to use Mixpanel, uncomment the following line and set your token
+  # If you don't want to use Mixpanel, comment out this section
+#  mixpanel:
+  #  token: YOUR-TOKEN
+  # If you want to use Heap, uncomment the following line and set your app ID
+  # If you don't want to use Heap, comment out this section
+#  heap:
+  #  app_id: YOUR-APP-ID
+  # If you want to use Hotjar, uncomment the following line and set your site ID
+  # If you don't want to use Hotjar, comment out this section
+#  hotjar:
+  #  site_id: YOUR-SITE-ID
+  # If you want to use Yandex Metrica, uncomment the following line and set your counter ID
+  # If you don't want to use Yandex Metrica, comment out this section
+#  yandex_metrica:
+  #  counter_id: YOUR-COUNTER-ID
+  # If you want to use Adobe Analytics, uncomment the following line and set your report suite ID
+  # If you don't want to use Adobe Analytics, comment out this section
+#  adobe_analytics:
+  #  report_suite_id: YOUR-REPORT-SUITE-ID
+  # If you want to use ClickHouse, uncomment the following line and set your URL
+  # If you don't want to use ClickHouse, comment out this section
+#  clickhouse:
+  #  url: https://clickhouse.example.com
+  # If you want to use Countly, uncomment the following line and set your app key
+  # If you don't want to use Countly, comment out this section
+#  countly:
+  #  app_key: YOUR-APP-KEY
 buymeacoffee:
   # Your Buy Me a Coffee username
   slug: alipang

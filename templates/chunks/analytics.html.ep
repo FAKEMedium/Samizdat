@@ -1,6 +1,6 @@
-<% if (exists(config->{google}->{tag})) { =%>
- <%== include 'chunks/analytics/googletag' =%>
+<% if (exists(config->{analytics}->{google}->{tag})) { =%>
+ <%== include 'chunks/analytics/googletag' %>
 <% } =%>
-<% if (exists(config->{matomo}->{siteId})) { =%>
-  <%== include 'chunks/analytics/matomo' =%>
+<% if (exists(config->{analytics}->{matomo}->{siteId})) { =%>
+  <%== include 'chunks/analytics/matomo' %>
 <% } =%>

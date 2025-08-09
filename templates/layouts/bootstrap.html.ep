@@ -95,17 +95,19 @@
       <%== web->indent(eval {include 'chunks/footer'}, 3) =%>
     </footer>
     <%= asset_tag '/samizdat.js', id => 'bundlejs', defer => 'defer' %>
-    <%== web->indent(eval {include 'chunks/analytics'}, 2) =%>
+% if ((exists($web->{script}) && '' ne $web->{script}) || (exists(config->{analytics}) && keys %{config->{analytics}})) {
     <script id="endjs"> /*<![CDATA[*/
-      function runPageScript() {
+      <%== web->indent(eval {include 'chunks/analytics'}, 3) =%>
+      function runEndJSScript() {
         <%== web->indent($web->{script}, 4) =%>
       }
       
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', runPageScript);
+        document.addEventListener('DOMContentLoaded', runEndJSScript);
       } else {
-        runPageScript();
+        runEndJSScript();
       }
-    /*]]>*/ </script>
+      /*]]>*/ </script>
+% }
   </body>
 </html>
