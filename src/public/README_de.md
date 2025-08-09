@@ -3,7 +3,7 @@
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="Joe Biden trifft den schwedischen Premierminister Stefan Löfvén" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="Joe Biden trifft den schwedischen Premierminister Stefan Löfvén" />
 
 <blockquote>
 Es gibt eine fesselnde Geschichte von einem Treffen im Weißen Haus zwischen dem damaligen schwedischen Premierminister Stefan Löfven und Joe Biden. Als sie umgeben von Beratern, Strategen und Experten saßen, lehnte sich Biden mit einem vertrauten, langsamen Tonfall zu Löfven hinüber: "Weißt du, Stefan, wir sind wahrscheinlich die Einzigen in diesem Raum, die wirklich wissen, wie es ist, aus der Arbeiterklasse zu kommen."

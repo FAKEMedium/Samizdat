@@ -1,9 +1,9 @@
-[description]: # "Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick"
-[keywords]: # "censorship,CMS,fake news,samizdat,publishing,artificial intelligence,open source"
+[description]: # "关于假新闻的一切。Samizdat 是一个内容管理平台，能够将内容保存在 USB 存储设备上"
+[keywords]: # "审查制度,内容管理系统,假新闻,地下出版,出版,人工智能,开源"
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="乔·拜登会见瑞典首相斯特凡·勒文" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="乔·拜登会见瑞典首相斯特凡·勒文" />
 
 <blockquote>
 有一个关于白宫会议的引人入胜的故事，当时的瑞典首相斯特凡·勒文和乔·拜登会面。当他们坐在顾问、战略家和专家的包围中时，拜登以熟悉的缓慢语调向勒文倾身说道："你知道，斯特凡，我们可能是这个房间里唯一真正知道来自工人阶级是什么感觉的人。"

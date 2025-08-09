@@ -3,7 +3,7 @@
 
 # FAKE News
 
-<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" alt="Joe Biden reuniéndose con el primer ministro sueco Stefan Löfvén" />
+<img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="Joe Biden reuniéndose con el primer ministro sueco Stefan Löfvén" />
 
 <blockquote>
 Hay una historia fascinante de una reunión en la Casa Blanca entre el entonces primer ministro sueco Stefan Löfven y Joe Biden. Mientras estaban sentados rodeados de asesores, estrategas y expertos, Biden se inclinó hacia Löfven con un acento lento y familiar: "Sabes, Stefan, probablemente somos los únicos en esta sala que realmente sabemos lo que es venir de la clase trabajadora".
