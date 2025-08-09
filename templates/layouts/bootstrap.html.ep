@@ -94,10 +94,18 @@
     <footer id="mainfooter" class="mt-0 py-3 container">
       <%== web->indent(eval {include 'chunks/footer'}, 3) =%>
     </footer>
-    <%= asset_tag '/samizdat.js', id => 'bundlejs' %>
+    <%= asset_tag '/samizdat.js', id => 'bundlejs', defer => 'defer' %>
+    <%== web->indent(eval {include 'chunks/analytics'}, 2) =%>
     <script id="endjs"> /*<![CDATA[*/
-      <%== web->indent($web->{script}, 3) =%>
-      <%== web->indent(eval {include 'chunks/analytics'}, 3) =%>
+      function runPageScript() {
+        <%== web->indent($web->{script}, 4) =%>
+      }
+      
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', runPageScript);
+      } else {
+        runPageScript();
+      }
     /*]]>*/ </script>
   </body>
 </html>
