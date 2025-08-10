@@ -1,6 +1,8 @@
 import '../scss/samizdat.scss';
-import { Modal, Collapse, Dropdown, Offcanvas, Toast, Tooltip, Popover } from 'bootstrap';
-window.bootstrap = { Modal, Collapse, Dropdown, Offcanvas, Toast, Tooltip, Popover };
+import Modal from 'bootstrap/js/dist/modal';
+import Collapse from 'bootstrap/js/dist/collapse';
+import Dropdown from 'bootstrap/js/dist/dropdown';
+window.bootstrap = { Modal, Collapse, Dropdown };
 
 import './user.js';
 import './sortby.js';
@@ -9,10 +11,3 @@ import './tablesorter.js';
 import './local.js';
 import './serviceworker.js';
 import './language.js';
-import { sprintf, vsprintf } from 'sprintf-js';
-window.sprintf = sprintf;
-window.vsprintf = vsprintf;
-import './shortbytes.js';
-
-let toastElList = document.querySelectorAll('.toast');
-let toastList = [...toastElList].map(toastEl => new Toast(toastEl));

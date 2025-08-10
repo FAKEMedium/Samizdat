@@ -1,4 +1,8 @@
-<a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ms-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
+<button id="editPageButton" class="btn btn-success btn-sm btn-normal-sm rounded-lg" title="<%= __('Edit this page') %>">
+  <%== icon 'pencil-square'; %>
+  <span class="d-sm-inline d-none ms-1"><%= __('Edit') %></span>
+</button>
+ <a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ms-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
   <%== icon 'box-arrow-in-right'; %>
   <span class="d-sm-inline d-none ms-1"><%= __('Log in') %></span>
 </a>

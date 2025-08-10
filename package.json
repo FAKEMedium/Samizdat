@@ -63,6 +63,10 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
+    "@tiptap/core": "^3.1.0",
+    "@tiptap/extension-image": "^3.1.0",
+    "@tiptap/extension-link": "^3.1.0",
+    "@tiptap/starter-kit": "^3.1.0",
     "bootstrap": "^5.2.3",
     "bootstrap-icons": "^1.10.4",
     "sprintf-js": "^1.1.3",

@@ -24,12 +24,25 @@ const config = {
   entry: {},
   plugins: [],
   module: {rules: []},
-  optimization: {minimizer: []}
+  optimization: {
+    minimizer: [],
+    splitChunks: {
+      cacheGroups: {
+        tiptap: {
+          test: /[\\/]node_modules[\\/]@tiptap/,
+          name: 'tiptap',
+          chunks: 'all',
+          enforce: true
+        }
+      }
+    }
+  }
 };
 
 config.entry['samizdat'] = './src/js/samizdat.js';
+config.entry['authenticated'] = './src/js/authenticated.js';
 config.entry['sw'] = './src/js/sw.js';
-//config.entry['suneditor'] = './src/js/editor.js';
+config.entry['tiptap'] = './src/js/editor.js';
 
 if (!isDev) {
   config.optimization.minimizer.push(
@@ -58,6 +71,14 @@ config.module.rules.push({
     {loader: 'css-loader', options: {sourceMap: true, url: false}},
     {loader: 'postcss-loader', options: {postcssOptions: {plugins: () => [autoprefixer]}}},
     {loader: 'sass-loader', options: {sourceMap: true}}
+  ]
+});
+
+config.module.rules.push({
+  test: /\.css$/,
+  use: [
+    {loader: MiniCssExtractPlugin.loader},
+    {loader: 'css-loader', options: {sourceMap: true, url: false}}
   ]
 });
 

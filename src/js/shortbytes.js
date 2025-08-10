@@ -1,35 +1,23 @@
-import { sprintf } from 'sprintf-js';
 !function() {
   'use strict';
 
   function shortbytes(bytes) {
-    return (bytes < 1024) ? sprintf("%d bytes", bytes)
-
-      : (bytes < (1024*10)) ? sprintf("%.2f kB", (bytes / (1024.0)))
-        : (bytes < (1024*100)) ? sprintf("%.1f kB", (bytes / (1024.0)))
-          : (bytes < (1024*1024)) ? sprintf("%.0f kB", (bytes / (1024.0)))
-
-            : (bytes < (1024*1024*10)) ? sprintf("%.2f MB", (bytes / (1024.0*1024)))
-              : (bytes < (1024*1024*100)) ? sprintf("%.1f MB", (bytes / (1024.0*1024)))
-                : (bytes < (1024*1024*1024)) ? sprintf("%.0f MB", (bytes / (1024.0*1024)))
-
-                  : (bytes < (1024*1024*1024*10)) ? sprintf("%.2f GB", (bytes / (1024.0*1024*1024)))
-                    : (bytes < (1024*1024*1024*100)) ? sprintf("%.1f GB", (bytes / (1024.0*1024*1024)))
-                      : (bytes < (1024*1024*1024*1024)) ? sprintf("%.0f GB", (bytes / (1024.0*1024*1024)))
-
-                        : (bytes < (1024*1024*1024*1024*10)) ? sprintf("%.2f TB", (bytes / (1024.0*1024*1024*1024)))
-                          : (bytes < (1024*1024*1024*1024*100)) ? sprintf("%.1f TB", (bytes / (1024.0*1024*1024*1024)))
-                            : (bytes < (1024*1024*1024*1024*1024)) ? sprintf("%.0f TB", (bytes / (1024.0*1024*1024*1024)))
-
-                              : (bytes < (1024*1024*1024*1024*1024*10)) ? sprintf("%.2f PB", (bytes / (1024.0*1024*1024*1024*1024)))
-                                : (bytes < (1024*1024*1024*1024*1024*100)) ? sprintf("%.1f PB", (bytes / (1024.0*1024*1024*1024*1024)))
-                                  : (bytes < (1024*1024*1024*1024*1024*1024)) ? sprintf("%.0f PB", (bytes / (1024.0*1024*1024*1024*1024)))
-
-                                    : (bytes < (1024*1024*1024*1024*1024*1024*10)) ? sprintf("%.2f EB", (bytes / (1024.0*1024*1024*1024*1024*1024)))
-                                      : (bytes < (1024*1024*1024*1024*1024*1024*100)) ? sprintf("%.1f EB", (bytes / (1024.0*1024*1024*1024*1024*1024)))
-                                        : (bytes < (1024*1024*1024*1024*1024*1024*1024)) ? sprintf("%.0f EB", (bytes / (1024.0*1024*1024*1024*1024*1024)))
-
-                                          : 'More than a zettabyte...';
+    if (bytes < 1024) return `${bytes} bytes`;
+    
+    const units = ['kB', 'MB', 'GB', 'TB', 'PB', 'EB'];
+    let unitIndex = 0;
+    let size = bytes / 1024;
+    
+    while (size >= 1024 && unitIndex < units.length - 1) {
+      size /= 1024;
+      unitIndex++;
+    }
+    
+    if (unitIndex >= units.length) return 'More than a zettabyte...';
+    
+    // Format with appropriate decimal places
+    const decimals = size < 10 ? 2 : size < 100 ? 1 : 0;
+    return `${size.toFixed(decimals)} ${units[unitIndex]}`;
   }
 
 
