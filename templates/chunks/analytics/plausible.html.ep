@@ -1,0 +1,14 @@
+// Plausible Analytics
+(function() {
+  var s = document.createElement('script');
+  s.async = true;
+  s.defer = true;
+  s.dataset.domain = '<%= config->{analytics}->{plausible}->{domain} %>';
+<% if (config->{analytics}->{plausible}->{apiHost}) { %>
+  s.dataset.apiHost = '<%= config->{analytics}->{plausible}->{apiHost} %>';
+  s.src = '<%= config->{analytics}->{plausible}->{apiHost} %>/js/script.js';
+<% } else { %>
+  s.src = 'https://plausible.io/js/script.js';
+<% } %>
+  document.head.appendChild(s);
+})();

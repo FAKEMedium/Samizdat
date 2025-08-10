@@ -1,0 +1,9 @@
+// Umami Analytics
+(function() {
+  var s = document.createElement('script');
+  s.async = true;
+  s.defer = true;
+  s.dataset.websiteId = '<%= config->{analytics}->{umami}->{websiteId} %>';
+  s.src = '<%= config->{analytics}->{umami}->{url} %>/script.js';
+  document.head.appendChild(s);
+})();

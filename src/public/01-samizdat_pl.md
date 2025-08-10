@@ -1,5 +1,7 @@
 # Samizdat
 
+<img src="media/images/samizdat.jpg" width="410" height="254" alt="Doradcy Putina na dalszym końcu ogromnego stołu" class="img-fluid">
+
 Ta strona o fałszywych wiadomościach jest częścią projektu mającego na celu generowanie statycznej treści z plików markdown.
 Celem jest dodanie zgranych filmów, umieszczenie wszystkiego na obrazie dysku i udostępnienie go jako bittorrent.
 Uznaj to za nowoczesny <a href="https://pl.wikipedia.org/wiki/Samizdat" target="_blank">samizdat</a>.

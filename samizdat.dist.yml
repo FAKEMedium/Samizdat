@@ -83,14 +83,20 @@ roomservice:
       format:
         webp: 1
       width:
-        thumb: 150
-        mobile: 360
-        col4: 450
-        col6: 540
-        tablet: 720
-        col8: 760
-        desktop: 1140
-        col12: 1320
+        thumb: 150      # Thumbnail
+        col1: 216       # 1/12 width at xxl
+        col2: 324       # 1/6 width at xxl  
+        mobile: 360     # Mobile viewport
+        col3: 432       # 1/4 width at xxl
+        col4: 516       # 1/3 width at xl - PageSpeed 372px
+        col6: 648       # 1/2 width at xxl
+        tablet: 696     # md container
+        col8: 744       # 2/3 width at xl - PageSpeed 744px
+        col8xxl: 873    # 2/3 width at xxl - actual browser display
+        col9: 864       # 3/4 width at xxl
+        desktop: 936    # lg container
+        col10: 1116     # xl container  
+        col12: 1296     # Full width at xxl
   user:
     cardnumber: 10
 screenshots:
@@ -312,68 +318,45 @@ locale:
     - hi-IN
     - hi-PK
 analytics:
-  # Google Analytics tag
-  # If you want to use Google Analytics, uncomment the following line and set your tag
-  # If you don't want to use Google Analytics, comment out this section
+  # Google Analytics - Most popular analytics service (privacy concerns, requires cookie consent in EU)
 #  google:
-  #  tag: YOUR-TAG
-  # If you want to use Matomo, uncomment the following line and set your URL
-  # If you don't want to use Matomo, comment out this section
+#    tag: YOUR-TAG
+  
+  # Matomo - Full-featured open source analytics, formerly Piwik (requires PHP, MySQL/MariaDB)
+  # Self-hosted alternative to Google Analytics with similar features
 #  matomo:
-  #  u: /matomo/
-  #  siteId: YOUR-SITE-ID
-  # If you want to use Plausible, uncomment the following line and set your domain
-  # If you don't want to use Plausible, comment out this section
-#  plausible:
-  #  domain: example.com
-  # If you want to use Fathom, uncomment the following line and set your domain
-  # If you don't want to use Fathom, comment out this section
-#  fathom:
-  #  domain: example.com
-  # If you want to use Simple Analytics, uncomment the following line and set your domain
-  # If you don't want to use Simple Analytics, comment out this section
-#  simple_analytics:
-  #  domain: example.com
-  # If you want to use Umami, uncomment the following line and set your URL
-  # If you don't want to use Umami, comment out this section
+#    u: /matomo/  # URL path to your Matomo installation
+#    siteId: 1    # Site ID from Matomo dashboard
+  
+  # Umami - Lightweight, privacy-focused analytics (requires Node.js, PostgreSQL/MySQL)
+  # Simple interface, GDPR compliant, ~50MB RAM usage
 #  umami:
-  #  url: https://umami.example.com
-  # If you want to use PostHog, uncomment the following line and set your API key
-  # If you don't want to use PostHog, comment out this section
+#    url: https://analytics.example.com  # Your Umami instance URL
+#    websiteId: YOUR-WEBSITE-ID          # Website ID from Umami dashboard
+  
+  # Plausible - Privacy-friendly analytics (requires Elixir, PostgreSQL, ClickHouse)
+  # No cookies, GDPR compliant, but complex self-hosting setup
+#  plausible:
+#    domain: example.com           # Your domain as configured in Plausible
+#    apiHost: https://plausible.example.com  # Your Plausible instance URL (optional)
+  
+  # PostHog - Product analytics with session recording (requires Docker, PostgreSQL, Redis)
+  # More than just analytics - includes feature flags, A/B testing
 #  posthog:
-  #  api_key: YOUR-API-KEY
-  # If you want to use Clicky, uncomment the following line and set your site ID
-  # If you don't want to use Clicky, comment out this section
-#  clicky:
-  #  site_id: YOUR-SITE-ID
-  # If you want to use Mixpanel, uncomment the following line and set your token
-  # If you don't want to use Mixpanel, comment out this section
-#  mixpanel:
-  #  token: YOUR-TOKEN
-  # If you want to use Heap, uncomment the following line and set your app ID
-  # If you don't want to use Heap, comment out this section
-#  heap:
-  #  app_id: YOUR-APP-ID
-  # If you want to use Hotjar, uncomment the following line and set your site ID
-  # If you don't want to use Hotjar, comment out this section
-#  hotjar:
-  #  site_id: YOUR-SITE-ID
-  # If you want to use Yandex Metrica, uncomment the following line and set your counter ID
-  # If you don't want to use Yandex Metrica, comment out this section
-#  yandex_metrica:
-  #  counter_id: YOUR-COUNTER-ID
-  # If you want to use Adobe Analytics, uncomment the following line and set your report suite ID
-  # If you don't want to use Adobe Analytics, comment out this section
-#  adobe_analytics:
-  #  report_suite_id: YOUR-REPORT-SUITE-ID
-  # If you want to use ClickHouse, uncomment the following line and set your URL
-  # If you don't want to use ClickHouse, comment out this section
-#  clickhouse:
-  #  url: https://clickhouse.example.com
-  # If you want to use Countly, uncomment the following line and set your app key
-  # If you don't want to use Countly, comment out this section
-#  countly:
-  #  app_key: YOUR-APP-KEY
+#    apiHost: https://posthog.example.com  # Your PostHog instance URL
+#    apiKey: YOUR-PROJECT-API-KEY          # Project API key from PostHog
+  
+  # GoatCounter - Minimal analytics (requires Go, SQLite)
+  # Extremely lightweight, privacy-focused, no JavaScript required (can use pixel tracking)
+#  goatcounter:
+#    url: https://stats.example.com  # Your GoatCounter instance URL
+#    siteCode: YOUR-SITE-CODE        # Site code from GoatCounter
+  
+  # Ackee - Minimal analytics focused on privacy (requires Node.js, MongoDB)
+  # Beautiful UI, detailed insights while respecting privacy
+#  ackee:
+#    url: https://ackee.example.com  # Your Ackee instance URL
+#    domainId: YOUR-DOMAIN-ID        # Domain ID from Ackee dashboard
 buymeacoffee:
   # Your Buy Me a Coffee username
   slug: alipang

@@ -4,3 +4,18 @@
 <% if (exists(config->{analytics}->{matomo}->{siteId})) { =%>
   <%== include 'chunks/analytics/matomo' %>
 <% } =%>
+<% if (exists(config->{analytics}->{umami}->{websiteId})) { =%>
+  <%== include 'chunks/analytics/umami' %>
+<% } =%>
+<% if (exists(config->{analytics}->{plausible}->{domain})) { =%>
+  <%== include 'chunks/analytics/plausible' %>
+<% } =%>
+<% if (exists(config->{analytics}->{posthog}->{apiKey})) { =%>
+  <%== include 'chunks/analytics/posthog' %>
+<% } =%>
+<% if (exists(config->{analytics}->{goatcounter}->{siteCode})) { =%>
+  <%== include 'chunks/analytics/goatcounter' %>
+<% } =%>
+<% if (exists(config->{analytics}->{ackee}->{domainId})) { =%>
+  <%== include 'chunks/analytics/ackee' %>
+<% } =%>

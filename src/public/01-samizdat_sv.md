@@ -1,5 +1,7 @@
 # Samizdat
 
+<img src="media/images/samizdat.jpg" width="410" height="254" alt="Putins rådgivare vid den avlägsna änden av ett enormt bord" class="img-fluid">
+
 Denna sida om fake news är en del av ett projekt för att skapa statisk html från markdown-filer som lagts 
 upp på Github. 
 Målet är att lägga till rippad video, lägga allt på en diskavbildning, och fildela med bittorrent.

@@ -7,6 +7,12 @@ $success: #228811;
 $body-color: #000;
 $body-bg: #fff;
 $nav-link-padding-x: 0.5rem;
+
+// Grid and spacing
+// $grid-gutter-width: 1.5rem;  // Default: 1.5rem (24px between columns)
+// $spacer: 1rem;  // Base spacing unit for margins/paddings
+// $container-padding-x: $grid-gutter-width;  // Container side padding
+
 // Required
 @import "bootstrap/scss/functions";
 @import "bootstrap/scss/variables";

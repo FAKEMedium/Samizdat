@@ -1,0 +1,9 @@
+// Ackee Analytics
+(function() {
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = '<%= config->{analytics}->{ackee}->{url} %>/tracker.js';
+  s.dataset.ackeeServer = '<%= config->{analytics}->{ackee}->{url} %>';
+  s.dataset.ackeeDomainId = '<%= config->{analytics}->{ackee}->{domainId} %>';
+  document.head.appendChild(s);
+})();

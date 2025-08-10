@@ -1,0 +1,9 @@
+// GoatCounter Analytics
+(function() {
+  window.goatcounter = window.goatcounter || {};
+  window.goatcounter.endpoint = '<%= config->{analytics}->{goatcounter}->{url} %>/count';
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = '<%= config->{analytics}->{goatcounter}->{url} %>/count.js';
+  document.head.appendChild(s);
+})();

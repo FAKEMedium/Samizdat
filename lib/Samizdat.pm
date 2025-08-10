@@ -160,12 +160,38 @@ sub startup ($self) {
     ],
   });
   $self->hook(before_routes => sub ($c) {
-    my $language = $c->cookie('language') // '';
-    if (exists($c->config->{locale}->{languages}->{$language})) {
-      $c->language($language);
-      $c->stash(language => $language);
-    } else {
-      $c->cookie(language => $c->config->{locale}->{default_language}, {
+    my $language;
+    
+    # 1. Check language cookie first
+    my $cookie_lang = $c->cookie('language') // '';
+    if (exists($c->config->{locale}->{languages}->{$cookie_lang})) {
+      $language = $cookie_lang;
+    }
+    
+    # 2. If no valid cookie, check Accept-Language header
+    if (!$language) {
+      my $accept_lang = $c->req->headers->accept_language // '';
+      # Parse Accept-Language header (e.g., "en-US,en;q=0.9,sv;q=0.8")
+      my @langs = split /,/, $accept_lang;
+      for my $lang_spec (@langs) {
+        my ($lang) = $lang_spec =~ /^([a-z]{2})(?:-|;|$)/i;
+        if ($lang && exists($c->config->{locale}->{languages}->{lc $lang})) {
+          $language = lc $lang;
+          last;
+        }
+      }
+    }
+    
+    # 3. Fall back to default language
+    $language //= $c->config->{locale}->{default_language};
+    
+    # Set the language and update cookie if needed
+    $c->language($language);
+    $c->stash(language => $language);
+    
+    # Update cookie if it doesn't match current language
+    if ($cookie_lang ne $language) {
+      $c->cookie(language => $language, {
         secure   => 1,
         httponly => 0,
         path     => '/',
@@ -174,7 +200,6 @@ sub startup ($self) {
         hostonly => 1,
         samesite => 'None',
       });
-      $c->language($c->config->{locale}->{default_language});
     }
   });
 

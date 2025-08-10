@@ -61,13 +61,68 @@ sub getlist ($self, $url, $options = {}) {
         }
       });
 
-      $html = $dom->content;
+      # Get the HTML content with basic formatting
+      $html = $dom->to_string;
+      # Remove extra whitespace at start/end
       $html =~ s/^[\s\r\n]+//;
       $html =~ s/[\s\r\n]+$//;
+      # Add newlines after block elements for readability
+      $html =~ s/(<\/(p|div|h[1-6]|ul|ol|li|blockquote|section|article|aside|nav|header|footer|pre)>)/$1\n/gi;
 
       # Overwrite the docpath of the default language if a file with the preferred language exists
       $docpath =~ s/_($options->{language})\.md$/.md/;
-      if ($docpath !~ /\_(.+)\.md$/) {
+      
+      # Determine if this will be a sidecard (not an index file)
+      my $will_be_index = 0;
+      if ($docpath =~ /README\.md$/) {
+        $will_be_index = 1;
+      }
+      
+      # Extract first image for sidecards if it's the first element
+      my $card_image = '';
+      # Only process card images for files that will become sidecards
+      if (!$will_be_index) {
+        # Re-parse the HTML to work with DOM
+        my $card_dom = Mojo::DOM->new($html);
+        
+        # Get the first child element
+        my $first_elem = $card_dom->children->first;
+        
+        # Check if it's a picture or img element
+        if ($first_elem && $first_elem->tag && ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img')) {
+          # Extract the element
+          $card_image = $first_elem->to_string;
+          
+          # Add card-img-top class to the img element
+          if ($first_elem->tag eq 'picture') {
+            # For picture elements, find the img inside and add the class
+            my $img = $first_elem->at('img');
+            if ($img) {
+              my $existing_class = $img->attr('class') // '';
+              unless ($existing_class =~ /card-img-top/) {
+                $img->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+              }
+              $card_image = $first_elem->to_string;
+            }
+          } else {
+            # For img elements, add the class directly
+            my $existing_class = $first_elem->attr('class') // '';
+            unless ($existing_class =~ /card-img-top/) {
+              $first_elem->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+            }
+            $card_image = $first_elem->to_string;
+          }
+          
+          # Remove the element from the DOM
+          $first_elem->remove;
+          
+          # Get the updated HTML
+          $html = $card_dom->to_string;
+          $html =~ s/^[\s\r\n]+//;
+          $html =~ s/[\s\r\n]+$//;
+        }
+      }
+      if ($docpath !~ /_(.+)\.md$/) {
         if ($docpath =~ s/README\.md/index.html/) {
           $found = $docpath;
         }
@@ -80,6 +135,7 @@ sub getlist ($self, $url, $options = {}) {
           url         => $url,
           language    => $options->{language},
           head        => $head,
+          card_image  => $card_image,
         };
       }
     }
@@ -251,12 +307,61 @@ sub imgtopicture ($self, $htmlref) {
     my $base = $src;
     $base =~ s/\.[^.]+$//; # Remove extension
 
+    # Determine column width by checking ancestor classes  
+    my $col_size = 12; # Default to full width
+    my $parent = $img;
+    
+    for (1..5) {
+      $parent = $parent->parent;
+      last unless $parent;
+      
+      if (my $parent_class = $parent->attr('class')) {
+        if ($parent_class =~ /col-(?:\w+-)?(\d+)/) {
+          $col_size = $1;
+          last;
+        }
+      }
+    }
+    
     # Provide all available image sizes and let the browser choose
-    my $srcset_webp = "${base}_150.webp 150w, ${base}_360.webp 360w, ${base}_450.webp 450w, ${base}_540.webp 540w, ${base}_720.webp 720w, ${base}_760.webp 760w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";
+    my $srcset_webp = "${base}_150.webp 150w, ${base}_216.webp 216w, ${base}_324.webp 324w, ${base}_360.webp 360w, ${base}_432.webp 432w, ${base}_516.webp 516w, ${base}_648.webp 648w, ${base}_696.webp 696w, ${base}_744.webp 744w, ${base}_864.webp 864w, ${base}_873.webp 873w, ${base}_936.webp 936w, ${base}_1116.webp 1116w, ${base}_1296.webp 1296w";
+    
+    # Define sizes based on column width - calculate actual rendered sizes
+    # Container width - padding (24px) = content width
+    # Then multiply by column fraction
+    my $sizes;
+    if ($col_size == 1) {
+      $sizes = "(min-width: 1400px) 108px, (min-width: 1200px) 93px, (min-width: 992px) 78px, (min-width: 768px) 58px, (min-width: 576px) 43px, 8.33vw";
+    } elsif ($col_size == 2) {
+      $sizes = "(min-width: 1400px) 216px, (min-width: 1200px) 186px, (min-width: 992px) 156px, (min-width: 768px) 116px, (min-width: 576px) 86px, 16.66vw";
+    } elsif ($col_size == 3) {
+      $sizes = "(min-width: 1400px) 324px, (min-width: 1200px) 279px, (min-width: 992px) 234px, (min-width: 768px) 174px, (min-width: 576px) 129px, 25vw";
+    } elsif ($col_size == 4) {
+      $sizes = "(min-width: 1400px) 432px, (min-width: 1200px) 372px, (min-width: 992px) 312px, (min-width: 768px) 232px, (min-width: 576px) 172px, 33.33vw";
+    } elsif ($col_size == 5) {
+      $sizes = "(min-width: 1400px) 540px, (min-width: 1200px) 465px, (min-width: 992px) 390px, (min-width: 768px) 290px, (min-width: 576px) 215px, 41.66vw";
+    } elsif ($col_size == 6) {
+      $sizes = "(min-width: 1400px) 648px, (min-width: 1200px) 558px, (min-width: 992px) 468px, (min-width: 768px) 348px, (min-width: 576px) 258px, 50vw";
+    } elsif ($col_size == 7) {
+      $sizes = "(min-width: 1400px) 756px, (min-width: 1200px) 651px, (min-width: 992px) 546px, (min-width: 768px) 406px, (min-width: 576px) 301px, 58.33vw";
+    } elsif ($col_size == 8) {
+      # 8-column layout (2/3 width) - browser shows 872-873px at full viewport
+      $sizes = "(min-width: 1400px) 873px, (min-width: 1200px) 744px, (min-width: 992px) 624px, (min-width: 768px) 464px, (min-width: 576px) 344px, 66.66vw";
+    } elsif ($col_size == 9) {
+      $sizes = "(min-width: 1400px) 972px, (min-width: 1200px) 837px, (min-width: 992px) 702px, (min-width: 768px) 522px, (min-width: 576px) 387px, 75vw";
+    } elsif ($col_size == 10) {
+      $sizes = "(min-width: 1400px) 1080px, (min-width: 1200px) 930px, (min-width: 992px) 780px, (min-width: 768px) 580px, (min-width: 576px) 430px, 83.33vw";
+    } elsif ($col_size == 11) {
+      $sizes = "(min-width: 1400px) 1188px, (min-width: 1200px) 1023px, (min-width: 992px) 858px, (min-width: 768px) 638px, (min-width: 576px) 473px, 91.66vw";
+    } else {
+      # 12-column layout (full width)
+      $sizes = "(min-width: 1400px) 1296px, (min-width: 1200px) 1116px, (min-width: 992px) 936px, (min-width: 768px) 696px, (min-width: 576px) 516px, 100vw";
+    }
 
     # Store info for this src
     $img_info->{$src} = {
       srcset_webp => $srcset_webp,
+      sizes => $sizes,
       base => $base,
     };
   });
@@ -295,18 +400,22 @@ sub imgtopicture ($self, $htmlref) {
       $other_attrs =~ s/\s*alt='[^']*'//g;          # Remove single-quoted alt
       $other_attrs =~ s/^\s+|\s+$//g;               # Trim whitespace
 
-      # Get srcset
+      # Get srcset and sizes
       my $info = $img_info->{$src};
       my $srcset_webp = $info->{srcset_webp};
       my $base = $info->{base};
+      my $sizes = $info->{sizes};
 
       # Build the picture element on a single line
       sprintf("%s%s<picture>\n%s\n%s\n%s</picture>%s",
         $indent,
         $prelude,
-        sprintf('  %s<source type="image/webp" srcset="%s">',
+        sprintf("  %s<source type=\"image/webp\"\n    %ssrcset=\"%s\"\n    %ssizes=\"%s\">",
           $indent,
-          $srcset_webp
+          $indent,
+          $srcset_webp,
+          $indent,
+          $sizes
         ),
         sprintf("  %s%s",
           $indent,
@@ -337,5 +446,6 @@ sub indent ($self, $content = '', $indents = 0) {
   chomp $content;
   return sprintf("%s%s\n", $indent, $content);
 }
+
 
 1;

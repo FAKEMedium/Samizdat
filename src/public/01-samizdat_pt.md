@@ -1,5 +1,7 @@
 # Samizdat
 
+<img src="media/images/samizdat.jpg" width="410" height="254" alt="Os conselheiros de Putin na extremidade mais distante de uma mesa enorme" class="img-fluid">
+
 Este site sobre notícias falsas é parte de um projeto para gerar conteúdo estático a partir de arquivos markdown.
 O objetivo é adicionar vídeos extraídos, colocar tudo em uma imagem de disco e compartilhá-la como um bittorrent.
 Considere isso um <a href="https://pt.wikipedia.org/wiki/Samizdat" target="_blank">samizdat</a> moderno.
