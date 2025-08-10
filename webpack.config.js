@@ -58,8 +58,13 @@ config.module.rules.push({
   exclude: /node_modules/,
   use: {
     loader: 'babel-loader', options: {
-      plugins: ['@babel/plugin-transform-runtime'],
-      presets: ['@babel/preset-env']
+      presets: [['@babel/preset-env', {
+        targets: {
+          browsers: ['last 2 versions', 'not dead', '> 1%', 'not ie 11']
+        },
+        useBuiltIns: false,
+        modules: false
+      }]]
     }
   }
 });

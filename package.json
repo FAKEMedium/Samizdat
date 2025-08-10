@@ -32,7 +32,6 @@
   "homepage": "https://github.com/FakenewsCom/Samizdat#readme",
   "devDependencies": {
     "@babel/core": "^7.21.3",
-    "@babel/plugin-transform-runtime": "^7.21.0",
     "@babel/preset-env": "^7.20.2",
     "@mojojs/core": "^1.26.4",
     "autoprefixer": "^10.4.14",
