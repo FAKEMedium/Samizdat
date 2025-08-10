@@ -251,46 +251,9 @@ sub imgtopicture ($self, $htmlref) {
     my $base = $src;
     $base =~ s/\.[^.]+$//; # Remove extension
 
-    # Determine column width by checking ancestor classes
-    my $col_size = 12; # Default to full width
-    my $parent = $img;
-
-    for (1..5) {
-      $parent = $parent->parent;
-      last unless $parent;
-
-      if (my $parent_class = $parent->attr('class')) {
-        if ($parent_class =~ /col-(?:\w+-)?(\d+)/) {
-          $col_size = $1;
-          last;
-        }
-      }
-    }
-
-    # Define srcset and sizes based on column size
-    my ($srcset_webp, $sizes);
-    if ($col_size <= 4) {
-      # 4-column layout (1/3 width)
-      $srcset_webp = "${base}_360.webp 360w, ${base}_450.webp 450w";
-      $sizes = "(min-width: 1400px) 440px, (min-width: 1200px) 380px, (min-width: 992px) 320px, (min-width: 768px) 240px, 100vw";
-    } elsif ($col_size <= 6) {
-      # 6-column layout (1/2 width)  
-      $srcset_webp = "${base}_360.webp 360w, ${base}_540.webp 540w, ${base}_720.webp 720w";
-      $sizes = "(min-width: 1400px) 660px, (min-width: 1200px) 570px, (min-width: 992px) 480px, (min-width: 768px) 360px, 100vw";
-    } elsif ($col_size <= 8) {
-      # 8-column layout (2/3 width)
-      $srcset_webp = "${base}_360.webp 360w, ${base}_540.webp 540w, ${base}_760.webp 760w";
-      # For 8-column layout: actual display size is ~66% of container minus gutters
-      # Container sizes: 1320px@1400px, 1140px@1200px, 960px@992px, 720px@768px
-      # With Bootstrap gutters, 8 columns displays at approximately:
-      # 1400px: 66% of 1320px = 871px - gutters = ~850px, but often constrained by content to ~400px
-      # 1200px: 66% of 1140px = 752px - gutters = ~730px, but often constrained to ~400px
-      $sizes = "(min-width: 1400px) 450px, (min-width: 1200px) 450px, (min-width: 992px) 450px, (min-width: 768px) 360px, 100vw";
-    } else {
-      # 12-column layout (full width)
-      $srcset_webp = "${base}_360.webp 360w, ${base}_720.webp 720w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";
-      $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1140px, (min-width: 992px) 960px, (min-width: 768px) 720px, 100vw";
-    }
+    # Provide all available image sizes and let the browser choose
+    my $srcset_webp = "${base}_150.webp 150w, ${base}_360.webp 360w, ${base}_450.webp 450w, ${base}_540.webp 540w, ${base}_720.webp 720w, ${base}_760.webp 760w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";
+    my $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1140px, (min-width: 992px) 960px, (min-width: 768px) 720px, 100vw";
 
     # Store info for this src
     $img_info->{$src} = {
@@ -347,7 +310,7 @@ sub imgtopicture ($self, $htmlref) {
         sprintf('  %s<source type="image/webp" srcset="%s" sizes="%s">',
           $indent,
           $srcset_webp,
-        $sizes
+          $sizes
         ),
         sprintf("  %s%s",
           $indent,
