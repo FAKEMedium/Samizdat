@@ -253,12 +253,10 @@ sub imgtopicture ($self, $htmlref) {
 
     # Provide all available image sizes and let the browser choose
     my $srcset_webp = "${base}_150.webp 150w, ${base}_360.webp 360w, ${base}_450.webp 450w, ${base}_540.webp 540w, ${base}_720.webp 720w, ${base}_760.webp 760w, ${base}_1140.webp 1140w, ${base}_1320.webp 1320w";
-    my $sizes = "(min-width: 1400px) 1320px, (min-width: 1200px) 1140px, (min-width: 992px) 960px, (min-width: 768px) 720px, 100vw";
 
     # Store info for this src
     $img_info->{$src} = {
       srcset_webp => $srcset_webp,
-      sizes => $sizes,
       base => $base,
     };
   });
@@ -297,20 +295,18 @@ sub imgtopicture ($self, $htmlref) {
       $other_attrs =~ s/\s*alt='[^']*'//g;          # Remove single-quoted alt
       $other_attrs =~ s/^\s+|\s+$//g;               # Trim whitespace
 
-      # Get srcset and sizes
+      # Get srcset
       my $info = $img_info->{$src};
       my $srcset_webp = $info->{srcset_webp};
       my $base = $info->{base};
-      my $sizes = $info->{sizes};
 
       # Build the picture element on a single line
       sprintf("%s%s<picture>\n%s\n%s\n%s</picture>%s",
         $indent,
         $prelude,
-        sprintf('  %s<source type="image/webp" srcset="%s" sizes="%s">',
+        sprintf('  %s<source type="image/webp" srcset="%s">',
           $indent,
-          $srcset_webp,
-          $sizes
+          $srcset_webp
         ),
         sprintf("  %s%s",
           $indent,
