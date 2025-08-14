@@ -5,7 +5,7 @@ organization: FAKE Media
 sitename: Example
 shortsitename: Example
 description: Example, a fullstack static content hybrid generator for extreme speed and optional disconnected use.
-siteurl: https://example.com/
+siteurl: https://example.com:3443/
 host: example.com
 cookiedomain: .example.com
 authcookiename: samizauth
@@ -30,14 +30,12 @@ roomservice:
     cardnumber: 2
     sender: billing@example.com
     sendername: Invoicing example
-    # invoicedir is an absolute path
-    invoicedir: /tmp/invoice
+    invoicedir: /tmp/invoice    # invoicedir is an absolute path
     invoiceurl: invoice/
     logotype: fakenews
     duedays: 30
     overdueinterest: 8
-    # Days after due day when we remind
-    duedaysremind: 10
+    duedaysremind: 10    # Days after due day when we remind
     debug: 0
     bankgiro: xxxxx
     plusgiro: xxxxxx-x
@@ -167,7 +165,7 @@ mail:
     - s3cr3t
 hypnotoad:
   listen:
-    - http://0.0.0.0:3000?reuse=1
+    - https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1 # Run "make cert" to generate a self-signed certificate
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
 extratemplates:
@@ -177,36 +175,23 @@ cache: 1
 bundlename: samizdat
 timezone: Etc/UTC
 account:
-  # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
-  passwordmethods:
+  passwordmethods:  # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
     - mysql
     - sha512
     - pbkdf2
     - bcrypt
     - argon2id
-  #
-  # Convert validated passwords to methods equal to, or better, than this methods strength
-  convertpasswordto: argon2id
-  #
-  # Number of minutes a user will be blocked
-  blocktime: 180
-  #
-  # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
-  blocklimit: 4
-  #
-  # Time window in minutes that unsuccessful login attempts will be counted
-  blockperiod: 10
-  #
-  # Session timeout in seconds
-  sessiontimeout: 3600
-  #
-  # List of username: password that have full access to everything, mainly for bootstrapping. CHANGE!!!
-  superadmins:
-#    superadmin: s3cr3t_Pa55w0r6
+  convertpasswordto: argon2id   # Convert validated passwords to methods equal to, or better, than this methods strength
+  blocktime: 180                # Number of minutes a user will be blocked
+  blocklimit: 4                 # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
+  blockperiod: 10               # Time window in minutes that unsuccessful login attempts will be counted
+  sessiontimeout: 3600          # Session timeout in seconds
+  superadmins:                  # List of username: password that have full access to everything, mainly for bootstrapping.
+#    superadmin: s3cr3t_Pa55w0r6  # CHANGE!!!
 dsn:
   pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
   redis: redis://127.0.0.1:6379/1
-#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fredis%2Fredis.sock/1"
+#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fredis%2Fredis.sock/1"  # Local redis socket
 piratebay:
   login: username
   password: s3cr3t
@@ -358,9 +343,6 @@ analytics:
 #    url: https://ackee.example.com  # Your Ackee instance URL
 #    domainId: YOUR-DOMAIN-ID        # Domain ID from Ackee dashboard
 buymeacoffee:
-  # Your Buy Me a Coffee username
-  slug: alipang
-  # /buymeacoffee/webhook is our local webhook endpoint
-  webhook: webhook
-  # This is the secret we use to verify the webhook. Get it from your BMC account.
-  webhook_secret: s3cr3t
+  slug: alipang           # Your Buy Me a Coffee username
+  webhook: webhook        # /buymeacoffee/webhook is our local webhook endpoint
+  webhook_secret: s3cr3t  # This is the secret we use to verify the webhook. Get it from your BMC account.

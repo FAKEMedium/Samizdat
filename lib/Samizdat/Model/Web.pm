@@ -146,9 +146,11 @@ sub getlist ($self, $url, $options = {}) {
   
   # Add image metadata to the main document
   if ($selectedimage->{src}) {
+    my $pngsrc = $selectedimage->{src};
+    $pngsrc =~ s/\.(webp|jpg|jpeg|png|gif|tiff|bmp)$/.png/;
     $docs->{$found}->{head}->{meta} //= {};
     $docs->{$found}->{head}->{meta}->{property} //= {};
-    $docs->{$found}->{head}->{meta}->{property}->{'og:image'} = $selectedimage->{src};
+    $docs->{$found}->{head}->{meta}->{property}->{'og:image'} = $pngsrc;
   }
   if ($selectedimage->{width}) {
     $docs->{$found}->{head}->{meta} //= {};

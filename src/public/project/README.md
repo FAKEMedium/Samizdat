@@ -1,4 +1,4 @@
-All the files i [description]: # "Samizdat is a new take on self publishing that uses modern technology."
+[description]: # "Samizdat is a new take on self publishing that uses modern technology."
 [keywords]: # "publishing,Samizdat"
 
 # Samizdat project

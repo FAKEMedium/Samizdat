@@ -5,14 +5,13 @@
     </defs>
   </svg>
   <div>
-    <a href="<%= config->{siteurl} %>" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
+    <a href="<%= config->{siteurl} %>" title="<%== __x('Logotype leading to {site}', site => config->{sitename}) %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
         'logotype',
-        'public/' . config->{logotype},
+        config->{roomservice}->{web}->{publicsrc} . '/' . config->{logotype},
         {
           id         => 'maillogotype',
           prefix     => 'anysvg',
           title      => config->{sitename},
-          height     => 73,
           width      => 194,
         }
         %></a>

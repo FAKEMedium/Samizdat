@@ -193,7 +193,7 @@ sub register ($self) {
         username    => $formdata->{newusername},
         password    => $formdata->{newpassword},
       });
-      if ($userid) {
+      if ($userid =~ /^\d+$/ && $userid > 0) {
         my $users = $self->app->account->getUsers({ 'users.userid' => $userid });
         if ($users) {
           my $contactid = ${$users}[0]->{contactid};
@@ -202,7 +202,9 @@ sub register ($self) {
         $formdata->{success} = 1;
         $formdata->{whois} = qx!whois $formdata->{ip}!;
         my $anyrepo = Mojo::Home->new();
-        my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
+        my $svgfile= $anyrepo->child($self->config->{roomservice}->{web}->{publicsrc})->child($self->config->{logotype});
+        say "SVG file: $svgfile";
+        my $svg = $svgfile->slurp;
         $svg = b64_encode($svg);
         $svg =~ s/[\r\n\s]+//g;
         chomp $svg;
@@ -228,7 +230,11 @@ sub register ($self) {
       } else {
         $formdata->{success} = 0;
         $formdata->{error} = { reason => 'username' };
-        $errors->{newusername} = $self->app->__('Database error');
+        if ($userid =~ /username_uq/i) {
+          $errors->{newusername} = $self->app->__('Username already exists');
+        } else {
+          $errors->{newusername} = $self->app->__('Username could not be created');
+        }
         $valid->{newusername} = "is-invalid";
       }
     }

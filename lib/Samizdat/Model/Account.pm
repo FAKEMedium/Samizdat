@@ -24,11 +24,15 @@ sub username ($self, $cookie) {
   return 1; # Temporary solution
 }
 
-sub addUser ($self, $username, $attribs = undef) {
+sub addUser ($self, $username, $attribs = {}) {
   my $db = $self->database->db;
+  my $contactid = 0;
   my $userid = 0;
+  my $passwordid = 0;
   $attribs->{username} = $username;
-  delete $attribs->{password};
+  my $password = delete $attribs->{password} // 'RANDOM' . uuid();
+  my $email = delete $attribs->{email} // '';
+
   if ('mysql' eq $self->config->{databasetype}) {
     $userid = $db->insert('snapusers',
       $attribs,
@@ -38,37 +42,39 @@ sub addUser ($self, $username, $attribs = undef) {
       userid => $userid,
     });
   } else {
-    my $password = delete $attribs->{password} // 'RANDOM' . uuid();
-    my $email = delete $attribs->{email} // '';
     my $contactattribs = {
-      countryid => undef,
-      languageid => undef,
-      stateid => undef,
-      email => '',
+      email => $email,
     };
 
-    my $contactid = $db->insert('account.contacts',
-      $contactattribs,
-      { returning => 'contactid' }
-    )->hash->{contactid};
-    if ($contactid) {
-      $attribs->{contactid} = $contactid;
-      $userid = $db->insert('account.users',
-        $attribs,
-        { returning => 'userid' }
-      )->hash->{userid};
-      if ($userid) {
-        my $passwordid = $db->insert('account.passwords',
-          { userid => $userid },
-          { returning => 'passwordid' }
-        )->hash->{passwordid};
-        if ($passwordid) {
-          $self->savePassword($userid, $password);
-        } else {
-          $db->delete('account.users', { userid => $userid });
-          $db->delete('account.contacts', { contactid => $contactid });
+    eval {
+      my $tx = $db->begin;
+
+      $contactid = $db->insert('account.contacts',
+        $contactattribs,
+        { returning => 'contactid' }
+      )->hash->{contactid};
+
+      if ($contactid =~ /^\d+$/ && $contactid > 0) {
+        $attribs->{contactid} = $contactid;
+        $userid = $db->insert('account.users',
+          $attribs,
+          { returning => 'userid' }
+        )->hash->{userid};
+        if ($userid =~ /^\d+$/) {
+          $passwordid = $db->insert('account.passwords',
+            { userid => $userid },
+            { returning => 'passwordid' }
+          )->hash->{passwordid};
         }
       }
+      $tx->commit;
+    };
+    if ($@) {
+      return $@->message;
+    }
+
+    if ($passwordid =~ /^\d+$/ && $passwordid > 0) {
+      $self->savePassword($userid, $password);
     }
   }
   return $userid;
@@ -84,10 +90,10 @@ sub addEmailConfirmationRequest ($self, $userid, $contactid, $newemail, $ip) {
     }, {returning => 'id'})->hash->{id};
   } else {
     return $db->insert('account.emailconfirmationrequests', {
-      userid    => $userid,
-      contactid => $contactid,
+      userid       => $userid,
+      contactid    => $contactid,
       newemail     => $newemail,
-      ip        => $ip,
+      ip           => $ip,
     }, {returning => 'confirmationuuid'})->hash->{confirmationuuid};
   }
 }

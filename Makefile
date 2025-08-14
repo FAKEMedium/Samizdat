@@ -76,8 +76,17 @@ i18n:
 	ln -s -r src/countries-data-json/data/translations/countries-zh_CN.json ./src/countries-data-json/data/translations/countries-zh.json
 	bin/samizdat makei18n
 
+cert:
+	openssl req -x509 -newkey rsa:4096 -sha256 -days 5000 -nodes \
+		-keyout server.key -out server.crt \
+		-subj "/C=US/ST=State/L=City/O=Example/CN=example.com" \
+		-addext "subjectAltName=DNS:example.com,DNS:*.example.com,DNS:localhost,IP:127.0.0.1"
+	@echo "Certificate created: server.crt (valid until ~2038)"
+	@echo "Private key created: server.key"
+	@openssl x509 -in server.crt -noout -text | grep -A2 "Validity"
+
 debug:
-	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l http://0.0.0.0:3000?reuse=1 -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
+	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l 'https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1' -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
 
 serverstart: zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat
