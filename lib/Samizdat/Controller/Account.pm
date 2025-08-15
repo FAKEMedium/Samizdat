@@ -17,6 +17,62 @@ my $levels = {
   'superadmin'     => 9999,
 };
 
+sub validate_username ($self, $username) {
+  my $config = $self->config->{account}->{username};
+  my $errors = [];
+  
+  # Check minimum length
+  if (length($username) < $config->{minlength}) {
+    push @$errors, $self->app->__x('Username must be at least {min} characters', min => $config->{minlength});
+  }
+  
+  # Check allowed characters
+  my $allowed_chars = $config->{chars};
+  if ($username !~ /^[$allowed_chars]+$/) {
+    push @$errors, $self->app->__x('Username can only contain {chars}', chars => $allowed_chars);
+  }
+  
+  return @$errors ? $errors : undef;
+}
+
+sub validate_password ($self, $password) {
+  my $config = $self->config->{account}->{password};
+  my $errors = [];
+  
+  # Check minimum length
+  if (length($password) < $config->{minlength}) {
+    push @$errors, $self->app->__x('Password must be at least {min} characters', min => $config->{minlength});
+  }
+  
+  # Check minimum uppercase
+  my $uppercase_count = () = $password =~ /[A-Z]/g;
+  if ($uppercase_count < $config->{minuppercase}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} uppercase letter(s)', min => $config->{minuppercase});
+  }
+  
+  # Check minimum lowercase
+  my $lowercase_count = () = $password =~ /[a-z]/g;
+  if ($lowercase_count < $config->{minlowercase}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} lowercase letter(s)', min => $config->{minlowercase});
+  }
+  
+  # Check minimum numbers
+  my $number_count = () = $password =~ /[0-9]/g;
+  if ($number_count < $config->{minnumbers}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} number(s)', min => $config->{minnumbers});
+  }
+  
+  # Check minimum special characters
+  my $special_chars = $config->{chars};
+  $special_chars =~ s/[a-zA-Z0-9]//g;  # Remove alphanumeric to get special chars
+  my $special_count = () = $password =~ /[\Q$special_chars\E]/g;
+  if ($special_count < $config->{minspecial}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} special character(s)', min => $config->{minspecial});
+  }
+  
+  return @$errors ? $errors : undef;
+}
+
 sub index ($self) {
   if ($self->authenticated_user()) {
     return $self->redirect_to($self->url_for('account_panel'));
@@ -172,8 +228,41 @@ sub register ($self) {
         $valid->{$field} = "is-invalid";
         $errors->{$field} = $self->app->__('This field is required');
       } else {
-        $valid->{$field} = "is-valid";
-        $errors->{$field} = '';
+        # Additional validation for username
+        if ($field eq 'newusername') {
+          my $username_errors = $self->validate_username($formdata->{$field});
+          if ($username_errors) {
+            $valid->{$field} = "is-invalid";
+            $errors->{$field} = join('. ', @$username_errors);
+          } else {
+            $valid->{$field} = "is-valid";
+            $errors->{$field} = '';
+          }
+        }
+        # Additional validation for password
+        elsif ($field eq 'newpassword') {
+          my $password_errors = $self->validate_password($formdata->{$field});
+          if ($password_errors) {
+            $valid->{$field} = "is-invalid";
+            $errors->{$field} = join('. ', @$password_errors);
+          } else {
+            $valid->{$field} = "is-valid";
+            $errors->{$field} = '';
+          }
+        }
+        # Email validation
+        elsif ($field eq 'email') {
+          if ($formdata->{$field} !~ /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) {
+            $valid->{$field} = "is-invalid";
+            $errors->{$field} = $self->app->__('Please enter a valid email address');
+          } else {
+            $valid->{$field} = "is-valid";
+            $errors->{$field} = '';
+          }
+        } else {
+          $valid->{$field} = "is-valid";
+          $errors->{$field} = '';
+        }
       }
     }
 
@@ -201,14 +290,6 @@ sub register ($self) {
         }
         $formdata->{success} = 1;
         $formdata->{whois} = qx!whois $formdata->{ip}!;
-        my $anyrepo = Mojo::Home->new();
-        my $svgfile= $anyrepo->child($self->config->{roomservice}->{web}->{publicsrc})->child($self->config->{logotype});
-        say "SVG file: $svgfile";
-        my $svg = $svgfile->slurp;
-        $svg = b64_encode($svg);
-        $svg =~ s/[\r\n\s]+//g;
-        chomp $svg;
-        $formdata->{svglogotype} = $svg;
         my $maildatahtml = $self->render_mail(template => 'account/confirm/texthtml', layout => 'default', formdata => $formdata);
         my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
 

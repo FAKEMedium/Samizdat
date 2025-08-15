@@ -1,4 +1,3 @@
-<img src="data:image/svg+xml;base64,<%== $formdata->{svglogotype} %>" width="100" style="width: 100px; margin-bottom: 2ex" />
 
 <h4><%== __('User registration') %></h4>
 

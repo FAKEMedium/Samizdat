@@ -11,21 +11,21 @@ sub register ($self, $app, $config = {}) {
   $r->post(sprintf('/buymeacoffee/%s', $app->config->{buymeacoffee}->{webhook}))->to('buy_me_a_coffee#webhook');
 
 
-  # Add helper to get cached supporter count
-  $app->helper('buymeacoffee.supporters' => sub ($c) {
-    my $cache_key = 'buymeacoffee:supporters:' . $c->config->{buymeacoffee}->{slug};
+  # Add helper to get cached supporter count with Redis and file fallback
+  $app->helper('buymeacoffee_supporters' => sub ($c) {
+    my $slug = $c->config->{buymeacoffee}->{slug};
+    return 0 unless $slug;
     
-    # Try to get from cache first
-    my $supporters = $c->app->redis->get($cache_key);
+    # Try Redis first
+    my $cache_key = "buymeacoffee:supporters:$slug";
+    my $supporters = $c->redis->db->get($cache_key);
     
+    # Fall back to file cache if Redis fails
     if (!defined $supporters) {
-      # Fetch from API if not in cache
-      $supporters = $self->_fetch_supporters($c);
-      
-      # Cache for 1 hour
-      if (defined $supporters) {
-        $c->app->redis->set($cache_key => $supporters);
-        $c->app->redis->expire($cache_key => 3600);
+      my $cache_file = "/tmp/buymeacoffee_$slug.txt";
+      if (-f $cache_file) {
+        $supporters = Mojo::File->new($cache_file)->slurp;
+        chomp $supporters if defined $supporters;
       }
     }
     

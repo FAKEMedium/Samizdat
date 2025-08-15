@@ -145,10 +145,11 @@ layout: bootstrap
 captcha:
   session_name: captcha_string
   font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
-  ptsize: 26
+  ptsize: 30
   width: 873
   height: 10/0
-  length: 3
+  length: 5
+  chars: '234679ACEFHJ-NPRT-Y'  # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
 mail:
   from: noreply@example.com
   type: text/html
@@ -175,6 +176,16 @@ cache: 1
 bundlename: samizdat
 timezone: Etc/UTC
 account:
+  username:
+    minlength: 3
+    chars: a-z0-9  # database comparisons will be case insensitive.
+  password:
+    minlength: 8
+    minuppercase: 1
+    minlowercase: 1
+    minnumbers: 1
+    minspecial: 1
+    chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
   passwordmethods:  # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
     - mysql
     - sha512

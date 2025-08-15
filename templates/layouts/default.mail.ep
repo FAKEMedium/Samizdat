@@ -1,20 +1,17 @@
+% use Mojo::Home;
+% use Mojo::Util qw(b64_encode trim);
+%
+% my $anyrepo = Mojo::Home->new();
+% my $svgfile= $anyrepo->child($self->config->{roomservice}->{web}->{publicsrc})->child($self->config->{logotype});
+% my $svg = $svgfile->slurp;
+% $svg = b64_encode($svg);
+% $svg =~ s/[\r\n\s]+//g;
+% chomp $svg;
 <div style="background: #ffffff; padding: 10px;">
-  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" style="display: none;">
-    <defs>
-      <!-- symbols -->
-    </defs>
-  </svg>
   <div>
-    <a href="<%= config->{siteurl} %>" title="<%== __x('Logotype leading to {site}', site => config->{sitename}) %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
-        'logotype',
-        config->{roomservice}->{web}->{publicsrc} . '/' . config->{logotype},
-        {
-          id         => 'maillogotype',
-          prefix     => 'anysvg',
-          title      => config->{sitename},
-          width      => 194,
-        }
-        %></a>
+    <a href="<%= config->{siteurl} %>" title="<%== __x('Logotype linked to {site}', site => config->{sitename}) %>" aria-label="<%== __('Logotype leading to start page') %>">
+      <img src="data:image/svg+xml;base64,<%== $svg %>" width="100" style="width: 100px; margin-bottom: 2ex" alt="<%== __('Logotype') %>">
+    </a>
   </div>
   <%== web->indent(content, 1) =%>
 </div>

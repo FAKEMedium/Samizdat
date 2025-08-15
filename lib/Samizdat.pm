@@ -58,7 +58,11 @@ sub startup ($self) {
     },
   );
 
+  $self->helper(merger => sub { state $merger = Hash::Merge->new() });
+  $self->helper(uuid => sub { state $uuid = Data::UUID->new });
+
   $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}); return $redis; });
+
   $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}); return $pg; });
   $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
@@ -69,29 +73,6 @@ sub startup ($self) {
   $self->pg->migrations->from_dir('migrations')->migrate;
   $self->pg->db->dbh->{pg_server_prepare} = 1;
 
-  $self->helper(merger => sub { state $merger = Hash::Merge->new() });
-  $self->helper(uuid => sub { state $uuid = Data::UUID->new });
-  
-  # Buy Me a Coffee supporter count helper
-  $self->helper('buymeacoffee_supporters' => sub ($c) {
-    my $slug = $c->config->{buymeacoffee}->{slug};
-    return 0 unless $slug;
-    
-    # Try Redis first
-    my $cache_key = "buymeacoffee:supporters:$slug";
-    my $supporters = $c->redis->db->get($cache_key);
-    
-    # Fall back to file cache if Redis fails
-    if (!defined $supporters) {
-      my $cache_file = "/tmp/buymeacoffee_$slug.txt";
-      if (-f $cache_file) {
-        $supporters = Mojo::File->new($cache_file)->slurp;
-        chomp $supporters if defined $supporters;
-      }
-    }
-    
-    return $supporters // 0;
-  });
   if (exists($config->{import}->{dsn})) {
     $self->helper(mysql => sub { state $mysql = Mojo::mysql->new($config->{import}->{dsn}) });
     $self->mysql->on(connection => sub {
@@ -99,6 +80,7 @@ sub startup ($self) {
       $mysql->max_connections(5);
     });
   }
+
   $self->plugin('Account');
   $self->plugin('Public');
   $self->plugin('Icons');
@@ -113,27 +95,6 @@ sub startup ($self) {
   }
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
-  $self->plugin('Captcha', {
-    session_name => $config->{captcha}->{session_name},
-    out          => {force => 'png'},
-    particle     => [ 500, 0 ],
-    create       => ['ttf', 'ellipse', '#ff0000'],
-    new          => {
-      rndmax     => $config->{captcha}->{length} // 3,
-      rnd_data   => [ '2', '3', '4', '6', '7', '9', 'A', 'C', 'E', 'F', 'H', 'J' ... 'N', 'P', 'R', 'T' ... 'Y' ],
-      width      => $config->{captcha}->{width},
-      height     => $config->{captcha}->{height},
-      lines      => 20,
-      font       => $config->{captcha}->{font},
-      ptsize     => $config->{captcha}->{ptsize},
-      scramble   => 1,
-      bgcolor    => '#ffffff',
-      frame      => 1,
-      send_ctobg => 1,
-    }
-  });
-  $self->routes->get('/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
-
   $self->plugin('Mail', $config->{mail});
   $self->plugin('Util::RandomString', {
     entropy => 256,
@@ -202,6 +163,30 @@ sub startup ($self) {
       });
     }
   });
+
+  # Captcha after the locale plugin, so it can use the locale (future: use a custom locale for captcha)
+  $self->plugin('Captcha', {
+    session_name => $config->{captcha}->{session_name},
+    out          => {force => 'png'},
+    particle     => [ 500, 0 ],
+    create       => ['ttf', 'ellipse', '#ff0000'],
+    new          => {
+      rndmax     => $config->{captcha}->{length} // 3,
+      rnd_data   => [ split //, do {
+        my $s = $config->{captcha}->{chars}; $s =~ s/([A-Z])-([A-Z])/join '', ($1 .. $2)/ge; $s
+      } ],
+      width      => $config->{captcha}->{width},
+      height     => $config->{captcha}->{height},
+      lines      => 20,
+      font       => $config->{captcha}->{font},
+      ptsize     => $config->{captcha}->{ptsize},
+      scramble   => 1,
+      bgcolor    => '#ffffff',
+      frame      => 1,
+      send_ctobg => 1,
+    }
+  });
+  $self->routes->get('/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
 
   # If Nginx serves files from the public directory, there's no need to have it in this application's list
   if ($config->{nginx}) {
