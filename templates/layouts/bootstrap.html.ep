@@ -19,6 +19,8 @@
 % if (exists($web->{head}->{canonical})) {
     <link rel="canonical" href="<%== $web->{head}->{canonical} %>">
 % }
+    <%= asset_tag '/samizdat.css', rel => 'preload', as => 'style' %>
+    <%= asset_tag '/samizdat.js', rel => 'preload', as => 'script' %>
     <link rel="manifest" href="/manifest.json">
     <link rel="icon" type="image/x-icon" name="favicon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/media/images/icon.0192.png">
