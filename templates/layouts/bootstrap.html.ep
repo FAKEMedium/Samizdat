@@ -77,30 +77,32 @@
           </ul>
         </div>
       </header>
-      <section class="container px-0"<%== eval {return ' id="thecontent"' if (!exists $web->{sidebar});} %>>
-% if (exists $web->{sidebar}) {
+      <section class="container px-0<%== eval {return ' editable' if (!exists $web->{sidebar});} %>"<%== eval {return ' id="thecontent"' if (!exists $web->{sidebar});} %>>
+<% if (exists $web->{sidebar}) { =%>
         <div class="row">
           <div class="col-sm-8 editable" id="thecontent">
-            <%== limiter %>
+            <%== limiter 'start' %>
             <%== web->indent(content, 6) =%>
             <%== limiter 'end' %>
           </div>
           <div class="col-sm-4">
+            <%== limiter 'startside' %>
             <%== web->indent($web->{sidebar}, 6) =%>
+            <%== limiter 'endside' %>
           </div>
         </div>
-% } else {
-        <%== limiter %>
+<% } else { =%>
+        <%== limiter 'start' %>
         <%== web->indent(content, 4) =%>
         <%== limiter 'end' %>
-        % }
+<%  } =%>
       </section>
     </main>
     <footer id="mainfooter" class="mt-0 py-3 container">
       <%== web->indent(eval {include 'chunks/footer'}, 3) =%>
     </footer>
     <%= asset_tag '/samizdat.js', id => 'bundlejs', defer => 'defer' %>
-% if ((exists($web->{script}) && '' ne $web->{script}) || (exists(config->{analytics}) && keys %{config->{analytics}})) {
+% if ((exists($web->{script}) && $web->{script}) || (exists(config->{analytics}) && keys(%{config->{analytics}}))) {
     <script id="endjs"> /*<![CDATA[*/
       <%== web->indent(eval {include 'chunks/analytics'}, 3) =%>
       function runEndJSScript() {

@@ -64,7 +64,10 @@ sub register ($self, $app, $conf) {
   $app->helper(
     limiter => sub ($c, $what =  'start') {
       return sprintf("<!-- ### %s ### ABCDEFGHIJKLMNOPQRSTUVWXYZÅÄÖabcdefghijklmnopqrstuvwxyzåäö0123456789!\"'|\$\\#¤%%&/(){}[]=? ### -->",
-        ($what eq 'end') ? $c->app->__('End main content') : $c->app->__('Start main content')
+        ($what eq 'end') ? $c->app->__('End main content') :
+          ($what eq 'endside') ? $c->app->__('End side content') :
+            ($what eq 'startside') ? $c->app->__('Start side content') :
+              $c->app->__('Start main content')
       );
     }
   );
