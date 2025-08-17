@@ -27,11 +27,10 @@ load_rc_config $name
 : ${samizdat_logfile="/var/log/samizdat.log"}
 
 pidfile="${samizdat_pidfile}"
-command="/usr/sbin/daemon"
-command_args="-f -u ${samizdat_user} -p ${samizdat_pidfile} /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat"
+command="/usr/bin/su"
+command_args="-m ${samizdat_user} -c 'cd ${samizdat_dir} && /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat >> ${samizdat_logfile} 2>&1'"
+procname="hypnotoad"
 required_dirs="${samizdat_dir}"
-required_files="${samizdat_config}"
-
 samizdat_prestart()
 {
     # Set environment for the daemon
