@@ -160,7 +160,7 @@ icons:
 	bin/samizdat makeicons
 
 install: clean favicon icons static_all webpack zip
-#	chown -R www-data:www-data .
+#	chown -R www:www .
 
 # Install runscript for FreeBSD
 install-rc:
