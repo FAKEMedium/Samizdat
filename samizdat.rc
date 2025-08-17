@@ -27,14 +27,17 @@ load_rc_config $name
 : ${samizdat_logfile="/var/log/samizdat.log"}
 
 pidfile="${samizdat_pidfile}"
-command="/bin/sh"  
-command_args="-c 'cd ${samizdat_dir} && /usr/bin/su -m ${samizdat_user} /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat >> ${samizdat_logfile} 2>&1'"
+command="/usr/bin/su"
+command_args="-m ${samizdat_user} /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat"
 procname="hypnotoad"
 required_dirs="${samizdat_dir}"
 samizdat_prestart()
 {
     # Set environment for the daemon
     export MOJO_MODE=production
+    export MOJO_HOME="${samizdat_dir}"
+    export HOME="${samizdat_dir}"
+    export PWD="${samizdat_dir}"
     
     # Ensure PID file directory exists
     install -d -o "${samizdat_user}" -g "${samizdat_group}" -m 755 "$(dirname ${samizdat_pidfile})"
@@ -44,7 +47,7 @@ samizdat_prestart()
     chown "${samizdat_user}:${samizdat_group}" "${samizdat_logfile}"
     chmod 640 "${samizdat_logfile}"
     
-    # Change to app directory
+    # Change to app directory - this affects where su starts
     cd "${samizdat_dir}"
 }
 
