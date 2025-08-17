@@ -24,7 +24,6 @@ load_rc_config $name
 : ${samizdat_user="www"}
 : ${samizdat_group="www"}
 : ${samizdat_dir="/sites/Samizdat"}
-: ${samizdat_config="${samizdat_dir}/samizdat.yml"}
 : ${samizdat_pidfile="${samizdat_dir}/bin/samizdat.pid"}
 : ${samizdat_logfile="/var/log/samizdat.log"}
 
@@ -33,16 +32,10 @@ command="${samizdat_dir}/bin/samizdat"
 
 # Export environment variables
 samizdat_env="MOJO_MODE=production PATH=/usr/local/bin:/usr/bin:/bin"
-samizdat_env="${samizdat_env} MOJO_CONFIG=${samizdat_config}"
 
 # Check if config file exists
 samizdat_precmd()
 {
-    if [ ! -f "${samizdat_config}" ]; then
-        echo "Config file ${samizdat_config} not found"
-        return 1
-    fi
-    
     if [ ! -d "${samizdat_dir}" ]; then
         echo "Samizdat directory ${samizdat_dir} not found"
         return 1
@@ -63,12 +56,7 @@ samizdat_start()
     echo "Starting ${name}."
     cd "${samizdat_dir}"
     
-    su -m "${samizdat_user}" -c "
-        /usr/bin/env ${samizdat_env} \
-            hypnotoad \
-            '${command}' \
-            >> '${samizdat_logfile}' 2>&1
-    "
+    su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad '${command}'" >> "${samizdat_logfile}" 2>&1
 }
 
 # Custom stop command
@@ -78,12 +66,7 @@ samizdat_stop()
         echo "Stopping ${name}."
         cd "${samizdat_dir}"
         
-        su -m "${samizdat_user}" -c "
-            /usr/bin/env ${samizdat_env} \
-                hypnotoad \
-                -s '${command}' \
-                >> '${samizdat_logfile}' 2>&1
-        "
+        su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad -s '${command}'" >> "${samizdat_logfile}" 2>&1
     else
         echo "${name} is not running."
     fi
@@ -95,12 +78,7 @@ samizdat_restart()
     echo "Restarting ${name}."
     cd "${samizdat_dir}"
     
-    su -m "${samizdat_user}" -c "
-        /usr/bin/env ${samizdat_env} \
-            hypnotoad \
-            '${command}' \
-            >> '${samizdat_logfile}' 2>&1
-    "
+    su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad '${command}'" >> "${samizdat_logfile}" 2>&1
 }
 
 # Custom reload command (graceful restart)
