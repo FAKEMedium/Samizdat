@@ -1,4 +1,4 @@
-$enable-gradients: false;
+ $enable-gradients: false;
 $enable-shadows: true;
 $enable-cssgrid: false;
 $offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
@@ -58,13 +58,13 @@ $grid-breakpoints: (
 // @import "bootstrap/scss/progress";
 @import "bootstrap/scss/list-group";
 @import "bootstrap/scss/close";
-@import "bootstrap/scss/toasts";
+// @import "bootstrap/scss/toasts"; // Moved to authenticated.scss
 @import "bootstrap/scss/modal"; // Requires transitions
-// @import "bootstrap/scss/tooltip";
-// @import "bootstrap/scss/popover";
+// @import "bootstrap/scss/tooltip"; // Moved to authenticated.scss
+// @import "bootstrap/scss/popover"; // Moved to authenticated.scss
 // @import "bootstrap/scss/carousel";
 // @import "bootstrap/scss/spinners";
-@import "bootstrap/scss/offcanvas"; // Requires transitions
+// @import "bootstrap/scss/offcanvas"; // Moved to authenticated.scss
 // @import "bootstrap/scss/placeholders";
 // Helpers
 @import "bootstrap/scss/helpers";

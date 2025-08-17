@@ -1,0 +1,27 @@
+// Additional styles for authenticated users only
+// This assumes samizdat.scss is already loaded and adds only missing components
+
+// Import Bootstrap's required files (needed for the additional components to work)
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
+
+// Additional Bootstrap components for authenticated users
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
+
+// Any custom authenticated-only styles
+.admin-toolbar {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0.5rem;
+}
+
+.editor-container {
+  min-height: 400px;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+}

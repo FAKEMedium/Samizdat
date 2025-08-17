@@ -1,6 +1,9 @@
 // Authenticated user functionality
 // This bundle is loaded only for logged-in users
 
+// Additional styles for authenticated users
+import '../scss/authenticated.scss';
+
 // Bootstrap components only needed for authenticated users
 import Offcanvas from 'bootstrap/js/dist/offcanvas';
 import Toast from 'bootstrap/js/dist/toast';
