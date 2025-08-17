@@ -28,7 +28,7 @@ load_rc_config $name
 
 pidfile="${samizdat_pidfile}"
 command="/usr/bin/su"
-command_args="-m ${samizdat_user} /usr/local/bin/perl /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat"
+command_args="-m ${samizdat_user} sh -c 'cd ${samizdat_dir} && /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat'"
 procname="hypnotoad"
 required_dirs="${samizdat_dir}"
 samizdat_prestart()
