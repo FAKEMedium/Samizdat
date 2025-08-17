@@ -169,6 +169,7 @@ hypnotoad:
     - https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1 # Run "make cert" to generate a self-signed certificate
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
+  pid_file: bin/samizdat.pid
 extratemplates:
   - /usr/local/share/perl/5.38.0/Mojolicious/resources/templates/mojo
 nginx: 1

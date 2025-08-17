@@ -86,7 +86,7 @@ cert:
 	@openssl x509 -in server.crt -noout -text | grep -A2 "Validity"
 
 debug:
-	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l 'https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1' -v -w ./lib -w ./templates -w ./script -w ./public/assets ./bin/samizdat
+	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l 'https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1' -v -w ./lib -w ./templates -w ./script ./bin/samizdat
 
 serverstart: zip
 	MOJO_MODE=production hypnotoad ./bin/samizdat

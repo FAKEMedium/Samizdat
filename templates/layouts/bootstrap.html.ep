@@ -1,4 +1,6 @@
 <%== '<!DOCTYPE html>' %>
+% use Mojo::Util qw(trim);
+% trim $web->{sidebar} if exists $web->{sidebar};
 % my $dir = 'ltr';
 % if (language eq 'ar' || language eq 'he' || language eq 'fa') {
 %   $dir = 'rtl';
