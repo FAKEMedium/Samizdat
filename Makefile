@@ -162,6 +162,11 @@ icons:
 install: clean favicon icons static_all webpack zip
 #	chown -R www-data:www-data .
 
+# Install runscript for FreeBSD
+install-rc:
+	install -o root -g wheel -m 555 samizdat.rc /usr/local/etc/rc.d/samizdat
+	@echo "RC script installed. Add samizdat_enable=\"YES\" to /etc/rc.conf"
+
 import:
 	bin/samizdat makeimport
 

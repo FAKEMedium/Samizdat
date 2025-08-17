@@ -9,7 +9,6 @@
 # samizdat_user="www"
 # samizdat_group="www"
 # samizdat_dir="/usr/local/www/samizdat"
-# samizdat_config="/usr/local/www/samizdat/samizdat.yml"
 # samizdat_pidfile="/var/run/samizdat.pid"
 # samizdat_logfile="/var/log/samizdat.log"
 
@@ -28,90 +27,28 @@ load_rc_config $name
 : ${samizdat_logfile="/var/log/samizdat.log"}
 
 pidfile="${samizdat_pidfile}"
-command="${samizdat_dir}/bin/samizdat"
+command="/usr/sbin/daemon"
+command_args="-f -u ${samizdat_user} -p ${samizdat_pidfile} /usr/local/bin/hypnotoad ${samizdat_dir}/bin/samizdat"
+required_dirs="${samizdat_dir}"
+required_files="${samizdat_config}"
 
-# Export environment variables
-samizdat_env="MOJO_MODE=production PATH=/usr/local/bin:/usr/bin:/bin"
-
-# Check if config file exists
-samizdat_precmd()
+samizdat_prestart()
 {
-    if [ ! -d "${samizdat_dir}" ]; then
-        echo "Samizdat directory ${samizdat_dir} not found"
-        return 1
-    fi
+    # Set environment for the daemon
+    export MOJO_MODE=production
     
     # Ensure PID file directory exists
     install -d -o "${samizdat_user}" -g "${samizdat_group}" -m 755 "$(dirname ${samizdat_pidfile})"
     
-    # Ensure log file exists with proper permissions
+    # Ensure log file exists with proper permissions  
     touch "${samizdat_logfile}"
     chown "${samizdat_user}:${samizdat_group}" "${samizdat_logfile}"
     chmod 640 "${samizdat_logfile}"
-}
-
-# Custom start command using hypnotoad
-samizdat_start()
-{
-    echo "Starting ${name}."
-    cd "${samizdat_dir}"
     
-    su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad '${command}'" >> "${samizdat_logfile}" 2>&1
-}
-
-# Custom stop command
-samizdat_stop()
-{
-    if [ -f "${samizdat_pidfile}" ]; then
-        echo "Stopping ${name}."
-        cd "${samizdat_dir}"
-        
-        su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad -s '${command}'" >> "${samizdat_logfile}" 2>&1
-    else
-        echo "${name} is not running."
-    fi
-}
-
-# Custom restart command
-samizdat_restart()
-{
-    echo "Restarting ${name}."
+    # Change to app directory
     cd "${samizdat_dir}"
-    
-    su -m "${samizdat_user}" -c "/usr/bin/env ${samizdat_env} hypnotoad '${command}'" >> "${samizdat_logfile}" 2>&1
 }
 
-# Custom reload command (graceful restart)
-samizdat_reload()
-{
-    samizdat_restart
-}
-
-# Custom status command
-samizdat_status()
-{
-    if [ -f "${samizdat_pidfile}" ]; then
-        pid=$(cat "${samizdat_pidfile}")
-        if ps -p "${pid}" > /dev/null 2>&1; then
-            echo "${name} is running as pid ${pid}."
-        else
-            echo "${name} is not running, but pidfile exists."
-            return 1
-        fi
-    else
-        echo "${name} is not running."
-        return 1
-    fi
-}
-
-# Override default commands
-start_cmd="samizdat_start"
-stop_cmd="samizdat_stop"
-restart_cmd="samizdat_restart"
-reload_cmd="samizdat_reload"
-status_cmd="samizdat_status"
-start_precmd="samizdat_precmd"
-
-extra_commands="reload"
+start_precmd="samizdat_prestart"
 
 run_rc_command "$1"
