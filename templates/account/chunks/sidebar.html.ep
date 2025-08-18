@@ -1,0 +1,1 @@
+<img src="/media/images/register.png" class="img-fluid" id="selectedimage" alt="<%= __('People rocketing to the sky') %>" width="1024" height="1536">

@@ -283,7 +283,7 @@ sub register ($self) {
   my $web = { title => $title };
   $web->{script} .= $self->render_to_string(template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, format => 'js');
-  $web->{sidebar} .= $self->render_to_string(template => 'account/register/sidebar');
+  $web->{sidebar} = $self->render_to_string(template => 'account/register/sidebar', format => 'html');
   return $self->render(web => $web, title => $title, template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
@@ -337,7 +337,7 @@ sub confirm ($self) {
   my $web = { title => $title };
   $web->{script} .= $self->render_to_string(template => 'account/confirm/index', 
     formdata => $formdata, format => 'js');
-  $web->{sidebar} .= $self->render_to_string(template => 'account/confirm/sidebar');
+  $web->{sidebar} = $self->render_to_string(template => 'account/confirm/sidebar');
   return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, status => 200);
 }
 
