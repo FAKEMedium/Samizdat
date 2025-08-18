@@ -281,9 +281,8 @@ sub register ($self) {
   # Handle regular GET request (return HTML page)
   my $title = $self->app->__('Register account');
   my $web = { title => $title };
-  $web->{script} .= $self->render_to_string(template => 'account/register/index',
-    formdata => { ip => 'REPLACEIP' }, format => 'js');
-  $web->{sidebar} = $self->render_to_string(template => 'account/register/sidebar', format => 'html');
+  $web->{sidebar} = $self->render_to_string(template => 'account/register/sidebar');
+  $web->{script} .= $self->render_to_string(template => 'account/register/index', formdata => { ip => 'REPLACEIP' }, format => 'js');
   return $self->render(web => $web, title => $title, template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
