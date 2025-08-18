@@ -1,12 +1,17 @@
-// Matomo
+// Matomo - deferred loading for better performance
 var _paq = window._paq = window._paq || [];
 _paq.push(['trackPageView']);
 _paq.push(['enableLinkTracking']);
-(function() {
-  var u="<%= config->{analytics}->{matomo}->{u} %>";
-  _paq.push(['setTrackerUrl', u+'matomo.php']);
-  _paq.push(['setSiteId', '<%= config->{analytics}->{matomo}->{siteId} %>']);
-  var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
-  g.async=true; g.src=u+'matomo.js';
-  s.parentNode.insertBefore(g,s);
-})();
+// Defer Matomo loading until after page load
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    var u="<%= config->{analytics}->{matomo}->{u} %>";
+    _paq.push(['setTrackerUrl', u+'matomo.php']);
+    _paq.push(['setSiteId', '<%= config->{analytics}->{matomo}->{siteId} %>']);
+    var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+    g.async=true; 
+    g.defer=true;
+    g.src=u+'matomo.js';
+    s.parentNode.insertBefore(g,s);
+  }, 100); // Small delay to prioritize user interaction
+});

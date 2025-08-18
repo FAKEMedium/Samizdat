@@ -162,10 +162,29 @@ icons:
 install: clean favicon icons static_all webpack zip
 #	chown -R www:www .
 
-# Install runscript for FreeBSD
+# Install runscript - works for both FreeBSD and Linux
 install-rc:
-	install -o root -g wheel -m 555 samizdat.rc /usr/local/etc/rc.d/samizdat
-	@echo "RC script installed. Add samizdat_enable=\"YES\" to /etc/rc.conf"
+	@if [ -d /usr/local/etc/rc.d ]; then \
+		echo "Installing FreeBSD rc script..."; \
+		sed 's/myapp/samizdat/g' myapp.rc > /tmp/samizdat.rc.tmp; \
+		install -o root -g wheel -m 555 /tmp/samizdat.rc.tmp /usr/local/etc/rc.d/samizdat; \
+		rm -f /tmp/samizdat.rc.tmp; \
+		echo "RC script installed. Add samizdat_enable=\"YES\" and samizdat_dir=\"$$(pwd)\" to /etc/rc.conf"; \
+	elif [ -d /etc/init.d ]; then \
+		echo "Installing Linux init script..."; \
+		sed 's/myapp/samizdat/g' myapp.rc > /tmp/samizdat.rc.tmp; \
+		install -o root -g root -m 755 /tmp/samizdat.rc.tmp /etc/init.d/samizdat; \
+		rm -f /tmp/samizdat.rc.tmp; \
+		if command -v systemctl >/dev/null 2>&1; then \
+			echo "Systemd detected. You may want to create a systemd service file instead."; \
+		else \
+			update-rc.d samizdat defaults 2>/dev/null || chkconfig --add samizdat 2>/dev/null || true; \
+			echo "Init script installed. Start with: service samizdat start"; \
+		fi; \
+	else \
+		echo "Error: Unable to detect init system location"; \
+		exit 1; \
+	fi
 
 import:
 	bin/samizdat makeimport
