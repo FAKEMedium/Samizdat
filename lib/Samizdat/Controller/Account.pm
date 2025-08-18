@@ -17,61 +17,6 @@ my $levels = {
   'superadmin'     => 9999,
 };
 
-sub validate_username ($self, $username) {
-  my $config = $self->config->{account}->{username};
-  my $errors = [];
-  
-  # Check minimum length
-  if (length($username) < $config->{minlength}) {
-    push @$errors, $self->app->__x('Username must be at least {min} characters', min => $config->{minlength});
-  }
-  
-  # Check allowed characters
-  my $allowed_chars = $config->{chars};
-  if ($username !~ /^[$allowed_chars]+$/) {
-    push @$errors, $self->app->__x('Username can only contain {chars}', chars => $allowed_chars);
-  }
-  
-  return @$errors ? $errors : undef;
-}
-
-sub validate_password ($self, $password) {
-  my $config = $self->config->{account}->{password};
-  my $errors = [];
-  
-  # Check minimum length
-  if (length($password) < $config->{minlength}) {
-    push @$errors, $self->app->__x('Password must be at least {min} characters', min => $config->{minlength});
-  }
-  
-  # Check minimum uppercase
-  my $uppercase_count = () = $password =~ /[A-Z]/g;
-  if ($uppercase_count < $config->{minuppercase}) {
-    push @$errors, $self->app->__x('Password must contain at least {min} uppercase letter(s)', min => $config->{minuppercase});
-  }
-  
-  # Check minimum lowercase
-  my $lowercase_count = () = $password =~ /[a-z]/g;
-  if ($lowercase_count < $config->{minlowercase}) {
-    push @$errors, $self->app->__x('Password must contain at least {min} lowercase letter(s)', min => $config->{minlowercase});
-  }
-  
-  # Check minimum numbers
-  my $number_count = () = $password =~ /[0-9]/g;
-  if ($number_count < $config->{minnumbers}) {
-    push @$errors, $self->app->__x('Password must contain at least {min} number(s)', min => $config->{minnumbers});
-  }
-  
-  # Check minimum special characters
-  my $special_chars = $config->{chars};
-  $special_chars =~ s/[a-zA-Z0-9]//g;  # Remove alphanumeric to get special chars
-  my $special_count = () = $password =~ /[\Q$special_chars\E]/g;
-  if ($special_count < $config->{minspecial}) {
-    push @$errors, $self->app->__x('Password must contain at least {min} special character(s)', min => $config->{minspecial});
-  }
-  
-  return @$errors ? $errors : undef;
-}
 
 sub index ($self) {
   if ($self->authenticated_user()) {
@@ -189,6 +134,7 @@ sub login ($self) {
   }
 }
 
+
 sub logout ($self) {
   my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
   my $session = $self->app->account->logout($authcookie);
@@ -216,11 +162,13 @@ sub logout ($self) {
 sub register ($self) {
   my $formdata = { ip => $self->tx->remote_address };
   my $accept = $self->req->headers->{headers}->{accept}->[0];
-  if ($accept =~ /json/) {
+  
+  # Handle POST request with JSON (form submission)
+  if (uc($self->req->method) eq 'POST' && $accept =~ /json/) {
     my $valid = {};
     my $errors = {};
     my $v = $self->validation;
-    $self->stash(docpath => undef);
+#    $self->stash(docpath => undef);
 
     for my $field (qw(newusername newpassword email terms captcha)) {
       $formdata->{$field} = trim $self->param($field);
@@ -234,27 +182,26 @@ sub register ($self) {
           if ($username_errors) {
             $valid->{$field} = "is-invalid";
             $errors->{$field} = join('. ', @$username_errors);
+            $v->error($field => ['invalid_username']);
           } else {
             $valid->{$field} = "is-valid";
             $errors->{$field} = '';
           }
-        }
-        # Additional validation for password
-        elsif ($field eq 'newpassword') {
+        } elsif ($field eq 'newpassword') {
           my $password_errors = $self->validate_password($formdata->{$field});
           if ($password_errors) {
             $valid->{$field} = "is-invalid";
             $errors->{$field} = join('. ', @$password_errors);
+            $v->error($field => ['invalid_password']);
           } else {
             $valid->{$field} = "is-valid";
             $errors->{$field} = '';
           }
-        }
-        # Email validation
-        elsif ($field eq 'email') {
+        } elsif ($field eq 'email') {
           if ($formdata->{$field} !~ /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) {
             $valid->{$field} = "is-invalid";
             $errors->{$field} = $self->app->__('Please enter a valid email address');
+            $v->error($field => ['invalid_email']);
           } else {
             $valid->{$field} = "is-valid";
             $errors->{$field} = '';
@@ -324,57 +271,74 @@ sub register ($self) {
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => $formdata, status => 200);
   }
+  
+  # Handle GET request with JSON (dynamic loading - just return data)
+  elsif ($self->req->method eq 'GET' && $accept =~ /json/) {
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
+  }
 
+  # Handle regular GET request (return HTML page)
   my $title = $self->app->__('Register account');
   my $web = { title => $title };
   $web->{script} .= $self->render_to_string(template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, format => 'js');
+  $web->{sidebar} .= $self->render_to_string(template => 'account/register/sidebar');
   return $self->render(web => $web, title => $title, template => 'account/register/index',
     formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
 
 sub confirm ($self) {
-  my $confirmationuuid = $self->stash('confirmationuuid');
-  my $formdata = {};
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
-  if ($accept !~ /json/) {
-    my $title = $self->app->__('Email confirmation');
-    my $web = { title => $title };
-    $web->{script} .= $self->render_to_string(template => 'account/confirm/index', format => 'js');
-    $self->session(confirmationuuid => $confirmationuuid);
-    return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, headline => undef);
-  } else {
-    my $method = uc $self->req->method;
-    if ($method eq "PUT") {
-      my $emailconfirmationrequest = $self->app->account->getEmailConfirmationRequest($confirmationuuid);
-      if ($emailconfirmationrequest) {
-        my $userid = $emailconfirmationrequest->{userid};
-        my $contactid = $emailconfirmationrequest->{contactid};
-        my $email = $emailconfirmationrequest->{email};
-        if ($self->app->account->updateContact($contactid, { email => $email })) {
-          $self->app->account->deleteEmailConfirmationRequest($confirmationuuid);
-          $self->app->account->updateUser($userid, { activated => 1, modified => 'NOW()' });
-          $formdata->{success} = 1;
-          $formdata->{message} = sprintf($self->app->__('Email %s verified'), $email);
-        } else {
-          $formdata->{success} = 0;
-          $formdata->{error} = { reason => 'database' };
-          $formdata->{confirmationuuid} = $confirmationuuid;
-        }
+  my $confirmationuuid = $self->stash('confirmationuuid') || $self->param('confirmationuuid');
+  my $formdata = { confirmationuuid => $confirmationuuid };
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+  
+  # Validate UUID exists
+  if (!$confirmationuuid) {
+    $formdata->{success} = 0;
+    $formdata->{error} = { reason => 'missing_uuid' };
+    $formdata->{message} = $self->app->__('Invalid confirmation link');
+  } elsif ($self->req->method eq 'GET' && $confirmationuuid) {
+    my $emailconfirmationrequest = $self->app->account->getEmailConfirmationRequest($confirmationuuid);
+    
+    if ($emailconfirmationrequest) {
+      my $userid = $emailconfirmationrequest->{userid};
+      my $contactid = $emailconfirmationrequest->{contactid};
+      my $email = $emailconfirmationrequest->{newemail};
+      
+      # Perform the confirmation
+      if ($self->app->account->updateContact($contactid, { email => $email })) {
+        $self->app->account->deleteEmailConfirmationRequest($confirmationuuid);
+        $self->app->account->updateUser($userid, { activated => 1, modified => 'NOW()' });
+        
+        $formdata->{success} = 1;
+        $formdata->{message} = sprintf($self->app->__('Email %s has been verified'), $email);
+        $formdata->{email} = $email;
       } else {
         $formdata->{success} = 0;
-        $formdata->{error} = { reason => 'uuid' };
-        $formdata->{confirmationuuid} = $confirmationuuid;
+        $formdata->{error} = { reason => 'database_error' };
+        $formdata->{message} = $self->app->__('Database error occurred');
       }
     } else {
       $formdata->{success} = 0;
-      $formdata->{error} = { reason => 'uuid' };
-      $formdata->{confirmationuuid} = $confirmationuuid;
+      $formdata->{error} = { reason => 'invalid_or_expired' };
+      $formdata->{message} = $self->app->__('This confirmation link is invalid or has expired');
     }
-
-    return $self->render(json => $formdata);
   }
+  
+  # Return JSON response if requested
+  if ($accept =~ /json/) {
+    return $self->render(json => $formdata, status => 200);
+  }
+  
+  # Return HTML page with formdata that JS will use to modify the page
+  my $title = $self->app->__('Email confirmation');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'account/confirm/index', 
+    formdata => $formdata, format => 'js');
+  $web->{sidebar} .= $self->render_to_string(template => 'account/confirm/sidebar');
+  return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, status => 200);
 }
 
 
@@ -459,6 +423,64 @@ sub settings ($self) {
 
   return 1;
 }
+
+
+sub validate_username ($self, $username) {
+  my $config = $self->config->{account}->{username};
+  my $errors = [];
+
+  # Check minimum length
+  if (length($username) < $config->{minlength}) {
+    push @$errors, $self->app->__x('Username must be at least {min} characters', min => $config->{minlength});
+  }
+
+  # Check allowed characters
+  my $allowed_chars = $config->{chars};
+  if ($username !~ /^[$allowed_chars]+$/) {
+    push @$errors, $self->app->__x('Username can only contain {chars}', chars => $allowed_chars);
+  }
+
+  return @$errors ? $errors : undef;
+}
+
+sub validate_password ($self, $password) {
+  my $config = $self->config->{account}->{password};
+  my $errors = [];
+
+  # Check minimum length
+  if (length($password) < $config->{minlength}) {
+    push @$errors, $self->app->__x('Password must be at least {min} characters', min => $config->{minlength});
+  }
+
+  # Check minimum uppercase
+  my $uppercase_count = () = $password =~ /[A-Z]/g;
+  if ($uppercase_count < $config->{minuppercase}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} uppercase letter(s)', min => $config->{minuppercase});
+  }
+
+  # Check minimum lowercase
+  my $lowercase_count = () = $password =~ /[a-z]/g;
+  if ($lowercase_count < $config->{minlowercase}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} lowercase letter(s)', min => $config->{minlowercase});
+  }
+
+  # Check minimum numbers
+  my $number_count = () = $password =~ /[0-9]/g;
+  if ($number_count < $config->{minnumbers}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} number(s)', min => $config->{minnumbers});
+  }
+
+  # Check minimum special characters
+  my $special_chars = $config->{chars};
+  $special_chars =~ s/[a-zA-Z0-9]//g;  # Remove alphanumeric to get special chars
+  my $special_count = () = $password =~ /[\Q$special_chars\E]/g;
+  if ($special_count < $config->{minspecial}) {
+    push @$errors, $self->app->__x('Password must contain at least {min} special character(s)', min => $config->{minspecial});
+  }
+
+  return @$errors ? $errors : undef;
+}
+
 
 1;
 

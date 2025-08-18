@@ -1,23 +1,15 @@
-<div class="row">
-  <div class="col-md-8" id="confirm">
-    <form action="<%= url_for('account_confirm') %>" id="dataform" method="post">
-      <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
-      <div class="form-floating mb-3">
-        <input type="text" class="form-control<%= $formdata->{valid}->{confirmationuuid} %>" id="confirmationuuid" name="confirmationuuid"
-               placeholder="<%== __('Enter code') %>" aria-describedby="invalidconfirmationuuid">
-        <label for="confirmationuuid" class="form-label"><%= __('Confirmation code') %></label>
-        <div id="confirmationuuidHelp" class="form-text"><%== __('Allow cookies to paste confirmation code from email') %></div>
-        <div id="invalidconfirmationuuid" class="invalid-feedback"><%= __("Couldn't use code for verification.") %></div>
-      </div>
-
-      <button type="submit" id="confirmemail" class="btn btn-primary mb-3">
-        <span class="mx-2"><%== __('Confirm') %></span>
-        <%== icon 'rocket-takeoff-fill', {} %>
-      </button>
-
-    </form>
+<form action="<%= url_for('account_confirm') %>" id="dataform" method="post">
+  <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
+  <div class="form-floating mb-3">
+    <input type="text" class="form-control" id="confirmationuuid" name="confirmationuuid"
+           placeholder="<%== __('Enter code') %>" aria-describedby="invalidconfirmationuuid">
+    <label for="confirmationuuid" class="form-label"><%= __('Confirmation code') %></label>
+    <div id="confirmationuuidHelp" class="form-text"><%== __('Allow cookies to paste confirmation code from email') %></div>
+    <div id="invalidconfirmationuuid" class="invalid-feedback"><%= __("Couldn't use code for verification.") %></div>
   </div>
-  <div class="col-md-4">
-    <img src="<%= url_for('account_register') %>.png" class="img-fluid">
-  </div>
-</div>
+
+  <button type="submit" id="confirmemail" class="btn btn-primary mb-3">
+    <span class="mx-2"><%== __('Confirm') %></span>
+    <%== icon 'rocket-takeoff-fill', {} %>
+  </button>
+</form>
