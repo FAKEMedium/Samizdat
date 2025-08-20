@@ -286,6 +286,7 @@ sub register ($self) {
     
     # Handle GET request (dynamic loading - just return data)
     elsif ($self->req->method eq 'GET') {
+      say Dumper $formdata;
       $self->tx->res->headers->content_type('application/json; charset=UTF-8');
       return $self->render(json => $formdata, status => 200);
     }
