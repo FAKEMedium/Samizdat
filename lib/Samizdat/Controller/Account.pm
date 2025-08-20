@@ -160,11 +160,12 @@ sub logout ($self) {
 
 
 sub register ($self) {
-  my $formdata = { ip => $self->tx->remote_address };
+  my $formdata = {};
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
   if ($accept =~ /json/) {
-    if (uc($self->req->method) eq 'POST') {
+    $formdata->{ip} = $self->tx->remote_address;
+    if ($self->req->method =~ /^(POST)$/i) {
       my $valid = {};
       my $errors = {};
       my $v = $self->validation;
@@ -280,16 +281,12 @@ sub register ($self) {
       }
       $formdata->{errors} = $errors;
       $formdata->{valid} = $valid;
-      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-      return $self->render(json => $formdata, status => 200);
     }
     
-    # Handle GET request (dynamic loading - just return data)
-    elsif ($self->req->method eq 'GET') {
-      say Dumper $formdata;
-      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-      return $self->render(json => $formdata, status => 200);
-    }
+    # Return JSON response for both POST and GET
+    say Dumper $formdata;
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
   }
 
   # Handle regular GET request (return HTML page)
@@ -297,8 +294,7 @@ sub register ($self) {
   my $web = { title => $title };
   $web->{sidebar} = $self->render_to_string(template => 'account/register/sidebar');
   $web->{script} .= $self->render_to_string(template => 'account/register/index', formdata => { ip => 'REPLACEIP' }, format => 'js');
-  return $self->render(web => $web, title => $title, template => 'account/register/index',
-    formdata => { ip => 'REPLACEIP' }, status => 200);
+  return $self->render(web => $web, title => $title, template => 'account/register/index', formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
 
