@@ -284,6 +284,8 @@ sub register ($self) {
     }
     
     # Return JSON response for both POST and GET
+    say Dumper %{ $self->tx };
+    say Dumper $formdata;
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => $formdata, status => 200);
   }
