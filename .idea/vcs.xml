@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/longevityhacksbydrdina.com" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/mojo" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/countries-data-json" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/flag-icons" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/src/i18n-iso-languages" vcs="Git" />
