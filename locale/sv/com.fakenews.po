@@ -110,10 +110,10 @@ msgid "Active"
 msgstr "Aktiv"
 
 msgid "Add"
-msgstr ""
+msgstr "Lägg till"
 
 msgid "Add content"
-msgstr ""
+msgstr "Lägg till innehåll"
 
 msgid "Add customer"
 msgstr "Ny kund"
@@ -125,16 +125,16 @@ msgid "Add domain"
 msgstr "Ny domän"
 
 msgid "Add grop"
-msgstr ""
+msgstr "Lägg till grupp"
 
 msgid "Add group"
-msgstr ""
+msgstr "Lägg till grupp"
 
 msgid "Add mail domain"
 msgstr "Ny maildomän"
 
 msgid "Add page"
-msgstr ""
+msgstr "Lägg till sida"
 
 msgid "Add product"
 msgstr "Ny produkt"
@@ -143,7 +143,7 @@ msgid "Add subscription"
 msgstr "Ny prenumeration"
 
 msgid "Add user"
-msgstr ""
+msgstr "Lägg till användare"
 
 msgid "Add voucher"
 msgstr "Ny verifikation"
@@ -152,7 +152,7 @@ msgid "Add website"
 msgstr "Ny webbplats"
 
 msgid "Add zone"
-msgstr ""
+msgstr "Lägg till zon"
 
 msgid "Address"
 msgstr "Adress"
@@ -196,6 +196,9 @@ msgstr "Belopp att betala inklusive {percent} moms: {costsum} {currency}"
 msgid "Amount to pay: {costsum} {currency}"
 msgstr "Belopp att betala: {costsum} {currency}"
 
+msgid "An error occurred"
+msgstr "Ett fel uppstod"
+
 msgid "Are you sure you want to delete this record?"
 msgstr "Är du säker på att du vill ta bort denna post?"
 
@@ -207,6 +210,12 @@ msgstr "Åtminstone 3 tecken från a-z 0-9 -, måste börja med a-z"
 
 msgid "At least 8 characters including capitals and digits"
 msgstr "Åtminstone 8 tecken inklusive versaler och siffror"
+
+msgid "At least {min} characters from: {chars}"
+msgstr "Minst {min} tecken från: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "Minst {min} tecken: {upper} versal, {lower} gemen, {num} siffra, {special} specialtecken"
 
 msgid "Authorize"
 msgstr "Auktorisera"
@@ -275,7 +284,7 @@ msgid "Changed status."
 msgstr "Ändrade status."
 
 msgid "Check zones"
-msgstr ""
+msgstr "Kontrollera zoner"
 
 msgid "Choose a password"
 msgstr "Välj ett lösenord"
@@ -299,7 +308,7 @@ msgid "City (billing)"
 msgstr "Ort (faktura)"
 
 msgid "Click to pop dialog."
-msgstr ""
+msgstr "Klicka för att öppna dialog."
 
 msgid "Click to pop login dialog."
 msgstr "Klicka för att öppna inloggningsfönstret."
@@ -343,8 +352,17 @@ msgstr "Bekräfta underskrift"
 msgid "Confirm your email address"
 msgstr "Bekräfta din e-postadress"
 
+msgid "Confirmation Failed"
+msgstr "Bekräftelse misslyckades"
+
 msgid "Confirmation code"
 msgstr "Bekräftelsekod"
+
+msgid "Confirmation error:"
+msgstr "Bekräftelsefel:"
+
+msgid "Confirmation failed"
+msgstr "Bekräftelse misslyckades"
 
 msgid "Confirmation request sent"
 msgstr "Bekräftelse skickad"
@@ -475,6 +493,9 @@ msgstr "Databas"
 msgid "Database error"
 msgstr "Databasfel"
 
+msgid "Database error occurred"
+msgstr "Databasfel uppstod"
+
 msgid "Databases"
 msgstr "Databaser"
 
@@ -541,17 +562,26 @@ msgstr "Redigera"
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
 
+msgid "Edit this page"
+msgstr "Redigera denna sida"
+
 msgid "Edit zone"
 msgstr "Redigera zon"
 
 msgid "Email"
 msgstr "Epost"
 
+msgid "Email %s has been verified"
+msgstr "E-post %s har verifierats"
+
 msgid "Email %s verified"
 msgstr "E-post %s verifierad"
 
 msgid "Email (billing)"
 msgstr "Epost (faktura)"
+
+msgid "Email Confirmed!"
+msgstr "E-post bekräftad!"
 
 msgid "Email Invoice"
 msgstr "Maila faktura"
@@ -633,6 +663,12 @@ msgstr "Förnam saknas"
 
 msgid "Empty telephone"
 msgstr "Telefon saknas"
+
+msgid "End main content"
+msgstr "Slut på huvudinnehåll"
+
+msgid "End side content"
+msgstr "Slut på sidoinnehåll"
 
 msgid "English"
 msgstr "Engelska"
@@ -736,8 +772,11 @@ msgstr "Förnamn"
 msgid "For more information, visit the Fortnox website:"
 msgstr "För mer information, besök Fortnoxs webbplats:"
 
+msgid "Form submission error:"
+msgstr "Formulärfel:"
+
 msgid "Fortnox"
-msgstr ""
+msgstr "Fortnox"
 
 msgid "Fortnox integration"
 msgstr "Fortnox-integration"
@@ -749,7 +788,7 @@ msgid "Fortnox panel"
 msgstr "Fortnoxpanel"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
@@ -801,6 +840,9 @@ msgstr "I din personliga meny hittar du bl.a. din panel."
 
 msgid "Including VAT"
 msgstr "Inklusive moms"
+
+msgid "Invalid confirmation link"
+msgstr "Ogiltig bekräftelselänk"
 
 msgid "Invalid email"
 msgstr "Ogiltig epostadress"
@@ -925,7 +967,7 @@ msgid "Language"
 msgstr "Språk"
 
 msgid "Languages"
-msgstr ""
+msgstr "Språk"
 
 msgid "Last name"
 msgstr "Efternamn"
@@ -966,11 +1008,17 @@ msgstr "Inloggning blockerad"
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr "Inloggning är tillfälligt blockerad pga upprepade misslyckade försök från {ip}."
 
+msgid "Logotype"
+msgstr "Logotyp"
+
 msgid "Logotype leading to start"
 msgstr "Logotypen leder till start"
 
 msgid "Logotype leading to start page"
 msgstr "Logotypen leder till startsidan"
+
+msgid "Logotype linked to {site}"
+msgstr "Logotyp länkad till {site}"
 
 msgid "Lost password?"
 msgstr "Förlorat lösenordet?"
@@ -994,7 +1042,7 @@ msgid "Mail domains"
 msgstr "Maildomäner"
 
 msgid "Mail dump"
-msgstr ""
+msgstr "E-postdump"
 
 msgid "Mail sent through own servers"
 msgstr "Mail skickas genom egna servrar"
@@ -1012,7 +1060,7 @@ msgid "Mark payment"
 msgstr "Markera betalning"
 
 msgid "Menus"
-msgstr ""
+msgstr "Menyer"
 
 msgid "Message"
 msgstr "Meddelande"
@@ -1056,6 +1104,9 @@ msgstr "Nettobelopp"
 msgid "Net amount:"
 msgstr "Summa netto:"
 
+msgid "Network error - please try again"
+msgstr "Nätverksfel - försök igen"
+
 msgid "New account"
 msgstr "Nytt konto"
 
@@ -1093,7 +1144,7 @@ msgid "No invoicing"
 msgstr "Faktureras inte"
 
 msgid "No pages found."
-msgstr ""
+msgstr "Inga sidor hittades."
 
 msgid "No selected customer."
 msgstr "Ingen kund vald."
@@ -1174,10 +1225,25 @@ msgid "Panel"
 msgstr "Panel"
 
 msgid "Paper in typewriter"
-msgstr ""
+msgstr "Papper i skrivmaskin"
 
 msgid "Password"
 msgstr "Lösenord"
+
+msgid "Password must be at least {min} characters"
+msgstr "Lösenordet måste vara minst {min} tecken"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "Lösenordet måste innehålla minst {min} gemen bokstav"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "Lösenordet måste innehålla minst {min} siffra"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "Lösenordet måste innehålla minst {min} specialtecken"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "Lösenordet måste innehålla minst {min} versal"
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "Lösenordet var fel eller användarnamnet finns inte."
@@ -1203,6 +1269,9 @@ msgstr "Det kan ta upp till en vecka innan betalningar blir synliga i kontrollpa
 msgid "Paypal"
 msgstr "Paypal"
 
+msgid "People rocketing to the sky"
+msgstr "Människor som skjuts mot himlen"
+
 msgid "Personal"
 msgstr "Personlig"
 
@@ -1215,8 +1284,14 @@ msgstr "Personlig panel"
 msgid "Phone"
 msgstr "Telefon"
 
+msgid "Please check your confirmation link or register again."
+msgstr "Kontrollera din bekräftelselänk eller registrera dig igen."
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Vänligen bekräfta din e-postadress genom att klicka på följande länk:"
+
+msgid "Please enter a valid email address"
+msgstr "Ange en giltig e-postadress"
 
 msgid "Please log in to access that page"
 msgstr "Logga in för att komma åt sidan"
@@ -1258,10 +1333,10 @@ msgid "Priority"
 msgstr "Prioritet"
 
 msgid "Privilege sets"
-msgstr ""
+msgstr "Behörighetsgrupper"
 
 msgid "Privileges"
-msgstr ""
+msgstr "Behörigheter"
 
 msgid "Products"
 msgstr "Produkter"
@@ -1354,7 +1429,7 @@ msgid "Resources"
 msgstr "Resurser"
 
 msgid "Roles"
-msgstr ""
+msgstr "Roller"
 
 msgid "Roomservice"
 msgstr "Rumservice"
@@ -1384,7 +1459,7 @@ msgid "Search"
 msgstr "Sök"
 
 msgid "Search content"
-msgstr ""
+msgstr "Sök innehåll"
 
 msgid "Search field for {what}"
 msgstr "Sökfält för {what}"
@@ -1408,7 +1483,7 @@ msgid "Search for product"
 msgstr "Sök produkt"
 
 msgid "Search for user or group"
-msgstr ""
+msgstr "Sök användare eller grupp"
 
 msgid "Search for website"
 msgstr "Sök webbplats"
@@ -1417,10 +1492,10 @@ msgid "Search for zone"
 msgstr "Sök zon"
 
 msgid "Search pages..."
-msgstr ""
+msgstr "Sök sidor..."
 
 msgid "Search web content"
-msgstr ""
+msgstr "Sök webbinnehåll"
 
 msgid "Select"
 msgstr "Välj"
@@ -1521,8 +1596,14 @@ msgstr "Rabatt"
 msgid "Start"
 msgstr "Start"
 
+msgid "Start main content"
+msgstr "Börja huvudinnehåll"
+
+msgid "Start side content"
+msgstr "Börja sidoinnehåll"
+
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 msgid "Strictly for Rymdweb"
 msgstr "Endast för Rymdweb"
@@ -1611,6 +1692,9 @@ msgstr "Sidan {docpath} kunde inte hittas."
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "Aktien är noterad på Nasdaq Stockholms huvudlista."
 
+msgid "This confirmation link is invalid or has expired"
+msgstr "Denna bekräftelselänk är ogiltig eller har förfallit"
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Detta exempel visar resultatet av Samizdats SVG-mallhjälp."
 
@@ -1695,8 +1779,20 @@ msgstr "Användarregistrering"
 msgid "Username"
 msgstr "Användarnamn"
 
+msgid "Username already exists"
+msgstr "Användarnamnet finns redan"
+
+msgid "Username can only contain {chars}"
+msgstr "Användarnamnet får endast innehålla {chars}"
+
+msgid "Username could not be created"
+msgstr "Användarnamnet kunde inte skapas"
+
+msgid "Username must be at least {min} characters"
+msgstr "Användarnamnet måste vara minst {min} tecken"
+
 msgid "Users and groups"
-msgstr ""
+msgstr "Användare och grupper"
 
 msgid "VAT"
 msgstr "Moms"
@@ -1760,6 +1856,9 @@ msgstr "Ja"
 
 msgid "You can also post in our discussions."
 msgstr "Du kan också posta i våra diskussioner."
+
+msgid "You can now log in to your account."
+msgstr "Du kan nu logga in på ditt konto."
 
 msgid "You have registered a new user account on {site}."
 msgstr "Du har registrerat ett nytt användarkonto på {site}."
@@ -1834,7 +1933,7 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "content"
-msgstr ""
+msgstr "innehåll"
 
 msgid "control panel"
 msgstr "kontrollpanel"
@@ -1869,8 +1968,11 @@ msgstr "produkt"
 msgid "standby firewall"
 msgstr "standbybrandvägg"
 
+msgid "supporters"
+msgstr "supportrar"
+
 msgid "user"
-msgstr ""
+msgstr "användare"
 
 msgid "website"
 msgstr "webbplats"

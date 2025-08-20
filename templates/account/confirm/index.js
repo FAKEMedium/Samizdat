@@ -14,8 +14,7 @@ async function handleConfirmation() {
     const response = await fetch(url, {
       method: 'GET',
       headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Accept': 'application/json'
       },
       credentials: 'same-origin'
     });
@@ -37,7 +36,7 @@ async function handleConfirmation() {
 
 // Show success message
 function showSuccess(message) {
-  const content = document.getElementById('thecontent');
+  const content = document.querySelector('#thecontent');
   if (content) {
     content.innerHTML = `
       <div class="alert alert-success" role="alert">
@@ -53,7 +52,7 @@ function showSuccess(message) {
 // Show error message in form or content area
 function showError(message) {
   // Try to find existing form first
-  const form = document.querySelector('form');
+  const form = document.querySelector('#dataform');
   if (form) {
     // Add error to form
     let errorDiv = form.querySelector('.alert-danger');
@@ -66,7 +65,7 @@ function showError(message) {
     errorDiv.textContent = message;
   } else {
     // Fallback: replace content area
-    const content = document.getElementById('thecontent');
+    const content = document.querySelector('#thecontent');
     if (content) {
       content.innerHTML = `
         <div class="alert alert-danger" role="alert">
@@ -80,24 +79,22 @@ function showError(message) {
   }
 }
 
-// Setup POST JSON for any forms on the page
+// Setup POST for the dataform
 function setupFormHandling() {
-  const forms = document.querySelectorAll('form');
-  forms.forEach(form => {
+  const form = document.querySelector('#dataform');
+  if (form) {
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       
       const formData = new FormData(form);
-      const data = Object.fromEntries(formData);
       
       try {
         const response = await fetch(form.action || window.location.pathname, {
           method: 'PUT',
           headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Accept': 'application/json'
           },
-          body: JSON.stringify(data),
+          body: formData,
           credentials: 'same-origin'
         });
         
@@ -113,7 +110,7 @@ function setupFormHandling() {
         showError('<%== __('Network error - please try again') %>');
       }
     });
-  });
+  }
 }
 
 handleConfirmation();

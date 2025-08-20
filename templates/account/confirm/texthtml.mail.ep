@@ -1,4 +1,3 @@
-
 <h4><%== __('User registration') %></h4>
 
 <p>

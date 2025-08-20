@@ -18,31 +18,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
-msgstr ""
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
 
 msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr ""
+msgstr "&copy;2022 &mdash; please share and add star on {sitename}!"
 
 msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr ""
+msgstr "&copy;2023 &mdash; please share and add star on {sitename}!"
 
 msgid "&copy;{year}&nbsp;{author}"
-msgstr ""
+msgstr "&copy;{year}&nbsp;{author}"
 
 msgid "1 database"
 msgid_plural "{number} databases"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 database"
+msgstr[1] "{number} databases"
 
 msgid "1 dns domain"
 msgid_plural "{number} dns domains"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 DNS domain"
+msgstr[1] "{number} DNS domains"
 
 msgid "1 domain"
 msgid_plural "{number} domains"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 domain"
+msgstr[1] "{number} domains"
 
 msgid "1 invoice"
 msgid_plural "{number} invoices"
@@ -65,7 +65,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "404: Missing document"
-msgstr ""
+msgstr "404: Missing document"
 
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr ""
@@ -95,7 +95,7 @@ msgid "According to our notes invoice {number} remains unpaid."
 msgstr ""
 
 msgid "Account confirmation"
-msgstr ""
+msgstr "Account confirmation"
 
 msgid "Actions"
 msgstr ""
@@ -196,6 +196,9 @@ msgstr ""
 msgid "Amount to pay: {costsum} {currency}"
 msgstr ""
 
+msgid "An error occurred"
+msgstr "An error occurred"
+
 msgid "Are you sure you want to delete this record?"
 msgstr ""
 
@@ -206,6 +209,12 @@ msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
 msgstr ""
 
 msgid "At least 8 characters including capitals and digits"
+msgstr ""
+
+msgid "At least {min} characters from: {chars}"
+msgstr ""
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr ""
 
 msgid "Authorize"
@@ -275,7 +284,7 @@ msgid "Captcha image"
 msgstr ""
 
 msgid "Captcha was wrong"
-msgstr ""
+msgstr "Captcha was wrong"
 
 msgid "Change password"
 msgstr ""
@@ -355,7 +364,16 @@ msgstr ""
 msgid "Confirm your email address"
 msgstr ""
 
+msgid "Confirmation Failed"
+msgstr ""
+
 msgid "Confirmation code"
+msgstr ""
+
+msgid "Confirmation error:"
+msgstr ""
+
+msgid "Confirmation failed"
 msgstr ""
 
 msgid "Confirmation request sent"
@@ -493,6 +511,9 @@ msgstr ""
 msgid "Database error"
 msgstr ""
 
+msgid "Database error occurred"
+msgstr ""
+
 msgid "Databases"
 msgstr ""
 
@@ -571,6 +592,9 @@ msgstr ""
 msgid "Edit customer {customerid}"
 msgstr ""
 
+msgid "Edit this page"
+msgstr ""
+
 msgid "Edit zone"
 msgstr ""
 
@@ -580,10 +604,16 @@ msgstr ""
 msgid "Email"
 msgstr ""
 
+msgid "Email %s has been verified"
+msgstr ""
+
 msgid "Email %s verified"
 msgstr ""
 
 msgid "Email (billing)"
+msgstr ""
+
+msgid "Email Confirmed!"
 msgstr ""
 
 msgid "Email Invoice"
@@ -596,7 +626,7 @@ msgid "Email Order"
 msgstr ""
 
 msgid "Email confirmation"
-msgstr ""
+msgstr "Email confirmation"
 
 msgid "Email not valid"
 msgstr ""
@@ -665,6 +695,12 @@ msgid "Empty surname"
 msgstr ""
 
 msgid "Empty telephone"
+msgstr ""
+
+msgid "End main content"
+msgstr ""
+
+msgid "End side content"
 msgstr ""
 
 msgid "English"
@@ -769,6 +805,9 @@ msgstr ""
 msgid "For more information, visit the Fortnox website:"
 msgstr ""
 
+msgid "Form submission error:"
+msgstr ""
+
 msgid "Fortnox"
 msgstr ""
 
@@ -839,6 +878,9 @@ msgid "In your personal menu you find your {panel} among other things."
 msgstr ""
 
 msgid "Including VAT"
+msgstr ""
+
+msgid "Invalid confirmation link"
 msgstr ""
 
 msgid "Invalid email"
@@ -1017,10 +1059,16 @@ msgstr ""
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr ""
 
+msgid "Logotype"
+msgstr ""
+
 msgid "Logotype leading to start"
 msgstr ""
 
 msgid "Logotype leading to start page"
+msgstr ""
+
+msgid "Logotype linked to {site}"
 msgstr ""
 
 msgid "Lost password?"
@@ -1105,6 +1153,9 @@ msgid "Net amount"
 msgstr ""
 
 msgid "Net amount:"
+msgstr ""
+
+msgid "Network error - please try again"
 msgstr ""
 
 msgid "New account"
@@ -1236,6 +1287,21 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+msgid "Password must be at least {min} characters"
+msgstr ""
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr ""
+
+msgid "Password must contain at least {min} number(s)"
+msgstr ""
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr ""
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr ""
+
 msgid "Password was wrong or username doesn't exist."
 msgstr ""
 
@@ -1266,6 +1332,9 @@ msgstr ""
 msgid "Paypal:"
 msgstr ""
 
+msgid "People rocketing to the sky"
+msgstr ""
+
 msgid "Personal"
 msgstr ""
 
@@ -1278,8 +1347,14 @@ msgstr ""
 msgid "Phone"
 msgstr ""
 
+msgid "Please check your confirmation link or register again."
+msgstr ""
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr ""
+
+msgid "Please enter a valid email address"
+msgstr "Please enter a valid email address"
 
 msgid "Please log in to access that page"
 msgstr ""
@@ -1596,6 +1671,12 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
+msgid "Start main content"
+msgstr ""
+
+msgid "Start side content"
+msgstr ""
+
 msgid "Statistics"
 msgstr ""
 
@@ -1686,11 +1767,14 @@ msgstr ""
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr ""
 
+msgid "This confirmation link is invalid or has expired"
+msgstr ""
+
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr ""
 
 msgid "This field is required"
-msgstr ""
+msgstr "This field is required"
 
 msgid "This file is distributed under the same license as the {project} package."
 msgstr ""
@@ -1771,9 +1855,21 @@ msgid "User manual"
 msgstr ""
 
 msgid "User registration"
-msgstr ""
+msgstr "User registration"
 
 msgid "Username"
+msgstr ""
+
+msgid "Username already exists"
+msgstr "Username already exists"
+
+msgid "Username can only contain {chars}"
+msgstr ""
+
+msgid "Username could not be created"
+msgstr "Username could not be created"
+
+msgid "Username must be at least {min} characters"
 msgstr ""
 
 msgid "Users and groups"
@@ -1846,6 +1942,9 @@ msgid "Yes"
 msgstr ""
 
 msgid "You can also post in our discussions."
+msgstr ""
+
+msgid "You can now log in to your account."
 msgstr ""
 
 msgid "You have registered a new user account on {site}."
@@ -1960,6 +2059,9 @@ msgid "product"
 msgstr ""
 
 msgid "standby firewall"
+msgstr ""
+
+msgid "supporters"
 msgstr ""
 
 msgid "user"

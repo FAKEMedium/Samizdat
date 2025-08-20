@@ -1,8 +1,7 @@
 <%== '<!DOCTYPE html>' %>
 % use Mojo::Util qw(trim);
-% trim $web->{sidebar} if exists $web->{sidebar};
 % my $dir = 'ltr';
-% if (language eq 'ar' || language eq 'he' || language eq 'fa') {
+% if (language =~ /^(ar|he|fa)$/i) {
 %   $dir = 'rtl';
 % }
 <html class="no-js" lang="<%== language %>" dir="<%== $dir %>">
@@ -30,7 +29,7 @@
     <%= asset_tag '/samizdat.css' %>
 % if (exists $web->{css} && '' ne $web->{css}) {
     <style id="headcss"> /*<![CDATA[*/
-       <%== web->indent($web->{css}, 3) =%>
+       <%== web->indent(eval {trim $web->{css}}, 3) =%>
      /*]]>*/ </style>
 % }
   </head>
@@ -47,20 +46,20 @@
     <header>
       <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
-        <%== web->indent(eval {include 'chunks/logobar'}, 4) =%>
+        <%== web->indent(eval {trim include 'chunks/logobar'}, 4) =%>
       </div>
       <div class="widewrapper bg-menubar d-print-none">
         <div id="menuwrapper" class="container position-relative" aria-live="polite">
           <nav id="sitenav" class="navbar navbar-expand-sm col-12 col-xl-12 pl-3 pl-sm-2 font-weight-bold">
             <div class="collapse navbar-collapse" id="navbarResponsive">
-              <%== web->indent(eval {include 'chunks/menu'}, 7) =%>
+              <%== web->indent(eval {trim include 'chunks/menu'}, 7) =%>
             </div>
           </nav>
           <aside id="leftlinks">
-            <%== web->indent(eval {include 'chunks/leftlinks'}, 6) =%>
+            <%== web->indent(eval {trim include 'chunks/leftlinks'}, 6) =%>
           </aside>
           <aside id="rightlinks">
-            <%== web->indent(eval {include 'chunks/rightlinks'}, 6) =%>
+            <%== web->indent(eval {trim include 'chunks/rightlinks'}, 6) =%>
           </aside>
         </div>
       </div>
@@ -84,39 +83,59 @@
         <div class="row">
           <div class="col-sm-8 editable" id="thecontent">
             <%== limiter 'start' %>
-            <%== web->indent(content, 6) =%>
+            <%== web->indent(eval {trim content}, 6) =%>
             <%== limiter 'end' %>
           </div>
           <div class="col-sm-4">
             <%== limiter 'startside' %>
-            <%== web->indent($web->{sidebar}, 6) =%>
+            <%== web->indent(eval {trim $web->{sidebar}}, 6) =%>
             <%== limiter 'endside' %>
           </div>
         </div>
 <% } else { =%>
         <%== limiter 'start' %>
-        <%== web->indent(content, 4) =%>
+        <%== web->indent(eval {trim content}, 4) =%>
         <%== limiter 'end' %>
 <%  } =%>
       </section>
     </main>
     <footer id="mainfooter" class="mt-0 py-3 container">
-      <%== web->indent(eval {include 'chunks/footer'}, 3) =%>
+      <%== web->indent(eval {trim include 'chunks/footer'}, 3) =%>
     </footer>
     <%= asset_tag '/samizdat.js', id => 'bundlejs', defer => 'defer' %>
-% if ((exists($web->{script}) && $web->{script}) || (exists(config->{analytics}) && keys(%{config->{analytics}}))) {
     <script id="endjs"> /*<![CDATA[*/
-      <%== web->indent(eval {include 'chunks/analytics'}, 3) =%>
+% if (exists(config->{analytics}) && keys(%{config->{analytics}})) {
+      <%== web->indent(eval {trim include 'chunks/analytics'}, 3) %>
+
+% }
       function runEndJSScript() {
-        <%== web->indent($web->{script}, 4) =%>
+        // Load authenticated assets if user is logged in
+        // username is set by checkUsername() in user.js which runs on DOMContentLoaded
+        if (typeof username !== 'undefined' && username !== '') {
+          // Load authenticated CSS if not already loaded
+          if (!document.querySelector('link[href*="authenticated.css"]')) {
+            const authCSS = document.createElement('link');
+            authCSS.rel = 'stylesheet';
+            authCSS.href = '/assets/authenticated.css';
+            document.head.appendChild(authCSS);
+          }
+          
+          // Load authenticated JS if not already loaded
+          if (!document.querySelector('script[src*="authenticated.js"]')) {
+            const authJS = document.createElement('script');
+            authJS.src = '/assets/authenticated.js';
+            authJS.defer = true;
+            document.body.appendChild(authJS);
+          }
+        }
+        
+        <%== web->indent(eval {trim $web->{script}}, 4) =%>
       }
-      
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', runEndJSScript);
       } else {
         runEndJSScript();
       }
-      /*]]>*/ </script>
-% }
+    /*]]>*/ </script>
   </body>
 </html>

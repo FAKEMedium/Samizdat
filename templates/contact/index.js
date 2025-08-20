@@ -15,7 +15,7 @@ form.addEventListener('submit', async (event) => {
   const result = await response.json();
 
   if (result.success) {
-    document.querySelector('#compose').innerHTML = result.sent;
+    document.querySelector('#thecontent').innerHTML = result.sent;
     // Scoll to start of content
     const el = document.querySelector('#startdoc');
     if (el) {

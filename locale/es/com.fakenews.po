@@ -110,10 +110,10 @@ msgid "Active"
 msgstr "Activo"
 
 msgid "Add"
-msgstr ""
+msgstr "Añadir"
 
 msgid "Add content"
-msgstr ""
+msgstr "Añadir contenido"
 
 msgid "Add customer"
 msgstr "Añadir cliente"
@@ -125,16 +125,16 @@ msgid "Add domain"
 msgstr "Añadir dominio"
 
 msgid "Add grop"
-msgstr ""
+msgstr "Añadir grupo"
 
 msgid "Add group"
-msgstr ""
+msgstr "Añadir grupo"
 
 msgid "Add mail domain"
 msgstr "Añadir dominio de correo"
 
 msgid "Add page"
-msgstr ""
+msgstr "Añadir página"
 
 msgid "Add product"
 msgstr "Añadir producto"
@@ -143,7 +143,7 @@ msgid "Add subscription"
 msgstr "Añadir suscripción"
 
 msgid "Add user"
-msgstr ""
+msgstr "Añadir usuario"
 
 msgid "Add voucher"
 msgstr "Añadir vale"
@@ -152,7 +152,7 @@ msgid "Add website"
 msgstr "Añadir sitio web"
 
 msgid "Add zone"
-msgstr ""
+msgstr "Añadir zona"
 
 msgid "Address"
 msgstr "Dirección"
@@ -196,6 +196,9 @@ msgstr "Importe a pagar incluyendo {percent} de IVA: {costsum} {currency}"
 msgid "Amount to pay: {costsum} {currency}"
 msgstr "Importe a pagar: {costsum} {currency}"
 
+msgid "An error occurred"
+msgstr "Ocurrió un error"
+
 msgid "Are you sure you want to delete this record?"
 msgstr "¿Está seguro de que desea eliminar este registro?"
 
@@ -207,6 +210,12 @@ msgstr "Al menos 3 caracteres de a-z 0-9 -, debe comenzar con a-z"
 
 msgid "At least 8 characters including capitals and digits"
 msgstr "Al menos 8 caracteres incluyendo mayúsculas y dígitos"
+
+msgid "At least {min} characters from: {chars}"
+msgstr "Al menos {min} caracteres de: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "Al menos {min} caracteres: {upper} mayúscula(s), {lower} minúscula(s), {num} número(s), {special} carácter(es) especial(es)"
 
 msgid "Authorize"
 msgstr "Autorizar"
@@ -284,7 +293,7 @@ msgid "Changed status."
 msgstr "Estado cambiado."
 
 msgid "Check zones"
-msgstr ""
+msgstr "Verificar zonas"
 
 msgid "Choose a password"
 msgstr "Elegir una contraseña"
@@ -308,7 +317,7 @@ msgid "City (billing)"
 msgstr "Ciudad (facturación)"
 
 msgid "Click to pop dialog."
-msgstr ""
+msgstr "Haga clic para abrir el diálogo."
 
 msgid "Click to pop login dialog."
 msgstr "Haga clic para abrir el diálogo de inicio de sesión."
@@ -355,8 +364,17 @@ msgstr "Confirmar firma de encuesta"
 msgid "Confirm your email address"
 msgstr "Confirmar su dirección de correo electrónico"
 
+msgid "Confirmation Failed"
+msgstr "Confirmación fallida"
+
 msgid "Confirmation code"
 msgstr "Código de confirmación"
+
+msgid "Confirmation error:"
+msgstr "Error de confirmación:"
+
+msgid "Confirmation failed"
+msgstr "Confirmación fallida"
 
 msgid "Confirmation request sent"
 msgstr "Solicitud de confirmación enviada"
@@ -493,6 +511,9 @@ msgstr "Base de datos"
 msgid "Database error"
 msgstr "Error de base de datos"
 
+msgid "Database error occurred"
+msgstr "Error de base de datos ocurrido"
+
 msgid "Databases"
 msgstr "Bases de datos"
 
@@ -571,6 +592,9 @@ msgstr "Editar"
 msgid "Edit customer {customerid}"
 msgstr "Editar cliente {customerid}"
 
+msgid "Edit this page"
+msgstr "Editar esta página"
+
 msgid "Edit zone"
 msgstr "Editar zona"
 
@@ -580,11 +604,17 @@ msgstr "Economía"
 msgid "Email"
 msgstr "Correo electrónico"
 
+msgid "Email %s has been verified"
+msgstr "El email %s ha sido verificado"
+
 msgid "Email %s verified"
 msgstr "Correo electrónico %s verificado"
 
 msgid "Email (billing)"
 msgstr "Correo electrónico (facturación)"
+
+msgid "Email Confirmed!"
+msgstr "¡Email confirmado!"
 
 msgid "Email Invoice"
 msgstr "Enviar Factura por Email"
@@ -666,6 +696,12 @@ msgstr "Apellido vacío"
 
 msgid "Empty telephone"
 msgstr "Teléfono vacío"
+
+msgid "End main content"
+msgstr "Fin del contenido principal"
+
+msgid "End side content"
+msgstr "Fin del contenido lateral"
 
 msgid "English"
 msgstr "Inglés"
@@ -769,8 +805,11 @@ msgstr "Nombre"
 msgid "For more information, visit the Fortnox website:"
 msgstr "Para más información, visite el sitio web de Fortnox:"
 
+msgid "Form submission error:"
+msgstr "Error de envío del formulario:"
+
 msgid "Fortnox"
-msgstr ""
+msgstr "Fortnox"
 
 msgid "Fortnox integration"
 msgstr "Integración Fortnox"
@@ -840,6 +879,9 @@ msgstr "En su menú personal encontrará su {panel} entre otras cosas."
 
 msgid "Including VAT"
 msgstr "IVA incluido"
+
+msgid "Invalid confirmation link"
+msgstr "Enlace de confirmación inválido"
 
 msgid "Invalid email"
 msgstr "Correo electrónico no válido"
@@ -976,7 +1018,7 @@ msgid "Language"
 msgstr "Idioma"
 
 msgid "Languages"
-msgstr ""
+msgstr "Idiomas"
 
 msgid "Last name"
 msgstr "Apellido"
@@ -1017,11 +1059,17 @@ msgstr "Inicio de sesión bloqueado"
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr "El inicio de sesión está temporalmente bloqueado debido a demasiados intentos fallidos desde {ip}."
 
+msgid "Logotype"
+msgstr "Logotipo"
+
 msgid "Logotype leading to start"
 msgstr "Logotipo que lleva al inicio"
 
 msgid "Logotype leading to start page"
 msgstr "Logotipo que lleva a la página de inicio"
+
+msgid "Logotype linked to {site}"
+msgstr "Logotipo enlazado a {site}"
 
 msgid "Lost password?"
 msgstr "¿Contraseña olvidada?"
@@ -1045,7 +1093,7 @@ msgid "Mail domains"
 msgstr "Dominios de correo"
 
 msgid "Mail dump"
-msgstr ""
+msgstr "Volcado de correo"
 
 msgid "Mail sent through own servers"
 msgstr "Correo enviado a través de servidores propios"
@@ -1063,7 +1111,7 @@ msgid "Mark payment"
 msgstr "Marcar pago"
 
 msgid "Menus"
-msgstr ""
+msgstr "Menús"
 
 msgid "Message"
 msgstr "Mensaje"
@@ -1107,6 +1155,9 @@ msgstr "Importe neto"
 msgid "Net amount:"
 msgstr "Importe neto:"
 
+msgid "Network error - please try again"
+msgstr "Error de red - por favor inténtelo de nuevo"
+
 msgid "New account"
 msgstr "Nueva cuenta"
 
@@ -1147,7 +1198,7 @@ msgid "No invoicing"
 msgstr "Sin facturación"
 
 msgid "No pages found."
-msgstr ""
+msgstr "No se encontraron páginas."
 
 msgid "No selected customer."
 msgstr "Ningún cliente seleccionado."
@@ -1231,10 +1282,25 @@ msgid "Panel"
 msgstr "Panel"
 
 msgid "Paper in typewriter"
-msgstr ""
+msgstr "Papel en máquina de escribir"
 
 msgid "Password"
 msgstr "Contraseña"
+
+msgid "Password must be at least {min} characters"
+msgstr "La contraseña debe tener al menos {min} caracteres"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "La contraseña debe contener al menos {min} letra(s) minúscula(s)"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "La contraseña debe contener al menos {min} número(s)"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "La contraseña debe contener al menos {min} carácter(es) especial(es)"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "La contraseña debe contener al menos {min} letra(s) mayúscula(s)"
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "La contraseña era incorrecta o el nombre de usuario no existe."
@@ -1266,6 +1332,9 @@ msgstr "Paypal"
 msgid "Paypal:"
 msgstr "Paypal:"
 
+msgid "People rocketing to the sky"
+msgstr "Personas disparando hacia el cielo"
+
 msgid "Personal"
 msgstr "Personal"
 
@@ -1278,8 +1347,14 @@ msgstr "Panel personal"
 msgid "Phone"
 msgstr "Teléfono"
 
+msgid "Please check your confirmation link or register again."
+msgstr "Por favor revise su enlace de confirmación o regístrese de nuevo."
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Por favor confirme su dirección de correo electrónico haciendo clic en el siguiente enlace:"
+
+msgid "Please enter a valid email address"
+msgstr "Por favor ingrese una dirección de correo electrónico válida"
 
 msgid "Please log in to access that page"
 msgstr "Por favor inicie sesión para acceder a esa página"
@@ -1324,10 +1399,10 @@ msgid "Priority"
 msgstr "Prioridad"
 
 msgid "Privilege sets"
-msgstr ""
+msgstr "Conjuntos de privilegios"
 
 msgid "Privileges"
-msgstr ""
+msgstr "Privilegios"
 
 msgid "Products"
 msgstr "Productos"
@@ -1423,7 +1498,7 @@ msgid "Resources"
 msgstr "Recursos"
 
 msgid "Roles"
-msgstr ""
+msgstr "Roles"
 
 msgid "Roomservice"
 msgstr "Servicio de habitaciones"
@@ -1456,7 +1531,7 @@ msgid "Search"
 msgstr "Buscar"
 
 msgid "Search content"
-msgstr ""
+msgstr "Buscar contenido"
 
 msgid "Search field for {what}"
 msgstr "Campo de búsqueda para {what}"
@@ -1480,7 +1555,7 @@ msgid "Search for product"
 msgstr "Buscar producto"
 
 msgid "Search for user or group"
-msgstr ""
+msgstr "Buscar usuario o grupo"
 
 msgid "Search for website"
 msgstr "Buscar sitio web"
@@ -1489,10 +1564,10 @@ msgid "Search for zone"
 msgstr "Buscar zona"
 
 msgid "Search pages..."
-msgstr ""
+msgstr "Buscar páginas..."
 
 msgid "Search web content"
-msgstr ""
+msgstr "Buscar contenido web"
 
 msgid "Select"
 msgstr "Seleccionar"
@@ -1596,8 +1671,14 @@ msgstr "Precio especial"
 msgid "Start"
 msgstr "Inicio"
 
+msgid "Start main content"
+msgstr "Inicio del contenido principal"
+
+msgid "Start side content"
+msgstr "Inicio del contenido lateral"
+
 msgid "Statistics"
-msgstr ""
+msgstr "Estadísticas"
 
 msgid "Strictly for Rymdweb"
 msgstr "Estrictamente para Rymdweb"
@@ -1685,6 +1766,9 @@ msgstr "La página {docpath} no se encontró."
 
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "La acción está listada en la lista principal de Nasdaq Estocolmo."
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "Este enlace de confirmación es inválido o ha expirado"
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "Esta demostración muestra el resultado del ayudante de plantillas SVG de Samizdat."
@@ -1776,8 +1860,20 @@ msgstr "Registro de usuario"
 msgid "Username"
 msgstr "Nombre de usuario"
 
+msgid "Username already exists"
+msgstr "El nombre de usuario ya existe"
+
+msgid "Username can only contain {chars}"
+msgstr "El nombre de usuario solo puede contener {chars}"
+
+msgid "Username could not be created"
+msgstr "No se pudo crear el nombre de usuario"
+
+msgid "Username must be at least {min} characters"
+msgstr "El nombre de usuario debe tener al menos {min} caracteres"
+
 msgid "Users and groups"
-msgstr ""
+msgstr "Usuarios y grupos"
 
 msgid "VAT"
 msgstr "IVA"
@@ -1847,6 +1943,9 @@ msgstr "Sí"
 
 msgid "You can also post in our discussions."
 msgstr "También puede publicar en nuestras discusiones."
+
+msgid "You can now log in to your account."
+msgstr "Ahora puede iniciar sesión en su cuenta."
 
 msgid "You have registered a new user account on {site}."
 msgstr "Ha registrado una nueva cuenta de usuario en {site}."
@@ -1927,7 +2026,7 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "content"
-msgstr ""
+msgstr "contenido"
 
 msgid "control panel"
 msgstr "panel de control"
@@ -1962,8 +2061,11 @@ msgstr "producto"
 msgid "standby firewall"
 msgstr "cortafuegos en espera"
 
+msgid "supporters"
+msgstr "seguidores"
+
 msgid "user"
-msgstr ""
+msgstr "usuario"
 
 msgid "website"
 msgstr "sitio web"

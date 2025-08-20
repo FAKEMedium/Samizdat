@@ -110,10 +110,10 @@ msgid "Active"
 msgstr "सक्रिय"
 
 msgid "Add"
-msgstr ""
+msgstr "जोड़ें"
 
 msgid "Add content"
-msgstr ""
+msgstr "सामग्री जोड़ें"
 
 msgid "Add customer"
 msgstr "ग्राहक जोड़ें"
@@ -125,16 +125,16 @@ msgid "Add domain"
 msgstr "डोमेन जोड़ें"
 
 msgid "Add grop"
-msgstr ""
+msgstr "समूह जोड़ें"
 
 msgid "Add group"
-msgstr ""
+msgstr "समूह जोड़ें"
 
 msgid "Add mail domain"
 msgstr "मेल डोमेन जोड़ें"
 
 msgid "Add page"
-msgstr ""
+msgstr "पृष्ठ जोड़ें"
 
 msgid "Add product"
 msgstr "उत्पाद जोड़ें"
@@ -143,7 +143,7 @@ msgid "Add subscription"
 msgstr "सदस्यता जोड़ें"
 
 msgid "Add user"
-msgstr ""
+msgstr "उपयोगकर्ता जोड़ें"
 
 msgid "Add voucher"
 msgstr "वाउचर जोड़ें"
@@ -152,7 +152,7 @@ msgid "Add website"
 msgstr "वेबसाइट जोड़ें"
 
 msgid "Add zone"
-msgstr ""
+msgstr "ज़ेत्र जोड़ें"
 
 msgid "Address"
 msgstr "पता"
@@ -196,6 +196,9 @@ msgstr "भुगतान राशि {percent} वैट सहित: {costs
 msgid "Amount to pay: {costsum} {currency}"
 msgstr "भुगतान राशि: {costsum} {currency}"
 
+msgid "An error occurred"
+msgstr "एक त्रुटि आई"
+
 msgid "Are you sure you want to delete this record?"
 msgstr "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?"
 
@@ -207,6 +210,12 @@ msgstr "कम से कम 3 अक्षर a-z 0-9 - से, a-z से श�
 
 msgid "At least 8 characters including capitals and digits"
 msgstr "कम से कम 8 अक्षर, बड़े अक्षर और अंक शामिल"
+
+msgid "At least {min} characters from: {chars}"
+msgstr "कम से कम {min} अक्षर: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "कम से कम {min} अक्षर: {upper} बड़े अक्षर, {lower} छोटे अक्षर, {num} संख्या, {special} विशेष अक्षर"
 
 msgid "Authorize"
 msgstr "प्राधिकृत करें"
@@ -284,7 +293,7 @@ msgid "Changed status."
 msgstr "स्थिति बदली गई।"
 
 msgid "Check zones"
-msgstr ""
+msgstr "क्षेत्रों की जांच करें"
 
 msgid "Choose a password"
 msgstr "पासवर्ड चुनें"
@@ -308,7 +317,7 @@ msgid "City (billing)"
 msgstr "शहर (बिलिंग)"
 
 msgid "Click to pop dialog."
-msgstr ""
+msgstr "डायलॉग खोलने के लिए क्लिक करें।"
 
 msgid "Click to pop login dialog."
 msgstr "लॉगिन डायलॉग खोलने के लिए क्लिक करें।"
@@ -355,8 +364,17 @@ msgstr "पोल हस्ताक्षर की पुष्टि कर�
 msgid "Confirm your email address"
 msgstr "अपने ईमेल पते की पुष्टि करें"
 
+msgid "Confirmation Failed"
+msgstr "पुष्टि विफल"
+
 msgid "Confirmation code"
 msgstr "पुष्टिकरण कोड"
+
+msgid "Confirmation error:"
+msgstr "पुष्टि त्रुटि:"
+
+msgid "Confirmation failed"
+msgstr "पुष्टि विफल"
 
 msgid "Confirmation request sent"
 msgstr "पुष्टिकरण अनुरोध भेजा गया"
@@ -493,6 +511,9 @@ msgstr "डेटाबेस"
 msgid "Database error"
 msgstr "डेटाबेस त्रुटि"
 
+msgid "Database error occurred"
+msgstr "डेटाबेस एरर आया"
+
 msgid "Databases"
 msgstr "डेटाबेस"
 
@@ -571,6 +592,9 @@ msgstr "संपादित करें"
 msgid "Edit customer {customerid}"
 msgstr "ग्राहक {customerid} संपादित करें"
 
+msgid "Edit this page"
+msgstr "इस पेज को संपादित करें"
+
 msgid "Edit zone"
 msgstr "ज़ोन संपादित करें"
 
@@ -580,11 +604,17 @@ msgstr "अर्थव्यवस्था"
 msgid "Email"
 msgstr "ईमेल"
 
+msgid "Email %s has been verified"
+msgstr "ईमेल %s सत्यापित हो गया है"
+
 msgid "Email %s verified"
 msgstr "ईमेल %s सत्यापित"
 
 msgid "Email (billing)"
 msgstr "ईमेल (बिलिंग)"
+
+msgid "Email Confirmed!"
+msgstr "ईमेल पुष्टि हो गयी!"
 
 msgid "Email Invoice"
 msgstr "ईमेल इनवॉइस"
@@ -666,6 +696,12 @@ msgstr "खाली उपनाम"
 
 msgid "Empty telephone"
 msgstr "खाली टेलीफोन"
+
+msgid "End main content"
+msgstr "मुख्य सामग्री समाप्त"
+
+msgid "End side content"
+msgstr "पार्श्व सामग्री समाप्त"
 
 msgid "English"
 msgstr "अंग्रेज़ी"
@@ -769,8 +805,11 @@ msgstr "पहला नाम"
 msgid "For more information, visit the Fortnox website:"
 msgstr "अधिक जानकारी के लिए, Fortnox वेबसाइट पर जाएं:"
 
+msgid "Form submission error:"
+msgstr "फ़ॉर्म सबमिशन त्रुटि:"
+
 msgid "Fortnox"
-msgstr ""
+msgstr "Fortnox"
 
 msgid "Fortnox integration"
 msgstr "Fortnox एकीकरण"
@@ -840,6 +879,9 @@ msgstr "अपने व्यक्तिगत मेनू में आप �
 
 msgid "Including VAT"
 msgstr "वैट सहित"
+
+msgid "Invalid confirmation link"
+msgstr "अमान्य पुष्टि लिंक"
 
 msgid "Invalid email"
 msgstr "अमान्य ईमेल"
@@ -976,7 +1018,7 @@ msgid "Language"
 msgstr "भाषा"
 
 msgid "Languages"
-msgstr ""
+msgstr "भाषाएँ"
 
 msgid "Last name"
 msgstr "अंतिम नाम"
@@ -1017,11 +1059,17 @@ msgstr "लॉगिन अवरुद्ध"
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr "{ip} से अत्यधिक विफल प्रयासों के कारण लॉगिन अस्थायी रूप से अवरुद्ध है।"
 
+msgid "Logotype"
+msgstr "लोगो"
+
 msgid "Logotype leading to start"
 msgstr "लोगोटाइप शुरुआत की ओर ले जाता है"
 
 msgid "Logotype leading to start page"
 msgstr "लोगोटाइप शुरुआती पृष्ठ की ओर ले जाता है"
+
+msgid "Logotype linked to {site}"
+msgstr "{site} से जुड़ा लोगो"
 
 msgid "Lost password?"
 msgstr "पासवर्ड खो गया?"
@@ -1045,7 +1093,7 @@ msgid "Mail domains"
 msgstr "मेल डोमेन"
 
 msgid "Mail dump"
-msgstr ""
+msgstr "मेल डंप"
 
 msgid "Mail sent through own servers"
 msgstr "अपने सर्वर के माध्यम से भेजी गई मेल"
@@ -1063,7 +1111,7 @@ msgid "Mark payment"
 msgstr "भुगतान चिह्नित करें"
 
 msgid "Menus"
-msgstr ""
+msgstr "मेनू"
 
 msgid "Message"
 msgstr "संदेश"
@@ -1107,6 +1155,9 @@ msgstr "निवल राशि"
 msgid "Net amount:"
 msgstr "निवल राशि:"
 
+msgid "Network error - please try again"
+msgstr "नेटवर्क त्रुटि - कृपया पुनः प्रयास करें"
+
 msgid "New account"
 msgstr "नया खाता"
 
@@ -1147,7 +1198,7 @@ msgid "No invoicing"
 msgstr "कोई बिलिंग नहीं"
 
 msgid "No pages found."
-msgstr ""
+msgstr "कोई पेज नहीं मिला।"
 
 msgid "No selected customer."
 msgstr "कोई ग्राहक चयनित नहीं।"
@@ -1231,10 +1282,25 @@ msgid "Panel"
 msgstr "पैनल"
 
 msgid "Paper in typewriter"
-msgstr ""
+msgstr "टाइपराइटर में कागज"
 
 msgid "Password"
 msgstr "पासवर्ड"
+
+msgid "Password must be at least {min} characters"
+msgstr "पासवर्ड में कम से कम {min} अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "पासवर्ड में कम से कम {min} छोटे अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "पासवर्ड में कम से कम {min} संख्या होनी चाहिए"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "पासवर्ड में कम से कम {min} विशेष अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "पासवर्ड में कम से कम {min} बड़े अक्षर होने चाहिए"
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "पासवर्ड गलत था या उपयोगकर्ता नाम मौजूद नहीं है।"
@@ -1266,6 +1332,9 @@ msgstr "पेपाल"
 msgid "Paypal:"
 msgstr "पेपाल:"
 
+msgid "People rocketing to the sky"
+msgstr "लोग आकाश की ओर उड़ते हुए"
+
 msgid "Personal"
 msgstr "व्यक्तिगत"
 
@@ -1278,8 +1347,14 @@ msgstr "व्यक्तिगत पैनल"
 msgid "Phone"
 msgstr "फोन"
 
+msgid "Please check your confirmation link or register again."
+msgstr "कृपया अपने पुष्टि लिंक की जाँच करें या फिर से पंजीकरण करें।"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "कृपया निम्न लिंक पर क्लिक करके अपने ईमेल पते की पुष्टि करें:"
+
+msgid "Please enter a valid email address"
+msgstr "कृपया एक वैध ईमेल पता दर्ज करें"
 
 msgid "Please log in to access that page"
 msgstr "कृपया उस पृष्ठ तक पहुंचने के लिए लॉग इन करें"
@@ -1324,10 +1399,10 @@ msgid "Priority"
 msgstr "प्राथमिकता"
 
 msgid "Privilege sets"
-msgstr ""
+msgstr "विशेषाधिकार सेट"
 
 msgid "Privileges"
-msgstr ""
+msgstr "विशेषाधिकार"
 
 msgid "Products"
 msgstr "उत्पाद"
@@ -1423,7 +1498,7 @@ msgid "Resources"
 msgstr "संसाधन"
 
 msgid "Roles"
-msgstr ""
+msgstr "भूमिकाएँ"
 
 msgid "Roomservice"
 msgstr "रूम सर्विस"
@@ -1456,7 +1531,7 @@ msgid "Search"
 msgstr "खोजें"
 
 msgid "Search content"
-msgstr ""
+msgstr "सामग्री खोजें"
 
 msgid "Search field for {what}"
 msgstr "{what} के लिए खोज फील्ड"
@@ -1480,7 +1555,7 @@ msgid "Search for product"
 msgstr "उत्पाद खोजें"
 
 msgid "Search for user or group"
-msgstr ""
+msgstr "उपयोगकर्ता या समूह खोजें"
 
 msgid "Search for website"
 msgstr "वेबसाइट खोजें"
@@ -1489,10 +1564,10 @@ msgid "Search for zone"
 msgstr "ज़ोन खोजें"
 
 msgid "Search pages..."
-msgstr ""
+msgstr "पेज खोजें..."
 
 msgid "Search web content"
-msgstr ""
+msgstr "वेब सामग्री खोजें"
 
 msgid "Select"
 msgstr "चुनें"
@@ -1596,8 +1671,14 @@ msgstr "विशेष मूल्य"
 msgid "Start"
 msgstr "शुरू करें"
 
+msgid "Start main content"
+msgstr "मुख्य सामग्री शुरू"
+
+msgid "Start side content"
+msgstr "पार्श्व सामग्री शुरू"
+
 msgid "Statistics"
-msgstr ""
+msgstr "आँकड़े"
 
 msgid "Strictly for Rymdweb"
 msgstr "केवल Rymdweb के लिए"
@@ -1685,6 +1766,9 @@ msgstr "पृष्ठ {docpath} नहीं मिला।"
 
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "शेयर Nasdaq स्टॉकहोम की मुख्य सूची में सूचीबद्ध है।"
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "यह पुष्टि लिंक अमान्य है या समाप्त हो गया है"
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "यह प्रदर्शन समिज़दात के SVG टेम्पलेट हेल्पर के परिणाम दिखाता है।"
@@ -1776,8 +1860,20 @@ msgstr "उपयोगकर्ता पंजीकरण"
 msgid "Username"
 msgstr "उपयोगकर्ता नाम"
 
+msgid "Username already exists"
+msgstr "उपयोगकर्ता नाम पहले से मौजूद है"
+
+msgid "Username can only contain {chars}"
+msgstr "उपयोगकर्ता नाम में केवल {chars} हो सकते हैं"
+
+msgid "Username could not be created"
+msgstr "उपयोगकर्ता नाम बनाया नहीं जा सका"
+
+msgid "Username must be at least {min} characters"
+msgstr "उपयोगकर्ता नाम में कम से कम {min} अक्षर होने चाहिए"
+
 msgid "Users and groups"
-msgstr ""
+msgstr "उपयोगकर्ता और समूह"
 
 msgid "VAT"
 msgstr "वैट"
@@ -1847,6 +1943,9 @@ msgstr "हाँ"
 
 msgid "You can also post in our discussions."
 msgstr "आप हमारी चर्चाओं में भी पोस्ट कर सकते हैं।"
+
+msgid "You can now log in to your account."
+msgstr "आप अब अपने खाते में लॉग इन कर सकते हैं।"
 
 msgid "You have registered a new user account on {site}."
 msgstr "आपने {site} पर एक नया उपयोगकर्ता खाता पंजीकृत किया है।"
@@ -1927,7 +2026,7 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "content"
-msgstr ""
+msgstr "सामग्री"
 
 msgid "control panel"
 msgstr "कंट्रोल पैनल"
@@ -1962,8 +2061,11 @@ msgstr "उत्पाद"
 msgid "standby firewall"
 msgstr "स्टैंडबाय फायरवॉल"
 
+msgid "supporters"
+msgstr "समर्थक"
+
 msgid "user"
-msgstr ""
+msgstr "उपयोगकर्ता"
 
 msgid "website"
 msgstr "वेबसाइट"

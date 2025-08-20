@@ -24,7 +24,7 @@ sub register ($self, $app, $conf) {
     docpath => '/account/register/index.html',
   );
   $account->post('/register')->to(controller => 'Account', action => 'register');
-  $account->any([qw( GET PUT )] => '/confirm/:confirmationuuid')->name('account_confirm')->to(
+  $account->any([qw( GET PUT POST)] => '/confirm/:confirmationuuid')->name('account_confirm')->to(
     controller => 'Account',
     action => 'confirm',
     docpath => '/account/confirm/index.html',

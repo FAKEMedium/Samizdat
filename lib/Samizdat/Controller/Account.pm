@@ -161,121 +161,134 @@ sub logout ($self) {
 
 sub register ($self) {
   my $formdata = { ip => $self->tx->remote_address };
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
-  # Handle POST request with JSON (form submission)
-  if (uc($self->req->method) eq 'POST' && $accept =~ /json/) {
-    my $valid = {};
-    my $errors = {};
-    my $v = $self->validation;
-#    $self->stash(docpath => undef);
+  if ($accept =~ /json/) {
+    if (uc($self->req->method) eq 'POST') {
+      my $valid = {};
+      my $errors = {};
+      my $v = $self->validation;
 
-    for my $field (qw(newusername newpassword email terms captcha)) {
-      $formdata->{$field} = trim $self->param($field);
-      if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
-        $valid->{$field} = "is-invalid";
-        $errors->{$field} = $self->app->__('This field is required');
-      } else {
-        # Additional validation for username
-        if ($field eq 'newusername') {
-          my $username_errors = $self->validate_username($formdata->{$field});
-          if ($username_errors) {
-            $valid->{$field} = "is-invalid";
-            $errors->{$field} = join('. ', @$username_errors);
-            $v->error($field => ['invalid_username']);
-          } else {
-            $valid->{$field} = "is-valid";
-            $errors->{$field} = '';
-          }
-        } elsif ($field eq 'newpassword') {
-          my $password_errors = $self->validate_password($formdata->{$field});
-          if ($password_errors) {
-            $valid->{$field} = "is-invalid";
-            $errors->{$field} = join('. ', @$password_errors);
-            $v->error($field => ['invalid_password']);
-          } else {
-            $valid->{$field} = "is-valid";
-            $errors->{$field} = '';
-          }
-        } elsif ($field eq 'email') {
-          if ($formdata->{$field} !~ /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) {
-            $valid->{$field} = "is-invalid";
-            $errors->{$field} = $self->app->__('Please enter a valid email address');
-            $v->error($field => ['invalid_email']);
-          } else {
-            $valid->{$field} = "is-valid";
-            $errors->{$field} = '';
-          }
+      for my $field (qw(newusername newpassword email terms captcha)) {
+        $formdata->{$field} = trim $self->param($field);
+        if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
+          $valid->{$field} = "is-invalid";
+          $errors->{$field} = $self->app->__('This field is required');
+          $v->error($field => ['empty_field']);
         } else {
-          $valid->{$field} = "is-valid";
-          $errors->{$field} = '';
+          # Additional validation for username
+          if ($field eq 'newusername') {
+            my $username_errors = $self->validate_username($formdata->{$field});
+            if ($username_errors) {
+              $valid->{$field} = "is-invalid";
+              $errors->{$field} = join('. ', @$username_errors);
+              $v->error($field => ['invalid_username']);
+            } else {
+              $valid->{$field} = "is-valid";
+              $errors->{$field} = '';
+            }
+          } elsif ($field eq 'newpassword') {
+            my $password_errors = $self->validate_password($formdata->{$field});
+            if ($password_errors) {
+              $valid->{$field} = "is-invalid";
+              $errors->{$field} = join('. ', @$password_errors);
+              $v->error($field => ['invalid_password']);
+            } else {
+              $valid->{$field} = "is-valid";
+              $errors->{$field} = '';
+            }
+          } elsif ($field eq 'email') {
+            if ($formdata->{$field} !~ /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/) {
+              $valid->{$field} = "is-invalid";
+              $errors->{$field} = $self->app->__('Please enter a valid email address');
+              $v->error($field => ['invalid_email']);
+            } else {
+              $valid->{$field} = "is-valid";
+              $errors->{$field} = '';
+            }
+          } else {
+            $valid->{$field} = "is-valid";
+            $errors->{$field} = '';
+          }
         }
       }
-    }
 
-    if (!$self->validate_captcha($formdata->{captcha})) {
-      $v->error(captcha => [ 'Captcha was wrong' ]);
-      $errors->{captcha} = $self->app->__('Captcha was wrong');
-      $valid->{captcha} = "is-invalid";
-    } else {
-      $valid->{captcha} = "is-valid";
-      $errors->{captcha} = '';
-    }
-
-    if ($v->has_error) {
-      $formdata->{success} = 0;
-    } else {
-      my $userid = $self->app->account->addUser($formdata->{newusername}, {
-        username    => $formdata->{newusername},
-        password    => $formdata->{newpassword},
-      });
-      if ($userid =~ /^\d+$/ && $userid > 0) {
-        my $users = $self->app->account->getUsers({ 'users.userid' => $userid });
-        if ($users) {
-          my $contactid = ${$users}[0]->{contactid};
-          $formdata->{confirmtionuuid} = $self->app->account->addEmailConfirmationRequest($userid, $contactid, $formdata->{email}, $formdata->{ip});
-        }
-        $formdata->{success} = 1;
-        $formdata->{whois} = qx!whois $formdata->{ip}!;
-        my $maildatahtml = $self->render_mail(template => 'account/confirm/texthtml', layout => 'default', formdata => $formdata);
-        my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
-
-        my $subject = Encode::encode("MIME-Q", $self->app->__('Account confirmation'));
-        $formdata->{$maildatahtml} = $maildatahtml;
-        $formdata->{$maildatatxt} = $maildatatxt;
-        my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
-        my $mail = MIME::Lite->new(
-          From         => $from,
-          To           => $formdata->{email},
-          BCC          => $self->config->{mail}->{to},
-          Subject      => $subject,
-          Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
-          'X-Mailer'   => "Samizdat",
-          Type         => 'text/html',
-          Data         => $maildatahtml,
-        );
-        $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
+      if (!$self->validate_captcha($formdata->{captcha})) {
+        $v->error(captcha => [ 'Captcha was wrong' ]);
+        $errors->{captcha} = $self->app->__('Captcha was wrong');
+        $valid->{captcha} = "is-invalid";
       } else {
+        $valid->{captcha} = "is-valid";
+        $errors->{captcha} = '';
+      }
+
+      if ($v->has_error) {
         $formdata->{success} = 0;
-        $formdata->{error} = { reason => 'username' };
-        if ($userid =~ /username_uq/i) {
-          $errors->{newusername} = $self->app->__('Username already exists');
+      } else {
+        my $userid = $self->app->account->addUser($formdata->{newusername}, {
+          username    => $formdata->{newusername},
+          password    => $formdata->{newpassword},
+        });
+        if (defined $userid && $userid > 0) {
+          my $users = $self->app->account->getUsers({ 'users.userid' => $userid });
+          if ($users) {
+            my $contactid = ${$users}[0]->{contactid};
+            my $confirmationuuid = $self->app->account->addEmailConfirmationRequest($userid, $contactid, $formdata->{email}, $formdata->{ip});
+            if (defined $confirmationuuid) {
+              $formdata->{confirmationuuid} = $confirmationuuid;
+            } else {
+              # Log the error but continue - user is created, just email confirmation failed
+              # Could optionally handle this differently
+            }
+          }
+          $formdata->{success} = 1;
+          $formdata->{whois} = qx!whois $formdata->{ip}!;
+          my $maildatahtml = $self->render_mail(template => 'account/confirm/texthtml', layout => 'default', formdata => $formdata);
+          my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
+
+          my $subject = Encode::encode("MIME-Q", $self->app->__('Email confirmation'));
+          my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
+          my $mail = MIME::Lite->new(
+            From         => $from,
+            To           => $formdata->{email},
+            BCC          => $self->config->{mail}->{to},
+            Subject      => $subject,
+            Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
+            'X-Mailer'   => "Samizdat",
+            Type         => 'multipart/alternative',
+          );
+          $mail->attach(
+            Type => 'text/plain',
+            Data => $maildatatxt,
+          );
+          $mail->attach(
+            Type => 'text/html',
+            Data => $maildatahtml,
+          );
+          $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
         } else {
-          $errors->{newusername} = $self->app->__('Username could not be created');
+          $formdata->{success} = 0;
+          $formdata->{error} = { reason => 'username' };
+          my $error_msg = $self->app->account->last_error // '';
+          if ($error_msg =~ /username_uq/i) {
+            $errors->{newusername} = $self->app->__('Username already exists');
+          } else {
+            $errors->{newusername} = $self->app->__('Username could not be created');
+          }
+          $valid->{newusername} = "is-invalid";
         }
-        $valid->{newusername} = "is-invalid";
       }
+      $formdata->{errors} = $errors;
+      $formdata->{valid} = $valid;
+      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+      return $self->render(json => $formdata, status => 200);
     }
-    $formdata->{errors} = $errors;
-    $formdata->{valid} = $valid;
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $formdata, status => 200);
-  }
-  
-  # Handle GET request with JSON (dynamic loading - just return data)
-  elsif ($self->req->method eq 'GET' && $accept =~ /json/) {
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $formdata, status => 200);
+    
+    # Handle GET request (dynamic loading - just return data)
+    elsif ($self->req->method eq 'GET') {
+      $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+      return $self->render(json => $formdata, status => 200);
+    }
   }
 
   # Handle regular GET request (return HTML page)
@@ -293,51 +306,51 @@ sub confirm ($self) {
   my $formdata = { confirmationuuid => $confirmationuuid };
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
-  # Validate UUID exists
-  if (!$confirmationuuid) {
-    $formdata->{success} = 0;
-    $formdata->{error} = { reason => 'missing_uuid' };
-    $formdata->{message} = $self->app->__('Invalid confirmation link');
-  } elsif ($self->req->method eq 'GET' && $confirmationuuid) {
-    my $emailconfirmationrequest = $self->app->account->getEmailConfirmationRequest($confirmationuuid);
-    
-    if ($emailconfirmationrequest) {
-      my $userid = $emailconfirmationrequest->{userid};
-      my $contactid = $emailconfirmationrequest->{contactid};
-      my $email = $emailconfirmationrequest->{newemail};
+  # Handle JSON requests
+  if ($accept =~ /json/) {
+    # Validate UUID exists
+    if (!$confirmationuuid) {
+      $formdata->{success} = 0;
+      $formdata->{error} = { reason => 'missing_uuid' };
+      $formdata->{message} = $self->app->__('Invalid confirmation link');
+    } else {
+      my $emailconfirmationrequest = $self->app->account->getEmailConfirmationRequest($confirmationuuid);
       
-      # Perform the confirmation
-      if ($self->app->account->updateContact($contactid, { email => $email })) {
-        $self->app->account->deleteEmailConfirmationRequest($confirmationuuid);
-        $self->app->account->updateUser($userid, { activated => 1, modified => 'NOW()' });
+      if ($emailconfirmationrequest) {
+        my $userid = $emailconfirmationrequest->{userid};
+        my $contactid = $emailconfirmationrequest->{contactid};
+        my $email = $emailconfirmationrequest->{newemail};
         
-        $formdata->{success} = 1;
-        $formdata->{message} = sprintf($self->app->__('Email %s has been verified'), $email);
-        $formdata->{email} = $email;
+        # Perform the confirmation
+        if ($self->app->account->updateContact($contactid, { email => $email })) {
+          $self->app->account->deleteEmailConfirmationRequest($confirmationuuid);
+          $self->app->account->updateUser($userid, { activated => 1, modified => 'NOW()' });
+          
+          $formdata->{success} = 1;
+          $formdata->{message} = sprintf($self->app->__('Email %s has been verified'), $email);
+          $formdata->{email} = $email;
+        } else {
+          $formdata->{success} = 0;
+          $formdata->{error} = { reason => 'database_error' };
+          $formdata->{message} = $self->app->__('Database error occurred');
+        }
       } else {
         $formdata->{success} = 0;
-        $formdata->{error} = { reason => 'database_error' };
-        $formdata->{message} = $self->app->__('Database error occurred');
+        $formdata->{error} = { reason => 'invalid_or_expired' };
+        $formdata->{message} = $self->app->__('This confirmation link is invalid or has expired');
       }
-    } else {
-      $formdata->{success} = 0;
-      $formdata->{error} = { reason => 'invalid_or_expired' };
-      $formdata->{message} = $self->app->__('This confirmation link is invalid or has expired');
     }
-  }
-  
-  # Return JSON response if requested
-  if ($accept =~ /json/) {
+    
     return $self->render(json => $formdata, status => 200);
   }
   
-  # Return HTML page with formdata that JS will use to modify the page
+  # Handle HTML requests - return generic page that JavaScript will populate
+  # No UUID-specific logic here since this gets cached for OpenResty
   my $title = $self->app->__('Email confirmation');
   my $web = { title => $title };
-  $web->{script} .= $self->render_to_string(template => 'account/confirm/index', 
-    formdata => $formdata, format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'account/confirm/index', format => 'js');
   $web->{sidebar} = $self->render_to_string(template => 'account/confirm/sidebar');
-  return $self->render(web => $web, title => $title, template => 'account/confirm/index', formdata => $formdata, status => 200);
+  return $self->render(web => $web, title => $title, template => 'account/confirm/index', status => 200);
 }
 
 
@@ -371,8 +384,7 @@ sub authenticated_user ($self) {
 
 
 sub authorize ($self, $level = 0) {
-  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
-  return 1;
+  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename}) // '';
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
     if ($session->{superadmin}) {

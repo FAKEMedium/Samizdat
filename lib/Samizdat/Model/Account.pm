@@ -12,6 +12,7 @@ use Data::Dumper;
 has 'config';
 has 'database'; # Mojo::Pg or Mojo::mysql
 has 'redis';
+has 'last_error' => '';
 
 my $pbkdf2 = Crypt::PBKDF2->new();
 
@@ -70,7 +71,8 @@ sub addUser ($self, $username, $attribs = {}) {
       $tx->commit;
     };
     if ($@) {
-      return $@->message;
+      $self->{last_error} = ref($@) && $@->can('message') ? $@->message : "$@";
+      return undef;
     }
 
     if ($passwordid =~ /^\d+$/ && $passwordid > 0) {
@@ -83,19 +85,33 @@ sub addUser ($self, $username, $attribs = {}) {
 
 sub addEmailConfirmationRequest ($self, $userid, $contactid, $newemail, $ip) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
-    return $db->insert('snapemailconfirmations', {
-      userid => $userid,
-      newemail  => $newemail
-    }, {returning => 'id'})->hash->{id};
-  } else {
-    return $db->insert('account.emailconfirmationrequests', {
-      userid       => $userid,
-      contactid    => $contactid,
-      newemail     => $newemail,
-      ip           => $ip,
-    }, {returning => 'confirmationuuid'})->hash->{confirmationuuid};
+  my $confirmationuuid = undef;
+  
+  eval {
+    my $tx = $db->begin;
+    
+    if ('mysql' eq $self->config->{databasetype}) {
+      $confirmationuuid = $db->insert('snapemailconfirmations', {
+        userid => $userid,
+        newemail  => $newemail
+      }, {returning => 'id'})->hash->{id};
+    } else {
+      $confirmationuuid = $db->insert('account.emailconfirmationrequests', {
+        userid       => $userid,
+        contactid    => $contactid,
+        newemail     => $newemail,
+        ip           => $ip,
+      }, {returning => 'confirmationuuid'})->hash->{confirmationuuid};
+    }
+    
+    $tx->commit;
+  };
+  if ($@) {
+    $self->{last_error} = ref($@) && $@->can('message') ? $@->message : "$@";
+    return undef;
   }
+  
+  return $confirmationuuid;
 }
 
 

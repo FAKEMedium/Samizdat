@@ -14,7 +14,7 @@ form.addEventListener('submit', async (event) => {
   const result = await response.json();
 
   if (result.success) {
-    document.querySelector('#register').innerHTML = `
+    document.querySelector('#thecontent').innerHTML = `
     <p><%== __x('A confirmation link was mailed to {email}.', email => 'REPLACEEMAIL') %></p>`
     .replace('REPLACEEMAIL', result.email);
 

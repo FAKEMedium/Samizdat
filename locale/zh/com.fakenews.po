@@ -103,10 +103,10 @@ msgid "Active"
 msgstr "活跃"
 
 msgid "Add"
-msgstr ""
+msgstr "添加"
 
 msgid "Add content"
-msgstr ""
+msgstr "添加内容"
 
 msgid "Add customer"
 msgstr "添加客户"
@@ -118,16 +118,16 @@ msgid "Add domain"
 msgstr "添加域名"
 
 msgid "Add grop"
-msgstr ""
+msgstr "添加组"
 
 msgid "Add group"
-msgstr ""
+msgstr "添加组"
 
 msgid "Add mail domain"
 msgstr "添加邮件域名"
 
 msgid "Add page"
-msgstr ""
+msgstr "添加页面"
 
 msgid "Add product"
 msgstr "添加产品"
@@ -136,7 +136,7 @@ msgid "Add subscription"
 msgstr "添加订阅"
 
 msgid "Add user"
-msgstr ""
+msgstr "添加用户"
 
 msgid "Add voucher"
 msgstr "添加凭证"
@@ -145,7 +145,7 @@ msgid "Add website"
 msgstr "添加网站"
 
 msgid "Add zone"
-msgstr ""
+msgstr "添加区域"
 
 msgid "Address"
 msgstr "地址"
@@ -189,6 +189,9 @@ msgstr "含 {percent} 增值税的应付金额：{costsum} {currency}"
 msgid "Amount to pay: {costsum} {currency}"
 msgstr "应付金额：{costsum} {currency}"
 
+msgid "An error occurred"
+msgstr "发生错误"
+
 msgid "Are you sure you want to delete this record?"
 msgstr "您确定要删除此记录吗？"
 
@@ -200,6 +203,12 @@ msgstr "至少3个字符，包含 a-z 0-9 -，必须以 a-z 开头"
 
 msgid "At least 8 characters including capitals and digits"
 msgstr "至少8个字符，包含大写字母和数字"
+
+msgid "At least {min} characters from: {chars}"
+msgstr "至少{min}个字符来自：{chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "至少{min}个字符：{upper}个大写字母，{lower}个小写字母，{num}个数字，{special}个特殊字符"
 
 msgid "Authorize"
 msgstr "授权"
@@ -277,7 +286,7 @@ msgid "Changed status."
 msgstr "状态已更改。"
 
 msgid "Check zones"
-msgstr ""
+msgstr "检查区域"
 
 msgid "Choose a password"
 msgstr "选择密码"
@@ -301,7 +310,7 @@ msgid "City (billing)"
 msgstr "城市（账单）"
 
 msgid "Click to pop dialog."
-msgstr ""
+msgstr "点击打开对话框。"
 
 msgid "Click to pop login dialog."
 msgstr "点击弹出登录对话框。"
@@ -348,8 +357,17 @@ msgstr "确认投票签名"
 msgid "Confirm your email address"
 msgstr "确认您的电子邮件地址"
 
+msgid "Confirmation Failed"
+msgstr "确认失败"
+
 msgid "Confirmation code"
 msgstr "确认码"
+
+msgid "Confirmation error:"
+msgstr "确认错误："
+
+msgid "Confirmation failed"
+msgstr "确认失败"
 
 msgid "Confirmation request sent"
 msgstr "确认请求已发送"
@@ -486,6 +504,9 @@ msgstr "数据库"
 msgid "Database error"
 msgstr "数据库错误"
 
+msgid "Database error occurred"
+msgstr "数据库错误发生"
+
 msgid "Databases"
 msgstr "数据库"
 
@@ -564,6 +585,9 @@ msgstr "编辑"
 msgid "Edit customer {customerid}"
 msgstr "编辑客户 {customerid}"
 
+msgid "Edit this page"
+msgstr "编辑此页面"
+
 msgid "Edit zone"
 msgstr "编辑区域"
 
@@ -573,11 +597,17 @@ msgstr "经济"
 msgid "Email"
 msgstr "电子邮件"
 
+msgid "Email %s has been verified"
+msgstr "邮箱 %s 已验证"
+
 msgid "Email %s verified"
 msgstr "电子邮件 %s 已验证"
 
 msgid "Email (billing)"
 msgstr "电子邮件（账单）"
+
+msgid "Email Confirmed!"
+msgstr "邮箱已确认！"
 
 msgid "Email Invoice"
 msgstr "邮件发票"
@@ -659,6 +689,12 @@ msgstr "姓氏为空"
 
 msgid "Empty telephone"
 msgstr "电话为空"
+
+msgid "End main content"
+msgstr "主要内容结束"
+
+msgid "End side content"
+msgstr "侧边内容结束"
 
 msgid "English"
 msgstr "英语"
@@ -762,8 +798,11 @@ msgstr "名字"
 msgid "For more information, visit the Fortnox website:"
 msgstr "欲了解更多信息，请访问 Fortnox 网站："
 
+msgid "Form submission error:"
+msgstr "表单提交错误："
+
 msgid "Fortnox"
-msgstr ""
+msgstr "Fortnox"
 
 msgid "Fortnox integration"
 msgstr "Fortnox 集成"
@@ -833,6 +872,9 @@ msgstr "在您的个人菜单中，您可以找到您的 {panel} 等内容。"
 
 msgid "Including VAT"
 msgstr "含增值税"
+
+msgid "Invalid confirmation link"
+msgstr "无效的确认链接"
 
 msgid "Invalid email"
 msgstr "无效的电子邮件"
@@ -968,7 +1010,7 @@ msgid "Language"
 msgstr "语言"
 
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 msgid "Last name"
 msgstr "姓氏"
@@ -1009,11 +1051,17 @@ msgstr "登录已封锁"
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
 msgstr "由于来自 {ip} 的过多失败尝试，登录已被暂时封锁。"
 
+msgid "Logotype"
+msgstr "标志"
+
 msgid "Logotype leading to start"
 msgstr "指向起始页的标志"
 
 msgid "Logotype leading to start page"
 msgstr "指向起始页的标志"
+
+msgid "Logotype linked to {site}"
+msgstr "链接到 {site} 的标志"
 
 msgid "Lost password?"
 msgstr "忘记密码？"
@@ -1037,7 +1085,7 @@ msgid "Mail domains"
 msgstr "邮件域名"
 
 msgid "Mail dump"
-msgstr ""
+msgstr "邮件转储"
 
 msgid "Mail sent through own servers"
 msgstr "通过自有服务器发送邮件"
@@ -1055,7 +1103,7 @@ msgid "Mark payment"
 msgstr "标记付款"
 
 msgid "Menus"
-msgstr ""
+msgstr "菜单"
 
 msgid "Message"
 msgstr "消息"
@@ -1099,6 +1147,9 @@ msgstr "净金额"
 msgid "Net amount:"
 msgstr "净金额："
 
+msgid "Network error - please try again"
+msgstr "网络错误 - 请重试"
+
 msgid "New account"
 msgstr "新账户"
 
@@ -1139,7 +1190,7 @@ msgid "No invoicing"
 msgstr "不开票"
 
 msgid "No pages found."
-msgstr ""
+msgstr "未找到页面。"
 
 msgid "No selected customer."
 msgstr "未选择客户。"
@@ -1223,10 +1274,25 @@ msgid "Panel"
 msgstr "面板"
 
 msgid "Paper in typewriter"
-msgstr ""
+msgstr "打字机中的纸张"
 
 msgid "Password"
 msgstr "密码"
+
+msgid "Password must be at least {min} characters"
+msgstr "密码必须至少包含 {min} 个字符"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "密码必须至少包含 {min} 个小写字母"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "密码必须至少包含 {min} 个数字"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "密码必须至少包含 {min} 个特殊字符"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "密码必须至少包含 {min} 个大写字母"
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "密码错误或用户名不存在。"
@@ -1258,6 +1324,9 @@ msgstr "Paypal"
 msgid "Paypal:"
 msgstr "Paypal："
 
+msgid "People rocketing to the sky"
+msgstr "人们飞向天空"
+
 msgid "Personal"
 msgstr "个人"
 
@@ -1270,8 +1339,14 @@ msgstr "个人面板"
 msgid "Phone"
 msgstr "电话"
 
+msgid "Please check your confirmation link or register again."
+msgstr "请检查您的确认链接或重新注册。"
+
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "请点击以下链接确认您的电子邮件地址："
+
+msgid "Please enter a valid email address"
+msgstr "请输入有效的电子邮件地址"
 
 msgid "Please log in to access that page"
 msgstr "请登录以访问该页面"
@@ -1316,10 +1391,10 @@ msgid "Priority"
 msgstr "优先级"
 
 msgid "Privilege sets"
-msgstr ""
+msgstr "权限集"
 
 msgid "Privileges"
-msgstr ""
+msgstr "权限"
 
 msgid "Products"
 msgstr "产品"
@@ -1415,7 +1490,7 @@ msgid "Resources"
 msgstr "资源"
 
 msgid "Roles"
-msgstr ""
+msgstr "角色"
 
 msgid "Roomservice"
 msgstr "客房服务"
@@ -1448,7 +1523,7 @@ msgid "Search"
 msgstr "搜索"
 
 msgid "Search content"
-msgstr ""
+msgstr "搜索内容"
 
 msgid "Search field for {what}"
 msgstr "{what} 的搜索字段"
@@ -1472,7 +1547,7 @@ msgid "Search for product"
 msgstr "搜索产品"
 
 msgid "Search for user or group"
-msgstr ""
+msgstr "搜索用户或组"
 
 msgid "Search for website"
 msgstr "搜索网站"
@@ -1481,10 +1556,10 @@ msgid "Search for zone"
 msgstr "搜索区域"
 
 msgid "Search pages..."
-msgstr ""
+msgstr "搜索页面..."
 
 msgid "Search web content"
-msgstr ""
+msgstr "搜索网页内容"
 
 msgid "Select"
 msgstr "选择"
@@ -1588,8 +1663,14 @@ msgstr "特价"
 msgid "Start"
 msgstr "开始"
 
+msgid "Start main content"
+msgstr "主要内容开始"
+
+msgid "Start side content"
+msgstr "侧边内容开始"
+
 msgid "Statistics"
-msgstr ""
+msgstr "统计"
 
 msgid "Strictly for Rymdweb"
 msgstr "专为 Rymdweb 提供"
@@ -1677,6 +1758,9 @@ msgstr "页面 {docpath} 未找到。"
 
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "该股票在纳斯达克斯德哥尔摩主板上市。"
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "此确认链接无效或已过期"
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
 msgstr "此演示展示了 Samizdat 的 SVG 模板助手的结果。"
@@ -1768,8 +1852,20 @@ msgstr "用户注册"
 msgid "Username"
 msgstr "用户名"
 
+msgid "Username already exists"
+msgstr "用户名已存在"
+
+msgid "Username can only contain {chars}"
+msgstr "用户名只能包含 {chars}"
+
+msgid "Username could not be created"
+msgstr "无法创建用户名"
+
+msgid "Username must be at least {min} characters"
+msgstr "用户名必须至少包含 {min} 个字符"
+
 msgid "Users and groups"
-msgstr ""
+msgstr "用户和组"
 
 msgid "VAT"
 msgstr "增值税"
@@ -1839,6 +1935,9 @@ msgstr "是"
 
 msgid "You can also post in our discussions."
 msgstr "您也可以在我们的讨论中发帖。"
+
+msgid "You can now log in to your account."
+msgstr "您现在可以登录您的账户。"
 
 msgid "You have registered a new user account on {site}."
 msgstr "您已在 {site} 上注册了新用户账户。"
@@ -1919,7 +2018,7 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "content"
-msgstr ""
+msgstr "内容"
 
 msgid "control panel"
 msgstr "控制面板"
@@ -1954,8 +2053,11 @@ msgstr "产品"
 msgid "standby firewall"
 msgstr "备用防火墙"
 
+msgid "supporters"
+msgstr "支持者"
+
 msgid "user"
-msgstr ""
+msgstr "用户"
 
 msgid "website"
 msgstr "网站"
