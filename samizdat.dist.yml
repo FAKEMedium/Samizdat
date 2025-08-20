@@ -170,6 +170,7 @@ hypnotoad:
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
   pid_file: bin/samizdat.pid
+  reverse_proxy: 1                                                    # Reverse proxy to the web server, e.g. nginx
 extratemplates:
   - /usr/local/share/perl/5.38.0/Mojolicious/resources/templates/mojo
 nginx: 1
