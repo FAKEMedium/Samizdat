@@ -1,7 +1,7 @@
 // Clean URL - remove UUID from location and history (like invoice/handle.js pattern)
 function cleanUrl() {
   const stateObj = { confirmed: true };
-  const cleanPath = window.location.pathname.replace(/\/[a-f0-9-]{36}$/, '');
+  const cleanPath = window.location.pathname.replace(/\/[a-f0-9-]{36}$/, '/');
   window.history.pushState(stateObj, document.title, cleanPath);
 }
 

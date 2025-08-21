@@ -7,9 +7,6 @@ shortsitename: Example
 description: Example, a fullstack static content hybrid generator for extreme speed and optional disconnected use.
 siteurl: https://example.com:3443/
 host: example.com
-cookiedomain: .example.com
-authcookiename: samizauth
-datacookiename: samizdata
 extraplugins:
   - Example
 logotype: media/images/fakenews.svg
@@ -178,6 +175,9 @@ cache: 1
 bundlename: samizdat
 timezone: Etc/UTC
 account:
+  cookiedomain: .example.com
+  authcookiename: samizauth
+  datacookiename: samizdata
   username:
     minlength: 3
     chars: a-z0-9  # database comparisons will be case insensitive.

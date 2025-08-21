@@ -25,6 +25,7 @@ sub username ($self, $cookie) {
   return 1; # Temporary solution
 }
 
+
 sub addUser ($self, $username, $attribs = {}) {
   my $db = $self->database->db;
   my $contactid = 0;
@@ -149,6 +150,25 @@ sub getUsers ($self, $where){
       $where
     )->hashes->to_array;
   }
+  say Dumper $result;
+  return $result;
+}
+
+sub getUserGroups ($self, $userid) {
+  my $db = $self->database->db;
+  my $result;
+  if ('mysql' eq $self->config->{databasetype}) {
+    $result = $db->select(['snapusergroups', ['snapgroups', 'groups.id' => 'usergroups.groupid']],
+      'groups.id, groups.groupname',
+      { 'usergroups.userid' => $userid }
+    )->hashes->to_array;
+  } else {
+    $result = $db->select(['account.usergroups', ['account.groups', 'groups.groupid' => 'usergroups.groupid']],
+      'groups.groupid, groups.groupname',
+      { 'usergroups.userid' => $userid }
+    )->hashes->to_array;
+  }
+  
   return $result;
 }
 
@@ -170,6 +190,7 @@ sub updateContact ($self, $contactid, $attribs = undef) {
   }
 }
 
+
 sub updateUser ($self, $userid, $attribs = undef) {
   my $db = $self->database->db;
   if ('mysql' eq $self->config->{databasetype}) {
@@ -187,6 +208,7 @@ sub updateUser ($self, $userid, $attribs = undef) {
   }
 }
 
+
 sub deleteUser ($self, $userid) {
   my $db = $self->database->db;
   if ('mysql' eq $self->config->{databasetype}) {
@@ -200,8 +222,15 @@ sub deleteUser ($self, $userid) {
 sub savePassword ($self, $userid, $password) {
   my $db = $self->database->db;
   my $attribs = {};
-  for my $method (@{ $self->config->{passwordmethods} }) {
+  if ($self->config->{convertpasswordto}) {
+    # Only store in the specified format
+    my $method = $self->config->{convertpasswordto};
     $attribs->{'password' . $method} = $self->hashPassword($password, $method);
+  } else {
+    # For compatibility, wtore in all configured methods
+    for my $method (@{ $self->config->{passwordmethods} }) {
+      $attribs->{'password' . $method} = $self->hashPassword($password, $method);
+    }
   }
 
   if ('mysql' eq $self->config->{databasetype}) {
@@ -221,44 +250,44 @@ sub savePassword ($self, $userid, $password) {
 
 
 sub validatePassword ($self, $username, $plain) {
-  my $userid = 0;
+  my $userid = undef;
   my $db = $self->database->db;
 
   # Superadmins in the configuration file don't need to be in the database
-  if ($self->config->{superadmins}->{$username} eq $plain) {
-    $userid = 1;
+  if (exists($self->config->{superadmins}->{$username}) &&  $self->config->{superadmins}->{$username} eq $plain) {
+    $userid = 0;
   } else {
     my $result;
     if ('mysql' eq $self->config->{databasetype}) {
       $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
     } else {
-      $result = $db->select([ 'account.users', [ -left => 'account.password', 'passwords.userid' => 'users.userid' ] ])->hash;
+      $result = $db->select([ 'account.users', [ -left => 'account.passwords', 'passwords.userid' => 'users.userid' ] ],
+        'passwords.*', {'users.username' => $username})->hash;
     }
-
     for my $method (@{ $self->config->{passwordmethods} }) {
       if ($method eq "sha512") {
-        if (passwdcmp($plain, $result->{passwordsha512})) {
-          $userid = $result->{$userid};
+        if ($result->{passwordsha512} && passwdcmp($plain, $result->{passwordsha512})) {
+          $userid = $result->{userid};
           last;
         }
       } elsif ($method eq "bcrypt") {
-        if (passwdcmp($plain, $result->{passwordbcrypt})) {
-          $userid = $result->{$userid};
+        if ($result->{passwordbcrypt} && bcrypt_check($plain, $result->{passwordbcrypt})) {
+          $userid = $result->{userid};
           last;
         }
       } elsif ($method eq "argon2id") {
-        if (argon2id_verify($result->{passwordargon2id}, $plain)) {
-          $userid = $result->{$userid};
+        if ($result->{passwordargon2id} && argon2id_verify($result->{passwordargon2id}, $plain)) {
+          $userid = $result->{userid};
           last;
         }
       } elsif ($method eq "mysql") {
-        if ($result->{passwordmysql} eq sprintf('*%s', uc sha1_hex(sha1($plain)))) {
-          $userid = $result->{$userid};
+        if ($result->{passwordmysql} && $result->{passwordmysql} eq sprintf('*%s', uc sha1_hex(sha1($plain)))) {
+          $userid = $result->{userid};
           last;
         }
       } elsif ($method eq "pbkdf2") {
-        if ($pbkdf2->validate($result->{passwordpbkdf2}, $plain)) {
-          $userid = $result->{$userid};
+        if ($result->{passwordpbkdf2} && $pbkdf2->validate($result->{passwordpbkdf2}, $plain)) {
+          $userid = $result->{userid};
           last;
         }
       }
@@ -286,21 +315,29 @@ sub hashPassword ($self, $password, $method) {
   }
 }
 
+
 sub session ($self, $authcookie) {
   my $session = $self->redis->db->hgetall("samizdat:$authcookie") // undef;
+  if ($session && %$session) {
+    # Refresh session expiration
+    $self->redis->db->expire("samizdat:$authcookie", $self->config->{sessiontimeout});
+  }
   return $session;
 }
 
-sub logout ($self, $authcookie) {
+
+sub deleteSession ($self, $authcookie) {
   my $session = $self->redis->db->hgetall("samizdat:$authcookie");
   $self->redis->db->del("samizdat:$authcookie");
   return $session;
 }
 
-sub login ($self, $authcookie, $data) {
+
+sub addSession ($self, $authcookie, $data) {
   my $res = $self->redis->db->hmset("samizdat:$authcookie", %$data);
   $self->redis->db->expire("samizdat:$authcookie", $self->config->{sessiontimeout});
 }
+
 
 sub insertLogin ($self, $ip, $userid, $value) {
   my $db = $self->database->db;

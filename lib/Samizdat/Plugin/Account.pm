@@ -32,11 +32,13 @@ sub register ($self, $app, $conf) {
 
   $account->any([qw( GET PUT )] => '/settings')->name('account_settings')->to(
     controller => 'Account',
-    action => 'settings'
+    action => 'settings',
+    docpath => '/account/settings/index.html',
   );
   $account->any([qw( GET PUT )] => '/password')->name('account_password')->to(
     controller => 'Account',
     action => 'password',
+    docpath => '/account/password/index.html',
   );
 
   $account->get('/login')->name('account_login')->to(
@@ -55,7 +57,7 @@ sub register ($self, $app, $conf) {
     action => 'index'
   );
 
-  my $panel = $account->under('/panel')->to(controller => 'Account', action => 'authorize');
+  my $panel = $account->under('/panel');
   $panel->get('/')->name('account_panel')->to(
     controller => 'Account',
     action => 'panel',

@@ -5,8 +5,8 @@
   <%== __('Please confirm your email address by clicking the following link:') %>
 </p>
 
-<a href="<%== sprintf('%s%s%s', config->{siteurl}, url_for('account_confirm'), $formdata->{confirmtionuuid}) %>" target="_blank">
-  <%== sprintf('%s%s%s', config->{siteurl}, url_for('account_confirm'), $formdata->{confirmtionuuid}) %>
+<a href="<%== sprintf('%s%s%s', config->{siteurl}, url_for('account_confirm'), $formdata->{confirmationuuid}) %>" target="_blank">
+  <%== sprintf('%s%s%s', config->{siteurl}, url_for('account_confirm'), $formdata->{confirmationuuid}) %>
 </a>
 
 <p>

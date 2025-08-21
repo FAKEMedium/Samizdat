@@ -28,7 +28,7 @@ sub index ($self) {
 
 
 sub login ($self) {
-  if (lc $self->req->method eq 'get') {
+  if ($self->req->method =~ /^(GET)$/i) {
     my $title = $self->app->__('Log in');
     my $web = { title => $title };
     $web->{script} .= $self->render_to_string(template => 'account/login/index', format => 'js');
@@ -46,7 +46,7 @@ sub login ($self) {
   }
 
   # Check if blocklimit failed attempts been made last blocktime minutes from remote host
-  my $ip = $self->_getip();
+  my $ip = $self->tx->remote_address;
   my $loginfailures = $self->app->account->getLoginFailures($ip);
   my $count = scalar @{ $loginfailures };
   if ($count >= $self->config->{account}->{blocklimit}) {
@@ -63,7 +63,7 @@ sub login ($self) {
   };
   my $username = $v->param('username');
   my $password = $v->param('password');
-  my $rememberme = $self->param('rememberme');
+  my $rememberme = $self->param('rememberme') // 0;
 
   if (exists($self->config->{account}->{superadmins}->{$username}) && ($self->config->{account}->{superadmins}->{$username} eq $password)) {
     $userid = 0;
@@ -74,54 +74,52 @@ sub login ($self) {
       displayname => 'Super admin',
     };
   } else {
-    $userid = eval {return $self->app->account->validatePassword($username, $password)};
+    $userid = eval { return $self->app->account->validatePassword($username, $password)};
     if ($userid) {
-      $user = ${$self->app->account->getUsers({ id => $userid })}[0];
+      $user = ${$self->app->account->getUsers({ 'users.userid' => $userid })}[0];
     }
   }
 
   if (defined $userid) {
+    # Preparing a cookie with user data to be used in the browser
     my $userdata = {
-      'd'  => $user->{displayname},
-      'n'  => $user->{username},
-      'i'  => $userid,
-      'e'  => '1',
-      't'  => '',
-      'm'  => '0',
-      'l'  => 'en',
-      's'  => exists($self->config->{account}->{superadmins}->{$user->{'username'}}) ? 1 : 0,
-      'ip' => $ip,
+      'd' => $user->{displayname},                                                              # Long display name
+      'n' => $user->{username},                                                                 # Username, short display name
+      'i' => $userid,                                                                           # User ID
+      'e' => '1',
+      't' => '',
+      'm' => '0',
+      'l' => 'en',                                                                              # Language, default is English
+      's' => exists($self->config->{account}->{superadmins}->{$user->{'username'}}) ? 1 : 0,    # Super admin flag
+      'a' => exists($self->config->{account}->{admins}->{$user->{'username'}}) ? 1 : 0,         # Admin flag
+      'i' => $ip,                                                                               # IP address
     };
     my $value = b64_encode(j $userdata);
     chomp $value;
     $value =~ s/[\r\n]+//g;
-    my $authcookie = $self->app->uuid->create_str();
 
-    $self->app->account->login($authcookie, {
+    my $cookie_opts = {
+      secure => 1,
+      httponly => 0,
+      path => '/',
+      domain => $self->config->{account}->{cookiedomain},
+      hostonly => 1,
+    };
+    $cookie_opts->{expires} = time + (30 * 24 * 60 * 60) if $rememberme;
+
+    my $authcookie = $self->app->uuid->create_str();
+    $self->app->account->addSession($authcookie, {
       userid     => $userid,
       username   => $user->{username},
       superadmin => $user->{superadmin},
       value      => $value,
       ip         => $ip,
+      groups     => join(':', map { $_->{groupname} } @{$self->app->account->getUserGroups($userid)}),
     });
+    $self->cookie($self->config->{account}->{authcookiename} => $authcookie, $cookie_opts);
+    $self->cookie($self->config->{account}->{datacookiename} => $value, $cookie_opts);
 
-    $self->signed_cookie($self->config->{account}->{authcookiename} => $authcookie, {
-      secure => 0,
-      httponly => 0,
-      path => '/',
-      expires => time + $self->config->{account}->{sessiontimeout},
-      domain => $self->config->{account}->{cookiedomain},
-      hostonly => 1,
-    });
-    $self->cookie($self->config->{account}->{datacookiename} => $value, {
-      secure => 0,
-      httponly => 0,
-      path => '/',
-      expires => time + $self->config->{account}->{sessiontimeout},
-      domain => $self->config->{account}->{cookiedomain},
-      hostonly => 1,
-    });
-    $self->app->account->insertLogin($ip, $userid, $value);
+    $self->app->account->insertLogin($ip, $userid, $authcookie);
     $self->render(json => { userdata => $userdata }, status => 200);
 
   } else {
@@ -136,25 +134,18 @@ sub login ($self) {
 
 
 sub logout ($self) {
-  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
-  my $session = $self->app->account->logout($authcookie);
-  my $username = $session->{username};
-  $self->cookie($self->config->{account}->{authcookiename} => '', {
-    secure => 0,
+  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
+  $self->app->account->deleteSession($authcookie);
+  my $cookie_opts = {
+    secure => 1,
     httponly => 0,
     path => '/',
     expires => 1,
     domain => $self->config->{account}->{cookiedomain},
     hostonly => 1,
-  });
-  $self->cookie($self->config->{account}->{datacookiename} => '', {
-    secure => 0,
-    httponly => 0,
-    path => '/',
-    expires => 1,
-    domain => $self->config->{account}->{cookiedomain},
-    hostonly => 1,
-  });
+  };
+  $self->cookie($authcookie => '', $cookie_opts);
+  $self->cookie($self->config->{account}->{datacookiename} => '', $cookie_opts);
   return $self->redirect_to('/');
 }
 
@@ -248,7 +239,7 @@ sub register ($self) {
           my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
 
           my $subject = Encode::encode("MIME-Q", $self->app->__('Email confirmation'));
-          my $from = Encode::encode("MIME-Q", sprintf('"%s" <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
+          my $from = Encode::encode("MIME-Q", sprintf('%s <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
           my $mail = MIME::Lite->new(
             From         => $from,
             To           => $formdata->{email},
@@ -366,12 +357,11 @@ sub password ($self) {
   if ($v->has_error) {
     return $self->render(json => { error => { reason => 'incomplete' } }, status => 200);
   }
-  my $ip = $self->_getip();
 }
 
 
 sub authenticated_user ($self) {
-  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
+  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
   if ($authcookie) {
     return $self->app->account->session($authcookie);
   }
@@ -397,13 +387,6 @@ sub authorize ($self, $level = 0) {
   };
   $self->render(template => 'unauthenticated', status => 401, web => $web, title => $title);
   return undef;
-}
-
-
-sub _getip ($self) {
-  my $ip = ${ $self->req->headers->{'headers'}->{'remote_host'} }[0]
-    // ${ $self->req->headers->{'headers'}->{'x-forwarded-for'} }[0]
-    // '0.0.0.0';
 }
 
 
