@@ -7,7 +7,7 @@ async function getData() {
     const response = await fetch('<%== sprintf("%sinvoices/open", config->{managerurl}) %>', request);
     dress(await response.json());
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

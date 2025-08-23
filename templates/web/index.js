@@ -15,7 +15,7 @@ async function fetchPages(searchterm = '') {
       return data.pages || {};
     }
   } catch (e) {
-    console.error('Error fetching pages:', e);
+    // Silent error handling
   }
   return {};
 }

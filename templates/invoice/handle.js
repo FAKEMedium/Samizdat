@@ -35,7 +35,7 @@ async function sendForm(method, dataform='#dataform') {
       populateForm(formdata, method, dataform);
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 
@@ -79,7 +79,7 @@ async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0, dataf
       return true;
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

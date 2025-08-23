@@ -67,7 +67,7 @@ if (editMatch) {
       }
     })
     .catch(err => {
-      console.error(err);
+      // Silent error handling
       showToast('An error occurred while fetching zone data.');
     });
 } else {
@@ -100,7 +100,7 @@ form.addEventListener('submit', function(e) {
       }
     })
     .catch(error => {
-      console.error(error);
+      // Silent error handling
       showToast('An error occurred while processing the request.');
     });
 });

@@ -1,12 +1,12 @@
 % use Mojo::Util qw(trim);
 % if ('' ne $web->{css}) {
         <style id="modalcss"> /*<![CDATA[*/
-           <%== web->indent(eval { trim $web->{css} }, 1) =%>
-         /*]]>*/ </style>
+          <%== web->indent(eval { trim $web->{css} }, 5) =%>
+        /*]]>*/ </style>
 % }
         <%== web->indent(eval { trim content }, 4) =%>
 % if ('' ne $web->{script}) {
         <script id="modalscript"> /*<![CDATA[*/
-          <%== web->indent(eval { trim $web->{script} }, 1) =%>
+          <%== web->indent(eval { trim $web->{script} }, 5) =%>
         /*]]>*/ </script>
 % }

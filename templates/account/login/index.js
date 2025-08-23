@@ -59,6 +59,8 @@ async function login () {
             loginform.innerHTML = jsonData.error;
         }
     } catch (error) {
-        console.error("Error: ", error);
+        // console.error('Login error:', error);
+        loginalert.classList.add('alert-danger');
+        loginalert.innerHTML = '<%== __("An error occurred during login. Please try again.") %>';
     }
 }

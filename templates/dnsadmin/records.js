@@ -9,7 +9,7 @@
         populate(data);
       }
     } catch (e) {
-      console.error(e);
+      // Silent error handling
     }
   }
 
@@ -63,7 +63,7 @@
             alert(result.error || '<%== __("Failed to delete record") %>');
           }
         } catch (error) {
-          console.error(error);
+          // Silent error handling
         }
       });
     });

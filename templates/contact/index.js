@@ -72,13 +72,13 @@ async function loadData() {
       const result = await response.json();
       document.querySelector('#ip').innerHTML = `<%== __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %>`
         .replace('REPLACEIP', result.ip);
-      document.querySelector('#name').value = result.name;
-      document.querySelector('#email').value = result.email;
+      document.querySelector('#name').value = result.name || displayname;
+      document.querySelector('#email').value = result.email || email;
       document.querySelector('#subject').value = result.subject;
       document.querySelector('#message').value = result.message;
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

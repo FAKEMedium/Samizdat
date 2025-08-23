@@ -1,3 +1,6 @@
+let docid = document.documentElement.dataset.docid || 0;
+let editor = 0;
+
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'

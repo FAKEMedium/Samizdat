@@ -75,7 +75,7 @@ async function loadData() {
         .replace('REPLACEIP', result.ip);
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

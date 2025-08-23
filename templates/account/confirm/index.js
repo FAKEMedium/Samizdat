@@ -29,7 +29,6 @@ async function handleConfirmation() {
       cleanUrl();
     }
   } catch (error) {
-    console.error('<%== __('Confirmation error:') %>', error);
     showError('<%== __('Network error - please try again') %>');
   }
 }
@@ -106,7 +105,6 @@ function setupFormHandling() {
           showError(result.message || '<%== __('An error occurred') %>');
         }
       } catch (error) {
-        console.error('<%== __('Form submission error:') %>', error);
         showError('<%== __('Network error - please try again') %>');
       }
     });

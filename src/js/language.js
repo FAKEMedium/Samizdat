@@ -19,11 +19,9 @@ export function setlanguage(event, el) {
     window.location.reload();
 }
 
-window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#languagedropdown a').forEach(el => {
-        el.addEventListener('click', (e) => {
-            e.preventDefault();
-            setlanguage(e, el);
-        })
+document.querySelectorAll('#languagedropdown a').forEach(el => {
+    el.addEventListener('click', (e) => {
+        e.preventDefault();
+        setlanguage(e, el);
     })
 })

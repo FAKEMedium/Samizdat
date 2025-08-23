@@ -11,7 +11,7 @@ async function sendData() {
       populate(await response.json());
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

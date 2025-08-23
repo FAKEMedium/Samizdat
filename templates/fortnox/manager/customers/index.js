@@ -40,7 +40,7 @@ async function loadCustomers() {
       tfoot.textContent = `<%== __x('Total: {count} customers', { count => '${customers.length}' }) %>`;
     }
   } catch (error) {
-    console.error('Error loading customers:', error);
+    // Silent error handling
   }
 }
 

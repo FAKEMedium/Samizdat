@@ -86,7 +86,7 @@ sub login ($self) {
       'd' => $user->{displayname},                                                              # Long display name
       'n' => $user->{username},                                                                 # Username, short display name
       'i' => $userid,                                                                           # User ID
-      'e' => '1',
+      'e' => $user->{email} // '',                                                              # Email address
       't' => '',
       'm' => '0',
       'l' => 'en',                                                                              # Language, default is English
@@ -140,7 +140,7 @@ sub logout ($self) {
     secure => 1,
     httponly => 0,
     path => '/',
-    expires => 1,
+    expires => 0,
     domain => $self->config->{account}->{cookiedomain},
     hostonly => 1,
   };

@@ -12,7 +12,7 @@ async function loadCustomer() {
       populateCustomerDetails(customer);
     }
   } catch (error) {
-    console.error('Error loading customer:', error);
+    // Silent error handling
   }
 }
 

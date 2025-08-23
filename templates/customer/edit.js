@@ -24,7 +24,7 @@ async function sendData(method, customerid = 0) {
       populateForm(await response.json(), method);
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 
@@ -57,7 +57,7 @@ async function getId(what, customerid = 0) {
       return true;
     }
   } catch (e) {
-    console.error(e);
+    // Silent error handling
   }
 }
 

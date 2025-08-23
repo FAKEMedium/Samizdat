@@ -1,12 +1,12 @@
 import { getCookie, setCookie, deleteCookie, decodeBase64 } from "./cookies.js";
 
-let userid = 0;
-let username = "";
-let displayname = "";
-let aliasname = "";
-let messages = 0;
-let superadmin = 0;
-let cartcount = 0;
+export let userid = 0;
+export let username = "";
+export let displayname = "";
+export let messages = 0;
+export let superadmin = 0;
+export let email = "";
+export let cartcount = 0;
 
 export function checkUsername() {
     let userdata = getCookie('samizdata');
@@ -17,7 +17,8 @@ export function checkUsername() {
         userid = u.i;
         messages = u.m;
         username = u.n;
-        displayname = u.d;
+        email = u.e;
+        displayname = u.d ? u.d : username;
         superadmin = u.s;
         cartcount = parseInt(u.b);
         if ("" !== username) {
@@ -35,6 +36,4 @@ export function checkUsername() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    checkUsername();
-})
+checkUsername();

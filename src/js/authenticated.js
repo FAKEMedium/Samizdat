@@ -31,7 +31,6 @@ import './shortbytes.js';
 window.initRoomService = function(serviceId) {
     const cardCol = document.querySelector(`#cardcol-${serviceId}`);
     if (cardCol) {
-        console.log(`RoomService initialized for: ${serviceId}`);
     }
 };
 
@@ -53,7 +52,6 @@ window.handleAuthForm = function(formId, endpoint) {
                     location.reload();
                 }
             } catch (error) {
-                console.error('Form submission error:', error);
             }
         });
     }
@@ -132,7 +130,6 @@ window.initPageEditor = async function() {
     // Set up save handler
     toolbar.onSave = function(htmlContent) {
         // TODO: Implement save to backend
-        console.log('Saving content:', htmlContent);
         content.innerHTML = htmlContent;
         content.style.display = 'block';
         wrapper.remove();
@@ -148,50 +145,46 @@ window.initPageEditor = async function() {
     return editor;
 };
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Authenticated modules loaded");
-    
-    // Initialize toasts for authenticated users
-    const toastElList = document.querySelectorAll('.toast');
-    const toastList = [...toastElList].map(toastEl => new Toast(toastEl));
-    
-    // Auto-initialize roomservice cards if present
-    document.querySelectorAll('[id^="cardcol-"]').forEach(card => {
-        const serviceId = card.id.replace('cardcol-', '');
-        window.initRoomService(serviceId);
-    });
-    
-    // Check if we're on a markdown page and show edit button
-    const theContent = document.getElementById('thecontent');
-    const editButton = document.getElementById('editPageButton');
-    
-    if (theContent && editButton) {
-        // Check if user is authenticated (button visibility is controlled by auth class toggling)
-        const checkAuth = () => {
-            const userButtons = document.getElementById('userbuttons');
-            if (userButtons && !userButtons.classList.contains('d-none')) {
-                // User is logged in, show edit button
-                editButton.classList.remove('d-none');
-            }
-        };
-        
-        // Check immediately and after a short delay (for auth state to be set)
-        checkAuth();
-        setTimeout(checkAuth, 100);
-        
-        // Handle edit button click
-        editButton.addEventListener('click', async () => {
-            editButton.disabled = true;
-            editButton.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Loading editor...';
-            
-            try {
-                await window.initPageEditor();
-                editButton.style.display = 'none';
-            } catch (error) {
-                console.error('Failed to load editor:', error);
-                editButton.disabled = false;
-                editButton.innerHTML = '<%== icon "pencil-square"; %> <span class="d-sm-inline d-none ms-1">Edit</span>';
-            }
-        });
-    }
+
+// Initialize toasts for authenticated users
+const toastElList = document.querySelectorAll('.toast');
+const toastList = [...toastElList].map(toastEl => new Toast(toastEl));
+
+// Auto-initialize roomservice cards if present
+document.querySelectorAll('[id^="cardcol-"]').forEach(card => {
+    const serviceId = card.id.replace('cardcol-', '');
+    window.initRoomService(serviceId);
 });
+
+// Check if we're on a markdown page and show edit button
+const theContent = document.getElementById('thecontent');
+const editButton = document.getElementById('editPageButton');
+
+if (theContent && editButton) {
+    // Check if user is authenticated (button visibility is controlled by auth class toggling)
+    const checkAuth = () => {
+        const userButtons = document.getElementById('userbuttons');
+        if (userButtons && !userButtons.classList.contains('d-none')) {
+            // User is logged in, show edit button
+            editButton.classList.remove('d-none');
+        }
+    };
+    
+    // Check immediately and after a short delay (for auth state to be set)
+    checkAuth();
+    setTimeout(checkAuth, 100);
+    
+    // Handle edit button click
+    editButton.addEventListener('click', async () => {
+        editButton.disabled = true;
+        editButton.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Loading editor...';
+        
+        try {
+            await window.initPageEditor();
+            editButton.style.display = 'none';
+        } catch (error) {
+            editButton.disabled = false;
+            editButton.innerHTML = '<%== icon "pencil-square"; %> <span class="d-sm-inline d-none ms-1">Edit</span>';
+        }
+    });
+}
