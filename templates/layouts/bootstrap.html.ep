@@ -78,26 +78,28 @@
           </ul>
         </div>
       </header>
-      <section class="container px-0<%== eval {return ' editable' if (!exists $web->{sidebar});} %>"<%== eval {return ' id="thecontent"' if (!exists $web->{sidebar});} %>>
 <% if (exists $web->{sidebar}) { =%>
+      <section class="container px-0">
         <div class="row">
+          <%== limiter 'start' %>
           <div class="col-sm-8 editable" id="thecontent">
-            <%== limiter 'start' %>
             <%== web->indent(eval {trim content}, 6) =%>
-            <%== limiter 'end' %>
           </div>
-          <div class="col-sm-4">
-            <%== limiter 'startside' %>
+          <%== limiter 'end' %>
+          <%== limiter 'startside' %>
+          <div class="col-sm-4" id="thesidebar">
             <%== web->indent(eval {trim $web->{sidebar}}, 6) =%>
-            <%== limiter 'endside' %>
           </div>
+          <%== limiter 'endside' %>
         </div>
-<% } else { =%>
-        <%== limiter 'start' %>
-        <%== web->indent(eval {trim content}, 4) =%>
-        <%== limiter 'end' %>
-<%  } =%>
       </section>
+% } else {
+      <%== limiter 'start' %>
+      <section class="container px-0 editable" id="thecontent">
+        <%== web->indent(eval {trim content}, 4) =%>
+      </section>
+      <%== limiter 'end' %>
+% }
     </main>
     <footer id="mainfooter" class="mt-0 py-3 container">
       <%== web->indent(eval {trim include 'chunks/footer'}, 3) =%>

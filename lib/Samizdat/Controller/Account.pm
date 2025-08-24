@@ -105,7 +105,7 @@ sub login ($self) {
       domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
     };
-    $cookie_opts->{expires} = time + (30 * 24 * 60 * 60) if $rememberme;
+    $cookie_opts->{expires} = time + (30 * 24 * 60 * 60) if $rememberme;                       # 30 days
 
     my $authcookie = $self->app->uuid->create_str();
     $self->app->account->addSession($authcookie, {
@@ -134,18 +134,17 @@ sub login ($self) {
 
 
 sub logout ($self) {
-  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
-  $self->app->account->deleteSession($authcookie);
   my $cookie_opts = {
     secure => 1,
     httponly => 0,
     path => '/',
-    expires => 0,
+    expires => time - 10000,
     domain => $self->config->{account}->{cookiedomain},
     hostonly => 1,
   };
-  $self->cookie($authcookie => '', $cookie_opts);
+  $self->cookie($self->config->{account}->{authcookiename} => '', $cookie_opts);
   $self->cookie($self->config->{account}->{datacookiename} => '', $cookie_opts);
+  $self->app->account->deleteSession($self->config->{account}->{authcookiename});
   return $self->redirect_to('/');
 }
 
