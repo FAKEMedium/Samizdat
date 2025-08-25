@@ -5,83 +5,71 @@ import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
 import Image from '@tiptap/extension-image'
+import { Table } from '@tiptap/extension-table'
+import { TableRow } from '@tiptap/extension-table-row'
+import { TableCell } from '@tiptap/extension-table-cell'
+import { TableHeader } from '@tiptap/extension-table-header'
 
 // Bootstrap-based TipTap toolbar
 class BootstrapTipTapToolbar {
   constructor(editor, container) {
     this.editor = editor;
     this.container = container;
-    this.createToolbar();
+    this.init();
+  }
+
+  async init() {
+    await this.createToolbar();
     this.bindEvents();
   }
 
-  createToolbar() {
-    const toolbar = document.createElement('div');
-    toolbar.className = 'btn-toolbar mb-3 p-2 border-bottom bg-light';
-    toolbar.innerHTML = `
-      <div class="btn-group me-2" role="group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="bold" title="Bold">
-          <i class="bi bi-type-bold"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="italic" title="Italic">
-          <i class="bi bi-type-italic"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="underline" title="Underline">
-          <i class="bi bi-type-underline"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="strike" title="Strikethrough">
-          <i class="bi bi-type-strikethrough"></i>
-        </button>
-      </div>
+  async createToolbar() {
+    try {
+      const response = await fetch('/chunks/tiptap-toolbar', {
+        method: 'GET',
+        headers: { 'Accept': 'text/html' }
+      });
       
-      <div class="btn-group me-2" role="group">
-        <select class="form-select form-select-sm" data-action="heading" style="width: 120px;">
-          <option value="">Normal</option>
-          <option value="1">Heading 1</option>
-          <option value="2">Heading 2</option>
-          <option value="3">Heading 3</option>
-        </select>
-      </div>
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       
-      <div class="btn-group me-2" role="group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="bulletList" title="Bullet List">
-          <i class="bi bi-list-ul"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="orderedList" title="Numbered List">
-          <i class="bi bi-list-ol"></i>
-        </button>
-      </div>
+      const toolbarHTML = await response.text();
+      const toolbarContainer = document.createElement('div');
+      toolbarContainer.innerHTML = toolbarHTML;
       
-      <div class="btn-group me-2" role="group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="blockquote" title="Quote">
-          <i class="bi bi-quote"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="codeBlock" title="Code Block">
-          <i class="bi bi-code"></i>
-        </button>
-      </div>
+      // Add SVG symbols to document
+      const tiptapDefs = toolbarContainer.querySelector('#tiptapdefs');
+      if (tiptapDefs) {
+        const topDefs = document.querySelector('#topdefs');
+        if (topDefs) {
+          // Merge toolbar symbols into main page symbols
+          while (tiptapDefs.firstChild) {
+            topDefs.appendChild(tiptapDefs.firstChild);
+          }
+        } else {
+          // Fallback: add to document head
+          const svgSymbols = toolbarContainer.querySelector('svg[aria-hidden="true"]');
+          if (svgSymbols) {
+            document.head.appendChild(svgSymbols);
+          }
+        }
+      }
       
-      <div class="btn-group me-2" role="group">
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="link" title="Link">
-          <i class="bi bi-link-45deg"></i>
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="image" title="Image">
-          <i class="bi bi-image"></i>
-        </button>
-      </div>
+      // Find the toolbar div (skip the SVG symbols)
+      const toolbar = toolbarContainer.querySelector('.btn-toolbar') || toolbarContainer.lastElementChild;
       
-      <div class="btn-group ms-auto" role="group">
-        <button type="button" class="btn btn-sm btn-success" data-action="save" title="Save">
-          <i class="bi bi-check-lg"></i> Save
-        </button>
-        <button type="button" class="btn btn-sm btn-outline-secondary" data-action="cancel" title="Cancel">
-          <i class="bi bi-x-lg"></i> Cancel
-        </button>
-      </div>
-    `;
-    
-    this.container.insertBefore(toolbar, this.container.firstChild);
-    this.toolbar = toolbar;
+      this.container.insertBefore(toolbar, this.container.firstChild);
+      this.toolbar = toolbar;
+    } catch (error) {
+      console.error('Failed to load TipTap toolbar:', error);
+      // Fallback: create a basic toolbar
+      const toolbar = document.createElement('div');
+      toolbar.className = 'btn-toolbar mb-3 p-2 border-bottom bg-light';
+      toolbar.innerHTML = '<div class="alert alert-warning">Toolbar failed to load</div>';
+      this.container.insertBefore(toolbar, this.container.firstChild);
+      this.toolbar = toolbar;
+    }
   }
 
   bindEvents() {
@@ -150,6 +138,30 @@ class BootstrapTipTapToolbar {
           editor.chain().focus().setImage({ src }).run();
         }
         break;
+      case 'insertTable':
+        editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+        break;
+      case 'addColumnBefore':
+        editor.chain().focus().addColumnBefore().run();
+        break;
+      case 'addColumnAfter':
+        editor.chain().focus().addColumnAfter().run();
+        break;
+      case 'deleteColumn':
+        editor.chain().focus().deleteColumn().run();
+        break;
+      case 'addRowBefore':
+        editor.chain().focus().addRowBefore().run();
+        break;
+      case 'addRowAfter':
+        editor.chain().focus().addRowAfter().run();
+        break;
+      case 'deleteRow':
+        editor.chain().focus().deleteRow().run();
+        break;
+      case 'deleteTable':
+        editor.chain().focus().deleteTable().run();
+        break;
       case 'save':
         this.onSave && this.onSave(editor.getHTML());
         break;
@@ -160,27 +172,58 @@ class BootstrapTipTapToolbar {
   }
 
   updateButtonStates() {
+    if (!this.toolbar) return;
+    
     const editor = this.editor;
     
     // Update button active states
-    this.toolbar.querySelector('[data-action="bold"]').classList.toggle('active', editor.isActive('bold'));
-    this.toolbar.querySelector('[data-action="italic"]').classList.toggle('active', editor.isActive('italic'));
-    this.toolbar.querySelector('[data-action="underline"]').classList.toggle('active', editor.isActive('underline'));
-    this.toolbar.querySelector('[data-action="strike"]').classList.toggle('active', editor.isActive('strike'));
-    this.toolbar.querySelector('[data-action="bulletList"]').classList.toggle('active', editor.isActive('bulletList'));
-    this.toolbar.querySelector('[data-action="orderedList"]').classList.toggle('active', editor.isActive('orderedList'));
-    this.toolbar.querySelector('[data-action="blockquote"]').classList.toggle('active', editor.isActive('blockquote'));
-    this.toolbar.querySelector('[data-action="codeBlock"]').classList.toggle('active', editor.isActive('codeBlock'));
+    const boldBtn = this.toolbar.querySelector('[data-action="bold"]');
+    const italicBtn = this.toolbar.querySelector('[data-action="italic"]');
+    const underlineBtn = this.toolbar.querySelector('[data-action="underline"]');
+    const strikeBtn = this.toolbar.querySelector('[data-action="strike"]');
+    const bulletListBtn = this.toolbar.querySelector('[data-action="bulletList"]');
+    const orderedListBtn = this.toolbar.querySelector('[data-action="orderedList"]');
+    const blockquoteBtn = this.toolbar.querySelector('[data-action="blockquote"]');
+    const codeBlockBtn = this.toolbar.querySelector('[data-action="codeBlock"]');
+    
+    if (boldBtn) boldBtn.classList.toggle('active', editor.isActive('bold'));
+    if (italicBtn) italicBtn.classList.toggle('active', editor.isActive('italic'));
+    if (underlineBtn) underlineBtn.classList.toggle('active', editor.isActive('underline'));
+    if (strikeBtn) strikeBtn.classList.toggle('active', editor.isActive('strike'));
+    if (bulletListBtn) bulletListBtn.classList.toggle('active', editor.isActive('bulletList'));
+    if (orderedListBtn) orderedListBtn.classList.toggle('active', editor.isActive('orderedList'));
+    if (blockquoteBtn) blockquoteBtn.classList.toggle('active', editor.isActive('blockquote'));
+    if (codeBlockBtn) codeBlockBtn.classList.toggle('active', editor.isActive('codeBlock'));
+    
+    // Update table button states
+    const isInTable = editor.isActive('table');
+    const addColumnBeforeBtn = this.toolbar.querySelector('[data-action="addColumnBefore"]');
+    const addColumnAfterBtn = this.toolbar.querySelector('[data-action="addColumnAfter"]');
+    const deleteColumnBtn = this.toolbar.querySelector('[data-action="deleteColumn"]');
+    const addRowBeforeBtn = this.toolbar.querySelector('[data-action="addRowBefore"]');
+    const addRowAfterBtn = this.toolbar.querySelector('[data-action="addRowAfter"]');
+    const deleteRowBtn = this.toolbar.querySelector('[data-action="deleteRow"]');
+    const deleteTableBtn = this.toolbar.querySelector('[data-action="deleteTable"]');
+    
+    if (addColumnBeforeBtn) addColumnBeforeBtn.disabled = !isInTable;
+    if (addColumnAfterBtn) addColumnAfterBtn.disabled = !isInTable;
+    if (deleteColumnBtn) deleteColumnBtn.disabled = !isInTable;
+    if (addRowBeforeBtn) addRowBeforeBtn.disabled = !isInTable;
+    if (addRowAfterBtn) addRowAfterBtn.disabled = !isInTable;
+    if (deleteRowBtn) deleteRowBtn.disabled = !isInTable;
+    if (deleteTableBtn) deleteTableBtn.disabled = !isInTable;
 
     // Update heading dropdown
     const headingSelect = this.toolbar.querySelector('[data-action="heading"]');
-    for (let i = 1; i <= 6; i++) {
-      if (editor.isActive('heading', { level: i })) {
-        headingSelect.value = i.toString();
-        return;
+    if (headingSelect) {
+      for (let i = 1; i <= 6; i++) {
+        if (editor.isActive('heading', { level: i })) {
+          headingSelect.value = i.toString();
+          return;
+        }
       }
+      headingSelect.value = '';
     }
-    headingSelect.value = '';
   }
 }
 
@@ -190,5 +233,9 @@ window.TipTap = {
   StarterKit,
   Link,
   Image,
+  Table,
+  TableRow,
+  TableCell,
+  TableHeader,
   BootstrapTipTapToolbar
 };

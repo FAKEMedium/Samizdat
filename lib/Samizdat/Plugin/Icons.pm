@@ -48,7 +48,9 @@ sub register ($self, $app, $conf) {
       } elsif ('anysvg' eq $what) {
         $prefix = $options->{prefix} // 'anysvg';
       }
-      my $stashsymbols = $c->app->stash('symbols') // {};
+      my $stashsymbols = $c->stash('symbols') // {};
+      
+      # Only read file if not already cached
       if (!exists($symbols->{$icon})) {
         if ('flag' eq $what) {
           $svg = $flagsrepo->child(
@@ -76,8 +78,10 @@ sub register ($self, $app, $conf) {
         chomp $symbol;
         $symbols->{$icon} = $symbol;
       }
+      
+      # Add to current request's stash
       $stashsymbols->{$icon} = $symbols->{$icon};
-      $c->app->stash(symbols => $stashsymbols);
+      $c->stash(symbols => $stashsymbols);
       my $class = $options->{class} // sprintf('%s %s-%s', $prefix, $prefix, $icon);
       $class .= ' ' . $options->{extraclass} if (exists $options->{extraclass});
       my $iconcode = $mtsvg->process({
@@ -98,7 +102,7 @@ sub register ($self, $app, $conf) {
     flag => sub($c, $cc, $options =  {}) {
       $options->{what} = 'flag';
       $options->{iconname} = $cc;
-      return $c->app->icon($cc, $options);
+      return $c->icon($cc, $options);
     }
   );
 
@@ -107,7 +111,7 @@ sub register ($self, $app, $conf) {
       $options->{what} = 'anysvg';
       $iconname =~ s/[^A-Za-z0-9\-]+//g;
       $options->{iconname} = $iconname;
-      return $c->app->icon($filename, $options);
+      return $c->icon($filename, $options);
     }
   );
 }

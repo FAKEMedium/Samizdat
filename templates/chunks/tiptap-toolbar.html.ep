@@ -1,0 +1,88 @@
+<div class="btn-toolbar mb-3 p-2 border-bottom bg-light">
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="bold" title="Bold">
+      <%== icon('type-bold') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="italic" title="Italic">
+      <%== icon('type-italic') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="underline" title="Underline">
+      <%== icon('type-underline') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="strike" title="Strikethrough">
+      <%== icon('type-strikethrough') %>
+    </button>
+  </div>
+  
+  <div class="btn-group me-2" role="group">
+    <select class="form-select form-select-sm" data-action="heading" style="width: 120px;">
+      <option value="">Normal</option>
+      <option value="1">Heading 1</option>
+      <option value="2">Heading 2</option>
+      <option value="3">Heading 3</option>
+    </select>
+  </div>
+  
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="bulletList" title="Bullet List">
+      <%== icon('list-ul') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="orderedList" title="Numbered List">
+      <%== icon('list-ol') %>
+    </button>
+  </div>
+  
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="blockquote" title="Quote">
+      <%== icon('quote') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="codeBlock" title="Code Block">
+      <%== icon('code') %>
+    </button>
+  </div>
+  
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="link" title="Link">
+      <%== icon('link-45deg') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="image" title="Image">
+      <%== icon('image') %>
+    </button>
+  </div>
+  
+  <div class="btn-group me-2" role="group">
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="insertTable" title="Insert Table">
+      <%== icon('table') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="addColumnBefore" title="Add Column Before">
+      <%== icon('plus-square') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="addColumnAfter" title="Add Column After">
+      <%== icon('plus-square-fill') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="deleteColumn" title="Delete Column">
+      <%== icon('dash-square') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="addRowBefore" title="Add Row Before">
+      <%== icon('plus-circle') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="addRowAfter" title="Add Row After">
+      <%== icon('plus-circle-fill') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="deleteRow" title="Delete Row">
+      <%== icon('dash-circle') %>
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="deleteTable" title="Delete Table">
+      <%== icon('trash') %>
+    </button>
+  </div>
+  
+  <div class="btn-group ms-auto" role="group">
+    <button type="button" class="btn btn-sm btn-success" data-action="save" title="Save">
+      <%== icon('check-lg') %> Save
+    </button>
+    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="cancel" title="Cancel">
+      <%== icon('x-lg') %> Cancel
+    </button>
+  </div>
+</div>

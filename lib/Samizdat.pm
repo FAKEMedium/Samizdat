@@ -29,7 +29,7 @@ sub startup ($self) {
     headtitle => '',
     extrajs => '',
     extracss => '',
-    symbols => {},
+    symbols => undef,
     headline => undef,
     web => {
       docid          => 0,

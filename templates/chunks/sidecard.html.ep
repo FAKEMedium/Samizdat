@@ -1,4 +1,4 @@
-<div class="card mb-3">
+<div class="card mb-3 editable" id="<%== $card->{docpath} %>">
   <h2 class="card-header p-1 p-sm-2"><%== $card->{title} %></h2>
 % if ($card->{card_image}) {
   <%== $card->{card_image} %>
