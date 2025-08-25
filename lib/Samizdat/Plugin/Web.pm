@@ -32,7 +32,7 @@ sub register ($self, $app, $conf) {
     ->to(controller => 'Web', action => 'index', docpath => '/web/index.html')
     ->name('web_index');
 
-  $r->get('/chunks/tiptap-toolbar')->to(controller => 'Web', action => 'tiptap_toolbar');
+  $r->get('/chunks/tiptap-toolbar')->to(controller => 'Web', action => 'tiptap_toolbar', docpath => '/assets/tiptap-toolbar.html');
   $r->get('/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
   $r->get('/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
   $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');

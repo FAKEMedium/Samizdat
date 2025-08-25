@@ -25,7 +25,7 @@ class BootstrapTipTapToolbar {
 
   async createToolbar() {
     try {
-      const response = await fetch('/chunks/tiptap-toolbar', {
+      const response = await fetch('/assets/tiptap-toolbar.html', {
         method: 'GET',
         headers: { 'Accept': 'text/html' }
       });
