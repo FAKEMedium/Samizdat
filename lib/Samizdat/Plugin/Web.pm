@@ -23,16 +23,18 @@ sub register ($self, $app, $conf) {
   );
 
   $manager->get('/menus')
-    ->to(controller => 'Web', action => 'index', docpath => '/web/menus/index.html')
+    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/menus/index.html')
     ->name('web_menus');
   $manager->get('/languages')
-    ->to(controller => 'Web', action => 'index', docpath => '/web/languages/index.html')
+    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/languages/index.html')
     ->name('web_languages');
   $manager->get('/')
-    ->to(controller => 'Web', action => 'index', docpath => '/web/index.html')
+    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/index.html')
     ->name('web_index');
 
-  $r->get('/assets/tiptap-toolbar')->to(controller => 'Web', action => 'tiptap_toolbar', docpath => '/assets/tiptap-toolbar/index.html');
+  $manager->get('/editor-toolbar')
+    ->to(controller => 'Web', action => 'tiptap_toolbar', docpath => '<%== config->{managerurl} %>/tiptap-toolbar/index.html');
+
   $r->get('/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
   $r->get('/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
   $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');

@@ -25,7 +25,9 @@ class BootstrapTipTapToolbar {
 
   async createToolbar() {
     try {
-      const response = await fetch('/assets/tiptap-toolbar/', {
+      const theContent = document.querySelector('#thecontent');
+      const toolbarUrl = theContent ? theContent.dataset.toolbar : '/web/editor-toolbar/';
+      const response = await fetch(toolbarUrl, {
         method: 'GET',
         headers: { 'Accept': 'text/html' }
       });

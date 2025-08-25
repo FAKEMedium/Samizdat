@@ -1,3 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" class="d-none">
+  <defs id="tiptapdefs">
+        <!-- symbols -->
+  </defs>
+</svg>
 <div class="btn-toolbar mb-3 p-2 border-bottom bg-light">
   <div class="btn-group me-2" role="group">
     <button type="button" class="btn btn-sm btn-outline-secondary" data-action="bold" title="<%== __('Bold') %>">
@@ -79,10 +84,10 @@
   
   <div class="btn-group ms-auto" role="group">
     <button type="button" class="btn btn-sm btn-success" data-action="save" title="<%== __('Save') %>">
-      <%== icon('check-lg') %> <span class="d-none d-md-inline"><%== __('Save') %></span>
+      <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
     </button>
     <button type="button" class="btn btn-sm btn-outline-secondary" data-action="cancel" title="<%== __('Cancel') %>">
-      <%== icon('x-lg') %> <span class="d-none d-md-inline"><%== __('Cancel') %></span>
+      <%== icon('x-lg') %> <span class="d-none d-sm-inline"><%== __('Cancel') %></span>
     </button>
   </div>
 </div>

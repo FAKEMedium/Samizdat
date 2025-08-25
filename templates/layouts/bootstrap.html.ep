@@ -82,7 +82,7 @@
       <section class="container px-0">
         <div class="row">
           <%== limiter 'start' %>
-          <div class="col-sm-8 editable" id="thecontent">
+          <div class="col-sm-8 editable" id="thecontent" data-toolbar="<%== config->{managerurl} %>web/editor-toolbar/">
             <%== web->indent(eval {trim content}, 6) =%>
           </div>
           <%== limiter 'end' %>
@@ -95,7 +95,7 @@
       </section>
 % } else {
       <%== limiter 'start' %>
-      <section class="container px-0 editable" id="thecontent">
+      <section class="container px-0 editable" id="thecontent" data-toolbar="<%== config->{managerurl} %>web/editor-toolbar/">
         <%== web->indent(eval {trim content}, 4) =%>
       </section>
       <%== limiter 'end' %>

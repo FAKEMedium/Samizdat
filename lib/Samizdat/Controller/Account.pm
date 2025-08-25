@@ -369,10 +369,10 @@ sub authenticated_user ($self) {
 
 
 sub authorize ($self, $level = 0) {
-  my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename}) // '';
+  my $authcookie = $self->cookie($self->config->{account}->{authcookiename}) // '';
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
-    if ($session->{superadmin}) {
+    if ($session->{username}) {
       return 1;
     } else {
       $self->render(template => 'forbidden', status => 403);

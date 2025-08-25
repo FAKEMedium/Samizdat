@@ -1,4 +1,4 @@
-<button id="editPageButton" class="btn btn-success btn-sm btn-normal-sm rounded-lg" title="<%= __('Edit this page') %>">
+<button id="editPageButton" class="auth btn btn-success btn-sm btn-normal-sm d-none rounded-lg" title="<%= __('Edit this page') %>">
   <%== icon 'pencil-square'; %>
   <span class="d-sm-inline d-none ms-1"><%= __('Edit') %></span>
 </button>

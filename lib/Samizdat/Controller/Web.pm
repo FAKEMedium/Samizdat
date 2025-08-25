@@ -177,7 +177,7 @@ sub banbot ($docpath, $ip){
 # Render TipTap toolbar chunk
 sub tiptap_toolbar ($self) {
   $self->stash(status => 200);
-  $self->render(template => 'chunks/tiptap-toolbar', layout => 'tiptap-toolbar', format => 'html');
+  $self->render(template => 'web/editor-toolbar/index', layout => 'undef', format => 'html');
 }
 
 1;

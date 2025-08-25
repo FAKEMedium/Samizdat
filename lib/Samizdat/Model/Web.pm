@@ -127,15 +127,16 @@ sub getlist ($self, $url, $options = {}) {
           $found = $docpath;
         }
         $docs->{$docpath} = {
-          docpath     => $docpath,
-          title       => $title,
-          main        => $html,
-          children    => [],
-          subdocs     => [],
-          url         => $url,
-          language    => $options->{language},
-          head        => $head,
-          card_image  => $card_image,
+          docpath    => $docpath,
+          title      => $title,
+          main       => $html,
+          children   => [],
+          subdocs    => [],
+          url        => $url,
+          language   => $options->{language},
+          head       => $head,
+          card_image => $card_image,
+          editable   => 1
         };
       }
     }
