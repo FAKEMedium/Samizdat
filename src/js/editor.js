@@ -45,9 +45,15 @@ class BootstrapTipTapToolbar {
       if (tiptapDefs) {
         const topDefs = document.querySelector('#topdefs');
         if (topDefs) {
-          // Merge toolbar symbols into main page symbols
+          // Merge toolbar symbols into main page symbols (avoid duplicates)
           while (tiptapDefs.firstChild) {
-            topDefs.appendChild(tiptapDefs.firstChild);
+            const symbol = tiptapDefs.firstChild;
+            const symbolId = symbol.id;
+            if (symbolId && !topDefs.querySelector(`#${symbolId}`)) {
+              topDefs.appendChild(symbol);
+            } else {
+              tiptapDefs.removeChild(symbol);
+            }
           }
         } else {
           // Fallback: add to document head

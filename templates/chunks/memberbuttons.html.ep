@@ -2,6 +2,12 @@
   <%== icon 'pencil-square'; %>
   <span class="d-sm-inline d-none ms-1"><%= __('Edit') %></span>
 </button>
+<button id="savePageButton" type="button" class="btn btn-sm btn-success d-none rounded-lg" data-action="save" title="<%== __('Save') %>">
+  <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
+</button>
+<button id="cancelPageButton" type="button" class="btn btn-sm btn-outline-secondary d-none rounded-lg" data-action="cancel" title="<%== __('Cancel') %>">
+  <%== icon('x-lg') %> <span class="d-none d-sm-inline"><%== __('Cancel') %></span>
+</button>
  <a href="<%== url_for('account_login') %>" id="loginbutton" class="auth btn btn-success btn-sm btn-normal-sm rounded-lg ms-sm-1" role="button" data-bs-toggle="modal" data-bs-target="#universalmodal" aria-label="<%= __('Log in') %>" title="<%=  __('Click to pop login dialog.') %>">
   <%== icon 'box-arrow-in-right'; %>
   <span class="d-sm-inline d-none ms-1"><%= __('Log in') %></span>

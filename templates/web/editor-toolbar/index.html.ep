@@ -81,13 +81,4 @@
       <%== icon('trash') %>
     </button>
   </div>
-  
-  <div class="btn-group ms-auto" role="group">
-    <button type="button" class="btn btn-sm btn-success" data-action="save" title="<%== __('Save') %>">
-      <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
-    </button>
-    <button type="button" class="btn btn-sm btn-outline-secondary" data-action="cancel" title="<%== __('Cancel') %>">
-      <%== icon('x-lg') %> <span class="d-none d-sm-inline"><%== __('Cancel') %></span>
-    </button>
-  </div>
 </div>

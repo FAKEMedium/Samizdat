@@ -86,13 +86,12 @@ window.initPageEditor = async function() {
     // Create wrapper for editor
     const wrapper = document.createElement('div');
     wrapper.id = 'editor-wrapper';
-    wrapper.className = 'border rounded';
+    wrapper.className = content.className;
     content.parentNode.insertBefore(wrapper, content);
     
     // Create editor container
     const editorContainer = document.createElement('div');
     editorContainer.id = 'tiptap-editor';
-    editorContainer.className = 'p-3';
     editorContainer.style.minHeight = '400px';
     wrapper.appendChild(editorContainer);
     
@@ -127,20 +126,49 @@ window.initPageEditor = async function() {
     // Create Bootstrap toolbar
     const toolbar = new TipTap.BootstrapTipTapToolbar(editor, wrapper);
     
+    // Show save and cancel buttons
+    const saveButton = document.getElementById('savePageButton');
+    const cancelButton = document.getElementById('cancelPageButton');
+    const editButton = document.getElementById('editPageButton');
+    
+    if (saveButton) saveButton.classList.remove('d-none');
+    if (cancelButton) cancelButton.classList.remove('d-none');
+    
     // Set up save handler
-    toolbar.onSave = function(htmlContent) {
+    const handleSave = function() {
         // TODO: Implement save to backend
+        const htmlContent = editor.getHTML();
         content.innerHTML = htmlContent;
         content.style.display = 'block';
         wrapper.remove();
+        
+        // Hide save/cancel buttons, show edit button
+        if (saveButton) saveButton.classList.add('d-none');
+        if (cancelButton) cancelButton.classList.add('d-none');
+        if (editButton) {
+            editButton.classList.remove('d-none');
+            editButton.disabled = false;
+        }
     };
     
     // Set up cancel handler
-    toolbar.onCancel = function() {
+    const handleCancel = function() {
         content.style.display = 'block';
         wrapper.remove();
         editor.destroy();
+        
+        // Hide save/cancel buttons, show edit button
+        if (saveButton) saveButton.classList.add('d-none');
+        if (cancelButton) cancelButton.classList.add('d-none');
+        if (editButton) {
+            editButton.classList.remove('d-none');
+            editButton.disabled = false;
+        }
     };
+    
+    // Attach event listeners
+    if (saveButton) saveButton.addEventListener('click', handleSave);
+    if (cancelButton) cancelButton.addEventListener('click', handleCancel);
     
     return editor;
 };
@@ -177,14 +205,12 @@ if (theContent && editButton) {
     // Handle edit button click
     editButton.addEventListener('click', async () => {
         editButton.disabled = true;
-        editButton.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span> Loading editor...';
         
         try {
             await window.initPageEditor();
-            editButton.style.display = 'none';
+            editButton.classList.add('d-none');
         } catch (error) {
             editButton.disabled = false;
-            editButton.innerHTML = '<%== icon "pencil-square"; %> <span class="d-sm-inline d-none ms-1">Edit</span>';
         }
     });
 }
