@@ -119,6 +119,18 @@ msgstr "Aktywny"
 msgid "Add"
 msgstr "Dodaj"
 
+msgid "Add Column After"
+msgstr "Dodaj kolumnę po"
+
+msgid "Add Column Before"
+msgstr "Dodaj kolumnę przed"
+
+msgid "Add Row After"
+msgstr "Dodaj wiersz po"
+
+msgid "Add Row Before"
+msgstr "Dodaj wiersz przed"
+
 msgid "Add content"
 msgstr "Dodaj treść"
 
@@ -206,6 +218,9 @@ msgstr "Kwota do zapłaty: {costsum} {currency}"
 msgid "An error occurred"
 msgstr "Wystąpił błąd"
 
+msgid "An error occurred during login. Please try again."
+msgstr ""
+
 msgid "Are you sure you want to delete this record?"
 msgstr "Czy na pewno chcesz usunąć ten rekord?"
 
@@ -260,6 +275,9 @@ msgstr "Zablokowany"
 msgid "Blocked ip number"
 msgstr "Zablokowany numer IP"
 
+msgid "Bold"
+msgstr "Pogrubienie"
+
 msgid "Bootstrap icons"
 msgstr "Ikony Bootstrap"
 
@@ -268,6 +286,9 @@ msgstr "Pomocnik ikon Bootstrap"
 
 msgid "Buddy price"
 msgstr "Cena przyjacielska"
+
+msgid "Bullet List"
+msgstr "Lista punktowana"
 
 msgid "Buy {slug} a coffee"
 msgstr "Kup {slug} kawę"
@@ -355,6 +376,9 @@ msgstr "Kliknij, aby wysłać ponownie."
 
 msgid "Close"
 msgstr "Zamknij"
+
+msgid "Code Block"
+msgstr "Blok kodu"
 
 msgid "Comments"
 msgstr "Komentarze"
@@ -538,6 +562,15 @@ msgstr "Zdecyduj, które części Twoich danych osobowych chcesz pokazywać ró�
 
 msgid "Delete"
 msgstr "Usuń"
+
+msgid "Delete Column"
+msgstr "Usuń kolumnę"
+
+msgid "Delete Row"
+msgstr "Usuń wiersz"
+
+msgid "Delete Table"
+msgstr "Usuń tabelę"
 
 msgid "Delivery Address"
 msgstr "Adres dostawy"
@@ -860,6 +893,15 @@ msgstr "Półrocze"
 msgid "Handled invoice"
 msgstr "Obsługiwana faktura"
 
+msgid "Heading 1"
+msgstr "Nagłówek 1"
+
+msgid "Heading 2"
+msgstr "Nagłówek 2"
+
+msgid "Heading 3"
+msgstr "Nagłówek 3"
+
 msgid "Highlights"
 msgstr "Najważniejsze informacje"
 
@@ -878,6 +920,9 @@ msgstr "Kod identyfikacyjny"
 msgid "If you did not register an account, please ignore this email."
 msgstr "Jeśli nie zarejestrowałeś konta, zignoruj tego e-maila."
 
+msgid "Image"
+msgstr "Obraz"
+
 msgid "Impersonate"
 msgstr "Udawaj"
 
@@ -886,6 +931,9 @@ msgstr "W menu osobistym znajdziesz swój {panel} wśród innych rzeczy."
 
 msgid "Including VAT"
 msgstr "Z VAT"
+
+msgid "Insert Table"
+msgstr "Wstaw tabelę"
 
 msgid "Invalid confirmation link"
 msgstr "Nieprawidłowy link potwierdzający"
@@ -1010,6 +1058,9 @@ msgstr "Jest również dostępne na"
 msgid "It's also available at {url}."
 msgstr "Jest również dostępne na {url}."
 
+msgid "Italic"
+msgstr "Kursywa"
+
 msgid "Keep me logged in"
 msgstr "Pozostaw mnie zalogowanym"
 
@@ -1033,6 +1084,9 @@ msgstr "Nazwisko"
 
 msgid "Latest"
 msgstr "Najnowsze"
+
+msgid "Link"
+msgstr "Link"
 
 msgid "Link to control panel"
 msgstr "Link do panelu sterowania"
@@ -1219,6 +1273,9 @@ msgstr "Notatki"
 
 msgid "Number"
 msgstr "Numer"
+
+msgid "Numbered List"
+msgstr "Lista numerowana"
 
 msgid "Open invoice"
 msgstr "Otwarta faktura"
@@ -1426,6 +1483,9 @@ msgstr "Ilość"
 
 msgid "Quarter"
 msgstr "Kwartał"
+
+msgid "Quote"
+msgstr "Cytat"
 
 msgid "Receiver"
 msgstr "Odbiorca"
@@ -1691,6 +1751,9 @@ msgstr "Statystyki"
 msgid "Strictly for Rymdweb"
 msgstr "Wyłącznie dla Rymdweb"
 
+msgid "Strikethrough"
+msgstr "Przekreślenie"
+
 msgid "Stuff"
 msgstr "Rzeczy"
 
@@ -1816,6 +1879,9 @@ msgstr "Typ"
 
 msgid "Unauthenticated"
 msgstr "Nieuwierzytelniony"
+
+msgid "Underline"
+msgstr "Podkreślenie"
 
 msgid "Unpaid"
 msgstr "Niezapłacone"
