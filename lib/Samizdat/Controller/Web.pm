@@ -37,6 +37,39 @@ sub index ($self) {
   }
 }
 
+sub pass ($self) {
+  return 1;
+}
+
+sub editor ($self) {
+  my $docpath = $self->stash('docpath');
+  my $docs = $self->app->web->getlist($docpath, {
+    language => $self->app->language,
+    languages => $self->config->{locale}->{languages},
+  });
+  if (!exists($docs->{$docpath})) {
+    $self->stash('status', 404);
+    return $self->reply->not_found;
+  }
+  my $title = $self->app->__x("Edit page {docpath}", docpath => '/' . $docpath);
+  my $web = $docs->{$docpath};
+  $web->{script} .= $self->render_to_string(template => 'web/edit', format => 'js');
+  $web->{css} .= $self->render_to_string(template => 'web/edit', format => 'css');
+  $self->stash(web => $web, docpath => $web->{docpath}, title => $title);
+  $self->render(template => 'web/edit', headline => 'web/chunks/headline');
+}
+
+
+sub languages ($self) {
+  my $languages = $self->app->web->getlanguages();
+  $self->render(json => { languages => $languages });
+}
+
+
+sub menus ($self) {
+  my $menus = $self->app->web->getmenus();
+  $self->render(json => { menus => $menus });
+}
 
 
 # This is the main entry point for all web pages that sit in the src/public directory.
@@ -175,9 +208,9 @@ sub banbot ($docpath, $ip){
 }
 
 # Render TipTap toolbar chunk
-sub tiptap_toolbar ($self) {
+sub editor_toolbar ($self) {
   $self->stash(status => 200);
-  $self->render(template => 'web/editor-toolbar/index', layout => 'undef', format => 'html');
+  $self->render(template => 'web/editor/toolbar/index', format => 'html', layout => undef);
 }
 
 1;

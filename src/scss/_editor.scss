@@ -1,0 +1,22 @@
+/* TipTap Editor Styles */
+.ProseMirror {
+  cursor: text !important;
+  caret-color: #000 !important;
+  outline: none !important;
+  
+  &:focus {
+    outline: 2px solid #007bff !important;
+    cursor: text !important;
+  }
+  
+  p {
+    min-height: 1.2em;
+    cursor: text !important;
+  }
+}
+
+/* Ensure the content area is editable when TipTap is active */
+.editable.ProseMirror-focused {
+  cursor: text !important;
+  caret-color: #000 !important;
+}

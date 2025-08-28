@@ -16,30 +16,47 @@ my $image = Imager->new;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  my $manager = $r->under($app->config->{managerurl})->under('web')->to(
+  my $manager = $r->under($app->config->{managerurl});
+  $manager->get('web/editor/toolbar')->name('web_editor_toolbar')->to(
+    controller => 'Web',
+    action => 'editor_toolbar',
+    docpath => sprintf('%s/index.html', $app->url_for('web_editor_toolbar'))
+  );
+  $manager->get('web/editor')->name('web_editor')->to(
     controller => 'Account',
-    action     => 'authorize',
-    level      => 'superadmin',
+    action => 'editor',
+    docpath => sprintf('%s/index.html', $app->url_for('web_editor'))
+  );
+  $manager->get('web/menus')->name('web_menus')->to(
+    controller => 'Web',
+    action => 'menus',
+    docpath => sprintf('%s/index.html', $app->url_for('web_menus'))
+  );
+  $manager->get('web/languages')->name('web_languages')->to(
+    controller => 'Web',
+    action => 'languages',
+    docpath => sprintf('%s/index.html', $app->url_for('web_languages'))
+  );
+  $manager->get('web/images')->name('web_images')->to(
+    controller => 'Web',
+    action => 'images',
+    docpath => sprintf('%s/index.html', $app->url_for('web_images'))
+  );
+  $manager->get('web')->name('web_index')->to(
+    controller => 'Web',
+    action => 'index',
+    docpath => sprintf('%s/index.html', $app->url_for('web_index'))
   );
 
-  $manager->get('/menus')
-    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/menus/index.html')
-    ->name('web_menus');
-  $manager->get('/languages')
-    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/languages/index.html')
-    ->name('web_languages');
-  $manager->get('/')
-    ->to(controller => 'Web', action => 'index', docpath => '<%== config->{managerurl} %>/index.html')
-    ->name('web_index');
-
-  $manager->get('/editor-toolbar')
-    ->to(controller => 'Web', action => 'tiptap_toolbar', docpath => '<%== config->{managerurl} %>/tiptap-toolbar/index.html');
-
+  # Things coming from configuration file
   $r->get('/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
   $r->get('/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
   $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');
   $r->get('/ads.txt')->to(controller => 'Web', action => 'ads', docpath => 'ads.txt');
   $r->get('/.well-known/security.txt')->to(controller => 'Web', action => 'security', docpath => '.well-known/security.txt');
+
+  # Things coming from database, or markdown files in src/public
+  # Database overlays files. See Samizdat::Model::Web and Samizdat::Controller::Web
   $r->get('/')->to(controller => 'Web', action => 'getdoc', docpath => '');
   $r->get('/*docpath')->to(controller => 'Web', action => 'getdoc');
 
@@ -52,10 +69,12 @@ sub register ($self, $app, $conf) {
     return $web;
   });
 
+  # Content shown in the headline area, default is share buttons
   $app->helper(headline => sub ($self, $chunkname =  'chunks/sharebuttons') {
     return ($chunkname) ? $self->render_to_string(template => $chunkname) : '';
   });
 
+  # Get the preferred language from the Accept-Language header
   $app->helper(
     accept_language => sub ($c) {
       my $language = $c->req->headers->accept_language;
@@ -75,6 +94,7 @@ sub register ($self, $app, $conf) {
     }
   );
 
+
   # Helper to check if a language is RTL
   $app->helper(
     is_rtl => sub ($c, $lang = undef) {
@@ -83,13 +103,6 @@ sub register ($self, $app, $conf) {
     }
   );
 
-  # Inline logotype (svg)
-  $app->helper(
-    languageselector => sub ($c) {
-      my $out = '';
-      return $out;
-    }
-  );
 
   $app->helper(
     includeany => sub ($c, $file = undef, $type = 'javascript', $insert = 0) {

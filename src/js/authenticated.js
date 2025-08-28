@@ -65,7 +65,7 @@ window.loadEditor = async function() {
     
     // Dynamically load TipTap bundle
     const script = document.createElement('script');
-    script.src = '/assets/tiptap.js';
+    script.src = '/assets/editor.js';
     document.head.appendChild(script);
     
     return new Promise((resolve) => {
@@ -77,100 +77,71 @@ window.loadEditor = async function() {
 
 // Initialize page editor
 window.initPageEditor = async function() {
-    const content = document.getElementById('thecontent');
-    if (!content) return;
+    console.log('Starting editor initialization...');
     
-    const TipTap = await window.loadEditor();
-    if (!TipTap || !TipTap.Editor) return;
+    let editor, content, editorContainer;
     
-    // Create wrapper for editor
-    const wrapper = document.createElement('div');
-    wrapper.id = 'editor-wrapper';
-    wrapper.className = content.className;
-    content.parentNode.insertBefore(wrapper, content);
-    
-    // Create editor container
-    const editorContainer = document.createElement('div');
-    editorContainer.id = 'tiptap-editor';
-    editorContainer.style.minHeight = '400px';
-    wrapper.appendChild(editorContainer);
-    
-    // Hide original content
-    content.style.display = 'none';
-    
-    // Initialize TipTap editor
-    const editor = new TipTap.Editor({
-        element: editorContainer,
-        extensions: [
-            TipTap.StarterKit,
-            TipTap.Link.configure({
-                openOnClick: false,
-                HTMLAttributes: {
-                    class: 'text-primary text-decoration-underline'
+    try {
+        await window.loadEditor();
+        console.log('Editor loaded');
+        
+        const manager = await window.initTipTapManager();
+        console.log('TipTap manager initialized:', manager);
+        
+        content = document.getElementById('thecontent');
+        if (!content) {
+            console.error('thecontent element not found');
+            return;
+        }
+        console.log('Found thecontent element:', content);
+        
+        // Store original content for cancel
+        const originalHTML = content.innerHTML;
+        
+        // Skip TipTap - use simple contenteditable (styling handled by setEditable)
+        
+        // Store original content for cancel functionality
+        content.dataset.originalContent = originalHTML;
+        
+        // Simple editor object for compatibility
+        editor = {
+            element: content,
+            getHTML: () => content.innerHTML,
+            setContent: (html) => content.innerHTML = html,
+            setEditable: (editable) => {
+                content.contentEditable = editable;
+                if (editable) {
+                    content.style.border = '2px solid #007bff';
+                    content.style.padding = '10px';
+                    content.style.cursor = 'text';
+                } else {
+                    content.style.border = '';
+                    content.style.padding = '';
+                    content.style.cursor = '';
                 }
-            }),
-            TipTap.Image.configure({
-                HTMLAttributes: {
-                    class: 'img-fluid'
-                }
-            })
-        ],
-        content: content.innerHTML,
-        editorProps: {
-            attributes: {
-                class: 'prose prose-sm sm:prose lg:prose-lg xl:prose-2xl mx-auto focus:outline-none',
+            },
+            destroy: () => {
+                content.contentEditable = 'false';
+                content.style.border = '';
+                content.style.padding = '';
+                content.style.cursor = '';
             }
-        }
-    });
-    
-    // Create Bootstrap toolbar
-    const toolbar = new TipTap.BootstrapTipTapToolbar(editor, wrapper);
-    
-    // Show save and cancel buttons
-    const saveButton = document.getElementById('savePageButton');
-    const cancelButton = document.getElementById('cancelPageButton');
-    const editButton = document.getElementById('editPageButton');
-    
-    if (saveButton) saveButton.classList.remove('d-none');
-    if (cancelButton) cancelButton.classList.remove('d-none');
-    
-    // Set up save handler
-    const handleSave = function() {
-        // TODO: Implement save to backend
-        const htmlContent = editor.getHTML();
-        content.innerHTML = htmlContent;
-        content.style.display = 'block';
-        wrapper.remove();
+        };
         
-        // Hide save/cancel buttons, show edit button
-        if (saveButton) saveButton.classList.add('d-none');
-        if (cancelButton) cancelButton.classList.add('d-none');
-        if (editButton) {
-            editButton.classList.remove('d-none');
-            editButton.disabled = false;
-        }
-    };
-    
-    // Set up cancel handler
-    const handleCancel = function() {
-        content.style.display = 'block';
-        wrapper.remove();
-        editor.destroy();
+        console.log('Simple contenteditable editor initialized');
         
-        // Hide save/cancel buttons, show edit button
-        if (saveButton) saveButton.classList.add('d-none');
-        if (cancelButton) cancelButton.classList.add('d-none');
-        if (editButton) {
-            editButton.classList.remove('d-none');
-            editButton.disabled = false;
-        }
-    };
-    
-    // Attach event listeners
-    if (saveButton) saveButton.addEventListener('click', handleSave);
-    if (cancelButton) cancelButton.addEventListener('click', handleCancel);
-    
-    return editor;
+        // Keep save/cancel buttons hidden - toolbar will handle editing
+        const saveButton = document.getElementById('savePageButton');
+        const cancelButton = document.getElementById('cancelPageButton');
+        
+        // Set up global editor reference (simplified)
+        window.currentEditor = editor;
+        
+        return editor;
+    } catch (error) {
+        console.error('Error in initPageEditor:', error);
+        return null;
+    }
 };
 
 
@@ -188,6 +159,9 @@ document.querySelectorAll('[id^="cardcol-"]').forEach(card => {
 const theContent = document.getElementById('thecontent');
 const editButton = document.getElementById('editPageButton');
 
+console.log('theContent found:', theContent);
+console.log('editButton found:', editButton);
+
 if (theContent && editButton) {
     // Check if user is authenticated (button visibility is controlled by auth class toggling)
     const checkAuth = () => {
@@ -204,13 +178,69 @@ if (theContent && editButton) {
     
     // Handle edit button click
     editButton.addEventListener('click', async () => {
-        editButton.disabled = true;
+        console.log('Edit button clicked!');
         
         try {
-            await window.initPageEditor();
+            if (!window.currentEditor) {
+                // First time - initialize editor
+                console.log('Initializing editor for first time...');
+                await window.initPageEditor();
+            }
+            
+            // Enable simple editing and show save/cancel buttons
             editButton.classList.add('d-none');
+            const saveButton = document.getElementById('savePageButton');
+            const cancelButton = document.getElementById('cancelPageButton');
+            if (saveButton) saveButton.classList.remove('d-none');
+            if (cancelButton) cancelButton.classList.remove('d-none');
+            
+            // Enable editing mode
+            if (window.currentEditor) {
+                window.currentEditor.setEditable(true);
+                window.currentEditor.element.focus();
+                console.log('Simple editor enabled and focused');
+            }
         } catch (error) {
-            editButton.disabled = false;
+            console.error('Error in edit button handler:', error);
         }
     });
+    console.log('Edit button click handler attached');
+    
+    // Set up global save/cancel handlers for memberbuttons
+    const saveButton = document.getElementById('savePageButton');
+    const cancelButton = document.getElementById('cancelPageButton');
+    
+    if (saveButton) {
+        saveButton.addEventListener('click', () => {
+            if (window.currentEditor) {
+                // Disable editing and clean up styling
+                window.currentEditor.setEditable(false);
+                console.log('Content saved and editor disabled');
+                
+                // Hide save/cancel buttons
+                saveButton.classList.add('d-none');
+                cancelButton.classList.add('d-none');
+                editButton.classList.remove('d-none');
+                editButton.disabled = false;
+            }
+        });
+    }
+    
+    if (cancelButton) {
+        cancelButton.addEventListener('click', () => {
+            if (window.currentEditor) {
+                // Cancel editing - revert to original content
+                const originalContent = window.currentEditor.element.dataset.originalContent;
+                window.currentEditor.setContent(originalContent);
+                window.currentEditor.setEditable(false);
+                console.log('Edit cancelled, reverted to original content');
+                
+                // Hide save/cancel buttons
+                saveButton.classList.add('d-none');
+                cancelButton.classList.add('d-none');
+                editButton.classList.remove('d-none');
+                editButton.disabled = false;
+            }
+        });
+    }
 }

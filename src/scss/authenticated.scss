@@ -13,6 +13,9 @@
 @import "bootstrap/scss/tooltip";
 @import "bootstrap/scss/popover";
 
+// TipTap Editor styles
+@import "_editor";
+
 // Any custom authenticated-only styles
 .admin-toolbar {
   background-color: #f8f9fa;

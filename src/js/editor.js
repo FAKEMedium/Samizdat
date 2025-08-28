@@ -1,6 +1,303 @@
 let docid = document.documentElement.dataset.docid || 0;
 let editor = 0;
 
+// Editor Manager for multiple TipTap instances
+class TipTapEditorManager {
+  constructor() {
+    this.editors = new Map();
+    this.activeEditor = null;
+    this.toolbar = null;
+    this.offcanvas = null;
+  }
+
+  async init() {
+    // Load the offcanvas toolbar
+    await this.loadOffcanvasToolbar();
+    this.bindGlobalEvents();
+  }
+
+  async loadOffcanvasToolbar() {
+    try {
+      const theContent = document.querySelector('#thecontent');
+      const baseUrl = theContent?.dataset.toolbar || '/web/editor/toolbar/';
+      const response = await fetch(baseUrl, {
+        method: 'GET',
+        headers: { 'Accept': 'text/html' }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
+      const offcanvasHTML = await response.text();
+      const tempContainer = document.createElement('div');
+      tempContainer.innerHTML = offcanvasHTML;
+      
+      // Add SVG symbols to document
+      const svgElement = tempContainer.querySelector('svg[aria-hidden="true"]');
+      if (svgElement) {
+        const existingSvg = document.querySelector('svg[aria-hidden="true"]');
+        if (existingSvg) {
+          // Merge symbols into existing SVG
+          const newDefs = svgElement.querySelector('defs');
+          const existingDefs = existingSvg.querySelector('defs');
+          if (newDefs && existingDefs) {
+            Array.from(newDefs.children).forEach(symbol => {
+              if (symbol.id && !existingDefs.querySelector(`#${symbol.id}`)) {
+                existingDefs.appendChild(symbol);
+              }
+            });
+          }
+        } else {
+          // Add the whole SVG
+          document.body.insertBefore(svgElement, document.body.firstChild);
+        }
+      }
+      
+      // Add offcanvas to document
+      const offcanvasElement = tempContainer.querySelector('.offcanvas');
+      if (offcanvasElement) {
+        document.body.appendChild(offcanvasElement);
+        this.offcanvas = new bootstrap.Offcanvas(offcanvasElement, {
+          backdrop: false, // Disable backdrop so it doesn't block editor
+          keyboard: false  // Disable keyboard closing so editor can receive keyboard input
+        });
+        this.toolbar = offcanvasElement.querySelector('.offcanvas-body');
+      }
+    } catch (error) {
+      console.error('Failed to load TipTap offcanvas toolbar:', error);
+    }
+  }
+
+  bindGlobalEvents() {
+    if (!this.toolbar) return;
+    
+    // Handle toolbar button clicks
+    this.toolbar.addEventListener('click', (e) => {
+      const button = e.target.closest('[data-action]');
+      if (!button || !this.activeEditor) return;
+      
+      const action = button.dataset.action;
+      this.handleAction(action, button);
+    });
+
+    // Handle heading dropdown
+    this.toolbar.addEventListener('change', (e) => {
+      if (e.target.dataset.action === 'heading' && this.activeEditor) {
+        const level = e.target.value;
+        if (level) {
+          this.activeEditor.chain().focus().toggleHeading({ level: parseInt(level) }).run();
+        } else {
+          this.activeEditor.chain().focus().setParagraph().run();
+        }
+      }
+    });
+  }
+
+  createEditor(element) {
+    const editor = new Editor({
+      element: element,
+      extensions: [
+        StarterKit.configure({
+          link: false, // Disable the built-in link extension
+        }),
+        Link.configure({
+          openOnClick: false,
+          HTMLAttributes: {
+            class: 'text-primary text-decoration-underline'
+          }
+        }),
+        Image.configure({
+          HTMLAttributes: {
+            class: 'img-fluid'
+          }
+        }),
+        Table.configure({
+          resizable: true,
+        }),
+        TableRow,
+        TableHeader,
+        TableCell,
+      ],
+      onFocus: () => {
+        console.log('TipTap editor received focus');
+        this.setActiveEditor(editor);
+        // Don't automatically show offcanvas - let edit button control it
+      },
+      onBlur: ({ event }) => {
+        // Don't hide toolbar if clicking within it
+        if (event?.relatedTarget?.closest('#tiptapToolbar')) {
+          return;
+        }
+      }
+    });
+
+    this.editors.set(element, editor);
+    return editor;
+  }
+
+  setActiveEditor(editor) {
+    this.activeEditor = editor;
+    this.updateToolbarState();
+  }
+
+  updateToolbarState() {
+    // Update button states based on active editor
+    if (!this.toolbar || !this.activeEditor) return;
+    
+    const editor = this.activeEditor;
+    
+    // Update button active states
+    const buttons = {
+      'bold': this.toolbar.querySelector('[data-action="bold"]'),
+      'italic': this.toolbar.querySelector('[data-action="italic"]'),
+      'underline': this.toolbar.querySelector('[data-action="underline"]'),
+      'strike': this.toolbar.querySelector('[data-action="strike"]'),
+      'bulletList': this.toolbar.querySelector('[data-action="bulletList"]'),
+      'orderedList': this.toolbar.querySelector('[data-action="orderedList"]'),
+      'blockquote': this.toolbar.querySelector('[data-action="blockquote"]'),
+      'codeBlock': this.toolbar.querySelector('[data-action="codeBlock"]')
+    };
+    
+    Object.entries(buttons).forEach(([action, button]) => {
+      if (button) {
+        button.classList.toggle('active', editor.isActive(action));
+      }
+    });
+    
+    // Update table button states
+    const isInTable = editor.isActive('table');
+    const tableButtons = [
+      'addColumnBefore', 'addColumnAfter', 'deleteColumn',
+      'addRowBefore', 'addRowAfter', 'deleteRow', 'deleteTable'
+    ];
+    
+    tableButtons.forEach(action => {
+      const button = this.toolbar.querySelector(`[data-action="${action}"]`);
+      if (button) {
+        button.disabled = !isInTable;
+      }
+    });
+
+    // Update heading dropdown
+    const headingSelect = this.toolbar.querySelector('[data-action="heading"]');
+    if (headingSelect) {
+      for (let i = 1; i <= 6; i++) {
+        if (editor.isActive('heading', { level: i })) {
+          headingSelect.value = i.toString();
+          return;
+        }
+      }
+      headingSelect.value = '';
+    }
+  }
+
+  handleAction(action, button) {
+    const editor = this.activeEditor;
+    if (!editor) return;
+    
+    switch(action) {
+      case 'bold':
+        editor.chain().focus().toggleBold().run();
+        break;
+      case 'italic':
+        editor.chain().focus().toggleItalic().run();
+        break;
+      case 'underline':
+        editor.chain().focus().toggleUnderline().run();
+        break;
+      case 'strike':
+        editor.chain().focus().toggleStrike().run();
+        break;
+      case 'bulletList':
+        editor.chain().focus().toggleBulletList().run();
+        break;
+      case 'orderedList':
+        editor.chain().focus().toggleOrderedList().run();
+        break;
+      case 'blockquote':
+        editor.chain().focus().toggleBlockquote().run();
+        break;
+      case 'codeBlock':
+        editor.chain().focus().toggleCodeBlock().run();
+        break;
+      case 'link':
+        const url = prompt('Enter URL:');
+        if (url) {
+          editor.chain().focus().setLink({ href: url }).run();
+        }
+        break;
+      case 'image':
+        const src = prompt('Enter image URL:');
+        if (src) {
+          editor.chain().focus().setImage({ src }).run();
+        }
+        break;
+      case 'insertTable':
+        editor.chain().focus().insertTable({ rows: 3, cols: 3, withHeaderRow: true }).run();
+        break;
+      case 'addColumnBefore':
+        editor.chain().focus().addColumnBefore().run();
+        break;
+      case 'addColumnAfter':
+        editor.chain().focus().addColumnAfter().run();
+        break;
+      case 'deleteColumn':
+        editor.chain().focus().deleteColumn().run();
+        break;
+      case 'addRowBefore':
+        editor.chain().focus().addRowBefore().run();
+        break;
+      case 'addRowAfter':
+        editor.chain().focus().addRowAfter().run();
+        break;
+      case 'deleteRow':
+        editor.chain().focus().deleteRow().run();
+        break;
+      case 'deleteTable':
+        editor.chain().focus().deleteTable().run();
+        break;
+      case 'save':
+        this.saveActiveEditor();
+        break;
+      case 'cancel':
+        this.cancelActiveEditor();
+        break;
+    }
+  }
+
+  saveActiveEditor() {
+    // This will be handled by the global save button
+    document.getElementById('savePageButton')?.click();
+  }
+
+  cancelActiveEditor() {
+    // This will be handled by the global cancel button
+    document.getElementById('cancelPageButton')?.click();
+  }
+
+  destroyEditor(element) {
+    const editor = this.editors.get(element);
+    if (editor) {
+      editor.destroy();
+      this.editors.delete(element);
+      if (this.activeEditor === editor) {
+        this.activeEditor = null;
+      }
+    }
+  }
+
+  getActiveEditor() {
+    return this.activeEditor;
+  }
+
+  hideToolbar() {
+    if (this.offcanvas) {
+      this.offcanvas.hide();
+    }
+  }
+}
+
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Link from '@tiptap/extension-link'
@@ -26,7 +323,7 @@ class BootstrapTipTapToolbar {
   async createToolbar() {
     try {
       const theContent = document.querySelector('#thecontent');
-      const toolbarUrl = theContent ? theContent.dataset.toolbar : '/web/editor-toolbar/';
+      const toolbarUrl = theContent ? theContent.dataset.toolbar : '/web/editor/toolbar/';
       const response = await fetch(toolbarUrl, {
         method: 'GET',
         headers: { 'Accept': 'text/html' }
@@ -235,6 +532,28 @@ class BootstrapTipTapToolbar {
   }
 }
 
+// Global editor manager instance
+window.tiptapManager = null;
+
+// Initialize the editor manager
+window.initTipTapManager = async function() {
+  if (!window.tiptapManager) {
+    window.tiptapManager = new TipTapEditorManager();
+    await window.tiptapManager.init();
+  }
+  return window.tiptapManager;
+};
+
+// Create editor for a specific element
+window.createEditor = async function(element, content) {
+  const manager = await window.initTipTapManager();
+  const editor = manager.createEditor(element);
+  if (content) {
+    editor.commands.setContent(content);
+  }
+  return editor;
+};
+
 // Export TipTap globally for dynamic loading
 window.TipTap = {
   Editor,
@@ -245,5 +564,6 @@ window.TipTap = {
   TableRow,
   TableCell,
   TableHeader,
-  BootstrapTipTapToolbar
+  BootstrapTipTapToolbar,
+  TipTapEditorManager
 };

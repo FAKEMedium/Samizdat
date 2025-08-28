@@ -78,11 +78,11 @@
           </ul>
         </div>
       </header>
-<% if (exists $web->{sidebar}) { =%>
+% if (exists $web->{sidebar}) {
       <section class="container px-0">
         <div class="row">
           <%== limiter 'start' %>
-          <div class="col-sm-8 editable" id="thecontent" data-toolbar="<%== config->{managerurl} %>web/editor-toolbar/">
+          <div class="col-sm-8 editable" id="thecontent" data-toolbar="<%== url_for('web_editor_toolbar') %>">
             <%== web->indent(eval {trim content}, 6) =%>
           </div>
           <%== limiter 'end' %>
@@ -95,7 +95,7 @@
       </section>
 % } else {
       <%== limiter 'start' %>
-      <section class="container px-0 editable" id="thecontent" data-toolbar="<%== config->{managerurl} %>web/editor-toolbar/">
+      <section class="container px-0 editable" id="thecontent" data-toolbar="<%== url_for('web_editor_toolbar') %>">
         <%== web->indent(eval {trim content}, 4) =%>
       </section>
       <%== limiter 'end' %>

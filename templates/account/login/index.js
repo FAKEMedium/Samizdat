@@ -12,7 +12,9 @@ async function login () {
             mode: "cors",
             cache: "no-cache",
             credentials: "same-origin",
-            headers: {Accept: 'application/json'},
+            headers: {
+                Accept: 'application/json'
+            },
             redirect: "follow",
             referrerPolicy: "no-referrer",
             body: formdata
@@ -23,11 +25,7 @@ async function login () {
         }
         const jsonData = await response.json();
         if (jsonData.userdata) {
-            if ('/' === window.location.pathname) {
-                location.assign("<%= url_for('account_panel') %>");
-            } else {
-                window.location.reload(true);
-            }
+            window.location.reload(true);
         } else if (jsonData.error) {
             if ('blocked' == jsonData.error.reason) {
                 modaltitle.innerHTML = `<%== __("Login blocked") %>`;

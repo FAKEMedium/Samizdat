@@ -30,7 +30,7 @@ const config = {
       cacheGroups: {
         tiptap: {
           test: /[\\/]node_modules[\\/]@tiptap/,
-          name: 'tiptap',
+          name: 'editor',
           chunks: 'all',
           enforce: true
         }
@@ -42,7 +42,7 @@ const config = {
 config.entry['samizdat'] = './src/js/samizdat.js';
 config.entry['authenticated'] = './src/js/authenticated.js';
 config.entry['sw'] = './src/js/sw.js';
-config.entry['tiptap'] = './src/js/editor.js';
+config.entry['editor'] = './src/js/editor.js';
 
 if (!isDev) {
   config.optimization.minimizer.push(
