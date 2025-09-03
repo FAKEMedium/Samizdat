@@ -17,6 +17,10 @@ my $levels = {
   'superadmin'     => 9999,
 };
 
+sub pass ($self) {
+  return 1;
+}
+
 
 sub index ($self) {
   if ($self->authenticated_user()) {
@@ -63,7 +67,6 @@ sub login ($self) {
   };
   my $username = $v->param('username');
   my $password = $v->param('password');
-  my $rememberme = $self->param('rememberme') // 0;
 
   if (exists($self->config->{account}->{superadmins}->{$username}) && ($self->config->{account}->{superadmins}->{$username} eq $password)) {
     $userid = 0;
@@ -97,16 +100,16 @@ sub login ($self) {
     my $value = b64_encode(j $userdata);
     chomp $value;
     $value =~ s/[\r\n]+//g;
-
+    my $expires = $self->config->{account}->{sessiontimeout};
     my $cookie_opts = {
       secure => 1,
       httponly => 0,
       path => '/',
       domain => $self->config->{account}->{cookiedomain},
       hostonly => 1,
+      same_site => 'Lax',
+      expires => time + $expires,
     };
-    $cookie_opts->{expires} = time + (30 * 24 * 60 * 60) if $rememberme;                       # 30 days
-
     my $authcookie = $self->app->uuid->create_str();
     $self->app->account->addSession($authcookie, {
       userid     => $userid,
@@ -115,7 +118,7 @@ sub login ($self) {
       value      => $value,
       ip         => $ip,
       groups     => join(':', map { $_->{groupname} } @{$self->app->account->getUserGroups($userid)}),
-    });
+    }, $expires);
     $self->cookie($self->config->{account}->{authcookiename} => $authcookie, $cookie_opts);
     $self->cookie($self->config->{account}->{datacookiename} => $value, $cookie_opts);
 
@@ -362,7 +365,20 @@ sub password ($self) {
 sub authenticated_user ($self) {
   my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
   if ($authcookie) {
-    return $self->app->account->session($authcookie);
+    my $session = $self->app->account->session($authcookie);
+    if ($session && %$session) {
+      # Refresh browser cookie to match Redis expiration
+      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, {
+        expires => time + $self->config->{sessiontimeout},
+        secure => 1,
+        httponly => 0,
+        path => '/',
+        domain => $self->config->{account}->{cookiedomain},
+        hostonly => 1,
+        same_site => 'Lax',
+      });
+    }
+    return $session;
   }
   return undef;
 }
@@ -373,6 +389,16 @@ sub authorize ($self, $level = 0) {
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
     if ($session->{username}) {
+      # Refresh browser cookie to match Redis expiration  
+      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, {
+        expires => time + $self->config->{sessiontimeout},
+        secure => 1,
+        httponly => 0,
+        path => '/',
+        domain => $self->config->{account}->{cookiedomain},
+        hostonly => 1,
+        same_site => 'Lax',
+      });
       return 1;
     } else {
       $self->render(template => 'forbidden', status => 403);

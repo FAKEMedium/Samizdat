@@ -333,11 +333,16 @@ sub deleteSession ($self, $authcookie) {
 }
 
 
-sub addSession ($self, $authcookie, $data) {
+sub addSession ($self, $authcookie, $data, $expires = undef) {
   my $res = $self->redis->db->hmset("samizdat:$authcookie", %$data);
-  $self->redis->db->expire("samizdat:$authcookie", $self->config->{sessiontimeout});
+  $expires //= $self->config->{sessiontimeout};
+  $self->refreshSession($authcookie, $expires);
 }
 
+sub refreshSession ($self, $authcookie, $expires = undef) {
+  $expires //= $self->config->{sessiontimeout};
+  $self->redis->db->expire("samizdat:$authcookie", $expires);
+}
 
 sub insertLogin ($self, $ip, $userid, $value) {
   my $db = $self->database->db;

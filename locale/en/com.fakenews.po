@@ -2175,3 +2175,114 @@ msgstr ""
 msgid "{sitename} in {country}"
 msgstr ""
 
+msgid "SMS Management"
+msgstr "SMS Management"
+
+msgid "Send SMS"
+msgstr "Send SMS"
+
+msgid "Phone Number"
+msgstr "Phone Number"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Please enter a valid phone number"
+msgstr "Please enter a valid phone number"
+
+msgid "characters"
+msgstr "characters"
+
+msgid "Please enter a message"
+msgstr "Please enter a message"
+
+msgid "Device Status"
+msgstr "Device Status"
+
+msgid "Connected"
+msgstr "Connected"
+
+msgid "Disconnected"
+msgstr "Disconnected"
+
+msgid "Signal: {signal}%"
+msgstr "Signal: {signal}%"
+
+msgid "Operator: {operator}"
+msgstr "Operator: {operator}"
+
+msgid "Recent Messages"
+msgstr "Recent Messages"
+
+msgid "All Messages"
+msgstr "All Messages"
+
+msgid "Direction"
+msgstr "Direction"
+
+msgid "Phone"
+msgstr "Phone"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Time"
+msgstr "Time"
+
+msgid "Sent"
+msgstr "Sent"
+
+msgid "Received"
+msgstr "Received"
+
+msgid "No messages yet"
+msgstr "No messages yet"
+
+msgid "SMS sent successfully"
+msgstr "SMS sent successfully"
+
+msgid "Failed to send SMS: {error}"
+msgstr "Failed to send SMS: {error}"
+
+msgid "SMS Manager"
+msgstr "SMS Manager"
+
+msgid "Signal Strength"
+msgstr "Signal Strength"
+
+msgid "Operator"
+msgstr "Operator"
+
+msgid "Unknown"
+msgstr "Unknown"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Refresh"
+msgstr "Refresh"
+
+msgid "Message Details"
+msgstr "Message Details"
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Are you sure you want to delete this message?"
+msgstr "Are you sure you want to delete this message?"
+
+msgid "Failed to delete message: {error}"
+msgstr "Failed to delete message: {error}"
+
+msgid "No messages found"
+msgstr "No messages found"
+
+msgid "Messages will appear here once sent or received"
+msgstr "Messages will appear here once sent or received"
+
+msgid "Access denied"
+msgstr "Access denied"
+

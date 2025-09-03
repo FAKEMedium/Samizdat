@@ -75,6 +75,177 @@ window.loadEditor = async function() {
     });
 };
 
+// Simple toolbar setup for contenteditable
+window.setupSimpleToolbar = async function() {
+    try {
+        // Check if toolbar already exists and is visible
+        let toolbarElement = document.getElementById('simpleToolbar');
+        if (toolbarElement) {
+            toolbarElement.style.display = 'block';
+            console.log('Simple toolbar already exists, showing it');
+            return;
+        }
+        
+        const theContent = document.querySelector('#thecontent');
+        const toolbarUrl = theContent?.dataset.toolbar || '/web/editor/toolbar/';
+        const response = await fetch(toolbarUrl, {
+            method: 'GET',
+            headers: { 'Accept': 'text/html' }
+        });
+        
+        if (!response.ok) {
+            console.error(`Failed to load toolbar: ${response.status}`);
+            return;
+        }
+        
+        const toolbarHTML = await response.text();
+        const tempContainer = document.createElement('div');
+        tempContainer.innerHTML = toolbarHTML;
+        
+        // Add simple toolbar to page
+        toolbarElement = tempContainer.querySelector('#simpleToolbar');
+        if (toolbarElement) {
+            document.body.appendChild(toolbarElement);
+            
+            // Move toolbar SVG symbols to main document defs (no duplicates)
+            const mainDefs = document.querySelector('#topdefs');
+            const toolbarSVG = tempContainer.querySelector('svg');
+            const toolbarDefs = tempContainer.querySelector('#toolbardefs');
+            
+            if (mainDefs && toolbarDefs) {
+                // Move unique symbols from toolbar to main defs
+                const toolbarSymbols = toolbarDefs.querySelectorAll('symbol');
+                let movedCount = 0;
+                toolbarSymbols.forEach(symbol => {
+                    const symbolId = symbol.id;
+                    if (symbolId && !mainDefs.querySelector(`#${symbolId}`)) {
+                        mainDefs.appendChild(symbol.cloneNode(true));
+                        movedCount++;
+                    }
+                });
+                console.log(`Moved ${movedCount} unique SVG symbols to main defs`);
+            }
+            
+            // Setup toolbar button handlers
+            toolbarElement.addEventListener('click', (e) => {
+                const button = e.target.closest('[data-cmd]');
+                if (button) {
+                    handleToolbarCommand(button);
+                }
+            });
+            
+            // Setup dropdown handler
+            toolbarElement.addEventListener('change', (e) => {
+                if (e.target.dataset.cmd) {
+                    handleToolbarCommand(e.target);
+                }
+            });
+            
+            // Setup close button
+            const closeBtn = toolbarElement.querySelector('#closeToolbar');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    toolbarElement.style.display = 'none';
+                });
+            }
+            
+            // Make toolbar draggable
+            makeDraggable(toolbarElement, toolbarElement.querySelector('#toolbarHandle'));
+            
+            window.simpleToolbar = { element: toolbarElement };
+            console.log('Simple toolbar loaded and shown');
+        }
+    } catch (error) {
+        console.error('Failed to setup simple toolbar:', error);
+    }
+};
+
+// Make element draggable by handle
+function makeDraggable(element, handle) {
+    let isDragging = false;
+    let currentX;
+    let currentY;
+    let initialX;
+    let initialY;
+    let xOffset = 0;
+    let yOffset = 0;
+
+    handle.addEventListener('mousedown', (e) => {
+        initialX = e.clientX - xOffset;
+        initialY = e.clientY - yOffset;
+        
+        if (e.target === handle || handle.contains(e.target)) {
+            // Don't start drag if clicking the close button
+            if (!e.target.classList.contains('btn-close')) {
+                isDragging = true;
+                element.style.userSelect = 'none';
+            }
+        }
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (isDragging) {
+            e.preventDefault();
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+            xOffset = currentX;
+            yOffset = currentY;
+            
+            element.style.transform = `translate(${currentX}px, ${currentY}px)`;
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isDragging) {
+            initialX = currentX;
+            initialY = currentY;
+            isDragging = false;
+            element.style.userSelect = '';
+        }
+    });
+}
+
+// Handle toolbar commands using document.execCommand
+function handleToolbarCommand(element) {
+    const cmd = element.dataset.cmd;
+    const value = element.dataset.value || element.value || null;
+    
+    // Focus the editor first
+    window.currentEditor?.element.focus();
+    
+    switch (cmd) {
+        case 'bold':
+        case 'italic':
+        case 'underline':
+        case 'insertUnorderedList':
+        case 'insertOrderedList':
+            document.execCommand(cmd, false, null);
+            break;
+        case 'formatBlock':
+            if (value) {
+                document.execCommand('formatBlock', false, value);
+                element.value = ''; // Reset dropdown
+            }
+            break;
+        case 'createLink':
+            const url = prompt('Enter URL:');
+            if (url) {
+                document.execCommand('createLink', false, url);
+            }
+            break;
+        case 'insertHTML':
+            if (value) {
+                document.execCommand('insertHTML', false, value);
+            }
+            break;
+        default:
+            console.log('Unknown command:', cmd);
+    }
+    
+    // Keep focus on editor
+    window.currentEditor?.element.focus();
+}
+
 // Initialize page editor
 window.initPageEditor = async function() {
     console.log('Starting editor initialization...');
@@ -82,11 +253,7 @@ window.initPageEditor = async function() {
     let editor, content, editorContainer;
     
     try {
-        await window.loadEditor();
-        console.log('Editor loaded');
-        
-        const manager = await window.initTipTapManager();
-        console.log('TipTap manager initialized:', manager);
+        console.log('Setting up simple contenteditable editor...');
         
         content = document.getElementById('thecontent');
         if (!content) {
@@ -194,10 +361,13 @@ if (theContent && editButton) {
             if (saveButton) saveButton.classList.remove('d-none');
             if (cancelButton) cancelButton.classList.remove('d-none');
             
-            // Enable editing mode
+            // Enable editing mode and setup toolbar
             if (window.currentEditor) {
                 window.currentEditor.setEditable(true);
                 window.currentEditor.element.focus();
+                
+                // Load and setup simple toolbar
+                window.setupSimpleToolbar();
                 console.log('Simple editor enabled and focused');
             }
         } catch (error) {
@@ -222,6 +392,13 @@ if (theContent && editButton) {
                 cancelButton.classList.add('d-none');
                 editButton.classList.remove('d-none');
                 editButton.disabled = false;
+                
+                // Hide toolbar
+                const toolbarElement = document.getElementById('simpleToolbar');
+                if (toolbarElement) {
+                    toolbarElement.style.display = 'none';
+                    console.log('Toolbar hidden');
+                }
             }
         });
     }
@@ -240,6 +417,13 @@ if (theContent && editButton) {
                 cancelButton.classList.add('d-none');
                 editButton.classList.remove('d-none');
                 editButton.disabled = false;
+                
+                // Hide toolbar
+                const toolbarElement = document.getElementById('simpleToolbar');
+                if (toolbarElement) {
+                    toolbarElement.style.display = 'none';
+                    console.log('Toolbar hidden');
+                }
             }
         });
     }

@@ -197,7 +197,7 @@ sub security ($self) {
 }
 
 # Gather exploiting bots
-sub banbot ($docpath, $ip){
+sub banbot ($docpath, $ip) {
   if ($docpath =~ /(
     xmlrpc.php |
     wp-login.php |

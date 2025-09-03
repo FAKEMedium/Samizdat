@@ -161,6 +161,12 @@ mail:
     - account@example.com
     - AuthPass
     - s3cr3t
+sms:
+  teltonika:
+    host: sms.example.com
+    port: 443
+    username: zaphod
+    password: s3cr3t
 hypnotoad:
   listen:
     - https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1 # Run "make cert" to generate a self-signed certificate
