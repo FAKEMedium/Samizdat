@@ -1,8 +1,6 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      <h1><%= $title %></h1>
-      
       % if (flash('success')) {
         <div class="alert alert-success alert-dismissible fade show" role="alert">
           <%= flash('success') %>
@@ -20,18 +18,31 @@
   </div>
   
   <div class="row">
+    <!-- Recent Messages -->
+    <div class="col-sm-8">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0"><%== __('Recent Messages') %></h5>
+        <a href="<%= url_for 'sms_manager' %>" class="btn btn-outline-primary btn-sm">
+          <%== icon('list-ul') %> <%== __('All Messages') %>
+        </a>
+      </div>
+      <div id="recentMessages">
+        <%== include 'sms/chunks/messagetable', show_actions => 0 %>
+      </div>
+    </div>
+    
     <!-- Send SMS Form -->
-    <div class="col-md-6">
+    <div class="col-sm-4">
       <div class="card">
         <div class="card-header">
           <h5 class="card-title mb-0"><%== __('Send SMS') %></h5>
         </div>
         <div class="card-body">
-          <%= form_for 'sms' => (method => 'POST', class => 'needs-validation', novalidate => '') => begin %>
+          <form id="smsForm" class="needs-validation" novalidate>
             <div class="mb-3">
               <label for="to" class="form-label"><%== __('Phone Number') %></label>
-              <input type="tel" class="form-control<%= $valid->{to} || '' %>" 
-                     id="to" name="to" value="<%= $form->{to} || '' %>"
+              <input type="tel" class="form-control" 
+                     id="to" name="to"
                      placeholder="+46701234567" required>
               <div class="invalid-feedback">
                 <%== __('Please enter a valid phone number') %>
@@ -40,9 +51,9 @@
             
             <div class="mb-3">
               <label for="message" class="form-label"><%== __('Message') %></label>
-              <textarea class="form-control<%= $valid->{message} || '' %>" 
+              <textarea class="form-control" 
                         id="message" name="message" rows="4" 
-                        maxlength="160" required><%= $form->{message} || '' %></textarea>
+                        maxlength="160" required></textarea>
               <div class="form-text">
                 <span id="charCount">0</span>/160 <%== __('characters') %>
               </div>
@@ -51,111 +62,10 @@
               </div>
             </div>
             
-            <button type="submit" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary" id="sendButton">
               <%== icon('send') %> <%== __('Send SMS') %>
             </button>
-          <% end %>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Device Status -->
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%== __('Device Status') %></h5>
-        </div>
-        <div class="card-body">
-          <div class="row">
-            <div class="col-6">
-              <div class="d-flex align-items-center mb-2">
-                % if ($status->{connected}) {
-                  <%== icon('wifi', class => 'text-success me-2') %>
-                  <span class="text-success"><%== __('Connected') %></span>
-                % } else {
-                  <%== icon('wifi-off', class => 'text-danger me-2') %>
-                  <span class="text-danger"><%== __('Disconnected') %></span>
-                % }
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="d-flex align-items-center mb-2">
-                <%== icon('reception-4', class => 'me-2') %>
-                <span><%== __('Signal: {signal}%', signal => $status->{signal}) %></span>
-              </div>
-            </div>
-          </div>
-          % if ($status->{operator}) {
-            <div class="d-flex align-items-center">
-              <%== icon('telephone', class => 'me-2') %>
-              <span><%== __('Operator: {operator}', operator => $status->{operator}) %></span>
-            </div>
-          % }
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- Recent Messages -->
-  <div class="row mt-4">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="card-title mb-0"><%== __('Recent Messages') %></h5>
-          <a href="<%= url_for 'sms_manager' %>" class="btn btn-outline-primary btn-sm">
-            <%== icon('list-ul') %> <%== __('All Messages') %>
-          </a>
-        </div>
-        <div class="card-body">
-          % if (@$messages) {
-            <div class="table-responsive">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th><%== __('Direction') %></th>
-                    <th><%== __('Phone') %></th>
-                    <th><%== __('Message') %></th>
-                    <th><%== __('Status') %></th>
-                    <th><%== __('Time') %></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  % for my $msg (@$messages) {
-                    <tr>
-                      <td>
-                        % if ($msg->{direction} eq 'outbound') {
-                          <span class="badge bg-primary"><%== icon('arrow-up') %> <%== __('Sent') %></span>
-                        % } else {
-                          <span class="badge bg-success"><%== icon('arrow-down') %> <%== __('Received') %></span>
-                        % }
-                      </td>
-                      <td><%= $msg->{phone} %></td>
-                      <td>
-                        <div class="text-truncate" style="max-width: 200px;" title="<%= $msg->{message} %>">
-                          <%= $msg->{message} %>
-                        </div>
-                      </td>
-                      <td>
-                        % if ($msg->{status} eq 'sent' || $msg->{status} eq 'received') {
-                          <span class="badge bg-success"><%= $msg->{status} %></span>
-                        % } else {
-                          <span class="badge bg-warning"><%= $msg->{status} %></span>
-                        % }
-                      </td>
-                      <td class="text-muted small">
-                        <%= $msg->{created_at} %>
-                      </td>
-                    </tr>
-                  % }
-                </tbody>
-              </table>
-            </div>
-          % } else {
-            <div class="text-center py-4 text-muted">
-              <%== icon('inbox', size => '3em', class => 'd-block mx-auto mb-3') %>
-              <p><%== __('No messages yet') %></p>
-            </div>
-          % }
+          </form>
         </div>
       </div>
     </div>

@@ -91,6 +91,9 @@ msgstr "Om"
 msgid "About Fortnox"
 msgstr "Om Fortnox"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Enligt våra noteringar är faktura {number} fortfarande obetald."
 
@@ -189,6 +192,9 @@ msgstr "Annonsering"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Efter registrering kan du lägga till mer information om dig själv, lätta på din delningspolicy och anpassa din upplevelse."
+
+msgid "All Messages"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Tillåt cookies för att klistra in bekräftelsekod från e-post"
@@ -562,6 +568,9 @@ msgstr "Utvecklardokument"
 msgid "Development"
 msgstr "Utveckling"
 
+msgid "Direction"
+msgstr ""
+
 msgid "Discount"
 msgstr "Rabatt"
 
@@ -594,6 +603,9 @@ msgstr "Redigera"
 
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
+
+msgid "Edit page {docpath}"
+msgstr ""
 
 msgid "Edit this page"
 msgstr "Redigera denna sida"
@@ -772,6 +784,9 @@ msgstr "Misslyckades ta bort post"
 msgid "Failed to delete zone"
 msgstr "Misslyckades ta bort zon"
 
+msgid "Failed to send SMS"
+msgstr ""
+
 msgid "Failed to send invoice to Fortnox"
 msgstr "Misslyckades att skicka faktura till Fortnox"
 
@@ -867,6 +882,9 @@ msgstr "Jag accepterar registreringsvillkoren"
 
 msgid "IBAN"
 msgstr "IBAN"
+
+msgid "ID"
+msgstr ""
 
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
@@ -1119,8 +1137,14 @@ msgstr "Menyer"
 msgid "Message"
 msgstr "Meddelande"
 
+msgid "Message must be 160 characters or less"
+msgstr ""
+
 msgid "Message sent"
 msgstr "Meddelandet skickades"
+
+msgid "Messages will appear here once sent or received"
+msgstr ""
 
 msgid "Mild"
 msgstr "Mild"
@@ -1196,6 +1220,9 @@ msgstr "Ingen fakturamall."
 
 msgid "No invoicing"
 msgstr "Faktureras inte"
+
+msgid "No messages found"
+msgstr ""
 
 msgid "No pages found."
 msgstr "Inga sidor hittades."
@@ -1284,6 +1311,9 @@ msgstr "Panel"
 msgid "Paper in typewriter"
 msgstr "Papper i skrivmaskin"
 
+msgid "Paragraph"
+msgstr ""
+
 msgid "Password"
 msgstr "Lösenord"
 
@@ -1341,14 +1371,23 @@ msgstr "Personlig panel"
 msgid "Phone"
 msgstr "Telefon"
 
+msgid "Phone Number"
+msgstr ""
+
 msgid "Please check your confirmation link or register again."
 msgstr "Kontrollera din bekräftelselänk eller registrera dig igen."
 
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Vänligen bekräfta din e-postadress genom att klicka på följande länk:"
 
+msgid "Please enter a message"
+msgstr ""
+
 msgid "Please enter a valid email address"
 msgstr "Ange en giltig e-postadress"
+
+msgid "Please enter a valid phone number"
+msgstr ""
 
 msgid "Please log in to access that page"
 msgstr "Logga in för att komma åt sidan"
@@ -1413,8 +1452,17 @@ msgstr "Kvartal"
 msgid "Quote"
 msgstr "Citat"
 
+msgid "Re:"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
 msgid "Receiver"
 msgstr "Mottagare"
+
+msgid "Recent Messages"
+msgstr ""
 
 msgid "Recent signatures"
 msgstr "Senaste underskrifterna"
@@ -1442,6 +1490,9 @@ msgstr "Poster"
 
 msgid "References"
 msgstr "Referenser"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Regards"
 msgstr "Vänligen"
@@ -1499,6 +1550,15 @@ msgstr "Avrundning"
 
 msgid "SEK"
 msgstr "kr"
+
+msgid "SMS Management"
+msgstr ""
+
+msgid "SMS Manager"
+msgstr ""
+
+msgid "SMS sent successfully"
+msgstr ""
 
 msgid "Samizdat"
 msgstr "Samizdat"
@@ -1560,6 +1620,9 @@ msgstr "Sök webbinnehåll"
 msgid "Select"
 msgstr "Välj"
 
+msgid "Select Format"
+msgstr ""
+
 msgid "Select art.no."
 msgstr "Välj art.nr."
 
@@ -1571,6 +1634,9 @@ msgstr "Välj land eller klicka på flaggor för detaljer"
 
 msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
+
+msgid "Send SMS"
+msgstr ""
 
 msgid "Send again"
 msgstr "Skicka igen"
@@ -1586,6 +1652,9 @@ msgstr "Skicka nu"
 
 msgid "Send reminder"
 msgstr "Skicka påminnelse"
+
+msgid "Sent"
+msgstr ""
 
 msgid "Servers"
 msgstr "Servrar"
@@ -1665,6 +1734,9 @@ msgstr "Börja sidoinnehåll"
 msgid "Statistics"
 msgstr "Statistik"
 
+msgid "Status"
+msgstr ""
+
 msgid "Strictly for Rymdweb"
 msgstr "Endast för Rymdweb"
 
@@ -1695,6 +1767,9 @@ msgstr "Förnamn"
 msgid "Swedish"
 msgstr "Svenska"
 
+msgid "Sync Messages"
+msgstr ""
+
 msgid "Technical"
 msgstr "Teknik"
 
@@ -1718,6 +1793,9 @@ msgstr "Testkund"
 
 msgid "Text"
 msgstr "Text"
+
+msgid "Text Editor"
+msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "Tack för att du kontaktar oss."
@@ -1772,6 +1850,9 @@ msgstr "Denna integration hanterar fakturering självständigt och synkroniserar
 
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "Denna integration utvecklas och underhålls av Rymdweb AB."
+
+msgid "Time"
+msgstr ""
 
 msgid "Toggle menu"
 msgstr "Visa meny"
@@ -1997,6 +2078,9 @@ msgstr "lägg till {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "characters"
+msgstr ""
 
 msgid "content"
 msgstr "innehåll"

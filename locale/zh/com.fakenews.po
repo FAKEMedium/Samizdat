@@ -84,6 +84,9 @@ msgstr "关于"
 msgid "About Fortnox"
 msgstr "关于 Fortnox"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "根据我们的记录，发票 {number} 仍未付款。"
 
@@ -182,6 +185,9 @@ msgstr "广告"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "注册后您可以添加更多个人信息，调整分享策略，并自定义您的体验。"
+
+msgid "All Messages"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "允许使用 cookie 从邮件粘贴确认码"
@@ -576,6 +582,9 @@ msgstr "开发者文档"
 msgid "Development"
 msgstr "开发"
 
+msgid "Direction"
+msgstr ""
+
 msgid "Discount"
 msgstr "折扣"
 
@@ -617,6 +626,9 @@ msgstr "编辑"
 
 msgid "Edit customer {customerid}"
 msgstr "编辑客户 {customerid}"
+
+msgid "Edit page {docpath}"
+msgstr ""
 
 msgid "Edit this page"
 msgstr "编辑此页面"
@@ -798,6 +810,9 @@ msgstr "删除记录失败"
 msgid "Failed to delete zone"
 msgstr "删除区域失败"
 
+msgid "Failed to send SMS"
+msgstr ""
+
 msgid "Failed to send invoice to Fortnox"
 msgstr "发送发票到 Fortnox 失败"
 
@@ -899,6 +914,9 @@ msgstr "IBAN"
 
 msgid "IBAN:"
 msgstr "IBAN："
+
+msgid "ID"
+msgstr ""
 
 msgid "Identification code"
 msgstr "识别码"
@@ -1162,8 +1180,14 @@ msgstr "菜单"
 msgid "Message"
 msgstr "消息"
 
+msgid "Message must be 160 characters or less"
+msgstr ""
+
 msgid "Message sent"
 msgstr "消息已发送"
+
+msgid "Messages will appear here once sent or received"
+msgstr ""
 
 msgid "Mild"
 msgstr "温和"
@@ -1242,6 +1266,9 @@ msgstr "没有发票模板。"
 
 msgid "No invoicing"
 msgstr "不开票"
+
+msgid "No messages found"
+msgstr ""
 
 msgid "No pages found."
 msgstr "未找到页面。"
@@ -1333,6 +1360,9 @@ msgstr "面板"
 msgid "Paper in typewriter"
 msgstr "打字机中的纸张"
 
+msgid "Paragraph"
+msgstr ""
+
 msgid "Password"
 msgstr "密码"
 
@@ -1396,14 +1426,23 @@ msgstr "个人面板"
 msgid "Phone"
 msgstr "电话"
 
+msgid "Phone Number"
+msgstr ""
+
 msgid "Please check your confirmation link or register again."
 msgstr "请检查您的确认链接或重新注册。"
 
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "请点击以下链接确认您的电子邮件地址："
 
+msgid "Please enter a message"
+msgstr ""
+
 msgid "Please enter a valid email address"
 msgstr "请输入有效的电子邮件地址"
+
+msgid "Please enter a valid phone number"
+msgstr ""
 
 msgid "Please log in to access that page"
 msgstr "请登录以访问该页面"
@@ -1471,8 +1510,17 @@ msgstr "季度"
 msgid "Quote"
 msgstr "引用"
 
+msgid "Re:"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
 msgid "Receiver"
 msgstr "接收者"
+
+msgid "Recent Messages"
+msgstr ""
 
 msgid "Recent signatures"
 msgstr "最近的签名"
@@ -1500,6 +1548,9 @@ msgstr "记录"
 
 msgid "References"
 msgstr "参考资料"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Regards"
 msgstr "此致"
@@ -1564,6 +1615,15 @@ msgstr "舍入："
 msgid "SEK"
 msgstr "瑞典克朗"
 
+msgid "SMS Management"
+msgstr ""
+
+msgid "SMS Manager"
+msgstr ""
+
+msgid "SMS sent successfully"
+msgstr ""
+
 msgid "Samizdat"
 msgstr "Samizdat"
 
@@ -1624,6 +1684,9 @@ msgstr "搜索网页内容"
 msgid "Select"
 msgstr "选择"
 
+msgid "Select Format"
+msgstr ""
+
 msgid "Select art.no."
 msgstr "选择货号"
 
@@ -1635,6 +1698,9 @@ msgstr "选择国家或点击旗帜查看详情"
 
 msgid "Select invoice pack"
 msgstr "选择发票包"
+
+msgid "Send SMS"
+msgstr ""
 
 msgid "Send again"
 msgstr "重新发送"
@@ -1650,6 +1716,9 @@ msgstr "立即发送"
 
 msgid "Send reminder"
 msgstr "发送提醒"
+
+msgid "Sent"
+msgstr ""
 
 msgid "Servers"
 msgstr "服务器"
@@ -1732,6 +1801,9 @@ msgstr "侧边内容开始"
 msgid "Statistics"
 msgstr "统计"
 
+msgid "Status"
+msgstr ""
+
 msgid "Strictly for Rymdweb"
 msgstr "专为 Rymdweb 提供"
 
@@ -1762,6 +1834,9 @@ msgstr "姓氏"
 msgid "Swedish"
 msgstr "瑞典语"
 
+msgid "Sync Messages"
+msgstr ""
+
 msgid "Technical"
 msgstr "技术"
 
@@ -1785,6 +1860,9 @@ msgstr "测试客户"
 
 msgid "Text"
 msgstr "文本"
+
+msgid "Text Editor"
+msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "感谢您联系我们。"
@@ -1842,6 +1920,9 @@ msgstr "此集成由 Rymdweb AB 开发和维护。"
 
 msgid "Tillbaka"
 msgstr "返回"
+
+msgid "Time"
+msgstr ""
 
 msgid "Toggle menu"
 msgstr "切换菜单"
@@ -2082,6 +2163,9 @@ msgstr "加 {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "characters"
+msgstr ""
 
 msgid "content"
 msgstr "内容"

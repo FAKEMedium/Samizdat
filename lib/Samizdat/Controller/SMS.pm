@@ -4,49 +4,79 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Data::Dumper;
 
 sub index ($self) {
-  my $method = lc $self->req->method;
-  my $web = { docpath => 'sms/index.html' };
-  my $title = $self->app->__('SMS Management');
-  my $valid = {};
+  my $formdata = {};
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
-  # Get recent messages
-  my $messages = $self->sms->get_messages(limit => 20);
-  my $status = $self->sms->get_status();
-  
-  if ('post' eq $method) {
-    my $v = $self->validation;
-    my $form = {
-      to      => $self->param('to'),
-      message => $self->param('message'),
-    };
-    
-    $valid->{to} = $v->required('to', 'trim', 'not_empty')->is_valid ? " is-valid" : " is-invalid";
-    $valid->{message} = $v->required('message', 'trim', 'not_empty')->is_valid ? " is-valid" : " is-invalid";
-    
-    if (!$v->has_error) {
-      my $result = $self->sms->send_sms($form->{to}, $form->{message});
+  if ($accept =~ /json/) {
+    $formdata->{ip} = $self->tx->remote_address;
+    if ($self->req->method =~ /^(POST)$/i) {
+      my $valid = {};
+      my $errors = {};
+      my $v = $self->validation;
       
-      if ($result->{success}) {
-        $self->flash(success => $self->app->__('SMS sent successfully'));
-        $form = {}; # Clear form on success
-      } else {
-        $self->flash(error => $self->app->__('Failed to send SMS: {error}', error => $result->{message}));
+      for my $field (qw(to message)) {
+        $formdata->{$field} = $self->param($field);
+        if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
+          $valid->{$field} = "is-invalid";
+          $errors->{$field} = $self->app->__('This field is required');
+          $v->error($field => ['empty_field']);
+        } else {
+          # Additional validation for phone number
+          if ($field eq 'to') {
+            # Basic phone number validation (can be enhanced)
+            if ($formdata->{$field} !~ /^\+?[1-9]\d{1,14}$/) {
+              $valid->{$field} = "is-invalid";
+              $errors->{$field} = $self->app->__('Please enter a valid phone number');
+              $v->error($field => ['invalid_phone']);
+            } else {
+              $valid->{$field} = "is-valid";
+              $errors->{$field} = '';
+            }
+          } elsif ($field eq 'message') {
+            # Check message length (SMS limit)
+            if (length($formdata->{$field}) > 160) {
+              $valid->{$field} = "is-invalid";
+              $errors->{$field} = $self->app->__('Message must be 160 characters or less');
+              $v->error($field => ['message_too_long']);
+            } else {
+              $valid->{$field} = "is-valid";
+              $errors->{$field} = '';
+            }
+          } else {
+            $valid->{$field} = "is-valid";
+            $errors->{$field} = '';
+          }
+        }
       }
       
-      # Refresh messages after send
-      $messages = $self->sms->get_messages(limit => 20);
+      if ($v->has_error) {
+        $formdata->{success} = 0;
+      } else {
+        my $result = $self->sms->send_sms($formdata->{to}, $formdata->{message});
+        if ($result->{success}) {
+          $formdata->{success} = 1;
+          $formdata->{tx_id} = $result->{tx_id};
+          $formdata->{message_text} = $self->app->__('SMS sent successfully');
+        } else {
+          $formdata->{success} = 0;
+          $formdata->{error} = { reason => 'send_failed' };
+          $errors->{general} = $result->{message} || $self->app->__('Failed to send SMS');
+        }
+      }
+      $formdata->{errors} = $errors;
+      $formdata->{valid} = $valid;
     }
     
-    $self->stash(form => $form);
-    delete $web->{docpath};
+    # Return JSON response for both POST and GET
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
   }
   
-  $self->stash(messages => $messages);
-  $self->stash(status => $status);
-  $self->stash(valid => $valid);
-  $self->stash(title => $title);
-  $self->stash(template => 'sms/index');
-  $self->render(web => $web);
+  # Handle regular GET request (return HTML page)
+  my $title = $self->app->__('SMS Management');
+  my $web = { title => $title };
+  $web->{script} = $self->render_to_string(template => 'sms/index', format => 'js');
+  return $self->render(web => $web, title => $title, template => 'sms/index', status => 200);
 }
 
 sub send ($self) {
@@ -123,27 +153,66 @@ sub delete ($self) {
 }
 
 sub manager ($self) {
-  my $web = {};
+  my $formdata = {};
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+  
+  if ($accept =~ /json/) {
+    # Handle JSON requests if needed for manager
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
+  }
+  
+  # Handle regular GET request (return HTML page)
   my $title = $self->app->__('SMS Manager');
+  my $web = { title => $title };
+  $web->{script} = $self->render_to_string(template => 'sms/manager/index', format => 'js');
+  return $self->render(web => $web, title => $title, template => 'sms/manager/index', status => 200);
+}
+
+sub sync ($self) {
+  my $new_messages = $self->sms->sync_messages();
   
-  # Get all messages with pagination
-  my $page = $self->param('page') || 1;
-  my $limit = 25;
-  my $offset = ($page - 1) * $limit;
+  $self->render(json => {
+    success => 1,
+    new_messages => $new_messages,
+    message => "Sync completed. $new_messages new messages retrieved."
+  });
+}
+
+sub webhook ($self) {
+  # Get SMS parameters from Teltonika device
+  my $phone = $self->param('phone') || $self->param('from') || $self->param('sender');
+  my $message = $self->param('message') || $self->param('text');
+  my $timestamp = $self->param('timestamp') || $self->param('time');
+  my $msg_id = $self->param('id') || $self->param('msg_id');
   
-  my $messages = $self->sms->get_messages(
-    limit => $limit,
-    offset => $offset
-  );
+  warn "SMS webhook received from " . $self->tx->remote_address . ": phone=$phone, message=$message, id=$msg_id";
   
-  my $status = $self->sms->get_status();
+  # Validate required parameters
+  unless ($phone && $message) {
+    warn "SMS webhook: Missing required parameters";
+    return $self->render(json => {
+      success => 0,
+      error => 'Missing required parameters'
+    }, status => 400);
+  }
   
-  $self->stash(messages => $messages);
-  $self->stash(status => $status);
-  $self->stash(page => $page);
-  $self->stash(title => $title);
-  $self->stash(template => 'sms/manager');
-  $self->render(web => $web);
+  # Store incoming SMS in database
+  if ($self->database) {
+    $self->sms->store_message({
+      direction => 'inbound',
+      phone => $phone,
+      message => $message,
+      msg_id => $msg_id,
+      status => 'received',
+      received_at => \'NOW()',
+    });
+  }
+  
+  return $self->render(json => {
+    success => 1,
+    message => 'SMS received and stored'
+  });
 }
 
 sub access ($self) {

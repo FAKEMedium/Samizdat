@@ -98,6 +98,9 @@ msgstr "O nas"
 msgid "About Fortnox"
 msgstr "O Fortnox"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Według naszych notatek faktura {number} pozostaje niezapłacona."
 
@@ -196,6 +199,9 @@ msgstr "Reklama"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Po rejestracji możesz dodać więcej danych o sobie, poluzować politykę udostępniania i dostosować swoje doświadczenie."
+
+msgid "All Messages"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Zezwól na pliki cookie, aby wkleić kod potwierdzający z e-maila"
@@ -590,6 +596,9 @@ msgstr "Dokumentacja dla deweloperów"
 msgid "Development"
 msgstr "Rozwój"
 
+msgid "Direction"
+msgstr ""
+
 msgid "Discount"
 msgstr "Rabat"
 
@@ -631,6 +640,9 @@ msgstr "Edytuj"
 
 msgid "Edit customer {customerid}"
 msgstr "Edytuj klienta {customerid}"
+
+msgid "Edit page {docpath}"
+msgstr ""
 
 msgid "Edit this page"
 msgstr "Edytuj tę stronę"
@@ -812,6 +824,9 @@ msgstr "Nie udało się usunąć rekordu"
 msgid "Failed to delete zone"
 msgstr "Nie udało się usunąć strefy"
 
+msgid "Failed to send SMS"
+msgstr ""
+
 msgid "Failed to send invoice to Fortnox"
 msgstr "Nie udało się wysłać faktury do Fortnox"
 
@@ -913,6 +928,9 @@ msgstr "IBAN"
 
 msgid "IBAN:"
 msgstr "IBAN:"
+
+msgid "ID"
+msgstr ""
 
 msgid "Identification code"
 msgstr "Kod identyfikacyjny"
@@ -1178,8 +1196,14 @@ msgstr "Menu"
 msgid "Message"
 msgstr "Wiadomość"
 
+msgid "Message must be 160 characters or less"
+msgstr ""
+
 msgid "Message sent"
 msgstr "Wiadomość wysłana"
+
+msgid "Messages will appear here once sent or received"
+msgstr ""
 
 msgid "Mild"
 msgstr "Łagodne"
@@ -1258,6 +1282,9 @@ msgstr "Brak szablonu faktury."
 
 msgid "No invoicing"
 msgstr "Brak fakturowania"
+
+msgid "No messages found"
+msgstr ""
 
 msgid "No pages found."
 msgstr "Nie znaleziono stron."
@@ -1349,6 +1376,9 @@ msgstr "Panel"
 msgid "Paper in typewriter"
 msgstr "Papier w maszynie do pisania"
 
+msgid "Paragraph"
+msgstr ""
+
 msgid "Password"
 msgstr "Hasło"
 
@@ -1412,14 +1442,23 @@ msgstr "Panel osobisty"
 msgid "Phone"
 msgstr "Telefon"
 
+msgid "Phone Number"
+msgstr ""
+
 msgid "Please check your confirmation link or register again."
 msgstr "Proszę sprawdzić link potwierdzający lub zarejestrować się ponownie."
 
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "Prosimy o potwierdzenie adresu e-mail, klikając w poniższy link:"
 
+msgid "Please enter a message"
+msgstr ""
+
 msgid "Please enter a valid email address"
 msgstr "Proszę wprowadzić poprawny adres e-mail"
+
+msgid "Please enter a valid phone number"
+msgstr ""
 
 msgid "Please log in to access that page"
 msgstr "Zaloguj się, aby uzyskać dostęp do tej strony"
@@ -1487,8 +1526,17 @@ msgstr "Kwartał"
 msgid "Quote"
 msgstr "Cytat"
 
+msgid "Re:"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
 msgid "Receiver"
 msgstr "Odbiorca"
+
+msgid "Recent Messages"
+msgstr ""
 
 msgid "Recent signatures"
 msgstr "Ostatnie podpisy"
@@ -1516,6 +1564,9 @@ msgstr "Rekordy"
 
 msgid "References"
 msgstr "Referencje"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Regards"
 msgstr "Pozdrowienia"
@@ -1580,6 +1631,15 @@ msgstr "Zaokrąglenie:"
 msgid "SEK"
 msgstr "SEK"
 
+msgid "SMS Management"
+msgstr ""
+
+msgid "SMS Manager"
+msgstr ""
+
+msgid "SMS sent successfully"
+msgstr ""
+
 msgid "Samizdat"
 msgstr ""
 
@@ -1640,6 +1700,9 @@ msgstr "Przeszukaj treść internetową"
 msgid "Select"
 msgstr "Wybierz"
 
+msgid "Select Format"
+msgstr ""
+
 msgid "Select art.no."
 msgstr "Wybierz nr art."
 
@@ -1651,6 +1714,9 @@ msgstr "Wybierz kraj lub kliknij flagi, aby zobaczyć szczegóły"
 
 msgid "Select invoice pack"
 msgstr "Wybierz pakiet faktur"
+
+msgid "Send SMS"
+msgstr ""
 
 msgid "Send again"
 msgstr "Wyślij ponownie"
@@ -1666,6 +1732,9 @@ msgstr "Wyślij teraz"
 
 msgid "Send reminder"
 msgstr "Wyślij przypomnienie"
+
+msgid "Sent"
+msgstr ""
 
 msgid "Servers"
 msgstr "Serwery"
@@ -1748,6 +1817,9 @@ msgstr "Początek bocznej treści"
 msgid "Statistics"
 msgstr "Statystyki"
 
+msgid "Status"
+msgstr ""
+
 msgid "Strictly for Rymdweb"
 msgstr "Wyłącznie dla Rymdweb"
 
@@ -1778,6 +1850,9 @@ msgstr "Nazwisko"
 msgid "Swedish"
 msgstr "Szwedzki"
 
+msgid "Sync Messages"
+msgstr ""
+
 msgid "Technical"
 msgstr "Techniczne"
 
@@ -1801,6 +1876,9 @@ msgstr "Testowy klient"
 
 msgid "Text"
 msgstr "Tekst"
+
+msgid "Text Editor"
+msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "Dziękujemy za kontakt."
@@ -1858,6 +1936,9 @@ msgstr "Ta integracja jest opracowywana i utrzymywana przez Rymdweb AB."
 
 msgid "Tillbaka"
 msgstr "Wstecz"
+
+msgid "Time"
+msgstr ""
 
 msgid "Toggle menu"
 msgstr "Przełącz menu"
@@ -2098,6 +2179,9 @@ msgstr "dodaj {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "characters"
+msgstr ""
 
 msgid "content"
 msgstr "treść"

@@ -119,6 +119,9 @@ msgstr "حول"
 msgid "About Fortnox"
 msgstr "حول Fortnox"
 
+msgid "Access denied"
+msgstr ""
+
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "وفقًا لملاحظاتنا، الفاتورة {number} لا تزال غير مدفوعة."
 
@@ -217,6 +220,9 @@ msgstr "الإعلان"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "بعد التسجيل، يمكنك إضافة المزيد من البيانات عن نفسك، وتخفيف سياسة المشاركة، وتخصيص تجربتك."
+
+msgid "All Messages"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "السماح بملفات تعريف الارتباط للصق رمز التأكيد من البريد الإلكتروني"
@@ -611,6 +617,9 @@ msgstr "وثائق المطور"
 msgid "Development"
 msgstr "التطوير"
 
+msgid "Direction"
+msgstr ""
+
 msgid "Discount"
 msgstr "خصم"
 
@@ -652,6 +661,9 @@ msgstr "تعديل"
 
 msgid "Edit customer {customerid}"
 msgstr "تعديل العميل {customerid}"
+
+msgid "Edit page {docpath}"
+msgstr ""
 
 msgid "Edit this page"
 msgstr "تحرير هذه الصفحة"
@@ -833,6 +845,9 @@ msgstr "فشل حذف السجل"
 msgid "Failed to delete zone"
 msgstr "فشل حذف المنطقة"
 
+msgid "Failed to send SMS"
+msgstr ""
+
 msgid "Failed to send invoice to Fortnox"
 msgstr "فشل إرسال الفاتورة إلى Fortnox"
 
@@ -934,6 +949,9 @@ msgstr "IBAN"
 
 msgid "IBAN:"
 msgstr "IBAN:"
+
+msgid "ID"
+msgstr ""
 
 msgid "Identification code"
 msgstr "رمز التعريف"
@@ -1202,8 +1220,14 @@ msgstr "القوائم"
 msgid "Message"
 msgstr "الرسالة"
 
+msgid "Message must be 160 characters or less"
+msgstr ""
+
 msgid "Message sent"
 msgstr "تم إرسال الرسالة"
+
+msgid "Messages will appear here once sent or received"
+msgstr ""
 
 msgid "Mild"
 msgstr "خفيف"
@@ -1282,6 +1306,9 @@ msgstr "لا يوجد قالب فاتورة."
 
 msgid "No invoicing"
 msgstr "لا توجد فوترة"
+
+msgid "No messages found"
+msgstr ""
 
 msgid "No pages found."
 msgstr "لم يتم العثور على أي صفحات."
@@ -1373,6 +1400,9 @@ msgstr "اللوحة"
 msgid "Paper in typewriter"
 msgstr "ورق في آلة الكتابة"
 
+msgid "Paragraph"
+msgstr ""
+
 msgid "Password"
 msgstr "كلمة المرور"
 
@@ -1436,14 +1466,23 @@ msgstr "اللوحة الشخصية"
 msgid "Phone"
 msgstr "الهاتف"
 
+msgid "Phone Number"
+msgstr ""
+
 msgid "Please check your confirmation link or register again."
 msgstr "يرجى التحقق من رابط التأكيد أو التسجيل مرة أخرى."
 
 msgid "Please confirm your email address by clicking the following link:"
 msgstr "يرجى تأكيد عنوان بريدك الإلكتروني بالنقر على الرابط التالي:"
 
+msgid "Please enter a message"
+msgstr ""
+
 msgid "Please enter a valid email address"
 msgstr "يرجى إدخال عنوان بريد إلكتروني صحيح"
+
+msgid "Please enter a valid phone number"
+msgstr ""
 
 msgid "Please log in to access that page"
 msgstr "يرجى تسجيل الدخول للوصول إلى تلك الصفحة"
@@ -1511,8 +1550,17 @@ msgstr "ربع سنة"
 msgid "Quote"
 msgstr "اقتباس"
 
+msgid "Re:"
+msgstr ""
+
+msgid "Received"
+msgstr ""
+
 msgid "Receiver"
 msgstr "المستلم"
+
+msgid "Recent Messages"
+msgstr ""
 
 msgid "Recent signatures"
 msgstr "التوقيعات الحديثة"
@@ -1540,6 +1588,9 @@ msgstr "السجلات"
 
 msgid "References"
 msgstr "المراجع"
+
+msgid "Refresh"
+msgstr ""
 
 msgid "Regards"
 msgstr "مع تحياتي"
@@ -1604,6 +1655,15 @@ msgstr "تقريب:"
 msgid "SEK"
 msgstr "كرونة سويدية"
 
+msgid "SMS Management"
+msgstr ""
+
+msgid "SMS Manager"
+msgstr ""
+
+msgid "SMS sent successfully"
+msgstr ""
+
 msgid "Samizdat"
 msgstr ""
 
@@ -1664,6 +1724,9 @@ msgstr "بحث في محتوى الويب"
 msgid "Select"
 msgstr "اختيار"
 
+msgid "Select Format"
+msgstr ""
+
 msgid "Select art.no."
 msgstr "اختر رقم الفن."
 
@@ -1675,6 +1738,9 @@ msgstr "اختر البلد أو انقر على الأعلام لرؤية ال�
 
 msgid "Select invoice pack"
 msgstr "اختر حزمة الفواتير"
+
+msgid "Send SMS"
+msgstr ""
 
 msgid "Send again"
 msgstr "إرسال مرة أخرى"
@@ -1690,6 +1756,9 @@ msgstr "إرسال الآن"
 
 msgid "Send reminder"
 msgstr "إرسال تذكير"
+
+msgid "Sent"
+msgstr ""
 
 msgid "Servers"
 msgstr "الخوادم"
@@ -1772,6 +1841,9 @@ msgstr "بداية المحتوى الجانبي"
 msgid "Statistics"
 msgstr "الإحصائيات"
 
+msgid "Status"
+msgstr ""
+
 msgid "Strictly for Rymdweb"
 msgstr "حصريًا لـ Rymdweb"
 
@@ -1802,6 +1874,9 @@ msgstr "اسم العائلة"
 msgid "Swedish"
 msgstr "السويدية"
 
+msgid "Sync Messages"
+msgstr ""
+
 msgid "Technical"
 msgstr "تقني"
 
@@ -1825,6 +1900,9 @@ msgstr "عميل اختبار"
 
 msgid "Text"
 msgstr "نص"
+
+msgid "Text Editor"
+msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "شكرًا لاتصالك بنا."
@@ -1882,6 +1960,9 @@ msgstr "تم تطوير هذا التكامل وصيانته من قبل Rymdweb
 
 msgid "Tillbaka"
 msgstr "رجوع"
+
+msgid "Time"
+msgstr ""
 
 msgid "Toggle menu"
 msgstr "تبديل القائمة"
@@ -2122,6 +2203,9 @@ msgstr "إضافة {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "characters"
+msgstr ""
 
 msgid "content"
 msgstr "محتوى"
