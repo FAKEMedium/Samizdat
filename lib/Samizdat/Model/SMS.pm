@@ -226,7 +226,7 @@ sub get_messages ($self, %opts) {
   $where->{phone} = $phone if $phone;
   
   my $other = { 
-    order_by => {-desc => 'id'}, 
+    order_by => {-desc => 'created_at'}, 
     limit => $limit,
     offset => $offset
   };

@@ -248,6 +248,9 @@ msgstr "حدث خطأ"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this message?"
+msgstr ""
+
 msgid "Are you sure you want to delete this record?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا السجل؟"
 
@@ -340,6 +343,9 @@ msgstr "صورة الكابتشا"
 
 msgid "Captcha was wrong"
 msgstr "الكابتشا كانت خاطئة"
+
+msgid "Certificates"
+msgstr ""
 
 msgid "Change password"
 msgstr "تغيير كلمة المرور"
@@ -436,6 +442,9 @@ msgstr "فشل التأكيد"
 
 msgid "Confirmation request sent"
 msgstr "تم إرسال طلب التأكيد"
+
+msgid "Connection error. Please try again."
+msgstr ""
 
 msgid "Contact"
 msgstr "اتصال"
@@ -839,6 +848,9 @@ msgstr "فشل إنشاء السجل"
 msgid "Failed to create zone"
 msgstr "فشل إنشاء المنطقة"
 
+msgid "Failed to delete message"
+msgstr ""
+
 msgid "Failed to delete record"
 msgstr "فشل حذف السجل"
 
@@ -1220,11 +1232,20 @@ msgstr "القوائم"
 msgid "Message"
 msgstr "الرسالة"
 
+msgid "Message Details"
+msgstr ""
+
 msgid "Message must be 160 characters or less"
 msgstr ""
 
 msgid "Message sent"
 msgstr "تم إرسال الرسالة"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Messages pagination"
+msgstr ""
 
 msgid "Messages will appear here once sent or received"
 msgstr ""
@@ -1294,6 +1315,9 @@ msgstr "الأحدث"
 
 msgid "Newsletter"
 msgstr "النشرة الإخبارية"
+
+msgid "Next"
+msgstr ""
 
 msgid "No"
 msgstr "لا"
@@ -1517,6 +1541,9 @@ msgstr "اضغط على \"{buttontext}\" لإعادة الإنشاء"
 msgid "Press Register to regenerate"
 msgstr "اضغط على تسجيل لإعادة الإنشاء"
 
+msgid "Previous"
+msgstr ""
+
 msgid "Price"
 msgstr "السعر"
 
@@ -1655,6 +1682,9 @@ msgstr "تقريب:"
 msgid "SEK"
 msgstr "كرونة سويدية"
 
+msgid "SMS"
+msgstr ""
+
 msgid "SMS Management"
 msgstr ""
 
@@ -1662,6 +1692,9 @@ msgid "SMS Manager"
 msgstr ""
 
 msgid "SMS sent successfully"
+msgstr ""
+
+msgid "SMS sent successfully!"
 msgstr ""
 
 msgid "Samizdat"
@@ -1756,6 +1789,9 @@ msgstr "إرسال الآن"
 
 msgid "Send reminder"
 msgstr "إرسال تذكير"
+
+msgid "Sending..."
+msgstr ""
 
 msgid "Sent"
 msgstr ""
@@ -1877,6 +1913,15 @@ msgstr "السويدية"
 msgid "Sync Messages"
 msgstr ""
 
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
 msgid "Technical"
 msgstr "تقني"
 
@@ -1987,6 +2032,9 @@ msgstr "غير مصادق"
 
 msgid "Underline"
 msgstr "مسطر"
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unpaid"
 msgstr "غير مدفوع"
@@ -2233,6 +2281,9 @@ msgstr "نطاق البريد"
 
 msgid "main firewall"
 msgstr "جدار الحماية الرئيسي"
+
+msgid "new messages retrieved."
+msgstr ""
 
 msgid "our web"
 msgstr "موقعنا"

@@ -227,6 +227,9 @@ msgstr "Произошла ошибка"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this message?"
+msgstr ""
+
 msgid "Are you sure you want to delete this record?"
 msgstr "Вы уверены, что хотите удалить эту запись?"
 
@@ -319,6 +322,9 @@ msgstr "Изображение капчи"
 
 msgid "Captcha was wrong"
 msgstr "Неверная капча"
+
+msgid "Certificates"
+msgstr ""
 
 msgid "Change password"
 msgstr "Изменить пароль"
@@ -415,6 +421,9 @@ msgstr "Подтверждение не удалось"
 
 msgid "Confirmation request sent"
 msgstr "Запрос подтверждения отправлен"
+
+msgid "Connection error. Please try again."
+msgstr ""
 
 msgid "Contact"
 msgstr "Контакт"
@@ -818,6 +827,9 @@ msgstr "Не удалось создать запись"
 msgid "Failed to create zone"
 msgstr "Не удалось создать зону"
 
+msgid "Failed to delete message"
+msgstr ""
+
 msgid "Failed to delete record"
 msgstr "Не удалось удалить запись"
 
@@ -1196,11 +1208,20 @@ msgstr "Меню"
 msgid "Message"
 msgstr "Сообщение"
 
+msgid "Message Details"
+msgstr ""
+
 msgid "Message must be 160 characters or less"
 msgstr ""
 
 msgid "Message sent"
 msgstr "Сообщение отправлено"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Messages pagination"
+msgstr ""
 
 msgid "Messages will appear here once sent or received"
 msgstr ""
@@ -1270,6 +1291,9 @@ msgstr "Новейшие"
 
 msgid "Newsletter"
 msgstr "Рассылка"
+
+msgid "Next"
+msgstr ""
 
 msgid "No"
 msgstr "Нет"
@@ -1493,6 +1517,9 @@ msgstr "Нажмите \"{buttontext}\" для новой капчи"
 msgid "Press Register to regenerate"
 msgstr "Нажмите Регистрация для новой капчи"
 
+msgid "Previous"
+msgstr ""
+
 msgid "Price"
 msgstr "Цена"
 
@@ -1631,6 +1658,9 @@ msgstr "Округление:"
 msgid "SEK"
 msgstr "SEK"
 
+msgid "SMS"
+msgstr ""
+
 msgid "SMS Management"
 msgstr ""
 
@@ -1638,6 +1668,9 @@ msgid "SMS Manager"
 msgstr ""
 
 msgid "SMS sent successfully"
+msgstr ""
+
+msgid "SMS sent successfully!"
 msgstr ""
 
 msgid "Samizdat"
@@ -1732,6 +1765,9 @@ msgstr "Отправить сейчас"
 
 msgid "Send reminder"
 msgstr "Отправить напоминание"
+
+msgid "Sending..."
+msgstr ""
 
 msgid "Sent"
 msgstr ""
@@ -1853,6 +1889,15 @@ msgstr "Шведский"
 msgid "Sync Messages"
 msgstr ""
 
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
 msgid "Technical"
 msgstr "Техническое"
 
@@ -1963,6 +2008,9 @@ msgstr "Не аутентифицирован"
 
 msgid "Underline"
 msgstr "Подчёркнутый"
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unpaid"
 msgstr "Неоплаченные"
@@ -2209,6 +2257,9 @@ msgstr "почтовый домен"
 
 msgid "main firewall"
 msgstr "основной файрвол"
+
+msgid "new messages retrieved."
+msgstr ""
 
 msgid "our web"
 msgstr "наш сайт"

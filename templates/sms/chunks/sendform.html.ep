@@ -3,12 +3,10 @@
     <h5 class="card-title mb-0"><%== __('Send SMS') %></h5>
   </div>
   <div class="card-body">
-    <form id="smsForm" class="needs-validation" novalidate>
+    <form id="smsForm" class="needs-validation" novalidate="novalidate">
       <div class="mb-3">
         <label for="to" class="form-label"><%== __('Phone Number') %></label>
-        <input type="tel" class="form-control" 
-               id="to" name="to"
-               placeholder="+46701234567" required>
+        <input type="tel" class="form-control" id="to" name="to" placeholder="+46701234567" required="required">
         <div class="invalid-feedback">
           <%== __('Please enter a valid phone number') %>
         </div>
@@ -16,9 +14,7 @@
       
       <div class="mb-3">
         <label for="message" class="form-label"><%== __('Message') %></label>
-        <textarea class="form-control" 
-                  id="message" name="message" rows="4" 
-                  maxlength="160" required></textarea>
+        <textarea class="form-control" id="message" name="message" rows="4" maxlength="160" required="required"></textarea>
         <div class="form-text">
           <span id="charCount">0</span>/160 <%== __('characters') %>
         </div>

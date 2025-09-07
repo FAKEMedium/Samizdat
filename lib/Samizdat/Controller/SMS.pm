@@ -165,6 +165,25 @@ sub delete ($self) {
 }
 
 
+sub conversation ($self) {
+  my $phone = $self->param('phone');
+  my $formdata = { phone => $phone };
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+  
+  if ($accept =~ /json/) {
+    # Return JSON response for AJAX requests
+    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+    return $self->render(json => $formdata, status => 200);
+  }
+  
+  # Handle regular GET request (return HTML page)  
+  my $title = $self->app->__('SMS Conversation');
+  my $web = { title => $title, phone => $phone };
+  $web->{script} = $self->render_to_string(template => 'sms/conversation/index', format => 'js', phone => $phone);
+  $web->{sidebar} = $self->render_to_string(template => 'sms/chunks/sendform');
+  return $self->render(web => $web, title => $title, template => 'sms/conversation/index', headline => 'chunks/pagination', status => 200);
+}
+
 sub sync ($self) {
   my $new_messages = $self->sms->sync_messages();
   

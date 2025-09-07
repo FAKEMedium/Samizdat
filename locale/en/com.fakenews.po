@@ -316,6 +316,9 @@ msgstr ""
 msgid "Captcha was wrong"
 msgstr "Captcha was wrong"
 
+msgid "Certificates"
+msgstr ""
+
 msgid "Change password"
 msgstr ""
 
@@ -414,6 +417,9 @@ msgstr ""
 
 msgid "Connected"
 msgstr "Connected"
+
+msgid "Connection error. Please try again."
+msgstr ""
 
 msgid "Contact"
 msgstr ""
@@ -823,6 +829,9 @@ msgstr ""
 msgid "Failed to create zone"
 msgstr ""
 
+msgid "Failed to delete message"
+msgstr ""
+
 msgid "Failed to delete message: {error}"
 msgstr "Failed to delete message: {error}"
 
@@ -1215,6 +1224,12 @@ msgstr ""
 msgid "Message sent"
 msgstr ""
 
+msgid "Messages"
+msgstr ""
+
+msgid "Messages pagination"
+msgstr ""
+
 msgid "Messages will appear here once sent or received"
 msgstr "Messages will appear here once sent or received"
 
@@ -1282,6 +1297,9 @@ msgid "Newest"
 msgstr ""
 
 msgid "Newsletter"
+msgstr ""
+
+msgid "Next"
 msgstr ""
 
 msgid "No"
@@ -1515,6 +1533,9 @@ msgstr ""
 msgid "Press Register to regenerate"
 msgstr ""
 
+msgid "Previous"
+msgstr ""
+
 msgid "Price"
 msgstr ""
 
@@ -1653,6 +1674,9 @@ msgstr ""
 msgid "SEK"
 msgstr ""
 
+msgid "SMS"
+msgstr ""
+
 msgid "SMS Management"
 msgstr "SMS Management"
 
@@ -1661,6 +1685,9 @@ msgstr "SMS Manager"
 
 msgid "SMS sent successfully"
 msgstr "SMS sent successfully"
+
+msgid "SMS sent successfully!"
+msgstr ""
 
 msgid "Samizdat"
 msgstr ""
@@ -1753,6 +1780,9 @@ msgid "Send now"
 msgstr ""
 
 msgid "Send reminder"
+msgstr ""
+
+msgid "Sending..."
 msgstr ""
 
 msgid "Sent"
@@ -1881,6 +1911,15 @@ msgstr ""
 msgid "Sync Messages"
 msgstr ""
 
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
 msgid "Technical"
 msgstr ""
 
@@ -1994,6 +2033,9 @@ msgstr ""
 
 msgid "Unknown"
 msgstr "Unknown"
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unpaid"
 msgstr ""
@@ -2239,6 +2281,9 @@ msgid "mail domain"
 msgstr ""
 
 msgid "main firewall"
+msgstr ""
+
+msgid "new messages retrieved."
 msgstr ""
 
 msgid "our web"

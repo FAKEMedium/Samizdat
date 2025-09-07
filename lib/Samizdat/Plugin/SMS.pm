@@ -18,6 +18,13 @@ sub register ($self, $app, $conf) {
     docpath => 'sms/index.html',
   );
   
+  # SMS conversation with specific phone number  
+  $protected->get('/conversation/:phone')->name('sms_conversation')->to(
+    controller => 'SMS',
+    action => 'conversation',
+    docpath => 'sms/conversation/index.html',
+  );
+  
   # API routes (protected)
   $protected->post('send')->to(controller => 'SMS', action => 'send')->name('sms_send');
   $protected->get('receive')->to(controller => 'SMS', action => 'receive')->name('sms_receive');

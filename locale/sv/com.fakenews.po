@@ -220,6 +220,9 @@ msgstr "Ett fel uppstod"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this message?"
+msgstr ""
+
 msgid "Are you sure you want to delete this record?"
 msgstr "Är du säker på att du vill ta bort denna post?"
 
@@ -303,6 +306,9 @@ msgstr "Captcha-bild"
 
 msgid "Captcha was wrong"
 msgstr "Felaktig captcha"
+
+msgid "Certificates"
+msgstr ""
 
 msgid "Change password"
 msgstr "Ändra lösenord"
@@ -396,6 +402,9 @@ msgstr "Bekräftelse misslyckades"
 
 msgid "Confirmation request sent"
 msgstr "Bekräftelse skickad"
+
+msgid "Connection error. Please try again."
+msgstr ""
 
 msgid "Contact"
 msgstr "Kontakt"
@@ -778,6 +787,9 @@ msgstr "Misslyckades skapa post"
 msgid "Failed to create zone"
 msgstr "Misslyckades skapa zon"
 
+msgid "Failed to delete message"
+msgstr ""
+
 msgid "Failed to delete record"
 msgstr "Misslyckades ta bort post"
 
@@ -1137,11 +1149,20 @@ msgstr "Menyer"
 msgid "Message"
 msgstr "Meddelande"
 
+msgid "Message Details"
+msgstr ""
+
 msgid "Message must be 160 characters or less"
 msgstr ""
 
 msgid "Message sent"
 msgstr "Meddelandet skickades"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Messages pagination"
+msgstr ""
 
 msgid "Messages will appear here once sent or received"
 msgstr ""
@@ -1208,6 +1229,9 @@ msgstr "Nyast"
 
 msgid "Newsletter"
 msgstr "Nyhetsbrev"
+
+msgid "Next"
+msgstr ""
 
 msgid "No"
 msgstr "Nej"
@@ -1419,6 +1443,9 @@ msgstr "Tryck \"{buttontext}\" för att återskapa"
 msgid "Press Register to regenerate"
 msgstr "Tryck Registrera för ny captcha"
 
+msgid "Previous"
+msgstr ""
+
 msgid "Price"
 msgstr "Pris"
 
@@ -1551,6 +1578,9 @@ msgstr "Avrundning"
 msgid "SEK"
 msgstr "kr"
 
+msgid "SMS"
+msgstr ""
+
 msgid "SMS Management"
 msgstr ""
 
@@ -1558,6 +1588,9 @@ msgid "SMS Manager"
 msgstr ""
 
 msgid "SMS sent successfully"
+msgstr ""
+
+msgid "SMS sent successfully!"
 msgstr ""
 
 msgid "Samizdat"
@@ -1652,6 +1685,9 @@ msgstr "Skicka nu"
 
 msgid "Send reminder"
 msgstr "Skicka påminnelse"
+
+msgid "Sending..."
+msgstr ""
 
 msgid "Sent"
 msgstr ""
@@ -1770,6 +1806,15 @@ msgstr "Svenska"
 msgid "Sync Messages"
 msgstr ""
 
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
 msgid "Technical"
 msgstr "Teknik"
 
@@ -1877,6 +1922,9 @@ msgstr "Oautentiserad"
 
 msgid "Underline"
 msgstr "Understruken"
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unpaid"
 msgstr "Obetalade"
@@ -2108,6 +2156,9 @@ msgstr "maildomän"
 
 msgid "main firewall"
 msgstr "huvudbrandvägg"
+
+msgid "new messages retrieved."
+msgstr ""
 
 msgid "our web"
 msgstr "vår webbplats"

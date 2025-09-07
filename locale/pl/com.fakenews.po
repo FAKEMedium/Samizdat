@@ -227,6 +227,9 @@ msgstr "Wystąpił błąd"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this message?"
+msgstr ""
+
 msgid "Are you sure you want to delete this record?"
 msgstr "Czy na pewno chcesz usunąć ten rekord?"
 
@@ -319,6 +322,9 @@ msgstr "Obraz captcha"
 
 msgid "Captcha was wrong"
 msgstr "Captcha była nieprawidłowa"
+
+msgid "Certificates"
+msgstr ""
 
 msgid "Change password"
 msgstr "Zmień hasło"
@@ -415,6 +421,9 @@ msgstr "Potwierdzenie nie powiodło się"
 
 msgid "Confirmation request sent"
 msgstr "Wysłano prośbę o potwierdzenie"
+
+msgid "Connection error. Please try again."
+msgstr ""
 
 msgid "Contact"
 msgstr "Kontakt"
@@ -818,6 +827,9 @@ msgstr "Nie udało się utworzyć rekordu"
 msgid "Failed to create zone"
 msgstr "Nie udało się utworzyć strefy"
 
+msgid "Failed to delete message"
+msgstr ""
+
 msgid "Failed to delete record"
 msgstr "Nie udało się usunąć rekordu"
 
@@ -1196,11 +1208,20 @@ msgstr "Menu"
 msgid "Message"
 msgstr "Wiadomość"
 
+msgid "Message Details"
+msgstr ""
+
 msgid "Message must be 160 characters or less"
 msgstr ""
 
 msgid "Message sent"
 msgstr "Wiadomość wysłana"
+
+msgid "Messages"
+msgstr ""
+
+msgid "Messages pagination"
+msgstr ""
 
 msgid "Messages will appear here once sent or received"
 msgstr ""
@@ -1270,6 +1291,9 @@ msgstr "Najnowsze"
 
 msgid "Newsletter"
 msgstr "Newsletter"
+
+msgid "Next"
+msgstr ""
 
 msgid "No"
 msgstr "Nie"
@@ -1493,6 +1517,9 @@ msgstr "Naciśnij \"{buttontext}\" aby ponownie wygenerować"
 msgid "Press Register to regenerate"
 msgstr "Naciśnij Rejestruj, aby ponownie wygenerować"
 
+msgid "Previous"
+msgstr ""
+
 msgid "Price"
 msgstr "Cena"
 
@@ -1631,6 +1658,9 @@ msgstr "Zaokrąglenie:"
 msgid "SEK"
 msgstr "SEK"
 
+msgid "SMS"
+msgstr ""
+
 msgid "SMS Management"
 msgstr ""
 
@@ -1638,6 +1668,9 @@ msgid "SMS Manager"
 msgstr ""
 
 msgid "SMS sent successfully"
+msgstr ""
+
+msgid "SMS sent successfully!"
 msgstr ""
 
 msgid "Samizdat"
@@ -1732,6 +1765,9 @@ msgstr "Wyślij teraz"
 
 msgid "Send reminder"
 msgstr "Wyślij przypomnienie"
+
+msgid "Sending..."
+msgstr ""
 
 msgid "Sent"
 msgstr ""
@@ -1853,6 +1889,15 @@ msgstr "Szwedzki"
 msgid "Sync Messages"
 msgstr ""
 
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
 msgid "Technical"
 msgstr "Techniczne"
 
@@ -1963,6 +2008,9 @@ msgstr "Nieuwierzytelniony"
 
 msgid "Underline"
 msgstr "Podkreślenie"
+
+msgid "Unknown error"
+msgstr ""
 
 msgid "Unpaid"
 msgstr "Niezapłacone"
@@ -2209,6 +2257,9 @@ msgstr "domena pocztowa"
 
 msgid "main firewall"
 msgstr "główna zapora"
+
+msgid "new messages retrieved."
+msgstr ""
 
 msgid "our web"
 msgstr "nasza strona"

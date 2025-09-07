@@ -45,7 +45,7 @@ function populateMessagesTable(messages, showActions = true) {
             <tr data-message-id="${msg.id}">
                 <td>
                     ${isPhoneNumber(msg.phone) ? 
-                        `<a href="<%= url_for 'sms_index' %>?to=${encodeURIComponent(msg.phone)}" class="text-decoration-none">${msg.phone}</a>` :
+                        `<a href="<%= url_for 'sms_conversation', phone => 'PHONE_PLACEHOLDER' %>".replace('PHONE_PLACEHOLDER', encodeURIComponent(msg.phone)) class="text-decoration-none">${msg.phone}</a>` :
                         `<span>${msg.phone}</span>`
                     }
                 </td>
