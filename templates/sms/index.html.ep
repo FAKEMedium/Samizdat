@@ -1,73 +1,27 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-12">
-      % if (flash('success')) {
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= flash('success') %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      % }
-      
-      % if (flash('error')) {
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-          <%= flash('error') %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-        </div>
-      % }
-    </div>
-  </div>
-  
-  <div class="row">
-    <!-- Recent Messages -->
-    <div class="col-sm-8">
-      <div class="d-flex justify-content-between align-items-center mb-3">
-        <h5 class="mb-0"><%== __('Recent Messages') %></h5>
-        <a href="<%= url_for 'sms_manager' %>" class="btn btn-outline-primary btn-sm">
-          <%== icon('list-ul') %> <%== __('All Messages') %>
-        </a>
-      </div>
-      <div id="recentMessages">
-        <%== include 'sms/chunks/messagetable', show_actions => 0 %>
-      </div>
-    </div>
-    
-    <!-- Send SMS Form -->
-    <div class="col-sm-4">
-      <div class="card">
-        <div class="card-header">
-          <h5 class="card-title mb-0"><%== __('Send SMS') %></h5>
-        </div>
-        <div class="card-body">
-          <form id="smsForm" class="needs-validation" novalidate>
-            <div class="mb-3">
-              <label for="to" class="form-label"><%== __('Phone Number') %></label>
-              <input type="tel" class="form-control" 
-                     id="to" name="to"
-                     placeholder="+46701234567" required>
-              <div class="invalid-feedback">
-                <%== __('Please enter a valid phone number') %>
-              </div>
-            </div>
-            
-            <div class="mb-3">
-              <label for="message" class="form-label"><%== __('Message') %></label>
-              <textarea class="form-control" 
-                        id="message" name="message" rows="4" 
-                        maxlength="160" required></textarea>
-              <div class="form-text">
-                <span id="charCount">0</span>/160 <%== __('characters') %>
-              </div>
-              <div class="invalid-feedback">
-                <%== __('Please enter a message') %>
-              </div>
-            </div>
-            
-            <button type="submit" class="btn btn-primary" id="sendButton">
-              <%== icon('send') %> <%== __('Send SMS') %>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+<!-- Messages Header -->
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0"><%== __('Messages') %></h5>
+  <button class="btn btn-outline-secondary btn-sm" id="syncMessages">
+    <%== icon('arrow-repeat') %> <%== __('Refresh') %>
+  </button>
+</div>
+
+<!-- Messages Table -->
+<div id="recentMessages">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover" id="messagesTable">
+      <thead class="orange">
+        <tr>
+          <th><%== __('Phone') %></th>
+          <th><%== __('Message') %></th>
+          <th><%== __('Status') %></th>
+          <th><%== __('Time') %></th>
+          <th><%== __('Actions') %></th>
+        </tr>
+      </thead>
+      <tbody id="messagesTableBody">
+        <!-- Messages will be populated by JavaScript -->
+      </tbody>
+    </table>
   </div>
 </div>

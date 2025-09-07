@@ -226,7 +226,7 @@ sub get_messages ($self, %opts) {
   $where->{phone} = $phone if $phone;
   
   my $other = { 
-    order_by => {-desc => 'created_at'}, 
+    order_by => {-desc => 'id'}, 
     limit => $limit,
     offset => $offset
   };
@@ -247,6 +247,21 @@ sub get_messages ($self, %opts) {
   }
   
   return $results;
+}
+
+
+sub count_messages ($self, %opts) {
+  return 0 unless $self->database;
+  
+  my $db = $self->database->db;
+  my $direction = $opts{direction};
+  my $phone = $opts{phone};
+  
+  my $where = {};
+  $where->{direction} = $direction if $direction;
+  $where->{phone} = $phone if $phone;
+  
+  return $db->select('sms.messages', 'COUNT(*) as total', $where)->hash->{total} || 0;
 }
 
 
@@ -309,10 +324,24 @@ sub sync_messages ($self) {
   
   return 0 unless $self->database && @$device_messages;
   
+  # Sort by timestamp so oldest messages get processed first (and get lower IDs)
+  my @sorted_messages = sort {
+    # Parse timestamps for comparison
+    my $time_a = eval { 
+      require Time::Piece;
+      Time::Piece->strptime($a->{timestamp} || '', "%a %b %d %H:%M:%S %Y")->epoch;
+    } || 0;
+    my $time_b = eval {
+      require Time::Piece; 
+      Time::Piece->strptime($b->{timestamp} || '', "%a %b %d %H:%M:%S %Y")->epoch;
+    } || 0;
+    $time_a <=> $time_b;
+  } @$device_messages;
+  
   my $db = $self->database->db;
   my $new_count = 0;
   
-  for my $msg (@$device_messages) {
+  for my $msg (@sorted_messages) {
     # Check if message already exists in database
     my $existing = $db->select('sms.messages', 'id', {
       direction => 'inbound',
@@ -323,13 +352,29 @@ sub sync_messages ($self) {
     
     # Only insert if it doesn't exist
     unless ($existing) {
+      # Parse the device timestamp if available
+      my $created_at;
+      if ($msg->{timestamp}) {
+        # Convert device timestamp to PostgreSQL format
+        # Device format: "Sat Sep  6 23:35:05 2025"
+        eval {
+          require Time::Piece;
+          my $parsed = Time::Piece->strptime($msg->{timestamp}, "%a %b %d %H:%M:%S %Y");
+          $created_at = $parsed->strftime("%Y-%m-%d %H:%M:%S");
+        };
+        # Fall back to NOW() if parsing fails
+        $created_at = \'NOW()' if $@;
+      } else {
+        $created_at = \'NOW()';
+      }
+      
       $self->store_message({
         direction => 'inbound',
         phone => $msg->{phone},
         message => $msg->{message},
         msg_id => $msg->{msg_id},
         status => 'received',
-        received_at => \'NOW()',
+        created_at => $created_at,
       });
       $new_count++;
     }

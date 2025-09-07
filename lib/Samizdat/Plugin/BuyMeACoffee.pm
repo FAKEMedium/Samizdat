@@ -13,12 +13,12 @@ sub register ($self, $app, $config = {}) {
 
   # Add helper to get cached supporter count with Redis and file fallback
   $app->helper('buymeacoffee_supporters' => sub ($c) {
-    my $slug = $c->config->{buymeacoffee}->{slug};
+    my $slug = $app->config->{buymeacoffee}->{slug};
     return 0 unless $slug;
     
     # Try Redis first
     my $cache_key = "buymeacoffee:supporters:$slug";
-    my $supporters = $c->redis->db->get($cache_key);
+    my $supporters = $app->redis->db->get($cache_key);
     
     # Fall back to file cache if Redis fails
     if (!defined $supporters) {

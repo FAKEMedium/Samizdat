@@ -167,7 +167,8 @@ sms:
     port: 443
     username: zaphod
     password: s3cr3t
-    secret: s3cr3t # Secret webhook url for sms to http forwarding
+    secret: s3cr3t # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
+    perpage: 10
 hypnotoad:
   listen:
     - https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1 # Run "make cert" to generate a self-signed certificate

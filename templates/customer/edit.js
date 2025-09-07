@@ -1,3 +1,129 @@
+// Universal modal access
+const universalModal = new bootstrap.Modal('#universalmodal');
+const modalDialog = document.getElementById('modalDialog');
+
+// Open SMS modal with pre-filled phone number
+function openSMSModal(phoneNumber) {
+  const modalContent = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Send SMS') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <%== include 'sms/chunks/sendform' %>
+      </div>
+    </div>
+  `;
+  
+  modalDialog.innerHTML = modalContent;
+  
+  // Pre-fill phone number after modal content is inserted
+  setTimeout(() => {
+    const phoneInput = document.querySelector('#universalmodal #to');
+    const messageInput = document.querySelector('#universalmodal #message');
+    const charCountSpan = document.querySelector('#universalmodal #charCount');
+    
+    if (phoneInput) {
+      phoneInput.value = phoneNumber;
+    }
+    if (messageInput) {
+      messageInput.focus();
+    }
+    
+    // Initialize SMS form functionality for the modal
+    initializeSMSFormInModal();
+  }, 100);
+  
+  universalModal.show();
+}
+
+// Initialize SMS form in modal
+function initializeSMSFormInModal() {
+  const modalForm = document.querySelector('#universalmodal #smsForm');
+  const messageTextarea = document.querySelector('#universalmodal #message');
+  const charCountSpan = document.querySelector('#universalmodal #charCount');
+  const sendButton = document.querySelector('#universalmodal #sendButton');
+  const toInput = document.querySelector('#universalmodal #to');
+  
+  if (messageTextarea && charCountSpan) {
+    function updateCharCount() {
+      const count = messageTextarea.value.length;
+      charCountSpan.textContent = count;
+      
+      if (count > 160) {
+        charCountSpan.classList.add('text-danger');
+      } else if (count > 140) {
+        charCountSpan.classList.add('text-warning');
+        charCountSpan.classList.remove('text-danger');
+      } else {
+        charCountSpan.classList.remove('text-warning', 'text-danger');
+      }
+    }
+    
+    messageTextarea.addEventListener('input', updateCharCount);
+    updateCharCount();
+  }
+  
+  if (modalForm) {
+    modalForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      
+      if (!modalForm.checkValidity()) {
+        modalForm.classList.add('was-validated');
+        return;
+      }
+      
+      const originalText = sendButton.innerHTML;
+      sendButton.disabled = true;
+      sendButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><%== __("Sending...") %>';
+      
+      try {
+        const formData = new FormData(modalForm);
+        const response = await fetch('<%= url_for 'sms_index' %>', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json'
+          },
+          body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (result.success) {
+          // Close modal and show success
+          universalModal.hide();
+          alert('<%== __("SMS sent successfully!") %>');
+        } else {
+          // Handle validation errors
+          if (result.valid) {
+            if (result.valid.to === 'is-invalid') {
+              toInput.classList.add('is-invalid');
+              toInput.classList.remove('is-valid');
+            }
+            if (result.valid.message === 'is-invalid') {
+              messageTextarea.classList.add('is-invalid');
+              messageTextarea.classList.remove('is-valid');
+            }
+          }
+          
+          let errorMsg = 'Failed to send SMS';
+          if (result.errors && result.errors.general) {
+            errorMsg = result.errors.general;
+          }
+          alert(errorMsg);
+        }
+      } catch (error) {
+        console.error('Send SMS error:', error);
+        alert('<%== __("Connection error. Please try again.") %>');
+      } finally {
+        sendButton.disabled = false;
+        sendButton.innerHTML = originalText;
+      }
+    });
+  }
+}
+
 const form = document.querySelector("#dataform");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
@@ -154,8 +280,14 @@ function populateForm(formdata, method) {
     if ('' != tel2) {
       document.querySelector('#tel2').href = 'tel:' + tel2;
       document.querySelector('#tel2').classList.remove("d-none");
-      document.querySelector('#sms').href = 'sms:' + tel2;
-      document.querySelector('#sms').classList.remove("d-none");
+      
+      // Setup SMS modal functionality
+      const smsButton = document.querySelector('#sms');
+      smsButton.onclick = (e) => {
+        e.preventDefault();
+        openSMSModal(tel2);
+      };
+      smsButton.classList.remove("d-none");
     }
   }
   let eucountries = /(<%== join '|',  @{$eucountries} %>)/i;

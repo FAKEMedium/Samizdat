@@ -73,10 +73,11 @@ sub index ($self) {
   }
   
   # Handle regular GET request (return HTML page)
-  my $title = $self->app->__('SMS Management');
+  my $title = $self->app->__('SMS');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'sms/index', format => 'js');
-  return $self->render(web => $web, title => $title, template => 'sms/index', status => 200);
+  $web->{sidebar} = $self->render_to_string(template => 'sms/chunks/sendform');
+  return $self->render(web => $web, title => $title, template => 'sms/index', headline => 'chunks/pagination', status => 200);
 }
 
 sub send ($self) {
@@ -106,10 +107,11 @@ sub receive ($self) {
 }
 
 sub messages ($self) {
-  my $limit = $self->param('limit') || 50;
+  my $limit = $self->param('limit') || $self->app->config->{sms}->{teltonika}->{perpage} || 50;
   my $offset = $self->param('offset') || 0;
   my $direction = $self->param('direction');
   my $phone = $self->param('phone');
+  my $need_total = $self->param('total');
   
   my $messages = $self->sms->get_messages(
     limit => $limit,
@@ -118,11 +120,21 @@ sub messages ($self) {
     phone => $phone,
   );
   
-  $self->render(json => {
+  my $result = {
     success => 1,
     messages => $messages,
     count => scalar @$messages
-  });
+  };
+  
+  # Add total count if requested (for pagination)
+  if ($need_total) {
+    $result->{total} = $self->sms->count_messages(
+      direction => $direction,
+      phone => $phone,
+    );
+  }
+  
+  $self->render(json => $result);
 }
 
 sub status ($self) {
@@ -152,22 +164,6 @@ sub delete ($self) {
   });
 }
 
-sub manager ($self) {
-  my $formdata = {};
-  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
-  
-  if ($accept =~ /json/) {
-    # Handle JSON requests if needed for manager
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $formdata, status => 200);
-  }
-  
-  # Handle regular GET request (return HTML page)
-  my $title = $self->app->__('SMS Manager');
-  my $web = { title => $title };
-  $web->{script} = $self->render_to_string(template => 'sms/manager/index', format => 'js');
-  return $self->render(web => $web, title => $title, template => 'sms/manager/index', status => 200);
-}
 
 sub sync ($self) {
   my $new_messages = $self->sms->sync_messages();
@@ -217,11 +213,26 @@ sub webhook ($self) {
 
 sub access ($self) {
   # Simple access control - check if user is authenticated
-  my $user = $self->session('user');
+  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
+  my $user;
   
-  unless ($user && $user->{privileges} && $user->{privileges}->{sms}) {
-    $self->flash(error => $self->app->__('Access denied'));
-    return $self->redirect_to('/account/login');
+  if ($authcookie) {
+    $user = $self->app->account->session($authcookie);
+  }
+  
+  # For now, just check if user exists (until privileges system is implemented)
+  unless ($user) {
+    my $accept = $self->req->headers->accept // '';
+    
+    if ($accept =~ /json/) {
+      return $self->render(json => {
+        success => 0,
+        error => 'Access denied'
+      }, status => 403);
+    } else {
+      $self->flash(error => $self->app->__('Access denied'));
+      return $self->redirect_to('/account/login');
+    }
   }
   
   return 1;
