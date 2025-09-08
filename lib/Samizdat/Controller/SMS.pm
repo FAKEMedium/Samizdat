@@ -75,8 +75,9 @@ sub index ($self) {
   # Handle regular GET request (return HTML page)
   my $title = $self->app->__('SMS');
   my $web = { title => $title };
-  $web->{script} = $self->render_to_string(template => 'sms/index', format => 'js');
-  $web->{sidebar} = $self->render_to_string(template => 'sms/chunks/sendform');
+  $web->{script} = ($web->{script} // '') . $self->render_to_string(template => 'sms/index', format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'sms/chunks/sendform', format => 'js');
+  $web->{sidebar} = ($web->{sidebar} // '') . $self->render_to_string(template => 'sms/chunks/sendform');
   return $self->render(web => $web, title => $title, template => 'sms/index', headline => 'chunks/pagination', status => 200);
 }
 
@@ -179,8 +180,9 @@ sub conversation ($self) {
   # Handle regular GET request (return HTML page)  
   my $title = $self->app->__('SMS Conversation');
   my $web = { title => $title, phone => $phone };
-  $web->{script} = $self->render_to_string(template => 'sms/conversation/index', format => 'js', phone => $phone);
-  $web->{sidebar} = $self->render_to_string(template => 'sms/chunks/sendform');
+  $web->{script} = ($web->{script} // '') . $self->render_to_string(template => 'sms/conversation/index', format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'sms/chunks/sendform', format => 'js');
+  $web->{sidebar} = ($web->{sidebar} // '') . $self->render_to_string(template => 'sms/chunks/sendform');
   return $self->render(web => $web, title => $title, template => 'sms/conversation/index', headline => 'chunks/pagination', status => 200);
 }
 

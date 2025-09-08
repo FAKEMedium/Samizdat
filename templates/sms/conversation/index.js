@@ -61,17 +61,17 @@ function renderConversation(messages) {
     const messagesHtml = messages.map(msg => {
         const isOutbound = msg.direction === 'outbound';
         const alignClass = isOutbound ? 'text-end' : 'text-start';
-        const bgClass = isOutbound ? 'bg-primary text-white' : 'bg-light';
+        const borderClass = isOutbound ? 'border border-primary' : '';
         const marginClass = isOutbound ? 'ms-auto' : 'me-auto';
         
         return `
           <div class="mb-3 ${alignClass}">
-            <div class="d-inline-block p-3 rounded ${bgClass} ${marginClass}" style="max-width: 70%;">
+            <div class="d-inline-block p-3 rounded bg-light ${borderClass} ${marginClass}" style="max-width: 70%;">
               <div class="message-text">${msg.message}</div>
-              <div class="message-time text-muted mt-1" style="font-size: 0.8em; ${isOutbound ? 'color: rgba(255,255,255,0.7) !important;' : ''}">
+              <div class="message-time text-muted mt-1" style="font-size: 0.8em;">
                 ${formatTimestamp(msg.created_at)}
-                <span class="badge badge-sm ms-1 ${msg.status === 'sent' ? 'text-bg-success' : 
-                                                    msg.status === 'received' ? 'text-bg-info' :
+                <span class="badge badge-sm ms-1 ${msg.status === 'sent' ? 'text-bg-primary' : 
+                                                    msg.status === 'received' ? 'text-bg-success' :
                                                     msg.status === 'failed' ? 'text-bg-danger' : 'text-bg-warning'}">
                   ${msg.status}
                 </span>
@@ -202,6 +202,15 @@ function prefillForm() {
     }
 }
 
+// Keep phone number filled after sending
+function ensurePhoneFilled() {
+    const toInput = document.querySelector('#to');
+    if (toInput && phoneNumber && !toInput.value) {
+        toInput.value = phoneNumber;
+        toInput.readOnly = true;
+    }
+}
+
 // Sync messages
 document.getElementById('syncMessages').addEventListener('click', async () => {
     const syncButton = document.getElementById('syncMessages');
@@ -237,3 +246,8 @@ document.getElementById('syncMessages').addEventListener('click', async () => {
 initializePagination();
 loadMessages(1);
 prefillForm();
+
+// Periodically ensure phone field stays filled in conversation
+setInterval(() => {
+    ensurePhoneFilled();
+}, 1000);
