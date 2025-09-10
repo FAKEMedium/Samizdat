@@ -246,65 +246,18 @@ function handleToolbarCommand(element) {
     window.currentEditor?.element.focus();
 }
 
-// Initialize page editor
+// Initialize page editor - dynamically load editor.js when needed
 window.initPageEditor = async function() {
-    console.log('Starting editor initialization...');
-    
-    let editor, content, editorContainer;
+    console.log('Loading editor functionality...');
     
     try {
-        console.log('Setting up simple contenteditable editor...');
-        
-        content = document.getElementById('thecontent');
-        if (!content) {
-            console.error('thecontent element not found');
-            return;
+        // Load editor.js if not already loaded
+        if (!window.initSimpleEditors) {
+            await window.loadEditor();
         }
-        console.log('Found thecontent element:', content);
         
-        // Store original content for cancel
-        const originalHTML = content.innerHTML;
-        
-        // Skip TipTap - use simple contenteditable (styling handled by setEditable)
-        
-        // Store original content for cancel functionality
-        content.dataset.originalContent = originalHTML;
-        
-        // Simple editor object for compatibility
-        editor = {
-            element: content,
-            getHTML: () => content.innerHTML,
-            setContent: (html) => content.innerHTML = html,
-            setEditable: (editable) => {
-                content.contentEditable = editable;
-                if (editable) {
-                    content.style.border = '2px solid #007bff';
-                    content.style.padding = '10px';
-                    content.style.cursor = 'text';
-                } else {
-                    content.style.border = '';
-                    content.style.padding = '';
-                    content.style.cursor = '';
-                }
-            },
-            destroy: () => {
-                content.contentEditable = 'false';
-                content.style.border = '';
-                content.style.padding = '';
-                content.style.cursor = '';
-            }
-        };
-        
-        console.log('Simple contenteditable editor initialized');
-        
-        // Keep save/cancel buttons hidden - toolbar will handle editing
-        const saveButton = document.getElementById('savePageButton');
-        const cancelButton = document.getElementById('cancelPageButton');
-        
-        // Set up global editor reference (simplified)
-        window.currentEditor = editor;
-        
-        return editor;
+        // Initialize simple editors for all .editable elements
+        return window.initSimpleEditors();
     } catch (error) {
         console.error('Error in initPageEditor:', error);
         return null;
@@ -361,14 +314,27 @@ if (theContent && editButton) {
             if (saveButton) saveButton.classList.remove('d-none');
             if (cancelButton) cancelButton.classList.remove('d-none');
             
-            // Enable editing mode and setup toolbar
-            if (window.currentEditor) {
+            // Enable editing mode for all editors and setup toolbar
+            if (window.allEditors && window.allEditors.length > 0) {
+                // Enable all editors
+                window.allEditors.forEach(editor => {
+                    editor.setEditable(true);
+                });
+                
+                // Focus the first editor
+                window.currentEditor.element.focus();
+                
+                // Load and setup simple toolbar
+                window.setupSimpleToolbar();
+                console.log(`${window.allEditors.length} editors enabled and first one focused`);
+            } else if (window.currentEditor) {
+                // Fallback for single editor
                 window.currentEditor.setEditable(true);
                 window.currentEditor.element.focus();
                 
                 // Load and setup simple toolbar
                 window.setupSimpleToolbar();
-                console.log('Simple editor enabled and focused');
+                console.log('Single editor enabled and focused');
             }
         } catch (error) {
             console.error('Error in edit button handler:', error);
@@ -382,48 +348,62 @@ if (theContent && editButton) {
     
     if (saveButton) {
         saveButton.addEventListener('click', () => {
-            if (window.currentEditor) {
-                // Disable editing and clean up styling
+            if (window.allEditors && window.allEditors.length > 0) {
+                // Disable editing for all editors
+                window.allEditors.forEach(editor => {
+                    editor.setEditable(false);
+                });
+                console.log(`Content saved and ${window.allEditors.length} editors disabled`);
+            } else if (window.currentEditor) {
+                // Fallback for single editor
                 window.currentEditor.setEditable(false);
                 console.log('Content saved and editor disabled');
-                
-                // Hide save/cancel buttons
-                saveButton.classList.add('d-none');
-                cancelButton.classList.add('d-none');
-                editButton.classList.remove('d-none');
-                editButton.disabled = false;
-                
-                // Hide toolbar
-                const toolbarElement = document.getElementById('simpleToolbar');
-                if (toolbarElement) {
-                    toolbarElement.style.display = 'none';
-                    console.log('Toolbar hidden');
-                }
+            }
+            
+            // Hide save/cancel buttons
+            saveButton.classList.add('d-none');
+            cancelButton.classList.add('d-none');
+            editButton.classList.remove('d-none');
+            editButton.disabled = false;
+            
+            // Hide toolbar
+            const toolbarElement = document.getElementById('simpleToolbar');
+            if (toolbarElement) {
+                toolbarElement.style.display = 'none';
+                console.log('Toolbar hidden');
             }
         });
     }
     
     if (cancelButton) {
         cancelButton.addEventListener('click', () => {
-            if (window.currentEditor) {
-                // Cancel editing - revert to original content
+            if (window.allEditors && window.allEditors.length > 0) {
+                // Cancel editing for all editors - revert to original content
+                window.allEditors.forEach(editor => {
+                    const originalContent = editor.element.dataset.originalContent;
+                    editor.setContent(originalContent);
+                    editor.setEditable(false);
+                });
+                console.log(`Edit cancelled, reverted ${window.allEditors.length} editors to original content`);
+            } else if (window.currentEditor) {
+                // Fallback for single editor
                 const originalContent = window.currentEditor.element.dataset.originalContent;
                 window.currentEditor.setContent(originalContent);
                 window.currentEditor.setEditable(false);
                 console.log('Edit cancelled, reverted to original content');
-                
-                // Hide save/cancel buttons
-                saveButton.classList.add('d-none');
-                cancelButton.classList.add('d-none');
-                editButton.classList.remove('d-none');
-                editButton.disabled = false;
-                
-                // Hide toolbar
-                const toolbarElement = document.getElementById('simpleToolbar');
-                if (toolbarElement) {
-                    toolbarElement.style.display = 'none';
-                    console.log('Toolbar hidden');
-                }
+            }
+            
+            // Hide save/cancel buttons
+            saveButton.classList.add('d-none');
+            cancelButton.classList.add('d-none');
+            editButton.classList.remove('d-none');
+            editButton.disabled = false;
+            
+            // Hide toolbar
+            const toolbarElement = document.getElementById('simpleToolbar');
+            if (toolbarElement) {
+                toolbarElement.style.display = 'none';
+                console.log('Toolbar hidden');
             }
         });
     }

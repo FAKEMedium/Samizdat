@@ -72,7 +72,7 @@
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0">
       <header class="container mb-1 mb-sm-4 px-0">
         <div class="row">
-          <h1 id="headline editable" class="col-8"><%== title %></h1>
+          <h1 id="headline" class="col-8 title<%== exists($web->{editable}) ? ' editable' : '' %>"><%== title %></h1>
           <ul class="nav px-0 px-sm-1 px-md-2 col-4 justify-content-sm-end d-flex d-print-none">
             <%== web->indent(headline($headline), 6) =%>
           </ul>
@@ -82,7 +82,7 @@
       <section class="container px-0">
         <div class="row">
           <%== limiter 'start' %>
-          <div class="col-sm-8 editable" id="thecontent" data-toolbar="<%== url_for('web_editor_toolbar') %>">
+          <div class="col-sm-8<%== exists($web->{editable}) ? ' editable' : '' %>" id="thecontent"<%== $web->{editable} ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
             <%== web->indent(eval {trim content}, 6) =%>
           </div>
           <%== limiter 'end' %>
@@ -95,7 +95,7 @@
       </section>
 % } else {
       <%== limiter 'start' %>
-      <section class="container px-0 editable" id="thecontent" data-toolbar="<%== url_for('web_editor_toolbar') %>">
+      <section class="container px-0<%= eval { return $web->{editable} ? ' editable' : ''; } %>" id="thecontent"<%== exists($web->{editable}) ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
         <%== web->indent(eval {trim content}, 4) =%>
       </section>
       <%== limiter 'end' %>

@@ -1,7 +1,9 @@
+<% if ($web->{editable}) { %>
 <button id="editPageButton" class="auth btn btn-success btn-sm btn-normal-sm d-none rounded-lg" title="<%= __('Edit this page') %>">
   <%== icon 'pencil-square'; %>
   <span class="d-sm-inline d-none ms-1"><%= __('Edit') %></span>
 </button>
+<% } %>
 <button id="savePageButton" type="button" class="btn btn-sm btn-success d-none rounded-lg" data-action="save" title="<%== __('Save') %>">
   <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
 </button>

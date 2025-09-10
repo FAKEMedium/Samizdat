@@ -232,31 +232,5 @@ sub webhook ($self) {
   });
 }
 
-sub access ($self) {
-  # Simple access control - check if user is authenticated
-  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
-  my $user;
-  
-  if ($authcookie) {
-    $user = $self->app->account->session($authcookie);
-  }
-  
-  # For now, just check if user exists (until privileges system is implemented)
-  unless ($user) {
-    my $accept = $self->req->headers->accept // '';
-    
-    if ($accept =~ /json/) {
-      return $self->render(json => {
-        success => 0,
-        error => 'Access denied'
-      }, status => 403);
-    } else {
-      $self->flash(error => $self->app->__('Access denied'));
-      return $self->redirect_to('/account/login');
-    }
-  }
-  
-  return 1;
-}
 
 1;

@@ -31,6 +31,7 @@ sub getlist ($self, $url, $options = {}) {
   my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
     my $docpath = $file->to_rel($self->config->{publicsrc})->to_string;
+    my $datasrc = $docpath;
     if ('md' eq $file->path->extname()) {
       my $content = decode 'UTF-8', $file->slurp;
       my $head = {};
@@ -138,6 +139,10 @@ sub getlist ($self, $url, $options = {}) {
           card_image => $card_image,
           editable   => 1
         };
+      }
+      if ($docs->{$docpath}) {
+        $docs->{$docpath}->{src} = $datasrc;
+        $docs->{$docpath}->{editable} = 1;
       }
     }
   });
