@@ -42,6 +42,10 @@ sub register ($self, $app, $conf) {
     action => 'images',
     docpath => sprintf('%s/index.html', $app->url_for('web_images'))
   );
+  $manager->post('web/save')->name('web_save')->to(
+    controller => 'Web',
+    action => 'save'
+  );
   $manager->get('web')->name('web_index')->to(
     controller => 'Web',
     action => 'index',

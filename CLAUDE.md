@@ -172,6 +172,8 @@ prove -l -v t/00-basic.t
 - User registration with personal profiles and content management.
 - Discussion forums for community engagement.
 - Sitewide installation with multidomain support (source trees and cached generated content).
+- Database overlay of markdown files for dynamic content management.
+- Image administration interface.
 
 ## Experimental Ideas
 

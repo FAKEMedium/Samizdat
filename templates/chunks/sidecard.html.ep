@@ -1,9 +1,9 @@
 <div class="card mb-3" id="<%== $card->{docpath} %>"<%== exists($card->{src}) ? sprintf(' data-src="%s"', $card->{src}) : '' %>>
-  <h2 class="card-header p-1 p-sm-2 title<%== exists($card->{editable}) ? ' editable' : '' %>"><%== $card->{title} %></h2>
+  <h2 class="card-header p-1 p-sm-2 title<%== exists($card->{editable}) ? ' editable' : '' %>" id="<%== $card->{docpath} %>-title"><%== $card->{title} %></h2>
 % if ($card->{card_image}) {
   <%== $card->{card_image} %>
 % }
-  <div class="card-body p-1 p-sm-2<%== exists($card->{editable}) ? ' editable' : '' %>">
+  <div class="card-body p-1 p-sm-2<%== exists($card->{editable}) ? ' editable' : '' %>" id="<%== $card->{docpath} %>-content">
     <%== web->indent($card->{main}, 2) =%>
   </div>
 </div>

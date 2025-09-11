@@ -42,7 +42,8 @@ const config = {
 config.entry['samizdat'] = './src/js/samizdat.js';
 config.entry['authenticated'] = './src/js/authenticated.js';
 config.entry['sw'] = './src/js/sw.js';
-config.entry['editor'] = './src/js/editor.js';
+// config.entry['editor'] = './src/js/editor.js'; // TipTap editor - commented out, using simple-editor instead
+config.entry['simple-editor'] = './src/js/simple-editor.js';
 
 if (!isDev) {
   config.optimization.minimizer.push(

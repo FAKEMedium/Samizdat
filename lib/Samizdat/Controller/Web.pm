@@ -213,4 +213,89 @@ sub editor_toolbar ($self) {
   $self->render(template => 'web/editor/toolbar/index', format => 'html', layout => undef);
 }
 
+# Save editable content to database
+sub save ($self) {
+  # Check authentication first
+  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
+  my $user;
+  
+  if ($authcookie) {
+    $user = $self->app->account->session($authcookie);
+  }
+  
+  unless ($user) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Authentication required'
+    }, status => 401);
+  }
+  
+  # Handle both single editor and batch editor formats
+  my $request_data;
+  if ($self->req->headers->content_type && $self->req->headers->content_type =~ /application\/json/) {
+    # New batch format
+    $request_data = $self->req->json;
+  } else {
+    # Legacy single editor format
+    $request_data = {
+      docpath => $self->param('docpath'),
+      editors => {
+        ($self->param('element_id') || 'thecontent') => $self->param('content')
+      }
+    };
+  }
+  
+  my $docpath = $request_data->{docpath};
+  my $editors = $request_data->{editors};
+  
+  # Normalize docpath - remove double slashes and ensure single trailing slash for directories
+  $docpath =~ s|//+|/|g;  # Replace multiple slashes with single slash
+  $docpath =~ s|/$||;     # Remove trailing slash
+  $docpath .= '/' if $docpath ne ''; # Add back single trailing slash for non-root
+  $docpath = '/' if $docpath eq '';  # Root case
+  
+  # Validate input
+  unless ($docpath && $editors && ref($editors) eq 'HASH') {
+    return $self->render(json => {
+      success => 0,
+      error => 'Missing required parameters: docpath, editors'
+    }, status => 400);
+  }
+  
+  eval {
+    # Save all editors for this page
+    my @resource_ids;
+    for my $element_id (keys %$editors) {
+      my $content = $editors->{$element_id};
+      next unless defined $content && $content ne '';
+      
+      my $resource_id = $self->app->web->save_content({
+        docpath => $docpath,
+        element_id => $element_id,
+        content => $content,
+        language => $self->app->language,
+        user_id => $user->{userid}
+      });
+      push @resource_ids, $resource_id;
+    }
+    
+    # Invalidate cache for this docpath and language
+    $self->app->web->invalidate_cache($docpath, $self->app->language);
+    
+    $self->render(json => {
+      success => 1,
+      message => 'Content saved successfully',
+      resource_ids => \@resource_ids,
+      editors_saved => scalar(@resource_ids)
+    });
+  };
+  if ($@) {
+    $self->app->log->error("Failed to save content: $@");
+    $self->render(json => {
+      success => 0,
+      error => 'Failed to save content'
+    }, status => 500);
+  }
+}
+
 1;

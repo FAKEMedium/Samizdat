@@ -24,8 +24,22 @@ my $md = Text::MultiMarkdown->new(
 );
 
 # Return a list of all markdown files in the publicsrc/url directory, with their metadata
+# Now checks database first before processing markdown files
 sub getlist ($self, $url, $options = {}) {
   my $docs = {};
+  
+  # First check if we have database content for this path
+  # Normalize the path to match what was saved (with leading slash)
+  my $save_docpath = $url || '';
+  $save_docpath =~ s|^/||;   # Remove leading slash
+  $save_docpath =~ s|/$||;   # Remove trailing slash  
+  $save_docpath = $save_docpath ? "/$save_docpath/" : "/";  # Add proper slashes
+  
+  if ($self->has_database_content($save_docpath, $options->{language} // 'en')) {
+    return $self->get_database_content($save_docpath, $options->{language} // 'en');
+  }
+  
+  # Fall back to markdown file processing
   my $path = Mojo::Home->new($self->config->{publicsrc})->child($url);
   my $found = 0;
   my $selectedimage = {};
@@ -455,5 +469,199 @@ sub indent ($self, $content = '', $indents = 0) {
   return sprintf("%s%s\n", $indent, $content);
 }
 
+# Save editable content to database
+sub save_content ($self, $params) {
+  my $docpath = $params->{docpath};
+  my $element_id = $params->{element_id};
+  my $content = $params->{content};
+  my $language = $params->{language};
+  my $user_id = $params->{user_id};
+  
+  # Get language ID from language code
+  my $language_id = $self->database->db->query(
+    'SELECT languageid FROM languages WHERE code = ?', 
+    $language
+  )->hash->{languageid} // 1;
+  
+  # Convert docpath to source markdown path
+  # /project/ -> project/README.md
+  # / -> README.md  
+  my $markdown_src = $docpath;
+  $markdown_src =~ s|^/||;  # Remove leading slash
+  $markdown_src =~ s|/$||;  # Remove trailing slash
+  $markdown_src = $markdown_src ? "${markdown_src}/README.md" : "README.md";
+  
+  # Determine field to update and source file based on element type
+  my ($field_to_update, $sidecard_base);
+  if ($element_id eq 'headline') {
+    # Headlines are stored as title field in main README.md
+    $field_to_update = 'title';
+  } elsif ($element_id eq 'thecontent' || $element_id eq 'element-0') {
+    # Main content is stored as content field in main README.md
+    $field_to_update = 'content';
+  } elsif ($element_id =~ /^(.+)-(title|content)$/) {
+    # Sidecard elements: sidecard1-title, sidecard1-content
+    $sidecard_base = $1;
+    $field_to_update = $2 eq 'title' ? 'title' : 'content';
+    # Override markdown_src for sidecards
+    $markdown_src = $docpath;
+    $markdown_src =~ s|^/||;  # Remove leading slash
+    $markdown_src =~ s|/$||;  # Remove trailing slash
+    $markdown_src = $markdown_src ? "${markdown_src}/${sidecard_base}.md" : "${sidecard_base}.md";
+  } else {
+    # Other elements - default to content
+    $field_to_update = 'content';
+  }
+  
+  # Check if resource already exists for this docpath and markdown source
+  my $existing = $self->database->db->query(
+    'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ?',
+    $docpath, $markdown_src
+  )->hash;
+  
+  if ($existing) {
+    # Update existing resource
+    my $update_sql = $field_to_update eq 'title' 
+      ? 'UPDATE web.resources SET title = ?, modified = NOW() WHERE resourceid = ?'
+      : 'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?';
+    
+    $self->database->db->query($update_sql, $content, $existing->{resourceid});
+    return $existing->{resourceid};
+  } else {
+    # Insert new resource with authenticated user
+    my $result;
+    if ($field_to_update eq 'title') {
+      $result = $self->database->db->query(
+        'INSERT INTO web.resources (alias, src, title, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+        $docpath, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+      );
+    } else {
+      $result = $self->database->db->query(
+        'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
+         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+        $docpath, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+      );
+    }
+    return $result->hash->{resourceid};
+  }
+}
+
+# Get content from database for a specific docpath and element_id
+sub get_content ($self, $docpath, $element_id, $language) {
+  my $language_id = $self->database->db->query(
+    'SELECT languageid FROM languages WHERE code = ?', 
+    $language
+  )->hash->{languageid} // 1;
+  
+  my $resource = $self->database->db->query(
+    'SELECT content, modified FROM web.resources 
+     WHERE alias = ? AND src = ? AND languageid = ?',
+    $docpath, $element_id, $language_id
+  )->hash;
+  
+  return $resource;
+}
+
+# Check if docpath has any database content
+sub has_database_content ($self, $docpath, $language) {
+  my $language_id = $self->database->db->query(
+    'SELECT languageid FROM languages WHERE code = ?', 
+    $language
+  )->hash->{languageid} // 1;
+  
+  my $count = $self->database->db->query(
+    'SELECT COUNT(*) as count FROM web.resources 
+     WHERE alias = ? AND languageid = ?',
+    $docpath, $language_id
+  )->hash->{count};
+  
+  return $count > 0;
+}
+
+# Get complete document structure from database
+sub get_database_content ($self, $save_docpath, $language) {
+  my $language_id = $self->database->db->query(
+    'SELECT languageid FROM languages WHERE code = ?', 
+    $language
+  )->hash->{languageid} // 1;
+  
+  # Get all content pieces for this save_docpath
+  my $resources = $self->database->db->query(
+    'SELECT src, content, title, description FROM web.resources 
+     WHERE alias = ? AND languageid = ? ORDER BY src',
+    $save_docpath, $language_id
+  )->hashes;
+  
+  my $docs = {};
+  my $main_content = '';
+  my $title = '';
+  my $subdocs = [];
+  
+  for my $resource (@$resources) {
+    if ($resource->{src} =~ /README\.md$/) {
+      # Main resource (README.md) with title and content
+      $main_content = $resource->{content} || '';
+      $title = $resource->{title} || '';
+    } else {
+      # Sidecard content (other .md files)
+      push @$subdocs, {
+        docpath => $resource->{src},
+        title => $resource->{title} || 'Untitled',
+        main => $resource->{content} || '',
+        editable => 1,
+        card_image => ''
+      };
+    }
+  }
+  
+  # Convert save_docpath back to expected docpath format
+  my $display_docpath = $save_docpath;
+  $display_docpath =~ s|^/||;  # Remove leading slash
+  $display_docpath =~ s|/$||;  # Remove trailing slash
+  $display_docpath = $display_docpath ? "${display_docpath}/index.html" : "index.html";
+  
+  $docs->{$display_docpath} = {
+    docpath => $display_docpath,
+    title => $title || 'Untitled',
+    main => $main_content,
+    subdocs => $subdocs,
+    children => [],
+    url => $save_docpath =~ s|^/||r =~ s|/$||r,
+    language => $language,
+    head => {},
+    editable => 1
+  };
+  
+  return $docs;
+}
+
+# Invalidate cache for a docpath and specific language
+sub invalidate_cache ($self, $docpath, $language = undef) {
+  my $public = Mojo::Home->new('public');
+  $language //= $self->locale->{default_language};
+  
+  # Normalize docpath - remove leading slash if present
+  $docpath =~ s|^/||;
+  
+  # For directory paths like "/project/", we need to invalidate "project/index.html"
+  if ($docpath =~ m|/$| || $docpath eq '' || !$docpath =~ m|\.|) {
+    $docpath = $docpath ? "${docpath}index.html" : 'index.html';
+  }
+  
+  # Adjust path for non-default language
+  my $cache_path = $docpath;
+  if ($language ne $self->locale->{default_language}) {
+    $cache_path =~ s/\.html$/.$language.html/;
+  }
+  
+  # Remove cached HTML file for this language only
+  my $cache_file = $public->child($cache_path);
+  $cache_file->remove if -e $cache_file;
+  
+  # Remove gzipped version for this language only
+  my $gz_file = $public->child("${cache_path}.gz");
+  $gz_file->remove if -e $gz_file;
+}
 
 1;
