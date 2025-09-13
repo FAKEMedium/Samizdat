@@ -17,6 +17,12 @@ sub register ($self, $app, $conf) {
   );
 
   my $account = $r->under('/account');
+  my $panel = $account->under('/panel');
+  $panel->get('/')->name('account_panel')->to(
+    controller => 'Account',
+    action => 'panel',
+    docpath => '/account/panel/index.html'
+  );
 
   $account->get('/register')->name('account_register')->to(
     controller => 'Account',
@@ -30,10 +36,14 @@ sub register ($self, $app, $conf) {
     docpath => '/account/confirm/index.html',
   );
 
-  $account->any([qw( GET PUT )] => '/settings')->name('account_settings')->to(
+  $account->any([qw( GET POST )] => '/settings')->name('account_settings')->to(
     controller => 'Account',
     action => 'settings',
     docpath => '/account/settings/index.html',
+  );
+  $account->post('/upload-image')->name('account_upload_image')->to(
+    controller => 'Account',
+    action => 'upload_image'
   );
   $account->any([qw( GET PUT )] => '/password')->name('account_password')->to(
     controller => 'Account',
@@ -57,12 +67,6 @@ sub register ($self, $app, $conf) {
     action => 'index'
   );
 
-  my $panel = $account->under('/panel');
-  $panel->get('/')->name('account_panel')->to(
-    controller => 'Account',
-    action => 'panel',
-    docpath => '/account/panel/index.html'
-  );
 
   $app->helper(account => sub ($self) {
     state $account = Samizdat::Model::Account->new({

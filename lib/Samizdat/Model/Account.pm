@@ -404,5 +404,107 @@ sub getLoginFailures ($self, $ip) {
   return $result;
 }
 
+# Get user profile data
+sub get_profile ($self, $userid) {
+  my $db = $self->database->db;
+  
+  # Get basic user info
+  my $user = $db->query(
+    'SELECT userid, username, displayname, email FROM account.users WHERE userid = ?',
+    $userid
+  )->hash;
+  
+  return {} unless $user;
+  
+  # Get extended profile data
+  my $profile_data = $db->query(
+    'SELECT section, key, value FROM account.profile WHERE userid = ?',
+    $userid
+  )->hashes;
+  
+  # Organize profile data by sections
+  my $profile = {
+    basic => {
+      userid => $user->{userid},
+      username => $user->{username}, 
+      displayname => $user->{displayname} || '',
+      email => $user->{email} || ''
+    },
+    contacts => {},
+    presentations => {},
+    images => {}
+  };
+  
+  for my $row (@$profile_data) {
+    $profile->{$row->{section}}->{$row->{key}} = $row->{value};
+  }
+  
+  return $profile;
+}
+
+# Update user profile data
+sub update_profile ($self, $userid, $profile_data) {
+  my $db = $self->database->db;
+  
+  my $tx = $db->begin;
+  
+  eval {
+    # Update basic user info if provided
+    if (exists $profile_data->{basic}) {
+      my $basic = $profile_data->{basic};
+      my @updates;
+      my @values;
+      
+      for my $field (qw(displayname email)) {
+        if (defined $basic->{$field}) {
+          push @updates, "$field = ?";
+          push @values, $basic->{$field};
+        }
+      }
+      
+      if (@updates) {
+        push @values, $userid;
+        $db->query(
+          "UPDATE account.users SET " . join(', ', @updates) . " WHERE userid = ?",
+          @values
+        );
+      }
+    }
+    
+    # Update extended profile sections
+    for my $section (qw(contacts presentations images)) {
+      next unless exists $profile_data->{$section};
+      
+      my $section_data = $profile_data->{$section};
+      
+      for my $key (keys %$section_data) {
+        my $value = $section_data->{$key};
+        
+        if (defined $value && $value ne '') {
+          # Insert or update profile data
+          $db->query(
+            'INSERT INTO account.profile (userid, section, key, value) 
+             VALUES (?, ?, ?, ?) 
+             ON CONFLICT (userid, section, key) 
+             DO UPDATE SET value = EXCLUDED.value, modified = NOW()',
+            $userid, $section, $key, $value
+          );
+        } else {
+          # Delete if value is empty
+          $db->query(
+            'DELETE FROM account.profile WHERE userid = ? AND section = ? AND key = ?',
+            $userid, $section, $key
+          );
+        }
+      }
+    }
+    
+    $tx->commit;
+  };
+  if ($@) {
+    $tx->rollback;
+    die "Profile update failed: $@";
+  }
+}
 
 1;

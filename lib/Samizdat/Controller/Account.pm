@@ -368,17 +368,19 @@ sub authenticated_user ($self) {
     my $session = $self->app->account->session($authcookie);
     if ($session && %$session) {
       # Refresh browser cookie to match Redis expiration
-      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, {
-        expires => time + $self->config->{sessiontimeout},
-        secure => 1,
-        httponly => 0,
-        path => '/',
-        domain => $self->config->{account}->{cookiedomain},
-        hostonly => 1,
+      my $cookie_opts = {
+        secure    => 1,
+        httponly  => 0,
+        path      => '/',
+        domain    => $self->config->{account}->{cookiedomain},
+        hostonly  => 1,
         same_site => 'Lax',
-      });
+        expires   => time + $self->config->{account}->{sessiontimeout},
+      };
+      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, $cookie_opts);
+      say Dumper $session;
+      return $session;
     }
-    return $session;
   }
   return undef;
 }
@@ -434,9 +436,133 @@ sub users ($self) {
 }
 
 sub settings ($self) {
-  $self->stash(user => $self->authenticated_user());
+  my $title = $self->app->__('Account settings');
+  if ($self->req->headers->accept =~ m{application/json}) {
+    my $user = $self->authenticated_user();
+    unless ($user) {
+      return $self->redirect_to($self->url_for('account_login'));
+    }
 
-  return 1;
+    if ($self->req->method eq 'POST') {
+      # Handle profile data update via AJAX
+      return $self->update_profile();
+    } else {
+      # Return current profile data as JSON
+      my $profile = $self->app->account->get_profile($user->{userid});
+      return $self->render(json => {
+        success => 1,
+        profile => $profile
+      });
+    }
+  } else {
+    # Render HTML settings page
+    my $web = { title => $title };
+    $web->{script} .= $self->render_to_string(template => 'account/settings/index', format => 'js');
+    return $self->render(template => 'account/settings/index', web => $web, title => $title);
+    return 1;
+  }
+}
+
+# Update user profile data
+sub update_profile ($self) {
+  my $user = $self->authenticated_user();
+  unless ($user) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Authentication required'
+    }, status => 401);
+  }
+
+  my $profile_data = $self->req->json;
+  unless ($profile_data) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Invalid JSON data'
+    }, status => 400);
+  }
+
+  eval {
+    $self->app->account->update_profile($user->{userid}, $profile_data);
+    $self->render(json => {
+      success => 1,
+      message => 'Profile updated successfully'
+    });
+  };
+  if ($@) {
+    $self->app->log->error("Failed to update profile: $@");
+    $self->render(json => {
+      success => 0,
+      error => 'Failed to update profile'
+    }, status => 500);
+  }
+}
+
+# Handle profile image upload
+sub upload_image ($self) {
+  my $user = $self->authenticated_user();
+  unless ($user) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Authentication required'
+    }, status => 401);
+  }
+
+  my $upload = $self->req->upload('image');
+  unless ($upload) {
+    return $self->render(json => {
+      success => 0,
+      error => 'No image file provided'
+    }, status => 400);
+  }
+
+  # Validate file type and size
+  my $content_type = $upload->headers->content_type;
+  unless ($content_type =~ /^image\/(jpeg|jpg|png|webp)$/i) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Invalid image format. Use JPG, PNG, or WebP'
+    }, status => 400);
+  }
+
+  if ($upload->size > 2 * 1024 * 1024) { # 2MB limit
+    return $self->render(json => {
+      success => 0,
+      error => 'Image too large. Maximum size is 2MB'
+    }, status => 400);
+  }
+
+  eval {
+    # Generate filename using user UUID and original extension
+    my $user_uuid = $user->{uuid} || $user->{userid};
+    my $ext = $1 if $content_type =~ /image\/(\w+)/;
+    $ext = 'jpg' if $ext eq 'jpeg';
+    
+    my $filename = "${user_uuid}.${ext}";
+    my $user_dir = Mojo::Home->new('src/public/user');
+    $user_dir->make_path unless -d $user_dir;
+    
+    my $file_path = $user_dir->child($filename);
+    $upload->move_to($file_path);
+    
+    # Store image reference in profile
+    my $image_url = "/user/${filename}";
+    $self->app->account->update_profile($user->{userid}, {
+      images => { avatar => $image_url }
+    });
+    
+    $self->render(json => {
+      success => 1,
+      message => 'Image uploaded successfully',
+      imagePath => $image_url
+    });
+  };
+  if ($@) {
+    $self->app->log->error("Image upload failed: $@");
+    $self->render(json => {
+      success => 0,
+      error => 'Failed to upload image'
+    }, status => 500);
+  }
 }
 
 

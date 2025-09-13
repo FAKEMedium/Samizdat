@@ -469,7 +469,7 @@ sub indent ($self, $content = '', $indents = 0) {
   return sprintf("%s%s\n", $indent, $content);
 }
 
-# Save editable content to database
+# Save editable content to database with new structure
 sub save_content ($self, $params) {
   my $docpath = $params->{docpath};
   my $element_id = $params->{element_id};
@@ -477,46 +477,41 @@ sub save_content ($self, $params) {
   my $language = $params->{language};
   my $user_id = $params->{user_id};
   
-  # Get language ID from language code
+  # Get language ID from language code (languages table is in public schema)
   my $language_id = $self->database->db->query(
-    'SELECT languageid FROM languages WHERE code = ?', 
+    'SELECT languageid FROM public.languages WHERE code = ?', 
     $language
   )->hash->{languageid} // 1;
   
-  # Convert docpath to source markdown path
-  # /project/ -> project/README.md
-  # / -> README.md  
-  my $markdown_src = $docpath;
-  $markdown_src =~ s|^/||;  # Remove leading slash
-  $markdown_src =~ s|/$||;  # Remove trailing slash
-  $markdown_src = $markdown_src ? "${markdown_src}/README.md" : "README.md";
+  # Convert docpath to source markdown path and determine alias
+  my ($alias, $markdown_src, $field_to_update, $sidecard_base);
   
-  # Determine field to update and source file based on element type
-  my ($field_to_update, $sidecard_base);
-  if ($element_id eq 'headline') {
-    # Headlines are stored as title field in main README.md
-    $field_to_update = 'title';
-  } elsif ($element_id eq 'thecontent' || $element_id eq 'element-0') {
-    # Main content is stored as content field in main README.md
-    $field_to_update = 'content';
-  } elsif ($element_id =~ /^(.+)-(title|content)$/) {
-    # Sidecard elements: sidecard1-title, sidecard1-content
-    $sidecard_base = $1;
-    $field_to_update = $2 eq 'title' ? 'title' : 'content';
-    # Override markdown_src for sidecards
+  if ($element_id eq 'headline' || $element_id eq 'thecontent' || $element_id eq 'element-0') {
+    # Main content: has alias, points to README.md
+    $alias = $docpath;
     $markdown_src = $docpath;
     $markdown_src =~ s|^/||;  # Remove leading slash
     $markdown_src =~ s|/$||;  # Remove trailing slash
-    $markdown_src = $markdown_src ? "${markdown_src}/${sidecard_base}.md" : "${sidecard_base}.md";
+    $markdown_src = $markdown_src ? "${markdown_src}/README.md" : "README.md";
+    $field_to_update = ($element_id eq 'headline') ? 'title' : 'content';
+  } elsif ($element_id =~ /^(.+)-(title|content)$/) {
+    # Sidecard elements: project/features-title, project/features-content
+    $sidecard_base = $1;
+    $alias = '';  # Sidecards have empty alias
+    # The sidecard_base is already the full path without .md, just add .md
+    $markdown_src = "${sidecard_base}.md";
+    $field_to_update = $2 eq 'title' ? 'title' : 'content';
   } else {
-    # Other elements - default to content
+    # Other elements - default to content with empty alias
+    $alias = '';
+    $markdown_src = $element_id;
     $field_to_update = 'content';
   }
   
-  # Check if resource already exists for this docpath and markdown source
+  # Check if resource already exists using unique constraint (src + languageid)
   my $existing = $self->database->db->query(
-    'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ?',
-    $docpath, $markdown_src
+    'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ?',
+    $markdown_src, $language_id
   )->hash;
   
   if ($existing) {
@@ -534,23 +529,50 @@ sub save_content ($self, $params) {
       $result = $self->database->db->query(
         'INSERT INTO web.resources (alias, src, title, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
          VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-        $docpath, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+        $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
       );
     } else {
       $result = $self->database->db->query(
         'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
          VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-        $docpath, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+        $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
       );
     }
-    return $result->hash->{resourceid};
+    
+    my $resource_id = $result->hash->{resourceid};
+    
+    # If this is a sidecard, create connection to main resource in current language only
+    if ($alias eq '' && $sidecard_base) {
+      # Find the main resource for this docpath in current language
+      my $main_alias = $docpath;
+      my $main_src = $docpath;
+      $main_src =~ s|^/||;  # Remove leading slash
+      $main_src =~ s|/$||;  # Remove trailing slash
+      $main_src = $main_src ? "${main_src}/README.md" : "README.md";
+      
+      my $main_resource = $self->database->db->query(
+        'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ? AND languageid = ?',
+        $main_alias, $main_src, $language_id
+      )->hash;
+      
+      if ($main_resource) {
+        # Create connection between main resource and sidecard in current language
+        $self->database->db->query(
+          'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?) 
+           ON CONFLICT DO NOTHING',
+          $main_resource->{resourceid}, $resource_id
+        );
+      }
+    }
+    
+    return $resource_id;
   }
 }
 
 # Get content from database for a specific docpath and element_id
 sub get_content ($self, $docpath, $element_id, $language) {
   my $language_id = $self->database->db->query(
-    'SELECT languageid FROM languages WHERE code = ?', 
+    'SELECT languageid FROM public.languages WHERE code = ?', 
     $language
   )->hash->{languageid} // 1;
   
@@ -566,7 +588,7 @@ sub get_content ($self, $docpath, $element_id, $language) {
 # Check if docpath has any database content
 sub has_database_content ($self, $docpath, $language) {
   my $language_id = $self->database->db->query(
-    'SELECT languageid FROM languages WHERE code = ?', 
+    'SELECT languageid FROM public.languages WHERE code = ?', 
     $language
   )->hash->{languageid} // 1;
   
@@ -579,40 +601,63 @@ sub has_database_content ($self, $docpath, $language) {
   return $count > 0;
 }
 
-# Get complete document structure from database
+# Get complete document structure from database using new schema
 sub get_database_content ($self, $save_docpath, $language) {
   my $language_id = $self->database->db->query(
-    'SELECT languageid FROM languages WHERE code = ?', 
+    'SELECT languageid FROM public.languages WHERE code = ?', 
     $language
   )->hash->{languageid} // 1;
   
-  # Get all content pieces for this save_docpath
-  my $resources = $self->database->db->query(
-    'SELECT src, content, title, description FROM web.resources 
-     WHERE alias = ? AND languageid = ? ORDER BY src',
+  # Get main resource (has alias matching save_docpath)
+  my $main_resource = $self->database->db->query(
+    'SELECT resourceid, src, content, title, description FROM web.resources 
+     WHERE alias = ? AND languageid = ?',
     $save_docpath, $language_id
+  )->hash;
+  
+  return {} unless $main_resource;
+  
+  # For non-default languages, ensure consistency by cloning missing sidecards from default
+  if ($language ne $self->locale->{default_language}) {
+    my $default_language_id = $self->database->db->query(
+      'SELECT languageid FROM public.languages WHERE code = ?', 
+      $self->locale->{default_language}
+    )->hash->{languageid} // 1;
+    
+    # Find the default language main resource to get its sidecards
+    my $default_main = $self->database->db->query(
+      'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ? AND alias != \'\'',
+      $main_resource->{src}, $default_language_id
+    )->hash;
+    
+    if ($default_main) {
+      $self->ensure_language_consistency($default_main->{resourceid}, $language_id, $default_language_id, $main_resource->{resourceid});
+    }
+  }
+  
+  # Get connected sidecard resources via resourceconnections
+  my $sidecards = $self->database->db->query(
+    'SELECT r.resourceid, r.src, r.content, r.title, r.description 
+     FROM web.resources r 
+     JOIN web.resourceconnections rc ON r.resourceid = rc.child 
+     WHERE rc.parent = ? AND r.languageid = ? 
+     ORDER BY r.src',
+    $main_resource->{resourceid}, $language_id
   )->hashes;
   
   my $docs = {};
-  my $main_content = '';
-  my $title = '';
   my $subdocs = [];
   
-  for my $resource (@$resources) {
-    if ($resource->{src} =~ /README\.md$/) {
-      # Main resource (README.md) with title and content
-      $main_content = $resource->{content} || '';
-      $title = $resource->{title} || '';
-    } else {
-      # Sidecard content (other .md files)
-      push @$subdocs, {
-        docpath => $resource->{src},
-        title => $resource->{title} || 'Untitled',
-        main => $resource->{content} || '',
-        editable => 1,
-        card_image => ''
-      };
-    }
+  # Process sidecard resources
+  for my $sidecard (@$sidecards) {
+    push @$subdocs, {
+      docpath => $sidecard->{src} =~ s|\.md$||r,  # Remove .md extension for display
+      title => $sidecard->{title} || 'Untitled',
+      main => $sidecard->{content} || '',
+      editable => 1,
+      card_image => '',
+      src => $sidecard->{src}
+    };
   }
   
   # Convert save_docpath back to expected docpath format
@@ -623,17 +668,69 @@ sub get_database_content ($self, $save_docpath, $language) {
   
   $docs->{$display_docpath} = {
     docpath => $display_docpath,
-    title => $title || 'Untitled',
-    main => $main_content,
+    title => $main_resource->{title} || 'Untitled',
+    main => $main_resource->{content} || '',
     subdocs => $subdocs,
     children => [],
     url => $save_docpath =~ s|^/||r =~ s|/$||r,
     language => $language,
     head => {},
-    editable => 1
+    editable => 1,
+    src => $main_resource->{src}
   };
   
   return $docs;
+}
+
+
+# Ensure sidecard consistency across languages by cloning missing resources
+sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $default_language_id, $target_main_id) {
+  # Get all sidecards connected to main resource in default language
+  my $default_sidecards = $self->database->db->query(
+    'SELECT r.src, r.title, r.content, r.description, r.owner, r.creator, r.publisher, 
+            r.contenttype, r.templateid, r.webserviceid
+     FROM web.resources r 
+     JOIN web.resourceconnections rc ON r.resourceid = rc.child 
+     WHERE rc.parent = ? AND r.languageid = ?',
+    $default_main_id, $default_language_id
+  )->hashes;
+  
+  for my $default_sidecard (@$default_sidecards) {
+    # Check if this sidecard exists in target language
+    my $existing = $self->database->db->query(
+      'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ?',
+      $default_sidecard->{src}, $target_language_id
+    )->hash;
+    
+    unless ($existing) {
+      # Clone the sidecard resource for target language
+      my $new_resource = $self->database->db->query(
+        'INSERT INTO web.resources (alias, src, title, content, description, owner, creator, publisher, 
+                                   languageid, contenttype, templateid, webserviceid) 
+         VALUES (\'\', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING resourceid',
+        $default_sidecard->{src},
+        $default_sidecard->{title},
+        $default_sidecard->{content}, 
+        $default_sidecard->{description},
+        $default_sidecard->{owner},
+        $default_sidecard->{creator},
+        $default_sidecard->{publisher},
+        $target_language_id,
+        $default_sidecard->{contenttype},
+        $default_sidecard->{templateid},
+        $default_sidecard->{webserviceid}
+      );
+      
+      my $new_resource_id = $new_resource->hash->{resourceid};
+      
+      # Create connection between target main resource and new sidecard
+      $self->database->db->query(
+        'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?) 
+         ON CONFLICT DO NOTHING',
+        $target_main_id, $new_resource_id
+      );
+    }
+  }
 }
 
 # Invalidate cache for a docpath and specific language
