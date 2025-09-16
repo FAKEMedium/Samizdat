@@ -8,41 +8,38 @@ use Data::Dumper;
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
-  my $manager = $r->under($app->config->{managerurl})->to(
-    controller => 'Account',
-    action     => 'authorize',
-    level      => 'superadmin',
-  );
 
-  $manager->get('invoices/open')
-    ->to(controller => 'Invoice', action => 'open', docpath => '/invoice/open/index.html')
-    ->name('invoice_open');
-  $manager->get('invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
-  $manager->get('invoices/:invoiceid/:to')->to('Invoice#nav')->name('invoice_nav');
-  $manager->get('invoices')->to('Invoice#index')->name('invoice_index');
+  # Invoice root routes
+  my $manager = $r->manager('invoices')->to(controller => 'Invoice');
+  $manager->get('/open')                                             ->to('#open')                 ->name('invoice_open');
+  $manager->get('/:invoiceid')                                       ->to('#handle')               ->name('invoice_handle');
+  $manager->get('/:invoiceid/:to')                                   ->to('#nav')                  ->name('invoice_nav');
+  $manager->get('/')                                                 ->to('#index')                ->name('invoice_index');
 
-  $manager->get('customers/:customerid/invoices/open')
-    ->to(controller => 'Invoice', action => 'edit', docpath => '/invoice/open/edit.html')
-    ->name('invoice_edit');
-  $manager->put('customers/:customerid/invoices/open')->to('Invoice#update')->name('invoice_uppdate');
-  $manager->post('customers/:customerid/invoices/open')->to('Invoice#create')->name('invoice_create');
-  $manager->get('customers/:customerid/invoices/:invoiceid')->to('Invoice#handle')->name('invoice_handle');
-  $manager->post('customers/:customerid/invoices/:invoiceid/creditinvoice')->to('Invoice#creditinvoice')->name('invoice_creditinvoice');
-  $manager->get('customers/:customerid/invoices/:invoiceid/payment')->to('Invoice#payment')->name('invoice_payment');
-  $manager->post('customers/:customerid/invoices/:invoiceid/payment')->to('Invoice#payment')->name('invoice_payment');
-  $manager->get('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
-  $manager->post('customers/:customerid/invoices/:invoiceid/remind')->to('Invoice#remind')->name('invoice_remind');
-  $manager->post('customers/:customerid/invoices/:invoiceid/resend')->to('Invoice#resend')->name('invoice_resend');
-  $manager->post('customers/:customerid/invoices/:invoiceid/reprint')->to('Invoice#reprint')->name('invoice_reprint');
-  $manager->get('customers/:customerid/invoices/:invoiceid/:to')->to('Invoice#nav')->name('invoice_nav');
-  $manager->get('customers/:customerid/invoices')->to('Invoice#index')->name('invoice_index');
+  # Customer specific invoice routes
+  my $customers = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
+  $customers->get('invoices/open')                                   ->to('#edit')                 ->name('invoice_edit');
+  $customers->put('open')                                            ->to('#update')               ->name('invoice_uppdate');
+  $customers->post('/open')                                          ->to('#create')               ->name('invoice_create');
+  $customers->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
+  $customers->post('/:invoiceid/creditinvoice')                      ->to('#creditinvoice')        ->name('invoice_creditinvoice');
+  $customers->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
+  $customers->post('/:invoiceid/payment')                            ->to('#payment')              ->name('invoice_payment');
+  $customers->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
+  $customers->post('/:invoiceid/remind')                             ->to('#remind')               ->name('invoice_remind');
+  $customers->post('/:invoiceid/resend')                             ->to('#resend')               ->name('invoice_resend');
+  $customers->post('/:invoiceid/reprint')                            ->to('#reprint')              ->name('invoice_reprint');
+  $customers->get('/:invoiceid/:to')                                 ->to('#nav')                  ->name('invoice_nav');
+  $customers->get('/')                                               ->to('#index')                ->name('invoice_index');
 
-  $manager->get('customers/:customerid/products/subscribe')->to('Customer#products');
-  $manager->post('customers/:customerid/products')->to('Customer#subscribe');
+  # Customer specific product routes
+  my $products = $r->manager('customers/:customerid/products')->to(controller => 'Invoice');
+  $products->get('/subscribe')                                       ->to('Customer#products');
+  $customers->post('/')                                              ->to('Customer#subscribe');
 
   $app->helper(invoice => sub ($self) {
     state $invoice = Samizdat::Model::Invoice->new({
-      config => $self->config->{roomservice}->{invoice},
+      config => $self->config->{manager}->{invoice},
       pg     => $self->app->pg,
       mysql  => $self->app->mysql,
     });
@@ -53,7 +50,7 @@ sub register ($self, $app, $conf) {
     printinvoice => sub($self, $tex, $formdata) {
       my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $formdata->{invoice}->{uuid}));
       my $pdfpath = Mojo::File->new(sprintf('%s/%s.pdf',
-        $app->config->{roomservice}->{invoice}->{invoicedir},
+        $app->config->{manager}->{invoice}->{invoicedir},
         $formdata->{invoice}->{uuid})
       );
       $texpath->spew($tex);

@@ -1,0 +1,16 @@
+<form name="searchdomain" method="get" action="<%== config->{manager}->{url} %>domains">
+  <div class="row mb-3">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('domain')) %>" placeholder="<%== __('Search for domain') %>...">
+      <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>domains/add"><%== __('Add domain') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>epp/contact"><%== __('Create contact') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>epp/create"><%== __('Register') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>epp/transfer"><%== __('Transfer') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>domains/expiring"><%== __('Expiring domains') %></a>
+<a class="badge rounded-pill text-bg-primary" href="https://dm.realtimeregister.com/docs/api/">RR API</a>

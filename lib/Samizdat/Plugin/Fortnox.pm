@@ -6,81 +6,28 @@ use Samizdat::Model::Fortnox;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  my $fortnox = $r->under('/fortnox');
-  my $manager = $fortnox->under('/manager')->to(
-    controller => 'Account',
-    action     => 'authorize',
-    level      => 'admin',
-  );
-
-
   # Invoice stuff
-  if (1) {
-    $manager->any(sprintf('%s', '/customers'))->name('fortnox_customer')->to(
-      controller => 'Fortnox',
-      action => 'customers',
-      docpath => '/fortnox/manager/customers/index.html',
-    );
-    $manager->any(sprintf('%s', '/customers/:customerid'))->to(
-      controller => 'Fortnox',
-      action => 'customers',
-      docpath => '/fortnox/manager/customers/single/index.html',
-    );
-    $manager->post(sprintf('%s', '/invoices'))->to(
-      controller => 'Fortnox',
-      action => 'postinvoice',
-    );
-    $manager->get(sprintf('%s', '/invoices'))->name('fortnox_invoices')->to(
-      controller => 'Fortnox',
-      action => 'invoices',
-      docpath => '/fortnox/manager/invoices/index.html',
-    );
-    $manager->get(sprintf('%s', '/payments'))->name('fortnox_payments')->to(
-      controller => 'Fortnox',
-      action => 'payments',
-      docpath => '/fortnox/manager/payments/index.html',
-    );
-    $manager->get(sprintf('%s', '/payments/:number'))->to(
-      controller => 'Fortnox',
-      action => 'payments',
-      docpath => '/fortnox/manager/payments/single/index.html',
-    );
-    $manager->any(sprintf('%s', '/'))->name('fortnox_manager')->to(
-      controller => 'Fortnox',
-      action => 'manager',
-      docpath => '/fortnox/manager/index.html',
-    );
-  }
+  my $manager = $r->manager('fortnox')->to(controller => 'Fortnox');
+  $manager->any('customers')                ->to('#customers')             ->name('fortnox_customer');
+  $manager->any('customers/:customerid')    ->to('#customers');
+  $manager->post('invoices')                ->to('#postinvoice');
+  $manager->get('invoices')                 ->to('#invoices')             ->name('fortnox_invoices');
+  $manager->get('payments/:number')         ->to('#payments');
+  $manager->get('payments')                 ->to('#payments')             ->name('fortnox_payments');
+  $manager->any('/')                        ->to('#manager')              ->name('fortnox_manager');
 
   # Integration stuff
-  $fortnox->any(sprintf('%s', '/auth'))->name('fortnox_auth')->to(
-    controller => 'Fortnox',
-    action => 'auth',
-  );
-  $fortnox->any(sprintf('%s', '/logout'))->name('fortnox_logout')->to(
-    controller => 'Fortnox',
-    action => 'logout',
-  );
-  $fortnox->any(sprintf('%s', '/start'))->name('fortnox_start')->to(
-    controller => 'Fortnox',
-    action => 'start',
-    docpath => '/fortnox/start/index.html'
-  );
-  $fortnox->any(sprintf('%s', '/activate'))->name('fortnox_activate')->to(
-    controller => 'Fortnox',
-    action => 'activate',
-    docpath => '/fortnox/activate/index.html',
-  );
-  $fortnox->any(sprintf('%s', '/'))->name('fortnox_index')->to(
-    controller => 'Fortnox',
-    action => 'index',
-    docpath => '/fortnox/index.html',
-  );
+  my $fortnox = $r->home('fortnox')->to(controller => 'Fortnox');
+  $fortnox->any('auth')                     ->to('#auth')                 ->name('fortnox_auth');
+  $fortnox->any('logout')                   ->to('#logout')               ->name('fortnox_logout');
+  $fortnox->any('start')                    ->to('#start')                ->name('fortnox_start');
+  $fortnox->any('activate')                 ->to('#activate')             ->name('fortnox_activate');
+  $fortnox->any('/')                        ->to('#index')                ->name('fortnox_index');
 
-
+  # Helper for accessing the Fortnox API model.
   $app->helper(fortnox => sub {
     state $fortnox = Samizdat::Model::Fortnox->new({
-      config      => $app->config->{roomservice}->{fortnox},
+      config      => $app->config->{manager}->{fortnox},
     });
     return $fortnox;
   });
@@ -90,8 +37,6 @@ sub register ($self, $app, $conf) {
       $self->render_to_string('chunks/metainfo', metainfo => $metainfo, title => $title);
     }
   );
-
 }
-
 
 1;

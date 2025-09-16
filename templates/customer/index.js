@@ -27,7 +27,7 @@ function populate(formdata) {
   for (const customer of customers) {
     snippet += `
       <tr data-customerid="${customer.customerid}">
-        <td><a class="w-auto" href="<%== sprintf('%s%s/', config->{managerurl}, $scriptname) %>${customer.customerid}">${customer.customerid}</a></td>
+        <td><a class="w-auto" href="<%== url_for('customer_index') %>/${customer.customerid}">${customer.customerid}</a></td>
         <td>${customer.company.replace(searchterm, '<b>' + searchterm + '</b>')}</td>
         <td>${customer.firstname.replace(searchterm, '<b>' + searchterm + '</b>')}</td>
         <td>${customer.lastname.replace(searchterm, '<b>' + searchterm + '</b>')}</td>

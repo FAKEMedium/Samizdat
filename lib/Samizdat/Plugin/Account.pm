@@ -7,66 +7,22 @@ use Samizdat::Model::Account;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  $r->get('/users')->name('listusers')->to(
-    controller => 'Account',
-    action => 'listusers',
-  );
-  $r->get('/user/:uuid')->name('user')->to(
-    controller => 'Account',
-    action => 'user',
-  );
+  my $users = $r->home('users')->to(controller => 'Account');
+  $users->get('/:uuid')                                                ->to('#user')         ->name('user');
+  $users->get('/')                                                     ->to('#listusers')    ->name('listusers');
 
-  my $account = $r->under('/account');
-  my $panel = $account->under('/panel');
-  $panel->get('/')->name('account_panel')->to(
-    controller => 'Account',
-    action => 'panel',
-    docpath => '/account/panel/index.html'
-  );
-
-  $account->get('/register')->name('account_register')->to(
-    controller => 'Account',
-    action => 'register',
-    docpath => '/account/register/index.html',
-  );
-  $account->post('/register')->to(controller => 'Account', action => 'register');
-  $account->any([qw( GET PUT POST)] => '/confirm/:confirmationuuid')->name('account_confirm')->to(
-    controller => 'Account',
-    action => 'confirm',
-    docpath => '/account/confirm/index.html',
-  );
-
-  $account->any([qw( GET POST )] => '/settings')->name('account_settings')->to(
-    controller => 'Account',
-    action => 'settings',
-    docpath => '/account/settings/index.html',
-  );
-  $account->post('/upload-image')->name('account_upload_image')->to(
-    controller => 'Account',
-    action => 'upload_image'
-  );
-  $account->any([qw( GET PUT )] => '/password')->name('account_password')->to(
-    controller => 'Account',
-    action => 'password',
-    docpath => '/account/password/index.html',
-  );
-
-  $account->get('/login')->name('account_login')->to(
-    controller => 'Account',
-    action => 'login',
-    docpath => => '/account/login/index.html',
-  );
-  $account->post('/login')->to(controller => 'Account', action => 'login');
-
-  $account->any([qw( GET POST DELETE )] => '/logout')->name('account_logout')->to(
-    controller => 'Account',
-    action => 'logout'
-  );
-  $account->get('/')->name('account_index')->to(
-    controller => 'Account',
-    action => 'index'
-  );
-
+  my $account = $r->home('account')->to(controller => 'Account');
+  $account->get('panel')                                               ->to('#panel')        ->name('account_panel');
+  $account->get('register')                                            ->to('#register')     ->name('account_register');
+  $account->post('register')                                           ->to('#register');
+  $account->any([qw( GET PUT POST)] => 'confirm/:confirmationuuid')    ->to('#confirm')      ->name('account_confirm');
+  $account->any([qw( GET POST )] => 'settings')                        ->to('#settings')     ->name('account_settings');
+  $account->any([qw( GET POST )] => 'upload-image')                    ->to('#upload_image') ->name('account_upload_image');
+  $account->any([qw( GET PUT )] => 'password')                         ->to('#password')     ->name('account_password');
+  $account->any([qw( GET POST DELETE )] => 'logout')                   ->to('#logout')       ->name('account_logout');
+  $account->get('login')                                               ->to('#login')        ->name('account_login');
+  $account->post('login')                                              ->to('#login');
+  $account->get('/')                                                   ->to('#index')        ->name('account_index');
 
   $app->helper(account => sub ($self) {
     state $account = Samizdat::Model::Account->new({
@@ -76,7 +32,6 @@ sub register ($self, $app, $conf) {
     });
     return $account;
   });
-
 }
 
 

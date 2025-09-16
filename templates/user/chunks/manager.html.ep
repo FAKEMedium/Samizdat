@@ -1,0 +1,15 @@
+<form name="searchuser" method="get" action="<%== config->{manager}->{url} %>users">
+  <div class="row mb-3">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('user')) %>" placeholder="<%== __('Search for user or group') %>..." />
+      <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/add"><%== __('Add user') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/group/add"><%== __('Add group') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/privilege"><%== __('Privileges') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/privilege/set"><%== __('Privilege sets') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/role"><%== __('Roles') %></a>

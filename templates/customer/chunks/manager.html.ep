@@ -1,0 +1,16 @@
+<form name="searchcustomer" method="get" action="<%== config->{manager}->{url} %>customers">
+  <div class="row mb-3">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('customer')) %>" placeholder="<%== __('Search for customer') %>...">
+      <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>customers/new"><%== __('Add customer') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>customers/newest"><%== __('Newest') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>customers?searchterm=blocked"><%== __('Barred') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>customers?searchterm=moss"><%== __('MOSS') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>mailadresser"><%== __('Mail dump') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>mailadresser/newsletter"><%== __('Newsletter') %></a>

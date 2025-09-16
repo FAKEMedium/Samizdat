@@ -5,7 +5,7 @@ use Samizdat::Model::Email;
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
-  my $manager = $r->under($app->config->{managerurl})->to(
+  my $manager = $r->under($app->config->{manager}->{url})->to(
     controller => 'Account',
     action     => 'authorize',
     require    => {
@@ -17,7 +17,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(email => sub ($self) {
     state $email = Samizdat::Model::Email->new({
-      config => $self->config->{roomservice}->{email},
+      config => $self->config->{manager}->{email},
       pg     => $self->pg,
       mysql  => $self->mysql,
     });

@@ -3,7 +3,7 @@
     <div class="card">
       <h5 class="card-header orange border-0"><%== __('Zone management') %></h5>
       <div class="card-body m-0 p-2">
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{managerurl} %>dnsadmin"><%== __('List zones') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>dnsadmin"><%== __('List zones') %></a>
       </div>
     </div>
   </div>

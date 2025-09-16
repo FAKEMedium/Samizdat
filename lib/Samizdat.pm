@@ -9,7 +9,6 @@ use Data::UUID;
 use Hash::Merge;
 use Data::Dumper;
 
-
 sub startup ($self) {
   my $config = $self->plugin('NotYAMLConfig');
   push @{$self->commands->namespaces}, 'Samizdat::Command';
@@ -81,11 +80,23 @@ sub startup ($self) {
     });
   }
 
+  # Make web root reusable for other plugins as $app->routes->home
+  $self->routes->root->add_shortcut(home => sub {
+    my ($route, $path) = @_;
+    my $home_url = $self->config->{baseurl} || '/';
+    $path = $home_url . ($path || '');
+    $path =~ s/\/{2,}/\//g;
+    my $home = $route->any($path);
+    return $home;
+  });
+
   $self->plugin('Account');
   $self->plugin('Public');
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');
+  $self->plugin('Manager');
+
   # Add your local plugins in your extraplugins setting
   for my $plugin (@{ $config->{extraplugins} }) {
     $self->plugin($plugin);
@@ -194,6 +205,7 @@ sub startup ($self) {
   }
 
   $self->plugin('Web'); # Routes not covered by other plugins go here
+#  say Dumper $self->routes;
 }
 
 1;

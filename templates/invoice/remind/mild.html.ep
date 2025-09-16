@@ -1,0 +1,15 @@
+<%== __x('According to our notes invoice {number} remains unpaid.', number => $invoice->{fakturanummer}) %>
+<%== __x('The invoice was due to {duedate}.', duedate => $invoice->{duedate}) %>
+
+
+<%== __x('Remaining amount to pay: {amount} {currency}', amount => $invoice->{debt}, uc $invoice->{currency}) %>
+
+
+<%== __x('Contact {sender} if you have questions.',  sender => config->{manager}->{invoice}->{sender}) %>
+
+<%== __('Find the invoice attached as PDF.') %> <%== __("It's also available at") %>
+
+<%== $link %>
+
+<%== __('Regards') %>
+<%== config->{manager}->{invoice}->{sendername} %>

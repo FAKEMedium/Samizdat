@@ -13,7 +13,8 @@ logotype: media/images/fakenews.svg
 favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
-roomservice:
+manager:
+  url: /manager/
   customer:
     cardnumber: 1
     country: SE

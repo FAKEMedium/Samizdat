@@ -27,7 +27,7 @@ window.vsprintf = vsprintf;
 // Byte formatting for file sizes in admin areas
 import './shortbytes.js';
 
-// Support for roomservice templates
+// Support for manager templates
 window.initRoomService = function(serviceId) {
     const cardCol = document.querySelector(`#cardcol-${serviceId}`);
     if (cardCol) {
@@ -269,7 +269,7 @@ window.initPageEditor = async function() {
 const toastElList = document.querySelectorAll('.toast');
 const toastList = [...toastElList].map(toastEl => new Toast(toastEl));
 
-// Auto-initialize roomservice cards if present
+// Auto-initialize manager cards if present
 document.querySelectorAll('[id^="cardcol-"]').forEach(card => {
     const serviceId = card.id.replace('cardcol-', '');
     window.initRoomService(serviceId);

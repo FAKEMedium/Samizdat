@@ -1,0 +1,12 @@
+<ul>
+  <li><a href="/fortnox/auth"><%== __('Authorize') %></a></li>
+  <li><a href="/fortnox/logout"><%== __('Log out') %></a></li>
+  <li><a href="<%== config->{manager}->{url} %>fortnox/manager"><%== __('Panel') %></a></li>
+  <li><a href="<%== config->{manager}->{url} %>fortnox/manager/customers"><%== __('Customers') %></a></li>
+  <li><a href="<%== config->{manager}->{url} %>fortnox/manager/customers/3323"><%== __('Test customer') %></a></li>
+  <li><a href="<%== config->{manager}->{url} %>fortnox/manager/invoices"><%== __('Invoices') %></a></li>
+  <li><a href="<%== config->{manager}->{url} %>fortnox/manager/payments"><%== __('Payments') %></a></li>
+  <li><a href="https://apps.fortnox.se/apidocs"><%== __('API docs') %></a></li>
+  <li><a href="https://fortnox.se/developer"><%== __('Developer docs') %></a></li>
+  <li><a href="/fortnox"><%== __('Fortnox integration') %></a></li>
+</ul>

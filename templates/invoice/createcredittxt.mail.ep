@@ -1,8 +1,0 @@
-% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{roomservice}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
-<%== __('Credit invoice') %>
-=======================================
-
-<%== __x('Invoice {fakturanummer} has been credited.', fakturanummer => $invoicedata->{invoice}->{kreditfakturaavser}) %> <%== __('Find the credit invoice attached as PDF.') %>
-<%== __x("It's also available at {url}.", url => $link) %>
-
-<%== __x('Invoice questions can be directed to {url}.', url => config->{roomservice}->{invoice}->{sender}) %>

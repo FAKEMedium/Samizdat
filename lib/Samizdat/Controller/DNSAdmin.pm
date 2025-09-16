@@ -35,9 +35,9 @@ sub zones($self) {
     my $zones = $self->dnsadmin->list_zones({ searchterm => $searchtern });
     $self->render(json => { zones => $zones });
   } else {
-    $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones', format => 'js');
+    $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones/index', format => 'js');
     $self->stash(web => $web, title => $title);
-    $self->render(template => 'dnsadmin/zones');
+    $self->render(template => 'dnsadmin/zones/index');
   }
 }
 
@@ -52,9 +52,9 @@ sub new_zone ($self) {
 
   my $title = $self->app->__('Edit zone');
   my $web = { title => $title };
-  $web->{script} .= $self->render_to_string(template => 'dnsadmin/edit_zone', format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones/edit/index', format => 'js');
   $self->stash(title => $title, web => $web);
-  return $self->render(template => 'dnsadmin/edit_zone');
+  return $self->render(template => 'dnsadmin/zones/edit/index');
 }
 
 # Create a new zone.
@@ -80,9 +80,9 @@ sub create_zone ($self) {
     return $self->redirect_to('dnsadmin_index');
   } else {
     $self->stash(toast => $result->{error} // $self->app->__('Failed to create zone'));
-    $web->{script} .= $self->render_to_string(template => 'dnsadmin/edit_zone', format => 'js');
+    $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones/edit/index', format => 'js');
     $self->stash(title => $title, web => $web);
-    return $self->render(template => 'dnsadmin/edit_zone');
+  return $self->render(template => 'dnsadmin/zones/edit/index');
   }
 }
 
@@ -102,9 +102,9 @@ sub edit_zone ($self) {
 
   my $title = $self->app->__('Edit zone');
   my $web = { title => $title };
-  $web->{script} .= $self->render_to_string(template => 'dnsadmin/edit_zone', format => 'js');
+  $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones/edit/index', format => 'js');
   $self->stash(title => $title, web => $web);
-  return $self->render(template => 'dnsadmin/edit_zone');
+  return $self->render(template => 'dnsadmin/zones/edit/index');
 }
 
 # Update an existing zone.
@@ -133,9 +133,9 @@ sub update_zone ($self) {
 
     my $title = $self->app->__('Edit zone');
     my $web = { title => $title };
-    $web->{script} .= $self->render_to_string(template => 'dnsadmin/edit_zone', format => 'js');
+    $web->{script} .= $self->render_to_string(template => 'dnsadmin/zones/edit/index', format => 'js');
     $self->stash(title => $title, web => $web);
-    return $self->render(template => 'dnsadmin/edit_zone');
+    return $self->render(template => 'dnsadmin/zones/edit/index');
   }
 }
 
@@ -160,16 +160,16 @@ sub records($self) {
   if ($self->req->headers->accept =~ m{application/json}) {
     $self->render(json => { zone_id => $zone_id, rrsets => $rrsets });
   } else {
-    $web->{script} .= $self->render_to_string(template => 'dnsadmin/records', format => 'js');
+    $web->{script} .= $self->render_to_string(template => 'dnsadmin/records/index', format => 'js');
     $self->stash(web => $web, title => $title);
-    $self->render(template => 'dnsadmin/records');
+    $self->render(template => 'dnsadmin/records/index');
   }
 }
 
 sub new_record($self) {
   my $zone_id = $self->stash('zone_id');
   $self->stash(record => {}, zone_id => $zone_id);
-  $self->render(template => 'dnsadmin/edit_record');
+  $self->render(template => 'dnsadmin/records/edit/index');
 }
 
 sub create_record($self) {
@@ -184,11 +184,11 @@ sub create_record($self) {
   my $result = $self->dnsadmin->create_record($zone_id, $record_data);
   if ($result->{success}) {
     $self->flash(message => $self->app->__('Record created successfully'));
-    return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
+    return $self->redirect_to('dnsadmin_record_index', zone_id => $zone_id);
   }
   $self->flash(error => $result->{error} // $self->app->__('Failed to create record'));
   $self->stash(record => $record_data, zone_id => $zone_id);
-  $self->render(template => 'dnsadmin/edit_record');
+  $self->render(template => 'dnsadmin/records/edit/index');
 }
 
 sub edit_record($self) {
@@ -197,10 +197,10 @@ sub edit_record($self) {
   my $record = $self->dnsadmin->get_record($zone_id, $record_id);
   unless ($record) {
     $self->flash(error => 'Record not found');
-    return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
+    return $self->redirect_to('dnsadmin_record_index', zone_id => $zone_id);
   }
   $self->stash(record => $record, zone_id => $zone_id);
-  $self->render(template => 'dnsadmin/edit_record');
+  $self->render(template => 'dnsadmin/records/edit/index');
 }
 
 sub update_record($self) {
@@ -216,11 +216,11 @@ sub update_record($self) {
   my $result = $self->dnsadmin->update_record($zone_id, $record_id, $record_data);
   if ($result->{success}) {
     $self->flash(message => $self->app->__('Record updated successfully'));
-    return $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
+    return $self->redirect_to('dnsadmin_record_index', zone_id => $zone_id);
   }
   $self->flash(error => $result->{error} // $self->app->__('Failed to update record'));
   $self->stash(record => $record_data, zone_id => $zone_id);
-  $self->render(template => 'dnsadmin/edit_record');
+  $self->render(template => 'dnsadmin/records/edit/index');
 }
 
 sub delete_record($self) {
@@ -231,7 +231,7 @@ sub delete_record($self) {
     ? $self->app->__('Record deleted successfully')
     : ($result->{error} // $self->app->__('Failed to delete record'))
   );
-  $self->redirect_to('dnsadmin_records', zone_id => $zone_id);
+  $self->redirect_to('dnsadmin_record_index', zone_id => $zone_id);
 }
 
 1;

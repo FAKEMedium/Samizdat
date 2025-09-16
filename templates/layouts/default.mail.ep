@@ -2,7 +2,7 @@
 % use Mojo::Util qw(b64_encode trim);
 %
 % my $anyrepo = Mojo::Home->new();
-% my $svgfile= $anyrepo->child($self->config->{roomservice}->{web}->{publicsrc})->child($self->config->{logotype});
+% my $svgfile= $anyrepo->child($self->config->{manager}->{web}->{publicsrc})->child($self->config->{logotype});
 % my $svg = $svgfile->slurp;
 % $svg = b64_encode($svg);
 % $svg =~ s/[\r\n\s]+//g;

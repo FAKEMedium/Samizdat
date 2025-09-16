@@ -5,7 +5,7 @@ use Data::Dumper;
 
 
 sub redirect ($self) {
-  $self->redirect_to($self->app->config->{managerurl});
+  $self->redirect_to($self->app->config->{manager}->{url});
 }
 
 
@@ -25,7 +25,7 @@ sub auth ($self) {
     say $redirect;
     return $self->redirect_to($redirect);
   }
-  $self->redirect_to(sprintf('%s', $self->app->config->{managerurl}));
+  $self->redirect_to(sprintf('%s', $self->app->config->{manager}->{url}));
 }
 
 sub customers ($self) {
@@ -88,8 +88,8 @@ sub logout ($self) {
 }
 
 sub _login ($self) {
-  say $self->app->config->{managerurl};
-  $self->redirect_to(sprintf('%s%s', $self->app->config->{managerurl}, 'fortnox/auth'));
+  say $self->app->config->{manager}->{url};
+  $self->redirect_to(sprintf('%s%s', $self->app->config->{manager}->{url}, 'fortnox/auth'));
 }
 
 sub index ($self) {
@@ -131,7 +131,7 @@ sub activate ($self) {
     $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/activate/index');
     return $self->render(web => $web, title => $title, formdata => $formdata, template => 'fortnox/activate/index');
   } else {
-    my $config = $self->app->config->{roomservice}->{fortnox};
+    my $config = $self->app->config->{manager}->{fortnox};
     return $self->render(json => { formdata => $formdata });
   }
 }

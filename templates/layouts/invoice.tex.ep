@@ -62,8 +62,8 @@
 \newcommand*{\topfont}{\fontfamily{PTSansCaption-TLF}\selectfont}
 \fancyhead {}
 \fancyfoot {}
-% if (exists(config->{roomservice}->{invoice}->{logotype}) && ('' ne config->{roomservice}->{invoice}->{logotype})) {
-\lhead {\includegraphics[width=2cm] {<%== config->{roomservice}->{invoice}->{logotype} %>}}
+% if (exists(config->{manager}->{invoice}->{logotype}) && ('' ne config->{manager}->{invoice}->{logotype})) {
+\lhead {\includegraphics[width=2cm] {<%== config->{manager}->{invoice}->{logotype} %>}}
 % } else {
 \lhead {}
 % }
@@ -130,7 +130,7 @@
 \newsavebox {\refbox}
 \newlength {\refboxheight}
 \sbox {\refbox} {\parbox[t] {146mm} {\topfont {%
-% my $address = join("\\newline\n", split("[\n\r]+", config->{roomservice}->{invoice}->{address}));
+% my $address = join("\\newline\n", split("[\n\r]+", config->{manager}->{invoice}->{address}));
 % $address =~ s/ /\\ /g;
 <%== $address %>\
 % if (('' ne $customer->{country}) && ("SE" ne $customer->{country})) {
@@ -145,46 +145,46 @@
 \newsavebox {\billbox}
 \newlength {\billboxheight}
 \sbox {\billbox} {\parbox[t][80mm][t] {170mm} {\topfont {%
-% if (exists(config->{roomservice}->{invoice}->{orgno}) && ('' ne config->{roomservice}->{invoice}->{orgno})) {
-\footnotesize {\textbf {<%= __('Organizational number') %>:} <%== config->{roomservice}->{invoice}->{orgno} %>}\newline
+% if (exists(config->{manager}->{invoice}->{orgno}) && ('' ne config->{manager}->{invoice}->{orgno})) {
+\footnotesize {\textbf {<%= __('Organizational number') %>:} <%== config->{manager}->{invoice}->{orgno} %>}\newline
 % }
-% if (exists(config->{roomservice}->{invoice}->{vatno}) && ('' ne config->{roomservice}->{invoice}->{vatno})) {
-\footnotesize {\textbf {<%= __('VAT number') %>:} <%== config->{roomservice}->{invoice}->{vatno} %>}\newline
+% if (exists(config->{manager}->{invoice}->{vatno}) && ('' ne config->{manager}->{invoice}->{vatno})) {
+\footnotesize {\textbf {<%= __('VAT number') %>:} <%== config->{manager}->{invoice}->{vatno} %>}\newline
 % }
 % if ('SE' eq $customer->{country}) {
-%   if (exists(config->{roomservice}->{invoice}->{bankgiro}) && ('' ne config->{roomservice}->{invoice}->{bankgiro})) {
-\footnotesize {\textbf {<%= __('Bankgiro') %>:} <%== config->{roomservice}->{invoice}->{bankgiro} %>}\newline
+%   if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+\footnotesize {\textbf {<%= __('Bankgiro') %>:} <%== config->{manager}->{invoice}->{bankgiro} %>}\newline
 %   }
-%   if (exists(config->{roomservice}->{invoice}->{plusgiro}) && ('' ne config->{roomservice}->{invoice}->{plusgiro})) {
-\footnotesize {\textbf {<%= __('Plusgiro') %>:} <%== config->{roomservice}->{invoice}->{plusgiro} %>}\newline
+%   if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+\footnotesize {\textbf {<%= __('Plusgiro') %>:} <%== config->{manager}->{invoice}->{plusgiro} %>}\newline
 %   }
 % } else {
-%   if (exists(config->{roomservice}->{invoice}->{bicswift}) && ('' ne config->{roomservice}->{invoice}->{bicswift})) {
-\footnotesize {\textbf {<%= __('BIC/Swift address') %>:} <%== config->{roomservice}->{invoice}->{bicswift} %>}\newline
+%   if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+\footnotesize {\textbf {<%= __('BIC/Swift address') %>:} <%== config->{manager}->{invoice}->{bicswift} %>}\newline
 %   }
-%   if (exists(config->{roomservice}->{invoice}->{iban}) && ('' ne config->{roomservice}->{invoice}->{iban})) {
-\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{roomservice}->{invoice}->{iban} %>}\newline
+%   if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{manager}->{invoice}->{iban} %>}\newline
 %   }
-%   if (exists(config->{roomservice}->{invoice}->{paypal}) && ('' ne config->{roomservice}->{invoice}->{paypal})) {
-\footnotesize {\textbf {<%= __('Paypal') %>:} <%== config->{roomservice}->{invoice}->{paypal} %>\
-%     if (exists(config->{roomservice}->{invoice}->{paypalfee}) && (config->{roomservice}->{invoice}->{paypalfee})) {
-%       my $fee = config->{roomservice}->{invoice}->{paypalfee};
+%   if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+\footnotesize {\textbf {<%= __('Paypal') %>:} <%== config->{manager}->{invoice}->{paypal} %>\
+%     if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+%       my $fee = config->{manager}->{invoice}->{paypalfee};
 %       $fee =~ s/\%/\\%/g;
 , <%= __x('add {fee}', fee => $fee) %>
 %     }
 }\newline
 %   }
 % }
-% if (exists(config->{roomservice}->{invoice}->{contact}) && ('' ne config->{roomservice}->{invoice}->{contact})) {
-\footnotesize {\textbf {<%= __('Contact') %>:} <%== config->{roomservice}->{invoice}->{contact} %>}\newline
+% if (exists(config->{manager}->{invoice}->{contact}) && ('' ne config->{manager}->{invoice}->{contact})) {
+\footnotesize {\textbf {<%= __('Contact') %>:} <%== config->{manager}->{invoice}->{contact} %>}\newline
 % }
-% if (exists(config->{roomservice}->{invoice}->{billingcontact}) && ('' ne config->{roomservice}->{invoice}->{billingcontact})) {
-\footnotesize {\textbf {<%= __('Invoicing') %>:} <%== config->{roomservice}->{invoice}->{billingcontact} %>}\newline
+% if (exists(config->{manager}->{invoice}->{billingcontact}) && ('' ne config->{manager}->{invoice}->{billingcontact})) {
+\footnotesize {\textbf {<%= __('Invoicing') %>:} <%== config->{manager}->{invoice}->{billingcontact} %>}\newline
 % }
-% if (exists(config->{roomservice}->{invoice}->{office}) && ('' ne config->{roomservice}->{invoice}->{office})) {
-\footnotesize {\textbf {<%= __('Registered office') %>:} <%== config->{roomservice}->{invoice}->{office} %>}\newline
+% if (exists(config->{manager}->{invoice}->{office}) && ('' ne config->{manager}->{invoice}->{office})) {
+\footnotesize {\textbf {<%= __('Registered office') %>:} <%== config->{manager}->{invoice}->{office} %>}\newline
 % }
-% if (exists(config->{roomservice}->{invoice}->{ftax}) && (config->{roomservice}->{invoice}->{ftax})) {
+% if (exists(config->{manager}->{invoice}->{ftax}) && (config->{manager}->{invoice}->{ftax})) {
 \footnotesize {<%== __('Registered for F-tax') %>}\newline
 % }
 \vfill
@@ -220,9 +220,9 @@
 %   }
 % }
 % if (!(exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser})) {
-\footnotesize {\textbf {<%== __('Payment terms') %>:} <%== __x('{number} days', number => config->{roomservice}->{invoice}->{duedays}) %>}\newline
+\footnotesize {\textbf {<%== __('Payment terms') %>:} <%== __x('{number} days', number => config->{manager}->{invoice}->{duedays}) %>}\newline
 \footnotesize {\textbf {<%== __('Due to') %>:} <%== $invoice->{duedate} %>}\newline
-\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => config->{roomservice}->{invoice}->{overdueinterest} . '\%') %>}
+\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => config->{manager}->{invoice}->{overdueinterest} . '\%') %>}
 % }
 }}}
 \settoheight {\billboxheight} {\usebox {\billbox}}
@@ -233,7 +233,7 @@
 \date {\textbf {<%== __('Date') %>:} <%== sprintf('%s%s', substr($invoice->{invoicedate}, 0, 10), ('snailmail' eq $customer->{invoicetype}) ? '.' : '') %>}
 \setlength {\unitlength} {1cm}
 \begin {picture}(17.42, 11.7)(0.0, 0.0)
-\put(0.0, 11.7) {\includegraphics[width=5cm] {<%== config->{roomservice}->{invoice}->{logotype} %>}}
+\put(0.0, 11.7) {\includegraphics[width=5cm] {<%== config->{manager}->{invoice}->{logotype} %>}}
 \put(9.0, 12.8) {\usebox {\invoicebox}}
 \put(0.0, 10.4) {\usebox {\refbox}}
 %% When printed on A4, and folded,  the address box should appear in the window of a C5 H2 envelope

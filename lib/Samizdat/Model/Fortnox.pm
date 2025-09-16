@@ -11,7 +11,7 @@ use Data::Dumper;
 
 has 'config';
 has 'cache' => sub ($self) {
-  state $cache = $self->Cache();
+  state $cache = $self->_loadCache();
   return $cache;
 };
 has 'merger' => sub {
@@ -23,29 +23,40 @@ has 'ua' => sub ($self) {
   return $ua;
 };
 
-sub Cache ($self, $cache = undef) {
-  if ($cache) {
-    path($self->config->{cachefile})->spew(encode_json($cache));
-  } elsif (-f $self->config->{cachefile}) {
+sub _loadCache ($self) {
+  my $cache;
+  if (-f $self->config->{cachefile}) {
     my $json = path($self->config->{cachefile})->slurp;
     if ($json) {
       $cache = decode_json($json);
     }
   }
-  if (!exists($cache->{state})) {
+  if (!$cache || !exists($cache->{state})) {
     $cache = {
       'state'   => 'login',
       'access'  => '',
       'refresh' => '',
       'code'    => ''
     };
-    $self->saveCache;
+    $self->_saveCache($cache);
   }
   return $cache;
 }
 
+sub Cache ($self, $cache = undef) {
+  if ($cache) {
+    $self->_saveCache($cache);
+    return $cache;
+  }
+  return $self->cache;
+}
+
+sub _saveCache ($self, $cache) {
+  path($self->config->{cachefile})->spew(encode_json($cache));
+}
+
 sub saveCache ($self) {
-  return $self->Cache($self->cache);
+  $self->_saveCache($self->cache);
 }
 
 sub updateCache ($self, $resource = undef) {

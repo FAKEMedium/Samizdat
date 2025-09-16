@@ -75,12 +75,14 @@ sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0) {
   }
 
   # Then try comparing/sorting
-  $where->{fakturanummer} = { $sign => $invoice->{fakturanummer} };
-  $results = $db->select('invoice', '*', $where, $orderby);
-  while (my $result = $results->hash) {
-    $results->finish;
-    return $result;
-    last; # LIMIT isn't available
+  if ($invoice->{fakturanummer}) {
+    $where->{fakturanummer} = { $sign => $invoice->{fakturanummer} };
+    $results = $db->select('invoice', '*', $where, $orderby);
+    while (my $result = $results->hash) {
+      $results->finish;
+      return $result;
+      last; # LIMIT isn't available
+    }
   }
 
   return $invoice;

@@ -1,0 +1,14 @@
+<form name="searchdatabase" method="get" action="<%== config->{manager}->{url} %>databases">
+  <div class="row mb-3">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('database')) %>" placeholder="<%== __('Search for database') %>..." />
+      <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>
+<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>databases/add"><%== __('Add database') %></a>
+<a class="badge rounded-pill text-bg-primary" href="/phpmyadmin/">PhpMyAdmin</a>
+<a class="badge rounded-pill text-bg-primary" href="/phppgadmin/">PhpPgAdmin</a>
+<a class="badge rounded-pill text-bg-primary" href="/phpldapadmin/">PhpLdapAdmin</a>

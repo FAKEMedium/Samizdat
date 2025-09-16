@@ -16,7 +16,6 @@ sub index ($self) {
   if ($accept !~ /json/) {
     my $title = $self->app->__('Customers');
     my $web = { title => $title };
-    $web->{docpath} = sprintf('%s%s/index.html', $self->config->{managerurl}, $scriptname);
     $web->{script} .= $self->render_to_string(template => 'customer/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'customer/index', customers => [], status => 200);
 
@@ -66,7 +65,7 @@ sub update ($self, $makejson = 1) {
 
 sub edit ($self) {
   # Fill in some default values
-  my $formdata = { customer => $self->config->{roomservice}->{customer} };
+  my $formdata = { customer => $self->config->{manager}->{customer} };
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     my $title = $self->app->__('New customer');
@@ -90,9 +89,8 @@ sub edit ($self) {
       setfields       => $setfields,
       eucountries     => $self->app->customer->eucountries,
     );
-    $web->{docpath} = sprintf('%s%s/edit.html', $self->config->{managerurl}, $scriptname);
-    $web->{script} .= $self->render_to_string(template => 'customer/edit', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'customer/edit', status => 200);
+    $web->{script} .= $self->render_to_string(template => 'customer/edit/index', format => 'js', toast => $toast);
+    return $self->render(web => $web, title => $title, template => 'customer/edit/index', status => 200);
   } else {
     my $customerid = int $self->param('customerid');
     if ($customerid) {
@@ -119,7 +117,7 @@ sub billing ($self) {
     $self->stash(
       customer        => $customer,
       invoices        => $invoices,
-      headline => 'customer/chunks/customernavbuttons',
+      headline        => 'customer/chunks/customernavbuttons',
       neighbours      => $self->app->customer->neighbours($customerid),
       template        => 'customer/billing',
     );
@@ -162,7 +160,7 @@ sub vatno ($self) {
     vatno => $vatno,
     info => $info,
     error => $error,
-    template => 'customer/vatno',
+    template => 'customer/vatno/index',
     scriptname => 'vatno'
   );
 }
@@ -217,7 +215,7 @@ sub first ($self) {
   my $minid = $self->app->customer->neighbours(1061)->{minid};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%s%s/%s', $self->config->{managerurl}, 'customers', $minid));
+    $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $minid));
   } else {
     return $self->render(json => $self->_getdata($minid));
   }}
@@ -226,7 +224,7 @@ sub newest ($self) {
   my $maxid = $self->app->customer->neighbours(1061)->{maxid};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%s%s/%s', $self->config->{managerurl}, 'customers', $maxid));
+    $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $maxid));
   } else {
     return $self->render(json => $self->_getdata($maxid));
   }}
@@ -236,7 +234,7 @@ sub prev ($self) {
   my $previd = $self->app->customer->neighbours($customerid)->{previd};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%s%s/%s', $self->config->{managerurl}, 'customers', $previd));
+    $self->redirect_to(sprintf('%s/%s', $self->url_for('customer_index'), $previd));
   } else {
     return $self->render(json => $self->_getdata($previd));
   }
@@ -247,7 +245,7 @@ sub next ($self) {
   my $nextid = $self->app->customer->neighbours($customerid)->{nextid};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%s%s/%s', $self->config->{managerurl}, 'customers', $nextid));
+    $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $nextid));
   } else {
     return $self->render(json => $self->_getdata($nextid));
   }
@@ -259,8 +257,8 @@ sub products ($self) {
   my $customerid = $self->param('customerid');
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'customer/products', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'customer/products', layout => 'modal');
+    $web->{script} .= $self->render_to_string(template => 'customer/products/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'customer/products/index', layout => 'modal');
   } else {
     my $products = $self->app->invoice->products({ where => { }});
     return $self->render(json => { products => $products, customerid => $customerid });

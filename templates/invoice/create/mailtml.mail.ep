@@ -1,0 +1,50 @@
+% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
+<div style="background: #fff; padding: 1em;">
+  <img src="data:image/svg+xml;base64,<%== $invoicedata->{svglogotype} %>" width="100" style="width: 100px; margin-bottom: 2ex" />
+  <h2><%== __('Invoice for completed services') %></h2>
+
+  <p>
+    <%== __('Find your invoice attached as PDF.') %>
+    <%== __("It's also available at") %><br>
+    <a href="<%== $link %>"><%== $link %></a>
+  </p>
+
+  <ul>
+    <li><%== __x('Invoice number: {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer}) %></li>
+    <li><%== __x('Payment due to: {duedate}', duedate => $invoicedata->{invoice}->{duedate}) %></li>
+% if ('SE' eq uc $invoicedata->{customer}->{country})  {
+%   if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+    <li><%= __('Bankgiro') %>: <%== config->{manager}->{invoice}->{bankgiro} %></li>
+%   }
+%   if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+    <li><%= __('Plusgiro') %>: <%== config->{manager}->{invoice}->{plusgiro} %></li>
+%   }
+% } else {
+%   if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+    <li><%= __('BIC/Swift address') %>: <%== config->{manager}->{invoice}->{bicswift} %></li>
+%   }
+%   if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+    <li><%= __('IBAN') %>: <%== config->{manager}->{invoice}->{iban} %></li>
+%   }
+%   if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+    <li><%= __('Paypal') %>: <%== config->{manager}->{invoice}->{paypal} %>\
+%     if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+, <%= __x('add {fee}', fee => config->{manager}->{invoice}->{paypalfee}) =%>\
+%     }
+</li>
+%   }
+% }
+
+  </ul>
+
+  <h3><%== __x('Amount to pay including {percent} VAT: {costsum} {currency}',
+    percent  => $invoicedata->{vat} . '%',
+    costsum  => $invoicedata->{invoice}->{costsum},
+    currency => $invoicedata->{invoice}->{currency}) %></h3>
+
+  <p>
+    <%== __('Write the invoice number as message when you pay.')%> <%== __x('Invoice questions can be directed to {url}.',
+      url => sprintf('<a href="mailto:%s">%s</a>', config->{manager}->{invoice}->{sender}, config->{manager}->{invoice}->{sender})) %>
+    <%== __('Payments may take up to one week to become visible in the control panel.') %>
+  </p>
+</div>

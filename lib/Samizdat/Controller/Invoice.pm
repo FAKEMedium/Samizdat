@@ -9,7 +9,7 @@ use MIME::Lite;
 use Mojo::Home;
 use Data::Dumper;
 
-my $scriptname = 'roomservice/invoices';
+my $scriptname = 'manager/invoices';
 my $fields = [qw(articlenumber include invoiceitemtext number price)];
 
 
@@ -161,7 +161,7 @@ sub create ($self, $credit = 0) {
     (localtime(time))[1],
     (localtime(time))[0]
   );
-  my $duedate = time2str("%Y-%m-%d", time + $self->app->config->{roomservice}->{invoice}->{duedays}*24*3600, 'CET');
+  my $duedate = time2str("%Y-%m-%d", time + $self->app->config->{manager}->{invoice}->{duedays}*24*3600, 'CET');
   $formdata->{invoice}->{duedate} = $duedate;
   $formdata->{invoice}->{pdfdate} = time2str("%Y%m%d%H%M%S", time, 'CET');
   $formdata->{invoice}->{costsum} = $costsum;
@@ -200,7 +200,7 @@ sub create ($self, $credit = 0) {
     return;
   }
   $self->stash(formdata => $formdata);
-  my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/print');
+  my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => undef);
   $tex = encode 'UTF-8', $tex;
   my $data = $self->app->printinvoice($tex, $formdata);
   if ($data) {
@@ -256,7 +256,7 @@ sub create ($self, $credit = 0) {
     $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
     $invoicedata->{invoice}->{duedate} = $duedate;
 
-    if ($self->app->fortnox and $self->config->{roomservice}->{invoice}->{usefortnox}) {
+    if ($self->app->fortnox and $self->config->{manager}->{invoice}->{usefortnox}) {
       my $fortnoxinvoice = {
         CustomerNumber            => $invoicedata->{invoice}->{customerid},
         InvoiceDate               => substr($invoicedata->{invoice}->{invoicedate}, 0, 10),
@@ -285,13 +285,13 @@ sub create ($self, $credit = 0) {
 
     my $subject = my $htmldata = my $txtdata = '';
     if ($credit) {
-      $htmldata = $self->render_mail(template => 'invoice/createcredithtml', invoicedata => $invoicedata);
-      $txtdata = $self->render_mail(template => 'invoice/createcredittxt', invoicedata => $invoicedata);
+      $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoicedata);
+      $txtdata = $self->render_mail(template => 'invoice/create/mailtxt', invoicedata => $invoicedata);
       $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
         $self->app->__x('Credited invoice: {number}', number => $invoicedata->{invoice}->{kreditfakturaavser})));
     } else {
-      $htmldata = $self->render_mail(template => 'invoice/createhtml', invoicedata => $invoicedata);
-      $txtdata = $self->render_mail(template => 'invoice/createtxt', invoicedata => $invoicedata);
+      $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoicedata);
+      $txtdata = $self->render_mail(template => 'invoice/create/mailtxt', invoicedata => $invoicedata);
       $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
         $self->app->__x('Invoice {number}', number => $invoicedata->{invoice}->{fakturanummer})));
     }
@@ -314,7 +314,7 @@ sub create ($self, $credit = 0) {
 
     # Attach PDF
     $mail->attach(
-      Path        => sprintf('%s/%s.pdf', $self->config->{roomservice}->{invoice}->{invoicedir}, $invoicedata->{invoice}->{uuid}),
+      Path        => sprintf('%s/%s.pdf', $self->config->{manager}->{invoice}->{invoicedir}, $invoicedata->{invoice}->{uuid}),
       Filename    => sprintf('%s.pdf', $invoicedata->{invoice}->{uuid}),
       Type        => 'application/pdf',
       Disposition => 'attachment'
@@ -323,7 +323,7 @@ sub create ($self, $credit = 0) {
     $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
     if ($credit) {
       $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
-        $self->config->{managerurl}, $invoicedata->{invoice}->{customerid}, $invoicedata->{invoice}->{invoiceid}
+        $self->config->{manager}->{url}, $invoicedata->{invoice}->{customerid}, $invoicedata->{invoice}->{invoiceid}
       ));
     } else {
       $self->render(data => $data, format => 'pdf');
@@ -397,8 +397,8 @@ sub edit ($self) {
   );
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/edit', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/edit', headline => 'chunks/editlinks');
+    $web->{script} .= $self->render_to_string(template => 'invoice/opwn/edit/index', format => 'js', toast => $toast);
+    return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'chunks/editlinks');
   } else {
     my $formdata = $self->_getdata();
     $formdata->{invoiceitems}->{extra} = {
@@ -433,8 +433,8 @@ sub handle ($self) {
   );
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/handle', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/handle', headline => 'invoice/chunks/handleinvoicelinks');
+    $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
+    return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handleinvoicelinks');
   } else {
     my $formdata = $self->_getdata();
     return $self->render(json => $formdata);
@@ -459,7 +459,7 @@ sub nav ($self) {
 
     my $accept = $self->req->headers->{headers}->{accept}->[0];
     if ($accept !~ /json/) {
-      $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{managerurl}, $customerid, $invoice->{invoiceid}));
+      $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{manager}->{url}, $customerid, $invoice->{invoiceid}));
     } else {
       my $json = $self->_getdata({ includearticles => 0 });
       return $self->render(json => $json);
@@ -473,8 +473,8 @@ sub open ($self) {
   my $web = {title => $title};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/open', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'invoice/open');
+    $web->{script} .= $self->render_to_string(template => 'invoice/open/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/open/index');
   } else {
     my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.state' => { '=', 'obehandlad' } } });
     my $customers = {};
@@ -522,8 +522,8 @@ sub remind ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
-    return $self->render(template => 'invoice/remind', layout => 'modal', web => $web, title => $title);
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
+    return $self->render(template => 'invoice/remind/index', layout => 'modal', web => $web, title => $title);
   } else {
     my $invoice = {};
     my $customer = {};
@@ -545,8 +545,8 @@ sub resend ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'invoice/remind');
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
   } else {
     my $invoice = {};
     my $customer = {};
@@ -568,8 +568,8 @@ sub reprint ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'invoice/remind');
+    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
   } else {
     my $invoice = {};
     my $customer = {};

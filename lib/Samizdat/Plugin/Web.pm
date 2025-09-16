@@ -16,57 +16,32 @@ my $image = Imager->new;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  my $manager = $r->under($app->config->{managerurl});
-  $manager->get('web/editor/toolbar')->name('web_editor_toolbar')->to(
-    controller => 'Web',
-    action => 'editor_toolbar',
-    docpath => sprintf('%s/index.html', $app->url_for('web_editor_toolbar'))
-  );
-  $manager->get('web/editor')->name('web_editor')->to(
-    controller => 'Account',
-    action => 'editor',
-    docpath => sprintf('%s/index.html', $app->url_for('web_editor'))
-  );
-  $manager->get('web/menus')->name('web_menus')->to(
-    controller => 'Web',
-    action => 'menus',
-    docpath => sprintf('%s/index.html', $app->url_for('web_menus'))
-  );
-  $manager->get('web/languages')->name('web_languages')->to(
-    controller => 'Web',
-    action => 'languages',
-    docpath => sprintf('%s/index.html', $app->url_for('web_languages'))
-  );
-  $manager->get('web/images')->name('web_images')->to(
-    controller => 'Web',
-    action => 'images',
-    docpath => sprintf('%s/index.html', $app->url_for('web_images'))
-  );
-  $manager->post('web/save')->name('web_save')->to(
-    controller => 'Web',
-    action => 'save'
-  );
-  $manager->get('web')->name('web_index')->to(
-    controller => 'Web',
-    action => 'index',
-    docpath => sprintf('%s/index.html', $app->url_for('web_index'))
-  );
+  my $manager = $r->manager('web')->to(controller => 'Web');
+  $manager->get('editor/toolbar')   ->to('#editor_toolbar')    ->name('web_editor_toolbar');
+  $manager->get('editor')           ->to('#editor')            ->name('web_editor');
+  $manager->get('menus')            ->to('#menus')             ->name('web_menus');
+  $manager->get('languages')        ->to('#languages')         ->name('web_languages');
+  $manager->get('images')           ->to('#images')            ->name('web_images');
+  $manager->post('save')            ->to('#save')              ->name('web_save');
+  $manager->get('/')                ->to('#index')             ->name('web_index');
+
+
+  my $web  = $r->home->to(controller => 'Web');
 
   # Things coming from configuration file
-  $r->get('/manifest.json')->to(controller => 'Web', action => 'manifest', docpath => 'manifest.json');
-  $r->get('/robots.txt')->to(controller => 'Web', action => 'robots', docpath => 'robots.txt');
-  $r->get('/humans.txt')->to(controller => 'Web', action => 'humans', docpath => 'humans.txt');
-  $r->get('/ads.txt')->to(controller => 'Web', action => 'ads', docpath => 'ads.txt');
-  $r->get('/.well-known/security.txt')->to(controller => 'Web', action => 'security', docpath => '.well-known/security.txt');
+  $web->get('manifest.json')               ->to('#manifest',  docpath => 'manifest.json');
+  $web->get('robots.txt')                  ->to('#robots',    docpath => 'robots.txt');
+  $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
+  $web->get('ads.txt')                     ->to('#ads',       docpath => 'ads.txt');
+  $web->get('.well-known/security.txt')    ->to('#security',  docpath => '.well-known/security.txt');
 
   # Things coming from database, or markdown files in src/public
   # Database overlays files. See Samizdat::Model::Web and Samizdat::Controller::Web
-  $r->get('/')->to(controller => 'Web', action => 'getdoc', docpath => '');
-  $r->get('/*docpath')->to(controller => 'Web', action => 'getdoc');
-
+  $web->get('/')                           ->to('#getdoc',    docpath => '')->name('home');
+  $web->get('/*docpath')                   ->to('#getdoc');
   $app->helper(web => sub ($self) {
     state $web = Samizdat::Model::Web->new(
-      config       => $self->config->{roomservice}->{web},
+      config       => $self->config->{manager}->{web},
       database     => $self->app->pg,
       locale       => $self->config->{locale}
     );
@@ -141,14 +116,21 @@ sub register ($self, $app, $conf) {
       $$output =~ s{        <!-- symbols -->\n}[
         $c->app->web->indent(join("\n", sort {$a cmp $b} map $symbols->{$_}, keys %{ $symbols }), 4)
       ]eu;
-      my $docpath = $c->stash('docpath') // '';
-      my $language = $c->stash('language');
-      if ($c->config->{locale}->{default_language} ne $language) {
-        $docpath =~ s/\.html$/.$language.html/;
-      }
-      if ('html' eq $format && 404 != $c->{stash}->{status}) {
+      if ('html' eq $format && 404 != $c->{stash}->{status} && uc($c->req->method) eq 'GET') {
+        my $docpath = $c->stash('docpath') // eval {
+          my $docpath = $c->req->url->to_abs->path->to_string;
+          if ($docpath =~ /\/$/) {
+            $docpath .= 'index.html';
+          } elsif ($docpath !~ /\.[a-zA-Z0-9]+$/) {
+            $docpath .= '/index.html';
+          }
+          return $docpath;
+        };
+        my $language = $c->stash('language');
+        if ($c->config->{locale}->{default_language} ne $language) {
+          $docpath =~ s/\.html$/.$language.html/;
+        }
         $c->app->web->tidyup($output);
-
         if ($c->config->{cache} && $docpath ne '') {
           $public->child($docpath)->dirname->make_path;
           $public->child($docpath)->spew($$output);
@@ -160,8 +142,8 @@ sub register ($self, $app, $conf) {
           undef $z;
         }
       }
-      if ($c->config->{roomservice}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
-        my $publicsrc = Mojo::Home->new($c->config->{roomservice}->{web}->{publicsrc} // 'src/public/');
+      if ($c->config->{manager}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
+        my $publicsrc = Mojo::Home->new($c->config->{manager}->{web}->{publicsrc} // 'src/public/');
         my $url = $c->{stash}->{web}->{url} // '';
         $url =~ s/\.webp$//;
         my $wantedsize = 0;
@@ -183,10 +165,10 @@ sub register ($self, $app, $conf) {
           my $imgdata = '';
           my $done = 0;
           for my $col (
-            sort {$c->config->{roomservice}->{web}->{imageconversion}->{width}->{$a} <=> $c->config->{roomservice}->{web}->{imageconversion}->{width}->{$b}}
-              keys %{ $c->config->{roomservice}->{web}->{imageconversion}->{width} }
+            sort {$c->config->{manager}->{web}->{imageconversion}->{width}->{$a} <=> $c->config->{manager}->{web}->{imageconversion}->{width}->{$b}}
+              keys %{ $c->config->{manager}->{web}->{imageconversion}->{width} }
           ) {
-            $colwidth = $c->config->{roomservice}->{web}->{imageconversion}->{width}->{$col};
+            $colwidth = $c->config->{manager}->{web}->{imageconversion}->{width}->{$col};
             my $converted = $image->scale(xpixels => $colwidth);
             $converted->write(
               data                 => \$imgdata,
@@ -232,6 +214,7 @@ sub register ($self, $app, $conf) {
       return 1;
     }
   );
+
 }
 
 1;
