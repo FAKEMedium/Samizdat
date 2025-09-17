@@ -25,10 +25,8 @@ sub register ($self, $app, $conf) {
   $manager->post('save')            ->to('#save')              ->name('web_save');
   $manager->get('/')                ->to('#index')             ->name('web_index');
 
-
-  my $web  = $r->home->to(controller => 'Web');
-
   # Things coming from configuration file
+  my $web  = $r->home->to(controller => 'Web');
   $web->get('manifest.json')               ->to('#manifest',  docpath => 'manifest.json');
   $web->get('robots.txt')                  ->to('#robots',    docpath => 'robots.txt');
   $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
@@ -39,6 +37,9 @@ sub register ($self, $app, $conf) {
   # Database overlays files. See Samizdat::Model::Web and Samizdat::Controller::Web
   $web->get('/')                           ->to('#getdoc',    docpath => '')->name('home');
   $web->get('/*docpath')                   ->to('#getdoc');
+
+
+  # Helper for accessing the Web model.
   $app->helper(web => sub ($self) {
     state $web = Samizdat::Model::Web->new(
       config       => $self->config->{manager}->{web},
@@ -48,10 +49,12 @@ sub register ($self, $app, $conf) {
     return $web;
   });
 
+
   # Content shown in the headline area, default is share buttons
   $app->helper(headline => sub ($self, $chunkname =  'chunks/sharebuttons') {
     return ($chunkname) ? $self->render_to_string(template => $chunkname) : '';
   });
+
 
   # Get the preferred language from the Accept-Language header
   $app->helper(
@@ -60,6 +63,7 @@ sub register ($self, $app, $conf) {
       return $language unless defined $language;
     }
   );
+
 
   # A marker to show where the generated main content is. Also a little encoding test.
   $app->helper(

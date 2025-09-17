@@ -6,7 +6,7 @@ use Samizdat::Model::SMS;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  my $manager = $r->manager('sms')               ->to(controller => 'SMS')           ->name('sms');
+  my $manager = $r->manager('sms')->to(controller => 'SMS')->name('sms');
 
   # Protected SMS routes - require authentication
   my $protected = $manager->under()              ->to(action => 'access');
@@ -40,3 +40,30 @@ sub register ($self, $app, $conf) {
 }
 
 1;
+
+=head1 NAME
+
+Samizdat::Plugin::SMS - SMS Management Plugin for Samizdat using Teltonika Devices
+
+=head1 DESCRIPTION
+
+This plugin provides SMS management functionality for the Samizdat application, leveraging Teltonika devices to send
+and receive SMS messages. It includes routes for managing SMS conversations, sending messages, receiving incoming
+messages, checking message status, and synchronizing messages.
+
+=head1 ROUTES
+
+=over 4
+=item * GET /sms - Main SMS page (requires authentication)
+=item * GET /sms/conversation/:phone - View conversation with a specific phone number (requires
+  authentication)
+=item * POST /sms/send - Send an SMS message (requires authentication)
+=item * GET /sms/receive - Endpoint for receiving incoming SMS messages (requires authentication)
+=item * GET /sms/messages - Retrieve a list of SMS messages (requires authentication)
+=item * GET /sms/status - Check the status of sent messages (requires authentication)
+=item * POST /sms/sync - Synchronize messages with the Teltonika device (requires
+  authentication)
+=item * DELETE /sms/messages/:id - Delete a specific SMS message by ID (requires authentication
+=item * ANY /sms/<webhook_secret> - Webhook endpoint for Teltonika devices to post incoming SMS messages
+  (no authentication required)
+=back

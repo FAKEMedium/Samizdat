@@ -31,12 +31,6 @@ sub register ($self, $app, $conf) {
     });
     return $fortnox;
   });
-
-  $app->helper(
-    metaInfo => sub($self, $metainfo, $title = '') {
-      $self->render_to_string('chunks/metainfo', metainfo => $metainfo, title => $title);
-    }
-  );
 }
 
 1;
