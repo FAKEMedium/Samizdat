@@ -95,6 +95,8 @@ manager:
         col12: 1296     # Full width at xxl
   user:
     cardnumber: 10
+  example:
+    cardnumber: 11
 screenshots:
   -
     src: /media/images/notrust.jpg

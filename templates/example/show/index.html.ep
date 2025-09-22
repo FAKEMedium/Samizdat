@@ -1,0 +1,24 @@
+<article class="example-detail">
+  <header class="mb-4">
+    <h1 id="example-title"></h1>
+    <div class="text-muted">
+      <small id="example-dates"></small>
+    </div>
+    <span id="example-status"></span>
+  </header>
+
+  <div id="example-description" class="lead mb-4"></div>
+
+  <div id="example-content" class="example-content"></div>
+
+  <footer id="example-tags" class="mt-4"></footer>
+
+  <div class="mt-4">
+    <a id="edit-link" href="#" class="btn btn-primary">
+      <%== icon 'pencil-fill' %> <%== __('Edit') %>
+    </a>
+    <a href="<%= url_for('example_index') %>" class="btn btn-secondary">
+      <%== icon 'arrow-left' %> <%== __('Back to list') %>
+    </a>
+  </div>
+</article>

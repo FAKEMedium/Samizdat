@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table id="examples" class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%= __('ID') %></th>
+        <th><%= __('Title') %></th>
+        <th><%= __('Description') %></th>
+        <th><%= __('Status') %></th>
+        <th><%= __('Created') %></th>
+        <th class="text-end"><%= __('Actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Examples will be loaded here by JavaScript -->
+    </tbody>
+  </table>
+</div>
+
+<nav aria-label="<%= __('Pagination') %>">
+  <ul id="pagination" class="pagination justify-content-center">
+    <!-- Pagination will be rendered here by JavaScript -->
+  </ul>
+</nav>
+
+<div id="toast-messages"></div>
