@@ -15,7 +15,7 @@
     <input type="text" class="form-control" name="newusername" id="newusername"
            placeholder="<%== __('Enter username') %>" aria-describedby="newusername invalidnewusername">
     <label for="newusername" class="form-label"><%== __('Choose a username') %></label>
-    <div id="newusernameHelp" class="form-text"><%== __x('At least {min} characters from: {chars}', min => config->{account}->{username}->{minlength}, chars => config->{account}->{username}->{chars}) %></div>
+    <div id="newusernameHelp" class="form-text"><%== __x('At least {min} characters from: {chars}', min => config->{manager}->{account}->{username}->{minlength}, chars => config->{manager}->{account}->{username}->{chars}) %></div>
     <div id="invalidnewusername" class="invalid-feedback"><%= __('Invalid username') %></div>
   </div>
 
@@ -24,11 +24,11 @@
            placeholder="<%= __('Enter password') %>" aria-describedby="newpassword invalidnewpassword">
     <label for="newpassword" class="form-label"><%== __('Choose a password') %></label>
     <div id="newpasswordHelp" class="form-text"><%== __x('At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)',
-      min => config->{account}->{password}->{minlength},
-      upper => config->{account}->{password}->{minuppercase},
-      lower => config->{account}->{password}->{minlowercase},
-      num => config->{account}->{password}->{minnumbers},
-      special => config->{account}->{password}->{minspecial}) %></div>
+      min => config->{manager}->{account}->{password}->{minlength},
+      upper => config->{manager}->{account}->{password}->{minuppercase},
+      lower => config->{manager}->{account}->{password}->{minlowercase},
+      num => config->{manager}->{account}->{password}->{minnumbers},
+      special => config->{manager}->{account}->{password}->{minspecial}) %></div>
     <div id="invalidnewpassword" class="invalid-feedback"><%= __('Invalid password') %></div>
   </div>
 

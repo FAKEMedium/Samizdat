@@ -3,11 +3,11 @@ package Samizdat::Controller::DNSAdmin;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Data::Dumper;
 
-# Simple auth check – assumes a "current_user" helper exists.
+# Simple auth check - requires admin access for DNS management
 sub check_auth($self) {
-  return 1 if $self->current_user;
-  $self->flash(error => $self->app->__('Please log in to access that page'));
-  $self->redirect_to('login');
+  return 1 if $self->access({ admin => 1 });
+  $self->flash(error => $self->app->__('Admin access required for DNS management'));
+  $self->redirect_to('account_login');
   return undef;
 }
 

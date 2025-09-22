@@ -35,25 +35,23 @@ sub index ($self) {
 
     # Fill in some fields if user is logged in
     if ('GET' eq uc $self->req->method) {
-      if ($self->helpers->can('account')) {
-        my $authcookie = $self->signed_cookie($self->config->{account}->{authcookiename});
-        my $user = undef;
-        my $username = undef;
-        if ($authcookie) {
-          $user = $self->app->account->session($authcookie);
-          if ($user) {
-            $username = $user->{username};
-          }
-        }
-        if ($username) {
-          my $contacts = $self->app->account->getUsers({ 'users.username' => $username });
-          if (0 == scalar @$contacts) {
-            my $contact = $contacts->[0];
-            if ('' eq $formdata->{email} && $contacts) {
-              $formdata->{email} = $contact->{email};
-            }
-            if ('' eq $formdata->{name} && $contacts) {
-              $formdata->{name} = sprintf('%s %s', $contact->{givenname}, $contact->{commonname});
+      if ($self->helpers->can('account') && $self->helpers->can('access')) {
+        # Check if user is logged in (any valid user)
+        if ($self->access({ 'valid-user' => 1 })) {
+          # Get the authenticated user's details
+          my $user = $self->authenticated_user() if $self->can('authenticated_user');
+          my $username = $user->{username} if $user;
+
+          if ($username) {
+            my $contacts = $self->app->account->getUsers({ 'users.username' => $username });
+            if (0 == scalar @$contacts) {
+              my $contact = $contacts->[0];
+              if ('' eq $formdata->{email} && $contacts) {
+                $formdata->{email} = $contact->{email};
+              }
+              if ('' eq $formdata->{name} && $contacts) {
+                $formdata->{name} = sprintf('%s %s', $contact->{givenname}, $contact->{commonname});
+              }
             }
           }
         }

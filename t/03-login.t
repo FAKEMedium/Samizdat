@@ -12,8 +12,8 @@ $t->get_ok('/login/')
   ->status_is(200)
   ->content_like(qr/get_login_like/);
 
-for my $username (sort {$a cmp $b} keys %{ $t->app->config->{account}->{superadmins} }) {
-  my $password = $t->app->config->{account}->{superadmins}->{$username};
+for my $username (sort {$a cmp $b} keys %{ $t->app->config->{manager}->{account}->{superadmins} }) {
+  my $password = $t->app->config->{manager}->{account}->{superadmins}->{$username};
   $t->post_ok('/login/' => form => {
     username => $username, 'password' => $password
   })

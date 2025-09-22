@@ -7,12 +7,15 @@ use Samizdat::Model::Account;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
+  my $manager = $r->manager('users')->to(controller => 'Account');
+  $manager->get('group')                                                 ->to('#group')      ->name('account_group');
+  $manager->get('/')                                                     ->to('#listusers')  ->name('account_index');
+
   my $users = $r->home('users')->to(controller => 'Account');
-  $users->get('/:uuid')                                                ->to('#user')         ->name('user');
+  $users->get('/:uuid')                                                ->to('#presentation') ->name('account_presentation');
   $users->get('/')                                                     ->to('#listusers')    ->name('listusers');
 
   my $account = $r->home('account')->to(controller => 'Account');
-  $account->get('panel')                                               ->to('#panel')        ->name('account_panel');
   $account->get('register')                                            ->to('#register')     ->name('account_register');
   $account->post('register')                                           ->to('#register');
   $account->any([qw( GET PUT POST)] => 'confirm/:confirmationuuid')    ->to('#confirm')      ->name('account_confirm');
@@ -22,15 +25,75 @@ sub register ($self, $app, $conf) {
   $account->any([qw( GET POST DELETE )] => 'logout')                   ->to('#logout')       ->name('account_logout');
   $account->get('login')                                               ->to('#login')        ->name('account_login');
   $account->post('login')                                              ->to('#login');
-  $account->get('/')                                                   ->to('#index')        ->name('account_index');
+  $account->get('/')                                                   ->to('#index')        ->name('account_panel');
 
   $app->helper(account => sub ($self) {
     state $account = Samizdat::Model::Account->new({
-      config       => $self->app->config->{account},
+      config       => $self->app->config->{manager}->{account},
       database     => $self->app->pg,
       redis        => $self->app->redis,
     });
     return $account;
+  });
+
+  # Grant access if any of the conditions in $require are met.
+  # admins and superadmin are defined in configuration and bypass all other checks.
+  $app->helper(access => sub ($self, $require = {
+    userid => [],
+    groupid => [],
+    'valid-user' => 0,
+    admin => 0,
+    superadmin => 1
+  })  {
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+
+    # No auth cookie means no access
+    return 0 unless $authcookie;
+
+    my $session = $self->app->account->session($authcookie);
+
+    # No valid session means no access
+    return 0 unless $session && %$session;
+
+    # Check superadmin from configuration
+    if ($require->{superadmin}) {
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      return 1 if exists $superadmins->{$session->{username}};
+    }
+
+    # Check admins from configuration
+    if ($require->{admin}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      return 1 if exists $admins->{$session->{username}};
+
+      # Also check if user is superadmin (superadmin implies admin)
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      return 1 if exists $superadmins->{$session->{username}};
+    }
+
+    # Check if any valid authenticated user is allowed
+    if ($require->{'valid-user'}) {
+      return 1 if $session->{userid};
+    }
+
+    # Check specific userid requirements
+    if ($require->{userid} && ref($require->{userid}) eq 'ARRAY') {
+      for my $allowed_userid (@{$require->{userid}}) {
+        return 1 if $session->{userid} && $session->{userid} == $allowed_userid;
+      }
+    }
+
+    # Check group membership
+    if ($require->{groupid} && ref($require->{groupid}) eq 'ARRAY' && @{$require->{groupid}}) {
+      # Groups are stored in session as colon-separated string
+      my @user_groups = split(':', $session->{groups} // '');
+      for my $allowed_groupid (@{$require->{groupid}}) {
+        return 1 if grep { $_ eq $allowed_groupid } @user_groups;
+      }
+    }
+
+    # No conditions met, deny access
+    return 0;
   });
 }
 

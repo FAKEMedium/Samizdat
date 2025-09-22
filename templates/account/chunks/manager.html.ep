@@ -1,10 +1,24 @@
-<form name="searchuser" method="get" action="<%== config->{manager}->{url} %>users">
+<form name="searchuser" method="get" action="<%== url_for("account_index") %>">
   <div class="row mb-3">
     <div class="input-group">
       <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('user')) %>" placeholder="<%== __('Search for user or group') %>..." />
       <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
         <%== icon 'search', {} %>
       </button>
+    </div>
+    <div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="checkbox" id="searchuser" name="searchuser" value="1" checked="checked">
+        <label class="form-check-label" for="searchuser"><%== __('Users') %></label>
+      </div>
+      <div class="form-check form-check-inline ms-1">
+        <input class="form-check-input" type="checkbox" id="searchgroup" name="searchgroup" value="1">
+        <label class="form-check-label" for="searchgroup"><%== __('Groups') %></label>
+      </div>
+      <div class="form-check form-check-inline ms-1">
+        <input class="form-check-input" type="checkbox" id="searchprivilege" name="searchprivilege" value="1">
+        <label class="form-check-label" for="searchprivilega"><%== __('Privileges') %></label>
+      </div>
     </div>
   </div>
 </form>

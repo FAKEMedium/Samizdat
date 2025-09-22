@@ -90,12 +90,22 @@ sub startup ($self) {
     return $home;
   });
 
+  # Make manager root reusable for other plugins as $app->routes->manager
+  $self->routes->root->add_shortcut(manager => sub {
+    my ($route, $path) = @_;
+    my $manager_url = $self->config->{manager}->{url} || '/manager/';
+    $path = $manager_url . ($path || '');
+    $path =~ s/\/{2,}/\//g;
+    my $manager = $route->any($path);
+    return $manager;
+  });
+
   $self->plugin('Account');
+  $self->plugin('Manager');
   $self->plugin('Public');
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');
-  $self->plugin('Manager');
 
   # Add your local plugins in your extraplugins setting
   for my $plugin (@{ $config->{extraplugins} }) {

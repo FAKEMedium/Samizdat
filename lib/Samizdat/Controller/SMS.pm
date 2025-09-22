@@ -4,6 +4,14 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Data::Dumper;
 
 sub index ($self) {
+  # Require admin access for SMS management
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $formdata = {};
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
@@ -82,6 +90,14 @@ sub index ($self) {
 }
 
 sub send ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $to = $self->param('to');
   my $message = $self->param('message');
   
@@ -98,6 +114,14 @@ sub send ($self) {
 }
 
 sub receive ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $messages = $self->sms->receive_sms();
   
   $self->render(json => {
@@ -108,6 +132,14 @@ sub receive ($self) {
 }
 
 sub messages ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $limit = $self->param('limit') || $self->app->config->{sms}->{teltonika}->{perpage} || 50;
   my $offset = $self->param('offset') || 0;
   my $direction = $self->param('direction');
@@ -139,6 +171,14 @@ sub messages ($self) {
 }
 
 sub status ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $status = $self->sms->get_status();
   
   $self->render(json => {
@@ -148,6 +188,14 @@ sub status ($self) {
 }
 
 sub delete ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $id = $self->param('id');
   
   unless ($id) {
@@ -167,6 +215,14 @@ sub delete ($self) {
 
 
 sub conversation ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $phone = $self->param('phone');
   my $formdata = { phone => $phone };
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
@@ -187,6 +243,14 @@ sub conversation ($self) {
 }
 
 sub sync ($self) {
+  # Require admin access
+  unless ($self->access({ admin => 1 })) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Admin access required'
+    }, status => 401);
+  }
+
   my $new_messages = $self->sms->sync_messages();
   
   $self->render(json => {

@@ -14,7 +14,7 @@ sub register ($self, $app, $conf) {
   $customers->put('open')                                      ->to('#update');
   $customers->post('open')                                     ->to('#create');
   $customers->get('/:domainid')                                ->to('#get');
-  $customers->get('Y')                                         ->to('#index');
+  $customers->get('/')                                         ->to('#index');
 
   $app->helper(domain => sub ($self) {
     state $domain = Samizdat::Model::Domain->new({

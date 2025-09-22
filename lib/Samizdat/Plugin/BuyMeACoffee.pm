@@ -8,7 +8,7 @@ sub register ($self, $app, $config = {}) {
   
   # Add webhook route
   my $r = $app->routes;
-  $r->post(sprintf('/buymeacoffee/%s', $app->config->{buymeacoffee}->{webhook}))->to('buy_me_a_coffee#webhook');
+  $r->home(sprintf('/buymeacoffee/%s', $app->config->{buymeacoffee}->{webhook}))->to('buy_me_a_coffee#webhook');
 
 
   # Add helper to get cached supporter count with Redis and file fallback
@@ -33,6 +33,7 @@ sub register ($self, $app, $config = {}) {
   });
 }
 
+
 sub _fetch_supporters ($self, $c) {
   my $slug = $c->config->{buymeacoffee}->{slug};
   return 0 unless $slug;
@@ -52,7 +53,6 @@ sub _fetch_supporters ($self, $c) {
       }
     }
   };
-  
   return 0;
 }
 

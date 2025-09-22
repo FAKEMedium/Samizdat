@@ -10,6 +10,7 @@ my $countriesrepo = Mojo::Home->new('src/countries-data-json/data/');
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
+
   $r->get('/country')->to(controller => 'Public', action => 'countries');
   $r->get('/country/#country')->to(controller => 'Public', action => 'country');
 
@@ -27,6 +28,7 @@ sub register ($self, $app, $conf) {
     }
   }
 
+
   $app->helper(
     countrylist => sub($c, $options = {}) {
       my $lang = $options->{language} // $app->language;
@@ -37,6 +39,7 @@ sub register ($self, $app, $conf) {
       };
     }
   );
+
 
   $app->helper(
     country => sub($c, $cc, $options =  {}) {

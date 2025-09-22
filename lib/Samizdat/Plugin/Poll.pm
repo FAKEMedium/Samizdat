@@ -19,7 +19,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(poll => sub {
     state $poll = Samizdat::Model::Poll->new({
-      config   => $self->app->config->{poll},
+      config   => $self->app->config->{manager}->{poll},
       database => shift->pg,
     });
     return $poll;

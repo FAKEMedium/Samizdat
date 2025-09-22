@@ -23,10 +23,22 @@ sub pass ($self) {
 
 
 sub index ($self) {
-  if ($self->authenticated_user()) {
-    return $self->redirect_to($self->url_for('account_panel'));
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+
+  # Handle JSON requests
+  if ($accept =~ /json/) {
+    unless ($self->access({ 'valid-user' => 1 })) {
+      return $self->render(json => { error => 'Authentication required' }, status => 401);
+    }
+    my $user = $self->authenticated_user();
+    return $self->render(json => { success => 1, user => $user }, status => 200);
   } else {
-    return $self->redirect_to($self->url_for('account_register'));
+    # Render HTML page
+    my $title = $self->app->__('Panel');
+    my $web = { title => $title };
+    $self->stash(user => $self->authenticated_user());
+    $web->{script} .= $self->render_to_string(template => 'account/index', format => 'js');
+    return $self->render(template => 'account/index', web => $web, title => $title);
   }
 }
 
@@ -53,11 +65,11 @@ sub login ($self) {
   my $ip = $self->tx->remote_address;
   my $loginfailures = $self->app->account->getLoginFailures($ip);
   my $count = scalar @{ $loginfailures };
-  if ($count >= $self->config->{account}->{blocklimit}) {
+  if ($count >= $self->config->{manager}->{account}->{blocklimit}) {
     return $self->render(json => { error => { reason => 'blocked' },
       ip         => $ip,
-      blocklimit => $self->config->{account}->{blocklimit},
-      blocktime  => $self->config->{account}->{blocktime}
+      blocklimit => $self->config->{manager}->{account}->{blocklimit},
+      blocktime  => $self->config->{manager}->{account}->{blocktime}
     }, status => 200);
   }
 
@@ -68,7 +80,7 @@ sub login ($self) {
   my $username = $v->param('username');
   my $password = $v->param('password');
 
-  if (exists($self->config->{account}->{superadmins}->{$username}) && ($self->config->{account}->{superadmins}->{$username} eq $password)) {
+  if (exists($self->config->{manager}->{account}->{superadmins}->{$username}) && ($self->config->{manager}->{account}->{superadmins}->{$username} eq $password)) {
     $userid = 0;
     $user = {
       userid      => 0,
@@ -93,19 +105,19 @@ sub login ($self) {
       't' => '',
       'm' => '0',
       'l' => 'en',                                                                              # Language, default is English
-      's' => exists($self->config->{account}->{superadmins}->{$user->{'username'}}) ? 1 : 0,    # Super admin flag
-      'a' => exists($self->config->{account}->{admins}->{$user->{'username'}}) ? 1 : 0,         # Admin flag
+      's' => exists($self->config->{manager}->{account}->{superadmins}->{$user->{'username'}}) ? 1 : 0,    # Super admin flag
+      'a' => exists($self->config->{manager}->{account}->{admins}->{$user->{'username'}}) ? 1 : 0,         # Admin flag
       'i' => $ip,                                                                               # IP address
     };
     my $value = b64_encode(j $userdata);
     chomp $value;
     $value =~ s/[\r\n]+//g;
-    my $expires = $self->config->{account}->{sessiontimeout};
+    my $expires = $self->config->{manager}->{account}->{sessiontimeout};
     my $cookie_opts = {
       secure => 1,
       httponly => 0,
       path => '/',
-      domain => $self->config->{account}->{cookiedomain},
+      domain => $self->config->{manager}->{account}->{cookiedomain},
       hostonly => 1,
       same_site => 'Lax',
       expires => time + $expires,
@@ -117,10 +129,10 @@ sub login ($self) {
       superadmin => $user->{superadmin},
       value      => $value,
       ip         => $ip,
-      groups     => join(':', map { $_->{groupname} } @{$self->app->account->getUserGroups($userid)}),
+      groups     => join(':', map { $_->{groupid} } @{$self->app->account->getUserGroups($userid)}),
     }, $expires);
-    $self->cookie($self->config->{account}->{authcookiename} => $authcookie, $cookie_opts);
-    $self->cookie($self->config->{account}->{datacookiename} => $value, $cookie_opts);
+    $self->cookie($self->config->{manager}->{account}->{authcookiename} => $authcookie, $cookie_opts);
+    $self->cookie($self->config->{manager}->{account}->{datacookiename} => $value, $cookie_opts);
 
     $self->app->account->insertLogin($ip, $userid, $authcookie);
     $self->render(json => { userdata => $userdata }, status => 200);
@@ -129,8 +141,8 @@ sub login ($self) {
     $self->app->account->insertLoginFailure($ip, $username);
     return $self->render(json => { error => { reason => 'password', count => $count },
       ip         => $ip,
-      blocklimit => $self->config->{account}->{blocklimit},
-      blocktime  => $self->config->{account}->{blocktime}
+      blocklimit => $self->config->{manager}->{account}->{blocklimit},
+      blocktime  => $self->config->{manager}->{account}->{blocktime}
     }, status => 403);
   }
 }
@@ -142,12 +154,12 @@ sub logout ($self) {
     httponly => 0,
     path => '/',
     expires => time - 10000,
-    domain => $self->config->{account}->{cookiedomain},
+    domain => $self->config->{manager}->{account}->{cookiedomain},
     hostonly => 1,
   };
-  $self->cookie($self->config->{account}->{authcookiename} => '', $cookie_opts);
-  $self->cookie($self->config->{account}->{datacookiename} => '', $cookie_opts);
-  $self->app->account->deleteSession($self->config->{account}->{authcookiename});
+  $self->cookie($self->config->{manager}->{account}->{authcookiename} => '', $cookie_opts);
+  $self->cookie($self->config->{manager}->{account}->{datacookiename} => '', $cookie_opts);
+  $self->app->account->deleteSession($self->config->{manager}->{account}->{authcookiename});
   return $self->redirect_to('/');
 }
 
@@ -363,7 +375,7 @@ sub password ($self) {
 
 
 sub authenticated_user ($self) {
-  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
     if ($session && %$session) {
@@ -372,12 +384,12 @@ sub authenticated_user ($self) {
         secure    => 1,
         httponly  => 0,
         path      => '/',
-        domain    => $self->config->{account}->{cookiedomain},
+        domain    => $self->config->{manager}->{account}->{cookiedomain},
         hostonly  => 1,
         same_site => 'Lax',
-        expires   => time + $self->config->{account}->{sessiontimeout},
+        expires   => time + $self->config->{manager}->{account}->{sessiontimeout},
       };
-      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, $cookie_opts);
+      $self->cookie($self->config->{manager}->{account}->{authcookiename} => $authcookie, $cookie_opts);
       say Dumper $session;
       return $session;
     }
@@ -387,17 +399,17 @@ sub authenticated_user ($self) {
 
 
 sub authorize ($self, $level = 0) {
-  my $authcookie = $self->cookie($self->config->{account}->{authcookiename}) // '';
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename}) // '';
   if ($authcookie) {
     my $session = $self->app->account->session($authcookie);
     if ($session->{username}) {
       # Refresh browser cookie to match Redis expiration  
-      $self->cookie($self->config->{account}->{authcookiename} => $authcookie, {
-        expires => time + $self->config->{sessiontimeout},
+      $self->cookie($self->config->{manager}->{account}->{authcookiename} => $authcookie, {
+        expires => time + $self->config->{manager}->{account}->{sessiontimeout},
         secure => 1,
         httponly => 0,
         path => '/',
-        domain => $self->config->{account}->{cookiedomain},
+        domain => $self->config->{manager}->{account}->{cookiedomain},
         hostonly => 1,
         same_site => 'Lax',
       });
@@ -438,10 +450,10 @@ sub users ($self) {
 sub settings ($self) {
   my $title = $self->app->__('Account settings');
   if ($self->req->headers->accept =~ m{application/json}) {
-    my $user = $self->authenticated_user();
-    unless ($user) {
+    unless ($self->access({ 'valid-user' => 1 })) {
       return $self->redirect_to($self->url_for('account_login'));
     }
+    my $user = $self->authenticated_user();
 
     if ($self->req->method eq 'POST') {
       # Handle profile data update via AJAX
@@ -465,13 +477,13 @@ sub settings ($self) {
 
 # Update user profile data
 sub update_profile ($self) {
-  my $user = $self->authenticated_user();
-  unless ($user) {
+  unless ($self->access({ 'valid-user' => 1 })) {
     return $self->render(json => {
       success => 0,
       error => 'Authentication required'
     }, status => 401);
   }
+  my $user = $self->authenticated_user();
 
   my $profile_data = $self->req->json;
   unless ($profile_data) {
@@ -499,13 +511,13 @@ sub update_profile ($self) {
 
 # Handle profile image upload
 sub upload_image ($self) {
-  my $user = $self->authenticated_user();
-  unless ($user) {
+  unless ($self->access({ 'valid-user' => 1 })) {
     return $self->render(json => {
       success => 0,
       error => 'Authentication required'
     }, status => 401);
   }
+  my $user = $self->authenticated_user();
 
   my $upload = $self->req->upload('image');
   unless ($upload) {
@@ -567,7 +579,7 @@ sub upload_image ($self) {
 
 
 sub validate_username ($self, $username) {
-  my $config = $self->config->{account}->{username};
+  my $config = $self->config->{manager}->{account}->{username};
   my $errors = [];
 
   # Check minimum length
@@ -585,7 +597,7 @@ sub validate_username ($self, $username) {
 }
 
 sub validate_password ($self, $password) {
-  my $config = $self->config->{account}->{password};
+  my $config = $self->config->{manager}->{account}->{password};
   my $errors = [];
 
   # Check minimum length

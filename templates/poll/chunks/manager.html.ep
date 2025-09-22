@@ -1,0 +1,11 @@
+<form name="searchpolls" method="get" action="<%== url_for("poll_manager") %>">
+  <div class="row mb-3">
+    <div class="input-group">
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('poll')) %>" placeholder="<%== __('Search for poll') %>..." />
+      <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
+        <%== icon 'search', {} %>
+      </button>
+    </div>
+  </div>
+</form>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for("poll_index") %>/add"><%== __('Add poll') %></a>

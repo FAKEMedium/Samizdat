@@ -215,21 +215,18 @@ sub editor_toolbar ($self) {
 
 # Save editable content to database
 sub save ($self) {
-  # Check authentication first
-  my $authcookie = $self->cookie($self->config->{account}->{authcookiename});
-  my $user;
-  
-  if ($authcookie) {
-    $user = $self->app->account->session($authcookie);
-  }
-  
-  unless ($user) {
+  # Check authentication first - require admin access for content editing
+  unless ($self->access({ admin => 1 })) {
     return $self->render(json => {
       success => 0,
-      error => 'Authentication required'
+      error => 'Admin access required'
     }, status => 401);
   }
-  
+
+  # Get the authenticated user
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+  my $user = $self->app->account->session($authcookie) if $authcookie;
+
   # Handle both single editor and batch editor formats
   my $request_data;
   if ($self->req->headers->content_type && $self->req->headers->content_type =~ /application\/json/) {

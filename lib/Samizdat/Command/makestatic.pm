@@ -39,7 +39,7 @@ sub run ($self, @args) {
         Mojo::Cookie::Response->new(
           name   => 'language',
           value  => $language,
-          domain => $self->app->config->{account}->{cookiedomain},
+          domain => $self->app->config->{manager}->{account}->{cookiedomain},
           path   => '/'
         )
       );
@@ -58,7 +58,7 @@ sub run ($self, @args) {
               Mojo::Cookie::Response->new(
                 name   => 'language',
                 value  => $language,
-                domain => $self->app->config->{account}->{cookiedomain},
+                domain => $self->app->config->{manager}->{account}->{cookiedomain},
                 path   => '/'
               )
             );
