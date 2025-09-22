@@ -33,6 +33,8 @@ sub index ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/index', invoices => [], cache => 1);
   } else {
+    # Require admin access for JSON invoice data
+    return unless $self->access({ admin => 1 });
     my $customerid = int $self->param('customerid');
     my $customer = {};
     my $options = {};
@@ -76,6 +78,9 @@ sub creditinvoice ($self) {
 
 
 sub create ($self, $credit = 0) {
+  # Require admin access for invoice management
+  return unless $self->access({ admin => 1 });
+
   my $formdata = {};
   my $creditedinvoice = { invoiceid => undef, fakturanummer => undef };
   if ($credit) {
@@ -338,6 +343,9 @@ sub create ($self, $credit = 0) {
 
 
 sub update ($self, $makejson = 1) {
+  # Require admin access for invoice management
+  return unless $self->access({ admin => 1 });
+
   my $formdata = $self->_formdata() || return 0;
   $self->app->customer->update($formdata->{invoice}->{customerid}, $formdata->{customer});
 
@@ -400,6 +408,8 @@ sub edit ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/opwn/edit/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'chunks/editlinks');
   } else {
+    # Require admin access for JSON invoice data
+    return unless $self->access({ admin => 1 });
     my $formdata = $self->_getdata();
     $formdata->{invoiceitems}->{extra} = {
       invoiceitemid   => 'extra',
@@ -418,6 +428,9 @@ sub edit ($self) {
 
 
 sub handle ($self) {
+  # Require admin access for invoice handling
+  return unless $self->access({ admin => 1 });
+
   my $title = $self->app->__x('Invoice');
   my $web = {title => $title};
   my $toast = $self->render_to_string(
@@ -436,6 +449,8 @@ sub handle ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handleinvoicelinks');
   } else {
+    # Require admin access for JSON invoice data
+    return unless $self->access({ admin => 1 });
     my $formdata = $self->_getdata();
     return $self->render(json => $formdata);
   }
@@ -461,6 +476,8 @@ sub nav ($self) {
     if ($accept !~ /json/) {
       $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{manager}->{url}, $customerid, $invoice->{invoiceid}));
     } else {
+      # Require admin access for JSON invoice data
+      return unless $self->access({ admin => 1 });
       my $json = $self->_getdata({ includearticles => 0 });
       return $self->render(json => $json);
     }
@@ -476,6 +493,8 @@ sub open ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/open/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'invoice/open/index');
   } else {
+    # Require admin access for JSON invoice data
+    return unless $self->access({ admin => 1 });
     my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.state' => { '=', 'obehandlad' } } });
     my $customers = {};
     for my $invoiceitemid (keys %{$invoiceitems}) {
@@ -495,6 +514,9 @@ sub open ($self) {
 }
 
 sub payment ($self) {
+  # Require admin access for payment management
+  return unless $self->access({ admin => 1 });
+
   my $title = $self->app->__('Mark payment');
   my $web = {title => $title};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
@@ -503,6 +525,8 @@ sub payment ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/payment', format => 'js');
     return $self->render(template => 'invoice/payment', layout => 'modal', web => $web, title => $title);
   } else {
+    # Require admin access for payment data
+    return unless $self->access({ admin => 1 });
     my $invoice = {};
     my $customer = {};
     if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
@@ -525,6 +549,8 @@ sub remind ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
     return $self->render(template => 'invoice/remind/index', layout => 'modal', web => $web, title => $title);
   } else {
+    # Require admin access for reminder data
+    return unless $self->access({ admin => 1 });
     my $invoice = {};
     my $customer = {};
     if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
@@ -548,6 +574,8 @@ sub resend ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
   } else {
+    # Require admin access for invoice operations
+    return unless $self->access({ admin => 1 });
     my $invoice = {};
     my $customer = {};
     if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
@@ -571,6 +599,8 @@ sub reprint ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
   } else {
+    # Require admin access for invoice operations
+    return unless $self->access({ admin => 1 });
     my $invoice = {};
     my $customer = {};
     if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {

@@ -27,9 +27,7 @@ sub index ($self) {
 
   # Handle JSON requests
   if ($accept =~ /json/) {
-    unless ($self->access({ 'valid-user' => 1 })) {
-      return $self->render(json => { error => 'Authentication required' }, status => 401);
-    }
+    return unless $self->access({ 'valid-user' => 1 });
     my $user = $self->authenticated_user();
     return $self->render(json => { success => 1, user => $user }, status => 200);
   } else {
@@ -450,9 +448,7 @@ sub users ($self) {
 sub settings ($self) {
   my $title = $self->app->__('Account settings');
   if ($self->req->headers->accept =~ m{application/json}) {
-    unless ($self->access({ 'valid-user' => 1 })) {
-      return $self->redirect_to($self->url_for('account_login'));
-    }
+    return unless $self->access({ 'valid-user' => 1 });
     my $user = $self->authenticated_user();
 
     if ($self->req->method eq 'POST') {
@@ -477,12 +473,7 @@ sub settings ($self) {
 
 # Update user profile data
 sub update_profile ($self) {
-  unless ($self->access({ 'valid-user' => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Authentication required'
-    }, status => 401);
-  }
+  return unless $self->access({ 'valid-user' => 1 });
   my $user = $self->authenticated_user();
 
   my $profile_data = $self->req->json;
@@ -511,12 +502,7 @@ sub update_profile ($self) {
 
 # Handle profile image upload
 sub upload_image ($self) {
-  unless ($self->access({ 'valid-user' => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Authentication required'
-    }, status => 401);
-  }
+  return unless $self->access({ 'valid-user' => 1 });
   my $user = $self->authenticated_user();
 
   my $upload = $self->req->upload('image');

@@ -6,18 +6,12 @@ const currentImagePreview = document.getElementById('currentImagePreview');
 
 // Load current profile data
 async function loadProfile() {
-    try {
-        const response = await fetch(window.location.pathname, {
-            method: 'GET',
-            headers: { 'Accept': 'application/json' }
-        });
-        
-        const result = await response.json();
-        if (result.success && result.profile) {
-            populateForm(result.profile);
-        }
-    } catch (error) {
-        console.error('Failed to load profile:', error);
+    const result = await window.authenticatedFetch(window.location.pathname, {
+        method: 'GET'
+    });
+
+    if (result && result.success && result.profile) {
+        populateForm(result.profile);
     }
 }
 
@@ -99,17 +93,15 @@ profileForm.addEventListener('submit', async (e) => {
     }
     
     // Save profile data
-    try {
-        const response = await fetch(window.location.pathname, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(profileData)
-        });
-        
-        const result = await response.json();
+    const result = await window.authenticatedFetch(window.location.pathname, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(profileData)
+    });
+
+    if (result) {
         if (result.success) {
             showStatus('success', result.message || 'Profile updated successfully');
             // Reload to show updated data
@@ -117,9 +109,6 @@ profileForm.addEventListener('submit', async (e) => {
         } else {
             showStatus('error', result.error || 'Failed to update profile');
         }
-    } catch (error) {
-        console.error('Save error:', error);
-        showStatus('error', 'Failed to save profile');
     }
 });
 
@@ -127,17 +116,17 @@ profileForm.addEventListener('submit', async (e) => {
 async function uploadProfileImage(file) {
     const formData = new FormData();
     formData.append('image', file);
-    
-    try {
-        const response = await fetch('/account/upload-image', {
-            method: 'POST',
-            body: formData
-        });
-        
-        return await response.json();
-    } catch (error) {
+
+    const result = await window.authenticatedFetch('/account/upload-image', {
+        method: 'POST',
+        headers: {}, // Let browser set Content-Type for FormData
+        body: formData
+    });
+
+    if (!result) {
         throw new Error('Upload failed');
     }
+    return result;
 }
 
 // Show status message

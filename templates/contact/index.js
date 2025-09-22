@@ -66,8 +66,10 @@ async function loadData() {
   };
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      // Contact form should remain open, just log the error
+      console.error('Failed to load form data:', response.statusText);
+      // Continue with empty form
     } else {
       const result = await response.json();
       document.querySelector('#ip').innerHTML = `<%== __x('Your ip {ip} will be appended to the message.', ip => $formdata->{ip}) %>`

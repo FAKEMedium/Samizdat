@@ -67,15 +67,18 @@ async function loadData() {
   };
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      // Registration form should remain open, just log the error
+      console.error('Failed to load form data:', response.statusText);
+      // Continue with empty form
     } else {
       const result = await response.json();
       document.querySelector('#ip').innerHTML = `<%== __x('Your ip {ip} will be appended to the confirmation request.', ip => $formdata->{ip}) %>`
         .replace('REPLACEIP', result.ip);
     }
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
+    // Continue with form anyway
   }
 }
 

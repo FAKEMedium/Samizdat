@@ -19,13 +19,25 @@ async function sendData(method) {
   }
   try {
     const response = await fetch(window.location, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        // Show login modal with error message
+        if (window.handle401Error) {
+          window.handle401Error(data.error || '<%== __("Authentication required") %>');
+        } else {
+          // Fallback to redirect if modal handler not available
+          window.location.href = '<%== url_for('account_login') %>';
+        }
+      } else {
+        alert('Request failed: ' + response.statusText);
+      }
     } else {
       populateForm(await response.json(), method);
     }
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
+    alert('Request failed');
   }
 }
 

@@ -5,9 +5,22 @@ async function getData() {
   };
   try {
     const response = await fetch('<%== sprintf("%sinvoices/open", config->{manager}->{url}) %>', request);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        // Show login modal with error message
+        if (window.handle401Error) {
+          window.handle401Error(data.error || '<%== __("Authentication required") %>');
+        }
+        return;
+      } else {
+        console.error('Request failed:', response.statusText);
+        return;
+      }
+    }
     dress(await response.json());
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
   }
 }
 

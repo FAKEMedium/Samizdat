@@ -1,15 +1,8 @@
 (async function () {
   async function sendData() {
-    try {
-      const response = await fetch(window.location.href, {headers: {'Accept': 'application/json'}});
-      const data = await response.json();
-      if (data.error) {
-        alert(data.error);
-      } else {
-        populate(data);
-      }
-    } catch (e) {
-      // Silent error handling
+    const data = await window.authenticatedFetch(window.location.href);
+    if (data) {
+      populate(data);
     }
   }
 
@@ -33,19 +26,11 @@
       btn.addEventListener('click', async () => {
         if (!confirm('Are you sure you want to delete this zone?')) return;
         const zoneId = btn.getAttribute('data-zoneid');
-        try {
-          const response = await fetch(`./${zoneId}`, {
-            method: 'DELETE',
-            headers: {'Accept': 'application/json'}
-          });
-          const result = await response.json();
-          if (result.success) {
-            btn.closest('tr').remove();
-          } else {
-            alert(result.error || 'Failed to delete zone');
-          }
-        } catch (error) {
-          // Silent error handling
+        const result = await window.authenticatedFetch(`./${zoneId}`, {
+          method: 'DELETE'
+        });
+        if (result && result.success) {
+          btn.closest('tr').remove();
         }
       });
     });

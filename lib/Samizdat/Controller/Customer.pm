@@ -20,6 +20,9 @@ sub index ($self) {
     return $self->render(web => $web, title => $title, template => 'customer/index', customers => [], status => 200);
 
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
+
     my $searchterm = $self->param('searchterm');
     my $params = {};
     if ('moss' eq $searchterm) {
@@ -48,6 +51,9 @@ sub index ($self) {
 
 
 sub update ($self, $makejson = 1) {
+  # Require admin access for customer management
+  return unless $self->access({ admin => 1 });
+
   my $formdata = $self->_formdata() || return 0;
   my $customerid = $self->param('customerid') // 0;
 
@@ -92,6 +98,9 @@ sub edit ($self) {
     $web->{script} .= $self->render_to_string(template => 'customer/edit/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'customer/edit/index', status => 200);
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
+
     my $customerid = int $self->param('customerid');
     if ($customerid) {
       $formdata->{customer}->{customerid} = $customerid;
@@ -135,6 +144,9 @@ sub billing ($self) {
 }
 
 sub sync ($self) {
+  # Require admin access for customer sync
+  return unless $self->access({ admin => 1 });
+
   my $customerid = $self->param('customerid') // $self->config->{test}->{customerid};
   my $customer = $self->customer->fetch($customerid);
 }
@@ -217,6 +229,8 @@ sub first ($self) {
   if ($accept !~ /json/) {
     $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $minid));
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
     return $self->render(json => $self->_getdata($minid));
   }}
 
@@ -226,6 +240,8 @@ sub newest ($self) {
   if ($accept !~ /json/) {
     $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $maxid));
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
     return $self->render(json => $self->_getdata($maxid));
   }}
 
@@ -236,6 +252,8 @@ sub prev ($self) {
   if ($accept !~ /json/) {
     $self->redirect_to(sprintf('%s/%s', $self->url_for('customer_index'), $previd));
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
     return $self->render(json => $self->_getdata($previd));
   }
 }
@@ -247,6 +265,8 @@ sub next ($self) {
   if ($accept !~ /json/) {
     $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $nextid));
   } else {
+    # Require admin access for customer data
+    return unless $self->access({ admin => 1 });
     return $self->render(json => $self->_getdata($nextid));
   }
 }
@@ -260,12 +280,18 @@ sub products ($self) {
     $web->{script} .= $self->render_to_string(template => 'customer/products/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'customer/products/index', layout => 'modal');
   } else {
+    # Require admin access for product data
+    return unless $self->access({ admin => 1 });
+
     my $products = $self->app->invoice->products({ where => { }});
     return $self->render(json => { products => $products, customerid => $customerid });
   }
 }
 
 sub subscribe ($self) {
+  # Require admin access for subscription management
+  return unless $self->access({ admin => 1 });
+
   my $productid = $self->param('productid');
   my $customerid = $self->param('customerid');
 }

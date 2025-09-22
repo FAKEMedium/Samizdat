@@ -42,6 +42,9 @@ sub customers ($self) {
       return $self->render(web => $web, title => $title, template => 'fortnox/manager/customers/index');
     }
   } else {
+    # Require admin access for JSON customer data
+    return unless $self->access({ admin => 1 });
+
     my $customer = $self->app->fortnox->getCustomer($customerid);
     say Dumper($customer);
     if (exists($customer->{Customers})) {
@@ -55,6 +58,9 @@ sub customers ($self) {
 }
 
 sub payments ($self) {
+  # Require admin access for payment management
+  return unless $self->access({ admin => 1 });
+
   my $title = $self->app->__('Payments');
   my $web = { title => $title };
   my $number = int $self->stash('number') // 0;
@@ -123,6 +129,9 @@ sub manager ($self) {
 
 
 sub activate ($self) {
+  # Require admin access for Fortnox activation
+  return unless $self->access({ admin => 1 });
+
   my $title = $self->app->__('Activate Samizdat Fortnox integration');
   my $web = { title => $title };
   my $formdata = {};

@@ -38,6 +38,8 @@ sub register ($self, $app, $conf) {
 
   # Grant access if any of the conditions in $require are met.
   # admins and superadmin are defined in configuration and bypass all other checks.
+  # Always renders JSON error on access denial and returns 0
+  # Returns 1 if access is granted
   $app->helper(access => sub ($self, $require = {
     userid => [],
     groupid => [],
@@ -46,54 +48,78 @@ sub register ($self, $app, $conf) {
     superadmin => 1
   })  {
     my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $has_access = 0;
 
-    # No auth cookie means no access
-    return 0 unless $authcookie;
+    if ($authcookie) {
+      my $session = $self->app->account->session($authcookie);
 
-    my $session = $self->app->account->session($authcookie);
+      if ($session && %$session) {
+        # Check superadmin from configuration
+        if ($require->{superadmin}) {
+          my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+          $has_access = 1 if exists $superadmins->{$session->{username}};
+        }
 
-    # No valid session means no access
-    return 0 unless $session && %$session;
+        # Check admins from configuration
+        if (!$has_access && $require->{admin}) {
+          my $admins = $self->config->{manager}->{account}->{admins} // {};
+          $has_access = 1 if exists $admins->{$session->{username}};
 
-    # Check superadmin from configuration
-    if ($require->{superadmin}) {
-      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
-      return 1 if exists $superadmins->{$session->{username}};
-    }
+          # Also check if user is superadmin (superadmin implies admin)
+          my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+          $has_access = 1 if exists $superadmins->{$session->{username}};
+        }
 
-    # Check admins from configuration
-    if ($require->{admin}) {
-      my $admins = $self->config->{manager}->{account}->{admins} // {};
-      return 1 if exists $admins->{$session->{username}};
+        # Check if any valid authenticated user is allowed
+        if (!$has_access && $require->{'valid-user'}) {
+          $has_access = 1 if $session->{userid};
+        }
 
-      # Also check if user is superadmin (superadmin implies admin)
-      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
-      return 1 if exists $superadmins->{$session->{username}};
-    }
+        # Check specific userid requirements
+        if (!$has_access && $require->{userid} && ref($require->{userid}) eq 'ARRAY') {
+          for my $allowed_userid (@{$require->{userid}}) {
+            if ($session->{userid} && $session->{userid} == $allowed_userid) {
+              $has_access = 1;
+              last;
+            }
+          }
+        }
 
-    # Check if any valid authenticated user is allowed
-    if ($require->{'valid-user'}) {
-      return 1 if $session->{userid};
-    }
-
-    # Check specific userid requirements
-    if ($require->{userid} && ref($require->{userid}) eq 'ARRAY') {
-      for my $allowed_userid (@{$require->{userid}}) {
-        return 1 if $session->{userid} && $session->{userid} == $allowed_userid;
+        # Check group membership
+        if (!$has_access && $require->{groupid} && ref($require->{groupid}) eq 'ARRAY' && @{$require->{groupid}}) {
+          # Groups are stored in session as colon-separated string
+          my @user_groups = split(':', $session->{groups} // '');
+          for my $allowed_groupid (@{$require->{groupid}}) {
+            if (grep { $_ eq $allowed_groupid } @user_groups) {
+              $has_access = 1;
+              last;
+            }
+          }
+        }
       }
     }
 
-    # Check group membership
-    if ($require->{groupid} && ref($require->{groupid}) eq 'ARRAY' && @{$require->{groupid}}) {
-      # Groups are stored in session as colon-separated string
-      my @user_groups = split(':', $session->{groups} // '');
-      for my $allowed_groupid (@{$require->{groupid}}) {
-        return 1 if grep { $_ eq $allowed_groupid } @user_groups;
+    # If access denied, always render JSON error
+    unless ($has_access) {
+      # Determine appropriate error message based on requirements
+      my $error_msg;
+      if ($require->{superadmin}) {
+        $error_msg = $self->app->__('Superadmin access required');
+      } elsif ($require->{admin}) {
+        $error_msg = $self->app->__('Admin access required');
+      } elsif ($require->{'valid-user'}) {
+        $error_msg = $self->app->__('Authentication required');
+      } else {
+        $error_msg = $self->app->__('Access denied');
       }
+
+      $self->render(json => {
+        success => 0,
+        error => $error_msg
+      }, status => 401);
     }
 
-    # No conditions met, deny access
-    return 0;
+    return $has_access;
   });
 }
 

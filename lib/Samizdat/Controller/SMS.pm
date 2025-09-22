@@ -4,18 +4,12 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Data::Dumper;
 
 sub index ($self) {
-  # Require admin access for SMS management
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
-
   my $formdata = {};
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
-  
+
   if ($accept =~ /json/) {
+    # Require admin access for SMS management
+    return unless $self->access({ admin => 1 });
     $formdata->{ip} = $self->tx->remote_address;
     if ($self->req->method =~ /^(POST)$/i) {
       my $valid = {};
@@ -91,12 +85,7 @@ sub index ($self) {
 
 sub send ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $to = $self->param('to');
   my $message = $self->param('message');
@@ -115,12 +104,7 @@ sub send ($self) {
 
 sub receive ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $messages = $self->sms->receive_sms();
   
@@ -133,12 +117,7 @@ sub receive ($self) {
 
 sub messages ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $limit = $self->param('limit') || $self->app->config->{sms}->{teltonika}->{perpage} || 50;
   my $offset = $self->param('offset') || 0;
@@ -172,12 +151,7 @@ sub messages ($self) {
 
 sub status ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $status = $self->sms->get_status();
   
@@ -189,12 +163,7 @@ sub status ($self) {
 
 sub delete ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $id = $self->param('id');
   
@@ -216,12 +185,7 @@ sub delete ($self) {
 
 sub conversation ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $phone = $self->param('phone');
   my $formdata = { phone => $phone };
@@ -244,12 +208,7 @@ sub conversation ($self) {
 
 sub sync ($self) {
   # Require admin access
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   my $new_messages = $self->sms->sync_messages();
   

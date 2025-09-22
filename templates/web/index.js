@@ -3,21 +3,13 @@ let searchTimeout;
 
 async function fetchPages(searchterm = '') {
   const params = searchterm ? `?searchterm=${encodeURIComponent(searchterm)}` : '';
-  const request = {
-    method: 'GET',
-    headers: {Accept: 'application/json'}
-  };
-  
-  try {
-    const response = await fetch(window.location + params, request);
-    if (response.ok) {
-      const data = await response.json();
-      return data.pages || {};
-    }
-  } catch (e) {
-    // Silent error handling
-  }
-  return {};
+
+  // This endpoint requires authentication
+  const data = await window.authenticatedFetch(window.location + params, {
+    method: 'GET'
+  });
+
+  return data ? (data.pages || {}) : {};
 }
 
 function formatFileSize(bytes) {

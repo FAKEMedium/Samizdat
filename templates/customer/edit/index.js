@@ -144,13 +144,20 @@ async function sendData(method, customerid = 0) {
   }
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        alert(data.error || 'Authentication required');
+        window.location.href = '<%== url_for('account_login') %>';
+      } else {
+        alert('Request failed: ' + response.statusText);
+      }
     } else {
       populateForm(await response.json(), method);
     }
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
+    alert('Request failed');
   }
 }
 
@@ -177,8 +184,15 @@ window.getId = async function getId(what, customerid = 0) {
   };
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        alert(data.error || 'Authentication required');
+        window.location.href = '<%== url_for('account_login') %>';
+      } else {
+        alert('Request failed: ' + response.statusText);
+      }
+      return false;
     } else {
       populateForm(await response.json(), 'GET');
       return true;

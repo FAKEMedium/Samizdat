@@ -9,6 +9,9 @@ sub index ($self) {
   my $title = $self->app->__('Site content');
 
   if ($self->req->headers->accept =~ m{application/json}) {
+    # Require admin access for JSON page listings
+    return unless $self->access({ admin => 1 });
+
     my $searchterm = $self->param('searchterm') // undef;
     $self->render(json => {
       pages => $self->app->web->geturis({
@@ -216,12 +219,7 @@ sub editor_toolbar ($self) {
 # Save editable content to database
 sub save ($self) {
   # Check authentication first - require admin access for content editing
-  unless ($self->access({ admin => 1 })) {
-    return $self->render(json => {
-      success => 0,
-      error => 'Admin access required'
-    }, status => 401);
-  }
+  return unless $self->access({ admin => 1 });
 
   # Get the authenticated user
   my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});

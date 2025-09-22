@@ -28,14 +28,21 @@ async function sendForm(method, dataform='#dataform') {
   }
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        alert(data.error || 'Authentication required');
+        window.location.href = '<%== url_for('account_login') %>';
+      } else {
+        alert('Request failed: ' + response.statusText);
+      }
     } else {
       let formdata = await response.json();
       populateForm(formdata, method, dataform);
     }
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
+    alert('Request failed');
   }
 }
 
@@ -72,14 +79,23 @@ window.getId = async function getId(what, customerid = 0, invoiceid = 0, percust
   };
   try {
     const response = await fetch(url, request);
-    if (response.error) {
-      alert(error);
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        alert(data.error || 'Authentication required');
+        window.location.href = '<%== url_for('account_login') %>';
+      } else {
+        alert('Request failed: ' + response.statusText);
+      }
+      return false;
     } else {
       populateForm(await response.json(), 'GET', dataform);
       return true;
     }
   } catch (e) {
-    // Silent error handling
+    console.error('Request error:', e);
+    alert('Request failed');
+    return false;
   }
 }
 
