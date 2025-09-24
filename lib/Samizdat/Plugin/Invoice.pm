@@ -18,9 +18,9 @@ sub register ($self, $app, $conf) {
 
   # Customer specific invoice routes
   my $customers = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
-  $customers->get('invoices/open')                                   ->to('#edit')                 ->name('invoice_edit');
+  $customers->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
   $customers->put('open')                                            ->to('#update')               ->name('invoice_uppdate');
-  $customers->post('/open')                                          ->to('#create')               ->name('invoice_create');
+  $customers->post('open')                                           ->to('#create')               ->name('invoice_create');
   $customers->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
   $customers->post('/:invoiceid/creditinvoice')                      ->to('#creditinvoice')        ->name('invoice_creditinvoice');
   $customers->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');

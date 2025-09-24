@@ -1,24 +1,28 @@
 % if (config->{buymeacoffee}->{slug}) {
-%   my $supporters = buymeacoffee_supporters();
-<a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>" target="_blank" rel="noopener" aria-label="<%==
-__x('Give small financial support to {slug} at buymeacoffee',
-slug => config->{buymeacoffee}->{slug}) %>">
-  <%== anysvg
-    'buymeacoffee',
-    'src/public/media/images/bmc-logo.svg',
-    {
-      id         => 'bmclogo',
-      prefix     => 'anysvg',
-      extraclass => 'img-fluid my-2',
-      title      => __x('Buy {slug} a coffee', slug => config->{buymeacoffee}->{slug}),
-      height     => 29,
-      width      => 42,
-    } %>
-% if ($supporters > 0) {
-  <span class="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger">
-    <%== $supporters %>
-    <span class="visually-hidden"><%== __('supporters') %></span>
-  </span>
-  % }
-</a>
+%   my $supporters = eval { buymeacoffee->get_supporters } // 0;
+<div class="position-relative d-inline-block">
+  <a href="https://www.buymeacoffee.com/<%== config->{buymeacoffee}->{slug} %>"
+     target="_blank"
+     rel="noopener"
+     aria-label="<%== __x('Give small financial support to {slug} at buymeacoffee', slug => config->{buymeacoffee}->{slug}) %>"
+     class="text-decoration-none">
+    <%== anysvg
+      'buymeacoffee',
+      'src/public/media/images/bmc-logo.svg',
+      {
+        id         => 'bmclogo',
+        prefix     => 'anysvg',
+        extraclass => 'img-fluid my-2',
+        title      => __x('Buy {slug} a coffee', slug => config->{buymeacoffee}->{slug}),
+        height     => 29,
+        width      => 42,
+      } %>
+%   if ($supporters > 0) {
+    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+      <%== $supporters %>
+      <span class="visually-hidden"><%== __('supporters') %></span>
+    </span>
+%   }
+  </a>
+</div>
 % }

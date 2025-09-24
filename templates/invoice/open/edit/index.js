@@ -3,6 +3,10 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
+// Bind button click events
+document.getElementById('updateInvoiceBtn')?.addEventListener('click', () => updateInvoice());
+document.getElementById('makeInvoiceBtn')?.addEventListener('click', () => makeInvoice());
+
 async function sendData(method) {
   const url = form.action || "";
   const formData = new FormData(form);
@@ -49,6 +53,23 @@ function getInvoice(){
 }
 
 function populateForm(formdata, method) {
+  // Check for Fortnox errors and display warning
+  if (formdata.fortnox_error) {
+    const alertDiv = document.createElement('div');
+    alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+    alertDiv.role = 'alert';
+    alertDiv.innerHTML = `
+      <strong><%== __('Fortnox Warning') %>:</strong> ${formdata.fortnox_error}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `;
+
+    // Insert at the top of the content area
+    const contentArea = document.querySelector('#thecontent');
+    if (contentArea) {
+      contentArea.insertBefore(alertDiv, contentArea.firstChild);
+    }
+  }
+
   let customer = formdata.customer;
   document.querySelector('#dataform').action = '<%== sprintf("%scustomers/", config->{manager}->{url}) %>' + customer.customerid + '/invoices/open';
   document.querySelector('#customerid').value = customer.customerid;
@@ -65,7 +86,7 @@ function populateForm(formdata, method) {
   document.querySelector('#invoiceid').value = invoice.invoiceid;
 
   let invoiceitems = formdata.invoiceitems;
-  let articles = formdata.articles;
+  let articles = formdata.articles || [];  // Ensure articles is at least an empty array
   let i = 1;
   let snippet = '';
   for (let invoiceitemid in invoiceitems) {
@@ -80,13 +101,16 @@ function populateForm(formdata, method) {
             <select class="form-select" name="articlenumber_${invoiceitemid}" id="articlenumber_${invoiceitemid}">
                 <option value="0"><%== __('Select') %></option>`;
 
-      for (let i = 0; i < articles.length; i++) {
-        snippet += `
-                <option value="${articles[i].ArticleNumber}"`;
-        if (articles[i].ArticleNumber == invoiceitem.articlenumber) {
-          snippet += ` selected="true"`;
+      // Check if articles is an array and has items
+      if (Array.isArray(articles) && articles.length > 0) {
+        for (let i = 0; i < articles.length; i++) {
+          snippet += `
+                  <option value="${articles[i].ArticleNumber}"`;
+          if (articles[i].ArticleNumber == invoiceitem.articlenumber) {
+            snippet += ` selected="true"`;
+          }
+          snippet += `>${articles[i].Description}</option>`;
         }
-        snippet += `>${articles[i].Description}</option>`;
       }
       snippet += `
             </select>

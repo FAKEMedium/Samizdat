@@ -20,52 +20,30 @@
       <label class="visually-hidden" for="amount"><%== __('Paid amount') %></label>
       <input type="text" class="form-control" name="amount" id="amount" placeholder="<%== __('Amount') %>">
       <input type="date" class="form-control" name="paydate" id="paydate" placeholder="<%== __('Paydate') %>">
-      <button
-         id="paymentbutton"
-         type="submit"
-         class="btn btn-primary"
-         title="<%==  __('Click to pop payment dialog.') %>"
-         onclick="markPayment('#dataform');">
+      <button id="paymentbutton" type="submit" class="btn btn-primary" title="<%==  __('Click to pop payment dialog.') %>" onclick="markPayment('#dataform');">
         <%== icon 'clipboard-plus-fill', {} %>
         <span class="d-sm-inline d-none"><%== __('Mark payment') %></span>
       </button>
     </div>
   </div>
   <div class="col justify-content-sm-end input-group">
-    <button type="submit"
-            class="btn btn-primary mx-1"
-            title="<%==  __('Click to send a credit invoice.') %>"
-            onclick="makeCreditInvoice('#dataform');">
+    <button type="submit" class="btn btn-primary mx-1" title="<%==  __('Click to send a credit invoice.') %>" onclick="makeCreditInvoice('#dataform');">
       <%== icon 'trash-fill', {} %>
       <span class="d-sm-inline d-none ms-0"><%== __('Credit invoice') %></span>
     </button>
-    <a href="#"
-       id="remindbutton"
-       role="button"
-       class="btn btn-primary mx-1 modal-lg"
-       aria-label="<%== __('Remind') %>"
-       title="<%==  __('Click to pop reminder dialog.') %>"
-       data-bs-toggle="modal"
-       data-bs-target="#universalmodal">
+    <a href="#" id="remindbutton" role="button" class="btn btn-primary mx-1 modal-lg" aria-label="<%== __('Remind') %>"
+       title="<%==  __('Click to pop reminder dialog.') %>" data-bs-toggle="modal" data-bs-target="#universalmodal">
       <div class="position-absolute top-0 end-0 translate-middle-y d-print-none">
         <span id="remindercount" class="badge rounded-pill bg-danger text-white blank reset"></span>
       </div>
       <%== icon 'exclamation-circle-fill', {} %>
       <span class="d-sm-inline d-none ms-1"><%== __('Remind') %></span>
     </a>
-    <button type="submit"
-            class="btn btn-primary mx-1"
-            aria-label="<%== __('Send again') %>"
-            title="<%==  __('Click to send again.') %>"
-            onclick="resendInvoice('#dataform');">
+    <button type="button" class="btn btn-primary mx-1" aria-label="<%== __('Send again') %>" title="<%==  __('Click to send again.') %>" onclick="resendInvoice();">
       <%== icon 'send-plus-fill', {} %>
       <span class="d-sm-inline d-none ms-1"><%== __('Resend') %></span>
     </button>
-    <button type="submit"
-            class="btn btn-primary mx-1"
-            aria-label="<%== __('Reprint') %>"
-            title="<%==  __('Click to regenerate PDF.') %>"
-            onclick="reprintInvoice('#dataform');">
+    <button type="button" class="btn btn-primary mx-1" aria-label="<%== __('Reprint') %>" title="<%==  __('Click to regenerate PDF.') %>" onclick="reprintInvoice();">
         <%== icon 'printer-fill', {} %>
         <span class="d-sm-inline d-none ms-1"><%== __('Reprint') %></span>
     </button>

@@ -21,7 +21,12 @@ sub get ($self, $params = {}) {
   my $duedate = sprintf("IF(state = 'fakturerad', DATE_FORMAT(DATE_ADD(invoicedate, INTERVAL %d DAY), '%%Y-%%m-%%d', 'CET'), 0) AS duedate",
     $self->config->{duedays} // 30
   );
-  my $invoices = $db->select('invoice', "*, $due, $duedate", $where, $limit)->hashes;
+
+  # Add subqueries for reminder information
+  my $lastreminderdate = "(SELECT MAX(reminderdate) FROM invoicereminder WHERE invoicereminder.invoiceid = invoice.invoiceid) AS lastreminderdate";
+  my $remindercount = "(SELECT COUNT(*) FROM invoicereminder WHERE invoicereminder.invoiceid = invoice.invoiceid) AS remindercount";
+
+  my $invoices = $db->select('invoice', "*, $due, $duedate, $lastreminderdate, $remindercount", $where, $limit)->hashes;
   return $invoices;
 }
 
@@ -37,7 +42,7 @@ sub nextnumber ($self) {
   return $nextnumber;
 }
 
-sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0) {
+sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0, $states = undef) {
   my $db = $self->mysql->db;
   my $sign = '>';
   my $orderby = { '-asc' => 'fakturanummer' };
@@ -50,7 +55,13 @@ sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0) {
   $invoiceid = int $invoiceid;
   $where->{invoiceid} = $invoiceid if ($invoiceid);
   $where->{customerid} = $customerid if ($customerid);
-  $where->{state} = { '=' => ['fakturerad','bokford','raderad'] };
+
+  # Use provided states or default
+  if ($states && @$states) {
+    $where->{state} = { '=' => $states };
+  } else {
+    $where->{state} = { '=' => ['fakturerad','bokford','raderad'] };
+  }
 
   my $invoice = {};
   my $results = $db->select('invoice', '*', $where);
@@ -159,9 +170,13 @@ sub addinvoice ($self, $customer =  {}) {
 
 sub updateinvoice ($self, $invoiceid = 0, $invoicedata = {}) {
   return 0 if (! int $invoiceid);
+
+  # Remove calculated/virtual fields that don't exist as actual columns
   delete $invoicedata->{duedate};
   delete $invoicedata->{pdfdate};
   delete $invoicedata->{due};
+  delete $invoicedata->{lastreminderdate};
+  delete $invoicedata->{remindercount};
 
   my $db = $self->mysql->db;
   my $where = {invoiceid => $invoiceid};

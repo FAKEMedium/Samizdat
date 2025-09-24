@@ -8,8 +8,8 @@ sub register ($self, $app, $conf) {
 
   # Invoice stuff
   my $manager = $r->manager('fortnox')->to(controller => 'Fortnox');
-  $manager->any('customers')                ->to('#customers')             ->name('fortnox_customer');
   $manager->any('customers/:customerid')    ->to('#customers');
+  $manager->any('customers')                ->to('#customers')             ->name('fortnox_customer');
   $manager->post('invoices')                ->to('#postinvoice');
   $manager->get('invoices')                 ->to('#invoices')             ->name('fortnox_invoices');
   $manager->get('payments/:number')         ->to('#payments');

@@ -1,58 +1,40 @@
 package Samizdat::Command::fetchbuymeacoffee;
 
-use Mojo::Base 'Mojolicious::Command';
-use Mojo::UserAgent;
+use Mojo::Base 'Mojolicious::Command', -signatures;
+use Samizdat::Model::BuyMeACoffee;
 
 # Add a cron job to run this command every hour
-# Not neded if we use the webhook
-# 0 * * * * cd /path/to/samizdat && script/samizdat fetchbuymeacoffee
+# Not needed if we use the webhook
+# 0 * * * * cd /path/to/samizdat && bin/samizdat fetchbuymeacoffee
 
 has description => 'Fetch Buy Me a Coffee supporter count';
 has usage => sub { shift->extract_usage };
 
 sub run ($self, @args) {
   my $app = $self->app;
-  my $slug = $app->config->{buymeacoffee}->{slug};
-  
-  unless ($slug) {
+  my $config = $app->config->{buymeacoffee};
+
+  unless ($config && $config->{slug}) {
     say "No Buy Me a Coffee slug configured";
     return;
   }
-  
-  my $ua = Mojo::UserAgent->new;
-  my $url = "https://www.buymeacoffee.com/$slug";
-  
-  say "Fetching supporter count for $slug...";
-  
-  my $tx = $ua->get($url);
-  
-  if ($tx->success) {
-    my $html = $tx->res->body;
-    my $supporters = 0;
-    
-    # Try multiple patterns to find supporter count
-    if ($html =~ /(\d+)\s*(?:supporters?|members?)/i) {
-      $supporters = $1;
-    } elsif ($html =~ /"supporters":\s*(\d+)/i) {
-      $supporters = $1;
-    } elsif ($html =~ /data-supporters=["'](\d+)["']/i) {
-      $supporters = $1;
-    }
-    
-    # Store in Redis with 24 hour expiry
-    my $cache_key = "buymeacoffee:supporters:$slug";
-    $app->redis->db->set($cache_key => $supporters);
-    $app->redis->db->expire($cache_key => 86400);
-    
-    # Also store in a file as backup
-    my $cache_file = "/tmp/buymeacoffee_$slug.txt";
-    Mojo::File->new($cache_file)->spurt($supporters);
-    
+
+  say "Fetching supporter count for $config->{slug}...";
+
+  # Create model instance
+  my $bmc = Samizdat::Model::BuyMeACoffee->new({
+    config => $config,
+    redis  => $app->redis,
+    pg     => $app->pg,
+  });
+
+  # Fetch fresh supporter count
+  my $supporters = $bmc->fetch_supporters;
+
+  if ($supporters) {
     say "Supporter count: $supporters (cached)";
   } else {
-    my $err = $tx->error;
-    say "Failed to fetch: $err->{code} $err->{message}" if $err->{code};
-    say "Connection error: $err->{message}" if !$err->{code};
+    say "Failed to fetch supporter count";
   }
 }
 

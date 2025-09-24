@@ -451,15 +451,33 @@ sub settings ($self) {
     return unless $self->access({ 'valid-user' => 1 });
     my $user = $self->authenticated_user();
 
+    # Check if user is authenticated
+    unless ($user && $user->{userid}) {
+      return $self->render(json => {
+        success => 0,
+        error => 'Not authenticated'
+      }, status => 401);
+    }
+
     if ($self->req->method eq 'POST') {
       # Handle profile data update via AJAX
       return $self->update_profile();
     } else {
       # Return current profile data as JSON
-      my $profile = $self->app->account->get_profile($user->{userid});
+      my $profile;
+      eval {
+        $profile = $self->app->account->get_profile($user->{userid});
+      };
+      if ($@) {
+        return $self->render(json => {
+          success => 0,
+          error => "Failed to get profile: $@"
+        }, status => 500);
+      }
+
       return $self->render(json => {
         success => 1,
-        profile => $profile
+        profile => $profile // {}
       });
     }
   } else {

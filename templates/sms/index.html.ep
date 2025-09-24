@@ -1,11 +1,3 @@
-<!-- Messages Header -->
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h5 class="mb-0"><%== __('Messages') %></h5>
-  <button class="btn btn-outline-secondary btn-sm" id="syncMessages">
-    <%== icon('arrow-repeat') %> <%== __('Refresh') %>
-  </button>
-</div>
-
 <!-- Messages Table -->
 <div id="recentMessages">
   <div class="table-responsive">
@@ -16,7 +8,14 @@
           <th><%== __('Message') %></th>
           <th><%== __('Status') %></th>
           <th><%== __('Time') %></th>
-          <th><%== __('Actions') %></th>
+          <th>
+            <div class="d-flex justify-content-between align-items-center">
+              <span><%== __('Actions') %></span>
+              <button class="btn btn-primary btn-sm" id="syncMessages" aria-label="<%== __('Sync messages') %>">
+                <%== icon('arrow-repeat') %>
+              </button>
+            </div>
+          </th>
         </tr>
       </thead>
       <tbody id="messagesTableBody">

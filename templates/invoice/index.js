@@ -49,6 +49,35 @@ function getInvoices(){
   sendData('GET');
 }
 
+async function updatePaymentDate(invoiceId, paymentDate) {
+  try {
+    const response = await fetch(`/invoices/${invoiceId}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({ paydate: paymentDate })
+    });
+
+    if (!response.ok) {
+      if (response.status === 401) {
+        const data = await response.json();
+        if (window.handle401Error) {
+          window.handle401Error(data.error || '<%== __("Authentication required") %>');
+        } else {
+          window.location.href = '<%== url_for('account_login') %>';
+        }
+      } else {
+        alert('Failed to update payment date');
+      }
+    }
+  } catch (e) {
+    console.error('Error updating payment date:', e);
+    alert('Failed to update payment date');
+  }
+}
+
 
 function populateForm(formdata, method) {
   let invoices = formdata.invoices;
@@ -78,12 +107,38 @@ function populateForm(formdata, method) {
       rowclass.push('text-white');
       rowclass.push('bg-success');
     }
+    // Create payment date cell based on state
+    let paymentCell = '';
+    if (invoice.state === 'fakturerad') {
+      // Show date input field for unpaid invoices
+      paymentCell = `<input type="date" class="form-control form-control-sm" name="paydate_${invoice.invoiceid}" value="${invoice.paydate ? invoice.paydate.substring(0, 10) : ''}" onchange="updatePaymentDate(${invoice.invoiceid}, this.value)">`;
+    } else if (invoice.state === 'bokford') {
+      // Show payment date for paid invoices
+      paymentCell = invoice.paydate ? invoice.paydate.substring(0, 10) : '';
+    } else {
+      // Empty for other states
+      paymentCell = '';
+    }
+
+    // Format last reminder date with badge for count
+    let reminderCell = '';
+    if (invoice.lastreminderdate) {
+      reminderCell = invoice.lastreminderdate.substring(0, 10);
+      if (invoice.remindercount > 0) {
+        reminderCell += ` <span class="badge bg-secondary">${invoice.remindercount}</span>`;
+      }
+    } else if (invoice.remindercount > 0) {
+      reminderCell = `<span class="badge bg-secondary">${invoice.remindercount}</span>`;
+    }
+
     snippet += `
                 <tr data-invoiceid="${invoice.invoiceid}">
                   <td><a href="<%== config->{sitesurl} %>invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
                   <td><a class="w-auto" href="<%== sprintf("%s%s", config->{manager}->{url}, 'invoices/') %>${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
-                  <td>${invoice.paydate.substring(10, 0)}</td>
-                  <td>${invoice.invoicedate.substring(10, 0)}</td>
+                  <td>${invoice.customername || ''}</td>
+                  <td>${invoice.invoicedate.substring(0, 10)}</td>
+                  <td>${reminderCell}</td>
+                  <td>${paymentCell}</td>
                   <td class="text-end">${invoice.costsum}</td>
                   <td class="text-end">${invoice.costsum}</td>
                 </tr>`;

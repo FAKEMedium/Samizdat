@@ -1,7 +1,19 @@
-billingemail = '';
-fakturanummer = '';
-debt = '';
-invoicedate = '';
+let billingemail = '';
+let fakturanummer = '';
+let debt = '';
+let invoicedate = '';
+
+// Create sprintf function that uses window.sprintf if available, or fallback
+function sprintf(format, ...args) {
+  if (window.sprintf && typeof window.sprintf === 'function') {
+    return window.sprintf(format, ...args);
+  }
+  // Simple fallback for %.2f format
+  if (format === '%.2f' && args.length === 1) {
+    return parseFloat(args[0]).toFixed(2);
+  }
+  return args[0]?.toString() || '';
+}
 
 document.querySelectorAll('form').forEach((el) => {
   el.addEventListener("submit", (event) => {
@@ -128,7 +140,7 @@ function populateForm(formdata, method, dataform) {
   debt = invoice.debt;
 
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
-  document.querySelector('#customer').href = `<%== url_for('customer_index') %>` + customer.customerid;
+  document.querySelector('#customer').href = `<%== url_for('customer_index') %>/` + customer.customerid;
   document.querySelector('#headline').innerHTML = `<%==__('Invoice') %> ${invoice.fakturanummer}`;
   document.querySelector('#invoiceid').value = invoice.invoiceid;
   document.querySelector('#customerid').value = invoice.customerid;
@@ -170,7 +182,7 @@ function populateForm(formdata, method, dataform) {
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
-  let pdfsrc = '<%== sprintf("%s/invoice/", config->{siteurl}) %>' + invoice.uuid + '.pdf';
+  let pdfsrc = '/<%== config->{manager}->{invoice}->{invoiceurl} %>' + invoice.uuid + '.pdf';
   if (pdfoffcanvas.classList.contains('show')) {
     pdfiframe.setAttribute('src', pdfsrc);
   }
@@ -250,16 +262,99 @@ function remindInvoice() {
   document.querySelector('#remindbutton').href = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/remind`;
 }
 
-function reprintInvoice() {
+// Make function globally accessible for onclick handlers
+window.reprintInvoice = async function() {
+  const customerid = document.querySelector('#customerid')?.value;
+  const invoiceid = document.querySelector('#invoiceid')?.value;
 
+  if (!customerid || !invoiceid) {
+    alert('<%== __("Missing customer or invoice ID") %>');
+    return;
+  }
+
+  try {
+    const url = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/reprint`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // Show success using the existing toast if available
+      const toastEl = document.getElementById('invoice-toast');
+      if (toastEl) {
+        toastEl.querySelector('.toast-body').textContent = '<%== __("Invoice reprinted successfully") %>';
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+      }
+
+      // Reload the page to show the new PDF
+      setTimeout(() => {
+        window.location.reload();
+      }, 1500);
+    } else {
+      const error = await response.text();
+      alert(`<%== __("Failed to reprint invoice") %>: ${error}`);
+    }
+  } catch (error) {
+    console.error('Error reprinting invoice:', error);
+    alert(`<%== __("Error reprinting invoice") %>: ${error.message || error}`);
+  }
 }
 
-function resendInvoice() {
+// Make functions globally accessible for onclick handlers
+window.resendInvoice = async function() {
+  const customerid = document.querySelector('#customerid')?.value;
+  const invoiceid = document.querySelector('#invoiceid')?.value;
 
+  if (!customerid || !invoiceid) {
+    alert('<%== __("Missing customer or invoice ID") %>');
+    return;
+  }
+
+  // Confirm before resending
+  if (!confirm('<%== __("Are you sure you want to resend this invoice?") %>')) {
+    return;
+  }
+
+  try {
+    const url = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/resend`;
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      // Show success using the existing toast if available
+      const toastEl = document.getElementById('invoice-toast');
+      if (toastEl) {
+        toastEl.querySelector('.toast-body').textContent = '<%== __("Invoice resent successfully") %>';
+        const toast = new bootstrap.Toast(toastEl);
+        toast.show();
+      } else {
+        alert('<%== __("Invoice resent successfully") %>');
+      }
+    } else {
+      const error = await response.text();
+      alert(`<%== __("Failed to resend invoice") %>: ${error}`);
+    }
+  } catch (error) {
+    console.error('Error resending invoice:', error);
+    alert(`<%== __("Error resending invoice") %>: ${error.message || error}`);
+  }
 }
 
-function markPayment() {
-
+window.markPayment = function() {
+  // TODO: Implement mark payment functionality
+  alert('Mark payment functionality not yet implemented');
 }
 
 function getInvoice(dataform) {

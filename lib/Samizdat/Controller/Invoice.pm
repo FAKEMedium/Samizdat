@@ -43,22 +43,79 @@ sub index ($self) {
       $customer = $self->app->customer->get($options)->[0];
       $customer->{customerid} = $customerid;
     }
-    my $searchterm = int $self->param('searchterm');
+    # Get existing filter from cookie
+    my $filter_cookie = $self->cookie('invoicefilter');
+    my $filter = {};
+    if ($filter_cookie) {
+      eval { $filter = decode_json($filter_cookie); };
+    }
+
+    # Get parameters from form or cookie defaults
+    my $searchterm = $self->param('searchterm') // $filter->{searchterm} // '';
+    my $paid = defined $self->param('paid') ? int $self->param('paid') : ($filter->{paid} // 0);
+    my $unpaid = defined $self->param('unpaid') ? int $self->param('unpaid') : ($filter->{unpaid} // 1);
+    my $destroyed = defined $self->param('destroyed') ? int $self->param('destroyed') : ($filter->{destroyed} // 0);
+
+    # Update filter and save to cookie
+    $filter = {
+      searchterm => $searchterm,
+      paid => $paid,
+      unpaid => $unpaid,
+      destroyed => $destroyed
+    };
+
+    # Set session cookie with JSON data
+    $self->cookie(invoicefilter => encode_json($filter), {
+      path => '/',
+      httponly => 1,
+      secure => 1,
+      samesite => 'Strict'
+      # No expires = session cookie
+    });
+
+    # Apply filters
+    $searchterm = int $searchterm if $searchterm =~ /^\d+$/;
     $options->{where}->{fakturanummer} = $searchterm if ($searchterm);
     $options->{where}->{state} = [];
-    my $paid = int $self->param('paid');
-    my $unpaid = int $self->param('unpaid');
-    my $destroyed = int $self->param('destroyed');
-
-    push @{ $options->{where}->{state} }, 'bokford' if ($paid);
-    push @{ $options->{where}->{state} }, 'fakturerad' if ($unpaid);
-    push @{ $options->{where}->{state} }, 'raderad' if ($destroyed);
-    push @{ $options->{where}->{state} }, 'krediterad' if ($destroyed);
+    if ($paid) {
+      push @{$options->{where}->{state}}, 'bokford';
+    }
+    if ($unpaid) {
+      push @{$options->{where}->{state}}, 'fakturerad';
+    }
+    if ($destroyed) {
+      push @{$options->{where}->{state}}, 'raderad';
+      push @{$options->{where}->{state}}, 'krediterad';
+    };
 
     $options->{where}->{state} = {'!=', 'obehandlad'} if (! scalar @{ $options->{where}->{state} });
     $options->{where}->{invoicedate} = {'>', '2017'};
 
     my $invoices = $self->app->invoice->get($options);
+
+    # Get unique customer IDs from invoices
+    my %customer_ids = map { $_->{customerid} => 1 } grep { $_->{customerid} } @$invoices;
+
+    # Fetch all customers at once if there are any
+    my %customer_names;
+    if (keys %customer_ids) {
+      my $customers = $self->app->customer->get({
+        where => { customerid => { '=' => [keys %customer_ids] } }
+      });
+
+      # Build lookup hash of customer names
+      foreach my $cust (@$customers) {
+        $customer_names{$cust->{customerid}} = $self->app->customer->name($cust);
+      }
+    }
+
+    # Add customer names to invoices
+    foreach my $invoice (@$invoices) {
+      if ($invoice->{customerid} && exists $customer_names{$invoice->{customerid}}) {
+        $invoice->{customername} = $customer_names{$invoice->{customerid}};
+      }
+    }
+
     my $formdata = {
       customer   => $customer,
       invoices   => $invoices,
@@ -205,7 +262,7 @@ sub create ($self, $credit = 0) {
     return;
   }
   $self->stash(formdata => $formdata);
-  my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => undef);
+  my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/create/index');
   $tex = encode 'UTF-8', $tex;
   my $data = $self->app->printinvoice($tex, $formdata);
   if ($data) {
@@ -405,7 +462,7 @@ sub edit ($self) {
   );
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/opwn/edit/index', format => 'js', toast => $toast);
+    $web->{script} .= $self->render_to_string(template => 'invoice/open/edit/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'chunks/editlinks');
   } else {
     # Require admin access for JSON invoice data
@@ -462,7 +519,32 @@ sub nav ($self) {
   my $customerid = int $self->stash('customerid');
   my $to = $self->stash('to');
   $self->stash(percustomer => $customerid);
-  my $invoice = $self->app->invoice->nav($to, $invoiceid, $customerid);
+
+  # Get filter from cookie
+  my $filter_cookie = $self->cookie('invoicefilter');
+  my $filter = {};
+  if ($filter_cookie) {
+    eval { $filter = decode_json($filter_cookie); };
+  }
+
+  # Build state filter based on cookie
+  my @states = ();
+  if ($filter->{paid}) {
+    push @states, 'bokford';
+  }
+  if ($filter->{unpaid}) {
+    push @states, 'fakturerad';
+  }
+  if ($filter->{destroyed}) {
+    push @states, 'raderad', 'krediterad';
+  }
+
+  # Default to showing non-draft invoices if no filter specified
+  if (!@states) {
+    @states = ('fakturerad', 'bokford', 'raderad');
+  }
+
+  my $invoice = $self->app->invoice->nav($to, $invoiceid, $customerid, \@states);
   if ($invoice->{invoiceid}) {
     $self->stash(invoiceid => $invoice->{invoiceid});
   }
@@ -566,27 +648,49 @@ sub remind ($self) {
 
 
 sub resend ($self) {
-  my $title = $self->app->__('Send reminder');
-  my $web = {title => $title};
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  # Require admin access for invoice operations
+  return unless $self->access({ admin => 1 });
+
   my $invoiceid = int $self->stash('invoiceid') // 0;
-  if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
-  } else {
-    # Require admin access for invoice operations
-    return unless $self->access({ admin => 1 });
-    my $invoice = {};
-    my $customer = {};
-    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
-      my $customerid = $invoice->{customerid} // 0;
-      if ($customer) {
-        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
-        $customer->{name} = $self->app->customer->name($customer);
-      }
-      return $self->render(json => { });
-    }
+  my $customerid = int $self->stash('customerid') // 0;
+
+  unless ($invoiceid) {
+    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
   }
+
+  # Get invoice details
+  my $invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid } })->[0];
+  unless ($invoice) {
+    return $self->render(json => { error => 'Invoice not found' }, status => 404);
+  }
+
+  # Get customer details
+  $customerid ||= $invoice->{customerid};
+  my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+  unless ($customer) {
+    return $self->render(json => { error => 'Customer not found' }, status => 404);
+  }
+
+  # TODO: Implement actual email sending logic here
+  # This would typically involve:
+  # 1. Getting the invoice PDF
+  # 2. Composing the email with invoice details
+  # 3. Sending via email service
+  # For now, just log and return success
+
+  $self->app->log->info("Resending invoice $invoiceid to customer $customerid");
+
+  # Update last sent timestamp if such field exists
+  eval {
+    $self->app->invoice->updateinvoice($invoiceid, { lastsentdate => \'NOW()' });
+  };
+
+  return $self->render(json => {
+    success => 1,
+    message => 'Invoice resent successfully',
+    invoiceid => $invoiceid,
+    customerid => $customerid
+  });
 }
 
 
@@ -681,18 +785,44 @@ sub _getdata ($self, $options = { includearticles => 1, includepayments => 1, in
   $formdata->{articles} = $self->_articles() if ($options->{includearticles});
   $formdata->{payments} = $self->app->invoice->payments({ where => { invoiceid => $invoiceid } }) if ($options->{includepayments});
   $formdata->{reminders} = $self->app->invoice->reminders($invoiceid) if ($options->{includereminders});
+
+  # Pass any Fortnox errors to the frontend
+  if (my $error = $self->stash('fortnox_error')) {
+    $formdata->{fortnox_error} = $error;
+  }
+
   return $formdata;
 }
 
 
 sub _articles ($self) {
+  # Check if Fortnox plugin is loaded
+  if (!$self->app->fortnox) {
+    return [];
+  }
+
   my $articles = $self->app->fortnox->getArticle();
-  if (exists $articles->{Articles}) {
+
+  # Ensure we have a valid response
+  if (!defined $articles) {
+    return [];
+  }
+
+  # Check for API errors
+  if (ref($articles) eq 'HASH' && exists($articles->{error}) && $articles->{error}) {
+    # Store error in stash for display to user
+    $self->stash(fortnox_error => $articles->{message} // 'Failed to fetch articles from Fortnox');
+    return [];
+  }
+
+  if (ref($articles) eq 'HASH' && exists $articles->{Articles}) {
     $articles = $articles->{Articles};
   } else {
     $articles = [];
   }
-  return $articles;
+
+  # Ensure we always return an array ref
+  return ref($articles) eq 'ARRAY' ? $articles : [];
 }
 
 

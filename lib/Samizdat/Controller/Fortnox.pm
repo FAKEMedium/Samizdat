@@ -5,7 +5,7 @@ use Data::Dumper;
 
 
 sub redirect ($self) {
-  $self->redirect_to($self->app->config->{manager}->{url});
+  $self->redirect_to($self->url_for('manager_index'));
 }
 
 
@@ -25,8 +25,9 @@ sub auth ($self) {
     say $redirect;
     return $self->redirect_to($redirect);
   }
-  $self->redirect_to(sprintf('%s', $self->app->config->{manager}->{url}));
+  $self->redirect_to($self->url_for('manager_index'));
 }
+
 
 sub customers ($self) {
   my $title = $self->app->__('Customers');
@@ -57,6 +58,7 @@ sub customers ($self) {
   }
 }
 
+
 sub payments ($self) {
   # Require admin access for payment management
   return unless $self->access({ admin => 1 });
@@ -80,23 +82,24 @@ sub payments ($self) {
       $options->{qp}->{invoicenumber} = $invoiceid;
     }
     my $payment = $self->app->fortnox->getInvoicePayment($number, $options);
-    my $fortnox = {
-      title    => $title,
-    };
+    my $fortnox = { title => $title };
     $fortnox->{payment} = $payment;
     return $self->render(json => { fortnox => $fortnox });
   }
 }
+
 
 sub logout ($self) {
   $self->app->fortnox->removeCache;
   $self->redirect;
 }
 
+
 sub _login ($self) {
   say $self->app->config->{manager}->{url};
-  $self->redirect_to(sprintf('%s%s', $self->app->config->{manager}->{url}, 'fortnox/auth'));
+  $self->redirect_to($self->url_for('fortnox_auth'));
 }
+
 
 sub index ($self) {
   my $title = $self->app->__('Samizdat');

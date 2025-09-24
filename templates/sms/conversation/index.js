@@ -3,7 +3,7 @@ const pathParts = window.location.pathname.split('/');
 const phoneNumber = decodeURIComponent(pathParts[pathParts.length - 1]);
 let currentPage = 1;
 let totalPages = 1;
-const perPage = <%= config->{sms}->{teltonika}->{perpage} || 20 %>;
+const perPage = <%= config->{manager}->{sms}->{teltonika}->{perpage} || 20 %>;
 
 // Format timestamp to show seconds precision
 function formatTimestamp(timestamp) {

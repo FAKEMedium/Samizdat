@@ -202,11 +202,11 @@ window.getId = async function getId(what, customerid = 0) {
   }
 }
 
-function updateCustomer(){
+window.updateCustomer = function(){
   sendData('PUT');
 }
 
-function createCustomer() {
+window.createCustomer = function() {
 //  sendData('POST');
   form.submit();
 }
@@ -311,8 +311,10 @@ function populateForm(formdata, method) {
       if (parseInt(customer.orgno.substring(2, 4)) < 20) {
         document.querySelector('#upplysning').href = `https://upplysning.se/person/?sl=detail&b=${customer.orgno}`;
         document.querySelector('#upplysning').classList.remove("d-none");
+        document.querySelector('#allabolag').href = `https://www.allabolag.se/befattningshavare?q=${customer.orgno.replace(/[^0-9]/g, '')}`;
+      } else {
+        document.querySelector('#allabolag').href = `https://www.allabolag.se/bransch-sök?q=${customer.orgno}`;
       }
-      document.querySelector('#allabolag').href = `https://www.allabolag.se/?what=${customer.orgno}`;
       document.querySelector('#allabolag').classList.remove("d-none");
     } else if ('NO' == customer.country) {
       document.querySelector('#brreg').href = `https://w2.brreg.no/enhet/sok/valg.jsp?inputparam=${customer.orgno}`;
@@ -440,7 +442,7 @@ function populateForm(formdata, method) {
   for (const dnsdomain of dnsdomains) {
     nrdnsdomains++;
     snippet += `
-                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== url_for('dnsadmin_index') %>/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
+                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== url_for('dnsadmin_zones') %>/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
   }
   document.querySelector('#dnsdomains tbody').innerHTML = snippet;
   if (nrdnsdomains > 0) {

@@ -25,9 +25,9 @@
       <%== icon 'person-circle'; %>
       <span class="ms-2"><%= __('Settings') %></span>
     </a>
-    <a class="dropdown-item" href="<%== url_for('account_panel') %>/" title="<%=  __('Link to control panel') %>">
+    <a class="dropdown-item" href="<%== url_for('manager_index') %>" title="<%=  __('Link to control panel') %>">
       <%== icon 'grid-3x3-gap-fill'; %>
-      <span class="ms-2"><%= __('Personal panel') %></span>
+      <span class="ms-2"><%= __('Control panel') %></span>
     </a>
     <a class="dropdown-item" href="<%== url_for('account_logout') %>" title="<%= __('Log out and end current session') %>" aria-label="<%= __('Log out') %>">
       <%== icon 'box-arrow-left'; %>

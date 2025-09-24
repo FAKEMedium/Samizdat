@@ -28,12 +28,12 @@ manager:
     cardnumber: 2
     sender: billing@example.com
     sendername: Invoicing example
-    invoicedir: /tmp/invoice    # invoicedir is an absolute path
+    invoicedir: /tmp/invoice      # invoicedir is an absolute path
     invoiceurl: invoice/
     logotype: fakenews
     duedays: 30
     overdueinterest: 8
-    duedaysremind: 10    # Days after due day when we remind
+    duedaysremind: 10              # Days after due day when we remind
     debug: 0
     bankgiro: xxxxx
     plusgiro: xxxxxx-x
@@ -79,24 +79,33 @@ manager:
       format:
         webp: 1
       width:
-        thumb: 150      # Thumbnail
-        col1: 216       # 1/12 width at xxl
-        col2: 324       # 1/6 width at xxl  
-        mobile: 360     # Mobile viewport
-        col3: 432       # 1/4 width at xxl
-        col4: 516       # 1/3 width at xl - PageSpeed 372px
-        col6: 648       # 1/2 width at xxl
-        tablet: 696     # md container
-        col8: 744       # 2/3 width at xl - PageSpeed 744px
-        col8xxl: 873    # 2/3 width at xxl - actual browser display
-        col9: 864       # 3/4 width at xxl
-        desktop: 936    # lg container
-        col10: 1116     # xl container  
-        col12: 1296     # Full width at xxl
+        thumb: 150                 # Thumbnail
+        col1: 216                  # 1/12 width at xxl
+        col2: 324                  # 1/6 width at xxl  
+        mobile: 360                # Mobile viewport
+        col3: 432                  # 1/4 width at xxl
+        col4: 516                  # 1/3 width at xl - PageSpeed 372px
+        col6: 648                  # 1/2 width at xxl
+        tablet: 696                # md container
+        col8: 744                  # 2/3 width at xl - PageSpeed 744px
+        col8xxl: 873               # 2/3 width at xxl - actual browser display
+        col9: 864                  # 3/4 width at xxl
+        desktop: 936               # lg container
+        col10: 1116                # xl container  
+        col12: 1296                # Full width at xxl
   user:
     cardnumber: 10
   example:
     cardnumber: 11
+  sms:
+    cardnumber: 12
+    teltonika:
+      host: sms.example.com
+      port: 443
+      username: zaphod
+      password: s3cr3t
+      secret: s3cr3t               # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
+      perpage: 10
 screenshots:
   -
     src: /media/images/notrust.jpg
@@ -149,7 +158,7 @@ captcha:
   width: 873
   height: 10/0
   length: 5
-  chars: '234679ACEFHJ-NPRT-Y'  # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
+  chars: '234679ACEFHJ-NPRT-Y'             # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
 mail:
   from: noreply@example.com
   type: text/html
@@ -164,21 +173,13 @@ mail:
     - account@example.com
     - AuthPass
     - s3cr3t
-sms:
-  teltonika:
-    host: sms.example.com
-    port: 443
-    username: zaphod
-    password: s3cr3t
-    secret: s3cr3t # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
-    perpage: 10
 hypnotoad:
   listen:
     - https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1 # Run "make cert" to generate a self-signed certificate
     - http+unix://bin%2Fsamizdat.sock
   workers: 4
   pid_file: bin/samizdat.pid
-  proxy: 1                                                            # Reverse proxy to the web server, e.g. nginx
+  proxy: 1                                  # Reverse proxy to the web server, e.g. nginx
 extratemplates:
   - /usr/local/share/perl/5.38.0/Mojolicious/resources/templates/mojo
 nginx: 1
@@ -191,7 +192,7 @@ account:
   datacookiename: samizdata
   username:
     minlength: 3
-    chars: a-z0-9  # database comparisons will be case insensitive.
+    chars: a-z0-9                           # database comparisons will be case insensitive.
   password:
     minlength: 8
     minuppercase: 1
@@ -199,19 +200,19 @@ account:
     minnumbers: 1
     minspecial: 1
     chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
-  passwordmethods:  # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
+  passwordmethods:                          # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
     - mysql
     - sha512
     - pbkdf2
     - bcrypt
     - argon2id
-  convertpasswordto: argon2id   # Convert validated passwords to methods equal to, or better, than this methods strength
-  blocktime: 180                # Number of minutes a user will be blocked
-  blocklimit: 4                 # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
-  blockperiod: 10               # Time window in minutes that unsuccessful login attempts will be counted
-  sessiontimeout: 3600          # Session timeout in seconds
-  superadmins:                  # List of username: password that have full access to everything, mainly for bootstrapping.
-#    superadmin: s3cr3t_Pa55w0r6  # CHANGE!!!
+  convertpasswordto: argon2id               # Convert validated passwords to methods equal to, or better, than this methods strength
+  blocktime: 180                            # Number of minutes a user will be blocked
+  blocklimit: 4                             # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
+  blockperiod: 10                           # Time window in minutes that unsuccessful login attempts will be counted
+  sessiontimeout: 3600                      # Session timeout in seconds
+  superadmins:                              # List of username: password that have full access to everything, mainly for bootstrapping.
+#    superadmin: s3cr3t_Pa55w0r6            # CHANGE!!!
 dsn:
   pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
   redis: redis://127.0.0.1:6379/1
@@ -334,39 +335,40 @@ analytics:
   # Matomo - Full-featured open source analytics, formerly Piwik (requires PHP, MySQL/MariaDB)
   # Self-hosted alternative to Google Analytics with similar features
 #  matomo:
-#    u: /matomo/  # URL path to your Matomo installation
-#    siteId: 1    # Site ID from Matomo dashboard
+#    u: /matomo/                            # URL path to your Matomo installation
+#    siteId: 1                              # Site ID from Matomo dashboard
   
   # Umami - Lightweight, privacy-focused analytics (requires Node.js, PostgreSQL/MySQL)
   # Simple interface, GDPR compliant, ~50MB RAM usage
 #  umami:
-#    url: https://analytics.example.com  # Your Umami instance URL
-#    websiteId: YOUR-WEBSITE-ID          # Website ID from Umami dashboard
+#    url: https://analytics.example.com     # Your Umami instance URL
+#    websiteId: YOUR-WEBSITE-ID             # Website ID from Umami dashboard
   
   # Plausible - Privacy-friendly analytics (requires Elixir, PostgreSQL, ClickHouse)
   # No cookies, GDPR compliant, but complex self-hosting setup
 #  plausible:
-#    domain: example.com           # Your domain as configured in Plausible
-#    apiHost: https://plausible.example.com  # Your Plausible instance URL (optional)
+#    domain: example.com                    # Your domain as configured in Plausible
+#    apiHost: https://plausible.example.com # Your Plausible instance URL (optional)
   
   # PostHog - Product analytics with session recording (requires Docker, PostgreSQL, Redis)
   # More than just analytics - includes feature flags, A/B testing
 #  posthog:
-#    apiHost: https://posthog.example.com  # Your PostHog instance URL
-#    apiKey: YOUR-PROJECT-API-KEY          # Project API key from PostHog
+#    apiHost: https://posthog.example.com   # Your PostHog instance URL
+#    apiKey: YOUR-PROJECT-API-KEY           # Project API key from PostHog
   
   # GoatCounter - Minimal analytics (requires Go, SQLite)
   # Extremely lightweight, privacy-focused, no JavaScript required (can use pixel tracking)
 #  goatcounter:
-#    url: https://stats.example.com  # Your GoatCounter instance URL
-#    siteCode: YOUR-SITE-CODE        # Site code from GoatCounter
+#    url: https://stats.example.com         # Your GoatCounter instance URL
+#    siteCode: YOUR-SITE-CODE               # Site code from GoatCounter
   
   # Ackee - Minimal analytics focused on privacy (requires Node.js, MongoDB)
   # Beautiful UI, detailed insights while respecting privacy
 #  ackee:
-#    url: https://ackee.example.com  # Your Ackee instance URL
-#    domainId: YOUR-DOMAIN-ID        # Domain ID from Ackee dashboard
+#    url: https://ackee.example.com         # Your Ackee instance URL
+#    domainId: YOUR-DOMAIN-ID               # Domain ID from Ackee dashboard
 buymeacoffee:
-  slug: alipang           # Your Buy Me a Coffee username
-  webhook: webhook        # /buymeacoffee/webhook is our local webhook endpoint
-  webhook_secret: s3cr3t  # This is the secret we use to verify the webhook. Get it from your BMC account.
+  slug: alipang                             # Your Buy Me a Coffee username
+  webhook:
+    url: webhook                            # /buymeacoffee/webhook is our local webhook endpoint
+    seccret: s3cr3t                         # This is the secret we use to verify the webhook. Get it from your BMC account.

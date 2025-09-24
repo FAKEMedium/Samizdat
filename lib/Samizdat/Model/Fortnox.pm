@@ -75,17 +75,31 @@ sub updateCache ($self, $resource = undef) {
       my $object = exists($resourceconfig->{object}) ? $resourceconfig->{object} : $resource;
       do {
         $fetch = $self->callAPI($resource, 'get', 0, {qp => {page => $page}});
-        if (exists($fetch->{$object})) {
+
+        # Check for errors
+        if (ref($fetch) eq 'HASH' && exists($fetch->{error}) && $fetch->{error}) {
+          # Log the error and stop fetching
+          say sprintf("Fortnox API error for %s: %s", $resource, $fetch->{message} // 'Unknown error');
+          last;
+        }
+
+        if (ref($fetch) eq 'HASH' && exists($fetch->{$object})) {
           push(@{$list}, @{$fetch->{$object}});
         }
         $page++;
-      } until (!exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
+      } until (!ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
       $self->cache->{$self->config->{selectedapp}}->{$resource} = $list;
       $self->saveCache;
     }
   }
   $self->saveCache;
-  return ($resource) ? $self->cache->{$self->config->{selectedapp}}->{$resource} : $self->cache;
+
+  # Ensure we return at least an empty array if the cache entry doesn't exist
+  if ($resource) {
+    return $self->cache->{$self->config->{selectedapp}}->{$resource} // [];
+  } else {
+    return $self->cache;
+  }
 }
 
 sub removeCache ($self) {
@@ -220,11 +234,13 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
       return {};
     } elsif (404 == $tx->result->code) {
       $done = 1;
-      return 404;
+      return { error => 1, code => 404, message => 'Resource not found' };
     } elsif (400 == $tx->result->code) {
       say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
       $done = 1;
-      return 400;
+      my $error_data = {};
+      eval { $error_data = decode_json($tx->result->body); };
+      return { error => 1, code => 400, message => $error_data->{ErrorInformation}->{message} // 'Bad Request' };
     } elsif ($tx->result->code =~ /^4/) {
       #          say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
 

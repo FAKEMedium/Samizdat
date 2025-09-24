@@ -35,23 +35,34 @@ sub index ($self) {
 
     # Fill in some fields if user is logged in
     if ('GET' eq uc $self->req->method) {
-      if ($self->helpers->can('account') && $self->helpers->can('access')) {
-        # Check if user is logged in (any valid user)
-        if ($self->access({ 'valid-user' => 1 })) {
-          # Get the authenticated user's details
-          my $user = $self->authenticated_user() if $self->can('authenticated_user');
-          my $username = $user->{username} if $user;
+      # Pre-fill form with user data if logged in
+      if (eval { $self->app->account }) {
+        # First try to get the session user
+        my $session = $self->session('user');
+        my $user;
 
-          if ($username) {
-            my $contacts = $self->app->account->getUsers({ 'users.username' => $username });
-            if (0 == scalar @$contacts) {
-              my $contact = $contacts->[0];
-              if ('' eq $formdata->{email} && $contacts) {
-                $formdata->{email} = $contact->{email};
-              }
-              if ('' eq $formdata->{name} && $contacts) {
-                $formdata->{name} = sprintf('%s %s', $contact->{givenname}, $contact->{commonname});
-              }
+        if ($session && $session->{username}) {
+          # Get full user details from database
+          my $users = $self->app->account->getUsers({ 'users.username' => $session->{username} });
+          $user = $users->[0] if $users && @$users;
+        }
+
+        # Fallback to authenticated_user if available
+        $user ||= eval { $self->app->account->authenticated_user() };
+
+        if ($user) {
+          # Debug: Log what we got
+          $self->app->log->debug("Contact form user data: " . ($self->app->dumper($user) || 'none'));
+
+          # Pre-fill email if empty
+          $formdata->{email} //= $user->{email} if $user->{email};
+
+          # Pre-fill name if empty
+          if (!$formdata->{name} || $formdata->{name} eq '') {
+            if ($user->{givenname} || $user->{commonname}) {
+              $formdata->{name} = join(' ', grep { $_ } ($user->{givenname}, $user->{commonname}));
+            } elsif ($user->{username}) {
+              $formdata->{name} = $user->{username};
             }
           }
         }

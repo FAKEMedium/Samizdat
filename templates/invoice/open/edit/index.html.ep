@@ -31,10 +31,10 @@
     </table>
   </div>
   <div>
-    <button type="submit" class="btn btn-primary mb-3" onclick="updateInvoice();">
+    <button type="button" class="btn btn-primary mb-3" id="updateInvoiceBtn">
       <span><%== __('Update') %></span>
     </button>
-    <button type="submit" class="btn btn-primary mb-3" onclick="makeInvoice();">
+    <button type="button" class="btn btn-primary mb-3" id="makeInvoiceBtn">
       <span><%== __('Make invoice') %></span>
     </button>
   </div>

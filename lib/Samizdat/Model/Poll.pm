@@ -2,7 +2,7 @@ package Samizdat::Model::Poll;
 
 use Mojo::Base -base, -signatures;
 
-has 'config':
+has 'config';
 has 'database';
 
 sub addsigner ($self, $signer) {

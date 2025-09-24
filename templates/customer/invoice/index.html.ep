@@ -1,3 +1,4 @@
+% my $customer = {}; # Safe for now
 <form class="row needs-validation grid gap-0 row-gap-3 px-0 g-0" id="customer" method="post">
   <input name="customerid" id="customerid" type="hidden" value="<%== $customer->{customerid} %>" />
   <div class="col-md-8 gx-0 gap-0">

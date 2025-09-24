@@ -220,8 +220,13 @@
         </div>
       </div>
       <div class="col-md-4">
-        <a class="d-block" id="impersonate" title="<%== __('Impersonate') %>"><%== icon 'person-fill', {extraclasses => 'mx-2'} %><%== __('Impersonate') %></a>
-        <a class="d-block" id="userlogin" title="<%== __('Login') %>"></a>
+        <span id="userlogin"></span>
+        <a class="" id="impersonate" title="<%== __x('Impersonate {who}', who => '*account*') %>">
+          <%== icon 'person-fill', {extraclasses => 'mx-2'} %>
+        </a>
+        <a class="" id="editaccount" title="<%== __x('Edit {who}', who => '*account*') %>">
+          <%== icon 'pen-fill', {extraclasses => 'mx-2'} %>
+        </a>
       </div>
     </div>
   </div>

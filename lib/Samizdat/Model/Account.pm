@@ -154,6 +154,7 @@ sub getUsers ($self, $where){
   return $result;
 }
 
+
 sub getUserGroups ($self, $userid) {
   my $db = $self->database->db;
   my $result;
@@ -339,10 +340,12 @@ sub addSession ($self, $authcookie, $data, $expires = undef) {
   $self->refreshSession($authcookie, $expires);
 }
 
+
 sub refreshSession ($self, $authcookie, $expires = undef) {
   $expires //= $self->config->{sessiontimeout};
   $self->redis->db->expire("samizdat:$authcookie", $expires);
 }
+
 
 sub insertLogin ($self, $ip, $userid, $value) {
   my $db = $self->database->db;
@@ -404,43 +407,118 @@ sub getLoginFailures ($self, $ip) {
   return $result;
 }
 
+
 # Get user profile data
 sub get_profile ($self, $userid) {
   my $db = $self->database->db;
-  
+
   # Get basic user info
-  my $user = $db->query(
-    'SELECT userid, username, displayname, email FROM account.users WHERE userid = ?',
-    $userid
-  )->hash;
-  
-  return {} unless $user;
-  
-  # Get extended profile data
-  my $profile_data = $db->query(
-    'SELECT section, key, value FROM account.profile WHERE userid = ?',
-    $userid
-  )->hashes;
-  
+  my $user;
+  eval {
+    $user = $db->query(
+      'SELECT userid, username, displayname, email FROM account.users WHERE userid = ?',
+      $userid
+    )->hash;
+  };
+
+  if ($@ || !$user) {
+    return {};
+  }
+
+  # Get contacts data
+  my $contacts = {};
+  eval {
+    my $contact_data = $db->query(
+      'SELECT * FROM account.contacts WHERE userid = ?',
+      $userid
+    )->hash;
+    $contacts = $contact_data || {};
+  };
+
+  # Get presentations data (one per language)
+  my $presentations = {};
+  my $fallback_presentation = undef;
+  eval {
+    my $presentation_data = $db->query(
+      'SELECT * FROM account.presentations WHERE userid = ?',
+      $userid
+    )->hashes;
+    if ($presentation_data && @$presentation_data) {
+      for my $pres (@$presentation_data) {
+        # Index by language code for easy access
+        if ($pres->{lang}) {
+          $presentations->{$pres->{lang}} = $pres;
+          # Keep first presentation as fallback for missing languages
+          $fallback_presentation //= $pres;
+        }
+      }
+    }
+  };
+
+  # Store fallback for use when a specific language variant is missing
+  if ($fallback_presentation) {
+    $presentations->{_fallback} = $fallback_presentation;
+  }
+
+  # Get images data
+  my $images = {};
+  eval {
+    my $image_data = $db->query(
+      'SELECT * FROM account.images WHERE userid = ?',
+      $userid
+    )->hashes;
+    if ($image_data) {
+      for my $img (@$image_data) {
+        $images->{$img->{imageid}} = $img;
+      }
+    }
+  };
+
   # Organize profile data by sections
   my $profile = {
     basic => {
       userid => $user->{userid},
-      username => $user->{username}, 
+      username => $user->{username},
       displayname => $user->{displayname} || '',
       email => $user->{email} || ''
     },
-    contacts => {},
-    presentations => {},
-    images => {}
+    contacts => $contacts,
+    presentations => $presentations,
+    images => $images
   };
-  
-  for my $row (@$profile_data) {
-    $profile->{$row->{section}}->{$row->{key}} = $row->{value};
-  }
-  
+
   return $profile;
 }
+
+
+# Get presentation for a specific language with fallback
+sub get_presentation_for_language ($self, $userid, $lang) {
+  my $profile = $self->get_profile($userid);
+
+  # Return the presentation for the requested language if it exists
+  if ($profile->{presentations} && $profile->{presentations}->{$lang}) {
+    return $profile->{presentations}->{$lang};
+  }
+
+  # Otherwise return the fallback presentation (any existing one)
+  if ($profile->{presentations} && $profile->{presentations}->{_fallback}) {
+    # Return a copy with the language changed to indicate it needs translation
+    my $fallback = { %{$profile->{presentations}->{_fallback}} };
+    $fallback->{lang} = $lang;
+    $fallback->{needs_translation} = 1;
+    delete $fallback->{presentationid}; # Remove ID since this is a template for new entry
+    return $fallback;
+  }
+
+  # Return empty presentation structure
+  return {
+    lang => $lang,
+    title => '',
+    content => '',
+    needs_translation => 0
+  };
+}
+
 
 # Update user profile data
 sub update_profile ($self, $userid, $profile_data) {
@@ -471,33 +549,78 @@ sub update_profile ($self, $userid, $profile_data) {
       }
     }
     
-    # Update extended profile sections
-    for my $section (qw(contacts presentations images)) {
-      next unless exists $profile_data->{$section};
-      
-      my $section_data = $profile_data->{$section};
-      
-      for my $key (keys %$section_data) {
-        my $value = $section_data->{$key};
-        
-        if (defined $value && $value ne '') {
-          # Insert or update profile data
+    # Update contacts data
+    if (exists $profile_data->{contacts}) {
+      my $contacts = $profile_data->{contacts};
+      # Check if contact record exists
+      my $existing = $db->query('SELECT userid FROM account.contacts WHERE userid = ?', $userid)->hash;
+
+      if ($existing) {
+        # Update existing contact
+        my @fields = grep { exists $contacts->{$_} } qw(phone mobile address city zip country);
+        if (@fields) {
+          my @updates = map { "$_ = ?" } @fields;
+          my @values = map { $contacts->{$_} } @fields;
+          push @values, $userid;
           $db->query(
-            'INSERT INTO account.profile (userid, section, key, value) 
-             VALUES (?, ?, ?, ?) 
-             ON CONFLICT (userid, section, key) 
-             DO UPDATE SET value = EXCLUDED.value, modified = NOW()',
-            $userid, $section, $key, $value
+            "UPDATE account.contacts SET " . join(', ', @updates) . " WHERE userid = ?",
+            @values
           );
-        } else {
-          # Delete if value is empty
+        }
+      } elsif (keys %$contacts) {
+        # Insert new contact record
+        $contacts->{userid} = $userid;
+        my @fields = keys %$contacts;
+        my @placeholders = map { '?' } @fields;
+        my @values = map { $contacts->{$_} } @fields;
+        $db->query(
+          "INSERT INTO account.contacts (" . join(', ', @fields) . ") VALUES (" . join(', ', @placeholders) . ")",
+          @values
+        );
+      }
+    }
+
+    # Update presentations data (one per language)
+    if (exists $profile_data->{presentations}) {
+      my $presentations = $profile_data->{presentations};
+
+      for my $lang (keys %$presentations) {
+        my $pres_data = $presentations->{$lang};
+
+        # Check if presentation exists for this user and language
+        my $existing = $db->query(
+          'SELECT presentationid FROM account.presentations WHERE userid = ? AND lang = ?',
+          $userid, $lang
+        )->hash;
+
+        if ($existing) {
+          # Update existing presentation
+          my @fields = grep { exists $pres_data->{$_} && $_ ne 'presentationid' && $_ ne 'userid' && $_ ne 'lang' } keys %$pres_data;
+          if (@fields) {
+            my @updates = map { "$_ = ?" } @fields;
+            my @values = map { $pres_data->{$_} } @fields;
+            push @values, $userid, $lang;
+            $db->query(
+              "UPDATE account.presentations SET " . join(', ', @updates) . " WHERE userid = ? AND lang = ?",
+              @values
+            );
+          }
+        } elsif (keys %$pres_data) {
+          # Insert new presentation
+          $pres_data->{userid} = $userid;
+          $pres_data->{lang} = $lang;
+          my @fields = grep { defined $pres_data->{$_} } keys %$pres_data;
+          my @placeholders = map { '?' } @fields;
+          my @values = map { $pres_data->{$_} } @fields;
           $db->query(
-            'DELETE FROM account.profile WHERE userid = ? AND section = ? AND key = ?',
-            $userid, $section, $key
+            "INSERT INTO account.presentations (" . join(', ', @fields) . ") VALUES (" . join(', ', @placeholders) . ")",
+            @values
           );
         }
       }
     }
+
+    # TODO: Handle images table when its structure is known
     
     $tx->commit;
   };

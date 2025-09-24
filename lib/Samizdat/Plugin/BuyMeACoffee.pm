@@ -1,59 +1,63 @@
 package Samizdat::Plugin::BuyMeACoffee;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
-use Mojo::UserAgent;
-use Mojo::JSON qw(decode_json);
+use Samizdat::Model::BuyMeACoffee;
 
 sub register ($self, $app, $config = {}) {
-  
-  # Add webhook route
+
   my $r = $app->routes;
-  $r->home(sprintf('/buymeacoffee/%s', $app->config->{buymeacoffee}->{webhook}))->to('buy_me_a_coffee#webhook');
 
+  my $bmc = $r->home('/buymeacoffee')->to(controller => 'BuyMeACoffee');
 
-  # Add helper to get cached supporter count with Redis and file fallback
-  $app->helper('buymeacoffee_supporters' => sub ($c) {
-    my $slug = $app->config->{buymeacoffee}->{slug};
-    return 0 unless $slug;
-    
-    # Try Redis first
-    my $cache_key = "buymeacoffee:supporters:$slug";
-    my $supporters = $app->redis->db->get($cache_key);
-    
-    # Fall back to file cache if Redis fails
-    if (!defined $supporters) {
-      my $cache_file = "/tmp/buymeacoffee_$slug.txt";
-      if (-f $cache_file) {
-        $supporters = Mojo::File->new($cache_file)->slurp;
-        chomp $supporters if defined $supporters;
-      }
-    }
-    
-    return $supporters // 0;
+  # Add webhook route
+  $bmc->any($app->config->{buymeacoffee}->{webhook}->{url})
+    ->to('#webhook')
+    ->name('buymeacoffee_webhook');
+
+  # Register model helper following the established pattern
+  $app->helper(buymeacoffee => sub ($c) {
+    state $bmc = Samizdat::Model::BuyMeACoffee->new({
+      config => $c->config->{buymeacoffee},
+      redis  => $c->app->redis,
+      pg     => $c->app->pg,
+    });
+    return $bmc;
   });
+
 }
 
-
-sub _fetch_supporters ($self, $c) {
-  my $slug = $c->config->{buymeacoffee}->{slug};
-  return 0 unless $slug;
-  
-  my $ua = Mojo::UserAgent->new;
-  my $url = "https://www.buymeacoffee.com/$slug";
-  
-  eval {
-    my $tx = $ua->get($url);
-    if ($tx->success) {
-      my $html = $tx->res->body;
-      
-      # Extract supporter count from the page
-      # This regex might need adjustment based on BMC's HTML structure
-      if ($html =~ /(\d+)\s*(?:supporters?|members?)/i) {
-        return $1;
-      }
-    }
-  };
-  return 0;
-}
 
 1;
+
+=head1 NAME
+
+Samizdat::Plugin::BuyMeACoffee - Buy Me a Coffee integration plugin
+
+=head1 SYNOPSIS
+
+  # In your application
+  $app->plugin('BuyMeACoffee');
+
+  # Use the helper
+  my $bmc = $c->buymeacoffee;
+  my $supporters = $bmc->get_supporters;
+
+=head1 DESCRIPTION
+
+This plugin integrates Buy Me a Coffee functionality into Samizdat, including:
+
+=over 4
+
+=item * Webhook endpoint for processing BMC events
+
+=item * Helper for accessing the BMC model
+
+=back
+
+=head1 HELPERS
+
+=head2 buymeacoffee
+
+Returns the L<Samizdat::Model::BuyMeACoffee> instance.
+
+=cut
