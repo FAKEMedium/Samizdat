@@ -6,7 +6,7 @@ use Mojo::JSON qw(decode_json encode_json);
 use Mojo::Util qw(decode encode b64_encode trim);
 
 sub index ($self) {
-  my $formdata = { ip => $self->tx->remote_address };
+  my $formdata = { ip => $self->getip };
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept =~ /json/) {
     my $valid = {};

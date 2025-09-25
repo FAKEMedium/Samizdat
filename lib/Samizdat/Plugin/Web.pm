@@ -39,6 +39,25 @@ sub register ($self, $app, $conf) {
   $web->get('/*docpath')                   ->to('#getdoc');
 
 
+  # Helper to get the real IP address of the client. Call this from controller object ($c->getip
+  $app->helper(getip => sub ($self) {
+    # Try various methods to get the real IP
+    my $ip = $self->tx->remote_address
+      // $self->req->headers->header('X-Real-IP')
+      // $self->req->headers->header('X-Forwarded-For')
+      // $self->req->headers->header('Remote-Host')
+      // $self->tx->original_remote_address
+      // '0.0.0.0';
+
+    # If X-Forwarded-For contains multiple IPs, take the first one
+    if ($ip && $ip =~ /,/) {
+      $ip = (split /,\s*/, $ip)[0];
+    }
+
+    return $ip;
+  });
+
+
   # Helper for accessing the Web model.
   $app->helper(web => sub ($self) {
     state $web = Samizdat::Model::Web->new(
@@ -109,6 +128,7 @@ sub register ($self, $app, $conf) {
       return $content;
     }
   );
+
 
   # Remove indentation from pre and textarea elements
   # Add the generated html to public as a static cache

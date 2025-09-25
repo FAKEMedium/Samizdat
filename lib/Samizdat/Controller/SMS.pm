@@ -10,7 +10,7 @@ sub index ($self) {
   if ($accept =~ /json/) {
     # Require admin access for SMS management
     return unless $self->access({ admin => 1 });
-    $formdata->{ip} = $self->tx->remote_address;
+    $formdata->{ip} = $self->getip;
     if ($self->req->method =~ /^(POST)$/i) {
       my $valid = {};
       my $errors = {};
@@ -226,7 +226,7 @@ sub webhook ($self) {
   my $timestamp = $self->param('timestamp') || $self->param('time');
   my $msg_id = $self->param('id') || $self->param('msg_id');
   
-  warn "SMS webhook received from " . $self->tx->remote_address . ": phone=$phone, message=$message, id=$msg_id";
+  warn "SMS webhook received from " . $self->getip . ": phone=$phone, message=$message, id=$msg_id";
   
   # Validate required parameters
   unless ($phone && $message) {

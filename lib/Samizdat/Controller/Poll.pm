@@ -44,7 +44,7 @@ sub index($self) {
     my $valid = {};
     my $method = lc $self->req->method;
     my $form = {
-      ip       => $self->tx->remote_address,
+      ip       => $self->getip,
       method   => $method,
       language => $self->app->language,
       cc       => '',

@@ -6,6 +6,8 @@ sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
   $r->manager->get('')->to(controller => 'Manager', action => 'index')->name('manager_index');
+
+
 }
 
 1;

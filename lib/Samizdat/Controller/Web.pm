@@ -87,7 +87,7 @@ sub getdoc ($self) {
   });
   my $path = sprintf("%s%s", $docpath, 'index.html');
   if (!exists($docs->{$path})) {
-    banbot($docpath, $self->tx->remote_address);
+    banbot($docpath, $self->getip);
     $path = '404.html';
     $self->stash('status', 404);
     $docs->{'404.html'} = {

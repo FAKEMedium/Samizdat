@@ -60,7 +60,7 @@ sub login ($self) {
   }
 
   # Check if blocklimit failed attempts been made last blocktime minutes from remote host
-  my $ip = $self->tx->remote_address;
+  my $ip = $self->getip;
   my $loginfailures = $self->app->account->getLoginFailures($ip);
   my $count = scalar @{ $loginfailures };
   if ($count >= $self->config->{manager}->{account}->{blocklimit}) {
@@ -167,7 +167,7 @@ sub register ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   
   if ($accept =~ /json/) {
-    $formdata->{ip} = $self->tx->remote_address;
+    $formdata->{ip} = $self->getip;
     if ($self->req->method =~ /^(POST)$/i) {
       my $valid = {};
       my $errors = {};
