@@ -1,0 +1,101 @@
+% layout 'default.mail';
+% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
+
+<h2 style="color: #ff0000;"><%== __('URGENT: Final Payment Reminder') %></h2>
+
+<div id="reminder-message">
+  % if ($message) {
+    <%== $message %>
+  % } else {
+    <div style="border: 2px solid #ff0000; padding: 15px; margin: 20px 0; background: #fff5f5;">
+      <p style="font-weight: bold; color: #ff0000;">
+        <%== __('This is a final reminder regarding your overdue invoice.') %>
+      </p>
+      <p>
+        <%== __('Despite previous reminders, payment has not been received.') %>
+        <%== __('Immediate action is required to avoid additional fees and potential collection proceedings.') %>
+      </p>
+    </div>
+  % }
+</div>
+
+<div style="background: #ffe6e6; padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px solid #ff9999;">
+  <h3 style="color: #cc0000;"><%== __('Overdue Invoice Details') %></h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice number') %>:</strong></td>
+      <td style="padding: 5px 0; font-weight: bold;"><%== $invoicedata->{invoice}->{fakturanummer} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice date') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{invoicedate} %></td>
+    </tr>
+    <tr style="background: #ffcccc;">
+      <td style="padding: 5px 0;"><strong><%== __('Original due date') %>:</strong></td>
+      <td style="padding: 5px 0; color: #ff0000; font-weight: bold;">
+        <%== $invoicedata->{invoice}->{duedate} %> <span style="text-transform: uppercase;">(<%== __('OVERDUE') %>)</span>
+      </td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Amount due') %>:</strong></td>
+      <td style="padding: 5px 0; font-size: 1.2em; color: #cc0000;"><strong><%== $invoicedata->{invoice}->{costsum} %> <%== $invoicedata->{invoice}->{currency} %></strong></td>
+    </tr>
+  </table>
+</div>
+
+<div style="background: #fff3cd; padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px solid #ffc107;">
+  <h3 style="color: #856404;"><%== __('IMMEDIATE PAYMENT REQUIRED') %></h3>
+  % if ('SE' eq uc $invoicedata->{customer}->{country})  {
+    % if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+      <p><strong><%= __('Bankgiro') %>:</strong> <%== config->{manager}->{invoice}->{bankgiro} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+      <p><strong><%= __('Plusgiro') %>:</strong> <%== config->{manager}->{invoice}->{plusgiro} %></p>
+    % }
+  % } else {
+    % if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+      <p><strong><%= __('BIC/Swift') %>:</strong> <%== config->{manager}->{invoice}->{bicswift} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+      <p><strong><%= __('IBAN') %>:</strong> <%== config->{manager}->{invoice}->{iban} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+      <p><strong><%= __('PayPal') %>:</strong> <%== config->{manager}->{invoice}->{paypal} %>
+      % if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+        (<%= __x('add {fee}', fee => config->{manager}->{invoice}->{paypalfee}) %>)
+      % }
+      </p>
+    % }
+  % }
+
+  <p style="font-weight: bold;"><%== __('You MUST include the invoice number as reference when making the payment.') %></p>
+</div>
+
+<div style="margin: 20px 0;">
+  <p>
+    <a href="<%== $link %>" style="display: inline-block; padding: 12px 24px; background: #dc3545; color: white; text-decoration: none; border-radius: 5px; font-weight: bold;">
+      <%== __('Download Invoice PDF - PAY NOW') %>
+    </a>
+  </p>
+</div>
+
+<div style="background: #f8d7da; padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px solid #f5c6cb;">
+  <h4 style="color: #721c24;"><%== __('WARNING: Legal Action Pending') %></h4>
+  <p style="color: #721c24;">
+    <%== __('If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency.') %>
+    <%== __('This will result in additional fees and may affect your credit rating.') %>
+  </p>
+  <p style="font-weight: bold; color: #721c24;">
+    <%== __('If you have already made payment, please contact us IMMEDIATELY with proof of payment.') %>
+  </p>
+</div>
+
+<p style="font-weight: bold;">
+  <%== __x('Contact: {email} or call us directly.', email => sprintf('<a href="mailto:%s" style="color: #cc0000;">%s</a>', config->{manager}->{invoice}->{sender}, config->{manager}->{invoice}->{sender})) %>
+</p>
+
+<hr style="border-top: 1px solid #ccc; margin: 30px 0;">
+
+<p style="color: #666; font-size: 0.85em;">
+  <%== __('This is an automated reminder. Failure to pay may result in service interruption and legal action.') %>
+</p>

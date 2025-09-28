@@ -90,8 +90,14 @@ msgstr ""
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "根据我们的记录，发票 {number} 仍未付款。"
 
+msgid "Account"
+msgstr ""
+
 msgid "Account confirmation"
 msgstr "账户确认"
+
+msgid "Account settings"
+msgstr ""
 
 msgid "Actions"
 msgstr "操作"
@@ -120,6 +126,9 @@ msgstr "后面添加行"
 msgid "Add Row Before"
 msgstr "前面添加行"
 
+msgid "Add certificate"
+msgstr ""
+
 msgid "Add content"
 msgstr "添加内容"
 
@@ -132,6 +141,9 @@ msgstr "添加数据库"
 msgid "Add domain"
 msgstr "添加域名"
 
+msgid "Add example"
+msgstr ""
+
 msgid "Add grop"
 msgstr "添加组"
 
@@ -143,6 +155,9 @@ msgstr "添加邮件域名"
 
 msgid "Add page"
 msgstr "添加页面"
+
+msgid "Add poll"
+msgstr ""
 
 msgid "Add product"
 msgstr "添加产品"
@@ -176,6 +191,12 @@ msgstr "地址2"
 
 msgid "Address check"
 msgstr "地址检查"
+
+msgid "Admin access required"
+msgstr ""
+
+msgid "Admin access required for DNS management"
+msgstr ""
 
 msgid "Admininistration panel"
 msgstr "管理面板"
@@ -213,11 +234,17 @@ msgstr "发生错误"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this example?"
+msgstr ""
+
 msgid "Are you sure you want to delete this message?"
 msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "您确定要删除此记录吗？"
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr ""
 
 msgid "Article"
 msgstr "文章"
@@ -234,6 +261,9 @@ msgstr "至少{min}个字符来自：{chars}"
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr "至少{min}个字符：{upper}个大写字母，{lower}个小写字母，{num}个数字，{special}个特殊字符"
 
+msgid "Authentication required"
+msgstr ""
+
 msgid "Authorize"
 msgstr "授权"
 
@@ -249,6 +279,9 @@ msgstr "BIC/Swift 地址："
 msgid "Back"
 msgstr "返回"
 
+msgid "Back to list"
+msgstr ""
+
 msgid "Bankgiro"
 msgstr "银行汇票"
 
@@ -263,6 +296,9 @@ msgstr "基本信息"
 
 msgid "Billing"
 msgstr "账单"
+
+msgid "Bio"
+msgstr ""
 
 msgid "Blocked"
 msgstr "已封锁"
@@ -309,6 +345,9 @@ msgstr "验证码图片"
 msgid "Captcha was wrong"
 msgstr "验证码错误"
 
+msgid "Category"
+msgstr ""
+
 msgid "Certificates"
 msgstr ""
 
@@ -317,6 +356,9 @@ msgstr "更改密码"
 
 msgid "Changed status."
 msgstr "状态已更改。"
+
+msgid "Changes saved successfully."
+msgstr ""
 
 msgid "Check zones"
 msgstr "检查区域"
@@ -378,6 +420,9 @@ msgstr "关闭"
 msgid "Code Block"
 msgstr "代码块"
 
+msgid "Comma separated"
+msgstr ""
+
 msgid "Comments"
 msgstr "评论"
 
@@ -435,6 +480,12 @@ msgstr "贡献"
 msgid "Contributing"
 msgstr "贡献"
 
+msgid "Control panel"
+msgstr ""
+
+msgid "Conversation with"
+msgstr ""
+
 msgid "Corporate identity number"
 msgstr "企业识别号"
 
@@ -458,6 +509,9 @@ msgstr "创建客户"
 
 msgid "Create new record"
 msgstr "创建新记录"
+
+msgid "Created"
+msgstr ""
 
 msgid "Created {created} by {creator}"
 msgstr "由 {creator} 于 {created} 创建"
@@ -534,6 +588,9 @@ msgstr "DNS 区域"
 msgid "DNS zones"
 msgstr "DNS 区域"
 
+msgid "Dark"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "数据使用量：{usage}"
 
@@ -555,11 +612,17 @@ msgstr "日期"
 msgid "Date:"
 msgstr "日期："
 
+msgid "Dear"
+msgstr ""
+
 msgid "Debt"
 msgstr "债务"
 
 msgid "Decide which parts of your personal data you want to show different groups."
 msgstr "决定您想向不同群组展示哪些个人数据。"
+
+msgid "Default"
+msgstr ""
 
 msgid "Delete"
 msgstr "删除"
@@ -597,6 +660,9 @@ msgstr ""
 msgid "Discount"
 msgstr "折扣"
 
+msgid "Display Name"
+msgstr ""
+
 msgid "Do you want to credit the invoice?"
 msgstr "您要贷记这张发票吗？"
 
@@ -614,6 +680,9 @@ msgstr "域名"
 
 msgid "DomÃ¤nregistrering"
 msgstr "域名注册"
+
+msgid "Draft"
+msgstr ""
 
 msgid "Due date"
 msgstr "到期日"
@@ -633,6 +702,9 @@ msgstr "经济"
 msgid "Edit"
 msgstr "编辑"
 
+msgid "Edit Example"
+msgstr ""
+
 msgid "Edit customer {customerid}"
 msgstr "编辑客户 {customerid}"
 
@@ -644,6 +716,9 @@ msgstr "编辑此页面"
 
 msgid "Edit zone"
 msgstr "编辑区域"
+
+msgid "Edit {who}"
+msgstr ""
 
 msgid "Ekonomi"
 msgstr "经济"
@@ -780,8 +855,26 @@ msgstr "输入您的电子邮件"
 msgid "Enter zone name"
 msgstr "输入区域名称"
 
+msgid "Error reprinting invoice"
+msgstr ""
+
+msgid "Error resending invoice"
+msgstr ""
+
 msgid "Euro"
 msgstr "欧元"
+
+msgid "Example created successfully"
+msgstr ""
+
+msgid "Example deleted successfully"
+msgstr ""
+
+msgid "Example not found"
+msgstr ""
+
+msgid "Example updated successfully"
+msgstr ""
 
 msgid "Examples"
 msgstr "示例"
@@ -795,6 +888,9 @@ msgstr "展开个人菜单。"
 msgid "Expires"
 msgstr "过期"
 
+msgid "Expiring"
+msgstr ""
+
 msgid "Expiring domains"
 msgstr "即将过期的域名"
 
@@ -807,11 +903,17 @@ msgstr "按国家分类的 FAKE News"
 msgid "Failed login from {ip}"
 msgstr "来自 {ip} 的登录失败"
 
+msgid "Failed to create example"
+msgstr ""
+
 msgid "Failed to create record"
 msgstr "创建记录失败"
 
 msgid "Failed to create zone"
 msgstr "创建区域失败"
+
+msgid "Failed to delete example"
+msgstr ""
 
 msgid "Failed to delete message"
 msgstr ""
@@ -822,17 +924,32 @@ msgstr "删除记录失败"
 msgid "Failed to delete zone"
 msgstr "删除区域失败"
 
+msgid "Failed to load conversation"
+msgstr ""
+
+msgid "Failed to reprint invoice"
+msgstr ""
+
+msgid "Failed to resend invoice"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
 msgid "Failed to send invoice to Fortnox"
 msgstr "发送发票到 Fortnox 失败"
 
+msgid "Failed to update example"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "更新记录失败"
 
 msgid "Failed to update zone"
 msgstr "更新区域失败"
+
+msgid "Featured"
+msgstr ""
 
 msgid "File archive"
 msgstr "文件存档"
@@ -863,6 +980,9 @@ msgstr "表单提交错误："
 
 msgid "Fortnox"
 msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr ""
 
 msgid "Fortnox integration"
 msgstr "Fortnox 集成"
@@ -896,6 +1016,9 @@ msgstr "前往 {confirmationlink} 确认您的签名并获取您的图片。"
 
 msgid "Gross"
 msgstr "总额"
+
+msgid "Groups"
+msgstr ""
 
 msgid "HTML result"
 msgstr "HTML 结果"
@@ -942,8 +1065,14 @@ msgstr "图片"
 msgid "Impersonate"
 msgstr "模拟"
 
+msgid "Impersonate {who}"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "在您的个人菜单中，您可以找到您的 {panel} 等内容。"
+
+msgid "Inactive"
+msgstr ""
 
 msgid "Including VAT"
 msgstr "含增值税"
@@ -956,6 +1085,9 @@ msgstr "无效的确认链接"
 
 msgid "Invalid email"
 msgstr "无效的电子邮件"
+
+msgid "Invalid form data"
+msgstr ""
 
 msgid "Invalid password"
 msgstr "无效的密码"
@@ -1016,6 +1148,12 @@ msgstr "发票问题："
 
 msgid "Invoice reminder, {number}"
 msgstr "发票提醒，{number}"
+
+msgid "Invoice reprinted successfully"
+msgstr ""
+
+msgid "Invoice resent successfully"
+msgstr ""
 
 msgid "Invoice type"
 msgstr "发票类型"
@@ -1096,8 +1234,14 @@ msgstr "语言"
 msgid "Last name"
 msgstr "姓氏"
 
+msgid "Last reminder"
+msgstr ""
+
 msgid "Latest"
 msgstr "最新"
+
+msgid "Light"
+msgstr ""
 
 msgid "Link"
 msgstr "链接"
@@ -1180,6 +1324,9 @@ msgstr "创建发票"
 msgid "Manage site"
 msgstr "管理网站"
 
+msgid "Manager"
+msgstr ""
+
 msgid "Manuals"
 msgstr "手册"
 
@@ -1216,6 +1363,9 @@ msgstr "温和"
 msgid "Minimal local customer data is stored in Fortnox."
 msgstr "Fortnox 中存储最少的本地客户数据。"
 
+msgid "Missing customer or invoice ID"
+msgstr ""
+
 msgid "Missing file, our bad?"
 msgstr "文件丢失，是我们的错吗？"
 
@@ -1249,11 +1399,17 @@ msgstr "净金额："
 msgid "Network error - please try again"
 msgstr "网络错误 - 请重试"
 
+msgid "New Example"
+msgstr ""
+
 msgid "New account"
 msgstr "新账户"
 
 msgid "New customer"
 msgstr "新客户"
+
+msgid "New example"
+msgstr ""
 
 msgid "New invoice for customer #{customerid}"
 msgstr "客户 #{customerid} 的新发票"
@@ -1285,6 +1441,9 @@ msgstr "否"
 msgid "No customer #{customerid}."
 msgstr "没有客户 #{customerid}。"
 
+msgid "No examples found"
+msgstr ""
+
 msgid "No invoice template."
 msgstr "没有发票模板。"
 
@@ -1292,6 +1451,9 @@ msgid "No invoicing"
 msgstr "不开票"
 
 msgid "No messages found"
+msgstr ""
+
+msgid "No messages yet"
 msgstr ""
 
 msgid "No pages found."
@@ -1372,6 +1534,9 @@ msgstr "第 {number} 页，共 {total} 页"
 msgid "PageSpeed result 100 100 100 100"
 msgstr "PageSpeed 结果 100 100 100 100"
 
+msgid "Pagination"
+msgstr ""
+
 msgid "Paid"
 msgstr "已付款"
 
@@ -1416,6 +1581,9 @@ msgstr "付款"
 
 msgid "Payment due to: {duedate}"
 msgstr "付款截止日期：{duedate}"
+
+msgid "Payment reminder: Invoice {number}"
+msgstr ""
 
 msgid "Payment terms"
 msgstr "付款条款"
@@ -1468,6 +1636,9 @@ msgstr "请输入有效的电子邮件地址"
 msgid "Please enter a valid phone number"
 msgstr ""
 
+msgid "Please find attached invoice"
+msgstr ""
+
 msgid "Please log in to access that page"
 msgstr "请登录以访问该页面"
 
@@ -1479,6 +1650,9 @@ msgstr "请退出并以具有适当授权的用户身份重新登录。"
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
+
+msgid "Polls"
+msgstr ""
 
 msgid "Posta faktura"
 msgstr "邮寄发票"
@@ -1494,6 +1668,12 @@ msgstr "邮政邮件"
 
 msgid "Postgiro"
 msgstr "Postgiro"
+
+msgid "Preferred Language"
+msgstr ""
+
+msgid "Presentation"
+msgstr ""
 
 msgid "Press \"{buttontext}\" to regenerate"
 msgstr "按“{buttontext}”重新生成"
@@ -1521,6 +1701,12 @@ msgstr "权限"
 
 msgid "Products"
 msgstr "产品"
+
+msgid "Profile Image"
+msgstr ""
+
+msgid "Published"
+msgstr ""
 
 msgid "Qty"
 msgstr "数量"
@@ -1618,11 +1804,20 @@ msgstr "剩余应付金额：{amount} {currency}"
 msgid "Remind"
 msgstr "提醒"
 
+msgid "Renew"
+msgstr ""
+
 msgid "Reprint"
 msgstr "重新打印"
 
+msgid "Reprint invoice"
+msgstr ""
+
 msgid "Resend"
 msgstr "重新发送"
+
+msgid "Resend invoice"
+msgstr ""
 
 msgid "Resources"
 msgstr "资源"
@@ -1643,6 +1838,9 @@ msgid "SEK"
 msgstr "瑞典克朗"
 
 msgid "SMS"
+msgstr ""
+
+msgid "SMS Conversation"
 msgstr ""
 
 msgid "SMS Management"
@@ -1672,14 +1870,29 @@ msgstr "Samizdat 使用来自 {link} 的 Bootstrap 图标。"
 msgid "Save"
 msgstr "保存"
 
+msgid "Save Settings"
+msgstr ""
+
+msgid "Saved successfully"
+msgstr ""
+
 msgid "Search"
 msgstr "搜索"
 
 msgid "Search content"
 msgstr "搜索内容"
 
+msgid "Search examples"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "{what} 的搜索字段"
+
+msgid "Search for SMS"
+msgstr ""
+
+msgid "Search for certificates"
+msgstr ""
 
 msgid "Search for customer"
 msgstr "搜索客户"
@@ -1690,11 +1903,17 @@ msgstr "搜索数据库"
 msgid "Search for domain"
 msgstr "搜索域名"
 
+msgid "Search for example"
+msgstr ""
+
 msgid "Search for invoice"
 msgstr "搜索发票"
 
 msgid "Search for mail domain"
 msgstr "搜索邮件域名"
+
+msgid "Search for poll"
+msgstr ""
 
 msgid "Search for product"
 msgstr "搜索产品"
@@ -1828,6 +2047,9 @@ msgstr "特价"
 msgid "Start"
 msgstr "开始"
 
+msgid "Start a conversation by sending a message"
+msgstr ""
+
 msgid "Start main content"
 msgstr "主要内容开始"
 
@@ -1861,8 +2083,14 @@ msgstr "总计"
 msgid "Super panel"
 msgstr "超级面板"
 
+msgid "Superadmin access required"
+msgstr ""
+
 msgid "Supplier invoices"
 msgstr "供应商发票"
+
+msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
+msgstr ""
 
 msgid "Surname"
 msgstr "姓氏"
@@ -1879,7 +2107,13 @@ msgstr ""
 msgid "Sync failed"
 msgstr ""
 
+msgid "Sync messages"
+msgstr ""
+
 msgid "Syncing..."
+msgstr ""
+
+msgid "Tags"
 msgstr ""
 
 msgid "Technical"
@@ -1911,6 +2145,9 @@ msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "感谢您联系我们。"
+
+msgid "Thank you for your business"
+msgstr ""
 
 msgid "The Samizdat project"
 msgstr "Samizdat 项目"
@@ -1945,6 +2182,9 @@ msgstr "页面 {docpath} 未找到。"
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "该股票在纳斯达克斯德哥尔摩主板上市。"
 
+msgid "Theme"
+msgstr ""
+
 msgid "This confirmation link is invalid or has expired"
 msgstr "此确认链接无效或已过期"
 
@@ -1967,6 +2207,9 @@ msgid "Tillbaka"
 msgstr "返回"
 
 msgid "Time"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
 msgid "Toggle menu"
@@ -2014,6 +2257,9 @@ msgstr "更新客户"
 msgid "Update invoice, customer #{customerid}"
 msgstr "更新发票，客户 #{customerid}"
 
+msgid "Updated"
+msgstr ""
+
 msgid "Updated customer"
 msgstr "已更新客户"
 
@@ -2022,6 +2268,9 @@ msgstr "已更新发票"
 
 msgid "Updated {updated} by {updater}"
 msgstr "由 {updater} 于 {updated} 更新"
+
+msgid "Upload Profile Image"
+msgstr ""
 
 msgid "Usage"
 msgstr "使用"
@@ -2058,6 +2307,9 @@ msgstr "无法创建用户名"
 
 msgid "Username must be at least {min} characters"
 msgstr "用户名必须至少包含 {min} 个字符"
+
+msgid "Users"
+msgstr ""
 
 msgid "Users and groups"
 msgstr "用户和组"
@@ -2109,6 +2361,9 @@ msgstr "我们将尽快回复。"
 
 msgid "Web sites"
 msgstr "网站"
+
+msgid "Website"
+msgstr ""
 
 msgid "Websites"
 msgstr "网站"
@@ -2212,6 +2467,9 @@ msgstr "加 {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "certificates"
+msgstr ""
+
 msgid "characters"
 msgstr ""
 
@@ -2230,6 +2488,9 @@ msgstr "数据库"
 msgid "domain"
 msgstr "域名"
 
+msgid "example"
+msgstr ""
+
 msgid "invoice"
 msgstr "发票"
 
@@ -2247,6 +2508,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "我们的网站"
+
+msgid "poll"
+msgstr ""
 
 msgid "product"
 msgstr "产品"

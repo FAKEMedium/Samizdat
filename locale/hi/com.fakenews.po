@@ -97,8 +97,14 @@ msgstr ""
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "हमारे रिकॉर्ड के अनुसार इनवॉइस {number} अभी तक अवैतनिक है।"
 
+msgid "Account"
+msgstr ""
+
 msgid "Account confirmation"
 msgstr "खाता पुष्टिकरण"
+
+msgid "Account settings"
+msgstr ""
 
 msgid "Actions"
 msgstr "कार्य"
@@ -127,6 +133,9 @@ msgstr "पंक्ति बाद जोड़ें"
 msgid "Add Row Before"
 msgstr "पंक्ति पहले जोड़ें"
 
+msgid "Add certificate"
+msgstr ""
+
 msgid "Add content"
 msgstr "सामग्री जोड़ें"
 
@@ -139,6 +148,9 @@ msgstr "डेटाबेस जोड़ें"
 msgid "Add domain"
 msgstr "डोमेन जोड़ें"
 
+msgid "Add example"
+msgstr ""
+
 msgid "Add grop"
 msgstr "समूह जोड़ें"
 
@@ -150,6 +162,9 @@ msgstr "मेल डोमेन जोड़ें"
 
 msgid "Add page"
 msgstr "पृष्ठ जोड़ें"
+
+msgid "Add poll"
+msgstr ""
 
 msgid "Add product"
 msgstr "उत्पाद जोड़ें"
@@ -183,6 +198,12 @@ msgstr "पता 2"
 
 msgid "Address check"
 msgstr "पता जांच"
+
+msgid "Admin access required"
+msgstr ""
+
+msgid "Admin access required for DNS management"
+msgstr ""
 
 msgid "Admininistration panel"
 msgstr "प्रशासन पैनल"
@@ -220,11 +241,17 @@ msgstr "एक त्रुटि आई"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this example?"
+msgstr ""
+
 msgid "Are you sure you want to delete this message?"
 msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?"
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr ""
 
 msgid "Article"
 msgstr "लेख"
@@ -241,6 +268,9 @@ msgstr "कम से कम {min} अक्षर: {chars}"
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr "कम से कम {min} अक्षर: {upper} बड़े अक्षर, {lower} छोटे अक्षर, {num} संख्या, {special} विशेष अक्षर"
 
+msgid "Authentication required"
+msgstr ""
+
 msgid "Authorize"
 msgstr "प्राधिकृत करें"
 
@@ -256,6 +286,9 @@ msgstr "BIC/स्विफ्ट पता:"
 msgid "Back"
 msgstr "वापस"
 
+msgid "Back to list"
+msgstr ""
+
 msgid "Bankgiro"
 msgstr "बैंकगिरो"
 
@@ -270,6 +303,9 @@ msgstr "मूलभूत जानकारी"
 
 msgid "Billing"
 msgstr "बिलिंग"
+
+msgid "Bio"
+msgstr ""
 
 msgid "Blocked"
 msgstr "अवरुद्ध"
@@ -316,6 +352,9 @@ msgstr "कैप्चा छवि"
 msgid "Captcha was wrong"
 msgstr "कैप्चा गलत था"
 
+msgid "Category"
+msgstr ""
+
 msgid "Certificates"
 msgstr ""
 
@@ -324,6 +363,9 @@ msgstr "पासवर्ड बदलें"
 
 msgid "Changed status."
 msgstr "स्थिति बदली गई।"
+
+msgid "Changes saved successfully."
+msgstr ""
 
 msgid "Check zones"
 msgstr "क्षेत्रों की जांच करें"
@@ -385,6 +427,9 @@ msgstr "बंद करें"
 msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
+msgid "Comma separated"
+msgstr ""
+
 msgid "Comments"
 msgstr "टिप्पणियाँ"
 
@@ -442,6 +487,12 @@ msgstr "योगदान दें"
 msgid "Contributing"
 msgstr "योगदान"
 
+msgid "Control panel"
+msgstr ""
+
+msgid "Conversation with"
+msgstr ""
+
 msgid "Corporate identity number"
 msgstr "कॉर्पोरेट पहचान संख्या"
 
@@ -465,6 +516,9 @@ msgstr "ग्राहक बनाएं"
 
 msgid "Create new record"
 msgstr "नया रिकॉर्ड बनाएं"
+
+msgid "Created"
+msgstr ""
 
 msgid "Created {created} by {creator}"
 msgstr "{creator} द्वारा {created} को बनाया गया"
@@ -541,6 +595,9 @@ msgstr "डीएनएस ज़ोन"
 msgid "DNS zones"
 msgstr "डीएनएस ज़ोन"
 
+msgid "Dark"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "डेटा उपयोग: {usage}"
 
@@ -562,11 +619,17 @@ msgstr "तिथि"
 msgid "Date:"
 msgstr "तिथि:"
 
+msgid "Dear"
+msgstr ""
+
 msgid "Debt"
 msgstr "कर्ज"
 
 msgid "Decide which parts of your personal data you want to show different groups."
 msgstr "तय करें कि आप अपने व्यक्तिगत डेटा के कौन से भाग विभिन्न समूहों को दिखाना चाहते हैं।"
+
+msgid "Default"
+msgstr ""
 
 msgid "Delete"
 msgstr "हटाएं"
@@ -604,6 +667,9 @@ msgstr ""
 msgid "Discount"
 msgstr "छूट"
 
+msgid "Display Name"
+msgstr ""
+
 msgid "Do you want to credit the invoice?"
 msgstr "क्या आप इनवॉइस को क्रेडिट करना चाहते हैं?"
 
@@ -621,6 +687,9 @@ msgstr "डोमेन"
 
 msgid "DomÃ¤nregistrering"
 msgstr "डोमेन पंजीकरण"
+
+msgid "Draft"
+msgstr ""
 
 msgid "Due date"
 msgstr "नियत तारीख"
@@ -640,6 +709,9 @@ msgstr "अर्थव्यवस्था"
 msgid "Edit"
 msgstr "संपादित करें"
 
+msgid "Edit Example"
+msgstr ""
+
 msgid "Edit customer {customerid}"
 msgstr "ग्राहक {customerid} संपादित करें"
 
@@ -651,6 +723,9 @@ msgstr "इस पेज को संपादित करें"
 
 msgid "Edit zone"
 msgstr "ज़ोन संपादित करें"
+
+msgid "Edit {who}"
+msgstr ""
 
 msgid "Ekonomi"
 msgstr "अर्थव्यवस्था"
@@ -787,8 +862,26 @@ msgstr "अपना ईमेल दर्ज करें"
 msgid "Enter zone name"
 msgstr "ज़ोन नाम दर्ज करें"
 
+msgid "Error reprinting invoice"
+msgstr ""
+
+msgid "Error resending invoice"
+msgstr ""
+
 msgid "Euro"
 msgstr "यूरो"
+
+msgid "Example created successfully"
+msgstr ""
+
+msgid "Example deleted successfully"
+msgstr ""
+
+msgid "Example not found"
+msgstr ""
+
+msgid "Example updated successfully"
+msgstr ""
 
 msgid "Examples"
 msgstr "उदाहरण"
@@ -802,6 +895,9 @@ msgstr "व्यक्तिगत मेनू विस्तारित क
 msgid "Expires"
 msgstr "समाप्त होता है"
 
+msgid "Expiring"
+msgstr ""
+
 msgid "Expiring domains"
 msgstr "समाप्त हो रहे डोमेन"
 
@@ -814,11 +910,17 @@ msgstr "देश द्वारा नकली समाचार"
 msgid "Failed login from {ip}"
 msgstr "{ip} से लॉगिन विफल"
 
+msgid "Failed to create example"
+msgstr ""
+
 msgid "Failed to create record"
 msgstr "रिकॉर्ड बनाने में विफल"
 
 msgid "Failed to create zone"
 msgstr "ज़ोन बनाने में विफल"
+
+msgid "Failed to delete example"
+msgstr ""
 
 msgid "Failed to delete message"
 msgstr ""
@@ -829,17 +931,32 @@ msgstr "रिकॉर्ड हटाने में विफल"
 msgid "Failed to delete zone"
 msgstr "ज़ोन हटाने में विफल"
 
+msgid "Failed to load conversation"
+msgstr ""
+
+msgid "Failed to reprint invoice"
+msgstr ""
+
+msgid "Failed to resend invoice"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
 msgid "Failed to send invoice to Fortnox"
 msgstr "Fortnox को बिल भेजने में विफल"
 
+msgid "Failed to update example"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "रिकॉर्ड अपडेट करने में विफल"
 
 msgid "Failed to update zone"
 msgstr "ज़ोन अपडेट करने में विफल"
+
+msgid "Featured"
+msgstr ""
 
 msgid "File archive"
 msgstr "फ़ाइल आर्काइव"
@@ -870,6 +987,9 @@ msgstr "फ़ॉर्म सबमिशन त्रुटि:"
 
 msgid "Fortnox"
 msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr ""
 
 msgid "Fortnox integration"
 msgstr "Fortnox एकीकरण"
@@ -903,6 +1023,9 @@ msgstr "अपने हस्ताक्षर की पुष्टि क�
 
 msgid "Gross"
 msgstr "सकल"
+
+msgid "Groups"
+msgstr ""
 
 msgid "HTML result"
 msgstr "HTML परिणाम"
@@ -949,8 +1072,14 @@ msgstr "चित्र"
 msgid "Impersonate"
 msgstr "प्रतिरूपण"
 
+msgid "Impersonate {who}"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "अपने व्यक्तिगत मेनू में आप अन्य चीज़ों के अलावा अपना {panel} पाएंगे।"
+
+msgid "Inactive"
+msgstr ""
 
 msgid "Including VAT"
 msgstr "वैट सहित"
@@ -963,6 +1092,9 @@ msgstr "अमान्य पुष्टि लिंक"
 
 msgid "Invalid email"
 msgstr "अमान्य ईमेल"
+
+msgid "Invalid form data"
+msgstr ""
 
 msgid "Invalid password"
 msgstr "अमान्य पासवर्ड"
@@ -1023,6 +1155,12 @@ msgstr "इनवॉइस प्रश्न:"
 
 msgid "Invoice reminder, {number}"
 msgstr "इनवॉइस रिमाइंडर, {number}"
+
+msgid "Invoice reprinted successfully"
+msgstr ""
+
+msgid "Invoice resent successfully"
+msgstr ""
 
 msgid "Invoice type"
 msgstr "इनवॉइस प्रकार"
@@ -1104,8 +1242,14 @@ msgstr "भाषाएँ"
 msgid "Last name"
 msgstr "अंतिम नाम"
 
+msgid "Last reminder"
+msgstr ""
+
 msgid "Latest"
 msgstr "नवीनतम"
+
+msgid "Light"
+msgstr ""
 
 msgid "Link"
 msgstr "लिंक"
@@ -1188,6 +1332,9 @@ msgstr "इनवॉइस बनाएं"
 msgid "Manage site"
 msgstr "साइट प्रबंधित करें"
 
+msgid "Manager"
+msgstr ""
+
 msgid "Manuals"
 msgstr "मैनुअल"
 
@@ -1224,6 +1371,9 @@ msgstr "मृदु"
 msgid "Minimal local customer data is stored in Fortnox."
 msgstr "न्यूनतम स्थानीय ग्राहक डेटा Fortnox में संग्रहीत है।"
 
+msgid "Missing customer or invoice ID"
+msgstr ""
+
 msgid "Missing file, our bad?"
 msgstr "फ़ाइल अनुपलब्ध, हमारी गलती?"
 
@@ -1257,11 +1407,17 @@ msgstr "निवल राशि:"
 msgid "Network error - please try again"
 msgstr "नेटवर्क त्रुटि - कृपया पुनः प्रयास करें"
 
+msgid "New Example"
+msgstr ""
+
 msgid "New account"
 msgstr "नया खाता"
 
 msgid "New customer"
 msgstr "नया ग्राहक"
+
+msgid "New example"
+msgstr ""
 
 msgid "New invoice for customer #{customerid}"
 msgstr "ग्राहक #{customerid} के लिए नया इनवॉइस"
@@ -1293,6 +1449,9 @@ msgstr "नहीं"
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
 
+msgid "No examples found"
+msgstr ""
+
 msgid "No invoice template."
 msgstr "कोई इनवॉइस टेम्प्लेट नहीं।"
 
@@ -1300,6 +1459,9 @@ msgid "No invoicing"
 msgstr "कोई बिलिंग नहीं"
 
 msgid "No messages found"
+msgstr ""
+
+msgid "No messages yet"
 msgstr ""
 
 msgid "No pages found."
@@ -1380,6 +1542,9 @@ msgstr "पृष्ठ {number} / {total}"
 msgid "PageSpeed result 100 100 100 100"
 msgstr "PageSpeed परिणाम 100 100 100 100"
 
+msgid "Pagination"
+msgstr ""
+
 msgid "Paid"
 msgstr "भुगतान किया गया"
 
@@ -1424,6 +1589,9 @@ msgstr "भुगतान"
 
 msgid "Payment due to: {duedate}"
 msgstr "भुगतान नियत तिथि: {duedate}"
+
+msgid "Payment reminder: Invoice {number}"
+msgstr ""
 
 msgid "Payment terms"
 msgstr "भुगतान शर्तें"
@@ -1476,6 +1644,9 @@ msgstr "कृपया एक वैध ईमेल पता दर्ज क
 msgid "Please enter a valid phone number"
 msgstr ""
 
+msgid "Please find attached invoice"
+msgstr ""
+
 msgid "Please log in to access that page"
 msgstr "कृपया उस पृष्ठ तक पहुंचने के लिए लॉग इन करें"
 
@@ -1487,6 +1658,9 @@ msgstr "कृपया लॉगआउट करें और उचित प�
 
 msgid "Plusgiro"
 msgstr "प्लसगिरो"
+
+msgid "Polls"
+msgstr ""
 
 msgid "Posta faktura"
 msgstr "डाक इनवॉइस"
@@ -1502,6 +1676,12 @@ msgstr "डाक मेल"
 
 msgid "Postgiro"
 msgstr "पोस्टगिरो"
+
+msgid "Preferred Language"
+msgstr ""
+
+msgid "Presentation"
+msgstr ""
 
 msgid "Press \"{buttontext}\" to regenerate"
 msgstr "पुनः उत्पन्न करने के लिए \"{buttontext}\" दबाएं"
@@ -1529,6 +1709,12 @@ msgstr "विशेषाधिकार"
 
 msgid "Products"
 msgstr "उत्पाद"
+
+msgid "Profile Image"
+msgstr ""
+
+msgid "Published"
+msgstr ""
 
 msgid "Qty"
 msgstr "मात्रा"
@@ -1626,11 +1812,20 @@ msgstr "भुगतान के लिए शेष राशि: {amount} {cu
 msgid "Remind"
 msgstr "याद दिलाएं"
 
+msgid "Renew"
+msgstr ""
+
 msgid "Reprint"
 msgstr "पुन: प्रिंट करें"
 
+msgid "Reprint invoice"
+msgstr ""
+
 msgid "Resend"
 msgstr "पुनः भेजें"
+
+msgid "Resend invoice"
+msgstr ""
 
 msgid "Resources"
 msgstr "संसाधन"
@@ -1651,6 +1846,9 @@ msgid "SEK"
 msgstr "एसईके"
 
 msgid "SMS"
+msgstr ""
+
+msgid "SMS Conversation"
 msgstr ""
 
 msgid "SMS Management"
@@ -1680,14 +1878,29 @@ msgstr "समिज़दात {link} से बूटस्ट्रैप �
 msgid "Save"
 msgstr "सहेजें"
 
+msgid "Save Settings"
+msgstr ""
+
+msgid "Saved successfully"
+msgstr ""
+
 msgid "Search"
 msgstr "खोजें"
 
 msgid "Search content"
 msgstr "सामग्री खोजें"
 
+msgid "Search examples"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "{what} के लिए खोज फील्ड"
+
+msgid "Search for SMS"
+msgstr ""
+
+msgid "Search for certificates"
+msgstr ""
 
 msgid "Search for customer"
 msgstr "ग्राहक खोजें"
@@ -1698,11 +1911,17 @@ msgstr "डेटाबेस खोजें"
 msgid "Search for domain"
 msgstr "डोमेन खोजें"
 
+msgid "Search for example"
+msgstr ""
+
 msgid "Search for invoice"
 msgstr "इनवॉइस खोजें"
 
 msgid "Search for mail domain"
 msgstr "मेल डोमेन खोजें"
+
+msgid "Search for poll"
+msgstr ""
 
 msgid "Search for product"
 msgstr "उत्पाद खोजें"
@@ -1836,6 +2055,9 @@ msgstr "विशेष मूल्य"
 msgid "Start"
 msgstr "शुरू करें"
 
+msgid "Start a conversation by sending a message"
+msgstr ""
+
 msgid "Start main content"
 msgstr "मुख्य सामग्री शुरू"
 
@@ -1869,8 +2091,14 @@ msgstr "योग"
 msgid "Super panel"
 msgstr "सुपर पैनल"
 
+msgid "Superadmin access required"
+msgstr ""
+
 msgid "Supplier invoices"
 msgstr "आपूर्तिकर्ता इनवॉइस"
+
+msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
+msgstr ""
 
 msgid "Surname"
 msgstr "उपनाम"
@@ -1887,7 +2115,13 @@ msgstr ""
 msgid "Sync failed"
 msgstr ""
 
+msgid "Sync messages"
+msgstr ""
+
 msgid "Syncing..."
+msgstr ""
+
+msgid "Tags"
 msgstr ""
 
 msgid "Technical"
@@ -1919,6 +2153,9 @@ msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "हमसे संपर्क करने के लिए धन्यवाद।"
+
+msgid "Thank you for your business"
+msgstr ""
 
 msgid "The Samizdat project"
 msgstr "समिज़दात प्रोजेक्ट"
@@ -1953,6 +2190,9 @@ msgstr "पृष्ठ {docpath} नहीं मिला।"
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "शेयर Nasdaq स्टॉकहोम की मुख्य सूची में सूचीबद्ध है।"
 
+msgid "Theme"
+msgstr ""
+
 msgid "This confirmation link is invalid or has expired"
 msgstr "यह पुष्टि लिंक अमान्य है या समाप्त हो गया है"
 
@@ -1975,6 +2215,9 @@ msgid "Tillbaka"
 msgstr "वापस"
 
 msgid "Time"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
 msgid "Toggle menu"
@@ -2022,6 +2265,9 @@ msgstr "ग्राहक अपडेट करें"
 msgid "Update invoice, customer #{customerid}"
 msgstr "इनवॉइस अपडेट करें, ग्राहक #{customerid}"
 
+msgid "Updated"
+msgstr ""
+
 msgid "Updated customer"
 msgstr "अपडेट किया गया ग्राहक"
 
@@ -2030,6 +2276,9 @@ msgstr "अपडेट किया गया इनवॉइस"
 
 msgid "Updated {updated} by {updater}"
 msgstr "{updater} द्वारा {updated} को अपडेट किया गया"
+
+msgid "Upload Profile Image"
+msgstr ""
 
 msgid "Usage"
 msgstr "उपयोग"
@@ -2066,6 +2315,9 @@ msgstr "उपयोगकर्ता नाम बनाया नहीं �
 
 msgid "Username must be at least {min} characters"
 msgstr "उपयोगकर्ता नाम में कम से कम {min} अक्षर होने चाहिए"
+
+msgid "Users"
+msgstr ""
 
 msgid "Users and groups"
 msgstr "उपयोगकर्ता और समूह"
@@ -2117,6 +2369,9 @@ msgstr "हम जल्द से जल्द उत्तर देंगे�
 
 msgid "Web sites"
 msgstr "वेब साइट"
+
+msgid "Website"
+msgstr ""
 
 msgid "Websites"
 msgstr "वेबसाइट"
@@ -2220,6 +2475,9 @@ msgstr "{fee} जोड़ें"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "certificates"
+msgstr ""
+
 msgid "characters"
 msgstr ""
 
@@ -2238,6 +2496,9 @@ msgstr "डेटाबेस"
 msgid "domain"
 msgstr "डोमेन"
 
+msgid "example"
+msgstr ""
+
 msgid "invoice"
 msgstr "इनवॉइस"
 
@@ -2255,6 +2516,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "हमारी वेब"
+
+msgid "poll"
+msgstr ""
 
 msgid "product"
 msgstr "उत्पाद"

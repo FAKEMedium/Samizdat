@@ -97,8 +97,14 @@ msgstr ""
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Según nuestros registros, la factura {number} sigue sin pagar."
 
+msgid "Account"
+msgstr ""
+
 msgid "Account confirmation"
 msgstr "Confirmación de cuenta"
+
+msgid "Account settings"
+msgstr ""
 
 msgid "Actions"
 msgstr "Acciones"
@@ -127,6 +133,9 @@ msgstr "Añadir fila después"
 msgid "Add Row Before"
 msgstr "Añadir fila antes"
 
+msgid "Add certificate"
+msgstr ""
+
 msgid "Add content"
 msgstr "Añadir contenido"
 
@@ -139,6 +148,9 @@ msgstr "Añadir base de datos"
 msgid "Add domain"
 msgstr "Añadir dominio"
 
+msgid "Add example"
+msgstr ""
+
 msgid "Add grop"
 msgstr "Añadir grupo"
 
@@ -150,6 +162,9 @@ msgstr "Añadir dominio de correo"
 
 msgid "Add page"
 msgstr "Añadir página"
+
+msgid "Add poll"
+msgstr ""
 
 msgid "Add product"
 msgstr "Añadir producto"
@@ -183,6 +198,12 @@ msgstr "Dirección 2"
 
 msgid "Address check"
 msgstr "Verificación de dirección"
+
+msgid "Admin access required"
+msgstr ""
+
+msgid "Admin access required for DNS management"
+msgstr ""
 
 msgid "Admininistration panel"
 msgstr "Panel de administración"
@@ -220,11 +241,17 @@ msgstr "Ocurrió un error"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "Are you sure you want to delete this example?"
+msgstr ""
+
 msgid "Are you sure you want to delete this message?"
 msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "¿Está seguro de que desea eliminar este registro?"
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr ""
 
 msgid "Article"
 msgstr "Artículo"
@@ -241,6 +268,9 @@ msgstr "Al menos {min} caracteres de: {chars}"
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr "Al menos {min} caracteres: {upper} mayúscula(s), {lower} minúscula(s), {num} número(s), {special} carácter(es) especial(es)"
 
+msgid "Authentication required"
+msgstr ""
+
 msgid "Authorize"
 msgstr "Autorizar"
 
@@ -256,6 +286,9 @@ msgstr "Dirección BIC/Swift:"
 msgid "Back"
 msgstr "Atrás"
 
+msgid "Back to list"
+msgstr ""
+
 msgid "Bankgiro"
 msgstr "Bankgiro"
 
@@ -270,6 +303,9 @@ msgstr "Información Básica"
 
 msgid "Billing"
 msgstr "Facturación"
+
+msgid "Bio"
+msgstr ""
 
 msgid "Blocked"
 msgstr "Bloqueado"
@@ -316,6 +352,9 @@ msgstr "Imagen captcha"
 msgid "Captcha was wrong"
 msgstr "El captcha era incorrecto"
 
+msgid "Category"
+msgstr ""
+
 msgid "Certificates"
 msgstr ""
 
@@ -324,6 +363,9 @@ msgstr "Cambiar contraseña"
 
 msgid "Changed status."
 msgstr "Estado cambiado."
+
+msgid "Changes saved successfully."
+msgstr ""
 
 msgid "Check zones"
 msgstr "Verificar zonas"
@@ -385,6 +427,9 @@ msgstr "Cerrar"
 msgid "Code Block"
 msgstr "Bloque de código"
 
+msgid "Comma separated"
+msgstr ""
+
 msgid "Comments"
 msgstr "Comentarios"
 
@@ -442,6 +487,12 @@ msgstr "Contribuir"
 msgid "Contributing"
 msgstr "Contribuyendo"
 
+msgid "Control panel"
+msgstr ""
+
+msgid "Conversation with"
+msgstr ""
+
 msgid "Corporate identity number"
 msgstr "Número de identificación corporativa"
 
@@ -465,6 +516,9 @@ msgstr "Crear cliente"
 
 msgid "Create new record"
 msgstr "Crear nuevo registro"
+
+msgid "Created"
+msgstr ""
 
 msgid "Created {created} by {creator}"
 msgstr "Creado el {created} por {creator}"
@@ -541,6 +595,9 @@ msgstr "Zona DNS"
 msgid "DNS zones"
 msgstr "Zonas DNS"
 
+msgid "Dark"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "Uso de datos: {usage}"
 
@@ -562,11 +619,17 @@ msgstr "Fecha"
 msgid "Date:"
 msgstr "Fecha:"
 
+msgid "Dear"
+msgstr ""
+
 msgid "Debt"
 msgstr "Deuda"
 
 msgid "Decide which parts of your personal data you want to show different groups."
 msgstr "Decida qué partes de sus datos personales desea mostrar a diferentes grupos."
+
+msgid "Default"
+msgstr ""
 
 msgid "Delete"
 msgstr "Eliminar"
@@ -604,6 +667,9 @@ msgstr ""
 msgid "Discount"
 msgstr "Descuento"
 
+msgid "Display Name"
+msgstr ""
+
 msgid "Do you want to credit the invoice?"
 msgstr "¿Desea acreditar la factura?"
 
@@ -621,6 +687,9 @@ msgstr "Dominios"
 
 msgid "DomÃ¤nregistrering"
 msgstr "Registro de dominio"
+
+msgid "Draft"
+msgstr ""
 
 msgid "Due date"
 msgstr "Fecha de vencimiento"
@@ -640,6 +709,9 @@ msgstr "Economía"
 msgid "Edit"
 msgstr "Editar"
 
+msgid "Edit Example"
+msgstr ""
+
 msgid "Edit customer {customerid}"
 msgstr "Editar cliente {customerid}"
 
@@ -651,6 +723,9 @@ msgstr "Editar esta página"
 
 msgid "Edit zone"
 msgstr "Editar zona"
+
+msgid "Edit {who}"
+msgstr ""
 
 msgid "Ekonomi"
 msgstr "Economía"
@@ -787,8 +862,26 @@ msgstr "Introduzca su correo electrónico"
 msgid "Enter zone name"
 msgstr "Introducir nombre de zona"
 
+msgid "Error reprinting invoice"
+msgstr ""
+
+msgid "Error resending invoice"
+msgstr ""
+
 msgid "Euro"
 msgstr "Euro"
+
+msgid "Example created successfully"
+msgstr ""
+
+msgid "Example deleted successfully"
+msgstr ""
+
+msgid "Example not found"
+msgstr ""
+
+msgid "Example updated successfully"
+msgstr ""
 
 msgid "Examples"
 msgstr "Ejemplos"
@@ -802,6 +895,9 @@ msgstr "Expandir menú personal"
 msgid "Expires"
 msgstr "Expira"
 
+msgid "Expiring"
+msgstr ""
+
 msgid "Expiring domains"
 msgstr "Dominios a punto de expirar"
 
@@ -814,11 +910,17 @@ msgstr "FAKE News por país"
 msgid "Failed login from {ip}"
 msgstr "Inicio de sesión fallido desde {ip}"
 
+msgid "Failed to create example"
+msgstr ""
+
 msgid "Failed to create record"
 msgstr "Error al crear registro"
 
 msgid "Failed to create zone"
 msgstr "Error al crear zona"
+
+msgid "Failed to delete example"
+msgstr ""
 
 msgid "Failed to delete message"
 msgstr ""
@@ -829,17 +931,32 @@ msgstr "Error al eliminar registro"
 msgid "Failed to delete zone"
 msgstr "Error al eliminar zona"
 
+msgid "Failed to load conversation"
+msgstr ""
+
+msgid "Failed to reprint invoice"
+msgstr ""
+
+msgid "Failed to resend invoice"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
 msgid "Failed to send invoice to Fortnox"
 msgstr "Error al enviar factura a Fortnox"
 
+msgid "Failed to update example"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Error al actualizar registro"
 
 msgid "Failed to update zone"
 msgstr "Error al actualizar zona"
+
+msgid "Featured"
+msgstr ""
 
 msgid "File archive"
 msgstr "Archivo de ficheros"
@@ -870,6 +987,9 @@ msgstr "Error de envío del formulario:"
 
 msgid "Fortnox"
 msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr ""
 
 msgid "Fortnox integration"
 msgstr "Integración Fortnox"
@@ -903,6 +1023,9 @@ msgstr "Vaya a {confirmationlink} para confirmar su firma y reclamar su imagen."
 
 msgid "Gross"
 msgstr "Bruto"
+
+msgid "Groups"
+msgstr ""
 
 msgid "HTML result"
 msgstr "Resultado HTML"
@@ -949,8 +1072,14 @@ msgstr "Imagen"
 msgid "Impersonate"
 msgstr "Suplantar"
 
+msgid "Impersonate {who}"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "En su menú personal encontrará su {panel} entre otras cosas."
+
+msgid "Inactive"
+msgstr ""
 
 msgid "Including VAT"
 msgstr "IVA incluido"
@@ -963,6 +1092,9 @@ msgstr "Enlace de confirmación inválido"
 
 msgid "Invalid email"
 msgstr "Correo electrónico no válido"
+
+msgid "Invalid form data"
+msgstr ""
 
 msgid "Invalid password"
 msgstr "Contraseña no válida"
@@ -1023,6 +1155,12 @@ msgstr "Preguntas sobre factura:"
 
 msgid "Invoice reminder, {number}"
 msgstr "Recordatorio de factura, {number}"
+
+msgid "Invoice reprinted successfully"
+msgstr ""
+
+msgid "Invoice resent successfully"
+msgstr ""
 
 msgid "Invoice type"
 msgstr "Tipo de factura"
@@ -1104,8 +1242,14 @@ msgstr "Idiomas"
 msgid "Last name"
 msgstr "Apellido"
 
+msgid "Last reminder"
+msgstr ""
+
 msgid "Latest"
 msgstr "Últimos"
+
+msgid "Light"
+msgstr ""
 
 msgid "Link"
 msgstr "Enlace"
@@ -1188,6 +1332,9 @@ msgstr "Crear factura"
 msgid "Manage site"
 msgstr "Gestionar sitio"
 
+msgid "Manager"
+msgstr ""
+
 msgid "Manuals"
 msgstr "Manuales"
 
@@ -1224,6 +1371,9 @@ msgstr "Leve"
 msgid "Minimal local customer data is stored in Fortnox."
 msgstr "Los datos mínimos del cliente local se almacenan en Fortnox."
 
+msgid "Missing customer or invoice ID"
+msgstr ""
+
 msgid "Missing file, our bad?"
 msgstr "¿Archivo faltante, culpa nuestra?"
 
@@ -1257,11 +1407,17 @@ msgstr "Importe neto:"
 msgid "Network error - please try again"
 msgstr "Error de red - por favor inténtelo de nuevo"
 
+msgid "New Example"
+msgstr ""
+
 msgid "New account"
 msgstr "Nueva cuenta"
 
 msgid "New customer"
 msgstr "Nuevo cliente"
+
+msgid "New example"
+msgstr ""
 
 msgid "New invoice for customer #{customerid}"
 msgstr "Nueva factura para cliente #{customerid}"
@@ -1293,6 +1449,9 @@ msgstr "No"
 msgid "No customer #{customerid}."
 msgstr "No hay cliente #{customerid}."
 
+msgid "No examples found"
+msgstr ""
+
 msgid "No invoice template."
 msgstr "No hay plantilla de factura."
 
@@ -1300,6 +1459,9 @@ msgid "No invoicing"
 msgstr "Sin facturación"
 
 msgid "No messages found"
+msgstr ""
+
+msgid "No messages yet"
 msgstr ""
 
 msgid "No pages found."
@@ -1380,6 +1542,9 @@ msgstr "Página {number} de {total}"
 msgid "PageSpeed result 100 100 100 100"
 msgstr "Resultado PageSpeed 100 100 100 100"
 
+msgid "Pagination"
+msgstr ""
+
 msgid "Paid"
 msgstr "Pagado"
 
@@ -1424,6 +1589,9 @@ msgstr "Pago"
 
 msgid "Payment due to: {duedate}"
 msgstr "Pago vencido el: {duedate}"
+
+msgid "Payment reminder: Invoice {number}"
+msgstr ""
 
 msgid "Payment terms"
 msgstr "Condiciones de pago"
@@ -1476,6 +1644,9 @@ msgstr "Por favor ingrese una dirección de correo electrónico válida"
 msgid "Please enter a valid phone number"
 msgstr ""
 
+msgid "Please find attached invoice"
+msgstr ""
+
 msgid "Please log in to access that page"
 msgstr "Por favor inicie sesión para acceder a esa página"
 
@@ -1487,6 +1658,9 @@ msgstr "Por favor cierre sesión e inicie sesión como un usuario con la autoriz
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
+
+msgid "Polls"
+msgstr ""
 
 msgid "Posta faktura"
 msgstr "Enviar factura por correo"
@@ -1502,6 +1676,12 @@ msgstr "Correo postal"
 
 msgid "Postgiro"
 msgstr "Postgiro"
+
+msgid "Preferred Language"
+msgstr ""
+
+msgid "Presentation"
+msgstr ""
 
 msgid "Press \"{buttontext}\" to regenerate"
 msgstr "Pulse \"{buttontext}\" para regenerar"
@@ -1529,6 +1709,12 @@ msgstr "Privilegios"
 
 msgid "Products"
 msgstr "Productos"
+
+msgid "Profile Image"
+msgstr ""
+
+msgid "Published"
+msgstr ""
 
 msgid "Qty"
 msgstr "Cant"
@@ -1626,11 +1812,20 @@ msgstr "Importe restante a pagar: {amount} {currency}"
 msgid "Remind"
 msgstr "Recordar"
 
+msgid "Renew"
+msgstr ""
+
 msgid "Reprint"
 msgstr "Reimprimir"
 
+msgid "Reprint invoice"
+msgstr ""
+
 msgid "Resend"
 msgstr "Reenviar"
+
+msgid "Resend invoice"
+msgstr ""
 
 msgid "Resources"
 msgstr "Recursos"
@@ -1651,6 +1846,9 @@ msgid "SEK"
 msgstr "SEK"
 
 msgid "SMS"
+msgstr ""
+
+msgid "SMS Conversation"
 msgstr ""
 
 msgid "SMS Management"
@@ -1680,14 +1878,29 @@ msgstr "Samizdat utiliza los iconos Bootstrap de {link}."
 msgid "Save"
 msgstr "Guardar"
 
+msgid "Save Settings"
+msgstr ""
+
+msgid "Saved successfully"
+msgstr ""
+
 msgid "Search"
 msgstr "Buscar"
 
 msgid "Search content"
 msgstr "Buscar contenido"
 
+msgid "Search examples"
+msgstr ""
+
 msgid "Search field for {what}"
 msgstr "Campo de búsqueda para {what}"
+
+msgid "Search for SMS"
+msgstr ""
+
+msgid "Search for certificates"
+msgstr ""
 
 msgid "Search for customer"
 msgstr "Buscar cliente"
@@ -1698,11 +1911,17 @@ msgstr "Buscar base de datos"
 msgid "Search for domain"
 msgstr "Buscar dominio"
 
+msgid "Search for example"
+msgstr ""
+
 msgid "Search for invoice"
 msgstr "Buscar factura"
 
 msgid "Search for mail domain"
 msgstr "Buscar dominio de correo"
+
+msgid "Search for poll"
+msgstr ""
 
 msgid "Search for product"
 msgstr "Buscar producto"
@@ -1836,6 +2055,9 @@ msgstr "Precio especial"
 msgid "Start"
 msgstr "Inicio"
 
+msgid "Start a conversation by sending a message"
+msgstr ""
+
 msgid "Start main content"
 msgstr "Inicio del contenido principal"
 
@@ -1869,8 +2091,14 @@ msgstr "Suma"
 msgid "Super panel"
 msgstr "Super panel"
 
+msgid "Superadmin access required"
+msgstr ""
+
 msgid "Supplier invoices"
 msgstr "Facturas de proveedores"
+
+msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
+msgstr ""
 
 msgid "Surname"
 msgstr "Apellido"
@@ -1887,7 +2115,13 @@ msgstr ""
 msgid "Sync failed"
 msgstr ""
 
+msgid "Sync messages"
+msgstr ""
+
 msgid "Syncing..."
+msgstr ""
+
+msgid "Tags"
 msgstr ""
 
 msgid "Technical"
@@ -1919,6 +2153,9 @@ msgstr ""
 
 msgid "Thank you for contacting us."
 msgstr "Gracias por contactarnos."
+
+msgid "Thank you for your business"
+msgstr ""
 
 msgid "The Samizdat project"
 msgstr "El proyecto Samizdat"
@@ -1953,6 +2190,9 @@ msgstr "La página {docpath} no se encontró."
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "La acción está listada en la lista principal de Nasdaq Estocolmo."
 
+msgid "Theme"
+msgstr ""
+
 msgid "This confirmation link is invalid or has expired"
 msgstr "Este enlace de confirmación es inválido o ha expirado"
 
@@ -1975,6 +2215,9 @@ msgid "Tillbaka"
 msgstr "Atrás"
 
 msgid "Time"
+msgstr ""
+
+msgid "Title"
 msgstr ""
 
 msgid "Toggle menu"
@@ -2022,6 +2265,9 @@ msgstr "Actualizar cliente"
 msgid "Update invoice, customer #{customerid}"
 msgstr "Actualizar factura, cliente #{customerid}"
 
+msgid "Updated"
+msgstr ""
+
 msgid "Updated customer"
 msgstr "Cliente actualizado"
 
@@ -2030,6 +2276,9 @@ msgstr "Factura actualizada"
 
 msgid "Updated {updated} by {updater}"
 msgstr "Actualizado el {updated} por {updater}"
+
+msgid "Upload Profile Image"
+msgstr ""
 
 msgid "Usage"
 msgstr "Uso"
@@ -2066,6 +2315,9 @@ msgstr "No se pudo crear el nombre de usuario"
 
 msgid "Username must be at least {min} characters"
 msgstr "El nombre de usuario debe tener al menos {min} caracteres"
+
+msgid "Users"
+msgstr ""
 
 msgid "Users and groups"
 msgstr "Usuarios y grupos"
@@ -2117,6 +2369,9 @@ msgstr "Responderemos lo antes posible."
 
 msgid "Web sites"
 msgstr "Sitios web"
+
+msgid "Website"
+msgstr ""
 
 msgid "Websites"
 msgstr "Sitios web"
@@ -2220,6 +2475,9 @@ msgstr "añadir {fee}"
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
+msgid "certificates"
+msgstr ""
+
 msgid "characters"
 msgstr ""
 
@@ -2238,6 +2496,9 @@ msgstr "base de datos"
 msgid "domain"
 msgstr "dominio"
 
+msgid "example"
+msgstr ""
+
 msgid "invoice"
 msgstr "factura"
 
@@ -2255,6 +2516,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "nuestra web"
+
+msgid "poll"
+msgstr ""
 
 msgid "product"
 msgstr "producto"

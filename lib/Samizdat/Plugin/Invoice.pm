@@ -4,6 +4,8 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Invoice;
 use Mojo::Home;
 use Mojo::File;
+use Mojo::Template;
+use Mojo::Loader qw(data_section);
 use Data::Dumper;
 
 sub register ($self, $app, $conf) {
@@ -37,23 +39,39 @@ sub register ($self, $app, $conf) {
   $products->get('/subscribe')                                       ->to('Customer#products');
   $customers->post('/')                                              ->to('Customer#subscribe');
 
+
   $app->helper(invoice => sub ($self) {
     state $invoice = Samizdat::Model::Invoice->new({
-      config => $self->config->{manager}->{invoice},
-      pg     => $self->app->pg,
-      mysql  => $self->app->mysql,
+      config   => $self->config->{manager}->{invoice},
+      pg       => $self->app->pg,
+      mysql    => $self->app->mysql,
+      customer => $self->app->customer,  # Pass customer helper
     });
     return $invoice;
   });
 
+
+  # Helper for PDF generation from LaTeX
   $app->helper(
-    printinvoice => sub($self, $tex, $formdata) {
-      my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $formdata->{invoice}->{uuid}));
+    generate_pdf_from_tex => sub($self, $tex, $uuid) {
+      my $config = $self->app->config;
+      my $texpath = Mojo::Home->new()->rel_file(sprintf('src/tmp/%s.tex', $uuid));
       my $pdfpath = Mojo::File->new(sprintf('%s/%s.pdf',
-        $app->config->{manager}->{invoice}->{invoicedir},
-        $formdata->{invoice}->{uuid})
+        $config->{manager}->{invoice}->{invoicedir},
+        $uuid)
       );
+
+      # Ensure temp directory exists
+      $texpath->dirname->make_path unless -d $texpath->dirname;
+
       $texpath->spew($tex);
+
+      # Clean up any previous compilation artifacts for this specific tex file
+      my $basename = $texpath->basename('.tex');
+      for my $ext (qw(aux log fls fdb_latexmk pdf)) {
+        my $file = $texpath->dirname->child("$basename.$ext");
+        $file->remove if -e $file;
+      }
 
       my $command = [
         'latexmk',
@@ -66,12 +84,526 @@ sub register ($self, $app, $conf) {
       ];
       system(@{$command});
 
-      $texpath->dirname->rel_file(sprintf('%s.pdf', $formdata->{invoice}->{uuid}))->move_to($pdfpath);
+      $texpath->dirname->rel_file(sprintf('%s.pdf', $uuid))->move_to($pdfpath);
       my $pdf = $pdfpath->slurp || 0;
-      if (!$self->app->config->{test}->{invoice}) {
+      if (!$config->{test}->{invoice}) {
         $texpath->dirname->remove_tree({ keep_root => 1 });
       }
       return $pdf;
+    }
+  );
+
+
+  # Helper to escape text for LaTeX
+  $app->helper(
+    tex_escape => sub($self, $text) {
+      return '' unless defined $text;
+
+      # Make a copy if passed by reference
+      my $escaped = ref $text ? $$text : $text;
+
+      # Escape LaTeX special characters
+      $escaped =~ s/\\/\\textbackslash{}/g;
+      $escaped =~ s/\{/\\\{/g;
+      $escaped =~ s/\}/\\\}/g;
+      $escaped =~ s/\$/\\\$/g;
+      $escaped =~ s/\&/\\\&/g;
+      $escaped =~ s/\#/\\\#/g;
+      $escaped =~ s/\_/\\\_/g;
+      $escaped =~ s/\%/\\\%/g;
+      $escaped =~ s/\^/\\textasciicircum{}/g;
+      $escaped =~ s/\~/\\textasciitilde{}/g;
+
+      # Update reference if passed
+      if (ref $text) {
+        $$text = $escaped;
+      }
+
+      return $escaped;
+    }
+  );
+
+  # Helper to convert HTML to plain text
+  $app->helper(
+    html_to_text => sub($self, $html) {
+      return '' unless $html;
+
+      # Remove script and style elements
+      $html =~ s/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>//gis;
+      $html =~ s/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>//gis;
+
+      # Convert headings with emphasis
+      $html =~ s/<h1[^>]*>(.*?)<\/h1>/\n\n=== $1 ===\n\n/gi;
+      $html =~ s/<h2[^>]*>(.*?)<\/h2>/\n\n== $1 ==\n\n/gi;
+      $html =~ s/<h3[^>]*>(.*?)<\/h3>/\n\n= $1 =\n\n/gi;
+      $html =~ s/<h[4-6][^>]*>(.*?)<\/h[4-6]>/\n\n$1\n\n/gi;
+
+      # Convert paragraphs and divs
+      $html =~ s/<\/p>/\n\n/gi;
+      $html =~ s/<p[^>]*>//gi;
+      $html =~ s/<\/div>/\n/gi;
+      $html =~ s/<div[^>]*>//gi;
+
+      # Convert line breaks
+      $html =~ s/<br\s*\/?>/\n/gi;
+
+      # Convert links to text with URL
+      $html =~ s/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/$2 ($1)/gi;
+
+      # Convert strong/bold
+      $html =~ s/<(strong|b)[^>]*>(.*?)<\/\1>/**$2**/gi;
+
+      # Convert em/italic
+      $html =~ s/<(em|i)[^>]*>(.*?)<\/\1>/*$2*/gi;
+
+      # Convert tables to simple text
+      $html =~ s/<table[^>]*>/\n/gi;
+      $html =~ s/<\/table>/\n/gi;
+      $html =~ s/<tr[^>]*>/\n/gi;
+      $html =~ s/<\/tr>//gi;
+      $html =~ s/<t[dh][^>]*>/  /gi;
+      $html =~ s/<\/t[dh]>//gi;
+
+      # Convert list items
+      $html =~ s/<ul[^>]*>/\n/gi;
+      $html =~ s/<\/ul>/\n/gi;
+      $html =~ s/<ol[^>]*>/\n/gi;
+      $html =~ s/<\/ol>/\n/gi;
+      $html =~ s/<li[^>]*>/  • /gi;
+      $html =~ s/<\/li>/\n/gi;
+
+      # Convert horizontal rules
+      $html =~ s/<hr[^>]*>/\n----------------------------------------\n/gi;
+
+      # Remove all remaining HTML tags
+      $html =~ s/<[^>]+>//g;
+
+      # Decode HTML entities
+      $html =~ s/&nbsp;/ /g;
+      $html =~ s/&lt;/</g;
+      $html =~ s/&gt;/>/g;
+      $html =~ s/&quot;/"/g;
+      $html =~ s/&#39;/'/g;
+      $html =~ s/&amp;/&/g;
+      $html =~ s/&#(\d+);/chr($1)/ge;
+
+      # Clean up multiple newlines and spaces
+      $html =~ s/\n{3,}/\n\n/g;
+      $html =~ s/[ \t]+/ /g;
+      $html =~ s/^\s+|\s+$//g;
+
+      return $html;
+    }
+  );
+
+  # Helper to send invoice email
+  $app->helper(
+    send_invoice_email => sub($self, $invoice_data, $options = {}) {
+      require MIME::Lite;
+      require Mojo::Util;
+
+      my $config = $self->app->config;
+
+      # Clean language variant suffixes (_XX) from billinglang
+      $invoice_data->{customer}->{billinglang} =~ s/_[A-Z]{2}$// if $invoice_data->{customer}->{billinglang};
+      $self->language($invoice_data->{customer}->{billinglang} || $config->{locale}->{default_language});
+
+      my $action = $options->{action} || 'send';
+
+      # Add logo if not present
+      if (!$invoice_data->{svglogotype}) {
+        my $logo_path = Mojo::Home->new()->child('src/public/' . $config->{logotype});
+        if (-e $logo_path) {
+          my $svg = $logo_path->slurp;
+          $svg = Mojo::Util::b64_encode($svg);
+          $svg =~ s/[\r\n\s]+//g;
+          chomp $svg;
+          $invoice_data->{svglogotype} = $svg;
+        }
+      }
+
+      # Render email templates
+      my ($htmldata, $txtdata);
+
+      # Add custom message if provided
+      my $message = $options->{message} || '';
+
+      # When in app context, render_mail is always available
+      # Use different templates based on action
+      if ($invoice_data->{invoice}->{kreditfakturaavser} || $action eq 'credit') {
+        $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', invoicedata => $invoice_data);
+      } elsif ($action eq 'reminder' || $action eq 'reminder_mild') {
+        $htmldata = $self->render_mail(template => 'invoice/remind/mildhtml',
+          invoicedata => $invoice_data, message => $message);
+      } elsif ($action eq 'reminder_tough') {
+        $htmldata = $self->render_mail(template => 'invoice/remind/toughhtml',
+          invoicedata => $invoice_data, message => $message);
+      } else {
+        $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoice_data);
+      }
+
+      # Always convert HTML to text for plain text version
+      $txtdata = $self->html_to_text($htmldata);
+
+      # Set subject based on action
+      my $subject;
+
+      # Try to use localization if in app context, otherwise use simple strings
+      if ($action eq 'credit') {
+        $subject = $self->app->__x('Credited invoice: {number}',
+          number => $invoice_data->{invoice}->{kreditfakturaavser});
+      } elsif ($action eq 'reminder' || $action eq 'reminder_mild') {
+        $subject = $self->app->__x('Payment reminder: Invoice {number}',
+          number => $invoice_data->{invoice}->{fakturanummer});
+      } elsif ($action eq 'reminder_tough') {
+        $subject = $self->app->__x('URGENT: Final payment reminder - Invoice {number}',
+          number => $invoice_data->{invoice}->{fakturanummer});
+      } else {
+        $subject = $self->app->__x('Invoice {number}',
+          number => $invoice_data->{invoice}->{fakturanummer});
+      }
+
+      # Determine recipient email
+      my $to_email = $config->{test}->{invoice} ?
+        $config->{mail}->{to} :
+        $invoice_data->{customer}->{billingemail};
+
+      # Create email
+      my $mail = MIME::Lite->new(
+        From         => $config->{mail}->{from},
+        Bcc          => $config->{test}->{invoice} ? undef : $config->{mail}->{from},
+        To           => $to_email,
+        Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $config->{organization})),
+        Subject      => Encode::encode("MIME-Q", Encode::decode("UTF-8", $subject)),
+        'X-Mailer'   => "Samizdat",
+        Type         => 'multipart/mixed',
+      );
+
+      # Attach plain text and html variants
+      my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
+      $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
+      $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
+      $mail->attach($alternative);
+
+      # Attach PDF if it exists
+      if ($invoice_data->{invoice}->{uuid}) {
+        my $pdf_path = sprintf('%s/%s.pdf', $config->{manager}->{invoice}->{invoicedir}, $invoice_data->{invoice}->{uuid});
+        $mail->attach(
+          Path        => $pdf_path,
+          Filename    => sprintf('%s.pdf', $invoice_data->{invoice}->{uuid}),
+          Type        => 'application/pdf',
+          Disposition => 'attachment'
+        );
+      }
+
+      # Send email
+      eval {
+        $mail->send($config->{mail}->{how}, @{$config->{mail}->{howargs}});
+      };
+
+      if ($@) {
+        return { success => 0, error => $@ };
+      }
+
+      return { success => 1 };
+    }
+  );
+
+
+  # Helper to process invoice (fetch data → escape → tex → pdf)
+  # Enhanced to handle both reprint and create operations with obehandlad state
+  $app->helper(
+    process_invoice => sub($self, $invoiceid = 0, $customerid = undef, $options = {}) {
+      require Mojo::Util;
+      require Date::Format;
+
+      # Determine operation mode
+      my $is_create = $options->{create} || 0;
+      my $is_credit = $options->{credit} || 0;
+      my $original_invoiceid = $options->{original_invoiceid};
+
+      # Handle credit invoice creation
+      if ($is_credit && $original_invoiceid) {
+        # Get original invoice
+        my $original_invoice = $self->invoice->get({
+          where => { invoiceid => $original_invoiceid }
+        })->[0];
+        return { error => 'Original invoice not found', status => 404 } unless $original_invoice;
+
+        # Get customer data but override with original invoice's currency and VAT
+        my $customer = $self->customer->get({
+          where => { customerid => $original_invoice->{customerid} }
+        })->[0];
+        return { error => 'Customer not found', status => 404 } unless $customer;
+
+        # Use original invoice's currency and VAT for the credit invoice
+        $customer->{currency} = $original_invoice->{currency};
+        $customer->{vat} = $original_invoice->{vat};
+
+        # Create new invoice for credit with original invoice's currency and VAT
+        my $credit_invoiceid = $self->invoice->addinvoice($customer);
+
+        # Copy all items from original invoice
+        my $original_items = $self->invoice->invoiceitems({
+          where => { 'invoice.invoiceid' => $original_invoiceid }
+        });
+        for my $itemid (keys %{$original_items}) {
+          my $item = $original_items->{$itemid};
+          # Copy item to credit invoice (don't negate - the invoice state handles that)
+          $item->{invoiceid} = $credit_invoiceid;
+          delete $item->{invoiceitemid};
+          $self->invoice->addinvoiceitem($item, $credit_invoiceid);
+        }
+
+        # Process the credit invoice with the original invoice number
+        my $result = $self->process_invoice($credit_invoiceid, $original_invoice->{customerid}, {
+          create => 1,
+          credit => 1,
+          credited_invoice => $original_invoice->{fakturanummer}
+        });
+
+        if ($result->{error}) {
+          return $result;
+        }
+
+        # Mark original invoice as credited (state = 'raderad')
+        $self->invoice->updateinvoice($original_invoiceid, { state => 'raderad' });
+
+        # Get the updated credit invoice with kreditfakturaavser
+        my $credit_invoice = $self->invoice->get({ where => { invoiceid => $credit_invoiceid } })->[0];
+        $result->{invoice} = $credit_invoice;
+
+        return $result;
+      }
+
+      # Fetch data from database
+      my $invoice;
+      if (!$invoiceid && $customerid) {
+        # If no invoiceid, fetch the obehandlad (unprocessed) invoice for the customer
+        $invoice = $self->invoice->get({
+          where => { state => 'obehandlad', customerid => $customerid }
+        })->[0];
+      } else {
+        # Fetch specific invoice by ID
+        $invoice = $self->invoice->get({
+          where => { invoiceid => $invoiceid }
+        })->[0];
+      }
+      return { error => 'Invoice not found', status => 404 } unless $invoice;
+
+      $customerid ||= $invoice->{customerid};
+      my $customer = $self->customer->get({
+        where => { customerid => $customerid }
+      })->[0];
+      return { error => 'Customer not found', status => 404 } unless $customer;
+
+      # Get customer name
+      $customer->{name} = $self->customer->name($customer);
+
+      # Get invoice items
+      my $invoiceitems = $self->invoice->invoiceitems({
+        where => { 'invoice.invoiceid' => $invoice->{invoiceid} }
+      });
+
+      # Check if there are invoice items
+      return { error => 'No invoice items', status => 400 } if (!$invoiceitems || keys %{$invoiceitems} < 1);
+
+      # Set language based on customer billing language preference
+      $customer->{billinglang} =~ s/_[A-Z]{2}$// if $customer->{billinglang};
+      $self->language($customer->{billinglang} || $self->app->config->{locale}->{default_language} || 'sv');
+
+      # Handle obehandlad state - assign invoice number and dates
+      if ($invoice->{state} eq 'obehandlad' && $is_create) {
+        # Get next invoice number
+        my $nextnumber = $self->invoice->nextnumber;
+        $invoice->{fakturanummer} = $nextnumber;
+
+        # Generate UUID
+        require UUID;
+        my $uuid = sprintf('%s_%s_%s',
+          $nextnumber,
+          $customer->{customerid},
+          UUID::uuid()
+        );
+        $invoice->{uuid} = $uuid;
+
+        # Set invoice date and due date
+        $invoice->{invoicedate} = sprintf('%4d-%02d-%02d %02d:%02d:%02d',
+          (localtime(time))[5] + 1900,
+          (localtime(time))[4] + 1,
+          (localtime(time))[3],
+          (localtime(time))[2],
+          (localtime(time))[1],
+          (localtime(time))[0]
+        );
+
+        my $duedays = $self->config->{manager}->{invoice}->{duedays} || 30;
+        $invoice->{duedate} = Date::Format::time2str("%Y-%m-%d", time + $duedays*24*3600, 'CET');
+        $invoice->{pdfdate} = Date::Format::time2str("%Y%m%d%H%M%S", time, 'CET');
+
+        # Set kreditfakturaavser for credit invoices
+        if ($is_credit && $options->{credited_invoice}) {
+          $invoice->{kreditfakturaavser} = $options->{credited_invoice};
+        }
+      }
+
+      # Set title for all invoices (not just obehandlad)
+      if (!$invoice->{title} && $invoice->{fakturanummer}) {
+        # Check if this is a credit invoice
+        if ($invoice->{kreditfakturaavser} || $invoice->{state} eq 'krediterad' || $is_credit) {
+          $invoice->{title} = $self->__x('Credit invoice {number}', number => $invoice->{fakturanummer});
+        } else {
+          $invoice->{title} = $self->__x('Invoice {number}', number => $invoice->{fakturanummer});
+        }
+      }
+
+      # Escape customer fields for LaTeX first (but not billingcity yet if Swedish)
+      my $is_swedish = ('SE' eq uc($customer->{billingcountry} || ''));
+
+      for my $field (qw(company firstname lastname address billingaddress city lang)) {
+        if ($customer->{$field}) {
+          $customer->{$field} = $self->tex_escape($customer->{$field});
+        }
+      }
+
+      # Escape billingcity only if not Swedish (Swedish formatting comes after)
+      if (!$is_swedish && $customer->{billingcity}) {
+        $customer->{billingcity} = $self->tex_escape($customer->{billingcity});
+      }
+
+      # Format Swedish postal code and city after other escaping
+      if ($is_swedish) {
+        # First escape the city name
+        if ($customer->{billingcity}) {
+          $customer->{billingcity} = $self->tex_escape($customer->{billingcity});
+        }
+
+        # Then format the postal code
+        $customer->{billingzip} =~ s/\s+//g if $customer->{billingzip};
+        if ($customer->{billingzip} && length($customer->{billingzip}) >= 5) {
+          $customer->{billingzip} = sprintf('%s\ %s',
+            substr($customer->{billingzip}, 0, 3),
+            substr($customer->{billingzip}, 3, 2)
+          );
+        }
+        # Add LaTeX double space before city (after escaping)
+        $customer->{billingcity} = '\ \ ' . $customer->{billingcity} if $customer->{billingcity};
+      }
+
+      # Process invoice items - validate and escape
+      for my $itemid (keys %$invoiceitems) {
+        my $item = $invoiceitems->{$itemid};
+
+        # Skip items not included (unless it's an invoice item with ID)
+        next unless $item->{include} || $item->{invoiceitemid};
+
+        # Escape description for LaTeX
+        my $description = $item->{invoiceitemtext} || $item->{description} || '';
+        $description =~ s/--/-\\-/g;  # Handle double dashes
+        $item->{invoiceitemtext} = $self->tex_escape($description);
+      }
+
+      # Calculate all invoice amounts using model method
+      my $amounts = $self->invoice->calculate_amounts(
+        $invoiceitems,
+        $customer->{vat},
+        $customer->{currency}
+      );
+
+      # Update invoice with calculated amounts
+      $invoice->{costsum} = $amounts->{costsum};
+      $invoice->{vatcost} = $amounts->{vatcost};
+      $invoice->{rounded} = $amounts->{rounded};
+      $invoice->{diff} = $amounts->{diff};
+
+      # Calculate VAT display value
+      my $vat = $amounts->{vat_percent};
+
+      # Prepare formdata for template
+      my $formdata = {
+        invoice => $invoice,
+        customer => $customer,
+        invoiceitems => $invoiceitems,
+        vat => $vat,
+        costsum => $amounts->{costsum},
+        rounded => $amounts->{rounded},
+        diff => $amounts->{diff},
+        vatcost => $amounts->{vatcost},
+      };
+
+      # Set formdata in stash for template access
+      $self->stash(formdata => $formdata);
+
+      # Render LaTeX template with layout
+      my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/create/index');
+
+      # Encode and generate PDF
+      $tex = Mojo::Util::encode('UTF-8', $tex);
+      my $pdf = $self->generate_pdf_from_tex($tex, $invoice->{uuid});
+
+      # Update database if creating from obehandlad
+      if ($invoice->{state} eq 'obehandlad' && $is_create) {
+        # Update invoice state and metadata
+        my $update_data = {
+          fakturanummer => $invoice->{fakturanummer},
+          uuid => $invoice->{uuid},
+          invoicedate => $invoice->{invoicedate},
+          duedate => $invoice->{duedate},
+          costsum => $invoice->{rounded},
+          state => $is_credit ? 'raderad' : 'fakturerad',
+        };
+
+        if ($is_credit && $options->{credited_invoice}) {
+          $update_data->{kreditfakturaavser} = $options->{credited_invoice};
+        }
+
+        $self->invoice->updateinvoice($invoice->{invoiceid}, $update_data);
+
+        # If not a credit invoice, update subscription dates for included items
+        if (!$is_credit) {
+          for my $itemid (keys %$invoiceitems) {
+            my $item = $invoiceitems->{$itemid};
+            if ($item->{include} && $item->{productid}) {
+              $self->invoice->updatesubscription($customerid, $item->{productid});
+            }
+          }
+
+          # Create new open invoice for unincluded items if needed
+          if ($options->{handle_unincluded}) {
+            my $has_unincluded = 0;
+            my $all_items = $self->invoice->invoiceitems({
+              where => { 'invoice.invoiceid' => $invoice->{invoiceid} }
+            });
+
+            # Check if there are any unincluded items
+            for my $itemid (keys %$all_items) {
+              if (!$all_items->{$itemid}->{include}) {
+                $has_unincluded = 1;
+                last;
+              }
+            }
+
+            # If there are unincluded items, create a new invoice and move them
+            if ($has_unincluded) {
+              my $newinvoiceid = $self->invoice->addinvoice($customer);
+              for my $itemid (keys %$all_items) {
+                my $item = $all_items->{$itemid};
+                if (!$item->{include}) {
+                  $self->invoice->updateinvoiceitem($itemid, { invoiceid => $newinvoiceid });
+                }
+              }
+            }
+          }
+        }
+      }
+
+      return {
+        success => 1,
+        pdf => $pdf,
+        invoice => $invoice,
+        customer => $customer,
+        formdata => $formdata
+      };
     }
   );
 }

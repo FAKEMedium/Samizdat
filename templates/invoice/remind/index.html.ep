@@ -29,6 +29,6 @@
       </div>
       <textarea class="form-control sgrow-wrap col-2" id="mailmessage" name="mailmessage" rows="15" cols="72" wrap="soft"></textarea>
     </div>
-    <button type="submit" id="submitremind" class="btn btn-primary" onclick="remind();"><%= __('Send reminder') %></button>
+    <button type="submit" id="submitremind" class="btn btn-primary" onclick="sendReminder();"><%= __('Send reminder') %></button>
   </div>
 </form>

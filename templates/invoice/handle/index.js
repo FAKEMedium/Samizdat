@@ -118,7 +118,10 @@ function populateForm(formdata, method, dataform) {
   let invoiceitems = formdata.invoiceitems;
   let payments = formdata.payments;
   let reminders = formdata.reminders;
-  let percustomer = formdata.percustomer; // Are we under invoices/ or custumor/customerid/invoices/
+
+  // Determine percustomer from current URL - check if we're under the customer route
+  let customerBaseUrl = `<%== url_for('customer_index') %>`;
+  let percustomer = window.location.pathname.startsWith(customerBaseUrl) ? 1 : 0;
 
   document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
   document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
@@ -138,6 +141,12 @@ function populateForm(formdata, method, dataform) {
   fakturanummer = invoice.fakturanummer;
   invoicedate = invoice.invoicedate;
   debt = invoice.debt;
+
+  // Set global variables for modals
+  window.customerid = invoice.customerid;
+  window.invoiceid = invoice.invoiceid;
+  window.fakturanummer = invoice.fakturanummer;
+  window.billingemail = billingemail;
 
   document.querySelector('#customer').innerHTML = customer.customerid + ', ' + customer.name;
   document.querySelector('#customer').href = `<%== url_for('customer_index') %>/` + customer.customerid;
@@ -182,7 +191,7 @@ function populateForm(formdata, method, dataform) {
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
-  let pdfsrc = '/<%== config->{manager}->{invoice}->{invoiceurl} %>' + invoice.uuid + '.pdf';
+  let pdfsrc = '<%== config->{manager}->{invoice}->{invoiceurl} %>' + invoice.uuid + '.pdf';
   if (pdfoffcanvas.classList.contains('show')) {
     pdfiframe.setAttribute('src', pdfsrc);
   }
@@ -262,7 +271,12 @@ function remindInvoice() {
   document.querySelector('#remindbutton').href = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/remind`;
 }
 
-// Make function globally accessible for onclick handlers
+// Make functions globally accessible for onclick handlers
+window.makeCreditInvoice = makeCreditInvoice;
+window.remindInvoice = remindInvoice;
+
+// Make invoice data globally accessible for modals
+window.customerid = '';
 window.reprintInvoice = async function() {
   const customerid = document.querySelector('#customerid')?.value;
   const invoiceid = document.querySelector('#invoiceid')?.value;

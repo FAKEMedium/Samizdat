@@ -9,12 +9,10 @@ use MIME::Lite;
 use Mojo::Home;
 use Data::Dumper;
 
-my $scriptname = 'manager/invoices';
 my $fields = [qw(articlenumber include invoiceitemtext number price)];
 
 
 sub index ($self) {
-  $self->stash(scriptname => $scriptname);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     my $title = $self->app->__('Invoices');
@@ -138,263 +136,94 @@ sub create ($self, $credit = 0) {
   # Require admin access for invoice management
   return unless $self->access({ admin => 1 });
 
-  my $formdata = {};
-  my $creditedinvoice = { invoiceid => undef, fakturanummer => undef };
-  if ($credit) {
-    $formdata = $self->_getdata({ includearticles => 0, includepayments => 0, includereminders => 0 });
-    $formdata->{invoice}->{kreditfakturaavser} = $formdata->{invoice}->{fakturanummer};
-    $creditedinvoice = {
-      invoiceid     => $formdata->{invoice}->{invoiceid},
-      fakturanummer => $formdata->{invoice}->{fakturanummer},
-      state         => 'raderad'
-    };
-  } else {
-    $formdata = $self->update(0);
-  }
-  delete $formdata->{invoiceitems}->{extra};
-  my $lang = 'en';
-  if ($formdata->{customer}->{lang} =~ /^(.+)_(.+)$/) {
-    $lang = $1;
-  }
+  my $customerid = int $self->stash('customerid');
+  my $invoiceid = int $self->stash('invoiceid');
+
+  # Get customer to determine billing language
+  my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
+  my $lang = $customer->{billinglang} || $customer->{lang} || $self->config->{locale}->{default_language} || 'sv';
+  $lang =~ s/_[A-Z]{2}$// if $lang;
   $self->app->language($lang);
 
-  my $customerid = $formdata->{customer}->{customerid};
-  my $costsum = 0;
-  for my $invoiceitemid (keys %{$formdata->{invoiceitems}}) {
-    if (!$credit) {
-      if (
-        (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{articlenumber}) ||
-          (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{number}) ||
-          ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{invoiceitemtext}) ||
-          ('' eq $formdata->{invoiceitems}->{$invoiceitemid}->{price})
-      ) {
+  # For regular invoices, get and validate form data
+  if (!$credit) {
+    my $formdata = $self->update(0);
+    delete $formdata->{invoiceitems}->{extra};
+
+    # Update IDs from formdata (may differ from stash values)
+    $customerid = $formdata->{customer}->{customerid};
+    $invoiceid = $formdata->{invoice}->{invoiceid};
+
+    # Validate invoice items
+    for my $invoiceitemid (keys %{$formdata->{invoiceitems}}) {
+      my $item = $formdata->{invoiceitems}->{$invoiceitemid};
+      if (!$item->{articlenumber} || !$item->{number} || !$item->{invoiceitemtext} || !defined($item->{price})) {
         return $self->render(json => { error => $self->app->__('Fill the form correctly!') });
       }
     }
-    if (0 == $formdata->{invoiceitems}->{$invoiceitemid}->{include}) {
-      delete $formdata->{invoiceitems}->{$invoiceitemid};
-    } else {
-      $formdata->{invoiceitems}->{$invoiceitemid}->{invoiceitemtext} =~ s/--/\-\-/;
-      $self->_texescape(\$formdata->{invoiceitems}->{$invoiceitemid}->{invoiceitemtext});
-      $costsum += $formdata->{invoiceitems}->{$invoiceitemid}->{number} * $formdata->{invoiceitems}->{$invoiceitemid}->{price};
+  }
+
+  # Process the invoice (credit or regular)
+  my $result = $self->process_invoice(
+    $credit ? 0 : $invoiceid,
+    $customerid,
+    {
+      create => 1,
+      credit => $credit ? 1 : 0,
+      $credit ? (original_invoiceid => $invoiceid) : (handle_unincluded => 1)
     }
-  }
-
-  my $vat = $formdata->{invoice}->{vat};
-  $vat *= 100;
-  $vat =~ s/[0]+$// if ($vat =~ /\./);
-  if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-    $vat = sprintf("%.2f", $vat);
-  }
-  $vat =~ s/\.$//;
-  $formdata->{vat} = $vat;
-
-  my $vatcost = $formdata->{customer}->{vat} * $costsum;
-  my $totalcost = $costsum + $vatcost;
-  my $rounded = $totalcost;
-  my $diff = 0;
-  if ($formdata->{customer}->{currency} =~ /sek/i) {
-    if ($totalcost =~ /(\d+)[\.]{1}(\d+)/) {
-      $rounded = $1;
-      $diff = $2;
-      if ($diff =~ /^[5-9]/) {
-        $rounded = $rounded + 1.0;
-      }
-    }
-  } else {
-    $rounded = sprintf("%.2f", $totalcost);
-  }
-
-  $diff = sprintf("%.5f", $rounded - $totalcost);
-  $diff =~ s/[0]+$// if ($diff =~ /\./);;
-  if ($diff =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-    $diff = sprintf("%.2f", $diff);
-  }
-  $diff =~ s/\.$//;
-  $costsum =~ s/[0]+$// if ($costsum =~ /\./);
-  if ($costsum =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-    $costsum = sprintf("%.2f", $costsum);
-  }
-  $formdata->{invoice}->{invoicedate} = sprintf('%4d-%02d-%02d %02d:%02d:%02d',
-    (localtime(time))[5] + 1900,
-    (localtime(time))[4] + 1,
-    (localtime(time))[3],
-    (localtime(time))[2],
-    (localtime(time))[1],
-    (localtime(time))[0]
   );
-  my $duedate = time2str("%Y-%m-%d", time + $self->app->config->{manager}->{invoice}->{duedays}*24*3600, 'CET');
-  $formdata->{invoice}->{duedate} = $duedate;
-  $formdata->{invoice}->{pdfdate} = time2str("%Y%m%d%H%M%S", time, 'CET');
-  $formdata->{invoice}->{costsum} = $costsum;
-  $formdata->{invoice}->{rounded} = $rounded;
-  $formdata->{invoice}->{diff} = $diff;
-  $formdata->{invoice}->{vatcost} = $vatcost;
 
-  my $nextnumber = $self->app->invoice->nextnumber;
-  $formdata->{invoice}->{fakturanummer} = $nextnumber;
-  my $uuid = sprintf('%s_%s_%s',
-    $nextnumber,
-    $formdata->{customer}->{customerid},
-    uuid()
-  );
-  $formdata->{invoice}->{uuid} = $uuid;
-  if ($credit) {
-    $formdata->{invoice}->{title} = $self->app->__x('Credit invoice {number}', number => $nextnumber);
-  } else {
-    $formdata->{invoice}->{title} = $self->app->__x('Invoice {number}', number => $nextnumber);
+  if ($result->{error}) {
+    my $type = $credit ? 'credit invoice' : 'invoice';
+    $self->app->log->error("Cannot create $type - " . $result->{error});
+    return $self->render(json => { error => $result->{error} }, status => $result->{status} || 500);
   }
 
-  # Prepare customer data
-  for my $field ('firstname', 'lastname', 'company', 'address', 'city', 'lang') {
-    $self->_texescape(\$formdata->{customer}->{$field});
-  }
-  if ('SE' eq uc $formdata->{customer}->{billingcountry}) {
-    $formdata->{customer}->{billingzip} =~ s/\s+//g;
-    $formdata->{customer}->{billingzip} = sprintf('%s\ %s',
-      substr($formdata->{customer}->{billingzip}, 0, 3),
-      substr($formdata->{customer}->{billingzip}, 3, 2)
-    );
-    $formdata->{customer}->{billingcity} = '\ ' . $formdata->{customer}->{billingcity};
-  }
-
-  if (keys %{$formdata->{invoiceitems}} < 1) {
-    return;
-  }
-  $self->stash(formdata => $formdata);
-  my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/create/index');
-  $tex = encode 'UTF-8', $tex;
-  my $data = $self->app->printinvoice($tex, $formdata);
-  if ($data) {
-    my $invoicedata = {
-      invoice      => $self->app->invoice->get({
-        where => { invoiceid => $formdata->{invoice}->{invoiceid}, customerid => $customerid }
-      })->[0],
-      invoiceitems => $self->app->invoice->invoiceitems({
-        where => { 'invoice.invoiceid' => $formdata->{invoice}->{invoiceid}, 'invoice.customerid' => $customerid }
-      }),
-      customer     => $formdata->{customer}
+  # Handle Fortnox integration if configured
+  if ($self->app->fortnox and $self->config->{manager}->{invoice}->{usefortnox}) {
+    my $invoice = $result->{invoice};
+    my $fortnoxinvoice = {
+      CustomerNumber            => $invoice->{customerid},
+      InvoiceDate               => substr($invoice->{invoicedate}, 0, 10),
+      Currency                  => uc($invoice->{currency} || 'SEK'),
+      DocumentNumber            => $invoice->{fakturanummer},
+      InvoiceType               => 'INVOICE',
+      InvoiceRows               => [],
+      Language                  => uc substr($lang, 0, 2),
+      ExternalInvoiceReference1 => $invoice->{fakturanummer},
+      ExternalInvoiceReference2 => $invoice->{uuid}
     };
-    $invoicedata->{invoice}->{invoicedate} = $formdata->{invoice}->{invoicedate};
-    $invoicedata->{invoice}->{uuid} = $uuid;
-    $invoicedata->{invoice}->{fakturanummer} = $nextnumber;
-    $invoicedata->{invoice}->{costsum} = $formdata->{invoice}->{rounded};
-    delete $invoicedata->{invoice}->{rounded};
-    delete $invoicedata->{invoice}->{diff};
-    delete $invoicedata->{invoice}->{vatcost};
-    delete $invoicedata->{invoice}->{paydate};
-    delete $invoicedata->{invoice}->{dontremind};
-    delete $invoicedata->{invoice}->{title};
-    delete $invoicedata->{invoice}->{bookingdate};
-    delete $invoicedata->{invoice}->{rev};
+    # TODO: Implement Fortnox posting when ready
+    # my $status = $self->app->fortnox->postInvoice($invoice, $result->{formdata}->{invoiceitems}, $result->{customer});
+  }
 
-    my $newinvoiceid = $self->app->invoice->addinvoice($formdata->{customer});
+  # Prepare invoice data for email
+  my $invoicedata = {
+    invoice => $result->{invoice},
+    customer => $result->{customer},
+    vat => $result->{formdata}->{vat}
+  };
 
-    if ($credit) {
-      for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
-        my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
-        $invoiceitem->{invoiceid} = $newinvoiceid;
-        delete $invoiceitem->{invoiceitemid};
-        $self->app->invoice->addinvoiceitem($invoiceitem, $newinvoiceid);
-      }
-      $invoicedata->{invoice}->{invoiceid} = $newinvoiceid;
-      $invoicedata->{invoice}->{state} = 'raderad';
-      $invoicedata->{invoice}->{kreditfakturaavser} = $creditedinvoice->{fakturanummer};
-      $self->app->invoice->updateinvoice($creditedinvoice->{invoiceid}, $creditedinvoice);
-    } else {
-      $invoicedata->{invoice}->{state} = 'fakturerad';
-      delete $invoicedata->{invoice}->{kreditfakturaavser};
-      for my $invoiceitemid (keys %{$invoicedata->{invoiceitems}}) {
-        my $invoiceitem = $invoicedata->{invoiceitems}->{$invoiceitemid};
-        if (!$invoiceitem->{include}) {
-          # Move unincluded invoice items to the newly created open invoice
-          $self->app->invoice->updateinvoiceitem($invoiceitemid, { invoiceid => $newinvoiceid });
-        } else {
-          # If item is a subscription, update the last invoicedate of the subscription
-          $self->app->invoice->updatesubscription($customerid, $invoiceitem->{productid});
-        }
-      }
-    }
-    $self->app->invoice->updateinvoice($invoicedata->{invoice}->{invoiceid}, $invoicedata->{invoice});
-    $invoicedata->{invoice}->{duedate} = $duedate;
+  # Send invoice email using the plugin helper
+  my $email_result = $self->send_invoice_email($invoicedata, { action => $credit ? 'credit' : 'send' });
 
-    if ($self->app->fortnox and $self->config->{manager}->{invoice}->{usefortnox}) {
-      my $fortnoxinvoice = {
-        CustomerNumber            => $invoicedata->{invoice}->{customerid},
-        InvoiceDate               => substr($invoicedata->{invoice}->{invoicedate}, 0, 10),
-        Currency                  => uc($invoicedata->{invoice}->{currency}),
-        DocumentNumber            => $invoicedata->{invoice}->{fakturanummer},
-        InvoiceType               => 'INVOICE',
-        InvoiceRows               => [],
-        Language                  => uc substr($invoicedata->{customer}->{ $invoicedata->{invoice}->{customerid} }->{lang}, 0, 2),
-        ExternalInvoiceReference1 => $invoicedata->{invoice}->{fakturanummer},
-        ExternalInvoiceReference2 => $invoicedata->{invoice}->{uuid}
-      };
-#      my $status = $self->app->fortnox->postInvoice($invoicedata->{invoice}, $invoicedata->{invoiceitems}, $formdata->{customer});
-#      if ($status) {
-#        $invoicedata->{invoice}->{fortnox} = $status;
-#      } else {
-#        $invoicedata->{invoice}->{fortnox} = { error => $self->app->__('Failed to send invoice to Fortnox') };
-#      }
-    }
-    my $anyrepo = Mojo::Home->new();
-    my $svg = $anyrepo->child('src/public/' . $self->config->{logotype})->slurp;
-    $svg = b64_encode($svg);
-    $svg =~ s/[\r\n\s]+//g;
-    chomp $svg;
-    $invoicedata->{svglogotype} = $svg;
-    $invoicedata->{vat} = $vat;
+  if (!$email_result->{success}) {
+    $self->app->log->error("Failed to send invoice email: " . ($email_result->{error} || 'Unknown error'));
+    # Continue anyway - invoice was created successfully, just email failed
+  }
 
-    my $subject = my $htmldata = my $txtdata = '';
-    if ($credit) {
-      $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoicedata);
-      $txtdata = $self->render_mail(template => 'invoice/create/mailtxt', invoicedata => $invoicedata);
-      $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
-        $self->app->__x('Credited invoice: {number}', number => $invoicedata->{invoice}->{kreditfakturaavser})));
-    } else {
-      $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoicedata);
-      $txtdata = $self->render_mail(template => 'invoice/create/mailtxt', invoicedata => $invoicedata);
-      $subject = Encode::encode("MIME-Q", Encode::decode("UTF-8",
-        $self->app->__x('Invoice {number}', number => $invoicedata->{invoice}->{fakturanummer})));
-    }
-
-    my $mail = MIME::Lite->new(
-      From         => $self->config->{mail}->{from},
-      Bcc          => $self->config->{test}->{invoice} ? undef : $self->config->{mail}->{from},
-      To           => $self->config->{test}->{invoice} ? $self->config->{mail}->{to} : $invoicedata->{customer}->{billingemail},
-      Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
-      Subject      => $subject,
-      Type         => 'multipart/mixed',
-      'X-Mailer'   => "Samizdat",
+  if ($credit) {
+    $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
+      $self->config->{manager}->{url}, $result->{invoice}->{customerid}, $result->{invoice}->{invoiceid}
+    ));
+  } else {
+    $self->render(data => $result->{pdf}, format => 'pdf');
+    $self->res->headers->header('Content-Disposition' =>
+      sprintf('inline; filename="%s.pdf"', $result->{invoice}->{uuid})
     );
-
-    # Attach plain text and html variants
-    my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
-    $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
-    $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
-    $mail->attach($alternative);
-
-    # Attach PDF
-    $mail->attach(
-      Path        => sprintf('%s/%s.pdf', $self->config->{manager}->{invoice}->{invoicedir}, $invoicedata->{invoice}->{uuid}),
-      Filename    => sprintf('%s.pdf', $invoicedata->{invoice}->{uuid}),
-      Type        => 'application/pdf',
-      Disposition => 'attachment'
-    );
-
-    $mail->send($self->config->{mail}->{how}, @{$self->config->{mail}->{howargs}});
-    if ($credit) {
-      $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
-        $self->config->{manager}->{url}, $invoicedata->{invoice}->{customerid}, $invoicedata->{invoice}->{invoiceid}
-      ));
-    } else {
-      $self->render(data => $data, format => 'pdf');
-      $self->res->headers->header('Content-Disposition' =>
-        sprintf('inline; filename="%s_%s.pdf"', 'Rymdweb', $formdata->{invoice}->{uuid})
-      );
-      $self->res->headers->content_type('application/pdf');
-      return 1;
-    }
+    $self->res->headers->content_type('application/pdf');
+    return 1;
   }
 }
 
@@ -467,7 +296,22 @@ sub edit ($self) {
   } else {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
-    my $formdata = $self->_getdata();
+
+    my $customerid = int $self->stash('customerid');
+    my $invoiceid = int $self->stash('invoiceid');
+
+    # Get form data from model
+    my $formdata = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
+    return $self->render(json => { error => 'Invoice not found' }) unless $formdata;
+
+    # Add articles from Fortnox
+    $formdata->{articles} = $self->_articles();
+
+    # Pass any Fortnox errors to the frontend
+    if (my $error = $self->stash('fortnox_error')) {
+      $formdata->{fortnox_error} = $error;
+    }
+
     $formdata->{invoiceitems}->{extra} = {
       invoiceitemid   => 'extra',
       invoiceid       => $formdata->{invoice}->{invoiceid},
@@ -508,7 +352,14 @@ sub handle ($self) {
   } else {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
-    my $formdata = $self->_getdata();
+
+    my $customerid = int $self->stash('customerid');
+    my $invoiceid = int $self->stash('invoiceid');
+
+    # Get form data from model
+    my $formdata = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
+    return $self->render(json => { error => 'Invoice not found' }) unless $formdata;
+
     return $self->render(json => $formdata);
   }
 }
@@ -560,13 +411,19 @@ sub nav ($self) {
     } else {
       # Require admin access for JSON invoice data
       return unless $self->access({ admin => 1 });
-      my $json = $self->_getdata({ includearticles => 0 });
-      return $self->render(json => $json);
+
+      my $customerid = int $self->stash('customerid');
+      my $invoiceid = int $self->stash('invoiceid');
+
+      # Get form data from model (without articles)
+      my $json = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
+      return $self->render(json => $json || {});
     }
   }
 }
 
 
+# List open (unhandled) invoices
 sub open ($self) {
   my $title = $self->app->__('Open invoices');
   my $web = {title => $title};
@@ -595,6 +452,8 @@ sub open ($self) {
   }
 }
 
+
+# Mark a payment for an invoice
 sub payment ($self) {
   # Require admin access for payment management
   return unless $self->access({ admin => 1 });
@@ -622,31 +481,153 @@ sub payment ($self) {
   }
 }
 
+
+# Send a reminder for an invoice
 sub remind ($self) {
-  my $title = $self->app->__('Send reminder');
-  my $web = {title => $title};
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  # Require admin access
+  return unless $self->access({ admin => 1 });
+
   my $invoiceid = int $self->stash('invoiceid') // 0;
-  if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
-    return $self->render(template => 'invoice/remind/index', layout => 'modal', web => $web, title => $title);
-  } else {
-    # Require admin access for reminder data
-    return unless $self->access({ admin => 1 });
-    my $invoice = {};
-    my $customer = {};
-    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
-      my $customerid = $invoice->{customerid} // 0;
-      if ($customer) {
-        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
-        $customer->{name} = $self->app->customer->name($customer);
-      }
-      return $self->render(json => { });
-    }
+  my $customerid = int $self->stash('customerid') // 0;
+
+  unless ($invoiceid) {
+    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
   }
+
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+
+  # Handle POST request - send the reminder
+  if ($self->req->method eq 'POST') {
+    # Determine reminder type from request parameters
+    my $reminder_type = $self->param('type') || 'mild';
+    # Get invoice and customer data
+    my $data = $self->app->invoice->get_invoice_and_customer($invoiceid, $customerid);
+    if ($data->{error}) {
+      return $self->render(json => { error => $data->{error} }, status => $data->{status});
+    }
+
+    my $invoice = $data->{invoice};
+    my $customer = $data->{customer};
+
+    # Check if invoice is in correct state for reminders
+    if ($invoice->{state} ne 'fakturerad') {
+      return $self->render(json => { error => 'Invoice must be in fakturerad state to send reminders' }, status => 400);
+    }
+
+    # Get invoice items for the email
+    my $invoiceitems = $self->app->invoice->invoiceitems({
+      where => { 'invoice.invoiceid' => $invoiceid }
+    });
+
+    # Calculate amounts
+    my $amounts = $self->app->invoice->calculate_amounts(
+      $invoiceitems,
+      $customer->{vat},
+      $customer->{currency}
+    );
+
+    # Prepare invoice data for email
+    my $invoicedata = {
+      invoice => $invoice,
+      customer => $customer,
+      invoiceitems => $invoiceitems,
+      vat => $amounts->{vat_percent}
+    };
+
+    # Get reminder count to determine if this should be tough
+    my $reminders = $self->app->invoice->reminders($invoiceid);
+    my $reminder_count = scalar(@$reminders);
+
+    # Automatically use tough reminder if this is 3rd or later reminder
+    if ($reminder_count >= 2) {
+      $reminder_type = 'tough';
+    }
+
+    # Get custom message from form
+    my $custom_message = $self->param('mailmessage') || '';
+
+    # Send reminder email using the plugin helper
+    my $action = $reminder_type eq 'tough' ? 'reminder_tough' : 'reminder_mild';
+    my $email_result = $self->send_invoice_email($invoicedata, {
+      action => $action,
+      message => $custom_message
+    });
+
+    if (!$email_result->{success}) {
+      return $self->render(json => { error => $email_result->{error} || 'Failed to send reminder' }, status => 500);
+    }
+
+    # Add reminder record to database
+    $self->app->invoice->addreminder($invoiceid);
+
+    # Return success for JSON requests
+    if ($accept =~ /json/) {
+      return $self->render(json => {
+        success => 1,
+        message => "$reminder_type reminder sent successfully",
+        type => $reminder_type,
+        count => $reminder_count + 1
+      });
+    }
+
+    # Redirect back to invoice for HTML requests
+    return $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
+      $self->config->{manager}->{url}, $customerid, $invoiceid
+    ));
+  }
+
+  # GET request - show the reminder form
+  if ($accept !~ /json/) {
+    # Get reminder count to show in UI
+    my $reminders = $self->app->invoice->reminders($invoiceid);
+    my $reminder_count = scalar(@$reminders);
+
+    my $title = $self->app->__('Send reminder');
+    my $web = {title => $title};
+
+    # Get invoice data for display
+    my $data = $self->app->invoice->get_invoice_and_customer($invoiceid, $customerid);
+    if ($data->{error}) {
+      return $self->render(text => $data->{error}, status => $data->{status});
+    }
+
+    # Render default messages for JavaScript (just the message content)
+    my $mild_message = $self->render_to_string(
+      template => 'invoice/remind/mildmessage',
+      invoice => $data->{invoice},
+      customer => $data->{customer}
+    );
+
+    my $tough_message = $self->render_to_string(
+      template => 'invoice/remind/toughmessage',
+      invoice => $data->{invoice},
+      customer => $data->{customer}
+    );
+
+    $web->{script} = $self->render_to_string(
+      template => 'invoice/remind/index',
+      format => 'js',
+      mild_message => $mild_message,
+      tough_message => $tough_message
+    );
+
+    return $self->render(
+      template => 'invoice/remind/index',
+      layout => 'modal',
+      web => $web,
+      title => $title,
+      reminder_count => $reminder_count,
+      invoice => $data->{invoice},
+      customer => $data->{customer},
+      mild_message => $mild_message
+    );
+  }
+
+  return $self->render(json => { error => 'Invalid request' }, status => 400);
 }
 
 
+# Resend an invoice email (no rendering of PDF)
 sub resend ($self) {
   # Require admin access for invoice operations
   return unless $self->access({ admin => 1 });
@@ -658,69 +639,124 @@ sub resend ($self) {
     return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
   }
 
-  # Get invoice details
-  my $invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid } })->[0];
-  unless ($invoice) {
-    return $self->render(json => { error => 'Invoice not found' }, status => 404);
+  # Return HTML template if not JSON request
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Resend invoice');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'invoice/resend/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/resend/index');
   }
 
-  # Get customer details
-  $customerid ||= $invoice->{customerid};
-  my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
-  unless ($customer) {
-    return $self->render(json => { error => 'Customer not found' }, status => 404);
+  # Get invoice and customer data from model
+  my $data = $self->app->invoice->get_invoice_and_customer($invoiceid, $customerid);
+  if ($data->{error}) {
+    return $self->render(json => { error => $data->{error} }, status => $data->{status});
   }
 
-  # TODO: Implement actual email sending logic here
-  # This would typically involve:
-  # 1. Getting the invoice PDF
-  # 2. Composing the email with invoice details
-  # 3. Sending via email service
-  # For now, just log and return success
+  my $invoice = $data->{invoice};
+  my $customer = $data->{customer};
 
-  $self->app->log->info("Resending invoice $invoiceid to customer $customerid");
+  # Set language based on customer billing language preference
+  my $lang = $customer->{billinglang} || $customer->{lang} || $self->config->{locale}->{default_language} || 'sv';
+  $self->app->language($lang);
 
-  # Update last sent timestamp if such field exists
+  # Prepare invoice data for email (including VAT)
+  my $invoicedata = {invoice => $invoice, customer => $customer};
+
+  # Calculate and add VAT for email template
+  if (defined $invoice->{vat}) {
+    my $vat = $invoice->{vat};
+    $vat *= 100;
+    $vat =~ s/[0]+$// if ($vat =~ /\./);
+    if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
+      $vat = sprintf("%.2f", $vat);
+    }
+    $vat =~ s/\.$//;
+    $invoicedata->{vat} = $vat;
+  } elsif (defined $customer->{vat}) {
+    # Use customer VAT if invoice doesn't have it
+    my $vat = $customer->{vat};
+    $vat *= 100;
+    $vat =~ s/[0]+$// if ($vat =~ /\./);
+    if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
+      $vat = sprintf("%.2f", $vat);
+    }
+    $vat =~ s/\.$//;
+    $invoicedata->{vat} = $vat;
+  }
+
+  # Send the invoice email using the plugin helper
+  my $email_result = $self->send_invoice_email($invoicedata, { action => 'resend' });
+
+  if (!$email_result->{success}) {
+    return $self->render(json => {success => 0, error => $email_result->{error} || 'Failed to resend invoice email'}, status => 500);
+  }
+
+  # Update last sent timestamp
   eval {
     $self->app->invoice->updateinvoice($invoiceid, { lastsentdate => \'NOW()' });
   };
+
+  $self->app->log->info("Resent invoice $invoiceid to customer " . $customer->{customerid});
 
   return $self->render(json => {
     success => 1,
     message => 'Invoice resent successfully',
     invoiceid => $invoiceid,
-    customerid => $customerid
+    customerid => $customer->{customerid},
+    customer => $customer->{name}
   });
 }
 
 
 sub reprint ($self) {
-  my $title = $self->app->__('Send reminder');
-  my $web = {title => $title};
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  # Require admin access for invoice operations
+  return unless $self->access({ admin => 1 });
+
   my $invoiceid = int $self->stash('invoiceid') // 0;
+  my $customerid = int $self->stash('customerid') // 0;
+
+  unless ($invoiceid) {
+    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
+  }
+
+  # Return HTML template if not JSON request
+  my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
   if ($accept !~ /json/) {
-    $web->{script} .= $self->render_to_string(template => 'invoice/remind/index', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'invoice/remind/index');
+    my $title = $self->app->__('Reprint invoice');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'invoice/reprint/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'invoice/reprint/index');
+  }
+
+  # Process invoice (fetches data, generates PDF)
+  my $result = $self->process_invoice($invoiceid, $customerid);
+
+  if ($result->{error}) {
+    $self->app->log->error("Cannot reprint invoice $invoiceid - " . $result->{error});
+    return $self->render(json => {
+      success => 0,
+      error => $result->{error}
+    }, status => $result->{status} || 500);
+  }
+
+  if ($result->{pdf}) {
+    $self->app->log->info("Successfully reprinted invoice $invoiceid (UUID: " . $result->{invoice}->{uuid} . ")");
+    return $self->render(json => {
+      success => 1,
+      message => 'Invoice reprinted successfully',
+      invoiceid => $invoiceid,
+      customerid => $result->{customer}->{customerid},
+      customer => $result->{customer}->{name},
+      uuid => $result->{invoice}->{uuid}
+    });
   } else {
-    # Require admin access for invoice operations
-    return unless $self->access({ admin => 1 });
-    my $invoice = {};
-    my $customer = {};
-    if ($invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, state => 'fakturerad' } })->[0]) {
-      my $customerid = $invoice->{customerid} // 0;
-      if ($customer) {
-        $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
-        $customer->{name} = $self->app->customer->name($customer);
-      }
-      return $self->render(json => { });
-    }
+    $self->app->log->error("Failed to regenerate PDF for invoice $invoiceid");
+    return $self->render(json => {success => 0, error => 'Failed to regenerate invoice PDF'}, status => 500);
   }
 }
 
-sub _texescape ($self, $text) {
-  $$text =~ s/(\&|\$|\%|\#|\_)/\\$1/g;
-}
 
 sub _formdata ($self) {
   my $invoiceid = int $self->param('invoiceid') || return 0;
@@ -750,47 +786,6 @@ sub _formdata ($self) {
       $formdata->{invoiceitems}->{$invoiceitemid}->{include} = 0;
     }
   }
-  return $formdata;
-}
-
-
-sub _getdata ($self, $options = { includearticles => 1, includepayments => 1, includereminders => 1 }) {
-  my $customerid = int $self->stash('customerid');
-  my $invoiceid = int $self->stash('invoiceid');
-  my $args = {};
-  if ($invoiceid) {
-    $args->{where} = { invoiceid => $invoiceid };
-    $args->{where}->{customerid} = $customerid if ($customerid);
-  } else {
-    $args->{where} = { state => 'obehandlad', customerid => $customerid };
-  }
-  my $invoice = $self->app->invoice->get($args)->[0];
-  $invoiceid = $invoice->{invoiceid};
-  my $percustomer = $self->stash('percustomer') // 1;
-  if (!$customerid) {
-    $percustomer = 0;
-    $customerid = $invoice->{customerid};
-  }
-  my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
-  $customer->{name} = $self->app->customer->name($customer);
-  my $formdata = {
-    customer     => $customer,
-    invoice      => $invoice,
-    invoiceitems => $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid, 'invoice.customerid' => $customerid } }),
-    articles     => [],
-    payments     => [],
-    reminders    => [],
-    percustomer  => $percustomer,
-  };
-  $formdata->{articles} = $self->_articles() if ($options->{includearticles});
-  $formdata->{payments} = $self->app->invoice->payments({ where => { invoiceid => $invoiceid } }) if ($options->{includepayments});
-  $formdata->{reminders} = $self->app->invoice->reminders($invoiceid) if ($options->{includereminders});
-
-  # Pass any Fortnox errors to the frontend
-  if (my $error = $self->stash('fortnox_error')) {
-    $formdata->{fortnox_error} = $error;
-  }
-
   return $formdata;
 }
 

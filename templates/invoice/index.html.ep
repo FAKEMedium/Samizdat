@@ -1,4 +1,4 @@
-<form id="dataform" action="/<%== $scriptname %>" method="post">
+<form id="dataform" action="<%== url_for('invoice_index') %>" method="post">
   <table id="invoices" class="table table-sm table-striped sortable">
     <thead>
       <tr>

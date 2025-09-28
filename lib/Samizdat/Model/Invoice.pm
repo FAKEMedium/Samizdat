@@ -4,11 +4,13 @@ use Mojo::Base -base, -signatures;
 
 use Mojo::Util qw(trim);
 use Mojo::JSON qw(decode_json encode_json);
+use Date::Format;
 use Data::Dumper;
 
 has 'config';
 has 'pg';
 has 'mysql';
+has 'customer';  # Customer model helper
 
 sub get ($self, $params = {}) {
   my $db = $self->mysql->db;
@@ -240,8 +242,200 @@ sub addreminder ($self, $invoiceid =  0) {
   $invoiceid = int $invoiceid;
   return 0 if (!$invoiceid);
   my $invoice = $self->get({ where => { invoiceid => $invoiceid }})->[0];
-  return 0 if (exists($invoice->{customerid}));
+  return 0 if (!exists($invoice->{customerid}));
   return $db->insert('invoicereminder', {invoiceid => $invoiceid, customerid => $invoice->{customerid}}, {returning => 'reminderid'});
+}
+
+
+# Calculate invoice amounts (costs, VAT, rounding)
+sub calculate_amounts ($self, $invoiceitems, $customer_vat, $customer_currency) {
+  my $costsum = 0;
+
+  # Calculate cost sum from invoice items
+  for my $item (values %{$invoiceitems}) {
+    if ($item->{include}) {
+      $costsum += $item->{number} * $item->{price};
+    }
+  }
+
+  # VAT calculations
+  my $vat = $customer_vat || 0.25;  # Default 25% VAT
+  my $vat_percent = $vat * 100;
+  $vat_percent =~ s/[0]+$// if ($vat_percent =~ /\./);
+  if ($vat_percent =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
+    $vat_percent = sprintf("%.2f", $vat_percent);
+  }
+  $vat_percent =~ s/\.$//;
+
+  my $vatcost = $vat * $costsum;
+  my $totalcost = $costsum + $vatcost;
+
+  # Rounding calculations based on currency
+  my $rounded = $totalcost;
+  my $diff = 0;
+  if ($customer_currency && $customer_currency =~ /sek/i) {
+    # Swedish rounding rules
+    if ($totalcost =~ /(\d+)[\.]{1}(\d+)/) {
+      $rounded = $1;
+      $diff = $2;
+      if ($diff =~ /^[5-9]/) {
+        $rounded = $rounded + 1.0;
+      }
+    }
+  } else {
+    $rounded = sprintf("%.2f", $totalcost);
+  }
+
+  # Format diff
+  $diff = sprintf("%.5f", $rounded - $totalcost);
+  $diff =~ s/(\.\d*?)0+$/$1/;
+  $diff =~ s/\.$//;
+
+  return {
+    costsum => $costsum,
+    vat => $vat,
+    vat_percent => $vat_percent,
+    vatcost => $vatcost,
+    totalcost => $totalcost,
+    rounded => $rounded,
+    diff => $diff
+  };
+}
+
+
+# Get full invoice data with customer and items
+sub get_full_invoice ($self, $invoiceid) {
+  my $invoice = $self->get({ where => { invoiceid => $invoiceid } })->[0];
+  return undef unless $invoice;
+
+  # Get invoice items
+  my $items = $self->invoiceitems({ invoiceid => $invoiceid });
+
+  # Get reminders
+  my $reminders = $self->reminders($invoiceid);
+
+  # Get payments
+  my $payments = $self->payments({ invoiceid => $invoiceid });
+
+  return {
+    invoice => $invoice,
+    invoiceitems => $items,
+    reminders => $reminders,
+    payments => $payments
+  };
+}
+
+
+# Generate next invoice number
+sub generate_invoice_number ($self, $prefix = '') {
+  my $nextnumber = $self->nextnumber();
+  return $prefix . $nextnumber;
+}
+
+
+# Calculate due date based on invoice date
+sub calculate_due_date ($self, $invoice_date = undef, $due_days = undef) {
+  $invoice_date ||= time;
+  $due_days ||= $self->config->{duedays} || 30;
+
+  # If invoice_date is a string, convert to timestamp
+  if ($invoice_date !~ /^\d+$/) {
+    require Time::ParseDate;
+    $invoice_date = Time::ParseDate::parsedate($invoice_date);
+  }
+
+  return time2str("%Y-%m-%d", $invoice_date + $due_days * 24 * 3600, 'CET');
+}
+
+
+# Check if invoice is overdue
+sub is_overdue ($self, $invoice) {
+  return 0 unless $invoice->{state} eq 'fakturerad';
+
+  my $due_days = $self->config->{duedays} || 30;
+  my $remind_days = $self->config->{duedaysremind} || 10;
+
+  require Time::ParseDate;
+  my $invoice_time = Time::ParseDate::parsedate($invoice->{invoicedate});
+  my $days_elapsed = int((time - $invoice_time) / (24 * 3600));
+
+  return $days_elapsed > ($due_days + $remind_days);
+}
+
+
+# Get invoice and customer data
+sub get_invoice_and_customer ($self, $invoiceid, $customerid = undef) {
+  # Get invoice details
+  my $invoice = $self->get({ where => { invoiceid => $invoiceid } })->[0];
+  return { error => 'Invoice not found', status => 404 } unless $invoice;
+
+  # Get customer details using customer helper
+  $customerid ||= $invoice->{customerid};
+  my $customer = $self->customer->get({ where => { customerid => $customerid } })->[0];
+  return { error => 'Customer not found', status => 404 } unless $customer;
+
+  # Get customer name using customer helper method
+  $customer->{name} = $self->customer->name($customer);
+
+  return { invoice => $invoice, customer => $customer };
+}
+
+
+# Get invoice form data with related entities
+sub get_invoice_formdata ($self, $invoiceid = undef, $customerid = undef, $options = {}) {
+  $options //= {};
+  $options->{includepayments} //= 1;
+  $options->{includereminders} //= 1;
+
+  my $args = {};
+
+  # Determine which invoice to get
+  if ($invoiceid) {
+    $args->{where} = { invoiceid => $invoiceid };
+    $args->{where}->{customerid} = $customerid if $customerid;
+  } elsif ($customerid) {
+    # Get open/unhandled invoice for customer
+    $args->{where} = { state => 'obehandlad', customerid => $customerid };
+  } else {
+    return undef;  # Need either invoiceid or customerid
+  }
+
+  my $invoice = $self->get($args)->[0];
+  return undef unless $invoice;
+
+  $invoiceid = $invoice->{invoiceid};
+  $customerid ||= $invoice->{customerid};
+
+  # Get customer details
+  my $customer = $self->customer->get({ where => { customerid => $customerid } })->[0];
+  return undef unless $customer;
+
+  $customer->{name} = $self->customer->name($customer);
+
+  # Build formdata
+  my $formdata = {
+    customer     => $customer,
+    invoice      => $invoice,
+    invoiceitems => $self->invoiceitems({
+      where => {
+        'invoice.invoiceid' => $invoiceid,
+        'invoice.customerid' => $customerid
+      }
+    }),
+    payments     => [],
+    reminders    => [],
+  };
+
+  # Include optional data
+  if ($options->{includepayments}) {
+    $formdata->{payments} = $self->payments({ where => { invoiceid => $invoiceid } });
+  }
+
+  if ($options->{includereminders}) {
+    $formdata->{reminders} = $self->reminders($invoiceid);
+  }
+
+  return $formdata;
 }
 
 

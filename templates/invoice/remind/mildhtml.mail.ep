@@ -1,0 +1,76 @@
+% layout 'default.mail';
+% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
+
+<h2><%== __('Payment Reminder') %></h2>
+
+<div id="reminder-message">
+  % if ($message) {
+    <%== $message %>
+  % } else {
+    <p><%== __('We noticed that we have not yet received payment for the invoice below.') %></p>
+    <p><%== __('This might be an oversight, so we wanted to send a friendly reminder.') %></p>
+  % }
+</div>
+
+<div style="background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px;">
+  <h3><%== __('Invoice Details') %></h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice number') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{fakturanummer} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice date') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{invoicedate} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Due date') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{duedate} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Amount due') %>:</strong></td>
+      <td style="padding: 5px 0;"><strong><%== $invoicedata->{invoice}->{costsum} %> <%== $invoicedata->{invoice}->{currency} %></strong></td>
+    </tr>
+  </table>
+</div>
+
+<div style="background: #e8f4ff; padding: 15px; margin: 20px 0; border-radius: 5px;">
+  <h3><%== __('Payment Information') %></h3>
+  % if ('SE' eq uc $invoicedata->{customer}->{country})  {
+    % if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+      <p><strong><%= __('Bankgiro') %>:</strong> <%== config->{manager}->{invoice}->{bankgiro} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+      <p><strong><%= __('Plusgiro') %>:</strong> <%== config->{manager}->{invoice}->{plusgiro} %></p>
+    % }
+  % } else {
+    % if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+      <p><strong><%= __('BIC/Swift') %>:</strong> <%== config->{manager}->{invoice}->{bicswift} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+      <p><strong><%= __('IBAN') %>:</strong> <%== config->{manager}->{invoice}->{iban} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+      <p><strong><%= __('PayPal') %>:</strong> <%== config->{manager}->{invoice}->{paypal} %>
+      % if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+        (<%= __x('add {fee}', fee => config->{manager}->{invoice}->{paypalfee}) %>)
+      % }
+      </p>
+    % }
+  % }
+
+  <p><%== __('Please include the invoice number as reference when making the payment.') %></p>
+</div>
+
+<div style="margin: 20px 0;">
+  <p>
+    <a href="<%== $link %>" style="display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+      <%== __('Download Invoice PDF') %>
+    </a>
+  </p>
+</div>
+
+<p style="color: #666; font-size: 0.9em;">
+  <%== __('If you have already paid, please disregard this reminder.') %>
+  <%== __x('For questions, please contact us at {email}.', email => sprintf('<a href="mailto:%s">%s</a>', config->{manager}->{invoice}->{sender}, config->{manager}->{invoice}->{sender})) %>
+</p>
