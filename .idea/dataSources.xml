@@ -88,5 +88,13 @@
       <jdbc-url>jdbc:mariadb://fake.se:3306/fakenews</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="samizdat@10.14.1.64" uuid="bdec90da-faf5-4304-bf2a-9f60469f3ea1">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://10.14.1.64:5432/samizdat</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>

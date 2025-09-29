@@ -106,8 +106,8 @@ zip:
 	find public/assets -type f -name "*.js" -exec gzip -f -k -9 {} \;
 
 database:
-#	sudo -u postgres -i createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
-	sudo -u postgres -i createdb --encoding=UTF-8 --template=template0 --locale=en_US.UTF-8 --owner=samizdat samizdat "Samizdat web application"
+#	sudo -u postgres -i env PGHOST=/var/run/postgresql createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
+	sudo -u postgres -i env PGHOST=/var/run/postgresql createdb --encoding=UTF-8 --template=template0 --locale=en_US.UTF-8 --owner=samizdat samizdat "Samizdat web application"
 #	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/\nlocal   samizdat        samizdat                      scram-sha-256//g' {} \;
 #	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   samizdat        samizdat                      scram-sha-256/' {} \;
 	sudo systemctl restart postgresql
@@ -194,8 +194,8 @@ installdata:
 
 purgedata:
 	sudo systemctl restart postgresql
-#	sudo -u postgres psql -c 'TRUNCATE account.user RESTART IDENTITY;' -d samizdat -e
-	sudo -u postgres psql -c 'DROP DATABASE samizdat;' -e
+#	sudo -u postgres env PGHOST=/var/run/postgresql psql -c 'TRUNCATE account.user RESTART IDENTITY;' -d samizdat -e
+	sudo -u postgres env PGHOST=/var/run/postgresql psql -c 'DROP DATABASE samizdat;' -e
 
 purgeuncompressed:
 	find public -type f \( -name "*.html" -o -name "*.css" -o -name "*.js" -o -name "*.json" -o -name "*.txt" \) ! -name "*.gz" -delete

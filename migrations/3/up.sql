@@ -456,23 +456,6 @@ VALUES
   (1, 'success', 'Success', 'The Samidat installation was a great success.',
    'See the documentation about how this works.', 0, 0, 0, NULL, NULL, 1, 1, NOW(), 0, 1, 1);
 
-INSERT INTO web.resources (resourceid, alias, title, description, content, owner, creator, publisher, parentid,
-                           resourcealias, contenttype, languageid, published, comments, templateid, webserviceid)
-VALUES
-  (2, 'lorsita', 'Lorem Ipsum do lorsita', 'Some lore mips umdo lors, it am et', '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta ante eget purus tincidunt bibendum. Quisque sagittis elit arcu, ac imperdiet eros cursus vitae. Quisque ut semper turpis, vitae cursus sapien. Fusce bibendum aliquet felis vel convallis. Praesent purus nunc, ultricies id odio eget, rutrum placerat nunc. Nulla varius imperdiet hendrerit. Pellentesque lacinia purus vel ex pretium laoreet. Vivamus luctus, sapien sagittis volutpat vehicula, enim nunc laoreet ligula, quis hendrerit nisi eros convallis nibh. Nullam quis libero urna. Phasellus venenatis urna ac quam dapibus, vel faucibus tortor faucibus. Curabitur id rutrum ligula, eu rutrum arcu. Quisque imperdiet aliquet risus scelerisque fermentum. Fusce varius libero quis tempor suscipit. Mauris at interdum massa.</p>
-<p>Aliquam erat volutpat. Donec gravida tellus nec vestibulum ultrices. Integer ac laoreet nunc. Donec mi augue, pellentesque et nisl sit amet, pellentesque bibendum urna. Curabitur iaculis dui neque, eu ultrices ante interdum ut. Nullam volutpat nisi ac nisi tempus facilisis. Fusce ut nisl euismod, aliquet velit in, maximus augue.</p>
-<p>Nulla luctus est id mauris sagittis, et faucibus libero pretium. Nulla faucibus, orci vitae luctus euismod, massa nulla venenatis odio, a tempor erat ligula non leo. Ut bibendum imperdiet arcu nec pharetra. Aenean egestas mi scelerisque, porta lacus suscipit, interdum orci. Donec neque justo, lobortis at ultricies aliquam, ultricies at lorem. Praesent dignissim gravida diam, condimentum euismod ante ullamcorper blandit. Suspendisse at ante quis ipsum elementum rutrum. Aenean eget metus volutpat, aliquam felis eget, commodo augue.</p>
-', 0, 0, 0, NULL, NULL, 1, 1, NOW(), 0, 1, 1);
-
-INSERT INTO web.resources (resourceid, alias, title, description, content, owner, creator, publisher, parentid,
-                           resourcealias, contenttype, languageid, published, comments, templateid, webserviceid)
-VALUES
-  (3, 'retake', 'Another retake', 'You can delete this',
-   '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse porta ante eget purus tincidunt bibendum. Quisque sagittis elit arcu, ac imperdiet eros cursus vitae. Quisque ut semper turpis, vitae cursus sapien. Fusce bibendum aliquet felis vel convallis. Praesent purus nunc, ultricies id odio eget, rutrum placerat nunc. Nulla varius imperdiet hendrerit. Pellentesque lacinia purus vel ex pretium laoreet. Vivamus luctus, sapien sagittis volutpat vehicula, enim nunc laoreet ligula, quis hendrerit nisi eros convallis nibh. Nullam quis libero urna. Phasellus venenatis urna ac quam dapibus, vel faucibus tortor faucibus. Curabitur id rutrum ligula, eu rutrum arcu. Quisque imperdiet aliquet risus scelerisque fermentum. Fusce varius libero quis tempor suscipit. Mauris at interdum massa.</p>
-<p>Aliquam erat volutpat. Donec gravida tellus nec vestibulum ultrices. Integer ac laoreet nunc. Donec mi augue, pellentesque et nisl sit amet, pellentesque bibendum urna. Curabitur iaculis dui neque, eu ultrices ante interdum ut. Nullam volutpat nisi ac nisi tempus facilisis. Fusce ut nisl euismod, aliquet velit in, maximus augue.</p>
-<p>Nulla luctus est id mauris sagittis, et faucibus libero pretium. Nulla faucibus, orci vitae luctus euismod, massa nulla venenatis odio, a tempor erat ligula non leo. Ut bibendum imperdiet arcu nec pharetra. Aenean egestas mi scelerisque, porta lacus suscipit, interdum orci. Donec neque justo, lobortis at ultricies aliquam, ultricies at lorem. Praesent dignissim gravida diam, condimentum euismod ante ullamcorper blandit. Suspendisse at ante quis ipsum elementum rutrum. Aenean eget metus volutpat, aliquam felis eget, commodo augue.</p>
-', 0, 0, 0, NULL, NULL, 1, 1, NOW(), 0, 1, 1);
-
 INSERT INTO web.settings (key, value, title)
 VALUES
   ('top_menu', 1, 'Top navigation menu');
