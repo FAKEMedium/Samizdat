@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="DdlMappings">
-    <mapping uuid="de52d52b-13de-4058-9417-8eb055e3cebd" name="postgres@unixsocket Mapping">
-      <data-sources db="da0edeb9-caac-4c05-8c1f-fcf6fc6ab8b6" />
-    </mapping>
-  </component>
-</project>
