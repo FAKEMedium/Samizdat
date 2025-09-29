@@ -28,10 +28,28 @@ async function sendData(method) {
         alert(data.error || 'Authentication required');
         window.location.href = '<%== url_for('account_login') %>';
       } else {
-        alert('Request failed: ' + response.statusText);
+        // Try to get error message from JSON response
+        try {
+          const data = await response.json();
+          alert(data.error || 'Request failed: ' + response.statusText);
+        } catch {
+          alert('Request failed: ' + response.statusText);
+        }
       }
     } else {
-      populateForm(await response.json(), method);
+      // Check content type
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/pdf')) {
+        // Handle PDF response - open in new window
+        const blob = await response.blob();
+        const pdfUrl = URL.createObjectURL(blob);
+        window.open(pdfUrl, '_blank');
+        // Reload the page to show updated invoice list
+        setTimeout(() => window.location.reload(), 1000);
+      } else {
+        // Handle JSON response
+        populateForm(await response.json(), method);
+      }
     }
   } catch (e) {
     console.error('Request error:', e);
@@ -44,8 +62,7 @@ function updateInvoice() {
 }
 
 function makeInvoice(){
-  form.submit();
-//  sendData('POST');
+  sendData('POST');
 }
 
 function getInvoice(){

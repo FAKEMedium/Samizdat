@@ -236,7 +236,11 @@ sub update ($self, $makejson = 1) {
   $self->app->customer->update($formdata->{invoice}->{customerid}, $formdata->{customer});
 
   for my $invoiceitemid (keys %{$formdata->{invoiceitems}}) {
-    $self->app->invoice->updateinvoiceitem($invoiceitemid, $formdata->{invoiceitems}->{$invoiceitemid}) if ($invoiceitemid =~ /^[\d]+$/);
+    if ($invoiceitemid =~ /^[\d]+$/) {
+      # Ensure include field is numeric (0 or 1)
+      $formdata->{invoiceitems}->{$invoiceitemid}->{include} = int($formdata->{invoiceitems}->{$invoiceitemid}->{include} || 0);
+      $self->app->invoice->updateinvoiceitem($invoiceitemid, $formdata->{invoiceitems}->{$invoiceitemid});
+    }
   }
   my $extra = $formdata->{invoiceitems}->{extra};
   $extra->{customerid} = $formdata->{customer}->{customerid};
@@ -509,6 +513,10 @@ sub remind ($self) {
     my $invoice = $data->{invoice};
     my $customer = $data->{customer};
 
+    # Set language based on customer billing language
+    $customer->{billinglang} =~ s/_[A-Z]{2}$// if $customer->{billinglang};
+    $self->language($customer->{billinglang} || $self->app->config->{locale}->{default_language} || 'sv');
+
     # Check if invoice is in correct state for reminders
     if ($invoice->{state} ne 'fakturerad') {
       return $self->render(json => { error => 'Invoice must be in fakturerad state to send reminders' }, status => 400);
@@ -534,14 +542,9 @@ sub remind ($self) {
       vat => $amounts->{vat_percent}
     };
 
-    # Get reminder count to determine if this should be tough
+    # Get reminder count for tracking
     my $reminders = $self->app->invoice->reminders($invoiceid);
     my $reminder_count = scalar(@$reminders);
-
-    # Automatically use tough reminder if this is 3rd or later reminder
-    if ($reminder_count >= 2) {
-      $reminder_type = 'tough';
-    }
 
     # Get custom message from form
     my $custom_message = $self->param('mailmessage') || '';
@@ -591,17 +594,29 @@ sub remind ($self) {
       return $self->render(text => $data->{error}, status => $data->{status});
     }
 
+    # Set language based on customer billing language
+    my $customer = $data->{customer};
+    $customer->{billinglang} =~ s/_[A-Z]{2}$// if $customer->{billinglang};
+    $self->language($customer->{billinglang} || $self->app->config->{locale}->{default_language} || 'sv');
+
     # Render default messages for JavaScript (just the message content)
-    my $mild_message = $self->render_to_string(
-      template => 'invoice/remind/mildmessage',
+    my $invoicedata = {
       invoice => $data->{invoice},
       customer => $data->{customer}
+    };
+
+    my $mild_message = $self->render_to_string(
+      template => 'invoice/remind/mildhtml',
+      invoicedata => $invoicedata,
+      message => '',  # Empty message to show default template content
+      format => 'mail'
     );
 
     my $tough_message = $self->render_to_string(
-      template => 'invoice/remind/toughmessage',
-      invoice => $data->{invoice},
-      customer => $data->{customer}
+      template => 'invoice/remind/toughhtml',
+      invoicedata => $invoicedata,
+      message => '',  # Empty message to show default template content
+      format => 'mail'
     );
 
     $web->{script} = $self->render_to_string(

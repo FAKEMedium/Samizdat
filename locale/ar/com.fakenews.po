@@ -212,6 +212,9 @@ msgstr "إضافة موقع"
 msgid "Add zone"
 msgstr "إضافة منطقة"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "العنوان"
 
@@ -500,6 +503,9 @@ msgstr "معلومات الاتصال"
 msgid "Contact {sender} if you have questions."
 msgstr "اتصل بـ {sender} إذا كانت لديك أسئلة."
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr "المحتوى"
 
@@ -677,6 +683,9 @@ msgstr "عنوان التسليم"
 msgid "Description"
 msgstr "الوصف"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr "تم تدميره"
 
@@ -715,6 +724,12 @@ msgstr "النطاقات"
 
 msgid "DomÃ¤nregistrering"
 msgstr "تسجيل النطاق"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
 
 msgid "Draft"
 msgstr ""
@@ -896,6 +911,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr "يورو"
 
@@ -934,6 +952,9 @@ msgstr "FAKE Media"
 
 msgid "FAKE News by country"
 msgstr "FAKE News حسب البلد"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "فشل تسجيل الدخول من {ip}"
@@ -974,6 +995,9 @@ msgstr ""
 msgid "Failed to send invoice to Fortnox"
 msgstr "فشل إرسال الفاتورة إلى Fortnox"
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -1009,6 +1033,9 @@ msgstr "الاسم الأول"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "لمزيد من المعلومات، قم بزيارة موقع Fortnox:"
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
 
 msgid "Form submission error:"
 msgstr "خطأ في إرسال النموذج:"
@@ -1088,14 +1115,38 @@ msgstr "IBAN:"
 msgid "ID"
 msgstr ""
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "رمز التعريف"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "إذا لم تسجل حسابًا، يرجى تجاهل هذا البريد الإلكتروني."
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
 msgstr "صورة"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "انتحال الشخصية"
@@ -1135,6 +1186,9 @@ msgstr "فاتورة"
 
 msgid "Invoice (credited)"
 msgstr "فاتورة (معتمدة)"
+
+msgid "Invoice Details"
+msgstr ""
 
 msgid "Invoice address"
 msgstr "عنوان الفاتورة"
@@ -1280,6 +1334,9 @@ msgstr ""
 msgid "Latest"
 msgstr "الأحدث"
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1409,6 +1466,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr "ملف مفقود، خطأنا؟"
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr "اسم المستخدم أو كلمة المرور مفقودة"
 
@@ -1426,6 +1486,9 @@ msgstr "لغات متعددة وتعديلات خاصة بالبلد"
 
 msgid "Name"
 msgstr "الاسم"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "صافي"
@@ -1514,6 +1577,9 @@ msgstr "الرقم"
 msgid "Numbered List"
 msgstr "قائمة مرقمة"
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr "فتح الفاتورة"
 
@@ -1550,6 +1616,9 @@ msgstr "رقم المؤسسة"
 msgid "Organizational number"
 msgstr "الرقم التنظيمي"
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr "مرجعنا"
 
@@ -1558,6 +1627,9 @@ msgstr "مرجعنا"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "بمرور الوقت، تمت إضافة المزيد من ميزات استضافة الويب."
+
+msgid "Overdue Invoice Details"
+msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "سيتم فرض رسوم تذكير وفائدة {rate} على المدفوعات المتأخرة."
@@ -1613,11 +1685,20 @@ msgstr "يجب أن تحتوي كلمة المرور على {min} حرف كبي�
 msgid "Password was wrong or username doesn't exist."
 msgstr "كلمة المرور خاطئة أو اسم المستخدم غير موجود."
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "تاريخ الدفع"
 
 msgid "Payment"
 msgstr "الدفع"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr ""
 
 msgid "Payment due to: {duedate}"
 msgstr "الدفع مستحق في: {duedate}"
@@ -1677,6 +1758,9 @@ msgid "Please enter a valid phone number"
 msgstr ""
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1843,6 +1927,9 @@ msgstr "المبلغ المتبقي للدفع: {amount} {currency}"
 
 msgid "Remind"
 msgstr "تذكير"
+
+msgid "Reminder sent successfully"
+msgstr ""
 
 msgid "Renew"
 msgstr ""
@@ -2018,6 +2105,9 @@ msgstr ""
 msgid "Servers"
 msgstr "الخوادم"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "تعيين سمة الارتفاع."
 
@@ -2189,6 +2279,9 @@ msgstr "شكرًا لاتصالك بنا."
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr "مشروع Samizdat"
 
@@ -2243,6 +2336,18 @@ msgstr "يتعامل هذا التكامل مع الفوترة بشكل مستق
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "تم تطوير هذا التكامل وصيانته من قبل Rymdweb AB."
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr "رجوع"
 
@@ -2258,6 +2363,9 @@ msgstr "تبديل القائمة"
 msgid "Tot"
 msgstr "المجموع"
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr "المجموع: {count} عميل"
 
@@ -2269,6 +2377,12 @@ msgstr "تحويل"
 
 msgid "Type"
 msgstr "النوع"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "غير مصادق"
@@ -2357,6 +2471,9 @@ msgstr "المستخدمون والمجموعات"
 msgid "VAT"
 msgstr "ضريبة القيمة المضافة"
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr "معرف ضريبة القيمة المضافة"
 
@@ -2390,6 +2507,12 @@ msgstr "ضريبة القيمة المضافة:"
 msgid "Value for the class attribute."
 msgstr "قيمة لسمة الفئة."
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "سنقوم أيضًا بتخزينه للإحصائيات ولمنع تسجيلات الروبوت."
 
@@ -2422,6 +2545,9 @@ msgstr "سنة"
 
 msgid "Yes"
 msgstr "نعم"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
 
 msgid "You can also post in our discussions."
 msgstr "يمكنك أيضًا النشر في مناقشاتنا."

@@ -184,6 +184,9 @@ msgstr "वेबसाइट जोड़ें"
 msgid "Add zone"
 msgstr "ज़ेत्र जोड़ें"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "पता"
 
@@ -472,6 +475,9 @@ msgstr "संपर्क जानकारी"
 msgid "Contact {sender} if you have questions."
 msgstr "यदि आपके कोई प्रश्न हैं तो {sender} से संपर्क करें।"
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr "सामग्री"
 
@@ -649,6 +655,9 @@ msgstr "डिलिवरी पता"
 msgid "Description"
 msgstr "विवरण"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr "नष्ट किया गया"
 
@@ -687,6 +696,12 @@ msgstr "डोमेन"
 
 msgid "DomÃ¤nregistrering"
 msgstr "डोमेन पंजीकरण"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
 
 msgid "Draft"
 msgstr ""
@@ -868,6 +883,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr "यूरो"
 
@@ -906,6 +924,9 @@ msgstr "नकली मीडिया"
 
 msgid "FAKE News by country"
 msgstr "देश द्वारा नकली समाचार"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "{ip} से लॉगिन विफल"
@@ -946,6 +967,9 @@ msgstr ""
 msgid "Failed to send invoice to Fortnox"
 msgstr "Fortnox को बिल भेजने में विफल"
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -981,6 +1005,9 @@ msgstr "पहला नाम"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "अधिक जानकारी के लिए, Fortnox वेबसाइट पर जाएं:"
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
 
 msgid "Form submission error:"
 msgstr "फ़ॉर्म सबमिशन त्रुटि:"
@@ -1060,14 +1087,38 @@ msgstr "आईबीएएन:"
 msgid "ID"
 msgstr ""
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "पहचान कोड"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "यदि आपने खाता पंजीकृत नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।"
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
 msgstr "चित्र"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "प्रतिरूपण"
@@ -1107,6 +1158,9 @@ msgstr "इनवॉइस"
 
 msgid "Invoice (credited)"
 msgstr "इनवॉइस (क्रेडिट किया गया)"
+
+msgid "Invoice Details"
+msgstr ""
 
 msgid "Invoice address"
 msgstr "इनवॉइस पता"
@@ -1248,6 +1302,9 @@ msgstr ""
 msgid "Latest"
 msgstr "नवीनतम"
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1377,6 +1434,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr "फ़ाइल अनुपलब्ध, हमारी गलती?"
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr "उपयोगकर्ता नाम या पासवर्ड अनुपलब्ध"
 
@@ -1394,6 +1454,9 @@ msgstr "कई भाषाएँ और देश-विशिष्ट सं�
 
 msgid "Name"
 msgstr "नाम"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "निवल"
@@ -1482,6 +1545,9 @@ msgstr "संख्या"
 msgid "Numbered List"
 msgstr "संख्याबद्ध सूची"
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr "ओपन इनवॉइस"
 
@@ -1518,6 +1584,9 @@ msgstr "संगठन संख्या"
 msgid "Organizational number"
 msgstr "संगठनात्मक संख्या"
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr "हमारा संदर्भ"
 
@@ -1526,6 +1595,9 @@ msgstr "हमारा संदर्भ"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "समय के साथ, और वेब होस्टिंग सुविधाएं जोड़ी गई हैं।"
+
+msgid "Overdue Invoice Details"
+msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "बकाया भुगतानों पर एक रिमाइंडर शुल्क और {rate} ब्याज लगाया जाएगा।"
@@ -1581,11 +1653,20 @@ msgstr "पासवर्ड में कम से कम {min} बड़े 
 msgid "Password was wrong or username doesn't exist."
 msgstr "पासवर्ड गलत था या उपयोगकर्ता नाम मौजूद नहीं है।"
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "भुगतान तिथि"
 
 msgid "Payment"
 msgstr "भुगतान"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr ""
 
 msgid "Payment due to: {duedate}"
 msgstr "भुगतान नियत तिथि: {duedate}"
@@ -1645,6 +1726,9 @@ msgid "Please enter a valid phone number"
 msgstr ""
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1811,6 +1895,9 @@ msgstr "भुगतान के लिए शेष राशि: {amount} {cu
 
 msgid "Remind"
 msgstr "याद दिलाएं"
+
+msgid "Reminder sent successfully"
+msgstr ""
 
 msgid "Renew"
 msgstr ""
@@ -1986,6 +2073,9 @@ msgstr ""
 msgid "Servers"
 msgstr "सर्वर"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "ऊंचाई विशेषता सेट करें।"
 
@@ -2157,6 +2247,9 @@ msgstr "हमसे संपर्क करने के लिए धन्�
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr "समिज़दात प्रोजेक्ट"
 
@@ -2211,6 +2304,18 @@ msgstr "यह एकीकरण बिलिंग को स्वतंत�
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "यह एकीकरण Rymdweb AB द्वारा विकसित और रखरखाव किया जाता है।"
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr "वापस"
 
@@ -2226,6 +2331,9 @@ msgstr "मेनू टॉगल करें"
 msgid "Tot"
 msgstr "कुल"
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr "कुल: {count} ग्राहक"
 
@@ -2237,6 +2345,12 @@ msgstr "ट्रांसफर"
 
 msgid "Type"
 msgstr "प्रकार"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "अप्रमाणित"
@@ -2325,6 +2439,9 @@ msgstr "उपयोगकर्ता और समूह"
 msgid "VAT"
 msgstr "वैट"
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr "वैट आईडी"
 
@@ -2358,6 +2475,12 @@ msgstr "वैट:"
 msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "हम इसे आंकड़ों के लिए और रोबोट पंजीकरण को रोकने के लिए भी स्टोर करेंगे।"
 
@@ -2390,6 +2513,9 @@ msgstr "वर्ष"
 
 msgid "Yes"
 msgstr "हाँ"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
 
 msgid "You can also post in our discussions."
 msgstr "आप हमारी चर्चाओं में भी पोस्ट कर सकते हैं।"

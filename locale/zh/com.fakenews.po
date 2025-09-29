@@ -177,6 +177,9 @@ msgstr "添加网站"
 msgid "Add zone"
 msgstr "添加区域"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "地址"
 
@@ -465,6 +468,9 @@ msgstr "联系信息"
 msgid "Contact {sender} if you have questions."
 msgstr "如有疑问，请联系 {sender}。"
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr "内容"
 
@@ -642,6 +648,9 @@ msgstr "送货地址"
 msgid "Description"
 msgstr "描述"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr "已销毁"
 
@@ -680,6 +689,12 @@ msgstr "域名"
 
 msgid "DomÃ¤nregistrering"
 msgstr "域名注册"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
 
 msgid "Draft"
 msgstr ""
@@ -861,6 +876,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr "欧元"
 
@@ -899,6 +917,9 @@ msgstr "FAKE Media"
 
 msgid "FAKE News by country"
 msgstr "按国家分类的 FAKE News"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "来自 {ip} 的登录失败"
@@ -939,6 +960,9 @@ msgstr ""
 msgid "Failed to send invoice to Fortnox"
 msgstr "发送发票到 Fortnox 失败"
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -974,6 +998,9 @@ msgstr "名字"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "欲了解更多信息，请访问 Fortnox 网站："
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
 
 msgid "Form submission error:"
 msgstr "表单提交错误："
@@ -1053,14 +1080,38 @@ msgstr "IBAN："
 msgid "ID"
 msgstr ""
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "识别码"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "如果您没有注册账户，请忽略此邮件。"
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
 msgstr "图片"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "模拟"
@@ -1100,6 +1151,9 @@ msgstr "发票"
 
 msgid "Invoice (credited)"
 msgstr "发票（已贷记）"
+
+msgid "Invoice Details"
+msgstr ""
 
 msgid "Invoice address"
 msgstr "发票地址"
@@ -1240,6 +1294,9 @@ msgstr ""
 msgid "Latest"
 msgstr "最新"
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1369,6 +1426,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr "文件丢失，是我们的错吗？"
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr "缺少用户名或密码"
 
@@ -1386,6 +1446,9 @@ msgstr "多语言和国家特定修改"
 
 msgid "Name"
 msgstr "名称"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "净额"
@@ -1474,6 +1537,9 @@ msgstr "号码"
 msgid "Numbered List"
 msgstr "编号列表"
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr "未结发票"
 
@@ -1510,6 +1576,9 @@ msgstr "组织编号"
 msgid "Organizational number"
 msgstr "组织号码"
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr "我们的参考"
 
@@ -1518,6 +1587,9 @@ msgstr "我们的参考"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "随着时间的推移，增加了更多的网站托管功能。"
+
+msgid "Overdue Invoice Details"
+msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "逾期付款将收取催款费和 {rate} 的利息。"
@@ -1573,11 +1645,20 @@ msgstr "密码必须至少包含 {min} 个大写字母"
 msgid "Password was wrong or username doesn't exist."
 msgstr "密码错误或用户名不存在。"
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "付款日期"
 
 msgid "Payment"
 msgstr "付款"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr ""
 
 msgid "Payment due to: {duedate}"
 msgstr "付款截止日期：{duedate}"
@@ -1637,6 +1718,9 @@ msgid "Please enter a valid phone number"
 msgstr ""
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1803,6 +1887,9 @@ msgstr "剩余应付金额：{amount} {currency}"
 
 msgid "Remind"
 msgstr "提醒"
+
+msgid "Reminder sent successfully"
+msgstr ""
 
 msgid "Renew"
 msgstr ""
@@ -1978,6 +2065,9 @@ msgstr ""
 msgid "Servers"
 msgstr "服务器"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "设置高度属性。"
 
@@ -2149,6 +2239,9 @@ msgstr "感谢您联系我们。"
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr "Samizdat 项目"
 
@@ -2203,6 +2296,18 @@ msgstr "此集成独立处理发票并与 Fortnox 同步发票。"
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "此集成由 Rymdweb AB 开发和维护。"
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr "返回"
 
@@ -2218,6 +2323,9 @@ msgstr "切换菜单"
 msgid "Tot"
 msgstr "总计"
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr "总计：{count} 个客户"
 
@@ -2229,6 +2337,12 @@ msgstr "转账"
 
 msgid "Type"
 msgstr "类型"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "未认证"
@@ -2317,6 +2431,9 @@ msgstr "用户和组"
 msgid "VAT"
 msgstr "增值税"
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr "增值税 ID"
 
@@ -2350,6 +2467,12 @@ msgstr "增值税："
 msgid "Value for the class attribute."
 msgstr "类属性的值。"
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "我们还将存储它用于统计并防止机器人注册。"
 
@@ -2382,6 +2505,9 @@ msgstr "年"
 
 msgid "Yes"
 msgstr "是"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
 
 msgid "You can also post in our discussions."
 msgstr "您也可以在我们的讨论中发帖。"

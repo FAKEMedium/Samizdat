@@ -184,6 +184,9 @@ msgstr "Ny webbplats"
 msgid "Add zone"
 msgstr "Lägg till zon"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "Adress"
 
@@ -460,6 +463,9 @@ msgstr "Kontaktinformation"
 msgid "Contact {sender} if you have questions."
 msgstr "Kontakta {sender} om du har frågor."
 
+msgid "Contact: {email} or call us directly."
+msgstr "Kontakt: {email} eller ring oss direkt."
+
 msgid "Content"
 msgstr "Innehåll"
 
@@ -628,6 +634,9 @@ msgstr "Leveransadress"
 msgid "Description"
 msgstr "Beskrivning"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr "Trots tidigare påminnelser har vi inte fått betalt."
+
 msgid "Destroyed"
 msgstr "Makulerade"
 
@@ -660,6 +669,12 @@ msgstr "Domänregistrering"
 
 msgid "Domains"
 msgstr "Domäner"
+
+msgid "Download Invoice PDF"
+msgstr "Ladda ner PDF-faktura"
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr "Ladda ner PDF-faktura - betala NU"
 
 msgid "Draft"
 msgstr "Utkast"
@@ -835,6 +850,9 @@ msgstr "Fel vid omtryckning av faktura"
 msgid "Error resending invoice"
 msgstr "Fel vid omsändning av faktura"
 
+msgid "Error sending reminder"
+msgstr "Fel i påminnelseutskick"
+
 msgid "Euro"
 msgstr "Euro"
 
@@ -873,6 +891,9 @@ msgstr "FAKE Media"
 
 msgid "FAKE News by country"
 msgstr "FAKE News per land"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
@@ -913,6 +934,9 @@ msgstr "Misslyckades skicka SMS"
 msgid "Failed to send invoice to Fortnox"
 msgstr "Misslyckades att skicka faktura till Fortnox"
 
+msgid "Failed to send reminder"
+msgstr "Misslyckades skicka påminnelse"
+
 msgid "Failed to update example"
 msgstr "Misslyckades uppdatera exempel"
 
@@ -948,6 +972,9 @@ msgstr "Förnamn"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "För mer information, besök Fortnoxs webbplats:"
+
+msgid "For questions, please contact us at {email}."
+msgstr "Vid frågor, kontakta oss på {email}."
 
 msgid "Form submission error:"
 msgstr "Formulärfel:"
@@ -1021,14 +1048,38 @@ msgstr "IBAN"
 msgid "ID"
 msgstr "ID"
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "Om du inte registrerade ett konto, ignorera detta e-postmeddelande."
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr "Bortse från detta meddelande om ni nyligen betalat."
+
 msgid "Image"
 msgstr "Bild"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "Agera som"
@@ -1068,6 +1119,9 @@ msgstr "Faktura"
 
 msgid "Invoice (credited)"
 msgstr "Faktura (krediterad)"
+
+msgid "Invoice Details"
+msgstr "Fakturadetaljer"
 
 msgid "Invoice address"
 msgstr "Faktureringsadress"
@@ -1196,6 +1250,9 @@ msgstr "Senaste påminnelse"
 
 msgid "Latest"
 msgstr "Senaste"
+
+msgid "Legal proceedings"
+msgstr ""
 
 msgid "Light"
 msgstr "Ljust"
@@ -1326,6 +1383,9 @@ msgstr "Kundnummer eller faktura-ID saknas"
 msgid "Missing file, our bad?"
 msgstr "Filen saknas, vårt fel?"
 
+msgid "Missing invoice information"
+msgstr "Saknad fakturainformatiin"
+
 msgid "Missing username or password"
 msgstr "Användarnamn eller lösenord saknas"
 
@@ -1343,6 +1403,9 @@ msgstr "Flera språk och landsspecifika anpassningar"
 
 msgid "Name"
 msgstr "Namn"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "Netto"
@@ -1428,6 +1491,9 @@ msgstr "Nummer"
 msgid "Numbered List"
 msgstr "Numrerad lista"
 
+msgid "OVERDUE"
+msgstr "Förfallna"
+
 msgid "Open invoice"
 msgstr "Öppen faktura"
 
@@ -1461,6 +1527,9 @@ msgstr "Organisationsnummer"
 msgid "Organizational number"
 msgstr "Organisationsnummer"
 
+msgid "Original due date"
+msgstr "Ursprungligt förfallodatum"
+
 msgid "Our Reference"
 msgstr "Vår referens"
 
@@ -1469,6 +1538,9 @@ msgstr "Vår referens"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Med tiden har fler webbhotell-funktioner lagts till."
+
+msgid "Overdue Invoice Details"
+msgstr "Detaljer om förfallen faktura"
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
@@ -1524,11 +1596,20 @@ msgstr "Lösenordet måste innehålla minst {min} versal"
 msgid "Password was wrong or username doesn't exist."
 msgstr "Lösenordet var fel eller användarnamnet finns inte."
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "Betaldatum"
 
 msgid "Payment"
 msgstr "Betalning"
+
+msgid "Payment Information"
+msgstr "Betalningsinformation"
+
+msgid "Payment Reminder"
+msgstr "Betalningspåminnelse"
 
 msgid "Payment due to: {duedate}"
 msgstr "Förfallodatum: {duedate}"
@@ -1583,6 +1664,9 @@ msgstr "Ange ett giltigt telefonnummer"
 
 msgid "Please find attached invoice"
 msgstr "Se bifogad faktura"
+
+msgid "Please include the invoice number as reference when making the payment."
+msgstr "Skriv fakturanumret som meddelande vid betalning."
 
 msgid "Please log in to access that page"
 msgstr "Logga in för att komma åt sidan"
@@ -1742,6 +1826,9 @@ msgstr "Kvar att betala: {amount} {currency}"
 
 msgid "Remind"
 msgstr "Påminn"
+
+msgid "Reminder sent successfully"
+msgstr "Påminnelse skickades"
 
 msgid "Renew"
 msgstr "Förnya"
@@ -1914,6 +2001,9 @@ msgstr "Skickat"
 msgid "Servers"
 msgstr "Servrar"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "Sätt height-attributet."
 
@@ -2082,6 +2172,9 @@ msgstr "Tack för att du kontaktar oss."
 msgid "Thank you for your business"
 msgstr "Tack för att ni använder våra tjänster"
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr "Vi hoppas ni hanterar detta snarast."
+
 msgid "The Samizdat project"
 msgstr "Projektet Samizdat"
 
@@ -2136,6 +2229,18 @@ msgstr "Denna integration hanterar fakturering självständigt och synkroniserar
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "Denna integration utvecklas och underhålls av Rymdweb AB."
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr "Eftersom det är lätt att missa en betalning vill vi skicka en vänlig påminnelse."
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Time"
 msgstr "Tid"
 
@@ -2148,6 +2253,9 @@ msgstr "Visa meny"
 msgid "Tot"
 msgstr "Tot"
 
+msgid "Total to pay"
+msgstr "Totalt att betala"
+
 msgid "Total: {count} customers"
 msgstr "Totalt: {count} kunder"
 
@@ -2159,6 +2267,12 @@ msgstr "Överföring"
 
 msgid "Type"
 msgstr "Typ"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "Oautentiserad"
@@ -2244,6 +2358,9 @@ msgstr "Användare och grupper"
 msgid "VAT"
 msgstr "Moms"
 
+msgid "VAT ({percent}%)"
+msgstr "Moms ({percent}%)"
+
 msgid "VAT Id"
 msgstr "Momsreg. nr"
 
@@ -2270,6 +2387,12 @@ msgstr "Moms {rate}\\%"
 
 msgid "Value for the class attribute."
 msgstr "Värde för klass-attributet."
+
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr "Enligt våra noteringar är fakturan nedanför inte betalad."
 
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "Vi kommer också lagra det för statistik och för att förhindra robotregistreringar."
@@ -2303,6 +2426,9 @@ msgstr "År"
 
 msgid "Yes"
 msgstr "Ja"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr "Du behöver ange fakturanumret som meddelande vid betalning,"
 
 msgid "You can also post in our discussions."
 msgstr "Du kan också posta i våra diskussioner."

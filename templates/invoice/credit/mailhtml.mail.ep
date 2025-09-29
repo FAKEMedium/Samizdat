@@ -1,6 +1,5 @@
 % my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
 <div style="background: #fff; padding: 1em;">
-  <img src="data:image/svg+xml;base64,<%== $invoicedata->{svglogotype} %>" width="100" style="width: 100px; margin-bottom: 2ex" />
   <h2><%== __('Credit invoice') %></h2>
 
   <p>

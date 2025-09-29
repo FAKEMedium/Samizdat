@@ -184,6 +184,9 @@ msgstr ""
 msgid "Add zone"
 msgstr ""
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr ""
 
@@ -475,6 +478,9 @@ msgstr ""
 msgid "Contact {sender} if you have questions."
 msgstr ""
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr ""
 
@@ -652,6 +658,9 @@ msgstr ""
 msgid "Description"
 msgstr ""
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr ""
 
@@ -695,6 +704,12 @@ msgid "Domains"
 msgstr ""
 
 msgid "DomÃ¤nregistrering"
+msgstr ""
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
 msgstr ""
 
 msgid "Draft"
@@ -877,6 +892,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr ""
 
@@ -914,6 +932,9 @@ msgid "FAKE Media"
 msgstr ""
 
 msgid "FAKE News by country"
+msgstr ""
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed login from {ip}"
@@ -961,6 +982,9 @@ msgstr "Failed to send SMS: {error}"
 msgid "Failed to send invoice to Fortnox"
 msgstr ""
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -995,6 +1019,9 @@ msgid "First name"
 msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
+msgstr ""
+
+msgid "For questions, please contact us at {email}."
 msgstr ""
 
 msgid "Form submission error:"
@@ -1075,13 +1102,37 @@ msgstr ""
 msgid "ID"
 msgstr "ID"
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
+msgstr ""
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
 msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr ""
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
+msgstr ""
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
 msgstr ""
 
 msgid "Impersonate"
@@ -1121,6 +1172,9 @@ msgid "Invoice"
 msgstr ""
 
 msgid "Invoice (credited)"
+msgstr ""
+
+msgid "Invoice Details"
 msgstr ""
 
 msgid "Invoice address"
@@ -1263,6 +1317,9 @@ msgstr ""
 msgid "Latest"
 msgstr ""
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1392,6 +1449,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr ""
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr ""
 
@@ -1408,6 +1468,9 @@ msgid "Multiple languages and country specific modifications"
 msgstr ""
 
 msgid "Name"
+msgstr ""
+
+msgid "Negative impact on credit rating"
 msgstr ""
 
 msgid "Net"
@@ -1497,6 +1560,9 @@ msgstr ""
 msgid "Numbered List"
 msgstr ""
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr ""
 
@@ -1539,6 +1605,9 @@ msgstr ""
 msgid "Organizational number"
 msgstr ""
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr ""
 
@@ -1546,6 +1615,9 @@ msgid "Our reference"
 msgstr ""
 
 msgid "Over time, more web hosting features have been added."
+msgstr ""
+
+msgid "Overdue Invoice Details"
 msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
@@ -1602,10 +1674,19 @@ msgstr ""
 msgid "Password was wrong or username doesn't exist."
 msgstr ""
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr ""
 
 msgid "Payment"
+msgstr ""
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -1666,6 +1747,9 @@ msgid "Please enter a valid phone number"
 msgstr "Please enter a valid phone number"
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1831,6 +1915,9 @@ msgid "Remaining amount to pay: {amount} {currency}"
 msgstr ""
 
 msgid "Remind"
+msgstr ""
+
+msgid "Reminder sent successfully"
 msgstr ""
 
 msgid "Renew"
@@ -2005,6 +2092,9 @@ msgid "Sent"
 msgstr "Sent"
 
 msgid "Servers"
+msgstr ""
+
+msgid "Service interruption"
 msgstr ""
 
 msgid "Set the height attribute."
@@ -2184,6 +2274,9 @@ msgstr ""
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr ""
 
@@ -2238,6 +2331,18 @@ msgstr ""
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr ""
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr ""
 
@@ -2253,6 +2358,9 @@ msgstr ""
 msgid "Tot"
 msgstr ""
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr ""
 
@@ -2263,6 +2371,12 @@ msgid "Transfer"
 msgstr ""
 
 msgid "Type"
+msgstr ""
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
 msgstr ""
 
 msgid "Unauthenticated"
@@ -2355,6 +2469,9 @@ msgstr ""
 msgid "VAT"
 msgstr ""
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr ""
 
@@ -2388,6 +2505,12 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr ""
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr ""
 
@@ -2419,6 +2542,9 @@ msgid "Year"
 msgstr ""
 
 msgid "Yes"
+msgstr ""
+
+msgid "You MUST include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "You can also post in our discussions."

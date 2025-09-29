@@ -128,18 +128,22 @@ sub register ($self, $app, $conf) {
     html_to_text => sub($self, $html) {
       return '' unless $html;
 
+      # Ensure HTML is UTF-8
+      require Encode;
+      $html = Encode::decode('UTF-8', $html) unless Encode::is_utf8($html);
+
       # Remove script and style elements
       $html =~ s/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>//gis;
       $html =~ s/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>//gis;
 
-      # Convert headings with emphasis
-      $html =~ s/<h1[^>]*>(.*?)<\/h1>/\n\n=== $1 ===\n\n/gi;
-      $html =~ s/<h2[^>]*>(.*?)<\/h2>/\n\n== $1 ==\n\n/gi;
-      $html =~ s/<h3[^>]*>(.*?)<\/h3>/\n\n= $1 =\n\n/gi;
-      $html =~ s/<h[4-6][^>]*>(.*?)<\/h[4-6]>/\n\n$1\n\n/gi;
+      # Convert headings - more compact
+      $html =~ s/<h1[^>]*>(.*?)<\/h1>/\n$1\n========================================\n/gi;
+      $html =~ s/<h2[^>]*>(.*?)<\/h2>/\n$1\n----------------------------------------\n/gi;
+      $html =~ s/<h3[^>]*>(.*?)<\/h3>/\n$1\n/gi;
+      $html =~ s/<h[4-6][^>]*>(.*?)<\/h[4-6]>/\n$1\n/gi;
 
-      # Convert paragraphs and divs
-      $html =~ s/<\/p>/\n\n/gi;
+      # Convert paragraphs and divs - single newline
+      $html =~ s/<\/p>/\n/gi;
       $html =~ s/<p[^>]*>//gi;
       $html =~ s/<\/div>/\n/gi;
       $html =~ s/<div[^>]*>//gi;
@@ -151,25 +155,25 @@ sub register ($self, $app, $conf) {
       $html =~ s/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/$2 ($1)/gi;
 
       # Convert strong/bold
-      $html =~ s/<(strong|b)[^>]*>(.*?)<\/\1>/**$2**/gi;
+      $html =~ s/<(strong|b)[^>]*>(.*?)<\/\1>/$2/gi;
 
       # Convert em/italic
-      $html =~ s/<(em|i)[^>]*>(.*?)<\/\1>/*$2*/gi;
+      $html =~ s/<(em|i)[^>]*>(.*?)<\/\1>/$2/gi;
 
-      # Convert tables to simple text
-      $html =~ s/<table[^>]*>/\n/gi;
-      $html =~ s/<\/table>/\n/gi;
-      $html =~ s/<tr[^>]*>/\n/gi;
-      $html =~ s/<\/tr>//gi;
-      $html =~ s/<t[dh][^>]*>/  /gi;
-      $html =~ s/<\/t[dh]>//gi;
+      # Convert tables to simple text - more compact
+      $html =~ s/<table[^>]*>//gi;
+      $html =~ s/<\/table>//gi;
+      $html =~ s/<tr[^>]*>//gi;
+      $html =~ s/<\/tr>/\n/gi;
+      $html =~ s/<th[^>]*>(.*?)<\/th>/$1: /gi;
+      $html =~ s/<td[^>]*>(.*?)<\/td>/$1 /gi;
 
       # Convert list items
-      $html =~ s/<ul[^>]*>/\n/gi;
+      $html =~ s/<ul[^>]*>//gi;
       $html =~ s/<\/ul>/\n/gi;
-      $html =~ s/<ol[^>]*>/\n/gi;
+      $html =~ s/<ol[^>]*>//gi;
       $html =~ s/<\/ol>/\n/gi;
-      $html =~ s/<li[^>]*>/  • /gi;
+      $html =~ s/<li[^>]*>/• /gi;
       $html =~ s/<\/li>/\n/gi;
 
       # Convert horizontal rules
@@ -187,12 +191,30 @@ sub register ($self, $app, $conf) {
       $html =~ s/&amp;/&/g;
       $html =~ s/&#(\d+);/chr($1)/ge;
 
-      # Clean up multiple newlines and spaces
-      $html =~ s/\n{3,}/\n\n/g;
-      $html =~ s/[ \t]+/ /g;
-      $html =~ s/^\s+|\s+$//g;
+      # Clean up whitespace - be more aggressive
+      $html =~ s/\n{3,}/\n\n/g;  # Max 2 newlines
+      $html =~ s/\n +/\n/g;      # Remove spaces at start of lines
+      $html =~ s/ +/ /g;         # Collapse multiple spaces
+      $html =~ s/^\s+|\s+$//g;   # Trim start and end
 
-      return $html;
+      # Ensure UTF-8 encoding for output
+      return Encode::encode('UTF-8', $html);
+    }
+  );
+
+  # Helper to calculate VAT percentage from decimal
+  $app->helper(
+    calculate_vat_percent => sub($self, $vat_decimal) {
+      return '0' unless defined $vat_decimal;
+
+      my $vat_percent = $vat_decimal * 100;
+      $vat_percent =~ s/[0]+$// if ($vat_percent =~ /\./);
+      if ($vat_percent =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
+        $vat_percent = sprintf("%.2f", $vat_percent);
+      }
+      $vat_percent =~ s/\.$//;
+
+      return $vat_percent;
     }
   );
 
@@ -228,18 +250,22 @@ sub register ($self, $app, $conf) {
       # Add custom message if provided
       my $message = $options->{message} || '';
 
+      # Ensure VAT percentage is set in invoice data
+      if (!exists $invoice_data->{vat}) {
+        # Try to get VAT from invoice or customer
+        my $vat_decimal = $invoice_data->{invoice}->{vat} || $invoice_data->{customer}->{vat} || 0.25;
+        $invoice_data->{vat} = $self->calculate_vat_percent($vat_decimal);
+      }
+
       # When in app context, render_mail is always available
       # Use different templates based on action
       if ($invoice_data->{invoice}->{kreditfakturaavser} || $action eq 'credit') {
-        $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', invoicedata => $invoice_data);
-      } elsif ($action eq 'reminder' || $action eq 'reminder_mild') {
-        $htmldata = $self->render_mail(template => 'invoice/remind/mildhtml',
-          invoicedata => $invoice_data, message => $message);
-      } elsif ($action eq 'reminder_tough') {
-        $htmldata = $self->render_mail(template => 'invoice/remind/toughhtml',
-          invoicedata => $invoice_data, message => $message);
+        $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', layout => 'default', invoicedata => $invoice_data);
+      } elsif ($action eq 'reminder' || $action eq 'reminder_mild' || $action eq 'reminder_tough') {
+        # For reminders, just render the message with the default layout
+        $htmldata = $self->render_mail(template => 'invoice/remind/message', layout => 'default', message => $message);
       } else {
-        $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', invoicedata => $invoice_data);
+        $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', layout => 'default', invoicedata => $invoice_data);
       }
 
       # Always convert HTML to text for plain text version
@@ -273,8 +299,8 @@ sub register ($self, $app, $conf) {
         From         => $config->{mail}->{from},
         Bcc          => $config->{test}->{invoice} ? undef : $config->{mail}->{from},
         To           => $to_email,
-        Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $config->{organization})),
-        Subject      => Encode::encode("MIME-Q", Encode::decode("UTF-8", $subject)),
+        Organization => Encode::encode("MIME-Q", $config->{organization}),
+        Subject      => Encode::encode("MIME-Q", $subject),
         'X-Mailer'   => "Samizdat",
         Type         => 'multipart/mixed',
       );
@@ -494,8 +520,8 @@ sub register ($self, $app, $conf) {
       for my $itemid (keys %$invoiceitems) {
         my $item = $invoiceitems->{$itemid};
 
-        # Skip items not included (unless it's an invoice item with ID)
-        next unless $item->{include} || $item->{invoiceitemid};
+        # Skip items not included
+        next unless $item->{include};
 
         # Escape description for LaTeX
         my $description = $item->{invoiceitemtext} || $item->{description} || '';
@@ -519,7 +545,20 @@ sub register ($self, $app, $conf) {
       # Calculate VAT display value
       my $vat = $amounts->{vat_percent};
 
-      # Prepare formdata for template
+      # Remove non-included items from the hash - they'll be handled later
+      my $unincluded_items = {};
+      for my $itemid (keys %$invoiceitems) {
+        unless ($invoiceitems->{$itemid}->{include}) {
+          $unincluded_items->{$itemid} = delete $invoiceitems->{$itemid};
+        }
+      }
+
+      # Check if we have any included items - can't create invoice without items
+      if (!keys %$invoiceitems && $is_create) {
+        return { error => 'No items selected for invoice', status => 400 };
+      }
+
+      # Prepare formdata for template (now only has included items)
       my $formdata = {
         invoice => $invoice,
         customer => $customer,
@@ -529,6 +568,7 @@ sub register ($self, $app, $conf) {
         rounded => $amounts->{rounded},
         diff => $amounts->{diff},
         vatcost => $amounts->{vatcost},
+        unincluded_items => $unincluded_items,  # Keep track for later processing
       };
 
       # Set formdata in stash for template access
@@ -559,6 +599,9 @@ sub register ($self, $app, $conf) {
 
         $self->invoice->updateinvoice($invoice->{invoiceid}, $update_data);
 
+        # Update the invoice object to match what was saved to database
+        $invoice->{costsum} = $invoice->{rounded};  # Database stores total with VAT as costsum
+
         # If not a credit invoice, update subscription dates for included items
         if (!$is_credit) {
           for my $itemid (keys %$invoiceitems) {
@@ -570,28 +613,18 @@ sub register ($self, $app, $conf) {
 
           # Create new open invoice for unincluded items if needed
           if ($options->{handle_unincluded}) {
-            my $has_unincluded = 0;
-            my $all_items = $self->invoice->invoiceitems({
-              where => { 'invoice.invoiceid' => $invoice->{invoiceid} }
-            });
+            # Use the unincluded items we already identified
+            my $unincluded_items = $formdata->{unincluded_items} || {};
 
-            # Check if there are any unincluded items
-            for my $itemid (keys %$all_items) {
-              if (!$all_items->{$itemid}->{include}) {
-                $has_unincluded = 1;
-                last;
-              }
-            }
-
-            # If there are unincluded items, create a new invoice and move them
-            if ($has_unincluded) {
+            if (keys %$unincluded_items) {
+              # Create new invoice and move unincluded items to it
               my $newinvoiceid = $self->invoice->addinvoice($customer);
-              for my $itemid (keys %$all_items) {
-                my $item = $all_items->{$itemid};
-                if (!$item->{include}) {
-                  $self->invoice->updateinvoiceitem($itemid, { invoiceid => $newinvoiceid });
-                }
+              for my $itemid (keys %$unincluded_items) {
+                $self->invoice->updateinvoiceitem($itemid, { invoiceid => $newinvoiceid });
               }
+            } else {
+              # No unincluded items - create empty obehandlad invoice for future use
+              $self->invoice->addinvoice($customer);
             }
           }
         }

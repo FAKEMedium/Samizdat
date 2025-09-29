@@ -191,6 +191,9 @@ msgstr "Новый сайт"
 msgid "Add zone"
 msgstr "Добавить зону"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "Адрес"
 
@@ -479,6 +482,9 @@ msgstr "Контактная информация"
 msgid "Contact {sender} if you have questions."
 msgstr "Свяжитесь с {sender}, если у вас есть вопросы."
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr "Содержание"
 
@@ -653,6 +659,9 @@ msgstr "Адрес доставки"
 msgid "Description"
 msgstr "Описание"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr "Уничтожено"
 
@@ -694,6 +703,12 @@ msgstr "Регистрация домена"
 
 msgid "Domänregistrering"
 msgstr "Регистрация домена"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
 
 msgid "Draft"
 msgstr ""
@@ -875,6 +890,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr "Евро"
 
@@ -913,6 +931,9 @@ msgstr "FAKE Media"
 
 msgid "FAKE News by country"
 msgstr "FAKE News по странам"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "Неудачная попытка входа с {ip}"
@@ -953,6 +974,9 @@ msgstr ""
 msgid "Failed to send invoice to Fortnox"
 msgstr "Не удалось отправить счет в Fortnox"
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -988,6 +1012,9 @@ msgstr "Имя"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "Для получения дополнительной информации посетите веб-сайт Fortnox:"
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
 
 msgid "Form submission error:"
 msgstr "Ошибка отправки формы:"
@@ -1067,14 +1094,38 @@ msgstr "IBAN:"
 msgid "ID"
 msgstr ""
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "Идентификационный код"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "Если вы не регистрировали аккаунт, пожалуйста, проигнорируйте это письмо."
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
 msgstr "Изображение"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "Действовать от имени"
@@ -1114,6 +1165,9 @@ msgstr "Счет"
 
 msgid "Invoice (credited)"
 msgstr "Счет (кредитован)"
+
+msgid "Invoice Details"
+msgstr ""
 
 msgid "Invoice address"
 msgstr "Адрес для счетов"
@@ -1256,6 +1310,9 @@ msgstr ""
 msgid "Latest"
 msgstr "Последние"
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1385,6 +1442,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr "Отсутствующий файл, наша ошибка?"
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr "Отсутствует имя пользователя или пароль"
 
@@ -1402,6 +1462,9 @@ msgstr "Множественные языки и модификации для �
 
 msgid "Name"
 msgstr "Имя"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "Нетто"
@@ -1490,6 +1553,9 @@ msgstr "Номер"
 msgid "Numbered List"
 msgstr "Нумерованный список"
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr "Открыть счет"
 
@@ -1526,6 +1592,9 @@ msgstr "Номер организации"
 msgid "Organizational number"
 msgstr "ИНН"
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr "Наша ссылка"
 
@@ -1534,6 +1603,9 @@ msgstr "Наша ссылка"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Со временем было добавлено больше функций веб-хостинга."
+
+msgid "Overdue Invoice Details"
+msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "За просроченные платежи взимается комиссия за напоминание и {rate} проценты."
@@ -1589,11 +1661,20 @@ msgstr "Пароль должен содержать минимум {min} заг
 msgid "Password was wrong or username doesn't exist."
 msgstr "Неверный пароль или имя пользователя не существует."
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "Дата оплаты"
 
 msgid "Payment"
 msgstr "Оплата"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr ""
 
 msgid "Payment due to: {duedate}"
 msgstr "Срок оплаты: {duedate}"
@@ -1653,6 +1734,9 @@ msgid "Please enter a valid phone number"
 msgstr ""
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1819,6 +1903,9 @@ msgstr "Осталось оплатить: {amount} {currency}"
 
 msgid "Remind"
 msgstr "Напомнить"
+
+msgid "Reminder sent successfully"
+msgstr ""
 
 msgid "Renew"
 msgstr ""
@@ -1994,6 +2081,9 @@ msgstr ""
 msgid "Servers"
 msgstr "Серверы"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "Установить атрибут height."
 
@@ -2165,6 +2255,9 @@ msgstr "Спасибо, что связались с нами."
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr "Проект Samizdat"
 
@@ -2219,6 +2312,18 @@ msgstr "Эта интеграция обрабатывает выставлен�
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "Эта интеграция разработана и поддерживается компанией Rymdweb AB."
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr "Назад"
 
@@ -2234,6 +2339,9 @@ msgstr "Переключить меню"
 msgid "Tot"
 msgstr "Всего"
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr "Всего: {count} клиентов"
 
@@ -2245,6 +2353,12 @@ msgstr "Перевод"
 
 msgid "Type"
 msgstr "Тип"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "Не аутентифицирован"
@@ -2333,6 +2447,9 @@ msgstr "Пользователи и группы"
 msgid "VAT"
 msgstr "НДС"
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr "Номер НДС"
 
@@ -2366,6 +2483,12 @@ msgstr "НДС:"
 msgid "Value for the class attribute."
 msgstr "Значение для атрибута class."
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "Мы также сохраним это для статистики и предотвращения регистрации роботов."
 
@@ -2398,6 +2521,9 @@ msgstr "Год"
 
 msgid "Yes"
 msgstr "Да"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
 
 msgid "You can also post in our discussions."
 msgstr "Вы также можете оставить сообщение в наших обсуждениях."

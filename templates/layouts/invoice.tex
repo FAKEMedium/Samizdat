@@ -188,14 +188,14 @@
 \footnotesize {<%== __('Registered for F-tax') %>}\newline
 % }
 \vfill
-% if ('sv_SE' eq $customer->{lang}) {
+% if ($customer->{billinglang} && $customer->{billinglang} =~ /^sv/i) {
 %   $invoice->{rounded} =~ tr/\./,/;
 %   $invoice->{vatcost} =~ tr/\./,/;
 %   $invoice->{diff} =~ tr/\./,/;
 %   $invoice->{costsum} =~ tr/\./,/;
 %   $vat =~ tr/\./,/;
 % }
-% if ('eur' eq $customer->{currency} && 'sv_SE' ne $customer->{lang}) {
+% if ('eur' eq $customer->{currency} && (!$customer->{billinglang} || $customer->{billinglang} !~ /^sv/i)) {
 {\huge \textbf {\
 %   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
 <%== __x('Credited amount incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
@@ -274,7 +274,7 @@
 %     $gross = sprintf("%.2f", $gross);
 %   }
 %
-%   if ('sv_SE' eq $customer->{lang}) {
+%   if ($customer->{billinglang} && $customer->{billinglang} =~ /^sv/i) {
 %     $cost =~ tr/\./,/;
 %     $net =~ tr/\./,/;
 %     $vatcost =~ tr/\./,/;

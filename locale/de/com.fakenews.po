@@ -184,6 +184,9 @@ msgstr "Website hinzufügen"
 msgid "Add zone"
 msgstr "Zone hinzufügen"
 
+msgid "Additional collection fees"
+msgstr ""
+
 msgid "Address"
 msgstr "Adresse"
 
@@ -472,6 +475,9 @@ msgstr "Kontaktinformationen"
 msgid "Contact {sender} if you have questions."
 msgstr "Kontaktieren Sie {sender}, wenn Sie Fragen haben."
 
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
 msgid "Content"
 msgstr "Inhalt"
 
@@ -649,6 +655,9 @@ msgstr "Lieferadresse"
 msgid "Description"
 msgstr "Beschreibung"
 
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
 msgid "Destroyed"
 msgstr "Zerstört"
 
@@ -687,6 +696,12 @@ msgstr "Domains"
 
 msgid "DomÃ¤nregistrering"
 msgstr "Domain-Registrierung"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
 
 msgid "Draft"
 msgstr ""
@@ -868,6 +883,9 @@ msgstr ""
 msgid "Error resending invoice"
 msgstr ""
 
+msgid "Error sending reminder"
+msgstr ""
+
 msgid "Euro"
 msgstr "Euro"
 
@@ -906,6 +924,9 @@ msgstr "FAKE Media"
 
 msgid "FAKE News by country"
 msgstr "FAKE News nach Land"
+
+msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "Fehlgeschlagene Anmeldung von {ip}"
@@ -946,6 +967,9 @@ msgstr ""
 msgid "Failed to send invoice to Fortnox"
 msgstr "Fehler beim Senden der Rechnung an Fortnox"
 
+msgid "Failed to send reminder"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr ""
 
@@ -981,6 +1005,9 @@ msgstr "Vorname"
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "Für weitere Informationen besuchen Sie die Fortnox-Website:"
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
 
 msgid "Form submission error:"
 msgstr "Formularfehler:"
@@ -1060,14 +1087,38 @@ msgstr "IBAN:"
 msgid "ID"
 msgstr ""
 
+msgid "IMMEDIATE PAYMENT REQUIRED"
+msgstr ""
+
 msgid "Identification code"
 msgstr "Identifikationscode"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "Wenn Sie kein Konto registriert haben, ignorieren Sie bitte diese E-Mail."
 
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
 msgid "Image"
 msgstr "Bild"
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate action is required to avoid:"
+msgstr ""
 
 msgid "Impersonate"
 msgstr "Identität annehmen"
@@ -1107,6 +1158,9 @@ msgstr "Rechnung"
 
 msgid "Invoice (credited)"
 msgstr "Rechnung (gutgeschrieben)"
+
+msgid "Invoice Details"
+msgstr ""
 
 msgid "Invoice address"
 msgstr "Rechnungsadresse"
@@ -1248,6 +1302,9 @@ msgstr ""
 msgid "Latest"
 msgstr "Neueste"
 
+msgid "Legal proceedings"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1377,6 +1434,9 @@ msgstr ""
 msgid "Missing file, our bad?"
 msgstr "Fehlende Datei, unser Fehler?"
 
+msgid "Missing invoice information"
+msgstr ""
+
 msgid "Missing username or password"
 msgstr "Fehlender Benutzername oder Passwort"
 
@@ -1394,6 +1454,9 @@ msgstr "Mehrere Sprachen und länderspezifische Anpassungen"
 
 msgid "Name"
 msgstr "Name"
+
+msgid "Negative impact on credit rating"
+msgstr ""
 
 msgid "Net"
 msgstr "Netto"
@@ -1482,6 +1545,9 @@ msgstr "Nummer"
 msgid "Numbered List"
 msgstr "Nummerierte Liste"
 
+msgid "OVERDUE"
+msgstr ""
+
 msgid "Open invoice"
 msgstr "Offene Rechnung"
 
@@ -1518,6 +1584,9 @@ msgstr "Organisationsnummer"
 msgid "Organizational number"
 msgstr "Organisationsnummer"
 
+msgid "Original due date"
+msgstr ""
+
 msgid "Our Reference"
 msgstr "Unsere Referenz"
 
@@ -1526,6 +1595,9 @@ msgstr "Unsere Referenz"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Im Laufe der Zeit wurden weitere Webhosting-Funktionen hinzugefügt."
+
+msgid "Overdue Invoice Details"
+msgstr ""
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
 msgstr "Bei überfälligen Zahlungen wird eine Mahngebühr und {rate} Zinsen berechnet."
@@ -1581,11 +1653,20 @@ msgstr "Passwort muss mindestens {min} Großbuchstaben enthalten"
 msgid "Password was wrong or username doesn't exist."
 msgstr "Passwort war falsch oder Benutzername existiert nicht."
 
+msgid "PayPal"
+msgstr ""
+
 msgid "Paydate"
 msgstr "Zahlungsdatum"
 
 msgid "Payment"
 msgstr "Zahlung"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr ""
 
 msgid "Payment due to: {duedate}"
 msgstr "Zahlungsfrist: {duedate}"
@@ -1645,6 +1726,9 @@ msgid "Please enter a valid phone number"
 msgstr ""
 
 msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
 msgstr ""
 
 msgid "Please log in to access that page"
@@ -1811,6 +1895,9 @@ msgstr "Restbetrag zu zahlen: {amount} {currency}"
 
 msgid "Remind"
 msgstr "Erinnern"
+
+msgid "Reminder sent successfully"
+msgstr ""
 
 msgid "Renew"
 msgstr ""
@@ -1986,6 +2073,9 @@ msgstr ""
 msgid "Servers"
 msgstr "Server"
 
+msgid "Service interruption"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "Das height-Attribut setzen."
 
@@ -2157,6 +2247,9 @@ msgstr "Vielen Dank, dass Sie uns kontaktiert haben."
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
 msgid "The Samizdat project"
 msgstr "Das Samizdat-Projekt"
 
@@ -2211,6 +2304,18 @@ msgstr "Diese Integration verwaltet die Rechnungsstellung unabhängig und synchr
 msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "Diese Integration wird von Rymdweb AB entwickelt und gewartet."
 
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
 msgid "Tillbaka"
 msgstr "Zurück"
 
@@ -2226,6 +2331,9 @@ msgstr "Menü umschalten"
 msgid "Tot"
 msgstr "Gesamt"
 
+msgid "Total to pay"
+msgstr ""
+
 msgid "Total: {count} customers"
 msgstr "Gesamt: {count} Kunden"
 
@@ -2237,6 +2345,12 @@ msgstr "Überweisung"
 
 msgid "Type"
 msgstr "Typ"
+
+msgid "URGENT: Final Payment Reminder"
+msgstr ""
+
+msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Unauthenticated"
 msgstr "Nicht authentifiziert"
@@ -2325,6 +2439,9 @@ msgstr "Benutzer und Gruppen"
 msgid "VAT"
 msgstr "MwSt."
 
+msgid "VAT ({percent}%)"
+msgstr ""
+
 msgid "VAT Id"
 msgstr "USt-IdNr."
 
@@ -2358,6 +2475,12 @@ msgstr "MwSt.:"
 msgid "Value for the class attribute."
 msgstr "Wert für das class-Attribut."
 
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
 msgid "We will also store it for statistics and to prevent robot registrations."
 msgstr "Wir werden es auch für Statistiken speichern und um Roboterregistrierungen zu verhindern."
 
@@ -2390,6 +2513,9 @@ msgstr "Jahr"
 
 msgid "Yes"
 msgstr "Ja"
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
 
 msgid "You can also post in our discussions."
 msgstr "Sie können auch in unseren Diskussionen posten."
