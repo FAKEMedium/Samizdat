@@ -24,10 +24,10 @@ async function sendData(method) {
         const data = await response.json();
         // Show login modal with error message
         if (window.handle401Error) {
-          window.handle401Error(data.error || '<%== __("Authentication required") %>');
+          window.handle401Error(data.error || `<%== __("Authentication required") %>`);
         } else {
           // Fallback to redirect if modal handler not available
-          window.location.href = '<%== url_for('account_login') %>';
+          window.location.href = `<%== url_for('account_login') %>`;
         }
       } else {
         alert('Request failed: ' + response.statusText);
@@ -64,17 +64,17 @@ async function updatePaymentDate(invoiceId, paymentDate) {
       if (response.status === 401) {
         const data = await response.json();
         if (window.handle401Error) {
-          window.handle401Error(data.error || '<%== __("Authentication required") %>');
+          window.handle401Error(data.error || `<%== __("Authentication required") %>`);
         } else {
-          window.location.href = '<%== url_for('account_login') %>';
+          window.location.href = `<%== url_for('account_login') %>`;
         }
       } else {
-        alert('Failed to update payment date');
+        alert(`<%== __('Failed to update payment date') %>`);
       }
     }
   } catch (e) {
     console.error('Error updating payment date:', e);
-    alert('Failed to update payment date');
+    alert(`<%== __('Failed to update payment date') %>`);
   }
 }
 
@@ -133,14 +133,14 @@ function populateForm(formdata, method) {
 
     snippet += `
                 <tr data-invoiceid="${invoice.invoiceid}">
-                  <td><a href="<%== config->{sitesurl} %>invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
-                  <td><a class="w-auto" href="<%== sprintf("%s%s", config->{manager}->{url}, 'invoices/') %>${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
+                  <td><a href="<%== invoice->url(config->{sitesurl}, config->{baseurl}) %>${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
+                  <td><a class="w-auto" href="<%== url_for('invoice_index') %>/${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
                   <td>${invoice.customername || ''}</td>
                   <td>${invoice.invoicedate.substring(0, 10)}</td>
                   <td>${reminderCell}</td>
                   <td>${paymentCell}</td>
-                  <td class="text-end">${invoice.costsum}</td>
-                  <td class="text-end">${invoice.costsum}</td>
+                  <td class="text-end">${invoice.totalcost}</td>
+                  <td class="text-end">${invoice.totalcost}</td>
                 </tr>`;
   }
   document.querySelector('#invoices tbody').innerHTML = snippet;

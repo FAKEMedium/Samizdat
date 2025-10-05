@@ -1,4 +1,4 @@
-% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
+% my $link = invoice->url(config->{siteurl}, config->{baseurl}, $invoicedata->{invoice});
 <h2><%== __('Payment Reminder') %></h2>
 
 <div id="reminder-message">
@@ -25,37 +25,25 @@
       <td style="padding: 5px 0;"><strong><%== __('Due date') %>:</strong></td>
       <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{duedate} %></td>
     </tr>
-    % # VAT is stored as decimal in invoice (0.25 for 25%)
-    % my $vat_rate = $invoicedata->{invoice}->{vat} || 0;
-    % my $net_amount = $vat_rate > 0 ? $invoicedata->{invoice}->{costsum} / (1 + $vat_rate) : $invoicedata->{invoice}->{costsum};
-    % my $vat_amount = $invoicedata->{invoice}->{costsum} - $net_amount;
-    % my $vat_percent = $vat_rate * 100;
-    % # Format amounts - remove .00 from whole numbers
-    % my $net_formatted = sprintf('%.2f', $net_amount);
-    % $net_formatted =~ s/\.00$//;
-    % my $vat_formatted = sprintf('%.2f', $vat_amount);
-    % $vat_formatted =~ s/\.00$//;
-    % my $total_formatted = $invoicedata->{invoice}->{costsum};
-    % $total_formatted =~ s/\.00$//;
-    % # Use comma as decimal separator for Swedish
-    % if ($invoicedata->{customer}->{billinglang} && $invoicedata->{customer}->{billinglang} =~ /^sv/i) {
-    %   $net_formatted =~ tr/\./,/;
-    %   $vat_formatted =~ tr/\./,/;
-    %   $total_formatted =~ tr/\./,/;
-    % }
     <tr>
       <td style="padding: 5px 0;"><strong><%== __('Net amount') %>:</strong></td>
-      <td style="padding: 5px 0;"><%== $net_formatted %> <%== $invoicedata->{invoice}->{currency} %></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{net_amount} %> <%== $invoicedata->{invoice}->{currency} %></td>
     </tr>
-    % if ($vat_rate > 0) {
+    % if ($invoicedata->{invoice}->{vatcost}) {
     <tr>
-      <td style="padding: 5px 0;"><strong><%== __x('VAT ({percent}%)', percent => sprintf('%.0f', $vat_percent)) %>:</strong></td>
-      <td style="padding: 5px 0;"><%== $vat_formatted %> <%== $invoicedata->{invoice}->{currency} %></td>
+      <td style="padding: 5px 0;"><strong><%== __x('VAT ({percent}%)', percent => $invoicedata->{vat}) %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{vatcost} %> <%== $invoicedata->{invoice}->{currency} %></td>
+    </tr>
+    % }
+    % if ($invoicedata->{invoice}->{diff}) {
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Rounding') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoicedata->{invoice}->{diff} %> <%== $invoicedata->{invoice}->{currency} %></td>
     </tr>
     % }
     <tr style="border-top: 2px solid #ddd;">
       <td style="padding: 8px 0 0 0;"><strong><%== __('Total to pay') %>:</strong></td>
-      <td style="padding: 8px 0 0 0;"><strong><%== $total_formatted %> <%== $invoicedata->{invoice}->{currency} %></strong></td>
+      <td style="padding: 8px 0 0 0;"><strong><%== $invoicedata->{invoice}->{totalcost} %> <%== $invoicedata->{invoice}->{currency} %></strong></td>
     </tr>
   </table>
 </div>

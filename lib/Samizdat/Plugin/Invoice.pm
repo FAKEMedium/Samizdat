@@ -202,45 +202,29 @@ sub register ($self, $app, $conf) {
     }
   );
 
-  # Helper to calculate VAT percentage from decimal
-  $app->helper(
-    calculate_vat_percent => sub($self, $vat_decimal) {
-      return '0' unless defined $vat_decimal;
-
-      my $vat_percent = $vat_decimal * 100;
-      $vat_percent =~ s/[0]+$// if ($vat_percent =~ /\./);
-      if ($vat_percent =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-        $vat_percent = sprintf("%.2f", $vat_percent);
-      }
-      $vat_percent =~ s/\.$//;
-
-      return $vat_percent;
-    }
-  );
-
   # Helper to send invoice email
   $app->helper(
-    send_invoice_email => sub($self, $invoice_data, $options = {}) {
+    send_invoice_email => sub($self, $invoicedata, $options = {}) {
       require MIME::Lite;
       require Mojo::Util;
 
       my $config = $self->app->config;
 
       # Clean language variant suffixes (_XX) from billinglang
-      $invoice_data->{customer}->{billinglang} =~ s/_[A-Z]{2}$// if $invoice_data->{customer}->{billinglang};
-      $self->language($invoice_data->{customer}->{billinglang} || $config->{locale}->{default_language});
+      $invoicedata->{customer}->{billinglang} =~ s/_[A-Z]{2}$// if $invoicedata->{customer}->{billinglang};
+      $self->language($invoicedata->{customer}->{billinglang} || $config->{locale}->{default_language});
 
       my $action = $options->{action} || 'send';
 
       # Add logo if not present
-      if (!$invoice_data->{svglogotype}) {
+      if (!$invoicedata->{svglogotype}) {
         my $logo_path = Mojo::Home->new()->child('src/public/' . $config->{logotype});
         if (-e $logo_path) {
           my $svg = $logo_path->slurp;
           $svg = Mojo::Util::b64_encode($svg);
           $svg =~ s/[\r\n\s]+//g;
           chomp $svg;
-          $invoice_data->{svglogotype} = $svg;
+          $invoicedata->{svglogotype} = $svg;
         }
       }
 
@@ -251,21 +235,20 @@ sub register ($self, $app, $conf) {
       my $message = $options->{message} || '';
 
       # Ensure VAT percentage is set in invoice data
-      if (!exists $invoice_data->{vat}) {
+      if (!exists $invoicedata->{vat}) {
         # Try to get VAT from invoice or customer
-        my $vat_decimal = $invoice_data->{invoice}->{vat} || $invoice_data->{customer}->{vat} || 0.25;
-        $invoice_data->{vat} = $self->calculate_vat_percent($vat_decimal);
+        my $vat_decimal = $invoicedata->{invoice}->{vat} || $invoicedata->{customer}->{vat} || 0.25;
+        $invoicedata->{vat} = $self->invoice->formatvat($vat_decimal);
       }
 
-      # When in app context, render_mail is always available
       # Use different templates based on action
-      if ($invoice_data->{invoice}->{kreditfakturaavser} || $action eq 'credit') {
-        $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', layout => 'default', invoicedata => $invoice_data);
+      if ($invoicedata->{invoice}->{kreditfakturaavser} || $action eq 'credit') {
+        $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', layout => 'default', invoicedata => $invoicedata);
       } elsif ($action eq 'reminder' || $action eq 'reminder_mild' || $action eq 'reminder_tough') {
         # For reminders, just render the message with the default layout
         $htmldata = $self->render_mail(template => 'invoice/remind/message', layout => 'default', message => $message);
       } else {
-        $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', layout => 'default', invoicedata => $invoice_data);
+        $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', layout => 'default', invoicedata => $invoicedata);
       }
 
       # Always convert HTML to text for plain text version
@@ -277,22 +260,22 @@ sub register ($self, $app, $conf) {
       # Try to use localization if in app context, otherwise use simple strings
       if ($action eq 'credit') {
         $subject = $self->app->__x('Credited invoice: {number}',
-          number => $invoice_data->{invoice}->{kreditfakturaavser});
+          number => $invoicedata->{invoice}->{kreditfakturaavser});
       } elsif ($action eq 'reminder' || $action eq 'reminder_mild') {
         $subject = $self->app->__x('Payment reminder: Invoice {number}',
-          number => $invoice_data->{invoice}->{fakturanummer});
+          number => $invoicedata->{invoice}->{fakturanummer});
       } elsif ($action eq 'reminder_tough') {
-        $subject = $self->app->__x('URGENT: Final payment reminder - Invoice {number}',
-          number => $invoice_data->{invoice}->{fakturanummer});
+        $subject = $self->app->__x('Final payment reminder - Invoice {number}',
+          number => $invoicedata->{invoice}->{fakturanummer});
       } else {
         $subject = $self->app->__x('Invoice {number}',
-          number => $invoice_data->{invoice}->{fakturanummer});
+          number => $invoicedata->{invoice}->{fakturanummer});
       }
 
       # Determine recipient email
       my $to_email = $config->{test}->{invoice} ?
         $config->{mail}->{to} :
-        $invoice_data->{customer}->{billingemail};
+        $invoicedata->{customer}->{billingemail};
 
       # Create email
       my $mail = MIME::Lite->new(
@@ -312,11 +295,11 @@ sub register ($self, $app, $conf) {
       $mail->attach($alternative);
 
       # Attach PDF if it exists
-      if ($invoice_data->{invoice}->{uuid}) {
-        my $pdf_path = sprintf('%s/%s.pdf', $config->{manager}->{invoice}->{invoicedir}, $invoice_data->{invoice}->{uuid});
+      if ($invoicedata->{invoice}->{uuid}) {
+        my $pdf_path = sprintf('%s/%s.pdf', $config->{manager}->{invoice}->{invoicedir}, $invoicedata->{invoice}->{uuid});
         $mail->attach(
           Path        => $pdf_path,
-          Filename    => sprintf('%s.pdf', $invoice_data->{invoice}->{uuid}),
+          Filename    => sprintf('%s.pdf', $invoicedata->{invoice}->{uuid}),
           Type        => 'application/pdf',
           Disposition => 'attachment'
         );
@@ -532,18 +515,15 @@ sub register ($self, $app, $conf) {
       # Calculate all invoice amounts using model method
       my $amounts = $self->invoice->calculate_amounts(
         $invoiceitems,
-        $customer->{vat},
-        $customer->{currency}
+        $invoice->{vat},
+        $invoice->{currency}
       );
 
       # Update invoice with calculated amounts
-      $invoice->{costsum} = $amounts->{costsum};
+      $invoice->{net_amount} = $amounts->{net_amount};
       $invoice->{vatcost} = $amounts->{vatcost};
-      $invoice->{rounded} = $amounts->{rounded};
+      $invoice->{totalcost} = $amounts->{totalcost};
       $invoice->{diff} = $amounts->{diff};
-
-      # Calculate VAT display value
-      my $vat = $amounts->{vat_percent};
 
       # Remove non-included items from the hash - they'll be handled later
       my $unincluded_items = {};
@@ -563,11 +543,7 @@ sub register ($self, $app, $conf) {
         invoice => $invoice,
         customer => $customer,
         invoiceitems => $invoiceitems,
-        vat => $vat,
-        costsum => $amounts->{costsum},
-        rounded => $amounts->{rounded},
-        diff => $amounts->{diff},
-        vatcost => $amounts->{vatcost},
+        vat => $amounts->{vat_percent},
         unincluded_items => $unincluded_items,  # Keep track for later processing
       };
 
@@ -589,18 +565,14 @@ sub register ($self, $app, $conf) {
           uuid => $invoice->{uuid},
           invoicedate => $invoice->{invoicedate},
           duedate => $invoice->{duedate},
-          costsum => $invoice->{rounded},
+          totalcost => ($invoice->{totalcost} =~ s/\,/./r),
           state => $is_credit ? 'raderad' : 'fakturerad',
         };
 
         if ($is_credit && $options->{credited_invoice}) {
           $update_data->{kreditfakturaavser} = $options->{credited_invoice};
         }
-
         $self->invoice->updateinvoice($invoice->{invoiceid}, $update_data);
-
-        # Update the invoice object to match what was saved to database
-        $invoice->{costsum} = $invoice->{rounded};  # Database stores total with VAT as costsum
 
         # If not a credit invoice, update subscription dates for included items
         if (!$is_credit) {

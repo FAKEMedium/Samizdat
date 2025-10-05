@@ -222,14 +222,14 @@ msgstr "金额"
 msgid "Amount incl. VAT"
 msgstr "含税金额"
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr "含税应付金额：{rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "含税应付金额：{totalcost} {currency}"
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr "含 {percent} 增值税的应付金额：{costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
+msgstr "含 {percent} 增值税的应付金额：{totalcost} {currency}"
 
-msgid "Amount to pay: {costsum} {currency}"
-msgstr "应付金额：{costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
+msgstr "应付金额：{totalcost} {currency}"
 
 msgid "An error occurred"
 msgstr "发生错误"
@@ -537,8 +537,8 @@ msgstr "信用可靠性"
 msgid "Creditability"
 msgstr "信用度"
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr "含税贷记金额：{rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "含税贷记金额：{totalcost} {currency}"
 
 msgid "Credited invoice"
 msgstr "已贷记发票"
@@ -966,6 +966,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr ""
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "更新记录失败"
 
@@ -980,6 +983,12 @@ msgstr "文件存档"
 
 msgid "Fill the form correctly!"
 msgstr "请正确填写表单！"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Financial Information"
 msgstr "财务信息"
@@ -1111,6 +1120,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"

@@ -257,14 +257,14 @@ msgstr "المبلغ"
 msgid "Amount incl. VAT"
 msgstr "المبلغ شامل ضريبة القيمة المضافة"
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr "المبلغ المستحق شامل ضريبة القيمة المضافة: {rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "المبلغ المستحق شامل ضريبة القيمة المضافة: {totalcost} {currency}"
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr "المبلغ المستحق بما في ذلك {percent} ضريبة القيمة المضافة: {costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
+msgstr "المبلغ المستحق بما في ذلك {percent} ضريبة القيمة المضافة: {totalcost} {currency}"
 
-msgid "Amount to pay: {costsum} {currency}"
-msgstr "المبلغ المستحق: {costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
+msgstr "المبلغ المستحق: {totalcost} {currency}"
 
 msgid "An error occurred"
 msgstr "حدث خطأ"
@@ -572,8 +572,8 @@ msgstr "موثوقية الائتمان"
 msgid "Creditability"
 msgstr "المصداقية"
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr "المبلغ المعتمد شامل ضريبة القيمة المضافة: {rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "المبلغ المعتمد شامل ضريبة القيمة المضافة: {totalcost} {currency}"
 
 msgid "Credited invoice"
 msgstr "فاتورة معتمدة"
@@ -1001,6 +1001,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr ""
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "فشل تحديث السجل"
 
@@ -1015,6 +1018,12 @@ msgstr "أرشيف الملفات"
 
 msgid "Fill the form correctly!"
 msgstr "املأ النموذج بشكل صحيح!"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Financial Information"
 msgstr "المعلومات المالية"
@@ -1146,6 +1155,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"

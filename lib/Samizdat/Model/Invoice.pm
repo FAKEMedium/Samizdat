@@ -162,7 +162,7 @@ sub addinvoice ($self, $customer =  {}) {
       state      => 'obehandlad',
       vat        => $customer->{vat},
       currency   => $customer->{currency},
-      costsum    => 0,
+      totalcost  => 0,
       debt       => 0
     },
     { returning => 'invoiceid' }
@@ -247,57 +247,59 @@ sub addreminder ($self, $invoiceid =  0) {
 }
 
 
-# Calculate invoice amounts (costs, VAT, rounding)
-sub calculate_amounts ($self, $invoiceitems, $customer_vat, $customer_currency) {
-  my $costsum = 0;
+# Calculate invoice amounts (costs, VAT, rounding). Relevant fields for calculation are:
+# invoiceitem has
+#   -  price (without VAT)
+#   -  number
+#   -  include (0 = pass to new invoice,  > 0 means to include)
+# invoice has
+#   - totalcost (including vat, corrected for rounding off, no decimals for sek, 2 decimals for eur)
+#   - vat (0 <= vat <= 1)
+#   - currency (sek or eur)
+sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
+  my $vat = $invoice_vat || 0.25;  # Default 25% VAT
+  my $net_amount = 0.00;
+  my $vatcost = 0.00;
 
-  # Calculate cost sum from invoice items
+  # Calculate cost sum (gross) and vat sum from invoice items
+  # The loop is somewhat prepared for item specific VAT rates
   for my $item (values %{$invoiceitems}) {
     if ($item->{include}) {
-      $costsum += $item->{number} * $item->{price};
+      $net_amount += $item->{number} * $item->{price};
+      $vatcost += $item->{number} * $item->{price} * $vat;
     }
   }
 
-  # VAT calculations
-  my $vat = $customer_vat || 0.25;  # Default 25% VAT
-  my $vat_percent = $vat * 100;
-  $vat_percent =~ s/[0]+$// if ($vat_percent =~ /\./);
-  if ($vat_percent =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-    $vat_percent = sprintf("%.2f", $vat_percent);
-  }
-  $vat_percent =~ s/\.$//;
-
-  my $vatcost = $vat * $costsum;
-  my $totalcost = $costsum + $vatcost;
-
   # Rounding calculations based on currency
-  my $rounded = $totalcost;
   my $diff = 0;
-  if ($customer_currency && $customer_currency =~ /sek/i) {
-    # Swedish rounding rules
+  my $totalcost = $vatcost + $net_amount;
+  if ($invoice_currency && $invoice_currency =~ /(sek)/i) {
+    # Swedish rounding rules - round to whole number
     if ($totalcost =~ /(\d+)[\.]{1}(\d+)/) {
-      $rounded = $1;
-      $diff = $2;
-      if ($diff =~ /^[5-9]/) {
-        $rounded = $rounded + 1.0;
+      my $whole = $1;
+      my $decimal = $2;
+      if ($decimal =~ /^[5-9]/) {
+        $totalcost = $whole + 1.0;
+      } else {
+        $totalcost = $whole;
       }
     }
   } else {
-    $rounded = sprintf("%.2f", $totalcost);
+    # EUR and other currencies - keep 2 decimals
+    $totalcost = sprintf("%.2f", $totalcost);
   }
 
   # Format diff
-  $diff = sprintf("%.5f", $rounded - $totalcost);
+  $diff = sprintf("%.5f", $totalcost - $net_amount - $vatcost);
   $diff =~ s/(\.\d*?)0+$/$1/;
   $diff =~ s/\.$//;
 
   return {
-    costsum => $costsum,
-    vat => $vat,
-    vat_percent => $vat_percent,
-    vatcost => $vatcost,
     totalcost => $totalcost,
-    rounded => $rounded,
+    net_amount => $net_amount,
+    vatcost => $vatcost,
+    vat => $vat,
+    vat_percent => $self->formatvat($vat),
     diff => $diff
   };
 }
@@ -436,6 +438,31 @@ sub get_invoice_formdata ($self, $invoiceid = undef, $customerid = undef, $optio
   }
 
   return $formdata;
+}
+
+
+sub url ($self, $siteurl = '', $baseurl = '/', $invoice = {}) {
+  my $url = $self->config->{invoiceurl};
+  $url .= '/';
+  if (exists($invoice->{uuid})) {
+    $url .= $invoice->{uuid} . '.pdf';
+  }
+  $url =~ s/[\/]{3,}/\/\//;
+  $url =~ s/[\/]{1,}http\:\/\//http\:\/\//;
+  return $url;
+}
+
+sub formatvat ($self, $vat_decimal) {
+  return '0' unless defined $vat_decimal;
+
+  my $vat_percent = $vat_decimal * 100;
+  $vat_percent =~ s/[0]+$// if ($vat_percent =~ /\./);
+  if ($vat_percent =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
+    $vat_percent = sprintf("%.2f", $vat_percent);
+  }
+  $vat_percent =~ s/\.$//;
+
+  return $vat_percent;
 }
 
 

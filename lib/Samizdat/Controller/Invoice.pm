@@ -41,53 +41,47 @@ sub index ($self) {
       $customer = $self->app->customer->get($options)->[0];
       $customer->{customerid} = $customerid;
     }
+
     # Get existing filter from cookie
     my $filter_cookie = $self->cookie('invoicefilter');
     my $filter = {};
     if ($filter_cookie) {
-      eval { $filter = decode_json($filter_cookie); };
+      eval {$filter = decode_json($filter_cookie);};
     }
 
     # Get parameters from form or cookie defaults
-    my $searchterm = $self->param('searchterm') // $filter->{searchterm} // '';
-    my $paid = defined $self->param('paid') ? int $self->param('paid') : ($filter->{paid} // 0);
-    my $unpaid = defined $self->param('unpaid') ? int $self->param('unpaid') : ($filter->{unpaid} // 1);
-    my $destroyed = defined $self->param('destroyed') ? int $self->param('destroyed') : ($filter->{destroyed} // 0);
-
-    # Update filter and save to cookie
-    $filter = {
-      searchterm => $searchterm,
-      paid => $paid,
-      unpaid => $unpaid,
-      destroyed => $destroyed
-    };
-
-    # Set session cookie with JSON data
-    $self->cookie(invoicefilter => encode_json($filter), {
-      path => '/',
-      httponly => 1,
-      secure => 1,
-      samesite => 'Strict'
-      # No expires = session cookie
-    });
-
-    # Apply filters
-    $searchterm = int $searchterm if $searchterm =~ /^\d+$/;
-    $options->{where}->{fakturanummer} = $searchterm if ($searchterm);
-    $options->{where}->{state} = [];
-    if ($paid) {
-      push @{$options->{where}->{state}}, 'bokford';
+    my ($searchterm, $paid, $unpaid, $destroyed);
+    my $action = $self->param('action') // '';
+    if ($action =~ /^search$/i) {
+      $paid = int $self->param('paid');
+      $unpaid = int $self->param('unpaid');
+      $destroyed = int $self->param('destroyed');
+      $self->param('searchterm');
+    } else {
+      $searchterm = $filter->{searchterm} // '';
+      $paid = $filter->{paid} // 0;
+      $destroyed = $filter->{destroyed} // 0;
+      $unpaid = $filter->{unpaid} // 1;
     }
-    if ($unpaid) {
-      push @{$options->{where}->{state}}, 'fakturerad';
-    }
-    if ($destroyed) {
-      push @{$options->{where}->{state}}, 'raderad';
-      push @{$options->{where}->{state}}, 'krediterad';
-    };
 
-    $options->{where}->{state} = {'!=', 'obehandlad'} if (! scalar @{ $options->{where}->{state} });
+    # Apply parameters
     $options->{where}->{invoicedate} = {'>', '2017'};
+    $options->{where}->{state} = [];
+    if ($searchterm =~ /^\d+$/) {
+      $options->{where}->{fakturanummer} = $searchterm;
+    } else {
+      if ($paid) {
+        push @{$options->{where}->{state}}, 'bokford';
+      }
+      if ($unpaid) {
+        push @{$options->{where}->{state}}, 'fakturerad';
+      }
+      if ($destroyed) {
+        push @{$options->{where}->{state}}, 'raderad';
+        push @{$options->{where}->{state}}, 'krediterad';
+      };
+    }
+    $options->{where}->{state} = {'!=', 'obehandlad'} if (! scalar @{ $options->{where}->{state} });
 
     my $invoices = $self->app->invoice->get($options);
 
@@ -97,6 +91,7 @@ sub index ($self) {
     # Fetch all customers at once if there are any
     my %customer_names;
     if (keys %customer_ids) {
+      # Is this query ok or should we make a join query?
       my $customers = $self->app->customer->get({
         where => { customerid => { '=' => [keys %customer_ids] } }
       });
@@ -122,6 +117,19 @@ sub index ($self) {
       destroyed  => $destroyed,
       searchterm => $searchterm,
     };
+
+    # Update filter and save to cookie
+    $filter = { searchterm => $searchterm, paid => $paid, unpaid => $unpaid, destroyed => $destroyed };
+
+    # Set session cookie with JSON data
+    $self->cookie(invoicefilter => encode_json($filter), {
+      path     => '/',
+      httponly => 0,
+      secure   => 1,
+      samesite => 'Strict'
+      # No expires = session cookie
+    });
+
     return $self->render(json => $formdata);
   }
 }
@@ -264,7 +272,7 @@ sub update ($self, $makejson = 1) {
     invoiceid       => $formdata->{invoice}->{invoiceid},
     invoiceitemtext => '',
     price           => '',
-    vat             => $formdata->{customer}->{vat},
+    vat             => $formdata->{invoice}->{vat},
     customerid      => $formdata->{invoice}->{customerid},
     number          => '',
     include         => 1,
@@ -296,7 +304,7 @@ sub edit ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(template => 'invoice/open/edit/index', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'chunks/editlinks');
+    return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'invoice/chunks/editlinks');
   } else {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
@@ -352,7 +360,7 @@ sub handle ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
-    return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handleinvoicelinks');
+    return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handlelinks');
   } else {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
@@ -777,7 +785,7 @@ sub _formdata ($self) {
   my $invoiceid = int $self->param('invoiceid') || return 0;
   my $customerid = int $self->param('customerid') || return 0;
   my $formdata = {
-    invoice      => { invoiceid  => $invoiceid, customerid => $customerid, costsum => 0 },
+    invoice      => { invoiceid  => $invoiceid, customerid => $customerid, totalcost => 0 },
     invoiceitems => {},
     customer     => { customerid => $customerid },
     articles     => $self->_articles(),

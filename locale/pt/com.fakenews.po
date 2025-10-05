@@ -229,14 +229,14 @@ msgstr "Valor"
 msgid "Amount incl. VAT"
 msgstr "Valor com impostos"
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr "Valor a pagar com impostos: {rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "Valor a pagar com impostos: {totalcost} {currency}"
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr "Valor a pagar incluindo {percent} de impostos: {costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
+msgstr "Valor a pagar incluindo {percent} de impostos: {totalcost} {currency}"
 
-msgid "Amount to pay: {costsum} {currency}"
-msgstr "Valor a pagar: {costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
+msgstr "Valor a pagar: {totalcost} {currency}"
 
 msgid "An error occurred"
 msgstr "Ocorreu um erro"
@@ -544,8 +544,8 @@ msgstr "Confiabilidade de crédito"
 msgid "Creditability"
 msgstr "Credibilidade"
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr "Valor creditado com impostos: {rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "Valor creditado com impostos: {totalcost} {currency}"
 
 msgid "Credited invoice"
 msgstr "Fatura creditada"
@@ -973,6 +973,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr "Falha ao atualizar exemplo"
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Falha ao atualizar registro"
 
@@ -987,6 +990,12 @@ msgstr "Arquivo de arquivos"
 
 msgid "Fill the form correctly!"
 msgstr "Preencha o formulário corretamente!"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Financial Information"
 msgstr "Informações Financeiras"
@@ -1118,6 +1127,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"

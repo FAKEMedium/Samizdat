@@ -177,8 +177,8 @@ function populateForm(formdata, method, dataform) {
   }
   document.querySelector('#amount').value = invoice.debt;
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
-  document.querySelector('#costsum').innerHTML = invoice.costsum;
-  document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.costsum * (1 - 1 / (1 + invoice.vat)));
+  document.querySelector('#totalcost').innerHTML = invoice.totalcost;
+  document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.totalcost * (1 - 1 / (1 + invoice.vat)));
   if (invoice.state !== 'fakturerad') {
     document.querySelector(dataform).classList.add('d-none');
     document.querySelector('#remindbutton').href = '#';
@@ -191,7 +191,7 @@ function populateForm(formdata, method, dataform) {
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
-  let pdfsrc = '<%== config->{manager}->{invoice}->{invoiceurl} %>' + invoice.uuid + '.pdf';
+  let pdfsrc = '<%== invoice->url(config->{siteurl}, config->{baseurl}) %>' + invoice.uuid + '.pdf';
   if (pdfoffcanvas.classList.contains('show')) {
     pdfiframe.setAttribute('src', pdfsrc);
   }

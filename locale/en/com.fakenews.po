@@ -229,13 +229,13 @@ msgstr ""
 msgid "Amount incl. VAT"
 msgstr ""
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
 msgstr ""
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
 msgstr ""
 
-msgid "Amount to pay: {costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
 msgstr ""
 
 msgid "An error occurred"
@@ -547,7 +547,7 @@ msgstr ""
 msgid "Creditability"
 msgstr ""
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
 msgstr ""
 
 msgid "Credited invoice"
@@ -988,6 +988,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr ""
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr ""
 
@@ -1001,6 +1004,12 @@ msgid "File archive"
 msgstr ""
 
 msgid "Fill the form correctly!"
+msgstr ""
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
 msgstr ""
 
 msgid "Financial Information"
@@ -1133,6 +1142,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"

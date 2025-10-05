@@ -229,14 +229,14 @@ msgstr "Importe"
 msgid "Amount incl. VAT"
 msgstr "Importe con IVA"
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr "Importe a pagar con IVA: {rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "Importe a pagar con IVA: {totalcost} {currency}"
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr "Importe a pagar incluyendo {percent} de IVA: {costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
+msgstr "Importe a pagar incluyendo {percent} de IVA: {totalcost} {currency}"
 
-msgid "Amount to pay: {costsum} {currency}"
-msgstr "Importe a pagar: {costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
+msgstr "Importe a pagar: {totalcost} {currency}"
 
 msgid "An error occurred"
 msgstr "Ocurrió un error"
@@ -544,8 +544,8 @@ msgstr "Fiabilidad crediticia"
 msgid "Creditability"
 msgstr "Solvencia"
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr "Importe acreditado con IVA: {rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "Importe acreditado con IVA: {totalcost} {currency}"
 
 msgid "Credited invoice"
 msgstr "Factura acreditada"
@@ -973,6 +973,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr ""
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Error al actualizar registro"
 
@@ -987,6 +990,12 @@ msgstr "Archivo de ficheros"
 
 msgid "Fill the form correctly!"
 msgstr "¡Rellene el formulario correctamente!"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Financial Information"
 msgstr "Información Financiera"
@@ -1118,6 +1127,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"

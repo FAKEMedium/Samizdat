@@ -26,7 +26,7 @@ async function sendData(method) {
       if (response.status === 401) {
         const data = await response.json();
         alert(data.error || 'Authentication required');
-        window.location.href = '<%== url_for('account_login') %>';
+        window.location.href = `<%== url_for('account_login') %>`;
       } else {
         // Try to get error message from JSON response
         try {
@@ -98,6 +98,7 @@ function populateForm(formdata, method) {
   document.querySelector('#mailto').href = 'mailto:' + customer.billingemail;
   document.querySelector('#billinglang').value = customer.billinglang;
   document.querySelector('#headline').innerHTML = `<%==__('Open invoice for customer') %> #${customer.customerid}`;
+  document.querySelector('#customerlink').href = `<%== url_for('customer_index') %>/` + customer.customerid;
 
   let invoice = formdata.invoice;
   document.querySelector('#invoiceid').value = invoice.invoiceid;

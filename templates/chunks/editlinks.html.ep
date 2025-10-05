@@ -1,3 +1,0 @@
-<li class="nav-item"><a class="nav-link" href="../../"><%== icon 'skip-start-fill', {} %></a></li>
-<li class="nav-item"><a class="nav-link" href="../"><%== icon 'caret-left-fill', {} %></a></li>
-<li class="nav-item"><a class="nav-link" onclick="history.back(-2)"><%== icon 'caret-up-fill', {} %></a></li>

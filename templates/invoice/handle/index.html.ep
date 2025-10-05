@@ -4,7 +4,7 @@
     <div><b><%== __('Customer') %></b>: <a id="customer"></a></div>
     <div><b><%== __('Invoice date') %></b>: <span id="invoicedate"></span></div>
     <div class="d-none" id="duebox"><b><%== __('Due date') %></b>: <span id="duedate"></span></div>
-    <div><b><%== __('Amount') %></b>: <span id="costsum"></span> <span class="currency"></span></div>
+    <div><b><%== __('Amount') %></b>: <span id="totalcost"></span> <span class="currency"></span></div>
     <div><b><%== __('Including VAT') %></b>: <span id="vat"></span> <span class="currency"></span></div>
     <div class="d-none" id="debt-box"><b><%== __('Debt') %></b>: <span id="debt"></span> <span class="currency"></span></div>
   </div>

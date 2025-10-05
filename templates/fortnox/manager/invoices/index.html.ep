@@ -8,6 +8,6 @@
   <div class="col-3"><%= $invoice->{fakturanummer} %></div>
   <div class="col-3"><%= $invoice->{invoicedate} %></div>
 
-  <div class="col-3"><%= $invoice->{costsum} %></div>
+  <div class="col-3"><%= $invoice->{totalcost} %></div>
 </div>
 % });

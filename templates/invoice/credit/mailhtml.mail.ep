@@ -1,5 +1,5 @@
-% my $link = sprintf('%s%s%s.pdf', config->{siteurl}, config->{manager}->{invoice}->{invoiceurl}, $invoicedata->{invoice}->{uuid});
-<div style="background: #fff; padding: 1em;">
+% my $link = invoice->url(config->{siteurl}, config->{baseurl}, $invoicedata->{invoice});
+<div style="background: #fff;">
   <h2><%== __('Credit invoice') %></h2>
 
   <p>

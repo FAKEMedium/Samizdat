@@ -188,32 +188,32 @@
 \footnotesize {<%== __('Registered for F-tax') %>}\newline
 % }
 \vfill
-% if ($customer->{billinglang} && $customer->{billinglang} =~ /^sv/i) {
-%   $invoice->{rounded} =~ tr/\./,/;
+% if ($customer->{billinglang} && $customer->{billinglang} =~ /^(sv)/i) {
+%   $invoice->{totalcost} =~ tr/\./,/;
 %   $invoice->{vatcost} =~ tr/\./,/;
 %   $invoice->{diff} =~ tr/\./,/;
-%   $invoice->{costsum} =~ tr/\./,/;
+%   $invoice->{net_amount} =~ tr/\./,/;
 %   $vat =~ tr/\./,/;
 % }
-% if ('eur' eq $customer->{currency} && (!$customer->{billinglang} || $customer->{billinglang} !~ /^sv/i)) {
+% if ('eur' eq $customer->{currency} && (!$customer->{billinglang} || $customer->{billinglang} !~ /^(sv)/i)) {
 {\huge \textbf {\
 %   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
-<%== __x('Credited amount incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
 %   } else {
-<%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
 %   }
 }}\newline
-\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
 \footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
 % } else {
 {\huge \textbf {\
 %   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
-<%== __x('Credited amount incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
 %   } else {
-<%== __x('Amount to pay incl. VAT: {rounded} {currency}', rounded => $invoice->{rounded},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
 %   }
 }}\newline
-\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{costsum} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize{\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
 \footnotesize{\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
 %   if ($invoice->{diff}) {
 \footnotesize {\textbf {<%== __('Round off') %>:} <%== $invoice->{diff} %> <%=$currency->{ $customer->{currency} } %>}\newline

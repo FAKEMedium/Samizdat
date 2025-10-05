@@ -236,14 +236,14 @@ msgstr "Kwota"
 msgid "Amount incl. VAT"
 msgstr "Kwota z VAT"
 
-msgid "Amount to pay incl. VAT: {rounded} {currency}"
-msgstr "Kwota do zapłaty z VAT: {rounded} {currency}"
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "Kwota do zapłaty z VAT: {totalcost} {currency}"
 
-msgid "Amount to pay including {percent} VAT: {costsum} {currency}"
-msgstr "Kwota do zapłaty z {percent} VAT: {costsum} {currency}"
+msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
+msgstr "Kwota do zapłaty z {percent} VAT: {totalcost} {currency}"
 
-msgid "Amount to pay: {costsum} {currency}"
-msgstr "Kwota do zapłaty: {costsum} {currency}"
+msgid "Amount to pay: {totalcost} {currency}"
+msgstr "Kwota do zapłaty: {totalcost} {currency}"
 
 msgid "An error occurred"
 msgstr "Wystąpił błąd"
@@ -551,8 +551,8 @@ msgstr "Wiarygodność kredytowa"
 msgid "Creditability"
 msgstr "Wiarygodność"
 
-msgid "Credited amount incl. VAT: {rounded} {currency}"
-msgstr "Kwota uznana z VAT: {rounded} {currency}"
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "Kwota uznana z VAT: {totalcost} {currency}"
 
 msgid "Credited invoice"
 msgstr "Skorygowana faktura"
@@ -980,6 +980,9 @@ msgstr ""
 msgid "Failed to update example"
 msgstr ""
 
+msgid "Failed to update payment date"
+msgstr ""
+
 msgid "Failed to update record"
 msgstr "Nie udało się zaktualizować rekordu"
 
@@ -994,6 +997,12 @@ msgstr "Archiwum plików"
 
 msgid "Fill the form correctly!"
 msgstr "Wypełnij formularz poprawnie!"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
 
 msgid "Financial Information"
 msgstr "Informacje finansowe"
@@ -1125,6 +1134,9 @@ msgid "Immediate action is required to avoid additional fees and potential colle
 msgstr ""
 
 msgid "Immediate action is required to avoid:"
+msgstr ""
+
+msgid "Immediate payment required!!!"
 msgstr ""
 
 msgid "Impersonate"
