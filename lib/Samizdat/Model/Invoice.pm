@@ -453,8 +453,8 @@ sub url ($self, $invoice = {}) {
   if (exists($invoice->{uuid})) {
     $url .= $invoice->{uuid} . '.pdf';
   }
-  $url =~ s/[\/]{1,}http\:\/\//http\:\/\//;
-  if ($url =~ s/^(http\:\/\/)//) {
+  $url =~ s/[\/]{1,}https?\:\/\//https?:\/\//;
+  if ($url =~ s/^(https?\:\/\/)//) {
     $siteurl = $1;
   }
   $url =~ s/[\/]{2,}/\//g;
