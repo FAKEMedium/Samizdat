@@ -1,0 +1,309 @@
+%% Comments start with %%
+%%
+% my $customer = $formdata->{customer};
+% my $invoice = $formdata->{invoice};
+% my $invoiceitems = $formdata->{invoiceitems};
+% my $currency = { sek => 'kr', eur => '\texteuro'};
+% my $countries = countrylist;
+% my $vat = $formdata->{vat};
+\documentclass[11pt,a4paper,onecolumn,notitlepage]{article}
+\usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,ltablex,geometry,ae,aecompl,enumerate,helvet}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[swedish]{babel}
+\graphicspath{{../public/media/images}{../../src}}
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
+\usepackage{PTSansNarrow}
+\renewcommand*\familydefault{\sfdefault}
+\pagestyle {fancy}
+\setlength \voffset {15mm -1in}
+\topmargin = 0pt
+\setlength \headsep {5mm}
+\setlength \headheight {1cm}
+\topmargin = 0pt
+\marginparsep = 0pt
+\marginparwidth = 0pt
+\footskip = 0pt
+\evensidemargin = 0pt
+\oddsidemargin = 0pt
+\setlength \paperheight {297mm}
+\setlength \paperwidth {210mm}
+\setlength \textwidth {17.420cm}
+\setlength \headwidth {17.420cm}
+\setlength \textheight {25.00cm}
+\parindent=0pt
+\parskip=0pt
+\parsep=0pt
+\fboxsep=0pt
+\linespread {1.2}
+\newif\ifpdf
+\ifx\pdfoutput\undefined
+	\pdffalse
+\else
+	\pdftrue
+\fi
+\ifpdf
+	\pdfcompresslevel=9
+	\pdfinfo {
+		/Title (<%= $invoice->{title} %>)
+		/Creator (<%== config->{siteurl} %>)
+		/Author (<%== config->{sitename} %>)
+		/CreationDate (D:<%== $invoice->{pdfdate} %>)
+		/ModDate (D:<%== $invoice->{pdfdate} %>)
+		/Producer (Rymdweb, Perl, latexmk)
+		/Subject (<%= $invoice->{title} %>)
+	}
+\fi
+\definecolor {gray1} {rgb} {0.9,0.9,0.9}
+\definecolor {black} {rgb} {0,0,0}
+\definecolor {white} {rgb} {1,1,1}
+\renewcommand {\headrulewidth} {0.0pt}
+\renewcommand {\footrulewidth} {0.0pt}
+\newcommand*{\topfont}{\fontfamily{PTSansCaption-TLF}\selectfont}
+\fancyhead {}
+\fancyfoot {}
+% if (exists(config->{manager}->{invoice}->{logotype}) && ('' ne config->{manager}->{invoice}->{logotype})) {
+\lhead {\includegraphics[width=2cm] {<%== config->{manager}->{invoice}->{logotype} %>}}
+% } else {
+\lhead {}
+% }
+\rhead {<%== __x('Page {number} of {total}', number => '\thepage\ ', total => '\pageref{LastPage}') %>}
+\chead {<%= $invoice->{title} %>}
+\thispagestyle {empty}
+%%
+%% Box at the top with main headline
+%%
+\newsavebox {\invoicebox}
+\newlength {\invoiceboxboxheight}
+\sbox {\invoicebox} {\parbox[t] {106mm} {\topfont {%
+% if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+{\LARGE <%= $invoice->{title} %>}\newline
+\textbf {<%== __('Credited invoice') %>:} <%== $invoice->{kreditfakturaavser} %>\newline
+% } else {
+\begin{huge}
+<%= $invoice->{title} %>
+\end{huge}\newline
+% }
+\textbf {<%== __('Date') %>:} <%== substr($invoice->{invoicedate}, 0, 10) %>}}}
+\settoheight {\invoiceboxboxheight} {\usebox {\invoicebox}}
+%%
+%% Box for customer's address
+%%
+\newsavebox {\addressbox}
+\newlength {\addressboxheight}
+\sbox {\addressbox} {\parbox[t][44mm][t] {106mm} {\topfont {%
+% if ('' ne $customer->{company}) {
+<%== $customer->{company} %>\newline
+% } else {
+<%== sprintf('%s %s', $customer->{firstname}, $customer->{lastname}) %>\newline
+% }
+% for my $streetpart (split("[\n\r]+", $customer->{billingaddress})) {
+<%== $streetpart %>\newline
+% }
+<%== $customer->{billingzip} %> <%== $customer->{billingcity} %>\
+% if (('' ne $customer->{billingcountry}) && ("SE" ne $customer->{billingcountry})) {
+\newline
+<%== $countries->{ $customer->{billingcountry} } %>\
+% }
+}}}
+\settoheight {\addressboxheight} {\usebox {\addressbox}}
+%%
+%% Box for customer details like VAT etc.
+%%
+\newsavebox {\yourrefbox}
+\newlength {\yourrefboxheight}
+\sbox {\yourrefbox} {\parbox[t] {106mm} {\topfont {%
+\footnotesize {\textbf {<%== __('Customer Id') %>:} <%= $customer->{customerid} %>}
+% if ('' ne $customer->{vatno}) {
+\newline \footnotesize {\textbf {<%== __('VAT number') %>:} <%= $customer->{vatno} %>}
+% }
+% if ('' ne $customer->{company}) {
+%   if ($customer->{firstname} ne '' || $customer->{lastname} ne '') {
+\newline \footnotesize {\textbf {<%== __('Your contact') %>:} <%== $customer->{firstname} %> <%== $customer->{lastname} %>}
+%   }
+% }
+}}}
+\settoheight {\yourrefboxheight} {\usebox {\yourrefbox}}
+%%
+%% Box for our address
+%%
+\newsavebox {\refbox}
+\newlength {\refboxheight}
+\sbox {\refbox} {\parbox[t] {146mm} {\topfont {%
+% my $address = join("\\newline\n", split("[\n\r]+", config->{manager}->{invoice}->{address}));
+% $address =~ s/ /\\ /g;
+<%== $address %>\
+% if (('' ne $customer->{billingcountry}) && ("SE" ne $customer->{billingcountry})) {
+\newline
+<%== $countries->{ 'SE' } %>\
+% }
+}}}
+\settoheight {\refboxheight} {\usebox {\refbox}}
+%%
+%% Box for billing details
+%%
+\newsavebox {\billbox}
+\newlength {\billboxheight}
+\sbox {\billbox} {\parbox[t][80mm][t] {170mm} {\topfont {%
+% if (exists(config->{manager}->{invoice}->{orgno}) && ('' ne config->{manager}->{invoice}->{orgno})) {
+\footnotesize {\textbf {<%= __('Organizational number') %>:} <%== config->{manager}->{invoice}->{orgno} %>}\newline
+% }
+% if (exists(config->{manager}->{invoice}->{vatno}) && ('' ne config->{manager}->{invoice}->{vatno})) {
+\footnotesize {\textbf {<%= __('VAT number') %>:} <%== config->{manager}->{invoice}->{vatno} %>}\newline
+% }
+% if ('SE' eq $customer->{billingcountry}) {
+%   if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+\footnotesize {\textbf {<%= __('Bankgiro') %>:} <%== config->{manager}->{invoice}->{bankgiro} %>}\newline
+%   }
+%   if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+\footnotesize {\textbf {<%= __('Plusgiro') %>:} <%== config->{manager}->{invoice}->{plusgiro} %>}\newline
+%   }
+% } else {
+%   if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+\footnotesize {\textbf {<%= __('BIC/Swift address') %>:} <%== config->{manager}->{invoice}->{bicswift} %>}\newline
+%   }
+%   if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+\footnotesize {\textbf {<%= __('IBAN') %>:} <%== config->{manager}->{invoice}->{iban} %>}\newline
+%   }
+%   if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+\footnotesize {\textbf {<%= __('Paypal') %>:} <%== config->{manager}->{invoice}->{paypal} %>\
+%     if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+%       my $fee = config->{manager}->{invoice}->{paypalfee};
+%       $fee =~ s/\%/\\%/g;
+, <%= __x('add {fee}', fee => $fee) %>
+%     }
+}\newline
+%   }
+% }
+% if (exists(config->{manager}->{invoice}->{contact}) && ('' ne config->{manager}->{invoice}->{contact})) {
+\footnotesize {\textbf {<%= __('Contact') %>:} <%== config->{manager}->{invoice}->{contact} %>}\newline
+% }
+% if (exists(config->{manager}->{invoice}->{billingcontact}) && ('' ne config->{manager}->{invoice}->{billingcontact})) {
+\footnotesize {\textbf {<%= __('Invoicing') %>:} <%== config->{manager}->{invoice}->{billingcontact} %>}\newline
+% }
+% if (exists(config->{manager}->{invoice}->{office}) && ('' ne config->{manager}->{invoice}->{office})) {
+\footnotesize {\textbf {<%= __('Registered office') %>:} <%== config->{manager}->{invoice}->{office} %>}\newline
+% }
+% if (exists(config->{manager}->{invoice}->{ftax}) && (config->{manager}->{invoice}->{ftax})) {
+\footnotesize {<%== __('Registered for F-tax') %>}\newline
+% }
+\vfill
+% if ($customer->{billinglang} && $customer->{billinglang} =~ /^(sv)/i) {
+%   $invoice->{totalcost} =~ tr/\./,/;
+%   $invoice->{vatcost} =~ tr/\./,/;
+%   $invoice->{diff} =~ tr/\./,/;
+%   $invoice->{net_amount} =~ tr/\./,/;
+%   $vat =~ tr/\./,/;
+% }
+% if ('eur' eq $customer->{currency} && (!$customer->{billinglang} || $customer->{billinglang} !~ /^(sv)/i)) {
+{\huge \textbf {\
+%   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+%   } else {
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+%   }
+}}
+\vfill
+\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+% } else {
+{\huge \textbf {\
+%   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+%   } else {
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+%   }
+}}
+\vfill
+\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+%   if ($invoice->{diff}) {
+\footnotesize {\textbf {<%== __('Rounding') %>:} <%== $invoice->{diff} %> <%=$currency->{ $customer->{currency} } %>}\newline
+%   }
+% }
+% if (!(exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser})) {
+\footnotesize {\textbf {<%== __('Payment terms') %>:} <%== __x('{number} days', number => config->{manager}->{invoice}->{duedays}) %>}\newline
+\footnotesize {\textbf {<%== __('Due to') %>:} <%== $invoice->{duedate} %>}\newline
+\footnotesize {<%== __x('Overdue payments will be charged a reminder fee  and {rate} interest.', rate => config->{manager}->{invoice}->{overdueinterest} . '\%') %>}
+\vfill
+% }
+}}}
+\settoheight {\billboxheight} {\usebox {\billbox}}
+%%
+\begin {document}
+\title {<%= $invoice->{title} %>}
+\author {<%== config->{author} %>}
+\date {\textbf {<%== __('Date') %>:} <%== sprintf('%s%s', substr($invoice->{invoicedate}, 0, 10), ('snailmail' eq $customer->{invoicetype}) ? '.' : '') %>}
+\setlength {\unitlength} {1cm}
+\begin {picture}(17.42, 11.7)(0.0, 0.0)
+\put(0.0, 11.7) {\includegraphics[width=5cm] {<%== config->{manager}->{invoice}->{logotype} %>}}
+\put(9.0, 12.8) {\usebox {\invoicebox}}
+\put(0.0, 10.4) {\usebox {\refbox}}
+%% When printed on A4, and folded,  the address box should appear in the window of a C5 H2 envelope
+\put(9.0, 10.4) {\usebox {\addressbox}}
+\put(0.0, 7.50) {\usebox {\billbox}}
+\put(9.0, 7.50) {\usebox {\yourrefbox}}
+\end {picture}
+\begin {center}
+\keepXColumns
+\begin {tabularx} {\linewidth} {lXrrrrr}
+\rowcolor {black}\color {white}\small { \textbf {<%== __('Description') %>}} & & \
+\color {white}\small { \textbf {<%== __('Qty') %>}} & \
+\color {white}\small { \textbf {<%== __('Price') %>}} & \
+\color {white}\small { \textbf {<%== __('Net') %>}} & \
+\color {white}\small { \textbf {<%== __('VAT') %>}} & \
+\color {white}\small { \textbf {<%== __('Gross') %>}}\endhead
+\multicolumn {7} {r} {\color {black}\small {\textbf {<%== __('Continues on next page...') %>}}} \endfoot
+\endlastfoot
+% my $i = 0;
+% for my $invoiceitemid (sort { $invoiceitems->{$a}->{invoiceitemtext} cmp $invoiceitems->{$b}->{invoiceitemtext} } keys %$invoiceitems) {
+%   my $invoiceitem = $invoiceitems->{$invoiceitemid};
+%
+%   my $cost = $invoiceitem->{price};
+%   my $net = $invoiceitem->{price} * $invoiceitem->{number};
+%	  my $vatcost = $net * $invoice->{vat};
+%	  my $gross = $net + $vatcost;
+%
+%   if ($cost =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $cost = sprintf("%.2f", $cost);
+%   }
+%   if ($net =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $net = sprintf("%.2f", $net);
+%   }
+%   if ($vatcost =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $vatcost = sprintf("%.2f", $vatcost);
+%   }
+%   if ($gross =~ /(\d+)[\.,]{1}(\d+)/) {
+%     $gross = sprintf("%.2f", $gross);
+%   }
+%
+%   if ($customer->{billinglang} && $customer->{billinglang} =~ /^sv/i) {
+%     $cost =~ tr/\./,/;
+%     $net =~ tr/\./,/;
+%     $vatcost =~ tr/\./,/;
+%     $gross =~ tr/\./,/;
+%   } else {
+%     $cost =~ tr/\,/./;
+%     $net =~ tr/\,/./;
+%     $vatcost =~ tr/\,/./;
+%     $gross =~ tr/\,/./;
+%   }
+%   if (($i % 2) && ($i != scalar keys %$invoiceitems)) {
+\rowcolor {gray1}\
+%   }
+\small {<%== $invoiceitem->{invoiceitemtext} %>} & & \
+%   if (1 == $invoiceitem->{number}) {
+& \
+%   } else {
+\small {<%= $invoiceitem->{number} %>} & \
+%   }
+\small {<%== __x('{cost}', cost => $cost, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $net, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $vatcost, currency => $currency->{ $customer->{currency} }) %>} & \
+\small {<%== __x('{cost}', cost => $gross, currency => $currency->{ $customer->{currency} }) %>}\\\
+
+%   $i++;
+% }
+\end {tabularx}
+\end {center}
+\end {document}

@@ -983,10 +983,16 @@ msgstr "فشل حذف المنطقة"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
 msgid "Failed to resend invoice"
+msgstr ""
+
+msgid "Failed to resend invoice email"
 msgstr ""
 
 msgid "Failed to send SMS"
@@ -1187,8 +1193,14 @@ msgstr "بريد إلكتروني غير صالح"
 msgid "Invalid form data"
 msgstr ""
 
+msgid "Invalid invoice ID"
+msgstr ""
+
 msgid "Invalid password"
 msgstr "كلمة مرور غير صالحة"
+
+msgid "Invalid request"
+msgstr ""
 
 msgid "Invalid username"
 msgstr "اسم مستخدم غير صالح"
@@ -1228,6 +1240,9 @@ msgstr "فاتورة للخدمات المكتملة"
 
 msgid "Invoice is credited"
 msgstr "تم اعتماد الفاتورة"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
 
 msgid "Invoice number"
 msgstr "رقم الفاتورة"
@@ -1972,6 +1987,9 @@ msgstr "تقريب"
 
 msgid "Round off:"
 msgstr "تقريب:"
+
+msgid "Rounding"
+msgstr ""
 
 msgid "SEK"
 msgstr "كرونة سويدية"
@@ -2731,6 +2749,9 @@ msgstr "{number} أيام"
 
 msgid "{number} signatures since {date}"
 msgstr "{number} توقيعات منذ {date}"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr ""
 
 msgid "{server}, main firewall"
 msgstr "{server}، جدار الحماية الرئيسي"

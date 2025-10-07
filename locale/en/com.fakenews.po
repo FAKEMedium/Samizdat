@@ -967,10 +967,16 @@ msgstr ""
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
 msgid "Failed to resend invoice"
+msgstr ""
+
+msgid "Failed to resend invoice email"
 msgstr ""
 
 msgid "Failed to send SMS"
@@ -1174,7 +1180,13 @@ msgstr ""
 msgid "Invalid form data"
 msgstr ""
 
+msgid "Invalid invoice ID"
+msgstr ""
+
 msgid "Invalid password"
+msgstr ""
+
+msgid "Invalid request"
 msgstr ""
 
 msgid "Invalid username"
@@ -1214,6 +1226,9 @@ msgid "Invoice for completed services"
 msgstr ""
 
 msgid "Invoice is credited"
+msgstr ""
+
+msgid "Invoice must be in fakturerad state to send reminders"
 msgstr ""
 
 msgid "Invoice number"
@@ -1960,6 +1975,9 @@ msgid "Round off"
 msgstr ""
 
 msgid "Round off:"
+msgstr ""
+
+msgid "Rounding"
 msgstr ""
 
 msgid "SEK"
@@ -2728,6 +2746,9 @@ msgid "{number} days"
 msgstr ""
 
 msgid "{number} signatures since {date}"
+msgstr ""
+
+msgid "{reminder_type} reminder sent successfully"
 msgstr ""
 
 msgid "{server}, main firewall"

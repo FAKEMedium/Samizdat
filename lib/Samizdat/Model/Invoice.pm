@@ -137,7 +137,6 @@ sub invoiceitems ($self, $params = {}) {
   my $db = $self->mysql->db;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
-  my $options = {order_by => {-asc => 'invoiceitemid'}};
   my $invoiceitems = {};
   $db->select(['invoiceitem', ['invoice', 'invoiceid' => 'invoiceid']], 'invoiceitem.*', $where, $limit)
     ->hashes
@@ -257,7 +256,7 @@ sub addreminder ($self, $invoiceid =  0) {
 #   - vat (0 <= vat <= 1)
 #   - currency (sek or eur)
 sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
-  my $vat = $invoice_vat || 0.25;  # Default 25% VAT
+  my $vat = $invoice_vat // 0.25;  # Default 25% VAT (use // to allow 0% VAT)
   my $net_amount = 0.00;
   my $vatcost = 0.00;
 
@@ -294,6 +293,12 @@ sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
   $diff =~ s/(\.\d*?)0+$/$1/;
   $diff =~ s/\.$//;
 
+  # Ensure amounts with exactly one decimal get a trailing zero
+  $totalcost .= '0' if $totalcost =~ /^\d+\.\d$/;
+  $net_amount .= '0' if $net_amount =~ /^\d+\.\d$/;
+  $vatcost .= '0' if $vatcost =~ /^\d+\.\d$/;
+  $diff .= '0' if $diff =~ /^\d+\.\d$/;
+
   return {
     totalcost => $totalcost,
     net_amount => $net_amount,
@@ -311,7 +316,7 @@ sub get_full_invoice ($self, $invoiceid) {
   return undef unless $invoice;
 
   # Get invoice items
-  my $items = $self->invoiceitems({ invoiceid => $invoiceid });
+  my $items = $self->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid } });
 
   # Get reminders
   my $reminders = $self->reminders($invoiceid);
@@ -441,16 +446,21 @@ sub get_invoice_formdata ($self, $invoiceid = undef, $customerid = undef, $optio
 }
 
 
-sub url ($self, $siteurl = '', $baseurl = '/', $invoice = {}) {
+sub url ($self, $invoice = {}) {
   my $url = $self->config->{invoiceurl};
+  my $siteurl = '';
   $url .= '/';
   if (exists($invoice->{uuid})) {
     $url .= $invoice->{uuid} . '.pdf';
   }
-  $url =~ s/[\/]{3,}/\/\//;
   $url =~ s/[\/]{1,}http\:\/\//http\:\/\//;
-  return $url;
+  if ($url =~ s/^(http\:\/\/)//) {
+    $siteurl = $1;
+  }
+  $url =~ s/[\/]{2,}/\//g;
+  return $siteurl . $url;
 }
+
 
 sub formatvat ($self, $vat_decimal) {
   return '0' unless defined $vat_decimal;

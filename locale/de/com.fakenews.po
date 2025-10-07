@@ -955,10 +955,16 @@ msgstr "Zone konnte nicht gelöscht werden"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
 msgid "Failed to resend invoice"
+msgstr ""
+
+msgid "Failed to resend invoice email"
 msgstr ""
 
 msgid "Failed to send SMS"
@@ -1159,8 +1165,14 @@ msgstr "Ungültige E-Mail"
 msgid "Invalid form data"
 msgstr ""
 
+msgid "Invalid invoice ID"
+msgstr ""
+
 msgid "Invalid password"
 msgstr "Ungültiges Passwort"
+
+msgid "Invalid request"
+msgstr ""
 
 msgid "Invalid username"
 msgstr "Ungültiger Benutzername"
@@ -1200,6 +1212,9 @@ msgstr "Rechnung für erbrachte Leistungen"
 
 msgid "Invoice is credited"
 msgstr "Rechnung ist gutgeschrieben"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
 
 msgid "Invoice number"
 msgstr "Rechnungsnummer"
@@ -1940,6 +1955,9 @@ msgstr "Rundung"
 
 msgid "Round off:"
 msgstr "Rundung:"
+
+msgid "Rounding"
+msgstr ""
 
 msgid "SEK"
 msgstr "SEK"
@@ -2699,6 +2717,9 @@ msgstr "{number} Tage"
 
 msgid "{number} signatures since {date}"
 msgstr "{number} Unterschriften seit {date}"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr ""
 
 msgid "{server}, main firewall"
 msgstr "{server}, Hauptfirewall"

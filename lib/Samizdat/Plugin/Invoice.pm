@@ -128,77 +128,27 @@ sub register ($self, $app, $conf) {
     html_to_text => sub($self, $html) {
       return '' unless $html;
 
-      # Ensure HTML is UTF-8
-      require Encode;
-      $html = Encode::decode('UTF-8', $html) unless Encode::is_utf8($html);
+      require HTML::FormatText;
+      require HTML::TreeBuilder;
 
-      # Remove script and style elements
-      $html =~ s/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>//gis;
-      $html =~ s/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>//gis;
+      # Parse HTML
+      my $tree = HTML::TreeBuilder->new();
+      $tree->parse($html);
+      $tree->eof();
 
-      # Convert headings - more compact
-      $html =~ s/<h1[^>]*>(.*?)<\/h1>/\n$1\n========================================\n/gi;
-      $html =~ s/<h2[^>]*>(.*?)<\/h2>/\n$1\n----------------------------------------\n/gi;
-      $html =~ s/<h3[^>]*>(.*?)<\/h3>/\n$1\n/gi;
-      $html =~ s/<h[4-6][^>]*>(.*?)<\/h[4-6]>/\n$1\n/gi;
+      # Convert to text with formatting options
+      my $formatter = HTML::FormatText->new(
+        leftmargin => 0,
+        rightmargin => 72
+      );
+      my $text = $formatter->format($tree);
+      $tree->delete();
 
-      # Convert paragraphs and divs - single newline
-      $html =~ s/<\/p>/\n/gi;
-      $html =~ s/<p[^>]*>//gi;
-      $html =~ s/<\/div>/\n/gi;
-      $html =~ s/<div[^>]*>//gi;
+      # Clean up excessive whitespace
+      $text =~ s/\n{3,}/\n\n/g;  # Max 2 newlines
+      $text =~ s/^\s+|\s+$//g;   # Trim start and end
 
-      # Convert line breaks
-      $html =~ s/<br\s*\/?>/\n/gi;
-
-      # Convert links to text with URL
-      $html =~ s/<a[^>]*href=["']([^"']+)["'][^>]*>(.*?)<\/a>/$2 ($1)/gi;
-
-      # Convert strong/bold
-      $html =~ s/<(strong|b)[^>]*>(.*?)<\/\1>/$2/gi;
-
-      # Convert em/italic
-      $html =~ s/<(em|i)[^>]*>(.*?)<\/\1>/$2/gi;
-
-      # Convert tables to simple text - more compact
-      $html =~ s/<table[^>]*>//gi;
-      $html =~ s/<\/table>//gi;
-      $html =~ s/<tr[^>]*>//gi;
-      $html =~ s/<\/tr>/\n/gi;
-      $html =~ s/<th[^>]*>(.*?)<\/th>/$1: /gi;
-      $html =~ s/<td[^>]*>(.*?)<\/td>/$1 /gi;
-
-      # Convert list items
-      $html =~ s/<ul[^>]*>//gi;
-      $html =~ s/<\/ul>/\n/gi;
-      $html =~ s/<ol[^>]*>//gi;
-      $html =~ s/<\/ol>/\n/gi;
-      $html =~ s/<li[^>]*>/• /gi;
-      $html =~ s/<\/li>/\n/gi;
-
-      # Convert horizontal rules
-      $html =~ s/<hr[^>]*>/\n----------------------------------------\n/gi;
-
-      # Remove all remaining HTML tags
-      $html =~ s/<[^>]+>//g;
-
-      # Decode HTML entities
-      $html =~ s/&nbsp;/ /g;
-      $html =~ s/&lt;/</g;
-      $html =~ s/&gt;/>/g;
-      $html =~ s/&quot;/"/g;
-      $html =~ s/&#39;/'/g;
-      $html =~ s/&amp;/&/g;
-      $html =~ s/&#(\d+);/chr($1)/ge;
-
-      # Clean up whitespace - be more aggressive
-      $html =~ s/\n{3,}/\n\n/g;  # Max 2 newlines
-      $html =~ s/\n +/\n/g;      # Remove spaces at start of lines
-      $html =~ s/ +/ /g;         # Collapse multiple spaces
-      $html =~ s/^\s+|\s+$//g;   # Trim start and end
-
-      # Ensure UTF-8 encoding for output
-      return Encode::encode('UTF-8', $html);
+      return $text;
     }
   );
 
@@ -417,6 +367,17 @@ sub register ($self, $app, $conf) {
       # Check if there are invoice items
       return { error => 'No invoice items', status => 400 } if (!$invoiceitems || keys %{$invoiceitems} < 1);
 
+      # Ensure invoice uses customer's VAT and currency (customer is source of truth)
+      # Exceptions:
+      # 1. For already-issued invoices (fakturerad, bokford, raderad, krediterad),
+      #    use the VAT/currency from the invoice record to maintain historical accuracy
+      # 2. For credit invoices, use the VAT/currency already set in the invoice record
+      #    (which was copied from the original invoice being credited)
+      if ($invoice->{state} eq 'obehandlad' && !$is_credit) {
+        $invoice->{vat} = $customer->{vat};
+        $invoice->{currency} = $customer->{currency};
+      }
+
       # Set language based on customer billing language preference
       $customer->{billinglang} =~ s/_[A-Z]{2}$// if $customer->{billinglang};
       $self->language($customer->{billinglang} || $self->app->config->{locale}->{default_language} || 'sv');
@@ -508,8 +469,9 @@ sub register ($self, $app, $conf) {
 
         # Escape description for LaTeX
         my $description = $item->{invoiceitemtext} || $item->{description} || '';
-        $description =~ s/--/-\\-/g;  # Handle double dashes
         $item->{invoiceitemtext} = $self->tex_escape($description);
+        # Handle double dashes after escaping to avoid issues with IDN domains like xn--t-1ga.se
+        $item->{invoiceitemtext} =~ s/--/-\\mbox{}-/g;
       }
 
       # Calculate all invoice amounts using model method
@@ -551,7 +513,7 @@ sub register ($self, $app, $conf) {
       $self->stash(formdata => $formdata);
 
       # Render LaTeX template with layout
-      my $tex = $self->render_to_string(format => 'tex', layout => 'invoice', template => 'invoice/create/index');
+      my $tex = $self->render_to_string(format => 'tex', template => 'invoice/create/index');
 
       # Encode and generate PDF
       $tex = Mojo::Util::encode('UTF-8', $tex);
@@ -566,6 +528,7 @@ sub register ($self, $app, $conf) {
           invoicedate => $invoice->{invoicedate},
           duedate => $invoice->{duedate},
           totalcost => ($invoice->{totalcost} =~ s/\,/./r),
+          debt => ($invoice->{totalcost} =~ s/\,/./r),
           state => $is_credit ? 'raderad' : 'fakturerad',
         };
 

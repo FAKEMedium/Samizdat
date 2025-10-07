@@ -1,9 +1,10 @@
-% my $link = invoice->url(config->{siteurl}, config->{baseurl}, $invoicedata->{invoice});
+% my $invoice = $invoicedata->{invoice};
+% my $link = invoice->url($invoice);
 <div style="background: #fff;">
   <h2><%== __('Credit invoice') %></h2>
 
   <p>
-    <%== __x('Invoice {fakturanummer} has been credited.', fakturanummer => $invoicedata->{invoice}->{kreditfakturaavser}) %>
+    <%== __x('Invoice {fakturanummer} has been credited.', fakturanummer => $invoice->{kreditfakturaavser}) %>
     <%== __('Find the credit invoice attached as PDF.') %>
     <%== __x("It's also available at {url}.", url => sprintf('<a href="%s">%s</a>', $link, __('our web'))) %>
   </p>

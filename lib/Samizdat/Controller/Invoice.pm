@@ -11,6 +11,11 @@ use Data::Dumper;
 
 my $fields = [qw(articlenumber include invoiceitemtext number price)];
 
+# invoice states are (names will change)
+# fakturerad - issued but not payed
+# bokford - issued and full payment received
+# obehandlad - open invoice
+# krediterad, raderad - credit and credited invoice
 
 sub index ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
@@ -217,7 +222,7 @@ sub create ($self, $credit = 0) {
   my $email_result = $self->send_invoice_email($invoicedata, { action => $credit ? 'credit' : 'send' });
 
   if (!$email_result->{success}) {
-    $self->app->log->error("Failed to send invoice email: " . ($email_result->{error} || 'Unknown error'));
+    $self->app->log->error("Failed to send invoice email: " . ($email_result->{error} || $self->app->__('Unknown error')));
     # Continue anyway - invoice was created successfully, just email failed
   }
 
@@ -503,7 +508,7 @@ sub remind ($self) {
   my $customerid = int $self->stash('customerid') // 0;
 
   unless ($invoiceid) {
-    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Invalid invoice ID') }, status => 400);
   }
 
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
@@ -527,7 +532,7 @@ sub remind ($self) {
 
     # Check if invoice is in correct state for reminders
     if ($invoice->{state} ne 'fakturerad') {
-      return $self->render(json => { error => 'Invoice must be in fakturerad state to send reminders' }, status => 400);
+      return $self->render(json => { error => $self->app->__('Invoice must be in fakturerad state to send reminders') }, status => 400);
     }
 
     # Get invoice items for the email
@@ -565,7 +570,7 @@ sub remind ($self) {
     });
 
     if (!$email_result->{success}) {
-      return $self->render(json => { error => $email_result->{error} || 'Failed to send reminder' }, status => 500);
+      return $self->render(json => { error => $email_result->{error} || $self->app->__('Failed to send reminder') }, status => 500);
     }
 
     # Add reminder record to database
@@ -575,7 +580,7 @@ sub remind ($self) {
     if ($accept =~ /json/) {
       return $self->render(json => {
         success => 1,
-        message => "$reminder_type reminder sent successfully",
+        message => $self->app->__x('{reminder_type} reminder sent successfully', reminder_type => $reminder_type),
         type => $reminder_type,
         count => $reminder_count + 1
       });
@@ -646,7 +651,7 @@ sub remind ($self) {
     );
   }
 
-  return $self->render(json => { error => 'Invalid request' }, status => 400);
+  return $self->render(json => { error => $self->app->__('Invalid request') }, status => 400);
 }
 
 
@@ -655,11 +660,10 @@ sub resend ($self) {
   # Require admin access for invoice operations
   return unless $self->access({ admin => 1 });
 
-  my $invoiceid = int $self->stash('invoiceid') // 0;
-  my $customerid = int $self->stash('customerid') // 0;
+  my $invoiceid = int $self->stash('invoiceid') // $self->param('invoiceid') // 0;
 
   unless ($invoiceid) {
-    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Invalid invoice ID') }, status => 400);
   }
 
   # Return HTML template if not JSON request
@@ -672,56 +676,50 @@ sub resend ($self) {
   }
 
   # Get invoice and customer data from model
-  my $data = $self->app->invoice->get_invoice_and_customer($invoiceid, $customerid);
-  if ($data->{error}) {
-    return $self->render(json => { error => $data->{error} }, status => $data->{status});
+  my $invoicedata = $self->app->invoice->get_invoice_and_customer($invoiceid);
+  if ($invoicedata->{error}) {
+    return $self->render(json => { error => $invoicedata->{error} }, status => $invoicedata->{status});
   }
+  my $invoice = $invoicedata->{invoice};
+  my $customer = $invoicedata->{customer};
 
-  my $invoice = $data->{invoice};
-  my $customer = $data->{customer};
+
+  # Calculate all invoice amounts using model method
+  my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid } });
+  my $amounts = $self->invoice->calculate_amounts(
+    $invoiceitems,
+    $invoice->{vat},
+    $invoice->{currency}
+  );
+
+  # Update invoice with calculated amounts
+  $invoice->{net_amount} = $amounts->{net_amount};
+  $invoice->{vatcost} = $amounts->{vatcost};
+  $invoice->{totalcost} = $amounts->{totalcost};
+  $invoice->{diff} = $amounts->{diff};
 
   # Set language based on customer billing language preference
   my $lang = $customer->{billinglang} || $customer->{lang} || $self->config->{locale}->{default_language} || 'sv';
   $self->app->language($lang);
 
-  # Prepare invoice data for email (including VAT)
-  my $invoicedata = {invoice => $invoice, customer => $customer};
 
-  # Calculate and add VAT for email template
-  if (defined $invoice->{vat}) {
-    my $vat = $invoice->{vat};
-    $vat *= 100;
-    $vat =~ s/[0]+$// if ($vat =~ /\./);
-    if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-      $vat = sprintf("%.2f", $vat);
-    }
-    $vat =~ s/\.$//;
-    $invoicedata->{vat} = $vat;
-  } elsif (defined $customer->{vat}) {
-    # Use customer VAT if invoice doesn't have it
-    my $vat = $customer->{vat};
-    $vat *= 100;
-    $vat =~ s/[0]+$// if ($vat =~ /\./);
-    if ($vat =~ /(\d+)[\.]{1}([\d]{1,2})$/) {
-      $vat = sprintf("%.2f", $vat);
-    }
-    $vat =~ s/\.$//;
-    $invoicedata->{vat} = $vat;
-  }
+  # Add formatted VAT percentage for email template
+  my $vat_decimal = $invoice->{vat} // $customer->{vat};
+  $invoicedata->{vat} = $self->app->invoice->formatvat($vat_decimal) if defined $vat_decimal;
 
   # Send the invoice email using the plugin helper
   my $email_result = $self->send_invoice_email($invoicedata, { action => 'resend' });
 
   if (!$email_result->{success}) {
-    return $self->render(json => {success => 0, error => $email_result->{error} || 'Failed to resend invoice email'}, status => 500);
+    return $self->render(json => {success => 0, error => $email_result->{error} || $self->app->__('Failed to resend invoice email')}, status => 500);
   }
 
   # Update last sent timestamp
   eval {
-    $self->app->invoice->updateinvoice($invoiceid, { lastsentdate => \'NOW()' });
+#    $self->app->invoice->updateinvoice($invoiceid, { lastsentdate => \'NOW()' });
   };
 
-  $self->app->log->info("Resent invoice $invoiceid to customer " . $customer->{customerid});
+#  $self->app->log->info("Resent invoice $invoiceid to customer " . $customer->{customerid});
 
   return $self->render(json => {
     success => 1,
@@ -741,7 +739,7 @@ sub reprint ($self) {
   my $customerid = int $self->stash('customerid') // 0;
 
   unless ($invoiceid) {
-    return $self->render(json => { error => 'Invalid invoice ID' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Invalid invoice ID') }, status => 400);
   }
 
   # Return HTML template if not JSON request
@@ -776,7 +774,7 @@ sub reprint ($self) {
     });
   } else {
     $self->app->log->error("Failed to regenerate PDF for invoice $invoiceid");
-    return $self->render(json => {success => 0, error => 'Failed to regenerate invoice PDF'}, status => 500);
+    return $self->render(json => {success => 0, error => $self->app->__('Failed to regenerate invoice PDF')}, status => 500);
   }
 }
 

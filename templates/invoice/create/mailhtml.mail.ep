@@ -1,68 +1,89 @@
-% my $link = invoice->url(config->{siteurl}, config->{baseurl}, $invoicedata->{invoice});
-<div style="background: #fff; padding: 1em;">
-  <h2><%== __('Invoice for completed services') %></h2>
+% my $invoice = $invoicedata->{invoice};
+% my $customer = $invoicedata->{customer};
+% my $link = invoice->url($invoice);
+<h2><%== __('Invoice for completed services') %></h2>
 
-  <p>
-    <%== __('Find your invoice attached as PDF.') %>
-    <%== __("It's also available at") %><br>
-    <a href="<%== $link %>"><%== $link %></a>
-  </p>
+<p>
+  <%== __('Find your invoice attached as PDF.') %>
+  <%== __("It's also available at") %>
+  <a href="<%== $link %>"><%== $link %></a>
+</p>
 
-  <ul>
-    <li><%== __x('Invoice number: {fakturanummer}', fakturanummer => $invoicedata->{invoice}->{fakturanummer}) %></li>
-    <li><%== __x('Payment due to: {duedate}', duedate => $invoicedata->{invoice}->{duedate}) %></li>
-% if ('SE' eq uc $invoicedata->{customer}->{country})  {
-%   if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
-    <li><%= __('Bankgiro') %>: <%== config->{manager}->{invoice}->{bankgiro} %></li>
-%   }
-%   if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
-    <li><%= __('Plusgiro') %>: <%== config->{manager}->{invoice}->{plusgiro} %></li>
-%   }
-% } else {
-%   if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
-    <li><%= __('BIC/Swift address') %>: <%== config->{manager}->{invoice}->{bicswift} %></li>
-%   }
-%   if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
-    <li><%= __('IBAN') %>: <%== config->{manager}->{invoice}->{iban} %></li>
-%   }
-%   if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
-    <li><%= __('Paypal') %>: <%== config->{manager}->{invoice}->{paypal} %>\
-%     if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
-, <%= __x('add {fee}', fee => config->{manager}->{invoice}->{paypalfee}) =%>\
-%     }
-</li>
-%   }
-% }
-  </ul>
+<div style="background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px;">
+  <h3><%== __('Invoice Details') %></h3>
+  <table style="width: 100%; border-collapse: collapse;">
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice number') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{fakturanummer} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Invoice date') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{invoicedate} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Due date') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{duedate} %></td>
+    </tr>
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Net amount') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{net_amount} %> <%== $invoice->{currency} %></td>
+    </tr>
+    % if ($invoice->{vatcost}) {
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __x('VAT ({percent}%)', percent => $invoicedata->{vat}) %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{vatcost} %> <%== $invoice->{currency} %></td>
+    </tr>
+    % }
+    % if ($invoice->{diff}) {
+    <tr>
+      <td style="padding: 5px 0;"><strong><%== __('Rounding') %>:</strong></td>
+      <td style="padding: 5px 0;"><%== $invoice->{diff} %> <%== $invoice->{currency} %></td>
+    </tr>
+    % }
+    <tr style="border-top: 2px solid #ddd;">
+      <td style="padding: 8px 0 0 0;"><strong><%== __('Total to pay') %>:</strong></td>
+      <td style="padding: 8px 0 0 0;"><strong><%== $invoice->{totalcost} %> <%== $invoice->{currency} %></strong></td>
+    </tr>
+  </table>
+</div>
 
-  <div style="background: #f5f5f5; padding: 15px; margin: 20px 0; border-radius: 5px;">
-    <table style="width: 100%; border-collapse: collapse;">
-      <tr>
-        <td style="padding: 5px 0;"><strong><%== __('Net amount') %>:</strong></td>
-        <td style="padding: 5px 0; text-align: right;"><%== $invoicedata->{invoice}->{net_amount} %> <%== $invoicedata->{invoice}->{currency} %></td>
-      </tr>
-      % if ($invoicedata->{invoice}->{vatcost}) {
-      <tr>
-        <td style="padding: 5px 0;"><strong><%== __x('VAT ({percent}%)', percent => $invoicedata->{vat}) %>:</strong></td>
-        <td style="padding: 5px 0; text-align: right;"><%== $invoicedata->{invoice}->{vatcost} %> <%== $invoicedata->{invoice}->{currency} %></td>
-      </tr>
+<div style="background: #e8f4ff; padding: 15px; margin: 20px 0; border-radius: 5px;">
+  <h3><%== __('Payment Information') %></h3>
+  % if ('SE' eq uc $customer->{billingcountry})  {
+    % if (exists(config->{manager}->{invoice}->{bankgiro}) && ('' ne config->{manager}->{invoice}->{bankgiro})) {
+      <p><strong><%= __('Bankgiro') %>:</strong> <%== config->{manager}->{invoice}->{bankgiro} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{plusgiro}) && ('' ne config->{manager}->{invoice}->{plusgiro})) {
+      <p><strong><%= __('Plusgiro') %>:</strong> <%== config->{manager}->{invoice}->{plusgiro} %></p>
+    % }
+  % } else {
+    % if (exists(config->{manager}->{invoice}->{bicswift}) && ('' ne config->{manager}->{invoice}->{bicswift})) {
+      <p><strong><%= __('BIC/Swift') %>:</strong> <%== config->{manager}->{invoice}->{bicswift} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{iban}) && ('' ne config->{manager}->{invoice}->{iban})) {
+      <p><strong><%= __('IBAN') %>:</strong> <%== config->{manager}->{invoice}->{iban} %></p>
+    % }
+    % if (exists(config->{manager}->{invoice}->{paypal}) && ('' ne config->{manager}->{invoice}->{paypal})) {
+      <p><strong><%= __('PayPal') %>:</strong> <%== config->{manager}->{invoice}->{paypal} %>
+      % if (exists(config->{manager}->{invoice}->{paypalfee}) && (config->{manager}->{invoice}->{paypalfee})) {
+        (<%= __x('add {fee}', fee => config->{manager}->{invoice}->{paypalfee}) %>)
       % }
-      % if ($invoicedata->{invoice}->{diff}) {
-      <tr>
-        <td style="padding: 5px 0;"><strong><%== __('Rounding') %>:</strong></td>
-        <td style="padding: 5px 0; text-align: right;"><%== $invoicedata->{invoice}->{diff} %> <%== $invoicedata->{invoice}->{currency} %></td>
-      </tr>
-      % }
-      <tr style="border-top: 2px solid #ccc;">
-        <td style="padding: 8px 0 0 0;"><h3 style="margin: 0;"><%== __('Total to pay') %>:</h3></td>
-        <td style="padding: 8px 0 0 0; text-align: right;"><h3 style="margin: 0;"><%== $invoicedata->{invoice}->{totalcost} %> <%== $invoicedata->{invoice}->{currency} %></h3></td>
-      </tr>
-    </table>
-  </div>
+      </p>
+    % }
+  % }
 
+  <p><%== __('Please include the invoice number as reference when making the payment.') %></p>
+</div>
+
+<div style="margin: 20px 0;">
   <p>
-    <%== __('Write the invoice number as message when you pay.')%> <%== __x('Invoice questions can be directed to {url}.',
-      url => sprintf('<a href="mailto:%s">%s</a>', config->{manager}->{invoice}->{sender}, config->{manager}->{invoice}->{sender})) %>
-    <%== __('Payments may take up to one week to become visible in the control panel.') %>
+    <a href="<%== $link %>" style="display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">
+      <%== __('Download Invoice PDF') %>
+    </a>
   </p>
 </div>
+
+<p style="color: #666; font-size: 0.9em;">
+  <%== __x('For questions, please contact us at {email}.', email => sprintf('<a href="mailto:%s">%s</a>', config->{manager}->{invoice}->{sender}, config->{manager}->{invoice}->{sender})) %>
+  <%== __('Payments may take up to one week to become visible in the control panel.') %>
+</p>

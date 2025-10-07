@@ -955,11 +955,17 @@ msgstr "Falha ao excluir zona"
 msgid "Failed to load conversation"
 msgstr "Falha ao carregar conversa"
 
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr "Falha ao reimprimir fatura"
 
 msgid "Failed to resend invoice"
 msgstr "Falha ao reenviar fatura"
+
+msgid "Failed to resend invoice email"
+msgstr ""
 
 msgid "Failed to send SMS"
 msgstr "Falha ao enviar SMS"
@@ -1159,8 +1165,14 @@ msgstr "E-mail inválido"
 msgid "Invalid form data"
 msgstr "Dados do formulário inválidos"
 
+msgid "Invalid invoice ID"
+msgstr ""
+
 msgid "Invalid password"
 msgstr "Senha inválida"
+
+msgid "Invalid request"
+msgstr ""
 
 msgid "Invalid username"
 msgstr "Nome de usuário inválido"
@@ -1200,6 +1212,9 @@ msgstr "Fatura por serviços concluídos"
 
 msgid "Invoice is credited"
 msgstr "Fatura está creditada"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
 
 msgid "Invoice number"
 msgstr "Número da fatura"
@@ -1940,6 +1955,9 @@ msgstr "Arredondar"
 
 msgid "Round off:"
 msgstr "Arredondar:"
+
+msgid "Rounding"
+msgstr ""
 
 msgid "SEK"
 msgstr "SEK"
@@ -2699,6 +2717,9 @@ msgstr "{number} dias"
 
 msgid "{number} signatures since {date}"
 msgstr "{number} assinaturas desde {date}"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr ""
 
 msgid "{server}, main firewall"
 msgstr "{server}, firewall principal"

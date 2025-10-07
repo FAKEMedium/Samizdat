@@ -185,7 +185,7 @@ msgid "Add zone"
 msgstr "Lägg till zon"
 
 msgid "Additional collection fees"
-msgstr ""
+msgstr "Extra inkassokostnader"
 
 msgid "Address"
 msgstr "Adress"
@@ -922,11 +922,17 @@ msgstr "Misslyckades ta bort zon"
 msgid "Failed to load conversation"
 msgstr "Misslyckades ladda konversation"
 
+msgid "Failed to regenerate invoice PDF"
+msgstr "Misslyckades med att återskapa PDF"
+
 msgid "Failed to reprint invoice"
 msgstr "Misslyckades trycka om faktura"
 
 msgid "Failed to resend invoice"
 msgstr "Misslyckades skicka om faktura"
+
+msgid "Failed to resend invoice email"
+msgstr "Misslyckades med att maila faktura"
 
 msgid "Failed to send SMS"
 msgstr "Misslyckades skicka SMS"
@@ -941,7 +947,7 @@ msgid "Failed to update example"
 msgstr "Misslyckades uppdatera exempel"
 
 msgid "Failed to update payment date"
-msgstr ""
+msgstr "Misslyckades med att uppdatera betaldatum"
 
 msgid "Failed to update record"
 msgstr "Misslyckades uppdatera post"
@@ -959,16 +965,16 @@ msgid "Fill the form correctly!"
 msgstr "Fyll i formuläret ordentligt!"
 
 msgid "Final Payment Reminder"
-msgstr ""
+msgstr "Sista betalningspåminnelsen"
 
 msgid "Final payment reminder - Invoice {number}"
-msgstr ""
+msgstr "Sista betalningspåminnelsen - faktura {nummber}"
 
 msgid "Financial Information"
 msgstr "Ekonomisk information"
 
 msgid "Find the credit invoice attached as PDF."
-msgstr "Den krediterade fakturan bifogas som PDF."
+msgstr "Kreditfakturan bifogas som PDF."
 
 msgid "Find the invoice attached as PDF."
 msgstr "Fakturan bifogas som PDF."
@@ -1120,8 +1126,14 @@ msgstr "Ogiltig epostadress"
 msgid "Invalid form data"
 msgstr "Ogiltiga formulärdata"
 
+msgid "Invalid invoice ID"
+msgstr ""
+
 msgid "Invalid password"
 msgstr "Ogiltigt lösenord"
+
+msgid "Invalid request"
+msgstr "Ogiltigt anrop"
 
 msgid "Invalid username"
 msgstr "Ogiltigt användarnamn"
@@ -1158,6 +1170,9 @@ msgstr "Faktura för utförda tjänster"
 
 msgid "Invoice is credited"
 msgstr "Fakturan är krediterad"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
 
 msgid "Invoice number"
 msgstr "Fakturanummer"
@@ -1609,7 +1624,7 @@ msgid "Password was wrong or username doesn't exist."
 msgstr "Lösenordet var fel eller användarnamnet finns inte."
 
 msgid "PayPal"
-msgstr ""
+msgstr "PayPal"
 
 msgid "Paydate"
 msgstr "Betaldatum"
@@ -1869,6 +1884,9 @@ msgstr "Rumservice"
 msgid "Round off"
 msgstr "Avrundning"
 
+msgid "Rounding"
+msgstr "Avrundning"
+
 msgid "SEK"
 msgstr "kr"
 
@@ -2014,7 +2032,7 @@ msgid "Servers"
 msgstr "Servrar"
 
 msgid "Service interruption"
-msgstr ""
+msgstr "Avbrott i tjänsterna"
 
 msgid "Set the height attribute."
 msgstr "Sätt height-attributet."
@@ -2603,6 +2621,9 @@ msgstr "{number} dagar"
 
 msgid "{number} signatures since {date}"
 msgstr "{number} underskrifter sedan {date}"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr "{reminder_type} skickades"
 
 msgid "{server}, main firewall"
 msgstr "{server}, huvudbrandvägg"

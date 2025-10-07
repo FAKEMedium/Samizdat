@@ -191,7 +191,7 @@ function populateForm(formdata, method, dataform) {
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
   var pdfiframe = document.getElementById('pdfinvoice');
-  let pdfsrc = '<%== invoice->url(config->{siteurl}, config->{baseurl}) %>' + invoice.uuid + '.pdf';
+  let pdfsrc = '<%== invoice->url() %>' + invoice.uuid + '.pdf';
   if (pdfoffcanvas.classList.contains('show')) {
     pdfiframe.setAttribute('src', pdfsrc);
   }
