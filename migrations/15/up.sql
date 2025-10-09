@@ -1,6 +1,6 @@
--- Schema copied from postfixadmin
+-- Schema copied from postfixadmin, then modified.
 --
-SET search_path = public,pg_catalog,postfix;
+SET search_path = public,pg_catalog,postfix,customer;
 
 CREATE SCHEMA IF NOT EXISTS postfix;
 ALTER SCHEMA postfix OWNER TO samizdat;

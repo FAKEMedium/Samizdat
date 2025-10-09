@@ -1,0 +1,57 @@
+<%== include 'email/chunks/manager' %>
+
+<a class="badge rounded-pill text-bg-primary mb-3" href="#" onclick="showDomainModal(); return false;"><%== __('Add domain') %></a>
+
+<table class="table table-sm table-striped sortable" id="domains">
+  <thead>
+    <tr>
+      <th><%== __('Domain') %></th>
+      <th><%== __('Description') %></th>
+      <th><%== __('Mailboxes') %></th>
+      <th><%== __('Quota') %></th>
+      <th><%== __('Active') %></th>
+      <th><%== __('Actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data will be injected here by JavaScript -->
+  </tbody>
+</table>
+
+<div id="toast-messages"></div>
+
+<!-- Domain Modal -->
+<div class="modal fade" id="domainModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Domain') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="domainForm">
+          <div class="mb-3">
+            <label for="domain" class="form-label"><%== __('Domain') %></label>
+            <input type="text" class="form-control" id="domain" name="domain" required>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label"><%== __('Description') %></label>
+            <input type="text" class="form-control" id="description" name="description">
+          </div>
+          <div class="mb-3">
+            <label for="customerid" class="form-label"><%== __('Customer ID') %></label>
+            <input type="number" class="form-control" id="customerid" name="customerid">
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="active" name="active">
+            <label class="form-check-label" for="active"><%== __('Active') %></label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+        <button type="button" class="btn btn-primary" id="saveDomain"><%== __('Save') %></button>
+      </div>
+    </div>
+  </div>
+</div>

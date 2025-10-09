@@ -133,6 +133,9 @@ msgstr "Adicionar linha depois"
 msgid "Add Row Before"
 msgstr "Adicionar linha antes"
 
+msgid "Add alias"
+msgstr ""
+
 msgid "Add certificate"
 msgstr "Adicionar certificado"
 
@@ -159,6 +162,9 @@ msgstr "Adicionar grupo"
 
 msgid "Add mail domain"
 msgstr "Adicionar domínio de e-mail"
+
+msgid "Add mailbox"
+msgstr ""
 
 msgid "Add page"
 msgstr "Adicionar página"
@@ -202,6 +208,9 @@ msgstr "Endereço 2"
 msgid "Address check"
 msgstr "Verificação de endereço"
 
+msgid "Address is required"
+msgstr ""
+
 msgid "Admin access required"
 msgstr "Acesso de administrador necessário"
 
@@ -216,6 +225,30 @@ msgstr "Publicidade"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Após o registro, você pode adicionar mais dados sobre você, flexibilizar sua política de compartilhamento e personalizar sua experiência."
+
+msgid "Alias"
+msgstr ""
+
+msgid "Alias Address"
+msgstr ""
+
+msgid "Alias created successfully"
+msgstr ""
+
+msgid "Alias deleted successfully"
+msgstr ""
+
+msgid "Alias not found"
+msgstr ""
+
+msgid "Alias saved successfully"
+msgstr ""
+
+msgid "Alias updated successfully"
+msgstr ""
+
+msgid "Aliases"
+msgstr ""
 
 msgid "All Messages"
 msgstr "Todas as Mensagens"
@@ -244,8 +277,17 @@ msgstr "Ocorreu um erro"
 msgid "An error occurred during login. Please try again."
 msgstr "Ocorreu um erro durante o login. Por favor, tente novamente."
 
+msgid "Are you sure you want to delete this alias?"
+msgstr ""
+
+msgid "Are you sure you want to delete this domain?"
+msgstr ""
+
 msgid "Are you sure you want to delete this example?"
 msgstr "Tem certeza de que deseja excluir este exemplo?"
+
+msgid "Are you sure you want to delete this mailbox?"
+msgstr ""
 
 msgid "Are you sure you want to delete this message?"
 msgstr "Tem certeza de que deseja excluir esta mensagem?"
@@ -288,6 +330,9 @@ msgstr "Endereço BIC/Swift:"
 
 msgid "Back"
 msgstr "Voltar"
+
+msgid "Back to domains"
+msgstr ""
 
 msgid "Back to list"
 msgstr "Voltar à lista"
@@ -339,6 +384,9 @@ msgstr "Compre um café para {user}"
 
 msgid "By default no information about you is shared."
 msgstr "Por padrão, nenhuma informação sobre você é compartilhada."
+
+msgid "Bytes Used"
+msgstr ""
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "Chamar o auxiliar adiciona o código svg à tabela de símbolos no início do documento, além de uma referência inline para ele."
@@ -432,6 +480,9 @@ msgstr "Bloco de código"
 
 msgid "Comma separated"
 msgstr "Separado por vírgula"
+
+msgid "Comma-separated list of email addresses"
+msgstr ""
 
 msgid "Comments"
 msgstr "Comentários"
@@ -562,6 +613,9 @@ msgstr "Cliente"
 msgid "Customer #{customerid}"
 msgstr "Cliente #{customerid}"
 
+msgid "Customer ID"
+msgstr ""
+
 msgid "Customer Id"
 msgstr "ID do cliente"
 
@@ -685,11 +739,29 @@ msgstr "Deseja creditar a fatura?"
 msgid "Domain"
 msgstr "Domínio"
 
+msgid "Domain created successfully"
+msgstr ""
+
+msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain name is required"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
 msgid "Domain registration"
 msgstr "Registro de domínio"
 
 msgid "Domain registtration"
 msgstr "Registro de domínio"
+
+msgid "Domain saved successfully"
+msgstr ""
+
+msgid "Domain updated successfully"
+msgstr ""
 
 msgid "Domains"
 msgstr "Domínios"
@@ -757,11 +829,17 @@ msgstr "E-mail %s verificado"
 msgid "Email (billing)"
 msgstr "E-mail (cobrança)"
 
+msgid "Email Address"
+msgstr ""
+
 msgid "Email Confirmed!"
 msgstr "Email confirmado!"
 
 msgid "Email Invoice"
 msgstr "Enviar Fatura por E-mail"
+
+msgid "Email Management"
+msgstr ""
 
 msgid "Email Offer"
 msgstr "Enviar Oferta por E-mail"
@@ -940,8 +1018,17 @@ msgstr "Falha ao criar registro"
 msgid "Failed to create zone"
 msgstr "Falha ao criar zona"
 
+msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
 msgid "Failed to delete example"
 msgstr "Falha ao excluir exemplo"
+
+msgid "Failed to delete mailbox"
+msgstr ""
 
 msgid "Failed to delete message"
 msgstr "Falha ao excluir mensagem"
@@ -976,8 +1063,17 @@ msgstr "Falha ao enviar fatura para Fortnox"
 msgid "Failed to send reminder"
 msgstr ""
 
+msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
 msgid "Failed to update example"
 msgstr "Falha ao atualizar exemplo"
+
+msgid "Failed to update mailbox"
+msgstr ""
 
 msgid "Failed to update payment date"
 msgstr ""
@@ -1047,6 +1143,9 @@ msgstr "A Fortnox foi fundada em 2001 com sede em Växjö."
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox foi fundada em 2001 com sede em Växjö."
+
+msgid "Forward To"
+msgstr ""
 
 msgid "From"
 msgstr "De"
@@ -1409,6 +1508,30 @@ msgstr "Despejo de correio"
 
 msgid "Mail sent through own servers"
 msgstr "E-mail enviado através de servidores próprios"
+
+msgid "Mailbox"
+msgstr ""
+
+msgid "Mailbox created successfully"
+msgstr ""
+
+msgid "Mailbox deleted successfully"
+msgstr ""
+
+msgid "Mailbox not found"
+msgstr ""
+
+msgid "Mailbox saved successfully"
+msgstr ""
+
+msgid "Mailbox updated successfully"
+msgstr ""
+
+msgid "Mailboxes"
+msgstr ""
+
+msgid "Mailboxes for"
+msgstr ""
 
 msgid "Make invoice"
 msgstr "Criar fatura"
@@ -1839,6 +1962,18 @@ msgstr "Quantidade"
 msgid "Quarter"
 msgstr "Trimestre"
 
+msgid "Quota"
+msgstr ""
+
+msgid "Quota (MB)"
+msgstr ""
+
+msgid "Quota updated successfully"
+msgstr ""
+
+msgid "Quotas"
+msgstr ""
+
 msgid "Quote"
 msgstr "Citação"
 
@@ -2027,6 +2162,9 @@ msgstr "Pesquisar por banco de dados"
 
 msgid "Search for domain"
 msgstr "Pesquisar por domínio"
+
+msgid "Search for email"
+msgstr ""
 
 msgid "Search for example"
 msgstr "Pesquisar exemplo"
@@ -2457,6 +2595,9 @@ msgstr "Nome de usuário pode conter apenas {chars}"
 msgid "Username could not be created"
 msgstr "Não foi possível criar o nome de usuário"
 
+msgid "Username is required"
+msgstr ""
+
 msgid "Username must be at least {min} characters"
 msgstr "Nome de usuário deve ter pelo menos {min} caracteres"
 
@@ -2651,6 +2792,9 @@ msgstr "banco de dados"
 
 msgid "domain"
 msgstr "domínio"
+
+msgid "email"
+msgstr ""
 
 msgid "example"
 msgstr "exemplo"

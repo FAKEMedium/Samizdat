@@ -1,15 +1,24 @@
-<form name="searchmaildomain" method="get" action="<%== config->{manager}->{url} %>maildomains">
+<form class="border-1" name="searchemail" method="get" action="<%== url_for('email_index') %>">
+  <input type="hidden" name="action" value="search">
   <div class="row mb-3">
     <div class="input-group">
-      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('mail domain')) %>" placeholder="<%== __('Search for mail domain') %>..." />
+      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('email')) %>" placeholder="<%== __('Search for email') %>...">
       <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
         <%== icon 'search', {} %>
       </button>
     </div>
+    <div>
+      <div class="form-check form-check-inline">
+        <input class="form-check-input" type="radio" id="searchDomains" name="type" value="domains" checked="true" />
+        <label class="form-check-label" for="searchDomains"><%== __('Domains') %></label>
+      </div>
+      <div class="form-check form-check-inline ms-1">
+        <input class="form-check-input" type="radio" id="searchAliases" name="type" value="aliases" />
+        <label class="form-check-label" for="searchAliases"><%== __('Aliases') %></label>
+      </div>
+    </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="#"><%== __('Add mail domain') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>maildomains/mx"><%== __('MX records') %></a>
-<a class="badge rounded-pill text-bg-primary" href="/postfixadmin/"><%== __('Mail admin') %></a>
-<a class="badge rounded-pill text-bg-primary" href="/rspamd/">Rspamd</a>
-<a class="badge rounded-pill text-bg-primary" href="https://getmaster.live.com/snds/data.aspx">Outlook SNDS</a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/domains"><%== __('Domains') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/aliases"><%== __('Aliases') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/quotas"><%== __('Quotas') %></a>

@@ -1,0 +1,64 @@
+% my $domain = stash('domain') || '';
+<a class="badge rounded-pill text-bg-secondary mb-3" href="<%== url_for('email_index') %>/domains"><%== __('Back to domains') %></a>
+
+<h4><%== __('Mailboxes for') %> <%= $domain %></h4>
+
+<a class="badge rounded-pill text-bg-primary mb-3" href="#" onclick="showMailboxModal(); return false;"><%== __('Add mailbox') %></a>
+
+<table class="table table-sm table-striped sortable" id="mailboxes">
+  <thead>
+    <tr>
+      <th><%== __('Email Address') %></th>
+      <th><%== __('Name') %></th>
+      <th><%== __('Domain') %></th>
+      <th><%== __('Quota') %></th>
+      <th><%== __('Active') %></th>
+      <th><%== __('Actions') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data will be injected here by JavaScript -->
+  </tbody>
+</table>
+
+<div id="toast-messages"></div>
+
+<!-- Mailbox Modal -->
+<div class="modal fade" id="mailboxModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Mailbox') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="mailboxForm">
+          <div class="mb-3">
+            <label for="username" class="form-label"><%== __('Email Address') %></label>
+            <input type="email" class="form-control" id="username" name="username" required>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label"><%== __('Password') %></label>
+            <input type="password" class="form-control" id="password" name="password">
+          </div>
+          <div class="mb-3">
+            <label for="name" class="form-label"><%== __('Name') %></label>
+            <input type="text" class="form-control" id="name" name="name">
+          </div>
+          <div class="mb-3">
+            <label for="quota" class="form-label"><%== __('Quota (MB)') %></label>
+            <input type="number" class="form-control" id="quota" name="quota">
+          </div>
+          <div class="form-check mb-3">
+            <input type="checkbox" class="form-check-input" id="mailbox_active" name="active">
+            <label class="form-check-label" for="mailbox_active"><%== __('Active') %></label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+        <button type="button" class="btn btn-primary" id="saveMailbox"><%== __('Save') %></button>
+      </div>
+    </div>
+  </div>
+</div>
