@@ -1,7 +1,7 @@
 [description]: # "Allt om falska nyheter. Samizdat är en innehållshanteringsplattform med möjlighet att lagra innehåll på en USB-pinne"
 [keywords]: # "censur,CMS,falska nyheter,samizdat,publicering,artificiell intelligens,öppen källkod"
 
-# FAKE News
+# Joe Biden får fredspriset 2025
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="Joe Biden träffar Sveriges statsminister Stefan Löfvén" />
 
