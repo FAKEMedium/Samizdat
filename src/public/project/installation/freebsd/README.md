@@ -16,21 +16,18 @@ FreeBSD 13.0+ using [pkg utility](https://docs.freebsd.org/en/books/handbook/por
 
 ### Perl modules
 
-Set cores for parallel builds:
-
-* `export CORES=$(sysctl -n hw.ncpu)`
-
 Install modules:
 
-* `sudo cpanm --configure-args="-j$CORES" Mojolicious EV Mojo::Pg Mojo::Redis DBD::Pg`
-* `sudo cpanm --configure-args="-j$CORES" Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF Imager::File::WEBP`
-* `sudo cpanm --configure-args="-j$CORES" Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
-* `sudo cpanm --configure-args="-j$CORES" Crypt::Argon2 Crypt::PBKDF2 Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
-* `sudo cpanm --configure-args="-j$CORES" Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
-* `sudo cpanm --configure-args="-j$CORES" Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip YAML::XS`
-* `sudo cpanm --configure-args="-j$CORES" MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`
-* `sudo cpanm --configure-args="-j$CORES" HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
-* `sudo cpanm --configure-args="-j$CORES" Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Mojolicious::Plugin::Util::RandomString Test::Harness`
+* `sudo cpanm Mojolicious EV Mojo::Pg Mojo::Redis DBD::Pg`
+* `sudo cpanm GD Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF Imager::File::WEBP`
+* `sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
+* `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
+* `sudo cpanm Clone Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
+* `sudo cpanm Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip YAML::XS`
+* `sudo cpanm MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`
+* `sudo cpanm --force HTML::Parser`
+* `sudo cpanm HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
+* `sudo cpanm Session::Token Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Mojolicious::Plugin::Util::RandomString Test::Harness`
 
 ### Database
 

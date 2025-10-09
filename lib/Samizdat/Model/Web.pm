@@ -742,7 +742,7 @@ sub invalidate_cache ($self, $docpath, $language = undef) {
   $docpath =~ s|^/||;
   
   # For directory paths like "/project/", we need to invalidate "project/index.html"
-  if ($docpath =~ m|/$| || $docpath eq '' || !$docpath =~ m|\.|) {
+  if ($docpath =~ m|/$| || $docpath eq '' || !($docpath =~ m|\.|)) {
     $docpath = $docpath ? "${docpath}index.html" : 'index.html';
   }
   
