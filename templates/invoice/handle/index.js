@@ -43,8 +43,8 @@ async function sendForm(method, dataform='#dataform') {
     if (!response.ok) {
       if (response.status === 401) {
         const data = await response.json();
-        alert(data.error || 'Authentication required');
-        window.location.href = '<%== url_for('account_login') %>';
+        alert(data.error || `<%== __('Authentication required') %>`);
+        window.location.href = `<%== url_for('account_login') %>`;
       } else {
         alert('Request failed: ' + response.statusText);
       }
@@ -94,8 +94,8 @@ window.getId = async function getId(what, customerid = 0, invoiceid = 0, percust
     if (!response.ok) {
       if (response.status === 401) {
         const data = await response.json();
-        alert(data.error || 'Authentication required');
-        window.location.href = '<%== url_for('account_login') %>';
+        alert(data.error || `<%== __('Authentication required') %>`);
+        window.location.href = `<%== url_for('account_login') %>`;
       } else {
         alert('Request failed: ' + response.statusText);
       }

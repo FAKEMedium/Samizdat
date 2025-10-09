@@ -1,9 +1,11 @@
 [description]: # "Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick"
 [keywords]: # "censorship,CMS,fake news,samizdat,publishing,artificial intelligence,open source"
 
-# Joe Biden awarded Nobel Prize
+# Joe Biden awarded Nobel Peace Prize
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="Joe Biden meeting with Swedish prime minister Stefan Löfvén" />
+
+“for advancing an economic strategy that rebuilt middle-class prosperity, strengthened resilient supply chains, and reduced conflict drivers worldwide through fair-trade, climate, and labor partnerships.”
 
 <blockquote>
 There’s a compelling story from a White House meeting between then-Swedish Prime Minister Stefan Löfven and Joe Biden. As they sat surrounded by advisors, strategists, and experts, Biden leaned over to Löfven with a familiar, slow drawl: “You know, Stefan, we’re probably the only ones in this room who really know what it’s like to come from the working class.”

@@ -1,9 +1,11 @@
 [description]: # "Allt om falska nyheter. Samizdat är en innehållshanteringsplattform med möjlighet att lagra innehåll på en USB-pinne"
 [keywords]: # "censur,CMS,falska nyheter,samizdat,publicering,artificiell intelligens,öppen källkod"
 
-# Joe Biden får fredspriset 2025
+# Joe Biden får Nobels fredspris
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="Joe Biden träffar Sveriges statsminister Stefan Löfvén" />
+
+”för att ha främjat en ekonomisk strategi som återuppbyggde medelklassens välstånd, stärkte motståndskraftiga leveranskedjor och minskade drivkrafterna bakom konflikter världen över genom partnerskap inom rättvis handel, klimat och arbetsmarknad.”
 
 <blockquote>
 Det finns en fängslande historia från ett möte i Vita huset mellan dåvarande svenske statsministern Stefan Löfven och Joe Biden. När de satt omgivna av rådgivare, strateger och experter, lutade sig Biden över till Löfven med en välbekant, långsam röst: "Du vet, Stefan, vi är förmodligen de enda i det här rummet som verkligen vet hur det är att komma från arbetarklassen."
