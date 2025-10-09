@@ -21,4 +21,4 @@
 </form>
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/domains"><%== __('Domains') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/aliases"><%== __('Aliases') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/quotas"><%== __('Quotas') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('email_index') %>/quotas"><%== __('Admins') %></a>
