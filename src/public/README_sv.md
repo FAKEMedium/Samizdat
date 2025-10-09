@@ -1,4 +1,4 @@
-[description]: # “för Bidenomics: fridfullt, nästan sömnigt ledarskap som fick medelklassen att växa, stabiliserade allierade leveranskedjor och minskade konflikter.”
+[description]: # “för Bidenomics - fridfullt, nästan sömnigt ledarskap som fick medelklassen att växa, stabiliserade allierade leveranskedjor och minskade konflikter.”
 [keywords]: # "censur,CMS,falska nyheter,samizdat,publicering,artificiell intelligens,öppen källkod"
 
 # Joe Biden får Nobels fredspris
