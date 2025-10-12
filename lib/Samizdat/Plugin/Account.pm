@@ -27,6 +27,7 @@ sub register ($self, $app, $conf) {
   $account->post('login')                                              ->to('#login');
   $account->get('/')                                                   ->to('#index')        ->name('account_panel');
 
+
   $app->helper(account => sub ($self) {
     state $account = Samizdat::Model::Account->new({
       config       => $self->app->config->{manager}->{account},
@@ -35,6 +36,7 @@ sub register ($self, $app, $conf) {
     });
     return $account;
   });
+
 
   # Grant access if any of the conditions in $require are met.
   # admins and superadmin are defined in configuration and bypass all other checks.
@@ -72,13 +74,13 @@ sub register ($self, $app, $conf) {
 
         # Check if any valid authenticated user is allowed
         if (!$has_access && $require->{'valid-user'}) {
-          $has_access = 1 if $session->{userid};
+          $has_access = 1 if defined $session->{userid};
         }
 
         # Check specific userid requirements
         if (!$has_access && $require->{userid} && ref($require->{userid}) eq 'ARRAY') {
           for my $allowed_userid (@{$require->{userid}}) {
-            if ($session->{userid} && $session->{userid} == $allowed_userid) {
+            if (defined $session->{userid} && $session->{userid} == $allowed_userid) {
               $has_access = 1;
               last;
             }
@@ -113,10 +115,7 @@ sub register ($self, $app, $conf) {
         $error_msg = $self->app->__('Access denied');
       }
 
-      $self->render(json => {
-        success => 0,
-        error => $error_msg
-      }, status => 401);
+      $self->render(json => { success => 0, error => $error_msg }, status => 401);
     }
 
     return $has_access;

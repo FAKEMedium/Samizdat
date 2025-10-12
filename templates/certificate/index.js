@@ -1,16 +1,16 @@
-// Example list handler with pagination and search
+// Certificate list handler with pagination and search
 let currentPage = 1;
 let totalPages = 1;
 let searchTerm = '';
 
-// Load examples on page load
-loadExamples();
+// Load certificates on page load
+loadCertificates();
 
 // Search functionality
 document.getElementById('searchButton').addEventListener('click', () => {
   searchTerm = document.getElementById('searchterm').value;
   currentPage = 1;
-  loadExamples();
+  loadCertificates();
 });
 
 // Enter key in search field
@@ -18,12 +18,12 @@ document.getElementById('searchterm').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     searchTerm = e.target.value;
     currentPage = 1;
-    loadExamples();
+    loadCertificates();
   }
 });
 
-// Load examples from API
-async function loadExamples() {
+// Load certificates from API
+async function loadCertificates() {
   const params = new URLSearchParams({
     page: currentPage,
     limit: 20,
@@ -35,47 +35,56 @@ async function loadExamples() {
   });
 
   if (data) {
-    populateTable(data.examples);
+    populateTable(data.certificates);
     updatePagination(data.pagination);
   }
 }
 
-// Populate the table with examples
-function populateTable(examples) {
-  const tbody = document.querySelector('#examples tbody');
+// Populate the table with certificates
+function populateTable(certificates) {
+  const tbody = document.querySelector('#certificates tbody');
 
-  if (!examples || examples.length === 0) {
+  if (!certificates || certificates.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="6" class="text-center"><%== __('No examples found') %></td>
+        <td colspan="7" class="text-center"><%== __('No certificates found') %></td>
       </tr>
     `;
     return;
   }
 
   let snippet = '';
-  examples.forEach(example => {
-    const createdDate = example.created ? new Date(example.created).toLocaleDateString() : '';
-    const statusClass = example.status === 'active' ? 'success' : 'secondary';
+  certificates.forEach(cert => {
+    const expiresDate = cert.expires_at ? new Date(cert.expires_at).toLocaleDateString() : '';
+    const statusClass = cert.status === 'active' ? 'success' : 'secondary';
+
+    // Check if certificate is expiring soon (within 30 days)
+    const daysUntilExpiry = cert.expires_at ? Math.floor((new Date(cert.expires_at) - new Date()) / (1000 * 60 * 60 * 24)) : null;
+    const expiryWarning = daysUntilExpiry !== null && daysUntilExpiry < 30 && daysUntilExpiry > 0
+      ? `<span class="badge bg-warning ms-2">${daysUntilExpiry} days</span>`
+      : daysUntilExpiry !== null && daysUntilExpiry <= 0
+      ? `<span class="badge bg-danger ms-2">Expired</span>`
+      : '';
 
     snippet += `
-      <tr data-id="${example.id}">
-        <td>${example.id}</td>
+      <tr data-id="${cert.certificateid}">
+        <td>${cert.certificateid}</td>
         <td>
-          <a href="<%= url_for('example_show') %>/${example.id}">${example.title || ''}</a>
+          <a href="<%= url_for('certificate_show') %>/${cert.certificateid}">${cert.domain || ''}</a>
         </td>
-        <td>${example.description || ''}</td>
+        <td>${cert.commonname || ''}</td>
+        <td>${cert.issuer || ''}</td>
+        <td>${expiresDate}${expiryWarning}</td>
         <td>
-          <span class="badge bg-${statusClass}">${example.status || 'draft'}</span>
+          <span class="badge bg-${statusClass}">${cert.status || 'unknown'}</span>
         </td>
-        <td>${createdDate}</td>
         <td class="text-end">
-          <a href="<%= url_for('example_edit') %>/${example.id}/edit"
+          <a href="<%= url_for('certificate_edit') %>/${cert.certificateid}/edit"
              class="btn btn-sm btn-secondary"
              title="<%== __('Edit') %>">
             <%== icon 'pencil-fill' %>
           </a>
-          <button data-id="${example.id}"
+          <button data-id="${cert.certificateid}"
                   class="btn btn-sm btn-danger btn-delete"
                   title="<%== __('Delete') %>">
             <%== icon 'trash-fill' %>
@@ -90,10 +99,10 @@ function populateTable(examples) {
   // Attach delete handlers
   document.querySelectorAll('.btn-delete').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!confirm('<%== __("Are you sure you want to delete this example?") %>')) return;
+      if (!confirm('<%== __("Are you sure you want to delete this certificate?") %>')) return;
 
       const id = btn.getAttribute('data-id');
-      await deleteExample(id);
+      await deleteCertificate(id);
     });
   });
 }
@@ -180,20 +189,20 @@ function updatePagination(pagination) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       currentPage = parseInt(link.getAttribute('data-page'));
-      loadExamples();
+      loadCertificates();
     });
   });
 }
 
-// Delete an example
-async function deleteExample(id) {
-  const result = await window.authenticatedFetch(`<%== url_for('example_index') %>/${id}`, {
+// Delete a certificate
+async function deleteCertificate(id) {
+  const result = await window.authenticatedFetch(`<%== url_for('certificate_index') %>/${id}`, {
     method: 'DELETE'
   });
 
   if (result && result.success) {
-    showToast('success', '<%== __("Example deleted successfully") %>');
-    loadExamples(); // Reload the list
+    showToast('success', '<%== __("Certificate deleted successfully") %>');
+    loadCertificates(); // Reload the list
   }
 }
 

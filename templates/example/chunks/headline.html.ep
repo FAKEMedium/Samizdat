@@ -1,10 +1,10 @@
 <div class="row g-3 align-items-center">
   <div class="input-group col-auto ms-auto">
     <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('example')) %>" placeholder="<%== __('Search for example') %>..." />
-    <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search examples') %>">
+    <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search example') %>">
       <%== icon 'search', {} %>
     </button>
-    <a href="<%= url_for('admin_example_new') %>" class="btn btn-success">
+    <a href="<%= url_for('example_new') %>" class="btn btn-primary">
       <%== icon 'plus-circle' %>
       <span class="d-sm-inline d-none ms-1"><%= __('New example') %></span>
     </a>

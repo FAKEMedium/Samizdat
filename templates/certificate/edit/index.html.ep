@@ -1,0 +1,99 @@
+<form id="certificateForm">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="domain" class="form-label"><%== __('Domain') %> *</label>
+        <input type="text" class="form-control" id="domain" name="domain"
+               value="<%= $certificate->{domain} // '' %>" required>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="commonname" class="form-label"><%== __('Common Name') %></label>
+        <input type="text" class="form-control" id="commonname" name="commonname"
+               value="<%= $certificate->{commonname} // '' %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="issuer" class="form-label"><%== __('Issuer') %></label>
+        <input type="text" class="form-control" id="issuer" name="issuer"
+               value="<%= $certificate->{issuer} // '' %>">
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="expires_at" class="form-label"><%== __('Expires At') %></label>
+        <input type="datetime-local" class="form-control" id="expires_at" name="expires_at"
+               value="<%= $certificate->{expires_at} // '' %>">
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="certificate" class="form-label"><%== __('Certificate') %></label>
+    <textarea class="form-control font-monospace" id="certificate" name="certificate"
+              rows="10"><%= $certificate->{certificate} // '' %></textarea>
+    <small class="form-text text-muted"><%== __('PEM format') %></small>
+  </div>
+
+  <div class="mb-3">
+    <label for="privatekey" class="form-label"><%== __('Private Key') %></label>
+    <textarea class="form-control font-monospace" id="privatekey" name="privatekey"
+              rows="10"><%= $certificate->{privatekey} // '' %></textarea>
+    <small class="form-text text-muted"><%== __('PEM format (stored securely)') %></small>
+  </div>
+
+  <div class="mb-3">
+    <label for="chain" class="form-label"><%== __('Certificate Chain') %></label>
+    <textarea class="form-control font-monospace" id="chain" name="chain"
+              rows="10"><%= $certificate->{chain} // '' %></textarea>
+    <small class="form-text text-muted"><%== __('PEM format') %></small>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="status" class="form-label"><%== __('Status') %></label>
+        <select class="form-select" id="status" name="status">
+          <option value="active" <%= ($certificate->{status} // '') eq 'active' ? 'selected' : '' %>><%== __('Active') %></option>
+          <option value="inactive" <%= ($certificate->{status} // '') eq 'inactive' ? 'selected' : '' %>><%== __('Inactive') %></option>
+          <option value="expired" <%= ($certificate->{status} // '') eq 'expired' ? 'selected' : '' %>><%== __('Expired') %></option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label class="form-label d-block"><%== __('Options') %></label>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="active" name="active"
+                 <%= $certificate->{active} ? 'checked' : '' %>>
+          <label class="form-check-label" for="active"><%== __('Active') %></label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="checkbox" id="autorenew" name="autorenew"
+                 <%= $certificate->{autorenew} ? 'checked' : '' %>>
+          <label class="form-check-label" for="autorenew"><%== __('Auto-renew') %></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="notes" class="form-label"><%== __('Notes') %></label>
+    <textarea class="form-control" id="notes" name="notes"
+              rows="3"><%= $certificate->{notes} // '' %></textarea>
+  </div>
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-primary">
+      <%== icon 'save' %> <%== __('Save') %>
+    </button>
+    <a href="<%= url_for('certificate_index') %>" class="btn btn-secondary">
+      <%== icon 'x-circle' %> <%== __('Cancel') %>
+    </a>
+  </div>
+</form>

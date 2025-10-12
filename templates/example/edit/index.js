@@ -58,10 +58,10 @@ async function saveExample() {
   // Determine URL and method
   let url, method;
   if (exampleId === 'new') {
-    url = '/api/example';
+    url = `<%== url_for('example_new') %>`;
     method = 'POST';
   } else {
-    url = `/api/example/${exampleId}`;
+    url = `<%== url_for('example_index') %>/${exampleId}`;
     method = 'PUT';
   }
 
@@ -79,7 +79,7 @@ async function saveExample() {
     // If creating new, redirect to edit page
     if (exampleId === 'new' && result.example && result.example.id) {
       setTimeout(() => {
-        window.location.href = `<%= url_for('admin_example_edit') %>/${result.example.id}/edit`;
+        window.location.href = `<%= url_for('example_edit') %>/${result.example.id}/edit`;
       }, 1000);
     }
   }
@@ -89,7 +89,7 @@ async function saveExample() {
 function showToast(type, message) {
   const toastContainer = document.getElementById('toast-messages');
   toastContainer.innerHTML = `
-<%== web->indent($toast, 1) %>`;
+  <%== web->indent($toast, 1) %>`;
 
   const toastEl = toastContainer.querySelector('.toast');
   if (toastEl) {

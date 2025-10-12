@@ -66,7 +66,7 @@
     <button type="submit" class="btn btn-primary">
       <%== icon 'save' %> <%== __('Save') %>
     </button>
-    <a href="<%= url_for('admin_example_index') %>" class="btn btn-secondary">
+    <a href="<%= url_for('example_index') %>" class="btn btn-secondary">
       <%== icon 'x-circle' %> <%== __('Cancel') %>
     </a>
   </div>

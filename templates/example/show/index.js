@@ -53,5 +53,5 @@ function displayExample(example) {
   }
 
   // Edit link
-  document.getElementById('edit-link').href = `<%= url_for('admin_example_edit') %>/${example.id}/edit`;
+  document.getElementById('edit-link').href = `<%== url_for('example_edit') %>/${example.id}/edit`;
 }

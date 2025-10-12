@@ -1,0 +1,5 @@
+<nav aria-label="<%== __('Pagination') %>">
+  <ul id="pagination" class="pagination justify-content-center">
+    <!-- Pagination will be rendered here by JavaScript -->
+  </ul>
+</nav>

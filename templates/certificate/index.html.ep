@@ -1,0 +1,28 @@
+<div class="input-group mb-3">
+  <input type="text" class="form-control" id="searchterm" placeholder="<%== __('Search certificates...') %>">
+  <button class="btn btn-primary" id="searchButton">
+    <%== icon 'search' %>
+  </button>
+  <a href="<%= url_for('certificate_new') %>" class="btn btn-primary">
+    <%== icon 'plus-circle' %> <span class="d-none d-sm-inline"><%== __('Add certificate') %></span>
+  </a>
+</div>
+
+<div class="table-responsive">
+  <table id="certificates" class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%== __('ID') %></th>
+        <th><%== __('Domain') %></th>
+        <th><%== __('Common Name') %></th>
+        <th><%== __('Issuer') %></th>
+        <th><%== __('Expires') %></th>
+        <th><%== __('Status') %></th>
+        <th class="text-end"><%== __('Actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Certificates will be loaded here by JavaScript -->
+    </tbody>
+  </table>
+</div>

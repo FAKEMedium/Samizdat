@@ -98,7 +98,7 @@ sub index ($self) {
   my $title = $self->app->__('Contact');
   my $web = { title => $title };
   $web->{script} .= $self->render_to_string(template => 'contact/index', formdata => { ip => 'REPLACEIP' }, format => 'js');
-  $web->{sidebar} = $self->render_to_string(template => 'contact/sidebar', format => 'html');
+  $web->{sidebar} = $self->render_to_string(template => 'contact/chunks/sidebar', format => 'html');
   return $self->render(web => $web, title => $title, template => 'contact/index', formdata => { ip => 'REPLACEIP' }, status => 200);
 }
 
