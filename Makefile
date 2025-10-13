@@ -124,6 +124,12 @@ fetchcountries:
 fetchlanguages:
 	git clone https://github.com/cospired/i18n-iso-languages.git ./src/i18n-iso-languages
 
+fetchfonts:
+	mkdir -p src/fonts
+	wget -O src/fonts/NotoSans-Regular.ttf "https://fonts.gstatic.com/s/notosans/v36/o-0mIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjcz6L1SoM-jCpoiyD9A-9a6Vc.ttf"
+	wget -O /tmp/NotoSansDevanagari.zip "https://github.com/notofonts/devanagari/releases/download/NotoSansDevanagari-v2.004/NotoSansDevanagari-v2.004.zip" && unzip -j -o /tmp/NotoSansDevanagari.zip "NotoSansDevanagari/googlefonts/ttf/NotoSansDevanagari-Regular.ttf" -d src/fonts && rm /tmp/NotoSansDevanagari.zip
+	wget -O /tmp/NotoSansArabic.zip "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansArabic-unhinted.zip" && unzip -j -o /tmp/NotoSansArabic.zip "NotoSansArabic-Regular.ttf" -d src/fonts && rm /tmp/NotoSansArabic.zip
+
 fetchall: fetchicons fetchflags fetchcountries fetchlanguages
 
 speedtest:

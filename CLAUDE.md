@@ -27,10 +27,17 @@ Samizdat follows an MVC architecture:
 - Plugins (`lib/Samizdat/Plugin/`) - Extend functionality
 
 The application integrates:
-- PostgreSQL database (via Mojo::Pg)
+- PostgreSQL database (via Mojo::Pg) - Primary database for new features
+- MariaDB/MySQL database (via Mojo::mysql) - Legacy database, being phased out
 - Redis for caching and sessions
 - Webpack for frontend asset bundling
 - Openresty (nginx) for static content (optional)
+
+### Database Migration
+The application is currently in a transition phase from MariaDB to PostgreSQL:
+- **Legacy System**: An older MariaDB database (`system2.sql`) contains tables used by legacy Perl CGI scripts not present in this application. Some classes still reference this database for backward compatibility.
+- **Current Practice**: All new features should use PostgreSQL. When encountering code that uses the MySQL database, consider it legacy code that may eventually be migrated.
+- **Database Access**: Models should use `$self->pg` for PostgreSQL and `$self->mysql` for legacy MariaDB access (when absolutely necessary).
 
 Speed and performance are prioritized through:
 - Static content generation for downstream delivery

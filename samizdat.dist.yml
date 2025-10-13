@@ -153,12 +153,31 @@ security: |
 layout: bootstrap
 captcha:
   session_name: captcha_string
-  font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
-  ptsize: 30
+  route: /captcha.png
   width: 873
-  height: 10/0
-  length: 5
-  chars: '234679ACEFHJ-NPRT-Y'             # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
+  height: 100
+  length: 4
+  language:
+    default:
+      font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
+      ptsize: 32
+      chars: '234679ACEFHJ-NPRT-Y'  # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
+    ru:
+      font: src/fonts/NotoSans-Regular-Full.ttf
+      ptsize: 28
+      chars: 'АБВГДЕЖЗКЛМНПРСТ'
+    hi:
+      font: src/fonts/NotoSansDevanagari-Regular.ttf
+      ptsize: 36
+      chars: 'अआइउएकगचजटडतदनपबमयरलवशसह'
+    ar:
+      font: src/fonts/NotoSansArabic-Regular.ttf
+      ptsize: 32
+      chars: 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'
+    zh:
+      font: src/fonts/NotoSansCJK-Regular.ttc
+      ptsize: 32
+      chars: '一二三四五六七八九十天地人日月水火木金土'
 mail:
   from: noreply@example.com
   type: text/html

@@ -170,11 +170,11 @@ sub startup ($self) {
     # Set the language and update cookie if needed
     $c->language($language);
     $c->stash(language => $language);
-    
+#    say $language;
     # Update cookie if it doesn't match current language
     if ($cookie_lang ne $language) {
       $c->cookie(language => $language, {
-        secure   => 1,
+        secure   => 0,
         httponly => 0,
         path     => '/',
         expires  => time + 360000,
@@ -185,29 +185,8 @@ sub startup ($self) {
     }
   });
 
-  # Captcha after the locale plugin, so it can use the locale (future: use a custom locale for captcha)
-  $self->plugin('Captcha', {
-    session_name => $config->{captcha}->{session_name},
-    out          => {force => 'png'},
-    particle     => [ 500, 0 ],
-    create       => ['ttf', 'ellipse', '#ff0000'],
-    new          => {
-      rndmax     => $config->{captcha}->{length} // 3,
-      rnd_data   => [ split //, do {
-        my $s = $config->{captcha}->{chars}; $s =~ s/([A-Z])-([A-Z])/join '', ($1 .. $2)/ge; $s
-      } ],
-      width      => $config->{captcha}->{width},
-      height     => $config->{captcha}->{height},
-      lines      => 20,
-      font       => $config->{captcha}->{font},
-      ptsize     => $config->{captcha}->{ptsize},
-      scramble   => 1,
-      bgcolor    => '#ffffff',
-      frame      => 1,
-      send_ctobg => 1,
-    }
-  });
-  $self->routes->get('/captcha.png')->to(controller => 'Captcha', action => 'index')->name('captcha_index');
+  # Captcha plugin with locale-aware font selection
+  $self->plugin('Captcha');
 
   # If Nginx serves files from the public directory, there's no need to have it in this application's list
   if ($config->{nginx}) {
