@@ -33,18 +33,6 @@ All Noto fonts are licensed under the SIL Open Font License 1.1 (see LICENSE-NOT
   - Coverage: Chinese, Japanese, Korean
   - Copyright: 2015-2022 Google LLC
 
-## Downloading Fonts
-
-Run `make fetchfonts` to download the required Noto fonts. Note that some fonts (NotoSans-Regular-Full.ttf and NotoSansCJK-Regular.ttc) are copied from system fonts and may need to be installed separately:
-
-```bash
-# Ubuntu/Debian
-sudo apt-get install fonts-noto-core fonts-noto-cjk
-
-# FreeBSD
-sudo pkg install noto-basic noto-sc
-```
-
 ## License Compliance
 
 When distributing Samizdat with these fonts:
