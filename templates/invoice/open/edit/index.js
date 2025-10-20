@@ -43,7 +43,20 @@ async function sendData(method) {
         // Handle PDF response - open in new window
         const blob = await response.blob();
         const pdfUrl = URL.createObjectURL(blob);
-        window.open(pdfUrl, '_blank');
+        const printDialog = response.headers.get('X-Print-Dialog');
+
+        if (printDialog === 'true') {
+          // For snailmail: open in same window and trigger print dialog
+          const printWindow = window.open(pdfUrl, '_blank');
+          if (printWindow) {
+            printWindow.addEventListener('load', () => {
+              printWindow.print();
+            });
+          }
+        } else {
+          // Regular invoice: just open in new window
+          window.open(pdfUrl, '_blank');
+        }
         // Reload the page to show updated invoice list
         setTimeout(() => window.location.reload(), 1000);
       } else {

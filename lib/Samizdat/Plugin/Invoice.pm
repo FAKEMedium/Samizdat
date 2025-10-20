@@ -223,14 +223,24 @@ sub register ($self, $app, $conf) {
       }
 
       # Determine recipient email
-      my $to_email = $config->{test}->{invoice} ?
-        $config->{mail}->{to} :
-        $invoicedata->{customer}->{billingemail};
+      # For snailmail customers, send to accountant instead of customer
+      my $is_snailmail = ($invoicedata->{customer}->{invoicetype} // '') eq 'snailmail';
+      my $to_email;
+
+      if ($config->{test}->{invoice}) {
+        $to_email = $config->{mail}->{to};
+      } elsif ($is_snailmail) {
+        # For snailmail: send to accountant (they need to print it)
+        $to_email = $config->{mail}->{from};
+      } else {
+        # Regular email invoice: send to customer
+        $to_email = $invoicedata->{customer}->{billingemail};
+      }
 
       # Create email
       my $mail = MIME::Lite->new(
         From         => $config->{mail}->{from},
-        Bcc          => $config->{test}->{invoice} ? undef : $config->{mail}->{from},
+        Bcc          => $config->{test}->{invoice} || $is_snailmail ? undef : $config->{mail}->{from},
         To           => $to_email,
         Organization => Encode::encode("MIME-Q", $config->{organization}),
         Subject      => Encode::encode("MIME-Q", $subject),

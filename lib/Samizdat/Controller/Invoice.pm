@@ -218,7 +218,7 @@ sub create ($self, $credit = 0) {
     vat => $result->{formdata}->{vat}
   };
 
-  # Send invoice email using the plugin helper
+  # Send invoice email (plugin handles snailmail logic for BCC to accountant)
   my $email_result = $self->send_invoice_email($invoicedata, { action => $credit ? 'credit' : 'send' });
 
   if (!$email_result->{success}) {
@@ -236,6 +236,8 @@ sub create ($self, $credit = 0) {
       sprintf('inline; filename="%s.pdf"', $result->{invoice}->{uuid})
     );
     $self->res->headers->content_type('application/pdf');
+    # Add custom header to trigger print dialog on client side for snailmail
+    $self->res->headers->header('X-Print-Dialog' => 'true') if ($result->{customer}->{invoicetype} // '') eq 'snailmail';
     return 1;
   }
 }

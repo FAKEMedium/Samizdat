@@ -4,11 +4,6 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::Home;
 use Data::Dumper;
 
-sub video ($self) {
-  my $web = { docpath => 'video/index.html', title => 'Video synopsis' };
-  $self->render(web => $web, template => 'video/index', title => $web->{title});
-}
-
 sub icons ($self) {
   my $icons = [];
   Mojo::Home->new('src/icons/icons/')->list->each( sub {
