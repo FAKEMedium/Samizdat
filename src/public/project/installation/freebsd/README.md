@@ -19,7 +19,7 @@ FreeBSD 13.0+ using [pkg utility](https://docs.freebsd.org/en/books/handbook/por
 Install modules:
 
 * `sudo cpanm Mojolicious EV Mojo::Pg Mojo::Redis DBD::Pg`
-* `sudo cpanm GD Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF Imager::File::WEBP`
+* `sudo cpanm GD Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF`
 * `sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
 * `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
 * `sudo cpanm Clone Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
@@ -28,6 +28,18 @@ Install modules:
 * `sudo cpanm --force HTML::Parser`
 * `sudo cpanm HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
 * `sudo cpanm Session::Token Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Mojolicious::Plugin::Util::RandomString Test::Harness`
+
+Imager::File::WEBP installation
+
+* `cd /tmp`
+* `fetch https://cpan.metacpan.org/authors/id/T/TO/TONYC/Imager-File-WEBP-0.005.tar.gz`
+* `tar xzf Imager-File-WEBP-0.005.tar.gz`
+* `cd Imager-File-WEBP-0.005`
+* `perl -pi -e 's/libopts => "-lwebpmux -lwebp",/libopts => "-L\/usr\/local\/lib -lwebpmux -lwebp",/' Makefile.PL`
+* `perl Makefile.PL --incpath=/usr/local/include --libpath=/usr/local/lib`
+* `make`
+* `make test`
+* `make install`
 
 ### Database
 
