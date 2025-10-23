@@ -24,7 +24,7 @@ Install modules:
 * `sudo cpanm Mojolicious EV Mojo::Pg Mojo::Redis DBD::Pg`
 * `sudo cpanm GD Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF Imager::File::WEBP`
 * `sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
-* `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
+* `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt CryptX Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
 * `sudo cpanm Clone Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
 * `sudo cpanm Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip YAML::XS`
 * `sudo cpanm MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`

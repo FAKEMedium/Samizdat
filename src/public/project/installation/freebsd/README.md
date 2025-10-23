@@ -3,14 +3,14 @@
 
 # FreeBSD Installation
 
-FreeBSD 13.0+ using [pkg utility](https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro).
+FreeBSD 14.0+ using [pkg utility](https://docs.freebsd.org/en/books/handbook/ports/#pkgng-intro).
 
 ### System packages
 
 * `sudo pkg update`
 * `sudo pkg install -y git gmake cmake wget pkgconf perl5 p5-App-cpanminus`
 * `sudo pkg install -y webp giflib jpeg-turbo png tiff libheif ImageMagick7 librsvg2 pngquant`
-* `sudo pkg install -y postgresql16-server postgresql16-client redis`
+* `sudo pkg install -y postgresql18-server postgresql18-client redis`
 * `sudo pkg install -y libargon2 e2fsprogs-libuuid texlive-base texlive-texmf`
 * `sudo pkg install -y nginx apache24 xorriso cdrkit-genisoimage transmission-cli`
 
@@ -21,7 +21,7 @@ Install modules:
 * `sudo cpanm Mojolicious EV Mojo::Pg Mojo::Redis DBD::Pg`
 * `sudo cpanm GD Imager Imager::File::JPEG Imager::File::GIF Imager::File::PNG Imager::File::TIFF Imager::File::HEIF`
 * `sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
-* `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
+* `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt CryptX Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
 * `sudo cpanm Clone Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
 * `sudo cpanm Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip YAML::XS`
 * `sudo cpanm MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`
@@ -39,7 +39,7 @@ Imager::File::WEBP installation
 * `perl Makefile.PL --incpath=/usr/local/include --libpath=/usr/local/lib`
 * `make`
 * `make test`
-* `make install`
+* `sudo make install`
 
 ### Database
 

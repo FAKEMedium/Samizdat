@@ -6,13 +6,18 @@ use Mojo::JSON qw(decode_json encode_json from_json);
 use Mojo::Collection qw(c);
 use Mojo::UserAgent;
 use Mojo::File qw(path);
+use Mojo::Util qw(secure_compare);
 use Hash::Merge;
 use Data::Dumper;
+use Crypt::AuthEnc::GCM;
+use Crypt::PRNG qw(random_bytes);
+use MIME::Base64 qw(encode_base64 decode_base64);
 
 has 'config';
+has 'redis';
+has 'session';
 has 'cache' => sub ($self) {
-  state $cache = $self->_loadCache();
-  return $cache;
+  return $self->_loadCache();
 };
 has 'merger' => sub {
   state $merger = Hash::Merge->new();
@@ -23,14 +28,100 @@ has 'ua' => sub ($self) {
   return $ua;
 };
 
+# Get session-specific Redis key
+sub _getRedisKey ($self) {
+  my $base_key = 'fortnox:cache';
+
+  # If we have a session, make it session-specific
+  if ($self->session && $self->session->{fortnox_session_id}) {
+    return $base_key . ':' . $self->session->{fortnox_session_id};
+  }
+
+  # Generate a session ID if we don't have one
+  if ($self->session) {
+    my $session_id = encode_base64(random_bytes(16), '');
+    $session_id =~ s/[^a-zA-Z0-9]//g;  # Remove special chars
+    $self->session->{fortnox_session_id} = $session_id;
+    return $base_key . ':' . $session_id;
+  }
+
+  # Fallback to non-session key (backwards compatibility)
+  return $base_key;
+}
+
+# Get or create encryption key from session
+sub _getEncryptionKey ($self) {
+  return undef unless $self->session;
+
+  # Check if session already has an encryption key
+  my $key = $self->session->{fortnox_encrypt_key};
+
+  if (!$key) {
+    # Generate new 256-bit (32-byte) key for AES-256
+    $key = encode_base64(random_bytes(32), '');
+    $self->session->{fortnox_encrypt_key} = $key;
+  }
+
+  return decode_base64($key);
+}
+
+# Encrypt data for Redis storage
+sub _encrypt ($self, $data) {
+  my $key = $self->_getEncryptionKey();
+  return $data unless $key;  # If no session, store unencrypted (fallback)
+
+  my $iv = random_bytes(12);  # 96-bit IV for GCM
+  my $gcm = Crypt::AuthEnc::GCM->new('AES', $key, $iv);
+
+  my $ciphertext = $gcm->encrypt_add($data);
+  my $tag = $gcm->encrypt_done();
+
+  # Return: encrypted marker + IV + tag + ciphertext (all base64 encoded)
+  # Format: ENC1:iv_base64:tag_base64:ciphertext_base64
+  return 'ENC1:' . encode_base64($iv, '') . ':' . encode_base64($tag, '') . ':' . encode_base64($ciphertext, '');
+}
+
+# Decrypt data from Redis
+sub _decrypt ($self, $encrypted) {
+  # Check if data is encrypted (starts with ENC1:)
+  return $encrypted unless $encrypted =~ /^ENC1:/;
+
+  my $key = $self->_getEncryptionKey();
+  return '' unless $key;  # No key available, can't decrypt
+
+  # Remove ENC1: prefix and split
+  $encrypted =~ s/^ENC1://;
+  my ($iv_b64, $tag_b64, $ciphertext_b64) = split(':', $encrypted, 3);
+
+  my $iv = decode_base64($iv_b64);
+  my $tag = decode_base64($tag_b64);
+  my $ciphertext = decode_base64($ciphertext_b64);
+
+  my $plaintext;
+  eval {
+    my $gcm = Crypt::AuthEnc::GCM->new('AES', $key, $iv);
+    $plaintext = $gcm->decrypt_add($ciphertext);
+    $gcm->decrypt_done($tag) or die "Authentication tag verification failed";
+  };
+
+  # If decryption fails, return empty (cache will be regenerated)
+  return '' if $@;
+
+  return $plaintext;
+}
+
 sub _loadCache ($self) {
   my $cache;
-  if (-f $self->config->{cachefile}) {
-    my $json = path($self->config->{cachefile})->slurp;
-    if ($json) {
-      $cache = decode_json($json);
-    }
+  my $redis_key = $self->_getRedisKey();
+
+  # Try to load from Redis
+  my $encrypted = $self->redis->db->get($redis_key);
+  if ($encrypted) {
+    # Decrypt if we have a session
+    my $json = $self->_decrypt($encrypted);
+    eval { $cache = decode_json($json) if $json; };
   }
+
   if (!$cache || !exists($cache->{state})) {
     $cache = {
       'state'   => 'login',
@@ -52,7 +143,12 @@ sub Cache ($self, $cache = undef) {
 }
 
 sub _saveCache ($self, $cache) {
-  path($self->config->{cachefile})->spew(encode_json($cache));
+  my $redis_key = $self->_getRedisKey();
+  my $json = encode_json($cache);
+
+  # Encrypt before storing
+  my $encrypted = $self->_encrypt($json);
+  $self->redis->db->set($redis_key => $encrypted);
 }
 
 sub saveCache ($self) {
@@ -103,6 +199,17 @@ sub updateCache ($self, $resource = undef) {
 }
 
 sub removeCache ($self) {
+  # Clear the cache in Redis
+  my $redis_key = $self->_getRedisKey();
+  $self->redis->db->del($redis_key);
+
+  # Clear session data
+  if ($self->session) {
+    delete $self->session->{fortnox_encrypt_key};
+    delete $self->session->{fortnox_session_id};
+  }
+
+  # Reset to empty cache
   $self->Cache({
     'state'   => '',
     'access'  => '',
