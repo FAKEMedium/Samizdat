@@ -220,7 +220,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <ul id="userlogins">
+        <ul id="userlogins" class="list-group list-group-flush">
           <!-- Data will be injected here by JavaScript -->
         </ul>
       </div>

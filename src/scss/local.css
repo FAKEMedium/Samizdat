@@ -1,5 +1,5 @@
-.modal-content,#logobar{z-index:1000;background-color:#ffffff}
-#contentwrapper{background-color:#fff;padding-bottom:1ex;margin:0 auto;min-height:400px}
+.modal-content,#logobar{z-index:1000;}
+#contentwrapper{padding-bottom:1ex;margin:0 auto;min-height:400px}
 #sitenav{z-index:500;padding:0}
 #rightlinks, #leftlinks {display: none;}
 .byline{background:#ffe}img.file-icon{max-width:2rem}
@@ -20,7 +20,6 @@ table.captiontop caption {font-weight:bold;caption-side:top !important;}
 @media screen and (min-width: 576px) {
   .admin {box-shadow: 0px 0px 8px 2px red !important;}
   .superadmin {box-shadow: 0px 0px 8px 2px yellow !important;}
-  #mainfooter,.bg-logobar {background-color: #ffffff !important;}
   #logotype {height: 73px;}
 }
 @media screen and (min-height:768px){#contentwrapper{min-height:600px}}

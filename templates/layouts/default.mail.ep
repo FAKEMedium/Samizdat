@@ -7,6 +7,11 @@
 % $svg = b64_encode($svg);
 % $svg =~ s/[\r\n\s]+//g;
 % chomp $svg;
+% if (exists $web->{css} && '' ne $web->{css}) {
+  <style id="emailcss"> /*<![CDATA[*/
+    <%== web->indent(eval {trim $web->{css}}, 1) =%>
+  /*]]>*/ </style>
+% }
 <div style="background: #ffffff; padding: 10px;">
   <div>
     <a href="<%= config->{siteurl} %>" title="<%== __x('Logotype linked to {site}', site => config->{sitename}) %>" aria-label="<%== __('Logotype leading to start page') %>">
