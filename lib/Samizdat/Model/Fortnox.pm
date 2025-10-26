@@ -22,6 +22,160 @@ has 'ua' => sub ($self) {
   state $ua = Mojo::UserAgent->new->max_redirects(0)->connect_timeout(3)->request_timeout(2);
   return $ua;
 };
+has 'default_resources' => sub ($self) {
+  return {
+    'Accounts' => {
+      'key' => 'Number',
+      'cache' => 1,
+      'qp' => {
+        'sortby' => 'number',
+        'sortorder' => 'ascending',
+        'limit' => 500
+      }
+    },
+    'AccountCharts' => {
+      'cache' => 1,
+      'qp' => {
+        'limit' => 500
+      }
+    },
+    'Archive' => {
+      'cache' => 1
+    },
+    'Articles' => {
+      'cache' => 1,
+      'key' => 'ArticleNumber',
+      'single' => {
+        'name' => 'Article',
+        'required' => ['Description']
+      }
+    },
+    'Customers' => {
+      'key' => 'CustomerNumber',
+      'cache' => 1,
+      'single' => {
+        'name' => 'Customer',
+        'required' => ['CustomerNumber']
+      }
+    },
+    'FinancialYears' => {
+      'key' => 'Id',
+      'cache' => 1,
+      'qp' => {
+        'sortby' => 'fromdate',
+        'sortorder' => 'descending',
+        'limit' => 40
+      }
+    },
+    'Inbox' => {
+      'key' => 'Id'
+    },
+    'Invoices' => {
+      'key' => 'DocumentNumber',
+      'single' => {
+        'name' => 'Invoice',
+        'required' => ['CustomerNumber']
+      },
+      'cache' => 0,
+      'qp' => {
+        'sortby' => 'invoicedate',
+        'sortorder' => 'descending',
+        'limit' => 50
+      }
+    },
+    'InvoiceAccruals' => {
+      'key' => 'InvoiceNumber'
+    },
+    'InvoicePayments' => {
+      'key' => 'Number',
+      'cache' => 0,
+      'single' => {
+        'name' => 'InvoicePayment'
+      },
+      'required' => ['InvoiceNumber']
+    },
+    'PredefinedAccounts' => {
+      'key' => 'Name'
+    },
+    'PredefinedVoucherSeries' => {
+      'key' => 'Name'
+    },
+    'Suppliers' => {
+      'key' => 'SupplierNumber',
+      'single' => 'Supplier',
+      'cache' => 1,
+      'qp' => {
+        'limit' => 500
+      }
+    },
+    'SupplierInvoiceAccruals' => {
+      'key' => 'SupplierInvoiceNumber'
+    },
+    'SupplierInvoices' => {
+      'key' => 'GivenNumber'
+    },
+    'SupplierInvoiceFileConnections' => {
+      'key' => 'FileId'
+    },
+    'SupplierInvoicePayments' => {
+      'key' => 'Number'
+    },
+    'Units' => {
+      'key' => 'Code',
+      'cache' => 1,
+      'qp' => {
+        'sortby' => 'code',
+        'sortorder' => 'ascending',
+        'limit' => 500
+      }
+    },
+    'VoucherFileConnections' => {
+      'key' => 'FileId',
+      'cache' => 0,
+      'qp' => {
+        'sortby' => 'vouchernumber',
+        'sortorder' => 'descending',
+        'limit' => 500
+      }
+    },
+    'Vouchers' => {
+      'key' => undef,
+      'cache' => 0,
+      'object' => 'Voucher',
+      'qp' => {
+        'sortby' => 'vouchernumber',
+        'sortorder' => 'descending',
+        'limit' => 500
+      }
+    },
+    'VoucherSeries' => {
+      'cache' => 1,
+      'object' => 'VoucherSeriesCollection',
+      'qp' => {
+        'sortorder' => 'descending',
+        'limit' => 500
+      }
+    },
+    'Currencies' => {
+      'key' => 'currency',
+      'single' => {
+        'name' => 'Currency',
+        'required' => ['currency', 'rate']
+      },
+      'cache' => 0,
+      'qp' => {
+        'sortby' => 'currency',
+        'sortorder' => 'ascending',
+        'limit' => 5
+      }
+    }
+  };
+};
+has 'resources' => sub ($self) {
+  # Merge config resources with default resources (config overrides defaults)
+  my $config_resources = $self->config->{app}->{resources} // {};
+  return $self->merger->merge($self->default_resources, $config_resources);
+};
 
 sub _loadCache ($self) {
   my $redis_key = 'fortnox:cache';
