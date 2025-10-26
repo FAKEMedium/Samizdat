@@ -1,6 +1,7 @@
 package Samizdat::Controller::Fortnox;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use Mojo::Util;
 use Data::Dumper;
 
 
@@ -13,6 +14,13 @@ sub auth ($self) {
   # Initialize Fortnox session (creates 'fortnox' cookie)
   $self->session->{fortnox_active} = 1;
   $self->session(expiration => 7200);  # 2 hours
+
+  # Force cache session ID to be created now (before OAuth redirect)
+  # This ensures the same session ID is used when redirected back
+  unless ($self->session->{cache_session_id}) {
+    my $session_id = Mojo::Util::md5_sum(time . $$ . rand());
+    $self->session->{cache_session_id} = $session_id;
+  }
 
   my $state = $self->param("state") // '';
   my $code = $self->param("code") // '';

@@ -65,10 +65,10 @@ sub updateCache ($self, $resource = undef) {
   if ($resource) {
     push @{ $resources }, $resource;
   } else {
-    push @{ $resources }, sort {$a cmp $b} keys %{ $self->config->{apps}->{$self->config->{selectedapp}}->{resources} };
+    push @{ $resources }, sort {$a cmp $b} keys %{ $self->config->{app}->{resources} };
   }
   for my $resource (@{ $resources }) {
-    my $resourceconfig = $self->config->{apps}->{$self->config->{selectedapp}}->{resources}->{$resource};
+    my $resourceconfig = $self->config->{app}->{resources}->{$resource};
     if (exists($resourceconfig->{cache}) && int $resourceconfig->{cache}) {
       my $list = [];
       my $page = 1;
@@ -89,7 +89,7 @@ sub updateCache ($self, $resource = undef) {
         }
         $page++;
       } until (!ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
-      $self->data->{$self->config->{selectedapp}}->{$resource} = $list;
+      $self->data->{$resource} = $list;
       $self->saveCache;
     }
   }
@@ -97,7 +97,7 @@ sub updateCache ($self, $resource = undef) {
 
   # Ensure we return at least an empty array if the cache entry doesn't exist
   if ($resource) {
-    return $self->data->{$self->config->{selectedapp}}->{$resource} // [];
+    return $self->data->{$resource} // [];
   } else {
     return $self->data;
   }
@@ -120,8 +120,8 @@ sub removeCache ($self) {
 sub getLogin($self) {
   $self->data->{state} = 'login';
   my $response = $self->ua->get($self->config->{oauth2}->{url} . '/auth' => {Accept => '*/*'} => form => {
-    client_id     => $self->config->{apps}->{$self->config->{selectedapp}}->{clientid},
-    scope         => $self->config->{apps}->{$self->config->{selectedapp}}->{scope},
+    client_id     => $self->config->{app}->{clientid},
+    scope         => $self->config->{app}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
     state         => $self->data->{state},
@@ -139,8 +139,8 @@ sub getLogin($self) {
 
 sub getToken ($self, $refresh = 0) {
   my $url = Mojo::URL->new($self->config->{oauth2}->{url} . '/token')->userinfo(sprintf('%s:%s',
-    $self->config->{apps}->{$self->config->{selectedapp}}->{clientid},
-    $self->config->{apps}->{$self->config->{selectedapp}}->{secret}
+    $self->config->{app}->{clientid},
+    $self->config->{app}->{secret}
   ));
   my $response;
   if ($refresh) {
@@ -201,7 +201,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
     $qp = $options->{qp} if (exists($options->{qp}));
   }
   while (!$done) {
-    $qp = $self->merger->merge($self->config->{apps}->{$self->config->{selectedapp}}->{resources}->{$resource}->{qp}, $qp);
+    $qp = $self->merger->merge($self->config->{app}->{resources}->{$resource}->{qp}, $qp);
     $qp = $self->merger->merge($options->{qp}, $qp);
     for my $p (qw/sortby sortorder filter limit offset page/) {
       #          delete $qp->{$p} if (exists($qp->{$p}) and ($qp->{$p} eq ''));
@@ -323,13 +323,13 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
 }
 
 sub financialYears ($self) {
-  $self->updateCache('FinancialYears') if (!exists($self->data->{$self->config->{selectedapp}}->{FinancialYears}));
-  return Mojo::Collection->new(@{ $self->data->{$self->config->{selectedapp}}->{FinancialYears} });
+  $self->updateCache('FinancialYears') if (!exists($self->data->{FinancialYears}));
+  return Mojo::Collection->new(@{ $self->data->{FinancialYears} });
 }
 
 sub accounts ($self) {
-  $self->updateCache('Accounts') if (!exists($self->data->{$self->config->{selectedapp}}->{Accounts}));
-  return Mojo::Collection->new(@{ $self->data->{$self->config->{selectedapp}}->{Accounts} });
+  $self->updateCache('Accounts') if (!exists($self->data->{Accounts}));
+  return Mojo::Collection->new(@{ $self->data->{Accounts} });
 }
 
 sub postInvoice ($self, $payload) {
