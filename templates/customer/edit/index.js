@@ -326,11 +326,20 @@ function populateForm(formdata, method) {
   }
 
   // Userlogins
+  let userloginsHtml = '';
   for (const userlogin of userlogins) {
-    document.querySelector('#userlogin').innerHTML = `${userlogin.userlogin}`;
-//    document.querySelector('#userlogin').href = `/phpmyadmin/tbl_change.php?db=system2&table=snapusers&where_clause=%60snapusers%60.%60userlogin%60%3D%27${userlogin..userlogin}%27&clause_is_unique=1&sql_query=SELECT%20%2A%20FROM%20%60systems%60.%60snapusers%60%20AS%20%60snapusers%60&goto=sql.php&default_action=update`;
-    document.querySelector('#impersonate').href = `/login/?action=impersonate&amp;impersonate=${userlogin.userlogin}`;
+    userloginsHtml += `
+      <li class="d-flex align-items-center mb-2">
+        <span class="me-2">${userlogin.userlogin}</span>
+        <a href="<%== url_for('account_login') %>?action=impersonate&impersonate=${userlogin.userlogin}" title="Impersonate ${userlogin.userlogin}">
+          <%== icon 'person-fill', {extraclasses => 'mx-1'} %>
+        </a>
+        <a href="<%== url_for('account_index') %>/${userlogin.userlogin}" title="Edit ${userlogin.userlogin}">
+          <%== icon 'pen-fill', {extraclasses => 'mx-1'} %>
+        </a>
+      </li>`;
   }
+  document.querySelector('#userlogins').innerHTML = userloginsHtml;
 
   // Invoices
   let snippet = '';
