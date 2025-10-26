@@ -9,7 +9,7 @@ sub register ($self, $app, $conf) {
   my $manager = $r->manager('domain')->to(controller => 'Domain');
   $manager->get('/')                                           ->to('#index')                    ->name('domain_index');
 
-  my $customers = $r->manager('customers/:customerid/domainss')->to(controller => 'Domain');
+  my $customers = $r->manager('customers/:customerid/domains')->to(controller => 'Domain');
   $customers->get('open')                                      ->to('#edit');
   $customers->put('open')                                      ->to('#update');
   $customers->post('open')                                     ->to('#create');

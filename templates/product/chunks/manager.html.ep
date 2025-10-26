@@ -1,4 +1,4 @@
-<form name="searchproduct" method="get" action="<%== config->{manager}->{url} %>products">
+<form name="searchproduct" method="get" action="<%== url_for('product_index') %>">
   <div class="row mb-3">
     <div class="input-group">
       <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('product')) %>" placeholder="<%== __('Search for product') %>..." />
@@ -8,4 +8,4 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>products/add"><%== __('Add product') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('product_new') %>"><%== __('Add product') %></a>
