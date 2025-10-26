@@ -147,6 +147,9 @@ sub login ($self) {
 
 
 sub logout ($self) {
+  # Get the authcookie value before clearing it
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+
   my $cookie_opts = {
     secure => 1,
     httponly => 0,
@@ -157,7 +160,12 @@ sub logout ($self) {
   };
   $self->cookie($self->config->{manager}->{account}->{authcookiename} => '', $cookie_opts);
   $self->cookie($self->config->{manager}->{account}->{datacookiename} => '', $cookie_opts);
-  $self->app->account->deleteSession($self->config->{manager}->{account}->{authcookiename});
+
+  # Delete session from Redis using the authcookie value
+  if ($authcookie) {
+    $self->app->account->deleteSession($authcookie);
+  }
+
   return $self->redirect_to('/');
 }
 

@@ -1,40 +1,31 @@
 package Samizdat::Plugin::Cache;
 
-use strict;
-use warnings FATAL => 'all';
-
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
-use Mojo::JSON qw(decode_json encode_json);
-use Mojo::File qw(path);
+use Samizdat::Model::Cache;
 
 sub register ($self, $app, $conf) {
+  my $r = $app->routes;
 
-  $app->helper(
-    cache => sub($c) {
-      my $config = $c->config;
-      state $cache = Cache($config->{statefile});
-      return $cache;
-    }
-  );
+  # Manager routes for cache administration
+  my $manager = $r->manager('cache')->to(controller => 'Cache');
+  $manager->get('/view')          ->to(template => 'cache/view/index');
+  $manager->get('/:key')          ->to('#show')   ->name('cache_show');
+  $manager->delete('/:key')       ->to('#delete') ->name('cache_delete');
+  $manager->post('/purge')        ->to('#purge')  ->name('cache_purge');
+  $manager->get('/')              ->to('#index')  ->name('cache_index');
 
-  $app->helper(
-    saveCache => sub($c) {
-      my $config = $c->config;
-      return Cache($config->{statefile}, $c->cache);
-    }
-  );
-}
+  # Helper for accessing the Cache model
+  $app->helper(cache => sub ($c) {
+    state $model = Samizdat::Model::Cache->new({
+      redis  => $c->redis,
+      config => $app->config->{manager}->{cache},
+    });
 
-sub Cache ($statefile, $cache = undef) {
-  if ($cache) {
-    return path($statefile)->spew(encode_json($cache));
-  } elsif (-f $statefile) {
-    my $json = path($statefile)->slurp;
-    if ($json) {
-      return decode_json($json);
-    }
-  }
-  return {};
+    # Update session reference for encryption
+    $model->session($c->session) if $c->can('session');
+
+    return $model;
+  });
 }
 
 1;

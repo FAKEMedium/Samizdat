@@ -1,0 +1,24 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title"><%== __('Cache Entry Details') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body">
+    <dl class="row">
+      <dt class="col-sm-3"><%== __('Key') %></dt>
+      <dd class="col-sm-9" id="modalKey"></dd>
+
+      <dt class="col-sm-3"><%== __('Type') %></dt>
+      <dd class="col-sm-9" id="modalType"></dd>
+
+      <dt class="col-sm-3"><%== __('TTL') %></dt>
+      <dd class="col-sm-9" id="modalTTL"></dd>
+
+      <dt class="col-sm-3"><%== __('Value') %></dt>
+      <dd class="col-sm-9"><pre id="modalValue" class="bg-light p-2 rounded"></pre></dd>
+    </dl>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+  </div>
+</div>

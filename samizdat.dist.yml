@@ -106,6 +106,9 @@ manager:
       password: s3cr3t
       secret: s3cr3t               # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
       perpage: 10
+  cache:
+    cardnumber: 13
+    lifetime: 7200                 # Seconds to live
 screenshots:
   -
     src: /media/images/notrust.jpg

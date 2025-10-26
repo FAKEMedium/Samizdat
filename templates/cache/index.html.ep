@@ -1,0 +1,40 @@
+<div class="mb-3">
+  <form id="searchForm" class="row g-2">
+    <div class="col-auto flex-grow-1">
+      <input type="text" class="form-control" id="pattern" name="pattern" placeholder="<%== __('Search pattern (e.g. fortnox:*, user:*)') %>" value="*">
+    </div>
+    <div class="col-auto">
+      <button type="submit" class="btn btn-primary">
+        <%== icon 'search', {} %> <%== __('Search') %>
+      </button>
+    </div>
+    <div class="col-auto">
+      <button type="button" class="btn btn-danger" id="purgeAllBtn">
+        <%== icon 'trash', {} %> <%== __('Purge All') %>
+      </button>
+    </div>
+  </form>
+</div>
+
+<div class="table-responsive">
+  <table id="cacheEntries" class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th><%== __('Key') %></th>
+        <th><%== __('Type') %></th>
+        <th><%== __('TTL') %></th>
+        <th><%== __('Preview') %></th>
+        <th class="text-end"><%== __('Actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Cache entries will be loaded here by JavaScript -->
+    </tbody>
+  </table>
+</div>
+
+<nav aria-label="<%== __('Pagination') %>">
+  <ul id="pagination" class="pagination justify-content-center">
+    <!-- Pagination will be rendered here by JavaScript -->
+  </ul>
+</nav>

@@ -17,6 +17,7 @@ Key features:
 - ISO image packaging for offline distribution
 - Management system for web hosting providers
 - Integration with external services (Fortnox, Realtime Register, Buy Me a Coffee, etc.)
+- Pulls in various data sources and use them in helper functions
 
 ## Architecture
 

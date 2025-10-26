@@ -10,21 +10,26 @@ sub redirect ($self) {
 
 
 sub auth ($self) {
+  # Initialize Fortnox session (creates 'fortnox' cookie)
+  $self->session->{fortnox_active} = 1;
+  $self->session(expiration => 7200);  # 2 hours
+
   my $state = $self->param("state") // '';
   my $code = $self->param("code") // '';
-  $self->app->fortnox->cache->{state} = $state if (!$state);
-  $self->app->fortnox->cache->{code} = $code if ($code);
-  if ('' ne $self->app->fortnox->cache->{access}) {
+  $self->app->fortnox->data->{state} = $state if (!$state);
+  $self->app->fortnox->data->{code} = $code if ($code);
+  if ('' ne $self->app->fortnox->data->{access}) {
 
-  } elsif ('' ne $self->app->fortnox->cache->{refresh}) {
+  } elsif ('' ne $self->app->fortnox->data->{refresh}) {
     $self->app->fortnox->getToken(1);
-  } elsif ('' ne $self->app->fortnox->cache->{code}) {
+  } elsif ('' ne $self->app->fortnox->data->{code}) {
     $self->app->fortnox->getToken(0);
   } else {
     my $redirect = $self->app->fortnox->getLogin();
     say $redirect;
     return $self->redirect_to($redirect);
   }
+  say Dumper %{ $self->app->fortnox->data };
   $self->redirect_to($self->url_for('manager_index'));
 }
 
@@ -90,7 +95,12 @@ sub payments ($self) {
 
 
 sub logout ($self) {
+  # Clear Fortnox cache in Redis
   $self->app->fortnox->removeCache;
+
+  # Expire the session cookie
+  $self->session(expires => 1);
+
   $self->redirect;
 }
 
@@ -111,6 +121,7 @@ sub index ($self) {
     return $self->render(web => $web, title => $title);
   }
 }
+
 
 sub manager ($self) {
   my $title = $self->app->__('Fortnox panel');

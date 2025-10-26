@@ -61,7 +61,6 @@ sub startup ($self) {
   $self->helper(uuid => sub { state $uuid = Data::UUID->new });
 
   $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}); return $redis; });
-
   $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}); return $pg; });
   $self->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
@@ -100,6 +99,7 @@ sub startup ($self) {
     return $manager;
   });
 
+  $self->plugin('Cache');
   $self->plugin('Account');
   $self->plugin('Manager');
   $self->plugin('Public');

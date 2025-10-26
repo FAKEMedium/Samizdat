@@ -6,17 +6,12 @@ use Mojo::JSON qw(decode_json encode_json from_json);
 use Mojo::Collection qw(c);
 use Mojo::UserAgent;
 use Mojo::File qw(path);
-use Mojo::Util qw(secure_compare);
 use Hash::Merge;
 use Data::Dumper;
-use Crypt::AuthEnc::GCM;
-use Crypt::PRNG qw(random_bytes);
-use MIME::Base64 qw(encode_base64 decode_base64);
 
 has 'config';
-has 'redis';
-has 'session';
-has 'cache' => sub ($self) {
+has 'cache';
+has 'data' => sub ($self) {
   return $self->_loadCache();
 };
 has 'merger' => sub {
@@ -28,101 +23,13 @@ has 'ua' => sub ($self) {
   return $ua;
 };
 
-# Get session-specific Redis key
-sub _getRedisKey ($self) {
-  my $base_key = 'fortnox:cache';
-
-  # If we have a session, make it session-specific
-  if ($self->session && $self->session->{fortnox_session_id}) {
-    return $base_key . ':' . $self->session->{fortnox_session_id};
-  }
-
-  # Generate a session ID if we don't have one
-  if ($self->session) {
-    my $session_id = encode_base64(random_bytes(16), '');
-    $session_id =~ s/[^a-zA-Z0-9]//g;  # Remove special chars
-    $self->session->{fortnox_session_id} = $session_id;
-    return $base_key . ':' . $session_id;
-  }
-
-  # Fallback to non-session key (backwards compatibility)
-  return $base_key;
-}
-
-# Get or create encryption key from session
-sub _getEncryptionKey ($self) {
-  return undef unless $self->session;
-
-  # Check if session already has an encryption key
-  my $key = $self->session->{fortnox_encrypt_key};
-
-  if (!$key) {
-    # Generate new 256-bit (32-byte) key for AES-256
-    $key = encode_base64(random_bytes(32), '');
-    $self->session->{fortnox_encrypt_key} = $key;
-  }
-
-  return decode_base64($key);
-}
-
-# Encrypt data for Redis storage
-sub _encrypt ($self, $data) {
-  my $key = $self->_getEncryptionKey();
-  return $data unless $key;  # If no session, store unencrypted (fallback)
-
-  my $iv = random_bytes(12);  # 96-bit IV for GCM
-  my $gcm = Crypt::AuthEnc::GCM->new('AES', $key, $iv);
-
-  my $ciphertext = $gcm->encrypt_add($data);
-  my $tag = $gcm->encrypt_done();
-
-  # Return: encrypted marker + IV + tag + ciphertext (all base64 encoded)
-  # Format: ENC1:iv_base64:tag_base64:ciphertext_base64
-  return 'ENC1:' . encode_base64($iv, '') . ':' . encode_base64($tag, '') . ':' . encode_base64($ciphertext, '');
-}
-
-# Decrypt data from Redis
-sub _decrypt ($self, $encrypted) {
-  # Check if data is encrypted (starts with ENC1:)
-  return $encrypted unless $encrypted =~ /^ENC1:/;
-
-  my $key = $self->_getEncryptionKey();
-  return '' unless $key;  # No key available, can't decrypt
-
-  # Remove ENC1: prefix and split
-  $encrypted =~ s/^ENC1://;
-  my ($iv_b64, $tag_b64, $ciphertext_b64) = split(':', $encrypted, 3);
-
-  my $iv = decode_base64($iv_b64);
-  my $tag = decode_base64($tag_b64);
-  my $ciphertext = decode_base64($ciphertext_b64);
-
-  my $plaintext;
-  eval {
-    my $gcm = Crypt::AuthEnc::GCM->new('AES', $key, $iv);
-    $plaintext = $gcm->decrypt_add($ciphertext);
-    $gcm->decrypt_done($tag) or die "Authentication tag verification failed";
-  };
-
-  # If decryption fails, return empty (cache will be regenerated)
-  return '' if $@;
-
-  return $plaintext;
-}
-
 sub _loadCache ($self) {
-  my $cache;
-  my $redis_key = $self->_getRedisKey();
+  my $redis_key = 'fortnox:cache';
 
-  # Try to load from Redis
-  my $encrypted = $self->redis->db->get($redis_key);
-  if ($encrypted) {
-    # Decrypt if we have a session
-    my $json = $self->_decrypt($encrypted);
-    eval { $cache = decode_json($json) if $json; };
-  }
+  # Try to load from cache (encryption handled by Cache model)
+  my $cache = $self->cache->get($redis_key);
 
-  if (!$cache || !exists($cache->{state})) {
+  if (!$cache || ref($cache) ne 'HASH' || !exists($cache->{state})) {
     $cache = {
       'state'   => 'login',
       'access'  => '',
@@ -139,20 +46,18 @@ sub Cache ($self, $cache = undef) {
     $self->_saveCache($cache);
     return $cache;
   }
-  return $self->cache;
+  return $self->data;
 }
 
 sub _saveCache ($self, $cache) {
-  my $redis_key = $self->_getRedisKey();
-  my $json = encode_json($cache);
+  my $redis_key = 'fortnox:cache';
 
-  # Encrypt before storing
-  my $encrypted = $self->_encrypt($json);
-  $self->redis->db->set($redis_key => $encrypted);
+  # Encryption handled by Cache model
+  $self->cache->set($redis_key => $cache);
 }
 
 sub saveCache ($self) {
-  $self->_saveCache($self->cache);
+  $self->_saveCache($self->data);
 }
 
 sub updateCache ($self, $resource = undef) {
@@ -184,7 +89,7 @@ sub updateCache ($self, $resource = undef) {
         }
         $page++;
       } until (!ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
-      $self->cache->{$self->config->{selectedapp}}->{$resource} = $list;
+      $self->data->{$self->config->{selectedapp}}->{$resource} = $list;
       $self->saveCache;
     }
   }
@@ -192,22 +97,16 @@ sub updateCache ($self, $resource = undef) {
 
   # Ensure we return at least an empty array if the cache entry doesn't exist
   if ($resource) {
-    return $self->cache->{$self->config->{selectedapp}}->{$resource} // [];
+    return $self->data->{$self->config->{selectedapp}}->{$resource} // [];
   } else {
-    return $self->cache;
+    return $self->data;
   }
 }
 
 sub removeCache ($self) {
   # Clear the cache in Redis
-  my $redis_key = $self->_getRedisKey();
-  $self->redis->db->del($redis_key);
-
-  # Clear session data
-  if ($self->session) {
-    delete $self->session->{fortnox_encrypt_key};
-    delete $self->session->{fortnox_session_id};
-  }
+  my $redis_key = 'fortnox:cache';
+  $self->cache->del($redis_key);
 
   # Reset to empty cache
   $self->Cache({
@@ -219,17 +118,17 @@ sub removeCache ($self) {
 }
 
 sub getLogin($self) {
-  $self->cache->{state} = 'login';
+  $self->data->{state} = 'login';
   my $response = $self->ua->get($self->config->{oauth2}->{url} . '/auth' => {Accept => '*/*'} => form => {
     client_id     => $self->config->{apps}->{$self->config->{selectedapp}}->{clientid},
     scope         => $self->config->{apps}->{$self->config->{selectedapp}}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
-    state         => $self->cache->{state},
+    state         => $self->data->{state},
     response_type => 'code',
   })->result;
   if ($response->headers->header('Location')) {
-    $self->cache->{state} = 'code';
+    $self->data->{state} = 'code';
     $self->saveCache;
     #        return sprintf($response->headers->header('Location'));
     my $redirect = sprintf("https://apps.fortnox.se%s\n", $response->headers->header('Location'));
@@ -247,12 +146,12 @@ sub getToken ($self, $refresh = 0) {
   if ($refresh) {
     $response = $self->ua->post($url => { Accept => '*/*' } => form => {
       grant_type    => 'refresh_token',
-      refresh_token => $self->cache->{refresh},
+      refresh_token => $self->data->{refresh},
     })->result;
   } else {
     $response = $self->ua->post($url => { Accept => '*/*' } => form => {
       grant_type   => 'authorization_code',
-      code         => $self->cache->{code},
+      code         => $self->data->{code},
       redirect_uri => $self->config->{oauth2}->{redirect_uri},
     })->result;
   }
@@ -260,10 +159,10 @@ sub getToken ($self, $refresh = 0) {
   if ($response->json('/error')) {
     return 0;
   } else {
-    $self->cache->{code} = '';
-    $self->cache->{refresh} = $response->json('/refresh_token');
-    $self->cache->{access} = $response->json('/access_token');
-    $self->cache->{state} = 'api';
+    $self->data->{code} = '';
+    $self->data->{refresh} = $response->json('/refresh_token');
+    $self->data->{access} = $response->json('/access_token');
+    $self->data->{state} = 'api';
     $self->saveCache;
     return 1;
   }
@@ -271,7 +170,7 @@ sub getToken ($self, $refresh = 0) {
 
 
 sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
-  if (!exists($self->cache->{access})) {
+  if (!exists($self->data->{access})) {
     return $self->getLogin();
   }
   $resource = lc $resource;
@@ -327,15 +226,15 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
 #      say Dumper $tx;
       $tx->req->headers->content_type('application/json');
     }
-    $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->cache->{access}));
+    $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->data->{access}));
     $tx = $self->ua->start($tx);
     #        say $tx->req->to_string;
 
     if (403 == $tx->result->code) {
       say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
-      $self->cache->{access} = '';
-      $self->cache->{state} = '';
-      $self->cache->{refresh} = '';
+      $self->data->{access} = '';
+      $self->data->{state} = '';
+      $self->data->{refresh} = '';
       $self->saveCache;
       $done = 1;
       return {};
@@ -353,8 +252,8 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
 
       #          if (2000311 == $result->{'ErrorInformation'}->{Code}) {}
       say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
-      $self->cache->{access} = '';
-      $self->cache->{state} = 'code';
+      $self->data->{access} = '';
+      $self->data->{state} = 'code';
       $self->saveCache;
       $self->getToken(1);
     } elsif (200 == $tx->result->code || 201 == $tx->result->code) {
@@ -372,7 +271,7 @@ sub postInbox ($self, $file, $folderid = 'inbox_kf') {
   my $url = sprintf("%s%s?folderid=%s", $self->config->{apiurl}, 'inbox', $folderid);
   my $headers = {
     'Content-Type'  => 'multipart/form-data',
-    'Authorization' => sprintf('Bearer %s', $self->cache->{access})
+    'Authorization' => sprintf('Bearer %s', $self->data->{access})
   };
   my $tx;
   if (1) {
@@ -411,7 +310,7 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
     }]);
     $tx->req->headers->content_type('application/json');
   }
-  $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->cache->{access}));
+  $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->data->{access}));
   $tx = $self->ua->start($tx);
 #  say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
 
@@ -424,13 +323,13 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
 }
 
 sub financialYears ($self) {
-  $self->updateCache('FinancialYears') if (!exists($self->cache->{$self->config->{selectedapp}}->{FinancialYears}));
-  return Mojo::Collection->new(@{ $self->cache->{$self->config->{selectedapp}}->{FinancialYears} });
+  $self->updateCache('FinancialYears') if (!exists($self->data->{$self->config->{selectedapp}}->{FinancialYears}));
+  return Mojo::Collection->new(@{ $self->data->{$self->config->{selectedapp}}->{FinancialYears} });
 }
 
 sub accounts ($self) {
-  $self->updateCache('Accounts') if (!exists($self->cache->{$self->config->{selectedapp}}->{Accounts}));
-  return Mojo::Collection->new(@{ $self->cache->{$self->config->{selectedapp}}->{Accounts} });
+  $self->updateCache('Accounts') if (!exists($self->data->{$self->config->{selectedapp}}->{Accounts}));
+  return Mojo::Collection->new(@{ $self->data->{$self->config->{selectedapp}}->{Accounts} });
 }
 
 sub postInvoice ($self, $payload) {
