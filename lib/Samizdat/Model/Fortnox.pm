@@ -177,6 +177,7 @@ has 'resources' => sub ($self) {
   return $self->merger->merge($self->default_resources, $config_resources);
 };
 
+
 sub _loadCache ($self) {
   my $redis_key = 'fortnox:cache';
 
@@ -195,6 +196,7 @@ sub _loadCache ($self) {
   return $cache;
 }
 
+
 sub Cache ($self, $cache = undef) {
   if ($cache) {
     $self->_saveCache($cache);
@@ -203,6 +205,7 @@ sub Cache ($self, $cache = undef) {
   return $self->data;
 }
 
+
 sub _saveCache ($self, $cache) {
   my $redis_key = 'fortnox:cache';
 
@@ -210,19 +213,21 @@ sub _saveCache ($self, $cache) {
   $self->cache->set($redis_key => $cache);
 }
 
+
 sub saveCache ($self) {
   $self->_saveCache($self->data);
 }
+
 
 sub updateCache ($self, $resource = undef) {
   my $resources = [];
   if ($resource) {
     push @{ $resources }, $resource;
   } else {
-    push @{ $resources }, sort {$a cmp $b} keys %{ $self->config->{app}->{resources} };
+    push @{ $resources }, sort {$a cmp $b} keys %{ $self->resources };
   }
   for my $resource (@{ $resources }) {
-    my $resourceconfig = $self->config->{app}->{resources}->{$resource};
+    my $resourceconfig = $self->resources->{$resource};
     if (exists($resourceconfig->{cache}) && int $resourceconfig->{cache}) {
       my $list = [];
       my $page = 1;
@@ -257,6 +262,7 @@ sub updateCache ($self, $resource = undef) {
   }
 }
 
+
 sub removeCache ($self) {
   # Clear the cache in Redis
   my $redis_key = 'fortnox:cache';
@@ -270,6 +276,7 @@ sub removeCache ($self) {
     'code'    => ''
   });
 }
+
 
 sub getLogin($self) {
   $self->data->{state} = 'login';
@@ -290,6 +297,7 @@ sub getLogin($self) {
   }
   return 0;
 }
+
 
 sub getToken ($self, $refresh = 0) {
   my $url = Mojo::URL->new($self->config->{oauth2}->{url} . '/token')->userinfo(sprintf('%s:%s',
@@ -355,7 +363,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
     $qp = $options->{qp} if (exists($options->{qp}));
   }
   while (!$done) {
-    $qp = $self->merger->merge($self->config->{app}->{resources}->{$resource}->{qp}, $qp);
+    $qp = $self->merger->merge($self->resources->{$resource}->{qp}, $qp) if (exists($self->resources->{$resource}) && exists($self->resources->{$resource}->{qp}));
     $qp = $self->merger->merge($options->{qp}, $qp);
     for my $p (qw/sortby sortorder filter limit offset page/) {
       #          delete $qp->{$p} if (exists($qp->{$p}) and ($qp->{$p} eq ''));
@@ -476,21 +484,25 @@ sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
   }
 }
 
+
 sub financialYears ($self) {
   $self->updateCache('FinancialYears') if (!exists($self->data->{FinancialYears}));
   return Mojo::Collection->new(@{ $self->data->{FinancialYears} });
 }
+
 
 sub accounts ($self) {
   $self->updateCache('Accounts') if (!exists($self->data->{Accounts}));
   return Mojo::Collection->new(@{ $self->data->{Accounts} });
 }
 
+
 sub postInvoice ($self, $payload) {
   my $result = $self->callAPI('Invoices', 'post', 0, $payload);
 #  say Dumper $result;
   return $result;
 }
+
 
 sub externalInvoice ($self, $DocumentNumber = 0) {
   if ($DocumentNumber) {
@@ -500,6 +512,7 @@ sub externalInvoice ($self, $DocumentNumber = 0) {
   }
 }
 
+
 sub creditInvoice ($self, $DocumentNumber = 0) {
   if ($DocumentNumber) {
     my $result = $self->callAPI('Invoices', 'put', $DocumentNumber, {}, 'credit');
@@ -508,14 +521,17 @@ sub creditInvoice ($self, $DocumentNumber = 0) {
   }
 }
 
+
 sub getInvoice ($self, $DocumentNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $list = $self->callAPI('Invoices', 'get', $DocumentNumber, $options);
 }
+
 
 sub putInvoice ($self, $DocumentNumber = 0) {
   return 0 if (!$DocumentNumber);
   my $result = $self->callAPI('Invoices', 'put', $DocumentNumber);
 }
+
 
 sub getInvoicePayment ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('InvoicePayments', 'get', $Number, $options);
@@ -523,56 +539,67 @@ sub getInvoicePayment ($self, $Number = 0, $options = {'qp' => {'limit' => 500, 
   return $result;
 }
 
+
 sub getCustomer ($self, $CustomerNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Customers', 'get', $CustomerNumber, $options);
   say Dumper $result;
   return $result;
 }
 
+
 sub putCustomer ($self, $CustomerNumber, $data = {}) {
   my $result = $self->callAPI('Customers', 'put', $CustomerNumber, $data);
   return $result;
 }
+
 
 sub postCustomer ($self, $data =  {}) {
   my $result = $self->callAPI('Customers', 'post', 0, $data);
   return $result;
 }
 
+
 sub deleteCustomer ($self, $CustomerNumber) {
   my $result = $self->callAPI('Customers', 'delete', $CustomerNumber);
   return $result;
 }
+
 
 sub putCurrency ($self, $Currency, $data = {}) {
   my $result = $self->callAPI('Currencies', 'put', $Currency, $data);
   return $result;
 }
 
+
 sub getCurrency ($self, $Currency = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Currencies', 'get', $Currency, $options);
   return $result;
 }
+
 
 sub postCurrency ($self, $data = {}) {
   my $result = $self->callAPI('Currencies', 'post', 0, $data);
   return $result;
 }
 
+
 sub getAccount ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Accounts', 'get', $Number, $options);
   return $result;
 }
+
 
 sub putAccount ($self, $Number = 0, $data = {}) {
   my $result = $self->callAPI('Accounts', 'put', $Number, $data);
   return $result;
 }
 
+
 sub postAccount ($self, $data = {}) {
   my $result = $self->callAPI('Accounts', 'post', 0, $data);
   return $result;
 }
+
 
 sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   if ($ArticleNumber) {
@@ -581,6 +608,7 @@ sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, 
     return { Articles => $self->updateCache('Articles') };
   }
 }
+
 
 sub postArticle ($self, $article = {}) {
   return 0 if (!exists($article->{Article}));
