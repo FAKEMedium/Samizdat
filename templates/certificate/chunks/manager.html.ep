@@ -1,4 +1,4 @@
-<form name="searchcertificates" method="get" action="<%== config->{manager}->{url} %>certificates">
+<form name="searchcertificates" method="get" action="<%== url_for('certificate_index') %>">
   <div class="row mb-3">
     <div class="input-group">
       <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('certificates')) %>" placeholder="<%== __('Search for certificates') %>..." />

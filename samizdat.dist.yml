@@ -108,7 +108,8 @@ manager:
       perpage: 10
   cache:
     cardnumber: 13
-    lifetime: 7200                 # Seconds to live
+    lifetime: 7200                 # Seconds to live (default TTL for cached items)
+    encrypt: 1                     # Enable AES-256-GCM encryption for cached data (requires session)
 screenshots:
   -
     src: /media/images/notrust.jpg

@@ -49,6 +49,9 @@ sub _getEncryptionKey ($self) {
 
 # Encrypt data for Redis storage
 sub _encrypt ($self, $data) {
+  # Check if encryption is enabled in config
+  return $data unless $self->config && $self->config->{encrypt};
+
   my $key = $self->_getEncryptionKey();
   return $data unless $key;  # If no session, store unencrypted (fallback)
 
