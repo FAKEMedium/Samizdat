@@ -19,7 +19,7 @@
 %     $current = "true";
 %     $link = "#";
 %   }
-    <a data-language="<%== $language %>" class="<%== $class %>" href="<%== $link %>" aria-current="<%== $current %>"<%= is_rtl($language) ? ' data-direction="rtl"' : '' %>>
+    <a data-language="<%== $language %>" class="<%== $class %>" href="<%== $link %>" aria-current="<%== $current %>"<%== is_rtl($language) ? ' data-direction="rtl"' : '' %>>
       <span class="flag-icon me-2"><%== flag config->{locale}->{languages}->{$language}->{flag}, {extraclass => 'bi'} %></span>
       <span class="language-name"><%== config->{locale}->{languages}->{$language}->{name} %></span>
     </a>
