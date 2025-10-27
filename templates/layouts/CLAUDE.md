@@ -4,7 +4,7 @@ The default layout for the project is 'bootstrap'. Some features of 'bootstrap' 
 
 - Responsive design for mobile and desktop
 - Uses special stash web => \$web
-- Lay has 8 + 4 columns if \$web->{sidebar} exists, otherwise 12 columns
+- Layout has 8 + 4 columns if \$web->{sidebar} exists, otherwise 12 columns
 - Predefined element universalmodal for popups like login, etc
 - Predefined element toast-messages for notifications
 - Included chunks for specific parts to keep the file lean and clean
