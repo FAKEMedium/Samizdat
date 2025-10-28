@@ -1,20 +1,14 @@
-# lib/Samizdat/Model/DNSAdmin.pm
-package Samizdat::Model::DNSAdmin;
+# lib/Samizdat/Model/Zone.pm
+package Samizdat::Model::Zone;
 
 use Mojo::Base -base, -signatures;
-use Mojo::JSON qw(decode_json encode_json from_json);
-use Mojo::Collection qw(c);
+use Mojo::JSON qw(decode_json encode_json);
 use Mojo::UserAgent;
-use Mojo::File qw(path);
-use Hash::Merge;
 use Data::Dumper;
 
 has 'config';
+has 'cache';
 has ua => sub { Mojo::UserAgent->new };
-has 'cache' => sub ($self) {
-  state $cache = Cache($self->config->{cachefile});
-  return $cache;
-};
 
 # Helper to set API headers.
 sub _headers ($self) {
@@ -27,13 +21,28 @@ sub _headers ($self) {
 ### Zone Methods
 
 # List zones. Accepts optional query parameters.
-# The "rrsets" parameter defaults to "true".
+# Uses cache to avoid frequent API calls.
 sub list_zones ($self, $params = {}) {
+  my $cache_key = 'zone:list';
+
+  # Check if we should use cache
+  if (!exists($params->{nocache}) || !$params->{nocache}) {
+    my $cached = $self->cache->get($cache_key);
+    return $cached if $cached;
+  }
+
+  # Fetch from API
   $params->{dnssec} //= 'false';
+  delete $params->{nocache};
   my $url = $self->config->{api}->{url} . '/zones';
   my $tx  = $self->ua->get($url, $self->_headers, form => $params);
+
   if (my $res = $tx->result) {
-    return $res->is_success ? $res->json : [];
+    if ($res->is_success) {
+      my $zones = $res->json;
+      $self->cache->set($cache_key => $zones);
+      return $zones;
+    }
   }
   return [];
 }
@@ -60,9 +69,12 @@ sub create_zone ($self, $zone_data) {
   };
   my $tx = $self->ua->post($url, $self->_headers, json => $payload);
   my $res = $tx->result;
-  return ($res && $res->is_success)
-    ? { success => 1 }
-    : { success => 0, error => $res ? $res->message : "No response" };
+
+  if ($res && $res->is_success) {
+    $self->clear_cache;
+    return { success => 1 };
+  }
+  return { success => 0, error => $res ? $res->message : "No response" };
 }
 
 # Update an existing zone.
@@ -74,9 +86,12 @@ sub update_zone ($self, $zone_id, $zone_data) {
   };
   my $tx = $self->ua->patch($url, $self->_headers, json => $payload);
   my $res = $tx->result;
-  return ($res && $res->is_success)
-    ? { success => 1 }
-    : { success => 0, error => $res ? $res->message : "No response" };
+
+  if ($res && $res->is_success) {
+    $self->clear_cache;
+    return { success => 1 };
+  }
+  return { success => 0, error => $res ? $res->message : "No response" };
 }
 
 # Delete a zone.
@@ -84,9 +99,12 @@ sub delete_zone ($self, $zone_id) {
   my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
   my $tx  = $self->ua->delete($url, $self->_headers);
   my $res = $tx->result;
-  return ($res && $res->is_success)
-    ? { success => 1 }
-    : { success => 0, error => $res ? $res->message : "No response" };
+
+  if ($res && $res->is_success) {
+    $self->clear_cache;
+    return { success => 1 };
+  }
+  return { success => 0, error => $res ? $res->message : "No response" };
 }
 
 ### Record Methods (Records are managed as part of the zone object)
@@ -167,29 +185,9 @@ sub delete_record ($self, $zone_id, $record_id) {
     : { success => 0, error => $res ? $res->message : "No response" };
 }
 
-sub Cache ($cachefile, $cache = undef) {
-  if ($cache) {
-    return path($cachefile)->spew(encode_json($cache));
-  } elsif (-f $cachefile) {
-    my $json = path($cachefile)->slurp;
-    if ($json) {
-      return decode_json($json);
-    }
-  }
-  return {
-  };
-}
-
-sub saveCache ($self) {
-  return Cache($self->config->{cachefile}, $self->cache);
-}
-
-sub updateCache ($self, $data = undef) {
-}
-
-sub removeCache ($self) {
-  unlink $self->config->{cachefile} if (-e $self->config->{cachefile});
-  state $cache = undef;
+# Clear the zone list cache (e.g., after creating/updating/deleting a zone)
+sub clear_cache ($self) {
+  $self->cache->del('zone:list');
 }
 
 1;

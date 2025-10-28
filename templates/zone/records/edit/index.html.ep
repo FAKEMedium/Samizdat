@@ -1,0 +1,48 @@
+<form id="recordForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== title %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="name" class="form-label"><%== __('Record Name') %></label>
+      <input type="text" class="form-control" id="name" name="name" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="type" class="form-label"><%== __('Record Type') %></label>
+      <select class="form-select" id="type" name="type" required>
+        <option value=""><%== __('Select type') %></option>
+        <option value="A">A</option>
+        <option value="AAAA">AAAA</option>
+        <option value="CNAME">CNAME</option>
+        <option value="MX">MX</option>
+        <option value="NS">NS</option>
+        <option value="SOA">SOA</option>
+        <option value="SRV">SRV</option>
+        <option value="TXT">TXT</option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label for="content" class="form-label"><%== __('Content') %></label>
+      <input type="text" class="form-control" id="content" name="content" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="ttl" class="form-label">TTL</label>
+      <input type="number" class="form-control" id="ttl" name="ttl" value="3600">
+    </div>
+
+    <div class="mb-3">
+      <label for="priority" class="form-label"><%== __('Priority') %></label>
+      <input type="number" class="form-control" id="priority" name="priority" value="0">
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary"><%== __('Submit') %></button>
+  </div>
+</form>

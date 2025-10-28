@@ -41,7 +41,7 @@ sub index($self) {
 
     my $searchterm = $self->param('searchterm') || '';
     my $page = $self->param('page') || 1;
-    my $limit = $self->param('limit') || 20;
+    my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 10;
     my $offset = ($page - 1) * $limit;
 
     my $certificates;

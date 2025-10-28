@@ -1,0 +1,26 @@
+<form id="zoneForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== title %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="name" class="form-label"><%== __('Zone Name') %></label>
+      <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="kind" class="form-label"><%== __('Zone Kind') %></label>
+      <select id="kind" name="kind" class="form-select">
+        <option value="Master">Master</option>
+        <option value="Slave">Slave</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary"><%== __('Submit') %></button>
+  </div>
+</form>

@@ -15,10 +15,10 @@
     </div>
   </div>
   <div class="col justify-content-sm-end input-group d-flex">
-    <a href="<%= url_for('dnsadmin_zone_new') %>" class="btn btn-primary">
+    <button type="button" id="newZone" class="btn btn-primary">
       <%== icon 'plus-circle-fill', {} %>
       <span class="d-sm-inline d-none mx-1"><%== __('New zone') %></span>
-    </a>
+    </button>
   </div>
 </form>
 

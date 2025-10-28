@@ -29,7 +29,7 @@ sub index($self) {
 
     my $pattern = $self->param('pattern') || '*';
     my $page = $self->param('page') || 1;
-    my $limit = $self->param('limit') || 50;
+    my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 10;
 
     # Get keys matching pattern
     my $redis = $self->cache->{redis};

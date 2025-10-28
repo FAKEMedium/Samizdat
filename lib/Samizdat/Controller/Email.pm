@@ -50,7 +50,7 @@ sub index ($self) {
     my $customerid = $self->param('customerid');
     my $domain = $self->param('domain');
     my $page = $self->param('page') || 1;
-    my $limit = $self->param('limit') || 50;
+    my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 10;
     my $offset = ($page - 1) * $limit;
 
     my $data;

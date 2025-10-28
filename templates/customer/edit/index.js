@@ -451,7 +451,7 @@ function populateForm(formdata, method) {
   for (const dnsdomain of dnsdomains) {
     nrdnsdomains++;
     snippet += `
-                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== url_for('dnsadmin_zones') %>/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
+                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== url_for('zone_index') %>/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
   }
   document.querySelector('#dnsdomains tbody').innerHTML = snippet;
   if (nrdnsdomains > 0) {

@@ -57,7 +57,7 @@ manager:
   domain:
     cardnumber: 3
     databasetype: mysql
-  dnsadmin:
+  zone:
     cardnumber: 4
     type: powerdns
     api:

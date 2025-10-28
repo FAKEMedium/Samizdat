@@ -83,6 +83,7 @@ sub index ($self) {
   return $self->render(web => $web, title => $title, template => 'sms/index', headline => 'chunks/pagination', status => 200);
 }
 
+
 sub send ($self) {
   # Require admin access
   return unless $self->access({ admin => 1 });
@@ -102,6 +103,7 @@ sub send ($self) {
   $self->render(json => $result);
 }
 
+
 sub receive ($self) {
   # Require admin access
   return unless $self->access({ admin => 1 });
@@ -115,11 +117,12 @@ sub receive ($self) {
   });
 }
 
+
 sub messages ($self) {
   # Require admin access
   return unless $self->access({ admin => 1 });
 
-  my $limit = $self->param('limit') || $self->app->config->{manager}->{sms}->{teltonika}->{perpage} || 50;
+  my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 10;
   my $offset = $self->param('offset') || 0;
   my $direction = $self->param('direction');
   my $phone = $self->param('phone');

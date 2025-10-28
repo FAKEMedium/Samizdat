@@ -1,4 +1,4 @@
-<form name="searchdomain" method="get" action="<%== url_for('dnsadmin_zones') %>">
+<form name="searchdomain" method="get" action="<%== url_for('zone_index') %>">
   <div class="row mb-3">
     <div class="input-group">
       <input class="form-control" type="text" name="searchterm"  aria-label="<%== __x('Search field for {what}', what => __('DNS zone')) %>" placeholder="<%== __('Search for zone') %>...">
@@ -8,5 +8,5 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('dnsadmin_zone_create') %>"><%== __('Add zone') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('dnsadmin_zones') %>/check"><%== __('Check zones') %></a>
+<button type="button" id="newZoneManager" class="badge rounded-pill text-bg-primary border-0"><%== __('Add zone') %></button>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('zone_index') %>/check"><%== __('Check zones') %></a>
