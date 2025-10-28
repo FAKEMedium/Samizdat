@@ -161,6 +161,9 @@ msgstr "إضافة صف بعد"
 msgid "Add Row Before"
 msgstr "إضافة صف قبل"
 
+msgid "Add admin"
+msgstr ""
+
 msgid "Add alias"
 msgstr ""
 
@@ -239,6 +242,9 @@ msgstr "التحقق من العنوان"
 msgid "Address is required"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
 msgid "Admin access required"
 msgstr ""
 
@@ -278,6 +284,9 @@ msgstr ""
 msgid "Aliases"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "All Messages"
 msgstr ""
 
@@ -308,6 +317,12 @@ msgstr ""
 msgid "Are you sure you want to delete this alias?"
 msgstr ""
 
+msgid "Are you sure you want to delete this cache entry?"
+msgstr ""
+
+msgid "Are you sure you want to delete this certificate?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr ""
 
@@ -322,6 +337,12 @@ msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "هل أنت متأكد أنك تريد حذف هذا السجل؟"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr ""
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr ""
 
 msgid "Are you sure you want to resend this invoice?"
 msgstr ""
@@ -347,6 +368,9 @@ msgstr ""
 msgid "Authorize"
 msgstr "تخويل"
 
+msgid "Auto-renew"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -358,6 +382,9 @@ msgstr "عنوان BIC/Swift:"
 
 msgid "Back"
 msgstr "رجوع"
+
+msgid "Back to List"
+msgstr ""
 
 msgid "Back to domains"
 msgstr ""
@@ -416,6 +443,21 @@ msgstr "افتراضيًا، لا تتم مشاركة أي معلومات عنك
 msgid "Bytes Used"
 msgstr ""
 
+msgid "Cache"
+msgstr ""
+
+msgid "Cache Entry Details"
+msgstr ""
+
+msgid "Cache Management"
+msgstr ""
+
+msgid "Cache entry deleted successfully"
+msgstr ""
+
+msgid "Cache entry not found or could not be deleted"
+msgstr ""
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "استدعاء المساعد يضيف رمز svg إلى جدول الرموز في بداية المستند، بالإضافة إلى مرجع مضمن له."
 
@@ -432,6 +474,27 @@ msgid "Captcha was wrong"
 msgstr "الكابتشا كانت خاطئة"
 
 msgid "Category"
+msgstr ""
+
+msgid "Certificate"
+msgstr ""
+
+msgid "Certificate Chain"
+msgstr ""
+
+msgid "Certificate created successfully"
+msgstr ""
+
+msgid "Certificate deleted successfully"
+msgstr ""
+
+msgid "Certificate not found"
+msgstr ""
+
+msgid "Certificate renewal initiated"
+msgstr ""
+
+msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
@@ -514,6 +577,9 @@ msgstr ""
 
 msgid "Comments"
 msgstr "التعليقات"
+
+msgid "Common Name"
+msgstr ""
 
 msgid "Company"
 msgstr "الشركة"
@@ -824,6 +890,9 @@ msgstr "الاقتصاد"
 msgid "Edit"
 msgstr "تعديل"
 
+msgid "Edit Certificate"
+msgstr ""
+
 msgid "Edit Example"
 msgstr ""
 
@@ -831,6 +900,9 @@ msgid "Edit customer {customerid}"
 msgstr "تعديل العميل {customerid}"
 
 msgid "Edit page {docpath}"
+msgstr ""
+
+msgid "Edit record"
 msgstr ""
 
 msgid "Edit this page"
@@ -1016,8 +1088,14 @@ msgstr "توسيع القائمة"
 msgid "Expand personal menu."
 msgstr "توسيع القائمة الشخصية."
 
+msgid "Expired"
+msgstr ""
+
 msgid "Expires"
 msgstr "تنتهي الصلاحية"
+
+msgid "Expires At"
+msgstr ""
 
 msgid "Expiring"
 msgstr ""
@@ -1025,8 +1103,8 @@ msgstr ""
 msgid "Expiring domains"
 msgstr "نطاقات منتهية الصلاحية"
 
-msgid "FAKE Media"
-msgstr "FAKE Media"
+msgid "FAKE Medium"
+msgstr "FAKE Medium"
 
 msgid "FAKE News by country"
 msgstr "FAKE News حسب البلد"
@@ -1036,6 +1114,9 @@ msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "فشل تسجيل الدخول من {ip}"
+
+msgid "Failed to create certificate"
+msgstr ""
 
 msgid "Failed to create example"
 msgstr ""
@@ -1047,6 +1128,9 @@ msgid "Failed to create zone"
 msgstr "فشل إنشاء المنطقة"
 
 msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete certificate"
 msgstr ""
 
 msgid "Failed to delete domain"
@@ -1082,6 +1166,15 @@ msgstr ""
 msgid "Failed to resend invoice email"
 msgstr ""
 
+msgid "Failed to save certificate"
+msgstr ""
+
+msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save zone"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
@@ -1092,6 +1185,9 @@ msgid "Failed to send reminder"
 msgstr ""
 
 msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update certificate"
 msgstr ""
 
 msgid "Failed to update domain"
@@ -1415,6 +1511,9 @@ msgstr[3] "الفوترة، {number} عناصر"
 msgstr[4] "الفوترة، {number} عنصر"
 msgstr[5] "الفوترة، {number} عنصر"
 
+msgid "Issuer"
+msgstr ""
+
 msgid "It can be configured to display everything publicly as well."
 msgstr "يمكن تكوينه لعرض كل شيء علنًا أيضًا."
 
@@ -1435,6 +1534,9 @@ msgstr "مائل"
 
 msgid "Keep me logged in"
 msgstr "البقاء متصلًا"
+
+msgid "Key"
+msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr "اطرد وزير الدفاع الروسي سيرغي شويغو!"
@@ -1652,6 +1754,15 @@ msgstr "المبلغ الصافي:"
 msgid "Network error - please try again"
 msgstr "خطأ في الشبكة - يرجى المحاولة مرة أخرى"
 
+msgid "Never"
+msgstr ""
+
+msgid "Never expires"
+msgstr ""
+
+msgid "New Certificate"
+msgstr ""
+
 msgid "New Example"
 msgstr ""
 
@@ -1691,6 +1802,12 @@ msgstr ""
 msgid "No"
 msgstr "لا"
 
+msgid "No cache entries found"
+msgstr ""
+
+msgid "No certificates found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "لا يوجد عميل #{customerid}."
 
@@ -1717,6 +1834,9 @@ msgstr "لم يتم تحديد عميل."
 
 msgid "Normal"
 msgstr "عادي"
+
+msgid "Not found"
+msgstr ""
 
 msgid "Notes"
 msgstr "ملاحظات"
@@ -1789,6 +1909,12 @@ msgstr "الملكية"
 
 msgid "PDF viewer"
 msgstr "عارض PDF"
+
+msgid "PEM format"
+msgstr ""
+
+msgid "PEM format (stored securely)"
+msgstr ""
 
 msgid "Page {number} of {total}"
 msgstr "الصفحة {number} من {total}"
@@ -1955,6 +2081,9 @@ msgstr "اضغط على \"{buttontext}\" لإعادة الإنشاء"
 msgid "Press Register to regenerate"
 msgstr "اضغط على تسجيل لإعادة الإنشاء"
 
+msgid "Preview"
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -1966,6 +2095,9 @@ msgstr "قائمة الأسعار"
 
 msgid "Priority"
 msgstr "الأولوية"
+
+msgid "Private Key"
+msgstr ""
 
 msgid "Privilege sets"
 msgstr "مجموعات الصلاحيات"
@@ -1980,6 +2112,18 @@ msgid "Profile Image"
 msgstr ""
 
 msgid "Published"
+msgstr ""
+
+msgid "Purge"
+msgstr ""
+
+msgid "Purge All"
+msgstr ""
+
+msgid "Purged %d cache entries"
+msgstr ""
+
+msgid "Purging all cache requires confirmation"
 msgstr ""
 
 msgid "Qty"
@@ -2036,8 +2180,17 @@ msgstr "نوع السجل"
 msgid "Record created successfully"
 msgstr "تم إنشاء السجل بنجاح"
 
+msgid "Record deleted"
+msgstr ""
+
 msgid "Record deleted successfully"
 msgstr "تم حذف السجل بنجاح"
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record saved successfully"
+msgstr ""
 
 msgid "Record updated successfully"
 msgstr "تم تحديث السجل بنجاح"
@@ -2159,6 +2312,9 @@ msgstr "Samizdat هو جزء من مشروع لإنشاء HTML ثابت من م�
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "يستخدم Samizdat أيقونات Bootstrap من {link}."
 
+msgid "Samples of fabric"
+msgstr ""
+
 msgid "Save"
 msgstr "حفظ"
 
@@ -2171,8 +2327,17 @@ msgstr ""
 msgid "Search"
 msgstr "بحث"
 
+msgid "Search cache"
+msgstr ""
+
+msgid "Search certificates..."
+msgstr ""
+
 msgid "Search content"
 msgstr "بحث في المحتوى"
+
+msgid "Search example"
+msgstr ""
 
 msgid "Search examples"
 msgstr ""
@@ -2225,6 +2390,9 @@ msgstr "البحث عن منطقة"
 msgid "Search pages..."
 msgstr "بحث في الصفحات..."
 
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr ""
+
 msgid "Search web content"
 msgstr "بحث في محتوى الويب"
 
@@ -2245,6 +2413,9 @@ msgstr "اختر البلد أو انقر على الأعلام لرؤية ال�
 
 msgid "Select invoice pack"
 msgstr "اختر حزمة الفواتير"
+
+msgid "Select type"
+msgstr ""
 
 msgid "Send SMS"
 msgstr ""
@@ -2409,6 +2580,9 @@ msgid "Sync messages"
 msgstr ""
 
 msgid "Syncing..."
+msgstr ""
+
+msgid "TTL"
 msgstr ""
 
 msgid "Tags"
@@ -2675,8 +2849,14 @@ msgstr "ضريبة القيمة المضافة {rate}\\%"
 msgid "VAT:"
 msgstr "ضريبة القيمة المضافة:"
 
+msgid "Value"
+msgstr ""
+
 msgid "Value for the class attribute."
 msgstr "قيمة لسمة الفئة."
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
 
 msgid "WARNING: Legal Action Pending"
 msgstr ""
@@ -2780,6 +2960,9 @@ msgstr "اسم المنطقة"
 msgid "Zone created successfully"
 msgstr "تم إنشاء المنطقة بنجاح"
 
+msgid "Zone deleted"
+msgstr ""
+
 msgid "Zone deleted successfully"
 msgstr "تم حذف المنطقة بنجاح"
 
@@ -2792,6 +2975,9 @@ msgstr "لم يتم العثور على المنطقة"
 msgid "Zone records"
 msgstr "سجلات المنطقة"
 
+msgid "Zone saved successfully"
+msgstr ""
+
 msgid "Zone updated successfully"
 msgstr "تم تحديث المنطقة بنجاح"
 
@@ -2803,6 +2989,9 @@ msgstr "إضافة {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "cache"
+msgstr ""
 
 msgid "certificates"
 msgstr ""
@@ -2854,6 +3043,9 @@ msgstr ""
 
 msgid "product"
 msgstr "المنتج"
+
+msgid "seconds"
+msgstr ""
 
 msgid "standby firewall"
 msgstr "جدار الحماية الاحتياطي"

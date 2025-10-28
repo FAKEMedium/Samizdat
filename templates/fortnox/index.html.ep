@@ -19,7 +19,7 @@
       <li><%== __('Customers get a list of invoices and open invoice items') %></li>
       <li>
         <%== __('Source code on Github') %>
-        <a href="https://github.com/FAKEMedia/Samizdat" target="_blank"><%== icon 'link', {} %></a>
+        <a href="https://github.com/FAKEMedium/Samizdat" target="_blank"><%== icon 'link', {} %></a>
       </li>
   </div>
   <div class="col-md-4">

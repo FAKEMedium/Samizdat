@@ -133,6 +133,9 @@ msgstr "Añadir fila después"
 msgid "Add Row Before"
 msgstr "Añadir fila antes"
 
+msgid "Add admin"
+msgstr ""
+
 msgid "Add alias"
 msgstr ""
 
@@ -211,6 +214,9 @@ msgstr "Verificación de dirección"
 msgid "Address is required"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
 msgid "Admin access required"
 msgstr ""
 
@@ -250,6 +256,9 @@ msgstr ""
 msgid "Aliases"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "All Messages"
 msgstr ""
 
@@ -280,6 +289,12 @@ msgstr ""
 msgid "Are you sure you want to delete this alias?"
 msgstr ""
 
+msgid "Are you sure you want to delete this cache entry?"
+msgstr ""
+
+msgid "Are you sure you want to delete this certificate?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr ""
 
@@ -294,6 +309,12 @@ msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "¿Está seguro de que desea eliminar este registro?"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr ""
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr ""
 
 msgid "Are you sure you want to resend this invoice?"
 msgstr ""
@@ -319,6 +340,9 @@ msgstr ""
 msgid "Authorize"
 msgstr "Autorizar"
 
+msgid "Auto-renew"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -330,6 +354,9 @@ msgstr "Dirección BIC/Swift:"
 
 msgid "Back"
 msgstr "Atrás"
+
+msgid "Back to List"
+msgstr ""
 
 msgid "Back to domains"
 msgstr ""
@@ -388,6 +415,21 @@ msgstr "Por defecto, no se comparte ninguna información sobre usted."
 msgid "Bytes Used"
 msgstr ""
 
+msgid "Cache"
+msgstr ""
+
+msgid "Cache Entry Details"
+msgstr ""
+
+msgid "Cache Management"
+msgstr ""
+
+msgid "Cache entry deleted successfully"
+msgstr ""
+
+msgid "Cache entry not found or could not be deleted"
+msgstr ""
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "Llamar al ayudante añade el código svg a la tabla de símbolos al principio del documento, más una referencia en línea."
 
@@ -404,6 +446,27 @@ msgid "Captcha was wrong"
 msgstr "El captcha era incorrecto"
 
 msgid "Category"
+msgstr ""
+
+msgid "Certificate"
+msgstr ""
+
+msgid "Certificate Chain"
+msgstr ""
+
+msgid "Certificate created successfully"
+msgstr ""
+
+msgid "Certificate deleted successfully"
+msgstr ""
+
+msgid "Certificate not found"
+msgstr ""
+
+msgid "Certificate renewal initiated"
+msgstr ""
+
+msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
@@ -486,6 +549,9 @@ msgstr ""
 
 msgid "Comments"
 msgstr "Comentarios"
+
+msgid "Common Name"
+msgstr ""
 
 msgid "Company"
 msgstr "Empresa"
@@ -796,6 +862,9 @@ msgstr "Economía"
 msgid "Edit"
 msgstr "Editar"
 
+msgid "Edit Certificate"
+msgstr ""
+
 msgid "Edit Example"
 msgstr ""
 
@@ -803,6 +872,9 @@ msgid "Edit customer {customerid}"
 msgstr "Editar cliente {customerid}"
 
 msgid "Edit page {docpath}"
+msgstr ""
+
+msgid "Edit record"
 msgstr ""
 
 msgid "Edit this page"
@@ -988,8 +1060,14 @@ msgstr "Expandir menú"
 msgid "Expand personal menu."
 msgstr "Expandir menú personal"
 
+msgid "Expired"
+msgstr ""
+
 msgid "Expires"
 msgstr "Expira"
+
+msgid "Expires At"
+msgstr ""
 
 msgid "Expiring"
 msgstr ""
@@ -997,8 +1075,8 @@ msgstr ""
 msgid "Expiring domains"
 msgstr "Dominios a punto de expirar"
 
-msgid "FAKE Media"
-msgstr "FAKE Media"
+msgid "FAKE Medium"
+msgstr "FAKE Medium"
 
 msgid "FAKE News by country"
 msgstr "FAKE News por país"
@@ -1008,6 +1086,9 @@ msgstr ""
 
 msgid "Failed login from {ip}"
 msgstr "Inicio de sesión fallido desde {ip}"
+
+msgid "Failed to create certificate"
+msgstr ""
 
 msgid "Failed to create example"
 msgstr ""
@@ -1019,6 +1100,9 @@ msgid "Failed to create zone"
 msgstr "Error al crear zona"
 
 msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete certificate"
 msgstr ""
 
 msgid "Failed to delete domain"
@@ -1054,6 +1138,15 @@ msgstr ""
 msgid "Failed to resend invoice email"
 msgstr ""
 
+msgid "Failed to save certificate"
+msgstr ""
+
+msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save zone"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
@@ -1064,6 +1157,9 @@ msgid "Failed to send reminder"
 msgstr ""
 
 msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update certificate"
 msgstr ""
 
 msgid "Failed to update domain"
@@ -1383,6 +1479,9 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] "Facturación, 1 artículo"
 msgstr[1] "Facturación, {number} artículos"
 
+msgid "Issuer"
+msgstr ""
+
 msgid "It can be configured to display everything publicly as well."
 msgstr "También se puede configurar para mostrar todo públicamente."
 
@@ -1403,6 +1502,9 @@ msgstr "Cursiva"
 
 msgid "Keep me logged in"
 msgstr "Mantenerme conectado"
+
+msgid "Key"
+msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr "¡Eche al ministro de defensa ruso Sergei Shoigu!"
@@ -1620,6 +1722,15 @@ msgstr "Importe neto:"
 msgid "Network error - please try again"
 msgstr "Error de red - por favor inténtelo de nuevo"
 
+msgid "Never"
+msgstr ""
+
+msgid "Never expires"
+msgstr ""
+
+msgid "New Certificate"
+msgstr ""
+
 msgid "New Example"
 msgstr ""
 
@@ -1659,6 +1770,12 @@ msgstr ""
 msgid "No"
 msgstr "No"
 
+msgid "No cache entries found"
+msgstr ""
+
+msgid "No certificates found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "No hay cliente #{customerid}."
 
@@ -1685,6 +1802,9 @@ msgstr "Ningún cliente seleccionado."
 
 msgid "Normal"
 msgstr "Normal"
+
+msgid "Not found"
+msgstr ""
 
 msgid "Notes"
 msgstr "Notas"
@@ -1757,6 +1877,12 @@ msgstr "Propiedad"
 
 msgid "PDF viewer"
 msgstr "Visor PDF"
+
+msgid "PEM format"
+msgstr ""
+
+msgid "PEM format (stored securely)"
+msgstr ""
 
 msgid "Page {number} of {total}"
 msgstr "Página {number} de {total}"
@@ -1923,6 +2049,9 @@ msgstr "Pulse \"{buttontext}\" para regenerar"
 msgid "Press Register to regenerate"
 msgstr "Pulse Registrar para regenerar"
 
+msgid "Preview"
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -1934,6 +2063,9 @@ msgstr "Lista de Precios"
 
 msgid "Priority"
 msgstr "Prioridad"
+
+msgid "Private Key"
+msgstr ""
 
 msgid "Privilege sets"
 msgstr "Conjuntos de privilegios"
@@ -1948,6 +2080,18 @@ msgid "Profile Image"
 msgstr ""
 
 msgid "Published"
+msgstr ""
+
+msgid "Purge"
+msgstr ""
+
+msgid "Purge All"
+msgstr ""
+
+msgid "Purged %d cache entries"
+msgstr ""
+
+msgid "Purging all cache requires confirmation"
 msgstr ""
 
 msgid "Qty"
@@ -2004,8 +2148,17 @@ msgstr "Tipo de Registro"
 msgid "Record created successfully"
 msgstr "Registro creado correctamente"
 
+msgid "Record deleted"
+msgstr ""
+
 msgid "Record deleted successfully"
 msgstr "Registro eliminado correctamente"
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record saved successfully"
+msgstr ""
 
 msgid "Record updated successfully"
 msgstr "Registro actualizado correctamente"
@@ -2127,6 +2280,9 @@ msgstr "Samizdat es parte de un proyecto para crear HTML estático a partir de a
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat utiliza los iconos Bootstrap de {link}."
 
+msgid "Samples of fabric"
+msgstr ""
+
 msgid "Save"
 msgstr "Guardar"
 
@@ -2139,8 +2295,17 @@ msgstr ""
 msgid "Search"
 msgstr "Buscar"
 
+msgid "Search cache"
+msgstr ""
+
+msgid "Search certificates..."
+msgstr ""
+
 msgid "Search content"
 msgstr "Buscar contenido"
+
+msgid "Search example"
+msgstr ""
 
 msgid "Search examples"
 msgstr ""
@@ -2193,6 +2358,9 @@ msgstr "Buscar zona"
 msgid "Search pages..."
 msgstr "Buscar páginas..."
 
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr ""
+
 msgid "Search web content"
 msgstr "Buscar contenido web"
 
@@ -2213,6 +2381,9 @@ msgstr "Seleccione país o haga clic en las banderas para ver detalles"
 
 msgid "Select invoice pack"
 msgstr "Seleccionar paquete de facturas"
+
+msgid "Select type"
+msgstr ""
 
 msgid "Send SMS"
 msgstr ""
@@ -2377,6 +2548,9 @@ msgid "Sync messages"
 msgstr ""
 
 msgid "Syncing..."
+msgstr ""
+
+msgid "TTL"
 msgstr ""
 
 msgid "Tags"
@@ -2643,8 +2817,14 @@ msgstr "IVA {rate}\\%"
 msgid "VAT:"
 msgstr "IVA:"
 
+msgid "Value"
+msgstr ""
+
 msgid "Value for the class attribute."
 msgstr "Valor para el atributo class."
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
 
 msgid "WARNING: Legal Action Pending"
 msgstr ""
@@ -2748,6 +2928,9 @@ msgstr "Nombre de Zona"
 msgid "Zone created successfully"
 msgstr "Zona creada correctamente"
 
+msgid "Zone deleted"
+msgstr ""
+
 msgid "Zone deleted successfully"
 msgstr "Zona eliminada correctamente"
 
@@ -2760,6 +2943,9 @@ msgstr "Zona no encontrada"
 msgid "Zone records"
 msgstr "Registros de zona"
 
+msgid "Zone saved successfully"
+msgstr ""
+
 msgid "Zone updated successfully"
 msgstr "Zona actualizada correctamente"
 
@@ -2771,6 +2957,9 @@ msgstr "añadir {fee}"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "cache"
+msgstr ""
 
 msgid "certificates"
 msgstr ""
@@ -2822,6 +3011,9 @@ msgstr ""
 
 msgid "product"
 msgstr "producto"
+
+msgid "seconds"
+msgstr ""
 
 msgid "standby firewall"
 msgstr "cortafuegos en espera"

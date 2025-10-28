@@ -1,10 +1,10 @@
 ---
 secrets:
   - b3133e5e7c653c995aa10d604fdab9917430ff26
-organization: FAKE Media
+organization: ACME Inc.
 sitename: Example
 shortsitename: Example
-description: Example, a fullstack static content hybrid generator for extreme speed and optional disconnected use.
+description: Example, a fullstack static content hybrid generator for speed and optional disconnected use.
 siteurl: https://example.com:3443/
 host: example.com
 extraplugins:
@@ -13,6 +13,8 @@ logotype: media/images/fakenews.svg
 favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
+pagination:
+  perpage: 10
 manager:
   url: /manager/
   customer:
@@ -105,19 +107,18 @@ manager:
       username: zaphod
       password: s3cr3t
       secret: s3cr3t               # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
-      perpage: 10
   cache:
     cardnumber: 13
     lifetime: 7200                 # Seconds to live (default TTL for cached items)
     encrypt: 1                     # Enable AES-256-GCM encryption for cached data (requires session)
 screenshots:
   -
-    src: /media/images/notrust.jpg
+    src: /media/images/samizdat.jpg
     type: image/jpeg
     sizes: 711x441
     form_factor: wide
   -
-    src: /media/images/notrust.jpg
+    src: /media/images/samizdat.jpg
     type: image/jpeg
     sizes: 441x711
     form_factor: narrow
@@ -130,7 +131,7 @@ humans: |
     Contact: beeblebrox[at]example.com
     From: Lund, Sweden
   
-    You could be listed here too. Make your contributions on https://github.com/FakenewsCom/Samizdat.
+    You could be listed here too. Make your contributions on https://github.com/FAKEMedium/Samizdat.
   
   /* SITE */
     Language: English / Swedish
@@ -204,7 +205,7 @@ hypnotoad:
   pid_file: bin/samizdat.pid
   proxy: 1                                  # Reverse proxy to the web server, e.g. nginx
 extratemplates:
-  - /usr/local/share/perl/5.38.0/Mojolicious/resources/templates/mojo
+  - /usr/local/share/perl/5.42.0/Mojolicious/resources/templates/mojo
 nginx: 1
 cache: 1
 bundlename: samizdat

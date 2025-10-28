@@ -133,6 +133,9 @@ msgstr "पंक्ति बाद जोड़ें"
 msgid "Add Row Before"
 msgstr "पंक्ति पहले जोड़ें"
 
+msgid "Add admin"
+msgstr ""
+
 msgid "Add alias"
 msgstr ""
 
@@ -211,6 +214,9 @@ msgstr "पता जांच"
 msgid "Address is required"
 msgstr ""
 
+msgid "Admin"
+msgstr ""
+
 msgid "Admin access required"
 msgstr ""
 
@@ -250,6 +256,9 @@ msgstr ""
 msgid "Aliases"
 msgstr ""
 
+msgid "All"
+msgstr ""
+
 msgid "All Messages"
 msgstr ""
 
@@ -280,6 +289,12 @@ msgstr ""
 msgid "Are you sure you want to delete this alias?"
 msgstr ""
 
+msgid "Are you sure you want to delete this cache entry?"
+msgstr ""
+
+msgid "Are you sure you want to delete this certificate?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr ""
 
@@ -294,6 +309,12 @@ msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr ""
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr ""
 
 msgid "Are you sure you want to resend this invoice?"
 msgstr ""
@@ -319,6 +340,9 @@ msgstr ""
 msgid "Authorize"
 msgstr "प्राधिकृत करें"
 
+msgid "Auto-renew"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/स्विफ्ट"
 
@@ -330,6 +354,9 @@ msgstr "BIC/स्विफ्ट पता:"
 
 msgid "Back"
 msgstr "वापस"
+
+msgid "Back to List"
+msgstr ""
 
 msgid "Back to domains"
 msgstr ""
@@ -388,6 +415,21 @@ msgstr "डिफ़ॉल्ट रूप से आपके बारे म�
 msgid "Bytes Used"
 msgstr ""
 
+msgid "Cache"
+msgstr ""
+
+msgid "Cache Entry Details"
+msgstr ""
+
+msgid "Cache Management"
+msgstr ""
+
+msgid "Cache entry deleted successfully"
+msgstr ""
+
+msgid "Cache entry not found or could not be deleted"
+msgstr ""
+
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "हेल्पर को कॉल करने से svg कोड दस्तावेज़ की शुरुआत में प्रतीक तालिका में जोड़ा जाता है, साथ ही इसका इनलाइन संदर्भ भी।"
 
@@ -404,6 +446,27 @@ msgid "Captcha was wrong"
 msgstr "कैप्चा गलत था"
 
 msgid "Category"
+msgstr ""
+
+msgid "Certificate"
+msgstr ""
+
+msgid "Certificate Chain"
+msgstr ""
+
+msgid "Certificate created successfully"
+msgstr ""
+
+msgid "Certificate deleted successfully"
+msgstr ""
+
+msgid "Certificate not found"
+msgstr ""
+
+msgid "Certificate renewal initiated"
+msgstr ""
+
+msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
@@ -486,6 +549,9 @@ msgstr ""
 
 msgid "Comments"
 msgstr "टिप्पणियाँ"
+
+msgid "Common Name"
+msgstr ""
 
 msgid "Company"
 msgstr "कंपनी"
@@ -796,6 +862,9 @@ msgstr "अर्थव्यवस्था"
 msgid "Edit"
 msgstr "संपादित करें"
 
+msgid "Edit Certificate"
+msgstr ""
+
 msgid "Edit Example"
 msgstr ""
 
@@ -803,6 +872,9 @@ msgid "Edit customer {customerid}"
 msgstr "ग्राहक {customerid} संपादित करें"
 
 msgid "Edit page {docpath}"
+msgstr ""
+
+msgid "Edit record"
 msgstr ""
 
 msgid "Edit this page"
@@ -988,8 +1060,14 @@ msgstr "मेनू विस्तारित करें"
 msgid "Expand personal menu."
 msgstr "व्यक्तिगत मेनू विस्तारित करें।"
 
+msgid "Expired"
+msgstr ""
+
 msgid "Expires"
 msgstr "समाप्त होता है"
+
+msgid "Expires At"
+msgstr ""
 
 msgid "Expiring"
 msgstr ""
@@ -997,7 +1075,7 @@ msgstr ""
 msgid "Expiring domains"
 msgstr "समाप्त हो रहे डोमेन"
 
-msgid "FAKE Media"
+msgid "FAKE Medium"
 msgstr "नकली मीडिया"
 
 msgid "FAKE News by country"
@@ -1009,6 +1087,9 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr "{ip} से लॉगिन विफल"
 
+msgid "Failed to create certificate"
+msgstr ""
+
 msgid "Failed to create example"
 msgstr ""
 
@@ -1019,6 +1100,9 @@ msgid "Failed to create zone"
 msgstr "ज़ोन बनाने में विफल"
 
 msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete certificate"
 msgstr ""
 
 msgid "Failed to delete domain"
@@ -1054,6 +1138,15 @@ msgstr ""
 msgid "Failed to resend invoice email"
 msgstr ""
 
+msgid "Failed to save certificate"
+msgstr ""
+
+msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save zone"
+msgstr ""
+
 msgid "Failed to send SMS"
 msgstr ""
 
@@ -1064,6 +1157,9 @@ msgid "Failed to send reminder"
 msgstr ""
 
 msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update certificate"
 msgstr ""
 
 msgid "Failed to update domain"
@@ -1383,6 +1479,9 @@ msgid_plural "Invoicing, {number} items"
 msgstr[0] "बिलिंग, 1 आइटम"
 msgstr[1] "बिलिंग, {number} आइटम"
 
+msgid "Issuer"
+msgstr ""
+
 msgid "It can be configured to display everything publicly as well."
 msgstr "इसे सब कुछ सार्वजनिक रूप से प्रदर्शित करने के लिए भी कॉन्फ़िगर किया जा सकता है।"
 
@@ -1403,6 +1502,9 @@ msgstr "तिरछा"
 
 msgid "Keep me logged in"
 msgstr "मुझे लॉग इन रखें"
+
+msgid "Key"
+msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr "रूसी रक्षा मंत्री सर्गेई शोइगु को किक करें!"
@@ -1620,6 +1722,15 @@ msgstr "निवल राशि:"
 msgid "Network error - please try again"
 msgstr "नेटवर्क त्रुटि - कृपया पुनः प्रयास करें"
 
+msgid "Never"
+msgstr ""
+
+msgid "Never expires"
+msgstr ""
+
+msgid "New Certificate"
+msgstr ""
+
 msgid "New Example"
 msgstr ""
 
@@ -1659,6 +1770,12 @@ msgstr ""
 msgid "No"
 msgstr "नहीं"
 
+msgid "No cache entries found"
+msgstr ""
+
+msgid "No certificates found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
 
@@ -1685,6 +1802,9 @@ msgstr "कोई ग्राहक चयनित नहीं।"
 
 msgid "Normal"
 msgstr "सामान्य"
+
+msgid "Not found"
+msgstr ""
 
 msgid "Notes"
 msgstr "नोट्स"
@@ -1757,6 +1877,12 @@ msgstr "स्वामित्व"
 
 msgid "PDF viewer"
 msgstr "पीडीएफ व्यूअर"
+
+msgid "PEM format"
+msgstr ""
+
+msgid "PEM format (stored securely)"
+msgstr ""
 
 msgid "Page {number} of {total}"
 msgstr "पृष्ठ {number} / {total}"
@@ -1923,6 +2049,9 @@ msgstr "पुनः उत्पन्न करने के लिए \"{butt
 msgid "Press Register to regenerate"
 msgstr "पुनः उत्पन्न करने के लिए रजिस्टर दबाएं"
 
+msgid "Preview"
+msgstr ""
+
 msgid "Previous"
 msgstr ""
 
@@ -1934,6 +2063,9 @@ msgstr "मूल्य सूची"
 
 msgid "Priority"
 msgstr "प्राथमिकता"
+
+msgid "Private Key"
+msgstr ""
 
 msgid "Privilege sets"
 msgstr "विशेषाधिकार सेट"
@@ -1948,6 +2080,18 @@ msgid "Profile Image"
 msgstr ""
 
 msgid "Published"
+msgstr ""
+
+msgid "Purge"
+msgstr ""
+
+msgid "Purge All"
+msgstr ""
+
+msgid "Purged %d cache entries"
+msgstr ""
+
+msgid "Purging all cache requires confirmation"
 msgstr ""
 
 msgid "Qty"
@@ -2004,8 +2148,17 @@ msgstr "रिकॉर्ड प्रकार"
 msgid "Record created successfully"
 msgstr "रिकॉर्ड सफलतापूर्वक बनाया गया"
 
+msgid "Record deleted"
+msgstr ""
+
 msgid "Record deleted successfully"
 msgstr "रिकॉर्ड सफलतापूर्वक हटाया गया"
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record saved successfully"
+msgstr ""
 
 msgid "Record updated successfully"
 msgstr "रिकॉर्ड सफलतापूर्वक अपडेट किया गया"
@@ -2127,6 +2280,9 @@ msgstr "Samizdat GitHub पर अपलोड की गई markdown फाइ�
 msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "समिज़दात {link} से बूटस्ट्रैप आइकन का उपयोग करता है।"
 
+msgid "Samples of fabric"
+msgstr ""
+
 msgid "Save"
 msgstr "सहेजें"
 
@@ -2139,8 +2295,17 @@ msgstr ""
 msgid "Search"
 msgstr "खोजें"
 
+msgid "Search cache"
+msgstr ""
+
+msgid "Search certificates..."
+msgstr ""
+
 msgid "Search content"
 msgstr "सामग्री खोजें"
+
+msgid "Search example"
+msgstr ""
 
 msgid "Search examples"
 msgstr ""
@@ -2193,6 +2358,9 @@ msgstr "ज़ोन खोजें"
 msgid "Search pages..."
 msgstr "पेज खोजें..."
 
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr ""
+
 msgid "Search web content"
 msgstr "वेब सामग्री खोजें"
 
@@ -2213,6 +2381,9 @@ msgstr "देश चुनें या विवरण देखने के 
 
 msgid "Select invoice pack"
 msgstr "इनवॉइस पैक चुनें"
+
+msgid "Select type"
+msgstr ""
 
 msgid "Send SMS"
 msgstr ""
@@ -2377,6 +2548,9 @@ msgid "Sync messages"
 msgstr ""
 
 msgid "Syncing..."
+msgstr ""
+
+msgid "TTL"
 msgstr ""
 
 msgid "Tags"
@@ -2643,8 +2817,14 @@ msgstr "वैट {rate}\\%"
 msgid "VAT:"
 msgstr "वैट:"
 
+msgid "Value"
+msgstr ""
+
 msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
 
 msgid "WARNING: Legal Action Pending"
 msgstr ""
@@ -2748,6 +2928,9 @@ msgstr "ज़ोन नाम"
 msgid "Zone created successfully"
 msgstr "ज़ोन सफलतापूर्वक बनाया गया"
 
+msgid "Zone deleted"
+msgstr ""
+
 msgid "Zone deleted successfully"
 msgstr "ज़ोन सफलतापूर्वक हटाया गया"
 
@@ -2760,6 +2943,9 @@ msgstr "ज़ोन नहीं मिला"
 msgid "Zone records"
 msgstr "ज़ोन रिकॉर्ड"
 
+msgid "Zone saved successfully"
+msgstr ""
+
 msgid "Zone updated successfully"
 msgstr "ज़ोन सफलतापूर्वक अपडेट किया गया"
 
@@ -2771,6 +2957,9 @@ msgstr "{fee} जोड़ें"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "cache"
+msgstr ""
 
 msgid "certificates"
 msgstr ""
@@ -2822,6 +3011,9 @@ msgstr ""
 
 msgid "product"
 msgstr "उत्पाद"
+
+msgid "seconds"
+msgstr ""
 
 msgid "standby firewall"
 msgstr "स्टैंडबाय फायरवॉल"
