@@ -7,7 +7,6 @@
 <html class="no-js" lang="<%== language %>" dir="<%== $dir %>">
   <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Samizdat">
   <% for my $meta (keys %{ $web->{head}->{meta} }) { =%>
@@ -41,6 +40,7 @@
     </svg>
     <aside aria-live="polite" aria-atomic="true" class="sticky-top">
       <div id="toast-messages" class="toast-container top-0 start-0 p-3">
+        <!-- Toast messages will be injected here -->
       </div>
     </aside>
     <header>
@@ -67,6 +67,7 @@
     <a id="startdoc" href="javascript:;" class="d-print-none" title="<%== __('Start') %>"></a>
     <div id="universalmodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
       <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center">
+        <!-- Modal content will be injected here -->
       </div>
     </div>
     <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0">
