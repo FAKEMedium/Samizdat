@@ -174,7 +174,7 @@ sub startup ($self) {
     # Update cookie if it doesn't match current language
     if ($cookie_lang ne $language) {
       $c->cookie(language => $language, {
-        secure   => 0,
+        secure   => 1,
         httponly => 0,
         path     => '/',
         expires  => time + 360000,
