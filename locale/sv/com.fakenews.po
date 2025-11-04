@@ -167,7 +167,7 @@ msgid "Add mail domain"
 msgstr "Ny maildomän"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "Lägg till brevlåda"
 
 msgid "Add page"
 msgstr "Lägg till sida"
@@ -212,7 +212,7 @@ msgid "Address check"
 msgstr "Adresskontroll"
 
 msgid "Address is required"
-msgstr ""
+msgstr "Adress krävs"
 
 msgid "Admin"
 msgstr ""
@@ -341,7 +341,7 @@ msgid "Authorize"
 msgstr "Auktorisera"
 
 msgid "Auto-renew"
-msgstr ""
+msgstr "Förnyas automatiskt"
 
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
@@ -353,16 +353,19 @@ msgid "Back"
 msgstr "Tillbaka"
 
 msgid "Back to List"
-msgstr ""
+msgstr "Tillbaka till listan"
 
 msgid "Back to domains"
-msgstr ""
+msgstr "Tillbaka till domäner"
 
 msgid "Back to list"
 msgstr "Tillbaka till listan"
 
 msgid "Bankgiro"
 msgstr "Bankgiro"
+
+msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
+msgstr "Bankgironumret är samma som tidigare, men IBAN och BIC/SWIFT är annorlunda."
 
 msgid "Barred"
 msgstr "Spärrade"
@@ -440,25 +443,25 @@ msgid "Category"
 msgstr "Kategori"
 
 msgid "Certificate"
-msgstr ""
+msgstr "Certifikat"
 
 msgid "Certificate Chain"
-msgstr ""
+msgstr "Certifikatkedja"
 
 msgid "Certificate created successfully"
-msgstr ""
+msgstr "Certifikat skapades"
 
 msgid "Certificate deleted successfully"
-msgstr ""
+msgstr "Certifikat togs bort"
 
 msgid "Certificate not found"
 msgstr ""
 
 msgid "Certificate renewal initiated"
-msgstr ""
+msgstr "Certifikatförnyelse initierad"
 
 msgid "Certificate updated successfully"
-msgstr ""
+msgstr "Certifikat uppdaterades"
 
 msgid "Certificates"
 msgstr "Certifikat"
@@ -533,13 +536,13 @@ msgid "Comma separated"
 msgstr "Kommaseparerad"
 
 msgid "Comma-separated list of email addresses"
-msgstr ""
+msgstr "Kommaseparerad lista med e-postadresser"
 
 msgid "Comments"
 msgstr "Kommentarer"
 
 msgid "Common Name"
-msgstr ""
+msgstr "Efternamn"
 
 msgid "Company"
 msgstr "Företag"
@@ -785,25 +788,25 @@ msgid "Domain"
 msgstr "Domän"
 
 msgid "Domain created successfully"
-msgstr ""
+msgstr "Domän skapades"
 
 msgid "Domain deleted successfully"
-msgstr ""
+msgstr "Domän togs bort"
 
 msgid "Domain name is required"
-msgstr ""
+msgstr "Domännamn krävs"
 
 msgid "Domain not found"
-msgstr ""
+msgstr "Domänen hittades inte"
 
 msgid "Domain registration"
 msgstr "Domänregistrering"
 
 msgid "Domain saved successfully"
-msgstr ""
+msgstr "Domän sparades"
 
 msgid "Domain updated successfully"
-msgstr ""
+msgstr "Domän uppdaterades"
 
 msgid "Domains"
 msgstr "Domäner"
@@ -833,7 +836,7 @@ msgid "Edit"
 msgstr "Redigera"
 
 msgid "Edit Certificate"
-msgstr ""
+msgstr "Redigera certifikat"
 
 msgid "Edit Example"
 msgstr "Redigera exempel"
@@ -845,7 +848,7 @@ msgid "Edit page {docpath}"
 msgstr "Redigera sida {docpath}"
 
 msgid "Edit record"
-msgstr ""
+msgstr "Redigera post"
 
 msgid "Edit this page"
 msgstr "Redigera denna sida"
@@ -869,7 +872,7 @@ msgid "Email (billing)"
 msgstr "Epost (faktura)"
 
 msgid "Email Address"
-msgstr ""
+msgstr "E-postadress"
 
 msgid "Email Confirmed!"
 msgstr "E-post bekräftad!"
@@ -878,7 +881,7 @@ msgid "Email Invoice"
 msgstr "Maila faktura"
 
 msgid "Email Management"
-msgstr ""
+msgstr "Mailhantering"
 
 msgid "Email Offer"
 msgstr "Maila offert"
@@ -1055,7 +1058,7 @@ msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
 msgid "Failed to create certificate"
-msgstr ""
+msgstr "Misslyckades skapa certifikat"
 
 msgid "Failed to create example"
 msgstr "Misslyckades skapa exempel"
@@ -1067,19 +1070,19 @@ msgid "Failed to create zone"
 msgstr "Misslyckades skapa zon"
 
 msgid "Failed to delete alias"
-msgstr ""
+msgstr "Misslyckades ta bort alias"
 
 msgid "Failed to delete certificate"
-msgstr ""
+msgstr "Misslyckades ta bort certifikat"
 
 msgid "Failed to delete domain"
-msgstr ""
+msgstr "Misslyckades ta bort domän"
 
 msgid "Failed to delete example"
 msgstr "Misslyckades ta bort exempel"
 
 msgid "Failed to delete mailbox"
-msgstr ""
+msgstr "Misslyckades ta bort brevlåda"
 
 msgid "Failed to delete message"
 msgstr "Misslyckades ta bort meddelande"
@@ -1106,13 +1109,13 @@ msgid "Failed to resend invoice email"
 msgstr "Misslyckades med att maila faktura"
 
 msgid "Failed to save certificate"
-msgstr ""
+msgstr "Misslyckades spara certifikat"
 
 msgid "Failed to save record"
-msgstr ""
+msgstr "Misslyckades spara post"
 
 msgid "Failed to save zone"
-msgstr ""
+msgstr "Misslyckades spara zon"
 
 msgid "Failed to send SMS"
 msgstr "Misslyckades skicka SMS"
@@ -1124,19 +1127,19 @@ msgid "Failed to send reminder"
 msgstr "Misslyckades skicka påminnelse"
 
 msgid "Failed to update alias"
-msgstr ""
+msgstr "Misslyckades uppdatera alias"
 
 msgid "Failed to update certificate"
-msgstr ""
+msgstr "Misslyckades uppdatera certifikat"
 
 msgid "Failed to update domain"
-msgstr ""
+msgstr "Misslyckades uppdatera domän"
 
 msgid "Failed to update example"
 msgstr "Misslyckades uppdatera exempel"
 
 msgid "Failed to update mailbox"
-msgstr ""
+msgstr "Misslyckades uppdatera brevlåda"
 
 msgid "Failed to update payment date"
 msgstr "Misslyckades med att uppdatera betaldatum"
@@ -1208,10 +1211,13 @@ msgid "Fortnox was founded in 2001 with headquarters in Växjö."
 msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 
 msgid "Forward To"
-msgstr ""
+msgstr "Skicka vidare till"
 
 msgid "From"
 msgstr "Från"
+
+msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr "Från och med 2025-11-01 använder vi Sparbanken Syd."
 
 msgid "Full"
 msgstr "Full"
@@ -1277,7 +1283,7 @@ msgid "If you have already made payment, please contact us IMMEDIATELY with proo
 msgstr ""
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
-msgstr ""
+msgstr "Om ni redan har betalat, kontakta oss OMDELbart med bevis på betalning."
 
 msgid "If you have already paid, please disregard this reminder."
 msgstr "Bortse från detta meddelande om ni nyligen betalat."
@@ -1322,7 +1328,7 @@ msgid "Invalid form data"
 msgstr "Ogiltiga formulärdata"
 
 msgid "Invalid invoice ID"
-msgstr ""
+msgstr "Ogiltigt faktura-ID"
 
 msgid "Invalid password"
 msgstr "Ogiltigt lösenord"
@@ -1367,7 +1373,7 @@ msgid "Invoice is credited"
 msgstr "Fakturan är krediterad"
 
 msgid "Invoice must be in fakturerad state to send reminders"
-msgstr ""
+msgstr "Fakturan måste vara i fakturerad status för att påminnelser ska vara möjliga"
 
 msgid "Invoice number"
 msgstr "Fakturanummer"
@@ -1429,7 +1435,7 @@ msgstr[0] "Fakturering, 1 rad"
 msgstr[1] "Fakturering, {number} rader"
 
 msgid "Issuer"
-msgstr ""
+msgstr "Utfärdare"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "Det kan konfigureras för att visa allt offentligt också."
@@ -1453,10 +1459,10 @@ msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
 
 msgid "Key"
-msgstr ""
+msgstr "Nyckel"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr "Avsätt ryska försvarsministern Sergei Shoigu!"
+msgstr ""
 
 msgid "Kunder"
 msgstr "Customers"
@@ -1561,28 +1567,28 @@ msgid "Mail sent through own servers"
 msgstr "Mail skickas genom egna servrar"
 
 msgid "Mailbox"
-msgstr ""
+msgstr "Brevlåda"
 
 msgid "Mailbox created successfully"
-msgstr ""
+msgstr "Brevlåda skapades"
 
 msgid "Mailbox deleted successfully"
-msgstr ""
+msgstr "Brevlåda togs bort"
 
 msgid "Mailbox not found"
-msgstr ""
+msgstr "Brevlåda hittades inte"
 
 msgid "Mailbox saved successfully"
-msgstr ""
+msgstr "Brevlåda sparades"
 
 msgid "Mailbox updated successfully"
-msgstr ""
+msgstr "Brevlåda uppdaterades"
 
 msgid "Mailboxes"
-msgstr ""
+msgstr "Brevlådor"
 
 msgid "Mailboxes for"
-msgstr ""
+msgstr "Brevlådor för"
 
 msgid "Make invoice"
 msgstr "Skapa faktura"
@@ -1672,13 +1678,13 @@ msgid "Network error - please try again"
 msgstr "Nätverksfel - försök igen"
 
 msgid "Never"
-msgstr ""
+msgstr "Aldrig"
 
 msgid "Never expires"
-msgstr ""
+msgstr "Går aldrig ut"
 
 msgid "New Certificate"
-msgstr ""
+msgstr "Nytt certifikat"
 
 msgid "New Example"
 msgstr "Nytt exempel"
@@ -1717,10 +1723,10 @@ msgid "No"
 msgstr "Nej"
 
 msgid "No cache entries found"
-msgstr ""
+msgstr "Inga cacheposter hittades"
 
 msgid "No certificates found"
-msgstr ""
+msgstr "Inga certifikat hittades"
 
 msgid "No customer #{customerid}."
 msgstr "Ingen kund #{customerid}."
@@ -1750,7 +1756,7 @@ msgid "Normal"
 msgstr "Normal"
 
 msgid "Not found"
-msgstr ""
+msgstr "Hittades inte"
 
 msgid "Notes"
 msgstr "Anteckningar"
@@ -1800,6 +1806,9 @@ msgstr "Organisationsnummer"
 msgid "Original due date"
 msgstr "Ursprungligt förfallodatum"
 
+msgid "Our Plusgiro will soon disappear too."
+msgstr "Vårt Plusgiro kommer snart att försvinna också."
+
 msgid "Our Reference"
 msgstr "Vår referens"
 
@@ -1822,10 +1831,10 @@ msgid "PDF viewer"
 msgstr "PDF-visare"
 
 msgid "PEM format"
-msgstr ""
+msgstr "PEM-format"
 
 msgid "PEM format (stored securely)"
-msgstr ""
+msgstr "PEM-format (lagrat säkert)"
 
 msgid "Page {number} of {total}"
 msgstr "Sida {number} av  {total}"
@@ -1984,7 +1993,7 @@ msgid "Press Register to regenerate"
 msgstr "Tryck Registrera för ny captcha"
 
 msgid "Preview"
-msgstr ""
+msgstr "Förhandsgranska"
 
 msgid "Previous"
 msgstr "Föregående"
@@ -1999,7 +2008,7 @@ msgid "Priority"
 msgstr "Prioritet"
 
 msgid "Private Key"
-msgstr ""
+msgstr "Privata nyckeln"
 
 msgid "Privilege sets"
 msgstr "Behörighetsgrupper"
@@ -2017,16 +2026,16 @@ msgid "Published"
 msgstr "Publicerad"
 
 msgid "Purge"
-msgstr ""
+msgstr "Rensa"
 
 msgid "Purge All"
-msgstr ""
+msgstr "Rensa allt"
 
 msgid "Purged %d cache entries"
-msgstr ""
+msgstr "Rensade %d cacheposter"
 
 msgid "Purging all cache requires confirmation"
-msgstr ""
+msgstr "Det krävs bekräftelse för att rensa all cache"
 
 msgid "Qty"
 msgstr "Antal"
@@ -2041,16 +2050,16 @@ msgid "Quarter"
 msgstr "Kvartal"
 
 msgid "Quota"
-msgstr ""
+msgstr "Gräns"
 
 msgid "Quota (MB)"
-msgstr ""
+msgstr "G"
 
 msgid "Quota updated successfully"
-msgstr ""
+msgstr "Uppdaterade gräns"
 
 msgid "Quotas"
-msgstr ""
+msgstr "Gränser"
 
 msgid "Quote"
 msgstr "Citat"
@@ -2083,16 +2092,16 @@ msgid "Record created successfully"
 msgstr "Lyckades skapa post"
 
 msgid "Record deleted"
-msgstr ""
+msgstr "Tog bort post"
 
 msgid "Record deleted successfully"
 msgstr "Tog bort post"
 
 msgid "Record not found"
-msgstr ""
+msgstr "Post hittades inte"
 
 msgid "Record saved successfully"
-msgstr ""
+msgstr "Sparade post"
 
 msgid "Record updated successfully"
 msgstr "Uppdaterade post"
@@ -2209,7 +2218,7 @@ msgid "Samizdat uses the Bootstrap icons from {link}."
 msgstr "Samizdat använder Bootstrapikonerna från {link}."
 
 msgid "Samples of fabric"
-msgstr ""
+msgstr "Tygprover"
 
 msgid "Save"
 msgstr "Spara"
@@ -2224,16 +2233,16 @@ msgid "Search"
 msgstr "Sök"
 
 msgid "Search cache"
-msgstr ""
+msgstr "Sök cache"
 
 msgid "Search certificates..."
-msgstr ""
+msgstr "Sök certifikat..."
 
 msgid "Search content"
 msgstr "Sök innehåll"
 
 msgid "Search example"
-msgstr ""
+msgstr "Sök exempel"
 
 msgid "Search examples"
 msgstr "Sök exempel"
@@ -2287,7 +2296,7 @@ msgid "Search pages..."
 msgstr "Sök sidor..."
 
 msgid "Search pattern (e.g. fortnox:*, user:*)"
-msgstr ""
+msgstr "Sökmönster (t.ex. fortnox:*, user:*)"
 
 msgid "Search web content"
 msgstr "Sök webbinnehåll"
@@ -2311,7 +2320,7 @@ msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
 
 msgid "Select type"
-msgstr ""
+msgstr "Välj typ"
 
 msgid "Send SMS"
 msgstr "Skicka SMS"
@@ -2572,16 +2581,16 @@ msgid "This integration is developed and maintained by Rymdweb AB."
 msgstr "Denna integration utvecklas och underhålls av Rymdweb AB."
 
 msgid "This is a final reminder regarding your overdue invoice."
-msgstr ""
+msgstr "Detta är en sista påminnelse angående din förfallna faktura."
 
 msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
-msgstr ""
+msgstr "Detta är en automatisk påminnelse. Underlåtenhet att betala kan leda till avbrott i tjänsterna och andra åtgärder."
 
 msgid "This might be an oversight, so we wanted to send a friendly reminder."
 msgstr "Eftersom det är lätt att missa en betalning vill vi skicka en vänlig påminnelse."
 
 msgid "This will result in additional fees and may affect your credit rating."
-msgstr ""
+msgstr "Detta kommer att resultera i extra avgifter och kan påverka er kreditvärdighet."
 
 msgid "Time"
 msgstr "Tid"
@@ -2689,7 +2698,7 @@ msgid "Username could not be created"
 msgstr "Användarnamnet kunde inte skapas"
 
 msgid "Username is required"
-msgstr ""
+msgstr "Användarnamn krävs"
 
 msgid "Username must be at least {min} characters"
 msgstr "Användarnamnet måste vara minst {min} tecken"
@@ -2731,7 +2740,7 @@ msgid "VAT {rate}\\%"
 msgstr "Moms {rate}\\%"
 
 msgid "Value"
-msgstr ""
+msgstr "Värde"
 
 msgid "Value for the class attribute."
 msgstr "Värde för klass-attributet."
@@ -2836,7 +2845,7 @@ msgid "Zone created successfully"
 msgstr "Lyckades skapa zon"
 
 msgid "Zone deleted"
-msgstr ""
+msgstr "Tog bort zon"
 
 msgid "Zone deleted successfully"
 msgstr "Zonen togs bort"
@@ -2851,7 +2860,7 @@ msgid "Zone records"
 msgstr "Zoninnehåll"
 
 msgid "Zone saved successfully"
-msgstr ""
+msgstr "Sparade zon"
 
 msgid "Zone updated successfully"
 msgstr "Zonuppdatering lyckades"
@@ -2866,7 +2875,7 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "cache"
-msgstr ""
+msgstr "cache"
 
 msgid "certificates"
 msgstr "certifikat"
@@ -2920,7 +2929,7 @@ msgid "product"
 msgstr "produkt"
 
 msgid "seconds"
-msgstr ""
+msgstr "sekunder"
 
 msgid "standby firewall"
 msgstr "standbybrandvägg"

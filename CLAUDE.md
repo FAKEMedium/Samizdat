@@ -39,6 +39,11 @@ The application is currently in a transition phase from MariaDB to PostgreSQL:
 - **Legacy System**: An older MariaDB database (`system2.sql`) contains tables used by legacy Perl CGI scripts not present in this application. Some classes still reference this database for backward compatibility.
 - **Current Practice**: All new features should use PostgreSQL. When encountering code that uses the MySQL database, consider it legacy code that may eventually be migrated.
 - **Database Access**: Models should use `$self->pg` for PostgreSQL and `$self->mysql` for legacy MariaDB access (when absolutely necessary).
+- **Configuration**: Each manager section in `samizdat.yml` can specify `dbtype` to control which database the module uses:
+  - `postgresql` (default) - PostgreSQL database
+  - `mysql` - Legacy MySQL/MariaDB database
+  - `redis` - Redis for caching and key-value storage
+  - Models should check `$self->config->{dbtype}` to determine the appropriate database connection and table names.
 
 Speed and performance are prioritized through:
 - Static content generation for downstream delivery
