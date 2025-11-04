@@ -18,7 +18,7 @@ my $pbkdf2 = Crypt::PBKDF2->new();
 
 sub username ($self, $cookie) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
   } else {
 
   }
@@ -35,7 +35,7 @@ sub addUser ($self, $username, $attribs = {}) {
   my $password = delete $attribs->{password} // 'RANDOM' . uuid();
   my $email = delete $attribs->{email} // '';
 
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $userid = $db->insert('snapusers',
       $attribs,
       { returning => 'id' }
@@ -91,7 +91,7 @@ sub addEmailConfirmationRequest ($self, $userid, $contactid, $newemail, $ip) {
   eval {
     my $tx = $db->begin;
     
-    if ('mysql' eq $self->config->{databasetype}) {
+    if ('mysql' eq $self->config->{dbtype}) {
       $confirmationuuid = $db->insert('snapemailconfirmations', {
         userid => $userid,
         newemail  => $newemail
@@ -118,7 +118,7 @@ sub addEmailConfirmationRequest ($self, $userid, $contactid, $newemail, $ip) {
 
 sub getEmailConfirmationRequest ($self, $confirmationuuid) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     return $db->select('snapemailconfirmations', '*', { confirmationuuid => $confirmationuuid })->hash;
   } else {
     return $db->select('account.emailconfirmationrequests', '*', { confirmationuuid => $confirmationuuid })->hash;
@@ -128,7 +128,7 @@ sub getEmailConfirmationRequest ($self, $confirmationuuid) {
 
 sub deleteEmailConfirmationRequest ($self, $confirmationuuid) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     return $db->delete('snapemailconfirmations', { confirmationuuid => $confirmationuuid });
   } else {
     return $db->delete('account.emailconfirmationrequests', { confirmationuuid => $confirmationuuid });
@@ -139,7 +139,7 @@ sub deleteEmailConfirmationRequest ($self, $confirmationuuid) {
 sub getUsers ($self, $where){
   my $db = $self->database->db;
   my $result;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $result = $db->select('snapusers',
       undef,
       $where
@@ -158,7 +158,7 @@ sub getUsers ($self, $where){
 sub getUserGroups ($self, $userid) {
   my $db = $self->database->db;
   my $result;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $result = $db->select(['snapusergroups', ['snapgroups', 'groups.id' => 'usergroups.groupid']],
       'groups.id, groups.groupname',
       { 'usergroups.userid' => $userid }
@@ -176,7 +176,7 @@ sub getUserGroups ($self, $userid) {
 
 sub updateContact ($self, $contactid, $attribs = undef) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->update('snapusers',
       $attribs,
       {contactid => $contactid},
@@ -194,7 +194,7 @@ sub updateContact ($self, $contactid, $attribs = undef) {
 
 sub updateUser ($self, $userid, $attribs = undef) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->update('snapusers',
       $attribs,
       { id => $userid },
@@ -212,7 +212,7 @@ sub updateUser ($self, $userid, $attribs = undef) {
 
 sub deleteUser ($self, $userid) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->delete('snapusers', { id => $userid });
   } else {
     $db->delete('account.users', { 'users.userid' => $userid });
@@ -234,7 +234,7 @@ sub savePassword ($self, $userid, $password) {
     }
   }
 
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->update('passwords',
       $attribs,
       { userid => $userid },
@@ -259,7 +259,7 @@ sub validatePassword ($self, $username, $plain) {
     $userid = 0;
   } else {
     my $result;
-    if ('mysql' eq $self->config->{databasetype}) {
+    if ('mysql' eq $self->config->{dbtype}) {
       $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
     } else {
       $result = $db->select([ 'account.users', [ -left => 'account.passwords', 'passwords.userid' => 'users.userid' ] ],
@@ -349,7 +349,7 @@ sub refreshSession ($self, $authcookie, $expires = undef) {
 
 sub insertLogin ($self, $ip, $userid, $value) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->insert('snapallsessions', {
       userlogin   => $userid,
       remote_host => $ip,
@@ -366,7 +366,7 @@ sub insertLogin ($self, $ip, $userid, $value) {
 
 sub insertLoginFailure ($self, $ip, $username) {
   my $db = $self->database->db;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $db->insert('loginfailures', {
       ip       => $ip,
       username => $username
@@ -383,7 +383,7 @@ sub insertLoginFailure ($self, $ip, $username) {
 sub getLoginFailures ($self, $ip) {
   my $db = $self->database->db;
   my $result;
-  if ('mysql' eq $self->config->{databasetype}) {
+  if ('mysql' eq $self->config->{dbtype}) {
     $result = $db->query("
       SELECT failuretime,ip,username
       FROM loginfailures

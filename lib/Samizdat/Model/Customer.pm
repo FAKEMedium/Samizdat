@@ -6,12 +6,17 @@ use Data::Dumper;
 
 has 'app';
 
+sub database ($self) {
+  my $dbtype = $self->app->config->{manager}->{customer}->{dbtype} // 'postgresql';
+  return ('mysql' eq $dbtype) ? $self->app->mysql->db : $self->app->pg->db;
+}
+
 sub eucountries ($self) {
   return [qw(AT BE BG CY CZ DE DK EE ES FI FR EL HR HU IE IT LI LV LT LU MT NL PL PT RO SE SI SK)];
 }
 
 sub get ($self, $params = {}) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
   my $customers = [];
@@ -43,7 +48,7 @@ sub add ($self, $customer) {
 
 sub update ($self, $customerid = 0, $customer =  {}) {
   return 0 if (!$customerid);
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my $where = {customerid => $customerid};
   return $db->update('customer', $customer, $where);
 }
@@ -57,25 +62,25 @@ sub archive ($self, $customerid) {
 }
 
 sub databases ($self, $params =  {}) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   return $db->select('databases', '*', $where)->hashes;
 }
 
 sub sites ($self, $params =  {}) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   return $db->select('Domain', '*', $where)->hashes;
 }
 
 sub userlogins ($self, $params =  {}) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   return $db->select('snapusers', '*', $where)->hashes;
 }
 
 sub neighbours ($self, $customerid) {
-  my $db = $self->app->mysql->db;
+  my $db = $self->database;
   my ($minid, $maxid) = @{$db->query(
     'SELECT MIN(customerid) AS minid, MAX(customerid) AS maxid FROM customer WHERE active = 1'
   )->array};

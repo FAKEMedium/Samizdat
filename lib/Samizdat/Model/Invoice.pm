@@ -12,8 +12,12 @@ has 'pg';
 has 'mysql';
 has 'customer';  # Customer model helper
 
+sub database ($self) {
+  return ('mysql' eq ($self->config->{dbtype} // 'postgresql')) ? $self->mysql->db : $self->pg->db;
+}
+
 sub get ($self, $params = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
   my $due = sprintf("IF((DATEDIFF(NOW(), invoicedate) > (%d + %d)) AND (state = 'fakturerad'), 1, 0) AS due",
@@ -33,7 +37,7 @@ sub get ($self, $params = {}) {
 }
 
 sub nextnumber ($self) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $nextnumber = $db->select('invoice', "MAX(fakturanummer) AS nextnumber")->hash->{nextnumber};
   my $currentyear = (localtime(time))[5] + 1900;
   if (substr($nextnumber, 0, 4) ne $currentyear) {
@@ -45,7 +49,7 @@ sub nextnumber ($self) {
 }
 
 sub nav ($self, $to = 'next', $invoiceid = 0, $customerid = 0, $states = undef) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $sign = '>';
   my $orderby = { '-asc' => 'fakturanummer' };
   if ('prev' eq $to) {
@@ -108,7 +112,7 @@ sub newinvoice ($self) {
 
 
 sub products ($self, $params = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
   my $products = $db->select('product', '*', $where, $limit)->hashes;
@@ -116,7 +120,7 @@ sub products ($self, $params = {}) {
 }
 
 sub subscriptions ($self, $params = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
 
@@ -128,13 +132,13 @@ sub subscriptions ($self, $params = {}) {
 sub updatesubscription ($self, $customerid = 0, $productid = 0) {
   return 0 if (! int $customerid);
   return 0 if (! int $productid);
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = {customerid => $customerid, productid => $productid};
   return $db->update('subscription', {lastinvoice => \['NOW()']}, $where);
 }
 
 sub invoiceitems ($self, $params = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
   my $invoiceitems = {};
@@ -154,7 +158,7 @@ sub addinvoice ($self, $customer =  {}) {
     $customerid = int $customer->{customerid};
   }
   return 0 if (!$customerid);
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   return $db->insert('invoice',
     {
       customerid => $customerid,
@@ -179,20 +183,20 @@ sub updateinvoice ($self, $invoiceid = 0, $invoicedata = {}) {
   delete $invoicedata->{lastreminderdate};
   delete $invoicedata->{remindercount};
 
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = {invoiceid => $invoiceid};
   return $db->update('invoice', $invoicedata, $where);
 }
 
 sub updateinvoiceitem ($self, $invoiceitemid = 0, $invoiceitem = {}) {
   return 0 if (! int $invoiceitemid);
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = {invoiceitemid => $invoiceitemid};
   return $db->update('invoiceitem', $invoiceitem, $where);
 }
 
 sub addinvoiceitem ($self, $invoiceitem = {}, $invoiceid = 0) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   return 0 if (!exists($invoiceitem->{customerid}) || (0 == int $invoiceitem->{customerid}));
   delete $invoiceitem->{invoiceitemid};
   if (!$invoiceid) {
@@ -208,7 +212,7 @@ sub addinvoiceitem ($self, $invoiceitem = {}, $invoiceid = 0) {
 }
 
 sub payments ($self, $params = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   my $where = $params->{where} // {};
   my $limit = $params->{limit} // {};
   my $invoicepayments = $db->select('invoicepayment', '*', $where, $limit)->hashes;
@@ -216,7 +220,7 @@ sub payments ($self, $params = {}) {
 }
 
 sub addpayment ($self, $payment = {}) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   return 0 if (!exists($payment->{invoiceid}) || (0 == int $payment->{invoiceid}));
 
   # Less than 1 currency is not an allowed payment
@@ -227,7 +231,7 @@ sub addpayment ($self, $payment = {}) {
 
 
 sub reminders ($self, $invoiceid = 0) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   $invoiceid = int $invoiceid;
   return [] if (!$invoiceid);
   my $where = { invoiceid => $invoiceid };
@@ -237,7 +241,7 @@ sub reminders ($self, $invoiceid = 0) {
 
 
 sub addreminder ($self, $invoiceid =  0) {
-  my $db = $self->mysql->db;
+  my $db = $self->database;
   $invoiceid = int $invoiceid;
   return 0 if (!$invoiceid);
   my $invoice = $self->get({ where => { invoiceid => $invoiceid }})->[0];

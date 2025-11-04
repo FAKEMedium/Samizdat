@@ -360,6 +360,9 @@ msgstr ""
 msgid "Bankgiro"
 msgstr "银行汇票"
 
+msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
+msgstr ""
+
 msgid "Bankgiro:"
 msgstr "银行汇票："
 
@@ -1239,6 +1242,9 @@ msgstr ""
 msgid "From"
 msgstr "从"
 
+msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr ""
+
 msgid "Full"
 msgstr "完整"
 
@@ -1847,6 +1853,9 @@ msgid "Organizational number"
 msgstr "组织号码"
 
 msgid "Original due date"
+msgstr ""
+
+msgid "Our Plusgiro will soon disappear too."
 msgstr ""
 
 msgid "Our Reference"

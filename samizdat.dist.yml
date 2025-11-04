@@ -19,6 +19,7 @@ manager:
   url: /manager/
   customer:
     cardnumber: 1
+    dbtype: postgresql
     country: SE
     lang: sv_SE
     currency: sek
@@ -28,6 +29,7 @@ manager:
     trust: normal
   invoice:
     cardnumber: 2
+    dbtype: mysql
     sender: billing@example.com
     sendername: Invoicing example
     invoicedir: /tmp/invoice      # invoicedir is an absolute path
@@ -58,24 +60,29 @@ manager:
     billingcontact: billing@example.com
   domain:
     cardnumber: 3
-    databasetype: mysql
+    dbtype: mysql
   zone:
     cardnumber: 4
+    dbtype: postgresql
     type: powerdns
     api:
       url: http://ns.example.com:8081/api/v1/servers/localhost
       key: s3cr3tk3y
   website:
     cardnumber: 5
+    dbtype: postgresql
   database:
     cardnumber: 6
+    dbtype: postgresql
   email:
     cardnumber: 7
-    databasetype: mysql
+    dbtype: mysql
   product:
     cardnumber: 8
+    dbtype: postgresql
   web:
     cardnumber: 9
+    dbtype: postgresql
     publicsrc: src/public
     imageconversion:
       format:
@@ -83,7 +90,7 @@ manager:
       width:
         thumb: 150                 # Thumbnail
         col1: 216                  # 1/12 width at xxl
-        col2: 324                  # 1/6 width at xxl  
+        col2: 324                  # 1/6 width at xxl
         mobile: 360                # Mobile viewport
         col3: 432                  # 1/4 width at xxl
         col4: 516                  # 1/3 width at xl - PageSpeed 372px
@@ -93,14 +100,17 @@ manager:
         col8xxl: 873               # 2/3 width at xxl - actual browser display
         col9: 864                  # 3/4 width at xxl
         desktop: 936               # lg container
-        col10: 1116                # xl container  
+        col10: 1116                # xl container
         col12: 1296                # Full width at xxl
   user:
     cardnumber: 10
+    dbtype: postgresql
   example:
     cardnumber: 11
+    dbtype: postgresql
   sms:
     cardnumber: 12
+    dbtype: postgresql
     teltonika:
       host: sms.example.com
       port: 443
@@ -109,6 +119,7 @@ manager:
       secret: s3cr3t               # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
   cache:
     cardnumber: 13
+    dbtype: redis
     lifetime: 7200                 # Seconds to live (default TTL for cached items)
     encrypt: 1                     # Enable AES-256-GCM encryption for cached data (requires session)
 screenshots:
