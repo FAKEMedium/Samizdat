@@ -6,16 +6,6 @@ use Samizdat::Model::Fortnox;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Register Fortnox as an OAuth2 provider
-  if ($app->config->{fortnox} && $app->config->{fortnox}->{app} && $app->config->{fortnox}->{oauth2}) {
-    $app->oauth2->register_provider(fortnox => {
-      key           => $app->config->{fortnox}->{app}->{clientid},
-      secret        => $app->config->{fortnox}->{app}->{secret},
-      authorize_url => $app->config->{fortnox}->{oauth2}->{url} . '/auth',
-      token_url     => $app->config->{fortnox}->{oauth2}->{url} . '/token',
-    });
-  }
-
   # Configure Fortnox session cookie
   $app->sessions->cookie_name('fortnox');
   $app->sessions->cookie_path('/');
@@ -31,7 +21,7 @@ sub register ($self, $app, $conf) {
   $manager->get('payments')                 ->to('#payments')             ->name('fortnox_payments');
   $manager->any('/')                        ->to('#manager')              ->name('fortnox_manager');
 
-  # Integration stuff
+  # Integration stuff (for Fortnox marketplace etc.)
   my $fortnox = $r->home('fortnox')->to(controller => 'Fortnox');
   $fortnox->any('auth')                     ->to('#auth')                 ->name('fortnox_auth');
   $fortnox->any('logout')                   ->to('#logout')               ->name('fortnox_logout');

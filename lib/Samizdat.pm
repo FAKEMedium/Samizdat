@@ -99,8 +99,39 @@ sub startup ($self) {
     return $manager;
   });
 
-  # Load OAuth2 plugin (providers configured in individual plugins)
+  # Load OAuth2 plugin and register providers from config
   $self->plugin('OAuth2');
+
+  # Automatically register OAuth2 providers from manager.*.oauth2 sections
+  if ($config->{manager}) {
+    my $providers = $self->oauth2->providers;
+    for my $module (keys %{$config->{manager}}) {
+      next unless ref $config->{manager}->{$module} eq 'HASH';
+      next unless $config->{manager}->{$module}->{oauth2};
+
+      my $module_config = $config->{manager}->{$module};
+      my $oauth2_config = { %{$module_config->{oauth2}} };
+
+      # Handle token_url_template interpolation (for Teltonika SMS)
+      if ($oauth2_config->{token_url_template}) {
+        my $protocol = ($module_config->{port} && $module_config->{port} == 443) ? 'https' : 'http';
+        $oauth2_config->{token_url} = $oauth2_config->{token_url_template};
+        $oauth2_config->{token_url} =~ s/\{protocol\}/$protocol/g;
+        $oauth2_config->{token_url} =~ s/\{host\}/$module_config->{host}/g;
+        delete $oauth2_config->{token_url_template};
+      }
+
+      # Remove redirect_uri from provider config (passed at request time)
+      delete $oauth2_config->{redirect_uri};
+
+      # Map client_id to key for OAuth2 plugin compatibility
+      $oauth2_config->{key} = $oauth2_config->{client_id} if $oauth2_config->{client_id};
+
+      # Register the provider
+      $providers->{$module} = $oauth2_config;
+      say "Registered OAuth2 provider: $module";
+    }
+  }
 
   $self->plugin('Cache');
   $self->plugin('Account');

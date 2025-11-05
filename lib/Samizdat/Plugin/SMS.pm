@@ -6,19 +6,6 @@ use Samizdat::Model::SMS;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Register Teltonika as an OAuth2 provider if using API mode
-  my $sms_config = $app->config->{manager}->{sms}->{device}->{teltonika};
-  if ($sms_config &&
-      $sms_config->{api_type} && $sms_config->{api_type} eq 'api' &&
-      $sms_config->{client_id} && $sms_config->{client_secret}) {
-    my $protocol = ($sms_config->{port} && $sms_config->{port} == 443) ? 'https' : 'http';
-    $app->oauth2->register_provider(teltonika => {
-      key        => $sms_config->{client_id},
-      secret     => $sms_config->{client_secret},
-      token_url  => sprintf('%s://%s/api/auth/token', $protocol, $sms_config->{host}),
-    });
-  }
-
   my $manager = $r->manager('sms')->to(controller => 'SMS')->name('sms');
   $manager->get('conversation/:phone')                     ->to(action => 'conversation')    ->name('sms_conversation');
   $manager->post('send')                                   ->to(action => 'send')            ->name('sms_send');
@@ -29,7 +16,7 @@ sub register ($self, $app, $conf) {
   $manager->get('messages')                                ->to(action => 'messages')        ->name('sms_messages');
 
   # Webhook route - Teltonika posts incoming SMS here
-  my $webhook_secret = $app->config->{manager}->{sms}->{device}->{teltonika}->{secret};
+  my $webhook_secret = $app->config->{manager}->{sms}->{webhook_secret};
   $manager->any($webhook_secret)                           ->to(action => 'webhook')         ->name('sms_webhook');
 
   # Main SMS page
@@ -38,7 +25,7 @@ sub register ($self, $app, $conf) {
   # Register helper
   $app->helper(sms => sub ($c) {
     state $sms = Samizdat::Model::SMS->new({
-      config   => $app->config->{manager}->{sms}->{device}->{teltonika},
+      config   => $app->config->{manager}->{sms},
       database => $c->pg,
       app      => $app,
     });

@@ -27,7 +27,8 @@ Install modules:
 * `sudo cpanm MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`
 * `sudo cpanm --force HTML::Parser`
 * `sudo cpanm HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
-* `sudo cpanm Session::Token Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Mojolicious::Plugin::Util::RandomString Mojolicious::Plugin::OAuth2 Test::Harness`
+* `sudo cpanm Session::Token Mojolicious::Plugin::Util::RandomString Mojolicious::Plugin::OAuth2 Crypt::OpenSSL::Bignum Crypt::OpenSSL::RSA Mojo::JWT`
+* `sudo cpanm Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Test::Harness`
 
 Imager::File::WEBP installation
 
