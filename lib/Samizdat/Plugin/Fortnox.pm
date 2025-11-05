@@ -6,6 +6,16 @@ use Samizdat::Model::Fortnox;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
+  # Register Fortnox as an OAuth2 provider
+  if ($app->config->{fortnox} && $app->config->{fortnox}->{app} && $app->config->{fortnox}->{oauth2}) {
+    $app->oauth2->register_provider(fortnox => {
+      key           => $app->config->{fortnox}->{app}->{clientid},
+      secret        => $app->config->{fortnox}->{app}->{secret},
+      authorize_url => $app->config->{fortnox}->{oauth2}->{url} . '/auth',
+      token_url     => $app->config->{fortnox}->{oauth2}->{url} . '/token',
+    });
+  }
+
   # Configure Fortnox session cookie
   $app->sessions->cookie_name('fortnox');
   $app->sessions->cookie_path('/');

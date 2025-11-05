@@ -99,6 +99,9 @@ sub startup ($self) {
     return $manager;
   });
 
+  # Load OAuth2 plugin (providers configured in individual plugins)
+  $self->plugin('OAuth2');
+
   $self->plugin('Cache');
   $self->plugin('Account');
   $self->plugin('Manager');
