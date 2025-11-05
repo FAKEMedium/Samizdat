@@ -111,25 +111,38 @@ manager:
   sms:
     cardnumber: 12
     dbtype: postgresql
-    device:
-      teltonika:
-        type: teltonika
-        api_type: cgi             # Use 'cgi' for legacy (username/password) or 'api' for modern (OAuth)
-        host: sms.example.com
-        port: 443
-        # CGI mode (api_type: cgi) - uses username/password
-        username: zaphod
-        password: s3cr3t
-        # API mode (api_type: api) - uses OAuth client credentials
-        # client_id: your-client-id
-        # client_secret: your-client-secret
-        # modem: 3-1               # Required for API mode
-        secret: s3cr3t            # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
+    api_type: cgi                 # Use 'cgi' for legacy (username/password) or 'api' for modern (OAuth)
+    host: sms.example.com
+    port: 443
+    # CGI mode (api_type: cgi) - uses username/password
+    username: zaphod
+    password: s3cr3t
+    # API mode (api_type: api) - uses OAuth client credentials
+    modem: 3-1                    # Required for API mode
+    oauth2:
+      client_id: your-client-id   # Client ID from Teltonika device OAuth settings
+      secret: your-client-secret  # Client secret from Teltonika device OAuth settings
+      token_url_template: '{protocol}://{host}/api/auth/token'  # Token endpoint
+    webhook_secret: s3cr3t        # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
   cache:
     cardnumber: 13
     dbtype: redis
     lifetime: 7200                 # Seconds to live (default TTL for cached items)
     encrypt: 1                     # Enable AES-256-GCM encryption for cached data (requires session)
+  fortnox:
+    cardnumber: 14
+    dbtype: postgresql
+    apiurl: https://api.fortnox.se/3/
+    attachmentsurl: https://api.fortnox.se/api/fileattachments/attachments-v1
+    oauth2:
+      client_id: your-client-id             # Client ID from Fortnox app registration
+      secret: your-client-secret            # Client secret from Fortnox app registration
+      authorize_url: https://apps.fortnox.se/oauth-v1/auth?response_type=code
+      token_url: https://apps.fortnox.se/oauth-v1/token
+      redirect_uri: https://example.com:3443/fortnox/auth  # Must match Fortnox app registration (dev: with port, prod: without port)
+      scope: 'invoice customer payment'     # Space-separated scopes for Fortnox API access
+      access_type: offline                  # Request refresh token
+      account_type: service                 # Account type for Fortnox
 screenshots:
   -
     src: /media/images/samizdat.jpg

@@ -41,6 +41,54 @@ sub auth ($self) {
   $self->redirect_to($self->url_for('manager_index'));
 }
 
+sub pauth ($self) {
+  # Initialize Fortnox session (creates 'fortnox' cookie)
+  $self->session->{fortnox_active} = 1;
+  $self->session(expiration => 7200);  # 2 hours
+
+  # Force cache session ID to be created now (before OAuth redirect)
+  # This ensures the same session ID is used when redirected back
+  unless ($self->session->{cache_session_id}) {
+    my $session_id = Mojo::Util::md5_sum(time . $$ . rand());
+    $self->session->{cache_session_id} = $session_id;
+  }
+
+  my $fortnox = $self->app->fortnox;
+
+  # Check if we got a code back from Fortnox
+  if (my $code = $self->param('code')) {
+    say "Got OAuth code from Fortnox: $code";
+
+    # Verify state parameter
+    my $state = $self->param('state');
+    if ($state && $state ne 'login') {
+      say "State verified: $state";
+    }
+
+    # Store code and exchange for tokens
+    $fortnox->data->{code} = $code;
+    $fortnox->saveCache;
+
+    if ($fortnox->getToken) {
+      say "Fortnox OAuth successful";
+      say "Access token: " . $fortnox->data->{access};
+      return $self->redirect_to($self->url_for('manager_index'));
+    } else {
+      say "Failed to exchange code for token";
+      return $self->render(text => "Authentication failed: Could not get access token", status => 401);
+    }
+  }
+
+  # No code, so initiate OAuth flow using Fortnox model's getLogin
+  if (my $redirect_url = $fortnox->getLogin) {
+    say "Redirecting to Fortnox: $redirect_url";
+    return $self->redirect_to($redirect_url);
+  } else {
+    say "Failed to get login URL from Fortnox";
+    return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+  }
+}
+
 
 sub customers ($self) {
   my $title = $self->app->__('Customers');

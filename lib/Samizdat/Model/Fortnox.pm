@@ -280,18 +280,16 @@ sub removeCache ($self) {
 
 sub getLogin($self) {
   $self->data->{state} = 'login';
-  my $response = $self->ua->get($self->config->{oauth2}->{url} . '/auth' => {Accept => '*/*'} => form => {
-    client_id     => $self->config->{app}->{clientid},
-    scope         => $self->config->{app}->{scope},
+  my $response = $self->ua->get($self->config->{oauth2}->{authorize_url} => {Accept => '*/*'} => form => {
+    client_id     => $self->config->{oauth2}->{client_id},
+    scope         => $self->config->{oauth2}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
     state         => $self->data->{state},
-    response_type => 'code',
   })->result;
   if ($response->headers->header('Location')) {
     $self->data->{state} = 'code';
     $self->saveCache;
-    #        return sprintf($response->headers->header('Location'));
     my $redirect = sprintf("https://apps.fortnox.se%s\n", $response->headers->header('Location'));
     return $redirect;
   }
@@ -300,9 +298,9 @@ sub getLogin($self) {
 
 
 sub getToken ($self, $refresh = 0) {
-  my $url = Mojo::URL->new($self->config->{oauth2}->{url} . '/token')->userinfo(sprintf('%s:%s',
-    $self->config->{app}->{clientid},
-    $self->config->{app}->{secret}
+  my $url = Mojo::URL->new($self->config->{oauth2}->{token_url})->userinfo(sprintf('%s:%s',
+    $self->config->{oauth2}->{client_id},
+    $self->config->{oauth2}->{secret}
   ));
   my $response;
   if ($refresh) {
@@ -317,8 +315,8 @@ sub getToken ($self, $refresh = 0) {
       redirect_uri => $self->config->{oauth2}->{redirect_uri},
     })->result;
   }
-#  $response->save_to($self->config->{cachefile});
   if ($response->json('/error')) {
+    say "Token error: " . Dumper($response->json);
     return 0;
   } else {
     $self->data->{code} = '';

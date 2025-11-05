@@ -63,7 +63,7 @@ sub send_sms ($self, $to, $message, %opts) {
 
     # Use OAuth2 plugin to get token
     my $tx;
-    $self->app->oauth2->get_token_p('teltonika')->then(sub ($token) {
+    $self->app->oauth2->get_token_p('sms')->then(sub ($token) {
       $tx = $ua->post($url => {
         Authorization => "Bearer $token"
       } => json => $payload);
@@ -375,7 +375,7 @@ sub get_device_messages ($self) {
 
     # Use OAuth2 plugin to get token
     my $tx;
-    $self->app->oauth2->get_token_p('teltonika')->then(sub ($token) {
+    $self->app->oauth2->get_token_p('sms')->then(sub ($token) {
       $tx = $ua->get($url => {
         Authorization => "Bearer $token"
       });
