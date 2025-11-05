@@ -152,6 +152,7 @@ sub messages ($self) {
   $self->render(json => $result);
 }
 
+
 sub status ($self) {
   # Require admin access
   return unless $self->access({ admin => 1 });
@@ -163,6 +164,7 @@ sub status ($self) {
     status => $status
   });
 }
+
 
 sub delete ($self) {
   # Require admin access
@@ -209,6 +211,7 @@ sub conversation ($self) {
   return $self->render(web => $web, title => $title, template => 'sms/conversation/index', headline => 'chunks/pagination', status => 200);
 }
 
+
 sub sync ($self) {
   # Require admin access
   return unless $self->access({ admin => 1 });
@@ -221,6 +224,7 @@ sub sync ($self) {
     message => "Sync completed. $new_messages new messages retrieved."
   });
 }
+
 
 sub webhook ($self) {
   # Get SMS parameters from Teltonika device

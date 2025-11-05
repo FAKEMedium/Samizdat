@@ -16,7 +16,7 @@ sub register ($self, $app, $conf) {
   $manager->get('messages')                                ->to(action => 'messages')        ->name('sms_messages');
 
   # Webhook route - Teltonika posts incoming SMS here
-  my $webhook_secret = $app->config->{manager}->{sms}->{teltonika}->{secret};
+  my $webhook_secret = $app->config->{manager}->{sms}->{device}->{teltonika}->{secret};
   $manager->any($webhook_secret)                           ->to(action => 'webhook')         ->name('sms_webhook');
 
   # Main SMS page
@@ -25,7 +25,7 @@ sub register ($self, $app, $conf) {
   # Register helper
   $app->helper(sms => sub {
     state $sms = Samizdat::Model::SMS->new({
-      config   => $app->config->{manager}->{sms}->{teltonika},
+      config   => $app->config->{manager}->{sms}->{device}->{teltonika},
       database => shift->pg,
     });
     return $sms;
