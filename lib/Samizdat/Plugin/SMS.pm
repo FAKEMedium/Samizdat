@@ -6,6 +6,19 @@ use Samizdat::Model::SMS;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
+  # Register Teltonika as an OAuth2 provider if using API mode
+  my $sms_config = $app->config->{manager}->{sms}->{device}->{teltonika};
+  if ($sms_config &&
+      $sms_config->{api_type} && $sms_config->{api_type} eq 'api' &&
+      $sms_config->{client_id} && $sms_config->{client_secret}) {
+    my $protocol = ($sms_config->{port} && $sms_config->{port} == 443) ? 'https' : 'http';
+    $app->oauth2->register_provider(teltonika => {
+      key        => $sms_config->{client_id},
+      secret     => $sms_config->{client_secret},
+      token_url  => sprintf('%s://%s/api/auth/token', $protocol, $sms_config->{host}),
+    });
+  }
+
   my $manager = $r->manager('sms')->to(controller => 'SMS')->name('sms');
   $manager->get('conversation/:phone')                     ->to(action => 'conversation')    ->name('sms_conversation');
   $manager->post('send')                                   ->to(action => 'send')            ->name('sms_send');
@@ -23,10 +36,11 @@ sub register ($self, $app, $conf) {
   $manager->any([qw(GET POST)] => '/')                     ->to(action => 'index')           ->name('sms_index');
 
   # Register helper
-  $app->helper(sms => sub {
+  $app->helper(sms => sub ($c) {
     state $sms = Samizdat::Model::SMS->new({
       config   => $app->config->{manager}->{sms}->{device}->{teltonika},
-      database => shift->pg,
+      database => $c->pg,
+      app      => $app,
     });
     return $sms;
   });

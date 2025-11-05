@@ -10,7 +10,8 @@ use utf8;
 
 has 'config';
 has 'database';
-has 'ua' => sub { 
+has 'app';  # Mojolicious app instance for OAuth2 access
+has 'ua' => sub {
   my $ua = Mojo::UserAgent->new;
   # Skip SSL verification for self-signed certificates
   $ua->insecure(1);
@@ -36,7 +37,7 @@ sub send_sms ($self, $to, $message, %opts) {
   };
 
   if ($api_type eq 'api') {
-    # Use modern JSON API endpoint
+    # Use modern JSON API endpoint with OAuth
     my $url = sprintf('%s://%s%s/api/messages/actions/send', $protocol, $config->{host}, $port);
 
     # Format phone number - ensure it starts with +
@@ -60,7 +61,16 @@ sub send_sms ($self, $to, $message, %opts) {
     warn "SMS Send API URL: $url";
     warn "SMS Send API Payload: " . encode_json($payload);
 
-    my $tx = $ua->post($url => json => $payload);
+    # Use OAuth2 plugin to get token
+    my $tx;
+    $self->app->oauth2->get_token_p('teltonika')->then(sub ($token) {
+      $tx = $ua->post($url => {
+        Authorization => "Bearer $token"
+      } => json => $payload);
+    })->catch(sub ($err) {
+      warn "OAuth2 token acquisition failed: $err";
+      $response->{message} = 'Failed to authenticate with API';
+    })->wait;
 
     # Log response for debugging
     warn "SMS Response Status: " . $tx->result->code if $tx->result->code;
@@ -358,11 +368,22 @@ sub get_device_messages ($self) {
   my @messages = ();
 
   if ($api_type eq 'api') {
-    # Use modern JSON API endpoint
+    # Use modern JSON API endpoint with OAuth
     my $url = sprintf('%s://%s%s/api/messages', $protocol, $config->{host}, $port);
 
     warn "SMS Device Messages API URL: $url";
-    my $tx = $ua->get($url);
+
+    # Use OAuth2 plugin to get token
+    my $tx;
+    $self->app->oauth2->get_token_p('teltonika')->then(sub ($token) {
+      $tx = $ua->get($url => {
+        Authorization => "Bearer $token"
+      });
+    })->catch(sub ($err) {
+      warn "OAuth2 token acquisition failed for message retrieval: $err";
+    })->wait;
+
+    return \@messages unless $tx;
 
     if ($tx->result->is_success) {
       my $json = $tx->result->json;

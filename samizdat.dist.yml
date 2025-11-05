@@ -111,12 +111,20 @@ manager:
   sms:
     cardnumber: 12
     dbtype: postgresql
-    teltonika:
-      host: sms.example.com
-      port: 443
-      username: zaphod
-      password: s3cr3t
-      secret: s3cr3t               # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
+    device:
+      teltonika:
+        type: teltonika
+        api_type: cgi             # Use 'cgi' for legacy (username/password) or 'api' for modern (OAuth)
+        host: sms.example.com
+        port: 443
+        # CGI mode (api_type: cgi) - uses username/password
+        username: zaphod
+        password: s3cr3t
+        # API mode (api_type: api) - uses OAuth client credentials
+        # client_id: your-client-id
+        # client_secret: your-client-secret
+        # modem: 3-1               # Required for API mode
+        secret: s3cr3t            # Secret webhook url for forwarding sms to http, e.g. https://example.com/sms/s3cr3t
   cache:
     cardnumber: 13
     dbtype: redis
