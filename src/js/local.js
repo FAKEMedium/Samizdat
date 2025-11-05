@@ -170,3 +170,31 @@ async function simpleFetch(url, options = {}) {
 }
 
 window.simpleFetch = simpleFetch;
+
+// Global fetch interceptor to handle 401 responses automatically
+(function() {
+    const originalFetch = window.fetch;
+    window.fetch = function(...args) {
+        return originalFetch.apply(this, args).then(async response => {
+            // If 401 and response is JSON, trigger login modal
+            if (response.status === 401) {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
+                    try {
+                        const clonedResponse = response.clone();
+                        const data = await clonedResponse.json();
+                        if (window.handle401Error) {
+                            window.handle401Error(data.error || 'Authentication required');
+                        }
+                    } catch (e) {
+                        // If JSON parsing fails, just show generic message
+                        if (window.handle401Error) {
+                            window.handle401Error('Authentication required');
+                        }
+                    }
+                }
+            }
+            return response;
+        });
+    };
+})();
