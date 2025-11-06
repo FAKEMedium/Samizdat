@@ -16,11 +16,11 @@ sub register ($self, $app, $conf) {
   $manager->get('/')                      ->to('#index')                            ->name('example_index');
 
   $app->helper(example => sub {
-    state $example = Samizdat::Model::Example->new({
+    state $model = Samizdat::Model::Example->new({
       pg => $app->pg,
       config => $self->config->{manager}->{example}
     });
-    return $example;
+    return $model;
   });
 
 }

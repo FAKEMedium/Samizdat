@@ -143,6 +143,13 @@ manager:
       scope: 'invoice customer payment'     # Space-separated scopes for Fortnox API access
       access_type: offline                  # Request refresh token
       account_type: service                 # Account type for Fortnox
+  realtimeregister:
+    cardnumber: 15
+    dbtype: postgresql
+    api_key: someapikey
+    api:
+      production: https://api.yoursrs.com/
+      test: https://api.yoursrs-ote.com/
 screenshots:
   -
     src: /media/images/samizdat.jpg

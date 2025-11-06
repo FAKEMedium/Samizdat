@@ -54,8 +54,8 @@ sub register ($self, $app, $conf) {
 
 
   $app->helper(public => sub {
-    state $public = Samizdat::Model::Public->new(pg => $app->pg);
-    return $public;
+    state $model = Samizdat::Model::Public->new(pg => $app->pg);
+    return $model;
   });
 
 }

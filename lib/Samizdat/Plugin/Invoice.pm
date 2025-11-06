@@ -41,13 +41,13 @@ sub register ($self, $app, $conf) {
 
 
   $app->helper(invoice => sub ($self) {
-    state $invoice = Samizdat::Model::Invoice->new({
+    state $model = Samizdat::Model::Invoice->new({
       config   => $self->config->{manager}->{invoice},
       pg       => $self->app->pg,
       mysql    => $self->app->mysql,
       customer => $self->app->customer,  # Pass customer helper
     });
-    return $invoice;
+    return $model;
   });
 
 

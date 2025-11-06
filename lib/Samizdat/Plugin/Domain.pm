@@ -17,12 +17,12 @@ sub register ($self, $app, $conf) {
   $customers->get('/')                                         ->to('#index');
 
   $app->helper(domain => sub ($self) {
-    state $domain = Samizdat::Model::Domain->new({
+    state $model = Samizdat::Model::Domain->new({
       config => $self->config->{manager}->{domain},
       pg     => $self->pg,
       mysql  => $self->mysql,
     });
-    return $domain;
+    return $model;
   });
 }
 

@@ -18,11 +18,11 @@ sub register ($self, $app, $conf) {
   $manager->get('/')                      ->to('#index')                            ->name('certificate_index');
 
   $app->helper(certificate => sub {
-    state $certificate = Samizdat::Model::Certificate->new({
+    state $model = Samizdat::Model::Certificate->new({
       pg => $app->pg,
       config => $self->config->{manager}->{certificate}
     });
-    return $certificate;
+    return $model;
   });
 
 }

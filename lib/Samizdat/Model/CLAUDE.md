@@ -46,3 +46,20 @@ The redirect_uri must exactly match what's registered in the Fortnox developer p
 
 Configure the redirect_uri in samizdat.yml under manager.fortnox.oauth2.redirect_uri
 to match your Fortnox app registration.
+
+## RealtimeRegister
+
+The RealtimeRegister model provides integration with the Realtime Register domain registrar API.
+It allows managing domain registrations, DNS records, and other domain-related operations
+through the Realtime Register service. Certificate management is also supported via integration
+with the Realtime Register API.
+
+### API Documentation
+
+API documentation is available at https://dm.realtimeregister.com/docs/api/.
+Samizdat uses the RESTful endpoints defined for production and testing environments.
+
+### Authentication
+
+The RealtimeRegister model uses API key authentication.
+The API key must be configured in samizdat.yml under manager.realtimeregister.api_key.

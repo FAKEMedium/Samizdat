@@ -22,11 +22,11 @@ sub register($self, $app, $conf) {
 
   # Helper for accessing the Zone API model.
   $app->helper(zone => sub($c) {
-    state $zone = Samizdat::Model::Zone->new({
+    state $model = Samizdat::Model::Zone->new({
       config => $c->config->{manager}->{zone},
       cache  => $c->cache,
     });
-    return $zone;
+    return $model;
   });
 }
 

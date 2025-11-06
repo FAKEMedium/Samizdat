@@ -16,12 +16,12 @@ sub register ($self, $app, $config = {}) {
 
   # Register model helper following the established pattern
   $app->helper(buymeacoffee => sub ($c) {
-    state $bmc = Samizdat::Model::BuyMeACoffee->new({
+    state $model = Samizdat::Model::BuyMeACoffee->new({
       config => $c->config->{buymeacoffee},
       redis  => $c->app->redis,
       pg     => $c->app->pg,
     });
-    return $bmc;
+    return $model;
   });
 
 }

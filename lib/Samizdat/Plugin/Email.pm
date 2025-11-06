@@ -36,12 +36,12 @@ sub register ($self, $app, $conf) {
 
   # Helper to access email model
   $app->helper(email => sub ($self) {
-    state $email = Samizdat::Model::Email->new({
+    state $model = Samizdat::Model::Email->new({
       config => $self->config->{manager}->{email} || {},
       pg     => $self->pg,
       mysql  => $self->mysql,
     });
-    return $email;
+    return $model;
   });
 }
 
