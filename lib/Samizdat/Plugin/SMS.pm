@@ -24,12 +24,12 @@ sub register ($self, $app, $conf) {
 
   # Register helper
   $app->helper(sms => sub ($c) {
-    state $sms = Samizdat::Model::SMS->new({
+    state $model = Samizdat::Model::SMS->new({
       config   => $app->config->{manager}->{sms},
       database => $c->pg,
       app      => $app,
     });
-    return $sms;
+    return $model;
   });
 }
 

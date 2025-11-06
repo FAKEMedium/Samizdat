@@ -29,12 +29,12 @@ sub register ($self, $app, $conf) {
 
 
   $app->helper(account => sub ($self) {
-    state $account = Samizdat::Model::Account->new({
+    state $model = Samizdat::Model::Account->new({
       config       => $self->app->config->{manager}->{account},
       database     => $self->app->pg,
       redis        => $self->app->redis,
     });
-    return $account;
+    return $model;
   });
 
 

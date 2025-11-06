@@ -60,12 +60,12 @@ sub register ($self, $app, $conf) {
 
   # Helper for accessing the Web model.
   $app->helper(web => sub ($self) {
-    state $web = Samizdat::Model::Web->new(
+    state $model = Samizdat::Model::Web->new(
       config       => $self->config->{manager}->{web},
       database     => $self->app->pg,
       locale       => $self->config->{locale}
     );
-    return $web;
+    return $model;
   });
 
 

@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="h5 mb-0"><%== __('RealtimeRegister API Integration') %></h2>
+  </div>
+  <div class="card-body">
+    <p><%== __('Manage domains and contacts through the RealtimeRegister API.') %></p>
+    <ul>
+      <li><%== __('View and manage domain registrations') %></li>
+      <li><%== __('Handle contact information') %></li>
+      <li><%== __('Support for both production and test environments') %></li>
+    </ul>
+  </div>
+</div>

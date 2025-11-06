@@ -460,6 +460,7 @@ sub imgtopicture ($self, $htmlref) {
 
 }
 
+
 sub indent ($self, $content = '', $indents = 0) {
   no warnings 'uninitialized';
   my $indent = "  " x $indents;
@@ -468,6 +469,7 @@ sub indent ($self, $content = '', $indents = 0) {
   chomp $content;
   return sprintf("%s%s\n", $indent, $content);
 }
+
 
 # Save editable content to database with new structure
 sub save_content ($self, $params) {
@@ -569,6 +571,7 @@ sub save_content ($self, $params) {
   }
 }
 
+
 # Get content from database for a specific docpath and element_id
 sub get_content ($self, $docpath, $element_id, $language) {
   my $language_id = $self->database->db->query(
@@ -600,6 +603,7 @@ sub has_database_content ($self, $docpath, $language) {
   
   return $count > 0;
 }
+
 
 # Get complete document structure from database using new schema
 sub get_database_content ($self, $save_docpath, $language) {
@@ -732,6 +736,7 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
     }
   }
 }
+
 
 # Invalidate cache for a docpath and specific language
 sub invalidate_cache ($self, $docpath, $language = undef) {
