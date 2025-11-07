@@ -4,65 +4,67 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Data::Dumper;
 
 sub index ($self) {
-  return unless $self->access({ admin => 1 });
-
-  my $title = $self->app->__('RealtimeRegister');
+  my $title = $self->app->__('Realtime Register');
   my $web = { title => $title };
 
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept || '';
   if ($accept !~ /json/) {
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
-    $web->{script} .= $self->render_to_string(format => 'js');
-    return $self->render(web => $web, title => $title, headline => 'realtimeregister/chunks/headline');
+    $web->{script} = $self->render_to_string(template => 'realtimeregister/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/index', headline => 'realtimeregister/chunks/headline');
+  } else {
+    return unless $self->access({ admin => 1 });
+    return $self->render(json => { status => 'ok' });
   }
 }
 
 # Domain management
 
 sub domains ($self) {
-  return unless $self->access({ admin => 1 });
-
   my $title = $self->app->__('Domains');
   my $web = { title => $title };
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
-    $web->{script} .= $self->render_to_string(format => 'js');
-    return $self->render(web => $web, title => $title, headline => 'realtimeregister/chunks/headline');
+    $web->{script} = $self->render_to_string(template => 'realtimeregister/domains/index', format => 'js', perpage => $self->perpage);
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/domains/index', headline => 'realtimeregister/chunks/headline');
   } else {
-    my $env = $self->param('env') // 'production';
-    my $domains = $self->app->realtimeregister->getDomains({}, $env);
+    return unless $self->access({ admin => 1 });
+    my $params = {};
+    $params->{limit} = $self->param('limit') if $self->param('limit');
+    $params->{offset} = $self->param('offset') if $self->param('offset');
+    $params->{search} = $self->param('search') if $self->param('search');
+    my $domains = $self->app->realtimeregister->getDomains($params);
     return $self->render(json => { domains => $domains });
   }
 }
 
-sub domain ($self) {
-  return unless $self->access({ admin => 1 });
 
+sub domain ($self) {
   my $domain_name = $self->stash('domain');
   my $title = $self->app->__('Domain: ') . $domain_name;
   my $web = { title => $title };
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
-    $web->{script} .= $self->render_to_string(format => 'js');
-    return $self->render(web => $web, title => $title, headline => 'realtimeregister/chunks/headline');
+    $web->{script} = $self->render_to_string(template => 'realtimeregister/domains/domain/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/domains/domain/index', headline => 'realtimeregister/chunks/headline');
   } else {
-    my $env = $self->param('env') // 'production';
-    my $domain = $self->app->realtimeregister->getDomain($domain_name, $env);
+    return unless $self->access({ admin => 1 });
+    my $domain = $self->app->realtimeregister->getDomain($domain_name);
     return $self->render(json => { domain => $domain });
   }
 }
+
 
 sub create_domain ($self) {
   return unless $self->access({ admin => 1 });
 
   my $domain_data = $self->req->json;
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->createDomain($domain_data, $env);
+  my $result = $self->app->realtimeregister->createDomain($domain_data);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);
@@ -71,14 +73,14 @@ sub create_domain ($self) {
   return $self->render(json => { success => 1, domain => $result });
 }
 
+
 sub update_domain ($self) {
   return unless $self->access({ admin => 1 });
 
   my $domain_name = $self->stash('domain');
   my $domain_data = $self->req->json;
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->updateDomain($domain_name, $domain_data, $env);
+  my $result = $self->app->realtimeregister->updateDomain($domain_name, $domain_data);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);
@@ -91,9 +93,8 @@ sub delete_domain ($self) {
   return unless $self->access({ admin => 1 });
 
   my $domain_name = $self->stash('domain');
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->deleteDomain($domain_name, $env);
+  my $result = $self->app->realtimeregister->deleteDomain($domain_name);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);
@@ -105,38 +106,39 @@ sub delete_domain ($self) {
 # Contact management
 
 sub contacts ($self) {
-  return unless $self->access({ admin => 1 });
-
   my $title = $self->app->__('Contacts');
   my $web = { title => $title };
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
-    $web->{script} .= $self->render_to_string(format => 'js');
-    return $self->render(web => $web, title => $title, headline => 'realtimeregister/chunks/headline');
+    $web->{script} = $self->render_to_string(template => 'realtimeregister/contacts/index', format => 'js', perpage => $self->perpage);
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/contacts/index', headline => 'realtimeregister/chunks/headline');
   } else {
-    my $env = $self->param('env') // 'production';
-    my $contacts = $self->app->realtimeregister->getContacts({}, $env);
+    return unless $self->access({ admin => 1 });
+    my $params = {};
+    $params->{limit} = $self->param('limit') if $self->param('limit');
+    $params->{offset} = $self->param('offset') if $self->param('offset');
+    $params->{search} = $self->param('search') if $self->param('search');
+    my $contacts = $self->app->realtimeregister->getContacts($params);
     return $self->render(json => { contacts => $contacts });
   }
 }
 
-sub contact ($self) {
-  return unless $self->access({ admin => 1 });
 
+sub contact ($self) {
   my $contact_handle = $self->stash('handle');
   my $title = $self->app->__('Contact: ') . $contact_handle;
   my $web = { title => $title };
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
-    $web->{script} .= $self->render_to_string(format => 'js');
-    return $self->render(web => $web, title => $title, headline => 'realtimeregister/chunks/headline');
+    $web->{script} = $self->render_to_string(template => 'realtimeregister/contacts/contact/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/contacts/contact/index', headline => 'realtimeregister/chunks/headline');
   } else {
-    my $env = $self->param('env') // 'production';
-    my $contact = $self->app->realtimeregister->getContact($contact_handle, $env);
+    return unless $self->access({ admin => 1 });
+    my $contact = $self->app->realtimeregister->getContact($contact_handle);
     return $self->render(json => { contact => $contact });
   }
 }
@@ -145,9 +147,8 @@ sub create_contact ($self) {
   return unless $self->access({ admin => 1 });
 
   my $contact_data = $self->req->json;
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->createContact($contact_data, $env);
+  my $result = $self->app->realtimeregister->createContact($contact_data);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);
@@ -161,9 +162,8 @@ sub update_contact ($self) {
 
   my $contact_handle = $self->stash('handle');
   my $contact_data = $self->req->json;
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->updateContact($contact_handle, $contact_data, $env);
+  my $result = $self->app->realtimeregister->updateContact($contact_handle, $contact_data);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);
@@ -176,9 +176,8 @@ sub delete_contact ($self) {
   return unless $self->access({ admin => 1 });
 
   my $contact_handle = $self->stash('handle');
-  my $env = $self->param('env') // 'production';
 
-  my $result = $self->app->realtimeregister->deleteContact($contact_handle, $env);
+  my $result = $self->app->realtimeregister->deleteContact($contact_handle);
 
   if ($result->{error}) {
     return $self->render(json => { error => $result->{error} }, status => 400);

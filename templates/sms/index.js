@@ -195,7 +195,8 @@ function updatePagination() {
 // Pagination state
 let currentPage = 1;
 let totalPages = 1;
-const perPage = <%= config->{manager}->{sms}->{teltonika}->{perpage} || 20 %>;
+// Read perpage from cookie, fallback to config default
+const perPage = parseInt(document.cookie.split('; ').find(row => row.startsWith('perpage='))?.split('=')[1]) || <%= $perpage %>;
 
 // Load messages with pagination
 async function loadMessages(page = 1) {

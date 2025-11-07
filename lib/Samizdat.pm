@@ -135,8 +135,8 @@ sub startup ($self) {
 
   $self->plugin('Cache');
   $self->plugin('Account');
-  $self->plugin('Manager');
   $self->plugin('Public');
+  $self->plugin('Manager');
   $self->plugin('Icons');
   $self->plugin('Contact');
   $self->plugin('Shortbytes');

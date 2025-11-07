@@ -58,6 +58,15 @@ sub register ($self, $app, $conf) {
     return $model;
   });
 
+  # Helper to get pagination items per page
+  # Checks: 1) session, 2) config, 3) default (10)
+  # This allows user preferences to be added later via session
+  $app->helper(perpage => sub ($c) {
+    return $c->session('perpage')
+        // $app->config->{pagination}->{perpage}
+        // 10;
+  });
+
 }
 
 

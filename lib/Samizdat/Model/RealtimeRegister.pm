@@ -11,14 +11,15 @@ has 'ua' => sub {
   return $ua;
 };
 
-# Get API base URL (production or test)
-sub api_url ($self, $env = 'production') {
-  return $self->config->{api}->{$env} // $self->config->{api}->{production};
+# Get API base URL from config
+sub api_url ($self) {
+  my $env = $self->config->{default_env} // 'production';
+  return $self->config->{env}->{$env}->{api} // $self->config->{env}->{production}->{api};
 }
 
 # Make API request with authentication
-sub _api_request ($self, $method, $endpoint, $data = undef, $env = 'production') {
-  my $url = $self->api_url($env) . $endpoint;
+sub _api_request ($self, $method, $endpoint, $data = undef) {
+  my $url = $self->api_url() . $endpoint;
   my $tx;
 
   my $headers = {
@@ -52,50 +53,50 @@ sub _api_request ($self, $method, $endpoint, $data = undef, $env = 'production')
 
 # Domain operations
 
-sub getDomains ($self, $params = {}, $env = 'production') {
+sub getDomains ($self, $params = {}) {
   my $query = Mojo::Parameters->new(%$params)->to_string;
   my $endpoint = 'v2/domains' . ($query ? "?$query" : '');
-  return $self->_api_request('GET', $endpoint, undef, $env);
+  return $self->_api_request('GET', $endpoint, undef);
 }
 
-sub getDomain ($self, $domain_name, $env = 'production') {
-  return $self->_api_request('GET', "v2/domains/$domain_name", undef, $env);
+sub getDomain ($self, $domain_name) {
+  return $self->_api_request('GET', "v2/domains/$domain_name", undef);
 }
 
-sub createDomain ($self, $domain_data, $env = 'production') {
-  return $self->_api_request('POST', 'v2/domains', $domain_data, $env);
+sub createDomain ($self, $domain_data) {
+  return $self->_api_request('POST', 'v2/domains', $domain_data);
 }
 
-sub updateDomain ($self, $domain_name, $domain_data, $env = 'production') {
-  return $self->_api_request('PUT', "v2/domains/$domain_name", $domain_data, $env);
+sub updateDomain ($self, $domain_name, $domain_data) {
+  return $self->_api_request('PUT', "v2/domains/$domain_name", $domain_data);
 }
 
-sub deleteDomain ($self, $domain_name, $env = 'production') {
-  return $self->_api_request('DELETE', "v2/domains/$domain_name", undef, $env);
+sub deleteDomain ($self, $domain_name) {
+  return $self->_api_request('DELETE', "v2/domains/$domain_name", undef);
 }
 
 # Contact operations
 
-sub getContacts ($self, $params = {}, $env = 'production') {
+sub getContacts ($self, $params = {}) {
   my $query = Mojo::Parameters->new(%$params)->to_string;
   my $endpoint = 'v2/contacts' . ($query ? "?$query" : '');
-  return $self->_api_request('GET', $endpoint, undef, $env);
+  return $self->_api_request('GET', $endpoint, undef);
 }
 
-sub getContact ($self, $contact_handle, $env = 'production') {
-  return $self->_api_request('GET', "v2/contacts/$contact_handle", undef, $env);
+sub getContact ($self, $contact_handle) {
+  return $self->_api_request('GET', "v2/contacts/$contact_handle", undef);
 }
 
-sub createContact ($self, $contact_data, $env = 'production') {
-  return $self->_api_request('POST', 'v2/contacts', $contact_data, $env);
+sub createContact ($self, $contact_data) {
+  return $self->_api_request('POST', 'v2/contacts', $contact_data);
 }
 
-sub updateContact ($self, $contact_handle, $contact_data, $env = 'production') {
-  return $self->_api_request('PUT', "v2/contacts/$contact_handle", $contact_data, $env);
+sub updateContact ($self, $contact_handle, $contact_data) {
+  return $self->_api_request('PUT', "v2/contacts/$contact_handle", $contact_data);
 }
 
-sub deleteContact ($self, $contact_handle, $env = 'production') {
-  return $self->_api_request('DELETE', "v2/contacts/$contact_handle", undef, $env);
+sub deleteContact ($self, $contact_handle) {
+  return $self->_api_request('DELETE', "v2/contacts/$contact_handle", undef);
 }
 
 1;
@@ -115,23 +116,23 @@ It supports domain and contact management operations.
 
 =over 4
 
-=item getDomains($params, $env)
+=item getDomains($params)
 
 Get list of domains. Optional params for filtering. Returns array of domains.
 
-=item getDomain($domain_name, $env)
+=item getDomain($domain_name)
 
 Get details for a specific domain.
 
-=item createDomain($domain_data, $env)
+=item createDomain($domain_data)
 
 Register a new domain.
 
-=item updateDomain($domain_name, $domain_data, $env)
+=item updateDomain($domain_name, $domain_data)
 
 Update domain information.
 
-=item deleteDomain($domain_name, $env)
+=item deleteDomain($domain_name)
 
 Delete/cancel a domain.
 
@@ -141,23 +142,23 @@ Delete/cancel a domain.
 
 =over 4
 
-=item getContacts($params, $env)
+=item getContacts($params)
 
 Get list of contacts. Optional params for filtering. Returns array of contacts.
 
-=item getContact($contact_handle, $env)
+=item getContact($contact_handle)
 
 Get details for a specific contact.
 
-=item createContact($contact_data, $env)
+=item createContact($contact_data)
 
 Create a new contact.
 
-=item updateContact($contact_handle, $contact_data, $env)
+=item updateContact($contact_handle, $contact_data)
 
 Update contact information.
 
-=item deleteContact($contact_handle, $env)
+=item deleteContact($contact_handle)
 
 Delete a contact.
 
@@ -170,8 +171,11 @@ Configure in samizdat.yml:
   manager:
     realtimeregister:
       api_key: your-api-key
-      api:
-        production: https://api.yoursrs.com/
-        test: https://api.yoursrs-ote.com/
+      default_env: production  # production or test
+      env:
+        production:
+          api: https://api.yoursrs.com/
+        test:
+          api: https://api.yoursrs-ote.com/
 
 =cut
