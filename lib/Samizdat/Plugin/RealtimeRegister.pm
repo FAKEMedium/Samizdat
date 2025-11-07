@@ -10,18 +10,18 @@ sub register ($self, $app, $conf) {
   my $manager = $r->manager('realtimeregister')->to(controller => 'RealtimeRegister');
 
   # Domain routes
-  $manager->get('domains')                  ->to('#domains')          ->name('rtr_domains');
   $manager->get('domains/:domain')          ->to('#domain')           ->name('rtr_domain');
-  $manager->post('domains')                 ->to('#create_domain')    ->name('rtr_create_domain');
   $manager->put('domains/:domain')          ->to('#update_domain')    ->name('rtr_update_domain');
   $manager->delete('domains/:domain')       ->to('#delete_domain')    ->name('rtr_delete_domain');
+  $manager->post('domains')                 ->to('#create_domain')    ->name('rtr_create_domain');
+  $manager->get('domains')                  ->to('#domains')          ->name('rtr_domains');
 
   # Contact routes
-  $manager->get('contacts')                 ->to('#contacts')         ->name('rtr_contacts');
   $manager->get('contacts/:handle')         ->to('#contact')          ->name('rtr_contact');
-  $manager->post('contacts')                ->to('#create_contact')   ->name('rtr_create_contact');
   $manager->put('contacts/:handle')         ->to('#update_contact')   ->name('rtr_update_contact');
   $manager->delete('contacts/:handle')      ->to('#delete_contact')   ->name('rtr_delete_contact');
+  $manager->post('contacts')                ->to('#create_contact')   ->name('rtr_create_contact');
+  $manager->get('contacts')                 ->to('#contacts')         ->name('rtr_contacts');
 
   # Main page
   $manager->any('/')                        ->to('#index')            ->name('rtr_index');

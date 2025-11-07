@@ -2,10 +2,53 @@
 const domainsTable = document.getElementById('domains');
 const searchButton = document.getElementById('searchButton');
 const searchterm = document.getElementById('searchterm');
+const paginationControls = document.getElementById('pagination-controls');
 
-function loadDomains(search = '') {
+// Read perpage from cookie, fallback to config default
+const pageSize = parseInt(document.cookie.split('; ').find(row => row.startsWith('perpage='))?.split('=')[1]) || <%= $perpage %>;
+let currentOffset = 0;
+let currentSearch = '';
+
+function renderPagination(pagination) {
+  if (!paginationControls) return;
+
+  const totalPages = Math.ceil(pagination.total / pagination.limit);
+  const currentPageNum = Math.floor(pagination.offset / pagination.limit);
+
+  paginationControls.innerHTML = '';
+
+  // Previous button
+  const prevBtn = document.createElement('button');
+  prevBtn.className = 'btn btn-sm btn-outline-primary';
+  prevBtn.disabled = currentPageNum === 0;
+  prevBtn.innerHTML = '<%== icon "chevron-left" %>';
+  prevBtn.addEventListener('click', () => loadDomains(currentSearch, (currentPageNum - 1) * pageSize));
+  paginationControls.appendChild(prevBtn);
+
+  // Page info
+  const pageInfo = document.createElement('button');
+  pageInfo.className = 'btn btn-sm btn-outline-primary';
+  pageInfo.disabled = true;
+  pageInfo.innerHTML = `<span class="d-none d-md-inline"><%== __('Page') %> </span>${currentPageNum + 1}/${totalPages}`;
+  paginationControls.appendChild(pageInfo);
+
+  // Next button
+  const nextBtn = document.createElement('button');
+  nextBtn.className = 'btn btn-sm btn-outline-primary';
+  nextBtn.disabled = currentPageNum >= totalPages - 1;
+  nextBtn.innerHTML = '<%== icon "chevron-right" %>';
+  nextBtn.addEventListener('click', () => loadDomains(currentSearch, (currentPageNum + 1) * pageSize));
+  paginationControls.appendChild(nextBtn);
+}
+
+function loadDomains(search = '', offset = 0) {
+  currentSearch = search;
+  currentOffset = offset;
+
   const url = new URL('<%= url_for('rtr_domains') %>', window.location.origin);
   if (search) url.searchParams.set('search', search);
+  url.searchParams.set('limit', pageSize);
+  url.searchParams.set('offset', offset);
 
   fetch(url, {
     headers: { 'Accept': 'application/json' }
@@ -15,12 +58,17 @@ function loadDomains(search = '') {
     const tbody = domainsTable.querySelector('tbody');
     tbody.innerHTML = '';
 
-    if (!data.domains || data.domains.length === 0) {
+    // API returns { domains: { entities: [...], pagination: {...} } }
+    const domainList = data.domains?.entities || [];
+    const pagination = data.domains?.pagination;
+
+    if (domainList.length === 0) {
       tbody.innerHTML = '<tr><td colspan="5" class="text-center"><%== __('No domains found') %></td></tr>';
+      if (paginationControls) paginationControls.innerHTML = '';
       return;
     }
 
-    data.domains.forEach(domain => {
+    domainList.forEach(domain => {
       const row = document.createElement('tr');
       row.innerHTML = `
         <td><a href="<%= url_for('rtr_domain', domain => '') %>${domain.domainName}">${domain.domainName}</a></td>
@@ -33,11 +81,16 @@ function loadDomains(search = '') {
       `;
       tbody.appendChild(row);
     });
+
+    if (pagination) {
+      renderPagination(pagination);
+    }
   })
   .catch(error => {
     console.error('Error loading domains:', error);
     const tbody = domainsTable.querySelector('tbody');
     tbody.innerHTML = '<tr><td colspan="5" class="text-center text-danger"><%== __('Error loading domains') %></td></tr>';
+    if (paginationControls) paginationControls.innerHTML = '';
   });
 }
 

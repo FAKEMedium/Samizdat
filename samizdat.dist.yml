@@ -147,9 +147,12 @@ manager:
     cardnumber: 15
     dbtype: postgresql
     api_key: someapikey
-    api:
-      production: https://api.yoursrs.com/
-      test: https://api.yoursrs-ote.com/
+    default_env: production  # production or test - determines which API endpoint to use
+    env:
+      production:
+        api: https://api.yoursrs.com/
+      test:
+        api: https://api.yoursrs-ote.com/
 screenshots:
   -
     src: /media/images/samizdat.jpg
