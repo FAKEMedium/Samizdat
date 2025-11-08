@@ -97,6 +97,8 @@ sub customers ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     if ($customerid) {
+      # Override cache path for dynamic customer ID to prevent creating separate cached files
+      $self->stash(docpath => '/fortnox/manager/customers/single/index.html');
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/customers/single/index');
       return $self->render(web => $web, title => $title, template => 'fortnox/manager/customers/single/index', layout => 'modal');
     } else {
@@ -130,6 +132,8 @@ sub payments ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     if ($number) {
+      # Override cache path for dynamic payment number to prevent creating separate cached files
+      $self->stash(docpath => '/fortnox/manager/payments/single/index.html');
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/payments/single/index');
       return $self->render(web => $web, title => $title, template => 'fortnox/manager/payments/single/index', layout => 'modal');
     } else {

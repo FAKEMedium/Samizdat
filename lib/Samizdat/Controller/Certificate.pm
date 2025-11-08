@@ -79,6 +79,8 @@ sub show($self) {
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /show/index.html instead of /<id>/index.html
+    $self->stash(docpath => '/certificate/show/index.html');
     my $certificate = $self->app->certificate->find($id);
     if (!$certificate) {
       return $self->render(
@@ -91,7 +93,7 @@ sub show($self) {
     my $web = { title => $title };
 
     $web->{script} = $self->render_to_string(
-      template => 'certificates/show/index',
+      template => 'certificate/show/index',
       format   => 'js'
     );
 
@@ -99,7 +101,7 @@ sub show($self) {
       web         => $web,
       title       => $title,
       certificate => $certificate,
-      template    => 'certificates/show/index'
+      template    => 'certificate/show/index'
     );
   } else {
     # JSON API response
@@ -121,6 +123,8 @@ sub edit($self) {
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /edit/index.html instead of /<id>/edit/index.html
+    $self->stash(docpath => '/certificate/edit/index.html');
     my $certificate = {};
     my $title = $self->app->__('New Certificate');
 
@@ -145,7 +149,7 @@ sub edit($self) {
     );
 
     $web->{script} = $self->render_to_string(
-      template => 'certificates/edit/index',
+      template => 'certificate/edit/index',
       format   => 'js',
       toast    => $toast
     );
@@ -160,7 +164,7 @@ sub edit($self) {
       web         => $web,
       title       => $title,
       certificate => $certificate,
-      template    => 'certificates/edit/index'
+      template    => 'certificate/edit/index'
     );
   } else {
     # JSON API response

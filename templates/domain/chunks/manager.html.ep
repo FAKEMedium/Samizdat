@@ -13,4 +13,5 @@
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>epp/create"><%== __('Register') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>epp/transfer"><%== __('Transfer') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('domain_index') %>?searchterm=expiring"><%== __('Expiring domains') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('rtr_index') %>">RR</a>
 <a class="badge rounded-pill text-bg-primary" href="https://dm.realtimeregister.com/docs/api/">RR API</a>

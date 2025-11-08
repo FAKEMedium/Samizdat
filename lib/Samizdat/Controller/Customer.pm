@@ -74,6 +74,8 @@ sub edit ($self) {
   my $formdata = { customer => $self->config->{manager}->{customer} };
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /customer/edit/index.html instead of /<customerid>/edit/index.html
+    $self->stash(docpath => '/customers/customer/edit/index.html');
     my $title = $self->app->__('New customer');
     my $web = { title => $title };
     my $toast = $self->render_to_string(
@@ -118,6 +120,8 @@ sub billing ($self) {
   my $params = {};
   my $title = $self->app->__('Customers');
   if ($customerid) {
+    # Set docpath to ensure static cache goes to /customer/billing/index.html instead of /<customerid>/billing/index.html
+    $self->stash(docpath => '/customers/customer/billing/index.html');
     $title = $self->app->__x('Invoice customer #{customerid}', customerid => $customerid);
     $params->{where} = { customerid => $customerid };
     my $customer = $self->app->customer->get($params)->[0];
@@ -277,6 +281,8 @@ sub products ($self) {
   my $customerid = $self->param('customerid');
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /customer/products/index.html instead of /<customerid>/products/index.html
+    $self->stash(docpath => '/customers/customer/products/index.html');
     $web->{script} .= $self->render_to_string(template => 'customer/products/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'customer/products/index', layout => 'modal');
   } else {

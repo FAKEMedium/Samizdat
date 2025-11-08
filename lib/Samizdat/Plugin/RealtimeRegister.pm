@@ -9,14 +9,14 @@ sub register ($self, $app, $conf) {
   # Manager routes for domain and contact management
   my $manager = $r->manager('realtimeregister')->to(controller => 'RealtimeRegister');
 
-  # Domain routes
-  $manager->get('domains/:domain')          ->to('#domain')           ->name('rtr_domain');
-  $manager->put('domains/:domain')          ->to('#update_domain')    ->name('rtr_update_domain');
-  $manager->delete('domains/:domain')       ->to('#delete_domain')    ->name('rtr_delete_domain');
+  # Domain routes (most specific first)
+  $manager->get('domains/#domain')          ->to('#domain')           ->name('rtr_domain');
+  $manager->put('domains/#domain')          ->to('#update_domain')    ->name('rtr_update_domain');
+  $manager->delete('domains/#domain')       ->to('#delete_domain')    ->name('rtr_delete_domain');
   $manager->post('domains')                 ->to('#create_domain')    ->name('rtr_create_domain');
   $manager->get('domains')                  ->to('#domains')          ->name('rtr_domains');
 
-  # Contact routes
+  # Contact routes (most specific first)
   $manager->get('contacts/:handle')         ->to('#contact')          ->name('rtr_contact');
   $manager->put('contacts/:handle')         ->to('#update_contact')   ->name('rtr_update_contact');
   $manager->delete('contacts/:handle')      ->to('#delete_contact')   ->name('rtr_delete_contact');

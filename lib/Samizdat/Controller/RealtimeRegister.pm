@@ -34,7 +34,7 @@ sub domains ($self) {
     my $params = {};
     $params->{limit} = $self->param('limit') if $self->param('limit');
     $params->{offset} = $self->param('offset') if $self->param('offset');
-    $params->{search} = $self->param('search') if $self->param('search');
+    $params->{q} = $self->param('search') if $self->param('search');
     my $domains = $self->app->realtimeregister->getDomains($params);
     return $self->render(json => { domains => $domains });
   }
@@ -42,17 +42,20 @@ sub domains ($self) {
 
 
 sub domain ($self) {
-  my $domain_name = $self->stash('domain');
-  my $title = $self->app->__('Domain: ') . $domain_name;
+  my $title = $self->app->__('Domain details');
   my $web = { title => $title };
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /domain/index.html instead of /<domain-name>/index.html
+    $self->stash(docpath => '/realtimeregister/domains/domain/index.html');
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
     $web->{script} = $self->render_to_string(template => 'realtimeregister/domains/domain/index', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'realtimeregister/domains/domain/index', headline => 'realtimeregister/chunks/headline');
+    return $self->render(web => $web, title => $title, template => 'realtimeregister/domains/domain/index',
+      headline => 'realtimeregister/chunks/headline', format => 'html');
   } else {
     return unless $self->access({ admin => 1 });
+    my $domain_name = $self->stash('domain');
     my $domain = $self->app->realtimeregister->getDomain($domain_name);
     return $self->render(json => { domain => $domain });
   }
@@ -63,7 +66,6 @@ sub create_domain ($self) {
   return unless $self->access({ admin => 1 });
 
   my $domain_data = $self->req->json;
-
   my $result = $self->app->realtimeregister->createDomain($domain_data);
 
   if ($result->{error}) {
@@ -89,11 +91,11 @@ sub update_domain ($self) {
   return $self->render(json => { success => 1, domain => $result });
 }
 
+
 sub delete_domain ($self) {
   return unless $self->access({ admin => 1 });
 
   my $domain_name = $self->stash('domain');
-
   my $result = $self->app->realtimeregister->deleteDomain($domain_name);
 
   if ($result->{error}) {
@@ -127,27 +129,29 @@ sub contacts ($self) {
 
 
 sub contact ($self) {
-  my $contact_handle = $self->stash('handle');
-  my $title = $self->app->__('Contact: ') . $contact_handle;
+  my $title = $self->app->__('Contact Details');
   my $web = { title => $title };
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /contact/index.html instead of /<contact-handle>/index.html
+    $self->stash(docpath => '/realtimeregister/contacts/contact/index.html');
     $web->{sidebar} = $self->render_to_string(template => 'realtimeregister/chunks/sidebar', format => 'html');
     $web->{script} = $self->render_to_string(template => 'realtimeregister/contacts/contact/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'realtimeregister/contacts/contact/index', headline => 'realtimeregister/chunks/headline');
   } else {
     return unless $self->access({ admin => 1 });
+    my $contact_handle = $self->param('handle');
     my $contact = $self->app->realtimeregister->getContact($contact_handle);
     return $self->render(json => { contact => $contact });
   }
 }
 
+
 sub create_contact ($self) {
   return unless $self->access({ admin => 1 });
 
   my $contact_data = $self->req->json;
-
   my $result = $self->app->realtimeregister->createContact($contact_data);
 
   if ($result->{error}) {
@@ -157,10 +161,11 @@ sub create_contact ($self) {
   return $self->render(json => { success => 1, contact => $result });
 }
 
+
 sub update_contact ($self) {
   return unless $self->access({ admin => 1 });
 
-  my $contact_handle = $self->stash('handle');
+  my $contact_handle = $self->param('handle');
   my $contact_data = $self->req->json;
 
   my $result = $self->app->realtimeregister->updateContact($contact_handle, $contact_data);
@@ -172,11 +177,11 @@ sub update_contact ($self) {
   return $self->render(json => { success => 1, contact => $result });
 }
 
+
 sub delete_contact ($self) {
   return unless $self->access({ admin => 1 });
 
-  my $contact_handle = $self->stash('handle');
-
+  my $contact_handle = $self->param('handle');
   my $result = $self->app->realtimeregister->deleteContact($contact_handle);
 
   if ($result->{error}) {

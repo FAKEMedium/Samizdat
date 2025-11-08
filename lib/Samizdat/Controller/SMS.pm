@@ -201,8 +201,11 @@ sub conversation ($self) {
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => $formdata, status => 200);
   }
-  
+
   # Handle regular GET request (return HTML page)
+  # Set docpath to ensure static cache goes to /sms/conversation/index.html instead of /<phone>/index.html
+  $self->stash(docpath => '/sms/conversation/index.html');
+
   my $title = $self->app->__('SMS Conversation');
   my $web = { title => $title, phone => $phone };
   $web->{script} = ($web->{script} // '') . $self->render_to_string(template => 'sms/conversation/index', format => 'js', perpage => $self->perpage);

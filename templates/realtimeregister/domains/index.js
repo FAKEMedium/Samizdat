@@ -51,9 +51,15 @@ function loadDomains(search = '', offset = 0) {
   url.searchParams.set('offset', offset);
 
   fetch(url, {
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept': 'application/json' },
+    credentials: 'same-origin'
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     const tbody = domainsTable.querySelector('tbody');
     tbody.innerHTML = '';
@@ -70,13 +76,23 @@ function loadDomains(search = '', offset = 0) {
 
     domainList.forEach(domain => {
       const row = document.createElement('tr');
+      // Status is an array, display all statuses
+      const statusBadges = domain.status && domain.status.length > 0
+        ? domain.status.map(s => `<span class="badge bg-${s === 'OK' ? 'success' : 'warning'}">${s}</span>`).join(' ')
+        : 'N/A';
+
+      // Registrant link
+      const registrantLink = domain.registrant
+        ? `<a href="<%== url_for('rtr_contacts') %>/${domain.registrant}">${domain.registrant}</a>`
+        : 'N/A';
+
       row.innerHTML = `
-        <td><a href="<%= url_for('rtr_domain', domain => '') %>${domain.domainName}">${domain.domainName}</a></td>
-        <td><span class="badge bg-${domain.status === 'ok' ? 'success' : 'warning'}">${domain.status || 'N/A'}</span></td>
-        <td>${domain.expiryDate || 'N/A'}</td>
-        <td>${domain.registrant || 'N/A'}</td>
+        <td><a href="<%== url_for('rtr_domains') %>/${domain.domainName}">${domain.domainName}</a></td>
+        <td>${statusBadges}</td>
+        <td>${domain.expiryDate ? domain.expiryDate.substring(0, 10) : 'N/A'}</td>
+        <td>${registrantLink}</td>
         <td class="text-end">
-          <a href="<%= url_for('rtr_domain', domain => '') %>${domain.domainName}" class="btn btn-sm btn-primary"><%== __('View') %></a>
+          <a href="<%== url_for('rtr_domains') %>/${domain.domainName}" class="btn btn-sm btn-primary"><%== __('View') %></a>
         </td>
       `;
       tbody.appendChild(row);

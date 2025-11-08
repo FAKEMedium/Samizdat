@@ -191,3 +191,4 @@ prove -l -v t/00-basic.t
 ## Experimental Ideas
 
 - Handle some REST routes in OpenResty directly to database, bypassing the application.
+- can't use handle since we don't stash data

@@ -71,6 +71,9 @@ sub edit_zone ($self) {
     return $self->render(json => $zone);
   }
 
+  # Set docpath to ensure static cache goes to /zone/edit/index.html instead of /<zone_id>/index.html
+  $self->stash(docpath => '/zone/edit/index.html');
+
   my $title = $self->app->__('Edit zone');
   my $web = { title => $title };
   $web->{script} .= $self->render_to_string(template => 'zone/edit/index', format => 'js');
@@ -127,6 +130,9 @@ sub records($self) {
     say Dumper $rrsets;
     $self->render(json => { zone_id => $zone_id, rrsets => $rrsets });
   } else {
+    # Set docpath to ensure static cache goes to /zone/records/index.html instead of /<zone_id>/records/index.html
+    $self->stash(docpath => '/zone/records/index.html');
+
     $web->{script} .= $self->render_to_string(template => 'zone/records/index', format => 'js');
     $self->render(web => $web, title => $title, template => 'zone/records/index');
   }
@@ -178,6 +184,9 @@ sub edit_record($self) {
     }
     return $self->render(json => { success => 1, record => $record });
   }
+
+  # Set docpath to ensure static cache goes to /zone/records/edit/index.html instead of /<zone_id>/records/<record_id>/index.html
+  $self->stash(docpath => '/zone/records/edit/index.html');
 
   my $title = $self->app->__('Edit record');
   my $web = { title => $title };
