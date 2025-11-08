@@ -147,6 +147,7 @@ manager:
     cardnumber: 15
     dbtype: postgresql
     api_key: someapikey
+    customer: yourcustomerhandle  # Customer handle for API requests
     default_env: production  # production or test - determines which API endpoint to use
     env:
       production:

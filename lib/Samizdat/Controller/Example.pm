@@ -70,6 +70,9 @@ sub show($self) {
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /example/show/index.html instead of /<id>/index.html
+    $self->stash(docpath => '/example/show/index.html');
+
     my $example = $self->app->example->find($id);
     if (!$example) {
       return $self->render(
@@ -108,6 +111,9 @@ sub edit($self) {
   my $accept = $self->req->headers->accept || '';
 
   if ($accept !~ /json/) {
+    # Set docpath to ensure static cache goes to /example/edit/index.html instead of /<id>/index.html
+    $self->stash(docpath => '/example/edit/index.html');
+
     my $example = {};
     my $title = $self->app->__('New Example');
 

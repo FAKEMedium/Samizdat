@@ -51,9 +51,15 @@ function loadContacts(search = '', offset = 0) {
   url.searchParams.set('offset', offset);
 
   fetch(url, {
-    headers: { 'Accept': 'application/json' }
+    headers: { 'Accept': 'application/json' },
+    credentials: 'same-origin'
   })
-  .then(response => response.json())
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json();
+  })
   .then(data => {
     const tbody = contactsTable.querySelector('tbody');
     tbody.innerHTML = '';
@@ -70,14 +76,13 @@ function loadContacts(search = '', offset = 0) {
 
     contactList.forEach(contact => {
       const row = document.createElement('tr');
-      const name = `${contact.firstName || ''} ${contact.lastName || ''}`.trim() || 'N/A';
       row.innerHTML = `
-        <td><a href="<%= url_for('rtr_contact', handle => '') %>${contact.handle}">${contact.handle}</a></td>
-        <td>${name}</td>
+        <td><a href="<%== url_for('rtr_contacts') %>/${contact.handle}">${contact.handle}</a></td>
+        <td>${contact.name || 'N/A'}</td>
         <td>${contact.organization || 'N/A'}</td>
         <td>${contact.email || 'N/A'}</td>
         <td class="text-end">
-          <a href="<%= url_for('rtr_contact', handle => '') %>${contact.handle}" class="btn btn-sm btn-primary"><%== __('View') %></a>
+          <a href="<%== url_for('rtr_contacts') %>/${contact.handle}" class="btn btn-sm btn-primary"><%== __('View') %></a>
         </td>
       `;
       tbody.appendChild(row);

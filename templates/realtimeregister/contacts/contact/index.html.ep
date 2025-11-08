@@ -1,6 +1,6 @@
 <div id="contactDetails" class="card">
   <div class="card-header">
-    <h2 class="h5 mb-0"><%== __('Contact Details') %></h2>
+    <h2 class="h5 mb-0"><%== __('Contact details') %></h2>
   </div>
   <div class="card-body">
     <div class="spinner-border" role="status">

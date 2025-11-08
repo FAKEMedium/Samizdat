@@ -60,6 +60,7 @@ sub getDomains ($self, $params = {}) {
 }
 
 sub getDomain ($self, $domain_name) {
+  say $domain_name;
   return $self->_api_request('GET', "v2/domains/$domain_name", undef);
 }
 
@@ -78,25 +79,30 @@ sub deleteDomain ($self, $domain_name) {
 # Contact operations
 
 sub getContacts ($self, $params = {}) {
+  my $customer = $self->config->{customer};
   my $query = Mojo::Parameters->new(%$params)->to_string;
-  my $endpoint = 'v2/contacts' . ($query ? "?$query" : '');
+  my $endpoint = "v2/customers/$customer/contacts" . ($query ? "?$query" : '');
   return $self->_api_request('GET', $endpoint, undef);
 }
 
 sub getContact ($self, $contact_handle) {
-  return $self->_api_request('GET', "v2/contacts/$contact_handle", undef);
+  my $customer = $self->config->{customer};
+  return $self->_api_request('GET', "v2/customers/$customer/contacts/$contact_handle", undef);
 }
 
 sub createContact ($self, $contact_data) {
-  return $self->_api_request('POST', 'v2/contacts', $contact_data);
+  my $customer = $self->config->{customer};
+  return $self->_api_request('POST', "v2/customers/$customer/contacts", $contact_data);
 }
 
 sub updateContact ($self, $contact_handle, $contact_data) {
-  return $self->_api_request('PUT', "v2/contacts/$contact_handle", $contact_data);
+  my $customer = $self->config->{customer};
+  return $self->_api_request('PUT', "v2/customers/$customer/contacts/$contact_handle", $contact_data);
 }
 
 sub deleteContact ($self, $contact_handle) {
-  return $self->_api_request('DELETE', "v2/contacts/$contact_handle", undef);
+  my $customer = $self->config->{customer};
+  return $self->_api_request('DELETE', "v2/customers/$customer/contacts/$contact_handle", undef);
 }
 
 1;
@@ -171,6 +177,7 @@ Configure in samizdat.yml:
   manager:
     realtimeregister:
       api_key: your-api-key
+      customer: yourcustomerhandle  # Your customer handle
       default_env: production  # production or test
       env:
         production:

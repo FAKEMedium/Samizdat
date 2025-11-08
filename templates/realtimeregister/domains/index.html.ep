@@ -1,5 +1,5 @@
 <div class="input-group mb-3">
-  <input type="text" class="form-control" id="searchterm" placeholder="<%== __('Search domains...') %>">
+  <input type="text" class="form-control" id="searchterm" name="searchterm" placeholder="<%== __('Search domains...') %>">
   <button class="btn btn-primary" id="searchButton">
     <%== icon 'search' %>
   </button>
