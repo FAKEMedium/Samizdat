@@ -61,6 +61,15 @@ manager:
   domain:
     cardnumber: 3
     dbtype: mysql
+    epp:
+      test:
+        host: epp.iis.se
+        bindto: ourIP
+        username: ourID
+        password: ourPassword
+        ssl_key: /path/to/our/key.pem
+        ssl_cert: /path/to/our/cert.pem
+        ssl_ca: /path/to/ca-certificates.crt
   zone:
     cardnumber: 4
     dbtype: postgresql
