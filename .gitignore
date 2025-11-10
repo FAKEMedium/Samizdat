@@ -11,3 +11,6 @@
 /.idea/
 /.vscode/
 /.claude/
+/lib/Samizdat/Model/EPP-PRIVATE.md
+/lib/Samizdat/Model/EPP.pm
+/lib/Samizdat/Plugin/EPP.pm

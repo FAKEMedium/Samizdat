@@ -63,3 +63,15 @@ Samizdat uses the RESTful endpoints defined for production and testing environme
 
 The RealtimeRegister model uses API key authentication.
 The API key must be configured in samizdat.yml under manager.realtimeregister.api_key.
+
+## EPP
+
+The EPP (Extensible Provisioning Protocol) model provides domain registration and management using the standard EPP protocol (RFC 5730-5734). It supports domain operations, DNSSEC, contact management, and nameserver configuration.
+
+**Note:** Detailed implementation documentation is in `EPP-PRIVATE.md` (not tracked in git).
+
+## SE Registry API
+
+An API for liisting domains we are managing at the IIS registry, and our invoices. Documentation at
+
+https://api.registry.se/docs/index.html

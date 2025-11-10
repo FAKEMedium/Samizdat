@@ -41,17 +41,17 @@ continue
 ## HTML5 video
 
 <div class="embed-responsive embed-responsive-16by9 fw-bold grid g-0">
-    <video class="img-fluid" width="1920" height="1080" controls="1">
-      <source src="A_Living_Room_with_a_Cozy_Ambience.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+  <video class="img-fluid" width="1920" height="1080" controls="1">
+    <source src="A_Living_Room_with_a_Cozy_Ambience.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
 </div>
 
 Video by Videographer [Shiyaz](https://www.pexels.com/@videographer-shiyaz-2356948) from Pexels.
 
 ## Adding WebP alternatives
 
-<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid pb-2 alert-dange admin superadminr" width="1078" height="718" />
+<img src="Brown_Mushroom_on_the_Green_Grass.jpg" class="img-fluid card-img-top pb-2 alert-dange admin superadminr" width="1078" height="718" />
 
 Brown Mushroom on the Green Grass by [Bulat Khamitov](https://www.pexels.com/@bulat/) from Pexels.
 The Samizdat application adds the picture tag and also creates a copy in webp format.
