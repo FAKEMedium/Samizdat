@@ -163,6 +163,25 @@ manager:
         api: https://api.yoursrs.com/
       test:
         api: https://api.yoursrs-ote.com/
+  paypal:
+    cardnumber: 16
+    dbtype: postgresql
+    currency: USD                             # Default currency code (USD, EUR, SEK, etc)
+    default_env: sandbox                      # sandbox or production - determines which API endpoint to use
+    oauth2:
+      # OAuth2 client credentials flow (not authorization code flow)
+      # Uses different credentials per environment (sandbox/production)
+      token_url_template: '{api}/v1/oauth2/token'  # Template using {api} placeholder
+      # client_id and secret are environment-specific (see env section below)
+    env:
+      sandbox:
+        api: https://api-m.sandbox.paypal.com
+        client_id: your-sandbox-client-id
+        secret: your-sandbox-secret
+      production:
+        api: https://api-m.paypal.com
+        client_id: your-production-client-id
+        secret: your-production-secret
 screenshots:
   -
     src: /media/images/samizdat.jpg
