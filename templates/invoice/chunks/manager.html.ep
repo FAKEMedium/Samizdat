@@ -23,4 +23,6 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>invoices/open"><%== __('Open invoices') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('invoice_open') %>"><%== __('Open invoices') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('paypal_index') %>"><%== __('PayPal') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('swish_index') %>"><%== __('SWISH') %></a>

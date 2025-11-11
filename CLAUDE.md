@@ -192,3 +192,6 @@ prove -l -v t/00-basic.t
 
 - Handle some REST routes in OpenResty directly to database, bypassing the application.
 - can't use handle since we don't stash data
+- Remember, no data in teplates. Use fetch json.
+- it should be index.js. We use make eplinks for index.js.ep generation.
+- no data in templates!
