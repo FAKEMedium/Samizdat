@@ -182,6 +182,9 @@ manager:
         api: https://api-m.paypal.com
         client_id: your-production-client-id
         secret: your-production-secret
+  bis:
+    cardnumber: 17
+    dbtype: postgresql
 screenshots:
   -
     src: /media/images/samizdat.jpg

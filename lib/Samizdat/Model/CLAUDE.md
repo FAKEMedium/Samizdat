@@ -212,3 +212,204 @@ CREATE INDEX idx_paypal_created ON paypal_ipn_log(created_at);
 SWISH is a Swedish service for mobile payments.
 
 Documentation at https://developer.swish.nu/
+
+
+## BIS (Based in Sweden)
+
+Based in Sweden (https://basedinsweden.se/) is an initiative to highlight the consequences of having data under foreign
+legislation. Its main concern is the Cloud Act, meaning US intelligence can access data in US-owned clouds, even if the
+servers are located in Sweden.
+
+The Samizdat BIS module tracks Swedish organizations' hosting compliance to promote data sovereignty and Swedish hosting.
+
+### Features
+
+- **DNS record checking**: A, AAAA, MX, and NS records
+- **IP geolocation**: Country-level geolocation for all IPs
+- **ASN lookup**: Identifies hosting providers via Autonomous System information
+- **Provider database**: Maintains database of Swedish vs foreign providers
+- **Compliance scoring**: 0-100% scores with BIS badge for 100% compliant
+- **Sector analysis**: Statistics broken down by healthcare, government, education, etc.
+- **Cloud Act tracking**: Identifies domains under US Cloud Act jurisdiction
+- **Historical trends**: Track improvements/regressions over time
+- **Public dashboard**: Name-and-shame/hall-of-fame approach to create pressure
+- **Caching**: Redis caching of IP lookups to avoid redundant API calls
+
+### Compliance Criteria
+
+To qualify for the BIS badge (100% score), ALL infrastructure must be Swedish:
+
+* All A/AAAA records resolve to Swedish IPs
+* All MX mail servers in Swedish datacenters
+* All NS nameservers in Swedish datacenters
+* Hosted by Swedish companies or on Swedish infrastructure
+
+### Configuration
+
+Configure in samizdat.yml under `manager.bis`:
+
+```yaml
+bis:
+  cardnumber: 17
+  dbtype: postgresql
+```
+
+### Database Setup
+
+Run the schema creation:
+
+```bash
+psql -U samizdat samizdat < schema/bis.sql
+```
+
+This creates:
+- Domain tracking tables with tagging
+- Check run tables for periodic audits
+- DNS check results with geolocation
+- Compliance scores and statistics
+- Provider identification database
+- Historical trend data
+
+### Usage
+
+#### Add Domains to Track
+
+```perl
+# In application code
+my $domain_id = $c->bis->add_domain(
+  domain => 'regeringen.se',
+  title => 'Swedish Government',
+  description => 'Main government website',
+  tags => ['government']
+);
+```
+
+Or via the manager interface at `/manager/bis/domains`.
+
+#### Run Compliance Checks
+
+```bash
+# From command line (run via cron every 6 hours)
+./samizdat bischeck
+
+# Or manually via manager interface
+curl -X POST http://localhost:3000/manager/bis/runs/start
+curl -X POST http://localhost:3000/manager/bis/runs/1/check
+```
+
+#### View Results
+
+- Public dashboard: `/bis`
+- By sector: `/bis/sector/healthcare`
+- By domain: `/bis/domain/example.se`
+- Provider stats: `/bis/providers`
+- Historical trends: `/bis/trends`
+- Manager panel: `/manager/bis`
+
+### Sectors and Tags
+
+Pre-configured sectors (can add more via manager):
+
+- **Government**: Government agencies and departments (highest priority)
+- **Healthcare**: Hospitals and healthcare providers (sensitive data)
+- **Municipality**: Municipal organizations
+- **Region**: Regional authorities
+- **Education**: Schools and universities
+- **Media**: News organizations
+- **Legal**: Law firms (attorney-client privilege concerns)
+- **Private**: Private companies
+
+### Provider Identification
+
+The system identifies hosting providers by matching:
+
+1. ASN (Autonomous System Number)
+2. AS Name patterns (e.g., "BAHNHOF", "AMAZON-AES")
+3. IP ranges (CIDR blocks)
+
+Pre-configured providers include:
+
+**Swedish (Compliant):**
+- Bahnhof
+- Safespring
+- Glesys
+- Loopia
+- Binero
+
+**US (Cloud Act Applies):**
+- AWS (Amazon Web Services)
+- Microsoft Azure
+- Google Cloud Platform
+- Cloudflare
+
+### Scoring System
+
+- **100%**: All records Swedish → **BIS BADGE** ✓
+- **75-99%**: Mostly Swedish (some foreign records)
+- **50-74%**: Mixed Swedish/foreign
+- **25-49%**: Mostly foreign
+- **0-24%**: Almost all foreign (high risk)
+
+Special highlighting for:
+- Healthcare/legal sectors with foreign hosting (GDPR/privacy concerns)
+- Government sites on US cloud providers (Cloud Act risk)
+- Domains that regressed from previous checks
+
+### API Endpoints
+
+All endpoints support JSON responses with `Accept: application/json` header:
+
+**Public:**
+- `GET /bis` - Dashboard with all domains
+- `GET /bis/domain/:domain` - Specific domain details
+- `GET /bis/sector/:sector` - Filter by sector
+- `GET /bis/providers` - Provider statistics
+- `GET /bis/trends?days=90` - Historical trends
+
+**Manager:**
+- `GET /manager/bis/domains` - List domains
+- `POST /manager/bis/domains` - Add domain
+- `PUT /manager/bis/domains/:id` - Update domain
+- `DELETE /manager/bis/domains/:id` - Delete domain
+- `GET /manager/bis/tags` - List tags
+- `POST /manager/bis/tags` - Add tag
+- `GET /manager/bis/runs` - List check runs
+- `POST /manager/bis/runs/start` - Start new run
+- `POST /manager/bis/runs/:id/check` - Check all domains
+- `GET /manager/bis/providers` - Manage providers
+- `POST /manager/bis/providers` - Add provider
+
+### Cron Job Setup
+
+Add to crontab to run every 6 hours:
+
+```bash
+0 */6 * * * cd /path/to/samizdat && ./samizdat bischeck >> /var/log/bis-check.log 2>&1
+```
+
+### External API Usage
+
+The system uses ip-api.com (free tier: 45 requests/minute) for IP geolocation and ASN data.
+Rate limiting is built-in (1.5s between requests) to stay within free tier limits.
+
+For production use with many domains, consider:
+- IP-API.com pro subscription (higher rate limits)
+- Self-hosted MaxMind GeoIP2 database
+- Caching IP results in Redis (already implemented)
+
+### Future Enhancements
+
+Potential additions:
+- SSL certificate authority tracking (Swedish vs foreign CAs)
+- Third-party service detection (Google Analytics, Facebook Pixel)
+- CDN usage analysis
+- Estimated hosting costs and Swedish alternatives
+- Automated reporting to media/politicians
+- Integration with GDPR compliance tracking
+
+### Documentation
+
+- Based in Sweden: https://basedinsweden.se/
+- Cloud Act info: https://en.wikipedia.org/wiki/CLOUD_Act
+- IP-API documentation: https://ip-api.com/docs/
+
