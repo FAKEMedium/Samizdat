@@ -195,3 +195,4 @@ prove -l -v t/00-basic.t
 - Remember, no data in teplates. Use fetch json.
 - it should be index.js. We use make eplinks for index.js.ep generation.
 - no data in templates!
+- don't query database in controller. Use methods in model instead!

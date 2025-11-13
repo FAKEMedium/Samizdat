@@ -1,112 +1,103 @@
 % # BIS Domain Detail View
-<div class="container-fluid mt-4">
-  <!-- Back button -->
-  <div class="row">
-    <div class="col-12">
-      <a href="<%= url_for('bis_index') %>" class="btn btn-sm btn-outline-secondary mb-3">← <%= __('Back to Dashboard') %></a>
-    </div>
-  </div>
-
-  <!-- Domain Header -->
-  <div class="row">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <div class="row align-items-center">
-            <div class="col-md-8">
-              <h1 id="domain-name" class="mb-2"><!-- Populated by JavaScript --></h1>
-              <h5 id="domain-title" class="text-muted"><!-- Populated by JavaScript --></h5>
-              <p id="domain-description" class="mt-2"><!-- Populated by JavaScript --></p>
-              <div id="domain-tags" class="mt-2"><!-- Populated by JavaScript --></div>
-            </div>
-            <div class="col-md-4 text-end">
-              <div id="domain-score-display"><!-- Populated by JavaScript --></div>
-            </div>
+<!-- Domain Header -->
+<div class="row">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <div class="row align-items-center">
+          <div class="col-md-8">
+            <h2 id="domain-name" class="mb-2"><!-- Populated by JavaScript --></h2>
+            <h5 id="domain-title" class="text-muted"><!-- Populated by JavaScript --></h5>
+            <p id="domain-description" class="mt-2"><!-- Populated by JavaScript --></p>
+            <div id="domain-tags" class="mt-2"><!-- Populated by JavaScript --></div>
+          </div>
+          <div class="col-md-4 text-end">
+            <div id="domain-score-display"><!-- Populated by JavaScript --></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Compliance Overview -->
-  <div class="row mt-4">
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body text-center">
-          <h6 class="text-muted"><%= __('Overall Score') %></h6>
-          <h2 id="overall-score"><!-- Populated by JavaScript --></h2>
-          <div id="bis-badge-display"><!-- Populated by JavaScript --></div>
-        </div>
+<!-- Compliance Overview -->
+<div class="row mt-4">
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted"><%= __('Overall Score') %></h6>
+        <h3 id="overall-score"><!-- Populated by JavaScript --></h3>
+        <div id="bis-badge-display"><!-- Populated by JavaScript --></div>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body text-center">
-          <h6 class="text-muted"><%= __('A Records') %></h6>
-          <h2 id="a-record-status"><!-- Populated by JavaScript --></h2>
-          <small id="a-record-count"><!-- Populated by JavaScript --></small>
-        </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted"><%= __('A Records') %></h6>
+        <h2 id="a-record-status"><!-- Populated by JavaScript --></h2>
+        <small id="a-record-count"><!-- Populated by JavaScript --></small>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body text-center">
-          <h6 class="text-muted"><%= __('MX Records') %></h6>
-          <h2 id="mx-record-status"><!-- Populated by JavaScript --></h2>
-          <small id="mx-record-count"><!-- Populated by JavaScript --></small>
-        </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted"><%= __('MX Records') %></h6>
+        <h2 id="mx-record-status"><!-- Populated by JavaScript --></h2>
+        <small id="mx-record-count"><!-- Populated by JavaScript --></small>
       </div>
     </div>
-    <div class="col-md-3">
-      <div class="card">
-        <div class="card-body text-center">
-          <h6 class="text-muted"><%= __('NS Records') %></h6>
-          <h2 id="ns-record-status"><!-- Populated by JavaScript --></h2>
-          <small id="ns-record-count"><!-- Populated by JavaScript --></small>
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-body text-center">
+        <h6 class="text-muted"><%= __('NS Records') %></h6>
+        <h2 id="ns-record-status"><!-- Populated by JavaScript --></h2>
+        <small id="ns-record-count"><!-- Populated by JavaScript --></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Detailed Check Results -->
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= __('DNS Check Results') %></h5>
+        <div class="table-responsive">
+          <table class="table table-sm" id="checks-table">
+            <thead>
+              <tr>
+                <th><%= __('Record Type') %></th>
+                <th><%= __('Record Value') %></th>
+                <th><%= __('IP Address') %></th>
+                <th><%= __('Country') %></th>
+                <th><%= __('ASN') %></th>
+                <th><%= __('AS Name') %></th>
+                <th><%= __('Provider') %></th>
+                <th><%= __('Status') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
   </div>
+</div>
 
-  <!-- Detailed Check Results -->
-  <div class="row mt-4">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= __('DNS Check Results') %></h5>
-          <div class="table-responsive">
-            <table class="table table-sm" id="checks-table">
-              <thead>
-                <tr>
-                  <th><%= __('Record Type') %></th>
-                  <th><%= __('Record Value') %></th>
-                  <th><%= __('IP Address') %></th>
-                  <th><%= __('Country') %></th>
-                  <th><%= __('ASN') %></th>
-                  <th><%= __('AS Name') %></th>
-                  <th><%= __('Provider') %></th>
-                  <th><%= __('Status') %></th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- Populated by JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Provider Summary -->
-  <div class="row mt-4 mb-4">
-    <div class="col-12">
-      <div class="card">
-        <div class="card-body">
-          <h5 class="card-title"><%= __('Hosting Provider Summary') %></h5>
-          <div id="provider-summary">
-            <!-- Populated by JavaScript -->
-          </div>
+<!-- Provider Summary -->
+<div class="row mt-4 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= __('Hosting Provider Summary') %></h5>
+        <div id="provider-summary">
+          <!-- Populated by JavaScript -->
         </div>
       </div>
     </div>
