@@ -196,3 +196,4 @@ prove -l -v t/00-basic.t
 - it should be index.js. We use make eplinks for index.js.ep generation.
 - no data in templates!
 - don't query database in controller. Use methods in model instead!
+- @index.js#L7 use url_for. dont hardcode links

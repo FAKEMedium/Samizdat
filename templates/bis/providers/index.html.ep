@@ -1,0 +1,30 @@
+% # BIS Providers View
+<p class="lead"><%= __('Hosting provider statistics for tracked domains') %></p>
+
+<!-- Provider Statistics -->
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= __('Hosting Providers') %></h5>
+        <div class="table-responsive">
+          <table class="table table-striped" id="providers-table">
+            <thead>
+              <tr>
+                <th><%= __('Provider') %></th>
+                <th><%= __('Country') %></th>
+                <th><%= __('Swedish') %></th>
+                <th><%= __('Cloud Act') %></th>
+                <th><%= __('Domains') %></th>
+                <th><%= __('Total Records') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,54 @@
+% # BIS Trends View
+<p class="lead"><%= __('Historical compliance trends over time') %></p>
+
+<!-- Time Range Filter -->
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary" data-days="30">30 Days</button>
+      <button type="button" class="btn btn-outline-primary active" data-days="90">90 Days</button>
+      <button type="button" class="btn btn-outline-primary" data-days="180">180 Days</button>
+      <button type="button" class="btn btn-outline-primary" data-days="365">1 Year</button>
+    </div>
+  </div>
+</div>
+
+<!-- Trends Chart -->
+<div class="row mt-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= __('Compliance Trends') %></h5>
+        <canvas id="trends-chart" style="max-height: 400px;"></canvas>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Trends Table -->
+<div class="row mt-4 mb-4">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title"><%= __('Historical Data') %></h5>
+        <div class="table-responsive">
+          <table class="table table-striped table-sm" id="trends-table">
+            <thead>
+              <tr>
+                <th><%= __('Date') %></th>
+                <th><%= __('Overall') %></th>
+                <th><%= __('A Records') %></th>
+                <th><%= __('MX Records') %></th>
+                <th><%= __('NS Records') %></th>
+                <th><%= __('Avg Score') %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

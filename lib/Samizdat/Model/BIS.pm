@@ -547,7 +547,7 @@ sub get_latest_scores ($self, %params) {
 
   if ($tag) {
     # Filter by tag key using bis.tag_names
-    $sql = 'SELECT s.* FROM bis.latest_scores s
+    $sql = 'SELECT DISTINCT s.* FROM bis.latest_scores s
             JOIN bis.domain_tags dt ON s.domain_id = dt.domain_id
             JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id
             WHERE tn.key = ?';
@@ -558,7 +558,7 @@ sub get_latest_scores ($self, %params) {
   my $total;
   if ($with_total) {
     my $count_sql = $sql;
-    $count_sql =~ s/SELECT \*|SELECT s\.\*/SELECT COUNT(*)/;
+    $count_sql =~ s/SELECT DISTINCT s\.\*|SELECT \*|SELECT s\.\*/SELECT COUNT(DISTINCT s.domain_id)/;
     $total = $self->pg->db->query($count_sql, @bind)->hash->{count};
   }
 
