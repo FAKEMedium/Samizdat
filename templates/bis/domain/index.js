@@ -1,11 +1,14 @@
 // BIS Domain Detail JavaScript
+// URL patterns from named routes
+const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+
 async function loadDomainDetails() {
   try {
     // Get domain from URL path
     const pathParts = window.location.pathname.split('/');
     const domain = pathParts[pathParts.length - 1];
 
-    const response = await fetch(`/bis/domain/${domain}`, {
+    const response = await fetch(`${BIS_DOMAIN_BASE}/${domain}`, {
       headers: { 'Accept': 'application/json' }
     });
 
@@ -19,6 +22,13 @@ async function loadDomainDetails() {
     }
 
     const data = await response.json();
+
+    // Ensure numeric fields are numbers
+    if (data.domain) {
+      data.domain.score = parseFloat(data.domain.score) || 0;
+      data.domain.compliant_checks = parseInt(data.domain.compliant_checks) || 0;
+      data.domain.total_checks = parseInt(data.domain.total_checks) || 0;
+    }
 
     renderDomainHeader(data.domain);
     renderComplianceOverview(data.domain);

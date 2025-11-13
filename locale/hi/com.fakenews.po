@@ -70,6 +70,12 @@ msgstr "404: अनुपलब्ध दस्तावेज़"
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
+msgid "A"
+msgstr ""
+
+msgid "A Records"
+msgstr ""
+
 msgid "A confirmation link was mailed to {email}."
 msgstr "एक पुष्टिकरण लिंक {email} पर भेजा गया है।"
 
@@ -84,6 +90,12 @@ msgstr "देर से भुगतान पर {rate} ब्याज लग
 
 msgid "API docs"
 msgstr "API दस्तावेज़"
+
+msgid "AS Name"
+msgstr ""
+
+msgid "ASN"
+msgstr ""
 
 msgid "About"
 msgstr "परिचय"
@@ -232,6 +244,9 @@ msgstr "विज्ञापन"
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "पंजीकरण के बाद आप अपने बारे में अधिक जानकारी जोड़ सकते हैं, अपनी शेयरिंग नीति को बदल सकते हैं और अपने अनुभव को अनुकूलित कर सकते हैं।"
 
+msgid "Algorithm"
+msgstr ""
+
 msgid "Alias"
 msgstr ""
 
@@ -262,6 +277,9 @@ msgstr ""
 msgid "All Messages"
 msgstr ""
 
+msgid "All Sectors"
+msgstr ""
+
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "ईमेल से पुष्टिकरण कोड पेस्ट करने के लिए कुकीज़ की अनुमति दें"
 
@@ -279,6 +297,9 @@ msgstr "भुगतान राशि {percent} वैट सहित: {total
 
 msgid "Amount to pay: {totalcost} {currency}"
 msgstr "भुगतान राशि: {totalcost} {currency}"
+
+msgid "Amount:"
+msgstr ""
 
 msgid "An error occurred"
 msgstr "एक त्रुटि आई"
@@ -340,7 +361,13 @@ msgstr ""
 msgid "Authorize"
 msgstr "प्राधिकृत करें"
 
+msgid "Auto Renew"
+msgstr ""
+
 msgid "Auto-renew"
+msgstr ""
+
+msgid "Average Score"
 msgstr ""
 
 msgid "BIC/Swift"
@@ -352,8 +379,32 @@ msgstr "BIC/स्विफ्ट पता"
 msgid "BIC/Swift address:"
 msgstr "BIC/स्विफ्ट पता:"
 
+msgid "BIS - $sector"
+msgstr ""
+
+msgid "BIS - Compliance Trends"
+msgstr ""
+
+msgid "BIS - Hosting Providers"
+msgstr ""
+
+msgid "BIS Badge"
+msgstr ""
+
+msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Check: $domain_name"
+msgstr ""
+
+msgid "BIS Manager"
+msgstr ""
+
 msgid "Back"
 msgstr "वापस"
+
+msgid "Back to Dashboard"
+msgstr ""
 
 msgid "Back to List"
 msgstr ""
@@ -362,6 +413,9 @@ msgid "Back to domains"
 msgstr ""
 
 msgid "Back to list"
+msgstr ""
+
+msgid "Balance"
 msgstr ""
 
 msgid "Bankgiro"
@@ -375,6 +429,9 @@ msgstr "बैंकगिरो:"
 
 msgid "Barred"
 msgstr "बाधित"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr ""
 
 msgid "Basic Information"
 msgstr "मूलभूत जानकारी"
@@ -541,6 +598,9 @@ msgstr "फिर से भेजने के लिए क्लिक कर
 msgid "Close"
 msgstr "बंद करें"
 
+msgid "Cloud Act Applies (US provider)"
+msgstr ""
+
 msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
@@ -558,6 +618,24 @@ msgstr ""
 
 msgid "Company"
 msgstr "कंपनी"
+
+msgid "Completed"
+msgstr ""
+
+msgid "Compliance"
+msgstr ""
+
+msgid "Compliance Rate"
+msgstr ""
+
+msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliant (Swedish hosting)"
+msgstr ""
+
+msgid "Compliant Domains"
+msgstr ""
 
 msgid "Confirm"
 msgstr "पुष्टि करें"
@@ -589,13 +667,25 @@ msgstr ""
 msgid "Contact"
 msgstr "संपर्क"
 
+msgid "Contact Details"
+msgstr ""
+
 msgid "Contact Information"
 msgstr "संपर्क जानकारी"
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Contact not found"
+msgstr ""
 
 msgid "Contact {sender} if you have questions."
 msgstr "यदि आपके कोई प्रश्न हैं तो {sender} से संपर्क करें।"
 
 msgid "Contact: {email} or call us directly."
+msgstr ""
+
+msgid "Contacts"
 msgstr ""
 
 msgid "Content"
@@ -673,6 +763,9 @@ msgstr "क्रेडिट किया गया इनवॉइस"
 msgid "Credited invoice: {number}"
 msgstr "क्रेडिट किया गया इनवॉइस: {number}"
 
+msgid "Critical"
+msgstr ""
+
 msgid "Currency"
 msgstr "मुद्रा"
 
@@ -709,6 +802,9 @@ msgstr "डीएनएस"
 msgid "DNS Admin"
 msgstr "डीएनएस एडमिन"
 
+msgid "DNS Check Results"
+msgstr ""
+
 msgid "DNS Zones"
 msgstr "डीएनएस ज़ोन"
 
@@ -723,6 +819,9 @@ msgstr "डीएनएस ज़ोन"
 
 msgid "DNS zones"
 msgstr "डीएनएस ज़ोन"
+
+msgid "DNSSEC Key Data"
+msgstr ""
 
 msgid "Dark"
 msgstr ""
@@ -796,6 +895,9 @@ msgstr "विकास"
 msgid "Direction"
 msgstr ""
 
+msgid "Disabled"
+msgstr ""
+
 msgid "Discount"
 msgstr "छूट"
 
@@ -808,10 +910,25 @@ msgstr "क्या आप इनवॉइस को क्रेडिट क�
 msgid "Domain"
 msgstr "डोमेन"
 
+msgid "Domain (A-Z)"
+msgstr ""
+
+msgid "Domain (Z-A)"
+msgstr ""
+
+msgid "Domain Compliance Scores"
+msgstr ""
+
+msgid "Domain Name"
+msgstr ""
+
 msgid "Domain created successfully"
 msgstr ""
 
 msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain details"
 msgstr ""
 
 msgid "Domain name is required"
@@ -834,6 +951,9 @@ msgstr ""
 
 msgid "Domains"
 msgstr "डोमेन"
+
+msgid "Domains in this Sector"
+msgstr ""
 
 msgid "DomÃ¤nregistrering"
 msgstr "डोमेन पंजीकरण"
@@ -994,6 +1114,9 @@ msgstr "खाली उपनाम"
 msgid "Empty telephone"
 msgstr "खाली टेलीफोन"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "End main content"
 msgstr "मुख्य सामग्री समाप्त"
 
@@ -1029,6 +1152,21 @@ msgstr "अपना ईमेल दर्ज करें"
 
 msgid "Enter zone name"
 msgstr "ज़ोन नाम दर्ज करें"
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
 
 msgid "Error reprinting invoice"
 msgstr ""
@@ -1183,6 +1321,9 @@ msgstr "रिकॉर्ड अपडेट करने में विफ�
 msgid "Failed to update zone"
 msgstr "ज़ोन अपडेट करने में विफल"
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Featured"
 msgstr ""
 
@@ -1191,6 +1332,9 @@ msgstr "फ़ाइल आर्काइव"
 
 msgid "Fill the form correctly!"
 msgstr "फॉर्म सही तरीके से भरें!"
+
+msgid "Filter Domains"
+msgstr ""
 
 msgid "Final Payment Reminder"
 msgstr ""
@@ -1212,6 +1356,9 @@ msgstr "अपना इनवॉइस संलग्न PDF के रूप 
 
 msgid "First name"
 msgstr "पहला नाम"
+
+msgid "Flags"
+msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "अधिक जानकारी के लिए, Fortnox वेबसाइट पर जाएं:"
@@ -1276,6 +1423,12 @@ msgstr "HTML परिणाम"
 msgid "Halfyear"
 msgstr "अर्धवार्षिक"
 
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
 msgid "Handled invoice"
 msgstr "संभाला गया इनवॉइस"
 
@@ -1288,8 +1441,14 @@ msgstr "शीर्षक 2"
 msgid "Heading 3"
 msgstr "शीर्षक 3"
 
+msgid "High"
+msgstr ""
+
 msgid "Highlights"
 msgstr "मुख्य बिंदु"
+
+msgid "Hosting Provider Summary"
+msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "मैं पंजीकरण के नियमों को स्वीकार करता हूं।"
@@ -1306,6 +1465,9 @@ msgstr ""
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr ""
 
+msgid "IP Address"
+msgstr ""
+
 msgid "Identification code"
 msgstr "पहचान कोड"
 
@@ -1317,6 +1479,9 @@ msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "यदि आपने खाता पंजीकृत नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
 msgstr ""
@@ -1506,6 +1671,12 @@ msgstr "यह {url} पर भी उपलब्ध है।"
 msgid "Italic"
 msgstr "तिरछा"
 
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "मुझे लॉग इन रखें"
 
@@ -1539,6 +1710,9 @@ msgstr "नवीनतम"
 msgid "Legal proceedings"
 msgstr ""
 
+msgid "Legend"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1559,6 +1733,9 @@ msgstr "ज़ोन सूची"
 
 msgid "Lista fakturor"
 msgstr "इनवॉइस सूची"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Log in"
 msgstr "लॉग इन करें"
@@ -1593,11 +1770,20 @@ msgstr "{site} से जुड़ा लोगो"
 msgid "Lost password?"
 msgstr "पासवर्ड खो गया?"
 
+msgid "Low"
+msgstr ""
+
 msgid "MB"
 msgstr "एमबी"
 
 msgid "MOSS"
 msgstr "एमओएसएस"
+
+msgid "MX"
+msgstr ""
+
+msgid "MX Records"
+msgstr ""
 
 msgid "MX records"
 msgstr "एमएक्स रिकॉर्ड"
@@ -1644,6 +1830,9 @@ msgstr ""
 msgid "Make invoice"
 msgstr "इनवॉइस बनाएं"
 
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
 msgid "Manage site"
 msgstr "साइट प्रबंधित करें"
 
@@ -1655,6 +1844,9 @@ msgstr "मैनुअल"
 
 msgid "Mark payment"
 msgstr "भुगतान चिह्नित करें"
+
+msgid "Medium"
+msgstr ""
 
 msgid "Menus"
 msgstr "मेनू"
@@ -1710,8 +1902,17 @@ msgstr "महीना"
 msgid "Multiple languages and country specific modifications"
 msgstr "कई भाषाएँ और देश-विशिष्ट संशोधन"
 
+msgid "NS"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
 msgid "Name"
 msgstr "नाम"
+
+msgid "Name Servers"
+msgstr ""
 
 msgid "Negative impact on credit rating"
 msgstr ""
@@ -1782,8 +1983,17 @@ msgstr ""
 msgid "No certificates found"
 msgstr ""
 
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No contacts found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
+
+msgid "No domains found"
+msgstr ""
 
 msgid "No examples found"
 msgstr ""
@@ -1803,8 +2013,14 @@ msgstr ""
 msgid "No pages found."
 msgstr "कोई पेज नहीं मिला।"
 
+msgid "No payments found"
+msgstr ""
+
 msgid "No selected customer."
 msgstr "कोई ग्राहक चयनित नहीं।"
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr ""
 
 msgid "Normal"
 msgstr "सामान्य"
@@ -1857,6 +2073,9 @@ msgstr "संगठन नंबर"
 msgid "Organisation Number"
 msgstr "संगठन संख्या"
 
+msgid "Organization"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "संगठनात्मक संख्या"
 
@@ -1875,6 +2094,9 @@ msgstr "हमारा संदर्भ"
 msgid "Over time, more web hosting features have been added."
 msgstr "समय के साथ, और वेब होस्टिंग सुविधाएं जोड़ी गई हैं।"
 
+msgid "Overall Score"
+msgstr ""
+
 msgid "Overdue Invoice Details"
 msgstr ""
 
@@ -1891,6 +2113,12 @@ msgid "PEM format"
 msgstr ""
 
 msgid "PEM format (stored securely)"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Page navigation"
 msgstr ""
 
 msgid "Page {number} of {total}"
@@ -1941,16 +2169,28 @@ msgstr "पासवर्ड गलत था या उपयोगकर्�
 msgid "PayPal"
 msgstr ""
 
+msgid "PayPal Payments"
+msgstr ""
+
 msgid "Paydate"
 msgstr "भुगतान तिथि"
 
+msgid "Payer Email"
+msgstr ""
+
 msgid "Payment"
 msgstr "भुगतान"
+
+msgid "Payment Cancelled"
+msgstr ""
 
 msgid "Payment Information"
 msgstr ""
 
 msgid "Payment Reminder"
+msgstr ""
+
+msgid "Payment Successful"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -1976,6 +2216,9 @@ msgstr "पेपाल"
 
 msgid "Paypal:"
 msgstr "पेपाल:"
+
+msgid "Pending"
+msgstr ""
 
 msgid "People rocketing to the sky"
 msgstr "लोग आकाश की ओर उड़ते हुए"
@@ -2073,6 +2316,9 @@ msgstr "मूल्य सूची"
 msgid "Priority"
 msgstr "प्राथमिकता"
 
+msgid "Privacy Protection"
+msgstr ""
+
 msgid "Private Key"
 msgstr ""
 
@@ -2086,6 +2332,15 @@ msgid "Products"
 msgstr "उत्पाद"
 
 msgid "Profile Image"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Provider"
+msgstr ""
+
+msgid "Public Key"
 msgstr ""
 
 msgid "Published"
@@ -2133,6 +2388,12 @@ msgstr "उद्धरण"
 msgid "Re:"
 msgstr ""
 
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
 msgid "Received"
 msgstr ""
 
@@ -2140,6 +2401,9 @@ msgid "Receiver"
 msgstr "प्राप्तकर्ता"
 
 msgid "Recent Messages"
+msgstr ""
+
+msgid "Recent Payments"
 msgstr ""
 
 msgid "Recent signatures"
@@ -2153,6 +2417,9 @@ msgstr "रिकॉर्ड नाम"
 
 msgid "Record Type"
 msgstr "रिकॉर्ड प्रकार"
+
+msgid "Record Value"
+msgstr ""
 
 msgid "Record created successfully"
 msgstr "रिकॉर्ड सफलतापूर्वक बनाया गया"
@@ -2179,6 +2446,12 @@ msgid "References"
 msgstr "संदर्भ"
 
 msgid "Refresh"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Refunded:"
 msgstr ""
 
 msgid "Regards"
@@ -2208,11 +2481,20 @@ msgstr "पंजीकृत भुगतान और आपूर्तिक
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
 msgstr "पंजीकृत भुगतान और आपूर्तिकर्ता बिल Fortnox से प्राप्त होते हैं और स्थानीय इंटरफेस में प्रदर्शित होते हैं।"
 
+msgid "Registrant"
+msgstr ""
+
 msgid "Registrar"
 msgstr "रजिस्ट्रार"
 
 msgid "Registration is currently non-functional"
 msgstr "पंजीकरण वर्तमान में गैर-कार्यात्मक है"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr ""
 
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "भुगतान के लिए शेष राशि: {amount} {currency}"
@@ -2240,6 +2522,9 @@ msgstr ""
 
 msgid "Resources"
 msgstr "संसाधन"
+
+msgid "Return to Home"
+msgstr ""
 
 msgid "Roles"
 msgstr "भूमिकाएँ"
@@ -2277,6 +2562,9 @@ msgstr ""
 msgid "SMS sent successfully!"
 msgstr ""
 
+msgid "SWISH"
+msgstr ""
+
 msgid "Samizdat"
 msgstr "समिज़दात"
 
@@ -2301,6 +2589,15 @@ msgstr ""
 msgid "Saved successfully"
 msgstr ""
 
+msgid "Score"
+msgstr ""
+
+msgid "Score (High to Low)"
+msgstr ""
+
+msgid "Score (Low to High)"
+msgstr ""
+
 msgid "Search"
 msgstr "खोजें"
 
@@ -2310,8 +2607,14 @@ msgstr ""
 msgid "Search certificates..."
 msgstr ""
 
+msgid "Search contacts..."
+msgstr ""
+
 msgid "Search content"
 msgstr "सामग्री खोजें"
+
+msgid "Search domains..."
+msgstr ""
 
 msgid "Search example"
 msgstr ""
@@ -2372,6 +2675,9 @@ msgstr ""
 
 msgid "Search web content"
 msgstr "वेब सामग्री खोजें"
+
+msgid "Sector"
+msgstr ""
 
 msgid "Select"
 msgstr "चुनें"
@@ -2481,6 +2787,9 @@ msgstr "केवल स्नैपबैक"
 msgid "Snapback scheduler"
 msgstr "स्नैपबैक शेड्यूलर"
 
+msgid "Sort by"
+msgstr ""
+
 msgid "Source code on Github"
 msgstr "Github पर स्रोत कोड"
 
@@ -2535,6 +2844,9 @@ msgstr ""
 msgid "Supplier invoices"
 msgstr "आपूर्तिकर्ता इनवॉइस"
 
+msgid "Support for both production and test environments"
+msgstr ""
+
 msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
 msgstr ""
 
@@ -2563,6 +2875,9 @@ msgid "TTL"
 msgstr ""
 
 msgid "Tags"
+msgstr ""
+
+msgid "Tech"
 msgstr ""
 
 msgid "Technical"
@@ -2596,6 +2911,9 @@ msgid "Thank you for contacting us."
 msgstr "हमसे संपर्क करने के लिए धन्यवाद।"
 
 msgid "Thank you for your business"
+msgstr ""
+
+msgid "Thank you for your payment. Your transaction has been completed."
 msgstr ""
 
 msgid "Thank you for your prompt attention to this matter."
@@ -2682,6 +3000,9 @@ msgstr "मेनू टॉगल करें"
 msgid "Tot"
 msgstr "कुल"
 
+msgid "Total Domains"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
@@ -2690,6 +3011,15 @@ msgstr "कुल: {count} ग्राहक"
 
 msgid "Tough"
 msgstr "कठिन"
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr ""
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
 
 msgid "Transfer"
 msgstr "ट्रांसफर"
@@ -2832,7 +3162,13 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
 
+msgid "View"
+msgstr ""
+
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
+
+msgid "View and manage domain registrations"
 msgstr ""
 
 msgid "WARNING: Legal Action Pending"
@@ -2883,6 +3219,9 @@ msgstr "आप हमारी चर्चाओं में भी पोस�
 msgid "You can now log in to your account."
 msgstr "आप अब अपने खाते में लॉग इन कर सकते हैं।"
 
+msgid "You have cancelled the payment process."
+msgstr ""
+
 msgid "You have registered a new user account on {site}."
 msgstr "आपने {site} पर एक नया उपयोगकर्ता खाता पंजीकृत किया है।"
 
@@ -2894,6 +3233,9 @@ msgstr "आपको पंजीकरण शर्तों को स्व�
 
 msgid "You were logged in as {username}."
 msgstr "आप {username} के रूप में लॉग इन थे।"
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
 
 msgid "Your Reference"
 msgstr "आपका संदर्भ"
@@ -3014,6 +3356,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "हमारी वेब"
+
+msgid "payments"
+msgstr ""
 
 msgid "poll"
 msgstr ""

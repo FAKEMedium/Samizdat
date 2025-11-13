@@ -23,16 +23,18 @@ sub index ($self) {
     my $offset = $self->param('offset') || 0;
     my $lang = $self->param('lang') || $self->stash('lang') || 'en';
 
-    my $scores = $self->bis->get_latest_scores(
+    my $result = $self->bis->get_latest_scores(
       tag => $tag,
       limit => $limit,
-      offset => $offset
+      offset => $offset,
+      with_total => 1
     );
     my $sector_stats = $self->bis->get_sector_stats(lang => $lang);
 
     my $data = {
       success => 1,
-      scores => $scores,
+      scores => $result->{scores},
+      total => $result->{total},
       sector_stats => $sector_stats,
     };
 
@@ -122,10 +124,11 @@ sub sector ($self) {
     my $offset = $self->param('offset') || 0;
     my $lang = $self->param('lang') || $self->stash('lang') || 'en';
 
-    my $scores = $self->bis->get_latest_scores(
+    my $result = $self->bis->get_latest_scores(
       tag => $sector,
       limit => $limit,
-      offset => $offset
+      offset => $offset,
+      with_total => 1
     );
 
     # Get languageid for this language
@@ -148,7 +151,8 @@ sub sector ($self) {
       success => 1,
       sector => $sector,
       sector_info => $sector_info,
-      scores => $scores
+      scores => $result->{scores},
+      total => $result->{total}
     };
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');

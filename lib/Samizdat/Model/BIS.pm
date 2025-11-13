@@ -5,6 +5,7 @@ use Mojo::UserAgent;
 use Mojo::JSON qw(decode_json encode_json);
 use Net::DNS::Resolver;
 use Socket qw(AF_INET AF_INET6 inet_pton inet_ntop);
+use Encode qw(decode_utf8);
 
 has 'config';
 has 'redis';
@@ -77,6 +78,11 @@ sub add_domain ($self, %params) {
   my $tags = $params{tags} || [];
   my $lang = $params{lang} || 'en';
 
+  # Ensure UTF-8 strings are properly decoded for database storage
+  # If they're already UTF-8 flagged, leave them alone; if not, decode them
+  utf8::decode($title) unless utf8::is_utf8($title);
+  utf8::decode($description) unless utf8::is_utf8($description);
+
   # Insert or update domain
   my $result = $self->pg->db->query(
     'INSERT INTO bis.domains (domain)
@@ -137,11 +143,13 @@ Start a new check run.
 =cut
 
 sub start_run ($self) {
-  # Clear Redis cache for this run
-  if ($self->redis) {
-    my $keys = $self->redis->db->keys('bis:cache:*');
-    $self->redis->db->del(@$keys) if @$keys;
-  }
+  # Keep Redis cache between runs for better performance
+  # Cached IP lookups can be reused across multiple domains
+  # Uncomment below to clear cache if needed for testing
+  # if ($self->redis) {
+  #   my $keys = $self->redis->db->keys('bis:cache:*');
+  #   $self->redis->db->del(@$keys) if @$keys;
+  # }
 
   my $result = $self->pg->db->query(
     'INSERT INTO bis.runs (started_at, status)
@@ -173,7 +181,7 @@ sub check_domain ($self, $domain_id, $run_id) {
 
   # Check A records
   my $a_records = $self->lookup_dns($domain_name, 'A');
-  my $a_compliant = 0;
+  my $a_compliant = @$a_records ? 1 : undef;  # NULL if no A records
   for my $record (@$a_records) {
     my $check = $self->check_ip($record->{value}, 'A');
     $check->{record_value} = $record->{value};
@@ -181,7 +189,8 @@ sub check_domain ($self, $domain_id, $run_id) {
     $total_checks++;
     if ($check->{is_compliant}) {
       $compliant_checks++;
-      $a_compliant = 1;
+    } else {
+      $a_compliant = 0;
     }
   }
 
@@ -221,7 +230,7 @@ sub check_domain ($self, $domain_id, $run_id) {
 
   # Check NS records
   my $ns_records = $self->lookup_dns($domain_name, 'NS');
-  my $ns_compliant = 1;
+  my $ns_compliant = @$ns_records ? 1 : undef;  # NULL if no NS records
   for my $record (@$ns_records) {
     # Resolve NS hostname to IP
     my $ns_a_records = $self->lookup_dns($record->{value}, 'A');
@@ -257,7 +266,7 @@ sub check_domain ($self, $domain_id, $run_id) {
 
   # Calculate score
   my $score = $total_checks > 0 ? int(($compliant_checks / $total_checks) * 100) : 0;
-  my $has_bis_badge = $score == 100 && $total_checks > 0;
+  my $has_bis_badge = ($score == 100 && $total_checks > 0) ? 1 : 0;
 
   # Determine primary provider (most common non-compliant provider)
   my $primary_provider = '';
@@ -496,6 +505,7 @@ sub get_latest_scores ($self, %params) {
   my $tag = $params{tag};
   my $limit = $params{limit} || 100;
   my $offset = $params{offset} || 0;
+  my $with_total = $params{with_total} || 0;
 
   my $sql = 'SELECT * FROM bis.latest_scores';
   my @bind;
@@ -509,10 +519,20 @@ sub get_latest_scores ($self, %params) {
     push @bind, $tag;
   }
 
+  # Get total count if requested
+  my $total;
+  if ($with_total) {
+    my $count_sql = $sql;
+    $count_sql =~ s/SELECT \*|SELECT s\.\*/SELECT COUNT(*)/;
+    $total = $self->pg->db->query($count_sql, @bind)->hash->{count};
+  }
+
   $sql .= ' ORDER BY score DESC LIMIT ? OFFSET ?';
   push @bind, $limit, $offset;
 
-  return $self->pg->db->query($sql, @bind)->hashes->to_array;
+  my $scores = $self->pg->db->query($sql, @bind)->hashes->to_array;
+
+  return $with_total ? {scores => $scores, total => $total} : $scores;
 }
 
 =head2 get_sector_stats
@@ -528,7 +548,7 @@ sub get_sector_stats ($self, %params) {
 
   # Get languageid from language code
   my $language = $self->pg->db->query(
-    'SELECT languageid FROM languages WHERE code = ?',
+    'SELECT languageid FROM public.languages WHERE code = ?',
     $lang
   )->hash;
 

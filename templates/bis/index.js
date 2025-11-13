@@ -1,4 +1,9 @@
 // BIS Dashboard JavaScript
+// URL patterns from named routes
+const BIS_INDEX_URL = '<%= url_for('bis_index') %>';
+const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+
 let currentPage = 1;
 let currentFilter = {
   sector: '',
@@ -18,7 +23,7 @@ async function loadDashboard() {
       params.append('tag', currentFilter.sector);
     }
 
-    const response = await fetch(`/bis?${params}`, {
+    const response = await fetch(`${BIS_INDEX_URL}?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
 
@@ -28,7 +33,7 @@ async function loadDashboard() {
 
     renderSectorStats(data.sector_stats);
     renderDomainsTable(data.scores);
-    renderPagination(data.scores.length);
+    renderPagination(data.total || data.scores.length);
 
   } catch (error) {
     console.error('Error loading dashboard:', error);
@@ -56,7 +61,8 @@ function renderSectorStats(sectors) {
 
   // Create sector cards
   container.innerHTML = sectors.map(sector => {
-    const complianceRate = sector.compliance_rate || 0;
+    const complianceRate = parseFloat(sector.compliance_rate) || 0;
+    const avgScore = parseFloat(sector.avg_score) || 0;
     const cardColor = complianceRate >= 75 ? 'success' : complianceRate >= 50 ? 'warning' : 'danger';
 
     return `
@@ -67,9 +73,9 @@ function renderSectorStats(sectors) {
             <h2 class="card-title text-${cardColor}">${complianceRate.toFixed(1)}%</h2>
             <p class="card-text">
               <small>${sector.compliant_domains}/${sector.total_domains} compliant</small><br>
-              <small>Avg score: ${sector.avg_score.toFixed(1)}</small>
+              <small>Avg score: ${avgScore.toFixed(1)}</small>
             </p>
-            <a href="/bis/sector/${sector.sector}" class="btn btn-sm btn-outline-${cardColor}">View Details</a>
+            <a href="${BIS_SECTOR_BASE}/${sector.sector}" class="btn btn-sm btn-outline-${cardColor}">View Details</a>
           </div>
         </div>
       </div>
@@ -117,7 +123,7 @@ function renderDomainsTable(scores) {
 
     return `
       <tr>
-        <td><a href="/bis/domain/${score.domain}">${score.domain}</a></td>
+        <td><a href="${BIS_DOMAIN_BASE}/${score.domain}">${score.domain}</a></td>
         <td>${score.title || '-'}</td>
         <td>
           <div class="progress" style="min-width: 60px;">

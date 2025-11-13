@@ -9,26 +9,26 @@ sub register ($self, $app, $config = {}) {
 
   # Public routes (for public dashboard)
   my $bis = $r->home('bis')->to(controller => 'BIS');
-  $bis->get('/')                          ->to('#index')                ->name('bis_index');
-  $bis->get('/domain/:domain')            ->to('#domain')               ->name('bis_domain');
-  $bis->get('/sector/:sector')            ->to('#sector')               ->name('bis_sector');
+  $bis->get('/domain/#domain')            ->to('#domain')               ->name('bis_domain');
+  $bis->get('/sector/#sector')            ->to('#sector')               ->name('bis_sector');
   $bis->get('/providers')                 ->to('#providers')            ->name('bis_providers');
   $bis->get('/trends')                    ->to('#trends')               ->name('bis_trends');
+  $bis->get('/')                          ->to('#index')                ->name('bis_index');
 
   # Manager routes
   my $manager = $r->manager('bis')->to(controller => 'BIS');
-  $manager->get('/')                      ->to('#manager')              ->name('bis_manager');
+  $manager->put('/domains/#id')           ->to('#update_domain')        ->name('bis_update_domain');
+  $manager->delete('/domains/#id')        ->to('#delete_domain')        ->name('bis_delete_domain');
+  $manager->post('/runs/:id/check')       ->to('#check_run')            ->name('bis_check_run');
+  $manager->post('/runs/start')           ->to('#start_run')            ->name('bis_start_run');
   $manager->get('/domains')               ->to('#domains')              ->name('bis_domains');
   $manager->post('/domains')              ->to('#add_domain')           ->name('bis_add_domain');
-  $manager->put('/domains/:id')           ->to('#update_domain')        ->name('bis_update_domain');
-  $manager->delete('/domains/:id')        ->to('#delete_domain')        ->name('bis_delete_domain');
   $manager->get('/tags')                  ->to('#tags')                 ->name('bis_tags');
   $manager->post('/tags')                 ->to('#add_tag')              ->name('bis_add_tag');
   $manager->get('/runs')                  ->to('#runs')                 ->name('bis_runs');
-  $manager->post('/runs/start')           ->to('#start_run')            ->name('bis_start_run');
-  $manager->post('/runs/:id/check')       ->to('#check_run')            ->name('bis_check_run');
   $manager->get('/providers')             ->to('#manage_providers')     ->name('bis_manage_providers');
   $manager->post('/providers')            ->to('#add_provider')         ->name('bis_add_provider');
+  $manager->get('/')                      ->to('#manager')              ->name('bis_manager');
 
 
   # Register model helper
