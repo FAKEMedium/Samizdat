@@ -8,11 +8,19 @@ use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
 use YAML::XS;
 use Data::Dumper;
+use Samizdat::Model::Public;
 
 has 'config';
 has 'database';
 has 'locale';
 has 'routes';
+has 'public' => sub ($self) {
+  return Samizdat::Model::Public->new(pg => $self->database);
+};
+has 'languages' => sub ($self) {
+  # Cache the languages hash for fast lookups
+  return $self->public->languages();
+};
 
 my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
@@ -479,11 +487,8 @@ sub save_content ($self, $params) {
   my $language = $params->{language};
   my $user_id = $params->{user_id};
   
-  # Get language ID from language code (languages table is in public schema)
-  my $language_id = $self->database->db->query(
-    'SELECT languageid FROM public.languages WHERE code = ?', 
-    $language
-  )->hash->{languageid} // 1;
+  # Get language ID from language code using cached languages hash
+  my $language_id = $self->languages->{$language} // 1;
   
   # Convert docpath to source markdown path and determine alias
   my ($alias, $markdown_src, $field_to_update, $sidecard_base);
@@ -574,10 +579,7 @@ sub save_content ($self, $params) {
 
 # Get content from database for a specific docpath and element_id
 sub get_content ($self, $docpath, $element_id, $language) {
-  my $language_id = $self->database->db->query(
-    'SELECT languageid FROM public.languages WHERE code = ?', 
-    $language
-  )->hash->{languageid} // 1;
+  my $language_id = $self->languages->{$language} // 1;
   
   my $resource = $self->database->db->query(
     'SELECT content, modified FROM web.resources 
@@ -590,10 +592,7 @@ sub get_content ($self, $docpath, $element_id, $language) {
 
 # Check if docpath has any database content
 sub has_database_content ($self, $docpath, $language) {
-  my $language_id = $self->database->db->query(
-    'SELECT languageid FROM public.languages WHERE code = ?', 
-    $language
-  )->hash->{languageid} // 1;
+  my $language_id = $self->languages->{$language} // 1;
   
   my $count = $self->database->db->query(
     'SELECT COUNT(*) as count FROM web.resources 
@@ -607,10 +606,7 @@ sub has_database_content ($self, $docpath, $language) {
 
 # Get complete document structure from database using new schema
 sub get_database_content ($self, $save_docpath, $language) {
-  my $language_id = $self->database->db->query(
-    'SELECT languageid FROM public.languages WHERE code = ?', 
-    $language
-  )->hash->{languageid} // 1;
+  my $language_id = $self->languages->{$language} // 1;
   
   # Get main resource (has alias matching save_docpath)
   my $main_resource = $self->database->db->query(
@@ -623,10 +619,7 @@ sub get_database_content ($self, $save_docpath, $language) {
   
   # For non-default languages, ensure consistency by cloning missing sidecards from default
   if ($language ne $self->locale->{default_language}) {
-    my $default_language_id = $self->database->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?', 
-      $self->locale->{default_language}
-    )->hash->{languageid} // 1;
+    my $default_language_id = $self->languages->{$self->locale->{default_language}} // 1;
     
     # Find the default language main resource to get its sidecards
     my $default_main = $self->database->db->query(

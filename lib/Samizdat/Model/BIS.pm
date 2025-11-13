@@ -6,6 +6,7 @@ use Mojo::JSON qw(decode_json encode_json);
 use Net::DNS::Resolver;
 use Socket qw(AF_INET AF_INET6 inet_pton inet_ntop);
 use Encode qw(decode_utf8);
+use Samizdat::Model::Public;
 
 has 'config';
 has 'redis';
@@ -21,6 +22,13 @@ has 'resolver' => sub {
   $res->tcp_timeout(5);
   $res->udp_timeout(5);
   return $res;
+};
+has 'public' => sub ($self) {
+  return Samizdat::Model::Public->new(pg => $self->pg);
+};
+has 'languages' => sub ($self) {
+  # Cache the languages hash for fast lookups
+  return $self->public->languages();
 };
 
 =head1 NAME
@@ -97,11 +105,7 @@ sub add_domain ($self, %params) {
 
   # Add or update localized description
   if ($title || $description) {
-    my $language = $self->pg->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?',
-      $lang
-    )->hash;
-    my $languageid = $language ? $language->{languageid} : 1;
+    my $languageid = $self->get_language_id($lang);
 
     $self->pg->db->query(
       'INSERT INTO bis.domain_descriptions (domain_id, languageid, title, description)
@@ -493,6 +497,37 @@ sub complete_run ($self, $run_id) {
   return $stats;
 }
 
+=head2 get_recent_runs
+
+Get recent check runs with their statistics.
+
+    my $runs = $bis->get_recent_runs(limit => 10);
+
+=cut
+
+sub get_recent_runs ($self, %params) {
+  my $limit = $params{limit} || 10;
+
+  my $runs = $self->pg->db->select(
+    'bis.runs',
+    '*',
+    undef,
+    {order_by => {-desc => 'started_at'}, limit => $limit}
+  )->hashes->to_array;
+
+  # Add statistics for each run
+  for my $run (@$runs) {
+    my $stats = $self->pg->db->select(
+      'bis.statistics',
+      '*',
+      {run_id => $run->{id}}
+    )->hash;
+    $run->{statistics} = $stats;
+  }
+
+  return $runs;
+}
+
 =head2 get_latest_scores
 
 Get latest scores for all domains or filtered by tag key.
@@ -545,14 +580,7 @@ Get compliance statistics by sector with localized names.
 
 sub get_sector_stats ($self, %params) {
   my $lang = $params{lang} || 'en';
-
-  # Get languageid from language code
-  my $language = $self->pg->db->query(
-    'SELECT languageid FROM public.languages WHERE code = ?',
-    $lang
-  )->hash;
-
-  my $languageid = $language ? $language->{languageid} : 1;  # Default to English
+  my $languageid = $self->get_language_id($lang);
 
   # Custom query with language parameter
   return $self->pg->db->query(
@@ -586,14 +614,7 @@ Get statistics by hosting provider with localized names.
 
 sub get_provider_stats ($self, %params) {
   my $lang = $params{lang} || 'en';
-
-  # Get languageid from language code
-  my $language = $self->pg->db->query(
-    'SELECT languageid FROM languages WHERE code = ?',
-    $lang
-  )->hash;
-
-  my $languageid = $language ? $language->{languageid} : 1;  # Default to English
+  my $languageid = $self->get_language_id($lang);
 
   # Custom query with language parameter
   return $self->pg->db->query(
@@ -625,14 +646,7 @@ Get all tags with localized names.
 
 sub get_tags ($self, %params) {
   my $lang = $params{lang} || 'en';
-
-  # Get languageid from language code
-  my $language = $self->pg->db->query(
-    'SELECT languageid FROM languages WHERE code = ?',
-    $lang
-  )->hash;
-
-  my $languageid = $language ? $language->{languageid} : 1;
+  my $languageid = $self->get_language_id($lang);
 
   return $self->pg->db->query(
     'SELECT
@@ -660,14 +674,7 @@ Get all providers with localized names.
 
 sub get_providers ($self, %params) {
   my $lang = $params{lang} || 'en';
-
-  # Get languageid from language code
-  my $language = $self->pg->db->query(
-    'SELECT languageid FROM languages WHERE code = ?',
-    $lang
-  )->hash;
-
-  my $languageid = $language ? $language->{languageid} : 1;
+  my $languageid = $self->get_language_id($lang);
 
   return $self->pg->db->query(
     'SELECT
@@ -712,6 +719,382 @@ sub get_historical_trends ($self, %params) {
      ORDER BY r.started_at ASC',
     $days, 'completed'
   )->hashes->to_array;
+}
+
+=head2 get_language_id
+
+Get language ID from language code using cached languages hash.
+
+    my $languageid = $bis->get_language_id('sv');
+
+=cut
+
+sub get_language_id ($self, $lang) {
+  $lang ||= 'en';
+  return $self->languages->{$lang} // 1;  # Default to English (1)
+}
+
+=head2 get_domain_details
+
+Get domain details with checks and tags for a specific domain.
+
+    my $details = $bis->get_domain_details(
+      domain => 'example.se',
+      lang => 'en'
+    );
+
+Returns hashref with domain, checks, and tags.
+
+=cut
+
+sub get_domain_details ($self, %params) {
+  my $domain_name = $params{domain} or return;
+  my $lang = $params{lang} || 'en';
+
+  # Get domain details
+  my $domain = $self->pg->db->query(
+    'SELECT * FROM bis.latest_scores WHERE domain = ?',
+    $domain_name
+  )->hash;
+
+  return unless $domain;
+
+  # Get checks for this domain
+  my $checks = $self->pg->db->query(
+    'SELECT * FROM bis.checks
+     WHERE domain_id = ? AND run_id = (SELECT MAX(id) FROM bis.runs WHERE status = ?)
+     ORDER BY record_type, checked_at',
+    $domain->{domain_id}, 'completed'
+  )->hashes->to_array;
+
+  # Get languageid for this language
+  my $languageid = $self->get_language_id($lang);
+
+  # Get tags with localized names
+  my $tags = $self->pg->db->query(
+    'SELECT t.id, t.color, t.priority, tn.key, tn.display_name, tn.description
+     FROM bis.tags t
+     JOIN bis.domain_tags dt ON t.id = dt.tag_id
+     JOIN bis.tag_names tn ON t.id = tn.tag_id AND tn.languageid = ?
+     WHERE dt.domain_id = ?
+     ORDER BY t.priority DESC',
+    $languageid, $domain->{domain_id}
+  )->hashes->to_array;
+
+  return {
+    domain => $domain,
+    checks => $checks,
+    tags => $tags
+  };
+}
+
+=head2 get_sector_info
+
+Get sector info with localized name.
+
+    my $sector_info = $bis->get_sector_info(
+      sector => 'healthcare',
+      lang => 'sv'
+    );
+
+=cut
+
+sub get_sector_info ($self, %params) {
+  my $sector = $params{sector} or return;
+  my $lang = $params{lang} || 'en';
+
+  my $languageid = $self->get_language_id($lang);
+
+  return $self->pg->db->query(
+    'SELECT t.color, tn.display_name, tn.description
+     FROM bis.tags t
+     JOIN bis.tag_names tn ON t.id = tn.tag_id AND tn.languageid = ?
+     WHERE tn.key = ?',
+    $languageid, $sector
+  )->hash;
+}
+
+=head2 get_domains_with_tags
+
+Get domains with their tags, optionally filtered by tag.
+
+    my $domains = $bis->get_domains_with_tags(
+      tag => 'healthcare',
+      limit => 100,
+      offset => 0
+    );
+
+=cut
+
+sub get_domains_with_tags ($self, %params) {
+  my $tag = $params{tag};
+  my $limit = $params{limit} || 100;
+  my $offset = $params{offset} || 0;
+
+  my $sql = 'SELECT d.*, array_agg(tn.key) as tags
+             FROM bis.domains d
+             LEFT JOIN bis.domain_tags dt ON d.id = dt.domain_id
+             LEFT JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id';
+  my @bind;
+
+  if ($tag) {
+    $sql .= ' WHERE d.id IN (
+                SELECT domain_id FROM bis.domain_tags dt2
+                JOIN bis.tag_names tn2 ON dt2.tag_id = tn2.tag_id
+                WHERE tn2.key = ?
+              )';
+    push @bind, $tag;
+  }
+
+  $sql .= ' GROUP BY d.id ORDER BY d.domain LIMIT ? OFFSET ?';
+  push @bind, $limit, $offset;
+
+  return $self->pg->db->query($sql, @bind)->hashes->to_array;
+}
+
+=head2 update_domain
+
+Update domain information.
+
+    $bis->update_domain(
+      id => 1,
+      active => 1,
+      title => 'Updated Title',
+      description => 'Updated description',
+      tags => ['government', 'healthcare'],
+      lang => 'en'
+    );
+
+=cut
+
+sub update_domain ($self, %params) {
+  my $id = $params{id} or die "domain id required";
+
+  # Update domain
+  $self->pg->db->update('bis.domains', {
+    active => $params{active} // 1,
+    updated_at => \'NOW()'
+  }, {id => $id});
+
+  # Update domain descriptions if provided
+  if ($params{title} || $params{description}) {
+    my $lang = $params{lang} || 'en';
+    my $languageid = $self->get_language_id($lang);
+
+    $self->pg->db->query(
+      'INSERT INTO bis.domain_descriptions (domain_id, languageid, title, description)
+       VALUES (?, ?, ?, ?)
+       ON CONFLICT (domain_id, languageid) DO UPDATE
+       SET title = EXCLUDED.title, description = EXCLUDED.description',
+      $id, $languageid, $params{title}, $params{description}
+    );
+  }
+
+  # Update tags if provided
+  if ($params{tags}) {
+    $self->update_domain_tags(
+      domain_id => $id,
+      tags => $params{tags}
+    );
+  }
+
+  return 1;
+}
+
+=head2 update_domain_tags
+
+Update tags for a domain.
+
+    $bis->update_domain_tags(
+      domain_id => 1,
+      tags => ['government', 'healthcare']
+    );
+
+=cut
+
+sub update_domain_tags ($self, %params) {
+  my $domain_id = $params{domain_id} or die "domain_id required";
+  my $tags = $params{tags} || [];
+
+  # Remove existing tags
+  $self->pg->db->delete('bis.domain_tags', {domain_id => $domain_id});
+
+  # Add new tags (tags are keys now)
+  for my $tag_key (@$tags) {
+    my $tag = $self->pg->db->query(
+      'SELECT DISTINCT tag_id FROM bis.tag_names WHERE key = ?',
+      $tag_key
+    )->hash;
+    if ($tag) {
+      $self->pg->db->insert('bis.domain_tags', {
+        domain_id => $domain_id,
+        tag_id => $tag->{tag_id}
+      });
+    }
+  }
+
+  return 1;
+}
+
+=head2 delete_domain
+
+Delete a domain.
+
+    $bis->delete_domain(id => 1);
+
+=cut
+
+sub delete_domain ($self, %params) {
+  my $id = $params{id} or die "domain id required";
+
+  $self->pg->db->delete('bis.domains', {id => $id});
+
+  return 1;
+}
+
+=head2 add_tag
+
+Add a new tag with localized name.
+
+    my $tag_id = $bis->add_tag(
+      key => 'healthcare',
+      display_name => 'Healthcare',
+      description => 'Healthcare organizations',
+      color => '#0066cc',
+      priority => 10,
+      lang => 'en'
+    );
+
+=cut
+
+sub add_tag ($self, %params) {
+  my $key = $params{key} or die "key required";
+  my $display_name = $params{display_name} or die "display_name required";
+  my $lang = $params{lang} || 'en';
+
+  # Insert tag
+  my $result = $self->pg->db->query(
+    'INSERT INTO bis.tags (color, priority) VALUES (?, ?) RETURNING id',
+    $params{color} || '#0066cc',
+    $params{priority} || 0
+  );
+  my $tag_id = $result->hash->{id};
+
+  # Insert localized tag name
+  my $languageid = $self->get_language_id($lang);
+
+  $self->pg->db->insert('bis.tag_names', {
+    tag_id => $tag_id,
+    languageid => $languageid,
+    key => $key,
+    display_name => $display_name,
+    description => $params{description} || ''
+  });
+
+  return $tag_id;
+}
+
+=head2 get_runs_with_stats
+
+Get check runs with their statistics.
+
+    my $runs = $bis->get_runs_with_stats(
+      limit => 50,
+      offset => 0
+    );
+
+=cut
+
+sub get_runs_with_stats ($self, %params) {
+  my $limit = $params{limit} || 50;
+  my $offset = $params{offset} || 0;
+
+  my $runs = $self->pg->db->select(
+    'bis.runs',
+    '*',
+    undef,
+    {order_by => {-desc => 'started_at'}, limit => $limit, offset => $offset}
+  )->hashes->to_array;
+
+  # Add statistics for each run
+  for my $run (@$runs) {
+    my $stats = $self->pg->db->select(
+      'bis.statistics',
+      '*',
+      {run_id => $run->{id}}
+    )->hash;
+    $run->{statistics} = $stats;
+  }
+
+  return $runs;
+}
+
+=head2 get_active_domains
+
+Get all active domain IDs for checking.
+
+    my $domains = $bis->get_active_domains();
+
+=cut
+
+sub get_active_domains ($self) {
+  return $self->pg->db->select(
+    'bis.domains',
+    ['id'],
+    {active => 1}
+  )->hashes->to_array;
+}
+
+=head2 add_provider
+
+Add a new hosting provider with localized name.
+
+    my $provider_id = $bis->add_provider(
+      key => 'aws',
+      name => 'Amazon Web Services',
+      country_code => 'US',
+      is_swedish => 0,
+      cloud_act_applies => 1,
+      asn_list => [16509, 14618],
+      as_name_patterns => ['AMAZON-AES', 'AMAZON-02'],
+      ip_ranges => ['52.0.0.0/8'],
+      notes => 'US cloud provider',
+      lang => 'en'
+    );
+
+=cut
+
+sub add_provider ($self, %params) {
+  my $key = $params{key} or die "key required";
+  my $name = $params{name} or die "name required";
+  my $country_code = $params{country_code} or die "country_code required";
+  my $lang = $params{lang} || 'en';
+
+  # Insert provider
+  my $result = $self->pg->db->query(
+    'INSERT INTO bis.providers (country_code, is_swedish, cloud_act_applies, asn_list, as_name_patterns, ip_ranges)
+     VALUES (?, ?, ?, ?, ?, ?) RETURNING id',
+    $country_code,
+    $params{is_swedish} // 0,
+    $params{cloud_act_applies} // 0,
+    $params{asn_list},
+    $params{as_name_patterns},
+    $params{ip_ranges}
+  );
+  my $provider_id = $result->hash->{id};
+
+  # Insert localized provider name
+  my $languageid = $self->get_language_id($lang);
+
+  $self->pg->db->insert('bis.provider_names', {
+    provider_id => $provider_id,
+    languageid => $languageid,
+    key => $key,
+    name => $name,
+    notes => $params{notes} || ''
+  });
+
+  return $provider_id;
 }
 
 1;

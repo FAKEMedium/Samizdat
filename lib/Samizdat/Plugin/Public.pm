@@ -58,6 +58,13 @@ sub register ($self, $app, $conf) {
     return $model;
   });
 
+  # Helper to get languages hash (code => languageid mapping)
+  # Cached in state for performance
+  $app->helper(languages => sub ($c) {
+    state $languages = $c->public->languages();
+    return $languages;
+  });
+
   # Helper to get pagination items per page
   # Checks: 1) session, 2) config, 3) default (10)
   # This allows user preferences to be added later via session

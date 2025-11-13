@@ -1,0 +1,36 @@
+<p class="lead"><%= __('Manage Based in Sweden compliance tracking') %></p>
+
+<!-- Sector Statistics -->
+<div class="row mb-3">
+  <div class="col-12">
+    <h2><%= __('Sector Statistics') %></h2>
+    <div id="sector-stats" class="row">
+      <!-- Populated by JavaScript -->
+    </div>
+  </div>
+</div>
+
+<!-- Recent Runs -->
+<div class="row">
+  <div class="col-12">
+    <h2><%= __('Recent Check Runs') %></h2>
+    <div class="table-responsive">
+      <table class="table table-striped" id="runs-table">
+        <thead>
+          <tr>
+            <th><%= __('ID') %></th>
+            <th><%= __('Started') %></th>
+            <th><%= __('Completed') %></th>
+            <th><%= __('Status') %></th>
+            <th><%= __('Domains') %></th>
+            <th><%= __('Compliant') %></th>
+            <th><%= __('BIS Badges') %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td colspan="7" class="text-center"><%= __('Loading...') %></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

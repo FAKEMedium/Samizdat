@@ -47,9 +47,10 @@ sub index ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/index', format => 'js');
 
-  $self->stash(web => $web);
+  $self->stash(title => $title, web => $web);
   $self->render(template => 'bis/index');
 }
+
 
 sub domain ($self) {
   my $domain_name = $self->param('domain');
@@ -58,47 +59,18 @@ sub domain ($self) {
   if ($accept =~ /json/) {
     my $lang = $self->param('lang') || $self->stash('lang') || 'en';
 
-    # Get domain details
-    my $domain = $self->bis->pg->db->query(
-      'SELECT * FROM bis.latest_scores WHERE domain = ?',
-      $domain_name
-    )->hash;
+    # Get domain details from model
+    my $details = $self->bis->get_domain_details(domain => $domain_name, lang => $lang);
 
-    unless ($domain) {
-      return $self->render(json => { error => 'Domain not found' }, status => 404);
+    unless ($details) {
+      return $self->render(json => { error => $self->app->__('Domain not found') }, status => 404);
     }
-
-    # Get checks for this domain
-    my $checks = $self->bis->pg->db->query(
-      'SELECT * FROM bis.checks
-       WHERE domain_id = ? AND run_id = (SELECT MAX(id) FROM bis.runs WHERE status = ?)
-       ORDER BY record_type, checked_at',
-      $domain->{domain_id}, 'completed'
-    )->hashes->to_array;
-
-    # Get languageid for this language
-    my $language = $self->bis->pg->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?',
-      $lang
-    )->hash;
-    my $languageid = $language ? $language->{languageid} : 1;
-
-    # Get tags with localized names
-    my $tags = $self->bis->pg->db->query(
-      'SELECT t.id, t.color, t.priority, tn.key, tn.display_name, tn.description
-       FROM bis.tags t
-       JOIN bis.domain_tags dt ON t.id = dt.tag_id
-       JOIN bis.tag_names tn ON t.id = tn.tag_id AND tn.languageid = ?
-       WHERE dt.domain_id = ?
-       ORDER BY t.priority DESC',
-      $languageid, $domain->{domain_id}
-    )->hashes->to_array;
 
     my $data = {
       success => 1,
-      domain => $domain,
-      checks => $checks,
-      tags => $tags
+      domain => $details->{domain},
+      checks => $details->{checks},
+      tags => $details->{tags}
     };
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
@@ -110,10 +82,10 @@ sub domain ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/domain/index', format => 'js');
 
-  $self->stash(web => $web);
-  $self->stash(docpath => '/bis/domain/index.html');
+  $self->stash(title => $title, web => $web, docpath => '/bis/domain/index.html', headline => 'bis/chunks/headline');
   $self->render(template => 'bis/domain/index');
 }
+
 
 sub sector ($self) {
   my $sector = $self->param('sector');
@@ -131,21 +103,8 @@ sub sector ($self) {
       with_total => 1
     );
 
-    # Get languageid for this language
-    my $language = $self->bis->pg->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?',
-      $lang
-    )->hash;
-    my $languageid = $language ? $language->{languageid} : 1;
-
-    # Get sector info with localized name
-    my $sector_info = $self->bis->pg->db->query(
-      'SELECT t.color, tn.display_name, tn.description
-       FROM bis.tags t
-       JOIN bis.tag_names tn ON t.id = tn.tag_id AND tn.languageid = ?
-       WHERE tn.key = ?',
-      $languageid, $sector
-    )->hash;
+    # Get sector info from model
+    my $sector_info = $self->bis->get_sector_info(sector => $sector, lang => $lang);
 
     my $data = {
       success => 1,
@@ -164,10 +123,10 @@ sub sector ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/sector/index', format => 'js');
 
-  $self->stash(web => $web);
-  $self->stash(docpath => '/bis/sector/index.html');
+  $self->stash(title => $title, web => $web, docpath => '/bis/sector/index.html', headline => 'bis/chunks/headline');
   $self->render(template => 'bis/sector/index');
 }
+
 
 sub providers ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -189,9 +148,10 @@ sub providers ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/providers/index', format => 'js');
 
-  $self->stash(web => $web);
+  $self->stash(title => $title, web => $web);
   $self->render(template => 'bis/providers/index');
 }
+
 
 sub trends ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -214,7 +174,7 @@ sub trends ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/trends/index', format => 'js');
 
-  $self->stash(web => $web);
+  $self->stash(title => $title, web => $web);
   $self->render(template => 'bis/trends/index');
 }
 
@@ -227,14 +187,7 @@ sub manager ($self) {
     # Get overview statistics
     my $sector_stats = $self->bis->get_sector_stats();
     my $provider_stats = $self->bis->get_provider_stats();
-
-    # Get recent runs
-    my $recent_runs = $self->bis->pg->db->select(
-      'bis.runs',
-      '*',
-      undef,
-      {-desc => 'started_at', limit => 10}
-    )->hashes->to_array;
+    my $recent_runs = $self->bis->get_recent_runs(limit => 10);
 
     my $data = {
       success => 1,
@@ -252,9 +205,10 @@ sub manager ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/manager/index', format => 'js');
 
-  $self->stash(web => $web);
+  $self->stash(title => $title, web => $web, headline => 'bis/chunks/managerheadline');
   $self->render(template => 'bis/manager/index');
 }
+
 
 sub domains ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -264,25 +218,8 @@ sub domains ($self) {
     my $offset = $self->param('offset') || 0;
     my $tag = $self->param('tag');
 
-    my $sql = 'SELECT d.*, array_agg(tn.key) as tags
-               FROM bis.domains d
-               LEFT JOIN bis.domain_tags dt ON d.id = dt.domain_id
-               LEFT JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id';
-    my @bind;
-
-    if ($tag) {
-      $sql .= ' WHERE d.id IN (
-                  SELECT domain_id FROM bis.domain_tags dt2
-                  JOIN bis.tag_names tn2 ON dt2.tag_id = tn2.tag_id
-                  WHERE tn2.key = ?
-                )';
-      push @bind, $tag;
-    }
-
-    $sql .= ' GROUP BY d.id ORDER BY d.domain LIMIT ? OFFSET ?';
-    push @bind, $limit, $offset;
-
-    my $domains = $self->bis->pg->db->query($sql, @bind)->hashes->to_array;
+    # Get domains from model
+    my $domains = $self->bis->get_domains_with_tags(tag => $tag, limit => $limit, offset => $offset);
 
     my $data = {
       success => 1,
@@ -294,14 +231,18 @@ sub domains ($self) {
   }
 
   # Return error for non-JSON
-  return $self->render(text => 'JSON only', status => 406);
+  return $self->render(text => $self->app->__('JSON only'), status => 406);
 }
 
+
 sub add_domain ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $params = $self->req->json;
 
   unless ($params && $params->{domain}) {
-    return $self->render(json => { error => 'Domain required' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Domain required') }, status => 400);
   }
 
   eval {
@@ -321,62 +262,32 @@ sub add_domain ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to add domain: $@");
-    return $self->render(json => { error => 'Failed to add domain' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to add domain') }, status => 500);
   }
 }
 
+
 sub update_domain ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $id = $self->param('id');
   my $params = $self->req->json;
 
   unless ($id && $params) {
-    return $self->render(json => { error => 'Invalid request' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Invalid request') }, status => 400);
   }
 
   eval {
-    # Update domain
-    $self->bis->pg->db->update('bis.domains', {
-      active => $params->{active} // 1,
-      updated_at => \'NOW()'
-    }, {id => $id});
-
-    # Update domain descriptions if provided
-    if ($params->{title} || $params->{description}) {
-      my $lang = $params->{lang} || 'en';
-      my $language = $self->bis->pg->db->query(
-        'SELECT languageid FROM public.languages WHERE code = ?',
-        $lang
-      )->hash;
-      my $languageid = $language ? $language->{languageid} : 1;
-
-      $self->bis->pg->db->query(
-        'INSERT INTO bis.domain_descriptions (domain_id, languageid, title, description)
-         VALUES (?, ?, ?, ?)
-         ON CONFLICT (domain_id, languageid) DO UPDATE
-         SET title = EXCLUDED.title, description = EXCLUDED.description',
-        $id, $languageid, $params->{title}, $params->{description}
-      );
-    }
-
-    # Update tags if provided
-    if ($params->{tags}) {
-      # Remove existing tags
-      $self->bis->pg->db->delete('bis.domain_tags', {domain_id => $id});
-
-      # Add new tags (tags are keys now)
-      for my $tag_key (@{$params->{tags}}) {
-        my $tag = $self->bis->pg->db->query(
-          'SELECT DISTINCT tag_id FROM bis.tag_names WHERE key = ?',
-          $tag_key
-        )->hash;
-        if ($tag) {
-          $self->bis->pg->db->insert('bis.domain_tags', {
-            domain_id => $id,
-            tag_id => $tag->{tag_id}
-          });
-        }
-      }
-    }
+    # Update domain using model
+    $self->bis->update_domain(
+      id => $id,
+      active => $params->{active},
+      title => $params->{title},
+      description => $params->{description},
+      tags => $params->{tags},
+      lang => $params->{lang}
+    );
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => { success => 1 }, status => 200);
@@ -384,19 +295,24 @@ sub update_domain ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to update domain: $@");
-    return $self->render(json => { error => 'Failed to update domain' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to update domain') }, status => 500);
   }
 }
 
+
 sub delete_domain ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $id = $self->param('id');
 
   unless ($id) {
-    return $self->render(json => { error => 'ID required' }, status => 400);
+    return $self->render(json => { error => $self->app->__('ID required') }, status => 400);
   }
 
   eval {
-    $self->bis->pg->db->delete('bis.domains', {id => $id});
+    # Delete domain using model
+    $self->bis->delete_domain(id => $id);
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => { success => 1 }, status => 200);
@@ -404,9 +320,10 @@ sub delete_domain ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to delete domain: $@");
-    return $self->render(json => { error => 'Failed to delete domain' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to delete domain') }, status => 500);
   }
 }
+
 
 sub tags ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -427,37 +344,27 @@ sub tags ($self) {
   return $self->render(text => 'JSON only', status => 406);
 }
 
+
 sub add_tag ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $params = $self->req->json;
 
   unless ($params && $params->{key} && $params->{display_name}) {
-    return $self->render(json => { error => 'Key and display_name required' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Key and display_name required') }, status => 400);
   }
 
   eval {
-    # Insert tag
-    my $result = $self->bis->pg->db->query(
-      'INSERT INTO bis.tags (color, priority) VALUES (?, ?) RETURNING id',
-      $params->{color} || '#0066cc',
-      $params->{priority} || 0
-    );
-    my $tag_id = $result->hash->{id};
-
-    # Insert localized tag name
-    my $lang = $params->{lang} || 'en';
-    my $language = $self->bis->pg->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?',
-      $lang
-    )->hash;
-    my $languageid = $language ? $language->{languageid} : 1;
-
-    $self->bis->pg->db->insert('bis.tag_names', {
-      tag_id => $tag_id,
-      languageid => $languageid,
+    # Add tag using model
+    my $tag_id = $self->bis->add_tag(
       key => $params->{key},
       display_name => $params->{display_name},
-      description => $params->{description} || ''
-    });
+      description => $params->{description},
+      color => $params->{color},
+      priority => $params->{priority},
+      lang => $params->{lang}
+    );
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => { success => 1, tag_id => $tag_id }, status => 200);
@@ -465,9 +372,10 @@ sub add_tag ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to add tag: $@");
-    return $self->render(json => { error => 'Failed to add tag' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to add tag') }, status => 500);
   }
 }
+
 
 sub runs ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -476,22 +384,8 @@ sub runs ($self) {
     my $limit = $self->param('limit') || 50;
     my $offset = $self->param('offset') || 0;
 
-    my $runs = $self->bis->pg->db->select(
-      'bis.runs',
-      '*',
-      undef,
-      {-desc => 'started_at', limit => $limit, offset => $offset}
-    )->hashes->to_array;
-
-    # Add statistics for each run
-    for my $run (@$runs) {
-      my $stats = $self->bis->pg->db->select(
-        'bis.statistics',
-        '*',
-        {run_id => $run->{id}}
-      )->hash;
-      $run->{statistics} = $stats;
-    }
+    # Get runs from model
+    my $runs = $self->bis->get_runs_with_stats(limit => $limit, offset => $offset);
 
     my $data = {
       success => 1,
@@ -505,7 +399,11 @@ sub runs ($self) {
   return $self->render(text => 'JSON only', status => 406);
 }
 
+
 sub start_run ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   eval {
     my $run_id = $self->bis->start_run();
 
@@ -513,31 +411,31 @@ sub start_run ($self) {
     return $self->render(json => {
       success => 1,
       run_id => $run_id,
-      message => 'Run started. Use /manager/bis/runs/:id/check to begin checking domains.'
+      message => $self->app->__('Run started. Use /manager/bis/runs/:id/check to begin checking domains.')
     }, status => 200);
   };
 
   if ($@) {
     $self->app->log->error("Failed to start run: $@");
-    return $self->render(json => { error => 'Failed to start run' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to start run') }, status => 500);
   }
 }
 
+
 sub check_run ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $run_id = $self->param('id');
 
   unless ($run_id) {
-    return $self->render(json => { error => 'Run ID required' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Run ID required') }, status => 400);
   }
 
   # This should be run as a background job, but for now run synchronously
   eval {
-    # Get all active domains
-    my $domains = $self->bis->pg->db->select(
-      'bis.domains',
-      ['id'],
-      {active => 1}
-    )->hashes->to_array;
+    # Get all active domains from model
+    my $domains = $self->bis->get_active_domains();
 
     my @results;
     for my $domain (@$domains) {
@@ -558,9 +456,10 @@ sub check_run ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to check run: $@");
-    return $self->render(json => { error => "Failed to check run: $@" }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to check run') . ": $@" }, status => 500);
   }
 }
+
 
 sub manage_providers ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
@@ -581,42 +480,31 @@ sub manage_providers ($self) {
   return $self->render(text => 'JSON only', status => 406);
 }
 
+
 sub add_provider ($self) {
+  # Require admin access
+  return if !$self->access({ admin => 1 });
+
   my $params = $self->req->json;
 
   unless ($params && $params->{key} && $params->{name} && $params->{country_code}) {
-    return $self->render(json => { error => 'Key, name and country_code required' }, status => 400);
+    return $self->render(json => { error => $self->app->__('Key, name and country_code required') }, status => 400);
   }
 
   eval {
-    # Insert provider
-    my $result = $self->bis->pg->db->query(
-      'INSERT INTO bis.providers (country_code, is_swedish, cloud_act_applies, asn_list, as_name_patterns, ip_ranges)
-       VALUES (?, ?, ?, ?, ?, ?) RETURNING id',
-      $params->{country_code},
-      $params->{is_swedish} // 0,
-      $params->{cloud_act_applies} // 0,
-      $params->{asn_list},
-      $params->{as_name_patterns},
-      $params->{ip_ranges}
-    );
-    my $provider_id = $result->hash->{id};
-
-    # Insert localized provider name
-    my $lang = $params->{lang} || 'en';
-    my $language = $self->bis->pg->db->query(
-      'SELECT languageid FROM public.languages WHERE code = ?',
-      $lang
-    )->hash;
-    my $languageid = $language ? $language->{languageid} : 1;
-
-    $self->bis->pg->db->insert('bis.provider_names', {
-      provider_id => $provider_id,
-      languageid => $languageid,
+    # Add provider using model
+    my $provider_id = $self->bis->add_provider(
       key => $params->{key},
       name => $params->{name},
-      notes => $params->{notes} || ''
-    });
+      country_code => $params->{country_code},
+      is_swedish => $params->{is_swedish},
+      cloud_act_applies => $params->{cloud_act_applies},
+      asn_list => $params->{asn_list},
+      as_name_patterns => $params->{as_name_patterns},
+      ip_ranges => $params->{ip_ranges},
+      notes => $params->{notes},
+      lang => $params->{lang}
+    );
 
     $self->tx->res->headers->content_type('application/json; charset=UTF-8');
     return $self->render(json => { success => 1, provider_id => $provider_id }, status => 200);
@@ -624,7 +512,7 @@ sub add_provider ($self) {
 
   if ($@) {
     $self->app->log->error("Failed to add provider: $@");
-    return $self->render(json => { error => 'Failed to add provider' }, status => 500);
+    return $self->render(json => { error => $self->app->__('Failed to add provider') }, status => 500);
   }
 }
 
