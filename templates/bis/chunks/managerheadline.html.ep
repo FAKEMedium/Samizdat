@@ -1,0 +1,8 @@
+<div class="btn-group" role="group">
+  <a href="<%= url_for('bis_index') %>" class="btn btn-outline-primary">
+    <%= __('View Public Dashboard') %>
+  </a>
+  <button type="button" class="btn btn-primary" id="start-run-btn">
+    <%= __('Start New Check Run') %>
+  </button>
+</div>

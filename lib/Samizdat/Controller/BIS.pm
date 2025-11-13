@@ -148,7 +148,7 @@ sub providers ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/providers/index', format => 'js');
 
-  $self->stash(title => $title, web => $web);
+  $self->stash(title => $title, web => $web, headline => 'bis/chunks/headline');
   $self->render(template => 'bis/providers/index');
 }
 
@@ -174,7 +174,7 @@ sub trends ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/trends/index', format => 'js');
 
-  $self->stash(title => $title, web => $web);
+  $self->stash(title => $title, web => $web, headline => 'bis/chunks/headline');
   $self->render(template => 'bis/trends/index');
 }
 
