@@ -15,6 +15,14 @@ backgroundcolor: '#fff'
 themecolor: '#0b0'
 pagination:
   perpage: 10
+anthropic:
+  # API key for Claude AI (used by biscollect command)
+  # Get your key from: https://console.anthropic.com/
+  # Or set environment variable: ANTHROPIC_API_KEY
+  api_key: ~
+  # Claude model to use for AI features
+  # Available models: claude-sonnet-4-20250514, claude-3-5-sonnet-20241022, claude-3-opus-20240229
+  model: claude-sonnet-4-20250514
 manager:
   url: /manager/
   customer:

@@ -39,15 +39,39 @@ sub run ($self, @args) {
 
   for my $domain (@$domains) {
     eval {
+      # First, add the domain (or get existing ID)
       my $domain_id = $bis->add_domain(
         domain => $domain->{domain},
-        title => $domain->{title} || '',
-        description => $domain->{description} || '',
-        tags => $domain->{tags} || [],
-        lang => 'en'  # Default to English for imports
+        tags => $domain->{tags} || []
       );
 
-      say "✓ Imported: $domain->{domain} (ID: $domain_id)";
+      # Add translations for all available languages
+      my $translations = $domain->{translations} || {};
+
+      # If no translations structure, use legacy title/description
+      if (!%$translations && ($domain->{title} || $domain->{description})) {
+        $translations->{en} = {
+          title => $domain->{title} || '',
+          description => $domain->{description} || ''
+        };
+      }
+
+      # Add each translation
+      for my $lang (keys %$translations) {
+        my $trans = $translations->{$lang};
+        if ($trans->{title} || $trans->{description}) {
+          $bis->add_domain(
+            domain => $domain->{domain},
+            title => $trans->{title} || '',
+            description => $trans->{description} || '',
+            tags => $domain->{tags} || [],
+            lang => $lang
+          );
+        }
+      }
+
+      my $lang_count = scalar keys %$translations;
+      say "✓ Imported: $domain->{domain} (ID: $domain_id, $lang_count languages)";
       $imported++;
     };
 
@@ -145,7 +169,26 @@ Notes:
 
 =head2 JSON Format
 
-JSON file should contain an array of domain objects:
+JSON file should contain an array of domain objects with translations:
+
+  [
+    {
+      "domain": "regeringen.se",
+      "tags": ["government"],
+      "translations": {
+        "en": {
+          "title": "Swedish Government",
+          "description": "Main government portal"
+        },
+        "sv": {
+          "title": "Regeringen",
+          "description": "Sveriges regeringsportal"
+        }
+      }
+    }
+  ]
+
+Legacy format (single language) is also supported:
 
   [
     {
@@ -153,22 +196,8 @@ JSON file should contain an array of domain objects:
       "title": "Swedish Government",
       "description": "Main government portal",
       "tags": ["government"]
-    },
-    {
-      "domain": "karolinska.se",
-      "title": "Karolinska Hospital",
-      "description": "Major hospital",
-      "tags": ["healthcare"]
     }
   ]
-
-Or a single object:
-
-  {
-    "domain": "regeringen.se",
-    "title": "Swedish Government",
-    "tags": ["government"]
-  }
 
 =head1 SEE ALSO
 

@@ -77,6 +77,12 @@ msgstr "404: Brakujący dokument"
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
+msgid "A"
+msgstr ""
+
+msgid "A Records"
+msgstr ""
+
 msgid "A confirmation link was mailed to {email}."
 msgstr "Link potwierdzający został wysłany na adres {email}."
 
@@ -91,6 +97,12 @@ msgstr "Opóźnione płatności będą obciążone odsetkami w wysokości {rate}
 
 msgid "API docs"
 msgstr "Dokumentacja API"
+
+msgid "AS Name"
+msgstr ""
+
+msgid "ASN"
+msgstr ""
 
 msgid "About"
 msgstr "O nas"
@@ -239,6 +251,9 @@ msgstr "Reklama"
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Po rejestracji możesz dodać więcej danych o sobie, poluzować politykę udostępniania i dostosować swoje doświadczenie."
 
+msgid "Algorithm"
+msgstr ""
+
 msgid "Alias"
 msgstr ""
 
@@ -269,6 +284,9 @@ msgstr ""
 msgid "All Messages"
 msgstr ""
 
+msgid "All Sectors"
+msgstr ""
+
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Zezwól na pliki cookie, aby wkleić kod potwierdzający z e-maila"
 
@@ -286,6 +304,9 @@ msgstr "Kwota do zapłaty z {percent} VAT: {totalcost} {currency}"
 
 msgid "Amount to pay: {totalcost} {currency}"
 msgstr "Kwota do zapłaty: {totalcost} {currency}"
+
+msgid "Amount:"
+msgstr ""
 
 msgid "An error occurred"
 msgstr "Wystąpił błąd"
@@ -347,7 +368,13 @@ msgstr ""
 msgid "Authorize"
 msgstr "Autoryzuj"
 
+msgid "Auto Renew"
+msgstr ""
+
 msgid "Auto-renew"
+msgstr ""
+
+msgid "Average Score"
 msgstr ""
 
 msgid "BIC/Swift"
@@ -359,8 +386,32 @@ msgstr "Adres BIC/Swift"
 msgid "BIC/Swift address:"
 msgstr "Adres BIC/Swift:"
 
+msgid "BIS - $sector"
+msgstr ""
+
+msgid "BIS - Compliance Trends"
+msgstr ""
+
+msgid "BIS - Hosting Providers"
+msgstr ""
+
+msgid "BIS Badge"
+msgstr ""
+
+msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Check: $domain_name"
+msgstr ""
+
+msgid "BIS Manager"
+msgstr ""
+
 msgid "Back"
 msgstr "Wstecz"
+
+msgid "Back to Dashboard"
+msgstr ""
 
 msgid "Back to List"
 msgstr ""
@@ -369,6 +420,9 @@ msgid "Back to domains"
 msgstr ""
 
 msgid "Back to list"
+msgstr ""
+
+msgid "Balance"
 msgstr ""
 
 msgid "Bankgiro"
@@ -382,6 +436,9 @@ msgstr "Bankgiro:"
 
 msgid "Barred"
 msgstr "Zablokowany"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr ""
 
 msgid "Basic Information"
 msgstr "Podstawowe informacje"
@@ -548,6 +605,9 @@ msgstr "Kliknij, aby wysłać ponownie."
 msgid "Close"
 msgstr "Zamknij"
 
+msgid "Cloud Act Applies (US provider)"
+msgstr ""
+
 msgid "Code Block"
 msgstr "Blok kodu"
 
@@ -565,6 +625,24 @@ msgstr ""
 
 msgid "Company"
 msgstr "Firma"
+
+msgid "Completed"
+msgstr ""
+
+msgid "Compliance"
+msgstr ""
+
+msgid "Compliance Rate"
+msgstr ""
+
+msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliant (Swedish hosting)"
+msgstr ""
+
+msgid "Compliant Domains"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Potwierdź"
@@ -596,13 +674,25 @@ msgstr ""
 msgid "Contact"
 msgstr "Kontakt"
 
+msgid "Contact Details"
+msgstr ""
+
 msgid "Contact Information"
 msgstr "Informacje kontaktowe"
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Contact not found"
+msgstr ""
 
 msgid "Contact {sender} if you have questions."
 msgstr "Skontaktuj się z {sender}, jeśli masz pytania."
 
 msgid "Contact: {email} or call us directly."
+msgstr ""
+
+msgid "Contacts"
 msgstr ""
 
 msgid "Content"
@@ -680,6 +770,9 @@ msgstr "Skorygowana faktura"
 msgid "Credited invoice: {number}"
 msgstr "Skorygowana faktura: {number}"
 
+msgid "Critical"
+msgstr ""
+
 msgid "Currency"
 msgstr "Waluta"
 
@@ -716,6 +809,9 @@ msgstr "DNS"
 msgid "DNS Admin"
 msgstr "Administrator DNS"
 
+msgid "DNS Check Results"
+msgstr ""
+
 msgid "DNS Zones"
 msgstr "Strefy DNS"
 
@@ -730,6 +826,9 @@ msgstr "Strefa DNS"
 
 msgid "DNS zones"
 msgstr "Strefy DNS"
+
+msgid "DNSSEC Key Data"
+msgstr ""
 
 msgid "Dark"
 msgstr ""
@@ -803,6 +902,9 @@ msgstr "Rozwój"
 msgid "Direction"
 msgstr ""
 
+msgid "Disabled"
+msgstr ""
+
 msgid "Discount"
 msgstr "Rabat"
 
@@ -815,10 +917,25 @@ msgstr "Czy chcesz skorygować fakturę?"
 msgid "Domain"
 msgstr "Domena"
 
+msgid "Domain (A-Z)"
+msgstr ""
+
+msgid "Domain (Z-A)"
+msgstr ""
+
+msgid "Domain Compliance Scores"
+msgstr ""
+
+msgid "Domain Name"
+msgstr ""
+
 msgid "Domain created successfully"
 msgstr ""
 
 msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain details"
 msgstr ""
 
 msgid "Domain name is required"
@@ -841,6 +958,9 @@ msgstr ""
 
 msgid "Domains"
 msgstr "Domeny"
+
+msgid "Domains in this Sector"
+msgstr ""
 
 msgid "DomÃ¤nregistrering"
 msgstr "Rejestracja domeny"
@@ -1001,6 +1121,9 @@ msgstr "Puste nazwisko"
 msgid "Empty telephone"
 msgstr "Pusty telefon"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "End main content"
 msgstr "Koniec głównej treści"
 
@@ -1036,6 +1159,21 @@ msgstr "Wprowadź swój e-mail"
 
 msgid "Enter zone name"
 msgstr "Wprowadź nazwę strefy"
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
 
 msgid "Error reprinting invoice"
 msgstr ""
@@ -1190,6 +1328,9 @@ msgstr "Nie udało się zaktualizować rekordu"
 msgid "Failed to update zone"
 msgstr "Nie udało się zaktualizować strefy"
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Featured"
 msgstr ""
 
@@ -1198,6 +1339,9 @@ msgstr "Archiwum plików"
 
 msgid "Fill the form correctly!"
 msgstr "Wypełnij formularz poprawnie!"
+
+msgid "Filter Domains"
+msgstr ""
 
 msgid "Final Payment Reminder"
 msgstr ""
@@ -1219,6 +1363,9 @@ msgstr "Znajdź załączoną fakturę w formacie PDF."
 
 msgid "First name"
 msgstr "Imię"
+
+msgid "Flags"
+msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "Aby uzyskać więcej informacji, odwiedź stronę internetową Fortnox:"
@@ -1283,6 +1430,12 @@ msgstr "Wynik HTML"
 msgid "Halfyear"
 msgstr "Półrocze"
 
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
 msgid "Handled invoice"
 msgstr "Obsługiwana faktura"
 
@@ -1295,8 +1448,14 @@ msgstr "Nagłówek 2"
 msgid "Heading 3"
 msgstr "Nagłówek 3"
 
+msgid "High"
+msgstr ""
+
 msgid "Highlights"
 msgstr "Najważniejsze informacje"
+
+msgid "Hosting Provider Summary"
+msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "Akceptuję warunki rejestracji."
@@ -1313,6 +1472,9 @@ msgstr ""
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr ""
 
+msgid "IP Address"
+msgstr ""
+
 msgid "Identification code"
 msgstr "Kod identyfikacyjny"
 
@@ -1324,6 +1486,9 @@ msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "Jeśli nie zarejestrowałeś konta, zignoruj tego e-maila."
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
 msgstr ""
@@ -1514,6 +1679,12 @@ msgstr "Jest również dostępne na {url}."
 msgid "Italic"
 msgstr "Kursywa"
 
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "Pozostaw mnie zalogowanym"
 
@@ -1547,6 +1718,9 @@ msgstr "Najnowsze"
 msgid "Legal proceedings"
 msgstr ""
 
+msgid "Legend"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1567,6 +1741,9 @@ msgstr "Lista stref"
 
 msgid "Lista fakturor"
 msgstr "Lista faktur"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Log in"
 msgstr "Zaloguj się"
@@ -1601,11 +1778,20 @@ msgstr "Logotyp połączony z {site}"
 msgid "Lost password?"
 msgstr "Zapomniane hasło?"
 
+msgid "Low"
+msgstr ""
+
 msgid "MB"
 msgstr "MB"
 
 msgid "MOSS"
 msgstr "MOSS"
+
+msgid "MX"
+msgstr ""
+
+msgid "MX Records"
+msgstr ""
 
 msgid "MX records"
 msgstr "Rekordy MX"
@@ -1652,6 +1838,9 @@ msgstr ""
 msgid "Make invoice"
 msgstr "Utwórz fakturę"
 
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
 msgid "Manage site"
 msgstr "Zarządzaj stroną"
 
@@ -1663,6 +1852,9 @@ msgstr "Podręczniki"
 
 msgid "Mark payment"
 msgstr "Oznacz płatność"
+
+msgid "Medium"
+msgstr ""
 
 msgid "Menus"
 msgstr "Menu"
@@ -1718,8 +1910,17 @@ msgstr "Miesiąc"
 msgid "Multiple languages and country specific modifications"
 msgstr "Wiele języków i modyfikacje specyficzne dla kraju"
 
+msgid "NS"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
 msgid "Name"
 msgstr "Nazwa"
+
+msgid "Name Servers"
+msgstr ""
 
 msgid "Negative impact on credit rating"
 msgstr ""
@@ -1790,8 +1991,17 @@ msgstr ""
 msgid "No certificates found"
 msgstr ""
 
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No contacts found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "Brak klienta #{customerid}."
+
+msgid "No domains found"
+msgstr ""
 
 msgid "No examples found"
 msgstr ""
@@ -1811,8 +2021,14 @@ msgstr ""
 msgid "No pages found."
 msgstr "Nie znaleziono stron."
 
+msgid "No payments found"
+msgstr ""
+
 msgid "No selected customer."
 msgstr "Brak wybranego klienta."
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr ""
 
 msgid "Normal"
 msgstr "Normalny"
@@ -1865,6 +2081,9 @@ msgstr "Nr org."
 msgid "Organisation Number"
 msgstr "Numer organizacji"
 
+msgid "Organization"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "Numer organizacyjny"
 
@@ -1883,6 +2102,9 @@ msgstr "Nasz numer referencyjny"
 msgid "Over time, more web hosting features have been added."
 msgstr "Z czasem dodano więcej funkcji hostingu internetowego."
 
+msgid "Overall Score"
+msgstr ""
+
 msgid "Overdue Invoice Details"
 msgstr ""
 
@@ -1899,6 +2121,12 @@ msgid "PEM format"
 msgstr ""
 
 msgid "PEM format (stored securely)"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Page navigation"
 msgstr ""
 
 msgid "Page {number} of {total}"
@@ -1949,16 +2177,28 @@ msgstr "Hasło było nieprawidłowe lub nazwa użytkownika nie istnieje."
 msgid "PayPal"
 msgstr ""
 
+msgid "PayPal Payments"
+msgstr ""
+
 msgid "Paydate"
 msgstr "Data płatności"
 
+msgid "Payer Email"
+msgstr ""
+
 msgid "Payment"
 msgstr "Płatność"
+
+msgid "Payment Cancelled"
+msgstr ""
 
 msgid "Payment Information"
 msgstr ""
 
 msgid "Payment Reminder"
+msgstr ""
+
+msgid "Payment Successful"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -1984,6 +2224,9 @@ msgstr "Paypal"
 
 msgid "Paypal:"
 msgstr "Paypal:"
+
+msgid "Pending"
+msgstr ""
 
 msgid "People rocketing to the sky"
 msgstr "Ludzie leczący ku niebu"
@@ -2081,6 +2324,9 @@ msgstr "Cennik"
 msgid "Priority"
 msgstr "Priorytet"
 
+msgid "Privacy Protection"
+msgstr ""
+
 msgid "Private Key"
 msgstr ""
 
@@ -2094,6 +2340,15 @@ msgid "Products"
 msgstr "Produkty"
 
 msgid "Profile Image"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Provider"
+msgstr ""
+
+msgid "Public Key"
 msgstr ""
 
 msgid "Published"
@@ -2141,6 +2396,12 @@ msgstr "Cytat"
 msgid "Re:"
 msgstr ""
 
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
 msgid "Received"
 msgstr ""
 
@@ -2148,6 +2409,9 @@ msgid "Receiver"
 msgstr "Odbiorca"
 
 msgid "Recent Messages"
+msgstr ""
+
+msgid "Recent Payments"
 msgstr ""
 
 msgid "Recent signatures"
@@ -2161,6 +2425,9 @@ msgstr "Nazwa rekordu"
 
 msgid "Record Type"
 msgstr "Typ rekordu"
+
+msgid "Record Value"
+msgstr ""
 
 msgid "Record created successfully"
 msgstr "Rekord utworzony pomyślnie"
@@ -2187,6 +2454,12 @@ msgid "References"
 msgstr "Referencje"
 
 msgid "Refresh"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Refunded:"
 msgstr ""
 
 msgid "Regards"
@@ -2216,11 +2489,20 @@ msgstr "Zarejestrowane płatności i faktury dostawców są pobierane z Fortnox 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
 msgstr "Zarejestrowane płatności i faktury dostawców są pobierane z Fortnox i wyświetlane w lokalnym interfejsie."
 
+msgid "Registrant"
+msgstr ""
+
 msgid "Registrar"
 msgstr "Rejestrator"
 
 msgid "Registration is currently non-functional"
 msgstr "Rejestracja jest obecnie niedostępna"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr ""
 
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "Pozostała kwota do zapłaty: {amount} {currency}"
@@ -2248,6 +2530,9 @@ msgstr ""
 
 msgid "Resources"
 msgstr "Zasoby"
+
+msgid "Return to Home"
+msgstr ""
 
 msgid "Roles"
 msgstr "Role"
@@ -2285,6 +2570,9 @@ msgstr ""
 msgid "SMS sent successfully!"
 msgstr ""
 
+msgid "SWISH"
+msgstr ""
+
 msgid "Samizdat"
 msgstr ""
 
@@ -2309,6 +2597,15 @@ msgstr ""
 msgid "Saved successfully"
 msgstr ""
 
+msgid "Score"
+msgstr ""
+
+msgid "Score (High to Low)"
+msgstr ""
+
+msgid "Score (Low to High)"
+msgstr ""
+
 msgid "Search"
 msgstr "Szukaj"
 
@@ -2318,8 +2615,14 @@ msgstr ""
 msgid "Search certificates..."
 msgstr ""
 
+msgid "Search contacts..."
+msgstr ""
+
 msgid "Search content"
 msgstr "Przeszukaj treść"
+
+msgid "Search domains..."
+msgstr ""
 
 msgid "Search example"
 msgstr ""
@@ -2380,6 +2683,9 @@ msgstr ""
 
 msgid "Search web content"
 msgstr "Przeszukaj treść internetową"
+
+msgid "Sector"
+msgstr ""
 
 msgid "Select"
 msgstr "Wybierz"
@@ -2489,6 +2795,9 @@ msgstr "Tylko Snapback"
 msgid "Snapback scheduler"
 msgstr "Harmonogram Snapback"
 
+msgid "Sort by"
+msgstr ""
+
 msgid "Source code on Github"
 msgstr "Kod źródłowy na Github"
 
@@ -2543,6 +2852,9 @@ msgstr ""
 msgid "Supplier invoices"
 msgstr "Faktury dostawców"
 
+msgid "Support for both production and test environments"
+msgstr ""
+
 msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
 msgstr ""
 
@@ -2571,6 +2883,9 @@ msgid "TTL"
 msgstr ""
 
 msgid "Tags"
+msgstr ""
+
+msgid "Tech"
 msgstr ""
 
 msgid "Technical"
@@ -2604,6 +2919,9 @@ msgid "Thank you for contacting us."
 msgstr "Dziękujemy za kontakt."
 
 msgid "Thank you for your business"
+msgstr ""
+
+msgid "Thank you for your payment. Your transaction has been completed."
 msgstr ""
 
 msgid "Thank you for your prompt attention to this matter."
@@ -2690,6 +3008,9 @@ msgstr "Przełącz menu"
 msgid "Tot"
 msgstr "Razem"
 
+msgid "Total Domains"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
@@ -2698,6 +3019,15 @@ msgstr "Razem: {count} klientów"
 
 msgid "Tough"
 msgstr "Trudne"
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr ""
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
 
 msgid "Transfer"
 msgstr "Przelew"
@@ -2840,7 +3170,13 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr "Wartość dla atrybutu class."
 
+msgid "View"
+msgstr ""
+
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
+
+msgid "View and manage domain registrations"
 msgstr ""
 
 msgid "WARNING: Legal Action Pending"
@@ -2891,6 +3227,9 @@ msgstr "Możesz też publikować w naszych dyskusjach."
 msgid "You can now log in to your account."
 msgstr "Możesz teraz zalogować się na swoje konto."
 
+msgid "You have cancelled the payment process."
+msgstr ""
+
 msgid "You have registered a new user account on {site}."
 msgstr "Zarejestrowałeś nowe konto użytkownika na {site}."
 
@@ -2902,6 +3241,9 @@ msgstr "Musisz zaakceptować warunki rejestracji."
 
 msgid "You were logged in as {username}."
 msgstr "Byłeś zalogowany jako {username}."
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
 
 msgid "Your Reference"
 msgstr "Państwa oznaczenie"
@@ -3022,6 +3364,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "nasza strona"
+
+msgid "payments"
+msgstr ""
 
 msgid "poll"
 msgstr ""

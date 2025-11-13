@@ -63,6 +63,12 @@ msgstr "404：文档未找到"
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
+msgid "A"
+msgstr ""
+
+msgid "A Records"
+msgstr ""
+
 msgid "A confirmation link was mailed to {email}."
 msgstr "确认链接已发送至 {email}。"
 
@@ -77,6 +83,12 @@ msgstr "逾期付款将收取 {rate} 的利息"
 
 msgid "API docs"
 msgstr "API 文档"
+
+msgid "AS Name"
+msgstr ""
+
+msgid "ASN"
+msgstr ""
 
 msgid "About"
 msgstr "关于"
@@ -225,6 +237,9 @@ msgstr "广告"
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "注册后您可以添加更多个人信息，调整分享策略，并自定义您的体验。"
 
+msgid "Algorithm"
+msgstr ""
+
 msgid "Alias"
 msgstr ""
 
@@ -255,6 +270,9 @@ msgstr ""
 msgid "All Messages"
 msgstr ""
 
+msgid "All Sectors"
+msgstr ""
+
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "允许使用 cookie 从邮件粘贴确认码"
 
@@ -272,6 +290,9 @@ msgstr "含 {percent} 增值税的应付金额：{totalcost} {currency}"
 
 msgid "Amount to pay: {totalcost} {currency}"
 msgstr "应付金额：{totalcost} {currency}"
+
+msgid "Amount:"
+msgstr ""
 
 msgid "An error occurred"
 msgstr "发生错误"
@@ -333,7 +354,13 @@ msgstr ""
 msgid "Authorize"
 msgstr "授权"
 
+msgid "Auto Renew"
+msgstr ""
+
 msgid "Auto-renew"
+msgstr ""
+
+msgid "Average Score"
 msgstr ""
 
 msgid "BIC/Swift"
@@ -345,8 +372,32 @@ msgstr "BIC/Swift 地址"
 msgid "BIC/Swift address:"
 msgstr "BIC/Swift 地址："
 
+msgid "BIS - $sector"
+msgstr ""
+
+msgid "BIS - Compliance Trends"
+msgstr ""
+
+msgid "BIS - Hosting Providers"
+msgstr ""
+
+msgid "BIS Badge"
+msgstr ""
+
+msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Check: $domain_name"
+msgstr ""
+
+msgid "BIS Manager"
+msgstr ""
+
 msgid "Back"
 msgstr "返回"
+
+msgid "Back to Dashboard"
+msgstr ""
 
 msgid "Back to List"
 msgstr ""
@@ -355,6 +406,9 @@ msgid "Back to domains"
 msgstr ""
 
 msgid "Back to list"
+msgstr ""
+
+msgid "Balance"
 msgstr ""
 
 msgid "Bankgiro"
@@ -368,6 +422,9 @@ msgstr "银行汇票："
 
 msgid "Barred"
 msgstr "已禁止"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr ""
 
 msgid "Basic Information"
 msgstr "基本信息"
@@ -534,6 +591,9 @@ msgstr "点击重新发送。"
 msgid "Close"
 msgstr "关闭"
 
+msgid "Cloud Act Applies (US provider)"
+msgstr ""
+
 msgid "Code Block"
 msgstr "代码块"
 
@@ -551,6 +611,24 @@ msgstr ""
 
 msgid "Company"
 msgstr "公司"
+
+msgid "Completed"
+msgstr ""
+
+msgid "Compliance"
+msgstr ""
+
+msgid "Compliance Rate"
+msgstr ""
+
+msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliant (Swedish hosting)"
+msgstr ""
+
+msgid "Compliant Domains"
+msgstr ""
 
 msgid "Confirm"
 msgstr "确认"
@@ -582,13 +660,25 @@ msgstr ""
 msgid "Contact"
 msgstr "联系"
 
+msgid "Contact Details"
+msgstr ""
+
 msgid "Contact Information"
 msgstr "联系信息"
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Contact not found"
+msgstr ""
 
 msgid "Contact {sender} if you have questions."
 msgstr "如有疑问，请联系 {sender}。"
 
 msgid "Contact: {email} or call us directly."
+msgstr ""
+
+msgid "Contacts"
 msgstr ""
 
 msgid "Content"
@@ -666,6 +756,9 @@ msgstr "已贷记发票"
 msgid "Credited invoice: {number}"
 msgstr "已贷记发票：{number}"
 
+msgid "Critical"
+msgstr ""
+
 msgid "Currency"
 msgstr "货币"
 
@@ -702,6 +795,9 @@ msgstr "DNS"
 msgid "DNS Admin"
 msgstr "DNS 管理"
 
+msgid "DNS Check Results"
+msgstr ""
+
 msgid "DNS Zones"
 msgstr "DNS 区域"
 
@@ -716,6 +812,9 @@ msgstr "DNS 区域"
 
 msgid "DNS zones"
 msgstr "DNS 区域"
+
+msgid "DNSSEC Key Data"
+msgstr ""
 
 msgid "Dark"
 msgstr ""
@@ -789,6 +888,9 @@ msgstr "开发"
 msgid "Direction"
 msgstr ""
 
+msgid "Disabled"
+msgstr ""
+
 msgid "Discount"
 msgstr "折扣"
 
@@ -801,10 +903,25 @@ msgstr "您要贷记这张发票吗？"
 msgid "Domain"
 msgstr "域名"
 
+msgid "Domain (A-Z)"
+msgstr ""
+
+msgid "Domain (Z-A)"
+msgstr ""
+
+msgid "Domain Compliance Scores"
+msgstr ""
+
+msgid "Domain Name"
+msgstr ""
+
 msgid "Domain created successfully"
 msgstr ""
 
 msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain details"
 msgstr ""
 
 msgid "Domain name is required"
@@ -827,6 +944,9 @@ msgstr ""
 
 msgid "Domains"
 msgstr "域名"
+
+msgid "Domains in this Sector"
+msgstr ""
 
 msgid "DomÃ¤nregistrering"
 msgstr "域名注册"
@@ -987,6 +1107,9 @@ msgstr "姓氏为空"
 msgid "Empty telephone"
 msgstr "电话为空"
 
+msgid "Enabled"
+msgstr ""
+
 msgid "End main content"
 msgstr "主要内容结束"
 
@@ -1022,6 +1145,21 @@ msgstr "输入您的电子邮件"
 
 msgid "Enter zone name"
 msgstr "输入区域名称"
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
 
 msgid "Error reprinting invoice"
 msgstr ""
@@ -1176,6 +1314,9 @@ msgstr "更新记录失败"
 msgid "Failed to update zone"
 msgstr "更新区域失败"
 
+msgid "Failed:"
+msgstr ""
+
 msgid "Featured"
 msgstr ""
 
@@ -1184,6 +1325,9 @@ msgstr "文件存档"
 
 msgid "Fill the form correctly!"
 msgstr "请正确填写表单！"
+
+msgid "Filter Domains"
+msgstr ""
 
 msgid "Final Payment Reminder"
 msgstr ""
@@ -1205,6 +1349,9 @@ msgstr "请查看附件中的您的发票 PDF。"
 
 msgid "First name"
 msgstr "名字"
+
+msgid "Flags"
+msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "欲了解更多信息，请访问 Fortnox 网站："
@@ -1269,6 +1416,12 @@ msgstr "HTML 结果"
 msgid "Halfyear"
 msgstr "半年"
 
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
 msgid "Handled invoice"
 msgstr "已处理发票"
 
@@ -1281,8 +1434,14 @@ msgstr "标题 2"
 msgid "Heading 3"
 msgstr "标题 3"
 
+msgid "High"
+msgstr ""
+
 msgid "Highlights"
 msgstr "亮点"
+
+msgid "Hosting Provider Summary"
+msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "我接受注册条款。"
@@ -1299,6 +1458,9 @@ msgstr ""
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr ""
 
+msgid "IP Address"
+msgstr ""
+
 msgid "Identification code"
 msgstr "识别码"
 
@@ -1310,6 +1472,9 @@ msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "如果您没有注册账户，请忽略此邮件。"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
 msgstr ""
@@ -1498,6 +1663,12 @@ msgstr "也可在 {url} 获取。"
 msgid "Italic"
 msgstr "斜体"
 
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "保持登录状态"
 
@@ -1531,6 +1702,9 @@ msgstr "最新"
 msgid "Legal proceedings"
 msgstr ""
 
+msgid "Legend"
+msgstr ""
+
 msgid "Light"
 msgstr ""
 
@@ -1551,6 +1725,9 @@ msgstr "列出区域"
 
 msgid "Lista fakturor"
 msgstr "发票列表"
+
+msgid "Loading..."
+msgstr ""
 
 msgid "Log in"
 msgstr "登录"
@@ -1585,11 +1762,20 @@ msgstr "链接到 {site} 的标志"
 msgid "Lost password?"
 msgstr "忘记密码？"
 
+msgid "Low"
+msgstr ""
+
 msgid "MB"
 msgstr "MB"
 
 msgid "MOSS"
 msgstr "MOSS"
+
+msgid "MX"
+msgstr ""
+
+msgid "MX Records"
+msgstr ""
 
 msgid "MX records"
 msgstr "MX 记录"
@@ -1636,6 +1822,9 @@ msgstr ""
 msgid "Make invoice"
 msgstr "创建发票"
 
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
 msgid "Manage site"
 msgstr "管理网站"
 
@@ -1647,6 +1836,9 @@ msgstr "手册"
 
 msgid "Mark payment"
 msgstr "标记付款"
+
+msgid "Medium"
+msgstr ""
 
 msgid "Menus"
 msgstr "菜单"
@@ -1702,8 +1894,17 @@ msgstr "月"
 msgid "Multiple languages and country specific modifications"
 msgstr "多语言和国家特定修改"
 
+msgid "NS"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
 msgid "Name"
 msgstr "名称"
+
+msgid "Name Servers"
+msgstr ""
 
 msgid "Negative impact on credit rating"
 msgstr ""
@@ -1774,8 +1975,17 @@ msgstr ""
 msgid "No certificates found"
 msgstr ""
 
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No contacts found"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "没有客户 #{customerid}。"
+
+msgid "No domains found"
+msgstr ""
 
 msgid "No examples found"
 msgstr ""
@@ -1795,8 +2005,14 @@ msgstr ""
 msgid "No pages found."
 msgstr "未找到页面。"
 
+msgid "No payments found"
+msgstr ""
+
 msgid "No selected customer."
 msgstr "未选择客户。"
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr ""
 
 msgid "Normal"
 msgstr "普通"
@@ -1849,6 +2065,9 @@ msgstr "组织号"
 msgid "Organisation Number"
 msgstr "组织编号"
 
+msgid "Organization"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "组织号码"
 
@@ -1867,6 +2086,9 @@ msgstr "我们的参考"
 msgid "Over time, more web hosting features have been added."
 msgstr "随着时间的推移，增加了更多的网站托管功能。"
 
+msgid "Overall Score"
+msgstr ""
+
 msgid "Overdue Invoice Details"
 msgstr ""
 
@@ -1883,6 +2105,12 @@ msgid "PEM format"
 msgstr ""
 
 msgid "PEM format (stored securely)"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Page navigation"
 msgstr ""
 
 msgid "Page {number} of {total}"
@@ -1933,16 +2161,28 @@ msgstr "密码错误或用户名不存在。"
 msgid "PayPal"
 msgstr ""
 
+msgid "PayPal Payments"
+msgstr ""
+
 msgid "Paydate"
 msgstr "付款日期"
 
+msgid "Payer Email"
+msgstr ""
+
 msgid "Payment"
 msgstr "付款"
+
+msgid "Payment Cancelled"
+msgstr ""
 
 msgid "Payment Information"
 msgstr ""
 
 msgid "Payment Reminder"
+msgstr ""
+
+msgid "Payment Successful"
 msgstr ""
 
 msgid "Payment due to: {duedate}"
@@ -1968,6 +2208,9 @@ msgstr "Paypal"
 
 msgid "Paypal:"
 msgstr "Paypal："
+
+msgid "Pending"
+msgstr ""
 
 msgid "People rocketing to the sky"
 msgstr "人们飞向天空"
@@ -2065,6 +2308,9 @@ msgstr "价格表"
 msgid "Priority"
 msgstr "优先级"
 
+msgid "Privacy Protection"
+msgstr ""
+
 msgid "Private Key"
 msgstr ""
 
@@ -2078,6 +2324,15 @@ msgid "Products"
 msgstr "产品"
 
 msgid "Profile Image"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Provider"
+msgstr ""
+
+msgid "Public Key"
 msgstr ""
 
 msgid "Published"
@@ -2125,6 +2380,12 @@ msgstr "引用"
 msgid "Re:"
 msgstr ""
 
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
 msgid "Received"
 msgstr ""
 
@@ -2132,6 +2393,9 @@ msgid "Receiver"
 msgstr "接收者"
 
 msgid "Recent Messages"
+msgstr ""
+
+msgid "Recent Payments"
 msgstr ""
 
 msgid "Recent signatures"
@@ -2145,6 +2409,9 @@ msgstr "记录名称"
 
 msgid "Record Type"
 msgstr "记录类型"
+
+msgid "Record Value"
+msgstr ""
 
 msgid "Record created successfully"
 msgstr "记录创建成功"
@@ -2171,6 +2438,12 @@ msgid "References"
 msgstr "参考资料"
 
 msgid "Refresh"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Refunded:"
 msgstr ""
 
 msgid "Regards"
@@ -2200,11 +2473,20 @@ msgstr "已注册的付款和供应商发票从 Fortnox 检索并在本地客户
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
 msgstr "已登记的付款和供应商发票从 Fortnox 检索并在本地界面中显示。"
 
+msgid "Registrant"
+msgstr ""
+
 msgid "Registrar"
 msgstr "注册商"
 
 msgid "Registration is currently non-functional"
 msgstr "注册功能当前不可用"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr ""
 
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "剩余应付金额：{amount} {currency}"
@@ -2232,6 +2514,9 @@ msgstr ""
 
 msgid "Resources"
 msgstr "资源"
+
+msgid "Return to Home"
+msgstr ""
 
 msgid "Roles"
 msgstr "角色"
@@ -2269,6 +2554,9 @@ msgstr ""
 msgid "SMS sent successfully!"
 msgstr ""
 
+msgid "SWISH"
+msgstr ""
+
 msgid "Samizdat"
 msgstr "Samizdat"
 
@@ -2293,6 +2581,15 @@ msgstr ""
 msgid "Saved successfully"
 msgstr ""
 
+msgid "Score"
+msgstr ""
+
+msgid "Score (High to Low)"
+msgstr ""
+
+msgid "Score (Low to High)"
+msgstr ""
+
 msgid "Search"
 msgstr "搜索"
 
@@ -2302,8 +2599,14 @@ msgstr ""
 msgid "Search certificates..."
 msgstr ""
 
+msgid "Search contacts..."
+msgstr ""
+
 msgid "Search content"
 msgstr "搜索内容"
+
+msgid "Search domains..."
+msgstr ""
 
 msgid "Search example"
 msgstr ""
@@ -2364,6 +2667,9 @@ msgstr ""
 
 msgid "Search web content"
 msgstr "搜索网页内容"
+
+msgid "Sector"
+msgstr ""
 
 msgid "Select"
 msgstr "选择"
@@ -2473,6 +2779,9 @@ msgstr "仅 Snapback"
 msgid "Snapback scheduler"
 msgstr "Snapback 调度程序"
 
+msgid "Sort by"
+msgstr ""
+
 msgid "Source code on Github"
 msgstr "Github 上的源代码"
 
@@ -2527,6 +2836,9 @@ msgstr ""
 msgid "Supplier invoices"
 msgstr "供应商发票"
 
+msgid "Support for both production and test environments"
+msgstr ""
+
 msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
 msgstr ""
 
@@ -2555,6 +2867,9 @@ msgid "TTL"
 msgstr ""
 
 msgid "Tags"
+msgstr ""
+
+msgid "Tech"
 msgstr ""
 
 msgid "Technical"
@@ -2588,6 +2903,9 @@ msgid "Thank you for contacting us."
 msgstr "感谢您联系我们。"
 
 msgid "Thank you for your business"
+msgstr ""
+
+msgid "Thank you for your payment. Your transaction has been completed."
 msgstr ""
 
 msgid "Thank you for your prompt attention to this matter."
@@ -2674,6 +2992,9 @@ msgstr "切换菜单"
 msgid "Tot"
 msgstr "总计"
 
+msgid "Total Domains"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
@@ -2682,6 +3003,15 @@ msgstr "总计：{count} 个客户"
 
 msgid "Tough"
 msgstr "严厉"
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr ""
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
 
 msgid "Transfer"
 msgstr "转账"
@@ -2824,7 +3154,13 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr "类属性的值。"
 
+msgid "View"
+msgstr ""
+
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
+
+msgid "View and manage domain registrations"
 msgstr ""
 
 msgid "WARNING: Legal Action Pending"
@@ -2875,6 +3211,9 @@ msgstr "您也可以在我们的讨论中发帖。"
 msgid "You can now log in to your account."
 msgstr "您现在可以登录您的账户。"
 
+msgid "You have cancelled the payment process."
+msgstr ""
+
 msgid "You have registered a new user account on {site}."
 msgstr "您已在 {site} 上注册了新用户账户。"
 
@@ -2886,6 +3225,9 @@ msgstr "您需要接受注册条款。"
 
 msgid "You were logged in as {username}."
 msgstr "您已作为 {username} 登录。"
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
 
 msgid "Your Reference"
 msgstr "您的参考"
@@ -3006,6 +3348,9 @@ msgstr ""
 
 msgid "our web"
 msgstr "我们的网站"
+
+msgid "payments"
+msgstr ""
 
 msgid "poll"
 msgstr ""

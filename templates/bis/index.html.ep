@@ -104,7 +104,7 @@
               <span class="badge bg-warning text-dark">⚠</span> <%= __('Cloud Act Applies (US provider)') %>
             </div>
             <div class="col-md-3">
-              <span class="badge bg-primary">🏆</span> <%= __('BIS Badge (100%% compliant)') %>
+              <span class="badge bg-primary">🏆</span> <%= __('BIS Badge (100% compliant)') %>
             </div>
           </div>
         </div>

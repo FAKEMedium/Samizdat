@@ -9,6 +9,9 @@ sub run ($self, @args) {
   my $app = $self->app;
   my $bis = $app->bis;
 
+  # Enable autoflush for immediate output
+  $| = 1;
+
   say "Starting BIS compliance check...";
 
   # Start a new run
@@ -16,11 +19,9 @@ sub run ($self, @args) {
   say "Created run #$run_id";
 
   # Get all active domains
-  my $domains = $bis->pg->db->select(
-    'bis_domains',
-    ['id', 'domain'],
-    {active => 1}
-  )->hashes->to_array;
+  my $domains = $bis->pg->db->query(q{
+    SELECT id, domain FROM bis.domains WHERE active = true
+  })->hashes;
 
   my $total = scalar(@$domains);
   say "Found $total active domains to check";
