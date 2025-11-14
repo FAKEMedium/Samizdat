@@ -804,9 +804,6 @@ sub get_domain_details ($self, %params) {
     $domain->{domain_id}, 'completed'
   )->hashes->to_array;
 
-  # Get languageid for this language
-  my $languageid = $self->get_language_id($lang);
-
   # Get tags with localized names
   my $tags = $self->pg->db->query(
     'SELECT t.id, t.color, t.priority, tn.key, tn.display_name, tn.description
