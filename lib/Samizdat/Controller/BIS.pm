@@ -19,15 +19,18 @@ sub index ($self) {
   if ($accept =~ /json/) {
     # Return JSON data for dashboard
     my $tag = $self->param('tag');
+    my $search = $self->param('search');
     my $limit = $self->param('limit') || 100;
     my $offset = $self->param('offset') || 0;
     my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
     my $result = $self->bis->get_latest_scores(
       tag => $tag,
+      search => $search,
       limit => $limit,
       offset => $offset,
-      with_total => 1
+      with_total => 1,
+      lang => $lang
     );
     my $sector_stats = $self->bis->get_sector_stats(lang => $lang);
 
