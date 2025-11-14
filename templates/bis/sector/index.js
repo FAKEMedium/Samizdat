@@ -85,9 +85,12 @@ function renderDomainsTable(scores) {
         <td><a href="${BIS_DOMAIN_BASE}/${score.domain}">${score.domain}</a></td>
         <td>${score.title || '-'}</td>
         <td>
-          <div class="progress" style="min-width: 60px;">
-            <div class="progress-bar bg-${scoreColor}" role="progressbar"
-                 style="width: ${score.score}%">${score.score}%</div>
+          <div class="d-flex align-items-center">
+            <div class="progress flex-grow-1" style="min-width: 60px; height: 20px !important; margin-right: 8px;">
+              <div class="progress-bar bg-${scoreColor}" role="progressbar"
+                   style="width: ${score.score}%; height: 100%;" aria-valuenow="${score.score}" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+            <span class="text-nowrap" style="min-width: 40px;">${score.score}%</span>
           </div>
         </td>
         <td class="text-center">${getRecordBadge(score.a_compliant)}</td>

@@ -1300,6 +1300,9 @@ msgstr "Échec de suppression de la zone"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to load domain details"
+msgstr ""
+
 msgid "Failed to regenerate invoice PDF"
 msgstr ""
 
@@ -1400,6 +1403,9 @@ msgid "For more information, visit the Fortnox website:"
 msgstr "Pour plus d'informations, visitez le site web de Fortnox :"
 
 msgid "For questions, please contact us at {email}."
+msgstr ""
+
+msgid "Foreign"
 msgstr ""
 
 msgid "Form submission error:"
@@ -2040,6 +2046,12 @@ msgstr ""
 msgid "No"
 msgstr "Non"
 
+msgid "No A/AAAA records"
+msgstr ""
+
+msgid "No MX records"
+msgstr ""
+
 msgid "No cache entries found"
 msgstr ""
 
@@ -2047,6 +2059,9 @@ msgid "No certificates found"
 msgstr ""
 
 msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No check data available"
 msgstr ""
 
 msgid "No contacts found"
@@ -2077,6 +2092,9 @@ msgid "No pages found."
 msgstr "Aucune page trouvée."
 
 msgid "No payments found"
+msgstr ""
+
+msgid "No provider data available"
 msgstr ""
 
 msgid "No selected customer."
@@ -3126,6 +3144,9 @@ msgstr "Non authentifié"
 msgid "Underline"
 msgstr "Souligné"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Unknown error"
 msgstr ""
 
@@ -3276,6 +3297,9 @@ msgstr "Nous enverrons une demande de confirmation par e-mail."
 msgid "We will reply as soon as possible."
 msgstr "Nous répondrons dès que possible."
 
+msgid "Web"
+msgstr ""
+
 msgid "Web sites"
 msgstr "Sites web"
 
@@ -3408,6 +3432,9 @@ msgstr ""
 msgid "characters"
 msgstr ""
 
+msgid "compliant"
+msgstr ""
+
 msgid "content"
 msgstr "contenu"
 
@@ -3455,6 +3482,9 @@ msgstr ""
 
 msgid "product"
 msgstr "produit"
+
+msgid "record(s)"
+msgstr ""
 
 msgid "seconds"
 msgstr ""

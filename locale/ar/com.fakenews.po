@@ -1328,6 +1328,9 @@ msgstr "فشل حذف المنطقة"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to load domain details"
+msgstr ""
+
 msgid "Failed to regenerate invoice PDF"
 msgstr ""
 
@@ -1428,6 +1431,9 @@ msgid "For more information, visit the Fortnox website:"
 msgstr "لمزيد من المعلومات، قم بزيارة موقع Fortnox:"
 
 msgid "For questions, please contact us at {email}."
+msgstr ""
+
+msgid "Foreign"
 msgstr ""
 
 msgid "Form submission error:"
@@ -2072,6 +2078,12 @@ msgstr ""
 msgid "No"
 msgstr "لا"
 
+msgid "No A/AAAA records"
+msgstr ""
+
+msgid "No MX records"
+msgstr ""
+
 msgid "No cache entries found"
 msgstr ""
 
@@ -2079,6 +2091,9 @@ msgid "No certificates found"
 msgstr ""
 
 msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No check data available"
 msgstr ""
 
 msgid "No contacts found"
@@ -2109,6 +2124,9 @@ msgid "No pages found."
 msgstr "لم يتم العثور على أي صفحات."
 
 msgid "No payments found"
+msgstr ""
+
+msgid "No provider data available"
 msgstr ""
 
 msgid "No selected customer."
@@ -3158,6 +3176,9 @@ msgstr "غير مصادق"
 msgid "Underline"
 msgstr "مسطر"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Unknown error"
 msgstr ""
 
@@ -3308,6 +3329,9 @@ msgstr "سنرسل طلب تأكيد عبر البريد الإلكتروني."
 msgid "We will reply as soon as possible."
 msgstr "سنرد في أقرب وقت ممكن."
 
+msgid "Web"
+msgstr ""
+
 msgid "Web sites"
 msgstr "مواقع الويب"
 
@@ -3440,6 +3464,9 @@ msgstr ""
 msgid "characters"
 msgstr ""
 
+msgid "compliant"
+msgstr ""
+
 msgid "content"
 msgstr "محتوى"
 
@@ -3487,6 +3514,9 @@ msgstr ""
 
 msgid "product"
 msgstr "المنتج"
+
+msgid "record(s)"
+msgstr ""
 
 msgid "seconds"
 msgstr ""
