@@ -2,6 +2,15 @@
 // URL patterns from named routes
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+const LOCALE = '<%= stash('language') || 'en' %>';
+
+// Format number with locale-specific decimal separator
+function formatNumber(num, decimals = 1) {
+  return num.toLocaleString(LOCALE, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
 
 let currentSort = 'score-desc';
 
@@ -11,7 +20,8 @@ async function loadSectorView() {
     const pathParts = window.location.pathname.split('/');
     const sector = pathParts[pathParts.length - 1];
 
-    const response = await fetch(`${BIS_SECTOR_BASE}/${sector}`, {
+    // Request a high limit to get all domains in the sector
+    const response = await fetch(`${BIS_SECTOR_BASE}/${sector}?limit=10000`, {
       headers: { 'Accept': 'application/json' }
     });
 
@@ -27,7 +37,7 @@ async function loadSectorView() {
     const data = await response.json();
 
     renderSectorHeader(data.sector_info);
-    renderDomainsTable(data.scores);
+    renderDomainsTable(data);
 
   } catch (error) {
     console.error('Error loading sector view:', error);
@@ -44,8 +54,10 @@ function renderSectorHeader(sectorInfo) {
 }
 
 // Render domains table
-function renderDomainsTable(scores) {
+function renderDomainsTable(data) {
   const tbody = document.querySelector('#domains-table tbody');
+  const scores = data.scores || [];
+  const total = data.total || 0;
 
   if (!scores || scores.length === 0) {
     tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No domains found in this sector</td></tr>';
@@ -59,18 +71,17 @@ function renderDomainsTable(scores) {
     return;
   }
 
-  // Calculate statistics
-  const total = scores.length;
+  // Calculate statistics - use actual total from API
   const compliant = scores.filter(s => s.has_bis_badge).length;
   const complianceRate = (compliant / total) * 100;
-  const avgScore = scores.reduce((sum, s) => sum + parseFloat(s.score || 0), 0) / total;
+  const avgScore = scores.reduce((sum, s) => sum + parseFloat(s.score || 0), 0) / scores.length;
 
   // Update stats
   const rateColor = complianceRate >= 75 ? 'success' : complianceRate >= 50 ? 'warning' : 'danger';
-  document.getElementById('compliance-rate').innerHTML = `<span class="text-${rateColor}">${complianceRate.toFixed(1)}%</span>`;
+  document.getElementById('compliance-rate').innerHTML = `<span class="text-${rateColor}">${formatNumber(complianceRate)}%</span>`;
   document.getElementById('total-domains').textContent = total;
   document.getElementById('compliant-domains').innerHTML = `<span class="text-success">${compliant}</span>`;
-  document.getElementById('avg-score').textContent = avgScore.toFixed(1);
+  document.getElementById('avg-score').textContent = formatNumber(avgScore);
 
   // Sort scores
   sortScores(scores);

@@ -1,4 +1,14 @@
 // BIS Trends page
+const LOCALE = '<%= stash('language') || 'en' %>';
+
+// Format number with locale-specific decimal separator
+function formatNumber(num, decimals = 1) {
+  return num.toLocaleString(LOCALE, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
+
 let trendsChart = null;
 let currentDays = 90;
 
@@ -57,11 +67,11 @@ const updateTable = (trends) => {
 
     row.innerHTML = `
       <td>${date}</td>
-      <td>${parseFloat(trend.compliance_rate || 0).toFixed(1)}%</td>
-      <td>${parseFloat(trend.a_compliance_rate || 0).toFixed(1)}%</td>
-      <td>${parseFloat(trend.mx_compliance_rate || 0).toFixed(1)}%</td>
-      <td>${parseFloat(trend.ns_compliance_rate || 0).toFixed(1)}%</td>
-      <td>${parseFloat(trend.avg_score || 0).toFixed(1)}</td>
+      <td>${formatNumber(parseFloat(trend.compliance_rate || 0))}%</td>
+      <td>${formatNumber(parseFloat(trend.a_compliance_rate || 0))}%</td>
+      <td>${formatNumber(parseFloat(trend.mx_compliance_rate || 0))}%</td>
+      <td>${formatNumber(parseFloat(trend.ns_compliance_rate || 0))}%</td>
+      <td>${formatNumber(parseFloat(trend.avg_score || 0))}</td>
     `;
 
     tbody.appendChild(row);
