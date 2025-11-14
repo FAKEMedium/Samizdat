@@ -23,6 +23,10 @@ async function loadDashboard() {
       params.append('tag', currentFilter.sector);
     }
 
+    if (currentFilter.search) {
+      params.append('search', currentFilter.search);
+    }
+
     const response = await fetch(`${BIS_INDEX_URL}?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
@@ -92,7 +96,7 @@ function renderDomainsTable(scores) {
     return;
   }
 
-  // Apply client-side filters
+  // Apply client-side compliance filter only (search now done on backend)
   let filtered = scores;
 
   if (currentFilter.compliance) {
@@ -107,14 +111,6 @@ function renderDomainsTable(scores) {
         default: return true;
       }
     });
-  }
-
-  if (currentFilter.search) {
-    const search = currentFilter.search.toLowerCase();
-    filtered = filtered.filter(score =>
-      score.domain.toLowerCase().includes(search) ||
-      (score.title && score.title.toLowerCase().includes(search))
-    );
   }
 
   tbody.innerHTML = filtered.map(score => {
@@ -243,6 +239,7 @@ document.getElementById('search-filter').addEventListener('input', (e) => {
   clearTimeout(searchTimeout);
   searchTimeout = setTimeout(() => {
     currentFilter.search = e.target.value;
+    currentPage = 1; // Reset to first page when searching
     loadDashboard();
   }, 300);
 });
