@@ -88,6 +88,9 @@ msgstr "एक उप-लक्ष्य खुले लेखांकन क�
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "देर से भुगतान पर {rate} ब्याज लगाया जाएगा"
 
+msgid "A/AAAA Records"
+msgstr ""
+
 msgid "API docs"
 msgstr "API दस्तावेज़"
 
@@ -370,6 +373,9 @@ msgstr ""
 msgid "Average Score"
 msgstr ""
 
+msgid "Avg Score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/स्विफ्ट"
 
@@ -392,6 +398,9 @@ msgid "BIS Badge"
 msgstr ""
 
 msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Badges"
 msgstr ""
 
 msgid "BIS Check: $domain_name"
@@ -598,6 +607,9 @@ msgstr "फिर से भेजने के लिए क्लिक कर
 msgid "Close"
 msgstr "बंद करें"
 
+msgid "Cloud Act"
+msgstr ""
+
 msgid "Cloud Act Applies (US provider)"
 msgstr ""
 
@@ -628,7 +640,13 @@ msgstr ""
 msgid "Compliance Rate"
 msgstr ""
 
+msgid "Compliance Trends"
+msgstr ""
+
 msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliant"
 msgstr ""
 
 msgid "Compliant (Swedish hosting)"
@@ -943,6 +961,9 @@ msgstr "डोमेन पंजीकरण"
 msgid "Domain registtration"
 msgstr "डोमेन पंजीकरण"
 
+msgid "Domain required"
+msgstr ""
+
 msgid "Domain saved successfully"
 msgstr ""
 
@@ -1228,6 +1249,18 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr "{ip} से लॉगिन विफल"
 
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to add provider"
+msgstr ""
+
+msgid "Failed to add tag"
+msgstr ""
+
+msgid "Failed to check run"
+msgstr ""
+
 msgid "Failed to create certificate"
 msgstr ""
 
@@ -1295,6 +1328,9 @@ msgid "Failed to send invoice to Fortnox"
 msgstr "Fortnox को बिल भेजने में विफल"
 
 msgid "Failed to send reminder"
+msgstr ""
+
+msgid "Failed to start run"
 msgstr ""
 
 msgid "Failed to update alias"
@@ -1447,7 +1483,19 @@ msgstr ""
 msgid "Highlights"
 msgstr "मुख्य बिंदु"
 
+msgid "Historical Data"
+msgstr ""
+
+msgid "Historical compliance trends over time"
+msgstr ""
+
 msgid "Hosting Provider Summary"
+msgstr ""
+
+msgid "Hosting Providers"
+msgstr ""
+
+msgid "Hosting provider statistics for tracked domains"
 msgstr ""
 
 msgid "I accept the terms for registration."
@@ -1460,6 +1508,9 @@ msgid "IBAN:"
 msgstr "आईबीएएन:"
 
 msgid "ID"
+msgstr ""
+
+msgid "ID required"
 msgstr ""
 
 msgid "IMMEDIATE PAYMENT REQUIRED"
@@ -1677,10 +1728,19 @@ msgstr ""
 msgid "Item:"
 msgstr ""
 
+msgid "JSON only"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "मुझे लॉग इन रखें"
 
 msgid "Key"
+msgstr ""
+
+msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key, name and country_code required"
 msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
@@ -1829,6 +1889,9 @@ msgstr ""
 
 msgid "Make invoice"
 msgstr "इनवॉइस बनाएं"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr ""
 
 msgid "Manage domains and contacts through the RealtimeRegister API."
 msgstr ""
@@ -2093,6 +2156,9 @@ msgstr "हमारा संदर्भ"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "समय के साथ, और वेब होस्टिंग सुविधाएं जोड़ी गई हैं।"
+
+msgid "Overall"
+msgstr ""
 
 msgid "Overall Score"
 msgstr ""
@@ -2400,6 +2466,9 @@ msgstr ""
 msgid "Receiver"
 msgstr "प्राप्तकर्ता"
 
+msgid "Recent Check Runs"
+msgstr ""
+
 msgid "Recent Messages"
 msgstr ""
 
@@ -2541,6 +2610,12 @@ msgstr "राउंड ऑफ:"
 msgid "Rounding"
 msgstr ""
 
+msgid "Run ID required"
+msgstr ""
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr ""
+
 msgid "SEK"
 msgstr "एसईके"
 
@@ -2679,6 +2754,9 @@ msgstr "वेब सामग्री खोजें"
 msgid "Sector"
 msgstr ""
 
+msgid "Sector Statistics"
+msgstr ""
+
 msgid "Select"
 msgstr "चुनें"
 
@@ -2802,6 +2880,9 @@ msgstr "विशेष मूल्य"
 msgid "Start"
 msgstr "शुरू करें"
 
+msgid "Start New Check Run"
+msgstr ""
+
 msgid "Start a conversation by sending a message"
 msgstr ""
 
@@ -2810,6 +2891,9 @@ msgstr "मुख्य सामग्री शुरू"
 
 msgid "Start side content"
 msgstr "पार्श्व सामग्री शुरू"
+
+msgid "Started"
+msgstr ""
 
 msgid "Statistics"
 msgstr "आँकड़े"
@@ -3003,6 +3087,9 @@ msgstr "कुल"
 msgid "Total Domains"
 msgstr ""
 
+msgid "Total Records"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
@@ -3163,6 +3250,9 @@ msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
 
 msgid "View"
+msgstr ""
+
+msgid "View Public Dashboard"
 msgstr ""
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."

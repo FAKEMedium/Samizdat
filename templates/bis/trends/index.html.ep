@@ -1,8 +1,8 @@
 % # BIS Trends View
-<p class="lead"><%= __('Historical compliance trends over time') %></p>
+<p class="lead mb-4"><%= __('Historical compliance trends over time') %></p>
 
 <!-- Time Range Filter -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-outline-primary" data-days="30">30 Days</button>
@@ -14,7 +14,7 @@
 </div>
 
 <!-- Trends Chart -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -26,7 +26,7 @@
 </div>
 
 <!-- Trends Table -->
-<div class="row mt-4 mb-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">

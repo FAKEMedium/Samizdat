@@ -88,6 +88,9 @@ msgstr "Ett delmål är att testa öppen redovisning, där siffror kan presenter
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
+msgid "A/AAAA Records"
+msgstr ""
+
 msgid "API docs"
 msgstr "API-dokument"
 
@@ -370,6 +373,9 @@ msgstr "Förnyas automatiskt"
 msgid "Average Score"
 msgstr "Genomsnittlig poäng"
 
+msgid "Avg Score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -390,6 +396,9 @@ msgstr "BIS-märke"
 
 msgid "BIS Badge (100% compliant)"
 msgstr "BIS-märke (100% kompatibel)"
+
+msgid "BIS Badges"
+msgstr ""
 
 msgid "BIS Check: $domain_name"
 msgstr "BIS-kontroll: $domain_name"
@@ -586,6 +595,9 @@ msgstr "Klicka för att skicka igen."
 msgid "Close"
 msgstr "Stäng"
 
+msgid "Cloud Act"
+msgstr ""
+
 msgid "Cloud Act Applies (US provider)"
 msgstr "Cloud Act gäller (US-leverantör)"
 
@@ -616,8 +628,14 @@ msgstr "Regelefterlevnad"
 msgid "Compliance Rate"
 msgstr "Efterlevnadsgrad"
 
+msgid "Compliance Trends"
+msgstr ""
+
 msgid "Compliance by Sector"
 msgstr "Efterlevnad per sektor"
+
+msgid "Compliant"
+msgstr ""
 
 msgid "Compliant (Swedish hosting)"
 msgstr "Kompatibel (svensk hosting)"
@@ -919,6 +937,9 @@ msgstr "Domänen hittades inte"
 msgid "Domain registration"
 msgstr "Domänregistrering"
 
+msgid "Domain required"
+msgstr ""
+
 msgid "Domain saved successfully"
 msgstr "Domän sparades"
 
@@ -1195,6 +1216,18 @@ msgstr "SLUTMEDDELANDE: Detta är en sista påminnelse angående er förfallna f
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to add provider"
+msgstr ""
+
+msgid "Failed to add tag"
+msgstr ""
+
+msgid "Failed to check run"
+msgstr ""
+
 msgid "Failed to create certificate"
 msgstr "Misslyckades skapa certifikat"
 
@@ -1263,6 +1296,9 @@ msgstr "Misslyckades att skicka faktura till Fortnox"
 
 msgid "Failed to send reminder"
 msgstr "Misslyckades skicka påminnelse"
+
+msgid "Failed to start run"
+msgstr ""
 
 msgid "Failed to update alias"
 msgstr "Misslyckades uppdatera alias"
@@ -1411,8 +1447,20 @@ msgstr "Hög"
 msgid "Highlights"
 msgstr "Höjdpunkter"
 
+msgid "Historical Data"
+msgstr ""
+
+msgid "Historical compliance trends over time"
+msgstr ""
+
 msgid "Hosting Provider Summary"
 msgstr "Hosting leverantörsammanfattning"
+
+msgid "Hosting Providers"
+msgstr ""
+
+msgid "Hosting provider statistics for tracked domains"
+msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
@@ -1422,6 +1470,9 @@ msgstr "IBAN"
 
 msgid "ID"
 msgstr "ID"
+
+msgid "ID required"
+msgstr ""
 
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr "OMEDELBAR BETALNING KRÄVS"
@@ -1626,11 +1677,20 @@ msgstr "Artikelnummer"
 msgid "Item:"
 msgstr "Artikel:"
 
+msgid "JSON only"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
 
 msgid "Key"
 msgstr "Nyckel"
+
+msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key, name and country_code required"
+msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr "Sparka Rysslands försvarsminister Sergej Shoigu!"
@@ -1778,6 +1838,9 @@ msgstr "Brevlådor för"
 
 msgid "Make invoice"
 msgstr "Skapa faktura"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr ""
 
 msgid "Manage domains and contacts through the RealtimeRegister API."
 msgstr "Hantera domäner och kontakter via RealtimeRegister API."
@@ -2036,6 +2099,9 @@ msgstr "Vår referens"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Med tiden har fler webbhotell-funktioner lagts till."
+
+msgid "Overall"
+msgstr ""
 
 msgid "Overall Score"
 msgstr "Total poäng"
@@ -2334,6 +2400,9 @@ msgstr "Mottagen"
 msgid "Receiver"
 msgstr "Mottagare"
 
+msgid "Recent Check Runs"
+msgstr ""
+
 msgid "Recent Messages"
 msgstr "Senaste meddelanden"
 
@@ -2468,6 +2537,12 @@ msgstr "Avrundning"
 
 msgid "Rounding"
 msgstr "Avrundning"
+
+msgid "Run ID required"
+msgstr ""
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr ""
 
 msgid "SEK"
 msgstr "kr"
@@ -2607,6 +2682,9 @@ msgstr "Sök webbinnehåll"
 msgid "Sector"
 msgstr "Sektor"
 
+msgid "Sector Statistics"
+msgstr ""
+
 msgid "Select"
 msgstr "Välj"
 
@@ -2727,6 +2805,9 @@ msgstr "Rabatt"
 msgid "Start"
 msgstr "Start"
 
+msgid "Start New Check Run"
+msgstr ""
+
 msgid "Start a conversation by sending a message"
 msgstr "Starta en konversation genom att skicka ett meddelande"
 
@@ -2735,6 +2816,9 @@ msgstr "Börja huvudinnehåll"
 
 msgid "Start side content"
 msgstr "Börja sidoinnehåll"
+
+msgid "Started"
+msgstr ""
 
 msgid "Statistics"
 msgstr "Statistik"
@@ -2925,6 +3009,9 @@ msgstr "Tot"
 msgid "Total Domains"
 msgstr "Totalt antal domäner"
 
+msgid "Total Records"
+msgstr ""
+
 msgid "Total to pay"
 msgstr "Totalt att betala"
 
@@ -3077,6 +3164,9 @@ msgstr "Värde för klass-attributet."
 
 msgid "View"
 msgstr "Visa"
+
+msgid "View Public Dashboard"
+msgstr ""
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
 msgstr "Visa och hantera Redis-cacheposter. Använd mönster som \"fortnox:*\", \"user:*\" eller \"*\" för att filtrera poster."

@@ -30,7 +30,7 @@ async function loadDomainDetails() {
       data.domain.total_checks = parseInt(data.domain.total_checks) || 0;
     }
 
-    renderDomainHeader(data.domain);
+    renderDomainHeader(data.domain, data.tags);
     renderComplianceOverview(data.domain);
     renderChecksTable(data.checks);
     renderProviderSummary(data.checks);
@@ -42,16 +42,16 @@ async function loadDomainDetails() {
 }
 
 // Render domain header
-function renderDomainHeader(domain) {
+function renderDomainHeader(domain, tags) {
   document.getElementById('domain-name').textContent = domain.domain;
   document.getElementById('domain-title').textContent = domain.title || '';
   document.getElementById('domain-description').textContent = domain.description || '';
 
   // Render tags
   const tagsContainer = document.getElementById('domain-tags');
-  if (domain.tags && domain.tags.length > 0) {
-    tagsContainer.innerHTML = domain.tags.map(tag =>
-      `<span class="badge bg-secondary me-1">${tag}</span>`
+  if (tags && tags.length > 0) {
+    tagsContainer.innerHTML = tags.map(tag =>
+      `<span class="badge bg-secondary me-1">${tag.display_name || tag.key}</span>`
     ).join('');
   }
 
@@ -85,8 +85,11 @@ function renderComplianceOverview(domain) {
     badgeDisplay.innerHTML = '';
   }
 
-  // A Records
-  renderRecordStatus('a-record', domain.a_compliant);
+  // A/AAAA Records - combined status (compliant only if both are compliant or null)
+  const aaaaCompliant = (domain.a_compliant === null || domain.a_compliant === true) &&
+                        (domain.aaaa_compliant === null || domain.aaaa_compliant === true);
+  const hasAorAAAA = domain.a_compliant !== null || domain.aaaa_compliant !== null;
+  renderRecordStatus('a-record', hasAorAAAA ? aaaaCompliant : null);
 
   // MX Records
   renderRecordStatus('mx-record', domain.mx_compliant);
@@ -141,11 +144,15 @@ function renderChecksTable(checks) {
   // Count records by type
   const counts = {
     A: checks.filter(c => c.record_type === 'A').length,
+    AAAA: checks.filter(c => c.record_type === 'AAAA').length,
     MX: checks.filter(c => c.record_type === 'MX').length,
     NS: checks.filter(c => c.record_type === 'NS').length
   };
 
-  document.getElementById('a-record-count').textContent = `${counts.A} record(s)`;
+  const totalA = counts.A + counts.AAAA;
+  document.getElementById('a-record-count').textContent = totalA > 0
+    ? `${counts.A} A + ${counts.AAAA} AAAA`
+    : 'No A/AAAA records';
   document.getElementById('mx-record-count').textContent = counts.MX > 0 ? `${counts.MX} record(s)` : 'No MX records';
   document.getElementById('ns-record-count').textContent = `${counts.NS} record(s)`;
 }
