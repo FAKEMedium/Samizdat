@@ -538,31 +538,51 @@ Get latest scores for all domains or filtered by tag key.
 
 sub get_latest_scores ($self, %params) {
   my $tag = $params{tag};
+  my $search = $params{search};
   my $limit = $params{limit} || 100;
   my $offset = $params{offset} || 0;
   my $with_total = $params{with_total} || 0;
+  my $lang = $params{lang} || 'en';
 
-  my $sql = 'SELECT * FROM bis.latest_scores';
-  my @bind;
+  my $languageid = $self->get_language_id($lang);
+
+  # Start with base query, joining with domain_descriptions for title search
+  my $sql = 'SELECT DISTINCT s.*, dd.title
+             FROM bis.latest_scores s
+             LEFT JOIN bis.domain_descriptions dd ON s.domain_id = dd.domain_id AND dd.languageid = ?';
+  my @bind = ($languageid);
+
+  my @where_clauses;
 
   if ($tag) {
     # Filter by tag key using bis.tag_names
-    $sql = 'SELECT DISTINCT s.* FROM bis.latest_scores s
-            JOIN bis.domain_tags dt ON s.domain_id = dt.domain_id
-            JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id
-            WHERE tn.key = ?';
+    $sql .= ' JOIN bis.domain_tags dt ON s.domain_id = dt.domain_id
+              JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id';
+    push @where_clauses, 'tn.key = ?';
     push @bind, $tag;
+  }
+
+  if ($search) {
+    # Search in both domain name and title using ILIKE (case-insensitive)
+    push @where_clauses, '(s.domain ILIKE ? OR dd.title ILIKE ?)';
+    my $search_pattern = '%' . $search . '%';
+    push @bind, $search_pattern, $search_pattern;
+  }
+
+  # Add WHERE clause if we have conditions
+  if (@where_clauses) {
+    $sql .= ' WHERE ' . join(' AND ', @where_clauses);
   }
 
   # Get total count if requested
   my $total;
   if ($with_total) {
     my $count_sql = $sql;
-    $count_sql =~ s/SELECT DISTINCT s\.\*|SELECT \*|SELECT s\.\*/SELECT COUNT(DISTINCT s.domain_id)/;
+    $count_sql =~ s/SELECT DISTINCT s\.\*, dd\.title/SELECT COUNT(DISTINCT s.domain_id)/;
     $total = $self->pg->db->query($count_sql, @bind)->hash->{count};
   }
 
-  $sql .= ' ORDER BY score DESC LIMIT ? OFFSET ?';
+  $sql .= ' ORDER BY s.score DESC LIMIT ? OFFSET ?';
   push @bind, $limit, $offset;
 
   my $scores = $self->pg->db->query($sql, @bind)->hashes->to_array;
@@ -758,6 +778,23 @@ sub get_domain_details ($self, %params) {
   )->hash;
 
   return unless $domain;
+
+  # Get languageid and fetch localized title/description
+  my $languageid = $self->get_language_id($lang);
+  my $description = $self->pg->db->query(
+    'SELECT title, description FROM bis.domain_descriptions
+     WHERE domain_id = ? AND languageid = ?',
+    $domain->{domain_id}, $languageid
+  )->hash;
+
+  # Add localized fields to domain hash
+  if ($description) {
+    $domain->{title} = $description->{title} || '';
+    $domain->{description} = $description->{description} || '';
+  } else {
+    $domain->{title} = '';
+    $domain->{description} = '';
+  }
 
   # Get checks for this domain
   my $checks = $self->pg->db->query(

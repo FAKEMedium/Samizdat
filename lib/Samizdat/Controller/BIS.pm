@@ -21,7 +21,7 @@ sub index ($self) {
     my $tag = $self->param('tag');
     my $limit = $self->param('limit') || 100;
     my $offset = $self->param('offset') || 0;
-    my $lang = $self->param('lang') || $self->stash('lang') || 'en';
+    my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
     my $result = $self->bis->get_latest_scores(
       tag => $tag,
@@ -57,7 +57,7 @@ sub domain ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
 
   if ($accept =~ /json/) {
-    my $lang = $self->param('lang') || $self->stash('lang') || 'en';
+    my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
     # Get domain details from model
     my $details = $self->bis->get_domain_details(domain => $domain_name, lang => $lang);
@@ -94,7 +94,7 @@ sub sector ($self) {
   if ($accept =~ /json/) {
     my $limit = $self->param('limit') || 100;
     my $offset = $self->param('offset') || 0;
-    my $lang = $self->param('lang') || $self->stash('lang') || 'en';
+    my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
     my $result = $self->bis->get_latest_scores(
       tag => $sector,

@@ -95,6 +95,9 @@ msgstr "Celem podrzędnym jest testowanie otwartej rachunkowości, gdzie liczby 
 msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Opóźnione płatności będą obciążone odsetkami w wysokości {rate}"
 
+msgid "A/AAAA Records"
+msgstr ""
+
 msgid "API docs"
 msgstr "Dokumentacja API"
 
@@ -377,6 +380,9 @@ msgstr ""
 msgid "Average Score"
 msgstr ""
 
+msgid "Avg Score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -399,6 +405,9 @@ msgid "BIS Badge"
 msgstr ""
 
 msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Badges"
 msgstr ""
 
 msgid "BIS Check: $domain_name"
@@ -605,6 +614,9 @@ msgstr "Kliknij, aby wysłać ponownie."
 msgid "Close"
 msgstr "Zamknij"
 
+msgid "Cloud Act"
+msgstr ""
+
 msgid "Cloud Act Applies (US provider)"
 msgstr ""
 
@@ -635,7 +647,13 @@ msgstr ""
 msgid "Compliance Rate"
 msgstr ""
 
+msgid "Compliance Trends"
+msgstr ""
+
 msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliant"
 msgstr ""
 
 msgid "Compliant (Swedish hosting)"
@@ -950,6 +968,9 @@ msgstr "Rejestracja domeny"
 msgid "Domain registtration"
 msgstr "Rejestracja domeny"
 
+msgid "Domain required"
+msgstr ""
+
 msgid "Domain saved successfully"
 msgstr ""
 
@@ -1235,6 +1256,18 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr "Nieudane logowanie z {ip}"
 
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to add provider"
+msgstr ""
+
+msgid "Failed to add tag"
+msgstr ""
+
+msgid "Failed to check run"
+msgstr ""
+
 msgid "Failed to create certificate"
 msgstr ""
 
@@ -1302,6 +1335,9 @@ msgid "Failed to send invoice to Fortnox"
 msgstr "Nie udało się wysłać faktury do Fortnox"
 
 msgid "Failed to send reminder"
+msgstr ""
+
+msgid "Failed to start run"
 msgstr ""
 
 msgid "Failed to update alias"
@@ -1454,7 +1490,19 @@ msgstr ""
 msgid "Highlights"
 msgstr "Najważniejsze informacje"
 
+msgid "Historical Data"
+msgstr ""
+
+msgid "Historical compliance trends over time"
+msgstr ""
+
 msgid "Hosting Provider Summary"
+msgstr ""
+
+msgid "Hosting Providers"
+msgstr ""
+
+msgid "Hosting provider statistics for tracked domains"
 msgstr ""
 
 msgid "I accept the terms for registration."
@@ -1467,6 +1515,9 @@ msgid "IBAN:"
 msgstr "IBAN:"
 
 msgid "ID"
+msgstr ""
+
+msgid "ID required"
 msgstr ""
 
 msgid "IMMEDIATE PAYMENT REQUIRED"
@@ -1685,10 +1736,19 @@ msgstr ""
 msgid "Item:"
 msgstr ""
 
+msgid "JSON only"
+msgstr ""
+
 msgid "Keep me logged in"
 msgstr "Pozostaw mnie zalogowanym"
 
 msgid "Key"
+msgstr ""
+
+msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key, name and country_code required"
 msgstr ""
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
@@ -1837,6 +1897,9 @@ msgstr ""
 
 msgid "Make invoice"
 msgstr "Utwórz fakturę"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr ""
 
 msgid "Manage domains and contacts through the RealtimeRegister API."
 msgstr ""
@@ -2101,6 +2164,9 @@ msgstr "Nasz numer referencyjny"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Z czasem dodano więcej funkcji hostingu internetowego."
+
+msgid "Overall"
+msgstr ""
 
 msgid "Overall Score"
 msgstr ""
@@ -2408,6 +2474,9 @@ msgstr ""
 msgid "Receiver"
 msgstr "Odbiorca"
 
+msgid "Recent Check Runs"
+msgstr ""
+
 msgid "Recent Messages"
 msgstr ""
 
@@ -2549,6 +2618,12 @@ msgstr "Zaokrąglenie:"
 msgid "Rounding"
 msgstr ""
 
+msgid "Run ID required"
+msgstr ""
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr ""
+
 msgid "SEK"
 msgstr "SEK"
 
@@ -2687,6 +2762,9 @@ msgstr "Przeszukaj treść internetową"
 msgid "Sector"
 msgstr ""
 
+msgid "Sector Statistics"
+msgstr ""
+
 msgid "Select"
 msgstr "Wybierz"
 
@@ -2810,6 +2888,9 @@ msgstr "Cena specjalna"
 msgid "Start"
 msgstr "Start"
 
+msgid "Start New Check Run"
+msgstr ""
+
 msgid "Start a conversation by sending a message"
 msgstr ""
 
@@ -2818,6 +2899,9 @@ msgstr "Początek głównej treści"
 
 msgid "Start side content"
 msgstr "Początek bocznej treści"
+
+msgid "Started"
+msgstr ""
 
 msgid "Statistics"
 msgstr "Statystyki"
@@ -3011,6 +3095,9 @@ msgstr "Razem"
 msgid "Total Domains"
 msgstr ""
 
+msgid "Total Records"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
@@ -3171,6 +3258,9 @@ msgid "Value for the class attribute."
 msgstr "Wartość dla atrybutu class."
 
 msgid "View"
+msgstr ""
+
+msgid "View Public Dashboard"
 msgstr ""
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."

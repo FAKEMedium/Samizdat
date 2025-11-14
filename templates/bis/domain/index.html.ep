@@ -7,9 +7,9 @@
         <div class="row align-items-center">
           <div class="col-md-8">
             <h2 id="domain-name" class="mb-2"><!-- Populated by JavaScript --></h2>
-            <h5 id="domain-title" class="text-muted"><!-- Populated by JavaScript --></h5>
-            <p id="domain-description" class="mt-2"><!-- Populated by JavaScript --></p>
-            <div id="domain-tags" class="mt-2"><!-- Populated by JavaScript --></div>
+            <h5 id="domain-title" class="text-muted mb-2"><!-- Populated by JavaScript --></h5>
+            <p id="domain-description" class="mb-2"><!-- Populated by JavaScript --></p>
+            <div id="domain-tags"><!-- Populated by JavaScript --></div>
           </div>
           <div class="col-md-4 text-end">
             <div id="domain-score-display"><!-- Populated by JavaScript --></div>
@@ -21,12 +21,12 @@
 </div>
 
 <!-- Compliance Overview -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-md-3">
     <div class="card">
       <div class="card-body text-center">
         <h6 class="text-muted"><%= __('Overall Score') %></h6>
-        <h3 id="overall-score"><!-- Populated by JavaScript --></h3>
+        <h2 id="overall-score"><!-- Populated by JavaScript --></h2>
         <div id="bis-badge-display"><!-- Populated by JavaScript --></div>
       </div>
     </div>
@@ -34,7 +34,7 @@
   <div class="col-md-3">
     <div class="card">
       <div class="card-body text-center">
-        <h6 class="text-muted"><%= __('A Records') %></h6>
+        <h6 class="text-muted"><%= __('A/AAAA Records') %></h6>
         <h2 id="a-record-status"><!-- Populated by JavaScript --></h2>
         <small id="a-record-count"><!-- Populated by JavaScript --></small>
       </div>
@@ -61,7 +61,7 @@
 </div>
 
 <!-- Detailed Check Results -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -91,7 +91,7 @@
 </div>
 
 <!-- Provider Summary -->
-<div class="row mt-4 mb-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">

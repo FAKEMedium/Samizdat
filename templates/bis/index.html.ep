@@ -1,8 +1,8 @@
 % # BIS (Based in Sweden) - Main Dashboard
-<p class="lead"><%= __('Tracking Swedish organizations\' hosting compliance for data sovereignty') %></p>
+<p class="lead mb-4"><%= __('Tracking Swedish organizations\' hosting compliance for data sovereignty') %></p>
 
 <!-- Sector Statistics -->
-<div class="row mt-4" id="sector-stats">
+<div class="row mb-4" id="sector-stats">
   <div class="col-12">
     <h2><%= __('Compliance by Sector') %></h2>
     <div class="row" id="sector-cards">
@@ -12,7 +12,7 @@
 </div>
 
 <!-- Filter Options -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -47,7 +47,7 @@
 </div>
 
 <!-- Domain Results Table -->
-<div class="row mt-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -82,7 +82,7 @@
 </div>
 
 <!-- Legend -->
-<div class="row mt-4 mb-4">
+<div class="row mb-4">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
