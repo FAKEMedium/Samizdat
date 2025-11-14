@@ -3,6 +3,15 @@
 const BIS_INDEX_URL = '<%= url_for('bis_index') %>';
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+const LOCALE = '<%= stash('language') || 'en' %>';
+
+// Format number with locale-specific decimal separator
+function formatNumber(num, decimals = 1) {
+  return num.toLocaleString(LOCALE, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
 
 let currentPage = 1;
 let currentFilter = {
@@ -74,10 +83,10 @@ function renderSectorStats(sectors) {
         <div class="card border-${cardColor}">
           <div class="card-body">
             <h6 class="card-subtitle mb-2 text-muted">${sector.display_name}</h6>
-            <h2 class="card-title text-${cardColor}">${complianceRate.toFixed(1)}%</h2>
+            <h2 class="card-title text-${cardColor}">${formatNumber(complianceRate)}%</h2>
             <p class="card-text">
               <small>${sector.compliant_domains}/${sector.total_domains} compliant</small><br>
-              <small>Avg score: ${avgScore.toFixed(1)}</small>
+              <small>Avg score: ${formatNumber(avgScore)}</small>
             </p>
             <a href="${BIS_SECTOR_BASE}/${sector.sector}" class="btn btn-sm btn-outline-${cardColor}">View Details</a>
           </div>

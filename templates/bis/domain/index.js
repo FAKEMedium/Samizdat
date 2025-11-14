@@ -2,6 +2,15 @@
 // URL patterns from named routes
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+const LOCALE = '<%= stash('language') || 'en' %>';
+
+// Format number with locale-specific decimal separator
+function formatNumber(num, decimals = 1) {
+  return num.toLocaleString(LOCALE, {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  });
+}
 
 async function loadDomainDetails() {
   try {
@@ -109,8 +118,9 @@ function renderComplianceOverview(domain) {
   }
 
   // A/AAAA Records - combined status (compliant only if both are compliant or null)
-  const aaaaCompliant = (domain.a_compliant === null || domain.a_compliant === true) &&
-                        (domain.aaaa_compliant === null || domain.aaaa_compliant === true);
+  const aCompliant = domain.a_compliant === null || domain.a_compliant;
+  const aaaaCompliantCheck = domain.aaaa_compliant === null || domain.aaaa_compliant;
+  const aaaaCompliant = aCompliant && aaaaCompliantCheck;
   const hasAorAAAA = domain.a_compliant !== null || domain.aaaa_compliant !== null;
   renderRecordStatus('a-record', hasAorAAAA ? aaaaCompliant : null);
 
@@ -218,7 +228,7 @@ function renderProviderSummary(checks) {
     <div class="row">
       ${sorted.map(([provider, count]) => {
         const stats = providerCompliance[provider];
-        const rate = ((stats.compliant / stats.total) * 100).toFixed(0);
+        const rate = formatNumber((stats.compliant / stats.total) * 100, 0);
         const badgeColor = stats.compliant === stats.total ? 'success' : 'danger';
         const flag = stats.country ? getFlagEmoji(stats.country) : '';
 
