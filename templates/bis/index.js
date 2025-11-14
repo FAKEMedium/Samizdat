@@ -40,7 +40,7 @@ async function loadDashboard() {
       headers: { 'Accept': 'application/json' }
     });
 
-    if (!response.ok) throw new Error('Failed to load dashboard data');
+    if (!response.ok) throw new Error('<%= __('Failed to load dashboard data') %>');
 
     const data = await response.json();
 
@@ -50,7 +50,7 @@ async function loadDashboard() {
 
   } catch (error) {
     console.error('Error loading dashboard:', error);
-    showError('Failed to load dashboard data');
+    showError('<%= __('Failed to load dashboard data') %>');
   }
 }
 
@@ -60,7 +60,7 @@ function renderSectorStats(sectors) {
   const sectorFilter = document.getElementById('sector-filter');
 
   if (!sectors || sectors.length === 0) {
-    container.innerHTML = '<div class="col-12"><p class="text-muted">No data available</p></div>';
+    container.innerHTML = '<div class="col-12"><p class="text-muted"><%= __('No data available') %></p></div>';
     return;
   }
 
@@ -85,10 +85,10 @@ function renderSectorStats(sectors) {
             <h6 class="card-subtitle mb-2 text-muted">${sector.display_name}</h6>
             <h2 class="card-title text-${cardColor}">${formatNumber(complianceRate)}%</h2>
             <p class="card-text">
-              <small>${sector.compliant_domains}/${sector.total_domains} compliant</small><br>
-              <small>Avg score: ${formatNumber(avgScore)}</small>
+              <small>${sector.compliant_domains}/${sector.total_domains} <%= __('compliant') %></small><br>
+              <small><%= __('Avg score') %>: ${formatNumber(avgScore)}</small>
             </p>
-            <a href="${BIS_SECTOR_BASE}/${sector.sector}" class="btn btn-sm btn-outline-${cardColor}">View Details</a>
+            <a href="${BIS_SECTOR_BASE}/${sector.sector}" class="btn btn-sm btn-outline-${cardColor}"><%= __('View Details') %></a>
           </div>
         </div>
       </div>
@@ -101,7 +101,7 @@ function renderDomainsTable(scores) {
   const tbody = document.querySelector('#domains-table tbody');
 
   if (!scores || scores.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No domains found</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted"><%= __('No domains found') %></td></tr>';
     return;
   }
 
@@ -183,7 +183,7 @@ function renderPagination(totalResults) {
   // Previous button
   html += `
     <li class="page-item ${currentPage === 1 ? 'disabled' : ''}">
-      <a class="page-link" href="#" data-page="${currentPage - 1}">Previous</a>
+      <a class="page-link" href="#" data-page="${currentPage - 1}"><%= __('Previous') %></a>
     </li>
   `;
 
@@ -203,7 +203,7 @@ function renderPagination(totalResults) {
   // Next button
   html += `
     <li class="page-item ${currentPage === totalPages ? 'disabled' : ''}">
-      <a class="page-link" href="#" data-page="${currentPage + 1}">Next</a>
+      <a class="page-link" href="#" data-page="${currentPage + 1}"><%= __('Next') %></a>
     </li>
   `;
 

@@ -376,6 +376,9 @@ msgstr "Genomsnittlig poäng"
 msgid "Avg Score"
 msgstr "Genomsnittlig poäng"
 
+msgid "Avg score"
+msgstr "Genomsnittlig poäng"
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -1267,8 +1270,11 @@ msgstr "Misslyckades ta bort zon"
 msgid "Failed to load conversation"
 msgstr "Misslyckades ladda konversation"
 
+msgid "Failed to load dashboard data"
+msgstr "Misslyckades ladda sammanställningsdata"
+
 msgid "Failed to load domain details"
-msgstr ""
+msgstr "Misslyckades ladda domändetaljer"
 
 msgid "Failed to regenerate invoice PDF"
 msgstr "Misslyckades med att återskapa PDF"
@@ -2015,6 +2021,9 @@ msgstr "Inga kontakter hittades"
 
 msgid "No customer #{customerid}."
 msgstr "Ingen kund #{customerid}."
+
+msgid "No data available"
+msgstr "Ingen tillgänglig data"
 
 msgid "No domains found"
 msgstr "Inga domäner hittades"
@@ -3067,7 +3076,7 @@ msgid "Underline"
 msgstr "Understruken"
 
 msgid "Unknown"
-msgstr ""
+msgstr "Okänd"
 
 msgid "Unknown error"
 msgstr "Okänt fel"
@@ -3186,6 +3195,9 @@ msgstr "Värde för klass-attributet."
 msgid "View"
 msgstr "Visa"
 
+msgid "View Details"
+msgstr "Visa detaljer"
+
 msgid "View Public Dashboard"
 msgstr "Visa offentlig instrumentpanel"
 
@@ -3211,7 +3223,7 @@ msgid "We will reply as soon as possible."
 msgstr "Vi svarar så fort vi kan."
 
 msgid "Web"
-msgstr ""
+msgstr "Webb"
 
 msgid "Web sites"
 msgstr "Webbplatser"

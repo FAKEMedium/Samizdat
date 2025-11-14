@@ -376,6 +376,9 @@ msgstr ""
 msgid "Avg Score"
 msgstr ""
 
+msgid "Avg score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/स्विफ्ट"
 
@@ -1300,6 +1303,9 @@ msgstr "ज़ोन हटाने में विफल"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to load dashboard data"
+msgstr ""
+
 msgid "Failed to load domain details"
 msgstr ""
 
@@ -2069,6 +2075,9 @@ msgstr ""
 
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
+
+msgid "No data available"
+msgstr ""
 
 msgid "No domains found"
 msgstr ""
@@ -3271,6 +3280,9 @@ msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
 
 msgid "View"
+msgstr ""
+
+msgid "View Details"
 msgstr ""
 
 msgid "View Public Dashboard"
