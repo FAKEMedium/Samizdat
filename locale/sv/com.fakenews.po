@@ -89,7 +89,7 @@ msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Vid försenad betalning debiteras avgift och {rate} ränta"
 
 msgid "A/AAAA Records"
-msgstr ""
+msgstr "A/AAAA-poster"
 
 msgid "API docs"
 msgstr "API-dokument"
@@ -374,7 +374,7 @@ msgid "Average Score"
 msgstr "Genomsnittlig poäng"
 
 msgid "Avg Score"
-msgstr ""
+msgstr "Genomsnittlig poäng"
 
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
@@ -398,7 +398,7 @@ msgid "BIS Badge (100% compliant)"
 msgstr "BIS-märke (100% kompatibel)"
 
 msgid "BIS Badges"
-msgstr ""
+msgstr "BIS-märken"
 
 msgid "BIS Check: $domain_name"
 msgstr "BIS-kontroll: $domain_name"
@@ -596,7 +596,7 @@ msgid "Close"
 msgstr "Stäng"
 
 msgid "Cloud Act"
-msgstr ""
+msgstr "Cloud Act"
 
 msgid "Cloud Act Applies (US provider)"
 msgstr "Cloud Act gäller (US-leverantör)"
@@ -629,13 +629,13 @@ msgid "Compliance Rate"
 msgstr "Efterlevnadsgrad"
 
 msgid "Compliance Trends"
-msgstr ""
+msgstr "Efterlevnadstrender"
 
 msgid "Compliance by Sector"
 msgstr "Efterlevnad per sektor"
 
 msgid "Compliant"
-msgstr ""
+msgstr "Efterlevnad"
 
 msgid "Compliant (Swedish hosting)"
 msgstr "Kompatibel (svensk hosting)"
@@ -938,7 +938,7 @@ msgid "Domain registration"
 msgstr "Domänregistrering"
 
 msgid "Domain required"
-msgstr ""
+msgstr "Domän krävs"
 
 msgid "Domain saved successfully"
 msgstr "Domän sparades"
@@ -1217,16 +1217,16 @@ msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
 msgid "Failed to add domain"
-msgstr ""
+msgstr "Kunde inte lägga till domän"
 
 msgid "Failed to add provider"
-msgstr ""
+msgstr "Kunde inte lägga till leverantör"
 
 msgid "Failed to add tag"
-msgstr ""
+msgstr "Kunde inte lägga till tagg"
 
 msgid "Failed to check run"
-msgstr ""
+msgstr "Kunde inte kontrollera körning"
 
 msgid "Failed to create certificate"
 msgstr "Misslyckades skapa certifikat"
@@ -1298,7 +1298,7 @@ msgid "Failed to send reminder"
 msgstr "Misslyckades skicka påminnelse"
 
 msgid "Failed to start run"
-msgstr ""
+msgstr "Kunde inte starta körning"
 
 msgid "Failed to update alias"
 msgstr "Misslyckades uppdatera alias"
@@ -1448,19 +1448,19 @@ msgid "Highlights"
 msgstr "Höjdpunkter"
 
 msgid "Historical Data"
-msgstr ""
+msgstr "Historisk data"
 
 msgid "Historical compliance trends over time"
-msgstr ""
+msgstr "Historiska efterlevnadstrender över tid"
 
 msgid "Hosting Provider Summary"
 msgstr "Hosting leverantörsammanfattning"
 
 msgid "Hosting Providers"
-msgstr ""
+msgstr "Webbhotellsleverantörer"
 
 msgid "Hosting provider statistics for tracked domains"
-msgstr ""
+msgstr "Webbhotellsleverantörsstatistik för spårade domäner"
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
@@ -1472,7 +1472,7 @@ msgid "ID"
 msgstr "ID"
 
 msgid "ID required"
-msgstr ""
+msgstr "ID krävs"
 
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr "OMEDELBAR BETALNING KRÄVS"
@@ -1678,7 +1678,7 @@ msgid "Item:"
 msgstr "Artikel:"
 
 msgid "JSON only"
-msgstr ""
+msgstr "Endast JSON"
 
 msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
@@ -1687,10 +1687,10 @@ msgid "Key"
 msgstr "Nyckel"
 
 msgid "Key and display_name required"
-msgstr ""
+msgstr "Nyckel och visningsnamn krävs"
 
 msgid "Key, name and country_code required"
-msgstr ""
+msgstr "Nyckel, namn och landskod krävs"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
 msgstr "Sparka Rysslands försvarsminister Sergej Shoigu!"
@@ -1840,7 +1840,7 @@ msgid "Make invoice"
 msgstr "Skapa faktura"
 
 msgid "Manage Based in Sweden compliance tracking"
-msgstr ""
+msgstr "Hantera Based in Sweden-efterlevnadsspårning"
 
 msgid "Manage domains and contacts through the RealtimeRegister API."
 msgstr "Hantera domäner och kontakter via RealtimeRegister API."
@@ -2101,7 +2101,7 @@ msgid "Over time, more web hosting features have been added."
 msgstr "Med tiden har fler webbhotell-funktioner lagts till."
 
 msgid "Overall"
-msgstr ""
+msgstr "Totalt"
 
 msgid "Overall Score"
 msgstr "Total poäng"
@@ -2401,7 +2401,7 @@ msgid "Receiver"
 msgstr "Mottagare"
 
 msgid "Recent Check Runs"
-msgstr ""
+msgstr "Senaste kontrollkörningar"
 
 msgid "Recent Messages"
 msgstr "Senaste meddelanden"
@@ -2539,10 +2539,10 @@ msgid "Rounding"
 msgstr "Avrundning"
 
 msgid "Run ID required"
-msgstr ""
+msgstr "Körnings-ID krävs"
 
 msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
-msgstr ""
+msgstr "Körning startad. Använd /manager/bis/runs/:id/check för att börja kontrollera domäner."
 
 msgid "SEK"
 msgstr "kr"
@@ -2683,7 +2683,7 @@ msgid "Sector"
 msgstr "Sektor"
 
 msgid "Sector Statistics"
-msgstr ""
+msgstr "Sektorstatistik"
 
 msgid "Select"
 msgstr "Välj"
@@ -2806,7 +2806,7 @@ msgid "Start"
 msgstr "Start"
 
 msgid "Start New Check Run"
-msgstr ""
+msgstr "Starta ny kontrollkörning"
 
 msgid "Start a conversation by sending a message"
 msgstr "Starta en konversation genom att skicka ett meddelande"
@@ -2818,7 +2818,7 @@ msgid "Start side content"
 msgstr "Börja sidoinnehåll"
 
 msgid "Started"
-msgstr ""
+msgstr "Startad"
 
 msgid "Statistics"
 msgstr "Statistik"
@@ -3010,7 +3010,7 @@ msgid "Total Domains"
 msgstr "Totalt antal domäner"
 
 msgid "Total Records"
-msgstr ""
+msgstr "Totalt antal poster"
 
 msgid "Total to pay"
 msgstr "Totalt att betala"
@@ -3166,7 +3166,7 @@ msgid "View"
 msgstr "Visa"
 
 msgid "View Public Dashboard"
-msgstr ""
+msgstr "Visa offentlig instrumentpanel"
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
 msgstr "Visa och hantera Redis-cacheposter. Använd mönster som \"fortnox:*\", \"user:*\" eller \"*\" för att filtrera poster."
