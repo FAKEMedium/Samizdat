@@ -1267,6 +1267,9 @@ msgstr "Misslyckades ta bort zon"
 msgid "Failed to load conversation"
 msgstr "Misslyckades ladda konversation"
 
+msgid "Failed to load domain details"
+msgstr ""
+
 msgid "Failed to regenerate invoice PDF"
 msgstr "Misslyckades med att återskapa PDF"
 
@@ -1368,6 +1371,9 @@ msgstr "För mer information, besök Fortnoxs webbplats:"
 
 msgid "For questions, please contact us at {email}."
 msgstr "Vid frågor, kontakta oss på {email}."
+
+msgid "Foreign"
+msgstr "Utländsk"
 
 msgid "Form submission error:"
 msgstr "Formulärfel:"
@@ -1986,6 +1992,12 @@ msgstr "Nästa"
 msgid "No"
 msgstr "Nej"
 
+msgid "No A/AAAA records"
+msgstr "Inga A/AAAA-poster"
+
+msgid "No MX records"
+msgstr "Inga MX-poster"
+
 msgid "No cache entries found"
 msgstr "Inga cacheposter hittades"
 
@@ -1994,6 +2006,9 @@ msgstr "Inga certifikat hittades"
 
 msgid "No charges have been made to your account."
 msgstr "Inga debiteringar har gjorts på ditt konto."
+
+msgid "No check data available"
+msgstr "Ingen kontrolldata tillgänglig"
 
 msgid "No contacts found"
 msgstr "Inga kontakter hittades"
@@ -2024,6 +2039,9 @@ msgstr "Inga sidor hittades."
 
 msgid "No payments found"
 msgstr "Inga betalningar hittades"
+
+msgid "No provider data available"
+msgstr "Ingen leverantörsdata tillgänglig"
 
 msgid "No selected customer."
 msgstr "Ingen kund vald."
@@ -3048,6 +3066,9 @@ msgstr "Oautentiserad"
 msgid "Underline"
 msgstr "Understruken"
 
+msgid "Unknown"
+msgstr ""
+
 msgid "Unknown error"
 msgstr "Okänt fel"
 
@@ -3189,6 +3210,9 @@ msgstr "Vi kommer maila en bekräftelselänk."
 msgid "We will reply as soon as possible."
 msgstr "Vi svarar så fort vi kan."
 
+msgid "Web"
+msgstr ""
+
 msgid "Web sites"
 msgstr "Webbplatser"
 
@@ -3315,6 +3339,9 @@ msgstr "certifikat"
 msgid "characters"
 msgstr "tecken"
 
+msgid "compliant"
+msgstr "kompatibel"
+
 msgid "content"
 msgstr "innehåll"
 
@@ -3362,6 +3389,9 @@ msgstr "omröstning"
 
 msgid "product"
 msgstr "produkt"
+
+msgid "record(s)"
+msgstr "post(er)"
 
 msgid "seconds"
 msgstr "sekunder"

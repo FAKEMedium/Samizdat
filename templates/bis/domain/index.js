@@ -1,6 +1,7 @@
 // BIS Domain Detail JavaScript
 // URL patterns from named routes
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
+const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 
 async function loadDomainDetails() {
   try {
@@ -14,9 +15,9 @@ async function loadDomainDetails() {
 
     if (!response.ok) {
       if (response.status === 404) {
-        showError('Domain not found');
+        showError('<%= __('Domain not found') %>');
       } else {
-        throw new Error('Failed to load domain details');
+        throw new Error('<%= __('Failed to load domain details') %>');
       }
       return;
     }
@@ -37,7 +38,7 @@ async function loadDomainDetails() {
 
   } catch (error) {
     console.error('Error loading domain details:', error);
-    showError('Failed to load domain details');
+    showError('<%= __('Failed to load domain details') %>');
   }
 }
 
@@ -51,21 +52,43 @@ function renderDomainHeader(domain, tags) {
   const tagsContainer = document.getElementById('domain-tags');
   if (tags && tags.length > 0) {
     tagsContainer.innerHTML = tags.map(tag =>
-      `<span class="badge bg-secondary me-1">${tag.display_name || tag.key}</span>`
+      `<a href="${BIS_SECTOR_BASE}/${tag.key}" class="badge bg-secondary text-decoration-none me-1">${tag.display_name || tag.key}</a>`
     ).join('');
   }
 
-  // Render score display
+  // Render score display as circular ring
   const scoreColor = getScoreColor(domain.score);
+  const colorMap = {
+    'success': '#198754',
+    'info': '#0dcaf0',
+    'warning': '#ffc107',
+    'danger': '#dc3545'
+  };
+  const color = colorMap[scoreColor] || '#6c757d';
+
+  // Calculate circle parameters
+  const radius = 45;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (domain.score / 100) * circumference;
+
   document.getElementById('domain-score-display').innerHTML = `
-    <div class="progress" style="height: 30px;">
-      <div class="progress-bar bg-${scoreColor}" role="progressbar"
-           style="width: ${domain.score}%; font-size: 1.2rem;"
-           aria-valuenow="${domain.score}" aria-valuemin="0" aria-valuemax="100">
-        ${domain.score}%
+    <div style="position: relative; width: 120px; height: 120px; margin-left: auto;">
+      <svg width="120" height="120" style="transform: rotate(-90deg);">
+        <!-- Background circle -->
+        <circle cx="60" cy="60" r="${radius}"
+                fill="none" stroke="#e9ecef" stroke-width="10"/>
+        <!-- Progress circle -->
+        <circle cx="60" cy="60" r="${radius}"
+                fill="none" stroke="${color}" stroke-width="10"
+                stroke-dasharray="${circumference}"
+                stroke-dashoffset="${offset}"
+                stroke-linecap="round"/>
+      </svg>
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+        <div style="font-size: 1.8rem; font-weight: bold; color: ${color};">${domain.score}%</div>
+        <small class="text-muted" style="font-size: 0.7rem;">${domain.compliant_checks}/${domain.total_checks}</small>
       </div>
     </div>
-    <small class="text-muted mt-1 d-block">${domain.compliant_checks}/${domain.total_checks} checks passed</small>
   `;
 }
 
@@ -80,7 +103,7 @@ function renderComplianceOverview(domain) {
   // BIS Badge
   const badgeDisplay = document.getElementById('bis-badge-display');
   if (domain.has_bis_badge) {
-    badgeDisplay.innerHTML = '<span class="badge bg-primary mt-2">🏆 BIS Badge</span>';
+    badgeDisplay.innerHTML = '<span class="badge bg-primary mt-2">🏆 <%= __('BIS Badge') %></span>';
   } else {
     badgeDisplay.innerHTML = '';
   }
@@ -116,14 +139,14 @@ function renderChecksTable(checks) {
   const tbody = document.querySelector('#checks-table tbody');
 
   if (!checks || checks.length === 0) {
-    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted">No check data available</td></tr>';
+    tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted"><%= __('No check data available') %></td></tr>';
     return;
   }
 
   tbody.innerHTML = checks.map(check => {
     const statusBadge = check.is_compliant
-      ? '<span class="badge bg-success">✓ Swedish</span>'
-      : '<span class="badge bg-danger">✗ Foreign</span>';
+      ? '<span class="badge bg-success">✓ <%= __('Swedish') %></span>'
+      : '<span class="badge bg-danger">✗ <%= __('Foreign') %></span>';
 
     const countryFlag = check.country_code ? getFlagEmoji(check.country_code) : '';
 
@@ -152,9 +175,9 @@ function renderChecksTable(checks) {
   const totalA = counts.A + counts.AAAA;
   document.getElementById('a-record-count').textContent = totalA > 0
     ? `${counts.A} A + ${counts.AAAA} AAAA`
-    : 'No A/AAAA records';
-  document.getElementById('mx-record-count').textContent = counts.MX > 0 ? `${counts.MX} record(s)` : 'No MX records';
-  document.getElementById('ns-record-count').textContent = `${counts.NS} record(s)`;
+    : '<%= __('No A/AAAA records') %>';
+  document.getElementById('mx-record-count').textContent = counts.MX > 0 ? `${counts.MX} <%= __('record(s)') %>` : '<%= __('No MX records') %>';
+  document.getElementById('ns-record-count').textContent = `${counts.NS} <%= __('record(s)') %>`;
 }
 
 // Render provider summary
@@ -162,7 +185,7 @@ function renderProviderSummary(checks) {
   const container = document.getElementById('provider-summary');
 
   if (!checks || checks.length === 0) {
-    container.innerHTML = '<p class="text-muted">No provider data available</p>';
+    container.innerHTML = '<p class="text-muted"><%= __('No provider data available') %></p>';
     return;
   }
 
@@ -171,7 +194,7 @@ function renderProviderSummary(checks) {
   const providerCompliance = {};
 
   checks.forEach(check => {
-    const provider = check.hosting_provider || 'Unknown';
+    const provider = check.hosting_provider || '<%= __('Unknown') %>';
     providerCounts[provider] = (providerCounts[provider] || 0) + 1;
 
     if (!providerCompliance[provider]) {
@@ -205,8 +228,8 @@ function renderProviderSummary(checks) {
               <div class="card-body">
                 <h6 class="card-subtitle mb-2">${flag} ${provider}</h6>
                 <p class="card-text">
-                  <strong>${count}</strong> record(s)<br>
-                  <span class="text-${badgeColor}">${rate}% compliant</span>
+                  <strong>${count}</strong> <%= __('record(s)') %><br>
+                  <span class="text-${badgeColor}">${rate}% <%= __('compliant') %></span>
                 </p>
               </div>
             </div>

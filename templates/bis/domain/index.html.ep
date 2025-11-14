@@ -1,6 +1,6 @@
 % # BIS Domain Detail View
 <!-- Domain Header -->
-<div class="row">
+<div class="row mb-3">
   <div class="col-12">
     <div class="card">
       <div class="card-body">
@@ -21,38 +21,38 @@
 </div>
 
 <!-- Compliance Overview -->
-<div class="row mb-4">
-  <div class="col-md-3">
+<div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4 gy-5 mb-4">
+  <div class="col cardcol">
     <div class="card">
-      <div class="card-body text-center">
-        <h6 class="text-muted"><%= __('Overall Score') %></h6>
+      <h6 class="card-header orange border-0"><%= __('Overall Score') %></h6>
+      <div class="card-body text-center m-0 p-2">
         <h2 id="overall-score"><!-- Populated by JavaScript --></h2>
         <div id="bis-badge-display"><!-- Populated by JavaScript --></div>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col cardcol">
     <div class="card">
-      <div class="card-body text-center">
-        <h6 class="text-muted"><%= __('A/AAAA Records') %></h6>
+      <h6 class="card-header orange border-0"><%= __('A/AAAA Records') %> (<%= __('Web') %>)</h6>
+      <div class="card-body text-center m-0 p-2">
         <h2 id="a-record-status"><!-- Populated by JavaScript --></h2>
         <small id="a-record-count"><!-- Populated by JavaScript --></small>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col cardcol">
     <div class="card">
-      <div class="card-body text-center">
-        <h6 class="text-muted"><%= __('MX Records') %></h6>
+      <h6 class="card-header orange border-0"><%= __('MX Records') %> (<%= __('Mail') %>)</h6>
+      <div class="card-body text-center m-0 p-2">
         <h2 id="mx-record-status"><!-- Populated by JavaScript --></h2>
         <small id="mx-record-count"><!-- Populated by JavaScript --></small>
       </div>
     </div>
   </div>
-  <div class="col-md-3">
+  <div class="col cardcol">
     <div class="card">
-      <div class="card-body text-center">
-        <h6 class="text-muted"><%= __('NS Records') %></h6>
+      <h6 class="card-header orange border-0"><%= __('NS Records') %> (<%= __('DNS') %>)</h6>
+      <div class="card-body text-center m-0 p-2">
         <h2 id="ns-record-status"><!-- Populated by JavaScript --></h2>
         <small id="ns-record-count"><!-- Populated by JavaScript --></small>
       </div>
@@ -61,45 +61,33 @@
 </div>
 
 <!-- Detailed Check Results -->
-<div class="row mb-4">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= __('DNS Check Results') %></h5>
-        <div class="table-responsive">
-          <table class="table table-sm" id="checks-table">
-            <thead>
-              <tr>
-                <th><%= __('Record Type') %></th>
-                <th><%= __('Record Value') %></th>
-                <th><%= __('IP Address') %></th>
-                <th><%= __('Country') %></th>
-                <th><%= __('ASN') %></th>
-                <th><%= __('AS Name') %></th>
-                <th><%= __('Provider') %></th>
-                <th><%= __('Status') %></th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Populated by JavaScript -->
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
+<div class="mb-4">
+  <h4 class="mb-3 orange p-md-1"><%= __('DNS Check Results') %></h4>
+  <div class="table-responsive">
+    <table class="table table-sm" id="checks-table">
+      <thead>
+        <tr>
+          <th><%= __('Record Type') %></th>
+          <th><%= __('Record Value') %></th>
+          <th><%= __('IP Address') %></th>
+          <th><%= __('Country') %></th>
+          <th><%= __('ASN') %></th>
+          <th><%= __('AS Name') %></th>
+          <th><%= __('Provider') %></th>
+          <th><%= __('Status') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Populated by JavaScript -->
+      </tbody>
+    </table>
   </div>
 </div>
 
 <!-- Provider Summary -->
-<div class="row mb-4">
-  <div class="col-12">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title"><%= __('Hosting Provider Summary') %></h5>
-        <div id="provider-summary">
-          <!-- Populated by JavaScript -->
-        </div>
-      </div>
-    </div>
+<div class="mb-3">
+  <h4 class="mb-3 orange p-md-1"><%= __('Hosting Provider Summary') %></h4>
+  <div id="provider-summary">
+    <!-- Populated by JavaScript -->
   </div>
 </div>
