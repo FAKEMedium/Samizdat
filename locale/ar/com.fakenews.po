@@ -404,6 +404,9 @@ msgstr ""
 msgid "Avg Score"
 msgstr ""
 
+msgid "Avg score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -1328,6 +1331,9 @@ msgstr "فشل حذف المنطقة"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to load dashboard data"
+msgstr ""
+
 msgid "Failed to load domain details"
 msgstr ""
 
@@ -2101,6 +2107,9 @@ msgstr ""
 
 msgid "No customer #{customerid}."
 msgstr "لا يوجد عميل #{customerid}."
+
+msgid "No data available"
+msgstr ""
 
 msgid "No domains found"
 msgstr ""
@@ -3303,6 +3312,9 @@ msgid "Value for the class attribute."
 msgstr "قيمة لسمة الفئة."
 
 msgid "View"
+msgstr ""
+
+msgid "View Details"
 msgstr ""
 
 msgid "View Public Dashboard"

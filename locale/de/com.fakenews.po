@@ -376,6 +376,9 @@ msgstr ""
 msgid "Avg Score"
 msgstr ""
 
+msgid "Avg score"
+msgstr ""
+
 msgid "BIC/Swift"
 msgstr "BIC/Swift"
 
@@ -1300,6 +1303,9 @@ msgstr "Zone konnte nicht gelöscht werden"
 msgid "Failed to load conversation"
 msgstr ""
 
+msgid "Failed to load dashboard data"
+msgstr ""
+
 msgid "Failed to load domain details"
 msgstr ""
 
@@ -2069,6 +2075,9 @@ msgstr ""
 
 msgid "No customer #{customerid}."
 msgstr "Kein Kunde #{customerid}."
+
+msgid "No data available"
+msgstr ""
 
 msgid "No domains found"
 msgstr ""
@@ -3271,6 +3280,9 @@ msgid "Value for the class attribute."
 msgstr "Wert für das class-Attribut."
 
 msgid "View"
+msgstr ""
+
+msgid "View Details"
 msgstr ""
 
 msgid "View Public Dashboard"
