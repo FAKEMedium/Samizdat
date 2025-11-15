@@ -30,6 +30,14 @@ has 'languages' => sub ($self) {
   # Cache the languages hash for fast lookups
   return $self->public->languages();
 };
+has 'selectedimage' => sub ($self) {
+  return {
+    src    => '/media/images/basedinsweden.png',
+    width  => 1359,
+    height => 865
+  };
+};
+
 
 =head1 NAME
 
@@ -870,7 +878,13 @@ sub nav ($self, %params) {
     LIMIT 1
   };
 
+  # Debug logging
+  warn "BIS nav SQL: $sql\n";
+  warn "BIS nav params: " . join(', ', @bind_params) . "\n";
+
   my $result = $self->pg->db->query($sql, @bind_params)->hash;
+
+  warn "BIS nav result: " . ($result ? $result->{domain} : 'NONE') . "\n";
 
   return $result || {};
 }

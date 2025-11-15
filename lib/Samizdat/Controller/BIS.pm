@@ -64,6 +64,9 @@ sub index ($self) {
   # Render HTML page
   my $title = $self->app->__('Based in Sweden - Compliance Dashboard');
   my $web = { title => $title };
+  $web->{selectedimage} = $self->bis->selectedimage;
+
+  $web->{head}->{meta}->{name}->{description} = $self->app->__('How well different Swedish organizations comply with having control of own infrastructure');
   $web->{script} = $self->render_to_string(template => 'bis/index', format => 'js');
 
   $self->stash(title => $title, web => $web);
@@ -97,8 +100,10 @@ sub domain ($self) {
   }
 
   # Render HTML page
-  my $title = $self->app->__("BIS Check: $domain_name");
+  my $title = $self->app->__("BIS Check");  # Generic title, domain added by JavaScript
   my $web = { title => $title };
+  $web->{selectedimage} = $self->bis->selectedimage;
+  $web->{head}->{meta}->{name}->{description} = $self->app->__('Domain specific compliance with standard of Based in Sweden');
   $web->{script} = $self->render_to_string(template => 'bis/domain/index', format => 'js');
 
   $self->stash(title => $title, web => $web, docpath => '/bis/domain/index.html', headline => 'bis/chunks/domainheadline');
@@ -120,6 +125,9 @@ sub nav ($self) {
   # Build filter parameters
   my $tag = $filter->{tag} || '';
   my $search = $filter->{search} || '';
+
+  # Debug logging
+  $self->app->log->debug("BIS nav: domain=$domain_name, to=$to, tag=$tag, search=$search, cookie=" . ($filter_cookie || 'NONE'));
 
   # Navigation respects the filter
   my $next_domain = $self->bis->nav(
