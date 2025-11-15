@@ -148,6 +148,20 @@ sub sector ($self) {
     my $offset = $self->param('offset') || 0;
     my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
+    # Save filter to cookie for navigation
+    my $filter = {
+      tag => $sector,
+      search => '',
+      compliance => ''
+    };
+    $self->cookie(bisfilter => encode_json($filter), {
+      path     => '/',
+      httponly => 0,
+      secure   => 1,
+      samesite => 'Lax'
+      # No expires = session cookie
+    });
+
     my $result = $self->bis->get_latest_scores(
       tag => $sector,
       limit => $limit,
