@@ -36,7 +36,7 @@ sub index ($self) {
       path     => '/',
       httponly => 0,
       secure   => 1,
-      samesite => 'Strict'
+      samesite => 'Lax'
       # No expires = session cookie
     });
 
