@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; يرجى المشاركة وإضافة نجمة عل�
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "1 Year"
+msgstr ""
+
 msgid "1 database"
 msgid_plural "{number} databases"
 msgstr[0] "لا توجد قواعد بيانات"
@@ -3565,6 +3568,9 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "تم إجراء {count} محاولات تسجيل دخول فاشلة من {ip} في آخر {minutes} دقائق."
+
+msgid "{days} Days"
+msgstr ""
 
 msgid "{number} days"
 msgstr "{number} أيام"

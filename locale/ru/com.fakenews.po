@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; пожалуйста, поделитесь ссылк
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "1 Year"
+msgstr ""
+
 msgid "1 database"
 msgid_plural "{number} databases"
 msgstr[0] "1 база данных"
@@ -3541,6 +3544,9 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "{count} неудачных попыток входа было совершено с {ip} за последние {minutes} минут."
+
+msgid "{days} Days"
+msgstr ""
 
 msgid "{number} days"
 msgstr "{number} дней"

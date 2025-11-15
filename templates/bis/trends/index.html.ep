@@ -5,10 +5,10 @@
 <div class="row mb-4">
   <div class="col-12">
     <div class="btn-group" role="group">
-      <button type="button" class="btn btn-outline-primary" data-days="30">30 Days</button>
-      <button type="button" class="btn btn-outline-primary active" data-days="90">90 Days</button>
-      <button type="button" class="btn btn-outline-primary" data-days="180">180 Days</button>
-      <button type="button" class="btn btn-outline-primary" data-days="365">1 Year</button>
+      <button type="button" class="btn btn-outline-primary" data-days="30"><%== __x('{days} Days', days => 30) %></button>
+      <button type="button" class="btn btn-outline-primary active" data-days="90"><%== __x('{days} Days', days => 90) %></button>
+      <button type="button" class="btn btn-outline-primary" data-days="180"><%== __x('{days} Days', days => 180) %></button>
+      <button type="button" class="btn btn-outline-primary" data-days="365"><%= __('1 Year') %></button>
     </div>
   </div>
 </div>

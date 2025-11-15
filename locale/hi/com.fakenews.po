@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; कृपया {sitename} पर शेयर कर
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "1 Year"
+msgstr ""
+
 msgid "1 database"
 msgid_plural "{number} databases"
 msgstr[0] "1 डेटाबेस"
@@ -3533,6 +3536,9 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "पिछले {minutes} मिनटों में {ip} से {count} विफल लॉगिन प्रयास किए गए हैं।"
+
+msgid "{days} Days"
+msgstr ""
 
 msgid "{number} days"
 msgstr "{number} दिन"

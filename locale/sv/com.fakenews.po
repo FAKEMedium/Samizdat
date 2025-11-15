@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; vänligen dela länk och ge en stjärna på {sitename
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "1 Year"
+msgstr "1 år"
+
 msgid "1 database"
 msgid_plural "{number} databases"
 msgstr[0] "1 databas"
@@ -389,10 +392,10 @@ msgid "BIS - $sector"
 msgstr "BIS - $sector"
 
 msgid "BIS - Compliance Trends"
-msgstr "BIS - Regelefterlevnads trender"
+msgstr "BIS - Regelefterlevnadstrender"
 
 msgid "BIS - Hosting Providers"
-msgstr "BIS - Hosting leverantörer"
+msgstr "BIS - Hostingleverantörer"
 
 msgid "BIS Badge"
 msgstr "BIS-märke"
@@ -3437,6 +3440,9 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "{count} misslyckade inloggningsförsök har gjorts från {ip} senaste {minutes} minuterna."
+
+msgid "{days} Days"
+msgstr "{days} dagar"
 
 msgid "{number} days"
 msgstr "{number} dagar"
