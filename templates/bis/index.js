@@ -134,6 +134,7 @@ function renderDomainsTable(scores) {
           <div class="d-flex align-items-center">
             <div class="progress flex-grow-1" style="min-width: 60px; height: 20px !important; margin-right: 8px;">
               <div class="progress-bar bg-${scoreColor}" role="progressbar"
+                   aria-label="<%= __('Compliance score') %>"
                    style="width: ${score.score}%; height: 100%;" aria-valuenow="${score.score}" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <span class="text-nowrap" style="min-width: 40px;">${score.score}%</span>
