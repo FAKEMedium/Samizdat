@@ -409,6 +409,9 @@ msgstr ""
 msgid "BIS Badges"
 msgstr ""
 
+msgid "BIS Check"
+msgstr ""
+
 msgid "BIS Check: $domain_name"
 msgstr ""
 
@@ -650,6 +653,9 @@ msgid "Compliance Trends"
 msgstr ""
 
 msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliance score"
 msgstr ""
 
 msgid "Compliant"
@@ -971,6 +977,9 @@ msgid "Domain required"
 msgstr ""
 
 msgid "Domain saved successfully"
+msgstr ""
+
+msgid "Domain specific compliance with standard of Based in Sweden"
 msgstr ""
 
 msgid "Domain updated successfully"
@@ -1309,7 +1318,13 @@ msgstr ""
 msgid "Failed to load dashboard data"
 msgstr ""
 
+msgid "Failed to load domain"
+msgstr ""
+
 msgid "Failed to load domain details"
+msgstr ""
+
+msgid "Failed to navigate"
 msgstr ""
 
 msgid "Failed to regenerate invoice PDF"
@@ -1511,6 +1526,9 @@ msgid "Hosting Providers"
 msgstr ""
 
 msgid "Hosting provider statistics for tracked domains"
+msgstr ""
+
+msgid "How well different Swedish organizations comply with having control of own infrastructure"
 msgstr ""
 
 msgid "I accept the terms for registration."
@@ -2098,6 +2116,9 @@ msgid "No messages found"
 msgstr ""
 
 msgid "No messages yet"
+msgstr ""
+
+msgid "No more domains in this direction"
 msgstr ""
 
 msgid "No pages found."

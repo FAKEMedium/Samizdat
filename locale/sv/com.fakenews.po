@@ -406,6 +406,9 @@ msgstr "BIS-märke (100% kompatibel)"
 msgid "BIS Badges"
 msgstr "BIS-märken"
 
+msgid "BIS Check"
+msgstr ""
+
 msgid "BIS Check: $domain_name"
 msgstr "BIS-kontroll: $domain_name"
 
@@ -639,6 +642,9 @@ msgstr "Efterlevnadstrender"
 
 msgid "Compliance by Sector"
 msgstr "Efterlevnad per sektor"
+
+msgid "Compliance score"
+msgstr ""
 
 msgid "Compliant"
 msgstr "Efterlevnad"
@@ -920,7 +926,7 @@ msgid "Domain (Z-A)"
 msgstr "Domän (Ö-A)"
 
 msgid "Domain Compliance Scores"
-msgstr "Domän regelefterlevnadspoäng"
+msgstr "Domänregelefterlevnadspoäng"
 
 msgid "Domain Name"
 msgstr "Domännamn"
@@ -948,6 +954,9 @@ msgstr "Domän krävs"
 
 msgid "Domain saved successfully"
 msgstr "Domän sparades"
+
+msgid "Domain specific compliance with standard of Based in Sweden"
+msgstr ""
 
 msgid "Domain updated successfully"
 msgstr "Domän uppdaterades"
@@ -1276,8 +1285,14 @@ msgstr "Misslyckades ladda konversation"
 msgid "Failed to load dashboard data"
 msgstr "Misslyckades ladda sammanställningsdata"
 
+msgid "Failed to load domain"
+msgstr ""
+
 msgid "Failed to load domain details"
 msgstr "Misslyckades ladda domändetaljer"
+
+msgid "Failed to navigate"
+msgstr ""
 
 msgid "Failed to regenerate invoice PDF"
 msgstr "Misslyckades med att återskapa PDF"
@@ -1476,6 +1491,9 @@ msgstr "Webbhotellsleverantörer"
 
 msgid "Hosting provider statistics for tracked domains"
 msgstr "Webbhotellsleverantörsstatistik för spårade domäner"
+
+msgid "How well different Swedish organizations comply with having control of own infrastructure"
+msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
@@ -2045,6 +2063,9 @@ msgstr "Inga meddelanden hittades"
 
 msgid "No messages yet"
 msgstr "Inga meddelanden än"
+
+msgid "No more domains in this direction"
+msgstr ""
 
 msgid "No pages found."
 msgstr "Inga sidor hittades."
