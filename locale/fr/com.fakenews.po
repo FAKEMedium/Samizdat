@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; partagez et ajoutez une étoile sur {sitename} !"
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "1 Year"
+msgstr ""
+
 msgid "1 database"
 msgid_plural "{number} databases"
 msgstr[0] "1 base de données"
@@ -3533,6 +3536,9 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "{count} tentatives de connexion infructueuses ont été effectuées depuis {ip} au cours des {minutes} dernières minutes."
+
+msgid "{days} Days"
+msgstr ""
 
 msgid "{number} days"
 msgstr "{number} jours"

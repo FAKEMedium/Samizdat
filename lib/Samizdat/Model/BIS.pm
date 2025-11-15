@@ -734,8 +734,8 @@ sub get_historical_trends ($self, %params) {
       s.avg_score
      FROM bis.statistics s
      JOIN bis.runs r ON s.run_id = r.id
-     WHERE r.started_at >= NOW() - INTERVAL ? DAY
-       AND r.status = ?
+     WHERE r.started_at >= NOW() - ($1 || \' DAY\')::INTERVAL
+       AND r.status = $2
      ORDER BY r.started_at ASC',
     $days, 'completed'
   )->hashes->to_array;

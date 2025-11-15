@@ -80,7 +80,7 @@ function renderRunsTable(runs) {
 
     // Get statistics from nested object
     const stats = run.statistics || {};
-    const domainsChecked = stats.total_domains || 0;
+    const domainsChecked = run.domains_checked || stats.total_domains || 0;
     const compliantCount = stats.compliant_domains || 0;
     const badgeCount = compliantCount; // Compliant domains are those with BIS badge
 
