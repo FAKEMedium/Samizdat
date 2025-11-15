@@ -23,7 +23,7 @@
 <!-- Compliance Overview -->
 <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4 gy-5 mb-4">
   <div class="col cardcol">
-    <div class="card">
+    <div class="card h-100">
       <h6 class="card-header orange border-0"><%= __('Overall Score') %></h6>
       <div class="card-body text-center m-0 p-2">
         <h2 id="overall-score"><!-- Populated by JavaScript --></h2>
@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="col cardcol">
-    <div class="card">
+    <div class="card h-100">
       <h6 class="card-header orange border-0"><%= __('A/AAAA Records') %> (<%= __('Web') %>)</h6>
       <div class="card-body text-center m-0 p-2">
         <h2 id="a-record-status"><!-- Populated by JavaScript --></h2>
@@ -41,7 +41,7 @@
     </div>
   </div>
   <div class="col cardcol">
-    <div class="card">
+    <div class="card h-100">
       <h6 class="card-header orange border-0"><%= __('MX Records') %> (<%= __('Mail') %>)</h6>
       <div class="card-body text-center m-0 p-2">
         <h2 id="mx-record-status"><!-- Populated by JavaScript --></h2>
@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="col cardcol">
-    <div class="card">
+    <div class="card h-100">
       <h6 class="card-header orange border-0"><%= __('NS Records') %> (<%= __('DNS') %>)</h6>
       <div class="card-body text-center m-0 p-2">
         <h2 id="ns-record-status"><!-- Populated by JavaScript --></h2>

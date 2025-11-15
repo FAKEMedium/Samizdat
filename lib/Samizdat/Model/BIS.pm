@@ -822,6 +822,59 @@ sub get_domain_details ($self, %params) {
   };
 }
 
+=head2 nav
+
+Navigate to next or previous domain respecting applied filters.
+
+    my $next_domain = $bis->nav(
+      domain => 'example.se',
+      to => 'next',  # or 'prev'
+      tag => 'government',
+      search => ''
+    );
+
+=cut
+
+sub nav ($self, %params) {
+  my $domain_name = $params{domain} or return;
+  my $to = $params{to} || 'next';
+  my $tag = $params{tag} || '';
+  my $search = $params{search} || '';
+
+  # Determine comparison operator and order
+  my $operator = $to eq 'prev' ? '<' : '>';
+  my $order = $to eq 'prev' ? 'DESC' : 'ASC';
+
+  # Build WHERE clause
+  my @where_parts = ("domain $operator ?");
+  my @bind_params = ($domain_name);
+
+  if ($tag) {
+    push @where_parts, 'EXISTS (SELECT 1 FROM bis.domain_tags dt JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id WHERE dt.domain_id = bis.latest_scores.domain_id AND tn.key = ?)';
+    push @bind_params, $tag;
+  }
+
+  if ($search) {
+    push @where_parts, '(domain ILIKE ? OR title ILIKE ?)';
+    push @bind_params, "%$search%", "%$search%";
+  }
+
+  my $where_clause = join(' AND ', @where_parts);
+
+  # Find next/previous domain
+  my $sql = qq{
+    SELECT domain, domain_id, score
+    FROM bis.latest_scores
+    WHERE $where_clause
+    ORDER BY domain $order
+    LIMIT 1
+  };
+
+  my $result = $self->pg->db->query($sql, @bind_params)->hash;
+
+  return $result || {};
+}
+
 =head2 get_sector_info
 
 Get sector info with localized name.

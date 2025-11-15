@@ -9,6 +9,7 @@ sub register ($self, $app, $config = {}) {
 
   # Public routes (for public dashboard)
   my $bis = $r->home('bis')->to(controller => 'BIS');
+  $bis->get('/domain/#domain/#to')        ->to('#nav')                  ->name('bis_nav');
   $bis->get('/domain/#domain')            ->to('#domain')               ->name('bis_domain');
   $bis->get('/sector/#sector')            ->to('#sector')               ->name('bis_sector');
   $bis->get('/providers')                 ->to('#providers')            ->name('bis_providers');
