@@ -547,6 +547,7 @@ Get latest scores for all domains or filtered by tag key.
 sub get_latest_scores ($self, %params) {
   my $tag = $params{tag};
   my $search = $params{search};
+  my $compliance = $params{compliance};
   my $limit = $params{limit} || 100;
   my $offset = $params{offset} || 0;
   my $with_total = $params{with_total} || 0;
@@ -575,6 +576,21 @@ sub get_latest_scores ($self, %params) {
     push @where_clauses, '(s.domain ILIKE ? OR dd.title ILIKE ?)';
     my $search_pattern = '%' . $search . '%';
     push @bind, $search_pattern, $search_pattern;
+  }
+
+  if ($compliance) {
+    # Filter by compliance score range
+    if ($compliance eq 'badge') {
+      push @where_clauses, 's.score = 100';
+    } elsif ($compliance eq 'high') {
+      push @where_clauses, 's.score >= 75 AND s.score < 100';
+    } elsif ($compliance eq 'medium') {
+      push @where_clauses, 's.score >= 50 AND s.score < 75';
+    } elsif ($compliance eq 'low') {
+      push @where_clauses, 's.score >= 25 AND s.score < 50';
+    } elsif ($compliance eq 'critical') {
+      push @where_clauses, 's.score < 25';
+    }
   }
 
   # Add WHERE clause if we have conditions
@@ -848,14 +864,33 @@ sub nav ($self, %params) {
   my $to = $params{to} || 'next';
   my $tag = $params{tag} || '';
   my $search = $params{search} || '';
+  my $compliance = $params{compliance} || '';
 
-  # Determine comparison operator and order
-  my $operator = $to eq 'prev' ? '<' : '>';
-  my $order = $to eq 'prev' ? 'DESC' : 'ASC';
+  # First, get the current domain's score
+  my $current = $self->pg->db->query(
+    'SELECT score FROM bis.latest_scores WHERE domain = ?',
+    $domain_name
+  )->hash;
 
-  # Build WHERE clause
-  my @where_parts = ("domain $operator ?");
-  my @bind_params = ($domain_name);
+  return {} unless $current;
+  my $current_score = $current->{score};
+
+  # Build WHERE clause for navigation
+  # Navigation uses score DESC, domain ASC ordering (same as main list)
+  # For "next" (down the list): score < current OR (score = current AND domain > current)
+  # For "prev" (up the list): score > current OR (score = current AND domain < current)
+  my @where_parts;
+  my @bind_params;
+
+  if ($to eq 'prev') {
+    # Moving up the list (to higher scores or earlier alphabetically at same score)
+    push @where_parts, '(score > ? OR (score = ? AND domain < ?))';
+    push @bind_params, $current_score, $current_score, $domain_name;
+  } else {
+    # Moving down the list (to lower scores or later alphabetically at same score)
+    push @where_parts, '(score < ? OR (score = ? AND domain > ?))';
+    push @bind_params, $current_score, $current_score, $domain_name;
+  }
 
   if ($tag) {
     push @where_parts, 'EXISTS (SELECT 1 FROM bis.domain_tags dt JOIN bis.tag_names tn ON dt.tag_id = tn.tag_id WHERE dt.domain_id = bis.latest_scores.domain_id AND tn.key = ?)';
@@ -867,15 +902,35 @@ sub nav ($self, %params) {
     push @bind_params, "%$search%", "%$search%";
   }
 
+  if ($compliance) {
+    # Filter by compliance score range
+    if ($compliance eq 'badge') {
+      push @where_parts, 'score = 100';
+    } elsif ($compliance eq 'high') {
+      push @where_parts, 'score >= 75 AND score < 100';
+    } elsif ($compliance eq 'medium') {
+      push @where_parts, 'score >= 50 AND score < 75';
+    } elsif ($compliance eq 'low') {
+      push @where_parts, 'score >= 25 AND score < 50';
+    } elsif ($compliance eq 'critical') {
+      push @where_parts, 'score < 25';
+    }
+  }
+
   my $where_clause = join(' AND ', @where_parts);
+
+  # Order same as main list: score DESC, domain ASC
+  # For prev, we want the closest match moving up, so we reverse and take first
+  my $order_clause = $to eq 'prev'
+    ? 'ORDER BY score ASC, domain DESC LIMIT 1'  # Reverse to get closest match going up
+    : 'ORDER BY score DESC, domain ASC LIMIT 1'; # Normal order for going down
 
   # Find next/previous domain
   my $sql = qq{
     SELECT domain, domain_id, score
     FROM bis.latest_scores
     WHERE $where_clause
-    ORDER BY domain $order
-    LIMIT 1
+    $order_clause
   };
 
   # Debug logging

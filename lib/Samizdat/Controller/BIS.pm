@@ -43,6 +43,7 @@ sub index ($self) {
     my $result = $self->bis->get_latest_scores(
       tag => $tag,
       search => $search,
+      compliance => $compliance,
       limit => $limit,
       offset => $offset,
       with_total => 1,
@@ -125,16 +126,18 @@ sub nav ($self) {
   # Build filter parameters
   my $tag = $filter->{tag} || '';
   my $search = $filter->{search} || '';
+  my $compliance = $filter->{compliance} || '';
 
   # Debug logging
-  $self->app->log->debug("BIS nav: domain=$domain_name, to=$to, tag=$tag, search=$search, cookie=" . ($filter_cookie || 'NONE'));
+  $self->app->log->debug("BIS nav: domain=$domain_name, to=$to, tag=$tag, search=$search, compliance=$compliance, cookie=" . ($filter_cookie || 'NONE'));
 
   # Navigation respects the filter
   my $next_domain = $self->bis->nav(
     domain => $domain_name,
     to => $to,
     tag => $tag,
-    search => $search
+    search => $search,
+    compliance => $compliance
   );
 
   if ($next_domain && $next_domain->{domain}) {

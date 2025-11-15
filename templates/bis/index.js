@@ -36,6 +36,10 @@ async function loadDashboard() {
       params.append('search', currentFilter.search);
     }
 
+    if (currentFilter.compliance) {
+      params.append('compliance', currentFilter.compliance);
+    }
+
     const response = await fetch(`${BIS_INDEX_URL}?${params}`, {
       headers: { 'Accept': 'application/json' }
     });
@@ -105,24 +109,7 @@ function renderDomainsTable(scores) {
     return;
   }
 
-  // Apply client-side compliance filter only (search now done on backend)
-  let filtered = scores;
-
-  if (currentFilter.compliance) {
-    filtered = filtered.filter(score => {
-      const s = score.score;
-      switch(currentFilter.compliance) {
-        case 'badge': return s === 100;
-        case 'high': return s >= 75 && s < 100;
-        case 'medium': return s >= 50 && s < 75;
-        case 'low': return s >= 25 && s < 50;
-        case 'critical': return s < 25;
-        default: return true;
-      }
-    });
-  }
-
-  tbody.innerHTML = filtered.map(score => {
+  tbody.innerHTML = scores.map(score => {
     const scoreColor = getScoreColor(score.score);
     const badge = score.has_bis_badge ? '<span class="badge bg-primary">🏆 BIS</span>' : '';
 
@@ -244,6 +231,7 @@ document.getElementById('sector-filter').addEventListener('change', (e) => {
 
 document.getElementById('compliance-filter').addEventListener('change', (e) => {
   currentFilter.compliance = e.target.value;
+  currentPage = 1;
   loadDashboard();
 });
 
