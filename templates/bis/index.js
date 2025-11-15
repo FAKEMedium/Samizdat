@@ -82,7 +82,7 @@ function renderSectorStats(sectors) {
       <div class="col-md-6 col-lg-3 mb-3">
         <div class="card border-${cardColor}">
           <div class="card-body">
-            <h6 class="card-subtitle mb-2 text-muted">${sector.display_name}</h6>
+            <h3 class="card-subtitle mb-2 text-muted">${sector.display_name}</h3>
             <h2 class="card-title text-${cardColor}">${formatNumber(complianceRate)}%</h2>
             <p class="card-text">
               <small>${sector.compliant_domains}/${sector.total_domains} <%= __('compliant') %></small><br>
