@@ -282,5 +282,89 @@ function showError(message) {
   container.insertBefore(alert, container.firstChild);
 }
 
+// Navigate to prev/next domain (AJAX)
+async function getDomain(to, domain) {
+  const url = `${BIS_DOMAIN_BASE}/${domain}/${to}`;
+
+  try {
+    const response = await fetch(url, {
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (!response.ok) {
+      if (response.status === 404) {
+        showError('<%= __('No more domains in this direction') %>');
+      } else {
+        throw new Error('<%= __('Failed to load domain') %>');
+      }
+      return false;
+    }
+
+    const data = await response.json();
+
+    // Ensure numeric fields are numbers
+    if (data.domain) {
+      data.domain.score = parseFloat(data.domain.score) || 0;
+      data.domain.compliant_checks = parseInt(data.domain.compliant_checks) || 0;
+      data.domain.total_checks = parseInt(data.domain.total_checks) || 0;
+    }
+
+    // Update the page content
+    renderDomainHeader(data.domain, data.tags);
+    renderComplianceOverview(data.domain);
+    renderChecksTable(data.checks);
+    renderProviderSummary(data.checks);
+
+    // Update navigation buttons
+    bindNavigation(data.domain.domain);
+
+    // Update browser history and URL
+    const newUrl = `${BIS_DOMAIN_BASE}/${data.domain.domain}`;
+    history.pushState({ domain: data.domain.domain }, '', newUrl);
+
+    // Update page title
+    document.title = `<%= __('BIS Check') %>: ${data.domain.domain}`;
+
+    // Update H1 heading
+    const headline = document.getElementById('headline');
+    if (headline) {
+      headline.textContent = `<%= __('BIS Check') %>: ${data.domain.domain}`;
+    }
+
+    return true;
+
+  } catch (error) {
+    console.error('Navigation error:', error);
+    showError('<%= __('Failed to navigate') %>');
+    return false;
+  }
+}
+
+// Bind navigation buttons
+function bindNavigation(currentDomain) {
+  const prevButton = document.getElementById('prevdomain');
+  const nextButton = document.getElementById('nextdomain');
+
+  if (prevButton) {
+    prevButton.onclick = () => getDomain('prev', currentDomain);
+    prevButton.style.cursor = 'pointer';
+  }
+
+  if (nextButton) {
+    nextButton.onclick = () => getDomain('next', currentDomain);
+    nextButton.style.cursor = 'pointer';
+  }
+}
+
+// Initialize navigation on page load
+async function initializePage() {
+  await loadDomainDetails();
+
+  // Bind navigation buttons after initial load
+  const pathParts = window.location.pathname.split('/');
+  const domain = pathParts[pathParts.length - 1];
+  bindNavigation(domain);
+}
+
 // Load on page load
-loadDomainDetails();
+initializePage();

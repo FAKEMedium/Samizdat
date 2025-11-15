@@ -1,6 +1,7 @@
 package Samizdat::Controller::BIS;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use Mojo::JSON qw(encode_json decode_json);
 
 =head1 NAME
 
@@ -18,11 +19,26 @@ sub index ($self) {
 
   if ($accept =~ /json/) {
     # Return JSON data for dashboard
-    my $tag = $self->param('tag');
-    my $search = $self->param('search');
+    my $tag = $self->param('tag') || '';
+    my $search = $self->param('search') || '';
+    my $compliance = $self->param('compliance') || '';
     my $limit = $self->param('limit') || 100;
     my $offset = $self->param('offset') || 0;
     my $lang = $self->param('lang') || $self->stash('language') || 'en';
+
+    # Save filter to cookie for navigation
+    my $filter = {
+      tag => $tag,
+      search => $search,
+      compliance => $compliance
+    };
+    $self->cookie(bisfilter => encode_json($filter), {
+      path     => '/',
+      httponly => 0,
+      secure   => 1,
+      samesite => 'Strict'
+      # No expires = session cookie
+    });
 
     my $result = $self->bis->get_latest_scores(
       tag => $tag,
@@ -85,8 +101,41 @@ sub domain ($self) {
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/domain/index', format => 'js');
 
-  $self->stash(title => $title, web => $web, docpath => '/bis/domain/index.html', headline => 'bis/chunks/headline');
+  $self->stash(title => $title, web => $web, docpath => '/bis/domain/index.html', headline => 'bis/chunks/domainheadline');
   $self->render(template => 'bis/domain/index');
+}
+
+
+sub nav ($self) {
+  my $domain_name = $self->param('domain');
+  my $to = $self->param('to');  # 'prev' or 'next'
+
+  # Get filter from cookie
+  my $filter_cookie = $self->cookie('bisfilter');
+  my $filter = {};
+  if ($filter_cookie) {
+    eval { $filter = decode_json($filter_cookie); };
+  }
+
+  # Build filter parameters
+  my $tag = $filter->{tag} || '';
+  my $search = $filter->{search} || '';
+
+  # Navigation respects the filter
+  my $next_domain = $self->bis->nav(
+    domain => $domain_name,
+    to => $to,
+    tag => $tag,
+    search => $search
+  );
+
+  if ($next_domain && $next_domain->{domain}) {
+    # Override the domain parameter with the new domain
+    $self->param(domain => $next_domain->{domain});
+  }
+
+  # Render domain view (will return JSON if Accept header is set)
+  $self->domain;
 }
 
 
