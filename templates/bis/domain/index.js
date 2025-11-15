@@ -81,8 +81,13 @@ function renderDomainHeader(domain, tags) {
   const offset = circumference - (domain.score / 100) * circumference;
 
   document.getElementById('domain-score-display').innerHTML = `
-    <div style="position: relative; width: 120px; height: 120px; margin-left: auto;">
-      <svg width="120" height="120" style="transform: rotate(-90deg);">
+    <div style="position: relative; width: 120px; height: 120px; margin-left: auto;"
+         role="progressbar"
+         aria-label="<%= __('Compliance score') %>"
+         aria-valuenow="${domain.score}"
+         aria-valuemin="0"
+         aria-valuemax="100">
+      <svg width="120" height="120" style="transform: rotate(-90deg);" aria-hidden="true">
         <!-- Background circle -->
         <circle cx="60" cy="60" r="${radius}"
                 fill="none" stroke="#e9ecef" stroke-width="10"/>
@@ -93,7 +98,7 @@ function renderDomainHeader(domain, tags) {
                 stroke-dashoffset="${offset}"
                 stroke-linecap="round"/>
       </svg>
-      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;" aria-hidden="true">
         <div style="font-size: 1.8rem; font-weight: bold; color: ${color};">${domain.score}%</div>
         <small class="text-muted" style="font-size: 0.7rem;">${domain.compliant_checks}/${domain.total_checks}</small>
       </div>

@@ -130,6 +130,68 @@ sub register ($self, $app, $conf) {
   );
 
 
+  # Automatically set canonical URLs and meta tags for all pages
+  $app->hook(before_render => sub ($c, $args) {
+    # Skip if rendering non-HTML or if web/title not set
+    return unless $args->{template};
+    return unless $c->stash('web') && $c->stash('title');
+
+    my $web = $c->stash('web');
+    my $title = $c->stash('title');
+
+    # Set canonical URL if not already set
+    unless ($web->{head}->{canonical}) {
+      my $docpath = $c->stash('docpath') || $c->req->url->path->to_string;
+
+      # Clean up the path: remove /index.html suffix and normalize slashes
+      $docpath =~ s|/index\.html$||;  # Remove /index.html suffix
+      $docpath =~ s|^/+|/|;            # Ensure single leading slash
+
+      my $canonical = sprintf('%s%s%s',
+        $c->config->{siteurl},
+        $c->config->{baseurl},
+        $docpath
+      );
+
+      # Remove double slashes (but keep :// for protocol)
+      $canonical =~ s|([^:])//+|$1/|g;
+
+      $web->{head}->{canonical} = $canonical;
+    }
+
+    # Set meta tags
+    $web->{head}->{meta}->{property}->{'og:title'} ||= $title;
+    $web->{head}->{meta}->{property}->{'og:url'} ||= $web->{head}->{canonical};
+    $web->{head}->{meta}->{property}->{'og:canonical'} ||= $web->{head}->{canonical};
+    $web->{head}->{meta}->{name}->{'twitter:title'} ||= $title;
+    $web->{head}->{meta}->{name}->{'twitter:url'} ||= $web->{head}->{canonical};
+    $web->{head}->{meta}->{itemprop}->{'name'} ||= $title;
+
+    # Set description meta tags if description exists
+    if (my $desc = $web->{head}->{meta}->{name}->{description}) {
+      $web->{head}->{meta}->{property}->{'og:description'} ||= $desc;
+      $web->{head}->{meta}->{name}->{'twitter:description'} ||= $desc;
+      $web->{head}->{meta}->{itemprop}->{'description'} ||= $desc;
+    }
+
+    # Set image meta tags if selectedimage exists
+    if (my $img = $web->{selectedimage}) {
+      if ($img->{src}) {
+        my $pngsrc = $img->{src};
+        $pngsrc =~ s/\.(webp|jpg|jpeg|png|gif|tiff|bmp)$/.png/;
+        $web->{head}->{meta}->{property}->{'og:image'} ||= $pngsrc;
+        $web->{head}->{meta}->{name}->{'twitter:image'} ||= $pngsrc;
+      }
+      if ($img->{width}) {
+        $web->{head}->{meta}->{property}->{'og:image:width'} ||= $img->{width};
+      }
+      if ($img->{height}) {
+        $web->{head}->{meta}->{property}->{'og:image:height'} ||= $img->{height};
+      }
+    }
+  });
+
+
   # Remove indentation from pre and textarea elements
   # Add the generated html to public as a static cache
   # Also adds missing webP files

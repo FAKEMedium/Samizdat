@@ -113,18 +113,19 @@ sub getdoc ($self) {
       return $self->reply->not_found;
     }
   } else {
-    $docs->{$path}->{canonical} = sprintf('%s%s%s', $self->config->{siteurl}, $self->config->{baseurl}, $docpath);
-    $docs->{$path}->{head}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
-    $docs->{$path}->{head}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{head}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{head}->{meta}->{name}->{'twitter:url'} = $docs->{$path}->{canonical};
-    $docs->{$path}->{head}->{meta}->{name}->{'twitter:title'} = $docs->{$path}->{title};
-    $docs->{$path}->{head}->{meta}->{itemprop}->{'name'} = $docs->{$path}->{title};
-    if (exists $docs->{$path}->{head}->{meta}->{name}->{description}) {
-      $docs->{$path}->{head}->{meta}->{property}->{'og:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
-      $docs->{$path}->{head}->{meta}->{name}->{'twitter:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
-      $docs->{$path}->{head}->{meta}->{itemprop}->{'description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
-    }
+    # Canonical URLs and meta tags are now set automatically by before_render hook in Web plugin
+    # $docs->{$path}->{canonical} = sprintf('%s%s%s', $self->config->{siteurl}, $self->config->{baseurl}, $docpath);
+    # $docs->{$path}->{head}->{meta}->{property}->{'og:title'} = $docs->{$path}->{title};
+    # $docs->{$path}->{head}->{meta}->{property}->{'og:url'} = $docs->{$path}->{canonical};
+    # $docs->{$path}->{head}->{meta}->{property}->{'og:canonical'} = $docs->{$path}->{canonical};
+    # $docs->{$path}->{head}->{meta}->{name}->{'twitter:url'} = $docs->{$path}->{canonical};
+    # $docs->{$path}->{head}->{meta}->{name}->{'twitter:title'} = $docs->{$path}->{title};
+    # $docs->{$path}->{head}->{meta}->{itemprop}->{'name'} = $docs->{$path}->{title};
+    # if (exists $docs->{$path}->{head}->{meta}->{name}->{description}) {
+    #   $docs->{$path}->{head}->{meta}->{property}->{'og:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
+    #   $docs->{$path}->{head}->{meta}->{name}->{'twitter:description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
+    #   $docs->{$path}->{head}->{meta}->{itemprop}->{'description'} = $docs->{$path}->{head}->{meta}->{name}->{description};
+    # }
     if ($#{$docs->{$path}->{subdocs}} > -1) {
       my $sidebar = '';
       for my $subdoc (sort {$a->{docpath} cmp $b->{docpath}} @{ $docs->{$path}->{subdocs} }) {
