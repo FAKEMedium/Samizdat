@@ -1,0 +1,52 @@
+% # Nets Easy Checkout - Payment Success
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="alert alert-success">
+      <h2 class="alert-heading">
+        <i class="bi bi-check-circle"></i> <%= __('Payment Successful') %>
+      </h2>
+      <p class="mb-0"><%= __('Thank you! Your payment has been processed successfully.') %></p>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title h5"><%= __('Payment Details') %></h3>
+        <dl class="row">
+          <dt class="col-sm-4"><%= __('Payment ID') %>:</dt>
+          <dd class="col-sm-8"><code><%= $payment->{payment_id} %></code></dd>
+
+          <dt class="col-sm-4"><%= __('Amount') %>:</dt>
+          <dd class="col-sm-8"><%= nets_format_amount($payment->{amount}, $payment->{currency}) %></dd>
+
+          <dt class="col-sm-4"><%= __('Reference') %>:</dt>
+          <dd class="col-sm-8"><%= $payment->{reference} %></dd>
+
+          <dt class="col-sm-4"><%= __('Status') %>:</dt>
+          <dd class="col-sm-8">
+            <span class="badge bg-success"><%= $payment->{status} %></span>
+          </dd>
+
+          <% if ($payment->{charged_at}) { %>
+          <dt class="col-sm-4"><%= __('Charged At') %>:</dt>
+          <dd class="col-sm-8"><%= $payment->{charged_at} %></dd>
+          <% } %>
+        </dl>
+
+        <% if ($nets_payment) { %>
+        <div class="mt-3">
+          <h4 class="h6"><%= __('Payment Method') %></h4>
+          <% if (my $method = $nets_payment->{payment}->{paymentDetails}) { %>
+            <p><%= $method->{paymentType} || __('Card Payment') %></p>
+          <% } %>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="<%= url_for('/') %>" class="btn btn-primary">
+        <%= __('Return to Home') %>
+      </a>
+    </div>
+  </div>
+</div>

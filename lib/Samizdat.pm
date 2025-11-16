@@ -148,6 +148,9 @@ sub startup ($self) {
   if (exists($config->{buymeacoffee}->{slug}) && $config->{buymeacoffee}->{slug}) {
     $self->plugin('BuyMeACoffee', $config->{buymeacoffee});
   }
+  if (exists($config->{manager}->{nets}) && $config->{manager}->{nets}) {
+    $self->plugin('Nets');
+  }
   $self->plugin('DefaultHelpers');
   $self->plugin('TagHelpers');
   $self->plugin('Mail', $config->{mail});
