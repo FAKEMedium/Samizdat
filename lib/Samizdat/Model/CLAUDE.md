@@ -6,8 +6,7 @@ We use a Teltonika device (RUTXR1) to send and receive SMS messages. We also use
 gateway forwarding messages. SMS functions include a form and controller for sending messages,
 as well as automated outgoing message for stuff like account verification codes.
 
-There is developer documentation for Teltonika at https://developers.rms.teltonika-networks.com/,
-including OAuth info and API docs.
+Teltonika documentation: https://developers.rms.teltonika-networks.com/
 
 ### Authentication
 
@@ -248,12 +247,6 @@ To qualify for the BIS badge (100% score), ALL infrastructure must be Swedish:
 
 Configure in samizdat.yml under `manager.bis`:
 
-```yaml
-bis:
-  cardnumber: 17
-  dbtype: postgresql
-```
-
 ### Database Setup
 
 Run the schema creation:
@@ -306,19 +299,6 @@ curl -X POST http://localhost:3000/manager/bis/runs/1/check
 - Historical trends: `/bis/trends`
 - Manager panel: `/manager/bis`
 
-### Sectors and Tags
-
-Pre-configured sectors (can add more via manager):
-
-- **Government**: Government agencies and departments (highest priority)
-- **Healthcare**: Hospitals and healthcare providers (sensitive data)
-- **Municipality**: Municipal organizations
-- **Region**: Regional authorities
-- **Education**: Schools and universities
-- **Media**: News organizations
-- **Legal**: Law firms (attorney-client privilege concerns)
-- **Private**: Private companies
-
 ### Provider Identification
 
 The system identifies hosting providers by matching:
@@ -327,21 +307,6 @@ The system identifies hosting providers by matching:
 2. AS Name patterns (e.g., "BAHNHOF", "AMAZON-AES")
 3. IP ranges (CIDR blocks)
 
-Pre-configured providers include:
-
-**Swedish (Compliant):**
-- Bahnhof
-- Safespring
-- Glesys
-- Loopia
-- Binero
-
-**US (Cloud Act Applies):**
-- AWS (Amazon Web Services)
-- Microsoft Azure
-- Google Cloud Platform
-- Cloudflare
-
 ### Scoring System
 
 - **100%**: All records Swedish → **BIS BADGE** ✓
@@ -349,11 +314,6 @@ Pre-configured providers include:
 - **50-74%**: Mixed Swedish/foreign
 - **25-49%**: Mostly foreign
 - **0-24%**: Almost all foreign (high risk)
-
-Special highlighting for:
-- Healthcare/legal sectors with foreign hosting (GDPR/privacy concerns)
-- Government sites on US cloud providers (Cloud Act risk)
-- Domains that regressed from previous checks
 
 ### API Endpoints
 
@@ -413,3 +373,13 @@ Potential additions:
 - Cloud Act info: https://en.wikipedia.org/wiki/CLOUD_Act
 - IP-API documentation: https://ip-api.com/docs/
 
+
+## Nets
+
+Integrate payments with Nets. We wish to custmoize and keep on-site as much as possible.
+A customer is supposed to order a service, pay for it, and the service will be performed when our webhook
+is called. Some services though, might be scheduled many days later, and often not performed at all.
+If possible, don't let our users fetch script from dibspayment.
+
+- Documentation: https://developer.nexigroup.com/nexi-checkout/en-EU/docs/
+- API Reference: https://developer.nexigroup.com/nexi-checkout/en-EU/api/

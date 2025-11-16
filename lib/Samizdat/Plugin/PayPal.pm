@@ -1,4 +1,4 @@
-package Samizdat::Plugin::PayPal;
+ package Samizdat::Plugin::PayPal;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::PayPal;

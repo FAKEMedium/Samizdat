@@ -1,0 +1,38 @@
+% # Nets Easy Checkout - Payment Cancelled
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <div class="alert alert-warning">
+      <h2 class="alert-heading">
+        <i class="bi bi-exclamation-triangle"></i> <%= __('Payment Cancelled') %>
+      </h2>
+      <p class="mb-0"><%= __('Your payment was cancelled or failed.') %></p>
+    </div>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title h5"><%= __('What happened?') %></h3>
+        <p><%= __('The payment process was interrupted. This could be because:') %></p>
+        <ul>
+          <li><%= __('You clicked the back or cancel button') %></li>
+          <li><%= __('The payment session expired') %></li>
+          <li><%= __('There was an issue with your payment method') %></li>
+        </ul>
+
+        <% if ($payment_id) { %>
+        <p class="mt-3">
+          <strong><%= __('Payment ID') %>:</strong> <code><%= $payment_id %></code>
+        </p>
+        <% } %>
+      </div>
+    </div>
+
+    <div class="mt-4">
+      <a href="<%= url_for('nets_index') %>" class="btn btn-primary">
+        <%= __('Try Again') %>
+      </a>
+      <a href="<%= url_for('/') %>" class="btn btn-secondary">
+        <%= __('Return to Home') %>
+      </a>
+    </div>
+  </div>
+</div>

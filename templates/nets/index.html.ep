@@ -1,0 +1,44 @@
+% # Nets Easy Checkout - Payment Page
+<div class="row">
+  <div class="col-md-8 mx-auto">
+    <h2 class="mb-4"><%= __('Payment with Nets Easy') %></h2>
+
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title h5"><%= __('Create Payment') %></h3>
+        <form id="payment-form">
+          <div class="mb-3">
+            <label for="amount" class="form-label"><%= __('Amount') %> (SEK):</label>
+            <input type="number" class="form-control" id="amount" name="amount"
+                   step="0.01" min="0.01" required placeholder="100.00">
+            <small class="form-text text-muted">
+              <%= __('Amount in Swedish Kronor') %>
+            </small>
+          </div>
+
+          <div class="mb-3">
+            <label for="reference" class="form-label"><%= __('Reference') %>:</label>
+            <input type="text" class="form-control" id="reference" name="reference"
+                   placeholder="<%= __('Order number or reference') %>">
+          </div>
+
+          <div class="mb-3">
+            <label for="description" class="form-label"><%= __('Description') %>:</label>
+            <input type="text" class="form-control" id="description" name="description"
+                   required placeholder="<%= __('Payment for...') %>">
+          </div>
+
+          <div class="alert alert-info">
+            <strong><%= __('Note') %>:</strong> <%= __('You will be redirected to Nets secure checkout page.') %>
+          </div>
+
+          <button type="submit" class="btn btn-primary">
+            <%= __('Proceed to Payment') %>
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div id="payment-error" class="alert alert-danger mt-3" style="display: none;"></div>
+  </div>
+</div>
