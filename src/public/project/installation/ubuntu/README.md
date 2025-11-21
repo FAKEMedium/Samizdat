@@ -48,7 +48,7 @@ Then: `sudo systemctl restart postgresql`
 ### Application
 
 * `sudo mkdir -p /sites && cd /sites`
-* `sudo git clone https://github.com/FakenewsCom/Samizdat.git && cd Samizdat`
+* `sudo git clone https://github.com/FAKEMedium/Samizdat.git && cd Samizdat`
 * `sudo chown -R www-data:www-data /sites/Samizdat`
 * `sudo -u www-data cp samizdat.dist.yml samizdat.yml`
 * `sudo -u www-data nano samizdat.yml` - Edit config
