@@ -8,14 +8,30 @@ use Data::Dumper;
 
 has 'config';
 has 'cache';
+has 'db';  # Mojo::Pg database connection for PowerDNS
 has ua => sub { Mojo::UserAgent->new };
+
+# Get environment configuration (production or test)
+sub get_env_config ($self) {
+  my $config = $self->config;
+  my $env = $config->{default_env} || 'production';
+
+  return $config->{env}->{$env};
+}
 
 # Helper to set API headers.
 sub _headers ($self) {
+  my $env_config = $self->get_env_config();
   return {
-    'X-API-Key'    => $self->config->{api}->{key},
+    'X-API-Key'    => $env_config->{api}->{key},
     'Content-Type' => 'application/json',
   };
+}
+
+# Helper to get API URL
+sub _api_url ($self) {
+  my $env_config = $self->get_env_config();
+  return $env_config->{api}->{url};
 }
 
 ### Zone Methods
@@ -34,7 +50,7 @@ sub list_zones ($self, $params = {}) {
   # Fetch from API
   $params->{dnssec} //= 'false';
   delete $params->{nocache};
-  my $url = $self->config->{api}->{url} . '/zones';
+  my $url = $self->_api_url() . '/zones';
   my $tx  = $self->ua->get($url, $self->_headers, form => $params);
 
   if (my $res = $tx->result) {
@@ -51,7 +67,7 @@ sub list_zones ($self, $params = {}) {
 # The "rrsets" parameter defaults to "true".
 sub get_zone ($self, $zone_id, $params = {}) {
   $params->{rrsets} //= 'false';
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $tx  = $self->ua->get($url, $self->_headers, form => $params);
   if (my $res = $tx->result) {
     return $res->is_success ? $res->json : undef;
@@ -61,7 +77,7 @@ sub get_zone ($self, $zone_id, $params = {}) {
 
 # Create a new zone. Expects a hashref with keys like name and kind.
 sub create_zone ($self, $zone_data) {
-  my $url = $self->config->{api}->{url} . '/zones';
+  my $url = $self->_api_url() . '/zones';
   my $payload = {
     name       => $zone_data->{name},
     kind       => $zone_data->{kind} // 'Master',
@@ -79,7 +95,7 @@ sub create_zone ($self, $zone_data) {
 
 # Update an existing zone.
 sub update_zone ($self, $zone_id, $zone_data) {
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $payload = {
     name => $zone_data->{name},
     kind => $zone_data->{kind},
@@ -96,7 +112,7 @@ sub update_zone ($self, $zone_id, $zone_data) {
 
 # Delete a zone.
 sub delete_zone ($self, $zone_id) {
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $tx  = $self->ua->delete($url, $self->_headers);
   my $res = $tx->result;
 
@@ -137,7 +153,7 @@ sub get_record ($self, $zone_id, $record_id) {
 
 # Create a record by adding it to the zone's records array and updating the zone.
 sub create_record ($self, $zone_id, $record_data) {
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $zone_tx = $self->ua->get($url, $self->_headers);
   my $zone = $zone_tx->result->json;
   push @{ $zone->{records} //= [] }, $record_data;
@@ -150,7 +166,7 @@ sub create_record ($self, $zone_id, $record_data) {
 
 # Update an existing record in a zone.
 sub update_record ($self, $zone_id, $record_id, $record_data) {
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $zone_tx = $self->ua->get($url, $self->_headers);
   my $zone = $zone_tx->result->json;
   my $found;
@@ -171,7 +187,7 @@ sub update_record ($self, $zone_id, $record_id, $record_data) {
 
 # Delete a record by removing it from the zone's records array and updating the zone.
 sub delete_record ($self, $zone_id, $record_id) {
-  my $url = $self->config->{api}->{url} . '/zones/' . $zone_id;
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
   my $zone_tx = $self->ua->get($url, $self->_headers);
   my $zone = $zone_tx->result->json;
   my $records = $zone->{records} // [];

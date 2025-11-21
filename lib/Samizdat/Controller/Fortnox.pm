@@ -14,7 +14,7 @@ sub auth ($self) {
   # Initialize Fortnox session (creates 'fortnox' cookie)
   $self->session->{fortnox_active} = 1;
   $self->session(expiration => 7200);  # 2 hours
-
+  say Dumper $self->req->params->to_hash;
   # Force cache session ID to be created now (before OAuth redirect)
   # This ensures the same session ID is used when redirected back
   unless ($self->session->{cache_session_id}) {
@@ -26,6 +26,8 @@ sub auth ($self) {
   my $code = $self->param("code") // '';
   $self->app->fortnox->data->{state} = $state if (!$state);
   $self->app->fortnox->data->{code} = $code if ($code);
+  say Dumper %{ $self->app->fortnox->data };
+
   if ('' ne $self->app->fortnox->data->{access}) {
 
   } elsif ('' ne $self->app->fortnox->data->{refresh}) {
@@ -37,7 +39,6 @@ sub auth ($self) {
     say $redirect;
     return $self->redirect_to($redirect);
   }
-  say Dumper %{ $self->app->fortnox->data };
   $self->redirect_to($self->url_for('manager_index'));
 }
 
