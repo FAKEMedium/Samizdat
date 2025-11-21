@@ -58,7 +58,7 @@ Then: `sudo service postgresql restart`
 ### Application
 
 * `sudo mkdir -p /sites && cd /sites`
-* `sudo git clone https://github.com/FakenewsCom/Samizdat.git && cd Samizdat`
+* `sudo git clone https://github.com/FAKEMedium/Samizdat.git && cd Samizdat`
 * `sudo chown -R www:www /sites/Samizdat`
 * `sudo -u www cp samizdat.dist.yml samizdat.yml && sudo -u www vi samizdat.yml`
 * `sudo -u www gmake fetchall && sudo -u www bin/samizdat migrate && sudo -u www gmake i18n`
