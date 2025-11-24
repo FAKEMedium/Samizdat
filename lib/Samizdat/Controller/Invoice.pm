@@ -327,7 +327,7 @@ sub edit ($self) {
 
     # Add articles from Fortnox
     $formdata->{articles} = $self->_articles();
-
+say Dumper($formdata->{articles});
     # Pass any Fortnox errors to the frontend
     if (my $error = $self->stash('fortnox_error')) {
       $formdata->{fortnox_error} = $error;
