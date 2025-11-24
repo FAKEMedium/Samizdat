@@ -603,7 +603,7 @@ sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, 
   if ($ArticleNumber) {
     return $self->callAPI('Articles', 'get', $ArticleNumber, $options);
   } else {
-    return { Articles => $self->updateCache('Articles') };
+    return { Articles => $self->updateCache('Articles') } if (!exists($self->data->{Articles}));
   }
 }
 
