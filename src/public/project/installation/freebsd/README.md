@@ -65,8 +65,11 @@ Then: `sudo service postgresql restart`
 
 Optional Webpack frontend:
 
-* `sudo pkg install -y node npm`
-* `sudo -u www gmake webpackinit && sudo -u www gmake webpack`
+* `sudo pkg install -y node npm python3 vips`
+* `sudo -u www gmake webpackinit`
+* `sudo -u www env SHARP_FORCE_GLOBAL_LIBVIPS=1 gmake webpack`
+
+Note: The `SHARP_FORCE_GLOBAL_LIBVIPS=1` environment variable tells sharp to use the system-installed libvips instead of downloading prebuilt binaries, which are not available for BSD systems.
 
 SSL cert (dev):
 
