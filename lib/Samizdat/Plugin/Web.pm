@@ -229,7 +229,7 @@ sub register ($self, $app, $conf) {
         }
       }
       if ($c->config->{manager}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
-        my $publicsrc = Mojo::Home->new($c->config->{manager}->{web}->{publicsrc} // 'src/public/');
+        my $publicsrc = Mojo::Home->new($c->config->{manager}->{web}->{src} // 'src')->child('public');
         my $url = $c->{stash}->{web}->{url} // '';
         $url =~ s/\.webp$//;
         my $wantedsize = 0;

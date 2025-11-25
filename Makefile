@@ -112,23 +112,27 @@ database:
 #	sudo find /etc/postgresql -name pg_hba.conf -type f -exec sed -i -E 's/(#\s+TYPE\s+DATABASE\s+USER\s+ADDRESS\s+METHOD)/\1\nlocal   samizdat        samizdat                      scram-sha-256/' {} \;
 	sudo systemctl restart postgresql
 
+# Use shared src for root, local src otherwise
+SHARED_SRC := /usr/local/share/samizdat/src
+FETCH_SRC := $(if $(filter 0,$(shell id -u)),$(SHARED_SRC),./src)
+
 fetchicons:
-	git clone https://github.com/twbs/icons.git ./src/icons
+	git clone https://github.com/twbs/icons.git $(FETCH_SRC)/icons
 
 fetchflags:
-	git clone https://github.com/lipis/flag-icons.git ./src/flag-icons
+	git clone https://github.com/lipis/flag-icons.git $(FETCH_SRC)/flag-icons
 
 fetchcountries:
-	git clone https://github.com/countries/countries-data-json.git ./src/countries-data-json
+	git clone https://github.com/countries/countries-data-json.git $(FETCH_SRC)/countries-data-json
 
 fetchlanguages:
-	git clone https://github.com/cospired/i18n-iso-languages.git ./src/i18n-iso-languages
+	git clone https://github.com/cospired/i18n-iso-languages.git $(FETCH_SRC)/i18n-iso-languages
 
 fetchfonts:
-	mkdir -p src/fonts
-	wget -O src/fonts/NotoSans-Regular.ttf "https://fonts.gstatic.com/s/notosans/v36/o-0mIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjcz6L1SoM-jCpoiyD9A-9a6Vc.ttf"
-	wget -O /tmp/NotoSansDevanagari.zip "https://github.com/notofonts/devanagari/releases/download/NotoSansDevanagari-v2.004/NotoSansDevanagari-v2.004.zip" && unzip -j -o /tmp/NotoSansDevanagari.zip "NotoSansDevanagari/googlefonts/ttf/NotoSansDevanagari-Regular.ttf" -d src/fonts && rm /tmp/NotoSansDevanagari.zip
-	wget -O /tmp/NotoSansArabic.zip "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansArabic-unhinted.zip" && unzip -j -o /tmp/NotoSansArabic.zip "NotoSansArabic-Regular.ttf" -d src/fonts && rm /tmp/NotoSansArabic.zip
+	mkdir -p $(FETCH_SRC)/fonts
+	wget -O $(FETCH_SRC)/fonts/NotoSans-Regular.ttf "https://fonts.gstatic.com/s/notosans/v36/o-0mIpQlx3QUlC5A4PNB6Ryti20_6n1iPHjcz6L1SoM-jCpoiyD9A-9a6Vc.ttf"
+	wget -O /tmp/NotoSansDevanagari.zip "https://github.com/notofonts/devanagari/releases/download/NotoSansDevanagari-v2.004/NotoSansDevanagari-v2.004.zip" && unzip -j -o /tmp/NotoSansDevanagari.zip "NotoSansDevanagari/googlefonts/ttf/NotoSansDevanagari-Regular.ttf" -d $(FETCH_SRC)/fonts && rm /tmp/NotoSansDevanagari.zip
+	wget -O /tmp/NotoSansArabic.zip "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansArabic-unhinted.zip" && unzip -j -o /tmp/NotoSansArabic.zip "NotoSansArabic-Regular.ttf" -d $(FETCH_SRC)/fonts && rm /tmp/NotoSansArabic.zip
 
 fetchall: fetchicons fetchflags fetchcountries fetchlanguages
 
@@ -202,6 +206,35 @@ install-rc:
 		echo "Error: Unable to detect init system location"; \
 		exit 1; \
 	fi
+
+# Install shared resources to system-wide location (run as root)
+installshared:
+	@if [ $$(id -u) -ne 0 ]; then \
+		echo "Error: installshared must be run as root"; \
+		exit 1; \
+	fi
+	mkdir -p $(SHARED_SRC)/js $(SHARED_SRC)/scss $(SHARED_SRC)/fonts
+	@echo "Installing shared JS files..."
+	cp -f src/js/samizdat.js src/js/authenticated.js src/js/sw.js src/js/simple-editor.js \
+		src/js/apidom.js src/js/user.js src/js/sortby.js src/js/tablesorter.js \
+		src/js/serviceworker.js src/js/language.js $(SHARED_SRC)/js/ 2>/dev/null || true
+	@echo "Installing shared SCSS files..."
+	cp -f src/scss/samizdat.scss src/scss/authenticated.scss src/scss/_*.scss $(SHARED_SRC)/scss/ 2>/dev/null || true
+	@echo "Installing fetched resources..."
+	@if [ -d src/icons ]; then cp -af src/icons $(SHARED_SRC)/; fi
+	@if [ -d src/flag-icons ]; then cp -af src/flag-icons $(SHARED_SRC)/; fi
+	@if [ -d src/countries-data-json ]; then cp -af src/countries-data-json $(SHARED_SRC)/; fi
+	@if [ -d src/i18n-iso-languages ]; then cp -af src/i18n-iso-languages $(SHARED_SRC)/; fi
+	@if [ -d src/fonts ]; then cp -af src/fonts/* $(SHARED_SRC)/fonts/; fi
+	@echo "Installing node_modules..."
+	@if [ -d node_modules ] && [ ! -L node_modules ]; then \
+		cp -af node_modules /usr/local/share/samizdat/; \
+	elif [ -L node_modules ]; then \
+		echo "node_modules is a symlink, skipping"; \
+	else \
+		echo "node_modules not found, run 'make webpackinit' first"; \
+	fi
+	@echo "Shared resources installed to $(SHARED_SRC)"
 
 import:
 	bin/samizdat makeimport

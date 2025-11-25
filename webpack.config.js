@@ -8,9 +8,14 @@ const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const { PurgeCSSPlugin } = require("purgecss-webpack-plugin");
-const srcDir = path.resolve(__dirname, 'src');
+const sharedSrc = process.env.SAMIZDAT_SHARED_SRC || '/usr/local/share/samizdat/src';
+const siteSrc = process.env.SAMIZDAT_SRC || path.resolve(__dirname, 'src');
+// Use local src as shared during development (when shared doesn't exist)
+const effectiveSharedSrc = fs.existsSync(sharedSrc) ? sharedSrc : path.resolve(__dirname, 'src');
 const PATHS = {
-  public: path.join(__dirname, "public")
+  public: path.join(__dirname, "public"),
+  sharedSrc: effectiveSharedSrc,
+  siteSrc: siteSrc
 };
 const isDev = process.env.MOJO_MODE === 'development';
 const config = {
@@ -24,6 +29,12 @@ const config = {
   entry: {},
   plugins: [],
   module: {rules: []},
+  resolve: {
+    alias: {
+      '@site': PATHS.siteSrc,
+      '@shared': PATHS.sharedSrc
+    }
+  },
   optimization: {
     minimizer: [],
     splitChunks: {
@@ -39,11 +50,11 @@ const config = {
   }
 };
 
-config.entry['samizdat'] = './src/js/samizdat.js';
-config.entry['authenticated'] = './src/js/authenticated.js';
-config.entry['sw'] = './src/js/sw.js';
-// config.entry['editor'] = './src/js/editor.js'; // TipTap editor - commented out, using simple-editor instead
-config.entry['simple-editor'] = './src/js/simple-editor.js';
+config.entry['samizdat'] = `${PATHS.sharedSrc}/js/samizdat.js`;
+config.entry['authenticated'] = `${PATHS.sharedSrc}/js/authenticated.js`;
+config.entry['sw'] = `${PATHS.sharedSrc}/js/sw.js`;
+// config.entry['editor'] = `${PATHS.sharedSrc}/js/editor.js`; // TipTap editor - commented out, using simple-editor instead
+config.entry['simple-editor'] = `${PATHS.sharedSrc}/js/simple-editor.js`;
 
 if (!isDev) {
   config.optimization.minimizer.push(
@@ -68,7 +79,7 @@ config.module.rules.push({
     {loader: MiniCssExtractPlugin.loader},
     {loader: 'css-loader', options: {sourceMap: true, url: false}},
     {loader: 'postcss-loader', options: {postcssOptions: {plugins: () => [autoprefixer]}}},
-    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', sassOptions: { quietDeps: true}}}
+    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', sassOptions: { quietDeps: true, loadPaths: [PATHS.siteSrc + '/scss', PATHS.sharedSrc + '/scss', path.resolve(__dirname, 'node_modules'), '/usr/local/share/samizdat/node_modules']}}}
   ]
 });
 
@@ -91,10 +102,11 @@ config.plugins.push(
   new PurgeCSSPlugin({
     paths: [
       ...glob.sync(`${PATHS.public}/**/*.html`, { nodir: true }),
-      ...glob.sync(`${__dirname}/src/public/**/*.md`, { nodir: true }),
+      ...glob.sync(`${PATHS.siteSrc}/public/**/*.md`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.html.ep`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.js`, { nodir: true }),
-      ...glob.sync(`${__dirname}/src/js/*.js`, { nodir: true })
+      ...glob.sync(`${PATHS.sharedSrc}/js/*.js`, { nodir: true }),
+      ...glob.sync(`${PATHS.siteSrc}/js/*.js`, { nodir: true })
     ],
     safelist: {
       standard: [

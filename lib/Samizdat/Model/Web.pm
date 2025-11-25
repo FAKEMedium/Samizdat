@@ -48,11 +48,11 @@ sub getlist ($self, $url, $options = {}) {
   }
   
   # Fall back to markdown file processing
-  my $path = Mojo::Home->new($self->config->{publicsrc})->child($url);
+  my $path = Mojo::Home->new($self->config->{src} // 'src')->child('public')->child($url);
   my $found = 0;
   my $selectedimage = {};
   $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
-    my $docpath = $file->to_rel($self->config->{publicsrc})->to_string;
+    my $docpath = $file->to_rel(Mojo::Home->new($self->config->{src} // 'src')->child('public'))->to_string;
     my $datasrc = $docpath;
     if ('md' eq $file->path->extname()) {
       my $content = decode 'UTF-8', $file->slurp;
@@ -207,10 +207,11 @@ sub getlist ($self, $url, $options = {}) {
 # Find every README.md markdown file, including the ones with language suffixes, and return a hash of URIs
 sub geturis ($self, $options = {}) {
   my $uris = {};
-  my $path = Mojo::Home->new($self->config->{publicsrc});
+  my $publicsrc = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $path = $publicsrc;
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
-      my $filename = $file->to_rel($self->config->{publicsrc})->to_string;
+      my $filename = $file->to_rel($publicsrc)->to_string;
       my $size = $file->stat->size;
       if ($filename =~ s/README([^\/]*)\.md$/README.md/) {
         my $lang = $1;
