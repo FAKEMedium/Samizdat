@@ -3,7 +3,7 @@
 
 # Ubuntu Installation
 
-Ubuntu 20.04 LTS or later.
+Ubuntu 24.04 LTS, possibly others too.
 
 ### System packages
 
@@ -60,18 +60,21 @@ Optional Webpack frontend:
 * `sudo apt-get install -y nodejs libvips-dev python3`
 
 **For single installation:**
+
 * `sudo -u www-data make webpackinit`
 * `sudo -u www-data make webpack`
 
 **For multiple sites (shared node_modules):**
 
 System-wide (requires root):
+
 * `sudo mkdir -p /usr/local/share/samizdat && cd /usr/local/share/samizdat`
 * `sudo cp /sites/Samizdat/package.json .`
 * `sudo mkdir -p .npm-cache`
 * `sudo HOME=/usr/local/share/samizdat npm_config_cache=/usr/local/share/samizdat/.npm-cache npm install`
 
 User-level (no root):
+
 * `mkdir -p ~/samizdat-shared && cd ~/samizdat-shared`
 * `cp /sites/Samizdat/package.json .`
 * `mkdir -p .npm-cache`
