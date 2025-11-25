@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/FakenewsCom/Samizdat.git"
+    "url": "git+https://github.com/FAKEMedium/Samizdat.git"
   },
   "keywords": [
     "CMS",
@@ -24,12 +24,12 @@
     "Webpack",
     "Mojolicious"
   ],
-  "author": "FakenewsCom",
+  "author": "FAKEMedium",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/FakenewsCom/Samizdat/issues"
+    "url": "https://github.com/FAKEMedium/Samizdat/issues"
   },
-  "homepage": "https://github.com/FakenewsCom/Samizdat#readme",
+  "homepage": "https://github.com/FAKEMedium/Samizdat#readme",
   "devDependencies": {
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
