@@ -68,18 +68,21 @@ Optional Webpack frontend:
 * `sudo pkg install -y node npm python3 vips`
 
 **For single installation:**
+
 * `sudo -u www gmake webpackinit`
 * `sudo -u www env SHARP_FORCE_GLOBAL_LIBVIPS=1 gmake webpack`
 
 **For multiple sites (shared node_modules):**
 
 System-wide (requires root):
+
 * `sudo mkdir -p /usr/local/share/samizdat && cd /usr/local/share/samizdat`
 * `sudo cp /sites/Samizdat/package.json .`
 * `sudo mkdir -p .npm-cache`
 * `sudo env SHARP_FORCE_GLOBAL_LIBVIPS=1 HOME=/usr/local/share/samizdat npm_config_cache=/usr/local/share/samizdat/.npm-cache npm install`
 
 User-level (no root):
+
 * `mkdir -p ~/samizdat-shared && cd ~/samizdat-shared`
 * `cp /sites/Samizdat/package.json .`
 * `mkdir -p .npm-cache`
