@@ -7,6 +7,7 @@
 /package-lock.json
 /public/js/local.js
 /node_modules/
+/.npm-cache/
 /log/
 /.idea/
 /.vscode/
