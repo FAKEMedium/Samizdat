@@ -79,7 +79,7 @@ config.module.rules.push({
     {loader: MiniCssExtractPlugin.loader},
     {loader: 'css-loader', options: {sourceMap: true, url: false}},
     {loader: 'postcss-loader', options: {postcssOptions: {plugins: () => [autoprefixer]}}},
-    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', sassOptions: { quietDeps: true, loadPaths: [PATHS.siteSrc + '/scss', PATHS.sharedSrc + '/scss', path.resolve(__dirname, 'node_modules'), '/usr/local/share/samizdat/node_modules']}}}
+    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', sassOptions: { quietDeps: true, silenceDeprecations: ['import'], loadPaths: [PATHS.siteSrc + '/scss', PATHS.sharedSrc + '/scss', path.resolve(__dirname, 'node_modules'), '/usr/local/share/samizdat/node_modules']}}}
   ]
 });
 

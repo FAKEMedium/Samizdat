@@ -2,16 +2,16 @@
 // This assumes samizdat.scss is already loaded and adds only missing components
 
 // Bootstrap core (needed for the additional components to work)
-@use "bootstrap/scss/functions" as *;
-@use "bootstrap/scss/variables" as *;
-@use "bootstrap/scss/maps" as *;
-@use "bootstrap/scss/mixins" as *;
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/maps";
+@import "bootstrap/scss/mixins";
 
 // Additional Bootstrap components for authenticated users
-@use "bootstrap/scss/toasts";
-@use "bootstrap/scss/offcanvas";
-@use "bootstrap/scss/tooltip";
-@use "bootstrap/scss/popover";
+@import "bootstrap/scss/toasts";
+@import "bootstrap/scss/offcanvas";
+@import "bootstrap/scss/tooltip";
+@import "bootstrap/scss/popover";
 
 // TipTap Editor styles
 @use "editor";
