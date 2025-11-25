@@ -1,20 +1,20 @@
 // Additional styles for authenticated users only
 // This assumes samizdat.scss is already loaded and adds only missing components
 
-// Import Bootstrap's required files (needed for the additional components to work)
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
+// Bootstrap core (needed for the additional components to work)
+@use "bootstrap/scss/functions" as *;
+@use "bootstrap/scss/variables" as *;
+@use "bootstrap/scss/maps" as *;
+@use "bootstrap/scss/mixins" as *;
 
 // Additional Bootstrap components for authenticated users
-@import "bootstrap/scss/toasts";
-@import "bootstrap/scss/offcanvas";
-@import "bootstrap/scss/tooltip";
-@import "bootstrap/scss/popover";
+@use "bootstrap/scss/toasts";
+@use "bootstrap/scss/offcanvas";
+@use "bootstrap/scss/tooltip";
+@use "bootstrap/scss/popover";
 
 // TipTap Editor styles
-@import "_editor";
+@use "editor";
 
 // Any custom authenticated-only styles
 .admin-toolbar {
