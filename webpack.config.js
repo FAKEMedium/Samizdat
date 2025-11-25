@@ -58,7 +58,21 @@ config.module.rules.push({
   test: /\.js$/,
   exclude: /node_modules/,
   use: {
-    loader: 'babel-loader'
+    loader: 'babel-loader',
+    options: {
+      presets: [
+        ['@babel/preset-env', {
+          targets: {
+            browsers: ['last 2 versions', 'not dead', '> 1%', 'not ie 11']
+          },
+          useBuiltIns: false,
+          modules: false
+        }]
+      ],
+      parserOpts: {
+        sourceType: 'module'
+      }
+    }
   }
 });
 
