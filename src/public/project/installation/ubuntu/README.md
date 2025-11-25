@@ -66,14 +66,16 @@ Optional Webpack frontend:
 **For multiple sites (shared node_modules):**
 
 System-wide (requires root):
-* `sudo mkdir -p /usr/local/share/samizdat`
-* `cd /usr/local/share/samizdat && sudo make webpackinit`
+* `sudo mkdir -p /usr/local/share/samizdat && cd /usr/local/share/samizdat`
+* `sudo cp /sites/Samizdat/package.json .`
+* `sudo mkdir -p .npm-cache`
 * `sudo HOME=/usr/local/share/samizdat npm_config_cache=/usr/local/share/samizdat/.npm-cache npm install`
 
 User-level (no root):
 * `mkdir -p ~/samizdat-shared && cd ~/samizdat-shared`
-* `make webpackinit`
-* `npm install`
+* `cp /sites/Samizdat/package.json .`
+* `mkdir -p .npm-cache`
+* `HOME=$(pwd) npm_config_cache=$(pwd)/.npm-cache npm install`
 
 Then in each site: `make webpack` (will auto-detect and link to shared node_modules)
 
