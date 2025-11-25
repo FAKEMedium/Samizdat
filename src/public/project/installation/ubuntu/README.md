@@ -57,8 +57,25 @@ Then: `sudo systemctl restart postgresql`
 Optional Webpack frontend:
 
 * `curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -`
-* `sudo apt-get install -y nodejs`
-* `sudo -u www-data make webpackinit && sudo -u www-data make webpack`
+* `sudo apt-get install -y nodejs libvips-dev python3`
+
+**For single installation:**
+* `sudo -u www-data make webpackinit`
+* `sudo -u www-data make webpack`
+
+**For multiple sites (shared node_modules):**
+
+System-wide (requires root):
+* `sudo mkdir -p /usr/local/share/samizdat`
+* `cd /usr/local/share/samizdat && sudo make webpackinit`
+* `sudo HOME=/usr/local/share/samizdat npm_config_cache=/usr/local/share/samizdat/.npm-cache npm install`
+
+User-level (no root):
+* `mkdir -p ~/samizdat-shared && cd ~/samizdat-shared`
+* `make webpackinit`
+* `npm install`
+
+Then in each site: `make webpack` (will auto-detect and link to shared node_modules)
 
 SSL cert (dev):
 

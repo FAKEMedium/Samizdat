@@ -149,9 +149,20 @@ webpackinit:
 	npm i --save sprintf-js
 
 webpack:
-	mkdir -p public/assets
-	npm install
-	MOJO_MODE=production npm run build
+	mkdir -p public/assets .npm-cache
+	@if [ ! -L node_modules ] && [ ! -d node_modules ]; then \
+		if [ -d /usr/local/share/samizdat/node_modules ]; then \
+			echo "Linking to system-wide node_modules"; \
+			ln -s /usr/local/share/samizdat/node_modules node_modules; \
+		elif [ -d "$$HOME/samizdat-shared/node_modules" ]; then \
+			echo "Linking to user-level shared node_modules"; \
+			ln -s "$$HOME/samizdat-shared/node_modules" node_modules; \
+		else \
+			echo "Installing node_modules locally"; \
+			HOME=$(shell pwd) npm_config_cache=$(shell pwd)/.npm-cache npm install; \
+		fi \
+	fi
+	HOME=$(shell pwd) MOJO_MODE=production npm run build
 
 favicon:
 	convert src/svg/f.svg -background none -bordercolor white -border 0 \
