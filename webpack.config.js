@@ -54,8 +54,13 @@ if (!isDev) {
   );
 }
 
-// Removed babel-loader - webpack handles ES6 modules natively
-// If transpilation is needed for older browsers, re-enable babel-loader
+config.module.rules.push({
+  test: /\.js$/,
+  exclude: /node_modules/,
+  use: {
+    loader: 'babel-loader'
+  }
+});
 
 config.module.rules.push({
   test: /\.s(c|a)ss$/,
