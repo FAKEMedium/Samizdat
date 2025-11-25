@@ -215,11 +215,15 @@ installshared:
 	fi
 	mkdir -p $(SHARED_SRC)/js $(SHARED_SRC)/scss $(SHARED_SRC)/fonts
 	@echo "Installing shared JS files..."
-	cp -f src/js/samizdat.js src/js/authenticated.js src/js/sw.js src/js/simple-editor.js \
-		src/js/apidom.js src/js/user.js src/js/sortby.js src/js/tablesorter.js \
-		src/js/serviceworker.js src/js/language.js $(SHARED_SRC)/js/ 2>/dev/null || true
+	@for f in src/js/*.js; do \
+		[ "$$(basename $$f)" != "local.js" ] && cp -f "$$f" $(SHARED_SRC)/js/; \
+	done
 	@echo "Installing shared SCSS files..."
-	cp -f src/scss/samizdat.scss src/scss/authenticated.scss src/scss/_*.scss $(SHARED_SRC)/scss/ 2>/dev/null || true
+	@for f in src/scss/*.scss; do \
+		[ "$$(basename $$f)" != "local.scss" ] && cp -f "$$f" $(SHARED_SRC)/scss/; \
+	done
+	@echo "// Fallback empty local.scss - override in site src" > $(SHARED_SRC)/scss/local.scss
+	@echo "// Fallback empty local.js - override in site src" > $(SHARED_SRC)/js/local.js
 	@echo "Installing fetched resources..."
 	@if [ -d src/icons ]; then cp -af src/icons $(SHARED_SRC)/; fi
 	@if [ -d src/flag-icons ]; then cp -af src/flag-icons $(SHARED_SRC)/; fi
