@@ -54,27 +54,8 @@ if (!isDev) {
   );
 }
 
-config.module.rules.push({
-  test: /\.js$/,
-  exclude: /node_modules/,
-  use: {
-    loader: 'babel-loader',
-    options: {
-      presets: [
-        ['@babel/preset-env', {
-          targets: {
-            browsers: ['last 2 versions', 'not dead', '> 1%', 'not ie 11']
-          },
-          useBuiltIns: false,
-          modules: false
-        }]
-      ],
-      parserOpts: {
-        sourceType: 'module'
-      }
-    }
-  }
-});
+// Removed babel-loader - webpack handles ES6 modules natively
+// If transpilation is needed for older browsers, re-enable babel-loader
 
 config.module.rules.push({
   test: /\.s(c|a)ss$/,
