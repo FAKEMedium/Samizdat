@@ -10,14 +10,22 @@ use Data::Dumper;
 has description => 'Import data from some open sources into Postgresql data base.';
 has usage => sub ($self) { $self->extract_usage };
 
-my $languagesrepo = Mojo::Home->new('src/i18n-iso-languages/');
-my $countriesrepo = Mojo::Home->new('src/countries-data-json/');
-my $flagsrepo = Mojo::Home->new('src/flag-icons/');
+my $shared_src = '/usr/local/share/samizdat/src';
+
+sub _find_repo ($name) {
+  my $shared = "$shared_src/$name";
+  return Mojo::Home->new($shared) if -d $shared;
+  return Mojo::Home->new("src/$name");
+}
 
 my $xml = Mojo::DOM->new->xml(1);
 
 sub run ($self, @args) {
   my $db = $self->app->pg->db;
+
+  my $languagesrepo = _find_repo('i18n-iso-languages');
+  my $countriesrepo = _find_repo('countries-data-json');
+  my $flagsrepo = _find_repo('flag-icons');
 
   say "Be patient. Importing data may take many minutes.";
   my $languages = {};
