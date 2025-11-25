@@ -6,6 +6,8 @@
 /src/flag-icons/
 /package-lock.json
 /public/js/local.js
+/src/js/local.js
+/src/scss/local.scss
 /node_modules/
 /.npm-cache/
 /log/

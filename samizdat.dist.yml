@@ -100,7 +100,7 @@ manager:
   web:
     cardnumber: 9
     dbtype: postgresql
-    publicsrc: src/public
+    src: src
     imageconversion:
       format:
         webp: 1
@@ -246,23 +246,23 @@ captcha:
   length: 4
   language:
     default:
-      font: src/fonts/star-jedi-outline/StarJediOutline-y0xm.ttf
+      font: star-jedi-outline/StarJediOutline-y0xm.ttf
       ptsize: 32
       chars: '234679ACEFHJ-NPRT-Y'  # Avoiding confusing chars like 0/O, 1/I, 5/S, 8/B
     ru:
-      font: src/fonts/NotoSans-Regular-Full.ttf
+      font: NotoSans-Regular-Full.ttf
       ptsize: 28
       chars: 'АБВГДЕЖЗКЛМНПРСТ'
     hi:
-      font: src/fonts/NotoSansDevanagari-Regular.ttf
+      font: NotoSansDevanagari-Regular.ttf
       ptsize: 36
       chars: 'अआइउएकगचजटडतदनपबमयरलवशसह'
     ar:
-      font: src/fonts/NotoSansArabic-Regular.ttf
+      font: NotoSansArabic-Regular.ttf
       ptsize: 32
       chars: 'ابتثجحخدذرزسشصضطظعغفقكلمنهوي'
     zh:
-      font: src/fonts/NotoSansCJK-Regular.ttc
+      font: NotoSansCJK-Regular.ttc
       ptsize: 32
       chars: '一二三四五六七八九十天地人日月水火木金土'
 mail:
