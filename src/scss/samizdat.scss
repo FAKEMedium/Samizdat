@@ -1,4 +1,8 @@
- $enable-gradients: false;
+// Bootstrap functions first (needed for variable customization)
+@use "bootstrap/scss/functions" as *;
+
+// Custom variables (before Bootstrap variables)
+$enable-gradients: false;
 $enable-shadows: true;
 $enable-cssgrid: false;
 $offcanvas-box-shadow: 0 1rem 3rem rgba(0, 0, 0, .175);
@@ -7,70 +11,53 @@ $success: #228811;
 $body-color: #000;
 $body-bg: #fff;
 $nav-link-padding-x: 0.5rem;
-
-// Grid and spacing
-// $grid-gutter-width: 1.5rem;  // Default: 1.5rem (24px between columns)
-// $spacer: 1rem;  // Base spacing unit for margins/paddings
-// $container-padding-x: $grid-gutter-width;  // Container side padding
-
-// Required
-@import "bootstrap/scss/functions";
-@import "bootstrap/scss/variables";
-@import "bootstrap/scss/maps";
-@import "bootstrap/scss/mixins";
-@import "bootstrap/scss/utilities";
-@import "bootstrap/scss/root";
-@import "bootstrap/scss/reboot";
 $border-radius: .4rem;
 $container-max-widths: (
-        sm: 540px,
-        md: 720px,
-        lg: 960px,
-        xl: 1140px,
-        xxl: 1320px
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
 );
 $grid-breakpoints: (
-        xs: 0,
-        sm: 576px,
-        md: 768px,
-        lg: 992px,
-        xl: 1200px,
-        xxl: 1400px
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
 );
-@import "bootstrap/scss/type";
-@import "bootstrap/scss/images";
-@import "bootstrap/scss/containers";
-@import "bootstrap/scss/grid";
-@import "bootstrap/scss/tables";
-@import "bootstrap/scss/forms";
-@import "bootstrap/scss/buttons";
-@import "bootstrap/scss/transitions";
-@import "bootstrap/scss/dropdown";
-@import "bootstrap/scss/button-group";
-@import "bootstrap/scss/nav";
-@import "bootstrap/scss/navbar";
-@import "bootstrap/scss/card";
-// @import "bootstrap/scss/breadcrumb";
-// @import "bootstrap/scss/accordion";
-@import "bootstrap/scss/pagination";
-@import "bootstrap/scss/badge";
-@import "bootstrap/scss/alert";
-// @import "bootstrap/scss/progress";
-@import "bootstrap/scss/list-group";
-@import "bootstrap/scss/close";
-// @import "bootstrap/scss/toasts"; // Moved to authenticated.scss
-@import "bootstrap/scss/modal"; // Requires transitions
-// @import "bootstrap/scss/tooltip"; // Moved to authenticated.scss
-// @import "bootstrap/scss/popover"; // Moved to authenticated.scss
-// @import "bootstrap/scss/carousel";
-// @import "bootstrap/scss/spinners";
-// @import "bootstrap/scss/offcanvas"; // Moved to authenticated.scss
-// @import "bootstrap/scss/placeholders";
-// Helpers
-@import "bootstrap/scss/helpers";
-// Utilities
-@import "bootstrap/scss/utilities/api";
 
-// @import "icon-list";
-// @import "./_rtl";
-@import "local";
+// Bootstrap core
+@use "bootstrap/scss/variables" as *;
+@use "bootstrap/scss/maps" as *;
+@use "bootstrap/scss/mixins" as *;
+@use "bootstrap/scss/utilities" as *;
+@use "bootstrap/scss/root";
+@use "bootstrap/scss/reboot";
+
+// Bootstrap components
+@use "bootstrap/scss/type";
+@use "bootstrap/scss/images";
+@use "bootstrap/scss/containers";
+@use "bootstrap/scss/grid";
+@use "bootstrap/scss/tables";
+@use "bootstrap/scss/forms";
+@use "bootstrap/scss/buttons";
+@use "bootstrap/scss/transitions";
+@use "bootstrap/scss/dropdown";
+@use "bootstrap/scss/button-group";
+@use "bootstrap/scss/nav";
+@use "bootstrap/scss/navbar";
+@use "bootstrap/scss/card";
+@use "bootstrap/scss/pagination";
+@use "bootstrap/scss/badge";
+@use "bootstrap/scss/alert";
+@use "bootstrap/scss/list-group";
+@use "bootstrap/scss/close";
+@use "bootstrap/scss/modal";
+@use "bootstrap/scss/helpers";
+@use "bootstrap/scss/utilities/api";
+
+// Site-specific styles
+@use "local";
