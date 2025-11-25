@@ -68,7 +68,7 @@ config.module.rules.push({
     {loader: MiniCssExtractPlugin.loader},
     {loader: 'css-loader', options: {sourceMap: true, url: false}},
     {loader: 'postcss-loader', options: {postcssOptions: {plugins: () => [autoprefixer]}}},
-    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', silenceDeprecations: ['import', 'global-builtin']}}
+    {loader: 'sass-loader', options: {sourceMap: true, api: 'modern', sassOptions: { quietDeps: true}}}
   ]
 });
 
