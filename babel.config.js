@@ -11,5 +11,7 @@ module.exports = {
       }
     ]
   ],
-  sourceType: 'module'
+  parserOpts: {
+    sourceType: 'module'
+  }
 };
