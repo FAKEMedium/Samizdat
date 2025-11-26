@@ -104,6 +104,7 @@ config.plugins.push(
   })
 );
 
+// PurgeCSS to remove unused CSS in production builds
 config.plugins.push(
   new PurgeCSSPlugin({
     paths: [
