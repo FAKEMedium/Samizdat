@@ -115,6 +115,7 @@ config.plugins.push(
       ...glob.sync(`${PATHS.sharedSrc}/svg/**/*.svg`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.html.ep`, { nodir: true }),
       ...glob.sync(`${__dirname}/templates/**/*.js`, { nodir: true }),
+      ...glob.sync(`${__dirname}/templates/**/*.js.ep`, { nodir: true }),
       ...glob.sync(`${PATHS.sharedSrc}/js/*.js`, { nodir: true }),
       ...glob.sync(`${PATHS.siteSrc}/js/*.js`, { nodir: true })
     ],
