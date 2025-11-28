@@ -259,13 +259,13 @@ sub register ($self) {
           my $maildatatxt = $self->render_mail(template => 'account/confirm/textplain', formdata => $formdata);
 
           my $subject = Encode::encode("MIME-Q", $self->app->__('Email confirmation'));
-          my $from = Encode::encode("MIME-Q", sprintf('%s <%s>', $self->config->{organization}, $self->config->{mail}->{from}));
+          my $from = Encode::encode("MIME-Q", sprintf('%s <%s>', $self->config->{organization}->{name}, $self->config->{mail}->{from}));
           my $mail = MIME::Lite->new(
             From         => $from,
             To           => $formdata->{email},
             BCC          => $self->config->{mail}->{to},
             Subject      => $subject,
-            Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization})),
+            Organization => Encode::encode("MIME-Q", Encode::decode("UTF-8", $self->config->{organization}->{name})),
             'X-Mailer'   => "Samizdat",
             Type         => 'multipart/alternative',
           );
