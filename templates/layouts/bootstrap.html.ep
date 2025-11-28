@@ -43,7 +43,7 @@
         <!-- Toast messages will be injected here -->
       </div>
     </aside>
-    <header>
+    <header id="mainheader">
       <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
       <div class="widewrapper bg-logobar">
         <%== web->indent(eval {trim include 'chunks/logobar'}, 4) =%>
