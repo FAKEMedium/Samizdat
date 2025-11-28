@@ -5,6 +5,9 @@
     </a>
   </div>
   <div class="col-8 col-auto text-end align-self-center">
-    <%== __x('&copy;{year}&nbsp;{author}', year => (localtime(time))[5] + 1900, author => config->{organization}) %>
+% my $org_name = config->{organization}->{name};
+% my $org_link = config->{organization}->{link};
+% my $author = $org_link ? qq{<a href="$org_link" target="_blank" rel="noopener">$org_name</a>} : $org_name;
+    <%== __x('&copy;{year}&nbsp;{author}', year => (localtime(time))[5] + 1900, author => $author) %>
   </div>
 </div>
