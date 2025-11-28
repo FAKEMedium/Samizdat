@@ -58,11 +58,13 @@ $grid-breakpoints: (
 @import "bootstrap/scss/utilities/api";
 
 // Custom styles
-.bg-menubar, .bg-logobar {
-  background-color: #f3f3f3;
+#mainheader, #pagespeed {
   a {
     background-color: transparent;
   }
+}
+.bg-menubar {
+  background-color: #f3f3f3;
 }
 .byline {background: #ffe;}
 .orange{background: #ecc562 !important;}
