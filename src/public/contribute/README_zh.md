@@ -4,7 +4,7 @@
 # 贡献
 
 您可以帮助构建和测试 Samizdat 应用程序。从以下地址克隆存储库：
-[https://github.com/FakenewsCom/Samizdat.git](https://github.com/FakenewsCom/Samizdat.git)
+[https://github.com/FAKEMedium/Samizdat.git](https://github.com/FAKEMedium/Samizdat.git)
 
 ### 定位视频、音频和图像
 

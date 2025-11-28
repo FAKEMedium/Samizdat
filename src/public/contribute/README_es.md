@@ -4,7 +4,7 @@
 # Contribuir
 
 Puedes ayudar a construir y probar la aplicación Samizdat. Clona el repositorio desde 
-[https://github.com/FakenewsCom/Samizdat.git](https://github.com/FakenewsCom/Samizdat.git)
+[https://github.com/FAKEMedium/Samizdat.git](https://github.com/FAKEMedium/Samizdat.git)
 
 ### Localización de videos, audios e imágenes
 

@@ -4,7 +4,7 @@
 # المساهمة
 
 يمكنك المساعدة في بناء واختبار تطبيق ساميزدات. قم باستنساخ المستودع من
-[https://github.com/FakenewsCom/Samizdat.git](https://github.com/FakenewsCom/Samizdat.git)
+[https://github.com/FAKEMedium/Samizdat.git](https://github.com/FAKEMedium/Samizdat.git)
 
 ### تحديد مواقع الفيديو والصوت والصور
 

@@ -4,7 +4,7 @@
 # Внести вклад
 
 Вы можете помочь в создании и тестировании приложения Самиздат. Клонируйте репозиторий из 
-[https://github.com/FakenewsCom/Samizdat.git](https://github.com/FakenewsCom/Samizdat.git)
+[https://github.com/FAKEMedium/Samizdat.git](https://github.com/FAKEMedium/Samizdat.git)
 
 ### Поиск видео, аудио и изображений
 

@@ -4,7 +4,7 @@
 # योगदान दें
 
 आप समिज़दात एप्लिकेशन के निर्माण और परीक्षण में मदद कर सकते हैं। रिपॉजिटरी को क्लोन करें
-[https://github.com/FakenewsCom/Samizdat.git](https://github.com/FakenewsCom/Samizdat.git)
+[https://github.com/FAKEMedium/Samizdat.git](https://github.com/FAKEMedium/Samizdat.git)
 
 ### वीडियो, ऑडियो और छवियों का पता लगाना
 
