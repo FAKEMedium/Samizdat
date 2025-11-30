@@ -71,6 +71,9 @@ if (!isDev) {
 config.module.rules.push({
   test: /\.js$/,
   exclude: /node_modules/,
+  resolve: {
+    fullySpecified: false
+  },
   use: {
     loader: 'babel-loader',
     options: {
@@ -85,7 +88,7 @@ config.module.rules.push({
           modules: false
         }]
       ],
-      sourceType: 'module'
+      sourceType: 'unambiguous'
     }
   }
 });
