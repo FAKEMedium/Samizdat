@@ -8,6 +8,8 @@ use Mojo::Util qw(decode);
 use MojoX::MIME::Types;
 use YAML::XS;
 use Data::Dumper;
+use IPC::Open2;
+use Encode ();
 use Samizdat::Model::Public;
 
 has 'config';
@@ -95,56 +97,8 @@ sub getlist ($self, $url, $options = {}) {
       # Overwrite the docpath of the default language if a file with the preferred language exists
       $docpath =~ s/_($options->{language})\.md$/.md/;
       
-      # Determine if this will be a sidecard (not an index file)
-      my $will_be_index = 0;
-      if ($docpath =~ /README\.md$/) {
-        $will_be_index = 1;
-      }
-      
-      # Extract first image for sidecards if it's the first element
-      my $card_image = '';
-      # Only process card images for files that will become sidecards
-      if (!$will_be_index) {
-        # Re-parse the HTML to work with DOM
-        my $card_dom = Mojo::DOM->new($html);
-        
-        # Get the first child element
-        my $first_elem = $card_dom->children->first;
-        
-        # Check if it's a picture or img element
-        if ($first_elem && $first_elem->tag && ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img')) {
-          # Extract the element
-          $card_image = $first_elem->to_string;
-          
-          # Add card-img-top class to the img element
-          if ($first_elem->tag eq 'picture') {
-            # For picture elements, find the img inside and add the class
-            my $img = $first_elem->at('img');
-            if ($img) {
-              my $existing_class = $img->attr('class') // '';
-              unless ($existing_class =~ /card-img-top/) {
-                $img->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
-              }
-              $card_image = $first_elem->to_string;
-            }
-          } else {
-            # For img elements, add the class directly
-            my $existing_class = $first_elem->attr('class') // '';
-            unless ($existing_class =~ /card-img-top/) {
-              $first_elem->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
-            }
-            $card_image = $first_elem->to_string;
-          }
-          
-          # Remove the element from the DOM
-          $first_elem->remove;
-          
-          # Get the updated HTML
-          $html = $card_dom->to_string;
-          $html =~ s/^[\s\r\n]+//;
-          $html =~ s/[\s\r\n]+$//;
-        }
-      }
+      # NOTE: Image extraction for sidecards is now done at render time in getdoc controller
+      # This preserves full content for editing and database storage
       if ($docpath !~ /_(.+)\.md$/) {
         if ($docpath =~ s/README\.md/index.html/) {
           $found = $docpath;
@@ -158,7 +112,7 @@ sub getlist ($self, $url, $options = {}) {
           url        => $url,
           language   => $options->{language},
           head       => $head,
-          card_image => $card_image,
+          card_image => '',  # Extracted at render time in getdoc controller
           editable   => 1
         };
       }
@@ -804,11 +758,17 @@ sub save_content ($self, $params) {
   
   if ($existing) {
     # Update existing resource
-    my $update_sql = $field_to_update eq 'title' 
+    my $update_sql = $field_to_update eq 'title'
       ? 'UPDATE web.resources SET title = ?, modified = NOW() WHERE resourceid = ?'
       : 'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?';
-    
+
     $self->database->db->query($update_sql, $content, $existing->{resourceid});
+
+    # For sidecards, ensure connection exists (may be missing from previous saves)
+    if ($alias eq '' && $sidecard_base) {
+      $self->_ensure_sidecard_connection($docpath, $existing->{resourceid}, $language_id);
+    }
+
     return $existing->{resourceid};
   } else {
     # Insert new resource with authenticated user
@@ -858,6 +818,39 @@ sub save_content ($self, $params) {
 }
 
 
+# Helper to ensure sidecard connection exists (for UPDATE case where connection may be missing)
+sub _ensure_sidecard_connection ($self, $docpath, $sidecard_resource_id, $language_id) {
+  # Find the main resource for this docpath in current language
+  my $main_alias = $docpath;
+  my $main_src = $docpath;
+  $main_src =~ s|^/||;  # Remove leading slash
+  $main_src =~ s|/$||;  # Remove trailing slash
+  $main_src = $main_src ? "${main_src}/README.md" : "README.md";
+
+  my $main_resource = $self->database->db->query(
+    'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ? AND languageid = ?',
+    $main_alias, $main_src, $language_id
+  )->hash;
+
+  if ($main_resource) {
+    # Check if connection already exists
+    my $existing_conn = $self->database->db->query(
+      'SELECT 1 FROM web.resourceconnections WHERE parent = ? AND child = ?',
+      $main_resource->{resourceid}, $sidecard_resource_id
+    )->hash;
+
+    unless ($existing_conn) {
+      # Create missing connection
+      $self->database->db->query(
+        'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?)
+         ON CONFLICT DO NOTHING',
+        $main_resource->{resourceid}, $sidecard_resource_id
+      );
+    }
+  }
+}
+
+
 # Get content from database for a specific docpath and element_id
 sub get_content ($self, $docpath, $element_id, $language) {
   my $language_id = $self->languages->{$language} // 1;
@@ -870,6 +863,169 @@ sub get_content ($self, $docpath, $element_id, $language) {
   
   return $resource;
 }
+
+# Convert HTML to markdown using Pandoc (for cleaning up legacy HTML content)
+sub html_to_markdown ($self, $html) {
+  return '' unless $html;
+
+  # Check if content looks like HTML (contains tags)
+  return $html unless $html =~ /<[a-z][^>]*>/i;
+
+  # Use Pandoc to convert HTML to GFM (GitHub Flavored Markdown)
+  # But keep tables as HTML (they're more flexible than pipe tables)
+  my $markdown = '';
+  eval {
+    my ($reader, $writer);
+    # Use gfm-raw_html to convert most HTML but keep tables
+    my $pid = open2($reader, $writer, 'pandoc', '-f', 'html', '-t', 'gfm-pipe_tables');
+
+    # Encode to UTF-8 bytes for Pandoc
+    my $html_bytes = Encode::encode('UTF-8', $html);
+    print $writer $html_bytes;
+    close($writer);
+
+    # Read and decode UTF-8 bytes from Pandoc
+    local $/;
+    my $output_bytes = <$reader>;
+    close($reader);
+    waitpid($pid, 0);
+
+    $markdown = Encode::decode('UTF-8', $output_bytes);
+  };
+
+  if ($@ || !$markdown) {
+    warn "Pandoc conversion failed: $@" if $@;
+    return $html;  # Return original if Pandoc fails
+  }
+
+  # Clean up Pandoc output
+  $markdown =~ s/^\s+//;
+  $markdown =~ s/\s+$//;
+
+  return $markdown;
+}
+
+# Get raw source content for editing (markdown from database or files)
+# Database stores markdown directly - return it for editing
+sub get_source_content ($self, $docpath, $language) {
+  my $language_id = $self->languages->{$language} // 1;
+  my $result = {
+    main => { title => '', content => '', src => '' },
+    sidecards => []
+  };
+
+  # Helper to strip title from markdown content
+  my $strip_title = sub ($content) {
+    return '' unless $content;
+    # Remove the first h1 heading (# Title) from content
+    $content =~ s/^#\s+[^\n]+\n*//;
+    $content =~ s/^\s+//;  # Trim leading whitespace
+    return $content;
+  };
+
+  # First check database for markdown content
+  if ($self->has_database_content($docpath, $language)) {
+    my $main = $self->database->db->query(
+      'SELECT resourceid, src, content, title FROM web.resources
+       WHERE alias = ? AND languageid = ?',
+      $docpath, $language_id
+    )->hash;
+
+    if ($main) {
+      my $content = $main->{content} // '';
+
+      # Convert HTML to markdown if needed (legacy data cleanup)
+      $content = $self->html_to_markdown($content);
+
+      $result->{main} = {
+        title => $main->{title} // '',
+        content => $strip_title->($content),
+        src => $main->{src} // '',
+        source => 'database'
+      };
+
+      # Get sidecards from database
+      my $sidecards = $self->database->db->query(
+        'SELECT r.resourceid, r.src, r.content, r.title
+         FROM web.resources r
+         JOIN web.resourceconnections rc ON r.resourceid = rc.child
+         WHERE rc.parent = ? AND r.languageid = ?
+         ORDER BY r.src',
+        $main->{resourceid}, $language_id
+      )->hashes;
+
+      for my $sc (@$sidecards) {
+        my $sc_content = $sc->{content} // '';
+        $sc_content = $self->html_to_markdown($sc_content);
+
+        push @{$result->{sidecards}}, {
+          title => $sc->{title} // '',
+          content => $strip_title->($sc_content),
+          src => $sc->{src} // '',
+          source => 'database'
+        };
+      }
+
+      return $result;
+    }
+  }
+
+  # Fall back to reading source markdown files
+  my $public_src = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Helper to read markdown file and extract title
+  my $read_markdown = sub ($src_path) {
+    return undef unless $src_path;
+    my $file = $public_src->child($src_path);
+    return undef unless -f $file;
+    my $content = decode('UTF-8', $file->slurp);
+    my ($title) = $content =~ /^#\s+(.+)$/m;
+    # Strip title from content
+    my $body = $strip_title->($content);
+    # Convert any inline HTML (tables, etc.) to GFM markdown
+    $body = $self->html_to_markdown($body);
+    return { title => $title // '', content => $body };
+  };
+
+  my $src_path = $docpath;
+  $src_path =~ s|^/||;
+  $src_path =~ s|/$||;
+
+  my $dir = $public_src->child($src_path);
+  return $result unless -d $dir;
+
+  # Read README.md for main content
+  my $readme_path = $src_path ? "$src_path/README.md" : "README.md";
+  my $md_content = $read_markdown->($readme_path);
+  if ($md_content) {
+    $result->{main} = {
+      title => $md_content->{title},
+      content => $md_content->{content},
+      src => $readme_path,
+      source => 'file'
+    };
+  }
+
+  # Read other .md files as sidecards (sorted)
+  for my $file (sort $dir->list->each) {
+    next unless $file->basename =~ /^\d+.*\.md$/ && $file->basename ne 'README.md';
+    next if $file->basename =~ /_[a-z]{2}\.md$/;  # Skip language variants
+
+    my $src = $src_path ? "$src_path/" . $file->basename : $file->basename;
+    my $md_content = $read_markdown->($src);
+    if ($md_content) {
+      push @{$result->{sidecards}}, {
+        title => $md_content->{title},
+        content => $md_content->{content},
+        src => $src,
+        source => 'file'
+      };
+    }
+  }
+
+  return $result;
+}
+
 
 # Check if docpath has any database content
 sub has_database_content ($self, $docpath, $language) {
@@ -885,69 +1041,94 @@ sub has_database_content ($self, $docpath, $language) {
 }
 
 
+# Convert markdown content to HTML for display
+sub markdown_to_html ($self, $markdown_content) {
+  return '' unless $markdown_content;
+
+  my $html = $md->markdown($markdown_content);
+  my $dom = Mojo::DOM->new->xml(0)->parse($html);
+
+  # Process images - unwrap from p tags if only child
+  $dom->find('img')->each(sub ($img, $num) {
+    $img->xml(0);
+    my $parent = $img->parent;
+    if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
+      $parent->replace($img);
+    }
+  });
+
+  $html = $dom->to_string;
+  $html =~ s/^[\s\r\n]+//;
+  $html =~ s/[\s\r\n]+$//;
+  $html =~ s/(<\/(p|div|h[1-6]|ul|ol|li|blockquote|section|article|aside|nav|header|footer|pre)>)/$1\n/gi;
+
+  return $html;
+}
+
 # Get complete document structure from database using new schema
+# Database stores markdown - convert to HTML for display
 sub get_database_content ($self, $save_docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
-  
+
   # Get main resource (has alias matching save_docpath)
   my $main_resource = $self->database->db->query(
-    'SELECT resourceid, src, content, title, description FROM web.resources 
+    'SELECT resourceid, src, content, title, description FROM web.resources
      WHERE alias = ? AND languageid = ?',
     $save_docpath, $language_id
   )->hash;
-  
+
   return {} unless $main_resource;
-  
+
   # For non-default languages, ensure consistency by cloning missing sidecards from default
   if ($language ne $self->locale->{default_language}) {
     my $default_language_id = $self->languages->{$self->locale->{default_language}} // 1;
-    
+
     # Find the default language main resource to get its sidecards
     my $default_main = $self->database->db->query(
       'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ? AND alias != \'\'',
       $main_resource->{src}, $default_language_id
     )->hash;
-    
+
     if ($default_main) {
       $self->ensure_language_consistency($default_main->{resourceid}, $language_id, $default_language_id, $main_resource->{resourceid});
     }
   }
-  
+
   # Get connected sidecard resources via resourceconnections
   my $sidecards = $self->database->db->query(
-    'SELECT r.resourceid, r.src, r.content, r.title, r.description 
-     FROM web.resources r 
-     JOIN web.resourceconnections rc ON r.resourceid = rc.child 
-     WHERE rc.parent = ? AND r.languageid = ? 
+    'SELECT r.resourceid, r.src, r.content, r.title, r.description
+     FROM web.resources r
+     JOIN web.resourceconnections rc ON r.resourceid = rc.child
+     WHERE rc.parent = ? AND r.languageid = ?
      ORDER BY r.src',
     $main_resource->{resourceid}, $language_id
   )->hashes;
-  
+
   my $docs = {};
   my $subdocs = [];
-  
-  # Process sidecard resources
+
+  # Process sidecard resources - convert markdown to HTML
   for my $sidecard (@$sidecards) {
     push @$subdocs, {
       docpath => $sidecard->{src} =~ s|\.md$||r,  # Remove .md extension for display
       title => $sidecard->{title} || 'Untitled',
-      main => $sidecard->{content} || '',
+      main => $self->markdown_to_html($sidecard->{content}),
       editable => 1,
       card_image => '',
       src => $sidecard->{src}
     };
   }
-  
+
   # Convert save_docpath back to expected docpath format
   my $display_docpath = $save_docpath;
   $display_docpath =~ s|^/||;  # Remove leading slash
   $display_docpath =~ s|/$||;  # Remove trailing slash
   $display_docpath = $display_docpath ? "${display_docpath}/index.html" : "index.html";
-  
+
   $docs->{$display_docpath} = {
     docpath => $display_docpath,
     title => $main_resource->{title} || 'Untitled',
-    main => $main_resource->{content} || '',
+    main => $self->markdown_to_html($main_resource->{content}),
     subdocs => $subdocs,
     children => [],
     url => $save_docpath =~ s|^/||r =~ s|/$||r,
@@ -956,7 +1137,7 @@ sub get_database_content ($self, $save_docpath, $language) {
     editable => 1,
     src => $main_resource->{src}
   };
-  
+
   return $docs;
 }
 

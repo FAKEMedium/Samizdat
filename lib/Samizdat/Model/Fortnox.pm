@@ -232,6 +232,7 @@ sub updateCache ($self, $resource = undef) {
       my $list = [];
       my $page = 1;
       my $fetch = {};
+      my $has_error = 0;
       my $object = exists($resourceconfig->{object}) ? $resourceconfig->{object} : $resource;
       do {
         $fetch = $self->callAPI($resource, 'get', 0, {qp => {page => $page}});
@@ -240,14 +241,14 @@ sub updateCache ($self, $resource = undef) {
         if (ref($fetch) eq 'HASH' && exists($fetch->{error}) && $fetch->{error}) {
           # Log the error and stop fetching
           say sprintf("Fortnox API error for %s: %s", $resource, $fetch->{message} // 'Unknown error');
-          last;
+          $has_error = 1;
         }
 
-        if (ref($fetch) eq 'HASH' && exists($fetch->{$object})) {
+        if (!$has_error && ref($fetch) eq 'HASH' && exists($fetch->{$object})) {
           push(@{$list}, @{$fetch->{$object}});
         }
         $page++;
-      } until (!ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
+      } until ($has_error || !ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
       $self->data->{$resource} = $list;
       $self->saveCache;
     }
@@ -600,11 +601,46 @@ sub postAccount ($self, $data = {}) {
 
 
 sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
+  # Hardcoded articles data (TODO: implement API/cache later)
+  my $articles = [
+    { ArticleNumber => '3010', Description => 'Domäner, svensk moms', VAT => 25 },
+    { ArticleNumber => '3011', Description => 'Snapback, svensk moms', VAT => 25 },
+    { ArticleNumber => '3012', Description => 'Webhosting, svensk moms', VAT => 25 },
+    { ArticleNumber => '3013', Description => 'Konsultarbete, svensk moms', VAT => 25 },
+    { ArticleNumber => '3110', Description => 'Domäner EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3111', Description => 'Snapback EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3112', Description => 'Webhosting EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3113', Description => 'Konsultarbete EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3210', Description => 'Domäner, ej EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3211', Description => 'Snapback, ej EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3212', Description => 'Webhosting, ej EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3213', Description => 'Konsultarbete, ej EU, momsfri', VAT => 0 },
+    { ArticleNumber => '3540', Description => 'Fakturaavgifter', VAT => 25 },
+  ];
+
   if ($ArticleNumber) {
-    return $self->callAPI('Articles', 'get', $ArticleNumber, $options);
-  } else {
-    return { Articles => $self->updateCache('Articles') } if (!exists($self->data->{Articles}));
+    # Find specific article
+    my ($article) = grep { $_->{ArticleNumber} eq $ArticleNumber } @$articles;
+    return { Article => $article } if $article;
+    return {};
   }
+
+  return { Articles => $articles };
+
+  # OLD CODE - keep for reference until API/cache is implemented
+  # if ($ArticleNumber) {
+  #   return $self->callAPI('Articles', 'get', $ArticleNumber, $options);
+  # } else {
+  #   return { Articles => $self->updateCache('Articles') } if (!exists($self->data->{Articles}));
+  # }
+  # Example API response:
+  # {
+  #   "Articles": [
+  #     { "@url": "https://api.fortnox.se/3/articles/3010", "ArticleNumber": "3010", "Description": "Domäner, svensk moms", "VAT": "25" },
+  #     { "@url": "https://api.fortnox.se/3/articles/3011", "ArticleNumber": "3011", "Description": "Snapback, svensk moms", "VAT": "25" },
+  #     ...
+  #   ]
+  # }
 }
 
 
