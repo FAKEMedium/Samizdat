@@ -77,18 +77,7 @@ config.module.rules.push({
   use: {
     loader: 'babel-loader',
     options: {
-      babelrc: false,
-      configFile: false,
-      presets: [
-        ['@babel/preset-env', {
-          targets: {
-            browsers: ['last 2 versions', 'not dead', '> 1%', 'not ie 11']
-          },
-          useBuiltIns: false,
-          modules: false
-        }]
-      ],
-      sourceType: 'module'
+      configFile: path.resolve(__dirname, 'babel.config.js')
     }
   }
 });
