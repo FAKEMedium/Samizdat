@@ -70,7 +70,10 @@ config.module.rules.push({
   test: /\.js$/,
   exclude: /node_modules/,
   use: {
-    loader: 'babel-loader'
+    loader: 'babel-loader',
+    options: {
+      configFile: path.resolve(__dirname, 'babel.config.js')
+    }
   }
 });
 
