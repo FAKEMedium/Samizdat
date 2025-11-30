@@ -35,6 +35,9 @@ const config = {
       '@shared': PATHS.sharedSrc
     }
   },
+  resolveLoader: {
+    modules: [path.resolve(__dirname, 'node_modules')]
+  },
   optimization: {
     minimizer: [],
     splitChunks: {
@@ -71,6 +74,8 @@ config.module.rules.push({
   use: {
     loader: 'babel-loader',
     options: {
+      babelrc: false,
+      configFile: false,
       presets: [
         ['@babel/preset-env', {
           targets: {
