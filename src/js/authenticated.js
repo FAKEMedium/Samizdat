@@ -57,21 +57,38 @@ window.handleAuthForm = function(formId, endpoint) {
     }
 };
 
-// Dynamic loading of simple editor for page editing
-window.loadSimpleEditor = async function() {
-    if (window.initSimpleEditors) {
+// Dynamic loading of TipTap markdown editor for page editing
+window.loadTipTapEditor = async function() {
+    if (window.tiptapMarkdown) {
         return true;
     }
-    
-    // Dynamically load simple editor bundle
+
+    // Load the TipTap vendor chunk first (contains @tiptap/* dependencies)
+    const editorScript = document.createElement('script');
+    editorScript.src = '/assets/editor.js';
+    document.head.appendChild(editorScript);
+
+    await new Promise((resolve) => {
+        editorScript.onload = () => resolve();
+    });
+
+    // Then load the tiptap markdown editor bundle
     const script = document.createElement('script');
-    script.src = '/assets/simple-editor.js';
+    script.src = '/assets/tiptap.js';
     document.head.appendChild(script);
-    
-    return new Promise((resolve) => {
+
+    return new Promise((resolve, reject) => {
         script.onload = () => {
-            setTimeout(() => resolve(true), 50);
+            // Wait for module initialization
+            setTimeout(() => {
+                if (window.tiptapMarkdown) {
+                    resolve(true);
+                } else {
+                    reject(new Error('TipTap markdown editor failed to initialize'));
+                }
+            }, 100);
         };
+        script.onerror = () => reject(new Error('Failed to load tiptap.js'));
     });
 };
 
@@ -246,18 +263,19 @@ function handleToolbarCommand(element) {
     window.currentEditor?.element.focus();
 }
 
-// Initialize page editor - dynamically load simple-editor.js when needed
+// Initialize page editor - dynamically load tiptap.js when needed
 window.initPageEditor = async function() {
-    console.log('Loading simple editor functionality...');
-    
+    console.log('Loading TipTap markdown editor...');
+
     try {
-        // Load simple-editor.js if not already loaded
-        if (!window.initSimpleEditors) {
-            await window.loadSimpleEditor();
+        // Load tiptap.js if not already loaded
+        if (!window.tiptapMarkdown) {
+            await window.loadTipTapEditor();
         }
-        
-        // Initialize simple editors for all .editable elements
-        return window.initSimpleEditors();
+
+        // Enter edit mode - transforms all .editable elements into TipTap editors
+        window.tiptapMarkdown.enterEditMode();
+        return true;
     } catch (error) {
         console.error('Error in initPageEditor:', error);
         return null;
@@ -299,43 +317,22 @@ if (theContent && editButton) {
     // Handle edit button click
     editButton.addEventListener('click', async () => {
         console.log('Edit button clicked!');
-        
+
         try {
-            if (!window.currentEditor) {
-                // First time - initialize editor
-                console.log('Initializing editor for first time...');
+            // Initialize TipTap editors if not already done
+            if (!window.tiptapMarkdown?.isEditMode) {
+                console.log('Initializing TipTap markdown editor...');
                 await window.initPageEditor();
             }
-            
-            // Enable simple editing and show save/cancel buttons
+
+            // Show save/cancel buttons, hide edit button
             editButton.classList.add('d-none');
             const saveButton = document.getElementById('savePageButton');
             const cancelButton = document.getElementById('cancelPageButton');
             if (saveButton) saveButton.classList.remove('d-none');
             if (cancelButton) cancelButton.classList.remove('d-none');
-            
-            // Enable editing mode for all editors and setup toolbar
-            if (window.allEditors && window.allEditors.length > 0) {
-                // Enable all editors
-                window.allEditors.forEach(editor => {
-                    editor.setEditable(true);
-                });
-                
-                // Focus the first editor
-                window.currentEditor.element.focus();
-                
-                // Load and setup simple toolbar
-                window.setupSimpleToolbar();
-                console.log(`${window.allEditors.length} editors enabled and first one focused`);
-            } else if (window.currentEditor) {
-                // Fallback for single editor
-                window.currentEditor.setEditable(true);
-                window.currentEditor.element.focus();
-                
-                // Load and setup simple toolbar
-                window.setupSimpleToolbar();
-                console.log('Single editor enabled and focused');
-            }
+
+            console.log('TipTap edit mode enabled');
         } catch (error) {
             console.error('Error in edit button handler:', error);
         }
@@ -354,123 +351,66 @@ if (theContent && editButton) {
                 alert('Save URL not found');
                 return;
             }
-            
-            const savePromises = [];
-            
-            if (window.allEditors && window.allEditors.length > 0) {
-                // Collect all editable content into a single request
-                const editorData = {};
-                window.allEditors.forEach(editor => {
-                    const elementId = editor.element.id || `element-${editor.index}`;
-                    editorData[elementId] = editor.getHTML();
-                });
-                
-                try {
-                    const response = await fetch(saveUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({
-                            docpath: currentPath,
-                            editors: editorData
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        // Disable editing for all editors
-                        window.allEditors.forEach(editor => {
-                            editor.setEditable(false);
-                        });
-                        console.log(`Content saved and ${window.allEditors.length} editors disabled`);
-                    } else {
-                        alert('Failed to save: ' + result.error);
-                        return;
-                    }
-                } catch (error) {
-                    console.error('Save error:', error);
-                    alert('Failed to save content. Please try again.');
-                    return;
-                }
-            } else if (window.currentEditor) {
-                // Fallback for single editor
-                const elementId = window.currentEditor.element.id || 'thecontent';
-                const content = window.currentEditor.getHTML();
-                
-                try {
-                    const response = await fetch(saveUrl, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/x-www-form-urlencoded',
-                        },
-                        body: new URLSearchParams({
-                            docpath: currentPath,
-                            element_id: elementId,
-                            content: content
-                        })
-                    });
-                    
-                    const result = await response.json();
-                    if (result.success) {
-                        window.currentEditor.setEditable(false);
-                        console.log('Content saved and editor disabled');
-                    } else {
-                        alert('Failed to save: ' + result.error);
-                        return;
-                    }
-                } catch (error) {
-                    console.error('Save error:', error);
-                    alert('Failed to save content. Please try again.');
-                    return;
-                }
+
+            if (!window.tiptapMarkdown) {
+                alert('Editor not initialized');
+                return;
             }
-            
+
+            // Get markdown content from all TipTap editors
+            // Set to false for HTML, true for markdown
+            const editorData = window.tiptapMarkdown.getContent(true);
+            console.log('Saving markdown content:', editorData);
+
+            try {
+                const response = await fetch(saveUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        docpath: currentPath,
+                        editors: editorData,
+                        format: 'markdown'  // Tell backend we're sending markdown
+                    })
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    // Exit edit mode (keeps content)
+                    window.tiptapMarkdown.exitEditMode(true);
+                    console.log('Markdown content saved successfully');
+                } else {
+                    alert('Failed to save: ' + result.error);
+                    return;
+                }
+            } catch (error) {
+                console.error('Save error:', error);
+                alert('Failed to save content. Please try again.');
+                return;
+            }
+
             // Hide save/cancel buttons
             saveButton.classList.add('d-none');
             cancelButton.classList.add('d-none');
             editButton.classList.remove('d-none');
             editButton.disabled = false;
-            
-            // Hide toolbar
-            const toolbarElement = document.getElementById('simpleToolbar');
-            if (toolbarElement) {
-                toolbarElement.style.display = 'none';
-                console.log('Toolbar hidden');
-            }
         });
     }
-    
+
     if (cancelButton) {
         cancelButton.addEventListener('click', () => {
-            if (window.allEditors && window.allEditors.length > 0) {
-                // Cancel editing for all editors - revert to original content
-                window.allEditors.forEach(editor => {
-                    const originalContent = editor.element.dataset.originalContent;
-                    editor.setContent(originalContent);
-                    editor.setEditable(false);
-                });
-                console.log(`Edit cancelled, reverted ${window.allEditors.length} editors to original content`);
-            } else if (window.currentEditor) {
-                // Fallback for single editor
-                const originalContent = window.currentEditor.element.dataset.originalContent;
-                window.currentEditor.setContent(originalContent);
-                window.currentEditor.setEditable(false);
-                console.log('Edit cancelled, reverted to original content');
+            if (window.tiptapMarkdown) {
+                // Exit edit mode without saving - restores original content
+                window.tiptapMarkdown.exitEditMode(false);
+                console.log('Edit cancelled, content reverted');
             }
-            
+
             // Hide save/cancel buttons
             saveButton.classList.add('d-none');
             cancelButton.classList.add('d-none');
             editButton.classList.remove('d-none');
             editButton.disabled = false;
-            
-            // Hide toolbar
-            const toolbarElement = document.getElementById('simpleToolbar');
-            if (toolbarElement) {
-                toolbarElement.style.display = 'none';
-                console.log('Toolbar hidden');
-            }
         });
     }
 }

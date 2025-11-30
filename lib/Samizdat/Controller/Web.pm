@@ -1,6 +1,7 @@
 package Samizdat::Controller::Web;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
+use Mojo::DOM;
 use Mojo::JSON qw(encode_json);
 
 # Render site management panel
@@ -56,6 +57,13 @@ sub editor ($self) {
   }
   my $title = $self->app->__x("Edit page {docpath}", docpath => '/' . $docpath);
   my $web = $docs->{$docpath};
+
+  # Convert <picture> back to simple <img> for editing
+  _simplify_pictures_for_editing(\$web->{main}) if $web->{main};
+  for my $subdoc (@{ $web->{subdocs} // [] }) {
+    _simplify_pictures_for_editing(\$subdoc->{main}) if $subdoc->{main};
+  }
+
   $web->{script} .= $self->render_to_string(template => 'web/edit', format => 'js');
   $web->{css} .= $self->render_to_string(template => 'web/edit', format => 'css');
   $self->stash(web => $web, docpath => $web->{docpath}, title => $title);
@@ -311,6 +319,8 @@ sub getdoc ($self) {
     if ($#{$docs->{$path}->{subdocs}} > -1) {
       my $sidebar = '';
       for my $subdoc (sort {$a->{docpath} cmp $b->{docpath}} @{ $docs->{$path}->{subdocs} }) {
+        # Extract first image for card display (at render time, preserving full content for editing)
+        _extract_card_image($subdoc);
         $sidebar .= $self->render_to_string(template => 'chunks/sidecard', card => $subdoc);
       }
       $docs->{$path}->{sidebar} = $sidebar;
@@ -393,10 +403,107 @@ sub banbot ($docpath, $ip) {
   }
 }
 
+# Convert <picture> elements back to simple <img> for editing
+# This reverses the tidyup transformation so editors work with simple img tags
+sub _simplify_pictures_for_editing ($htmlref) {
+  return unless $$htmlref;
+
+  my $dom = Mojo::DOM->new($$htmlref);
+  my $modified = 0;
+
+  $dom->find('picture')->each(sub ($picture, $num) {
+    my $img = $picture->at('img');
+    if ($img) {
+      # Remove card-img-top class if present (will be re-added at display time)
+      my $class = $img->attr('class') // '';
+      $class =~ s/\bcard-img-top\b//g;
+      $class =~ s/^\s+|\s+$//g;
+      $class =~ s/\s+/ /g;
+      $img->attr('class', $class) if $class;
+      $img->attr('class', undef) unless $class;
+
+      # Replace <picture> with just the <img>
+      $picture->replace($img);
+      $modified = 1;
+    }
+  });
+
+  if ($modified) {
+    $$htmlref = $dom->to_string;
+  }
+}
+
+
+# Extract first image from subdoc content for card display
+# Modifies subdoc in place: sets card_image and removes image from main
+sub _extract_card_image ($subdoc) {
+  return unless $subdoc->{main};
+
+  my $dom = Mojo::DOM->new($subdoc->{main});
+  my $first_elem = $dom->children->first;
+
+  # Check if first element is a picture or img
+  if ($first_elem && $first_elem->tag && ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img')) {
+    # Add card-img-top class to the img element
+    if ($first_elem->tag eq 'picture') {
+      my $img = $first_elem->at('img');
+      if ($img) {
+        my $existing_class = $img->attr('class') // '';
+        unless ($existing_class =~ /card-img-top/) {
+          $img->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+        }
+      }
+    } else {
+      my $existing_class = $first_elem->attr('class') // '';
+      unless ($existing_class =~ /card-img-top/) {
+        $first_elem->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+      }
+    }
+
+    # Store the image for card header
+    $subdoc->{card_image} = $first_elem->to_string;
+
+    # Remove from content
+    $first_elem->remove;
+
+    # Update main content
+    my $html = $dom->to_string;
+    $html =~ s/^[\s\r\n]+//;
+    $html =~ s/[\s\r\n]+$//;
+    $subdoc->{main} = $html;
+  }
+}
+
 # Render TipTap toolbar chunk
 sub editor_toolbar ($self) {
   $self->stash(status => 200);
   $self->render(template => 'web/editor/toolbar/index', format => 'html', layout => undef);
+}
+
+# Get raw source content for editing (returns JSON with markdown/source)
+sub source ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $docpath = $self->stash('docpath') // '/';
+  $docpath =~ s|^/||;
+  $docpath =~ s|/$||;
+  $docpath = $docpath ? "/$docpath/" : "/";
+
+  my $language = $self->app->language;
+
+  # Get source content from model
+  my $source_data = $self->app->web->get_source_content($docpath, $language);
+
+  unless ($source_data) {
+    return $self->render(json => { success => 0, error => 'Content not found' }, status => 404);
+  }
+
+  $self->render(json => {
+    success => 1,
+    docpath => $docpath,
+    language => $language,
+    content => $source_data
+  });
 }
 
 # Save editable content to database
@@ -442,11 +549,19 @@ sub save ($self) {
   
   eval {
     # Save all editors for this page
+    # Sort to ensure main content is saved FIRST (headline, thecontent, element-0)
+    # This is critical because sidecards need the main resource to exist for connections
     my @resource_ids;
-    for my $element_id (keys %$editors) {
+    my @main_ids = qw(headline thecontent element-0);
+    my @sorted_ids = (
+      (grep { my $id = $_; grep { $id eq $_ } @main_ids } keys %$editors),
+      (grep { my $id = $_; !grep { $id eq $_ } @main_ids } keys %$editors)
+    );
+
+    for my $element_id (@sorted_ids) {
       my $content = $editors->{$element_id};
       next unless defined $content && $content ne '';
-      
+
       my $resource_id = $self->app->web->save_content({
         docpath => $docpath,
         element_id => $element_id,

@@ -32,6 +32,8 @@ sub register ($self, $app, $conf) {
   $manager->get('languages')                          ->to('#languages')         ->name('web_languages');
   $manager->get('images')                             ->to('#images')            ->name('web_images');
   $manager->post('save')                              ->to('#save')              ->name('web_save');
+  $manager->get('source/*docpath')                    ->to('#source')            ->name('web_source');
+  $manager->get('source')                             ->to('#source', docpath => '')->name('web_source_root');
   $manager->get('/')                                  ->to('#index')             ->name('web_index');
 
   # Things coming from configuration file
