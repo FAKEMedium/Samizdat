@@ -1,0 +1,2 @@
+% # PayPal payment button container (data fetched via JSON)
+<div id="paypal-button-container"></div>
