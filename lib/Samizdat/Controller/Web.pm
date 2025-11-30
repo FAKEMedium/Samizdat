@@ -64,14 +64,196 @@ sub editor ($self) {
 
 
 sub languages ($self) {
-  my $languages = $self->app->web->getlanguages();
+  my $languages = $self->public->getLanguages($self->config->{locale}->{languages});
   $self->render(json => { languages => $languages });
 }
 
 
+# Menu management - list all menus or create new menu
 sub menus ($self) {
-  my $menus = $self->app->web->getmenus();
-  $self->render(json => { menus => $menus });
+  if ($self->req->headers->accept =~ m{application/json}) {
+    return unless $self->access({ admin => 1 });
+
+    if ($self->req->method eq 'POST') {
+      # Create new menu
+      my $data = $self->req->json;
+      my $name = $data->{name};
+      my $webserviceid = $data->{webserviceid} // 1;
+
+      unless ($name) {
+        return $self->render(json => { success => 0, error => 'Menu name is required' }, status => 400);
+      }
+
+      my $menuid = $self->app->web->addMenu($name, $webserviceid);
+      return $self->render(json => { success => 1, menuid => $menuid });
+    }
+
+    # GET - list menus
+    my $menus = $self->app->web->getMenus();
+    $self->render(json => { menus => $menus });
+  } else {
+    # HTML page loads first, then JS makes authenticated API calls
+    my $title = $self->app->__('Menus');
+    my $web = {
+      docpath => 'manager/web/menus/index.html',
+      title   => $title,
+      head    => { title => $title }
+    };
+    $web->{script} = $self->render_to_string(template => 'web/menus/index', format => 'js');
+    $self->render(template => 'web/menus/index', web => $web, title => $title);
+  }
+}
+
+# Single menu editor - view/update menu and its items
+sub menu ($self) {
+  my $menuid = $self->stash('menuid');
+
+  if ($self->req->headers->accept =~ m{application/json}) {
+    return unless $self->access({ admin => 1 });
+
+    if ($self->req->method eq 'POST') {
+      # Update menu
+      my $data = $self->req->json;
+      $self->app->web->updateMenu($menuid, $data);
+      return $self->render(json => { success => 1 });
+    }
+
+    # GET - single menu with items
+    my $menu = $self->app->web->getMenu($menuid);
+    unless ($menu) {
+      return $self->render(json => { success => 0, error => 'Menu not found' }, status => 404);
+    }
+
+    my $languageid = $self->param('languageid') // 1;
+    my $items = $self->app->web->getMenuItems($menuid, $languageid);
+    my $languages = $self->public->getLanguages($self->config->{locale}->{languages});
+
+    $self->render(json => {
+      menu      => $menu,
+      items     => $items,
+      languages => $languages
+    });
+  } else {
+    # HTML page loads first, then JS makes authenticated API calls
+    my $menu = $self->app->web->getMenu($menuid);
+    unless ($menu) {
+      return $self->reply->not_found;
+    }
+
+    my $title = $self->app->__x('Edit menu: {name}', name => $menu->{name});
+    my $web = {
+      docpath => 'manager/web/menus/menu/index.html',
+      title   => $title,
+      head    => { title => $title }
+    };
+    $web->{script} = $self->render_to_string(template => 'web/menus/menu/index', format => 'js');
+    $web->{css} = $self->render_to_string(template => 'web/menus/menu/index', format => 'css');
+    $self->render(template => 'web/menus/menu/index', web => $web, title => $title, menu => $menu);
+  }
+}
+
+# Menu item editor - view/create/update/delete menu item
+sub menuitem ($self) {
+  my $menuid = $self->stash('menuid');
+  my $menuitemid = $self->stash('menuitemid');
+
+  if ($self->req->headers->accept =~ m{application/json}) {
+    return unless $self->access({ admin => 1 });
+
+    if ($self->req->method eq 'DELETE') {
+      # Delete menu item - must have valid ID
+      return $self->render(json => { success => 0, error => 'Invalid menu item' }, status => 400)
+        unless $menuitemid && $menuitemid ne 'new';
+      $self->app->web->deleteMenuItem($menuitemid);
+      return $self->render(json => { success => 1 });
+    }
+
+    if ($self->req->method eq 'POST') {
+      my $data = $self->req->json;
+
+      if (!$menuitemid || $menuitemid eq 'new') {
+        # Create new menu item
+        $data->{menuid} = $menuid;
+        my $newid = $self->app->web->addMenuItem($menuid, $data);
+        return $self->render(json => { success => 1, menuitemid => $newid });
+      } else {
+        # Update existing menu item
+        $self->app->web->updateMenuItem($menuitemid, $data);
+        return $self->render(json => { success => 1 });
+      }
+    }
+
+    # GET - single item with all titles
+    my $languages = $self->public->getLanguages($self->config->{locale}->{languages});
+    my $languageid = $languages->[0]{languageid} // 1;
+    my $allItems = $self->app->web->getMenuItemsFlat($menuid, $languageid);
+
+    if (!$menuitemid || $menuitemid eq 'new') {
+      return $self->render(json => {
+        item      => { menuid => $menuid },
+        titles    => [],
+        languages => $languages,
+        allItems  => $allItems
+      });
+    }
+
+    my $item = $self->app->web->getMenuItem($menuitemid);
+    unless ($item) {
+      return $self->render(json => { success => 0, error => 'Menu item not found' }, status => 404);
+    }
+
+    my $titles = $self->app->web->getMenuItemTitles($menuitemid);
+
+    $self->render(json => {
+      item      => $item,
+      titles    => $titles,
+      languages => $languages,
+      allItems  => $allItems
+    });
+  } else {
+    # HTML page loads first, then JS makes authenticated API calls
+    my $menu = $self->app->web->getMenu($menuid);
+    unless ($menu) {
+      return $self->reply->not_found;
+    }
+
+    my $item = {};
+    my $title;
+    if (!$menuitemid || $menuitemid eq 'new') {
+      $title = $self->app->__('New menu item');
+      $item = { menuid => $menuid };
+    } else {
+      $item = $self->app->web->getMenuItem($menuitemid);
+      unless ($item) {
+        return $self->reply->not_found;
+      }
+      $title = $self->app->__x('Edit menu item: {id}', id => $menuitemid);
+    }
+
+    my $web = {
+      docpath => 'manager/web/menus/item/index.html',
+      title   => $title,
+      head    => { title => $title }
+    };
+    $web->{script} = $self->render_to_string(template => 'web/menus/item/index', format => 'js');
+    $self->render(template => 'web/menus/item/index', web => $web, title => $title, menu => $menu, item => $item);
+  }
+}
+
+# Reorder menu items
+sub menuitems_reorder ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $menuid = $self->stash('menuid');
+  my $data = $self->req->json;
+  my $order = $data->{order};
+
+  unless ($order && ref($order) eq 'ARRAY') {
+    return $self->render(json => { success => 0, error => 'Order array is required' }, status => 400);
+  }
+
+  $self->app->web->reorderMenuItems($menuid, $order);
+  $self->render(json => { success => 1 });
 }
 
 

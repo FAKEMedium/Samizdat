@@ -75,6 +75,20 @@ async function loadData() {
       const result = await response.json();
       document.querySelector('#ip').innerHTML = `<%== __x('Your ip {ip} will be appended to the confirmation request.', ip => $formdata->{ip}) %>`
         .replace('REPLACEIP', result.ip);
+
+      // Hide captcha and terms in admin mode
+      if (result.admin_mode) {
+        ['captchaimage', 'captcha', 'terms'].forEach(id => {
+          const el = document.getElementById(id);
+          if (el) {
+            let parent = el.parentElement;
+            while (parent && !parent.classList.contains('mb-3')) {
+              parent = parent.parentElement;
+            }
+            if (parent) parent.style.display = 'none';
+          }
+        });
+      }
     }
   } catch (e) {
     console.error('Request error:', e);

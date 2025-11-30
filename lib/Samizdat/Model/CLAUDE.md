@@ -1,5 +1,28 @@
 # Samizdat models
 
+## Web
+
+Routes are primarily linked to Samizdate controllers with definitions in Plugins.
+The default wildcard route is defined in the Web plugin.
+The Web model first looks for a matching route in the database,
+then looks for files in the src public directory where README.md will be
+converted to index.html.
+
+Multiple languages are supported. If a route is not found for the requested language,
+the model will fall back to the default language if available, and
+finally return a 404 if no match is found.
+
+Routes are matched against web.uris table with fields for path and resourceid.
+web.webservices and web.domains defines alias domains, primary domain,
+and subpath.
+Web pages are stored in web.resources table with fields for path, language, title, content, metadata, etc.
+The src fields store the file path in the src/public directory if applicable.
+web.resourceconnections builds a tree structure for storing resources.
+
+Menus are stored in web.menus and web.menulinks tables.
+web.menutitles stores localized titles for menus.
+Menu links can point to internal resources or external URLs.
+
 ## SMS
 
 We use a Teltonika device (RUTXR1) to send and receive SMS messages. We also use sms to http

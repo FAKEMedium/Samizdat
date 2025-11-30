@@ -93,6 +93,15 @@ async function authenticatedFetch(url, options = {}) {
     if (!options.headers.Accept) {
         options.headers.Accept = 'application/json';
     }
+    // Auto-set Content-Type for JSON bodies
+    if (options.body && typeof options.body === 'string' && !options.headers['Content-Type']) {
+        try {
+            JSON.parse(options.body);
+            options.headers['Content-Type'] = 'application/json';
+        } catch (e) {
+            // Not JSON, leave Content-Type unset
+        }
+    }
 
     try {
         const response = await fetch(url, options);
@@ -143,6 +152,30 @@ async function authenticatedFetch(url, options = {}) {
 
 // Export for use in other scripts
 window.authenticatedFetch = authenticatedFetch;
+
+// Global toast notification function
+window.showToast = function(message, type = 'success') {
+    const toastContainer = document.getElementById('toast-messages');
+    if (!toastContainer) {
+        console.warn('Toast container #toast-messages not found');
+        return;
+    }
+
+    const bgClass = type === 'danger' ? 'bg-danger' : (type === 'warning' ? 'bg-warning' : 'bg-success');
+    const toastHtml = `
+        <div class="toast align-items-center text-white ${bgClass} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        </div>
+    `;
+    toastContainer.insertAdjacentHTML('beforeend', toastHtml);
+    const toastEl = toastContainer.lastElementChild;
+    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+    toast.show();
+    toastEl.addEventListener('hidden.bs.toast', () => toastEl.remove());
+};
 
 // Simple fetch wrapper that silently handles errors (for public endpoints)
 async function simpleFetch(url, options = {}) {

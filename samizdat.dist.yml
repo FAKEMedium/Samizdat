@@ -11,7 +11,10 @@ siteurl: https://example.com:3443/
 host: example.com
 extraplugins:
   - Example
-logotype: media/images/fakenews.svg
+logotype:
+  file: media/images/fakenews.svg
+  width: 194
+  height: 73
 favicon: media/images/f.svg
 backgroundcolor: '#fff'
 themecolor: '#0b0'
@@ -103,6 +106,7 @@ manager:
     cardnumber: 9
     dbtype: postgresql
     src: src
+    topmenu: 1
     imageconversion:
       format:
         webp: 1

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <div>
+    <a href="<%== url_for('web_menus') %>" class="btn btn-secondary">
+      <%== icon 'arrow-left', {} %> <%== __('Back to menus') %>
+    </a>
+  </div>
+  <div>
+    <label for="languageSelect" class="me-2"><%== __('Language:') %></label>
+    <select id="languageSelect" class="form-select form-select-sm d-inline-block w-auto">
+      <!-- Languages populated by JS -->
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><%== __('Menu Items') %></h5>
+        <button type="button" id="addItem" class="btn btn-sm btn-primary">
+          <%== icon 'plus-circle-fill', {} %> <%== __('Add item') %>
+        </button>
+      </div>
+      <div class="card-body">
+        <div id="menuItemsTree" class="menu-tree">
+          <!-- Menu items tree populated by JS -->
+        </div>
+        <div id="noItems" class="alert alert-info d-none">
+          <%== __('No menu items. Click "Add item" to create one.') %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card">
+      <div class="card-header">
+        <h5 class="mb-0"><%== __('Menu Settings') %></h5>
+      </div>
+      <div class="card-body">
+        <form id="menuForm">
+          <div class="mb-3">
+            <label for="menuName" class="form-label"><%== __('Name') %></label>
+            <input type="text" class="form-control" id="menuName" name="name" value="<%= $menu->{name} %>">
+          </div>
+          <button type="submit" class="btn btn-primary"><%== __('Save') %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

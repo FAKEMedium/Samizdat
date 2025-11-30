@@ -1,0 +1,13 @@
+.menu-tree { padding-left: 0; }
+.menu-tree ul { padding-left: 1.5rem; margin: 0; list-style: none; }
+.menu-tree li { padding: 0.5rem 0; border: 2px solid transparent; transition: all 0.2s; }
+.menu-tree .item-row { display: flex; align-items: center; gap: 0.5rem; padding: 0.25rem; border-radius: 4px; }
+.menu-tree .drag-handle { cursor: grab; color: #999; }
+.menu-tree .drag-handle:active { cursor: grabbing; }
+.menu-tree .item-title { flex-grow: 1; }
+.menu-tree .item-path { color: #666; font-size: 0.85em; }
+.menu-tree .item-actions { white-space: nowrap; }
+.menu-tree li.dragging { opacity: 0.4; }
+.menu-tree li.drop-before { border-top-color: #0d6efd; }
+.menu-tree li.drop-after { border-bottom-color: #0d6efd; }
+.menu-tree li.drop-child .item-row { background-color: #e7f1ff; outline: 2px dashed #0d6efd; }

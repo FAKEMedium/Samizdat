@@ -17,13 +17,22 @@ sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
   my $manager = $r->manager('web')->to(controller => 'Web');
-  $manager->get('editor/toolbar')   ->to('#editor_toolbar')    ->name('web_editor_toolbar');
-  $manager->get('editor')           ->to('#editor')            ->name('web_editor');
-  $manager->get('menus')            ->to('#menus')             ->name('web_menus');
-  $manager->get('languages')        ->to('#languages')         ->name('web_languages');
-  $manager->get('images')           ->to('#images')            ->name('web_images');
-  $manager->post('save')            ->to('#save')              ->name('web_save');
-  $manager->get('/')                ->to('#index')             ->name('web_index');
+  $manager->get('editor/toolbar')                     ->to('#editor_toolbar')    ->name('web_editor_toolbar');
+  $manager->get('editor')                             ->to('#editor')            ->name('web_editor');
+  $manager->get('menus/:menuid/items/new')            ->to('#menuitem')          ->name('web_menuitem_new');
+  $manager->post('menus/:menuid/items/new')           ->to('#menuitem');
+  $manager->get('menus/:menuid/items/:menuitemid')    ->to('#menuitem')          ->name('web_menuitem');
+  $manager->post('menus/:menuid/items/:menuitemid')   ->to('#menuitem');
+  $manager->delete('menus/:menuid/items/:menuitemid') ->to('#menuitem');
+  $manager->post('menus/:menuid/reorder')             ->to('#menuitems_reorder') ->name('web_menuitems_reorder');
+  $manager->get('menus/:menuid')                      ->to('#menu')              ->name('web_menu');
+  $manager->post('menus/:menuid')                     ->to('#menu');
+  $manager->post('menus')                             ->to('#menus');
+  $manager->get('menus')                              ->to('#menus')             ->name('web_menus');
+  $manager->get('languages')                          ->to('#languages')         ->name('web_languages');
+  $manager->get('images')                             ->to('#images')            ->name('web_images');
+  $manager->post('save')                              ->to('#save')              ->name('web_save');
+  $manager->get('/')                                  ->to('#index')             ->name('web_index');
 
   # Things coming from configuration file
   my $web  = $r->home->to(controller => 'Web');
@@ -102,6 +111,35 @@ sub register ($self, $app, $conf) {
     is_rtl => sub ($c, $lang = undef) {
       $lang = $c->language unless defined $lang;
       return $lang =~ /^(ar|he|fa)$/ ? 1 : 0;
+    }
+  );
+
+  # Menu helper - renders a menu by name or ID
+  # Usage: <%== menu('main') %>
+  #        <%== menu('main', { template => 'web/chunks/menu/sidebar', skip_root => 1 }) %>
+  #        menu('main', { json => 1 })  # returns data structure for JSON rendering
+  $app->helper(
+    menu => sub ($c, $name_or_id, $options = {}) {
+      return $options->{json} ? undef : '' unless defined $name_or_id;
+
+      # Get localized menu from model
+      my $lang = $c->stash('language') // $c->config->{locale}->{default_language};
+      my $data;
+      eval { $data = $c->web->getLocalizedMenu($name_or_id, $lang) };
+      return $options->{json} ? undef : '' if $@ || !$data || !$data->{items} || !@{$data->{items}};
+
+      # Skip root level if requested (use children of first root item)
+      my $items = $data->{items};
+      if ($options->{skip_root} && @$items == 1 && $items->[0]{items} && @{$items->[0]{items}}) {
+        $items = $items->[0]{items};
+      }
+
+      # Return JSON data structure if requested
+      return { menu => $data->{menu}, items => $items } if $options->{json};
+
+      # Render the menu template
+      my $template = $options->{template} // 'web/chunks/menu/navbar';
+      return $c->render_to_string(template => $template, items => $items) // '';
     }
   );
 
