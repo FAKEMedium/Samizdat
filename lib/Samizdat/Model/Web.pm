@@ -266,22 +266,302 @@ sub includefile ($self, $dirname, $filename) {
   return $inclusion;
 }
 
-# Get the menu items for a given menu in a tree structure
-sub menuitems ($self, $menuid = 1) {
+# ============================================================================
+# MENU MANAGEMENT METHODS
+# ============================================================================
+
+# Get all menus
+sub getMenus ($self) {
+  return $self->database->db->select('web.menus', '*', {}, { order_by => 'menuid' })->hashes->to_array;
+}
+
+# Get a single menu by ID or name
+sub getMenu ($self, $id_or_name) {
+  my $where = $id_or_name =~ /^\d+$/ ? { menuid => $id_or_name } : { name => $id_or_name };
+  return $self->database->db->select('web.menus', '*', $where)->hash;
+}
+
+# Add a new menu
+sub addMenu ($self, $name, $webserviceid = 1) {
+  my $result = $self->database->db->insert('web.menus', {
+    name => $name,
+    webserviceid => $webserviceid
+  }, { returning => 'menuid' });
+  return $result->hash->{menuid};
+}
+
+# Update a menu
+sub updateMenu ($self, $menuid, $data) {
+  return $self->database->db->update('web.menus', $data, { menuid => $menuid });
+}
+
+# Delete a menu and all its items
+sub deleteMenu ($self, $menuid) {
   my $db = $self->database->db;
-  my $childrenof = {};
-  $db->select(['menuitems', ['menuitemtitles', 'menuitemid' => 'menuitemid']],
-    '*',
-    {'menuitems.menuid' => $menuid}, { order_by => {-asc => 'menuitemid', -asc => 'position'} })->hashes->each(
-    sub($item, $num) {
-      if (defined($item->{parent})) {
-        push @{ $childrenof->{ $item->{parent} }}, $item;
+  $db->query('DELETE FROM web.menuitemtitles WHERE menuitemid IN (SELECT menuitemid FROM web.menuitems WHERE menuid = ?)', $menuid);
+  $db->delete('web.menuitems', { menuid => $menuid });
+  return $db->delete('web.menus', { menuid => $menuid });
+}
+
+# Get menu items as a flat list with titles for a specific language
+# Falls back to default language if translation is missing
+sub getMenuItemsFlat ($self, $menuid, $languageid = 1) {
+  my $default_lang = $self->languages->{$self->locale->{default_language} // 'en'} // 1;
+  return $self->database->db->query(q{
+    SELECT mi.menuitemid, mi.parentid, mi.position, mi.uriid, mi.menuid, mi.children,
+           u.path, COALESCE(mit.title, mit_default.title) AS title
+    FROM web.menuitems mi
+    LEFT JOIN web.uris u ON mi.uriid = u.uriid
+    LEFT JOIN web.menuitemtitles mit ON mi.menuitemid = mit.menuitemid AND mit.languageid = ?
+    LEFT JOIN web.menuitemtitles mit_default ON mi.menuitemid = mit_default.menuitemid AND mit_default.languageid = ?
+    WHERE mi.menuid = ?
+    ORDER BY mi.position, mi.menuitemid
+  }, $languageid, $default_lang, $menuid)->hashes->to_array;
+}
+
+# Get menu items as a tree structure for a specific language
+sub getMenuItems ($self, $menuid, $languageid = 1) {
+  my $items = $self->getMenuItemsFlat($menuid, $languageid);
+
+  my %by_id = map { $_->{menuitemid} => $_ } @$items;
+  my @roots;
+
+  for my $item (@$items) {
+    $item->{items} = [];  # child items array
+    if ($item->{parentid} && exists $by_id{$item->{parentid}}) {
+      push @{ $by_id{$item->{parentid}}->{items} }, $item;
+    } else {
+      push @roots, $item;
+    }
+  }
+
+  return \@roots;
+}
+
+# Get localized menu by name or ID with language code
+# Returns { menu => {...}, items => [...] } or undef if menu doesn't exist
+sub getLocalizedMenu ($self, $name_or_id, $lang = undef) {
+  # Get the menu
+  my $menu = $self->getMenu($name_or_id);
+  return undef unless $menu;
+
+  # Resolve language code to ID
+  $lang //= $self->locale->{default_language} // 'en';
+  my $languageid = $self->languages->{$lang} // $self->languages->{en} // 1;
+
+  # Get localized menu items
+  my $items = $self->getMenuItems($menu->{menuid}, $languageid);
+
+  return {
+    menu  => $menu,
+    items => $items
+  };
+}
+
+# Get a single menu item with all its titles
+sub getMenuItem ($self, $menuitemid) {
+  my $item = $self->database->db->select('web.menuitems', '*', { menuitemid => $menuitemid })->hash;
+  return undef unless $item;
+
+  if ($item->{uriid}) {
+    my $uri = $self->database->db->select('web.uris', 'path', { uriid => $item->{uriid} })->hash;
+    $item->{path} = $uri->{path} if $uri;
+  }
+
+  $item->{titles} = $self->database->db->query(q{
+    SELECT mit.languageid, l.code, mit.title
+    FROM web.menuitemtitles mit
+    JOIN languages l ON mit.languageid = l.languageid
+    WHERE mit.menuitemid = ?
+  }, $menuitemid)->hashes->to_array;
+
+  return $item;
+}
+
+# Add a new menu item
+sub addMenuItem ($self, $menuid, $data) {
+  my $db = $self->database->db;
+
+  my $uriid = undef;
+  if ($data->{path}) {
+    my $uri = $db->select('web.uris', 'uriid', { path => $data->{path} })->hash;
+    if ($uri) {
+      $uriid = $uri->{uriid};
+    } else {
+      my $result = $db->insert('web.uris', { path => $data->{path} }, { returning => 'uriid' });
+      $uriid = $result->hash->{uriid};
+    }
+  }
+
+  my $max_pos = $db->query(
+    'SELECT COALESCE(MAX(position), 0) as maxpos FROM web.menuitems WHERE menuid = ? AND parentid IS NOT DISTINCT FROM ?',
+    $menuid, $data->{parentid}
+  )->hash->{maxpos};
+
+  my $result = $db->insert('web.menuitems', {
+    menuid => $menuid,
+    parentid => $data->{parentid},
+    position => $max_pos + 1,
+    uriid => $uriid,
+    children => 0
+  }, { returning => 'menuitemid' });
+
+  my $menuitemid = $result->hash->{menuitemid};
+
+  if ($data->{parentid}) {
+    $db->query('UPDATE web.menuitems SET children = children + 1 WHERE menuitemid = ?', $data->{parentid});
+  }
+
+  if ($data->{titles}) {
+    for my $lang_key (keys %{$data->{titles}}) {
+      my $languageid = $lang_key =~ /^\d+$/ ? $lang_key
+        : $db->select('languages', 'languageid', { code => $lang_key })->hash->{languageid};
+      $self->setMenuItemTitle($menuitemid, $languageid, $data->{titles}{$lang_key}) if $languageid;
+    }
+  }
+
+  return $menuitemid;
+}
+
+# Update a menu item
+sub updateMenuItem ($self, $menuitemid, $data) {
+  my $db = $self->database->db;
+
+  if (exists $data->{path}) {
+    my $uriid = undef;
+    if ($data->{path}) {
+      my $uri = $db->select('web.uris', 'uriid', { path => $data->{path} })->hash;
+      if ($uri) {
+        $uriid = $uri->{uriid};
       } else {
-        push @{ $childrenof->{0}}, $item;
+        my $result = $db->insert('web.uris', { path => $data->{path} }, { returning => 'uriid' });
+        $uriid = $result->hash->{uriid};
       }
     }
-  );
-  my $menuitems = [];
+    $db->update('web.menuitems', { uriid => $uriid }, { menuitemid => $menuitemid });
+  }
+
+  if (exists $data->{parentid}) {
+    my $old = $db->select('web.menuitems', 'parentid', { menuitemid => $menuitemid })->hash;
+    if (($old->{parentid} // 0) != ($data->{parentid} // 0)) {
+      if ($old->{parentid}) {
+        $db->query('UPDATE web.menuitems SET children = children - 1 WHERE menuitemid = ?', $old->{parentid});
+      }
+      if ($data->{parentid}) {
+        $db->query('UPDATE web.menuitems SET children = children + 1 WHERE menuitemid = ?', $data->{parentid});
+      }
+      $db->update('web.menuitems', { parentid => $data->{parentid} }, { menuitemid => $menuitemid });
+    }
+  }
+
+  if (exists $data->{position}) {
+    $db->update('web.menuitems', { position => $data->{position} }, { menuitemid => $menuitemid });
+  }
+
+  if ($data->{titles}) {
+    for my $lang_key (keys %{$data->{titles}}) {
+      my $languageid = $lang_key =~ /^\d+$/ ? $lang_key
+        : $db->select('languages', 'languageid', { code => $lang_key })->hash->{languageid};
+      $self->setMenuItemTitle($menuitemid, $languageid, $data->{titles}{$lang_key}) if $languageid;
+    }
+  }
+
+  return 1;
+}
+
+# Delete a menu item and its children
+sub deleteMenuItem ($self, $menuitemid) {
+  my $db = $self->database->db;
+
+  my $item = $db->select('web.menuitems', '*', { menuitemid => $menuitemid })->hash;
+  return unless $item;
+
+  my $children = $db->select('web.menuitems', 'menuitemid', { parentid => $menuitemid })->hashes;
+  for my $child (@$children) {
+    $self->deleteMenuItem($child->{menuitemid});
+  }
+
+  $db->delete('web.menuitemtitles', { menuitemid => $menuitemid });
+  $db->delete('web.menuitems', { menuitemid => $menuitemid });
+
+  if ($item->{parentid}) {
+    $db->query('UPDATE web.menuitems SET children = children - 1 WHERE menuitemid = ?', $item->{parentid});
+  }
+
+  return 1;
+}
+
+# Reorder menu items (also handles parent changes)
+sub reorderMenuItems ($self, $menuid, $order) {
+  my $db = $self->database->db;
+  my $pos = 0;
+  for my $item (@$order) {
+    # Handle both formats: [{menuitemid: 1, position: 1, parentid: 2}, ...] or [1, 2, 3, ...]
+    my ($menuitemid, $position, $parentid);
+    if (ref($item) eq 'HASH') {
+      $menuitemid = $item->{menuitemid};
+      $position = $item->{position};
+      $parentid = $item->{parentid}; # may be undef for root level
+    } else {
+      $menuitemid = $item;
+      $position = ++$pos;
+      $parentid = undef;
+    }
+
+    # Get current parentid to update children counts
+    my $current = $db->select('web.menuitems', ['parentid'], { menuitemid => $menuitemid })->hash;
+    my $oldParentId = $current->{parentid} if $current;
+
+    # Update position and parentid
+    $db->update('web.menuitems', { position => $position, parentid => $parentid }, { menuitemid => $menuitemid, menuid => $menuid });
+
+    # Update children counts if parent changed
+    if (defined $oldParentId && (!defined $parentid || $oldParentId != $parentid)) {
+      $db->query('UPDATE web.menuitems SET children = GREATEST(children - 1, 0) WHERE menuitemid = ?', $oldParentId);
+    }
+    if (defined $parentid && (!defined $oldParentId || $parentid != $oldParentId)) {
+      $db->query('UPDATE web.menuitems SET children = children + 1 WHERE menuitemid = ?', $parentid);
+    }
+  }
+  return 1;
+}
+
+# Get all titles for a menu item
+sub getMenuItemTitles ($self, $menuitemid) {
+  return $self->database->db->query(q{
+    SELECT mit.languageid, l.code, mit.title
+    FROM web.menuitemtitles mit
+    JOIN languages l ON mit.languageid = l.languageid
+    WHERE mit.menuitemid = ?
+  }, $menuitemid)->hashes->to_array;
+}
+
+# Set/update a menu item title for a specific language
+sub setMenuItemTitle ($self, $menuitemid, $languageid, $title) {
+  my $db = $self->database->db;
+
+  my $existing = $db->select('web.menuitemtitles', 'menuitemtitles', {
+    menuitemid => $menuitemid,
+    languageid => $languageid
+  })->hash;
+
+  if ($existing) {
+    return $db->update('web.menuitemtitles', { title => $title }, {
+      menuitemid => $menuitemid,
+      languageid => $languageid
+    });
+  } else {
+    return $db->insert('web.menuitemtitles', {
+      menuitemid => $menuitemid,
+      languageid => $languageid,
+      title => $title
+    });
+  }
+}
+
+# Legacy method kept for backwards compatibility
+sub menuitems ($self, $menuid = 1, $languageid = 1) {
+  return $self->getMenuItems($menuid, $languageid);
 }
 
 

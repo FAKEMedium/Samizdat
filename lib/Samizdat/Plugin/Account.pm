@@ -7,14 +7,21 @@ use Samizdat::Model::Account;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  my $manager = $r->manager('users')->to(controller => 'Account');
+  # Manager routes for user and group management
+  my $manager = $r->manager('users')->to(controller => 'Account', admin_mode => 1);
+  $manager->get('group/new')                                             ->to('#groupedit')  ->name('account_group_edit');
+  $manager->get('group/:groupid')                                        ->to('#groupedit');
   $manager->get('group')                                                 ->to('#group')      ->name('account_group');
+  $manager->get('new')                                                   ->to('#register')   ->name('account_new');
+  $manager->post('new')                                                  ->to('#register');
   $manager->get('/')                                                     ->to('#listusers')  ->name('account_index');
 
+  # Public routes for user presentation and listing
   my $users = $r->home('users')->to(controller => 'Account');
   $users->get('/:uuid')                                                ->to('#presentation') ->name('account_presentation');
   $users->get('/')                                                     ->to('#listusers')    ->name('listusers');
 
+  # Registration and private account management routes
   my $account = $r->home('account')->to(controller => 'Account');
   $account->get('register')                                            ->to('#register')     ->name('account_register');
   $account->post('register')                                           ->to('#register');

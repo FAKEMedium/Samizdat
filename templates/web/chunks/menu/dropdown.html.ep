@@ -1,0 +1,16 @@
+% # Renders menu items as a Bootstrap dropdown menu
+% # Usage: <%== include 'web/chunks/menu/dropdown', items => $items %>
+<ul class="dropdown-menu">
+% for my $item (@{$items}) {
+%   if ($item->{items} && @{$item->{items}}) {
+  <li class="dropdown-submenu">
+    <a class="dropdown-item dropdown-toggle" href="<%= $item->{path} // '#' %>">
+      <%= $item->{title} // 'Untitled' %>
+    </a>
+    <%== include 'web/chunks/menu/dropdown', items => $item->{items} %>
+  </li>
+%   } else {
+  <li><a class="dropdown-item" href="<%= $item->{path} // '#' %>"><%= $item->{title} // 'Untitled' %></a></li>
+%   }
+% }
+</ul>

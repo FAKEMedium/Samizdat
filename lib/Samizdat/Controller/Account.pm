@@ -173,15 +173,32 @@ sub logout ($self) {
 sub register ($self) {
   my $formdata = {};
   my $accept = $self->req->headers->{headers}->{accept}->[0] // '';
-  
+
+  # Check if user is admin (either via route stash or session)
+  my $admin_mode = $self->stash('admin_mode') // 0;
+  if (!$admin_mode) {
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    if ($authcookie) {
+      my $session = $self->app->account->session($authcookie);
+      if ($session && $session->{username}) {
+        my $admins = $self->config->{manager}->{account}->{admins} // {};
+        my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+        $admin_mode = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+      }
+    }
+  }
+
   if ($accept =~ /json/) {
     $formdata->{ip} = $self->getip;
+    $formdata->{admin_mode} = $admin_mode;
     if ($self->req->method =~ /^(POST)$/i) {
       my $valid = {};
       my $errors = {};
       my $v = $self->validation;
 
-      for my $field (qw(newusername newpassword email terms captcha)) {
+      # Admin registration skips captcha and terms
+      my @fields = $admin_mode ? qw(newusername newpassword email) : qw(newusername newpassword email terms captcha);
+      for my $field (@fields) {
         $formdata->{$field} = trim $self->param($field);
         if (!$v->required($field, 'trim', 'not_empty')->is_valid) {
           $valid->{$field} = "is-invalid";
@@ -225,13 +242,16 @@ sub register ($self) {
         }
       }
 
-      if (!$self->validate_captcha($formdata->{captcha})) {
-        $v->error(captcha => [ 'Captcha was wrong' ]);
-        $errors->{captcha} = $self->app->__('Captcha was wrong');
-        $valid->{captcha} = "is-invalid";
-      } else {
-        $valid->{captcha} = "is-valid";
-        $errors->{captcha} = '';
+      # Skip captcha validation in admin mode
+      unless ($admin_mode) {
+        if (!$self->validate_captcha($formdata->{captcha})) {
+          $v->error(captcha => [ 'Captcha was wrong' ]);
+          $errors->{captcha} = $self->app->__('Captcha was wrong');
+          $valid->{captcha} = "is-invalid";
+        } else {
+          $valid->{captcha} = "is-valid";
+          $errors->{captcha} = '';
+        }
       }
 
       if ($v->has_error) {
@@ -300,11 +320,16 @@ sub register ($self) {
   }
 
   # Handle regular GET request (return HTML page)
+  # Admin mode requires authentication (HTML shows login modal)
+  if ($admin_mode) {
+    return unless $self->authorize;
+  }
+
   my $title = $self->app->__('Register account');
   my $web = { title => $title };
   $web->{sidebar} = $self->render_to_string(template => 'account/register/sidebar');
-  $web->{script} .= $self->render_to_string(template => 'account/register/index', formdata => { ip => 'REPLACEIP' }, format => 'js');
-  return $self->render(web => $web, title => $title, template => 'account/register/index', formdata => { ip => 'REPLACEIP' }, status => 200);
+  $web->{script} .= $self->render_to_string(template => 'account/register/index', formdata => { ip => 'REPLACEIP', admin_mode => $admin_mode }, format => 'js');
+  return $self->render(web => $web, title => $title, template => 'account/register/index', formdata => { ip => 'REPLACEIP', admin_mode => $admin_mode }, status => 200);
 }
 
 

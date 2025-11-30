@@ -1,0 +1,18 @@
+% # Renders menu items as a Bootstrap navbar
+% # Usage: <%== include 'web/chunks/menu/navbar', items => $items %>
+<ul class="navbar-nav">
+% for my $item (@{$items}) {
+%   if ($item->{items} && @{$item->{items}}) {
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= $item->{title} // 'Untitled' %>
+    </a>
+    <%== include 'web/chunks/menu/dropdown', items => $item->{items} %>
+  </li>
+%   } else {
+  <li class="nav-item">
+    <a class="nav-link" href="<%= $item->{path} // '#' %>"><%= $item->{title} // 'Untitled' %></a>
+  </li>
+%   }
+% }
+</ul>

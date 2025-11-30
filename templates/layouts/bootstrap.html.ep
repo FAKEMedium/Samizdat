@@ -52,7 +52,7 @@
         <div id="menuwrapper" class="container position-relative" aria-live="polite">
           <nav id="sitenav" class="navbar navbar-expand-sm col-12 col-xl-12 pl-3 pl-sm-2 font-weight-bold">
             <div class="collapse navbar-collapse" id="navbarResponsive">
-              <%== web->indent(eval {trim include 'chunks/menu'}, 7) =%>
+              <%== web->indent(eval {trim (menu(config->{manager}->{web}->{topmenu}, {skip_root => 1}) || include 'chunks/menu')}, 7) =%>
             </div>
           </nav>
           <aside id="leftlinks">
@@ -112,7 +112,7 @@
 
 % }
       function runEndJSScript() {
-        <%== web->indent(eval {trim $web->{script}}, 4) =%>
+        <%== web->indent(eval {trim ($web->{script} // '')}, 4) =%>
       }
       if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', runEndJSScript);

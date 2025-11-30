@@ -22,8 +22,8 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/add"><%== __('Add user') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/group/add"><%== __('Add group') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('account_new') %>"><%== __('Add user') %></a>
+<a class="badge rounded-pill text-bg-primary" href="<%== url_for('account_group_new') %>"><%== __('Add group') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/privilege"><%== __('Privileges') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/privilege/set"><%== __('Privilege sets') %></a>
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>user/role"><%== __('Roles') %></a>

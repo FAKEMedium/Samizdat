@@ -3,14 +3,14 @@
     <div class="col-3 col-xl-3 pr-0 py-1 py-sm-2">
       <a href="/" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
           'logotype',
-          'src/public/' . config->{logotype},
+          'src/public/' . config->{logotype}->{file},
           {
             id         => 'logotype',
             prefix     => 'anysvg',
             extraclass => 'img-fluid my-2',
             title      => config->{sitename},
-            height     => 73,
-            width      => 194,
+            height     => config->{logotype}->{height} || 50,
+            width      => config->{logotype}->{width} || 150,
           }
           %></a>
     </div>
