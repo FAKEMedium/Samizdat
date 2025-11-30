@@ -88,7 +88,7 @@ config.module.rules.push({
           modules: false
         }]
       ],
-      sourceType: 'unambiguous'
+      sourceType: 'module'
     }
   }
 });
