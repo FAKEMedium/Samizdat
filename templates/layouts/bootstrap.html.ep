@@ -39,7 +39,7 @@
       </defs>
     </svg>
     <aside aria-live="polite" aria-atomic="true" class="sticky-top">
-      <div id="toast-messages" class="toast-container top-0 start-0 p-3">
+      <div id="toast-messages" class="toast-container top-0 start-0">
         <!-- Toast messages will be injected here -->
       </div>
     </aside>
