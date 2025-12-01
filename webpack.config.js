@@ -47,6 +47,12 @@ const config = {
           name: 'editor',
           chunks: 'all',
           enforce: true
+        },
+        toastui: {
+          test: /[\\/]node_modules[\\/]@toast-ui/,
+          name: 'toastui-vendor',
+          chunks: 'all',
+          enforce: true
         }
       }
     }
@@ -58,6 +64,7 @@ config.entry['authenticated'] = `${PATHS.sharedSrc}/js/authenticated.js`;
 config.entry['sw'] = `${PATHS.sharedSrc}/js/sw.js`;
 // config.entry['simple-editor'] = `${PATHS.sharedSrc}/js/simple-editor.js`;
 config.entry['tiptap'] = `${PATHS.sharedSrc}/js/tiptap.js`;
+config.entry['toastui'] = `${PATHS.sharedSrc}/js/toastui.js`;
 
 if (!isDev) {
   config.optimization.minimizer.push(
@@ -139,6 +146,10 @@ config.plugins.push(
         'modal-open',
         'fade',
         'in'
+      ],
+      greedy: [
+        /^toastui-/,
+        /^tui-/
       ]
     }
   })
