@@ -12,7 +12,7 @@ host: example.com
 extraplugins:
   - Example
 logotype:
-  file: media/images/fakenews.svg
+  file: public/media/images/fakenews.svg
   width: 194
   height: 73
 favicon: media/images/f.svg

@@ -1,9 +1,10 @@
+% my $file = sprintf('%s/%s', config->{manager}->{web}->{src}, config->{logotype}->{file});
 <div id="logobar" class="container bg-logobar" aria-live="polite">
   <div class="row justify-content-between position-relative">
     <div class="col-3 col-xl-3 pr-0 py-1 py-sm-2">
       <a href="/" title="<%== __('Logotype leading to start') %>" aria-label="<%== __('Logotype leading to start page') %>"><%== anysvg
           'logotype',
-          'src/public/' . config->{logotype}->{file},
+          $file,
           {
             id         => 'logotype',
             prefix     => 'anysvg',
