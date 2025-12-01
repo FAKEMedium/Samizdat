@@ -9,6 +9,29 @@ import { Editor } from '@toast-ui/editor';
 console.log('Toast UI imports loaded successfully');
 
 /**
+ * Remove soft line breaks (word wrap) while preserving paragraph breaks
+ * @param {string} text - Markdown text with soft line breaks
+ * @returns {string} - Text with soft breaks removed
+ */
+function unwrapSoftBreaks(text) {
+  if (!text) return text;
+
+  // Split into blocks (paragraphs, code blocks, etc.)
+  // Preserve double newlines (paragraph breaks) and lines starting with special chars
+  return text
+    // Normalize line endings
+    .replace(/\r\n/g, '\n')
+    // Protect paragraph breaks (double newlines)
+    .replace(/\n\n/g, '\n\n')
+    // Unwrap soft breaks: single newline NOT followed by special markdown chars
+    // Keep breaks before: #, -, *, >, |, \d+., ```, <, [
+    .replace(/\n(?![\n#\-*>|\d`<\[])/g, ' ')
+    // Clean up multiple spaces
+    .replace(/  +/g, ' ')
+    .trim();
+}
+
+/**
  * Toast UI Markdown Editor Manager
  * Transforms editable areas into Toast UI editors with markdown support
  */
@@ -121,31 +144,31 @@ class ToastUIMarkdownManager {
   getSourceMarkdown(elementId, element = null) {
     if (!this.sourceData) return null;
 
+    let content = null;
+
     if (elementId === 'thecontent' || elementId === 'maincontent') {
-      return this.sourceData.main?.content || null;
-    }
-
-    if (elementId === 'headline' || elementId === 'thetitle' || elementId === 'maintitle') {
-      return this.sourceData.main?.title || null;
-    }
-
-    if (this.sourceData.sidecards && element) {
+      content = this.sourceData.main?.content || null;
+    } else if (elementId === 'headline' || elementId === 'thetitle' || elementId === 'maintitle') {
+      content = this.sourceData.main?.title || null;
+    } else if (this.sourceData.sidecards && element) {
       const cardContainer = element.closest('[data-src]');
       if (cardContainer) {
         const dataSrc = cardContainer.dataset.src;
         for (const card of this.sourceData.sidecards) {
           if (card.src === dataSrc) {
             if (elementId.endsWith('-title')) {
-              return card.title || '';
+              content = card.title || '';
             } else {
-              return card.content || '';
+              content = card.content || '';
             }
+            break;
           }
         }
       }
     }
 
-    return null;
+    // Unwrap soft line breaks
+    return content ? unwrapSoftBreaks(content) : null;
   }
 
   /**
@@ -157,6 +180,7 @@ class ToastUIMarkdownManager {
     const elementId = element.id || `element-${index}`;
     const isTitle = element.classList.contains('title') ||
                     element.tagName.match(/^H[1-6]$/i);
+    const isSidecard = element.classList.contains('card');
 
     let content = this.getSourceMarkdown(elementId, element);
     const hasMarkdownSource = content !== null;
@@ -175,7 +199,8 @@ class ToastUIMarkdownManager {
 
     const editorConfig = {
       el: editorContainer,
-      height: isTitle ? '100px' : '400px',
+      height: 'auto',
+      minHeight: '100px',
       initialEditType: 'markdown',
       previewStyle: 'vertical',
       initialValue: content || '',
@@ -216,6 +241,25 @@ class ToastUIMarkdownManager {
       editorConfig.minHeight = '1em';
       editorConfig.toolbarItems = [];
       editorConfig.previewStyle = 'tab';  // No preview for titles
+    }
+
+    // Sidecard config - edit full card markdown
+    if (isSidecard) {
+      editorConfig.minHeight = '150px';
+      // For sidecards, get the full source markdown (title + content combined)
+      const dataSrc = element.dataset.src;
+      if (this.sourceData?.sidecards && dataSrc) {
+        for (const card of this.sourceData.sidecards) {
+          if (card.src === dataSrc) {
+            // Combine title and content as markdown, unwrap soft breaks
+            const title = card.title || '';
+            const cardContent = unwrapSoftBreaks(card.content || '');
+            content = `# ${title}\n\n${cardContent}`;
+            break;
+          }
+        }
+      }
+      editorConfig.initialValue = content || '';
     }
 
     const editor = new Editor(editorConfig);
@@ -293,6 +337,36 @@ class ToastUIMarkdownManager {
    */
   setPreviewMode(showPreview) {
     document.body.classList.toggle('preview-mode', showPreview);
+
+    // For sidecards, show placeholder content in preview mode
+    this.editors.forEach((editor, element) => {
+      if (element.classList.contains('card')) {
+        const editorContainer = element.querySelector('.toastui-editor-defaultUI');
+        if (showPreview) {
+          // Hide editor, show placeholder
+          if (editorContainer) editorContainer.style.display = 'none';
+          let placeholder = element.querySelector('.sidecard-placeholder');
+          if (!placeholder) {
+            placeholder = document.createElement('div');
+            placeholder.className = 'sidecard-placeholder';
+            placeholder.innerHTML = `
+              <h2 class="card-header p-1 p-sm-2 title">[Title]</h2>
+              <div class="card-body p-1 p-sm-2">
+                <p class="text-muted">[Card content]</p>
+              </div>
+            `;
+            element.appendChild(placeholder);
+          }
+          placeholder.style.display = 'block';
+        } else {
+          // Show editor, hide placeholder
+          if (editorContainer) editorContainer.style.display = '';
+          const placeholder = element.querySelector('.sidecard-placeholder');
+          if (placeholder) placeholder.style.display = 'none';
+        }
+      }
+    });
+
     console.log(`ToastUI: Preview mode ${showPreview ? 'enabled' : 'disabled'}`);
   }
 }
@@ -369,6 +443,21 @@ style.textContent = `
     font-size: 2.5rem;
     font-weight: 500;
     line-height: 1.2;
+  }
+  /* Auto-grow editors - no scrollbars */
+  .edit-mode .toastui-editor-defaultUI,
+  .edit-mode .toastui-editor-main,
+  .edit-mode .toastui-editor-md-container,
+  .edit-mode .toastui-editor-ww-container,
+  .edit-mode .toastui-editor,
+  .edit-mode .ProseMirror {
+    height: auto !important;
+    min-height: 100px !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  .edit-mode .toastui-editor-main {
+    overflow: visible !important;
   }
   /* Write mode: show editor, hide preview, full width */
   .edit-mode .toastui-editor-md-splitter,
