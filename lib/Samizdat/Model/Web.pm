@@ -982,8 +982,8 @@ sub get_source_content ($self, $docpath, $language) {
     my ($title) = $content =~ /^#\s+(.+)$/m;
     # Strip title from content
     my $body = $strip_title->($content);
-    # Convert any inline HTML (tables, etc.) to GFM markdown
-    $body = $self->html_to_markdown($body);
+    # Note: Don't convert through pandoc - file is already markdown
+    # html_to_markdown would escape [, ], # etc.
     return { title => $title // '', content => $body };
   };
 
