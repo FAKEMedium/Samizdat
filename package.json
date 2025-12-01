@@ -63,6 +63,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@tiptap/core": "^3.1.0",
+    "@toast-ui/editor": "^3.2.2",
     "@tiptap/extension-image": "^3.1.0",
     "@tiptap/extension-link": "^3.1.0",
     "@tiptap/extension-table": "^3.3.0",
