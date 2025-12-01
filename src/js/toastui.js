@@ -177,8 +177,7 @@ class ToastUIMarkdownManager {
       el: editorContainer,
       height: isTitle ? '100px' : '400px',
       initialEditType: 'markdown',
-      previewStyle: 'tab',
-      toolbarItems: [],  // No toolbar in editor, use headlinenav toggler instead
+      previewStyle: 'vertical',
       initialValue: content || '',
       usageStatistics: false,
       hooks: {
@@ -211,9 +210,12 @@ class ToastUIMarkdownManager {
       }
     };
 
-    // Smaller height for titles
+    // Compact config for titles - no toolbar, auto height
     if (isTitle) {
-      editorConfig.height = '80px';
+      editorConfig.height = 'auto';
+      editorConfig.minHeight = '1em';
+      editorConfig.toolbarItems = [];
+      editorConfig.previewStyle = 'tab';  // No preview for titles
     }
 
     const editor = new Editor(editorConfig);
@@ -286,24 +288,11 @@ class ToastUIMarkdownManager {
   }
 
   /**
-   * Set preview mode for all editors (markdown mode only)
-   * @param {boolean} showPreview - true to show preview, false to show editor
+   * Set preview mode for all editors
+   * @param {boolean} showPreview - true to show preview only, false to show editor only
    */
   setPreviewMode(showPreview) {
-    this.editors.forEach((editor) => {
-      if (showPreview) {
-        editor.changePreviewStyle('tab');
-        // Switch to preview tab
-        const container = editor.getEditorElements().mdEditor.parentElement;
-        const previewTab = container?.querySelector('.toastui-editor-tabs .tab-item:last-child');
-        previewTab?.click();
-      } else {
-        // Switch to write tab
-        const container = editor.getEditorElements().mdEditor.parentElement;
-        const writeTab = container?.querySelector('.toastui-editor-tabs .tab-item:first-child');
-        writeTab?.click();
-      }
-    });
+    document.body.classList.toggle('preview-mode', showPreview);
     console.log(`ToastUI: Preview mode ${showPreview ? 'enabled' : 'disabled'}`);
   }
 }
@@ -329,10 +318,77 @@ style.textContent = `
   .edit-mode .editable.title {
     border-color: #ffc107;
   }
-  /* Hide built-in mode switch and tabs in editors - controlled from headlinenav */
-  .toastui-editor-mode-switch,
-  .toastui-editor-tabs {
+  /* Hide built-in mode switch - controlled from headlinenav */
+  .toastui-editor-mode-switch {
     display: none !important;
+  }
+  /* Compact title editors */
+  .editable.title .toastui-editor-toolbar,
+  h1.editable .toastui-editor-toolbar,
+  h2.editable .toastui-editor-toolbar,
+  h3.editable .toastui-editor-toolbar,
+  h4.editable .toastui-editor-toolbar,
+  h5.editable .toastui-editor-toolbar,
+  h6.editable .toastui-editor-toolbar {
+    display: none !important;
+  }
+  .editable.title .toastui-editor-defaultUI,
+  h1.editable .toastui-editor-defaultUI,
+  h2.editable .toastui-editor-defaultUI {
+    border: none !important;
+  }
+  .editable.title .toastui-editor-main,
+  h1.editable .toastui-editor-main,
+  h2.editable .toastui-editor-main {
+    min-height: auto !important;
+    height: auto !important;
+  }
+  .editable.title .toastui-editor-md-container,
+  h1.editable .toastui-editor-md-container,
+  h2.editable .toastui-editor-md-container {
+    height: auto !important;
+  }
+  .editable.title .ProseMirror,
+  h1.editable .ProseMirror,
+  h2.editable .ProseMirror {
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+  /* Title text styling */
+  h1.editable .toastui-editor .ProseMirror {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  h2.editable .toastui-editor .ProseMirror {
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .editable.title .toastui-editor .ProseMirror {
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  /* Write mode: show editor, hide preview, full width */
+  .edit-mode .toastui-editor-md-splitter,
+  .edit-mode .toastui-editor-md-preview {
+    display: none !important;
+  }
+  .edit-mode .toastui-editor-md-container,
+  .edit-mode .toastui-editor-md-container .toastui-editor-md-tab-container,
+  .edit-mode .toastui-editor-md-container .toastui-editor {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+  /* Preview mode: show preview, hide editor */
+  .preview-mode .toastui-editor-md-container .toastui-editor-md-splitter,
+  .preview-mode .toastui-editor-md-container .toastui-editor {
+    display: none !important;
+  }
+  .preview-mode .toastui-editor-md-preview {
+    display: block !important;
+    width: 100% !important;
   }
 `;
 document.head.appendChild(style);
