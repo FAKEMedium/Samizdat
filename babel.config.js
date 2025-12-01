@@ -1,4 +1,4 @@
-1module.exports = {
+module.exports = {
   presets: [
     [
       '@babel/preset-env',
@@ -7,7 +7,7 @@
           browsers: ['last 2 versions', 'not dead', '> 1%', 'not ie 11']
         },
         useBuiltIns: false,
-        modules: false
+        modules: 'auto'
       }
     ]
   ],

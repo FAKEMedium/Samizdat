@@ -71,6 +71,7 @@ if (!isDev) {
 config.module.rules.push({
   test: /\.js$/,
   exclude: /node_modules/,
+  type: 'javascript/auto',
   resolve: {
     fullySpecified: false
   },
