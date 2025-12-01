@@ -35,7 +35,7 @@
     "@babel/preset-env": "^7.28.5",
     "@mojojs/core": "^1.26.4",
     "autoprefixer": "^10.4.14",
-    "babel-loader": "^9.2.1",
+    "babel-loader": "^10.0.0",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
     "css-minimizer-webpack-plugin": "^4.2.2",
