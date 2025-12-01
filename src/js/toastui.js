@@ -177,17 +177,21 @@ class ToastUIMarkdownManager {
       el: editorContainer,
       height: isTitle ? '100px' : '400px',
       initialEditType: 'markdown',
-      previewStyle: 'vertical',
+      previewStyle: 'tab',
+      toolbarItems: [],  // No toolbar in editor, use headlinenav toggler instead
       initialValue: content || '',
       usageStatistics: false,
       hooks: {
         addImageBlobHook: async (blob, callback) => {
-          // Upload image via REST endpoint
+          // Get image upload URL from data attribute or default
+          const theContent = document.getElementById('thecontent');
+          const imageUploadUrl = theContent?.dataset.imageUpload || '/manager/web/images';
+
           const formData = new FormData();
           formData.append('file', blob);
 
           try {
-            const res = await fetch('/api/images', {
+            const res = await fetch(imageUploadUrl, {
               method: 'POST',
               body: formData,
               credentials: 'same-origin'
@@ -207,10 +211,9 @@ class ToastUIMarkdownManager {
       }
     };
 
-    // Simpler config for titles
+    // Smaller height for titles
     if (isTitle) {
-      editorConfig.toolbarItems = [];
-      editorConfig.previewStyle = 'tab';
+      editorConfig.height = '80px';
     }
 
     const editor = new Editor(editorConfig);
@@ -244,6 +247,65 @@ class ToastUIMarkdownManager {
     if (!editor) return null;
     return asMarkdown ? editor.getMarkdown() : editor.getHTML();
   }
+
+  /**
+   * Get current editor mode for all editors
+   * @returns {string} 'markdown' or 'wysiwyg'
+   */
+  getCurrentMode() {
+    // All editors share the same mode, just check the first one
+    const firstEditor = this.editors.values().next().value;
+    if (!firstEditor) return 'markdown';
+    return firstEditor.isMarkdownMode() ? 'markdown' : 'wysiwyg';
+  }
+
+  /**
+   * Set editor mode for all editors
+   * @param {string} mode - 'markdown' or 'wysiwyg'
+   */
+  setMode(mode) {
+    this.editors.forEach((editor) => {
+      if (mode === 'markdown') {
+        editor.changeMode('markdown');
+      } else {
+        editor.changeMode('wysiwyg');
+      }
+    });
+    console.log(`ToastUI: All editors switched to ${mode} mode`);
+  }
+
+  /**
+   * Toggle between markdown and wysiwyg modes
+   * @returns {string} The new mode
+   */
+  toggleMode() {
+    const currentMode = this.getCurrentMode();
+    const newMode = currentMode === 'markdown' ? 'wysiwyg' : 'markdown';
+    this.setMode(newMode);
+    return newMode;
+  }
+
+  /**
+   * Set preview mode for all editors (markdown mode only)
+   * @param {boolean} showPreview - true to show preview, false to show editor
+   */
+  setPreviewMode(showPreview) {
+    this.editors.forEach((editor) => {
+      if (showPreview) {
+        editor.changePreviewStyle('tab');
+        // Switch to preview tab
+        const container = editor.getEditorElements().mdEditor.parentElement;
+        const previewTab = container?.querySelector('.toastui-editor-tabs .tab-item:last-child');
+        previewTab?.click();
+      } else {
+        // Switch to write tab
+        const container = editor.getEditorElements().mdEditor.parentElement;
+        const writeTab = container?.querySelector('.toastui-editor-tabs .tab-item:first-child');
+        writeTab?.click();
+      }
+    });
+    console.log(`ToastUI: Preview mode ${showPreview ? 'enabled' : 'disabled'}`);
+  }
 }
 
 // Create global instance
@@ -266,6 +328,11 @@ style.textContent = `
   }
   .edit-mode .editable.title {
     border-color: #ffc107;
+  }
+  /* Hide built-in mode switch and tabs in editors - controlled from headlinenav */
+  .toastui-editor-mode-switch,
+  .toastui-editor-tabs {
+    display: none !important;
   }
 `;
 document.head.appendChild(style);

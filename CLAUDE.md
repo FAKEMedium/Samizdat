@@ -198,3 +198,4 @@ prove -l -v t/00-basic.t
 - don't query database in controller. Use methods in model instead!
 - @index.js#L7 use url_for. dont hardcode links
 - supply password when calling psql
+- its in authenticated

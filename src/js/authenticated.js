@@ -57,38 +57,44 @@ window.handleAuthForm = function(formId, endpoint) {
     }
 };
 
-// Dynamic loading of TipTap markdown editor for page editing
-window.loadTipTapEditor = async function() {
-    if (window.tiptapMarkdown) {
+// Dynamic loading of Toast UI markdown editor for page editing
+window.loadToastUIEditor = async function() {
+    if (window.toastUIMarkdown) {
         return true;
     }
 
-    // Load the TipTap vendor chunk first (contains @tiptap/* dependencies)
-    const editorScript = document.createElement('script');
-    editorScript.src = '/assets/editor.js';
-    document.head.appendChild(editorScript);
+    // Load the Toast UI vendor chunk first (contains @toast-ui/* dependencies)
+    const vendorScript = document.createElement('script');
+    vendorScript.src = '/assets/toastui-vendor.js';
+    document.head.appendChild(vendorScript);
+
+    // Load vendor CSS
+    const vendorCSS = document.createElement('link');
+    vendorCSS.rel = 'stylesheet';
+    vendorCSS.href = '/assets/toastui-vendor.css';
+    document.head.appendChild(vendorCSS);
 
     await new Promise((resolve) => {
-        editorScript.onload = () => resolve();
+        vendorScript.onload = () => resolve();
     });
 
-    // Then load the tiptap markdown editor bundle
+    // Then load the toastui markdown editor bundle
     const script = document.createElement('script');
-    script.src = '/assets/tiptap.js';
+    script.src = '/assets/toastui.js';
     document.head.appendChild(script);
 
     return new Promise((resolve, reject) => {
         script.onload = () => {
             // Wait for module initialization
             setTimeout(() => {
-                if (window.tiptapMarkdown) {
+                if (window.toastUIMarkdown) {
                     resolve(true);
                 } else {
-                    reject(new Error('TipTap markdown editor failed to initialize'));
+                    reject(new Error('Toast UI markdown editor failed to initialize'));
                 }
             }, 100);
         };
-        script.onerror = () => reject(new Error('Failed to load tiptap.js'));
+        script.onerror = () => reject(new Error('Failed to load toastui.js'));
     });
 };
 
@@ -263,18 +269,18 @@ function handleToolbarCommand(element) {
     window.currentEditor?.element.focus();
 }
 
-// Initialize page editor - dynamically load tiptap.js when needed
+// Initialize page editor - dynamically load toastui.js when needed
 window.initPageEditor = async function() {
-    console.log('Loading TipTap markdown editor...');
+    console.log('Loading Toast UI markdown editor...');
 
     try {
-        // Load tiptap.js if not already loaded
-        if (!window.tiptapMarkdown) {
-            await window.loadTipTapEditor();
+        // Load toastui.js if not already loaded
+        if (!window.toastUIMarkdown) {
+            await window.loadToastUIEditor();
         }
 
-        // Enter edit mode - transforms all .editable elements into TipTap editors
-        window.tiptapMarkdown.enterEditMode();
+        // Enter edit mode - transforms all .editable elements into Toast UI editors
+        window.toastUIMarkdown.enterEditMode();
         return true;
     } catch (error) {
         console.error('Error in initPageEditor:', error);
@@ -296,9 +302,153 @@ document.querySelectorAll('[id^="cardcol-"]').forEach(card => {
 // Check if we're on a markdown page and show edit button
 const theContent = document.getElementById('thecontent');
 const editButton = document.getElementById('editPageButton');
+const headlinenav = document.getElementById('headlinenav');
+
+// Store original headlinenav content
+let originalHeadlinenavContent = null;
 
 console.log('theContent found:', theContent);
 console.log('editButton found:', editButton);
+
+/**
+ * Create the editor toolbar HTML to replace headlinenav content
+ */
+function createEditorToolbar() {
+    const currentMode = window.toastUIMarkdown?.getCurrentMode() || 'markdown';
+
+    return `
+        <li class="nav-item">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Editor mode">
+                <button type="button" class="btn ${currentMode === 'markdown' ? 'btn-primary' : 'btn-outline-primary'}" id="modeMarkdown" title="Markdown mode">MD</button>
+                <button type="button" class="btn ${currentMode === 'wysiwyg' ? 'btn-primary' : 'btn-outline-primary'}" id="modeWysiwyg" title="WYSIWYG mode">WYSIWYG</button>
+            </div>
+        </li>
+        <li class="nav-item ms-2">
+            <div class="btn-group btn-group-sm" role="group" aria-label="Write/Preview">
+                <button type="button" class="btn btn-primary" id="modeWrite" title="Write">Write</button>
+                <button type="button" class="btn btn-outline-primary" id="modePreview" title="Preview">Preview</button>
+            </div>
+        </li>
+    `;
+}
+
+/**
+ * Setup editor toolbar event handlers
+ */
+function setupEditorToolbarHandlers() {
+    const mdBtn = document.getElementById('modeMarkdown');
+    const wysiwygBtn = document.getElementById('modeWysiwyg');
+    const writeBtn = document.getElementById('modeWrite');
+    const previewBtn = document.getElementById('modePreview');
+
+    // MD/WYSIWYG toggler
+    if (mdBtn && wysiwygBtn) {
+        mdBtn.addEventListener('click', () => {
+            window.toastUIMarkdown?.setMode('markdown');
+            mdBtn.classList.remove('btn-outline-primary');
+            mdBtn.classList.add('btn-primary');
+            wysiwygBtn.classList.remove('btn-primary');
+            wysiwygBtn.classList.add('btn-outline-primary');
+        });
+
+        wysiwygBtn.addEventListener('click', () => {
+            window.toastUIMarkdown?.setMode('wysiwyg');
+            wysiwygBtn.classList.remove('btn-outline-primary');
+            wysiwygBtn.classList.add('btn-primary');
+            mdBtn.classList.remove('btn-primary');
+            mdBtn.classList.add('btn-outline-primary');
+        });
+    }
+
+    // Write/Preview toggler
+    if (writeBtn && previewBtn) {
+        writeBtn.addEventListener('click', () => {
+            window.toastUIMarkdown?.setPreviewMode(false);
+            writeBtn.classList.remove('btn-outline-primary');
+            writeBtn.classList.add('btn-primary');
+            previewBtn.classList.remove('btn-primary');
+            previewBtn.classList.add('btn-outline-primary');
+        });
+
+        previewBtn.addEventListener('click', () => {
+            window.toastUIMarkdown?.setPreviewMode(true);
+            previewBtn.classList.remove('btn-outline-primary');
+            previewBtn.classList.add('btn-primary');
+            writeBtn.classList.remove('btn-primary');
+            writeBtn.classList.add('btn-outline-primary');
+        });
+    }
+}
+
+/**
+ * Handle save
+ */
+async function handleSave() {
+    const currentPath = window.location.pathname;
+    const saveUrl = theContent?.dataset.save;
+    if (!saveUrl) {
+        alert('Save URL not found');
+        return;
+    }
+
+    if (!window.toastUIMarkdown) {
+        alert('Editor not initialized');
+        return;
+    }
+
+    const editorData = window.toastUIMarkdown.getContent(true);
+    console.log('Saving markdown content:', editorData);
+
+    try {
+        const response = await fetch(saveUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                docpath: currentPath,
+                editors: editorData,
+                format: 'markdown'
+            })
+        });
+
+        const result = await response.json();
+        if (result.success) {
+            window.toastUIMarkdown.exitEditMode(true);
+            console.log('Markdown content saved successfully');
+            restoreHeadlinenav();
+        } else {
+            alert('Failed to save: ' + result.error);
+        }
+    } catch (error) {
+        console.error('Save error:', error);
+        alert('Failed to save content. Please try again.');
+    }
+}
+
+/**
+ * Handle cancel
+ */
+function handleCancel() {
+    if (window.toastUIMarkdown) {
+        window.toastUIMarkdown.exitEditMode(false);
+        console.log('Edit cancelled, content reverted');
+    }
+    restoreHeadlinenav();
+}
+
+/**
+ * Restore original headlinenav content
+ */
+function restoreHeadlinenav() {
+    if (headlinenav && originalHeadlinenavContent !== null) {
+        headlinenav.innerHTML = originalHeadlinenavContent;
+        originalHeadlinenavContent = null;
+        console.log('Headlinenav restored');
+    }
+}
+
+// Get save/cancel buttons from headline
+const saveButton = document.getElementById('savePageButton');
+const cancelButton = document.getElementById('cancelPageButton');
 
 if (theContent && editButton) {
     // Check if user is authenticated (button visibility is controlled by auth class toggling)
@@ -309,108 +459,61 @@ if (theContent && editButton) {
             editButton.classList.remove('d-none');
         }
     };
-    
+
     // Check immediately and after a short delay (for auth state to be set)
     checkAuth();
     setTimeout(checkAuth, 100);
-    
+
     // Handle edit button click
     editButton.addEventListener('click', async () => {
         console.log('Edit button clicked!');
 
         try {
-            // Initialize TipTap editors if not already done
-            if (!window.tiptapMarkdown?.isEditMode) {
-                console.log('Initializing TipTap markdown editor...');
+            // Initialize Toast UI editors if not already done
+            if (!window.toastUIMarkdown?.isEditMode) {
+                console.log('Initializing Toast UI markdown editor...');
                 await window.initPageEditor();
             }
 
-            // Show save/cancel buttons, hide edit button
-            editButton.classList.add('d-none');
-            const saveButton = document.getElementById('savePageButton');
-            const cancelButton = document.getElementById('cancelPageButton');
+            // Show save/cancel, hide edit
+            if (editButton) editButton.classList.add('d-none');
             if (saveButton) saveButton.classList.remove('d-none');
             if (cancelButton) cancelButton.classList.remove('d-none');
 
-            console.log('TipTap edit mode enabled');
+            // Replace headlinenav content with mode toggler only
+            if (headlinenav && originalHeadlinenavContent === null) {
+                originalHeadlinenavContent = headlinenav.innerHTML;
+                headlinenav.innerHTML = createEditorToolbar();
+                setupEditorToolbarHandlers();
+                console.log('Headlinenav replaced with mode toggler');
+            }
+
+            console.log('Toast UI edit mode enabled');
         } catch (error) {
             console.error('Error in edit button handler:', error);
         }
     });
     console.log('Edit button click handler attached');
-    
-    // Set up global save/cancel handlers for memberbuttons
-    const saveButton = document.getElementById('savePageButton');
-    const cancelButton = document.getElementById('cancelPageButton');
-    
+
+    // Handle save button click
     if (saveButton) {
         saveButton.addEventListener('click', async () => {
-            const currentPath = window.location.pathname;
-            const saveUrl = document.getElementById('thecontent')?.dataset.save;
-            if (!saveUrl) {
-                alert('Save URL not found');
-                return;
-            }
-
-            if (!window.tiptapMarkdown) {
-                alert('Editor not initialized');
-                return;
-            }
-
-            // Get markdown content from all TipTap editors
-            // Set to false for HTML, true for markdown
-            const editorData = window.tiptapMarkdown.getContent(true);
-            console.log('Saving markdown content:', editorData);
-
-            try {
-                const response = await fetch(saveUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        docpath: currentPath,
-                        editors: editorData,
-                        format: 'markdown'  // Tell backend we're sending markdown
-                    })
-                });
-
-                const result = await response.json();
-                if (result.success) {
-                    // Exit edit mode (keeps content)
-                    window.tiptapMarkdown.exitEditMode(true);
-                    console.log('Markdown content saved successfully');
-                } else {
-                    alert('Failed to save: ' + result.error);
-                    return;
-                }
-            } catch (error) {
-                console.error('Save error:', error);
-                alert('Failed to save content. Please try again.');
-                return;
-            }
-
-            // Hide save/cancel buttons
-            saveButton.classList.add('d-none');
-            cancelButton.classList.add('d-none');
-            editButton.classList.remove('d-none');
-            editButton.disabled = false;
+            await handleSave();
+            // Restore UI
+            if (editButton) editButton.classList.remove('d-none');
+            if (saveButton) saveButton.classList.add('d-none');
+            if (cancelButton) cancelButton.classList.add('d-none');
         });
     }
 
+    // Handle cancel button click
     if (cancelButton) {
         cancelButton.addEventListener('click', () => {
-            if (window.tiptapMarkdown) {
-                // Exit edit mode without saving - restores original content
-                window.tiptapMarkdown.exitEditMode(false);
-                console.log('Edit cancelled, content reverted');
-            }
-
-            // Hide save/cancel buttons
-            saveButton.classList.add('d-none');
-            cancelButton.classList.add('d-none');
-            editButton.classList.remove('d-none');
-            editButton.disabled = false;
+            handleCancel();
+            // Restore UI
+            if (editButton) editButton.classList.remove('d-none');
+            if (saveButton) saveButton.classList.add('d-none');
+            if (cancelButton) cancelButton.classList.add('d-none');
         });
     }
 }
