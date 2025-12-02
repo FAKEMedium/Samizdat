@@ -58,6 +58,8 @@ sub list_zones ($self, $params = {}) {
       my $zones = $res->json;
       $self->cache->set($cache_key => $zones);
       return $zones;
+    } else {
+      say "Error fetching zones: " . $res->message;
     }
   }
   return [];
