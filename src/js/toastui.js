@@ -16,18 +16,15 @@ console.log('Toast UI imports loaded successfully');
 function unwrapSoftBreaks(text) {
   if (!text) return text;
 
-  // Split into blocks (paragraphs, code blocks, etc.)
-  // Preserve double newlines (paragraph breaks) and lines starting with special chars
+  // GFM: two trailing spaces + newline = hard break (<br>), preserve these
+  // GFM: tables use spaces for alignment, preserve those too
+  // Soft breaks (word wrap at ~80 chars) should be unwrapped
   return text
     // Normalize line endings
     .replace(/\r\n/g, '\n')
-    // Protect paragraph breaks (double newlines)
-    .replace(/\n\n/g, '\n\n')
-    // Unwrap soft breaks: single newline NOT followed by special markdown chars
-    // Keep breaks before: #, -, *, >, |, \d+., ```, <, [
-    .replace(/\n(?![\n#\-*>|\d`<\[])/g, ' ')
-    // Clean up multiple spaces
-    .replace(/  +/g, ' ')
+    // Unwrap soft breaks: newline NOT preceded by two spaces, NOT followed by special chars
+    // Keep breaks: after "  " (hard break), before #-*>|`<[ or digits, double newlines
+    .replace(/([^ ])\n(?![\n#\-*>|\d`<\[])/g, '$1 ')
     .trim();
 }
 
