@@ -93,7 +93,7 @@ A module for managing web content.
 
 ### SMS
 
-Utilities for sending and receiving SMS with a Teltoniks GSM modem via their HTTP API.
+Utilities for sending and receiving SMS with a Teltonika GSM modem via its' HTTP API.
 
 
 ### Payments
