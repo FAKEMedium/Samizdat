@@ -94,6 +94,7 @@ A module for managing web content.
 ### SMS
 
 Utilities for sending and receiving SMS with a Teltonika GSM modem via its' HTTP API.
+When enabled, other modules can use this for sending SMS notifications, 2FA codes, phone verifications, etc.
 
 
 ### Payments
@@ -110,5 +111,32 @@ Utilities for sending and receiving SMS with a Teltonika GSM modem via its' HTTP
 - Icon helper for including SVG icons into symbol defs
 - Importing of flags, language names and country data from public sources, and providing them as helper functions
 - Wrapping img tags with picture tags for responsive images and WebP support in multiple sizes
+- Cache management (session encrypted or not) with Redis
+- Configuration in yaml file
 - Makefile for building, minimizing (Webpack, PurgeCSS) and deploying the site
 - FreeBSD and Ubuntu support with installation documentation and startup scripts
+
+### Technologies used
+
+- Mojolicious web framework for Perl
+- JavaScript (ES6) for client-side interactivity
+- CSS3 with Flexbox and Grid for responsive design
+- HTML5 for markup
+- Git for version control
+- Bootstrap 5 for UI components and layout
+- PostgreSQL for data storage
+- Redis for caching
+- Nginx for web server and FastCGI interface
+- Lua for Nginx scripting
+- Makefile for build automation
+- LATEX for PDF generation
+- Webpack for JavaScript and CSS bundling and minimization
+- Toast-UI editor for markdown editing
+
+### Plans for future development
+
+- OpenAPI/Swagger documentation for the API
+- ActivityPub support for decentralized publishing
+- More payment gateways
+- Additional hosting modules (e.g., FTP, SSH key management)
+- Improved user interface and user experience (Tailwind CSS?)
