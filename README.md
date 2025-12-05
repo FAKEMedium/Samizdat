@@ -115,28 +115,31 @@ When enabled, other modules can use this for sending SMS notifications, 2FA code
 - Configuration in yaml file
 - Makefile for building, minimizing (Webpack, PurgeCSS) and deploying the site
 - FreeBSD and Ubuntu support with installation documentation and startup scripts
+- Proper handcrafted indentation as procrastination therapy
+- Unit tests with Mojolicious::Test
+
 
 ### Technologies used
 
-- Mojolicious web framework for Perl
+- [Mojolicious](https://mojolicious.org/) modern web framework for Perl
 - JavaScript (ES6) for client-side interactivity
-- CSS3 with Flexbox and Grid for responsive design
-- HTML5 for markup
+- CSS3
+- HTML5
 - Git for version control
-- Bootstrap 5 for UI components and layout
+- [Bootstrap 5](https://getbootstrap.com/) for UI components and layout
 - PostgreSQL for data storage
 - Redis for caching
-- Nginx for web server and FastCGI interface
-- Lua for Nginx scripting
+- [OpenResty](https://openresty.org/) (Nginx) for web server and FastCGI interface
+- Lua for OpenResty/Nginx scripting
 - Makefile for build automation
 - LATEX for PDF generation
 - Webpack for JavaScript and CSS bundling and minimization
-- Toast-UI editor for markdown editing
+- [Toast-UI](https://ui.toast.com/) editor for markdown editing
 
 ### Plans for future development
 
-- OpenAPI/Swagger documentation for the API
+- [OpenAPI/Swagger](https://github.com/jhthorsen/mojolicious-plugin-openapi) endpoints/documentation for the API
 - ActivityPub support for decentralized publishing
 - More payment gateways
-- Additional hosting modules (e.g., FTP, SSH key management)
-- Improved user interface and user experience (Tailwind CSS?)
+- Additional hosting modules (e.g., FTP, Certificates, Databases)
+- Improved user interface and user experience (Tailwind CSS, Flowbite?)
