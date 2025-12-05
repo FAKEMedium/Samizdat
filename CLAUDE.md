@@ -199,3 +199,4 @@ prove -l -v t/00-basic.t
 - @index.js#L7 use url_for. dont hardcode links
 - supply password when calling psql
 - its in authenticated
+- don't stash data. use js/json/fetch. we are moving towars complete restful endpoints for pure data.

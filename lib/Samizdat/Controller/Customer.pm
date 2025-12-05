@@ -24,7 +24,35 @@ sub index ($self) {
     return unless $self->access({ admin => 1 });
 
     my $searchterm = $self->param('searchterm');
+    my $simple = $self->param('simple');  # For dropdowns - returns id+name only, active customers
     my $params = {};
+
+    if ($simple && $searchterm && length($searchterm) >= 3) {
+      # Simple mode for selectors - search active customers, return minimal data
+      $params->{where} = {
+        -and => [
+          { active => 1 },
+          -or => [
+            customerid   => [ int $searchterm ],
+            firstname    => { -like => sprintf('%%%s%%', $searchterm) },
+            lastname     => { -like => sprintf('%%%s%%', $searchterm) },
+            contactemail => { -like => sprintf('%%%s%%', $searchterm) },
+            company      => { -like => sprintf('%%%s%%', $searchterm) },
+          ]
+        ]
+      };
+      $params->{limit} = { -limit => 20 };
+      my $customers = $self->app->customer->get($params);
+      # Return simplified format with formatted name
+      my @simple_list = map {
+        {
+          customerid => $_->{customerid},
+          name => sprintf('%d %s', $_->{customerid}, $self->app->customer->name($_))
+        }
+      } @$customers;
+      return $self->render(json => { customers => \@simple_list });
+    }
+
     if ('moss' eq $searchterm) {
       $params->{where} = { moss => 1 };
     } elsif ('blocked' eq $searchterm) {

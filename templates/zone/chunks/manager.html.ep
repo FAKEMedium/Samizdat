@@ -9,4 +9,5 @@
   </div>
 </form>
 <button type="button" id="newZoneManager" class="badge rounded-pill text-bg-primary border-0"><%== __('Add zone') %></button>
+<button type="button" id="importZoneManager" class="badge rounded-pill text-bg-primary border-0"><%== __('Import zone') %></button>
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('zone_index') %>/check"><%== __('Check zones') %></a>

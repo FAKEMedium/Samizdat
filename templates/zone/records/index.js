@@ -2,12 +2,18 @@
   const universalModal = new bootstrap.Modal('#universalmodal');
   const modalDialog = document.querySelector('#universalmodal #modalDialog');
   let currentZoneId = null;
+  let allRrsets = [];  // Store all rrsets for filtering
 
   async function fetchRecords() {
     const data = await window.authenticatedFetch(window.location.href);
     if (data) {
       currentZoneId = data.zone_id;
-      populate(data);
+      allRrsets = data.rrsets || [];
+      renderRecords(allRrsets, data.zone_id);
+      setupEventHandlers(data.zone_id);
+      // Set headline with zone name
+      const zoneName = data.zone_id.replace(/\.$/, ''); // Remove trailing dot
+      document.getElementById('headline').textContent = `<%== __('Zone Records') %>, ${zoneName}`;
     }
   }
 
@@ -15,72 +21,176 @@
     return text.length > limit ? text.slice(0, limit) + '...' : text;
   }
 
+  function stripZoneName(name, zoneId) {
+    if (!name || !zoneId) return name;
+    const zoneWithDot = zoneId.endsWith('.') ? zoneId : zoneId + '.';
+    if (name.endsWith(zoneWithDot)) {
+      name = name.slice(0, -zoneWithDot.length);
+    } else if (name.endsWith(zoneId)) {
+      name = name.slice(0, -zoneId.length);
+    }
+    if (name.endsWith('.')) name = name.slice(0, -1);
+    if (name === '') name = '@';
+    return name;
+  }
+
+  // Global function to update a record row after save
+  window.updateRecordRow = function(recordData) {
+    const recordId = recordData.type + '_' + recordData.name;
+    const displayName = stripZoneName(recordData.name, currentZoneId);
+
+    // Update allRrsets array
+    const existingIdx = allRrsets.findIndex(r => r.type + '_' + r.name === recordId);
+    const rrset = {
+      name: recordData.name,
+      type: recordData.type,
+      ttl: recordData.ttl,
+      records: [{ content: recordData.content, disabled: false }]
+    };
+
+    if (existingIdx >= 0) {
+      allRrsets[existingIdx] = rrset;
+    } else {
+      allRrsets.push(rrset);
+    }
+
+    // Find or create row
+    let tr = document.querySelector(`#records tbody tr[data-recordid="${recordId}"]`);
+    const rowHtml = `
+        <td>
+          <button class="btn btn-sm btn-secondary btn-edit" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></button>
+          <button class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
+        </td>
+        <td>${displayName}</td>
+        <td>${recordData.type}</td>
+        <td>${truncateText(recordData.content, 100)}</td>
+        <td class="text-end">${recordData.ttl}</td>`;
+
+    if (tr) {
+      tr.innerHTML = rowHtml;
+    } else {
+      // New record - add row
+      tr = document.createElement('tr');
+      tr.dataset.recordid = recordId;
+      tr.dataset.type = recordData.type;
+      tr.dataset.name = recordData.name;
+      tr.innerHTML = rowHtml;
+      document.querySelector('#records tbody').appendChild(tr);
+    }
+
+    // Flash highlight
+    tr.style.backgroundColor = '#d4edda';
+    setTimeout(() => tr.style.backgroundColor = '', 1000);
+  };
+
   async function openRecordModal(recordId = 'new') {
     const url = `<%== url_for('zone_index') %>/${currentZoneId}/records/${recordId}`;
     const modalResponse = await fetch(url);
     const modalHTML = await modalResponse.text();
+    modalDialog.dataset.sourceUrl = url;
     modalDialog.innerHTML = modalHTML;
+
+    // Extract and execute modal script
+    const modalscript = modalDialog.querySelector('#modalscript');
+    if (modalscript) {
+      const script = document.createElement('script');
+      script.id = 'modaljs';
+      script.innerHTML = modalscript.innerHTML;
+      modalDialog.appendChild(script);
+      modalscript.remove();
+    }
+
     universalModal.show();
   }
 
-  function populate(data) {
-    // Set new record button to open modal
+  function filterRecords(searchterm) {
+    if (!searchterm) return allRrsets;
+    const term = searchterm.toLowerCase();
+    return allRrsets.filter(rrset =>
+      rrset.name.toLowerCase().includes(term) ||
+      rrset.type.toLowerCase().includes(term) ||
+      rrset.records.some(r => r.content.toLowerCase().includes(term))
+    );
+  }
+
+  function renderRecords(rrsets, zoneId) {
+    let snippet = '';
+    rrsets.sort((a, b) => a.name.localeCompare(b.name)).forEach(rrset => {
+      rrset.records.forEach(record => {
+        const displayName = stripZoneName(rrset.name, zoneId);
+        // Use type_name as unique identifier for rrsets
+        let recordid = rrset.type + '_' + rrset.name;
+        snippet += `
+      <tr data-recordid="${recordid}" data-type="${rrset.type}" data-name="${rrset.name}">
+        <td>
+          <button class="btn btn-sm btn-secondary btn-edit" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></button>
+          <button class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
+        </td>
+        <td>${displayName}</td>
+        <td>${rrset.type}</td>
+        <td>${truncateText(record.content, 100)}</td>
+        <td class="text-end">${rrset.ttl}</td>
+      </tr>`;
+      })
+    });
+    document.querySelector('#records tbody').innerHTML = snippet || '<tr><td colspan="5" class="text-muted text-center"><%== __("No records found") %></td></tr>';
+  }
+
+  function setupEventHandlers(zoneId) {
+    // New record button
     document.querySelector('#newrecord').addEventListener('click', async (e) => {
       e.preventDefault();
       await openRecordModal('new');
     });
 
-    const rrsets = data.rrsets || [];
-    let snippet = '';
-    rrsets.sort((a, b) => b.name - a.name).forEach(rrset => {
-      rrset.records.forEach(record => {
-        record.name = rrset.name;
-        if (record.name.endsWith(data.zone_id)) {
-          record.name = record.name.slice(0, -data.zone_id.length);
-        }
-        if (record.name === "") {
-          record.name = "@";
-        }
-        if (record.name.endsWith('.')) {
-          record.name = record.name.slice(0, -1);
-        }
-        let recordid = rrset.type + '_' + rrset.name;
-        snippet += `
-      <tr data-recordid="${recordid}">
-        <td>${record.name}</td>
-        <td>${rrset.type}</td>
-        <td>${truncateText(record.content, 100)}</td>
-        <td class="text-end">${rrset.ttl}</td>
-        <td class="text-end">
-          <button data-recordname="${rrset.name}" class="btn btn-sm btn-secondary btn-edit" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></button>
-          <button data-recordid="${recordid}" class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
-        </td>
-      </tr>`;
-      })
-    });
-    document.querySelector('#records tbody').innerHTML = snippet;
-
-    // Edit button handlers
-    document.querySelectorAll('.btn-edit').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const recordName = btn.getAttribute('data-recordname');
-        await openRecordModal(recordName);
-      });
+    // Search form submit
+    document.querySelector('#dataform').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const searchterm = document.querySelector('#searchterm').value;
+      const filtered = filterRecords(searchterm);
+      renderRecords(filtered, zoneId);
     });
 
-    // Delete button handlers
-    document.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', async () => {
+    // Live search as user types (debounced, starts after 2 chars)
+    let searchTimeout = null;
+    document.querySelector('#searchterm').addEventListener('input', (e) => {
+      const value = e.target.value;
+      clearTimeout(searchTimeout);
+      if (value.length > 2) {
+        searchTimeout = setTimeout(() => {
+          const filtered = filterRecords(value);
+          renderRecords(filtered, zoneId);
+        }, 200);
+      } else if (value.length === 0) {
+        renderRecords(allRrsets, zoneId);
+      }
+    });
+
+    // Event delegation for edit and delete buttons
+    document.querySelector('#records tbody').addEventListener('click', async (e) => {
+      const btn = e.target.closest('button');
+      if (!btn) return;
+
+      const tr = btn.closest('tr');
+      const recordType = tr.dataset.type;
+      const recordName = tr.dataset.name;
+      const recordId = tr.dataset.recordid;
+
+      if (btn.classList.contains('btn-edit')) {
+        // Pass type and name as query params for unique identification
+        await openRecordModal(`${recordName}?type=${recordType}`);
+      } else if (btn.classList.contains('btn-delete')) {
         if (!confirm('<%== __("Are you sure you want to delete this record?") %>')) return;
-        const recordId = btn.getAttribute('data-recordid');
-        const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${data.zone_id}/records/${recordId}`, {
+        const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}/records/${recordId}`, {
           method: 'DELETE'
         });
         if (result && result.success) {
-          btn.closest('tr').remove();
+          tr.remove();
           window.showToast(result.toast || '<%== __("Record deleted") %>');
+          // Also remove from allRrsets
+          allRrsets = allRrsets.filter(r => r.type + '_' + r.name !== recordId);
         }
-      });
+      }
     });
   }
 

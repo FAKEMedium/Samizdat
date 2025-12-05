@@ -6,14 +6,36 @@ use Data::Dumper;
 ### Zone CRUD
 
 sub index($self) {
-  my $title = $self->app->__('DNS Zones');
+  # Check for customerid from route (customer-specific zone listing)
+  my $customerid = $self->stash('customerid');
+  my $title = $customerid
+    ? $self->app->__x('DNS Zones for customer {id}', id => $customerid)
+    : $self->app->__('DNS Zones');
   my $web = { title => $title };
+
   if ($self->req->headers->accept =~ m{application/json}) {
     return unless $self->access({ admin => 1 });
-    my $searchtern = $self->param('searchterm') // undef;
-    my $zones = $self->zone->list_zones({ searchterm => $searchtern });
-    $self->render(json => { zones => $zones });
+    my $searchterm = $self->param('searchterm') // '';
+    # Use customerid from route, or account from query param
+    my $account = $customerid // $self->param('account') // undef;
+
+    my $zones;
+    if ($self->zone->db) {
+      # Use PostgreSQL for all searches when available (faster)
+      $zones = $self->zone->search_zones({
+        searchterm => $searchterm || undef,
+        account    => $account,
+      });
+    } else {
+      # Fall back to API when PostgreSQL not configured
+      $zones = $self->zone->list_zones();
+    }
+
+    $self->render(json => { zones => $zones, customerid => $customerid });
   } else {
+    # Set docpath for customer-specific routes to use shared cached template
+    $self->stash(docpath => '/zone/index.html') if $customerid;
+
     $web->{script} .= $self->render_to_string(template => 'zone/index', format => 'js');
     $self->render(web => $web, title => $title, template => 'zone/index');
   }
@@ -40,8 +62,9 @@ sub create_zone ($self) {
 
   my $json = $self->req->json;
   my $zone_data = {
-    name => $json->{name},
-    kind => $json->{kind} // 'Master',
+    name    => $json->{name},
+    kind    => $json->{kind} // 'Native',
+    account => $json->{account} // '',
   };
   my $result = $self->zone->create_zone($zone_data);
 
@@ -50,6 +73,38 @@ sub create_zone ($self) {
     toast   => $result->{success}
       ? $self->app->__('Zone created successfully')
       : ($result->{error} // $self->app->__('Failed to create zone'))
+  });
+}
+
+
+# Render import zone form.
+sub import_zone_form ($self) {
+  my $title = $self->app->__('Import zone');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'zone/import/index', format => 'js');
+  $self->stash(web => $web);
+  return $self->render(template => 'zone/import/index', layout => 'modal');
+}
+
+
+# Import a zone from zone file content.
+sub import_zone ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $json = $self->req->json;
+  my $zone_data = {
+    name    => $json->{name},
+    kind    => $json->{kind} // 'Native',
+    zone    => $json->{zone},
+    account => $json->{account} // '',
+  };
+  my $result = $self->zone->import_zone($zone_data);
+
+  return $self->render(json => {
+    success => $result->{success} ? 1 : 0,
+    toast   => $result->{success}
+      ? $self->app->__('Zone imported successfully')
+      : ($result->{error} // $self->app->__('Failed to import zone'))
   });
 }
 
@@ -89,8 +144,8 @@ sub update_zone ($self) {
   my $zone_id = $self->stash('zone_id') // '';
   my $json = $self->req->json;
   my $zone_data = {
-    name => $json->{name},
-    kind => $json->{kind},
+    kind    => $json->{kind},    # Zone name is immutable
+    account => $json->{account} // '',
   };
   my $result = $self->zone->update_zone($zone_id, $zone_data);
 
@@ -115,6 +170,24 @@ sub delete_zone($self) {
       ? $self->app->__('Zone deleted successfully')
       : ($result->{error} // $self->app->__('Failed to delete zone'))
   });
+}
+
+
+# Export zone in AXFR format (text/plain).
+sub export_zone($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $zone_id = $self->stash('zone_id') // '';
+  my $result = $self->zone->export_zone($zone_id);
+
+  if ($result->{success}) {
+    return $self->render(text => $result->{content}, format => 'txt');
+  }
+
+  return $self->render(json => {
+    success => 0,
+    error => $result->{error} // $self->app->__('Failed to export zone')
+  }, status => 400);
 }
 
 
@@ -174,11 +247,12 @@ sub create_record($self) {
 
 sub edit_record($self) {
   my $zone_id = $self->stash('zone_id');
-  my $record_id = $self->stash('record_id');
+  my $record_id = $self->stash('record_id');  # This is the record name
+  my $record_type = $self->param('type');      # Type from query param
 
   if ($self->is_json_request) {
     return unless $self->access({ admin => 1 });
-    my $record = $self->zone->get_record($zone_id, $record_id);
+    my $record = $self->zone->get_record($zone_id, $record_id, $record_type);
     unless ($record) {
       return $self->render(json => { success => 0, toast => $self->app->__('Record not found') });
     }
@@ -232,6 +306,66 @@ sub delete_record($self) {
     toast   => $result->{success}
       ? $self->app->__('Record deleted successfully')
       : ($result->{error} // $self->app->__('Failed to delete record'))
+  });
+}
+
+
+### Cryptokeys CRUD (DNSSEC)
+
+sub cryptokeys($self) {
+  my $zone_id = $self->stash('zone_id');
+
+  if ($self->is_json_request) {
+    return unless $self->access({ admin => 1 });
+    my $keys = $self->zone->list_cryptokeys($zone_id);
+    return $self->render(json => { zone_id => $zone_id, cryptokeys => $keys });
+  }
+
+  $self->stash(docpath => '/zone/cryptokeys/index.html');
+  my $title = $self->app->__('DNSSEC Keys');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'zone/cryptokeys/index', format => 'js');
+  $self->stash(web => $web);
+  return $self->render(template => 'zone/cryptokeys/index', layout => 'modal');
+}
+
+
+sub create_cryptokey($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $zone_id = $self->stash('zone_id');
+  my $json = $self->req->json;
+  my $key_data = {
+    keytype   => $json->{keytype} // 'ksk',
+    algorithm => $json->{algorithm} // 'ECDSAP256SHA256',
+    active    => $json->{active} // 1,
+  };
+  $key_data->{bits} = $json->{bits} if $json->{bits};
+
+  my $result = $self->zone->create_cryptokey($zone_id, $key_data);
+
+  return $self->render(json => {
+    success => $result->{success} ? 1 : 0,
+    key     => $result->{key},
+    toast   => $result->{success}
+      ? $self->app->__('Cryptokey created successfully')
+      : ($result->{error} // $self->app->__('Failed to create cryptokey'))
+  });
+}
+
+
+sub delete_cryptokey($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $zone_id = $self->stash('zone_id');
+  my $key_id = $self->stash('key_id');
+  my $result = $self->zone->delete_cryptokey($zone_id, $key_id);
+
+  return $self->render(json => {
+    success => $result->{success} ? 1 : 0,
+    toast   => $result->{success}
+      ? $self->app->__('Cryptokey deleted successfully')
+      : ($result->{error} // $self->app->__('Failed to delete cryptokey'))
   });
 }
 

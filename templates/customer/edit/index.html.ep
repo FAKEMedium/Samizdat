@@ -313,6 +313,9 @@
         <h5 class="offcanvas-title"><%== __('DNS zones') %></h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="<%== __('Close') %>"></button>
       </div>
+      <div class="offcanvas-header">
+        <a href="#" id="zonelistlink"><%== __('Open zone list') %></a>
+      </div>
       <div class="offcanvas-body">
         <table class="table table-striped table-sm sortable" id="dnsdomains">
           <thead>

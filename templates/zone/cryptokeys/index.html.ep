@@ -1,0 +1,44 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== __('DNSSEC Keys') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div id="cryptokeys">
+      <!-- Keys will be populated via JavaScript -->
+    </div>
+
+    <hr>
+
+    <h6><%== __('Add New Key') %></h6>
+    <form id="cryptokeyForm" class="row g-2 align-items-end">
+      <div class="col-auto">
+        <label for="keytype" class="form-label"><%== __('Key Type') %></label>
+        <select class="form-select form-select-sm" id="keytype" name="keytype">
+          <option value="ksk">KSK</option>
+          <option value="zsk">ZSK</option>
+          <option value="csk">CSK</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <label for="algorithm" class="form-label"><%== __('Algorithm') %></label>
+        <select class="form-select form-select-sm" id="algorithm" name="algorithm">
+          <option value="ECDSAP256SHA256">ECDSAP256SHA256 (13)</option>
+          <option value="ECDSAP384SHA384">ECDSAP384SHA384 (14)</option>
+          <option value="ED25519">ED25519 (15)</option>
+          <option value="ED448">ED448 (16)</option>
+          <option value="RSASHA256">RSASHA256 (8)</option>
+          <option value="RSASHA512">RSASHA512 (10)</option>
+        </select>
+      </div>
+      <div class="col-auto">
+        <button type="submit" class="btn btn-sm btn-primary"><%== icon 'plus-circle', {} %> <%== __('Add Key') %></button>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+  </div>
+</div>
