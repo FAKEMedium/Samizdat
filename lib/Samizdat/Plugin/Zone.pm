@@ -14,12 +14,22 @@ sub register($self, $app, $conf) {
   $manager->delete('/#zone_id/records/#record_id')          ->to('#delete_record')      ->name('zone_record_delete');
   $manager->get('/#zone_id/records')                        ->to('#records')            ->name('zone_record_index');
   $manager->post('/#zone_id/records')                       ->to('#create_record')      ->name('zone_record_create');
+  $manager->get('/#zone_id/cryptokeys')                     ->to('#cryptokeys')         ->name('zone_cryptokeys');
+  $manager->post('/#zone_id/cryptokeys')                    ->to('#create_cryptokey')   ->name('zone_cryptokey_create');
+  $manager->delete('/#zone_id/cryptokeys/#key_id')          ->to('#delete_cryptokey')   ->name('zone_cryptokey_delete');
   $manager->get('/new')                                     ->to('#new_zone')           ->name('zone_new');
+  $manager->get('/import')                                  ->to('#import_zone_form')   ->name('zone_import_form');
+  $manager->post('/import')                                 ->to('#import_zone')        ->name('zone_import');
   $manager->get('/#zone_id/edit')                           ->to('#edit_zone')          ->name('zone_edit');
+  $manager->get('/#zone_id/export')                         ->to('#export_zone')        ->name('zone_export');
   $manager->patch('/#zone_id')                              ->to('#update_zone')        ->name('zone_update');
   $manager->delete('/#zone_id')                             ->to('#delete_zone')        ->name('zone_delete');
   $manager->post('/')                                       ->to('#create_zone')        ->name('zone_create');
   $manager->get('/')                                        ->to('#index')              ->name('zone_index');
+
+  # Customer specific zone routes
+  my $customer = $r->manager('customers/:customerid/zones')->to(controller => 'Zone');
+  $customer->get('/')                                      ->to('#index')              ->name('customer_zones');
 
   # Helper for PowerDNS database connection
   $app->helper(zonedb => sub($c) {

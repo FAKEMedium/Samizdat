@@ -13,31 +13,31 @@ sub register ($self, $app, $conf) {
 
   # Invoice root routes
   my $manager = $r->manager('invoices')->to(controller => 'Invoice');
-  $manager->get('/open')                                             ->to('#open')                 ->name('invoice_open');
-  $manager->get('/:invoiceid')                                       ->to('#handle')               ->name('invoice_handle');
-  $manager->get('/:invoiceid/:to')                                   ->to('#nav')                  ->name('invoice_nav');
-  $manager->get('/')                                                 ->to('#index')                ->name('invoice_index');
+  $manager->get('/open')                                            ->to('#open')                 ->name('invoice_open');
+  $manager->get('/:invoiceid')                                      ->to('#handle')               ->name('invoice_handle');
+  $manager->get('/:invoiceid/:to')                                  ->to('#nav')                  ->name('invoice_nav');
+  $manager->get('/')                                                ->to('#index')                ->name('invoice_index');
 
   # Customer specific invoice routes
-  my $customers = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
-  $customers->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
-  $customers->put('open')                                            ->to('#update')               ->name('invoice_uppdate');
-  $customers->post('open')                                           ->to('#create')               ->name('invoice_create');
-  $customers->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
-  $customers->post('/:invoiceid/creditinvoice')                      ->to('#creditinvoice')        ->name('invoice_creditinvoice');
-  $customers->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
-  $customers->post('/:invoiceid/payment')                            ->to('#payment')              ->name('invoice_payment');
-  $customers->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
-  $customers->post('/:invoiceid/remind')                             ->to('#remind')               ->name('invoice_remind');
-  $customers->post('/:invoiceid/resend')                             ->to('#resend')               ->name('invoice_resend');
-  $customers->post('/:invoiceid/reprint')                            ->to('#reprint')              ->name('invoice_reprint');
-  $customers->get('/:invoiceid/:to')                                 ->to('#nav')                  ->name('invoice_nav');
-  $customers->get('/')                                               ->to('#index')                ->name('invoice_index');
+  my $customer = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
+  $customer->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
+  $customer->put('open')                                            ->to('#update')               ->name('invoice_uppdate');
+  $customer->post('open')                                           ->to('#create')               ->name('invoice_create');
+  $customer->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
+  $customer->post('/:invoiceid/creditinvoice')                      ->to('#creditinvoice')        ->name('invoice_creditinvoice');
+  $customer->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
+  $customer->post('/:invoiceid/payment')                            ->to('#payment')              ->name('invoice_payment');
+  $customer->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
+  $customer->post('/:invoiceid/remind')                             ->to('#remind')               ->name('invoice_remind');
+  $customer->post('/:invoiceid/resend')                             ->to('#resend')               ->name('invoice_resend');
+  $customer->post('/:invoiceid/reprint')                            ->to('#reprint')              ->name('invoice_reprint');
+  $customer->get('/:invoiceid/:to')                                 ->to('#nav')                  ->name('invoice_nav');
+  $customer->get('/')                                               ->to('#index')                ->name('invoice_index');
 
   # Customer specific product routes
   my $products = $r->manager('customers/:customerid/products')->to(controller => 'Invoice');
-  $products->get('/subscribe')                                       ->to('Customer#products');
-  $customers->post('/')                                              ->to('Customer#subscribe');
+  $products->get('/subscribe')                                      ->to('Customer#products');
+  $customer->post('/')                                              ->to('Customer#subscribe');
 
 
   $app->helper(invoice => sub ($self) {

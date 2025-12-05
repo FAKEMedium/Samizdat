@@ -215,11 +215,41 @@ function getCustomer(customerid = 0) {
   sendData('GET', customerid);
 }
 
+// Fetch DNS zones from Zone model
+async function fetchCustomerZones(customerid) {
+  try {
+    const response = await fetch(`<%== url_for('customer_index') %>/${customerid}/zones`, {
+      headers: { 'Accept': 'application/json' }
+    });
+    if (!response.ok) return;
+
+    const data = await response.json();
+    const zones = data.zones || [];
+
+    let snippet = '';
+    zones.sort((a, b) => a.name.localeCompare(b.name));
+    for (const zone of zones) {
+      const displayName = zone.unicode_name && zone.unicode_name !== zone.name
+        ? zone.unicode_name
+        : zone.name.replace(/\.$/, '');
+      snippet += `
+                <tr data-zoneid="${zone.name}"><td><a class="d-block" href="<%== url_for('zone_index') %>/${zone.name}/records/">${displayName}</a></td></tr>`;
+    }
+    document.querySelector('#dnsdomains tbody').innerHTML = snippet;
+
+    if (zones.length > 0) {
+      document.querySelector('#nrdnsdomains').innerHTML = zones.length;
+      document.querySelector('#nrdnsdomains').classList.remove("d-none");
+    }
+  } catch (e) {
+    console.error('Failed to fetch zones:', e);
+  }
+}
+
 
 function populateForm(formdata, method) {
   let customer = formdata.customer;
   let domains = formdata.domains;
-  let dnsdomains = formdata.dnsdomains;
   let invoices = formdata.invoices;
   let invoiceitems = formdata.invoiceitems;
   let databases = formdata.databases;
@@ -444,20 +474,9 @@ function populateForm(formdata, method) {
   }
   document.querySelector('#domainlistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/domains`;
 
-  // DNS domains
-  snippet = '';
-  let nrdnsdomains = 0;
-  dnsdomains = dnsdomains.sortBy('domainname');
-  for (const dnsdomain of dnsdomains) {
-    nrdnsdomains++;
-    snippet += `
-                <tr data-zoneid="${dnsdomain.domainid}"><td><a class="d-block" href="<%== url_for('zone_index') %>/${dnsdomain.domainname}./records/">${dnsdomain.domainname}</a></td></tr>`;
-  }
-  document.querySelector('#dnsdomains tbody').innerHTML = snippet;
-  if (nrdnsdomains > 0) {
-    document.querySelector('#nrdnsdomains').innerHTML = nrdnsdomains;
-    document.querySelector('#nrdnsdomains').classList.remove("d-none");
-  }
+  // DNS zones - fetch from Zone model via customer-specific endpoint
+  document.querySelector('#zonelistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/zones`;
+  fetchCustomerZones(customer.customerid);
 
   // Websites
   snippet = '';

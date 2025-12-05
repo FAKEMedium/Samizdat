@@ -5,9 +5,14 @@
   </div>
 
   <div class="modal-body">
+    <input type="hidden" id="zone_name" name="zone_name" value="">
     <div class="mb-3">
       <label for="name" class="form-label"><%== __('Record Name') %></label>
-      <input type="text" class="form-control" id="name" name="name" required>
+      <div class="input-group">
+        <input type="text" class="form-control" id="name" name="name" required placeholder="@">
+        <span class="input-group-text" id="zone_suffix"></span>
+      </div>
+      <div class="form-text"><%== __('Use @ for the zone apex') %></div>
     </div>
 
     <div class="mb-3">
@@ -16,6 +21,7 @@
         <option value=""><%== __('Select type') %></option>
         <option value="A">A</option>
         <option value="AAAA">AAAA</option>
+        <option value="CAA">CAA</option>
         <option value="CNAME">CNAME</option>
         <option value="MX">MX</option>
         <option value="NS">NS</option>
@@ -25,19 +31,125 @@
       </select>
     </div>
 
-    <div class="mb-3">
-      <label for="content" class="form-label"><%== __('Content') %></label>
-      <input type="text" class="form-control" id="content" name="content" required>
+    <!-- Dynamic content fields based on record type -->
+    <div id="content-fields">
+      <!-- Default: single content field -->
+      <div class="mb-3" id="field-content">
+        <label for="content" class="form-label"><%== __('Content') %></label>
+        <input type="text" class="form-control" id="content" name="content" required>
+      </div>
     </div>
+
+    <!-- Type-specific field templates (hidden) -->
+    <template id="tpl-simple">
+      <div class="mb-3" id="field-content">
+        <label for="content" class="form-label content-label"><%== __('Content') %></label>
+        <input type="text" class="form-control" id="content" name="content" required>
+      </div>
+    </template>
+
+    <template id="tpl-mx">
+      <div class="mb-3" id="field-priority">
+        <label for="mx_priority" class="form-label"><%== __('Priority') %></label>
+        <input type="number" class="form-control" id="mx_priority" value="10" min="0">
+        <div class="form-text"><%== __('Lower values have higher priority') %></div>
+      </div>
+      <div class="mb-3" id="field-content">
+        <label for="content" class="form-label"><%== __('Mail Server') %></label>
+        <input type="text" class="form-control" id="content" name="content" required placeholder="mail.example.com.">
+      </div>
+    </template>
+
+    <template id="tpl-srv">
+      <div class="row mb-3">
+        <div class="col-4">
+          <label for="srv_priority" class="form-label"><%== __('Priority') %></label>
+          <input type="number" class="form-control" id="srv_priority" value="0" min="0">
+        </div>
+        <div class="col-4">
+          <label for="srv_weight" class="form-label"><%== __('Weight') %></label>
+          <input type="number" class="form-control" id="srv_weight" value="0" min="0">
+        </div>
+        <div class="col-4">
+          <label for="srv_port" class="form-label"><%== __('Port') %></label>
+          <input type="number" class="form-control" id="srv_port" value="0" min="0" max="65535">
+        </div>
+      </div>
+      <div class="mb-3" id="field-content">
+        <label for="content" class="form-label"><%== __('Target') %></label>
+        <input type="text" class="form-control" id="content" name="content" required placeholder="server.example.com.">
+      </div>
+    </template>
+
+    <template id="tpl-caa">
+      <div class="row mb-3">
+        <div class="col-3">
+          <label for="caa_flags" class="form-label"><%== __('Flags') %></label>
+          <input type="number" class="form-control" id="caa_flags" value="0" min="0" max="255">
+        </div>
+        <div class="col-4">
+          <label for="caa_tag" class="form-label"><%== __('Tag') %></label>
+          <select class="form-select" id="caa_tag">
+            <option value="issue">issue</option>
+            <option value="issuewild">issuewild</option>
+            <option value="iodef">iodef</option>
+          </select>
+        </div>
+        <div class="col-5">
+          <label for="caa_value" class="form-label"><%== __('Value') %></label>
+          <input type="text" class="form-control" id="caa_value" placeholder="letsencrypt.org">
+        </div>
+      </div>
+      <input type="hidden" id="content" name="content">
+    </template>
+
+    <template id="tpl-soa">
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="soa_primary" class="form-label"><%== __('Primary NS') %></label>
+          <input type="text" class="form-control" id="soa_primary" required placeholder="ns1.example.com.">
+        </div>
+        <div class="col-6">
+          <label for="soa_admin" class="form-label"><%== __('Admin Email') %></label>
+          <input type="text" class="form-control" id="soa_admin" required placeholder="admin.example.com.">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-4">
+          <label for="soa_serial" class="form-label"><%== __('Serial') %></label>
+          <input type="number" class="form-control" id="soa_serial" value="1" min="1">
+        </div>
+        <div class="col-4">
+          <label for="soa_refresh" class="form-label"><%== __('Refresh') %></label>
+          <input type="number" class="form-control" id="soa_refresh" value="10800">
+        </div>
+        <div class="col-4">
+          <label for="soa_retry" class="form-label"><%== __('Retry') %></label>
+          <input type="number" class="form-control" id="soa_retry" value="3600">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="soa_expire" class="form-label"><%== __('Expire') %></label>
+          <input type="number" class="form-control" id="soa_expire" value="604800">
+        </div>
+        <div class="col-6">
+          <label for="soa_minimum" class="form-label"><%== __('Minimum TTL') %></label>
+          <input type="number" class="form-control" id="soa_minimum" value="3600">
+        </div>
+      </div>
+      <input type="hidden" id="content" name="content">
+    </template>
 
     <div class="mb-3">
       <label for="ttl" class="form-label">TTL</label>
       <input type="number" class="form-control" id="ttl" name="ttl" value="3600">
     </div>
 
-    <div class="mb-3">
-      <label for="priority" class="form-label"><%== __('Priority') %></label>
-      <input type="number" class="form-control" id="priority" name="priority" value="0">
+    <!-- Combined content preview -->
+    <div class="mb-3" id="content-preview" style="display: none;">
+      <label class="form-label"><%== __('Combined Value') %></label>
+      <code class="d-block p-2 bg-light rounded" id="preview-value"></code>
     </div>
   </div>
 

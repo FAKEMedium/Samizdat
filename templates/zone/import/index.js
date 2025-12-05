@@ -1,20 +1,22 @@
 (function() {
-  // Zone edit form handler (runs in modal context)
-  // Get URL from modal's data attribute (set by openZoneModal or modalLoad)
+  // Import zone form handler
   const modalDialog = document.querySelector('#modalDialog');
-  const sourceUrl = modalDialog?.dataset.sourceUrl || '';
-  const match = sourceUrl.match(/\/zones\/([^/]+)\/edit/);
-  const isNew = sourceUrl.endsWith('/new');
-  const zoneId = !isNew && match ? match[1] : null;
 
   // Check if opened under a customer context (customerId passed from parent)
   const fixedCustomerId = modalDialog?.dataset.customerId || null;
 
-  // Zone name is immutable after creation - disable when editing
-  const nameField = document.getElementById('name');
-  if (!isNew && nameField) {
-    nameField.disabled = true;
-  }
+  // Set placeholder via JS to avoid template indentation issues
+  document.getElementById('zone').placeholder = [
+    'example.com.\t3600\tIN\tSOA\tns1.example.com. admin.example.com. 2024010101 3600 900 604800 86400',
+    'example.com.\t3600\tIN\tNS\tns1.example.com.',
+    'example.com.\t3600\tIN\tNS\tns2.example.com.',
+    'example.com.\t3600\tIN\tA\t192.0.2.1',
+    'ns1.example.com.\t3600\tIN\tA\t192.0.2.1',
+    'ns2.example.com.\t3600\tIN\tA\t192.0.2.2',
+    'www.example.com.\t3600\tIN\tA\t192.0.2.10',
+    'example.com.\t3600\tIN\tMX\t10 mail.example.com.',
+    'mail.example.com.\t3600\tIN\tA\t192.0.2.20'
+  ].join('\n');
 
   // Customer search for admin dropdown
   let searchTimeout = null;
@@ -22,7 +24,6 @@
   const accountSelect = document.getElementById('account');
   const customerSearch = document.getElementById('customerSearch');
 
-  // Check if user has admin access by testing endpoint
   async function checkAdminAccess() {
     // If under customer context, show field but disable search
     if (fixedCustomerId) {
@@ -40,7 +41,6 @@
 
     try {
       const data = await window.authenticatedFetch('<%== url_for('customer_index') %>?simple=1&searchterm=___');
-      // If we get here without error, user has access
       accountField.style.display = 'block';
       setupCustomerSearch();
     } catch (e) {
@@ -61,17 +61,7 @@
       if (value.length >= 3) {
         searchTimeout = setTimeout(() => searchCustomers(value), 300);
       } else {
-        // Clear results but keep current selection
-        const currentValue = accountSelect.value;
-        const currentText = accountSelect.options[accountSelect.selectedIndex]?.text;
         accountSelect.innerHTML = '<option value=""><%== __("No customer assigned") %></option>';
-        if (currentValue) {
-          const opt = document.createElement('option');
-          opt.value = currentValue;
-          opt.textContent = currentText;
-          opt.selected = true;
-          accountSelect.appendChild(opt);
-        }
         customerSearch.placeholder = defaultPlaceholder;
         accountSelect.style.boxShadow = '';
       }
@@ -82,14 +72,11 @@
     try {
       const data = await window.authenticatedFetch(`<%== url_for('customer_index') %>?simple=1&searchterm=${encodeURIComponent(term)}`);
       if (data && data.customers) {
-        const currentValue = accountSelect.value;
         accountSelect.innerHTML = '<option value=""><%== __("No customer assigned") %></option>';
-
         data.customers.forEach(c => {
           const opt = document.createElement('option');
           opt.value = c.customerid;
           opt.textContent = c.name;
-          if (c.customerid == currentValue) opt.selected = true;
           accountSelect.appendChild(opt);
         });
 
@@ -106,65 +93,21 @@
     }
   }
 
-  // Load zone data for editing
-  async function loadZone() {
-    const data = await window.authenticatedFetch(sourceUrl, {
-      method: 'GET',
-      headers: { 'Accept': 'application/json' }
-    });
-
-    if (data && !data.error) {
-      populateForm(data);
-    }
-  }
-
-  // Populate form with zone data
-  function populateForm(zone) {
-    nameField.value = zone.name || '';
-    document.getElementById('kind').value = zone.kind || 'Master';
-
-    // If zone has account, add it as option and select it
-    if (zone.account) {
-      const opt = document.createElement('option');
-      opt.value = zone.account;
-      opt.textContent = zone.account;  // Will be replaced by search if user searches
-      opt.selected = true;
-      accountSelect.appendChild(opt);
-    }
-  }
-
-  // Check admin access
   checkAdminAccess();
 
-  // Save zone (create or update)
-  async function saveZone() {
-    const form = document.getElementById('zoneForm');
-    const formData = new FormData(form);
+  document.getElementById('importForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    // Convert FormData to object
-    const data = {};
-    for (const [key, value] of formData.entries()) {
-      data[key] = value;
-    }
+    const form = e.target;
+    const data = {
+      name: document.getElementById('name').value,
+      kind: document.getElementById('kind').value,
+      zone: document.getElementById('zone').value,
+      account: document.getElementById('account').value
+    };
 
-    // Add disabled account field value (not included in FormData when disabled)
-    if (fixedCustomerId && accountSelect.disabled) {
-      data.account = accountSelect.value;
-    }
-
-    // Determine URL and method
-    let url, method;
-    if (isNew) {
-      url = '<%== url_for('zone_create') %>';
-      method = 'POST';
-    } else {
-      url = `<%== url_for('zone_index') %>/${zoneId}`;
-      method = 'PATCH';
-      delete data.name;  // Zone name is immutable
-    }
-
-    const result = await window.authenticatedFetch(url, {
-      method: method,
+    const result = await window.authenticatedFetch('<%== url_for("zone_import") %>', {
+      method: 'POST',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
@@ -173,24 +116,12 @@
     });
 
     if (result && result.success) {
-      window.showToast(result.toast || '<%== __("Zone saved successfully") %>');
+      window.showToast(result.toast || '<%== __("Zone imported successfully") %>');
       const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
       if (modal) modal.hide();
-      // Refresh the zone list
       setTimeout(() => location.reload(), 500);
     } else {
-      window.showToast(result?.toast || '<%== __("Failed to save zone") %>');
+      window.showToast(result?.toast || result?.error || '<%== __("Failed to import zone") %>', 'danger');
     }
-  }
-
-  // Form submission handler
-  document.getElementById('zoneForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    await saveZone();
   });
-
-  // Load existing zone if editing
-  if (!isNew && zoneId) {
-    loadZone();
-  }
 })();

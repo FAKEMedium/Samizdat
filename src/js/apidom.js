@@ -13,20 +13,26 @@
 async function modalLoad(event) {
     try {
         let ref = event.relatedTarget;
+        // Skip if modal was opened programmatically (no relatedTarget)
+        if (!ref) return;
+
         const url = ref.href || ref.action;
         const method = ref.method || 'get';
         const response = await fetch(url, { method: method});
         const body = await response.text();
         let modaldialog = document.querySelector('#modalDialog');
+        modaldialog.dataset.sourceUrl = url;
         modaldialog.innerHTML = "\n" + body;
         let modalscript = document.querySelector('#modalscript');
-        let script = document.createElement('script');
-        script.id = 'modaljs';
-        script.innerHTML = modalscript.innerHTML;
-        modaldialog.appendChild(script);
-        document.querySelector('#modalscript').remove();
+        if (modalscript) {
+            let script = document.createElement('script');
+            script.id = 'modaljs';
+            script.innerHTML = modalscript.innerHTML;
+            modaldialog.appendChild(script);
+            modalscript.remove();
+        }
     } catch (e) {
-        // Silent error handling
+        console.error('modalLoad error:', e);
     }
 }
 
