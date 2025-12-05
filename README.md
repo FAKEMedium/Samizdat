@@ -135,6 +135,8 @@ When enabled, other modules can use this for sending SMS notifications, 2FA code
 - LATEX for PDF generation
 - Webpack for JavaScript and CSS bundling and minimization
 - [Toast-UI](https://ui.toast.com/) editor for markdown editing
+- CLAUDE.md in many directories for AI assisted development
+
 
 ### Plans for future development
 
