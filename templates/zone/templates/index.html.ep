@@ -1,0 +1,239 @@
+<div class="container-fluid">
+  <div class="row mb-3">
+    <div class="col">
+      <div class="btn-group">
+        <button id="newTemplate" class="btn btn-primary"><%== icon 'plus-circle' %> <%== __('New Template') %></button>
+        <a href="<%== url_for('zone_index') %>" class="btn btn-outline-secondary"><%== __('Back to Zones') %></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-header"><%== __('Templates') %></div>
+        <div class="list-group list-group-flush" id="templateList">
+          <!-- Templates loaded via JS -->
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-8">
+      <div id="templateEditor" style="display: none;">
+        <div class="card mb-3">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <span id="templateTitle"><%== __('Template') %></span>
+            <div>
+              <button id="duplicateTemplate" class="btn btn-sm btn-outline-secondary" title="<%== __('Duplicate') %>"><%== icon 'copy' %></button>
+              <button id="deleteTemplate" class="btn btn-sm btn-danger" title="<%== __('Delete') %>"><%== icon 'trash-fill' %></button>
+            </div>
+          </div>
+          <div class="card-body">
+            <form id="templateForm">
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="templateName" class="form-label"><%== __('Name') %></label>
+                  <input type="text" id="templateName" class="form-control" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="templateDescription" class="form-label"><%== __('Description') %></label>
+                  <input type="text" id="templateDescription" class="form-control">
+                </div>
+              </div>
+              <button type="submit" class="btn btn-primary"><%== __('Save Template') %></button>
+            </form>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <%== __('Records') %>
+            <button id="addRecord" class="btn btn-sm btn-success"><%== icon 'plus-circle' %></button>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-sm table-hover mb-0" id="recordsTable">
+              <thead>
+                <tr>
+                  <th><%== __('Name') %></th>
+                  <th><%== __('Type') %></th>
+                  <th><%== __('Content') %></th>
+                  <th><%== __('TTL') %></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Records loaded via JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div id="noSelection" class="text-muted text-center py-5">
+        <%== __('Select a template to edit or create a new one') %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Record Edit Modal -->
+<div class="modal fade" id="recordModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form id="recordForm">
+        <div class="modal-header">
+          <h5 class="modal-title" id="recordModalTitle"><%== __('Record') %></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <input type="hidden" id="recordId">
+          <div class="mb-3">
+            <label for="recordName" class="form-label"><%== __('Name') %></label>
+            <input type="text" id="recordName" class="form-control" placeholder="@ or subdomain" required>
+            <div class="form-text"><%== __('Use @ for zone apex, or subdomain name') %></div>
+          </div>
+          <div class="mb-3">
+            <label for="recordType" class="form-label"><%== __('Type') %></label>
+            <select id="recordType" class="form-select" required>
+              <option value="A">A</option>
+              <option value="AAAA">AAAA</option>
+              <option value="CNAME">CNAME</option>
+              <option value="MX">MX</option>
+              <option value="TXT">TXT</option>
+              <option value="NS">NS</option>
+              <option value="SOA">SOA</option>
+              <option value="SRV">SRV</option>
+              <option value="CAA">CAA</option>
+            </select>
+          </div>
+
+          <!-- Dynamic content fields based on record type -->
+          <div id="contentFields">
+            <div class="mb-3">
+              <label for="recordContent" class="form-label"><%== __('Content') %></label>
+              <input type="text" id="recordContent" class="form-control" required>
+              <div class="form-text content-hint"></div>
+            </div>
+          </div>
+
+          <!-- Type-specific field templates (hidden) -->
+          <template id="tpl-simple">
+            <div class="mb-3">
+              <label for="recordContent" class="form-label content-label"><%== __('Content') %></label>
+              <input type="text" id="recordContent" class="form-control" required>
+              <div class="form-text content-hint"></div>
+            </div>
+          </template>
+
+          <template id="tpl-mx">
+            <div class="mb-3">
+              <label for="mxPriority" class="form-label"><%== __('Priority') %></label>
+              <input type="number" class="form-control" id="mxPriority" value="10" min="0">
+              <div class="form-text"><%== __('Lower values have higher priority') %></div>
+            </div>
+            <div class="mb-3">
+              <label for="recordContent" class="form-label"><%== __('Mail Server') %></label>
+              <input type="text" class="form-control" id="recordContent" required placeholder="mail.example.com. or @">
+              <div class="form-text"><%== __('Use @ for zone apex') %></div>
+            </div>
+          </template>
+
+          <template id="tpl-srv">
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="srvPriority" class="form-label"><%== __('Priority') %></label>
+                <input type="number" class="form-control" id="srvPriority" value="0" min="0">
+              </div>
+              <div class="col-4">
+                <label for="srvWeight" class="form-label"><%== __('Weight') %></label>
+                <input type="number" class="form-control" id="srvWeight" value="0" min="0">
+              </div>
+              <div class="col-4">
+                <label for="srvPort" class="form-label"><%== __('Port') %></label>
+                <input type="number" class="form-control" id="srvPort" value="0" min="0" max="65535">
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="recordContent" class="form-label"><%== __('Target') %></label>
+              <input type="text" class="form-control" id="recordContent" required placeholder="server.example.com. or @">
+              <div class="form-text"><%== __('Use @ for zone apex') %></div>
+            </div>
+          </template>
+
+          <template id="tpl-caa">
+            <div class="row mb-3">
+              <div class="col-3">
+                <label for="caaFlags" class="form-label"><%== __('Flags') %></label>
+                <input type="number" class="form-control" id="caaFlags" value="0" min="0" max="255">
+              </div>
+              <div class="col-4">
+                <label for="caaTag" class="form-label"><%== __('Tag') %></label>
+                <select class="form-select" id="caaTag">
+                  <option value="issue">issue</option>
+                  <option value="issuewild">issuewild</option>
+                  <option value="iodef">iodef</option>
+                </select>
+              </div>
+              <div class="col-5">
+                <label for="caaValue" class="form-label"><%== __('Value') %></label>
+                <input type="text" class="form-control" id="caaValue" placeholder="letsencrypt.org">
+              </div>
+            </div>
+          </template>
+
+          <template id="tpl-soa">
+            <div class="row mb-3">
+              <div class="col-6">
+                <label for="soaPrimary" class="form-label"><%== __('Primary NS') %></label>
+                <input type="text" class="form-control" id="soaPrimary" required placeholder="ns1.example.com. or @">
+              </div>
+              <div class="col-6">
+                <label for="soaAdmin" class="form-label"><%== __('Admin Email') %></label>
+                <input type="text" class="form-control" id="soaAdmin" required placeholder="admin.example.com.">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-4">
+                <label for="soaSerial" class="form-label"><%== __('Serial') %></label>
+                <input type="number" class="form-control" id="soaSerial" value="1" min="1">
+              </div>
+              <div class="col-4">
+                <label for="soaRefresh" class="form-label"><%== __('Refresh') %></label>
+                <input type="number" class="form-control" id="soaRefresh" value="10800">
+              </div>
+              <div class="col-4">
+                <label for="soaRetry" class="form-label"><%== __('Retry') %></label>
+                <input type="number" class="form-control" id="soaRetry" value="3600">
+              </div>
+            </div>
+            <div class="row mb-3">
+              <div class="col-6">
+                <label for="soaExpire" class="form-label"><%== __('Expire') %></label>
+                <input type="number" class="form-control" id="soaExpire" value="604800">
+              </div>
+              <div class="col-6">
+                <label for="soaMinimum" class="form-label"><%== __('Minimum TTL') %></label>
+                <input type="number" class="form-control" id="soaMinimum" value="3600">
+              </div>
+            </div>
+          </template>
+
+          <div class="mb-3">
+            <label for="recordTTL" class="form-label"><%== __('TTL') %></label>
+            <input type="number" id="recordTTL" class="form-control" value="3600">
+          </div>
+
+          <!-- Combined content preview -->
+          <div class="mb-3" id="contentPreview" style="display: none;">
+            <label class="form-label"><%== __('Combined Value') %></label>
+            <code class="d-block p-2 bg-light rounded" id="previewValue"></code>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+          <button type="submit" class="btn btn-primary"><%== __('Save') %></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

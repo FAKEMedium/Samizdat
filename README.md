@@ -59,7 +59,7 @@ A frontend to PowerDNS Authoritative Server, using API with optional extra suppo
 - Create, edit and delete records
 - Import and export zones in BIND format
 - Support for DNSSEC signing and key management
-- Template sets for easy creation of common zones (not yet implemented)
+- Advanced template sets, including apex (@) in content, for easy creation of common zones
 - Different access levels for users (customers) and admins
 
 

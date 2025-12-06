@@ -22,6 +22,35 @@
   const accountSelect = document.getElementById('account');
   const customerSearch = document.getElementById('customerSearch');
 
+  // Template selector (only for new zones)
+  const templateField = document.getElementById('templateField');
+  const templateSelect = document.getElementById('templateid');
+
+  // Fetch available templates for new zone
+  async function loadTemplates() {
+    if (!isNew) return;  // Templates only for new zones
+
+    try {
+      let url = '<%== url_for("zone_templates") %>';
+      if (fixedCustomerId) {
+        url += `?customerid=${fixedCustomerId}`;
+      }
+      const data = await window.authenticatedFetch(url);
+      if (data && data.templates && data.templates.length > 0) {
+        templateField.style.display = 'block';
+        data.templates.forEach(t => {
+          const opt = document.createElement('option');
+          opt.value = t.templateid;
+          opt.textContent = `${t.name} (${t.record_count} <%== __("records") %>)`;
+          if (t.description) opt.title = t.description;
+          templateSelect.appendChild(opt);
+        });
+      }
+    } catch (e) {
+      // No templates available or access denied
+    }
+  }
+
   // Check if user has admin access by testing endpoint
   async function checkAdminAccess() {
     // If under customer context, show field but disable search
@@ -133,8 +162,9 @@
     }
   }
 
-  // Check admin access
+  // Check admin access and load templates
   checkAdminAccess();
+  loadTemplates();
 
   // Save zone (create or update)
   async function saveZone() {
@@ -160,7 +190,8 @@
     } else {
       url = `<%== url_for('zone_index') %>/${zoneId}`;
       method = 'PATCH';
-      delete data.name;  // Zone name is immutable
+      delete data.name;       // Zone name is immutable
+      delete data.templateid; // Templates only for new zones
     }
 
     const result = await window.authenticatedFetch(url, {

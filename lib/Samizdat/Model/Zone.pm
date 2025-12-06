@@ -9,7 +9,8 @@ use Data::Dumper;
 
 has 'config';
 has 'cache';
-has 'db';  # Mojo::Pg database connection for PowerDNS
+has 'pdns';  # Mojo::Pg connection to PowerDNS database
+has 'pg';    # Mojo::Pg connection to main Samizdat database (for templates)
 has ua => sub { Mojo::UserAgent->new };
 
 # Get environment configuration (production or test)
@@ -246,6 +247,31 @@ sub create_record ($self, $zone_id, $record_data) {
   return { success => 0, error => $error };
 }
 
+# Create an rrset with multiple records (for templates with same name+type).
+sub _create_rrset ($self, $zone_id, $rrset) {
+  my $url = $self->_api_url() . '/zones/' . $zone_id;
+
+  my $payload = {
+    rrsets => [{
+      name       => $rrset->{name},
+      type       => $rrset->{type},
+      ttl        => $rrset->{ttl} || 3600,
+      changetype => 'REPLACE',
+      records    => $rrset->{records},
+    }],
+  };
+
+  my $tx = $self->ua->patch($url, $self->_headers, json => $payload);
+  my $res = $tx->result;
+
+  if ($res && ($res->is_success || $res->code == 204)) {
+    return { success => 1 };
+  }
+
+  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  return { success => 0, error => $error };
+}
+
 # Update an existing record in a zone (same as create - REPLACE overwrites).
 sub update_record ($self, $zone_id, $record_id, $record_data) {
   # PowerDNS uses name+type to identify rrsets, not record_id
@@ -341,12 +367,260 @@ sub _decode_idn ($self, $name) {
   return $@ ? $name : $decoded;
 }
 
+# Expand @ references in template record content based on record type.
+# Different record types have different content formats:
+#   A/AAAA: IP address - no replacement
+#   CNAME/NS: hostname - replace @ with zone FQDN
+#   TXT: text - no replacement
+#   MX: "priority hostname" - replace @ in hostname part
+#   SRV: "priority weight port target" - replace @ in target part
+#   CAA: "flags tag value" - no replacement (value is CA name)
+#   SOA: "primary admin ..." - replace @ in primary and admin parts
+sub _expand_template_content ($self, $type, $content, $zone_name) {
+  return $content unless defined $content;
+
+  # zone_name already has trailing dot from _normalize_zone_name
+  my $zone_fqdn = $zone_name;
+
+  # Helper to replace @ patterns with zone FQDN
+  # Handles: @ -> example.com.
+  #          ns1.@ -> ns1.example.com.
+  #          admin.@ -> admin.example.com.
+  my $expand = sub {
+    my ($val) = @_;
+    return $val unless defined $val;
+    return $zone_fqdn if $val eq '@';
+    if ($val =~ /^(.+)\.\@$/) {
+      return "$1.$zone_fqdn";
+    }
+    return $val;
+  };
+
+  if ($type eq 'CNAME' || $type eq 'NS') {
+    # Simple hostname - replace @ directly
+    return $expand->($content);
+  }
+  elsif ($type eq 'MX') {
+    # Format: "priority hostname"
+    my ($priority, $hostname) = split /\s+/, $content, 2;
+    return "$priority " . $expand->($hostname // '');
+  }
+  elsif ($type eq 'SRV') {
+    # Format: "priority weight port target"
+    my @parts = split /\s+/, $content;
+    if (@parts >= 4) {
+      $parts[3] = $expand->($parts[3]);
+    }
+    return join ' ', @parts;
+  }
+  elsif ($type eq 'SOA') {
+    # Format: "primary admin serial refresh retry expire minimum"
+    my @parts = split /\s+/, $content;
+    $parts[0] = $expand->($parts[0]) if @parts > 0;  # primary NS
+    $parts[1] = $expand->($parts[1]) if @parts > 1;  # admin email
+    return join ' ', @parts;
+  }
+
+  # A, AAAA, TXT, CAA - return as-is
+  return $content;
+}
+
+### Zone Templates (stored in zone schema)
+
+# List available templates, optionally filtered by customerid.
+sub list_templates ($self, $params = {}) {
+  my $db = $self->pg->db;
+  my $sql = 'SELECT t.templateid, t.customerid, t.name, t.description,
+             COUNT(r.recordid) AS record_count
+             FROM zone.templates t
+             LEFT JOIN zone.template_records r ON t.templateid = r.templateid
+             WHERE t.customerid IS NULL';
+  my @bindings;
+
+  # Include customer-specific templates if customerid provided
+  if ($params->{customerid}) {
+    $sql .= ' OR t.customerid = ?';
+    push @bindings, $params->{customerid};
+  }
+
+  $sql .= ' GROUP BY t.templateid ORDER BY t.name';
+  return $db->query($sql, @bindings)->hashes->to_array;
+}
+
+# Get a template with its records.
+sub get_template ($self, $templateid) {
+  my $db = $self->pg->db;
+  my $template = $db->query(
+    'SELECT * FROM zone.templates WHERE templateid = ?', $templateid
+  )->hash;
+  return undef unless $template;
+
+  $template->{records} = $db->query(
+    'SELECT * FROM zone.template_records WHERE templateid = ? ORDER BY type, name',
+    $templateid
+  )->hashes->to_array;
+
+  return $template;
+}
+
+# Create a new template.
+sub create_template ($self, $data) {
+  my $db = $self->pg->db;
+  my $result = $db->insert('zone.templates', {
+    name        => $data->{name},
+    description => $data->{description} // '',
+    customerid  => $data->{customerid} || undef,
+  }, { returning => 'templateid' });
+  return { success => 1, templateid => $result->hash->{templateid} };
+}
+
+# Update a template.
+sub update_template ($self, $templateid, $data) {
+  my $db = $self->pg->db;
+  $db->update('zone.templates', {
+    name        => $data->{name},
+    description => $data->{description} // '',
+    customerid  => $data->{customerid} || undef,
+  }, { templateid => $templateid });
+  return { success => 1 };
+}
+
+# Delete a template (cascade deletes records).
+sub delete_template ($self, $templateid) {
+  my $db = $self->pg->db;
+  $db->delete('zone.templates', { templateid => $templateid });
+  return { success => 1 };
+}
+
+# Duplicate a template with all its records.
+sub duplicate_template ($self, $templateid) {
+  my $db = $self->pg->db;
+
+  # Get original template
+  my $original = $self->get_template($templateid);
+  return { success => 0, error => 'Template not found' } unless $original;
+
+  # Create new template with "Copy of" prefix
+  my $tx = $db->begin;
+  my $new_template = $db->insert('zone.templates', {
+    name        => "Copy of $original->{name}",
+    description => $original->{description} // '',
+    customerid  => $original->{customerid},
+  }, { returning => 'templateid' });
+  my $new_id = $new_template->hash->{templateid};
+
+  # Copy all records
+  for my $rec (@{$original->{records}}) {
+    $db->insert('zone.template_records', {
+      templateid => $new_id,
+      name       => $rec->{name},
+      type       => $rec->{type},
+      content    => $rec->{content},
+      ttl        => $rec->{ttl},
+      disabled   => $rec->{disabled},
+    });
+  }
+
+  $tx->commit;
+  return { success => 1, templateid => $new_id };
+}
+
+# Create a template record.
+sub create_template_record ($self, $templateid, $data) {
+  my $db = $self->pg->db;
+  my $result = $db->insert('zone.template_records', {
+    templateid => $templateid,
+    name       => $data->{name},
+    type       => $data->{type},
+    content    => $data->{content},
+    ttl        => $data->{ttl} // 3600,
+    disabled   => $data->{disabled} ? 1 : 0,
+  }, { returning => 'recordid' });
+  return { success => 1, recordid => $result->hash->{recordid} };
+}
+
+# Update a template record.
+sub update_template_record ($self, $recordid, $data) {
+  my $db = $self->pg->db;
+  $db->update('zone.template_records', {
+    name     => $data->{name},
+    type     => $data->{type},
+    content  => $data->{content},
+    ttl      => $data->{ttl} // 3600,
+    disabled => $data->{disabled} ? 1 : 0,
+  }, { recordid => $recordid });
+  return { success => 1 };
+}
+
+# Delete a template record.
+sub delete_template_record ($self, $recordid) {
+  my $db = $self->pg->db;
+  $db->delete('zone.template_records', { recordid => $recordid });
+  return { success => 1 };
+}
+
+# Get a single template record.
+sub get_template_record ($self, $recordid) {
+  my $db = $self->pg->db;
+  return $db->select('zone.template_records', '*', { recordid => $recordid })->hash;
+}
+
+# Create zone from template - creates zone then adds template records.
+sub create_zone_from_template ($self, $zone_data, $templateid) {
+  # First create the zone
+  my $result = $self->create_zone($zone_data);
+  return $result unless $result->{success};
+
+  # Get the template
+  my $template = $self->get_template($templateid);
+  return { success => 0, error => 'Template not found' } unless $template;
+
+  my $zone_name = $self->_normalize_zone_name($zone_data->{name});
+
+  # Group template records by name+type (PowerDNS replaces entire rrsets)
+  my %rrsets;
+  for my $rec (@{$template->{records}}) {
+    # Replace @ with zone name, append zone to relative names
+    # Handles: @ -> example.com, ns1.@ -> ns1.example.com, ns1 -> ns1.example.com
+    my $name = $rec->{name};
+    if ($name eq '@' || $name eq '') {
+      $name = $zone_name;
+    } elsif ($name =~ /^(.+)\.\@$/) {
+      # Pattern like ns1.@ -> ns1.example.com
+      $name = "$1.$zone_name";
+    } elsif ($name !~ /\.$/) {
+      $name = "$name.$zone_name";
+    }
+
+    # Replace @ in content with zone FQDN based on record type
+    my $content = $self->_expand_template_content($rec->{type}, $rec->{content}, $zone_name);
+
+    my $key = "$name|$rec->{type}";
+    $rrsets{$key} //= { name => $name, type => $rec->{type}, ttl => $rec->{ttl}, records => [] };
+    push @{$rrsets{$key}{records}}, { content => $content, disabled => $rec->{disabled} ? \1 : \0 };
+
+    say "Template record: $rec->{name} $rec->{type} $rec->{content} -> $name $rec->{type} $content";
+  }
+
+  # Create each rrset (with all records of same name+type together)
+  for my $rrset (values %rrsets) {
+    my $rec_result = $self->_create_rrset($zone_name, $rrset);
+    if ($rec_result->{success}) {
+      say "  Created: $rrset->{name} $rrset->{type} (" . scalar(@{$rrset->{records}}) . " records)";
+    } else {
+      say "  FAILED: $rrset->{name} $rrset->{type} - $rec_result->{error}";
+    }
+  }
+
+  return { success => 1, zone => $zone_name, template => $template->{name} };
+}
+
 # Search zones directly via PostgreSQL (faster for live search).
 # Supports filtering by name pattern (ILIKE) and account (exact match).
 # Handles IDN/punycode: Unicode search terms match decoded domain names.
 # Returns array of zone hashes with id, name, and unicode_name.
 sub search_zones ($self, $params = {}) {
-  my $db = $self->db->db;
+  my $db = $self->pdns->db;
   my $searchterm = $params->{searchterm};
   my $is_unicode_search = $searchterm && $searchterm =~ /[^\x00-\x7F]/;
 

@@ -10,6 +10,14 @@
       <input type="text" id="name" name="name" class="form-control" required>
     </div>
 
+    <div class="mb-3" id="templateField" style="display: none;">
+      <label for="templateid" class="form-label"><%== __('From Template') %></label>
+      <select id="templateid" name="templateid" class="form-select">
+        <option value=""><%== __('No template (empty zone)') %></option>
+      </select>
+      <div class="form-text"><%== __('Pre-populate zone with template records') %></div>
+    </div>
+
     <div class="mb-3">
       <label for="kind" class="form-label"><%== __('Zone Kind') %></label>
       <select id="kind" name="kind" class="form-select">
