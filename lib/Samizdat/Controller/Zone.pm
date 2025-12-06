@@ -20,7 +20,7 @@ sub index($self) {
     my $account = $customerid // $self->param('account') // undef;
 
     my $zones;
-    if ($self->zone->db) {
+    if ($self->zone->pdns) {
       # Use PostgreSQL for all searches when available (faster)
       $zones = $self->zone->search_zones({
         searchterm => $searchterm || undef,
@@ -66,13 +66,149 @@ sub create_zone ($self) {
     kind    => $json->{kind} // 'Native',
     account => $json->{account} // '',
   };
-  my $result = $self->zone->create_zone($zone_data);
+
+  my $result;
+  if ($json->{templateid}) {
+    # Create zone from template
+    $result = $self->zone->create_zone_from_template($zone_data, $json->{templateid});
+  } else {
+    $result = $self->zone->create_zone($zone_data);
+  }
 
   return $self->render(json => {
     success => $result->{success} ? 1 : 0,
     toast   => $result->{success}
       ? $self->app->__('Zone created successfully')
       : ($result->{error} // $self->app->__('Failed to create zone'))
+  });
+}
+
+# List available zone templates.
+sub templates ($self) {
+  my $title = $self->app->__('Zone Templates');
+  my $web = { title => $title };
+
+  if ($self->is_json_request) {
+    return unless $self->access({ admin => 1 });
+    my $customerid = $self->stash('customerid') // $self->param('customerid');
+    my $templates = $self->zone->list_templates({ customerid => $customerid });
+    return $self->render(json => { templates => $templates });
+  }
+
+  $web->{script} .= $self->render_to_string(template => 'zone/templates/index', format => 'js');
+  return $self->render(web => $web, title => $title, template => 'zone/templates/index');
+}
+
+# Get a single template with records.
+sub get_template ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $templateid = $self->stash('template_id');
+  my $template = $self->zone->get_template($templateid);
+
+  return $self->render(json => { template => $template });
+}
+
+# Create a new template.
+sub create_template ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $json = $self->req->json;
+  my $result = $self->zone->create_template($json);
+
+  return $self->render(json => {
+    success => $result->{success},
+    templateid => $result->{templateid},
+    toast => $self->app->__('Template created'),
+  });
+}
+
+# Update a template.
+sub update_template ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $templateid = $self->stash('template_id');
+  my $json = $self->req->json;
+  my $result = $self->zone->update_template($templateid, $json);
+
+  return $self->render(json => {
+    success => $result->{success},
+    toast => $self->app->__('Template updated'),
+  });
+}
+
+# Delete a template.
+sub delete_template ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $templateid = $self->stash('template_id');
+  my $result = $self->zone->delete_template($templateid);
+
+  return $self->render(json => {
+    success => $result->{success},
+    toast => $self->app->__('Template deleted'),
+  });
+}
+
+sub duplicate_template ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $templateid = $self->stash('template_id');
+  my $result = $self->zone->duplicate_template($templateid);
+
+  return $self->render(json => {
+    success    => $result->{success},
+    templateid => $result->{templateid},
+    toast      => $self->app->__('Template duplicated'),
+  });
+}
+
+# Template record CRUD
+sub get_template_record ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $recordid = $self->stash('record_id');
+  my $record = $self->zone->get_template_record($recordid);
+
+  return $self->render(json => { record => $record });
+}
+
+sub create_template_record ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $templateid = $self->stash('template_id');
+  my $json = $self->req->json;
+  my $result = $self->zone->create_template_record($templateid, $json);
+
+  return $self->render(json => {
+    success => $result->{success},
+    recordid => $result->{recordid},
+    toast => $self->app->__('Record added'),
+  });
+}
+
+sub update_template_record ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $recordid = $self->stash('record_id');
+  my $json = $self->req->json;
+  my $result = $self->zone->update_template_record($recordid, $json);
+
+  return $self->render(json => {
+    success => $result->{success},
+    toast => $self->app->__('Record updated'),
+  });
+}
+
+sub delete_template_record ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $recordid = $self->stash('record_id');
+  my $result = $self->zone->delete_template_record($recordid);
+
+  return $self->render(json => {
+    success => $result->{success},
+    toast => $self->app->__('Record deleted'),
   });
 }
 
