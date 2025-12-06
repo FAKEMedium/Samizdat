@@ -6,5 +6,5 @@
 الهدف هو إضافة مقاطع فيديو مستخرجة، ووضع كل شيء على صورة قرص، ومشاركتها كبت تورنت.
 اعتبر هذا <a href="https://ar.wikipedia.org/wiki/سامزدات" target="_blank">ساميزدات</a> حديثًا.
 
-[سجّل](account/)، استكشف [المشروع](project/)، ألق نظرة على [الزوار](https://fakenews.com/matomo/)،
+[سجّل](/account/register)، استكشف [المشروع](https://fakemedium.com/project)، ألق نظرة على [الزوار](https://fakenews.com/matomo/)،
 أو اكتشف كيف يمكنك [المساهمة](contribute/).

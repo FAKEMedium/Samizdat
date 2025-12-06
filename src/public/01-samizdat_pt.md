@@ -6,5 +6,5 @@ Este site sobre notícias falsas é parte de um projeto para gerar conteúdo est
 O objetivo é adicionar vídeos extraídos, colocar tudo em uma imagem de disco e compartilhá-la como um bittorrent.
 Considere isso um <a href="https://pt.wikipedia.org/wiki/Samizdat" target="_blank">samizdat</a> moderno.
 
-[Registre-se](account/), explore o [projeto](https://fakemedium.com/project/), dê uma olhada nos [visitantes](/matomo/),
+[Registre-se](account/register/), explore o [projeto](https://fakemedium.com/project/), dê uma olhada nos [visitantes](/matomo/),
 ou descubra como você pode [contribuir](contribute/).
