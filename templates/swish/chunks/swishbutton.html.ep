@@ -1,0 +1,25 @@
+% # Swish payment button container
+<div id="swish-button-container" class="swish-payment">
+  <div class="mb-3">
+    <label for="swish-phone" class="form-label"><%= __('Phone number') %></label>
+    <input type="tel" class="form-control" id="swish-phone" placeholder="07XXXXXXXX">
+    <div class="form-text"><%= __('Enter your Swedish phone number to receive a Swish payment request.') %></div>
+  </div>
+  <button type="button" class="btn btn-success" id="swish-pay-btn">
+    <%== anysvg
+        'swish-icon',
+        'src/public/media/images/swish.svg',
+        {
+          id         => 'swish-icon',
+          prefix     => 'anysvg',
+          extraclass => 'me-2',
+          title      => 'Swish',
+          height     => 24,
+          width      => 24,
+        }
+    %>
+    <%= __('Pay with Swish') %>
+  </button>
+  <div id="swish-status" class="mb-3" style="display:none;"></div>
+  <div id="swish-qr" class="mb-3" style="display:none;"></div>
+</div>
