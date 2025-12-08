@@ -199,6 +199,28 @@ manager:
   bis:
     cardnumber: 17
     dbtype: postgresql
+  swish:
+    cardnumber: 18
+    dbtype: postgresql
+    currency: SEK
+    default_env: test                             # test or production
+    # mTLS certificates for Swish API authentication
+    # Test certificates: https://developer.swish.nu/documentation/getting-started/swish-commerce-api
+    env:
+      test:
+        api: https://mss.cpc.getswish.net/swish-cpcapi/api/v2
+        payee_alias: '1234679304'                 # Test merchant Swish number
+        cert:
+          client_cert: src/swish/Swish_Merchant_TestCertificate_1234679304.pem
+          client_key: src/swish/Swish_Merchant_TestCertificate_1234679304.key
+          ca_cert: src/swish/Swish_TLS_RootCA.pem
+      production:
+        api: https://cpc.getswish.net/swish-cpcapi/api/v2
+        payee_alias: '46XXXXXXXXX'                # Your production Swish number
+        cert:
+          client_cert: /path/to/production_client.pem
+          client_key: /path/to/production_client.key
+          ca_cert: /path/to/production_ca.pem
 screenshots:
   -
     src: /media/images/samizdat.jpg

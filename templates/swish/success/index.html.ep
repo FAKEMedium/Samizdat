@@ -1,0 +1,14 @@
+% # Swish payment success page
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-success" role="alert" id="success-message">
+        <h4 class="alert-heading"><%= __('Payment Successful') %></h4>
+        <p><%= __('Thank you for your payment. Your Swish transaction has been completed.') %></p>
+        <hr>
+        <div id="transaction-details"></div>
+      </div>
+      <a href="/" class="btn btn-primary"><%= __('Return to Home') %></a>
+    </div>
+  </div>
+</div>

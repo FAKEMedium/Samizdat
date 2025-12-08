@@ -134,7 +134,21 @@ fetchfonts:
 	wget -O /tmp/NotoSansDevanagari.zip "https://github.com/notofonts/devanagari/releases/download/NotoSansDevanagari-v2.004/NotoSansDevanagari-v2.004.zip" && unzip -j -o /tmp/NotoSansDevanagari.zip "NotoSansDevanagari/googlefonts/ttf/NotoSansDevanagari-Regular.ttf" -d $(FETCH_SRC)/fonts && rm /tmp/NotoSansDevanagari.zip
 	wget -O /tmp/NotoSansArabic.zip "https://noto-website-2.storage.googleapis.com/pkgs/NotoSansArabic-unhinted.zip" && unzip -j -o /tmp/NotoSansArabic.zip "NotoSansArabic-Regular.ttf" -d $(FETCH_SRC)/fonts && rm /tmp/NotoSansArabic.zip
 
-fetchall: fetchicons fetchflags fetchcountries fetchlanguages
+fetchswish:
+	@mkdir -p $(FETCH_SRC)/swish
+	@echo ""
+	@echo "=== Swish test certificates require manual download ==="
+	@echo "1. Visit: https://developer.swish.nu/documentation/environments#certificates"
+	@echo "2. Download mss_test_2.0.zip (or current version)"
+	@echo "3. Extract to: $(FETCH_SRC)/swish/"
+	@echo ""
+	@echo "Expected files:"
+	@echo "  - Swish_Merchant_TestCertificate_1234679304.pem"
+	@echo "  - Swish_Merchant_TestCertificate_1234679304.key"
+	@echo "  - Swish_TLS_RootCA.pem"
+	@echo ""
+
+fetchall: fetchicons fetchflags fetchcountries fetchlanguages fetchswish
 
 speedtest:
 	bin/samizdat speedtest

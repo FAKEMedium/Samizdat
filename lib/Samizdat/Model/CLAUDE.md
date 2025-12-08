@@ -229,11 +229,145 @@ CREATE INDEX idx_paypal_created ON paypal_ipn_log(created_at);
 - PayPal OAuth 2.0: https://developer.paypal.com/api/rest/authentication/
 
 
-## SWISH
+## Swish
 
-SWISH is a Swedish service for mobile payments.
+Swish is a Swedish mobile payment service that allows instant bank transfers via phone number.
+The Swish model provides integration with the Swish Commerce API using mTLS certificates.
 
-Documentation at https://developer.swish.nu/
+### Features
+
+- mTLS certificate authentication (no OAuth)
+- E-commerce flow (phone number push notification)
+- M-commerce flow (QR code / app link)
+- Callback handling for payment status updates
+- Refund support
+- Payment logging and statistics
+
+### Authentication
+
+Swish uses mutual TLS (mTLS) with client certificates instead of OAuth2:
+
+1. **Test certificates**: Download from https://developer.swish.nu/documentation/getting-started/swish-commerce-api
+2. **Production certificates**: Order from Swish Certificate Management through your bank
+
+Configure certificates in samizdat.yml under `manager.swish.cert`:
+- `client_cert`: Path to client certificate (PEM)
+- `client_key`: Path to client private key (PEM)
+- `ca_cert`: Path to Swish CA certificate (PEM)
+
+### Configuration
+
+```yaml
+swish:
+  cardnumber: 18
+  dbtype: postgresql
+  currency: SEK
+  default_env: test                          # test or production
+  payee_alias: '1231181189'                  # Merchant Swish number (test number shown)
+  cert:
+    client_cert: /path/to/swish_client.pem
+    client_key: /path/to/swish_client.key
+    ca_cert: /path/to/swish_ca.pem
+  env:
+    test:
+      api: https://mss.cpc.getswish.net/swish-cpcapi/api/v2
+    production:
+      api: https://cpc.getswish.net/swish-cpcapi/api/v2
+```
+
+### Payment Flows
+
+#### E-commerce (phone number provided)
+
+1. User enters phone number on checkout page
+2. POST to `/swish/payments/create` with `payer_alias`
+3. Swish sends push notification to user's Swish app
+4. User opens app and confirms payment with BankID
+5. Swish sends callback to `/swish/callback`
+6. Payment status updated to PAID
+
+#### M-commerce (QR code / app link)
+
+1. POST to `/swish/payments/create` without `payer_alias`
+2. Response includes `payment_request_token`
+3. Display QR code or redirect to `swish://` URL
+4. User scans QR or taps link to open Swish app
+5. User confirms payment with BankID
+6. Swish sends callback to `/swish/callback`
+7. Payment status updated to PAID
+
+### API Endpoints
+
+- `GET /swish/config` - Get client configuration (currency, environment)
+- `POST /swish/payments/create` - Create payment request
+- `GET /swish/payments/:id` - Get payment status
+- `POST /swish/callback` - Receive Swish callbacks (webhook)
+- `POST /swish/refunds/create` - Create refund request
+
+### Database Schema
+
+Run the schema creation:
+
+```bash
+psql -U samizdat samizdat < schema/swish.sql
+```
+
+This creates the `swish` schema with:
+- `swish.payments` - Payment request records
+- `swish.callback_log` - Audit log of callback events
+- `swish.refunds` - Refund operations
+
+### Usage
+
+#### In Templates (with JavaScript)
+
+```html
+<!-- Include the Swish button container -->
+<%== swishbutton %>
+
+<!-- Include the JavaScript in your page script -->
+<% $web->{script} = swishbutton_script(); %>
+```
+
+#### In Perl Code
+
+```perl
+# E-commerce payment (phone number)
+my $payment = $c->swish->create_payment(
+  amount => 10000,  # 100.00 SEK in öre
+  payer_alias => '46701234567',
+  message => 'Order #123',
+  callback_url => $c->url_for('swish_callback')->to_abs,
+);
+
+# M-commerce payment (QR code)
+my $payment = $c->swish->create_payment(
+  amount => 10000,
+  message => 'Order #123',
+  callback_url => $c->url_for('swish_callback')->to_abs,
+);
+# Use $payment->{payment_request_token} for QR code
+
+# Create refund
+my $refund = $c->swish->create_refund(
+  original_payment_reference => $payment_ref,
+  amount => 5000,
+  message => 'Partial refund',
+  callback_url => $c->url_for('swish_callback')->to_abs,
+);
+```
+
+### Test Phone Numbers
+
+In test environment, use these phone numbers:
+- `46701234567` - Successful payment
+- `46701234568` - Declined payment
+
+### Documentation
+
+- Swish Developer: https://developer.swish.nu/
+- API Reference: https://developer.swish.nu/api/payment-request
+- Getting Started: https://developer.swish.nu/documentation/getting-started/swish-commerce-api
 
 
 ## BIS (Based in Sweden)

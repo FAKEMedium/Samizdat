@@ -1,0 +1,14 @@
+% # Swish payment cancelled page
+<div class="container mb-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-warning" role="alert">
+        <h4 class="alert-heading"><%= __('Payment Cancelled') %></h4>
+        <p><%= __('Your Swish payment was cancelled or declined.') %></p>
+        <hr>
+        <p class="mb-0"><%= __('You can try again or choose a different payment method.') %></p>
+      </div>
+      <a href="/" class="btn btn-primary"><%= __('Return to Home') %></a>
+    </div>
+  </div>
+</div>
