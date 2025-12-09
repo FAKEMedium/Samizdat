@@ -23,10 +23,10 @@ fetch(window.location.pathname, {
     document.getElementById('pending-count').textContent =
       stats.count_pending + ' <%= __("payments") %>';
 
-    document.getElementById('refunded-count').textContent =
-      '<%= __("Refunded:") %> ' + stats.count_refunded;
+    document.getElementById('refunded-amount').textContent =
+      formatCurrency(stats.total_refunded);
     document.getElementById('failed-count').textContent =
-      '<%= __("Failed:") %> ' + stats.count_failed;
+      stats.count_refunded + ' <%= __("refunded") %>, ' + stats.count_failed + ' <%= __("failed") %>';
 
     // Update payments table
     const tbody = document.getElementById('payments-tbody');

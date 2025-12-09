@@ -9,36 +9,37 @@
   <!-- Statistics Cards -->
   <div class="row mt-4" id="stats-cards">
     <div class="col-md-3">
-      <div class="card text-white bg-success mb-3">
+      <div class="card text-white bg-success mb-3 h-100">
         <div class="card-header"><%= __('Balance') %></div>
         <div class="card-body">
           <h4 class="card-title" id="balance-amount">-</h4>
+          <p class="card-text" id="balance-label"><%= __('net balance') %></p>
         </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card text-white bg-primary mb-3">
+      <div class="card text-white bg-primary mb-3 h-100">
         <div class="card-header"><%= __('Completed') %></div>
         <div class="card-body">
-          <h5 class="card-title" id="completed-amount">-</h5>
+          <h4 class="card-title" id="completed-amount">-</h4>
           <p class="card-text" id="completed-count">-</p>
         </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card text-white bg-warning mb-3">
+      <div class="card text-white bg-warning mb-3 h-100">
         <div class="card-header"><%= __('Pending') %></div>
         <div class="card-body">
-          <h5 class="card-title" id="pending-amount">-</h5>
+          <h4 class="card-title" id="pending-amount">-</h4>
           <p class="card-text" id="pending-count">-</p>
         </div>
       </div>
     </div>
     <div class="col-md-3">
-      <div class="card text-white bg-danger mb-3">
+      <div class="card text-white bg-danger mb-3 h-100">
         <div class="card-header"><%= __('Refunded/Failed') %></div>
         <div class="card-body">
-          <p class="card-text" id="refunded-count">-</p>
+          <h4 class="card-title" id="refunded-amount">-</h4>
           <p class="card-text" id="failed-count">-</p>
         </div>
       </div>

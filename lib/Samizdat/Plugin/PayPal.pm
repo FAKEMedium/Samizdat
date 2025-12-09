@@ -14,7 +14,7 @@ sub register ($self, $app, $config = {}) {
   $paypal->get('/cancel')                 ->to('#cancel')               ->name('paypal_cancel');
 
   # REST API routes
-  $paypal->get('/config')                 ->to('#config')               ->name('paypal_config');
+  $paypal->get('/config')                 ->to('#paypal_config')        ->name('paypal_config');
   $paypal->post('/orders/create')         ->to('#create_order')         ->name('paypal_create_order');
   $paypal->post('/orders/:id/capture')    ->to('#capture_order')        ->name('paypal_capture_order');
 
@@ -25,11 +25,19 @@ sub register ($self, $app, $config = {}) {
 
   # Register model helper following the established pattern
   $app->helper(paypal => sub ($c) {
-    state $model = Samizdat::Model::PayPal->new({
-      config => $c->config->{manager}->{paypal},
-      redis  => $c->app->redis,
-      pg     => $c->app->pg,
-    });
+    state $model;
+    return $model if $model;
+
+    eval {
+      $model = Samizdat::Model::PayPal->new(
+        config => $c->app->config->{manager}->{paypal},
+        redis  => $c->app->redis,
+        pg     => $c->app->pg,
+      );
+    };
+    if ($@) {
+      $c->app->log->error("Failed to create PayPal model: $@");
+    }
     return $model;
   });
 
