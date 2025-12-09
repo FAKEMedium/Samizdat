@@ -453,7 +453,7 @@ sub store_ipn_event ($self, $params) {
   return unless $self->pg;
 
   eval {
-    $self->pg->db->insert('paypal_ipn_log', {
+    $self->pg->db->insert('paypal.ipn_log', {
       txn_id => $params->{txn_id} || '',
       txn_type => $params->{txn_type} || '',
       payment_status => $params->{payment_status} || '',
@@ -485,7 +485,7 @@ sub get_transaction ($self, $txn_id) {
   return unless $self->pg;
 
   my $result = $self->pg->db->select(
-    'paypal_ipn_log',
+    'paypal.ipn_log',
     '*',
     {txn_id => $txn_id}
   )->hash;
@@ -508,7 +508,7 @@ sub get_recent_payments ($self, %params) {
   my $offset = $params{offset} || 0;
 
   my $results = $self->pg->db->query(
-    'SELECT * FROM paypal_ipn_log
+    'SELECT * FROM paypal.ipn_log
      ORDER BY created_at DESC
      LIMIT ? OFFSET ?',
     $limit, $offset
@@ -541,7 +541,7 @@ sub get_payment_stats ($self) {
   # Get completed payments stats
   my $completed = $self->pg->db->query(
     'SELECT COUNT(*) as count, COALESCE(SUM(amount), 0) as total
-     FROM paypal_ipn_log
+     FROM paypal.ipn_log
      WHERE payment_status = ?',
     'Completed'
   )->hash;
@@ -551,26 +551,27 @@ sub get_payment_stats ($self) {
   # Get pending payments stats
   my $pending = $self->pg->db->query(
     'SELECT COUNT(*) as count, COALESCE(SUM(amount), 0) as total
-     FROM paypal_ipn_log
+     FROM paypal.ipn_log
      WHERE payment_status = ?',
     'Pending'
   )->hash;
   $stats->{count_pending} = $pending->{count} || 0;
   $stats->{total_pending} = $pending->{total} || 0;
 
-  # Get refunded count
+  # Get refunded stats
   my $refunded = $self->pg->db->query(
-    'SELECT COUNT(*) as count
-     FROM paypal_ipn_log
+    'SELECT COUNT(*) as count, COALESCE(SUM(amount), 0) as total
+     FROM paypal.ipn_log
      WHERE payment_status IN (?, ?)',
     'Refunded', 'Reversed'
   )->hash;
   $stats->{count_refunded} = $refunded->{count} || 0;
+  $stats->{total_refunded} = $refunded->{total} || 0;
 
   # Get failed count
   my $failed = $self->pg->db->query(
     'SELECT COUNT(*) as count
-     FROM paypal_ipn_log
+     FROM paypal.ipn_log
      WHERE payment_status = ?',
     'Failed'
   )->hash;
@@ -579,8 +580,8 @@ sub get_payment_stats ($self) {
   # Calculate balance (completed - refunded amounts)
   my $balance = $self->pg->db->query(
     'SELECT COALESCE(
-       (SELECT SUM(amount) FROM paypal_ipn_log WHERE payment_status = ?) -
-       (SELECT SUM(amount) FROM paypal_ipn_log WHERE payment_status IN (?, ?))
+       (SELECT SUM(amount) FROM paypal.ipn_log WHERE payment_status = ?) -
+       (SELECT SUM(amount) FROM paypal.ipn_log WHERE payment_status IN (?, ?))
      , 0) as balance',
     'Completed', 'Refunded', 'Reversed'
   )->hash;
@@ -627,26 +628,11 @@ To receive IPN notifications:
 
 =head1 DATABASE SCHEMA
 
-Create the following table for IPN logging:
+Run the schema creation:
 
-    CREATE TABLE paypal_ipn_log (
-      id SERIAL PRIMARY KEY,
-      txn_id VARCHAR(255) UNIQUE,
-      txn_type VARCHAR(100),
-      payment_status VARCHAR(50),
-      payer_email VARCHAR(255),
-      receiver_email VARCHAR(255),
-      amount DECIMAL(10,2),
-      currency VARCHAR(10),
-      item_number VARCHAR(255),
-      custom TEXT,
-      raw_data JSONB,
-      created_at TIMESTAMP DEFAULT NOW()
-    );
+    psql -U samizdat samizdat < schema/paypal.sql
 
-    CREATE INDEX idx_paypal_txn_id ON paypal_ipn_log(txn_id);
-    CREATE INDEX idx_paypal_status ON paypal_ipn_log(payment_status);
-    CREATE INDEX idx_paypal_created ON paypal_ipn_log(created_at);
+This creates the C<paypal> schema with the C<paypal.ipn_log> table for transaction logging.
 
 =head1 SEE ALSO
 

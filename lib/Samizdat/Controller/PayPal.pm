@@ -6,6 +6,9 @@ sub index ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
 
   if ($accept =~ /json/) {
+    # Require admin access for JSON
+    return unless $self->access({ admin => 1 });
+
     # Return JSON data for the panel
     my $payments = $self->paypal->get_recent_payments(limit => 50);
     my $stats = $self->paypal->get_payment_stats();
@@ -114,8 +117,9 @@ sub cancel ($self) {
   $self->render(template => 'paypal/cancel/index');
 }
 
-sub config ($self) {
+sub paypal_config ($self) {
   # Return PayPal configuration for frontend (client ID, environment)
+  # Named paypal_config to avoid collision with inherited Mojolicious::Controller::config method
   my $env_config = $self->paypal->get_env_config();
   my $config_data = $self->paypal->config;
 
@@ -173,7 +177,7 @@ sub capture_order ($self) {
       my $capture = $result->{purchase_units}->[0]->{payments}->{captures}->[0];
       if ($capture) {
         eval {
-          $self->paypal->pg->db->insert('paypal_ipn_log', {
+          $self->paypal->pg->db->insert('paypal.ipn_log', {
             txn_id => $capture->{id},
             txn_type => 'web_accept',
             payment_status => $capture->{status},

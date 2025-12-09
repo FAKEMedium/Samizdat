@@ -6,6 +6,9 @@ sub index ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
 
   if ($accept =~ /json/) {
+    # Require admin access for JSON
+    return unless $self->access({ admin => 1 });
+
     my $payments = $self->swish->get_recent_payments(limit => 50);
     my $stats = $self->swish->get_payment_stats();
 
