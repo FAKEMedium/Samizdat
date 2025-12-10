@@ -1,0 +1,14 @@
+% # Stripe Payment Element container
+% my $params = stash('params') || {};
+<div id="stripe-payment-container" class="stripe-payment-wrapper">
+  <form id="stripe-payment-form">
+    <div id="stripe-payment-element">
+      <!-- Stripe Payment Element will be mounted here -->
+    </div>
+    <div id="stripe-payment-message" class="alert alert-danger mt-3 d-none" role="alert"></div>
+    <button id="stripe-submit-button" type="submit" class="btn btn-primary mt-3 w-100" disabled>
+      <span id="stripe-button-text"><%= __('Pay') %></span>
+      <span id="stripe-spinner" class="spinner-border spinner-border-sm d-none" role="status"></span>
+    </button>
+  </form>
+</div>

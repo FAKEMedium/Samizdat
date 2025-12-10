@@ -221,6 +221,19 @@ manager:
           client_cert: /path/to/production_client.pem
           client_key: /path/to/production_client.key
           ca_cert: /path/to/production_ca.pem
+  stripe:
+    cardnumber: 19
+    dbtype: postgresql
+    currency: SEK
+    default_env: test                             # test or production
+    webhook_secret: whsec_xxx                     # Webhook signing secret from Stripe Dashboard
+    env:
+      test:
+        publishable_key: pk_test_xxx              # Sandbox publishable key
+        secret_key: sk_test_xxx                   # Sandbox secret key
+      production:
+        publishable_key: pk_live_xxx              # Production publishable key
+        secret_key: sk_live_xxx                   # Production secret key
 screenshots:
   -
     src: /media/images/samizdat.jpg
