@@ -6,6 +6,7 @@ use Mojo::Home;
 use Mojo::DOM;
 use Mojo::Util qw(decode);
 use IO::Compress::Gzip;
+use IO::Compress::Brotli;
 use Imager;
 use Data::Dumper;
 
@@ -260,12 +261,21 @@ sub register ($self, $app, $conf) {
         if ($c->config->{cache} && $docpath ne '') {
           $public->child($docpath)->dirname->make_path;
           $public->child($docpath)->spew($$output);
+          # Gzip compression
           my $z = new IO::Compress::Gzip sprintf('%s.gz',
             $public->child($docpath)->to_string),
             -Level => 9, Minimal => 1, AutoClose => 1;
           $z->print($$output);
           $z->close;
           undef $z;
+          # Brotli compression (better ratio, for nginx brotli_static)
+          # quality=11 (max), lgwin=24 (max window) - slow but best compression
+          my $br = new IO::Compress::Brotli sprintf('%s.br',
+            $public->child($docpath)->to_string),
+            quality => 11, lgwin => 24;
+          $br->print($$output);
+          $br->close;
+          undef $br;
         }
       }
       if ($c->config->{manager}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {

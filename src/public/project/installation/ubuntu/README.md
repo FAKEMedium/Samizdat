@@ -26,7 +26,7 @@ Install modules:
 * `sudo cpanm Mojolicious::Plugin::LocaleTextDomainOO Locale::TextDomain::OO::Extract`
 * `sudo cpanm Params::Classify Params::Util Params::Validate Crypt::Argon2 Crypt::PBKDF2 Crypt::Eksblowfish::Bcrypt CryptX Digest::SHA Digest::SHA1 App::bmkpasswd Bytes::Random::Secure::Tiny`
 * `sudo cpanm Clone Data::UUID UUID DateTime DateTime::TimeZone Date::Calc Date::Format Hash::Merge`
-* `sudo cpanm Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip YAML::XS`
+* `sudo cpanm Text::MultiMarkdown MojoX::MIME::Types IO::Compress::Gzip IO::Compress::Brotli YAML::XS`
 * `sudo cpanm MIME::Base64 MIME::Lite MIME::Types File::Spec File::MimeInfo Time::HiRes`
 * `sudo cpanm --force HTML::Parser`
 * `sudo cpanm HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
