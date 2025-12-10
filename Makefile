@@ -104,6 +104,8 @@ test: clean
 zip:
 	find public/assets -type f -name "*.css" -exec gzip -f -k -9 {} \;
 	find public/assets -type f -name "*.js" -exec gzip -f -k -9 {} \;
+	find public/assets -type f -name "*.css" -exec brotli -f -k -q 11 {} \;
+	find public/assets -type f -name "*.js" -exec brotli -f -k -q 11 {} \;
 
 database:
 #	sudo -u postgres -i env PGHOST=/var/run/postgresql createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
@@ -190,6 +192,7 @@ favicon:
 	  \( -clone 0 -resize 64x64 \) \
       -alpha off -colors 256 -delete 0 public/favicon.ico
 	gzip -f -k -9 public/favicon.ico
+	brotli -f -k -q 11 public/favicon.ico
 
 icons:
 	bin/samizdat makeicons
