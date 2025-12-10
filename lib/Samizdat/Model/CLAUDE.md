@@ -370,6 +370,12 @@ In test environment, use these phone numbers:
 - Getting Started: https://developer.swish.nu/documentation/getting-started/swish-commerce-api
 
 
+## Stripe
+
+- Use embedded components
+- Documentation: https://docs.stripe.com
+
+
 ## BIS (Based in Sweden)
 
 Based in Sweden (https://basedinsweden.se/) is an initiative to highlight the consequences of having data under foreign

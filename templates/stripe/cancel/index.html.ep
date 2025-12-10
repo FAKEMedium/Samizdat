@@ -1,0 +1,15 @@
+% # Stripe payment cancelled page
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 text-center">
+      <div class="card">
+        <div class="card-body">
+          <i class="bi bi-x-circle text-warning" style="font-size: 4rem;"></i>
+          <h2 class="card-title mt-3"><%= __('Payment Cancelled') %></h2>
+          <p class="card-text text-muted"><%= __('Your payment was cancelled. No charges were made.') %></p>
+          <a href="/" class="btn btn-secondary mt-3"><%= __('Go Back') %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
