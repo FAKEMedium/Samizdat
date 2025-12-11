@@ -262,22 +262,6 @@ humans: |
     Programming languages: Perl, Javascript, SQL, Shellscript, Lua, Makefile, SCSS, CSS
 ads: |
   placeholder.example.com, placeholder, DIRECT, placeholder
-security: |
-  # Our security address
-  Contact: mailto:security@example.com
-  
-  # Our OpenPGP key
-  Encryption: https://example.com/security/pgp-key.txt
-  
-  # Our security policy
-  Policy: https://example.com/security
-  
-  # Our security acknowledgements
-  Acknowledgements: https://example.com/security/acknowledgements
-  
-  Preferred-Languages: en,sv
-  
-  Canonical: https://example.com/.well-known/security.txt
 csp:
   # Content Security Policy - hashes for inline scripts/styles are auto-generated
   default_src: "'self' data:"

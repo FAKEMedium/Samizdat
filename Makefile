@@ -85,6 +85,15 @@ cert:
 	@echo "Private key created: server.key"
 	@openssl x509 -in server.crt -noout -text | grep -A2 "Validity"
 
+signsecurity:
+	@if [ ! -f src/public/.well-known/security.txt ]; then \
+		echo "Create src/public/.well-known/security.txt first"; \
+		exit 1; \
+	fi
+	@gpg --clearsign -u security@example.com -o src/public/.well-known/security.txt.asc src/public/.well-known/security.txt
+	@mv src/public/.well-known/security.txt.asc src/public/.well-known/security.txt
+	@echo "Signed: src/public/.well-known/security.txt"
+
 debug:
 	MOJO_MODE=development MOJO_DAEMON_DEBUG=1 DBI_TRACE=SQL morbo -m development -l http+unix://bin%2Fsamizdat.sock -l 'https://0.0.0.0:3443?cert=./server.crt&key=./server.key&reuse=1' -v -w ./lib -w ./templates -w ./script ./bin/samizdat
 
@@ -164,7 +173,6 @@ webpackinit:
 	npm i --save-dev css-minimizer-webpack-plugin clean-webpack-plugin
 	npm i --save-dev image-minimizer-webpack-plugin svgo sharp katex
 	npm i --save bootstrap @popperjs/core
-	npm i --save suneditor
 	npm i --save bootstrap-icons
 	npm i --save sprintf-js
 
