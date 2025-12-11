@@ -259,16 +259,17 @@ sub register ($self, $app, $conf) {
           $docpath =~ s/\.html$/.$language.html/;
         }
         # Generate CSP hashes for inline scripts and styles
+        # CSP hashes must be computed on the ENTIRE content between tags (including CDATA wrappers)
         my @script_hashes;
         my @style_hashes;
-        while ($$output =~ m{<script[^>]*>\s*/\*<!\[CDATA\[\*/\s*(.*?)\s*/\*\]\]>\*/\s*</script>}gs) {
+        while ($$output =~ m{<script[^>]*>(.+?)</script>}gs) {
           my $content = $1;
           next unless $content =~ /\S/;  # skip empty
           my $hash = sha256_base64($content);
           $hash .= '=' x (4 - length($hash) % 4) if length($hash) % 4;  # pad base64
           push @script_hashes, "'sha256-$hash'";
         }
-        while ($$output =~ m{<style[^>]*>\s*/\*<!\[CDATA\[\*/\s*(.*?)\s*/\*\]\]>\*/\s*</style>}gs) {
+        while ($$output =~ m{<style[^>]*>(.+?)</style>}gs) {
           my $content = $1;
           next unless $content =~ /\S/;
           my $hash = sha256_base64($content);
@@ -281,13 +282,17 @@ sub register ($self, $app, $conf) {
           my $csp = $c->config->{csp} // {};
           my $default_src = $csp->{default_src} // "'self' data:";
           my $script_src = "'self' " . join(' ', @script_hashes);
-          my $style_src = "'self' " . join(' ', @style_hashes);
+          # 'unsafe-inline' for style-src covers style attributes on elements (SVG, etc.)
+          my $style_src = "'self' 'unsafe-inline'";
           my $img_src = $csp->{img_src} // "'self' data: *";
           my $font_src = $csp->{font_src} // "'self' data:";
           my $connect_src = $csp->{connect_src} // "'self'";
           my $frame_ancestors = $csp->{frame_ancestors} // "'none'";
-          $csp_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src; frame-ancestors $frame_ancestors";
-          my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_policy">};
+          # Meta tag policy (frame-ancestors not supported in meta)
+          my $csp_meta_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src";
+          # Full policy for companion file (includes frame-ancestors)
+          $csp_policy = "$csp_meta_policy; frame-ancestors $frame_ancestors";
+          my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_meta_policy">};
           $$output =~ s{(</head>)}{  $csp_meta\n  $1};
         }
         $c->app->web->tidyup($output);
