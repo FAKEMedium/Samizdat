@@ -10,7 +10,7 @@ FreeBSD 14.0+ using [pkg utility](https://docs.freebsd.org/en/books/handbook/por
 * `sudo pkg update`
 * `sudo pkg install -y git gmake cmake wget pkgconf perl5 p5-App-cpanminus`
 * `sudo pkg install -y webp giflib jpeg-turbo png tiff libheif ImageMagick7 librsvg2 pngquant`
-* `sudo pkg install -y postgresql18-server postgresql18-client redis`
+* `sudo pkg install -y postgresql18-server postgresql18-client valkey`
 * `sudo pkg install -y libargon2 e2fsprogs-libuuid texlive-base texlive-texmf`
 * `sudo pkg install -y nginx apache24 xorriso cdrkit-genisoimage transmission-cli`
 
@@ -46,8 +46,8 @@ Imager::File::WEBP installation
 ### Database
 
 * `sudo /usr/local/etc/rc.d/postgresql oneinitdb`
-* `sudo sysrc postgresql_enable=YES redis_enable=YES`
-* `sudo service postgresql start && sudo service redis start`
+* `sudo sysrc postgresql_enable=YES valkey_enable=YES`
+* `sudo service postgresql start && sudo service valkey start`
 * `sudo -u postgres createuser -P samizdat`
 * `sudo -u postgres createdb -O samizdat -E UTF-8 -T template0 --locale=en_US.UTF-8 samizdat`
 

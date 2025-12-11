@@ -11,7 +11,7 @@ Ubuntu 24.04 LTS, possibly others too.
 * `sudo apt install -y build-essential cpanminus git make automake autoconf cmake wget`
 * `sudo apt install -y libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev libgd-dev`
 * `sudo apt install -y imagemagick librsvg2-bin librsvg2-dev pngquant`
-* `sudo apt install -y postgresql postgresql-client postgresql-server-dev-all redis-server libhiredis-dev`
+* `sudo apt install -y postgresql postgresql-client postgresql-server-dev-all valkey-server valkey-tools libhiredis-dev`
 * `sudo apt install -y libargon2-dev uuid-dev libevdev-dev libhtml-tidy-perl`
 * `sudo apt install -y mkisofs xorriso growisofs transmission-cli nginx-full apache2-utils`
 * `sudo apt install -y texlive-base texlive-latex-base texlive-latex-recommended texlive-fonts-recommended`
@@ -38,8 +38,8 @@ Install modules:
 
 * `sudo -u postgres createuser samizdat -P`
 * `sudo -u postgres createdb -O samizdat -E UTF-8 -T template0 --locale=en_US.UTF-8 samizdat`
-* `sudo systemctl enable redis-server postgresql`
-* `sudo systemctl start redis-server postgresql`
+* `sudo systemctl enable valkey-server postgresql`
+* `sudo systemctl start valkey-server postgresql`
 
 Edit `/etc/postgresql/*/main/pg_hba.conf`, add: `local   samizdat        samizdat        scram-sha-256`
 
