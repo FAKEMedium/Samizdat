@@ -275,7 +275,8 @@ sub register ($self, $app, $conf) {
           $hash .= '=' x (4 - length($hash) % 4) if length($hash) % 4;
           push @style_hashes, "'sha256-$hash'";
         }
-        # Inject CSP meta tag into <head>
+        # Generate CSP policy and inject meta tag into <head>
+        my $csp_policy = '';
         if (@script_hashes || @style_hashes) {
           my $csp = $c->config->{csp} // {};
           my $default_src = $csp->{default_src} // "'self' data:";
@@ -284,7 +285,8 @@ sub register ($self, $app, $conf) {
           my $img_src = $csp->{img_src} // "'self' data: *";
           my $font_src = $csp->{font_src} // "'self' data:";
           my $connect_src = $csp->{connect_src} // "'self'";
-          my $csp_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src";
+          my $frame_ancestors = $csp->{frame_ancestors} // "'none'";
+          $csp_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src; frame-ancestors $frame_ancestors";
           my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_policy">};
           $$output =~ s{(</head>)}{  $csp_meta\n  $1};
         }
@@ -292,6 +294,8 @@ sub register ($self, $app, $conf) {
         if ($c->config->{cache} && $docpath ne '') {
           $public->child($docpath)->dirname->make_path;
           $public->child($docpath)->spew($$output);
+          # Companion CSP file for OpenResty
+          $public->child($docpath . '.csp')->spew($csp_policy) if $csp_policy;
           # Gzip compression
           my $z = new IO::Compress::Gzip sprintf('%s.gz', $public->child($docpath)->to_string),
             -Level => 9, Minimal => 1, AutoClose => 1;

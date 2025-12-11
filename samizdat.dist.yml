@@ -284,7 +284,9 @@ csp:
   img_src: "'self' data: *"
   font_src: "'self' data:"
   connect_src: "'self'"
+  frame_ancestors: "'none'"
   # script_src and style_src get sha256 hashes added automatically
+  # Companion .csp files are generated for OpenResty to serve as headers
 layout: bootstrap
 captcha:
   session_name: captcha_string
