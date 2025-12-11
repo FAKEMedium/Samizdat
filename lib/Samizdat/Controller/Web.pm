@@ -388,10 +388,6 @@ sub ads ($self) {
   $self->render(text => $self->config->{ads}, docpath => 'ads.txt', format => 'txt');
 }
 
-sub security ($self) {
-  $self->render(text => $self->config->{security}, docpath => '.well-known/security.txt', format => 'txt');
-}
-
 # Gather exploiting bots
 sub banbot ($docpath, $ip) {
   if ($docpath =~ /(

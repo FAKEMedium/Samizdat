@@ -44,7 +44,6 @@ sub register ($self, $app, $conf) {
   $web->get('robots.txt')                  ->to('#robots',    docpath => 'robots.txt');
   $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
   $web->get('ads.txt')                     ->to('#ads',       docpath => 'ads.txt');
-  $web->get('.well-known/security.txt')    ->to('#security',  docpath => '.well-known/security.txt');
 
   # Things coming from database, or markdown files in src/public
   # Database overlays files. See Samizdat::Model::Web and Samizdat::Controller::Web
