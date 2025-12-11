@@ -259,10 +259,10 @@ sub register ($self, $app, $conf) {
           $docpath =~ s/\.html$/.$language.html/;
         }
         # Generate CSP hashes for inline scripts and styles
-        # CSP hashes must be computed on the ENTIRE content between tags (including CDATA wrappers)
+        # Only match inline scripts (no src attribute) to avoid capturing across external script tags
         my @script_hashes;
         my @style_hashes;
-        while ($$output =~ m{<script[^>]*>(.+?)</script>}gs) {
+        while ($$output =~ m{<script(?![^>]*\ssrc\s*=)[^>]*>([^<]+(?:<(?!/script>)[^<]*)*)</script>}gsi) {
           my $content = $1;
           next unless $content =~ /\S/;  # skip empty
           my $hash = sha256_base64($content);
@@ -281,7 +281,9 @@ sub register ($self, $app, $conf) {
         if (@script_hashes || @style_hashes) {
           my $csp = $c->config->{csp} // {};
           my $default_src = $csp->{default_src} // "'self' data:";
-          my $script_src = "'self' " . join(' ', @script_hashes);
+          # script_src_extra allows adding 'unsafe-eval' or external sources from config
+          my $script_src_extra = $csp->{script_src_extra} // '';
+          my $script_src = "'self' " . join(' ', @script_hashes) . ($script_src_extra ? " $script_src_extra" : '');
           # 'unsafe-inline' for style-src covers style attributes on elements (SVG, etc.)
           my $style_src = "'self' 'unsafe-inline'";
           my $img_src = $csp->{img_src} // "'self' data: *";

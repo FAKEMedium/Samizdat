@@ -18,17 +18,23 @@ function _M.apply()
         return
     end
 
-    local uri = ngx.var.uri
-    if uri:match("/$") then
-        uri = uri .. "index.html"
+    -- Use request_filename which gives the actual resolved file path
+    -- This handles i18n with cookie-based language mapping (index.html -> index.sv.html)
+    local filepath = ngx.var.request_filename
+    if not filepath or filepath == "" then
+        -- Fallback to uri-based lookup
+        local uri = ngx.var.uri
+        if uri:match("/$") then
+            uri = uri .. "index.html"
+        end
+        filepath = ngx.var.document_root .. uri
     end
 
-    -- Include document_root in cache key for multi-vhost support
-    local cache_key = ngx.var.document_root .. uri
+    local cache_key = filepath
 
     local csp = cache:get(cache_key)
     if csp == nil then
-        local path = cache_key .. ".csp"
+        local path = filepath .. ".csp"
         local f = io.open(path, "r")
         if f then
             csp = f:read("*all") or ""
