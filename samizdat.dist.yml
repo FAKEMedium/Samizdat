@@ -278,6 +278,13 @@ security: |
   Preferred-Languages: en,sv
   
   Canonical: https://example.com/.well-known/security.txt
+csp:
+  # Content Security Policy - hashes for inline scripts/styles are auto-generated
+  default_src: "'self' data:"
+  img_src: "'self' data: *"
+  font_src: "'self' data:"
+  connect_src: "'self'"
+  # script_src and style_src get sha256 hashes added automatically
 layout: bootstrap
 captcha:
   session_name: captcha_string
