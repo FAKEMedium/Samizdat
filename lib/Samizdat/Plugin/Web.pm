@@ -5,6 +5,7 @@ use Samizdat::Model::Web;
 use Mojo::Home;
 use Mojo::DOM;
 use Mojo::Util qw(decode);
+use Digest::SHA qw(sha256_base64);
 use IO::Compress::Gzip;
 use IO::Compress::Brotli qw(bro);
 use Imager;
@@ -256,6 +257,36 @@ sub register ($self, $app, $conf) {
         my $language = $c->stash('language');
         if ($c->config->{locale}->{default_language} ne $language) {
           $docpath =~ s/\.html$/.$language.html/;
+        }
+        # Generate CSP hashes for inline scripts and styles
+        my @script_hashes;
+        my @style_hashes;
+        while ($$output =~ m{<script[^>]*>\s*/\*<!\[CDATA\[\*/\s*(.*?)\s*/\*\]\]>\*/\s*</script>}gs) {
+          my $content = $1;
+          next unless $content =~ /\S/;  # skip empty
+          my $hash = sha256_base64($content);
+          $hash .= '=' x (4 - length($hash) % 4) if length($hash) % 4;  # pad base64
+          push @script_hashes, "'sha256-$hash'";
+        }
+        while ($$output =~ m{<style[^>]*>\s*/\*<!\[CDATA\[\*/\s*(.*?)\s*/\*\]\]>\*/\s*</style>}gs) {
+          my $content = $1;
+          next unless $content =~ /\S/;
+          my $hash = sha256_base64($content);
+          $hash .= '=' x (4 - length($hash) % 4) if length($hash) % 4;
+          push @style_hashes, "'sha256-$hash'";
+        }
+        # Inject CSP meta tag into <head>
+        if (@script_hashes || @style_hashes) {
+          my $csp = $c->config->{csp} // {};
+          my $default_src = $csp->{default_src} // "'self' data:";
+          my $script_src = "'self' " . join(' ', @script_hashes);
+          my $style_src = "'self' " . join(' ', @style_hashes);
+          my $img_src = $csp->{img_src} // "'self' data: *";
+          my $font_src = $csp->{font_src} // "'self' data:";
+          my $connect_src = $csp->{connect_src} // "'self'";
+          my $csp_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src";
+          my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_policy">};
+          $$output =~ s{(</head>)}{  $csp_meta\n  $1};
         }
         $c->app->web->tidyup($output);
         if ($c->config->{cache} && $docpath ne '') {
