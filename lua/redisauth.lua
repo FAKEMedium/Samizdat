@@ -3,9 +3,9 @@ local red = redis:new()
 
 red:set_timeout(1000)
 
-local ok, err = red:connect("unix:/var/run/redis/redis.sock")
+local ok, err = red:connect("unix:/var/run/valkey/valkey.sock")
 if not ok then
-    ngx.log(ngx.ERR, "failed to connect to redis: ", err)
+    ngx.log(ngx.ERR, "failed to connect to valkey: ", err)
     return ngx.exit(500)
 end
 
@@ -18,7 +18,7 @@ end
 -- Check if session exists
 local session_res, err = red:get("samizdat:" .. cookie_value)
 if err then
-    ngx.log(ngx.ERR, "redis session check error: ", err)
+    ngx.log(ngx.ERR, "valkey session check error: ", err)
     red:close()
     return ngx.exit(500)
 end
