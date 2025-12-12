@@ -44,8 +44,10 @@
       </div>
     </aside>
     <header id="mainheader">
-      <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip menu') %></a>
-      <div class="widewrapper bg-logobar">
+      <nav aria-label="<%= __('Skip links') %>" class="d-print-none">
+        <a class="visually-hidden-focusable" href="#startdoc"><%= __('Skip to main content') %></a>
+      </nav>
+      <div id="bg-logobar" class="widewrapper d-print-none">
         <%== web->indent(eval {trim include 'chunks/logobar'}, 4) =%>
       </div>
       <div class="widewrapper bg-menubar d-print-none">
@@ -64,13 +66,12 @@
         </div>
       </div>
     </header>
-    <a id="startdoc" href="javascript:;" class="d-print-none" title="<%== __('Start') %>"></a>
     <div id="universalmodal" class="modal fade d-print-none" tabindex="-1" aria-labelledby="modaltitle" aria-hidden="true">
       <div id="modalDialog" class="modal-dialog modal-dialog-centered justify-content-center">
         <!-- Modal content will be injected here -->
       </div>
     </div>
-    <main class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0">
+    <main id="startdoc" class="container pb-3 pt-1 pt-sm-2 pt-md-3 pt-lg-4 px-1 px-sm-2 px-md-0" tabindex="-1" role="main">
       <header class="container mb-1 mb-sm-4 px-0">
         <div class="row">
           <h1 id="headline" class="col-8 title"><%== title %></h1>
