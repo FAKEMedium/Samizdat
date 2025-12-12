@@ -356,7 +356,7 @@ account:
 dsn:
   pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
   redis: redis://127.0.0.1:6379/1
-#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fredis%2Fredis.sock/1"  # Local redis socket
+#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fvalkey%2Fvalkey.sock/1"  # Local redis socket
 piratebay:
   login: username
   password: s3cr3t
