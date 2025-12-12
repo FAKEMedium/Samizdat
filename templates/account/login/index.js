@@ -1,4 +1,7 @@
-document.querySelector('#loginform').addEventListener("submit", (event) => {event.preventDefault()});
+document.querySelector('#loginform').addEventListener("submit", (event) => {
+    event.preventDefault();
+    login();
+});
 
 async function login () {
     const loginform = document.querySelector('#loginform');

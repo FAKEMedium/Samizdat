@@ -282,7 +282,7 @@ sub register ($self, $app, $conf) {
           my $default_src = $csp->{default_src} // "'self' data:";
           # script_src_extra allows adding 'unsafe-eval' or external sources from config
           my $script_src_extra = $csp->{script_src_extra} // '';
-          my $script_src = "'self' " . join(' ', @script_hashes) . ($script_src_extra ? " $script_src_extra" : '');
+          my $script_src = "'self' blob: " . join(' ', @script_hashes) . ($script_src_extra ? " $script_src_extra" : '');
           # 'unsafe-inline' for style-src covers style attributes on elements (SVG, etc.)
           my $style_src = "'self' 'unsafe-inline'";
           my $img_src = $csp->{img_src} // "'self' data: *";
