@@ -25,9 +25,13 @@ async function modalLoad(event) {
         modaldialog.innerHTML = "\n" + body;
         let modalscript = document.querySelector('#modalscript');
         if (modalscript) {
+            // Use blob URL to avoid CSP inline script restrictions
+            const blob = new Blob([modalscript.innerHTML], { type: 'application/javascript' });
+            const url = URL.createObjectURL(blob);
             let script = document.createElement('script');
             script.id = 'modaljs';
-            script.innerHTML = modalscript.innerHTML;
+            script.src = url;
+            script.onload = () => URL.revokeObjectURL(url);
             modaldialog.appendChild(script);
             modalscript.remove();
         }
@@ -72,9 +76,13 @@ async function showLoginModal(errorMessage) {
         // Extract and execute any scripts in the modal
         let modalscript = modaldialog.querySelector('#modalscript');
         if (modalscript) {
+            // Use blob URL to avoid CSP inline script restrictions
+            const blob = new Blob([modalscript.innerHTML], { type: 'application/javascript' });
+            const blobUrl = URL.createObjectURL(blob);
             let script = document.createElement('script');
             script.id = 'modaljs';
-            script.innerHTML = modalscript.innerHTML;
+            script.src = blobUrl;
+            script.onload = () => URL.revokeObjectURL(blobUrl);
             modaldialog.appendChild(script);
             modalscript.remove();
         }
