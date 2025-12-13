@@ -51,12 +51,29 @@ function addZoneName(name) {
   return name + zoneWithDot;
 }
 
+// Detect reverse zone
+const zoneNorm = (zoneId || '').replace(/\.$/, '');
+const isReverseZone = zoneNorm.endsWith('.in-addr.arpa') || zoneNorm.endsWith('.ip6.arpa');
+
+// Filter record type options based on zone type
+const typeSelect = document.getElementById('type');
+typeSelect.querySelectorAll('option[data-zone]').forEach(opt => {
+  const zoneType = opt.dataset.zone;
+  if (zoneType === 'both') return;
+  if (isReverseZone && zoneType === 'forward') {
+    opt.style.display = 'none';
+  } else if (!isReverseZone && zoneType === 'reverse') {
+    opt.style.display = 'none';
+  }
+});
+
 // Record type configurations
 const typeConfig = {
   A: { template: 'simple', label: '<%== __("IPv4 Address") %>', placeholder: '192.0.2.1' },
   AAAA: { template: 'simple', label: '<%== __("IPv6 Address") %>', placeholder: '2001:db8::1' },
   CNAME: { template: 'simple', label: '<%== __("Target") %>', placeholder: 'www.example.com.' },
   NS: { template: 'simple', label: '<%== __("Nameserver") %>', placeholder: 'ns1.example.com.' },
+  PTR: { template: 'simple', label: '<%== __("Hostname") %>', placeholder: 'server.example.com.' },
   TXT: { template: 'simple', label: '<%== __("Text") %>', placeholder: '"v=spf1 include:_spf.example.com ~all"' },
   MX: { template: 'mx' },
   SRV: { template: 'srv' },
@@ -280,6 +297,8 @@ async function saveRecord() {
 
 // Initialize with default template if new record
 if (recordName === 'new') {
-  switchTemplate('A');
+  const defaultType = isReverseZone ? 'PTR' : 'A';
+  typeSelect.value = defaultType;
+  switchTemplate(defaultType);
 }
 })();

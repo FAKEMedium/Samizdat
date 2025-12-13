@@ -6,47 +6,125 @@
   const basePath = window.location.pathname.replace(/\/$/, '');
   // Customer ID will be set from JSON response
   let customerId = null;
+  // Store all zones for client-side filtering
+  let allZones = [];
 
-  async function sendData(searchterm = null) {
-    let url = basePath;
-    const params = new URLSearchParams();
+  // Filter elements
+  const zoneTypeFilter = document.querySelector('#zoneType');
+  const accountFilter = document.querySelector('#accountFilter');
+  const searchtermInput = document.querySelector('#searchterm');
 
-    if (searchterm) {
-      params.set('searchterm', searchterm);
-    }
-
-    if (params.toString()) {
-      url += '?' + params.toString();
-    }
-
-    const data = await window.authenticatedFetch(url);
+  async function sendData() {
+    const data = await window.authenticatedFetch(basePath);
     if (data) {
-      populate(data);
+      allZones = data.zones || [];
+      customerId = data.customerid || null;
+      populateAccountFilter();
+      applyFilters();
     }
+  }
+
+  function applyFilters() {
+    const searchterm = searchtermInput?.value.toLowerCase() || '';
+    const zoneType = zoneTypeFilter?.value || 'forward';
+    const account = accountFilter?.value || '';
+
+    let filtered = allZones.filter(zone => {
+      // Zone type filter (handle with/without trailing dot)
+      const name = (zone.name || '').replace(/\.$/, '');
+      if (zoneType === 'forward') {
+        if (name.endsWith('.in-addr.arpa') || name.endsWith('.ip6.arpa')) return false;
+      } else if (zoneType === 'in-addr.arpa') {
+        if (!name.endsWith('.in-addr.arpa')) return false;
+      } else if (zoneType === 'ip6.arpa') {
+        if (!name.endsWith('.ip6.arpa')) return false;
+      }
+
+      // Account filter
+      if (account === '__none__') {
+        if (zone.account) return false;
+      } else if (account && zone.account !== account) {
+        return false;
+      }
+
+      // Search term filter
+      if (searchterm && !name.toLowerCase().includes(searchterm)) return false;
+
+      return true;
+    });
+
+    populate({ zones: filtered, customerid: customerId });
+  }
+
+  function populateAccountFilter() {
+    const zoneType = zoneTypeFilter?.value || 'forward';
+
+    // Filter zones by current zone type first
+    const filteredByType = allZones.filter(zone => {
+      const name = (zone.name || '').replace(/\.$/, '');
+      if (zoneType === 'forward') {
+        return !name.endsWith('.in-addr.arpa') && !name.endsWith('.ip6.arpa');
+      } else if (zoneType === 'in-addr.arpa') {
+        return name.endsWith('.in-addr.arpa');
+      } else if (zoneType === 'ip6.arpa') {
+        return name.endsWith('.ip6.arpa');
+      }
+      return true;
+    });
+
+    // Count zones per account from filtered list
+    const accountCounts = {};
+    let unaccountedCount = 0;
+    filteredByType.forEach(z => {
+      if (z.account) {
+        accountCounts[z.account] = (accountCounts[z.account] || 0) + 1;
+      } else {
+        unaccountedCount++;
+      }
+    });
+    const accounts = Object.keys(accountCounts).sort();
+    const currentValue = accountFilter?.value || '';
+    accountFilter.innerHTML = `<option value=""><%== __('All accounts') %> (${filteredByType.length})</option>`;
+    // Add unaccounted option
+    if (unaccountedCount > 0) {
+      const opt = document.createElement('option');
+      opt.value = '__none__';
+      opt.textContent = `<%== __('No account') %> (${unaccountedCount})`;
+      if (currentValue === '__none__') opt.selected = true;
+      accountFilter.appendChild(opt);
+    }
+    accounts.forEach(acc => {
+      const opt = document.createElement('option');
+      opt.value = acc;
+      opt.textContent = `${acc} (${accountCounts[acc]})`;
+      if (acc === currentValue) opt.selected = true;
+      accountFilter.appendChild(opt);
+    });
   }
 
   // Search form handler - use AJAX instead of page reload
   document.querySelector('#dataform')?.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const searchterm = document.querySelector('#searchterm').value;
-    await sendData(searchterm);
+    applyFilters();
   });
 
   // Live search as user types (debounced, starts after 3 chars)
   let searchTimeout = null;
-  document.querySelector('#searchterm')?.addEventListener('input', (e) => {
+  searchtermInput?.addEventListener('input', (e) => {
     const value = e.target.value;
     clearTimeout(searchTimeout);
 
-    if (value.length > 3) {
-      searchTimeout = setTimeout(async () => {
-        await sendData(value);
-      }, 300);
-    } else if (value.length === 0) {
-      // Clear search - show all zones
-      sendData();
+    if (value.length > 3 || value.length === 0) {
+      searchTimeout = setTimeout(() => applyFilters(), 300);
     }
   });
+
+  // Filter change handlers
+  zoneTypeFilter?.addEventListener('change', () => {
+    populateAccountFilter();  // Update account counts for new zone type
+    applyFilters();
+  });
+  accountFilter?.addEventListener('change', () => applyFilters());
 
   async function openModal(url, wide = false) {
     const modalResponse = await fetch(url);
@@ -110,13 +188,16 @@
         <button class="btn btn-sm ${cryptoClass} btn-cryptokeys" title="DNSSEC"><%== icon 'shield-lock', {} %> <span class="badge text-bg-dark">${zone.cryptokey_count || 0}</span></button>
         <button class="btn btn-sm btn-outline-secondary btn-export" title="<%== __('Export zone file') %>"><%== icon 'download', {} %></button>
         <button class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>`;
+      const account = zone.account || '';
       snippet += `
       <tr data-zoneid="${zoneId}">
-        <td colspan="2" class="d-md-none py-2">
+        <td colspan="3" class="d-md-none py-2">
           <div class="fw-bold mb-1">${displayName}</div>
+          ${account ? `<div class="text-muted small mb-1">${account}</div>` : ''}
           <div class="btn-group btn-group-sm flex-wrap gap-1">${buttons}</div>
         </td>
         <td class="d-none d-md-table-cell">${displayName}</td>
+        <td class="d-none d-md-table-cell">${account}</td>
         <td class="d-none d-md-table-cell text-end text-nowrap">${buttons}</td>
       </tr>
       `;
