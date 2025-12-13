@@ -58,12 +58,15 @@
     // Set modal width
     modalDialog.classList.toggle('modal-xl', wide);
 
-    // Extract and execute modal script
+    // Extract and execute modal script using blob URL (CSP-compatible)
     const modalscript = modalDialog.querySelector('#modalscript');
     if (modalscript) {
+      const blob = new Blob([modalscript.innerHTML], { type: 'application/javascript' });
+      const url = URL.createObjectURL(blob);
       const script = document.createElement('script');
       script.id = 'modaljs';
-      script.innerHTML = modalscript.innerHTML;
+      script.src = url;
+      script.onload = () => URL.revokeObjectURL(url);
       modalDialog.appendChild(script);
       modalscript.remove();
     }
