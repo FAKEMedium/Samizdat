@@ -25,6 +25,7 @@
         <option value="CAA" data-zone="forward">CAA</option>
         <option value="CNAME" data-zone="forward">CNAME</option>
         <option value="MX" data-zone="forward">MX</option>
+        <option value="NAPTR" data-zone="forward">NAPTR</option>
         <option value="SRV" data-zone="forward">SRV</option>
         <option value="TXT" data-zone="forward">TXT</option>
         <!-- Reverse zone types -->
@@ -82,6 +83,37 @@
       <div class="mb-3" id="field-content">
         <label for="content" class="form-label"><%== __('Target') %></label>
         <input type="text" class="form-control" id="content" name="content" required placeholder="server.example.com.">
+      </div>
+    </template>
+
+    <template id="tpl-naptr">
+      <div class="row mb-3">
+        <div class="col-3">
+          <label for="naptr_order" class="form-label"><%== __('Order') %></label>
+          <input type="number" class="form-control" id="naptr_order" value="100" min="0">
+        </div>
+        <div class="col-3">
+          <label for="naptr_preference" class="form-label"><%== __('Preference') %></label>
+          <input type="number" class="form-control" id="naptr_preference" value="10" min="0">
+        </div>
+        <div class="col-3">
+          <label for="naptr_flags" class="form-label"><%== __('Flags') %></label>
+          <input type="text" class="form-control" id="naptr_flags" placeholder="U">
+        </div>
+        <div class="col-3">
+          <label for="naptr_service" class="form-label"><%== __('Service') %></label>
+          <input type="text" class="form-control" id="naptr_service" placeholder="E2U+sip">
+        </div>
+      </div>
+      <div class="row mb-3">
+        <div class="col-6">
+          <label for="naptr_regexp" class="form-label"><%== __('Regexp') %></label>
+          <input type="text" class="form-control" id="naptr_regexp" placeholder="!^.*$!sip:info@example.com!">
+        </div>
+        <div class="col-6">
+          <label for="content" class="form-label"><%== __('Replacement') %></label>
+          <input type="text" class="form-control" id="content" name="content" placeholder=".">
+        </div>
       </div>
     </template>
 

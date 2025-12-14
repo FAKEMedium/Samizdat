@@ -370,6 +370,8 @@ sub create_record($self) {
     ttl      => $json->{ttl} || 3600,
     priority => $json->{priority} || 0,
   };
+  # For updates, include original content to remove old record
+  $record_data->{original_content} = $json->{original_content} if $json->{original_content};
   my $result = $self->zone->create_record($zone_id, $record_data);
 
   return $self->render(json => {
@@ -385,10 +387,11 @@ sub edit_record($self) {
   my $zone_id = $self->stash('zone_id');
   my $record_id = $self->stash('record_id');  # This is the record name
   my $record_type = $self->param('type');      # Type from query param
+  my $record_content = $self->param('content'); # Content for multi-record rrsets
 
   if ($self->is_json_request) {
     return unless $self->access({ admin => 1 });
-    my $record = $self->zone->get_record($zone_id, $record_id, $record_type);
+    my $record = $self->zone->get_record($zone_id, $record_id, $record_type, $record_content);
     unless ($record) {
       return $self->render(json => { success => 0, toast => $self->app->__('Record not found') });
     }
@@ -419,6 +422,8 @@ sub update_record($self) {
     ttl      => $json->{ttl},
     priority => $json->{priority},
   };
+  # For updates, include original content to remove old record
+  $record_data->{original_content} = $json->{original_content} if $json->{original_content};
   my $result = $self->zone->update_record($zone_id, $record_id, $record_data);
 
   return $self->render(json => {
@@ -435,7 +440,10 @@ sub delete_record($self) {
 
   my $zone_id = $self->stash('zone_id');
   my $record_id = $self->stash('record_id');
-  my $result = $self->zone->delete_record($zone_id, $record_id);
+  # Get content from request body for single record deletion from multi-record rrsets
+  my $json = $self->req->json;
+  my $content = $json->{content} if $json;
+  my $result = $self->zone->delete_record($zone_id, $record_id, $content);
 
   return $self->render(json => {
     success => $result->{success} ? 1 : 0,

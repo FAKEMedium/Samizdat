@@ -122,7 +122,11 @@ sub import_zone ($self, $zone_data) {
     return { success => 1, zone => $res->json };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -146,7 +150,11 @@ sub update_zone ($self, $zone_id, $zone_data) {
     return { success => 1 };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -160,7 +168,11 @@ sub export_zone ($self, $zone_id) {
     return { success => 1, content => $res->body };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -195,25 +207,40 @@ sub list_rrsets ($self, $zone_id, $filter = {}) {
   return $rrsets;
 }
 
-# Get a specific rrset from a zone by name and optionally type.
+# Get a specific rrset from a zone by name and optionally type and content.
 # PowerDNS rrsets are identified by name+type, not by a single ID.
+# For multi-record rrsets (MX, NS, etc.), content is needed to identify the specific record.
 # Returns the matching rrset with flattened record data for form population.
-sub get_record ($self, $zone_id, $record_name, $record_type = undef) {
+sub get_record ($self, $zone_id, $record_name, $record_type = undef, $record_content = undef) {
   my $filter = { name => $record_name };
   $filter->{type} = $record_type if $record_type;
 
   my $rrsets = $self->list_rrsets($zone_id, $filter);
   return undef unless @$rrsets;
 
-  # Return first matching rrset, flatten first record's content for the form
   my $rrset = $rrsets->[0];
-  my $record = $rrset->{records}[0] // {};
+  my $record;
 
+  # If content provided, find the specific record in the rrset
+  if ($record_content && $rrset->{records}) {
+    my $content_normalized = $self->_normalize_dns($record_content);
+    for my $rec (@{$rrset->{records}}) {
+      if ($self->_normalize_dns($rec->{content}) eq $content_normalized) {
+        $record = $rec;
+        last;
+      }
+    }
+  }
+
+  # Fall back to first record if no content match or no content specified
+  $record //= $rrset->{records}[0] // {};
+
+  # Priority is part of content (zone-file style) in PowerDNS 4.9+
   return {
-    name    => $rrset->{name},
-    type    => $rrset->{type},
-    ttl     => $rrset->{ttl},
-    content => $record->{content},
+    name     => $rrset->{name},
+    type     => $rrset->{type},
+    ttl      => $rrset->{ttl},
+    content  => $record->{content},
     disabled => $record->{disabled},
   };
 }
@@ -232,9 +259,26 @@ sub create_record ($self, $zone_id, $record_data) {
   my $url = $self->_api_url() . '/zones/' . $zone_id;
 
   # Types that commonly have multiple records per name
-  my %multi_record_types = map { $_ => 1 } qw(MX NS A AAAA TXT SRV);
+  my %multi_record_types = map { $_ => 1 } qw(MX NS A AAAA TXT SRV NAPTR);
 
   my @records;
+
+  # Build the full content first (prepend priority for MX/SRV/NAPTR)
+  # PowerDNS 4.9+ requires priority in content (zone-file style), not as separate field
+  my $content = $record_data->{content};
+  if ($record_data->{type} eq 'MX' && defined $record_data->{priority}) {
+    $content = int($record_data->{priority}) . " " . $content;
+  } elsif ($record_data->{type} eq 'SRV' && defined $record_data->{priority}) {
+    $content = int($record_data->{priority}) . " " . $content;
+  } elsif ($record_data->{type} eq 'NAPTR' && defined $record_data->{priority}) {
+    $content = int($record_data->{priority}) . " " . $content;
+  }
+
+  # Normalize for comparison (now includes priority)
+  my $new_content_normalized = $self->_normalize_dns($content);
+  my $original_content_normalized = $record_data->{original_content}
+    ? $self->_normalize_dns($record_data->{original_content})
+    : undef;
 
   # If this type supports multiple records, fetch existing and append
   if ($multi_record_types{$record_data->{type}}) {
@@ -244,11 +288,12 @@ sub create_record ($self, $zone_id, $record_data) {
     });
 
     if (@$existing && $existing->[0]{records}) {
-      # Keep existing records that don't match the new content
-      my $new_content_normalized = $self->_normalize_dns($record_data->{content});
       for my $rec (@{$existing->[0]{records}}) {
-        # Skip if this is the same content (updating existing)
-        next if $self->_normalize_dns($rec->{content}) eq $new_content_normalized;
+        my $rec_normalized = $self->_normalize_dns($rec->{content});
+        # Skip if this is the same as new content (prevents duplicates on retry)
+        next if $rec_normalized eq $new_content_normalized;
+        # Skip if this is the original content being updated (remove old record)
+        next if $original_content_normalized && $rec_normalized eq $original_content_normalized;
         push @records, {
           content  => $rec->{content},
           disabled => $rec->{disabled} ? \1 : \0,
@@ -257,9 +302,9 @@ sub create_record ($self, $zone_id, $record_data) {
     }
   }
 
-  # Add the new/updated record
+  # Add the new record
   push @records, {
-    content  => $record_data->{content},
+    content  => $content,
     disabled => $record_data->{disabled} ? \1 : \0,
   };
 
@@ -267,7 +312,7 @@ sub create_record ($self, $zone_id, $record_data) {
     rrsets => [{
       name       => $record_data->{name},
       type       => $record_data->{type},
-      ttl        => $record_data->{ttl} || 3600,
+      ttl        => int($record_data->{ttl} || 3600),
       changetype => 'REPLACE',
       records    => \@records,
     }],
@@ -280,7 +325,11 @@ sub create_record ($self, $zone_id, $record_data) {
     return { success => 1 };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -292,7 +341,7 @@ sub _create_rrset ($self, $zone_id, $rrset) {
     rrsets => [{
       name       => $rrset->{name},
       type       => $rrset->{type},
-      ttl        => $rrset->{ttl} || 3600,
+      ttl        => int($rrset->{ttl} || 3600),
       changetype => 'REPLACE',
       records    => $rrset->{records},
     }],
@@ -305,7 +354,11 @@ sub _create_rrset ($self, $zone_id, $rrset) {
     return { success => 1 };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -316,22 +369,75 @@ sub update_record ($self, $zone_id, $record_id, $record_data) {
   return $self->create_record($zone_id, $record_data);
 }
 
-# Delete a record using PowerDNS rrsets API with changetype DELETE.
+# Delete a record using PowerDNS rrsets API.
+# For multi-record rrsets (MX, NS, etc.), removes only the specified record.
 # record_id format: "TYPE_name" (e.g., "A_www.example.com.")
-sub delete_record ($self, $zone_id, $record_id) {
+# content: optional - if provided, only delete this specific record from the rrset
+sub delete_record ($self, $zone_id, $record_id, $content = undef) {
   my $url = $self->_api_url() . '/zones/' . $zone_id;
 
   # Parse record_id: TYPE_name
   my ($type, $name) = $record_id =~ /^([^_]+)_(.+)$/;
   return { success => 0, error => "Invalid record ID format" } unless $type && $name;
 
-  my $payload = {
-    rrsets => [{
-      name       => $name,
-      type       => $type,
-      changetype => 'DELETE',
-    }],
-  };
+  # Types that commonly have multiple records per name
+  my %multi_record_types = map { $_ => 1 } qw(MX NS A AAAA TXT SRV NAPTR);
+
+  my $payload;
+
+  # If content provided and this is a multi-record type, use REPLACE to keep other records
+  if ($content && $multi_record_types{$type}) {
+    my $existing = $self->list_rrsets($zone_id, { name => $name, type => $type });
+
+    if (@$existing && $existing->[0]{records}) {
+      my $content_normalized = $self->_normalize_dns($content);
+      my @remaining;
+
+      for my $rec (@{$existing->[0]{records}}) {
+        my $rec_normalized = $self->_normalize_dns($rec->{content});
+        # Keep all records except the one matching content
+        next if $rec_normalized eq $content_normalized;
+        push @remaining, {
+          content  => $rec->{content},
+          disabled => $rec->{disabled} ? \1 : \0,
+        };
+      }
+
+      if (@remaining) {
+        # REPLACE with remaining records
+        $payload = {
+          rrsets => [{
+            name       => $name,
+            type       => $type,
+            ttl        => int($existing->[0]{ttl} || 3600),
+            changetype => 'REPLACE',
+            records    => \@remaining,
+          }],
+        };
+      } else {
+        # No records left, DELETE the entire rrset
+        $payload = {
+          rrsets => [{
+            name       => $name,
+            type       => $type,
+            changetype => 'DELETE',
+          }],
+        };
+      }
+    } else {
+      # Rrset doesn't exist, nothing to delete
+      return { success => 1 };
+    }
+  } else {
+    # No content or single-record type: DELETE entire rrset
+    $payload = {
+      rrsets => [{
+        name       => $name,
+        type       => $type,
+        changetype => 'DELETE',
+      }],
+    };
+  }
 
   my $tx = $self->ua->patch($url, $self->_headers, json => $payload);
   my $res = $tx->result;
@@ -340,7 +446,11 @@ sub delete_record ($self, $zone_id, $record_id) {
     return { success => 1 };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -379,7 +489,11 @@ sub create_cryptokey ($self, $zone_id, $key_data = {}) {
     return { success => 1, key => $res->json };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
@@ -393,7 +507,11 @@ sub delete_cryptokey ($self, $zone_id, $key_id) {
     return { success => 1 };
   }
 
-  my $error = $res ? ($res->json->{error} // $res->message) : "No response";
+  my $error = "No response";
+  if ($res) {
+    my $json = eval { $res->json };
+    $error = ($json && $json->{error}) ? $json->{error} : $res->message;
+  }
   return { success => 0, error => $error };
 }
 
