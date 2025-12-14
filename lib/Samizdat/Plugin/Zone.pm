@@ -20,9 +20,9 @@ sub register($self, $app, $conf) {
   $manager->get('/#zone_id/cryptokeys')                     ->to('#cryptokeys')         ->name('zone_cryptokeys');
   $manager->post('/#zone_id/cryptokeys')                    ->to('#create_cryptokey')   ->name('zone_cryptokey_create');
   # Template routes
-  $manager->get('/templates/:template_id/records/:record_id')    ->to('#get_template_record')       ->name('zone_template_record_get');
-  $manager->patch('/templates/:template_id/records/:record_id')  ->to('#update_template_record')    ->name('zone_template_record_update');
-  $manager->delete('/templates/:template_id/records/:record_id') ->to('#delete_template_record')    ->name('zone_template_record_delete');
+  $manager->get('/templates/:template_id/records/#record_id')    ->to('#get_template_record')       ->name('zone_template_record_get');
+  $manager->patch('/templates/:template_id/records/#record_id')  ->to('#update_template_record')    ->name('zone_template_record_update');
+  $manager->delete('/templates/:template_id/records/#record_id') ->to('#delete_template_record')    ->name('zone_template_record_delete');
   $manager->post('/templates/:template_id/records')         ->to('#create_template_record')    ->name('zone_template_record_create');
   $manager->get('/templates/:template_id')                  ->to('#get_template')              ->name('zone_template_get');
   $manager->post('/templates/:template_id/duplicate')       ->to('#duplicate_template')        ->name('zone_template_duplicate');
