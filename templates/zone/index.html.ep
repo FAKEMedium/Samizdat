@@ -30,7 +30,7 @@
 </form>
 
 <table id="zones" class="table table-striped table-sm sortable">
-  <thead class="d-none d-md-table-header-group">
+  <thead class="d-none-md-thead">
     <tr class="orange">
       <th class="px-2"><%== __('Name') %></th>
       <th class="px-2"><%== __('Account') %></th>

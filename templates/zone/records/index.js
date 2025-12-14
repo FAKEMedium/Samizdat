@@ -34,53 +34,10 @@
     return name;
   }
 
-  // Global function to update a record row after save
+  // Global function to refresh records after save
+  // Refetch all records to handle multi-record types (MX, NS, etc.) correctly
   window.updateRecordRow = function(recordData) {
-    const recordId = recordData.type + '_' + recordData.name;
-    const displayName = stripZoneName(recordData.name, currentZoneId);
-
-    // Update allRrsets array
-    const existingIdx = allRrsets.findIndex(r => r.type + '_' + r.name === recordId);
-    const rrset = {
-      name: recordData.name,
-      type: recordData.type,
-      ttl: recordData.ttl,
-      records: [{ content: recordData.content, disabled: false }]
-    };
-
-    if (existingIdx >= 0) {
-      allRrsets[existingIdx] = rrset;
-    } else {
-      allRrsets.push(rrset);
-    }
-
-    // Find or create row
-    let tr = document.querySelector(`#records tbody tr[data-recordid="${recordId}"]`);
-    const rowHtml = `
-        <td>
-          <button class="btn btn-sm btn-secondary btn-edit" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></button>
-          <button class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
-        </td>
-        <td>${displayName}</td>
-        <td>${recordData.type}</td>
-        <td>${truncateText(recordData.content, 100)}</td>
-        <td class="text-end">${recordData.ttl}</td>`;
-
-    if (tr) {
-      tr.innerHTML = rowHtml;
-    } else {
-      // New record - add row
-      tr = document.createElement('tr');
-      tr.dataset.recordid = recordId;
-      tr.dataset.type = recordData.type;
-      tr.dataset.name = recordData.name;
-      tr.innerHTML = rowHtml;
-      document.querySelector('#records tbody').appendChild(tr);
-    }
-
-    // Flash highlight
-    tr.style.backgroundColor = '#d4edda';
-    setTimeout(() => tr.style.backgroundColor = '', 1000);
+    fetchRecords();
   };
 
   async function openRecordModal(recordId = 'new') {
