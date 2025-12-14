@@ -4,13 +4,18 @@
   let currentZoneId = null;
   let allRrsets = [];  // Store all rrsets for filtering
 
+  let handlersSetup = false;
+
   async function fetchRecords() {
     const data = await window.authenticatedFetch(window.location.href);
     if (data) {
       currentZoneId = data.zone_id;
       allRrsets = data.rrsets || [];
       renderRecords(allRrsets, data.zone_id);
-      setupEventHandlers(data.zone_id);
+      if (!handlersSetup) {
+        setupEventHandlers(data.zone_id);
+        handlersSetup = true;
+      }
       // Set headline with zone name
       const zoneName = data.zone_id.replace(/\.$/, ''); // Remove trailing dot
       document.getElementById('headline').textContent = `<%== __('Zone Records') %>, ${zoneName}`;
@@ -80,8 +85,10 @@
         const displayName = stripZoneName(rrset.name, zoneId);
         // Use type_name as unique identifier for rrsets
         let recordid = rrset.type + '_' + rrset.name;
+        // Escape content for data attribute
+        const escapedContent = record.content.replace(/"/g, '&quot;');
         snippet += `
-      <tr data-recordid="${recordid}" data-type="${rrset.type}" data-name="${rrset.name}">
+      <tr data-recordid="${recordid}" data-type="${rrset.type}" data-name="${rrset.name}" data-content="${escapedContent}">
         <td>
           <button class="btn btn-sm btn-secondary btn-edit" title="<%== __('Edit') %>"><%== icon 'pencil-fill', {} %></button>
           <button class="btn btn-sm btn-danger btn-delete" title="<%== __('Delete') %>"><%== icon 'trash-fill', {} %></button>
@@ -137,18 +144,29 @@
       const recordId = tr.dataset.recordid;
 
       if (btn.classList.contains('btn-edit')) {
-        // Pass type and name as query params for unique identification
-        await openRecordModal(`${recordName}?type=${recordType}`);
+        // Pass type, name, and content as query params for unique identification
+        const recordContent = encodeURIComponent(tr.dataset.content);
+        await openRecordModal(`${recordName}?type=${recordType}&content=${recordContent}`);
       } else if (btn.classList.contains('btn-delete')) {
         if (!confirm('<%== __("Are you sure you want to delete this record?") %>')) return;
+        // Send content in body for single record deletion from multi-record rrsets (MX, NS, etc.)
+        const recordContent = tr.dataset.content;
         const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}/records/${recordId}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          body: JSON.stringify({ content: recordContent }),
+          headers: { 'Content-Type': 'application/json' }
         });
         if (result && result.success) {
           tr.remove();
           window.showToast(result.toast || '<%== __("Record deleted") %>');
-          // Also remove from allRrsets
-          allRrsets = allRrsets.filter(r => r.type + '_' + r.name !== recordId);
+          // Also remove from allRrsets - for multi-record types, only remove specific content
+          allRrsets = allRrsets.map(r => {
+            if (r.type + '_' + r.name === recordId) {
+              r.records = r.records.filter(rec => rec.content !== recordContent);
+              if (r.records.length === 0) return null;
+            }
+            return r;
+          }).filter(Boolean);
         }
       }
     });

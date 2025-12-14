@@ -76,6 +76,7 @@ const typeConfig = {
   PTR: { template: 'simple', label: '<%== __("Hostname") %>', placeholder: 'server.example.com.' },
   TXT: { template: 'simple', label: '<%== __("Text") %>', placeholder: '"v=spf1 include:_spf.example.com ~all"' },
   MX: { template: 'mx' },
+  NAPTR: { template: 'naptr' },
   SRV: { template: 'srv' },
   CAA: { template: 'caa' },
   SOA: { template: 'soa' }
@@ -88,14 +89,32 @@ function parseContent(type, content) {
 
   switch (type) {
     case 'MX':
-      // MX content in PowerDNS is just the mail server (priority is separate)
+      // MX content is "priority mailserver" (zone-file style, PowerDNS 4.9+)
+      return {
+        mx_priority: parts[0] || '10',
+        content: parts.slice(1).join(' ') || ''
+      };
+    case 'NAPTR':
+      // NAPTR content: order preference "flags" "service" "regexp" replacement (zone-file style)
+      const naptrMatch = content.match(/^(\d+)\s+(\d+)\s+"([^"]*)"\s+"([^"]*)"\s+"([^"]*)"\s+(\S+)$/);
+      if (naptrMatch) {
+        return {
+          naptr_order: naptrMatch[1],
+          naptr_preference: naptrMatch[2],
+          naptr_flags: naptrMatch[3],
+          naptr_service: naptrMatch[4],
+          naptr_regexp: naptrMatch[5],
+          content: naptrMatch[6]
+        };
+      }
       return { content: content };
     case 'SRV':
-      // SRV: priority weight port target (priority handled separately by PowerDNS)
+      // SRV content: priority weight port target (zone-file style)
       return {
-        srv_weight: parts[0] || '0',
-        srv_port: parts[1] || '0',
-        content: parts.slice(2).join(' ') || ''
+        srv_priority: parts[0] || '0',
+        srv_weight: parts[1] || '0',
+        srv_port: parts[2] || '0',
+        content: parts.slice(3).join(' ') || ''
       };
     case 'CAA':
       // CAA: flags tag "value"
@@ -135,10 +154,18 @@ function ensureTrailingDot(hostname) {
 function combineContent(type) {
   switch (type) {
     case 'MX':
-      const priority = document.getElementById('mx_priority')?.value || '10';
-      const mailserver = ensureTrailingDot(document.getElementById('content')?.value || '');
-      return `${priority} ${mailserver}`;
+      // MX: server prepends priority to get "priority mailserver"
+      return ensureTrailingDot(document.getElementById('content')?.value || '');
+    case 'NAPTR':
+      // NAPTR: server prepends order to get "order preference flags service regexp replacement"
+      const naptrPref = document.getElementById('naptr_preference')?.value || '10';
+      const naptrFlags = document.getElementById('naptr_flags')?.value || '';
+      const naptrService = document.getElementById('naptr_service')?.value || '';
+      const naptrRegexp = document.getElementById('naptr_regexp')?.value || '';
+      const naptrReplacement = document.getElementById('content')?.value || '.';
+      return `${naptrPref} "${naptrFlags}" "${naptrService}" "${naptrRegexp}" ${naptrReplacement}`;
     case 'SRV':
+      // SRV: server prepends priority to get "priority weight port target"
       const weight = document.getElementById('srv_weight')?.value || '0';
       const port = document.getElementById('srv_port')?.value || '0';
       const target = ensureTrailingDot(document.getElementById('content')?.value || '');
@@ -166,15 +193,27 @@ function combineContent(type) {
   }
 }
 
-// Update content preview
+// Update content preview (shows full zone-file format)
 function updatePreview() {
   const type = document.getElementById('type').value;
   const preview = document.getElementById('content-preview');
   const previewValue = document.getElementById('preview-value');
 
-  if (['MX', 'SRV', 'CAA', 'SOA'].includes(type)) {
+  if (['MX', 'NAPTR', 'SRV', 'CAA', 'SOA'].includes(type)) {
     preview.style.display = 'block';
-    previewValue.textContent = combineContent(type);
+    let content = combineContent(type);
+    // Add priority prefix for preview (server will do this too)
+    if (type === 'MX') {
+      const prio = document.getElementById('mx_priority')?.value || '10';
+      content = `${prio} ${content}`;
+    } else if (type === 'SRV') {
+      const prio = document.getElementById('srv_priority')?.value || '0';
+      content = `${prio} ${content}`;
+    } else if (type === 'NAPTR') {
+      const order = document.getElementById('naptr_order')?.value || '100';
+      content = `${order} ${content}`;
+    }
+    previewValue.textContent = content;
   } else {
     preview.style.display = 'none';
   }
@@ -237,12 +276,16 @@ document.getElementById('recordForm').addEventListener('submit', async (e) => {
 });
 
 // Load record data for editing
+// Track original content for multi-record type updates
+let originalContent = null;
+
 async function loadRecord() {
   const data = await window.authenticatedFetch(sourceUrl, {
     method: 'GET'
   });
 
   if (data && data.success && data.record) {
+    originalContent = data.record.content;  // Store for update
     populateForm(data.record);
   }
 }
@@ -254,11 +297,19 @@ function populateForm(record) {
   document.getElementById('ttl').value = record.ttl || 3600;
 
   // Switch template and populate content fields
+  // For MX/SRV/NAPTR, parseContent extracts priority from content (zone-file style)
   switchTemplate(record.type, record.content);
 }
 
 // Save record (create or update)
+let saving = false;
 async function saveRecord() {
+  if (saving) return;  // Prevent double submission
+  saving = true;
+
+  const submitBtn = document.querySelector('#recordForm button[type="submit"]');
+  if (submitBtn) submitBtn.disabled = true;
+
   const form = document.getElementById('recordForm');
   const type = document.getElementById('type').value;
 
@@ -270,11 +321,18 @@ async function saveRecord() {
     ttl: document.getElementById('ttl').value || 3600
   };
 
-  // Add priority for MX/SRV
+  // For updates, include original content so server can remove old record
+  if (originalContent && recordName !== 'new') {
+    data.original_content = originalContent;
+  }
+
+  // Add priority for MX/SRV/NAPTR
   if (type === 'MX') {
     data.priority = document.getElementById('mx_priority')?.value || 10;
   } else if (type === 'SRV') {
     data.priority = document.getElementById('srv_priority')?.value || 0;
+  } else if (type === 'NAPTR') {
+    data.priority = document.getElementById('naptr_order')?.value || 100;
   }
 
   // Determine URL and method
@@ -287,22 +345,27 @@ async function saveRecord() {
     method = 'PATCH';
   }
 
-  const result = await window.authenticatedFetch(url, {
-    method: method,
-    body: JSON.stringify(data),
-    headers: { 'Content-Type': 'application/json' }
-  });
+  try {
+    const result = await window.authenticatedFetch(url, {
+      method: method,
+      body: JSON.stringify(data),
+      headers: { 'Content-Type': 'application/json' }
+    });
 
-  if (result && result.success) {
-    window.showToast(result.toast || '<%== __("Record saved successfully") %>', 'success');
-    const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
-    if (modal) modal.hide();
-    // Update the row in the list instead of reloading
-    if (window.updateRecordRow) {
-      window.updateRecordRow(data);
+    if (result && result.success) {
+      window.showToast(result.toast || '<%== __("Record saved successfully") %>', 'success');
+      const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
+      if (modal) modal.hide();
+      // Update the row in the list instead of reloading
+      if (window.updateRecordRow) {
+        window.updateRecordRow(data);
+      }
+    } else {
+      window.showToast(result?.error || result?.toast || '<%== __("Failed to save record") %>', 'danger');
     }
-  } else {
-    window.showToast(result?.error || result?.toast || '<%== __("Failed to save record") %>', 'danger');
+  } finally {
+    saving = false;
+    if (submitBtn) submitBtn.disabled = false;
   }
 }
 
