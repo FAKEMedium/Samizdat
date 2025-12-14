@@ -14,6 +14,13 @@
   const accountFilter = document.querySelector('#accountFilter');
   const searchtermInput = document.querySelector('#searchterm');
 
+  // Read searchterm from URL if present (for links from manager widget)
+  const urlParams = new URLSearchParams(window.location.search);
+  const urlSearchterm = urlParams.get('searchterm');
+  if (urlSearchterm && searchtermInput) {
+    searchtermInput.value = urlSearchterm;
+  }
+
   async function sendData() {
     const data = await window.authenticatedFetch(basePath);
     if (data) {
@@ -191,12 +198,14 @@
       const account = zone.account || '';
       snippet += `
       <tr data-zoneid="${zoneId}">
-        <td colspan="3" class="d-md-none py-2">
-          <div class="fw-bold mb-1">${displayName}</div>
-          ${account ? `<div class="text-muted small mb-1">${account}</div>` : ''}
-          <div class="btn-group btn-group-sm flex-wrap gap-1">${buttons}</div>
+        <td>
+          <div class="d-md-none py-2">
+            <div class="fw-bold mb-1">${displayName}</div>
+            ${account ? `<div class="text-muted small mb-1">${account}</div>` : ''}
+            <div class="btn-group btn-group-sm flex-wrap gap-1">${buttons}</div>
+          </div>
+          <span class="d-none d-md-inline">${displayName}</span>
         </td>
-        <td class="d-none d-md-table-cell">${displayName}</td>
         <td class="d-none d-md-table-cell">${account}</td>
         <td class="d-none d-md-table-cell text-end text-nowrap">${buttons}</td>
       </tr>

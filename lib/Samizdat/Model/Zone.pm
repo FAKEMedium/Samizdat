@@ -218,10 +218,50 @@ sub get_record ($self, $zone_id, $record_name, $record_type = undef) {
   };
 }
 
+# Normalize DNS name/content for comparison (handle trailing dots)
+sub _normalize_dns ($self, $value) {
+  return '' unless defined $value;
+  $value =~ s/\.$//;  # Remove trailing dot
+  return lc($value);  # Case-insensitive
+}
+
 # Create or update a record using PowerDNS rrsets API.
 # PowerDNS uses PATCH with rrsets and changetype REPLACE to create/update.
+# For types that allow multiple records (MX, NS, A, AAAA, TXT), we preserve existing records.
 sub create_record ($self, $zone_id, $record_data) {
   my $url = $self->_api_url() . '/zones/' . $zone_id;
+
+  # Types that commonly have multiple records per name
+  my %multi_record_types = map { $_ => 1 } qw(MX NS A AAAA TXT SRV);
+
+  my @records;
+
+  # If this type supports multiple records, fetch existing and append
+  if ($multi_record_types{$record_data->{type}}) {
+    my $existing = $self->list_rrsets($zone_id, {
+      name => $record_data->{name},
+      type => $record_data->{type}
+    });
+
+    if (@$existing && $existing->[0]{records}) {
+      # Keep existing records that don't match the new content
+      my $new_content_normalized = $self->_normalize_dns($record_data->{content});
+      for my $rec (@{$existing->[0]{records}}) {
+        # Skip if this is the same content (updating existing)
+        next if $self->_normalize_dns($rec->{content}) eq $new_content_normalized;
+        push @records, {
+          content  => $rec->{content},
+          disabled => $rec->{disabled} ? \1 : \0,
+        };
+      }
+    }
+  }
+
+  # Add the new/updated record
+  push @records, {
+    content  => $record_data->{content},
+    disabled => $record_data->{disabled} ? \1 : \0,
+  };
 
   my $payload = {
     rrsets => [{
@@ -229,10 +269,7 @@ sub create_record ($self, $zone_id, $record_data) {
       type       => $record_data->{type},
       ttl        => $record_data->{ttl} || 3600,
       changetype => 'REPLACE',
-      records    => [{
-        content  => $record_data->{content},
-        disabled => $record_data->{disabled} ? \1 : \0,
-      }],
+      records    => \@records,
     }],
   };
 

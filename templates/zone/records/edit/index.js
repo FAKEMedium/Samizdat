@@ -124,17 +124,24 @@ function parseContent(type, content) {
   }
 }
 
+// Ensure hostname has trailing dot (required by PowerDNS)
+function ensureTrailingDot(hostname) {
+  if (!hostname) return hostname;
+  hostname = hostname.trim();
+  return hostname.endsWith('.') ? hostname : hostname + '.';
+}
+
 // Combine type-specific fields into content
 function combineContent(type) {
   switch (type) {
     case 'MX':
       const priority = document.getElementById('mx_priority')?.value || '10';
-      const mailserver = document.getElementById('content')?.value || '';
+      const mailserver = ensureTrailingDot(document.getElementById('content')?.value || '');
       return `${priority} ${mailserver}`;
     case 'SRV':
       const weight = document.getElementById('srv_weight')?.value || '0';
       const port = document.getElementById('srv_port')?.value || '0';
-      const target = document.getElementById('content')?.value || '';
+      const target = ensureTrailingDot(document.getElementById('content')?.value || '');
       return `${weight} ${port} ${target}`;
     case 'CAA':
       const flags = document.getElementById('caa_flags')?.value || '0';
@@ -142,14 +149,18 @@ function combineContent(type) {
       const value = document.getElementById('caa_value')?.value || '';
       return `${flags} ${tag} "${value}"`;
     case 'SOA':
-      const primary = document.getElementById('soa_primary')?.value || '';
-      const admin = document.getElementById('soa_admin')?.value || '';
+      const primary = ensureTrailingDot(document.getElementById('soa_primary')?.value || '');
+      const admin = ensureTrailingDot(document.getElementById('soa_admin')?.value || '');
       const serial = document.getElementById('soa_serial')?.value || '1';
       const refresh = document.getElementById('soa_refresh')?.value || '10800';
       const retry = document.getElementById('soa_retry')?.value || '3600';
       const expire = document.getElementById('soa_expire')?.value || '604800';
       const minimum = document.getElementById('soa_minimum')?.value || '3600';
       return `${primary} ${admin} ${serial} ${refresh} ${retry} ${expire} ${minimum}`;
+    case 'CNAME':
+    case 'NS':
+    case 'PTR':
+      return ensureTrailingDot(document.getElementById('content')?.value || '');
     default:
       return document.getElementById('content')?.value || '';
   }
@@ -283,7 +294,7 @@ async function saveRecord() {
   });
 
   if (result && result.success) {
-    window.showToast(result.toast || '<%== __("Record saved successfully") %>');
+    window.showToast(result.toast || '<%== __("Record saved successfully") %>', 'success');
     const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
     if (modal) modal.hide();
     // Update the row in the list instead of reloading
@@ -291,7 +302,7 @@ async function saveRecord() {
       window.updateRecordRow(data);
     }
   } else {
-    window.showToast(result?.toast || '<%== __("Failed to save record") %>');
+    window.showToast(result?.error || result?.toast || '<%== __("Failed to save record") %>', 'danger');
   }
 }
 
