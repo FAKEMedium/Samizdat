@@ -311,7 +311,7 @@ sub edit ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     # Override cache path to match template structure and share cache between /invoices/ and /customers/:customerid/invoices/ routes
-    $self->stash(docpath => '/invoice/open/edit/index.html');
+    $self->stash(docpath => '/invoices/open/edit/index.html');
     $web->{script} .= $self->render_to_string(template => 'invoice/open/edit/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/open/edit/index', headline => 'invoice/chunks/editlinks');
   } else {
@@ -369,7 +369,7 @@ sub handle ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     # Override cache path to match template structure and share cache between /invoices/ and /customers/:customerid/invoices/ routes
-    $self->stash(docpath => '/invoice/handle/index.html');
+    $self->stash(docpath => '/invoices/handle/index.html');
     $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handlelinks');
   } else {
@@ -487,7 +487,7 @@ sub payment ($self) {
   my $invoiceid = int $self->stash('invoiceid') // 0;
   if ($accept !~ /json/) {
     # Override cache path to match template structure and share cache between /invoices/ and /customers/:customerid/invoices/ routes
-    $self->stash(docpath => '/invoice/payment/index.html');
+    $self->stash(docpath => '/invoices/payment/index.html');
     $web->{script} .= $self->render_to_string(template => 'invoice/payment', format => 'js');
     return $self->render(template => 'invoice/payment', layout => 'modal', web => $web, title => $title);
   } else {
@@ -603,7 +603,7 @@ sub remind ($self) {
   # GET request - show the reminder form
   if ($accept !~ /json/) {
     # Override cache path to match template structure and share cache between /invoices/ and /customers/:customerid/invoices/ routes
-    $self->stash(docpath => '/invoice/remind/index.html');
+    $self->stash(docpath => '/invoices/remind/index.html');
 
     # Get reminder count to show in UI
     my $reminders = $self->app->invoice->reminders($invoiceid);
