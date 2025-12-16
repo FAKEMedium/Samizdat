@@ -19,7 +19,7 @@ has 'merger' => sub {
   return $merger;
 };
 has 'ua' => sub ($self) {
-  state $ua = Mojo::UserAgent->new->max_redirects(0)->connect_timeout(3)->request_timeout(2);
+  state $ua = Mojo::UserAgent->new->max_redirects(0)->connect_timeout(10)->request_timeout(30);
   return $ua;
 };
 has 'default_resources' => sub ($self) {
@@ -92,7 +92,11 @@ has 'default_resources' => sub ($self) {
       'single' => {
         'name' => 'InvoicePayment'
       },
-      'required' => ['InvoiceNumber']
+      'required' => ['InvoiceNumber'],
+      'qp' => {
+        'sortby' => 'paymentdate',
+        'sortorder' => 'descending',
+      }
     },
     'PredefinedAccounts' => {
       'key' => 'Name'
@@ -305,6 +309,7 @@ sub getToken ($self, $refresh = 0) {
   ));
   my $response;
   if ($refresh) {
+    say "Refreshing token with refresh_token: " . substr($self->data->{refresh} // '', 0, 20) . "...";
     $response = $self->ua->post($url => { Accept => '*/*' } => form => {
       grant_type    => 'refresh_token',
       refresh_token => $self->data->{refresh},
@@ -316,6 +321,14 @@ sub getToken ($self, $refresh = 0) {
       redirect_uri => $self->config->{oauth2}->{redirect_uri},
     })->result;
   }
+
+  # Check HTTP status first
+  if (!$response->is_success) {
+    say "Token HTTP error: " . $response->code . " " . $response->message;
+    say "Response body: " . $response->body;
+    return 0;
+  }
+
   if ($response->json('/error')) {
     say "Token error: " . Dumper($response->json);
     return 0;
@@ -325,6 +338,7 @@ sub getToken ($self, $refresh = 0) {
     $self->data->{access} = $response->json('/access_token');
     $self->data->{state} = 'api';
     $self->saveCache;
+    say "Token refreshed successfully";
     return 1;
   }
 }
@@ -357,6 +371,7 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
   }
   my $done = 0;
   my $qp = {};
+  my $refresh_attempted = 0;  # Prevent infinite refresh loops
 
   if (!$id) {
     $qp = $options->{qp} if (exists($options->{qp}));
@@ -393,6 +408,18 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
 
     if (403 == $tx->result->code) {
       say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
+      # Try to refresh token if we have a refresh token (only once)
+      if ($self->data->{refresh} && !$refresh_attempted) {
+        $refresh_attempted = 1;
+        say "Attempting token refresh...";
+        $self->data->{access} = '';
+        if ($self->getToken(1)) {
+          say "Token refreshed successfully, retrying request...";
+          next;  # Retry the request with new token
+        }
+      }
+      # Refresh failed or no refresh token - clear everything
+      say "Token refresh failed, clearing session";
       $self->data->{access} = '';
       $self->data->{state} = '';
       $self->data->{refresh} = '';
@@ -522,7 +549,59 @@ sub creditInvoice ($self, $DocumentNumber = 0) {
 
 
 sub getInvoice ($self, $DocumentNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
-  my $list = $self->callAPI('Invoices', 'get', $DocumentNumber, $options);
+  my $result = $self->callAPI('Invoices', 'get', $DocumentNumber, $options);
+  return $result;
+}
+
+
+# Navigate to prev/next invoice using cached invoice list
+sub navInvoice ($self, $to = 'next', $DocumentNumber = 0) {
+  return 0 unless $DocumentNumber;
+
+  my $cache_key = 'fortnox:invoice_list';
+  my $list = $self->cache->get($cache_key);
+
+  # Refresh cache if empty or stale (fetch all invoice numbers)
+  if (!$list || !@$list) {
+    $list = [];
+    my $page = 1;
+    my $fetch;
+    do {
+      $fetch = $self->callAPI('Invoices', 'get', 0, {qp => {
+        page => $page,
+        limit => 500,
+        sortby => 'documentnumber',
+        sortorder => 'descending'
+      }});
+      if ($fetch && $fetch->{Invoices}) {
+        push @$list, map { $_->{DocumentNumber} } @{$fetch->{Invoices}};
+      }
+      $page++;
+    } until (!$fetch || !$fetch->{MetaInformation} ||
+             $fetch->{MetaInformation}->{'@CurrentPage'} >= $fetch->{MetaInformation}->{'@TotalPages'});
+
+    $self->cache->set($cache_key => $list, 3600);  # Cache for 1 hour
+  }
+
+  # Find current position and navigate
+  my $idx;
+  for my $i (0 .. $#$list) {
+    if ($list->[$i] == $DocumentNumber) {
+      $idx = $i;
+      last;
+    }
+  }
+
+  return 0 unless defined $idx;
+
+  # List is descending, so 'next' goes to lower index (newer), 'prev' goes to higher index (older)
+  if ($to eq 'next' && $idx > 0) {
+    return $list->[$idx - 1];
+  } elsif ($to eq 'prev' && $idx < $#$list) {
+    return $list->[$idx + 1];
+  }
+
+  return 0;
 }
 
 
@@ -536,6 +615,43 @@ sub getInvoicePayment ($self, $Number = 0, $options = {'qp' => {'limit' => 500, 
   my $result = $self->callAPI('InvoicePayments', 'get', $Number, $options);
   say Dumper $result;
   return $result;
+}
+
+
+# Get customer names for invoice numbers, using cache
+sub getInvoiceCustomerNames ($self, $invoice_numbers = []) {
+  return {} unless @$invoice_numbers;
+
+  my $cache_key = 'fortnox:invoice_customers';
+  my $cached = $self->cache->get($cache_key) // {};
+  my %result;
+  my @missing;
+
+  # Check cache first
+  for my $num (@$invoice_numbers) {
+    if (exists $cached->{$num}) {
+      $result{$num} = $cached->{$num};
+    } else {
+      push @missing, $num;
+    }
+  }
+
+  # Fetch missing from API
+  for my $num (@missing) {
+    my $invoice = $self->callAPI('Invoices', 'get', $num);
+    if ($invoice && $invoice->{Invoice}) {
+      my $customer_name = $invoice->{Invoice}->{CustomerName} // '';
+      $result{$num} = $customer_name;
+      $cached->{$num} = $customer_name;
+    }
+  }
+
+  # Save updated cache
+  if (@missing) {
+    $self->cache->set($cache_key => $cached);
+  }
+
+  return \%result;
 }
 
 
