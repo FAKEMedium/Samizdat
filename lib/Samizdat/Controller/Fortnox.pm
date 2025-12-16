@@ -24,8 +24,9 @@ sub auth ($self) {
 
   my $state = $self->param("state") // '';
   my $code = $self->param("code") // '';
-  $self->app->fortnox->data->{state} = $state if (!$state);
+  $self->app->fortnox->data->{state} = $state if ($state);
   $self->app->fortnox->data->{code} = $code if ($code);
+  say "Fortnox auth - state: $state, code: " . ($code ? 'present' : 'none');
   say Dumper %{ $self->app->fortnox->data };
 
   if ('' ne $self->app->fortnox->data->{access}) {
@@ -94,17 +95,17 @@ sub pauth ($self) {
 sub customers ($self) {
   my $title = $self->app->__('Customers');
   my $web = { title => $title };
-  my $customerid = int $self->stash('customerid') // 0;
+  my $customerid = int($self->stash('customerid') // 0);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     if ($customerid) {
       # Override cache path for dynamic customer ID to prevent creating separate cached files
-      $self->stash(docpath => '/fortnox/manager/customers/single/index.html');
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/customers/single/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/manager/customers/single/index', layout => 'modal');
+      $self->stash(docpath => '/fortnox/customers/single/index.html');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/customers/single/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/customers/single/index', layout => 'modal');
     } else {
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/customers/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/manager/customers/index');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/customers/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/customers/index');
     }
   } else {
     # Require admin access for JSON customer data
@@ -123,33 +124,101 @@ sub customers ($self) {
 }
 
 
+sub invoices ($self) {
+  # Require admin access for invoice management
+  return unless $self->access({ admin => 1 });
+
+  my $title = $self->app->__('Invoices');
+  my $web = { title => $title };
+  my $invoiceid = int($self->stash('invoiceid') // 0);
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept !~ /json/) {
+    if ($invoiceid) {
+      $self->stash(docpath => '/fortnox/invoices/single/index.html');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/single/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/invoices/single/index');
+    } else {
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/invoices/index');
+    }
+  } else {
+    my $page = int($self->param('page') // 1);
+    my $perpage = $self->app->config->{pagination}->{perpage} || 25;
+    my $options = {'qp' => {'limit' => $perpage, 'page' => $page}};
+    my $invoice = $self->app->fortnox->getInvoice($invoiceid, $options);
+    my $fortnox = { title => $title };
+    $fortnox->{invoice} = $invoice;
+    $fortnox->{page} = $page;
+    $fortnox->{perpage} = $perpage;
+    return $self->render(json => { fortnox => $fortnox });
+  }
+}
+
+
+sub invoicenav ($self) {
+  # Require admin access for invoice navigation
+  return unless $self->access({ admin => 1 });
+
+  my $invoiceid = int($self->stash('invoiceid') // 0);
+  my $to = $self->stash('to') // 'next';
+
+  my $next_id = $self->app->fortnox->navInvoice($to, $invoiceid);
+
+  if ($next_id) {
+    return $self->redirect_to($self->url_for('fortnox_invoices') . "/$next_id");
+  } else {
+    # Stay on current invoice if no prev/next available
+    return $self->redirect_to($self->url_for('fortnox_invoices') . "/$invoiceid");
+  }
+}
+
+
 sub payments ($self) {
   # Require admin access for payment management
   return unless $self->access({ admin => 1 });
 
   my $title = $self->app->__('Payments');
   my $web = { title => $title };
-  my $number = int $self->stash('number') // 0;
+  my $number = int($self->stash('number') // 0);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
-      $self->stash(docpath => '/fortnox/manager/payments/single/index.html');
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/payments/single/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/manager/payments/single/index', layout => 'modal');
+      $self->stash(docpath => '/fortnox/payments/single/index.html');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/payments/single/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/payments/single/index', layout => 'modal');
     } else {
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/manager/payments/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/manager/payments/index');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/payments/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/payments/index');
     }
   } else {
-    my $invoiceid = int $self->param('invoiceid') // 0;
-    my $options = {'qp' => {'limit' => 100, page => 1}};
+    my $invoiceid = int($self->param('invoiceid') // 0);
+    my $page = int($self->param('page') // 1);
+    my $perpage = $self->app->config->{pagination}->{perpage} || 25;
+    my $options = {'qp' => {
+      'limit' => $perpage,
+      'page' => $page,
+      'sortby' => 'paymentdate',
+      'sortorder' => 'descending',
+    }};
     if ($invoiceid) {
       $options->{qp}->{invoicenumber} = $invoiceid;
     }
     my $payment = $self->app->fortnox->getInvoicePayment($number, $options);
+
+    # Enrich payments with customer names from cached invoice data
+    if ($payment && $payment->{InvoicePayments}) {
+      my @invoice_numbers = map { $_->{InvoiceNumber} } @{$payment->{InvoicePayments}};
+      my $customer_names = $self->app->fortnox->getInvoiceCustomerNames(\@invoice_numbers);
+      for my $p (@{$payment->{InvoicePayments}}) {
+        $p->{CustomerName} = $customer_names->{$p->{InvoiceNumber}} // '';
+      }
+    }
+
     my $fortnox = { title => $title };
     $fortnox->{payment} = $payment;
+    $fortnox->{page} = $page;
+    $fortnox->{perpage} = $perpage;
     return $self->render(json => { fortnox => $fortnox });
   }
 }
