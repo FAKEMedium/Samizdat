@@ -370,6 +370,17 @@ In test environment, use these phone numbers:
 - Getting Started: https://developer.swish.nu/documentation/getting-started/swish-commerce-api
 
 
+## Nets
+
+Integrate payments with Nets. We wish to custmoize and keep on-site as much as possible.
+A customer is supposed to order a service, pay for it, and the service will be performed when our webhook
+is called. Some services though, might be scheduled many days later, and often not performed at all.
+If possible, don't let our users fetch script from dibspayment.
+
+- Documentation: https://developer.nexigroup.com/nexi-checkout/en-EU/docs/
+- API Reference: https://developer.nexigroup.com/nexi-checkout/en-EU/api/
+
+
 ## Stripe
 
 - Use embedded components
@@ -535,14 +546,3 @@ Potential additions:
 - Based in Sweden: https://basedinsweden.se/
 - Cloud Act info: https://en.wikipedia.org/wiki/CLOUD_Act
 - IP-API documentation: https://ip-api.com/docs/
-
-
-## Nets
-
-Integrate payments with Nets. We wish to custmoize and keep on-site as much as possible.
-A customer is supposed to order a service, pay for it, and the service will be performed when our webhook
-is called. Some services though, might be scheduled many days later, and often not performed at all.
-If possible, don't let our users fetch script from dibspayment.
-
-- Documentation: https://developer.nexigroup.com/nexi-checkout/en-EU/docs/
-- API Reference: https://developer.nexigroup.com/nexi-checkout/en-EU/api/
