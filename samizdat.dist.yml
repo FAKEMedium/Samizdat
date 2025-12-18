@@ -28,6 +28,11 @@ anthropic:
   # Claude model to use for AI features
   # Available models: claude-sonnet-4-20250514, claude-3-5-sonnet-20241022, claude-3-opus-20240229
   model: claude-sonnet-4-20250514
+
+# API configuration - JSON endpoints, no static caching
+# OpenAPI spec is auto-generated from plugin fragments
+api:
+  url: /api/
 manager:
   url: /manager/
   customer:

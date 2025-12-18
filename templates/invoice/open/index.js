@@ -4,7 +4,7 @@ async function getData() {
     headers: {Accept: 'application/json'}
   };
   try {
-    const response = await fetch('<%== sprintf("%sinvoices/open", config->{manager}->{url}) %>', request);
+    const response = await fetch('<%== sprintf("%sinvoices/open", config->{api}->{url} // "/api/") %>', request);
     if (!response.ok) {
       if (response.status === 401) {
         const data = await response.json();

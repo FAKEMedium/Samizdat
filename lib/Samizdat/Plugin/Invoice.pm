@@ -6,38 +6,57 @@ use Mojo::Home;
 use Mojo::File;
 use Mojo::Template;
 use Mojo::Loader qw(data_section);
+use YAML::XS qw(Load);
+use JSON::PP ();
 use Data::Dumper;
+
+# Deep clone and convert YAML booleans to JSON booleans for OpenAPI compatibility
+sub _fix_booleans {
+  my ($data) = @_;
+  return $data unless ref $data;
+
+  if (ref $data eq 'HASH') {
+    my %new;
+    for my $key (keys %$data) {
+      if ($key eq 'required' && defined $data->{$key} && !ref $data->{$key}) {
+        $new{$key} = $data->{$key} ? JSON::PP::true : JSON::PP::false;
+      } else {
+        $new{$key} = _fix_booleans($data->{$key});
+      }
+    }
+    return \%new;
+  } elsif (ref $data eq 'ARRAY') {
+    return [ map { _fix_booleans($_) } @$data ];
+  }
+  return $data;
+}
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Invoice root routes
+  # Load OpenAPI fragment from __DATA__ section and store in config
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  if ($openapi_yaml) {
+    $app->config->{openapi_fragments}{Invoice} = _fix_booleans(Load($openapi_yaml));
+  }
+
+  # Customer specific invoice routes (HTML pages only - GET)
+  my $customer = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
+  $customer->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
+  $customer->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
+  $customer->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
+  $customer->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
+  $customer->get('/')                                               ->to('#index')                ->name('invoice_index');
+
+  # Invoice root routes (HTML pages, can be cached)
   my $manager = $r->manager('invoices')->to(controller => 'Invoice');
   $manager->get('/open')                                            ->to('#open')                 ->name('invoice_open');
   $manager->get('/:invoiceid')                                      ->to('#handle')               ->name('invoice_handle');
-  $manager->get('/:invoiceid/:to')                                  ->to('#nav')                  ->name('invoice_nav');
   $manager->get('/')                                                ->to('#index')                ->name('invoice_index');
-
-  # Customer specific invoice routes
-  my $customer = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
-  $customer->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
-  $customer->put('open')                                            ->to('#update')               ->name('invoice_uppdate');
-  $customer->post('open')                                           ->to('#create')               ->name('invoice_create');
-  $customer->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
-  $customer->post('/:invoiceid/creditinvoice')                      ->to('#creditinvoice')        ->name('invoice_creditinvoice');
-  $customer->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
-  $customer->post('/:invoiceid/payment')                            ->to('#payment')              ->name('invoice_payment');
-  $customer->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
-  $customer->post('/:invoiceid/remind')                             ->to('#remind')               ->name('invoice_remind');
-  $customer->post('/:invoiceid/resend')                             ->to('#resend')               ->name('invoice_resend');
-  $customer->post('/:invoiceid/reprint')                            ->to('#reprint')              ->name('invoice_reprint');
-  $customer->get('/:invoiceid/:to')                                 ->to('#nav')                  ->name('invoice_nav');
-  $customer->get('/')                                               ->to('#index')                ->name('invoice_index');
 
   # Customer specific product routes
   my $products = $r->manager('customers/:customerid/products')->to(controller => 'Invoice');
   $products->get('/subscribe')                                      ->to('Customer#products');
-  $customer->post('/')                                              ->to('Customer#subscribe');
 
 
   $app->helper(invoice => sub ($self) {
@@ -587,3 +606,512 @@ sub register ($self, $app, $conf) {
 }
 
 1;
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Invoice API
+# This is merged with other plugin fragments in the main app
+paths:
+  /invoices/open:
+    get:
+      operationId: Invoice.open
+      x-mojo-to: Invoice#open
+      summary: List open (unhandled) invoices
+      tags: [Invoices]
+      responses:
+        '200':
+          description: Open invoices grouped by customer
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_OpenInvoicesResponse'
+
+  /invoices/{invoiceid}/{to}:
+    get:
+      operationId: Invoice.nav
+      x-mojo-to: Invoice#nav
+      summary: Navigate to previous or next invoice
+      tags: [Invoices]
+      parameters:
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: to
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [prev, next]
+      responses:
+        '200':
+          description: Invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+
+  /invoices/{invoiceid}:
+    get:
+      operationId: Invoice.get
+      x-mojo-to: Invoice#handle
+      summary: Get invoice by ID
+      tags: [Invoices]
+      parameters:
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+
+  /invoices/:
+    get:
+      operationId: Invoice.index
+      x-mojo-to: Invoice#index
+      summary: List all invoices
+      tags: [Invoices]
+      parameters:
+        - name: customerid
+          in: query
+          schema:
+            type: integer
+        - name: paid
+          in: query
+          schema:
+            type: integer
+        - name: unpaid
+          in: query
+          schema:
+            type: integer
+        - name: destroyed
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of invoices
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_ListResponse'
+
+  /customers/{customerid}/invoices/open:
+    get:
+      operationId: Invoice.customer.open
+      x-mojo-to: Invoice#edit
+      summary: Get customer's open invoice
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Open invoice form data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+    put:
+      operationId: Invoice.customer.update
+      x-mojo-to: Invoice#update
+      summary: Update customer's open invoice
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Updated invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+    post:
+      operationId: Invoice.customer.create
+      x-mojo-to: Invoice#create
+      summary: Create invoice from open invoice
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Created invoice
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_CreateResponse'
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+  /customers/{customerid}/invoices/{invoiceid}:
+    get:
+      operationId: Invoice.customer.get
+      x-mojo-to: Invoice#handle
+      summary: Get customer's specific invoice
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+
+  /customers/{customerid}/invoices/{invoiceid}/{to}:
+    get:
+      operationId: Invoice.customer.nav
+      x-mojo-to: Invoice#nav
+      summary: Navigate to prev/next invoice for customer
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: to
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [prev, next]
+      responses:
+        '200':
+          description: Invoice data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_FormData'
+
+  /customers/{customerid}/invoices/{invoiceid}/creditinvoice:
+    post:
+      operationId: Invoice.customer.credit
+      x-mojo-to: Invoice#creditinvoice
+      summary: Create credit invoice
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '302':
+          description: Redirect to credit invoice
+
+  /customers/{customerid}/invoices/{invoiceid}/payment:
+    post:
+      operationId: Invoice.customer.payment
+      x-mojo-to: Invoice#payment
+      summary: Mark invoice payment
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Payment marked
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /customers/{customerid}/invoices/{invoiceid}/remind:
+    post:
+      operationId: Invoice.customer.remind
+      x-mojo-to: Invoice#remind
+      summary: Send payment reminder
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                type:
+                  type: string
+                  enum: [mild, tough]
+                mailmessage:
+                  type: string
+      responses:
+        '200':
+          description: Reminder sent
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /customers/{customerid}/invoices/{invoiceid}/resend:
+    post:
+      operationId: Invoice.customer.resend
+      x-mojo-to: Invoice#resend
+      summary: Resend invoice email
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice resent
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /customers/{customerid}/invoices/{invoiceid}/reprint:
+    post:
+      operationId: Invoice.customer.reprint
+      x-mojo-to: Invoice#reprint
+      summary: Reprint invoice PDF
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Invoice reprinted
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /customers/{customerid}/invoices/:
+    get:
+      operationId: Invoice.customer.list
+      x-mojo-to: Invoice#index
+      summary: List customer's invoices
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Customer invoice list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invoice_ListResponse'
+    post:
+      operationId: Invoice.customer.subscribe
+      x-mojo-to: Customer#subscribe
+      summary: Subscribe customer to products
+      tags: [Customer Invoices]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Subscription created
+          content:
+            application/json:
+              schema:
+                type: object
+
+components:
+  schemas:
+    Invoice_Error:
+      type: object
+      properties:
+        error:
+          type: string
+    Invoice_Invoice:
+      type: object
+      properties:
+        invoiceid:
+          type: integer
+        customerid:
+          type: integer
+        fakturanummer:
+          type: integer
+        uuid:
+          type: string
+        state:
+          type: string
+          enum: [obehandlad, fakturerad, bokford, raderad, krediterad]
+        invoicedate:
+          type: string
+        duedate:
+          type: string
+        totalcost:
+          type: number
+        debt:
+          type: number
+        currency:
+          type: string
+        vat:
+          type: number
+    Invoice_Customer:
+      type: object
+      properties:
+        customerid:
+          type: integer
+        name:
+          type: string
+        billingemail:
+          type: string
+        billingaddress:
+          type: string
+        billingzip:
+          type: string
+        billingcity:
+          type: string
+        billingcountry:
+          type: string
+        currency:
+          type: string
+        vat:
+          type: number
+    Invoice_Item:
+      type: object
+      properties:
+        invoiceitemid:
+          type: integer
+        invoiceid:
+          type: integer
+        articlenumber:
+          type: string
+        invoiceitemtext:
+          type: string
+        number:
+          type: number
+        price:
+          type: number
+        include:
+          type: integer
+        vat:
+          type: number
+    Invoice_FormData:
+      type: object
+      properties:
+        invoice:
+          $ref: '#/components/schemas/Invoice_Invoice'
+        customer:
+          $ref: '#/components/schemas/Invoice_Customer'
+        invoiceitems:
+          type: object
+        articles:
+          type: array
+          items:
+            type: object
+    Invoice_OpenInvoicesResponse:
+      type: object
+      properties:
+        customers:
+          type: object
+    Invoice_ListResponse:
+      type: object
+      properties:
+        customer:
+          $ref: '#/components/schemas/Invoice_Customer'
+        invoices:
+          type: array
+          items:
+            $ref: '#/components/schemas/Invoice_Invoice'
+    Invoice_CreateResponse:
+      type: object
+      properties:
+        success:
+          type: integer
+        invoiceid:
+          type: integer
+        fakturanummer:
+          type: integer
+        uuid:
+          type: string
+        customerid:
+          type: integer
+        print_dialog:
+          type: integer

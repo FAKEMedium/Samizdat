@@ -321,13 +321,21 @@ sub edit ($self) {
     my $customerid = int $self->stash('customerid');
     my $invoiceid = int $self->stash('invoiceid');
 
+    # If no invoiceid, get the open invoice for this customer
+    if (!$invoiceid && $customerid) {
+      my $invoice = $self->app->invoice->get({
+        where => { customerid => $customerid, state => 'obehandlad' }
+      })->[0];
+      $invoiceid = $invoice->{invoiceid} if $invoice;
+    }
+
     # Get form data from model
     my $formdata = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
     return $self->render(json => { error => 'Invoice not found' }) unless $formdata;
 
     # Add articles from Fortnox
     $formdata->{articles} = $self->_articles();
-say Dumper($formdata->{articles});
+
     # Pass any Fortnox errors to the frontend
     if (my $error = $self->stash('fortnox_error')) {
       $formdata->{fortnox_error} = $error;
@@ -403,60 +411,51 @@ sub nav ($self) {
 
   # Build state filter based on cookie
   my @states = ();
-  if ($filter->{paid}) {
-    push @states, 'bokford';
-  }
-  if ($filter->{unpaid}) {
-    push @states, 'fakturerad';
-  }
-  if ($filter->{destroyed}) {
-    push @states, 'raderad', 'krediterad';
-  }
+  push @states, 'bokford' if $filter->{paid};
+  push @states, 'fakturerad' if $filter->{unpaid};
+  push @states, 'raderad', 'krediterad' if $filter->{destroyed};
 
   # Default to showing non-draft invoices if no filter specified
-  if (!@states) {
-    @states = ('fakturerad', 'bokford', 'raderad');
-  }
+  @states = ('fakturerad', 'bokford', 'raderad') unless @states;
 
   my $invoice = $self->app->invoice->nav($to, $invoiceid, $customerid, \@states);
   if ($invoice->{invoiceid}) {
     $self->stash(invoiceid => $invoice->{invoiceid});
   }
-  if ($invoice->{customerid}) {
-#    $self->stash(customerid => $invoice->{customerid});
-  }
-  $self->handle;
-  if (0) {
 
-    my $accept = $self->req->headers->{headers}->{accept}->[0];
-    if ($accept !~ /json/) {
-      $self->redirect_to(sprintf('%scustomers/%s/invoices/%s', $self->config->{manager}->{url}, $customerid, $invoice->{invoiceid}));
-    } else {
-      # Require admin access for JSON invoice data
-      return unless $self->access({ admin => 1 });
+  # Return JSON with invoice data
+  return unless $self->access({ admin => 1 });
 
-      my $customerid = int $self->stash('customerid');
-      my $invoiceid = int $self->stash('invoiceid');
+  my $nav_invoiceid = $invoice->{invoiceid};
+  return $self->render(json => { error => 'No invoice found' }, status => 404) unless $nav_invoiceid;
 
-      # Get form data from model (without articles)
-      my $json = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
-      return $self->render(json => $json || {});
-    }
-  }
+  my $nav_invoice = $self->app->invoice->get({ where => { invoiceid => $nav_invoiceid } })->[0];
+  return $self->render(json => { error => 'Invoice not found' }, status => 404) unless $nav_invoice;
+
+  my $customer = $self->app->customer->get({ where => { customerid => $nav_invoice->{customerid} } })->[0];
+  $customer->{name} = $self->app->customer->name($customer) if $customer;
+
+  my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $nav_invoiceid } });
+
+  return $self->render(json => {
+    invoice => $nav_invoice,
+    customer => $customer,
+    invoiceitems => $invoiceitems
+  });
 }
 
 
 # List open (unhandled) invoices
 sub open ($self) {
-  my $title = $self->app->__('Open invoices');
-  my $web = {title => $title};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
+    my $title = $self->app->__('Open invoices');
+    my $web = {title => $title};
     $web->{script} .= $self->render_to_string(template => 'invoice/open/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'invoice/open/index');
   } else {
-    # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
+
     my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.state' => { '=', 'obehandlad' } } });
     my $customers = {};
     for my $invoiceitemid (keys %{$invoiceitems}) {

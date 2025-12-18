@@ -130,10 +130,13 @@ form.addEventListener("submit", (event) => {
 });
 
 async function sendData(method, customerid = 0) {
+  let url;
   if (customerid > 0) {
-    form.action = `<%== url_for('customer_index') %>/` + customerid;
+    url = `<%== url_for('Customer.get', customerid => '_CID_') %>`.replace('_CID_', customerid);
+    form.action = url;
+  } else {
+    url = form.action || "";
   }
-  const url = form.action || "";
   const formData = new FormData(form);
   const request = {
     method: method,
@@ -171,13 +174,20 @@ window.onpopstate = function(event) {
 var stateObj = { foo: 1000 + Math.random()*1001 };
 
 window.getId = async function getId(what, customerid = 0) {
-  let url = `<%== url_for('customer_index') %>/`;
   customerid = parseInt(customerid);
-  if (customerid > 1000) {
-    url += customerid;
-    url += '/';
+  let url;
+  // Use API routes for navigation
+  if (what === 'prev') {
+    url = `<%== url_for('Customer.prev', customerid => '_CID_') %>`.replace('_CID_', customerid);
+  } else if (what === 'next') {
+    url = `<%== url_for('Customer.next', customerid => '_CID_') %>`.replace('_CID_', customerid);
+  } else if (what === 'first') {
+    url = `<%== url_for('Customer.first') %>`;
+  } else if (what === 'newest') {
+    url = `<%== url_for('Customer.newest') %>`;
+  } else {
+    url = `<%== url_for('Customer.get', customerid => '_CID_') %>`.replace('_CID_', customerid);
   }
-  url += what;
   const request = {
     method: 'GET',
     headers: {Accept: 'application/json'}

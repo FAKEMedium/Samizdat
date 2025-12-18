@@ -9,28 +9,29 @@ use Data::UUID;
 use Hash::Merge;
 use Data::Dumper;
 
-sub startup ($self) {
-  my $config = $self->plugin('NotYAMLConfig');
-  push @{$self->commands->namespaces}, 'Samizdat::Command';
-  unshift @{$self->plugins->namespaces}, 'Samizdat::Plugin';
-  push @{$self->renderer->paths}, @{ $config->{extratemplates} };
-  push @{$self->static->paths}, 'src/public';
-  $self->secrets($config->{secrets});
-  $self->types(MojoX::MIME::Types->new);
+sub startup {
+  my $app = shift;
+  my $config = $app->plugin('NotYAMLConfig');
+  push @{$app->commands->namespaces}, 'Samizdat::Command';
+  unshift @{$app->plugins->namespaces}, 'Samizdat::Plugin';
+  push @{$app->renderer->paths}, @{$config->{extratemplates}};
+  push @{$app->static->paths}, 'src/public';
+  $app->secrets($config->{secrets});
+  $app->types(MojoX::MIME::Types->new);
 
-  $self->defaults(
-    layout => $config->{layout},
-    template => 'index',
-    languages => {},
-    language => $config->{locale}->{default_language},
-    countries => {},
+  $app->defaults(
+    layout     => $config->{layout},
+    template   => 'index',
+    languages  => {},
+    language   => $config->{locale}->{default_language},
+    countries  => {},
     themecolor => '',
-    headtitle => '',
-    extrajs => '',
-    extracss => '',
-    symbols => undef,
-    headline => undef,
-    web => {
+    headtitle  => '',
+    extrajs    => '',
+    extracss   => '',
+    symbols    => undef,
+    headline   => undef,
+    web        => {
       docid          => 0,
       comments       => 0,
       creator        => 1,
@@ -41,7 +42,7 @@ sub startup ($self) {
       title          => '',
       url            => '',
     },
-    user => {
+    user       => {
       username     => undef,
       givennname   => undef,
       commonnname  => undef,
@@ -57,32 +58,38 @@ sub startup ($self) {
     },
   );
 
-  $self->helper(merger => sub { state $merger = Hash::Merge->new() });
-  $self->helper(uuid => sub { state $uuid = Data::UUID->new });
+  $app->helper(merger => sub {state $merger = Hash::Merge->new()});
+  $app->helper(uuid => sub {state $uuid = Data::UUID->new});
 
-  $self->helper(redis => sub { state $redis = Mojo::Redis->new($config->{dsn}->{redis}); return $redis; });
-  $self->helper(pg => sub { state $pg = Mojo::Pg->new($config->{dsn}->{pg}); return $pg; });
-  $self->pg->on(connection => sub {
+  $app->helper(redis => sub {
+    state $redis = Mojo::Redis->new($config->{dsn}->{redis});
+    return $redis;
+  });
+  $app->helper(pg => sub {
+    state $pg = Mojo::Pg->new($config->{dsn}->{pg});
+    return $pg;
+  });
+  $app->pg->on(connection => sub {
     my ($pg, $dbh) = @_;
     $dbh->do('SET search_path TO public');
     $dbh->{pg_server_prepare} = 0;
     $pg->max_connections(32);
   });
-  $self->pg->migrations->from_dir('migrations')->migrate;
-  $self->pg->db->dbh->{pg_server_prepare} = 1;
+  $app->pg->migrations->from_dir('migrations')->migrate;
+  $app->pg->db->dbh->{pg_server_prepare} = 1;
 
   if (exists($config->{import}->{dsn})) {
-    $self->helper(mysql => sub { state $mysql = Mojo::mysql->new($config->{import}->{dsn}) });
-    $self->mysql->on(connection => sub {
+    $app->helper(mysql => sub {state $mysql = Mojo::mysql->new($config->{import}->{dsn})});
+    $app->mysql->on(connection => sub {
       my ($mysql, $dbh) = @_;
       $mysql->max_connections(5);
     });
   }
 
   # Make web root reusable for other plugins as $app->routes->home
-  $self->routes->root->add_shortcut(home => sub {
+  $app->routes->root->add_shortcut(home => sub {
     my ($route, $path) = @_;
-    my $home_url = $self->config->{baseurl} || '/';
+    my $home_url = $app->config->{baseurl} || '/';
     $path = $home_url . ($path || '');
     $path =~ s/\/{2,}/\//g;
     my $home = $route->any($path);
@@ -90,9 +97,9 @@ sub startup ($self) {
   });
 
   # Make manager root reusable for other plugins as $app->routes->manager
-  $self->routes->root->add_shortcut(manager => sub {
+  $app->routes->root->add_shortcut(manager => sub {
     my ($route, $path) = @_;
-    my $manager_url = $self->config->{manager}->{url} || '/manager/';
+    my $manager_url = $app->config->{manager}->{url} || '/manager/';
     $path = $manager_url . ($path || '');
     $path =~ s/\/{2,}/\//g;
     my $manager = $route->any($path);
@@ -100,11 +107,11 @@ sub startup ($self) {
   });
 
   # Load OAuth2 plugin and register providers from config
-  $self->plugin('OAuth2');
+  $app->plugin('OAuth2');
 
   # Automatically register OAuth2 providers from manager.*.oauth2 sections
   if ($config->{manager}) {
-    my $providers = $self->oauth2->providers;
+    my $providers = $app->oauth2->providers;
     for my $module (keys %{$config->{manager}}) {
       next unless ref $config->{manager}->{$module} eq 'HASH';
       next unless $config->{manager}->{$module}->{oauth2};
@@ -133,28 +140,28 @@ sub startup ($self) {
     }
   }
 
-  $self->plugin('Cache');
-  $self->plugin('Account');
-  $self->plugin('Public');
-  $self->plugin('Manager');
-  $self->plugin('Icons');
-  $self->plugin('Contact');
-  $self->plugin('Shortbytes');
+  $app->plugin('Cache');
+  $app->plugin('Account');
+  $app->plugin('Public');
+  $app->plugin('Manager');
+  $app->plugin('Icons');
+  $app->plugin('Contact');
+  $app->plugin('Shortbytes');
 
   # Add your local plugins in your extraplugins setting
   for my $plugin (@{ $config->{extraplugins} }) {
-    $self->plugin($plugin);
+    $app->plugin($plugin);
   }
   if (exists($config->{buymeacoffee}->{slug}) && $config->{buymeacoffee}->{slug}) {
-    $self->plugin('BuyMeACoffee', $config->{buymeacoffee});
+    $app->plugin('BuyMeACoffee', $config->{buymeacoffee});
   }
   if (exists($config->{manager}->{nets}) && $config->{manager}->{nets}) {
-    $self->plugin('Nets');
+    $app->plugin('Nets');
   }
-  $self->plugin('DefaultHelpers');
-  $self->plugin('TagHelpers');
-  $self->plugin('Mail', $config->{mail});
-  $self->plugin('Util::RandomString', {
+  $app->plugin('DefaultHelpers');
+  $app->plugin('TagHelpers');
+  $app->plugin('Mail', $config->{mail});
+  $app->plugin('Util::RandomString', {
     entropy => 256,
     printable => {
       alphabet => '2345679bdfhmnprtFGHJLMNPRT',
@@ -163,13 +170,13 @@ sub startup ($self) {
   });
 
   # Internationalization block. Use "make i18n" to rebuild text lexicon.
-  $self->plugin('LocaleTextDomainOO', {
+  $app->plugin('LocaleTextDomainOO', {
     file_type => 'mo',
     default => $config->{locale}->{default_language},
     languages => [ keys %{$config->{locale}->{languages}} ],
     no_header_detect => 1,
   });
-  $self->lexicon({
+  $app->lexicon({
     search_dirs => [qw(./locale)],
     gettext_to_maketext => 0,
     decode => 1,
@@ -178,7 +185,7 @@ sub startup ($self) {
       delete_lexicon => 'i-default::',
     ],
   });
-  $self->hook(before_routes => sub ($c) {
+  $app->hook(before_routes => sub ($c) {
     my $language;
     
     # 1. Check language cookie first
@@ -223,15 +230,76 @@ sub startup ($self) {
   });
 
   # Captcha plugin with locale-aware font selection
-  $self->plugin('Captcha');
+  $app->plugin('Captcha');
 
   # If Nginx serves files from the public directory, there's no need to have it in this application's list
   if ($config->{nginx}) {
 
   }
 
-  $self->plugin('Web'); # Routes not covered by other plugins go here
-#  say Dumper $self->routes;
+  # Collect OpenAPI fragments from plugins and merge into single spec
+  $app->_load_openapi($config);
+
+
+  $app->plugin('Web'); # Routes not covered by other plugins go here
+#  say Dumper $app->routes;
+}
+
+
+# Collect OpenAPI fragments from all plugins and load OpenAPI plugin
+sub _load_openapi {
+  my ($self, $config) = @_;
+  require Hash::Merge;
+
+  # Base OpenAPI spec
+  my $spec = {
+    openapi => '3.0.3',
+    info => {
+      title       => ($config->{sitename} // 'Samizdat') . ' API',
+      description => $config->{description} // 'API documentation',
+      version     => '1.0.0',
+    },
+    servers => [
+      { url => $config->{api}->{url} || '/api/', description => 'API server' }
+    ],
+    paths      => {},
+    components => { schemas => {}, securitySchemes => {} },
+    tags       => [],
+    security   => [],
+  };
+
+  # Add cookie auth security scheme (cookie name from Account plugin config)
+  $spec->{components}->{securitySchemes}->{cookieAuth} = {
+    type => 'apiKey',
+    in   => 'cookie',
+    name => $config->{manager}->{account}->{authcookiename} || 'session',
+  };
+
+  # Collect fragments from plugins (stored in config during plugin registration)
+  my $merger = Hash::Merge->new('RIGHT_PRECEDENT');
+  my $fragments = $config->{openapi_fragments} || {};
+
+  for my $name (keys %$fragments) {
+    my $fragment = $fragments->{$name};
+    if ($fragment && ref $fragment eq 'HASH') {
+      $spec = $merger->merge($spec, $fragment);
+    }
+  }
+
+  # Only load OpenAPI plugin if we have paths defined
+  if (keys %{$spec->{paths}}) {
+    $self->plugin('OpenAPI' => {
+      spec   => $spec,
+      route  => $self->routes->any($config->{api}->{url} || '/api'),
+      schema => 'v3',
+    });
+
+    # Serve the merged spec as JSON at /api/openapi.json
+    $self->routes->get(($config->{api}->{url} || '/api/') . 'openapi.json')->to(cb => sub {
+      my $c = shift;
+      $c->render(json => $spec);
+    })->name('openapi_spec');
+  }
 }
 
 1;
