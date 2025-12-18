@@ -3,13 +3,30 @@ form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
+let currentCustomerId = null;
+
 // Bind button click events
 document.getElementById('updateInvoiceBtn')?.addEventListener('click', () => updateInvoice());
 document.getElementById('makeInvoiceBtn')?.addEventListener('click', () => makeInvoice());
 
+// Get API URL for customer invoice operations using operationId
+function getApiUrl(method) {
+  if (method === 'GET') {
+    return `<%== url_for('Invoice.customer.open', customerid => '_CID_') %>`.replace('_CID_', currentCustomerId);
+  } else if (method === 'PUT') {
+    return `<%== url_for('Invoice.customer.update', customerid => '_CID_') %>`.replace('_CID_', currentCustomerId);
+  } else if (method === 'POST') {
+    return `<%== url_for('Invoice.customer.create', customerid => '_CID_') %>`.replace('_CID_', currentCustomerId);
+  }
+  return form.action || "";
+}
+
 async function sendData(method) {
-  const url = form.action || "";
   const formData = new FormData(form);
+
+  // Use API endpoints for all methods
+  let url = currentCustomerId ? getApiUrl(method) : form.action || "";
+
   const request = {
     method: method,
     headers: {Accept: 'application/json'}
@@ -101,6 +118,8 @@ function populateForm(formdata, method) {
   }
 
   let customer = formdata.customer;
+  // Store customer ID for API requests
+  currentCustomerId = customer.customerid;
   document.querySelector('#dataform').action = '<%== sprintf("%scustomers/", config->{manager}->{url}) %>' + customer.customerid + '/invoices/open';
   document.querySelector('#customerid').value = customer.customerid;
   document.querySelector('#billingemail').value = customer.billingemail;
@@ -167,6 +186,12 @@ function populateForm(formdata, method) {
 
 function dropToast(){
   document.querySelector('#toast-messages').innerHTML = '';
+}
+
+// Extract customerid from URL (pattern: /customers/:customerid/invoices/open)
+const urlMatch = window.location.pathname.match(/\/customers\/(\d+)\/invoices/);
+if (urlMatch) {
+  currentCustomerId = urlMatch[1];
 }
 
 getInvoice();

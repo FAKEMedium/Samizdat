@@ -40,7 +40,7 @@
     }
 
     try {
-      const data = await window.authenticatedFetch('<%== url_for('customer_index') %>?simple=1&searchterm=___');
+      const data = await window.authenticatedFetch('<%== url_for('Customer.index') %>?simple=1&searchterm=___');
       accountField.style.display = 'block';
       setupCustomerSearch();
     } catch (e) {
@@ -70,7 +70,7 @@
 
   async function searchCustomers(term) {
     try {
-      const data = await window.authenticatedFetch(`<%== url_for('customer_index') %>?simple=1&searchterm=${encodeURIComponent(term)}`);
+      const data = await window.authenticatedFetch(`<%== url_for('Customer.index') %>?simple=1&searchterm=${encodeURIComponent(term)}`);
       if (data && data.customers) {
         accountSelect.innerHTML = '<option value=""><%== __("No customer assigned") %></option>';
         data.customers.forEach(c => {

@@ -57,7 +57,8 @@ window.sendReminder = async function() {
   }
 
   try {
-    const response = await fetch(`<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/remind`, {
+    const url = `<%== url_for('Invoice.customer.remind', customerid => '_CID_', invoiceid => '_IID_') %>`.replace('_CID_', customerid).replace('_IID_', invoiceid);
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',

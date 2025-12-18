@@ -69,22 +69,20 @@ window.onpopstate = function(event) {
 var stateObj = { foo: 1000 + Math.random()*1001 };
 
 window.getId = async function getId(what, customerid = 0, invoiceid = 0, percustomer = 0, dataform = '#dataform') {
-  let url = '<%== config->{manager}->{url} %>';
-  if (percustomer) {
-    customerid = parseInt(customerid);
-    if (customerid) {
-      url += 'customers/'
-      url += customerid;
-      url += '/'
-    }
-  }
-  url += 'invoices/';
+  let url;
+  customerid = parseInt(customerid);
   invoiceid = parseInt(invoiceid);
-  if (invoiceid > 1000) {
-    url += invoiceid;
-    url += '/';
+
+  if (percustomer && customerid) {
+    url = `<%== url_for('Invoice.customer.nav', customerid => '_CID_', invoiceid => '_IID_', to => '_TO_') %>`
+      .replace('_CID_', customerid)
+      .replace('_IID_', invoiceid)
+      .replace('_TO_', what);
+  } else {
+    url = `<%== url_for('Invoice.nav', invoiceid => '_IID_', to => '_TO_') %>`
+      .replace('_IID_', invoiceid)
+      .replace('_TO_', what);
   }
-  url += what;
   const request = {
     method: 'GET',
     headers: {Accept: 'application/json'}
@@ -260,7 +258,7 @@ function makeCreditInvoice(dataform) {
   if (confirm('<%== __("Do you want to credit the invoice?") %>')) {
     let customerid = document.querySelector('#customerid').value;
     let invoiceid = document.querySelector('#invoiceid').value;
-    document.querySelector(dataform).action = `<%== url_for('customer_index') %>/` + customerid + '/invoices/' + invoiceid + '/creditinvoice';
+    document.querySelector(dataform).action = `<%== url_for('Invoice.customer.credit', customerid => '_CID_', invoiceid => '_IID_') %>`.replace('_CID_', customerid).replace('_IID_', invoiceid);
     sendForm('POST', dataform);
   }
 }
@@ -287,7 +285,7 @@ window.reprintInvoice = async function() {
   }
 
   try {
-    const url = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/reprint`;
+    const url = `<%== url_for('Invoice.customer.reprint', customerid => '_CID_', invoiceid => '_IID_') %>`.replace('_CID_', customerid).replace('_IID_', invoiceid);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -336,7 +334,7 @@ window.resendInvoice = async function() {
   }
 
   try {
-    const url = `<%== url_for('customer_index') %>/${customerid}/invoices/${invoiceid}/resend`;
+    const url = `<%== url_for('Invoice.customer.resend', customerid => '_CID_', invoiceid => '_IID_') %>`.replace('_CID_', customerid).replace('_IID_', invoiceid);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
