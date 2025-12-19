@@ -1,0 +1,16 @@
+% my $id = $slugify->(op => $method, $path);
+<h3 id="<%= $id %>" class="op-path <%= $op_spec->{deprecated} ? "deprecated" : "" %>">
+  <a href="#<%= $id %>"><%= $operation_id %></a>
+</h3>
+% if ($op_spec->{deprecated}) {
+  <p class="op-deprecated"><%== __('This resource is deprecated!') %></p>
+% }
+<ul class="unstyled">
+  <li><b><%= uc $method %></b> <a href="<%= "$base_url$path" %>"><%= $base_url->path . $path %></a></li>
+% if ($op_spec->{operationId}) {
+  <li><b><%== __('Operation ID:') %></b> <span><%= $op_spec->{operationId} %></span></li>
+% }
+</ul>
+%= include 'mojolicious/plugin/openapi/human', op_spec => $op_spec
+%= include 'mojolicious/plugin/openapi/parameters', op_spec => $op_spec
+%= include 'mojolicious/plugin/openapi/response', op_spec => $op_spec

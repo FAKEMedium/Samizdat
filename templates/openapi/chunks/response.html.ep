@@ -1,0 +1,6 @@
+
+% while (my ($code, $res) = $c->openapi->spec_iterator($op_spec->{responses})) {
+  <h4 class="op-response"><%== __('Response') %> <%= $code %></h3>
+%= include 'mojolicious/plugin/openapi/human', op_spec => $res
+  <pre class="op-response"><%= $serialize->($res->{schema} || $res->{content}) %></pre>
+% }

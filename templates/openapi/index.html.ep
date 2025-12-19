@@ -1,0 +1,23 @@
+
+<div id="top" class="container openapi-container">
+%= include 'mojolicious/plugin/openapi/header'
+
+  <article class="openapi-spec">
+    <section class="openapi-spec_intro">
+%= include 'mojolicious/plugin/openapi/intro'
+    </section>
+    <section class="openapi-spec_resources">
+%= include 'mojolicious/plugin/openapi/resources'
+    </section>
+    <section class="openapi-spec_references">
+%= include 'mojolicious/plugin/openapi/references'
+    </section>
+  </article>
+
+  <footer class="openapi-footer">
+%= include 'mojolicious/plugin/openapi/footer'
+  </footer>
+</div>
+
+%= include "mojolicious/plugin/openapi/javascript"
+%= include "mojolicious/plugin/openapi/foot"
