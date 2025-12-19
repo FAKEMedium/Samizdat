@@ -1,0 +1,59 @@
+
+<ol id="toc">
+% if ($spec->{info}{description}) {
+  <li class="for-description">
+    <a href="#about"><%== __('About') %></a>
+    <ol>
+      <li><a href="#license"><%== __('License') %></a></li>
+      <li><a href="#contact"><%== __('Contact') %></a></li>
+      <li><a href="#baseurl"><%== __('Base URL') %></a></li>
+% if ($spec->{info}{termsOfService}) {
+      <li class="for-terms"><a href="#terms-of-service"><%== __('Terms of service') %></a></li>
+% }
+    </ol>
+  </li>
+% }
+  <li class="for-resources">
+    <a href="#resources"><%== __('Resources') %></a>
+    <ol>
+% for my $op (@$operations) {
+      <li><a href="#<%= $slugify->(op => @$op{qw(method path)}) %>"><%= $op->{operation_id} %></a></li>
+% }
+    </ol>
+  </li>
+
+% if ($spec->{parameters}) {
+  <li class="for-references for-parameters">
+    <a href="#references"><%== __('Parameters') %></a>
+    <ol>
+% while (my ($key) = openapi->spec_iterator($spec->{parameters})) {
+      <li><a href="#<%= lc $slugify->(qw(ref parameters), $key) %>"><%= $key %></a></li>
+% }
+    </ol>
+  </li>
+% }
+
+% if ($spec->{components}) {
+  <li class="for-references for-components">
+    <a href="#references"><%== __('Components') %></a>
+    <ol>
+% while (my ($type, $comp_group) = openapi->spec_iterator($spec->{components})) {
+% while (my ($key, $comp) = openapi->spec_iterator($comp_group)) {
+        <li><a href="#<%= lc $slugify->(qw(ref components), $key) %>"><%= $key %></a></li>
+% }
+% }
+    </ol>
+  </li>
+% }
+
+% if ($spec->{definitions}) {
+  <li class="for-references for-definitions">
+    <a href="#references"><%== __('Definitions') %></a>
+    <ol>
+% while (my ($key) = openapi->spec_iterator($spec->{definitions})) {
+      <li><a href="#<%= lc $slugify->(qw(ref definitions), $key) %>"><%= $key %></a></li>
+% }
+    </ol>
+  </li>
+% }
+</ol>

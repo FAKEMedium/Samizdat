@@ -1,0 +1,11 @@
+<header class="openapi-header">
+  <h1 id="title"><%= $spec->{info}{title} || __('No title' %></h1>
+  <p class="version">
+    <span><%== __('Version') %></span>
+    <span class="version"><%= $spec->{info}{version} %> - OpenAPI <%= $spec->{swagger} || $spec->{openapi} %></span>
+  </p>
+</header>
+
+<nav class="openapi-nav">
+%= include 'mojolicious/plugin/openapi/toc'
+</nav>

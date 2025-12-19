@@ -1,0 +1,45 @@
+
+% my $has_parameters = @{$op_spec->{parameters} || []};
+% my $body;
+<h4 class="op-parameters"><%== __('Parameters') %></h4>
+% if ($has_parameters) {
+<table class="op-parameters">
+  <thead>
+    <tr>
+      <th><%== __('Name') %></th>
+      <th><%== __('In') %></th>
+      <th><%== __('Type') %></th>
+      <th><%== __('Required') %></th>
+      <th><%== __('Description') %></th>
+    </tr>
+  </thead>
+  <tbody>
+% }
+% for my $p (@{$op_spec->{parameters} || []}) {
+  % $body = $p->{schema} if $p->{in} eq 'body';
+  <tr>
+    % if ($spec->{parameters}{$p->{name}}) {
+      <td><a href="#<%= $slugify->(qw(ref parameters), $p->{name}) %>"><%= $p->{name} %></a></td>
+    % } else {
+      <td><%= $p->{name} %></td>
+    % }
+    <td><%= $p->{in} %></td>
+    <td><%= $p->{type} || $p->{schema}{type} %></td>
+    <td><%= $p->{required} ? "Yes" : "No" %></td>
+    <td><%== $p->{description} ? $c->openapi->rich_text($p->{description}) : "" %></td>
+  </tr>
+% }
+% if ($has_parameters) {
+  </tbody>
+</table>
+% } else {
+<p class="op-parameters"><%== __('This resource has no input parameters.') %></p>
+% }
+% if ($body) {
+<h4 class="op-parameter-body"><%== __('Body') %></h4>
+<pre class="op-parameter-body"><%= $serialize->($body) %></pre>
+% }
+% if ($op_spec->{requestBody}) {
+<h4 class="op-parameter-body">requestBody</h4>
+<pre class="op-parameter-body"><%= $serialize->($op_spec->{requestBody}{content}) %></pre>
+% }

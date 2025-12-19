@@ -1,0 +1,9 @@
+% if ($op_spec->{summary}) {
+  <p class="spec-summary"><%= $op_spec->{summary} %></p>
+% }
+% if ($op_spec->{description}) {
+  <div class="spec-description"><%== $c->openapi->rich_text($op_spec->{description}) %></div>
+% }
+% if (!$op_spec->{description} and !$op_spec->{summary}) {
+  <p class="op-summary op-doc-missing"><%== __('This resource is not documented.') %></p>
+% }

@@ -289,9 +289,12 @@ sub _load_openapi {
   # Only load OpenAPI plugin if we have paths defined
   if (keys %{$spec->{paths}}) {
     $self->plugin('OpenAPI' => {
-      spec   => $spec,
-      route  => $self->routes->any($config->{api}->{url} || '/api'),
-      schema => 'v3',
+      plugins                        => [qw(+SpecRenderer)],
+      spec                           => $spec,
+      route                          => $self->routes->any($config->{api}->{url} || '/api'),
+      schema                         => 'v3',
+      render_specification           => 1,  # Enables /api.html and /api.json
+      render_specification_for_paths => 1,  # Ensable per-path spec rendering
     });
 
     # Serve the merged spec as JSON at /api/openapi.json

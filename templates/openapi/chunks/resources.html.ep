@@ -1,0 +1,4 @@
+<h2 id="resources"><a href="#resources"><%== __('Resources') %></a></h2>
+% for my $op (@$operations) {
+%=  include 'templates/openapi/chunks/resource', %$op;
+% }

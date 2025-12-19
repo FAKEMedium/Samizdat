@@ -1,0 +1,28 @@
+% if ($spec->{parameters}) {
+  <h2 id="parameters"><a href="#parameters"><%== __('Parameters') %></a></h2>
+% while (my ($key, $schema) = $c->openapi->spec_iterator($spec->{parameters})) {
+% my $id = lc $slugify->(qw(ref parameters), $key);
+    <h3 id="<%= $id %>"><a href="#<%= $id %>"><%= $key %></a></h3>
+    <pre class="ref"><%= $serialize->($schema) %></pre>
+% }
+  </li>
+% }
+
+% if ($spec->{components}) {
+  <h2 id="components"><a href="#components"><%== __('Components') %></a></h2>
+% while (my ($type, $comp_group) = $c->openapi->spec_iterator($spec->{components})) {
+% while (my ($key, $comp) = $c->openapi->spec_iterator($comp_group)) {
+      <li><a href="#<%= lc $slugify->(qw(ref components), $key) %>"><%= $key %></a></li>
+% }
+% }
+% }
+
+% if ($spec->{definitions}) {
+  <h2 id="definitions"><a href="#definitions"><%== __('Definitions') %></a></h2>
+% while (my ($key, $schema) = $c->openapi->spec_iterator($spec->{definitions})) {
+% my $id = lc $slugify->(qw(ref definitions), $key);
+    <h3 id="<%= $id %>"><a href="#<%= $id %>"><%= $key %></a></h3>
+    <pre class="ref"><%= $serialize->($schema) %></pre>
+% }
+  </li>
+% }
