@@ -49,7 +49,7 @@ if (smsForm) {
         
         try {
             const formData = new FormData(smsForm);
-            const response = await fetch('<%= url_for 'sms_index' %>', {
+            const response = await fetch('<%= url_for 'SMS.send' %>', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json'

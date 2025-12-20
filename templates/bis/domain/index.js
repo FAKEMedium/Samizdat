@@ -1,5 +1,6 @@
 // BIS Domain Detail JavaScript
 // URL patterns from named routes
+const BIS_DOMAIN_API = '<%= url_for('BIS.public.domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const LOCALE = '<%= stash('language') || 'en' %>';
@@ -18,9 +19,7 @@ async function loadDomainDetails() {
     const pathParts = window.location.pathname.split('/');
     const domain = pathParts[pathParts.length - 1];
 
-    const response = await fetch(`${BIS_DOMAIN_BASE}/${domain}`, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch(`${BIS_DOMAIN_API}/${domain}`);
 
     if (!response.ok) {
       if (response.status === 404) {
@@ -289,6 +288,7 @@ function showError(message) {
 
 // Navigate to prev/next domain (AJAX)
 async function getDomain(to, domain) {
+  // Nav route still uses Accept header for content negotiation
   const url = `${BIS_DOMAIN_BASE}/${domain}/${to}`;
 
   try {

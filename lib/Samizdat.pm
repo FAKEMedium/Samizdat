@@ -8,6 +8,7 @@ use Mojo::Redis;
 use Data::UUID;
 use Hash::Merge;
 use Data::Dumper;
+use JSON::PP ();
 
 sub startup {
   my $app = shift;
@@ -237,11 +238,14 @@ sub startup {
 
   }
 
+  $app->plugin('Web'); # Routes not covered by other plugins go here
+
   # Collect OpenAPI fragments from plugins and merge into single spec
   $app->_load_openapi($config);
 
-
-  $app->plugin('Web'); # Routes not covered by other plugins go here
+  # Wildcard catch-all route for database/markdown content
+  # Registered AFTER OpenAPI routes so API endpoints take priority
+  $app->routes->home->get('/*docpath')->to(controller => 'Web', action => 'getdoc');
 #  say Dumper $app->routes;
 }
 
@@ -250,6 +254,7 @@ sub startup {
 sub _load_openapi {
   my ($self, $config) = @_;
   require Hash::Merge;
+  require YAML::XS;
 
   # Base OpenAPI spec
   my $spec = {
@@ -281,13 +286,19 @@ sub _load_openapi {
 
   for my $name (keys %$fragments) {
     my $fragment = $fragments->{$name};
-    if ($fragment && ref $fragment eq 'HASH') {
+    next unless $fragment;
+    # Parse YAML string if not already a hashref
+    $fragment = YAML::XS::Load($fragment) unless ref $fragment;
+    if (ref $fragment eq 'HASH') {
       $spec = $merger->merge($spec, $fragment);
     }
   }
 
   # Only load OpenAPI plugin if we have paths defined
   if (keys %{$spec->{paths}}) {
+    # Fix YAML booleans for JSON/OpenAPI compatibility
+    $spec = _fix_booleans($spec);
+
     $self->plugin('OpenAPI' => {
       plugins                        => [qw(+SpecRenderer)],
       spec                           => $spec,
@@ -303,6 +314,27 @@ sub _load_openapi {
       $c->render(json => $spec);
     })->name('openapi_spec');
   }
+}
+
+# Deep clone and convert YAML booleans to JSON booleans for OpenAPI compatibility
+sub _fix_booleans {
+  my ($data) = @_;
+  return $data unless ref $data;
+
+  if (ref $data eq 'HASH') {
+    my %new;
+    for my $key (keys %$data) {
+      if ($key eq 'required' && defined $data->{$key} && !ref $data->{$key}) {
+        $new{$key} = $data->{$key} ? JSON::PP::true : JSON::PP::false;
+      } else {
+        $new{$key} = _fix_booleans($data->{$key});
+      }
+    }
+    return \%new;
+  } elsif (ref $data eq 'ARRAY') {
+    return [ map { _fix_booleans($_) } @$data ];
+  }
+  return $data;
 }
 
 1;

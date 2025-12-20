@@ -1,7 +1,9 @@
 // RealtimeRegister domain detail
 const domainDetails = document.getElementById('domainDetails');
+const domainName = window.location.pathname.split('/').pop();
+const apiUrl = `<%== url_for('RTR.domains.index') %>/${domainName}`;
 
-fetch(window.location.href, {
+fetch(apiUrl, {
   headers: { 'Accept': 'application/json' },
   credentials: 'same-origin'
 })

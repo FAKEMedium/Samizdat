@@ -1,5 +1,5 @@
 % # JavaScript for Swish panel - fetches JSON data
-fetch(window.location.pathname, {
+fetch('<%== url_for('Swish.index') %>', {
   headers: {
     'Accept': 'application/json'
   }

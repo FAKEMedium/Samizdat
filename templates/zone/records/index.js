@@ -151,7 +151,7 @@
         if (!confirm('<%== __("Are you sure you want to delete this record?") %>')) return;
         // Send content in body for single record deletion from multi-record rrsets (MX, NS, etc.)
         const recordContent = tr.dataset.content;
-        const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}/records/${recordId}`, {
+        const result = await window.authenticatedFetch(`<%== url_for('Zone.records.delete', zone_id => '_ZID_', record_id => '_RID_') %>`.replace('_ZID_', zoneId).replace('_RID_', recordId), {
           method: 'DELETE',
           body: JSON.stringify({ content: recordContent }),
           headers: { 'Content-Type': 'application/json' }

@@ -338,10 +338,10 @@ async function saveRecord() {
   // Determine URL and method
   let url, method;
   if (recordName === 'new') {
-    url = `<%== url_for('zone_index') %>/${zoneId}/records`;
+    url = `<%== url_for('Zone.records.create', zone_id => '_ZID_') %>`.replace('_ZID_', zoneId);
     method = 'POST';
   } else {
-    url = `<%== url_for('zone_index') %>/${zoneId}/records/${recordType}_${recordName}`;
+    url = `<%== url_for('Zone.records.update', zone_id => '_ZID_', record_id => '_RID_') %>`.replace('_ZID_', zoneId).replace('_RID_', `${recordType}_${recordName}`);
     method = 'PATCH';
   }
 

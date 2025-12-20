@@ -3,7 +3,7 @@ let currentPage = 1;
 async function loadInvoices(page = 1) {
   currentPage = page;
   try {
-    const response = await fetch(`<%== url_for('fortnox_invoices') %>?page=${page}`, {
+    const response = await fetch(`<%== url_for('Fortnox.invoices.index') %>?page=${page}`, {
       method: 'GET',
       headers: { Accept: 'application/json' }
     });
@@ -34,7 +34,7 @@ async function loadInvoices(page = 1) {
 
         html += `
           <tr class="${rowClass}">
-            <td><a href="<%== url_for('fortnox_invoices') %>/${invoiceNumber}">${invoiceNumber}</a></td>
+            <td><a href="<%== url_for('fortnox_invoice') %>/${invoiceNumber}">${invoiceNumber}</a></td>
             <td>${customerName}</td>
             <td>${invoiceDate}</td>
             <td>${dueDate}</td>

@@ -10,7 +10,7 @@ async function login () {
     const modaltitle = document.querySelector('#modaltitle');
     try {
         const formdata = new FormData(loginform);
-        const response = await fetch('<%= url_for("account_login") %>', {
+        const response = await fetch('<%= url_for("Account.login") %>', {
             method: 'POST',
             mode: "cors",
             cache: "no-cache",

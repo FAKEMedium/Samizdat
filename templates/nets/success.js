@@ -1,7 +1,7 @@
 // Nets Easy Checkout - Success Page
 // Auto-refresh payment status
 const PAYMENT_ID = '<%= $payment->{payment_id} %>';
-const STATUS_URL = '<%= url_for('nets_status', payment_id => $payment->{payment_id}) %>';
+const STATUS_URL = '<%== url_for('Nets.payment.status', payment_id => $payment->{payment_id}) %>';
 
 // Optional: Poll for updated status
 async function checkPaymentStatus() {

@@ -6,39 +6,14 @@ use Mojo::Home;
 use Mojo::File;
 use Mojo::Template;
 use Mojo::Loader qw(data_section);
-use YAML::XS qw(Load);
-use JSON::PP ();
 use Data::Dumper;
-
-# Deep clone and convert YAML booleans to JSON booleans for OpenAPI compatibility
-sub _fix_booleans {
-  my ($data) = @_;
-  return $data unless ref $data;
-
-  if (ref $data eq 'HASH') {
-    my %new;
-    for my $key (keys %$data) {
-      if ($key eq 'required' && defined $data->{$key} && !ref $data->{$key}) {
-        $new{$key} = $data->{$key} ? JSON::PP::true : JSON::PP::false;
-      } else {
-        $new{$key} = _fix_booleans($data->{$key});
-      }
-    }
-    return \%new;
-  } elsif (ref $data eq 'ARRAY') {
-    return [ map { _fix_booleans($_) } @$data ];
-  }
-  return $data;
-}
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Load OpenAPI fragment from __DATA__ section and store in config
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
-  if ($openapi_yaml) {
-    $app->config->{openapi_fragments}{Invoice} = _fix_booleans(Load($openapi_yaml));
-  }
+  $app->config->{openapi_fragments}{Invoice} = $openapi_yaml if $openapi_yaml;
 
   # Customer specific invoice routes (HTML pages only - GET)
   my $customer = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
@@ -605,6 +580,71 @@ sub register ($self, $app, $conf) {
   );
 }
 
+=head1 NAME
+
+Samizdat::Plugin::Invoice - Invoice management plugin
+
+=head1 DESCRIPTION
+
+This plugin provides invoice management functionality including creating,
+viewing, paying, and reminding invoices. It supports both customer-specific
+and global invoice routes.
+
+=head1 NGINX CONFIGURATION
+
+Invoice routes use nested dynamic parameters (C<:customerid> and C<:invoiceid>).
+The controller sets C<docpath> to ensure shared cached templates.
+
+=head2 Regex Routes
+
+    # Customer invoices list
+    location ~ ^/manager/customers/\d+/invoices/?$ {
+        root /path/to/public;
+        try_files /manager/customers/invoices/index.html @backend;
+    }
+
+    # Customer open invoice editor
+    location ~ ^/manager/customers/\d+/invoices/open$ {
+        root /path/to/public;
+        try_files /manager/customers/invoices/open/index.html @backend;
+    }
+
+    # Customer specific invoice
+    location ~ ^/manager/customers/\d+/invoices/\d+$ {
+        root /path/to/public;
+        try_files /manager/customers/invoices/handle/index.html @backend;
+    }
+
+    # Invoice payment page
+    location ~ ^/manager/customers/\d+/invoices/\d+/payment$ {
+        root /path/to/public;
+        try_files /manager/customers/invoices/payment/index.html @backend;
+    }
+
+    # Invoice reminder page
+    location ~ ^/manager/customers/\d+/invoices/\d+/remind$ {
+        root /path/to/public;
+        try_files /manager/customers/invoices/remind/index.html @backend;
+    }
+
+    # Global invoice routes
+    location ~ ^/manager/invoices/\d+$ {
+        root /path/to/public;
+        try_files /manager/invoices/handle/index.html @backend;
+    }
+
+    location @backend {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+=head1 SEE ALSO
+
+L<Samizdat::Controller::Invoice>, L<Samizdat::Model::Invoice>
+
+=cut
+
 1;
 
 __DATA__
@@ -673,7 +713,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Invoice_FormData'
 
-  /invoices/:
+  /invoices:
     get:
       operationId: Invoice.index
       x-mojo-to: Invoice#index
@@ -962,7 +1002,7 @@ paths:
               schema:
                 type: object
 
-  /customers/{customerid}/invoices/:
+  /customers/{customerid}/invoices:
     get:
       operationId: Invoice.customer.list
       x-mojo-to: Invoice#index

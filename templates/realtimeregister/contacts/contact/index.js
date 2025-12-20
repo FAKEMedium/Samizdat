@@ -1,7 +1,9 @@
 // RealtimeRegister contact detail
 const contactDetails = document.getElementById('contactDetails');
+const handle = window.location.pathname.split('/').pop();
+const apiUrl = `<%== url_for('RTR.contacts.index') %>/${handle}`;
 
-fetch(window.location.href, {
+fetch(apiUrl, {
   headers: { 'Accept': 'application/json' },
   credentials: 'same-origin'
 })

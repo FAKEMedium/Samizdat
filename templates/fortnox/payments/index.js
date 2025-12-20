@@ -3,7 +3,7 @@ let currentPage = 1;
 async function loadPayments(page = 1) {
   currentPage = page;
   try {
-    const response = await fetch(`<%== url_for('fortnox_payments') %>?page=${page}`, {
+    const response = await fetch(`<%== url_for('Fortnox.payments.index') %>?page=${page}`, {
       method: 'GET',
       headers: { Accept: 'application/json' }
     });
@@ -27,7 +27,7 @@ async function loadPayments(page = 1) {
 
         html += `
           <tr>
-            <td><a href="<%== url_for('fortnox_invoices') %>/${invoiceNumber}">${invoiceNumber}</a></td>
+            <td><a href="<%== url_for('fortnox_invoice') %>/${invoiceNumber}">${invoiceNumber}</a></td>
             <td>${customerName}</td>
             <td>${date}</td>
             <td class="text-end">${amount.toFixed(2)}</td>

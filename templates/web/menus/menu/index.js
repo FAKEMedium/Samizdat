@@ -78,7 +78,7 @@
         if (!confirm("<%= __('Are you sure you want to delete this item?') %>")) return;
         const itemid = btn.getAttribute("data-itemid");
         const result = await window.authenticatedFetch(
-          `<%= url_for('web_menus') %>/${menuid}/items/${itemid}`,
+          `<%= url_for('Web.menus.index') %>/${menuid}/items/${itemid}`,
           { method: "DELETE" }
         );
         if (result && result.success) {
@@ -178,7 +178,7 @@
 
         // Save to server
         const result = await window.authenticatedFetch(
-          `<%= url_for('web_menus') %>/${menuid}/reorder`,
+          `<%= url_for('Web.menus.index') %>/${menuid}/reorder`,
           { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ order }) }
         );
 

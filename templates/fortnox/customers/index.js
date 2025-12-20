@@ -1,17 +1,17 @@
 async function loadCustomers() {
   try {
-    const response = await fetch('<%== url_for('fortnox_customer') %>', {
+    const response = await fetch('<%== url_for('Fortnox.customers.index') %>', {
       method: 'GET',
       headers: { Accept: 'application/json' }
     });
-    
+
     const data = await response.json();
-    
+
     if (data.fortnox && data.fortnox.customers) {
       const customers = data.fortnox.customers || [];
       const tbody = document.querySelector('#customers tbody');
       let html = '';
-      
+
       // Sort customers by customer number or name
       customers.sort((a, b) => {
         if (a.CustomerNumber && b.CustomerNumber) {
@@ -19,7 +19,7 @@ async function loadCustomers() {
         }
         return 0;
       });
-      
+
       customers.forEach(customer => {
         const customerNumber = customer.CustomerNumber || '';
         const name = customer.Name || '';

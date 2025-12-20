@@ -1,6 +1,6 @@
 // BIS Dashboard JavaScript
 // URL patterns from named routes
-const BIS_INDEX_URL = '<%= url_for('bis_index') %>';
+const BIS_SCORES_URL = '<%= url_for('BIS.public.scores') %>';
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const LOCALE = '<%= stash('language') || 'en' %>';
@@ -40,9 +40,7 @@ async function loadDashboard() {
       params.append('compliance', currentFilter.compliance);
     }
 
-    const response = await fetch(`${BIS_INDEX_URL}?${params}`, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch(`${BIS_SCORES_URL}?${params}`);
 
     if (!response.ok) throw new Error('<%= __('Failed to load dashboard data') %>');
 

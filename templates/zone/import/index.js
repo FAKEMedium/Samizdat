@@ -106,7 +106,7 @@
       account: document.getElementById('account').value
     };
 
-    const result = await window.authenticatedFetch('<%== url_for("zone_import") %>', {
+    const result = await window.authenticatedFetch('<%== url_for("Zone.import") %>', {
       method: 'POST',
       body: JSON.stringify(data),
       headers: {

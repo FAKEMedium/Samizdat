@@ -88,7 +88,7 @@
       btn.addEventListener('click', async () => {
         if (!confirm('<%== __("Are you sure you want to delete this menu?") %>')) return;
         const menuid = btn.getAttribute('data-menuid');
-        const result = await window.authenticatedFetch(`<%== url_for('web_menus') %>/${menuid}`, {
+        const result = await window.authenticatedFetch(`<%== url_for('Web.menus.index') %>/${menuid}`, {
           method: 'DELETE'
         });
         if (result && result.success) {

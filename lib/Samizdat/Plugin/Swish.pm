@@ -2,22 +2,23 @@ package Samizdat::Plugin::Swish;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Swish;
+use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
 
   my $r = $app->routes;
 
-  # Public routes
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{Swish} = $openapi_yaml if $openapi_yaml;
+
+  # Public routes (non-API)
   my $swish = $r->home('/swish')->to(controller => 'Swish');
   $swish->post('/callback')             ->to('#callback')             ->name('swish_callback');
   $swish->get('/success')               ->to('#success')              ->name('swish_success');
   $swish->get('/cancel')                ->to('#cancel')               ->name('swish_cancel');
 
-  # REST API routes
-  $swish->get('/config')                ->to('#swish_config')         ->name('swish_config');
-  $swish->post('/payments/create')      ->to('#create_payment')       ->name('swish_create_payment');
-  $swish->get('/payments/:id')          ->to('#get_payment')          ->name('swish_get_payment');
-  $swish->post('/refunds/create')       ->to('#create_refund')        ->name('swish_create_refund');
+  # API routes are defined in OpenAPI spec (__DATA__ section)
 
   # Manager routes
   my $manager = $r->manager('swish')->to(controller => 'Swish');
@@ -229,3 +230,276 @@ L<Samizdat::Model::Swish>, L<Samizdat::Controller::Swish>
 Swish Developer Documentation: L<https://developer.swish.nu/>
 
 =cut
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Swish API
+paths:
+  /swish:
+    get:
+      operationId: Swish.index
+      x-mojo-to: Swish#index
+      summary: Swish payments panel
+      tags: [Swish]
+      responses:
+        '200':
+          description: Payment statistics and recent payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_IndexResponse'
+
+  /swish/config:
+    get:
+      operationId: Swish.config
+      x-mojo-to: Swish#swish_config
+      summary: Get Swish client configuration
+      tags: [Swish]
+      responses:
+        '200':
+          description: Swish configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_ConfigResponse'
+
+  /swish/payments/create:
+    post:
+      operationId: Swish.payments.create
+      x-mojo-to: Swish#create_payment
+      summary: Create payment request
+      tags: [Swish]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Swish_PaymentInput'
+      responses:
+        '201':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_Payment'
+
+  /swish/payments/{id}:
+    get:
+      operationId: Swish.payments.get
+      x-mojo-to: Swish#get_payment
+      summary: Get payment status
+      tags: [Swish]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_Payment'
+
+  /swish/refunds/create:
+    post:
+      operationId: Swish.refunds.create
+      x-mojo-to: Swish#create_refund
+      summary: Create refund request
+      tags: [Swish]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Swish_RefundInput'
+      responses:
+        '201':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_Refund'
+
+  /swish/callback:
+    post:
+      operationId: Swish.callback
+      x-mojo-to: Swish#callback
+      summary: Swish callback endpoint
+      tags: [Swish]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Callback processed
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /swish/success:
+    get:
+      operationId: Swish.success
+      x-mojo-to: Swish#success
+      summary: Payment success return URL
+      tags: [Swish]
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_SuccessResponse'
+
+  /swish/cancel:
+    get:
+      operationId: Swish.cancel
+      x-mojo-to: Swish#cancel
+      summary: Payment cancel return URL
+      tags: [Swish]
+      responses:
+        '200':
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Swish_CancelResponse'
+
+components:
+  schemas:
+    Swish_ConfigResponse:
+      type: object
+      properties:
+        currency:
+          type: string
+        env:
+          type: string
+        payee_alias:
+          type: string
+    Swish_PaymentInput:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount in ore (smallest currency unit)
+        customerid:
+          type: integer
+        payer_alias:
+          type: string
+          description: Phone number for e-commerce flow
+        message:
+          type: string
+          maxLength: 50
+        reference:
+          type: string
+        callback_url:
+          type: string
+        custom_data:
+          type: object
+      required:
+        - amount
+    Swish_Payment:
+      type: object
+      properties:
+        instruction_id:
+          type: string
+        status:
+          type: string
+          enum: [CREATED, PAID, DECLINED, ERROR, CANCELLED]
+        flow_type:
+          type: string
+          enum: [ecommerce, mcommerce]
+        payment_request_token:
+          type: string
+        swish_url:
+          type: string
+        payer_alias:
+          type: string
+        payer_name:
+          type: string
+        amount:
+          type: integer
+        message:
+          type: string
+        created_at:
+          type: string
+        error:
+          type: boolean
+        error_message:
+          type: string
+    Swish_RefundInput:
+      type: object
+      properties:
+        original_payment_reference:
+          type: string
+        amount:
+          type: integer
+        message:
+          type: string
+        reference:
+          type: string
+        callback_url:
+          type: string
+      required:
+        - original_payment_reference
+        - amount
+    Swish_Refund:
+      type: object
+      properties:
+        instruction_id:
+          type: string
+        status:
+          type: string
+        error:
+          type: boolean
+        error_message:
+          type: string
+    Swish_SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+    Swish_CancelResponse:
+      type: object
+      properties:
+        cancelled:
+          type: boolean
+    Swish_Stats:
+      type: object
+      properties:
+        total_paid:
+          type: number
+        count_paid:
+          type: integer
+        total_pending:
+          type: number
+        count_pending:
+          type: integer
+        total_declined:
+          type: number
+        count_declined:
+          type: integer
+        total_error:
+          type: number
+        count_error:
+          type: integer
+    Swish_IndexResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Swish_Payment'
+        stats:
+          $ref: '#/components/schemas/Swish_Stats'

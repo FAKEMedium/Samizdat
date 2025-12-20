@@ -1,9 +1,7 @@
 // BIS Providers page
 const loadProviders = async () => {
   try {
-    const response = await fetch('<%= url_for("bis_providers") %>', {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch('<%= url_for('BIS.public.providers') %>');
 
     if (!response.ok) throw new Error('Failed to load providers');
 

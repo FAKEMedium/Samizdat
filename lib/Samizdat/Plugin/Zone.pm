@@ -4,38 +4,13 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Zone;
 use Mojo::Pg;
 use Mojo::Loader qw(data_section);
-use YAML::XS qw(Load);
-use JSON::PP ();
-
-# Deep clone and convert YAML booleans to JSON booleans for OpenAPI compatibility
-sub _fix_booleans {
-  my ($data) = @_;
-  return $data unless ref $data;
-
-  if (ref $data eq 'HASH') {
-    my %new;
-    for my $key (keys %$data) {
-      if ($key eq 'required' && defined $data->{$key} && !ref $data->{$key}) {
-        $new{$key} = $data->{$key} ? JSON::PP::true : JSON::PP::false;
-      } else {
-        $new{$key} = _fix_booleans($data->{$key});
-      }
-    }
-    return \%new;
-  } elsif (ref $data eq 'ARRAY') {
-    return [ map { _fix_booleans($_) } @$data ];
-  }
-  return $data;
-}
 
 sub register($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Load OpenAPI fragment from __DATA__ section and store in config
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
-  if ($openapi_yaml) {
-    $app->config->{openapi_fragments}{Zone} = _fix_booleans(Load($openapi_yaml));
-  }
+  $app->config->{openapi_fragments}{Zone} = $openapi_yaml if $openapi_yaml;
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('zones')->to(controller => 'Zone');
@@ -127,7 +102,7 @@ __DATA__
 @@ openapi.yaml
 # OpenAPI 3.0 fragment for Zone API (DNS management)
 paths:
-  /zones/:
+  /zones:
     get:
       operationId: Zone.index
       x-mojo-to: Zone#index
@@ -196,6 +171,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -214,6 +190,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -237,6 +214,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -257,6 +235,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -267,7 +246,7 @@ paths:
               schema:
                 type: string
 
-  /zones/{zone_id}/records/:
+  /zones/{zone_id}/records:
     get:
       operationId: Zone.records.index
       x-mojo-to: Zone#records
@@ -277,6 +256,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -295,6 +275,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -320,13 +301,16 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
         - name: record_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
-            type: integer
+            type: string
+            description: Record identifier (TYPE_name format)
       responses:
         '200':
           description: Record data
@@ -343,13 +327,16 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
         - name: record_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
-            type: integer
+            type: string
+            description: Record identifier (TYPE_name format)
       requestBody:
         content:
           application/json:
@@ -371,13 +358,16 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
         - name: record_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
-            type: integer
+            type: string
+            description: Record identifier (TYPE_name format)
       responses:
         '200':
           description: Record deleted
@@ -386,7 +376,7 @@ paths:
               schema:
                 type: object
 
-  /zones/{zone_id}/cryptokeys/:
+  /zones/{zone_id}/cryptokeys:
     get:
       operationId: Zone.cryptokeys.index
       x-mojo-to: Zone#cryptokeys
@@ -396,6 +386,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -416,6 +407,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -441,6 +433,7 @@ paths:
         - name: zone_id
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
         - name: key_id
@@ -456,7 +449,7 @@ paths:
               schema:
                 type: object
 
-  /zones/templates/:
+  /zones/templates:
     get:
       operationId: Zone.templates.index
       x-mojo-to: Zone#templates
@@ -570,7 +563,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/Zone_Template'
 
-  /zones/templates/{template_id}/records/:
+  /zones/templates/{template_id}/records:
     post:
       operationId: Zone.templates.records.create
       x-mojo-to: Zone#create_template_record
@@ -671,7 +664,7 @@ paths:
               schema:
                 type: object
 
-  /customers/{customerid}/zones/:
+  /customers/{customerid}/zones:
     get:
       operationId: Zone.customer.index
       x-mojo-to: Zone#index

@@ -68,7 +68,7 @@ function showMailboxModal(username = null) {
 
 async function loadMailbox(username) {
   try {
-    const response = await authenticatedFetch('<%== url_for('email_mailbox', username => '') %>/' + encodeURIComponent(username));
+    const response = await authenticatedFetch('<%== url_for('Email.mailboxes.index') %>/' + encodeURIComponent(username));
     const result = await response.json();
 
     if (result.success) {
@@ -93,9 +93,11 @@ async function saveMailbox() {
   const data = new FormData(form);
 
   try {
-    const url = '<%== url_for('email_mailbox', username => '') %>/' + (isEdit ? encodeURIComponent(username) : '');
+    const url = isEdit
+      ? '<%== url_for('Email.mailboxes.index') %>/' + encodeURIComponent(username)
+      : '<%== url_for('Email.mailboxes.create') %>';
 
-    const response = await authenticatedFetch(url.replace(/\/$/, ''), {
+    const response = await authenticatedFetch(url, {
       method: isEdit ? 'PUT' : 'POST',
       body: data
     });
@@ -118,7 +120,7 @@ async function deleteMailbox(username) {
   if (!confirm('<%== __('Are you sure you want to delete this mailbox?') %>')) return;
 
   try {
-    const response = await authenticatedFetch('<%== url_for('email_mailbox', username => '') %>/' + encodeURIComponent(username), {
+    const response = await authenticatedFetch('<%== url_for('Email.mailboxes.index') %>/' + encodeURIComponent(username), {
       method: 'DELETE'
     });
 

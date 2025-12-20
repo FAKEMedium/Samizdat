@@ -10,59 +10,12 @@ Samizdat::Controller::BIS - Based in Sweden controller
 =head1 DESCRIPTION
 
 Handles all BIS (Based in Sweden) compliance tracking requests.
-All endpoints support JSON response when Accept: application/json header is provided.
+HTML pages are served for static cache, API routes return JSON.
 
 =cut
 
+# HTML page for public dashboard
 sub index ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    # Return JSON data for dashboard
-    my $tag = $self->param('tag') || '';
-    my $search = $self->param('search') || '';
-    my $compliance = $self->param('compliance') || '';
-    my $limit = $self->param('limit') || 100;
-    my $offset = $self->param('offset') || 0;
-    my $lang = $self->param('lang') || $self->stash('language') || 'en';
-
-    # Save filter to cookie for navigation
-    my $filter = {
-      tag => $tag,
-      search => $search,
-      compliance => $compliance
-    };
-    $self->cookie(bisfilter => encode_json($filter), {
-      path     => '/',
-      httponly => 0,
-      secure   => 1,
-      samesite => 'Lax'
-      # No expires = session cookie
-    });
-
-    my $result = $self->bis->get_latest_scores(
-      tag => $tag,
-      search => $search,
-      compliance => $compliance,
-      limit => $limit,
-      offset => $offset,
-      with_total => 1,
-      lang => $lang
-    );
-    my $sector_stats = $self->bis->get_sector_stats(lang => $lang);
-
-    my $data = {
-      success => 1,
-      scores => $result->{scores},
-      total => $result->{total},
-      sector_stats => $sector_stats,
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
   my $title = $self->app->__('Based in Sweden - Compliance Dashboard');
   my $web = { title => $title };
   $web->{selectedimage} = $self->bis->selectedimage;
@@ -74,34 +27,51 @@ sub index ($self) {
   $self->render(template => 'bis/index');
 }
 
+# API: Get compliance scores for public dashboard
+sub api_scores ($self) {
+  my $tag = $self->param('tag') || '';
+  my $search = $self->param('search') || '';
+  my $compliance = $self->param('compliance') || '';
+  my $limit = $self->param('limit') || 100;
+  my $offset = $self->param('offset') || 0;
+  my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
+  # Save filter to cookie for navigation
+  my $filter = {
+    tag => $tag,
+    search => $search,
+    compliance => $compliance
+  };
+  $self->cookie(bisfilter => encode_json($filter), {
+    path     => '/',
+    httponly => 0,
+    secure   => 1,
+    samesite => 'Lax'
+  });
+
+  my $result = $self->bis->get_latest_scores(
+    tag => $tag,
+    search => $search,
+    compliance => $compliance,
+    limit => $limit,
+    offset => $offset,
+    with_total => 1,
+    lang => $lang
+  );
+  my $sector_stats = $self->bis->get_sector_stats(lang => $lang);
+
+  return $self->render(json => {
+    success => 1,
+    scores => $result->{scores},
+    total => $result->{total},
+    sector_stats => $sector_stats,
+  });
+}
+
+
+# HTML page for domain details
 sub domain ($self) {
-  my $domain_name = $self->param('domain');
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    my $lang = $self->param('lang') || $self->stash('language') || 'en';
-
-    # Get domain details from model
-    my $details = $self->bis->get_domain_details(domain => $domain_name, lang => $lang);
-
-    unless ($details) {
-      return $self->render(json => { error => $self->app->__('Domain not found') }, status => 404);
-    }
-
-    my $data = {
-      success => 1,
-      domain => $details->{domain},
-      checks => $details->{checks},
-      tags => $details->{tags}
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
-  my $title = $self->app->__("BIS Check");  # Generic title, domain added by JavaScript
+  my $title = $self->app->__("BIS Check");
   my $web = { title => $title };
   $web->{selectedimage} = $self->bis->selectedimage;
   $web->{head}->{meta}->{name}->{description} = $self->app->__('Domain specific compliance with standard of Based in Sweden');
@@ -111,7 +81,27 @@ sub domain ($self) {
   $self->render(template => 'bis/domain/index');
 }
 
+# API: Get domain compliance details
+sub api_domain ($self) {
+  my $domain_name = $self->param('domain');
+  my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
+  my $details = $self->bis->get_domain_details(domain => $domain_name, lang => $lang);
+
+  unless ($details) {
+    return $self->render(json => { error => $self->app->__('Domain not found') }, status => 404);
+  }
+
+  return $self->render(json => {
+    success => 1,
+    domain => $details->{domain},
+    checks => $details->{checks},
+    tags => $details->{tags}
+  });
+}
+
+
+# Navigation handler - finds prev/next domain and returns its data
 sub nav ($self) {
   my $domain_name = $self->param('domain');
   my $to = $self->param('to');  # 'prev' or 'next'
@@ -145,57 +135,20 @@ sub nav ($self) {
     $self->param(domain => $next_domain->{domain});
   }
 
-  # Render domain view (will return JSON if Accept header is set)
+  # Check Accept header for JSON response
+  my $accept = $self->req->headers->accept || '';
+  if ($accept =~ /json/) {
+    return $self->api_domain;
+  }
+
+  # Render HTML domain view
   $self->domain;
 }
 
 
+# HTML page for sector view
 sub sector ($self) {
   my $sector = $self->param('sector');
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    my $limit = $self->param('limit') || 100;
-    my $offset = $self->param('offset') || 0;
-    my $lang = $self->param('lang') || $self->stash('language') || 'en';
-
-    # Save filter to cookie for navigation
-    my $filter = {
-      tag => $sector,
-      search => '',
-      compliance => ''
-    };
-    $self->cookie(bisfilter => encode_json($filter), {
-      path     => '/',
-      httponly => 0,
-      secure   => 1,
-      samesite => 'Lax'
-      # No expires = session cookie
-    });
-
-    my $result = $self->bis->get_latest_scores(
-      tag => $sector,
-      limit => $limit,
-      offset => $offset,
-      with_total => 1
-    );
-
-    # Get sector info from model
-    my $sector_info = $self->bis->get_sector_info(sector => $sector, lang => $lang);
-
-    my $data = {
-      success => 1,
-      sector => $sector,
-      sector_info => $sector_info,
-      scores => $result->{scores},
-      total => $result->{total}
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
   my $title = $self->app->__("BIS - $sector");
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/sector/index', format => 'js');
@@ -204,23 +157,47 @@ sub sector ($self) {
   $self->render(template => 'bis/sector/index');
 }
 
+# API: Get sector compliance data
+sub api_sector ($self) {
+  my $sector = $self->param('sector');
+  my $limit = $self->param('limit') || 100;
+  my $offset = $self->param('offset') || 0;
+  my $lang = $self->param('lang') || $self->stash('language') || 'en';
 
+  # Save filter to cookie for navigation
+  my $filter = {
+    tag => $sector,
+    search => '',
+    compliance => ''
+  };
+  $self->cookie(bisfilter => encode_json($filter), {
+    path     => '/',
+    httponly => 0,
+    secure   => 1,
+    samesite => 'Lax'
+  });
+
+  my $result = $self->bis->get_latest_scores(
+    tag => $sector,
+    limit => $limit,
+    offset => $offset,
+    with_total => 1
+  );
+
+  my $sector_info = $self->bis->get_sector_info(sector => $sector, lang => $lang);
+
+  return $self->render(json => {
+    success => 1,
+    sector => $sector,
+    sector_info => $sector_info,
+    scores => $result->{scores},
+    total => $result->{total}
+  });
+}
+
+
+# HTML page for providers view
 sub providers ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    my $stats = $self->bis->get_provider_stats();
-
-    my $data = {
-      success => 1,
-      providers => $stats
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
   my $title = $self->app->__('BIS - Hosting Providers');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/providers/index', format => 'js');
@@ -229,24 +206,19 @@ sub providers ($self) {
   $self->render(template => 'bis/providers/index');
 }
 
+# API: Get public provider statistics
+sub api_public_providers ($self) {
+  my $stats = $self->bis->get_provider_stats();
 
+  return $self->render(json => {
+    success => 1,
+    providers => $stats
+  });
+}
+
+
+# HTML page for trends view
 sub trends ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    my $days = $self->param('days') || 90;
-    my $trends = $self->bis->get_historical_trends(days => $days);
-
-    my $data = {
-      success => 1,
-      trends => $trends
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
   my $title = $self->app->__('BIS - Compliance Trends');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/trends/index', format => 'js');
@@ -255,29 +227,21 @@ sub trends ($self) {
   $self->render(template => 'bis/trends/index');
 }
 
+# API: Get historical compliance trends
+sub api_trends ($self) {
+  my $days = $self->param('days') || 90;
+  my $trends = $self->bis->get_historical_trends(days => $days);
+
+  return $self->render(json => {
+    success => 1,
+    trends => $trends
+  });
+}
+
 # Manager routes
 
+# HTML page for manager dashboard
 sub manager ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
-
-  if ($accept =~ /json/) {
-    # Get overview statistics
-    my $sector_stats = $self->bis->get_sector_stats();
-    my $provider_stats = $self->bis->get_provider_stats();
-    my $recent_runs = $self->bis->get_recent_runs(limit => 10);
-
-    my $data = {
-      success => 1,
-      sector_stats => $sector_stats,
-      provider_stats => $provider_stats,
-      recent_runs => $recent_runs
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Render HTML page
   my $title = $self->app->__('BIS Manager');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'bis/manager/index', format => 'js');
@@ -286,29 +250,33 @@ sub manager ($self) {
   $self->render(template => 'bis/manager/index');
 }
 
+# API: Get manager dashboard data
+sub api_manager ($self) {
+  my $sector_stats = $self->bis->get_sector_stats();
+  my $provider_stats = $self->bis->get_provider_stats();
+  my $recent_runs = $self->bis->get_recent_runs(limit => 10);
 
+  return $self->render(json => {
+    success => 1,
+    sector_stats => $sector_stats,
+    provider_stats => $provider_stats,
+    recent_runs => $recent_runs
+  });
+}
+
+
+# API: List domains (JSON only)
 sub domains ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
+  my $limit = $self->param('limit') || 100;
+  my $offset = $self->param('offset') || 0;
+  my $tag = $self->param('tag');
 
-  if ($accept =~ /json/) {
-    my $limit = $self->param('limit') || 100;
-    my $offset = $self->param('offset') || 0;
-    my $tag = $self->param('tag');
+  my $domains = $self->bis->get_domains_with_tags(tag => $tag, limit => $limit, offset => $offset);
 
-    # Get domains from model
-    my $domains = $self->bis->get_domains_with_tags(tag => $tag, limit => $limit, offset => $offset);
-
-    my $data = {
-      success => 1,
-      domains => $domains
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  # Return error for non-JSON
-  return $self->render(text => $self->app->__('JSON only'), status => 406);
+  return $self->render(json => {
+    success => 1,
+    domains => $domains
+  });
 }
 
 
@@ -402,23 +370,15 @@ sub delete_domain ($self) {
 }
 
 
+# API: List tags (JSON only)
 sub tags ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
+  my $lang = $self->param('lang') || 'en';
+  my $tags = $self->bis->get_tags(lang => $lang);
 
-  if ($accept =~ /json/) {
-    my $lang = $self->param('lang') || 'en';
-    my $tags = $self->bis->get_tags(lang => $lang);
-
-    my $data = {
-      success => 1,
-      tags => $tags
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  return $self->render(text => 'JSON only', status => 406);
+  return $self->render(json => {
+    success => 1,
+    tags => $tags
+  });
 }
 
 
@@ -454,26 +414,17 @@ sub add_tag ($self) {
 }
 
 
+# API: List runs (JSON only)
 sub runs ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
+  my $limit = $self->param('limit') || 50;
+  my $offset = $self->param('offset') || 0;
 
-  if ($accept =~ /json/) {
-    my $limit = $self->param('limit') || 50;
-    my $offset = $self->param('offset') || 0;
+  my $runs = $self->bis->get_runs_with_stats(limit => $limit, offset => $offset);
 
-    # Get runs from model
-    my $runs = $self->bis->get_runs_with_stats(limit => $limit, offset => $offset);
-
-    my $data = {
-      success => 1,
-      runs => $runs
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  return $self->render(text => 'JSON only', status => 406);
+  return $self->render(json => {
+    success => 1,
+    runs => $runs
+  });
 }
 
 
@@ -538,23 +489,15 @@ sub check_run ($self) {
 }
 
 
+# API: List providers for management (JSON only)
 sub manage_providers ($self) {
-  my $accept = $self->req->headers->{headers}->{accept}->[0] || '';
+  my $lang = $self->param('lang') || 'en';
+  my $providers = $self->bis->get_providers(lang => $lang);
 
-  if ($accept =~ /json/) {
-    my $lang = $self->param('lang') || 'en';
-    my $providers = $self->bis->get_providers(lang => $lang);
-
-    my $data = {
-      success => 1,
-      providers => $providers
-    };
-
-    $self->tx->res->headers->content_type('application/json; charset=UTF-8');
-    return $self->render(json => $data, status => 200);
-  }
-
-  return $self->render(text => 'JSON only', status => 406);
+  return $self->render(json => {
+    success => 1,
+    providers => $providers
+  });
 }
 
 
