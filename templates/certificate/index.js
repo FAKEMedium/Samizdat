@@ -196,7 +196,7 @@ function updatePagination(pagination) {
 
 // Delete a certificate
 async function deleteCertificate(id) {
-  const result = await window.authenticatedFetch(`<%== url_for('certificate_index') %>/${id}`, {
+  const result = await window.authenticatedFetch(`<%== url_for('Certificate.delete', id => '_ID_') %>`.replace('_ID_', id), {
     method: 'DELETE'
   });
 

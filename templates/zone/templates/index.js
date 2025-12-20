@@ -1,5 +1,5 @@
 (function() {
-  const baseUrl = '<%== url_for("zone_templates") %>';
+  const baseUrl = '<%== url_for("Zone.templates.index") %>';
   let currentTemplateId = null;
 
   const templateList = document.getElementById('templateList');

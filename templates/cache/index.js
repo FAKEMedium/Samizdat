@@ -78,7 +78,7 @@ function populateTable(entries) {
 
 // View cache entry details
 async function viewCacheEntry(key) {
-  const data = await window.authenticatedFetch(`<%== url_for('cache_index') %>/${encodeURIComponent(key)}`, {
+  const data = await window.authenticatedFetch(`<%== url_for('Cache.index') %>/${encodeURIComponent(key)}`, {
     method: 'GET'
   });
 
@@ -86,7 +86,7 @@ async function viewCacheEntry(key) {
     const entry = data.entry;
 
     // Load modal template
-    const modalResponse = await fetch('<%== url_for('cache_index') %>/view');
+    const modalResponse = await fetch('<%== url_for('cache_view') %>');
     const modalHTML = await modalResponse.text();
     modalDialog.innerHTML = modalHTML;
 
@@ -112,7 +112,7 @@ async function viewCacheEntry(key) {
 // Delete a cache entry
 async function deleteCacheEntry(key) {
   const result = await window.authenticatedFetch(
-    `<%== url_for('cache_index') %>/${encodeURIComponent(key)}`,
+    `<%== url_for('Cache.index') %>/${encodeURIComponent(key)}`,
     { method: 'DELETE' }
   );
 
@@ -133,7 +133,7 @@ async function purgeCache(confirmed = false) {
   }
 
   const result = await window.authenticatedFetch(
-    `<%== url_for('cache_purge') %>`,
+    `<%== url_for('Cache.purge') %>`,
     {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

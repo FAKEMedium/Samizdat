@@ -126,6 +126,12 @@ sub menu ($self) {
       return $self->render(json => { success => 1 });
     }
 
+    if ($self->req->method eq 'DELETE') {
+      # Delete menu
+      $self->app->web->deleteMenu($menuid);
+      return $self->render(json => { success => 1 });
+    }
+
     # GET - single menu with items
     my $menu = $self->app->web->getMenu($menuid);
     unless ($menu) {

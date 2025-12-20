@@ -8,7 +8,7 @@ deleteBtn.addEventListener('click', async () => {
     return;
   }
 
-  const result = await window.authenticatedFetch(`<%== url_for('certificate_index') %>/${certificateId}`, {
+  const result = await window.authenticatedFetch(`<%== url_for('Certificate.index') %>/${certificateId}`, {
     method: 'DELETE'
   });
 

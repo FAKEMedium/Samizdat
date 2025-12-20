@@ -1,5 +1,5 @@
 % # JavaScript for Stripe panel - fetches JSON data
-fetch(window.location.pathname, {
+fetch('<%== url_for('Stripe.payments.list') %>', {
   headers: {
     'Accept': 'application/json'
   }

@@ -31,7 +31,7 @@
     if (!isNew) return;  // Templates only for new zones
 
     try {
-      let url = '<%== url_for("zone_templates") %>';
+      let url = '<%== url_for("Zone.templates.index") %>';
       if (fixedCustomerId) {
         url += `?customerid=${fixedCustomerId}`;
       }
@@ -68,7 +68,7 @@
     }
 
     try {
-      const data = await window.authenticatedFetch('<%== url_for('customer_index') %>?simple=1&searchterm=___');
+      const data = await window.authenticatedFetch('<%== url_for('Customer.index') %>?simple=1&searchterm=___');
       // If we get here without error, user has access
       accountField.style.display = 'block';
       setupCustomerSearch();
@@ -109,7 +109,7 @@
 
   async function searchCustomers(term) {
     try {
-      const data = await window.authenticatedFetch(`<%== url_for('customer_index') %>?simple=1&searchterm=${encodeURIComponent(term)}`);
+      const data = await window.authenticatedFetch(`<%== url_for('Customer.index') %>?simple=1&searchterm=${encodeURIComponent(term)}`);
       if (data && data.customers) {
         const currentValue = accountSelect.value;
         accountSelect.innerHTML = '<option value=""><%== __("No customer assigned") %></option>';
@@ -185,10 +185,10 @@
     // Determine URL and method
     let url, method;
     if (isNew) {
-      url = '<%== url_for('zone_create') %>';
+      url = '<%== url_for('Zone.create') %>';
       method = 'POST';
     } else {
-      url = `<%== url_for('zone_index') %>/${zoneId}`;
+      url = `<%== url_for('Zone.update', zone_id => '_ZID_') %>`.replace('_ZID_', zoneId);
       method = 'PATCH';
       delete data.name;       // Zone name is immutable
       delete data.templateid; // Templates only for new zones

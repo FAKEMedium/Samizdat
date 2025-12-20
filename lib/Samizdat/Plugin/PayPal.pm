@@ -1,22 +1,24 @@
- package Samizdat::Plugin::PayPal;
+package Samizdat::Plugin::PayPal;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::PayPal;
+use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
 
   my $r = $app->routes;
 
-  # Public routes
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{PayPal} = $openapi_yaml if $openapi_yaml;
+
+  # Public routes (non-API)
   my $paypal = $r->home('/paypal')->to(controller => 'PayPal');
   $paypal->post('/ipn')                   ->to('#ipn')                  ->name('paypal_ipn');
   $paypal->get('/success')                ->to('#success')              ->name('paypal_success');
   $paypal->get('/cancel')                 ->to('#cancel')               ->name('paypal_cancel');
 
-  # REST API routes
-  $paypal->get('/config')                 ->to('#paypal_config')        ->name('paypal_config');
-  $paypal->post('/orders/create')         ->to('#create_order')         ->name('paypal_create_order');
-  $paypal->post('/orders/:id/capture')    ->to('#capture_order')        ->name('paypal_capture_order');
+  # API routes are defined in OpenAPI spec (__DATA__ section)
 
   # Manager routes
   my $manager = $r->manager('paypal')->to(controller => 'PayPal');
@@ -204,3 +206,245 @@ L<Samizdat::Model::PayPal>, L<Samizdat::Controller::PayPal>
 PayPal REST API documentation: L<https://developer.paypal.com/api/rest/>
 
 =cut
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for PayPal API
+paths:
+  /paypal:
+    get:
+      operationId: PayPal.index
+      x-mojo-to: PayPal#index
+      summary: PayPal payments panel
+      tags: [PayPal]
+      responses:
+        '200':
+          description: Payment statistics and recent payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_IndexResponse'
+
+  /paypal/config:
+    get:
+      operationId: PayPal.config
+      x-mojo-to: PayPal#paypal_config
+      summary: Get PayPal client configuration
+      tags: [PayPal]
+      responses:
+        '200':
+          description: PayPal SDK configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_ConfigResponse'
+
+  /paypal/orders/create:
+    post:
+      operationId: PayPal.orders.create
+      x-mojo-to: PayPal#create_order
+      summary: Create payment order
+      tags: [PayPal]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PayPal_OrderInput'
+      responses:
+        '200':
+          description: Order created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_Order'
+
+  /paypal/orders/{id}/capture:
+    post:
+      operationId: PayPal.orders.capture
+      x-mojo-to: PayPal#capture_order
+      summary: Capture payment order
+      tags: [PayPal]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Order captured
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_CaptureResponse'
+
+  /paypal/success:
+    get:
+      operationId: PayPal.success
+      x-mojo-to: PayPal#success
+      summary: Payment success return URL
+      tags: [PayPal]
+      parameters:
+        - name: tx
+          in: query
+          schema:
+            type: string
+        - name: item_number
+          in: query
+          schema:
+            type: string
+        - name: amt
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_SuccessResponse'
+
+  /paypal/cancel:
+    get:
+      operationId: PayPal.cancel
+      x-mojo-to: PayPal#cancel
+      summary: Payment cancel return URL
+      tags: [PayPal]
+      responses:
+        '200':
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_CancelResponse'
+
+  /paypal/ipn:
+    post:
+      operationId: PayPal.ipn
+      x-mojo-to: PayPal#ipn
+      summary: IPN notification endpoint (legacy)
+      tags: [PayPal]
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: IPN processed
+          content:
+            text/plain:
+              schema:
+                type: string
+
+components:
+  schemas:
+    PayPal_ConfigResponse:
+      type: object
+      properties:
+        client_id:
+          type: string
+        currency:
+          type: string
+        env:
+          type: string
+    PayPal_OrderInput:
+      type: object
+      properties:
+        amount:
+          type: number
+        currency:
+          type: string
+        description:
+          type: string
+      required:
+        - amount
+    PayPal_Order:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        links:
+          type: array
+          items:
+            type: object
+    PayPal_CaptureResponse:
+      type: object
+      properties:
+        id:
+          type: string
+        status:
+          type: string
+        purchase_units:
+          type: array
+          items:
+            type: object
+        payer:
+          type: object
+    PayPal_SuccessResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        txn_id:
+          type: string
+        item_number:
+          type: string
+        amount:
+          type: string
+    PayPal_CancelResponse:
+      type: object
+      properties:
+        cancelled:
+          type: boolean
+    PayPal_Payment:
+      type: object
+      properties:
+        txn_id:
+          type: string
+        payment_status:
+          type: string
+        payer_email:
+          type: string
+        amount:
+          type: number
+        currency:
+          type: string
+        item_number:
+          type: string
+        created_at:
+          type: string
+    PayPal_Stats:
+      type: object
+      properties:
+        balance:
+          type: number
+        total_completed:
+          type: number
+        count_completed:
+          type: integer
+        total_pending:
+          type: number
+        count_pending:
+          type: integer
+        total_refunded:
+          type: number
+        count_refunded:
+          type: integer
+        count_failed:
+          type: integer
+    PayPal_IndexResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayPal_Payment'
+        stats:
+          $ref: '#/components/schemas/PayPal_Stats'

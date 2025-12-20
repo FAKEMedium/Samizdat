@@ -45,7 +45,7 @@ function loadDomains(search = '', offset = 0) {
   currentSearch = search;
   currentOffset = offset;
 
-  const url = new URL('<%= url_for('rtr_domains') %>', window.location.origin);
+  const url = new URL('<%= url_for('RTR.domains.index') %>', window.location.origin);
   if (search) url.searchParams.set('search', search);
   url.searchParams.set('limit', pageSize);
   url.searchParams.set('offset', offset);

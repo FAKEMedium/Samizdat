@@ -202,7 +202,7 @@ const perPage = parseInt(document.cookie.split('; ').find(row => row.startsWith(
 async function loadMessages(page = 1) {
     try {
         const offset = (page - 1) * perPage;
-        const response = await fetch(`<%= url_for 'sms_messages' %>?limit=${perPage}&offset=${offset}&total=1`, {
+        const response = await fetch(`<%= url_for 'SMS.messages.index' %>?limit=${perPage}&offset=${offset}&total=1`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -228,34 +228,26 @@ async function loadMessages(page = 1) {
     }
 }
 
-// Show alert function
+// Show alert function using toast container
 function showAlert(type, message) {
-    const alertsContainer = document.querySelector('.container-fluid .row:first-child .col-12');
-    const existingAlert = alertsContainer.querySelector('.alert');
-    
-    // Remove existing alert
-    if (existingAlert) {
-        existingAlert.remove();
-    }
-    
-    const alertHTML = `
-        <div class="alert alert-${type} alert-dismissible fade show" role="alert">
-            ${message}
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    const container = document.getElementById('toast-messages');
+    if (!container) return;
+
+    const toastHTML = `
+        <div class="toast align-items-center text-white bg-${type === 'success' ? 'success' : 'danger'} border-0"
+             role="alert" aria-live="assertive" aria-atomic="true"
+             data-bs-autohide="true" data-bs-delay="5000">
+            <div class="d-flex">
+                <div class="toast-body">${message}</div>
+                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+            </div>
         </div>
     `;
-    
-    const titleElement = alertsContainer.querySelector('h1');
-    titleElement.insertAdjacentHTML('afterend', alertHTML);
-    
-    // Auto-dismiss after 5 seconds
-    setTimeout(() => {
-        const alert = alertsContainer.querySelector('.alert');
-        if (alert) {
-            const bsAlert = new bootstrap.Alert(alert);
-            bsAlert.close();
-        }
-    }, 5000);
+
+    container.innerHTML = toastHTML;
+    const toastEl = container.querySelector('.toast');
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
 }
 
 // Pre-fill form from URL parameters
@@ -347,7 +339,7 @@ function addMessageEventListeners() {
             }
             
             try {
-                const response = await fetch('<%= url_for 'sms_delete', id => 'PLACEHOLDER' %>'.replace('PLACEHOLDER', id), {
+                const response = await fetch('<%= url_for 'SMS.messages.delete', id => '_ID_' %>'.replace('_ID_', id), {
                     method: 'DELETE',
                     headers: {
                         'Accept': 'application/json'
@@ -377,7 +369,7 @@ document.getElementById('syncMessages').addEventListener('click', async () => {
     syncButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><%== __("Syncing...") %>';
     
     try {
-        const response = await fetch('<%= url_for 'sms_sync' %>', {
+        const response = await fetch('<%= url_for 'SMS.sync' %>', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json'

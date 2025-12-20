@@ -1,5 +1,6 @@
 // BIS Sector View JavaScript
 // URL patterns from named routes
+const BIS_SECTOR_API = '<%= url_for('BIS.public.sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_SECTOR_BASE = '<%= url_for('bis_sector', sector => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const BIS_DOMAIN_BASE = '<%= url_for('bis_domain', domain => 'PLACEHOLDER') %>'.replace('/PLACEHOLDER', '');
 const LOCALE = '<%= stash('language') || 'en' %>';
@@ -21,9 +22,7 @@ async function loadSectorView() {
     const sector = pathParts[pathParts.length - 1];
 
     // Request a high limit to get all domains in the sector
-    const response = await fetch(`${BIS_SECTOR_BASE}/${sector}?limit=10000`, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch(`${BIS_SECTOR_API}/${sector}?limit=10000`);
 
     if (!response.ok) {
       if (response.status === 404) {

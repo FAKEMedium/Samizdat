@@ -2,25 +2,25 @@ package Samizdat::Plugin::Stripe;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Stripe;
+use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
 
   my $r = $app->routes;
 
-  # Public routes
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{Stripe} = $openapi_yaml if $openapi_yaml;
+
+  # Public routes (non-API)
   my $stripe = $r->home('/stripe')->to(controller => 'Stripe');
   $stripe->post('/webhook')               ->to('#webhook')               ->name('stripe_webhook');
   $stripe->get('/success')                ->to('#success')               ->name('stripe_success');
   $stripe->get('/cancel')                 ->to('#cancel')                ->name('stripe_cancel');
 
-  # REST API routes
-  $stripe->get('/config')                 ->to('#stripe_config')         ->name('stripe_config');
-  $stripe->post('/payment-intents')       ->to('#create_payment_intent') ->name('stripe_create_intent');
-  $stripe->post('/checkout-sessions')     ->to('#create_checkout_session')->name('stripe_create_session');
-  $stripe->get('/payments/:id')           ->to('#get_payment')           ->name('stripe_get_payment');
-  $stripe->post('/refunds')               ->to('#create_refund')         ->name('stripe_create_refund');
+  # API routes are defined in OpenAPI spec (__DATA__ section)
 
-  # Manager routes
+  # Manager routes (HTML page only - API via OpenAPI)
   my $manager = $r->manager('stripe')->to(controller => 'Stripe');
   $manager->get('/')                      ->to('#index')                 ->name('stripe_index');
 
@@ -223,3 +223,272 @@ L<Samizdat::Model::Stripe>, L<Samizdat::Controller::Stripe>
 Stripe Documentation: L<https://docs.stripe.com>
 
 =cut
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Stripe API
+paths:
+  /stripe/config:
+    get:
+      operationId: Stripe.config
+      x-mojo-to: Stripe#stripe_config
+      summary: Get Stripe client configuration
+      tags: [Stripe]
+      responses:
+        '200':
+          description: Stripe configuration
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_ConfigResponse'
+
+  /stripe/payment-intents:
+    post:
+      operationId: Stripe.paymentIntents.create
+      x-mojo-to: Stripe#create_payment_intent
+      summary: Create PaymentIntent
+      tags: [Stripe]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stripe_PaymentIntentInput'
+      responses:
+        '200':
+          description: PaymentIntent created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_PaymentIntentResponse'
+
+  /stripe/checkout-sessions:
+    post:
+      operationId: Stripe.checkoutSessions.create
+      x-mojo-to: Stripe#create_checkout_session
+      summary: Create Checkout Session
+      tags: [Stripe]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stripe_CheckoutSessionInput'
+      responses:
+        '200':
+          description: Checkout session created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_CheckoutSessionResponse'
+
+  /stripe/payments/{id}:
+    get:
+      operationId: Stripe.payments.get
+      x-mojo-to: Stripe#get_payment
+      summary: Get payment status
+      tags: [Stripe]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_Payment'
+
+  /stripe/refunds:
+    post:
+      operationId: Stripe.refunds.create
+      x-mojo-to: Stripe#create_refund
+      summary: Create refund
+      tags: [Stripe]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Stripe_RefundInput'
+      responses:
+        '200':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_RefundResponse'
+
+  /stripe/payments:
+    get:
+      operationId: Stripe.payments.list
+      x-mojo-to: Stripe#index
+      summary: List recent payments
+      tags: [Stripe]
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Stripe_PaymentsResponse'
+
+components:
+  schemas:
+    Stripe_ConfigResponse:
+      type: object
+      properties:
+        publishable_key:
+          type: string
+        currency:
+          type: string
+        env:
+          type: string
+    Stripe_PaymentIntentInput:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount in smallest currency unit
+        currency:
+          type: string
+          default: SEK
+        description:
+          type: string
+        customer_email:
+          type: string
+        metadata:
+          type: object
+      required:
+        - amount
+    Stripe_PaymentIntentResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payment_intent_id:
+          type: string
+        client_secret:
+          type: string
+        error:
+          type: boolean
+        error_message:
+          type: string
+    Stripe_CheckoutSessionInput:
+      type: object
+      properties:
+        amount:
+          type: integer
+        currency:
+          type: string
+        description:
+          type: string
+        customer_email:
+          type: string
+        success_url:
+          type: string
+        cancel_url:
+          type: string
+        metadata:
+          type: object
+      required:
+        - amount
+    Stripe_CheckoutSessionResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        session_id:
+          type: string
+        url:
+          type: string
+        error:
+          type: boolean
+        error_message:
+          type: string
+    Stripe_Payment:
+      type: object
+      properties:
+        payment_intent_id:
+          type: string
+        checkout_session_id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        description:
+          type: string
+        customer_email:
+          type: string
+        payment_method_type:
+          type: string
+        created_at:
+          type: string
+    Stripe_RefundInput:
+      type: object
+      properties:
+        payment_intent_id:
+          type: string
+        amount:
+          type: integer
+        reason:
+          type: string
+      required:
+        - payment_intent_id
+    Stripe_RefundResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        refund_id:
+          type: string
+        amount:
+          type: integer
+        status:
+          type: string
+        error:
+          type: boolean
+        error_message:
+          type: string
+    Stripe_Stats:
+      type: object
+      properties:
+        balance:
+          type: number
+        total_succeeded:
+          type: number
+        count_succeeded:
+          type: integer
+        total_pending:
+          type: number
+        count_pending:
+          type: integer
+        total_failed:
+          type: number
+        count_failed:
+          type: integer
+        total_refunded:
+          type: number
+        count_refunded:
+          type: integer
+    Stripe_PaymentsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Stripe_Payment'
+        stats:
+          $ref: '#/components/schemas/Stripe_Stats'

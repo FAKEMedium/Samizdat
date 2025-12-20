@@ -3,39 +3,13 @@ package Samizdat::Plugin::Customer;
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Customer;
 use Mojo::Loader qw(data_section);
-use YAML::XS qw(Load);
-use JSON::PP ();
-
-# Deep clone and convert YAML booleans to JSON booleans for OpenAPI compatibility
-sub _fix_booleans {
-  my ($data) = @_;
-  return $data unless ref $data;
-
-  if (ref $data eq 'HASH') {
-    my %new;
-    for my $key (keys %$data) {
-      if ($key eq 'required' && defined $data->{$key} && !ref $data->{$key}) {
-        $new{$key} = $data->{$key} ? JSON::PP::true : JSON::PP::false;
-      } else {
-        $new{$key} = _fix_booleans($data->{$key});
-      }
-    }
-    return \%new;
-  } elsif (ref $data eq 'ARRAY') {
-    return [ map { _fix_booleans($_) } @$data ];
-  }
-  return $data;
-}
-
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
-  # Load OpenAPI fragment from __DATA__ section and store in config
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
-  if ($openapi_yaml) {
-    $app->config->{openapi_fragments}{Customer} = _fix_booleans(Load($openapi_yaml));
-  }
+  $app->config->{openapi_fragments}{Customer} = $openapi_yaml if $openapi_yaml;
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('customers')->to(controller => 'Customer');
@@ -58,6 +32,57 @@ sub register ($self, $app, $conf) {
 
 }
 
+=head1 NAME
+
+Samizdat::Plugin::Customer - Customer management plugin
+
+=head1 DESCRIPTION
+
+This plugin provides customer management functionality including listing,
+creating, editing, and navigating between customers.
+
+=head1 NGINX CONFIGURATION
+
+Customer routes use dynamic C<:customerid> parameters. The controller sets
+C<docpath> to ensure all customer IDs share the same cached template.
+
+=head2 Regex Routes
+
+    # Customer edit - any customerid uses same cached template
+    location ~ ^/manager/customers/\d+$ {
+        root /path/to/public;
+        try_files /manager/customers/customer/edit/index.html @backend;
+    }
+
+    # Customer billing tab
+    location ~ ^/manager/customers/\d+/billing$ {
+        root /path/to/public;
+        try_files /manager/customers/customer/billing/index.html @backend;
+    }
+
+    # Customer products tab
+    location ~ ^/manager/customers/\d+/products$ {
+        root /path/to/public;
+        try_files /manager/customers/customer/products/index.html @backend;
+    }
+
+    # Navigation routes - always proxy (returns redirect)
+    location ~ ^/manager/customers/\d+/(prev|next)$ {
+        proxy_pass http://127.0.0.1:3000;
+    }
+
+    location @backend {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+=head1 SEE ALSO
+
+L<Samizdat::Controller::Customer>, L<Samizdat::Model::Customer>
+
+=cut
+
 1;
 
 __DATA__
@@ -65,7 +90,7 @@ __DATA__
 @@ openapi.yaml
 # OpenAPI 3.0 fragment for Customer API
 paths:
-  /customers/:
+  /customers:
     get:
       operationId: Customer.index
       x-mojo-to: Customer#index

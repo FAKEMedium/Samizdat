@@ -1,8 +1,9 @@
 // BIS Manager JavaScript
-// URL patterns from named routes
+// URL patterns - HTML routes for navigation, API routes for data
 const BIS_INDEX_URL = '<%= url_for('bis_index') %>';
-const BIS_MANAGER_URL = '<%= url_for('bis_manager') %>';
-const BIS_RUNS_URL = '<%= url_for('bis_runs') %>';
+const BIS_MANAGER_API = '<%= url_for('BIS.manager.index') %>';
+const BIS_RUNS_API = '<%= url_for('BIS.runs.index') %>';
+const BIS_RUNS_START_API = '<%= url_for('BIS.runs.start') %>';
 const LOCALE = '<%= stash('language') || 'en' %>';
 
 // Format number with locale-specific decimal separator
@@ -16,9 +17,7 @@ function formatNumber(num, decimals = 1) {
 // Load manager dashboard
 async function loadManagerDashboard() {
   try {
-    const response = await fetch(BIS_MANAGER_URL, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch(BIS_MANAGER_API);
 
     if (!response.ok) throw new Error('Failed to load manager data');
 
@@ -116,12 +115,9 @@ async function startNewRun() {
   btn.textContent = 'Starting...';
 
   try {
-    const response = await fetch(`${BIS_RUNS_URL}/start`, {
+    const response = await fetch(BIS_RUNS_START_API, {
       method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      }
+      headers: { 'Content-Type': 'application/json' }
     });
 
     if (!response.ok) throw new Error('Failed to start run');
@@ -132,9 +128,8 @@ async function startNewRun() {
       showSuccess(`Check run ${data.run_id} started successfully`);
 
       // Start the actual checking process
-      await fetch(`${BIS_RUNS_URL}/${data.run_id}/check`, {
-        method: 'POST',
-        headers: { 'Accept': 'application/json' }
+      await fetch(`<%== url_for('BIS.runs.check', id => '_ID_') %>`.replace('_ID_', data.run_id), {
+        method: 'POST'
       });
 
       // Reload dashboard to show new run

@@ -21,7 +21,7 @@ function formatTimestamp(timestamp) {
 async function loadMessages(page = 1) {
     try {
         const offset = (page - 1) * perPage;
-        const response = await fetch(`<%= url_for 'sms_messages' %>?phone=${encodeURIComponent(phoneNumber)}&limit=${perPage}&offset=${offset}&total=1`, {
+        const response = await fetch(`<%= url_for 'SMS.messages.index' %>?phone=${encodeURIComponent(phoneNumber)}&limit=${perPage}&offset=${offset}&total=1`, {
             headers: {
                 'Accept': 'application/json'
             }
@@ -221,7 +221,7 @@ document.getElementById('syncMessages').addEventListener('click', async () => {
     syncButton.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span><%== __("Syncing...") %>';
     
     try {
-        const response = await fetch('<%= url_for 'sms_sync' %>', {
+        const response = await fetch('<%= url_for 'SMS.sync' %>', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json'

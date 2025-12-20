@@ -77,7 +77,7 @@
       btn.addEventListener('click', async () => {
         if (!confirm('<%== __("Are you sure you want to delete this key?") %>')) return;
         const keyId = btn.getAttribute('data-keyid');
-        const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}/cryptokeys/${keyId}`, {
+        const result = await window.authenticatedFetch(`<%== url_for('Zone.cryptokeys.delete', zone_id => '_ZID_', key_id => '_KID_') %>`.replace('_ZID_', zoneId).replace('_KID_', keyId), {
           method: 'DELETE'
         });
         if (result && result.success) {
@@ -104,7 +104,7 @@
       active: true
     };
 
-    const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}/cryptokeys`, {
+    const result = await window.authenticatedFetch(`<%== url_for('Zone.cryptokeys.index', zone_id => '_ZID_') %>`.replace('_ZID_', zoneId), {
       method: 'POST',
       body: JSON.stringify(data),
       headers: { 'Content-Type': 'application/json' }

@@ -165,10 +165,10 @@ sub invoicenav ($self) {
   my $next_id = $self->app->fortnox->navInvoice($to, $invoiceid);
 
   if ($next_id) {
-    return $self->redirect_to($self->url_for('fortnox_invoices') . "/$next_id");
+    return $self->redirect_to($self->url_for('fortnox_invoice', invoiceid => $next_id));
   } else {
     # Stay on current invoice if no prev/next available
-    return $self->redirect_to($self->url_for('fortnox_invoices') . "/$invoiceid");
+    return $self->redirect_to($self->url_for('fortnox_invoice', invoiceid => $invoiceid));
   }
 }
 
@@ -278,14 +278,12 @@ sub activate ($self) {
 
   my $title = $self->app->__('Activate Samizdat Fortnox integration');
   my $web = { title => $title };
-  my $formdata = {};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/activate/index');
-    return $self->render(web => $web, title => $title, formdata => $formdata, template => 'fortnox/activate/index');
+    return $self->render(web => $web, title => $title, template => 'fortnox/activate/index');
   } else {
-    my $config = $self->app->config->{manager}->{fortnox};
-    return $self->render(json => { formdata => $formdata });
+    return $self->render(json => { success => 1 });
   }
 }
 

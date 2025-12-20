@@ -4,7 +4,7 @@ let elements;
 
 async function initStripePayment(amount, options = {}) {
   // Fetch Stripe config
-  const configResponse = await fetch('/stripe/config');
+  const configResponse = await fetch('<%== url_for('Stripe.config') %>');
   const config = await configResponse.json();
 
   // Load Stripe.js
@@ -21,7 +21,7 @@ async function initStripePayment(amount, options = {}) {
   stripe = Stripe(config.publishable_key);
 
   // Create PaymentIntent
-  const intentResponse = await fetch('/stripe/payment-intents', {
+  const intentResponse = await fetch('<%== url_for('Stripe.paymentIntents.create') %>', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -88,7 +88,7 @@ async function handleStripeSubmit(event) {
   const { error } = await stripe.confirmPayment({
     elements,
     confirmParams: {
-      return_url: window.location.origin + '/stripe/success',
+      return_url: window.location.origin + '<%== url_for('stripe_success') %>',
     },
   });
 
@@ -113,7 +113,7 @@ function hideMessage() {
 
 // Alternative: Redirect to Stripe Checkout
 async function redirectToCheckout(amount, options = {}) {
-  const response = await fetch('/stripe/checkout-sessions', {
+  const response = await fetch('<%== url_for('Stripe.checkoutSessions.create') %>', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

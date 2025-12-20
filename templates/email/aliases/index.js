@@ -66,7 +66,7 @@ function showAliasModal(address = null) {
 
 async function loadAlias(address) {
   try {
-    const response = await authenticatedFetch('<%== url_for('email_alias', address => '') %>/' + encodeURIComponent(address));
+    const response = await authenticatedFetch('<%== url_for('Email.aliases.index') %>/' + encodeURIComponent(address));
     const result = await response.json();
 
     if (result.success) {
@@ -89,9 +89,11 @@ async function saveAlias() {
   const data = new FormData(form);
 
   try {
-    const url = '<%== url_for('email_alias', address => '') %>/' + (isEdit ? encodeURIComponent(address) : '');
+    const url = isEdit
+      ? '<%== url_for('Email.aliases.index') %>/' + encodeURIComponent(address)
+      : '<%== url_for('Email.aliases.create') %>';
 
-    const response = await authenticatedFetch(url.replace(/\/$/, ''), {
+    const response = await authenticatedFetch(url, {
       method: isEdit ? 'PUT' : 'POST',
       body: data
     });
@@ -114,7 +116,7 @@ async function deleteAlias(address) {
   if (!confirm('<%== __('Are you sure you want to delete this alias?') %>')) return;
 
   try {
-    const response = await authenticatedFetch('<%== url_for('email_alias', address => '') %>/' + encodeURIComponent(address), {
+    const response = await authenticatedFetch('<%== url_for('Email.aliases.index') %>/' + encodeURIComponent(address), {
       method: 'DELETE'
     });
 

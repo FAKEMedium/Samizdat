@@ -42,7 +42,7 @@
     }
 
     try {
-      const response = await fetch('/swish/payments/create', {
+      const response = await fetch('<%== url_for('Swish.payments.create') %>', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -97,14 +97,14 @@
       }
 
       try {
-        const response = await fetch(`/swish/payments/${instructionId}`);
+        const response = await fetch(`<%== url_for('Swish.payments.get', id => '_ID_') %>`.replace('_ID_', instructionId));
         const payment = await response.json();
 
         if (payment.status === 'PAID') {
           statusDiv.innerHTML = '<div class="alert alert-success"><%= __("Payment successful!") %></div>';
           qrDiv.style.display = 'none';
           setTimeout(() => {
-            window.location.href = '/swish/success?id=' + instructionId;
+            window.location.href = '<%== url_for('swish_success') %>?id=' + instructionId;
           }, 1500);
           return;
         }

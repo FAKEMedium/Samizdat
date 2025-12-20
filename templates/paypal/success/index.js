@@ -1,7 +1,7 @@
 % # JavaScript for PayPal success page - fetches JSON data
 const urlParams = new URLSearchParams(window.location.search);
 
-fetch(window.location.pathname + '?' + urlParams.toString(), {
+fetch('<%== url_for('PayPal.success') %>' + '?' + urlParams.toString(), {
   headers: {
     'Accept': 'application/json'
   }

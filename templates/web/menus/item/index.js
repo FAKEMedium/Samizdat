@@ -63,8 +63,8 @@
     });
 
     const url = menuitemid === "new"
-      ? `<%= url_for('web_menus') %>/${menuid}/items/new`
-      : `<%= url_for('web_menus') %>/${menuid}/items/${menuitemid}`;
+      ? `<%= url_for('Web.menus.index') %>/${menuid}/items/`
+      : `<%= url_for('Web.menus.index') %>/${menuid}/items/${menuitemid}`;
 
     try {
       const result = await window.authenticatedFetch(url, {
@@ -88,7 +88,8 @@
   // Delete button
   document.querySelector("#deleteItem")?.addEventListener("click", async () => {
     if (!confirm("<%= __('Are you sure you want to delete this item?') %>")) return;
-    const result = await window.authenticatedFetch(window.location.href, { method: "DELETE" });
+    const apiUrl = `<%= url_for('Web.menus.index') %>/${menuid}/items/${menuitemid}`;
+    const result = await window.authenticatedFetch(apiUrl, { method: "DELETE" });
     if (result && result.success) {
       window.location.href = `<%= url_for('web_menus') %>/${menuid}`;
     }

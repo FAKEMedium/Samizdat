@@ -20,8 +20,8 @@ form.addEventListener('submit', async (e) => {
   data.autorenew = form.querySelector('#autorenew').checked ? 1 : 0;
 
   const url = isNew
-    ? '<%== url_for('certificate_create') %>'
-    : `<%== url_for('certificate_index') %>/${certificateId}`;
+    ? '<%== url_for('Certificate.create') %>'
+    : `<%== url_for('Certificate.index') %>/${certificateId}`;
 
   const method = isNew ? 'POST' : 'PUT';
 

@@ -1,6 +1,7 @@
 async function loadCustomer() {
   try {
-    const response = await fetch('<%== url_for('fortnox_customer') %>', {
+    const customerid = window.location.pathname.split('/').pop();
+    const response = await fetch(`<%== url_for('Fortnox.customers.get', customerid => '_CID_') %>`.replace('_CID_', customerid), {
       method: 'GET',
       headers: { Accept: 'application/json' }
     });

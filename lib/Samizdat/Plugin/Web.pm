@@ -5,6 +5,7 @@ use Samizdat::Model::Web;
 use Mojo::Home;
 use Mojo::DOM;
 use Mojo::Util qw(decode);
+use Mojo::Loader qw(data_section);
 use Digest::SHA qw(sha256_base64);
 use IO::Compress::Gzip;
 use IO::Compress::Brotli qw(bro);
@@ -18,25 +19,25 @@ my $image = Imager->new;
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{Web} = $openapi_yaml if $openapi_yaml;
+
+  # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('web')->to(controller => 'Web');
   $manager->get('editor/toolbar')                     ->to('#editor_toolbar')    ->name('web_editor_toolbar');
   $manager->get('editor')                             ->to('#editor')            ->name('web_editor');
   $manager->get('menus/:menuid/items/new')            ->to('#menuitem')          ->name('web_menuitem_new');
-  $manager->post('menus/:menuid/items/new')           ->to('#menuitem');
   $manager->get('menus/:menuid/items/:menuitemid')    ->to('#menuitem')          ->name('web_menuitem');
-  $manager->post('menus/:menuid/items/:menuitemid')   ->to('#menuitem');
-  $manager->delete('menus/:menuid/items/:menuitemid') ->to('#menuitem');
-  $manager->post('menus/:menuid/reorder')             ->to('#menuitems_reorder') ->name('web_menuitems_reorder');
   $manager->get('menus/:menuid')                      ->to('#menu')              ->name('web_menu');
-  $manager->post('menus/:menuid')                     ->to('#menu');
-  $manager->post('menus')                             ->to('#menus');
   $manager->get('menus')                              ->to('#menus')             ->name('web_menus');
   $manager->get('languages')                          ->to('#languages')         ->name('web_languages');
   $manager->get('images')                             ->to('#images')            ->name('web_images');
-  $manager->post('save')                              ->to('#save')              ->name('web_save');
   $manager->get('source/*docpath')                    ->to('#source')            ->name('web_source');
   $manager->get('source')                             ->to('#source', docpath => '')->name('web_source_root');
   $manager->get('/')                                  ->to('#index')             ->name('web_index');
+
+  # API routes are defined in OpenAPI spec (__DATA__ section)
 
   # Things coming from configuration file
   my $web  = $r->home->to(controller => 'Web');
@@ -45,10 +46,9 @@ sub register ($self, $app, $conf) {
   $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
   $web->get('ads.txt')                     ->to('#ads',       docpath => 'ads.txt');
 
-  # Things coming from database, or markdown files in src/public
-  # Database overlays files. See Samizdat::Model::Web and Samizdat::Controller::Web
+  # Home page route - specific route here, wildcard catch-all registered separately in Samizdat.pm
+  # after OpenAPI routes to ensure proper route priority
   $web->get('/')                           ->to('#getdoc',    docpath => '')->name('home');
-  $web->get('/*docpath')                   ->to('#getdoc');
 
 
   # Helper to get the real IP address of the client. Call this from controller object ($c->getip
@@ -388,8 +388,6 @@ sub register ($self, $app, $conf) {
 
 }
 
-1;
-
 =encoding utf8
 
 =head1 NAME
@@ -432,6 +430,143 @@ Contains supported languages and the path to the source files.
 
 =back
 
+=head1 STATIC CACHE AND NGINX
+
+The C<after_render> hook in this plugin generates static HTML files in the
+C<public/> directory. These files can be served directly by nginx, bypassing
+the Perl application for dramatically improved performance.
+
+=head2 The docpath Stash Variable
+
+For routes with dynamic parameters (like C</:id> or C</#domain>), set the
+C<docpath> stash variable in your controller to ensure all variations use
+the same cached template file:
+
+    # In controller - all customer IDs share one cached file
+    sub edit ($self) {
+        $self->stash(docpath => '/customers/customer/edit/index.html');
+        # ... render template
+    }
+
+Without C<docpath>, each customer would create a separate cached file:
+
+    public/customers/123/edit/index.html
+    public/customers/456/edit/index.html
+    public/customers/789/edit/index.html
+
+With C<docpath>, all share one file:
+
+    public/customers/customer/edit/index.html
+
+=head2 Nginx Regex Routes for Dynamic Parameters
+
+Configure nginx to rewrite dynamic URLs to the shared cached path:
+
+    # Customer edit pages - any customer ID uses same cached template
+    location ~ ^/manager/customers/\d+/edit$ {
+        root /path/to/public;
+        try_files /manager/customers/customer/edit/index.html @backend;
+    }
+
+    # Domain pages - any domain name uses same cached template
+    location ~ ^/bis/domain/[^/]+$ {
+        root /path/to/public;
+        try_files /bis/domain/index.html @backend;
+    }
+
+    # Zone records - zone_id is variable
+    location ~ ^/manager/zones/[^/]+/records$ {
+        root /path/to/public;
+        try_files /manager/zones/_zone_id/records/index.html @backend;
+    }
+
+    # Nested dynamic parameters - zone_id and record_id
+    location ~ ^/manager/zones/[^/]+/records/[^/]+$ {
+        root /path/to/public;
+        try_files /manager/zones/_zone_id/records/_record_id/index.html @backend;
+    }
+
+    # Fallback to application
+    location @backend {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+    }
+
+=head2 Compressed Static Files
+
+The C<after_render> hook creates compressed versions of cached files:
+
+=over 4
+
+=item * C<file.html> - Original HTML
+
+=item * C<file.html.gz> - Gzip compressed (for C<gzip_static on>)
+
+=item * C<file.html.br> - Brotli compressed (for C<brotli_static on>)
+
+=back
+
+Enable static compression in nginx:
+
+    gzip_static on;
+    brotli_static on;
+
+Nginx will automatically serve C<.gz> or C<.br> files when the client
+supports compression, without needing to compress on-the-fly.
+
+=head2 Complete Nginx Configuration Example
+
+    server {
+        listen 443 ssl http2;
+        server_name example.com;
+        root /path/to/samizdat/public;
+
+        # Enable pre-compressed files
+        gzip_static on;
+        brotli_static on;
+
+        # Static assets - serve directly
+        location /media/ {
+            expires 1y;
+            add_header Cache-Control "public, immutable";
+        }
+
+        # API routes - always proxy
+        location /api/ {
+            proxy_pass http://127.0.0.1:3000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+        }
+
+        # Manager dynamic routes with regex
+        location ~ ^/manager/customers/\d+/ {
+            try_files /manager/customers/customer$uri/index.html @backend;
+        }
+
+        location ~ ^/manager/zones/[^/]+/ {
+            try_files /manager/zones/_zone_id$uri/index.html @backend;
+        }
+
+        # Default - try static then proxy
+        location / {
+            try_files $uri $uri/index.html @backend;
+        }
+
+        location @backend {
+            proxy_pass http://127.0.0.1:3000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+        }
+    }
+
+=head2 Cache Invalidation
+
+When content changes, the cached file must be regenerated. The model provides
+an C<invalidate_cache> method that deletes the cached file and its compressed
+variants. The next request will regenerate the cache through the application.
 
 =head1 BUGS
 
@@ -557,3 +692,388 @@ AI gave me a list of features to implement in the web plugin. Here is the list c
 =item Add support for web page user profiles to personalize content.
 
 =back
+
+=cut
+
+1;
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Web API (content management)
+paths:
+  /web/menus:
+    get:
+      operationId: Web.menus.index
+      x-mojo-to: Web#menus
+      summary: List all menus
+      tags: [Web]
+      responses:
+        '200':
+          description: List of menus
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_MenuListResponse'
+    post:
+      operationId: Web.menus.create
+      x-mojo-to: Web#menus
+      summary: Create new menu
+      tags: [Web]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Web_MenuInput'
+      responses:
+        '200':
+          description: Menu created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/menus/{menuid}:
+    get:
+      operationId: Web.menus.get
+      x-mojo-to: Web#menu
+      summary: Get menu details
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Menu'
+    post:
+      operationId: Web.menus.update
+      x-mojo-to: Web#menu
+      summary: Update menu
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Web_MenuInput'
+      responses:
+        '200':
+          description: Menu updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+    delete:
+      operationId: Web.menus.delete
+      x-mojo-to: Web#menu
+      summary: Delete menu
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/menus/{menuid}/reorder:
+    post:
+      operationId: Web.menus.reorder
+      x-mojo-to: Web#menuitems_reorder
+      summary: Reorder menu items
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                order:
+                  type: array
+                  items:
+                    type: integer
+      responses:
+        '200':
+          description: Items reordered
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/menus/{menuid}/items:
+    post:
+      operationId: Web.menuitems.create
+      x-mojo-to: Web#menuitem
+      summary: Create new menu item
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Web_MenuItemInput'
+      responses:
+        '200':
+          description: Menu item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/menus/{menuid}/items/{menuitemid}:
+    get:
+      operationId: Web.menuitems.get
+      x-mojo-to: Web#menuitem
+      summary: Get menu item details
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: menuitemid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu item data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_MenuItem'
+    post:
+      operationId: Web.menuitems.update
+      x-mojo-to: Web#menuitem
+      summary: Update menu item
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: menuitemid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Web_MenuItemInput'
+      responses:
+        '200':
+          description: Menu item updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+    delete:
+      operationId: Web.menuitems.delete
+      x-mojo-to: Web#menuitem
+      summary: Delete menu item
+      tags: [Web]
+      parameters:
+        - name: menuid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: menuitemid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Menu item deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/save:
+    post:
+      operationId: Web.save
+      x-mojo-to: Web#save
+      summary: Save content changes
+      tags: [Web]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                docpath:
+                  type: string
+                content:
+                  type: string
+      responses:
+        '200':
+          description: Content saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+  /web/languages:
+    get:
+      operationId: Web.languages.index
+      x-mojo-to: Web#languages
+      summary: List available languages
+      tags: [Web]
+      responses:
+        '200':
+          description: List of languages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_LanguageListResponse'
+
+  /web/images:
+    get:
+      operationId: Web.images.index
+      x-mojo-to: Web#images
+      summary: List images
+      tags: [Web]
+      responses:
+        '200':
+          description: List of images
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_ImageListResponse'
+
+components:
+  schemas:
+    Web_Menu:
+      type: object
+      properties:
+        menuid:
+          type: integer
+        menuname:
+          type: string
+        description:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Web_MenuItem'
+    Web_MenuInput:
+      type: object
+      properties:
+        menuname:
+          type: string
+        description:
+          type: string
+    Web_MenuItem:
+      type: object
+      properties:
+        menuitemid:
+          type: integer
+        menuid:
+          type: integer
+        parentid:
+          type: integer
+        sortorder:
+          type: integer
+        resourceid:
+          type: integer
+        url:
+          type: string
+        target:
+          type: string
+        titles:
+          type: object
+    Web_MenuItemInput:
+      type: object
+      properties:
+        parentid:
+          type: integer
+        sortorder:
+          type: integer
+        resourceid:
+          type: integer
+        url:
+          type: string
+        target:
+          type: string
+        titles:
+          type: object
+    Web_MenuListResponse:
+      type: object
+      properties:
+        menus:
+          type: array
+          items:
+            $ref: '#/components/schemas/Web_Menu'
+    Web_LanguageListResponse:
+      type: object
+      properties:
+        languages:
+          type: array
+          items:
+            type: object
+            properties:
+              code:
+                type: string
+              name:
+                type: string
+    Web_ImageListResponse:
+      type: object
+      properties:
+        images:
+          type: array
+          items:
+            type: object
+            properties:
+              path:
+                type: string
+              url:
+                type: string
+              width:
+                type: integer
+              height:
+                type: integer
+    Web_Result:
+      type: object
+      properties:
+        success:
+          type: boolean
+        error:
+          type: string
+        message:
+          type: string

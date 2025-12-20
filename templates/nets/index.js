@@ -1,5 +1,5 @@
 // Nets Easy Checkout - Payment Form
-const CHECKOUT_URL = '<%= url_for('nets_checkout') %>';
+const CHECKOUT_URL = '<%== url_for('Nets.checkout') %>';
 
 const form = document.getElementById('payment-form');
 const errorDiv = document.getElementById('payment-error');

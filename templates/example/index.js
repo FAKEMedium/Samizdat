@@ -187,7 +187,7 @@ function updatePagination(pagination) {
 
 // Delete an example
 async function deleteExample(id) {
-  const result = await window.authenticatedFetch(`<%== url_for('example_index') %>/${id}`, {
+  const result = await window.authenticatedFetch(`<%== url_for('Example.delete', exampleid => '_ID_') %>`.replace('_ID_', id), {
     method: 'DELETE'
   });
 

@@ -58,10 +58,10 @@ async function saveExample() {
   // Determine URL and method
   let url, method;
   if (exampleId === 'new') {
-    url = `<%== url_for('example_new') %>`;
+    url = `<%== url_for('Example.create') %>`;
     method = 'POST';
   } else {
-    url = `<%== url_for('example_index') %>/${exampleId}`;
+    url = `<%== url_for('Example.update', id => '_ID_') %>`.replace('_ID_', exampleId);
     method = 'PUT';
   }
 

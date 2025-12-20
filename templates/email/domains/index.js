@@ -68,7 +68,7 @@ function showDomainModal(domain = null) {
 
 async function loadDomain(domain) {
   try {
-    const response = await authenticatedFetch('<%== url_for('email_domain', domain => '') %>/' + encodeURIComponent(domain));
+    const response = await authenticatedFetch('<%== url_for('Email.domains.index') %>/' + encodeURIComponent(domain));
     const result = await response.json();
 
     if (result.success) {
@@ -92,9 +92,11 @@ async function saveDomain() {
   const data = new FormData(form);
 
   try {
-    const url = '<%== url_for('email_domain', domain => '') %>/' + (isEdit ? encodeURIComponent(domain) : '');
+    const url = isEdit
+      ? '<%== url_for('Email.domains.index') %>/' + encodeURIComponent(domain)
+      : '<%== url_for('Email.domains.create') %>';
 
-    const response = await authenticatedFetch(url.replace(/\/$/, ''), {
+    const response = await authenticatedFetch(url, {
       method: isEdit ? 'PUT' : 'POST',
       body: data
     });
@@ -117,7 +119,7 @@ async function deleteDomain(domain) {
   if (!confirm('<%== __('Are you sure you want to delete this domain?') %>')) return;
 
   try {
-    const response = await authenticatedFetch('<%== url_for('email_domain', domain => '') %>/' + encodeURIComponent(domain), {
+    const response = await authenticatedFetch('<%== url_for('Email.domains.index') %>/' + encodeURIComponent(domain), {
       method: 'DELETE'
     });
 

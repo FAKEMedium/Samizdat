@@ -14,9 +14,7 @@ let currentDays = 90;
 
 const loadTrends = async (days = 90) => {
   try {
-    const response = await fetch(`<%= url_for("bis_trends") %>?days=${days}`, {
-      headers: { 'Accept': 'application/json' }
-    });
+    const response = await fetch(`<%= url_for('BIS.public.trends') %>?days=${days}`);
 
     if (!response.ok) throw new Error('Failed to load trends');
 

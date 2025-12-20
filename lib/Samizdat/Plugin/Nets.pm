@@ -2,23 +2,27 @@ package Samizdat::Plugin::Nets;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Nets;
+use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
 
   my $r = $app->routes;
 
-  # Public routes
+  # Store OpenAPI fragment (parsed centrally in _load_openapi)
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{Nets} = $openapi_yaml if $openapi_yaml;
+
+  # Public routes (non-API)
   my $nets = $r->home('/nets')->to(controller => 'Nets');
-  $nets->post('/checkout')                    ->to('#checkout')             ->name('nets_checkout');
   $nets->get('/success')                      ->to('#success')              ->name('nets_success');
   $nets->get('/cancel')                       ->to('#cancel')               ->name('nets_cancel');
   $nets->post('/webhook')                     ->to('#webhook')              ->name('nets_webhook');
-  $nets->get('/payment/:payment_id/status')   ->to('#status')               ->name('nets_status');
   $nets->get('/')                             ->to('#index')                ->name('nets_index');
 
-  # Manager routes
+  # API routes are defined in OpenAPI spec (__DATA__ section)
+
+  # Manager routes (HTML pages only - API via OpenAPI)
   my $manager = $r->manager('nets')->to(controller => 'Nets');
-  $manager->post('/payment/:payment_id/refund')->to('#refund')              ->name('nets_refund');
   $manager->get('/')                          ->to('#list_payments')        ->name('nets_manager_index');
 
 
@@ -197,3 +201,203 @@ L<Samizdat::Model::Nets>, L<Samizdat::Controller::Nets>
 Nets Easy documentation: L<https://developer.nexigroup.com/nexi-checkout/en-EU/docs/>
 
 =cut
+
+__DATA__
+
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Nets API
+paths:
+  /nets/checkout:
+    post:
+      operationId: Nets.checkout
+      x-mojo-to: Nets#checkout
+      summary: Create payment and get checkout URL
+      tags: [Nets]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nets_CheckoutInput'
+      responses:
+        '200':
+          description: Payment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nets_CheckoutResponse'
+
+  /nets/payment/{payment_id}/status:
+    get:
+      operationId: Nets.payment.status
+      x-mojo-to: Nets#status
+      summary: Get payment status
+      tags: [Nets]
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nets_PaymentStatus'
+
+  /nets/payments:
+    get:
+      operationId: Nets.payments.list
+      x-mojo-to: Nets#list_payments
+      summary: List recent payments
+      tags: [Nets]
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of payments
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nets_PaymentsResponse'
+
+  /nets/payment/{payment_id}/refund:
+    post:
+      operationId: Nets.payment.refund
+      x-mojo-to: Nets#refund
+      summary: Create refund for payment
+      tags: [Nets]
+      parameters:
+        - name: payment_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Nets_RefundInput'
+      responses:
+        '200':
+          description: Refund created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Nets_RefundResponse'
+
+components:
+  schemas:
+    Nets_CheckoutInput:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Amount in smallest currency unit (ore)
+        currency:
+          type: string
+          default: SEK
+        reference:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nets_OrderItem'
+        return_url:
+          type: string
+        custom_data:
+          type: object
+      required:
+        - amount
+        - items
+    Nets_OrderItem:
+      type: object
+      properties:
+        reference:
+          type: string
+        name:
+          type: string
+        quantity:
+          type: integer
+        unit:
+          type: string
+        unitPrice:
+          type: integer
+        taxRate:
+          type: integer
+        taxAmount:
+          type: integer
+        grossTotalAmount:
+          type: integer
+        netTotalAmount:
+          type: integer
+    Nets_CheckoutResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payment_id:
+          type: string
+        checkout_url:
+          type: string
+    Nets_PaymentStatus:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payment_id:
+          type: string
+        status:
+          type: string
+        amount:
+          type: integer
+        currency:
+          type: string
+        reference:
+          type: string
+        charged_amount:
+          type: integer
+        refunded_amount:
+          type: integer
+    Nets_RefundInput:
+      type: object
+      properties:
+        amount:
+          type: integer
+          description: Refund amount in smallest currency unit
+        reason:
+          type: string
+      required:
+        - amount
+    Nets_RefundResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        refund_id:
+          type: string
+        amount:
+          type: integer
+        payment_id:
+          type: string
+    Nets_PaymentsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nets_PaymentStatus'
+        statistics:
+          type: object

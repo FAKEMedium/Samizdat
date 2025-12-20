@@ -1,6 +1,7 @@
 async function loadInvoice() {
   try {
-    const response = await fetch(window.location.pathname, {
+    const invoiceid = window.location.pathname.split('/').pop();
+    const response = await fetch(`<%== url_for('Fortnox.invoices.get', invoiceid => '_IID_') %>`.replace('_IID_', invoiceid), {
       method: 'GET',
       headers: { Accept: 'application/json' }
     });
@@ -93,9 +94,8 @@ function populateInvoiceDetails(invoice) {
   // Set navigation links
   const docNum = invoice.DocumentNumber;
   if (docNum) {
-    const baseUrl = '<%== url_for('fortnox_invoices') %>';
-    document.getElementById('nav-prev').href = `${baseUrl}/${docNum}/prev`;
-    document.getElementById('nav-next').href = `${baseUrl}/${docNum}/next`;
+    document.getElementById('nav-prev').href = `<%== url_for('Fortnox.invoices.navigate', invoiceid => '_IID_', direction => 'prev') %>`.replace('_IID_', docNum);
+    document.getElementById('nav-next').href = `<%== url_for('Fortnox.invoices.navigate', invoiceid => '_IID_', direction => 'next') %>`.replace('_IID_', docNum);
   }
 }
 

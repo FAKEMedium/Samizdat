@@ -232,7 +232,7 @@
         window.location.href = `<%== url_for('zone_index') %>/${zoneId}/export`;
       } else if (btn.classList.contains('btn-delete')) {
         if (!confirm('<%== __("Are you sure you want to delete this zone?") %>')) return;
-        const result = await window.authenticatedFetch(`<%== url_for('zone_index') %>/${zoneId}`, {
+        const result = await window.authenticatedFetch(`<%== url_for('Zone.delete', zone_id => '_ZID_') %>`.replace('_ZID_', zoneId), {
           method: 'DELETE'
         });
         if (result && result.success) {

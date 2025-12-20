@@ -1,10 +1,11 @@
 const form = document.querySelector('#contactform');
+const contactUrl = '<%== url_for('contact_index') %>';
 
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
 
   const formData = new FormData(form);
-  const response = await fetch(form.action, {
+  const response = await fetch(contactUrl, {
     method: 'POST',
     body: formData,
     headers: {
@@ -59,13 +60,12 @@ form.addEventListener('submit', async (event) => {
 
 
 async function loadData() {
-  const url = form.action || "";
   const request = {
     method: 'GET',
     headers: {Accept: 'application/json'}
   };
   try {
-    const response = await fetch(url, request);
+    const response = await fetch(contactUrl, request);
     if (!response.ok) {
       // Contact form should remain open, just log the error
       console.error('Failed to load form data:', response.statusText);

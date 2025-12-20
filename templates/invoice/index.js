@@ -51,7 +51,7 @@ function getInvoices(){
 
 async function updatePaymentDate(invoiceId, paymentDate) {
   try {
-    const response = await fetch(`/invoices/${invoiceId}`, {
+    const response = await fetch(`<%== url_for('Invoice.update', invoiceid => '_IID_') %>`.replace('_IID_', invoiceId), {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

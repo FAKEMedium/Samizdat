@@ -80,7 +80,7 @@ function initializeSMSFormInModal() {
       
       try {
         const formData = new FormData(modalForm);
-        const response = await fetch(`<%= url_for 'sms_index' %>`, {
+        const response = await fetch(`<%= url_for 'SMS.send' %>`, {
           method: 'POST',
           headers: {
             'Accept': 'application/json'
@@ -228,7 +228,7 @@ function getCustomer(customerid = 0) {
 // Fetch DNS zones from Zone model
 async function fetchCustomerZones(customerid) {
   try {
-    const response = await fetch(`<%== url_for('customer_index') %>/${customerid}/zones`, {
+    const response = await fetch(`<%== url_for('Zone.customer.index', customerid => '_CID_') %>`.replace('_CID_', customerid), {
       headers: { 'Accept': 'application/json' }
     });
     if (!response.ok) return;
