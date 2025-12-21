@@ -133,10 +133,25 @@ sub login ($self) {
     $self->cookie($self->config->{manager}->{account}->{datacookiename} => $value, $cookie_opts);
 
     $self->app->account->insertLogin($ip, $userid, $authcookie);
+
+    # Content negotiation: redirect for browsers, JSON for API clients
+    my $accept = $self->req->headers->accept // '';
+    if ($accept =~ /text\/html/ && $accept !~ /application\/json/) {
+      # Browser form submission - redirect to referer or home
+      my $referer = $self->req->headers->referrer // '/';
+      return $self->redirect_to($referer);
+    }
     $self->render(json => { userdata => $userdata }, status => 200);
 
   } else {
     $self->app->account->insertLoginFailure($ip, $username);
+
+    # Content negotiation for failed login
+    my $accept = $self->req->headers->accept // '';
+    if ($accept =~ /text\/html/ && $accept !~ /application\/json/) {
+      # Browser - redirect back to login page (let JS handle error display)
+      return $self->redirect_to($self->url_for('account_login'));
+    }
     return $self->render(json => { error => { reason => 'password', count => $count },
       ip         => $ip,
       blocklimit => $self->config->{manager}->{account}->{blocklimit},
