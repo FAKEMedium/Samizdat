@@ -294,26 +294,27 @@ function populateForm(formdata, method) {
     }
   });
 
-  document.querySelector('#minid').setAttribute('onclick', `return getId('first', 1000);`);
-  document.querySelector('#maxid').setAttribute('onclick', `return getId('newest', 1000);`);
+  // Use addEventListener instead of onclick for CSP compliance
+  document.querySelector('#minid').onclick = (e) => { e.preventDefault(); getId('first', 1000); };
+  document.querySelector('#maxid').onclick = (e) => { e.preventDefault(); getId('newest', 1000); };
   if (0 == customer.customerid) {
     thisurl = `<%== url_for('customer_index') %>`;
     document.querySelector('#dataform').action = `<%== url_for('customer_index') %>`;
     document.querySelector('#submitbutton').innerHTML = `<%== __('Create customer') %>`;
-    document.querySelector('#submitbutton').setAttribute('onclick', 'createCustomer();');
-    document.querySelector('#previd').setAttribute('onclick', `return getId('first', 1000);`);
-    document.querySelector('#nextid').setAttribute('onclick', `return getId('newest', 1000);`);
+    document.querySelector('#submitbutton').onclick = () => createCustomer();
+    document.querySelector('#previd').onclick = (e) => { e.preventDefault(); getId('first', 1000); };
+    document.querySelector('#nextid').onclick = (e) => { e.preventDefault(); getId('newest', 1000); };
     return;
   }
 
   document.querySelector('#submitbutton').innerHTML = `<%== __('Update customer') %>`;
-  document.querySelector('#submitbutton').setAttribute('onclick', 'updateCustomer();')
+  document.querySelector('#submitbutton').onclick = () => updateCustomer();
   thisurl = `<%== url_for('customer_index') %>/${ customer.customerid }`
   history.pushState(stateObj, "ajax page loaded...", thisurl);
   document.querySelector('#dataform').action = thisurl;
   document.querySelector('#headline').innerHTML = `<%==__('Customer') %> #${customer.customerid}`;
-  document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${customer.customerid});`);
-  document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${customer.customerid});`);
+  document.querySelector('#previd').onclick = (e) => { e.preventDefault(); getId('prev', customer.customerid); };
+  document.querySelector('#nextid').onclick = (e) => { e.preventDefault(); getId('next', customer.customerid); };
 
   if (Object.hasOwn(customer, 'vatno') && ('' != customer.vatno)) {
     document.querySelector('#vatlookup').href = `<%== url_for('vatno') %>/${customer.vatno}`;

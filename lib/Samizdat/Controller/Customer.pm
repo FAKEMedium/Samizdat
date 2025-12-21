@@ -282,7 +282,7 @@ sub prev ($self) {
   my $previd = $self->app->customer->neighbours($customerid)->{previd};
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    $self->redirect_to(sprintf('%s/%s', $self->url_for('customer_index'), $previd));
+    $self->redirect_to(sprintf('%s%s/%s', $self->config->{manager}->{url}, 'customers', $previd));
   } else {
     # Require admin access for customer data
     return unless $self->access({ admin => 1 });
