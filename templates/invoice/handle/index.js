@@ -121,8 +121,9 @@ function populateForm(formdata, method, dataform) {
   let customerBaseUrl = `<%== url_for('customer_index') %>`;
   let percustomer = window.location.pathname.startsWith(customerBaseUrl) ? 1 : 0;
 
-  document.querySelector('#previd').setAttribute('onclick', `return getId('prev', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
-  document.querySelector('#nextid').setAttribute('onclick', `return getId('next', ${invoice.customerid}, ${invoice.invoiceid}, ${percustomer});`);
+  // Use onclick assignment instead of setAttribute for CSP compliance
+  document.querySelector('#previd').onclick = (e) => { e.preventDefault(); getId('prev', invoice.customerid, invoice.invoiceid, percustomer); };
+  document.querySelector('#nextid').onclick = (e) => { e.preventDefault(); getId('next', invoice.customerid, invoice.invoiceid, percustomer); };
 
   if (percustomer) {
     thisurl = `<%== url_for('customer_index') %>/${invoice.customerid}/invoices/${invoice.invoiceid}`;
