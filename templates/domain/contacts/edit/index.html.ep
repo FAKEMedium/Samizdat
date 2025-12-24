@@ -1,0 +1,101 @@
+<div class="modal-header">
+  <h5 class="modal-title"><%== __('New contact') %></h5>
+  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+</div>
+<form id="contactForm">
+  <div class="modal-body">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="handle" class="form-label"><%== __('Handle') %> *</label>
+        <input type="text" class="form-control" id="handle" name="handle" required>
+      </div>
+      <div class="col-md-6">
+        <label for="name" class="form-label"><%== __('Name') %> *</label>
+        <input type="text" class="form-control" id="name" name="name" required>
+      </div>
+      <div class="col-md-6">
+        <label for="organization" class="form-label"><%== __('Organization') %></label>
+        <input type="text" class="form-control" id="organization" name="organization">
+      </div>
+      <div class="col-md-6">
+        <label for="email" class="form-label"><%== __('Email') %> *</label>
+        <input type="email" class="form-control" id="email" name="email" required>
+      </div>
+      <div class="col-md-6">
+        <label for="phone" class="form-label"><%== __('Phone') %></label>
+        <input type="tel" class="form-control" id="phone" name="phone">
+      </div>
+      <div class="col-md-6">
+        <label for="fax" class="form-label"><%== __('Fax') %></label>
+        <input type="tel" class="form-control" id="fax" name="fax">
+      </div>
+      <div class="col-12">
+        <label for="street" class="form-label"><%== __('Street') %></label>
+        <textarea class="form-control" id="street" name="street" rows="2"></textarea>
+      </div>
+      <div class="col-md-4">
+        <label for="postalCode" class="form-label"><%== __('Postal code') %></label>
+        <input type="text" class="form-control" id="postalCode" name="postalCode">
+      </div>
+      <div class="col-md-4">
+        <label for="city" class="form-label"><%== __('City') %></label>
+        <input type="text" class="form-control" id="city" name="city">
+      </div>
+      <div class="col-md-4">
+        <label for="country" class="form-label"><%== __('Country') %></label>
+        <input type="text" class="form-control" id="country" name="country" maxlength="2" placeholder="SE">
+      </div>
+      <div class="col-md-6">
+        <label for="orgno" class="form-label"><%== __('Org number') %></label>
+        <input type="text" class="form-control" id="orgno" name="orgno">
+      </div>
+      <div class="col-md-6">
+        <label for="vatno" class="form-label"><%== __('VAT number') %></label>
+        <input type="text" class="form-control" id="vatno" name="vatno">
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary"><%== __('Create') %></button>
+  </div>
+</form>
+<script id="modalscript">
+(function() {
+  const form = document.querySelector('#contactForm');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = {
+      handle: formData.get('handle'),
+      name: formData.get('name'),
+      organization: formData.get('organization'),
+      email: formData.get('email'),
+      phone: formData.get('phone'),
+      fax: formData.get('fax'),
+      street: formData.get('street')?.split('\n').filter(s => s.trim()) || [],
+      postalCode: formData.get('postalCode'),
+      city: formData.get('city'),
+      country: formData.get('country'),
+      orgno: formData.get('orgno'),
+      vatno: formData.get('vatno'),
+    };
+
+    const result = await window.authenticatedFetch('<%== url_for('Domain.contact.create') %>', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+
+    if (result && result.success) {
+      window.showToast?.('<%== __("Contact created") %>');
+      bootstrap.Modal.getInstance(document.querySelector('#universalmodal'))?.hide();
+      window.location.href = '<%== url_for('domain_contacts') %>/' + data.handle;
+    } else {
+      alert(result?.error || '<%== __("Failed to create contact") %>');
+    }
+  });
+})();
+</script>

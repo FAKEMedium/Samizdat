@@ -1,0 +1,57 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <span id="contact-handle"><%== __('Contact') %></span>
+        <span id="source-badge"></span>
+      </div>
+      <div class="card-body">
+        <div id="loading" class="text-center py-4">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden"><%== __('Loading...') %></span>
+          </div>
+        </div>
+        <div id="contact-details" style="display: none;">
+          <dl class="row mb-0">
+            <dt class="col-sm-4"><%== __('Handle') %></dt>
+            <dd class="col-sm-8" id="detail-handle"></dd>
+
+            <dt class="col-sm-4"><%== __('Name') %></dt>
+            <dd class="col-sm-8" id="detail-name"></dd>
+
+            <dt class="col-sm-4"><%== __('Organization') %></dt>
+            <dd class="col-sm-8" id="detail-organization"></dd>
+
+            <dt class="col-sm-4"><%== __('Email') %></dt>
+            <dd class="col-sm-8" id="detail-email"></dd>
+
+            <dt class="col-sm-4"><%== __('Phone') %></dt>
+            <dd class="col-sm-8" id="detail-phone"></dd>
+
+            <dt class="col-sm-4"><%== __('Fax') %></dt>
+            <dd class="col-sm-8" id="detail-fax"></dd>
+
+            <dt class="col-sm-4"><%== __('Address') %></dt>
+            <dd class="col-sm-8">
+              <address id="detail-address" class="mb-0"></address>
+            </dd>
+
+            <dt class="col-sm-4"><%== __('Country') %></dt>
+            <dd class="col-sm-8" id="detail-country"></dd>
+
+            <dt class="col-sm-4" id="orgno-label" style="display: none;"><%== __('Org number') %></dt>
+            <dd class="col-sm-8" id="detail-orgno" style="display: none;"></dd>
+
+            <dt class="col-sm-4" id="vatno-label" style="display: none;"><%== __('VAT number') %></dt>
+            <dd class="col-sm-8" id="detail-vatno" style="display: none;"></dd>
+          </dl>
+        </div>
+        <div id="error-message" class="alert alert-danger" style="display: none;"></div>
+      </div>
+      <div class="card-footer">
+        <a href="<%== url_for('domain_contacts') %>" class="btn btn-secondary"><%== __('Back to list') %></a>
+        <button type="button" id="deleteContact" class="btn btn-danger float-end"><%== __('Delete') %></button>
+      </div>
+    </div>
+  </div>
+</div>
