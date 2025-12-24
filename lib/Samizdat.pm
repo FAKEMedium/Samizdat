@@ -305,7 +305,7 @@ sub _load_openapi {
       route                          => $self->routes->any($config->{api}->{url} || '/api'),
       schema                         => 'v3',
       render_specification           => 1,  # Enables /api.html and /api.json
-      render_specification_for_paths => 1,  # Ensable per-path spec rendering
+      render_specification_for_paths => 0,  # Ensable per-path spec rendering
     });
 
     # Serve the merged spec as JSON at /api/openapi.json

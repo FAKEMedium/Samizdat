@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header"><%== __('Register domain') %></div>
+      <form id="registerForm">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-8">
+              <label for="domainname" class="form-label"><%== __('Domain name') %> *</label>
+              <input type="text" class="form-control" id="domainname" name="domainname" required placeholder="example.com">
+            </div>
+            <div class="col-md-4">
+              <label for="period" class="form-label"><%== __('Period') %></label>
+              <select class="form-select" id="period" name="period">
+                <option value="1">1 <%== __('year') %></option>
+                <option value="2">2 <%== __('years') %></option>
+                <option value="3">3 <%== __('years') %></option>
+                <option value="5">5 <%== __('years') %></option>
+                <option value="10">10 <%== __('years') %></option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label for="registrant" class="form-label"><%== __('Registrant contact') %> *</label>
+              <select class="form-select" id="registrant" name="registrant" required>
+                <option value=""><%== __('Select contact...') %></option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="admin" class="form-label"><%== __('Admin contact') %></label>
+              <select class="form-select" id="admin" name="admin">
+                <option value=""><%== __('Same as registrant') %></option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="tech" class="form-label"><%== __('Tech contact') %></label>
+              <select class="form-select" id="tech" name="tech">
+                <option value=""><%== __('Same as registrant') %></option>
+              </select>
+            </div>
+            <div class="col-12">
+              <label class="form-label"><%== __('Nameservers') %></label>
+              <div id="nameservers">
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" name="ns[]" placeholder="ns1.example.com">
+                </div>
+                <div class="input-group mb-2">
+                  <input type="text" class="form-control" name="ns[]" placeholder="ns2.example.com">
+                </div>
+              </div>
+              <button type="button" class="btn btn-sm btn-outline-secondary" id="addNs"><%== __('Add nameserver') %></button>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <a href="<%== url_for('domain_index') %>" class="btn btn-secondary"><%== __('Cancel') %></a>
+          <button type="submit" class="btn btn-primary float-end"><%== __('Register') %></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
