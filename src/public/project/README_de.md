@@ -1,5 +1,9 @@
-[description]: # "Samizdat ist ein neuer Ansatz für Selbstverlag, der moderne Technologie nutzt."
-[keywords]: # "Verlagswesen,Samizdat"
+---
+description: Samizdat ist ein neuer Ansatz für Selbstverlag, der moderne Technologie nutzt.
+keywords:
+  - Verlagswesen
+  - Samizdat
+---
 
 # Samizdat-Projekt
 

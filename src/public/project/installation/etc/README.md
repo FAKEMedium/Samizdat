@@ -1,5 +1,11 @@
-[description]: # "Configuration for various daemons supporting the Samizdat application."
-[keywords]: # "etc,nginx,systemd,configuration"
+---
+description: Configuration for various daemons supporting the Samizdat application.
+keywords:
+  - etc
+  - nginx
+  - systemd
+  - configuration
+---
 
 # System integration
 

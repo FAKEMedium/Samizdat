@@ -1,5 +1,9 @@
-[description]: # "Samizdat to nowe podejście do samopublikowania, które wykorzystuje nowoczesną technologię."
-[keywords]: # "wydawnictwo,Samizdat"
+---
+description: Samizdat to nowe podejście do samopublikowania, które wykorzystuje nowoczesną technologię.
+keywords:
+  - wydawnictwo
+  - Samizdat
+---
 
 # Projekt Samizdat
 

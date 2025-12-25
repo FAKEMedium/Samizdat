@@ -1,5 +1,9 @@
-[description]: # "萨米亚特是使用现代技术的自助出版新方法。"
-[keywords]: # "出版,萨米亚特"
+---
+description: 萨米亚特是使用现代技术的自助出版新方法。
+keywords:
+  - 出版
+  - 萨米亚特
+---
 
 # Samizdat 项目
 

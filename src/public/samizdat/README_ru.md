@@ -1,5 +1,11 @@
-[description]: # "Samizdat är en totallösning för webhosting och innehåller dessutom funktioner för fakturering och bokföring."
-[keywords]: # "fakturering,bokföring,Fortnox,transparens"
+---
+description: Samizdat är en totallösning för webhosting och innehåller dessutom funktioner för fakturering och bokföring.
+keywords:
+  - fakturering
+  - bokföring
+  - Fortnox
+  - transparens
+---
 
 # Samizdat
 

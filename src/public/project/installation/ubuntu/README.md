@@ -1,5 +1,11 @@
-[description]: # "Commands to install Samizdat on Ubuntu."
-[keywords]: # "Mojolicious,perl,linux,ubuntu"
+---
+description: Commands to install Samizdat on Ubuntu.
+keywords:
+  - Mojolicious
+  - perl
+  - linux
+  - ubuntu
+---
 
 # Ubuntu Installation
 

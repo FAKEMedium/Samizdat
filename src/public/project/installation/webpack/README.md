@@ -1,5 +1,11 @@
-[description]: # "How Samizdat minimizes assets by using Webpack and PurgeCSS"
-[keywords]: # "Webpack,optimization,PurgeCSS,treeshaking"
+---
+description: How Samizdat minimizes assets by using Webpack and PurgeCSS
+keywords:
+  - Webpack
+  - optimization
+  - PurgeCSS
+  - treeshaking
+---
 
 # Webpack
 

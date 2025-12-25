@@ -275,7 +275,15 @@ class ToastUIMarkdownManager {
     const content = {};
 
     this.editors.forEach((editor, element) => {
-      const elementId = element.id || element.dataset.toastuiIndex;
+      let elementId = element.id || element.dataset.toastuiIndex;
+
+      // For sidecards with data-src, use src-based key for backend matching
+      if (element.classList.contains('card') && element.dataset.src) {
+        // Convert "01-samizdat.md" to "01-samizdat-content"
+        const srcBase = element.dataset.src.replace(/\.md$/, '');
+        elementId = `${srcBase}-content`;
+      }
+
       content[elementId] = asMarkdown ? editor.getMarkdown() : editor.getHTML();
     });
 

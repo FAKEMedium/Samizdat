@@ -10,7 +10,7 @@ keywords:
   - open source
 author: FAKE Medium
 title: FAKE News
-categogry: articles
+category: articles
 tags:
   - fake news
   - Sweden

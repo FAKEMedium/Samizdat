@@ -1,5 +1,14 @@
-[description]: # "Tudo sobre notícias falsas. Samizdat é uma plataforma de gerenciamento de conteúdo com a capacidade de manter conteúdo em um pen drive"
-[keywords]: # "censura,CMS,notícias falsas,samizdat,publicação,inteligência artificial,código aberto"
+---
+description: Tudo sobre notícias falsas. Samizdat é uma plataforma de gerenciamento de conteúdo com a capacidade de manter conteúdo em um pen drive
+keywords:
+  - censura
+  - CMS
+  - notícias falsas
+  - samizdat
+  - publicação
+  - inteligência artificial
+  - código aberto
+---
 
 # FAKE News
 
