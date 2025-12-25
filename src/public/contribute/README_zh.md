@@ -1,5 +1,11 @@
-[description]: # "帮助改进萨米亚特，发现虚假新闻并创建您自己的新闻。"
-[keywords]: # "代码,报告,翻译,Github"
+---
+description: 帮助改进萨米亚特，发现虚假新闻并创建您自己的新闻。
+keywords:
+  - 代码
+  - 报告
+  - 翻译
+  - Github
+---
 
 # 贡献
 

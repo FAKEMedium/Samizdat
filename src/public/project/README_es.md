@@ -1,5 +1,9 @@
-[description]: # "Samizdat es un nuevo enfoque de la autopublicación que utiliza tecnología moderna."
-[keywords]: # "publicación,Samizdat"
+---
+description: Samizdat es un nuevo enfoque de la autopublicación que utiliza tecnología moderna.
+keywords:
+  - publicación
+  - Samizdat
+---
 
 # Proyecto Samizdat
 

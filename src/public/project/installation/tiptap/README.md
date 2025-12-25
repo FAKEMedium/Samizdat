@@ -1,5 +1,12 @@
-[description]: # "TipTap markdown editor setup for Samizdat inline editing"
-[keywords]: # "TipTap,markdown,editor,WYSIWYG,inline editing"
+---
+description: TipTap markdown editor setup for Samizdat inline editing
+keywords:
+  - TipTap
+  - markdown
+  - editor
+  - WYSIWYG
+  - inline editing
+---
 
 # TipTap Editor
 

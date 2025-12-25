@@ -1,5 +1,9 @@
-[description]: # "Samizdat är ett nytt sätt att se på självpublicering som använder modern teknik."
-[keywords]: # "publicering,Samizdat"
+---
+description: Samizdat är ett nytt sätt att se på självpublicering som använder modern teknik.
+keywords:
+  - publicering
+  - Samizdat
+---
 
 # Samizdat-projektet
 

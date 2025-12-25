@@ -183,31 +183,63 @@ sub geturis ($self, $options = {}) {
 
 
 sub transclude ($self, $contentref, $head, $dirname) {
-  # Extract metadata from reference-style links like [key]: # "value"
-  while ($$contentref =~ s/^\[([^\]]+)\]:\s*#\s*"([^"]+)"\s*$//m) {
-    my $key = $1;
-    my $value = $2;
-    
-    # Initialize nested hashes if they don't exist
-    $head->{meta} //= {};
-    $head->{meta}->{name} //= {};
-    $head->{meta}->{property} //= {};
-    $head->{meta}->{itemprop} //= {};
-    
-    if ($key =~ /^(description|keywords)$/) {
-      $head->{meta}->{name}->{$key} = $value;
-    } elsif ($key =~ /^og:(.+)$/) {
-      $head->{meta}->{property}->{$key} = $value;
-    } elsif ($key =~ /^twitter:(.+)$/) {
-      $head->{meta}->{name}->{$key} = $value;
-    } elsif ($key =~ /^itemprop:(.+)$/) {
-      my $itemprop_key = $1;
-      $head->{meta}->{itemprop}->{$itemprop_key} = $value;
-    } elsif ($key =~ /^(title)$/) {
-      $head->{$key} = $value;
-    } else {
-      # Store other metadata directly in head
-      $head->{$key} = $value;
+  # Initialize nested hashes
+  $head->{meta} //= {};
+  $head->{meta}->{name} //= {};
+  $head->{meta}->{property} //= {};
+  $head->{meta}->{itemprop} //= {};
+
+  # Try YAML front matter first (between --- markers)
+  if ($$contentref =~ s/^---\s*\n(.*?)\n---\s*\n//s) {
+    my $yaml_content = $1;
+    my $frontmatter = eval { YAML::XS::Load($yaml_content) } // {};
+
+    for my $key (keys %$frontmatter) {
+      my $value = $frontmatter->{$key};
+
+      if ($key eq 'description') {
+        $head->{meta}->{name}->{description} = $value;
+      } elsif ($key eq 'keywords') {
+        # Keywords can be array or string
+        $head->{meta}->{name}->{keywords} = ref $value eq 'ARRAY' ? join(', ', @$value) : $value;
+      } elsif ($key eq 'title') {
+        $head->{title} = $value;
+      } elsif ($key =~ /^og[_:](.+)$/) {
+        my $og_key = "og:$1";
+        $head->{meta}->{property}->{$og_key} = $value;
+      } elsif ($key =~ /^twitter[_:](.+)$/) {
+        my $tw_key = "twitter:$1";
+        $head->{meta}->{name}->{$tw_key} = $value;
+      } elsif ($key eq 'tags') {
+        # Tags as array - store as comma-separated for meta, keep array in head
+        $head->{tags} = $value;
+        $head->{meta}->{name}->{keywords} //= ref $value eq 'ARRAY' ? join(', ', @$value) : $value;
+      } else {
+        # Store other metadata directly in head (author, category, etc.)
+        $head->{$key} = $value;
+      }
+    }
+  } else {
+    # Fall back to reference-style links like [key]: # "value"
+    while ($$contentref =~ s/^\[([^\]]+)\]:\s*#\s*"([^"]+)"\s*$//m) {
+      my $key = $1;
+      my $value = $2;
+
+      if ($key =~ /^(description|keywords)$/) {
+        $head->{meta}->{name}->{$key} = $value;
+      } elsif ($key =~ /^og:(.+)$/) {
+        $head->{meta}->{property}->{$key} = $value;
+      } elsif ($key =~ /^twitter:(.+)$/) {
+        $head->{meta}->{name}->{$key} = $value;
+      } elsif ($key =~ /^itemprop:(.+)$/) {
+        my $itemprop_key = $1;
+        $head->{meta}->{itemprop}->{$itemprop_key} = $value;
+      } elsif ($key =~ /^(title)$/) {
+        $head->{$key} = $value;
+      } else {
+        # Store other metadata directly in head
+        $head->{$key} = $value;
+      }
     }
   }
 
@@ -743,6 +775,12 @@ sub save_content ($self, $params) {
     # The sidecard_base is already the full path without .md, just add .md
     $markdown_src = "${sidecard_base}.md";
     $field_to_update = $2 eq 'title' ? 'title' : 'content';
+
+    # For sidecard content, extract title from markdown if present (# Title\n\n...)
+    if ($field_to_update eq 'content' && $content =~ s/^#\s+([^\n]+)\n+//) {
+      # Store extracted title for later use
+      $params->{_extracted_title} = $1;
+    }
   } else {
     # Other elements - default to content with empty alias
     $alias = '';
@@ -758,11 +796,22 @@ sub save_content ($self, $params) {
   
   if ($existing) {
     # Update existing resource
-    my $update_sql = $field_to_update eq 'title'
-      ? 'UPDATE web.resources SET title = ?, modified = NOW() WHERE resourceid = ?'
-      : 'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?';
+    my $update_sql;
+    my @bind_params;
 
-    $self->database->db->query($update_sql, $content, $existing->{resourceid});
+    if ($field_to_update eq 'title') {
+      $update_sql = 'UPDATE web.resources SET title = ?, modified = NOW() WHERE resourceid = ?';
+      @bind_params = ($content, $existing->{resourceid});
+    } elsif ($params->{_extracted_title}) {
+      # Sidecard content with extracted title - update both
+      $update_sql = 'UPDATE web.resources SET title = ?, content = ?, modified = NOW() WHERE resourceid = ?';
+      @bind_params = ($params->{_extracted_title}, $content, $existing->{resourceid});
+    } else {
+      $update_sql = 'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?';
+      @bind_params = ($content, $existing->{resourceid});
+    }
+
+    $self->database->db->query($update_sql, @bind_params);
 
     # For sidecards, ensure connection exists (may be missing from previous saves)
     if ($alias eq '' && $sidecard_base) {
@@ -775,13 +824,20 @@ sub save_content ($self, $params) {
     my $result;
     if ($field_to_update eq 'title') {
       $result = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, title, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
+        'INSERT INTO web.resources (alias, src, title, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
          VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
         $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
       );
+    } elsif ($params->{_extracted_title}) {
+      # Sidecard content with extracted title - insert both
+      $result = $self->database->db->query(
+        'INSERT INTO web.resources (alias, src, title, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+        $alias, $markdown_src, $params->{_extracted_title}, $content, $user_id, $user_id, $user_id, $language_id
+      );
     } else {
       $result = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid) 
+        'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
          VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
         $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
       );
@@ -910,8 +966,17 @@ sub html_to_markdown ($self, $html) {
 sub get_source_content ($self, $docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
   my $result = {
-    main => { title => '', content => '', src => '' },
+    main => { title => '', content => '', src => '', frontmatter => '' },
     sidecards => []
+  };
+
+  # Helper to extract and strip YAML front matter
+  my $extract_frontmatter = sub ($content) {
+    return ('', $content) unless $content;
+    if ($content =~ s/^(---\s*\n.*?\n---\s*\n)//s) {
+      return ($1, $content);
+    }
+    return ('', $content);
   };
 
   # Helper to strip title from markdown content
@@ -937,9 +1002,21 @@ sub get_source_content ($self, $docpath, $language) {
       # Convert HTML to markdown if needed (legacy data cleanup)
       $content = $self->html_to_markdown($content);
 
+      # Try to get front matter from source file if available
+      my $frontmatter = '';
+      if ($main->{src}) {
+        my $public_src = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+        my $file = $public_src->child($main->{src});
+        if (-f $file) {
+          my $file_content = decode('UTF-8', $file->slurp);
+          ($frontmatter) = $extract_frontmatter->($file_content);
+        }
+      }
+
       $result->{main} = {
         title => $main->{title} // '',
         content => $strip_title->($content),
+        frontmatter => $frontmatter,
         src => $main->{src} // '',
         source => 'database'
       };
@@ -979,12 +1056,14 @@ sub get_source_content ($self, $docpath, $language) {
     my $file = $public_src->child($src_path);
     return undef unless -f $file;
     my $content = decode('UTF-8', $file->slurp);
-    my ($title) = $content =~ /^#\s+(.+)$/m;
+    # Extract front matter before processing
+    my ($frontmatter, $body) = $extract_frontmatter->($content);
+    my ($title) = $body =~ /^#\s+(.+)$/m;
     # Strip title from content
-    my $body = $strip_title->($content);
+    $body = $strip_title->($body);
     # Note: Don't convert through pandoc - file is already markdown
     # html_to_markdown would escape [, ], # etc.
-    return { title => $title // '', content => $body };
+    return { title => $title // '', content => $body, frontmatter => $frontmatter };
   };
 
   my $src_path = $docpath;
@@ -1001,6 +1080,7 @@ sub get_source_content ($self, $docpath, $language) {
     $result->{main} = {
       title => $md_content->{title},
       content => $md_content->{content},
+      frontmatter => $md_content->{frontmatter},
       src => $readme_path,
       source => 'file'
     };
@@ -1017,6 +1097,7 @@ sub get_source_content ($self, $docpath, $language) {
       push @{$result->{sidecards}}, {
         title => $md_content->{title},
         content => $md_content->{content},
+        frontmatter => $md_content->{frontmatter},
         src => $src,
         source => 'file'
       };

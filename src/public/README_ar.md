@@ -1,7 +1,16 @@
-[description]: # "Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick"
-[keywords]: # "censorship,CMS,fake news,samizdat,publishing,artificial intelligence,open source"
+---
+description: Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick
+keywords:
+  - censorship
+  - CMS
+  - fake news
+  - samizdat
+  - publishing
+  - artificial intelligence
+  - open source
+---
 
-# أخبار مزيفة
+# أخبار مزيفة 
 
 <img src="bidenlofven.jpg" id="selectedimage" class="img-fluid mb-2 d-block" width="1320" height="879" alt="جو بايدن يلتقي برئيس وزراء السويد ستيفان لوفين" />
 

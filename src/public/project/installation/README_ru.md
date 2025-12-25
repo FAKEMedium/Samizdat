@@ -1,5 +1,8 @@
-[description]: # "Overview of installation of the Samizdat application"
-[keywords]: # "installation"
+---
+description: Overview of installation of the Samizdat application
+keywords:
+  - installation
+---
 
 # Установка
 

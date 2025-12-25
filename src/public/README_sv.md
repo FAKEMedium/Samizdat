@@ -1,5 +1,14 @@
-[description]: # "Allt om falska nyheter. Samizdat är en innehållshanteringsplattform med möjlighet att lagra innehåll på en USB-pinne"
-[keywords]: # "censur,CMS,falska nyheter,samizdat,publicering,artificiell intelligens,öppen källkod"
+---
+description: Allt om falska nyheter. Samizdat är en innehållshanteringsplattform med möjlighet att lagra innehåll på en USB-pinne
+keywords:
+  - censur
+  - CMS
+  - falska nyheter
+  - samizdat
+  - publicering
+  - artificiell intelligens
+  - öppen källkod
+---
 
 # FAKE News
 

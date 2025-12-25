@@ -443,37 +443,59 @@ sub _extract_card_image ($subdoc) {
 
   my $dom = Mojo::DOM->new($subdoc->{main});
   my $first_elem = $dom->children->first;
+  return unless $first_elem && $first_elem->tag;
 
-  # Check if first element is a picture or img
-  if ($first_elem && $first_elem->tag && ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img')) {
-    # Add card-img-top class to the img element
-    if ($first_elem->tag eq 'picture') {
-      my $img = $first_elem->at('img');
-      if ($img) {
-        my $existing_class = $img->attr('class') // '';
-        unless ($existing_class =~ /card-img-top/) {
-          $img->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+  my $image_elem;
+
+  # Check if first element is directly a picture or img
+  if ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img') {
+    $image_elem = $first_elem;
+  }
+  # Also check if first element is a <p> containing only an image
+  elsif ($first_elem->tag eq 'p') {
+    my $p_children = $first_elem->children;
+    if ($p_children->size == 1) {
+      my $child = $p_children->first;
+      if ($child && $child->tag && ($child->tag eq 'picture' || $child->tag eq 'img')) {
+        # Check that p has no significant text content
+        my $text_content = $first_elem->text // '';
+        $text_content =~ s/^\s+|\s+$//g;
+        if ($text_content eq '') {
+          $image_elem = $child;
         }
       }
-    } else {
-      my $existing_class = $first_elem->attr('class') // '';
+    }
+  }
+
+  return unless $image_elem;
+
+  # Add card-img-top class to the img element
+  if ($image_elem->tag eq 'picture') {
+    my $img = $image_elem->at('img');
+    if ($img) {
+      my $existing_class = $img->attr('class') // '';
       unless ($existing_class =~ /card-img-top/) {
-        $first_elem->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+        $img->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
       }
     }
-
-    # Store the image for card header
-    $subdoc->{card_image} = $first_elem->to_string;
-
-    # Remove from content
-    $first_elem->remove;
-
-    # Update main content
-    my $html = $dom->to_string;
-    $html =~ s/^[\s\r\n]+//;
-    $html =~ s/[\s\r\n]+$//;
-    $subdoc->{main} = $html;
+  } else {
+    my $existing_class = $image_elem->attr('class') // '';
+    unless ($existing_class =~ /card-img-top/) {
+      $image_elem->attr('class', $existing_class ? "$existing_class card-img-top" : 'card-img-top');
+    }
   }
+
+  # Store the image for card header
+  $subdoc->{card_image} = $image_elem->to_string;
+
+  # Remove the first element (which contains or is the image)
+  $first_elem->remove;
+
+  # Update main content
+  my $html = $dom->to_string;
+  $html =~ s/^[\s\r\n]+//;
+  $html =~ s/[\s\r\n]+$//;
+  $subdoc->{main} = $html;
 }
 
 # Render TipTap toolbar chunk

@@ -1,5 +1,9 @@
-[description]: # "Samizdat is a new take on self publishing that uses modern technology."
-[keywords]: # "publishing,Samizdat"
+---
+description: Samizdat is a new take on self publishing that uses modern technology.
+keywords:
+  - publishing
+  - Samizdat
+---
 
 # Samizdat project
 

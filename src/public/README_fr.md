@@ -1,5 +1,14 @@
-[description]: # "Tout sur les fausses nouvelles. Samizdat est une plateforme de gestion de contenu avec la possibilité de conserver le contenu sur une clé USB"
-[keywords]: # "censure,CMS,fausses nouvelles,samizdat,édition,intelligence artificielle,open source"
+---
+description: Tout sur les fausses nouvelles. Samizdat est une plateforme de gestion de contenu avec la possibilité de conserver le contenu sur une clé USB
+keywords:
+  - censure
+  - CMS
+  - fausses nouvelles
+  - samizdat
+  - édition
+  - intelligence artificielle
+  - open source
+---
 
 # FAKE News
 

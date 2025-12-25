@@ -1,5 +1,10 @@
-[description]: # "This page should open in Suneditor when the linking link has the "editable" class."
-[keywords]: # "Suneditor,javascript,magic"
+---
+description: This page should open in Suneditor when the linking link has the "editable" class.
+keywords:
+  - Suneditor
+  - javascript
+  - magic
+---
 
 # Edit content
 

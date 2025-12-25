@@ -1,5 +1,14 @@
-[description]: # "Alles über Fake News. Samizdat ist eine Content-Management-Plattform mit der Möglichkeit, Inhalte auf einem USB-Stick zu speichern"
-[keywords]: # "Zensur,CMS,Fake News,Samizdat,Verlagswesen,künstliche Intelligenz,Open Source"
+---
+description: Alles über Fake News. Samizdat ist eine Content-Management-Plattform mit der Möglichkeit, Inhalte auf einem USB-Stick zu speichern
+keywords:
+  - Zensur
+  - CMS
+  - Fake News
+  - Samizdat
+  - Verlagswesen
+  - künstliche Intelligenz
+  - Open Source
+---
 
 # FAKE News
 

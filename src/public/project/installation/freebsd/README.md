@@ -1,5 +1,11 @@
-[description]: # "Commands to install Samizdat on FreeBSD."
-[keywords]: # "FreeBSD,Perl,PostgreSQL,pkg"
+---
+description: Commands to install Samizdat on FreeBSD.
+keywords:
+  - FreeBSD
+  - Perl
+  - PostgreSQL
+  - pkg
+---
 
 # FreeBSD Installation
 
