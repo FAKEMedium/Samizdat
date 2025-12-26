@@ -770,23 +770,16 @@ sub save_content ($self, $params) {
   my $language = $params->{language};
   my $user_id = $params->{user_id};
 
-  # Parse frontmatter YAML for title and description
-  my ($fm_title, $fm_description);
+  # Prepend frontmatter to content if provided (for main content only)
   if ($frontmatter && $frontmatter =~ /\S/) {
-    eval {
-      require YAML::XS;
-      my $fm_data = YAML::XS::Load($frontmatter);
-      $fm_title = $fm_data->{title} if ref $fm_data eq 'HASH';
-      $fm_description = $fm_data->{description} if ref $fm_data eq 'HASH';
-    };
+    # Ensure frontmatter has proper YAML delimiters
+    $frontmatter =~ s/^\s+//;
+    $frontmatter =~ s/\s+$//;
+    unless ($frontmatter =~ /^---/) {
+      $frontmatter = "---\n$frontmatter\n---\n";
+    }
+    $content = "$frontmatter\n$content";
   }
-
-  # Fallback: extract title from markdown # heading if not in frontmatter
-  if (!$fm_title && $content) {
-    ($fm_title) = $content =~ /^#\s+(.+)$/m;
-  }
-  $fm_title //= '';  # Database requires non-null title
-  $fm_description //= '';  # Database requires non-null description
 
   # Get language ID from language code using cached languages hash
   my $language_id = $self->languages->{$language} // 1;
@@ -825,18 +818,11 @@ sub save_content ($self, $params) {
   
   if ($existing) {
     # Update existing resource - store complete markdown in content field
-    # Include title and description from frontmatter if provided
-    if (defined $fm_title || defined $fm_description) {
-      $self->database->db->query(
-        'UPDATE web.resources SET content = ?, title = COALESCE(?, title), description = COALESCE(?, description), modified = NOW() WHERE resourceid = ?',
-        $content, $fm_title, $fm_description, $existing->{resourceid}
-      );
-    } else {
-      $self->database->db->query(
-        'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
-        $content, $existing->{resourceid}
-      );
-    }
+    # Title and description are extracted from markdown content, not stored separately
+    $self->database->db->query(
+      'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
+      $content, $existing->{resourceid}
+    );
 
     # For sidecards, ensure connection exists (may be missing from previous saves)
     if ($alias eq '' && $sidecard_base) {
@@ -846,10 +832,11 @@ sub save_content ($self, $params) {
     return $existing->{resourceid};
   } else {
     # Insert new resource - store complete markdown in content field
+    # Title and description are extracted from markdown content, not stored separately
     my $result = $self->database->db->query(
-      'INSERT INTO web.resources (alias, src, content, title, description, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-      $alias, $markdown_src, $content, $fm_title, $fm_description, $user_id, $user_id, $user_id, $language_id
+      'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
+       VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+      $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
     );
 
     my $resource_id = $result->hash->{resourceid};
@@ -1191,8 +1178,9 @@ sub get_database_content ($self, $save_docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
 
   # Get main resource (has alias matching save_docpath)
+  # Title and description are extracted from markdown content, not stored separately
   my $main_resource = $self->database->db->query(
-    'SELECT resourceid, src, content, title, description FROM web.resources
+    'SELECT resourceid, src, content FROM web.resources
      WHERE alias = ? AND languageid = ?',
     $save_docpath, $language_id
   )->hash;
@@ -1261,18 +1249,22 @@ sub get_database_content ($self, $save_docpath, $language) {
   $display_docpath =~ s|/$||;  # Remove trailing slash
   $display_docpath = $display_docpath ? "${display_docpath}/index.html" : "index.html";
 
-  # Extract title from main content markdown
+  # Extract title from main content markdown and parse frontmatter for meta tags
   my $main_markdown = $main_resource->{content} // '';
+  my $head = {};
+
+  # Parse frontmatter from markdown content (extracts description, keywords, og:*, etc.)
+  $self->transclude(\$main_markdown, $head, '');
 
   $docs->{$display_docpath} = {
     docpath => $display_docpath,
-    title => $extract_title->($main_markdown),
+    title => $head->{title} // $extract_title->($main_markdown),
     main => $self->markdown_to_html($strip_md_title->($main_markdown)),
     subdocs => $subdocs,
     children => [],
     url => $save_docpath =~ s|^/||r =~ s|/$||r,
     language => $language,
-    head => {},
+    head => $head,
     editable => 1,
     src => $main_resource->{src}
   };
@@ -1284,32 +1276,31 @@ sub get_database_content ($self, $save_docpath, $language) {
 # Ensure sidecard consistency across languages by cloning missing resources
 sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $default_language_id, $target_main_id) {
   # Get all sidecards connected to main resource in default language
+  # Title and description are extracted from markdown content, not stored separately
   my $default_sidecards = $self->database->db->query(
-    'SELECT r.src, r.title, r.content, r.description, r.owner, r.creator, r.publisher, 
+    'SELECT r.src, r.content, r.owner, r.creator, r.publisher,
             r.contenttype, r.templateid, r.webserviceid
-     FROM web.resources r 
-     JOIN web.resourceconnections rc ON r.resourceid = rc.child 
+     FROM web.resources r
+     JOIN web.resourceconnections rc ON r.resourceid = rc.child
      WHERE rc.parent = ? AND r.languageid = ?',
     $default_main_id, $default_language_id
   )->hashes;
-  
+
   for my $default_sidecard (@$default_sidecards) {
     # Check if this sidecard exists in target language
     my $existing = $self->database->db->query(
       'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ?',
       $default_sidecard->{src}, $target_language_id
     )->hash;
-    
+
     unless ($existing) {
       # Clone the sidecard resource for target language
       my $new_resource = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, title, content, description, owner, creator, publisher, 
-                                   languageid, contenttype, templateid, webserviceid) 
-         VALUES (\'\', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING resourceid',
+        'INSERT INTO web.resources (alias, src, content, owner, creator, publisher,
+                                   languageid, contenttype, templateid, webserviceid)
+         VALUES (\'\', ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING resourceid',
         $default_sidecard->{src},
-        $default_sidecard->{title},
-        $default_sidecard->{content}, 
-        $default_sidecard->{description},
+        $default_sidecard->{content},
         $default_sidecard->{owner},
         $default_sidecard->{creator},
         $default_sidecard->{publisher},
@@ -1318,12 +1309,12 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
         $default_sidecard->{templateid},
         $default_sidecard->{webserviceid}
       );
-      
+
       my $new_resource_id = $new_resource->hash->{resourceid};
-      
+
       # Create connection between target main resource and new sidecard
       $self->database->db->query(
-        'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?) 
+        'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?)
          ON CONFLICT DO NOTHING',
         $target_main_id, $new_resource_id
       );
