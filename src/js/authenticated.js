@@ -312,72 +312,22 @@ console.log('editButton found:', editButton);
 
 /**
  * Create the editor toolbar HTML to replace headlinenav content
+ * Simplified to markdown-only mode
  */
 function createEditorToolbar() {
-    const currentMode = window.toastUIMarkdown?.getCurrentMode() || 'markdown';
-
     return `
         <li class="nav-item">
-            <div class="btn-group btn-group-sm" role="group" aria-label="Editor mode">
-                <button type="button" class="btn ${currentMode === 'markdown' ? 'btn-primary' : 'btn-outline-primary'}" id="modeMarkdown" title="Markdown mode">MD</button>
-                <button type="button" class="btn ${currentMode === 'wysiwyg' ? 'btn-primary' : 'btn-outline-primary'}" id="modeWysiwyg" title="WYSIWYG mode">WYSIWYG</button>
-            </div>
-        </li>
-        <li class="nav-item ms-2">
-            <div class="btn-group btn-group-sm" role="group" aria-label="Write/Preview">
-                <button type="button" class="btn btn-primary" id="modeWrite" title="Write">Write</button>
-                <button type="button" class="btn btn-outline-primary" id="modePreview" title="Preview">Preview</button>
-            </div>
+            <span class="navbar-text">Editing markdown</span>
         </li>
     `;
 }
 
 /**
  * Setup editor toolbar event handlers
+ * Simplified - no mode switching in markdown-only mode
  */
 function setupEditorToolbarHandlers() {
-    const mdBtn = document.getElementById('modeMarkdown');
-    const wysiwygBtn = document.getElementById('modeWysiwyg');
-    const writeBtn = document.getElementById('modeWrite');
-    const previewBtn = document.getElementById('modePreview');
-
-    // MD/WYSIWYG toggler
-    if (mdBtn && wysiwygBtn) {
-        mdBtn.addEventListener('click', () => {
-            window.toastUIMarkdown?.setMode('markdown');
-            mdBtn.classList.remove('btn-outline-primary');
-            mdBtn.classList.add('btn-primary');
-            wysiwygBtn.classList.remove('btn-primary');
-            wysiwygBtn.classList.add('btn-outline-primary');
-        });
-
-        wysiwygBtn.addEventListener('click', () => {
-            window.toastUIMarkdown?.setMode('wysiwyg');
-            wysiwygBtn.classList.remove('btn-outline-primary');
-            wysiwygBtn.classList.add('btn-primary');
-            mdBtn.classList.remove('btn-primary');
-            mdBtn.classList.add('btn-outline-primary');
-        });
-    }
-
-    // Write/Preview toggler
-    if (writeBtn && previewBtn) {
-        writeBtn.addEventListener('click', () => {
-            window.toastUIMarkdown?.setPreviewMode(false);
-            writeBtn.classList.remove('btn-outline-primary');
-            writeBtn.classList.add('btn-primary');
-            previewBtn.classList.remove('btn-primary');
-            previewBtn.classList.add('btn-outline-primary');
-        });
-
-        previewBtn.addEventListener('click', () => {
-            window.toastUIMarkdown?.setPreviewMode(true);
-            previewBtn.classList.remove('btn-outline-primary');
-            previewBtn.classList.add('btn-primary');
-            writeBtn.classList.remove('btn-primary');
-            writeBtn.classList.add('btn-outline-primary');
-        });
-    }
+    // No handlers needed for markdown-only mode
 }
 
 /**
@@ -412,9 +362,8 @@ async function handleSave() {
 
         const result = await response.json();
         if (result.success) {
-            window.toastUIMarkdown.exitEditMode(true);
-            console.log('Markdown content saved successfully');
-            restoreHeadlinenav();
+            console.log('Markdown content saved successfully, reloading page...');
+            window.location.reload();
         } else {
             alert('Failed to save: ' + result.error);
         }

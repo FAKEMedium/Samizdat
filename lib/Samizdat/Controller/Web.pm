@@ -595,7 +595,8 @@ sub save ($self) {
   
   my $docpath = $request_data->{docpath};
   my $editors = $request_data->{editors};
-  
+  my $frontmatter = delete $editors->{frontmatter};  # Extract frontmatter separately
+
   # Normalize docpath - remove double slashes and ensure single trailing slash for directories
   $docpath =~ s|//+|/|g;  # Replace multiple slashes with single slash
   $docpath =~ s|/$||;     # Remove trailing slash
@@ -625,10 +626,13 @@ sub save ($self) {
       my $content = $editors->{$element_id};
       next unless defined $content && $content ne '';
 
+      # Pass frontmatter only for main content
+      my $is_main = grep { $element_id eq $_ } @main_ids;
       my $resource_id = $self->app->web->save_content({
         docpath => $docpath,
         element_id => $element_id,
         content => $content,
+        frontmatter => $is_main ? $frontmatter : undef,
         language => $self->app->language,
         user_id => $user->{userid}
       });

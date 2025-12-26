@@ -68,6 +68,26 @@ class ToastUIMarkdownManager {
 
     this.sourceData = await this.fetchSourceContent();
 
+    // Hide headline and headlinenav, show frontmatter editor
+    const headline = document.getElementById('headline');
+    const headlinenav = document.getElementById('headlinenav');
+    if (headline) headline.style.display = 'none';
+    if (headlinenav) headlinenav.style.display = 'none';
+
+    // Create frontmatter editor in header area
+    if (headline?.parentElement && this.sourceData?.main?.frontmatter) {
+      const fmEditor = document.createElement('div');
+      fmEditor.id = 'frontmatter-editor';
+      fmEditor.className = 'col-12';
+      fmEditor.innerHTML = `
+        <details class="mb-2">
+          <summary class="text-muted small">Frontmatter (YAML)</summary>
+          <textarea id="frontmatter-textarea" class="form-control font-monospace" rows="4">${this.sourceData.main.frontmatter}</textarea>
+        </details>
+      `;
+      headline.parentElement.appendChild(fmEditor);
+    }
+
     // Create editor for main content (#thecontent)
     const mainContent = document.getElementById('thecontent');
     if (mainContent) {
@@ -99,6 +119,16 @@ class ToastUIMarkdownManager {
         // Content saved to server, page will reload
       }
     });
+
+    // Restore headline and headlinenav
+    const headline = document.getElementById('headline');
+    const headlinenav = document.getElementById('headlinenav');
+    if (headline) headline.style.display = '';
+    if (headlinenav) headlinenav.style.display = '';
+
+    // Remove frontmatter editor
+    const fmEditor = document.getElementById('frontmatter-editor');
+    if (fmEditor) fmEditor.remove();
 
     this.editors.clear();
     this.originalContent.clear();
@@ -186,6 +216,12 @@ class ToastUIMarkdownManager {
   getContent() {
     const content = {};
 
+    // Get frontmatter if edited
+    const fmTextarea = document.getElementById('frontmatter-textarea');
+    if (fmTextarea) {
+      content['frontmatter'] = fmTextarea.value;
+    }
+
     this.editors.forEach((editor, element) => {
       const isSidecard = element.classList.contains('card');
       const isMain = element.id === 'thecontent';
@@ -241,14 +277,9 @@ style.textContent = `
     max-height: none !important;
     overflow: visible !important;
   }
-  /* Full width markdown editor, no preview pane */
-  .edit-mode .toastui-editor-md-splitter,
-  .edit-mode .toastui-editor-md-preview {
+  /* Hide splitter for tab mode (not side-by-side) */
+  .edit-mode .toastui-editor-md-splitter {
     display: none !important;
-  }
-  .edit-mode .toastui-editor-md-container,
-  .edit-mode .toastui-editor-md-container .toastui-editor {
-    width: 100% !important;
   }
 `;
 document.head.appendChild(style);

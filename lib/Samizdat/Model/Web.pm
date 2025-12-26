@@ -766,9 +766,28 @@ sub save_content ($self, $params) {
   my $docpath = $params->{docpath};
   my $element_id = $params->{element_id};
   my $content = $params->{content};
+  my $frontmatter = $params->{frontmatter};
   my $language = $params->{language};
   my $user_id = $params->{user_id};
-  
+
+  # Parse frontmatter YAML for title and description
+  my ($fm_title, $fm_description);
+  if ($frontmatter && $frontmatter =~ /\S/) {
+    eval {
+      require YAML::XS;
+      my $fm_data = YAML::XS::Load($frontmatter);
+      $fm_title = $fm_data->{title} if ref $fm_data eq 'HASH';
+      $fm_description = $fm_data->{description} if ref $fm_data eq 'HASH';
+    };
+  }
+
+  # Fallback: extract title from markdown # heading if not in frontmatter
+  if (!$fm_title && $content) {
+    ($fm_title) = $content =~ /^#\s+(.+)$/m;
+  }
+  $fm_title //= '';  # Database requires non-null title
+  $fm_description //= '';  # Database requires non-null description
+
   # Get language ID from language code using cached languages hash
   my $language_id = $self->languages->{$language} // 1;
   
@@ -806,10 +825,18 @@ sub save_content ($self, $params) {
   
   if ($existing) {
     # Update existing resource - store complete markdown in content field
-    $self->database->db->query(
-      'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
-      $content, $existing->{resourceid}
-    );
+    # Include title and description from frontmatter if provided
+    if (defined $fm_title || defined $fm_description) {
+      $self->database->db->query(
+        'UPDATE web.resources SET content = ?, title = COALESCE(?, title), description = COALESCE(?, description), modified = NOW() WHERE resourceid = ?',
+        $content, $fm_title, $fm_description, $existing->{resourceid}
+      );
+    } else {
+      $self->database->db->query(
+        'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
+        $content, $existing->{resourceid}
+      );
+    }
 
     # For sidecards, ensure connection exists (may be missing from previous saves)
     if ($alias eq '' && $sidecard_base) {
@@ -820,9 +847,9 @@ sub save_content ($self, $params) {
   } else {
     # Insert new resource - store complete markdown in content field
     my $result = $self->database->db->query(
-      'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
-       VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-      $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+      'INSERT INTO web.resources (alias, src, content, title, description, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+      $alias, $markdown_src, $content, $fm_title, $fm_description, $user_id, $user_id, $user_id, $language_id
     );
 
     my $resource_id = $result->hash->{resourceid};
@@ -982,9 +1009,6 @@ sub get_source_content ($self, $docpath, $language) {
       # Content field contains complete markdown (including # Title)
       my $markdown = $main->{content} // '';
 
-      # Convert HTML to markdown if needed (legacy data cleanup)
-      $markdown = $self->html_to_markdown($markdown);
-
       # Extract title from markdown (first # heading)
       my ($title) = $markdown =~ /^#\s+(.+)$/m;
       $title //= '';
@@ -1022,7 +1046,6 @@ sub get_source_content ($self, $docpath, $language) {
       for my $sc (@$sidecards) {
         # Content field contains complete markdown (including # Title)
         my $sc_markdown = $sc->{content} // '';
-        $sc_markdown = $self->html_to_markdown($sc_markdown);
 
         # Extract title from markdown
         my ($sc_title) = $sc_markdown =~ /^#\s+(.+)$/m;
