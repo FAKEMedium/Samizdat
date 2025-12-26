@@ -445,23 +445,62 @@ sub _extract_card_image ($subdoc) {
   my $first_elem = $dom->children->first;
   return unless $first_elem && $first_elem->tag;
 
-  my $image_elem;
+  my $image_elem;   # The img/picture element (for adding card-img-top class)
+  my $store_elem;   # What to store in card_image (may include link wrapper)
 
   # Check if first element is directly a picture or img
   if ($first_elem->tag eq 'picture' || $first_elem->tag eq 'img') {
     $image_elem = $first_elem;
+    $store_elem = $first_elem;
+  }
+  # Check if first element is a linked image (a > img or a > picture)
+  elsif ($first_elem->tag eq 'a') {
+    my $a_children = $first_elem->children;
+    if ($a_children->size == 1) {
+      my $child = $a_children->first;
+      if ($child && $child->tag && ($child->tag eq 'picture' || $child->tag eq 'img')) {
+        $image_elem = $child;
+        $store_elem = $first_elem;  # Store the full link with image
+      }
+    }
   }
   # Also check if first element is a <p> containing only an image
   elsif ($first_elem->tag eq 'p') {
     my $p_children = $first_elem->children;
     if ($p_children->size == 1) {
       my $child = $p_children->first;
-      if ($child && $child->tag && ($child->tag eq 'picture' || $child->tag eq 'img')) {
-        # Check that p has no significant text content
-        my $text_content = $first_elem->text // '';
-        $text_content =~ s/^\s+|\s+$//g;
-        if ($text_content eq '') {
-          $image_elem = $child;
+      if ($child && $child->tag) {
+        if ($child->tag eq 'picture' || $child->tag eq 'img') {
+          # Check that p has no significant text content
+          my $text_content = $first_elem->all_text // '';
+          $text_content =~ s/^\s+|\s+$//g;
+          my $alt_text = '';
+          if (my $img = ($child->tag eq 'picture' ? $child->at('img') : $child)) {
+            $alt_text = $img->attr('alt') // '';
+          }
+          if ($text_content eq '' || $text_content eq $alt_text) {
+            $image_elem = $child;
+            $store_elem = $child;  # Store just the image, not the p wrapper
+          }
+        }
+        # Check for p > a > img (linked image in paragraph)
+        elsif ($child->tag eq 'a') {
+          my $a_children = $child->children;
+          if ($a_children->size == 1) {
+            my $grandchild = $a_children->first;
+            if ($grandchild && $grandchild->tag && ($grandchild->tag eq 'picture' || $grandchild->tag eq 'img')) {
+              my $text_content = $first_elem->all_text // '';
+              $text_content =~ s/^\s+|\s+$//g;
+              my $alt_text = '';
+              if (my $img = ($grandchild->tag eq 'picture' ? $grandchild->at('img') : $grandchild)) {
+                $alt_text = $img->attr('alt') // '';
+              }
+              if ($text_content eq '' || $text_content eq $alt_text) {
+                $image_elem = $grandchild;
+                $store_elem = $child;  # Store the full link with image
+              }
+            }
+          }
         }
       }
     }
@@ -485,8 +524,8 @@ sub _extract_card_image ($subdoc) {
     }
   }
 
-  # Store the image for card header
-  $subdoc->{card_image} = $image_elem->to_string;
+  # Store the image for card header (may include link wrapper)
+  $subdoc->{card_image} = $store_elem->to_string;
 
   # Remove the first element (which contains or is the image)
   $first_elem->remove;

@@ -1,6 +1,16 @@
 [title]: # "This is a test"
-[description]: # "Samizdat is built to be fastest in the universe."
-[keywords]: # "Mojolicious, Bootstrap, cache, speed, markdown, hacker, Perl"
+---
+description: Samizdat is built to be fastest in the universe.
+keywords:
+  - Mojolicious
+  - Bootstrap
+  - cache
+  - speed
+  - markdown
+  - hacker
+  - Perl
+---
+
 [author]: # "Companion"
 # Test
 
