@@ -67,16 +67,31 @@ sub getlist ($self, $url, $options = {}) {
 
       $dom->find('img')->each( sub ($img, $num) {
         $img->xml(0);
-        
-        # If img is the only child of a p tag, replace the p with the img
+
+        # If img is the only child of a p tag (no text content), replace the p with the img
         my $parent = $img->parent;
         if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
-          $parent->replace($img);
+          my $text_content = $parent->all_text // '';
+          $text_content =~ s/^\s+|\s+$//g;
+          if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
+            $parent->replace($img);
+          }
         }
-        
+        # Handle p > a > img (linked images)
+        elsif ($parent && $parent->tag eq 'a') {
+          my $grandparent = $parent->parent;
+          if ($grandparent && $grandparent->tag eq 'p' && $grandparent->children->size == 1) {
+            my $text_content = $grandparent->all_text // '';
+            $text_content =~ s/^\s+|\s+$//g;
+            if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
+              $grandparent->replace($parent);  # Replace p with the a>img
+            }
+          }
+        }
+
         my $src = $img->attr('src');
         if ($src !~ m{^(http|https)?://} && $src !~ m{^data:} && $src !~ m{^/captcha\.}) {
-          if (!exists($selectedimage->{src}) || 'selectedimage' eq $img->attr('id')) {
+          if (!exists($selectedimage->{src}) || 'selectedimage' eq ($img->attr('id') // '')) {
             $selectedimage = {
               src    => $src,
               width  => $img->attr('width') // 0,
@@ -767,20 +782,15 @@ sub save_content ($self, $params) {
     $markdown_src =~ s|^/||;  # Remove leading slash
     $markdown_src =~ s|/$||;  # Remove trailing slash
     $markdown_src = $markdown_src ? "${markdown_src}/README.md" : "README.md";
-    $field_to_update = ($element_id eq 'headline') ? 'title' : 'content';
-  } elsif ($element_id =~ /^(.+)-(title|content)$/) {
-    # Sidecard elements: project/features-title, project/features-content
+    # Store complete markdown in content field
+    $field_to_update = 'content';
+  } elsif ($element_id =~ /^(.+)-content$/) {
+    # Sidecard content - store complete markdown (including # Title)
     $sidecard_base = $1;
     $alias = '';  # Sidecards have empty alias
-    # The sidecard_base is already the full path without .md, just add .md
     $markdown_src = "${sidecard_base}.md";
-    $field_to_update = $2 eq 'title' ? 'title' : 'content';
-
-    # For sidecard content, extract title from markdown if present (# Title\n\n...)
-    if ($field_to_update eq 'content' && $content =~ s/^#\s+([^\n]+)\n+//) {
-      # Store extracted title for later use
-      $params->{_extracted_title} = $1;
-    }
+    $field_to_update = 'content';
+    # Don't extract title - keep complete markdown in content field
   } else {
     # Other elements - default to content with empty alias
     $alias = '';
@@ -795,23 +805,11 @@ sub save_content ($self, $params) {
   )->hash;
   
   if ($existing) {
-    # Update existing resource
-    my $update_sql;
-    my @bind_params;
-
-    if ($field_to_update eq 'title') {
-      $update_sql = 'UPDATE web.resources SET title = ?, modified = NOW() WHERE resourceid = ?';
-      @bind_params = ($content, $existing->{resourceid});
-    } elsif ($params->{_extracted_title}) {
-      # Sidecard content with extracted title - update both
-      $update_sql = 'UPDATE web.resources SET title = ?, content = ?, modified = NOW() WHERE resourceid = ?';
-      @bind_params = ($params->{_extracted_title}, $content, $existing->{resourceid});
-    } else {
-      $update_sql = 'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?';
-      @bind_params = ($content, $existing->{resourceid});
-    }
-
-    $self->database->db->query($update_sql, @bind_params);
+    # Update existing resource - store complete markdown in content field
+    $self->database->db->query(
+      'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
+      $content, $existing->{resourceid}
+    );
 
     # For sidecards, ensure connection exists (may be missing from previous saves)
     if ($alias eq '' && $sidecard_base) {
@@ -820,29 +818,13 @@ sub save_content ($self, $params) {
 
     return $existing->{resourceid};
   } else {
-    # Insert new resource with authenticated user
-    my $result;
-    if ($field_to_update eq 'title') {
-      $result = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, title, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-        $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
-      );
-    } elsif ($params->{_extracted_title}) {
-      # Sidecard content with extracted title - insert both
-      $result = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, title, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-        $alias, $markdown_src, $params->{_extracted_title}, $content, $user_id, $user_id, $user_id, $language_id
-      );
-    } else {
-      $result = $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
-         VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
-        $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
-      );
-    }
-    
+    # Insert new resource - store complete markdown in content field
+    my $result = $self->database->db->query(
+      'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
+       VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+      $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
+    );
+
     my $resource_id = $result->hash->{resourceid};
     
     # If this is a sidecard, create connection to main resource in current language only
@@ -997,10 +979,15 @@ sub get_source_content ($self, $docpath, $language) {
     )->hash;
 
     if ($main) {
-      my $content = $main->{content} // '';
+      # Content field contains complete markdown (including # Title)
+      my $markdown = $main->{content} // '';
 
       # Convert HTML to markdown if needed (legacy data cleanup)
-      $content = $self->html_to_markdown($content);
+      $markdown = $self->html_to_markdown($markdown);
+
+      # Extract title from markdown (first # heading)
+      my ($title) = $markdown =~ /^#\s+(.+)$/m;
+      $title //= '';
 
       # Try to get front matter from source file if available
       my $frontmatter = '';
@@ -1014,8 +1001,9 @@ sub get_source_content ($self, $docpath, $language) {
       }
 
       $result->{main} = {
-        title => $main->{title} // '',
-        content => $strip_title->($content),
+        title => $title,
+        content => $strip_title->($markdown),  # Body without title for display
+        markdown => $markdown,  # Complete markdown for editing
         frontmatter => $frontmatter,
         src => $main->{src} // '',
         source => 'database'
@@ -1023,7 +1011,7 @@ sub get_source_content ($self, $docpath, $language) {
 
       # Get sidecards from database
       my $sidecards = $self->database->db->query(
-        'SELECT r.resourceid, r.src, r.content, r.title
+        'SELECT r.resourceid, r.src, r.content
          FROM web.resources r
          JOIN web.resourceconnections rc ON r.resourceid = rc.child
          WHERE rc.parent = ? AND r.languageid = ?
@@ -1032,12 +1020,18 @@ sub get_source_content ($self, $docpath, $language) {
       )->hashes;
 
       for my $sc (@$sidecards) {
-        my $sc_content = $sc->{content} // '';
-        $sc_content = $self->html_to_markdown($sc_content);
+        # Content field contains complete markdown (including # Title)
+        my $sc_markdown = $sc->{content} // '';
+        $sc_markdown = $self->html_to_markdown($sc_markdown);
+
+        # Extract title from markdown
+        my ($sc_title) = $sc_markdown =~ /^#\s+(.+)$/m;
+        $sc_title //= '';
 
         push @{$result->{sidecards}}, {
-          title => $sc->{title} // '',
-          content => $strip_title->($sc_content),
+          title => $sc_title,
+          content => $strip_title->($sc_markdown),  # Body without title for display
+          markdown => $sc_markdown,  # Complete markdown for editing
           src => $sc->{src} // '',
           source => 'database'
         };
@@ -1059,11 +1053,13 @@ sub get_source_content ($self, $docpath, $language) {
     # Extract front matter before processing
     my ($frontmatter, $body) = $extract_frontmatter->($content);
     my ($title) = $body =~ /^#\s+(.+)$/m;
-    # Strip title from content
-    $body = $strip_title->($body);
     # Note: Don't convert through pandoc - file is already markdown
-    # html_to_markdown would escape [, ], # etc.
-    return { title => $title // '', content => $body, frontmatter => $frontmatter };
+    return {
+      title => $title // '',
+      content => $strip_title->($body),
+      markdown => $body,  # Full markdown including title
+      frontmatter => $frontmatter
+    };
   };
 
   my $src_path = $docpath;
@@ -1080,6 +1076,7 @@ sub get_source_content ($self, $docpath, $language) {
     $result->{main} = {
       title => $md_content->{title},
       content => $md_content->{content},
+      markdown => $md_content->{markdown},
       frontmatter => $md_content->{frontmatter},
       src => $readme_path,
       source => 'file'
@@ -1097,6 +1094,7 @@ sub get_source_content ($self, $docpath, $language) {
       push @{$result->{sidecards}}, {
         title => $md_content->{title},
         content => $md_content->{content},
+        markdown => $md_content->{markdown},
         frontmatter => $md_content->{frontmatter},
         src => $src,
         source => 'file'
@@ -1129,12 +1127,30 @@ sub markdown_to_html ($self, $markdown_content) {
   my $html = $md->markdown($markdown_content);
   my $dom = Mojo::DOM->new->xml(0)->parse($html);
 
-  # Process images - unwrap from p tags if only child
+  # Process images - unwrap from p tags if only child (no text content)
   $dom->find('img')->each(sub ($img, $num) {
     $img->xml(0);
     my $parent = $img->parent;
+
+    # Handle direct p > img
     if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
-      $parent->replace($img);
+      # Check that p has no significant text content
+      my $text_content = $parent->all_text // '';
+      $text_content =~ s/^\s+|\s+$//g;
+      if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
+        $parent->replace($img);
+      }
+    }
+    # Handle p > a > img (linked images)
+    elsif ($parent && $parent->tag eq 'a') {
+      my $grandparent = $parent->parent;
+      if ($grandparent && $grandparent->tag eq 'p' && $grandparent->children->size == 1) {
+        my $text_content = $grandparent->all_text // '';
+        $text_content =~ s/^\s+|\s+$//g;
+        if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
+          $grandparent->replace($parent);  # Replace p with the a>img
+        }
+      }
     }
   });
 
@@ -1175,9 +1191,24 @@ sub get_database_content ($self, $save_docpath, $language) {
     }
   }
 
+  # Helper to extract title from markdown
+  my $extract_title = sub ($markdown) {
+    return 'Untitled' unless $markdown;
+    my ($title) = $markdown =~ /^#\s+(.+)$/m;
+    return $title // 'Untitled';
+  };
+
+  # Helper to strip title from markdown for body content
+  my $strip_md_title = sub ($markdown) {
+    return '' unless $markdown;
+    $markdown =~ s/^#\s+[^\n]+\n*//;
+    $markdown =~ s/^\s+//;
+    return $markdown;
+  };
+
   # Get connected sidecard resources via resourceconnections
   my $sidecards = $self->database->db->query(
-    'SELECT r.resourceid, r.src, r.content, r.title, r.description
+    'SELECT r.resourceid, r.src, r.content
      FROM web.resources r
      JOIN web.resourceconnections rc ON r.resourceid = rc.child
      WHERE rc.parent = ? AND r.languageid = ?
@@ -1188,12 +1219,13 @@ sub get_database_content ($self, $save_docpath, $language) {
   my $docs = {};
   my $subdocs = [];
 
-  # Process sidecard resources - convert markdown to HTML
+  # Process sidecard resources - extract title from markdown, convert to HTML
   for my $sidecard (@$sidecards) {
+    my $sc_markdown = $sidecard->{content} // '';
     push @$subdocs, {
       docpath => $sidecard->{src} =~ s|\.md$||r,  # Remove .md extension for display
-      title => $sidecard->{title} || 'Untitled',
-      main => $self->markdown_to_html($sidecard->{content}),
+      title => $extract_title->($sc_markdown),
+      main => $self->markdown_to_html($strip_md_title->($sc_markdown)),
       editable => 1,
       card_image => '',
       src => $sidecard->{src}
@@ -1206,10 +1238,13 @@ sub get_database_content ($self, $save_docpath, $language) {
   $display_docpath =~ s|/$||;  # Remove trailing slash
   $display_docpath = $display_docpath ? "${display_docpath}/index.html" : "index.html";
 
+  # Extract title from main content markdown
+  my $main_markdown = $main_resource->{content} // '';
+
   $docs->{$display_docpath} = {
     docpath => $display_docpath,
-    title => $main_resource->{title} || 'Untitled',
-    main => $self->markdown_to_html($main_resource->{content}),
+    title => $extract_title->($main_markdown),
+    main => $self->markdown_to_html($strip_md_title->($main_markdown)),
     subdocs => $subdocs,
     children => [],
     url => $save_docpath =~ s|^/||r =~ s|/$||r,
