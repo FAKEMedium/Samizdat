@@ -2,10 +2,12 @@ let allPages = {};
 let searchTimeout;
 
 async function fetchPages(searchterm = '') {
+  // Build URL without existing query params
+  const baseUrl = window.location.origin + window.location.pathname;
   const params = searchterm ? `?searchterm=${encodeURIComponent(searchterm)}` : '';
 
   // This endpoint requires authentication
-  const data = await window.authenticatedFetch(window.location + params, {
+  const data = await window.authenticatedFetch(baseUrl + params, {
     method: 'GET'
   });
 
@@ -121,16 +123,19 @@ function displayPages(pages) {
   }
 }
 
-async function loadPages() {
-  allPages = await fetchPages();
-  displayPages(allPages);
-}
-
 // Search functionality
-document.getElementById('searchterm').addEventListener('input', function(e) {
+const searchInput = document.getElementById('searchterm');
+const searchForm = searchInput?.closest('form');
+
+// Prevent form submission - use live search instead
+searchForm?.addEventListener('submit', (e) => {
+  e.preventDefault();
+});
+
+searchInput?.addEventListener('input', function(e) {
   clearTimeout(searchTimeout);
   const searchTerm = e.target.value.trim();
-  
+
   searchTimeout = setTimeout(async () => {
     if (searchTerm) {
       const filteredPages = await fetchPages(searchTerm);
@@ -141,5 +146,19 @@ document.getElementById('searchterm').addEventListener('input', function(e) {
   }, 300);
 });
 
-// Initialize
-loadPages();
+// Initialize - check for initial search term from URL
+const urlParams = new URLSearchParams(window.location.search);
+const initialSearch = urlParams.get('searchterm') || '';
+if (initialSearch && searchInput) {
+  searchInput.value = initialSearch;
+}
+
+async function init() {
+  if (initialSearch) {
+    allPages = await fetchPages(initialSearch);
+  } else {
+    allPages = await fetchPages();
+  }
+  displayPages(allPages);
+}
+init();

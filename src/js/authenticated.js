@@ -34,6 +34,56 @@ window.initRoomService = function(serviceId) {
     }
 };
 
+// Open modal by fetching content from URL
+window.openModalFromUrl = async function(url) {
+    const modalEl = document.querySelector('#universalmodal');
+    const modalDialog = modalEl?.querySelector('#modalDialog');
+    if (!modalDialog) {
+        console.error('Universal modal not found');
+        return;
+    }
+
+    try {
+        const response = await fetch(url, {
+            headers: { 'Accept': 'text/html' },
+            credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+            console.error('Failed to load modal content:', response.status);
+            return;
+        }
+
+        modalDialog.innerHTML = await response.text();
+
+        // Execute any scripts in the modal (innerHTML doesn't run them)
+        const scripts = modalDialog.querySelectorAll('script');
+        scripts.forEach(oldScript => {
+            const newScript = document.createElement('script');
+            if (oldScript.src) {
+                newScript.src = oldScript.src;
+            } else {
+                newScript.textContent = oldScript.textContent;
+            }
+            oldScript.parentNode.replaceChild(newScript, oldScript);
+        });
+
+        const universalModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+        universalModal.show();
+    } catch (error) {
+        console.error('Error loading modal:', error);
+    }
+};
+
+// Delegated handler for data-modal-url links (CSP-compliant)
+document.addEventListener('click', (e) => {
+    const link = e.target.closest('[data-modal-url]');
+    if (link) {
+        e.preventDefault();
+        window.openModalFromUrl(link.dataset.modalUrl);
+    }
+});
+
 // Dynamic form handling for authenticated areas
 window.handleAuthForm = function(formId, endpoint) {
     const form = document.getElementById(formId);

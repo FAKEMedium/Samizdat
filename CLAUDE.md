@@ -127,13 +127,33 @@ make fortnox
   - `Controller/` - Request handlers
   - `Model/` - Business logic and data access
   - `Plugin/` - Functionality extensions
-- `public/` - Generated content
+- `public/` - Generated content (with symlinks for default language)
 - `templates/` - Templates, layouts, and smaller chunks
 - `src/` - Source files for frontend
   - `js/` - JavaScript files
   - `scss/` - SCSS stylesheets
-  - `public/` - Content to be processed
+  - `public/` - Content to be processed (markdown with language suffixes)
 - `migrations/` - Database migration scripts
+
+## Markdown File Naming Convention
+
+All markdown files in `src/public/` must include a language suffix:
+
+- `README_en.md` - English content (default language)
+- `README_sv.md` - Swedish content
+- `README_ru.md` - Russian content
+- `01-sidecard_en.md` - English sidecard
+- `01-sidecard_sv.md` - Swedish sidecard
+
+This convention applies to:
+- Main content files (`README_xx.md`)
+- Sidecard files (`NN-name_xx.md`)
+
+During static generation, symlinks are created in `public/` for the default language:
+- `index.html` -> generated from `README_en.md`
+
+The database stores content with language-specific src paths (e.g., `project/README_en.md`).
+Title and description are extracted from markdown content (frontmatter or `# heading`).
 
 ## Frontend Development
 
