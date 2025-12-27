@@ -20,6 +20,135 @@ class ToastUIMarkdownManager {
     this.isEditMode = false;
   }
 
+  /**
+   * Show modal with options for handling fallback content
+   * @returns {Promise<string>} 'empty', 'copy', 'translate', or 'cancel'
+   */
+  async showFallbackOptionsModal() {
+    return new Promise(async (resolve) => {
+      const modalEl = document.querySelector('#universalmodal');
+      const modalDialog = modalEl?.querySelector('#modalDialog');
+      if (!modalDialog) {
+        console.warn('Universal modal not found, defaulting to copy');
+        resolve('copy');
+        return;
+      }
+
+      const targetLang = this.sourceData?.target_language || 'unknown';
+      const theContent = document.getElementById('thecontent');
+      const newUrl = theContent?.dataset.new;
+
+      if (!newUrl) {
+        console.warn('No data-new URL found, defaulting to copy');
+        resolve('copy');
+        return;
+      }
+
+      try {
+        // Fetch the modal template from server
+        const response = await fetch(`${newUrl}?target_language=${targetLang}`, {
+          headers: { 'Accept': 'text/html' },
+          credentials: 'same-origin'
+        });
+
+        if (!response.ok) {
+          console.warn('Failed to load translation modal, defaulting to copy');
+          resolve('copy');
+          return;
+        }
+
+        modalDialog.innerHTML = await response.text();
+
+        // Store translate URL from the button's data attribute
+        const translateBtn = document.querySelector('#fallbackTranslate');
+        this.translateUrl = translateBtn?.dataset.translateUrl;
+
+        const universalModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+
+        // Set up button click handlers (scripts in innerHTML don't execute)
+        const handleButtonClick = (choice) => {
+          modalEl.removeEventListener('hidden.bs.modal', handleCancel);
+          universalModal.hide();
+          resolve(choice);
+        };
+
+        const handleCancel = () => {
+          resolve('cancel');
+        };
+
+        document.querySelector('#fallbackEmpty')?.addEventListener('click', () => handleButtonClick('empty'));
+        document.querySelector('#fallbackCopy')?.addEventListener('click', () => handleButtonClick('copy'));
+        document.querySelector('#fallbackTranslate')?.addEventListener('click', () => handleButtonClick('translate'));
+        modalEl.addEventListener('hidden.bs.modal', handleCancel, { once: true });
+
+        universalModal.show();
+      } catch (error) {
+        console.error('Error loading translation modal:', error);
+        resolve('copy');
+      }
+    });
+  }
+
+  /**
+   * Translate content using Anthropic API
+   */
+  async translateContent() {
+    const targetLang = this.sourceData?.target_language || 'en';
+    const markdown = this.sourceData?.main?.markdown || '';
+
+    if (!markdown) return;
+
+    try {
+      // Show loading state
+      const modalDialog = document.querySelector('#universalmodal #modalDialog');
+      if (modalDialog) {
+        modalDialog.innerHTML = `
+          <div class="modal-content">
+            <div class="modal-body text-center py-5">
+              <div class="spinner-border text-primary mb-3" role="status">
+                <span class="visually-hidden">Translating...</span>
+              </div>
+              <p>Translating content to ${targetLang.toUpperCase()}...</p>
+            </div>
+          </div>
+        `;
+        bootstrap.Modal.getOrCreateInstance(document.querySelector('#universalmodal')).show();
+      }
+
+      // Use translate URL from modal template (set via url_for in server template)
+      const translateUrl = this.translateUrl || '/web/translate';
+      const response = await fetch(translateUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          markdown: markdown,
+          target_language: targetLang,
+          frontmatter: this.sourceData?.main?.frontmatter || ''
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`Translation failed: ${response.status}`);
+      }
+
+      const result = await response.json();
+      if (result.success && result.translated) {
+        this.sourceData.main.markdown = result.translated;
+        if (result.frontmatter) {
+          this.sourceData.main.frontmatter = result.frontmatter;
+        }
+      }
+
+      // Hide modal
+      bootstrap.Modal.getOrCreateInstance(document.querySelector('#universalmodal'))?.hide();
+    } catch (error) {
+      console.error('Translation error:', error);
+      alert('Translation failed. Using original content.');
+      bootstrap.Modal.getOrCreateInstance(document.querySelector('#universalmodal'))?.hide();
+    }
+  }
+
   async fetchSourceContent() {
     const currentPath = window.location.pathname;
     const theContent = document.getElementById('thecontent');
@@ -67,6 +196,28 @@ class ToastUIMarkdownManager {
     if (this.isEditMode) return;
 
     this.sourceData = await this.fetchSourceContent();
+
+    // Check if using fallback content OR content is empty - show options modal
+    const mainMarkdown = this.sourceData?.main?.markdown || '';
+    const isEmptyContent = !mainMarkdown.trim() || mainMarkdown.trim() === '#';
+    if (this.sourceData?.using_fallback || isEmptyContent) {
+      const choice = await this.showFallbackOptionsModal();
+      if (choice === 'cancel') {
+        return;  // User cancelled
+      }
+      if (choice === 'empty') {
+        // Clear the content for new translation
+        if (this.sourceData.main) {
+          this.sourceData.main.markdown = `# \n\n`;
+          this.sourceData.main.frontmatter = '';
+        }
+        this.sourceData.sidecards = [];
+      } else if (choice === 'translate') {
+        // Translate content using Anthropic API
+        await this.translateContent();
+      }
+      // choice === 'copy' - use fallback content as-is (default)
+    }
 
     // Hide headline and headlinenav, show frontmatter editor
     const headline = document.getElementById('headline');

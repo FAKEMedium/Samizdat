@@ -543,6 +543,26 @@ sub editor_toolbar ($self) {
   $self->render(template => 'web/editor/toolbar/index', format => 'html', layout => undef);
 }
 
+# Render new content modal (for new docs or fallback/translation options)
+sub addcontent ($self) {
+  return unless $self->access({ admin => 1 });
+
+  # Only set target_language if explicitly passed (for fallback mode)
+  my $target_language = $self->param('target_language') // '';
+  my $default_language = $self->config->{locale}->{default_language} // 'en';
+  my $has_anthropic = exists($self->config->{anthropic}) && $self->config->{anthropic}->{api_key} ? 1 : 0;
+
+  $self->stash(
+    target_language => $target_language,
+    default_language => $default_language,
+    has_anthropic => $has_anthropic
+  );
+
+  my $web = { css => '', script => '' };
+  $web->{script} = $self->render_to_string(template => 'web/new/index', format => 'js');
+  $self->render(template => 'web/new/index', format => 'html', web => $web);
+}
+
 # Get raw source content for editing (returns JSON with markdown/source)
 sub source ($self) {
   return unless $self->access({ admin => 1 });
@@ -567,6 +587,108 @@ sub source ($self) {
     language => $language,
     content => $source_data
   });
+}
+
+# Translate markdown content using Anthropic API
+sub translate ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $json = $self->req->json;
+  my $markdown = $json->{markdown} // '';
+  my $target_language = $json->{target_language} // 'en';
+  my $frontmatter = $json->{frontmatter} // '';
+
+  unless ($markdown) {
+    return $self->render(json => { success => 0, error => 'No content to translate' }, status => 400);
+  }
+
+  # Get Anthropic config
+  my $config = $self->config->{anthropic} // {};
+  my $api_key = $config->{api_key} // $ENV{ANTHROPIC_API_KEY};
+  my $model = $config->{model} // 'claude-sonnet-4-20250514';
+
+  unless ($api_key) {
+    return $self->render(json => { success => 0, error => 'Translation service not configured' }, status => 503);
+  }
+
+  # Build translation prompt
+  my $prompt = "Translate the following markdown content to $target_language. " .
+               "Preserve all markdown formatting, links, and structure. " .
+               "Only translate the text content, not code blocks or URLs. " .
+               "Return ONLY the translated markdown, no explanations.\n\n" .
+               "Content to translate:\n$markdown";
+
+  # Call Anthropic API
+  my $ua = Mojo::UserAgent->new;
+  $ua->transactor->name('Samizdat (see fakemedium.com)');
+
+  my $tx = $ua->post('https://api.anthropic.com/v1/messages' => {
+    'Content-Type' => 'application/json',
+    'x-api-key' => $api_key,
+    'anthropic-version' => '2023-06-01'
+  } => json => {
+    model => $model,
+    max_tokens => 4096,
+    messages => [
+      { role => 'user', content => $prompt }
+    ]
+  });
+
+  if ($tx->result->is_success) {
+    my $response = $tx->result->json;
+    if ($response->{content} && @{$response->{content}}) {
+      my $translated = $response->{content}[0]{text};
+
+      # Also translate frontmatter if provided
+      my $translated_frontmatter = '';
+      if ($frontmatter) {
+        # Strip --- delimiters before sending to API
+        my $fm_content = $frontmatter;
+        $fm_content =~ s/^---\s*\n//;
+        $fm_content =~ s/\n---\s*\n?$//;
+
+        my $fm_prompt = "Translate the following YAML frontmatter metadata to $target_language. " .
+                        "Only translate the values, not the keys. Preserve YAML structure. " .
+                        "Return ONLY the translated YAML content without --- delimiters, no explanations.\n\n$fm_content";
+
+        my $fm_tx = $ua->post('https://api.anthropic.com/v1/messages' => {
+          'Content-Type' => 'application/json',
+          'x-api-key' => $api_key,
+          'anthropic-version' => '2023-06-01'
+        } => json => {
+          model => $model,
+          max_tokens => 1024,
+          messages => [
+            { role => 'user', content => $fm_prompt }
+          ]
+        });
+
+        if ($fm_tx->result->is_success) {
+          my $fm_response = $fm_tx->result->json;
+          if ($fm_response->{content} && @{$fm_response->{content}}) {
+            $translated_frontmatter = $fm_response->{content}[0]{text};
+            # Strip ALL --- delimiters from response (handles duplicates)
+            $translated_frontmatter =~ s/^[\s\n]*---[\s\n]*//;  # Leading ---
+            $translated_frontmatter =~ s/[\s\n]*---[\s\n]*$//;  # Trailing ---
+            $translated_frontmatter =~ s/\n---\n/\n/g;          # Any middle ---
+            $translated_frontmatter =~ s/^\s+//;
+            $translated_frontmatter =~ s/\s+$//;
+          }
+        }
+      }
+      # Always add proper delimiters
+      $translated_frontmatter = "---\n$translated_frontmatter\n---\n" if $translated_frontmatter;
+
+      return $self->render(json => {
+        success => 1,
+        translated => $translated,
+        frontmatter => $translated_frontmatter
+      });
+    }
+  }
+
+  my $error = $tx->result->json->{error}{message} // 'Translation failed';
+  $self->render(json => { success => 0, error => $error }, status => 500);
 }
 
 # Save editable content to database

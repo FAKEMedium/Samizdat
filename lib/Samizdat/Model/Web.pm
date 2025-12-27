@@ -37,84 +37,92 @@ my $md = Text::MultiMarkdown->new(
 # Now checks database first before processing markdown files
 sub getlist ($self, $url, $options = {}) {
   my $docs = {};
-  
+
   # First check if we have database content for this path
   # Normalize the path to match what was saved (with leading slash)
   my $save_docpath = $url || '';
   $save_docpath =~ s|^/||;   # Remove leading slash
-  $save_docpath =~ s|/$||;   # Remove trailing slash  
+  $save_docpath =~ s|/$||;   # Remove trailing slash
   $save_docpath = $save_docpath ? "/$save_docpath/" : "/";  # Add proper slashes
-  
+
   if ($self->has_database_content($save_docpath, $options->{language} // 'en')) {
     return $self->get_database_content($save_docpath, $options->{language} // 'en');
   }
-  
+
   # Fall back to markdown file processing
   my $path = Mojo::Home->new($self->config->{src} // 'src')->child('public')->child($url);
   my $found = 0;
   my $selectedimage = {};
-  $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
-    my $docpath = $file->to_rel(Mojo::Home->new($self->config->{src} // 'src')->child('public'))->to_string;
-    my $datasrc = $docpath;
-    if ('md' eq $file->path->extname()) {
-      my $content = decode 'UTF-8', $file->slurp;
-      my $head = {};
-      $self->transclude(\$content, $head, $file->dirname);
-      my $html = $md->markdown($content);
-      my $dom = Mojo::DOM->new->xml(0)->parse($html);
-      my $title = $dom->at('h1')->text;
-      $dom->at('h1')->remove;
+  my $requested_language = $options->{language} // $self->locale->{default_language} // 'en';
+  my $default_language = $self->locale->{default_language} // 'en';
+  my $using_fallback = 0;
 
-      $dom->find('img')->each( sub ($img, $num) {
-        $img->xml(0);
+  # Helper to process files for a given language
+  my $process_files = sub ($target_lang) {
+    $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
+      my $docpath = $file->to_rel(Mojo::Home->new($self->config->{src} // 'src')->child('public'))->to_string;
+      my $datasrc = $docpath;
+      if ('md' eq $file->path->extname()) {
+        # Only process files matching the target language
+        return unless $docpath =~ /_${target_lang}\.md$/;
 
-        # If img is the only child of a p tag (no text content), replace the p with the img
-        my $parent = $img->parent;
-        if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
-          my $text_content = $parent->all_text // '';
-          $text_content =~ s/^\s+|\s+$//g;
-          if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
-            $parent->replace($img);
-          }
-        }
-        # Handle p > a > img (linked images)
-        elsif ($parent && $parent->tag eq 'a') {
-          my $grandparent = $parent->parent;
-          if ($grandparent && $grandparent->tag eq 'p' && $grandparent->children->size == 1) {
-            my $text_content = $grandparent->all_text // '';
+        my $content = decode 'UTF-8', $file->slurp;
+        my $head = {};
+        $self->transclude(\$content, $head, $file->dirname);
+        my $html = $md->markdown($content);
+        my $dom = Mojo::DOM->new->xml(0)->parse($html);
+        my $title = $dom->at('h1')->text;
+        $dom->at('h1')->remove;
+
+        $dom->find('img')->each( sub ($img, $num) {
+          $img->xml(0);
+
+          # If img is the only child of a p tag (no text content), replace the p with the img
+          my $parent = $img->parent;
+          if ($parent && $parent->tag eq 'p' && $parent->children->size == 1) {
+            my $text_content = $parent->all_text // '';
             $text_content =~ s/^\s+|\s+$//g;
             if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
-              $grandparent->replace($parent);  # Replace p with the a>img
+              $parent->replace($img);
             }
           }
-        }
-
-        my $src = $img->attr('src');
-        if ($src !~ m{^(http|https)?://} && $src !~ m{^data:} && $src !~ m{^/captcha\.}) {
-          if (!exists($selectedimage->{src}) || 'selectedimage' eq ($img->attr('id') // '')) {
-            $selectedimage = {
-              src    => $src,
-              width  => $img->attr('width') // 0,
-              height => $img->attr('height') // 0
-            };
+          # Handle p > a > img (linked images)
+          elsif ($parent && $parent->tag eq 'a') {
+            my $grandparent = $parent->parent;
+            if ($grandparent && $grandparent->tag eq 'p' && $grandparent->children->size == 1) {
+              my $text_content = $grandparent->all_text // '';
+              $text_content =~ s/^\s+|\s+$//g;
+              if ($text_content eq '' || $text_content eq ($img->attr('alt') // '')) {
+                $grandparent->replace($parent);  # Replace p with the a>img
+              }
+            }
           }
-        }
-      });
 
-      # Get the HTML content with basic formatting
-      $html = $dom->to_string;
-      # Remove extra whitespace at start/end
-      $html =~ s/^[\s\r\n]+//;
-      $html =~ s/[\s\r\n]+$//;
-      # Add newlines after block elements for readability
-      $html =~ s/(<\/(p|div|h[1-6]|ul|ol|li|blockquote|section|article|aside|nav|header|footer|pre)>)/$1\n/gi;
+          my $src = $img->attr('src');
+          if ($src !~ m{^(http|https)?://} && $src !~ m{^data:} && $src !~ m{^/captcha\.}) {
+            if (!exists($selectedimage->{src}) || 'selectedimage' eq ($img->attr('id') // '')) {
+              $selectedimage = {
+                src    => $src,
+                width  => $img->attr('width') // 0,
+                height => $img->attr('height') // 0
+              };
+            }
+          }
+        });
 
-      # Overwrite the docpath of the default language if a file with the preferred language exists
-      $docpath =~ s/_($options->{language})\.md$/.md/;
-      
-      # NOTE: Image extraction for sidecards is now done at render time in getdoc controller
-      # This preserves full content for editing and database storage
-      if ($docpath !~ /_(.+)\.md$/) {
+        # Get the HTML content with basic formatting
+        $html = $dom->to_string;
+        # Remove extra whitespace at start/end
+        $html =~ s/^[\s\r\n]+//;
+        $html =~ s/[\s\r\n]+$//;
+        # Add newlines after block elements for readability
+        $html =~ s/(<\/(p|div|h[1-6]|ul|ol|li|blockquote|section|article|aside|nav|header|footer|pre)>)/$1\n/gi;
+
+        # Strip language suffix for output path
+        $docpath =~ s/_${target_lang}\.md$/.md/;
+
+        # NOTE: Image extraction for sidecards is now done at render time in getdoc controller
+        # This preserves full content for editing and database storage
         if ($docpath =~ s/README\.md/index.html/) {
           $found = $docpath;
         }
@@ -128,15 +136,23 @@ sub getlist ($self, $url, $options = {}) {
           language   => $options->{language},
           head       => $head,
           card_image => '',  # Extracted at render time in getdoc controller
-          editable   => 1
+          editable   => 1,
+          using_fallback => $using_fallback,
+          src        => $datasrc
         };
       }
-      if ($docs->{$docpath}) {
-        $docs->{$docpath}->{src} = $datasrc;
-        $docs->{$docpath}->{editable} = 1;
-      }
-    }
-  });
+    });
+  };
+
+  # Try requested language first
+  $process_files->($requested_language);
+
+  # If no content found and requested language differs from default, try default language
+  if (!$found && $requested_language ne $default_language) {
+    $using_fallback = 1;
+    $process_files->($default_language);
+  }
+
   if (!$found) {
     return $docs;
   }
@@ -173,7 +189,8 @@ sub getlist ($self, $url, $options = {}) {
 }
 
 
-# Find every README.md markdown file, including the ones with language suffixes, and return a hash of URIs
+# Find every README_xx.md markdown file and return a hash of URIs by language
+# All markdown files now require language suffix (e.g., README_en.md, README_sv.md)
 sub geturis ($self, $options = {}) {
   my $uris = {};
   my $publicsrc = Mojo::Home->new($self->config->{src} // 'src')->child('public');
@@ -182,14 +199,10 @@ sub geturis ($self, $options = {}) {
     if ('md' eq $file->path->extname()) {
       my $filename = $file->to_rel($publicsrc)->to_string;
       my $size = $file->stat->size;
-      if ($filename =~ s/README([^\/]*)\.md$/README.md/) {
+      # Match README_xx.md pattern (language suffix required)
+      if ($filename =~ s/README_([a-z]{2})\.md$/README.md/) {
         my $lang = $1;
-        $lang =~ s/^_//;
-        if ($lang) {
-          $uris->{$filename}->{$lang} = $size;
-        } else {
-          $uris->{$filename}->{$self->{locale}->{default_language}} = $size;
-        }
+        $uris->{$filename}->{$lang} = $size;
       }
     }
   });
@@ -761,6 +774,125 @@ sub indent ($self, $content = '', $indents = 0) {
 }
 
 
+# Save metadata to meta tables (metakeys, metavalues, metaconnections)
+sub save_resource_meta ($self, $resourceid, $meta_hash, $language_id) {
+  my $db = $self->database->db;
+
+  # Clear existing metaconnections for this resource
+  $db->query('DELETE FROM web.metaconnections WHERE resourceid = ?', $resourceid);
+
+  for my $key (keys %$meta_hash) {
+    my $value = $meta_hash->{$key};
+    next unless defined $value && $value ne '';
+
+    # Handle arrays (e.g., keywords, tags) - join with comma
+    $value = join(', ', @$value) if ref $value eq 'ARRAY';
+
+    # Find or create metakey
+    my $metakey = $db->query(
+      'SELECT metakeyid FROM web.metakeys WHERE metakey = ?', $key
+    )->hash;
+
+    my $metakeyid;
+    if ($metakey) {
+      $metakeyid = $metakey->{metakeyid};
+    } else {
+      $metakeyid = $db->query(
+        'INSERT INTO web.metakeys (metakey) VALUES (?) RETURNING metakeyid', $key
+      )->hash->{metakeyid};
+    }
+
+    # Find or create metavalue for this key+language
+    my $metavalue = $db->query(
+      'SELECT metavalueid FROM web.metavalues WHERE metakeyid = ? AND languageid = ?',
+      $metakeyid, $language_id
+    )->hash;
+
+    my $metavalueid;
+    if ($metavalue) {
+      $metavalueid = $metavalue->{metavalueid};
+      # Update the value
+      $db->query(
+        'UPDATE web.metavalues SET metavalue = ? WHERE metavalueid = ?',
+        $value, $metavalueid
+      );
+    } else {
+      $metavalueid = $db->query(
+        'INSERT INTO web.metavalues (metavalue, metakeyid, languageid) VALUES (?, ?, ?) RETURNING metavalueid',
+        $value, $metakeyid, $language_id
+      )->hash->{metavalueid};
+    }
+
+    # Create metaconnection
+    $db->query(
+      'INSERT INTO web.metaconnections (resourceid, metavalueid) VALUES (?, ?) ON CONFLICT DO NOTHING',
+      $resourceid, $metavalueid
+    );
+  }
+}
+
+
+# Get metadata from meta tables for a resource
+sub get_resource_meta ($self, $resourceid, $language_id) {
+  my $meta = {};
+
+  my $rows = $self->database->db->query(q{
+    SELECT mk.metakey, mv.metavalue
+    FROM web.metaconnections mc
+    JOIN web.metavalues mv ON mc.metavalueid = mv.metavalueid
+    JOIN web.metakeys mk ON mv.metakeyid = mk.metakeyid
+    WHERE mc.resourceid = ? AND mv.languageid = ?
+  }, $resourceid, $language_id)->hashes;
+
+  for my $row (@$rows) {
+    $meta->{$row->{metakey}} = $row->{metavalue};
+  }
+
+  return $meta;
+}
+
+
+# Convert flat meta hash to nested head structure for templates
+sub meta_to_head ($self, $meta) {
+  my $head = {
+    meta => {
+      name => {},
+      property => {},
+      itemprop => {}
+    }
+  };
+
+  for my $key (keys %$meta) {
+    my $value = $meta->{$key};
+
+    if ($key eq 'title') {
+      $head->{title} = $value;
+    } elsif ($key eq 'description') {
+      $head->{meta}->{name}->{description} = $value;
+    } elsif ($key eq 'keywords') {
+      $head->{meta}->{name}->{keywords} = $value;
+    } elsif ($key =~ /^og[_:](.+)$/) {
+      my $og_key = "og:$1";
+      $head->{meta}->{property}->{$og_key} = $value;
+    } elsif ($key =~ /^twitter[_:](.+)$/) {
+      my $tw_key = "twitter:$1";
+      $head->{meta}->{name}->{$tw_key} = $value;
+    } elsif ($key =~ /^itemprop[_:](.+)$/) {
+      my $itemprop_key = $1;
+      $head->{meta}->{itemprop}->{$itemprop_key} = $value;
+    } elsif ($key eq 'tags') {
+      $head->{tags} = $value;
+      $head->{meta}->{name}->{keywords} //= $value;
+    } else {
+      # Store other metadata directly in head
+      $head->{$key} = $value;
+    }
+  }
+
+  return $head;
+}
+
+
 # Save editable content to database with new structure
 sub save_content ($self, $params) {
   my $docpath = $params->{docpath};
@@ -770,15 +902,18 @@ sub save_content ($self, $params) {
   my $language = $params->{language};
   my $user_id = $params->{user_id};
 
-  # Prepend frontmatter to content if provided (for main content only)
+  # Parse frontmatter YAML to extract metadata (saved to meta tables, not content)
+  my $meta_hash = {};
   if ($frontmatter && $frontmatter =~ /\S/) {
-    # Ensure frontmatter has proper YAML delimiters
     $frontmatter =~ s/^\s+//;
     $frontmatter =~ s/\s+$//;
-    unless ($frontmatter =~ /^---/) {
-      $frontmatter = "---\n$frontmatter\n---\n";
-    }
-    $content = "$frontmatter\n$content";
+    # Strip YAML delimiters if present
+    $frontmatter =~ s/^---\s*\n?//;
+    $frontmatter =~ s/\n?---\s*$//;
+    eval {
+      $meta_hash = YAML::XS::Load($frontmatter) // {};
+    };
+    warn "Failed to parse frontmatter YAML: $@" if $@;
   }
 
   # Get language ID from language code using cached languages hash
@@ -788,19 +923,25 @@ sub save_content ($self, $params) {
   my ($alias, $markdown_src, $field_to_update, $sidecard_base);
   
   if ($element_id eq 'headline' || $element_id eq 'thecontent' || $element_id eq 'element-0') {
-    # Main content: has alias, points to README.md
+    # Main content: has alias, points to README_xx.md (with language suffix)
     $alias = $docpath;
     $markdown_src = $docpath;
     $markdown_src =~ s|^/||;  # Remove leading slash
     $markdown_src =~ s|/$||;  # Remove trailing slash
-    $markdown_src = $markdown_src ? "${markdown_src}/README.md" : "README.md";
+    $markdown_src = $markdown_src ? "${markdown_src}/README_${language}.md" : "README_${language}.md";
     # Store complete markdown in content field
     $field_to_update = 'content';
   } elsif ($element_id =~ /^(.+)-content$/) {
     # Sidecard content - store complete markdown (including # Title)
+    # Sidecard files have language suffix: 01-sidecard_en.md
+    # element_id may already contain the language suffix, strip it first
     $sidecard_base = $1;
+    $sidecard_base =~ s/_[a-z]{2}$//;  # Remove existing language suffix if present
     $alias = '';  # Sidecards have empty alias
-    $markdown_src = "${sidecard_base}.md";
+    my $dir_path = $docpath;
+    $dir_path =~ s|^/||;  # Remove leading slash
+    $dir_path =~ s|/$||;  # Remove trailing slash
+    $markdown_src = $dir_path ? "${dir_path}/${sidecard_base}_${language}.md" : "${sidecard_base}_${language}.md";
     $field_to_update = 'content';
     # Don't extract title - keep complete markdown in content field
   } else {
@@ -810,74 +951,55 @@ sub save_content ($self, $params) {
     $field_to_update = 'content';
   }
   
-  # Check if resource already exists using unique constraint (src + languageid)
+  # Check by src alone since language is encoded in filename (e.g., test/01-sidecard_en.md)
   my $existing = $self->database->db->query(
-    'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ?',
-    $markdown_src, $language_id
+    'SELECT resourceid FROM web.resources WHERE src = ?',
+    $markdown_src
   )->hash;
-  
+
+  my $resource_id;
   if ($existing) {
-    # Update existing resource - store complete markdown in content field
-    # Title and description are extracted from markdown content, not stored separately
+    # Update existing resource
     $self->database->db->query(
       'UPDATE web.resources SET content = ?, modified = NOW() WHERE resourceid = ?',
       $content, $existing->{resourceid}
     );
-
-    # For sidecards, ensure connection exists (may be missing from previous saves)
-    if ($alias eq '' && $sidecard_base) {
-      $self->_ensure_sidecard_connection($docpath, $existing->{resourceid}, $language_id);
-    }
-
-    return $existing->{resourceid};
+    $resource_id = $existing->{resourceid};
   } else {
-    # Insert new resource - store complete markdown in content field
-    # Title and description are extracted from markdown content, not stored separately
+    # Insert new resource
     my $result = $self->database->db->query(
       'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
        VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
       $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
     );
-
-    my $resource_id = $result->hash->{resourceid};
-    
-    # If this is a sidecard, create connection to main resource in current language only
-    if ($alias eq '' && $sidecard_base) {
-      # Find the main resource for this docpath in current language
-      my $main_alias = $docpath;
-      my $main_src = $docpath;
-      $main_src =~ s|^/||;  # Remove leading slash
-      $main_src =~ s|/$||;  # Remove trailing slash
-      $main_src = $main_src ? "${main_src}/README.md" : "README.md";
-      
-      my $main_resource = $self->database->db->query(
-        'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ? AND languageid = ?',
-        $main_alias, $main_src, $language_id
-      )->hash;
-      
-      if ($main_resource) {
-        # Create connection between main resource and sidecard in current language
-        $self->database->db->query(
-          'INSERT INTO web.resourceconnections (parent, child) VALUES (?, ?) 
-           ON CONFLICT DO NOTHING',
-          $main_resource->{resourceid}, $resource_id
-        );
-      }
-    }
-    
-    return $resource_id;
+    $resource_id = $result->hash->{resourceid};
   }
+
+  # Save metadata to meta tables
+  $self->save_resource_meta($resource_id, $meta_hash, $language_id) if keys %$meta_hash;
+
+  # For sidecards, ensure connection exists
+  if ($alias eq '' && $sidecard_base) {
+    $self->_ensure_sidecard_connection($docpath, $resource_id, $language_id, $language);
+  }
+
+  return $resource_id;
 }
 
 
 # Helper to ensure sidecard connection exists (for UPDATE case where connection may be missing)
-sub _ensure_sidecard_connection ($self, $docpath, $sidecard_resource_id, $language_id) {
+sub _ensure_sidecard_connection ($self, $docpath, $sidecard_resource_id, $language_id, $language = undef) {
   # Find the main resource for this docpath in current language
+  # Look up language code if not provided
+  $language //= $self->database->db->query(
+    'SELECT code FROM languages WHERE languageid = ?', $language_id
+  )->hash->{code} // 'en';
+
   my $main_alias = $docpath;
   my $main_src = $docpath;
   $main_src =~ s|^/||;  # Remove leading slash
   $main_src =~ s|/$||;  # Remove trailing slash
-  $main_src = $main_src ? "${main_src}/README.md" : "README.md";
+  $main_src = $main_src ? "${main_src}/README_${language}.md" : "README_${language}.md";
 
   my $main_resource = $self->database->db->query(
     'SELECT resourceid FROM web.resources WHERE alias = ? AND src = ? AND languageid = ?',
@@ -961,9 +1083,16 @@ sub html_to_markdown ($self, $html) {
 # Database stores markdown directly - return it for editing
 sub get_source_content ($self, $docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
+  my $default_language = $self->locale->{default_language} // 'en';
+  my $default_language_id = $self->languages->{$default_language} // 1;
+  my $using_fallback = 0;
   my $result = {
     main => { title => '', content => '', src => '', frontmatter => '' },
-    sidecards => []
+    sidecards => [],
+    using_fallback => 0,
+    target_language => $language,
+    default_language => $default_language,
+    has_anthropic => exists($self->config->{anthropic}) && $self->config->{anthropic}->{api_key} ? 1 : 0
   };
 
   # Helper to extract and strip YAML front matter
@@ -987,28 +1116,38 @@ sub get_source_content ($self, $docpath, $language) {
   # First check database for markdown content
   if ($self->has_database_content($docpath, $language)) {
     my $main = $self->database->db->query(
-      'SELECT resourceid, src, content, title FROM web.resources
+      'SELECT resourceid, src, content FROM web.resources
        WHERE alias = ? AND languageid = ?',
       $docpath, $language_id
     )->hash;
 
+    # Fallback to default language if not found
+    if (!$main && $language ne $default_language) {
+      $main = $self->database->db->query(
+        'SELECT resourceid, src, content FROM web.resources
+         WHERE alias = ? AND languageid = ?',
+        $docpath, $default_language_id
+      )->hash;
+      if ($main) {
+        $using_fallback = 1;
+        $language_id = $default_language_id;
+        $result->{using_fallback} = 1;
+      }
+    }
+
     if ($main) {
-      # Content field contains complete markdown (including # Title)
+      # Content field contains markdown (without frontmatter)
       my $markdown = $main->{content} // '';
 
       # Extract title from markdown (first # heading)
       my ($title) = $markdown =~ /^#\s+(.+)$/m;
       $title //= '';
 
-      # Try to get front matter from source file if available
+      # Get frontmatter from meta tables and convert to YAML
+      my $meta = $self->get_resource_meta($main->{resourceid}, $language_id);
       my $frontmatter = '';
-      if ($main->{src}) {
-        my $public_src = Mojo::Home->new($self->config->{src} // 'src')->child('public');
-        my $file = $public_src->child($main->{src});
-        if (-f $file) {
-          my $file_content = decode('UTF-8', $file->slurp);
-          ($frontmatter) = $extract_frontmatter->($file_content);
-        }
+      if (keys %$meta) {
+        $frontmatter = "---\n" . YAML::XS::Dump($meta) . "---\n";
       }
 
       $result->{main} = {
@@ -1079,9 +1218,22 @@ sub get_source_content ($self, $docpath, $language) {
   my $dir = $public_src->child($src_path);
   return $result unless -d $dir;
 
-  # Read README.md for main content
-  my $readme_path = $src_path ? "$src_path/README.md" : "README.md";
+  # Read README_xx.md for main content (language suffix required)
+  my $readme_path = $src_path ? "$src_path/README_${language}.md" : "README_${language}.md";
   my $md_content = $read_markdown->($readme_path);
+
+  # Fallback to default language if not found
+  my $active_language = $language;
+  if (!$md_content && $language ne $default_language) {
+    $readme_path = $src_path ? "$src_path/README_${default_language}.md" : "README_${default_language}.md";
+    $md_content = $read_markdown->($readme_path);
+    if ($md_content) {
+      $using_fallback = 1;
+      $active_language = $default_language;
+      $result->{using_fallback} = 1;
+    }
+  }
+
   if ($md_content) {
     $result->{main} = {
       title => $md_content->{title},
@@ -1093,12 +1245,13 @@ sub get_source_content ($self, $docpath, $language) {
     };
   }
 
-  # Read other .md files as sidecards (sorted)
+  # Read other .md files as sidecards (sorted) - match current language (or fallback)
   for my $file (sort $dir->list->each) {
-    next unless $file->basename =~ /^\d+.*\.md$/ && $file->basename ne 'README.md';
-    next if $file->basename =~ /_[a-z]{2}\.md$/;  # Skip language variants
+    my $basename = $file->basename;
+    # Match files like 01-sidecard_en.md for the active language
+    next unless $basename =~ /^\d+.*_${active_language}\.md$/;
 
-    my $src = $src_path ? "$src_path/" . $file->basename : $file->basename;
+    my $src = $src_path ? "$src_path/$basename" : $basename;
     my $md_content = $read_markdown->($src);
     if ($md_content) {
       push @{$result->{sidecards}}, {
@@ -1119,13 +1272,27 @@ sub get_source_content ($self, $docpath, $language) {
 # Check if docpath has any database content
 sub has_database_content ($self, $docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
-  
+  my $default_language = $self->locale->{default_language} // 'en';
+  my $default_language_id = $self->languages->{$default_language} // 1;
+
+  # Check for requested language first
   my $count = $self->database->db->query(
-    'SELECT COUNT(*) as count FROM web.resources 
+    'SELECT COUNT(*) as count FROM web.resources
      WHERE alias = ? AND languageid = ?',
     $docpath, $language_id
   )->hash->{count};
-  
+
+  return 1 if $count > 0;
+
+  # Fallback to default language if not found
+  if ($language ne $default_language) {
+    $count = $self->database->db->query(
+      'SELECT COUNT(*) as count FROM web.resources
+       WHERE alias = ? AND languageid = ?',
+      $docpath, $default_language_id
+    )->hash->{count};
+  }
+
   return $count > 0;
 }
 
@@ -1176,6 +1343,9 @@ sub markdown_to_html ($self, $markdown_content) {
 # Database stores markdown - convert to HTML for display
 sub get_database_content ($self, $save_docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
+  my $default_language = $self->locale->{default_language} // 'en';
+  my $default_language_id = $self->languages->{$default_language} // 1;
+  my $using_fallback = 0;
 
   # Get main resource (has alias matching save_docpath)
   # Title and description are extracted from markdown content, not stored separately
@@ -1184,6 +1354,19 @@ sub get_database_content ($self, $save_docpath, $language) {
      WHERE alias = ? AND languageid = ?',
     $save_docpath, $language_id
   )->hash;
+
+  # Fallback to default language if not found
+  if (!$main_resource && $language ne $default_language) {
+    $main_resource = $self->database->db->query(
+      'SELECT resourceid, src, content FROM web.resources
+       WHERE alias = ? AND languageid = ?',
+      $save_docpath, $default_language_id
+    )->hash;
+    if ($main_resource) {
+      $using_fallback = 1;
+      $language_id = $default_language_id;
+    }
+  }
 
   return {} unless $main_resource;
 
@@ -1249,12 +1432,20 @@ sub get_database_content ($self, $save_docpath, $language) {
   $display_docpath =~ s|/$||;  # Remove trailing slash
   $display_docpath = $display_docpath ? "${display_docpath}/index.html" : "index.html";
 
-  # Extract title from main content markdown and parse frontmatter for meta tags
+  # Get main content markdown
   my $main_markdown = $main_resource->{content} // '';
-  my $head = {};
 
-  # Parse frontmatter from markdown content (extracts description, keywords, og:*, etc.)
-  $self->transclude(\$main_markdown, $head, '');
+  # Get metadata from meta tables and convert to head format
+  my $meta = $self->get_resource_meta($main_resource->{resourceid}, $language_id);
+  my $head = $self->meta_to_head($meta);
+
+  # Set canonical URL - always points to the page in default language
+  my $url_path = $save_docpath =~ s|^/||r =~ s|/$||r;
+  my $siteurl = $self->config->{siteurl} // '';
+  my $baseurl = $self->config->{baseurl} // '';
+  my $canonical = "${siteurl}${baseurl}/${url_path}";
+  $canonical =~ s|([^:])//+|$1/|g;  # Remove double slashes (but keep :// for protocol)
+  $head->{canonical} = $canonical;
 
   $docs->{$display_docpath} = {
     docpath => $display_docpath,
@@ -1262,10 +1453,11 @@ sub get_database_content ($self, $save_docpath, $language) {
     main => $self->markdown_to_html($strip_md_title->($main_markdown)),
     subdocs => $subdocs,
     children => [],
-    url => $save_docpath =~ s|^/||r =~ s|/$||r,
+    url => $url_path,
     language => $language,
     head => $head,
     editable => 1,
+    using_fallback => $using_fallback,
     src => $main_resource->{src}
   };
 
@@ -1275,8 +1467,16 @@ sub get_database_content ($self, $save_docpath, $language) {
 
 # Ensure sidecard consistency across languages by cloning missing resources
 sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $default_language_id, $target_main_id) {
+  # Get target language code
+  my $target_lang = $self->database->db->query(
+    'SELECT code FROM languages WHERE languageid = ?', $target_language_id
+  )->hash->{code} // 'en';
+
+  my $default_lang = $self->database->db->query(
+    'SELECT code FROM languages WHERE languageid = ?', $default_language_id
+  )->hash->{code} // 'en';
+
   # Get all sidecards connected to main resource in default language
-  # Title and description are extracted from markdown content, not stored separately
   my $default_sidecards = $self->database->db->query(
     'SELECT r.src, r.content, r.owner, r.creator, r.publisher,
             r.contenttype, r.templateid, r.webserviceid
@@ -1287,19 +1487,24 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
   )->hashes;
 
   for my $default_sidecard (@$default_sidecards) {
+    # Convert src from default language to target language
+    # e.g., 01-sidecard_en.md -> 01-sidecard_sv.md
+    my $target_src = $default_sidecard->{src};
+    $target_src =~ s/_${default_lang}\.md$/_${target_lang}.md/;
+
     # Check if this sidecard exists in target language
     my $existing = $self->database->db->query(
       'SELECT resourceid FROM web.resources WHERE src = ? AND languageid = ?',
-      $default_sidecard->{src}, $target_language_id
+      $target_src, $target_language_id
     )->hash;
 
     unless ($existing) {
-      # Clone the sidecard resource for target language
+      # Clone the sidecard resource for target language with correct src
       my $new_resource = $self->database->db->query(
         'INSERT INTO web.resources (alias, src, content, owner, creator, publisher,
                                    languageid, contenttype, templateid, webserviceid)
          VALUES (\'\', ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING resourceid',
-        $default_sidecard->{src},
+        $target_src,
         $default_sidecard->{content},
         $default_sidecard->{owner},
         $default_sidecard->{creator},

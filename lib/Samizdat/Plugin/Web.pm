@@ -35,6 +35,7 @@ sub register ($self, $app, $conf) {
   $manager->get('images')                             ->to('#images')            ->name('web_images');
   $manager->get('source/*docpath')                    ->to('#source')            ->name('web_source');
   $manager->get('source')                             ->to('#source', docpath => '')->name('web_source_root');
+  $manager->get('new')                                ->to('#addcontent')        ->name('web_new');
   $manager->get('/')                                  ->to('#index')             ->name('web_index');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
@@ -254,9 +255,10 @@ sub register ($self, $app, $conf) {
           return $docpath;
         };
         my $language = $c->stash('language');
-        if ($c->config->{locale}->{default_language} ne $language) {
-          $docpath =~ s/\.html$/.$language.html/;
-        }
+        my $default_language = $c->config->{locale}->{default_language};
+        my $is_default_lang = ($default_language eq $language);
+        # Always use language suffix for all languages
+        $docpath =~ s/\.html$/.$language.html/;
         # Generate CSP hashes for inline scripts and styles
         # Only match inline scripts (no src attribute) to avoid capturing across external script tags
         my @script_hashes;
@@ -292,7 +294,7 @@ sub register ($self, $app, $conf) {
           # Meta tag policy (frame-ancestors not supported in meta)
           my $csp_meta_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src";
           # Full policy for companion file (includes frame-ancestors)
-          $csp_policy = "$csp_meta_policy; frame-ancestors $frame_ancestors";
+          $csp_policy = "$csp_meta_policy; frame-ances tors $frame_ancestors";
           my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_meta_policy">};
           $$output =~ s{(</head>)}{  $csp_meta\n  $1};
         }
@@ -311,6 +313,17 @@ sub register ($self, $app, $conf) {
           # Brotli compression (better ratio, for nginx brotli_static)
           # quality=11 (max), lgwin=24 (max window) - slow but best compression
           $public->child($docpath . '.br')->spew(bro($$output, 11, 24));
+          # Create index.html symlink for default language (works in ISO with Rock Ridge)
+          if ($is_default_lang && $docpath =~ /index\.\w+\.html$/) {
+            my $symlink_path = $docpath;
+            $symlink_path =~ s/index\.\w+\.html$/index.html/;
+            my $symlink_file = $public->child($symlink_path);
+            my $target_file = $public->child($docpath);
+            # Get just the filename for relative symlink
+            my $target_name = $target_file->basename;
+            unlink $symlink_file if -e $symlink_file || -l $symlink_file;
+            symlink $target_name, $symlink_file->to_string;
+          }
         }
       }
       if ($c->config->{manager}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
@@ -948,6 +961,45 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Web_Result'
+
+  /web/translate:
+    post:
+      operationId: Web.translate
+      x-mojo-to: Web#translate
+      summary: Translate markdown content using AI
+      tags: [Web]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                markdown:
+                  type: string
+                  description: Markdown content to translate
+                target_language:
+                  type: string
+                  description: Target language code (e.g., 'es', 'sv')
+                frontmatter:
+                  type: string
+                  description: Optional YAML frontmatter to translate
+              required:
+                - markdown
+                - target_language
+      responses:
+        '200':
+          description: Translation successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  translated:
+                    type: string
+                  frontmatter:
+                    type: string
 
   /web/languages:
     get:
