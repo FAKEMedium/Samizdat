@@ -76,7 +76,7 @@ sub startup {
     $dbh->{pg_server_prepare} = 0;
     $pg->max_connections(32);
   });
-  $app->pg->migrations->from_dir('migrations')->migrate;
+  $app->pg->migrations->from_dir('migrations/pg')->migrate;
   $app->pg->db->dbh->{pg_server_prepare} = 1;
 
   if (exists($config->{import}->{dsn})) {
