@@ -24,15 +24,15 @@
   </div>
 </form>
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('invoice_open') %>"><%== __('Open invoices') %></a>
-% if (exists config->{manager}->{paypal}) {
+% if (exists app->renderer->helpers->{paypal}) {
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('paypal_index') %>"><%== __('PayPal') %></a>
 % }
-% if (exists config->{manager}->{swish}) {
+% if (exists app->renderer->helpers->{swish}) {
 <a class="badge rounded-pill text-bg-primary" href="<%== url_for('swish_index') %>"><%== __('SWISH') %></a>
 % }
-% if (exists config->{manager}->{stripe}) {
+% if (exists app->renderer->helpers->{stripe}) {
   <a class="badge rounded-pill text-bg-primary" href="<%== url_for('stripe_index') %>"><%== __('Stripe') %></a>
 % }
-% if (exists config->{manager}->{nets}) {
+% if (exists app->renderer->helpers->{nets}) {
   <a class="badge rounded-pill text-bg-primary" href="<%== url_for('nets_payments_index') %>"><%== __('Nets') %></a>
 % }

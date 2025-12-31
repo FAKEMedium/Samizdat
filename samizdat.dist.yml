@@ -183,7 +183,6 @@ manager:
       test:
         api: https://api.yoursrs-ote.com/
   paypal:
-    cardnumber: 16
     dbtype: postgresql
     currency: USD                             # Default currency code (USD, EUR, SEK, etc)
     default_env: sandbox                      # sandbox or production - determines which API endpoint to use
@@ -205,7 +204,6 @@ manager:
     cardnumber: 17
     dbtype: postgresql
   swish:
-    cardnumber: 18
     dbtype: postgresql
     currency: SEK
     default_env: test                             # test or production
@@ -226,8 +224,25 @@ manager:
           client_cert: /path/to/production_client.pem
           client_key: /path/to/production_client.key
           ca_cert: /path/to/production_ca.pem
+  nets:
+    dbtype: postgresql
+    currency: SEK
+    default_env: test                             # test or production
+    # Documentation: https://developer.nexigroup.com/nexi-checkout/en-EU/docs/
+    env:
+      test:
+        api: https://test.api.dibspayment.eu/
+        api_key: your-test-secret-key
+        checkoutjs: https://test.checkout.dibspayment.eu/v1/checkout.js?v=1
+        webhook:
+          origin: 20.31.57.60/30                  # Nets test webhook source IP range
+      production:
+        api: https://api.dibspayment.eu/
+        api_key: your-production-secret-key
+        checkoutjs: https://checkout.dibspayment.eu/v1/checkout.js?v=1
+        webhook:
+          origin: 20.103.218.104/30               # Nets production webhook source IP range
   stripe:
-    cardnumber: 19
     dbtype: postgresql
     currency: SEK
     default_env: test                             # test or production
