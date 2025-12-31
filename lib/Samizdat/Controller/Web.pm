@@ -676,13 +676,10 @@ sub translate ($self) {
           }
         }
       }
-      # Always add proper delimiters
-      $translated_frontmatter = "---\n$translated_frontmatter\n---\n" if $translated_frontmatter;
-
       return $self->render(json => {
         success => 1,
         translated => $translated,
-        frontmatter => $translated_frontmatter
+        frontmatter => $translated_frontmatter  # YAML without --- delimiters
       });
     }
   }

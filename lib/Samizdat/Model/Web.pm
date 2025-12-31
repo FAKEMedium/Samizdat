@@ -1095,11 +1095,11 @@ sub get_source_content ($self, $docpath, $language) {
     has_anthropic => exists($self->config->{anthropic}) && $self->config->{anthropic}->{api_key} ? 1 : 0
   };
 
-  # Helper to extract and strip YAML front matter
+  # Helper to extract and strip YAML front matter (returns YAML without --- delimiters)
   my $extract_frontmatter = sub ($content) {
     return ('', $content) unless $content;
-    if ($content =~ s/^(---\s*\n.*?\n---\s*\n)//s) {
-      return ($1, $content);
+    if ($content =~ s/^---\s*\n(.*?)\n---\s*\n//s) {
+      return ($1, $content);  # Return just the YAML content, no delimiters
     }
     return ('', $content);
   };
@@ -1143,11 +1143,12 @@ sub get_source_content ($self, $docpath, $language) {
       my ($title) = $markdown =~ /^#\s+(.+)$/m;
       $title //= '';
 
-      # Get frontmatter from meta tables and convert to YAML
+      # Get frontmatter from meta tables and convert to YAML (without --- delimiters)
       my $meta = $self->get_resource_meta($main->{resourceid}, $language_id);
       my $frontmatter = '';
       if (keys %$meta) {
-        $frontmatter = "---\n" . YAML::XS::Dump($meta) . "---\n";
+        $frontmatter = YAML::XS::Dump($meta);
+        $frontmatter =~ s/\n$//;  # Remove trailing newline from YAML::XS::Dump
       }
 
       $result->{main} = {
@@ -1272,26 +1273,14 @@ sub get_source_content ($self, $docpath, $language) {
 # Check if docpath has any database content
 sub has_database_content ($self, $docpath, $language) {
   my $language_id = $self->languages->{$language} // 1;
-  my $default_language = $self->locale->{default_language} // 'en';
-  my $default_language_id = $self->languages->{$default_language} // 1;
 
-  # Check for requested language first
+  # Check ONLY for the specific requested language - no fallback here
+  # Fallback logic is handled in get_editable_content after checking files
   my $count = $self->database->db->query(
     'SELECT COUNT(*) as count FROM web.resources
      WHERE alias = ? AND languageid = ?',
     $docpath, $language_id
   )->hash->{count};
-
-  return 1 if $count > 0;
-
-  # Fallback to default language if not found
-  if ($language ne $default_language) {
-    $count = $self->database->db->query(
-      'SELECT COUNT(*) as count FROM web.resources
-       WHERE alias = ? AND languageid = ?',
-      $docpath, $default_language_id
-    )->hash->{count};
-  }
 
   return $count > 0;
 }
