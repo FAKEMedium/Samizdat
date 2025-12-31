@@ -175,7 +175,7 @@ sub create_payment ($self, %params) {
   # Save to database
   eval {
     $self->pg->db->query(
-      'INSERT INTO nets_payments (payment_id, checkout_url, amount, currency, reference, status, order_items, custom_data, created_at)
+      'INSERT INTO nets.payments (payment_id, checkout_url, amount, currency, reference, status, order_items, custom_data, created_at)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())',
       $payment_id,
       $checkout_url,
@@ -268,7 +268,7 @@ sub charge_payment ($self, $payment_id, %params) {
   # Update database
   eval {
     $self->pg->db->query(
-      'UPDATE nets_payments SET status = ?, charged_amount = ?, charged_at = NOW(), updated_at = NOW()
+      'UPDATE nets.payments SET status = ?, charged_amount = ?, charged_at = NOW(), updated_at = NOW()
        WHERE payment_id = ?',
       'charged',
       $amount,
@@ -323,7 +323,7 @@ sub refund_payment ($self, $payment_id, %params) {
   # Save refund to database
   eval {
     $self->pg->db->query(
-      'INSERT INTO nets_refunds (payment_id, refund_id, amount, reason, status, created_at)
+      'INSERT INTO nets.refunds (payment_id, refund_id, amount, reason, status, created_at)
        VALUES (?, ?, ?, ?, ?, NOW())',
       $payment_id,
       $refund_id,
@@ -334,7 +334,7 @@ sub refund_payment ($self, $payment_id, %params) {
 
     # Update payment refunded amount
     $self->pg->db->query(
-      'UPDATE nets_payments SET refunded_amount = refunded_amount + ?, updated_at = NOW()
+      'UPDATE nets.payments SET refunded_amount = refunded_amount + ?, updated_at = NOW()
        WHERE payment_id = ?',
       $amount,
       $payment_id
@@ -406,7 +406,7 @@ sub process_webhook ($self, $payload, $source_ip) {
   my $log_id;
   eval {
     my $result = $self->pg->db->query(
-      'INSERT INTO nets_webhook_log (payment_id, event_type, event_data, source_ip, verified, created_at)
+      'INSERT INTO nets.webhook_log (payment_id, event_type, event_data, source_ip, verified, created_at)
        VALUES (?, ?, ?, ?, ?, NOW())
        RETURNING id',
       $payment_id,
@@ -433,7 +433,7 @@ sub process_webhook ($self, $payload, $source_ip) {
     if ($event_type =~ /payment\.charge\.created/i || $event_type =~ /reservation\.created/i) {
       # Payment was charged
       $self->pg->db->query(
-        'UPDATE nets_payments
+        'UPDATE nets.payments
          SET status = ?, webhook_data = ?, updated_at = NOW(),
              events = events || ?::jsonb
          WHERE payment_id = ?',
@@ -447,7 +447,7 @@ sub process_webhook ($self, $payload, $source_ip) {
     elsif ($event_type =~ /payment\.created/i) {
       # Payment session created
       $self->pg->db->query(
-        'UPDATE nets_payments
+        'UPDATE nets.payments
          SET webhook_data = ?, updated_at = NOW(),
              events = events || ?::jsonb
          WHERE payment_id = ?',
@@ -460,7 +460,7 @@ sub process_webhook ($self, $payload, $source_ip) {
     elsif ($event_type =~ /refund/i) {
       # Refund event
       $self->pg->db->query(
-        'UPDATE nets_payments
+        'UPDATE nets.payments
          SET webhook_data = ?, updated_at = NOW(),
              events = events || ?::jsonb
          WHERE payment_id = ?',
@@ -478,7 +478,7 @@ sub process_webhook ($self, $payload, $source_ip) {
   # Update webhook log with processing status
   if ($processing_result) {
     $self->pg->db->query(
-      'UPDATE nets_webhook_log SET processed = true WHERE id = ?',
+      'UPDATE nets.webhook_log SET processed = true WHERE id = ?',
       $log_id
     );
     return { success => 1, event_type => $event_type };
@@ -486,7 +486,7 @@ sub process_webhook ($self, $payload, $source_ip) {
   else {
     my $error = $@ || 'Unknown processing error';
     $self->pg->db->query(
-      'UPDATE nets_webhook_log SET processed = false, processing_error = ? WHERE id = ?',
+      'UPDATE nets.webhook_log SET processed = false, processing_error = ? WHERE id = ?',
       $error,
       $log_id
     );
@@ -504,7 +504,7 @@ Get payment record from database.
 
 sub get_payment_from_db ($self, $payment_id) {
   return $self->pg->db->query(
-    'SELECT * FROM nets_payments WHERE payment_id = ?',
+    'SELECT * FROM nets.payments WHERE payment_id = ?',
     $payment_id
   )->hash;
 }
@@ -522,7 +522,7 @@ sub get_recent_payments ($self, %params) {
   my $offset = $params{offset} || 0;
 
   return $self->pg->db->query(
-    'SELECT * FROM nets_payments ORDER BY created_at DESC LIMIT ? OFFSET ?',
+    'SELECT * FROM nets.payments ORDER BY created_at DESC LIMIT ? OFFSET ?',
     $limit,
     $offset
   )->hashes->to_array;
@@ -544,7 +544,7 @@ sub get_payment_statistics ($self) {
        COALESCE(SUM(charged_amount), 0) as total_charged,
        COALESCE(SUM(refunded_amount), 0) as total_refunded,
        COALESCE(SUM(charged_amount) - SUM(refunded_amount), 0) as net_amount
-     FROM nets_payments',
+     FROM nets.payments',
     'charged'
   )->hash;
 }

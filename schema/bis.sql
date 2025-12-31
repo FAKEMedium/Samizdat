@@ -4,6 +4,7 @@
 
 -- Create BIS schema
 CREATE SCHEMA IF NOT EXISTS bis;
+ALTER SCHEMA bis OWNER TO samizdat;
 
 -- Main domains table (only domain name, no localized content)
 CREATE TABLE bis.domains (
@@ -13,6 +14,8 @@ CREATE TABLE bis.domains (
   created_at TIMESTAMP DEFAULT NOW(),
   updated_at TIMESTAMP DEFAULT NOW()
 );
+
+ALTER TABLE bis.domains OWNER TO samizdat;
 
 CREATE INDEX idx_domains_active ON bis.domains(active);
 CREATE INDEX idx_domains_domain ON bis.domains(domain);
@@ -27,6 +30,8 @@ CREATE TABLE bis.domain_descriptions (
   CONSTRAINT domain_descriptions_unique UNIQUE (domain_id, languageid)
 );
 
+ALTER TABLE bis.domain_descriptions OWNER TO samizdat;
+
 CREATE INDEX idx_domain_descriptions_domain ON bis.domain_descriptions(domain_id);
 CREATE INDEX idx_domain_descriptions_lang ON bis.domain_descriptions(languageid);
 
@@ -37,6 +42,8 @@ CREATE TABLE bis.tags (
   priority INT DEFAULT 0,  -- Higher priority tags shown first
   created_at TIMESTAMP DEFAULT NOW()
 );
+
+ALTER TABLE bis.tags OWNER TO samizdat;
 
 -- Localized tag names and descriptions
 CREATE TABLE bis.tag_names (
@@ -49,6 +56,8 @@ CREATE TABLE bis.tag_names (
   CONSTRAINT tag_names_unique UNIQUE (tag_id, languageid)
 );
 
+ALTER TABLE bis.tag_names OWNER TO samizdat;
+
 CREATE INDEX idx_tag_names_tag ON bis.tag_names(tag_id);
 CREATE INDEX idx_tag_names_lang ON bis.tag_names(languageid);
 CREATE INDEX idx_tag_names_key ON bis.tag_names(key);
@@ -59,6 +68,8 @@ CREATE TABLE bis.domain_tags (
   tag_id INT REFERENCES bis.tags(id) ON DELETE CASCADE,
   PRIMARY KEY (domain_id, tag_id)
 );
+
+ALTER TABLE bis.domain_tags OWNER TO samizdat;
 
 CREATE INDEX idx_domain_tags_domain ON bis.domain_tags(domain_id);
 CREATE INDEX idx_domain_tags_tag ON bis.domain_tags(tag_id);
@@ -72,6 +83,8 @@ CREATE TABLE bis.runs (
   status VARCHAR(50) DEFAULT 'running',  -- running, completed, failed
   notes TEXT
 );
+
+ALTER TABLE bis.runs OWNER TO samizdat;
 
 CREATE INDEX idx_runs_started ON bis.runs(started_at DESC);
 
@@ -90,6 +103,8 @@ CREATE TABLE bis.checks (
   is_compliant BOOLEAN DEFAULT FALSE,  -- TRUE if Swedish
   checked_at TIMESTAMP DEFAULT NOW()
 );
+
+ALTER TABLE bis.checks OWNER TO samizdat;
 
 CREATE INDEX idx_checks_run ON bis.checks(run_id);
 CREATE INDEX idx_checks_domain ON bis.checks(domain_id);
@@ -116,6 +131,8 @@ CREATE TABLE bis.scores (
   UNIQUE(run_id, domain_id)
 );
 
+ALTER TABLE bis.scores OWNER TO samizdat;
+
 CREATE INDEX idx_scores_run ON bis.scores(run_id);
 CREATE INDEX idx_scores_domain ON bis.scores(domain_id);
 CREATE INDEX idx_scores_score ON bis.scores(score DESC);
@@ -134,6 +151,8 @@ CREATE TABLE bis.providers (
   updated_at TIMESTAMP DEFAULT NOW()
 );
 
+ALTER TABLE bis.providers OWNER TO samizdat;
+
 CREATE INDEX idx_providers_swedish ON bis.providers(is_swedish);
 
 -- Localized provider names and notes
@@ -146,6 +165,8 @@ CREATE TABLE bis.provider_names (
   notes TEXT,
   CONSTRAINT provider_names_unique UNIQUE (provider_id, languageid)
 );
+
+ALTER TABLE bis.provider_names OWNER TO samizdat;
 
 CREATE INDEX idx_provider_names_provider ON bis.provider_names(provider_id);
 CREATE INDEX idx_provider_names_lang ON bis.provider_names(languageid);
@@ -164,6 +185,8 @@ CREATE TABLE bis.statistics (
   avg_score DECIMAL(5,2),
   calculated_at TIMESTAMP DEFAULT NOW()
 );
+
+ALTER TABLE bis.statistics OWNER TO samizdat;
 
 CREATE INDEX idx_statistics_run ON bis.statistics(run_id);
 
@@ -267,6 +290,8 @@ WHERE s.run_id = (SELECT MAX(id) FROM bis.runs WHERE status = 'completed')
   AND d.active = TRUE
 GROUP BY tn.key, tn.display_name, t.priority
 ORDER BY t.priority DESC;
+ALTER VIEW bis.latest_scores OWNER TO samizdat;
+ALTER VIEW bis.sector_stats OWNER TO samizdat;
 
 -- View for provider statistics (English)
 CREATE VIEW bis.provider_stats AS
@@ -285,3 +310,4 @@ LEFT JOIN bis.providers bp ON pn.provider_id = bp.id
 WHERE c.run_id = (SELECT MAX(id) FROM bis.runs WHERE status = 'completed')
 GROUP BY c.hosting_provider, pn.name, bp.country_code, bp.is_swedish, bp.cloud_act_applies
 ORDER BY domain_count DESC;
+ALTER VIEW bis.provider_stats OWNER TO samizdat;
