@@ -140,7 +140,7 @@ sub success ($self) {
 
   my $title = $self->app->__('Payment Successful');
   my $web = { title => $title };
-  $web->{script} = $self->render_to_string(template => 'nets/success', format => 'js');
+  $web->{script} = $self->render_to_string(template => 'nets/success/index', format => 'js');
 
   $self->stash(
     title => $title,
@@ -148,7 +148,7 @@ sub success ($self) {
     payment => $payment,
     nets_payment => $nets_payment
   );
-  $self->render(template => 'nets/success');
+  $self->render(template => 'nets/success/index');
 }
 
 =head2 cancel
@@ -170,7 +170,7 @@ sub cancel ($self) {
     web => $web,
     payment_id => $payment_id
   );
-  $self->render(template => 'nets/cancel');
+  $self->render(template => 'nets/cancel/index');
 }
 
 =head2 webhook
@@ -320,7 +320,7 @@ sub refund ($self) {
   });
 }
 
-=head2 list_payments
+=head2 payments_index
 
 List recent payments (admin only).
 
@@ -328,7 +328,7 @@ GET /nets/payments?limit=50&offset=0
 
 =cut
 
-sub list_payments ($self) {
+sub payments_index ($self) {
   # Require admin access for JSON
   if ($self->req->headers->accept =~ /json/) {
     return unless $self->access({ admin => 1 });
@@ -351,7 +351,7 @@ sub list_payments ($self) {
   # Render HTML page for manager
   my $title = $self->app->__('Nets Payments');
   my $web = { title => $title };
-  $web->{script} = $self->render_to_string(template => 'nets/payments', format => 'js');
+  $web->{script} = $self->render_to_string(template => 'nets/payments/index', format => 'js');
 
   $self->stash(
     title => $title,
@@ -359,7 +359,7 @@ sub list_payments ($self) {
     payments => $payments,
     statistics => $stats
   );
-  $self->render(template => 'nets/payments');
+  $self->render(template => 'nets/payments/index');
 }
 
 1;
