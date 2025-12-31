@@ -16,7 +16,7 @@ Ubuntu 24.04 LTS, possibly others too.
 * `sudo apt update`
 * `sudo apt install -y build-essential cpanminus git make automake autoconf cmake wget`
 * `sudo apt install -y libwebp-dev libgif-dev libjpeg-dev libpng-dev libtiff-dev libheif-dev libgd-dev`
-* `sudo apt install -y imagemagick librsvg2-bin librsvg2-dev pngquant`
+* `sudo apt install -y imagemagick librsvg2-bin librsvg2-dev pngquant libqrencode-dev`
 * `sudo apt install -y postgresql postgresql-client postgresql-server-dev-all valkey-server valkey-tools libhiredis-dev`
 * `sudo apt install -y libargon2-dev uuid-dev libevdev-dev libhtml-tidy-perl`
 * `sudo apt install -y mkisofs xorriso growisofs transmission-cli nginx-full apache2-utils`
@@ -39,6 +39,7 @@ Install modules:
 * `sudo cpanm Session::Token Mojolicious::Plugin::Util::RandomString Mojolicious::Plugin::OAuth2 Crypt::OpenSSL::Bignum Crypt::OpenSSL::RSA Mojo::JWT`
 * `sudo cpanm Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Test::Harness`
 * `sudo cpanm Net::DNS::Resolver Net::IP Net::IDN::Encode`
+* `sudo cpanm Text::QRCode`
 
 ### Database
 

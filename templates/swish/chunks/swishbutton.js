@@ -62,12 +62,29 @@
         // M-commerce: show QR code or app link
         statusDiv.innerHTML = '<div class="alert alert-info"><%= __("Scan QR code or tap to open Swish app") %></div>';
         qrDiv.style.display = 'block';
-        qrDiv.innerHTML = `
-          <a href="${payment.swish_url}" class="btn btn-lg btn-success d-block mb-2">
-            <%= __("Open Swish App") %>
-          </a>
-          <p class="text-muted small"><%= __("Or scan QR code with Swish app") %></p>
-        `;
+
+        // Fetch QR code SVG from server
+        const qrUrl = `<%== url_for('Swish.qr') %>?payee=${encodeURIComponent(payment.payee_alias || '')}&amount=${amount}&message=${encodeURIComponent(message)}`;
+        fetch(qrUrl)
+          .then(r => r.text())
+          .then(svg => {
+            qrDiv.innerHTML = `
+              <div class="text-center mb-3">${svg}</div>
+              <a href="${payment.swish_url}" class="btn btn-lg btn-success d-block mb-2">
+                <%= __("Open Swish App") %>
+              </a>
+              <p class="text-muted small"><%= __("Or scan QR code with Swish app") %></p>
+            `;
+          })
+          .catch(() => {
+            qrDiv.innerHTML = `
+              <a href="${payment.swish_url}" class="btn btn-lg btn-success d-block mb-2">
+                <%= __("Open Swish App") %>
+              </a>
+              <p class="text-muted small"><%= __("Or scan QR code with Swish app") %></p>
+            `;
+          });
+
         // Poll for payment status
         pollPaymentStatus(payment.instruction_id);
       } else {
