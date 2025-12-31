@@ -66,6 +66,36 @@
   </p>
 </div>
 
+% # Swish payment option for Swedish customers
+% my $swish_config = config->{manager}->{swish};
+% if ($swish_config && 'SE' eq uc $customer->{billingcountry}) {
+%   my $env = $swish_config->{default_env} || 'test';
+%   my $payee_alias = $swish_config->{env}->{$env}->{payee_alias};
+%   if ($payee_alias) {
+%     my $amount_ore = int($invoice->{totalcost} * 100);
+%     my $message = __x('Invoice {num}', num => $invoice->{fakturanummer});
+%     my $qr_svg = swish_qr_svg(payee => $payee_alias, amount => $amount_ore, message => $message, size => 200);
+<div style="background: #00796B; color: white; padding: 15px; margin: 20px 0; border-radius: 5px;">
+  <h3 style="color: white; margin-top: 0;"><%== __('Pay with Swish') %></h3>
+  <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+    % if ($qr_svg) {
+    <div style="background: white; padding: 10px; border-radius: 5px;">
+      <%== $qr_svg %>
+    </div>
+    % }
+    <div>
+      <p style="margin: 5px 0;"><strong><%== __('Swish number') %>:</strong> <%== $payee_alias %></p>
+      <p style="margin: 5px 0;"><strong><%== __('Amount') %>:</strong> <%== $invoice->{totalcost} %> <%== $invoice->{currency} %></p>
+      <p style="margin: 5px 0;"><strong><%== __('Message') %>:</strong> <%== $message %></p>
+      <p style="margin: 10px 0 0 0; font-size: 0.9em;">
+        <%== __('Scan the QR code with your Swish app or enter the details manually.') %>
+      </p>
+    </div>
+  </div>
+</div>
+%   }
+% }
+
 <div style="margin: 20px 0;">
   <p>
     <a href="<%== $link %>" style="display: inline-block; padding: 10px 20px; background: #007bff; color: white; text-decoration: none; border-radius: 5px;">
