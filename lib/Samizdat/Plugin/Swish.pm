@@ -3,6 +3,7 @@ package Samizdat::Plugin::Swish;
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Swish;
 use Mojo::Loader qw(data_section);
+use Mojo::File;
 
 sub register ($self, $app, $config = {}) {
 
@@ -17,6 +18,7 @@ sub register ($self, $app, $config = {}) {
   $swish->post('/callback')             ->to('#callback')             ->name('swish_callback');
   $swish->get('/success')               ->to('#success')              ->name('swish_success');
   $swish->get('/cancel')                ->to('#cancel')               ->name('swish_cancel');
+  $swish->get('/qr')                    ->to('#qr')                   ->name('swish_qr');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
 
@@ -61,10 +63,138 @@ sub register ($self, $app, $config = {}) {
     );
   });
 
-  # Register helper for QR code generation
+  # Register helper for Swish payment URL (web format)
+  $app->helper(swish_payment_url => sub ($c, %params) {
+    my $payee = $params{payee} || $c->app->config->{manager}->{swish}->{env}->{$c->app->config->{manager}->{swish}->{default_env} || 'test'}->{payee_alias} || '';
+    my $amount = $params{amount} // 0;
+    my $message = $params{message} // '';
+
+    # Format: https://app.swish.nu/1/p/sw/?sw=46701234567&amt=170.0&msg=Hot%20Dog
+    require Mojo::URL;
+    my $url = Mojo::URL->new('https://app.swish.nu/1/p/sw/');
+    $url->query(
+      sw => $payee,
+      amt => sprintf('%.2f', $amount / 100),  # Convert öre to SEK
+      msg => $message
+    );
+    return $url->to_string;
+  });
+
+  # Register helper for QR code URL using Swish app scheme
   $app->helper(swish_qr_url => sub ($c, $token) {
-    # Generate QR code URL using Swish app scheme
     return "swish://paymentrequest?token=$token";
+  });
+
+  # Register helper for SVG QR code generation with optional center logo
+  $app->helper(qr_svg => sub ($c, $data, %opts) {
+    my $size = $opts{size} || 200;
+    my $margin = $opts{margin} // 4;
+    my $logo = $opts{logo};        # SVG content for center logo
+    my $logo_image = $opts{logo_image};  # Data URI for PNG/JPG image
+    my $logo_ratio = $opts{logo_ratio} // 0.25;  # Logo takes 25% of QR code
+    my $has_logo = $logo || $logo_image;
+
+    eval { require Text::QRCode };
+    if ($@) {
+      $c->app->log->error("Text::QRCode not installed: $@");
+      return '';
+    }
+
+    # Use high error correction when embedding a logo
+    my $level = $has_logo ? 'H' : ($opts{level} || 'M');
+
+    my $qr = Text::QRCode->new(
+      level => $level,
+      version => $opts{version} || 0,
+      mode => $opts{mode} || '8-bit',
+    );
+
+    my $matrix = $qr->plot($data);
+    return '' unless $matrix && @$matrix;
+
+    my $rows = scalar @$matrix;
+    my $cols = scalar @{$matrix->[0]};
+    my $total = $rows + ($margin * 2);
+    my $cell_size = $size / $total;
+
+    # Calculate logo exclusion zone (center area where logo will be placed)
+    my $logo_size = $size * $logo_ratio;
+    my $logo_x = ($size - $logo_size) / 2;
+    my $logo_y = ($size - $logo_size) / 2;
+
+    my @rects;
+    for my $y (0 .. $rows - 1) {
+      for my $x (0 .. $cols - 1) {
+        if ($matrix->[$y][$x] eq '*') {
+          my $px = ($x + $margin) * $cell_size;
+          my $py = ($y + $margin) * $cell_size;
+
+          # Skip cells that would be covered by the logo
+          if ($has_logo) {
+            my $cell_center_x = $px + $cell_size / 2;
+            my $cell_center_y = $py + $cell_size / 2;
+            next if $cell_center_x >= $logo_x && $cell_center_x <= $logo_x + $logo_size &&
+                    $cell_center_y >= $logo_y && $cell_center_y <= $logo_y + $logo_size;
+          }
+
+          push @rects, qq{<rect x="$px" y="$py" width="$cell_size" height="$cell_size"/>};
+        }
+      }
+    }
+
+    my $rects_str = join("\n    ", @rects);
+
+    # Build logo element if provided
+    my $logo_element = '';
+    if ($logo_image) {
+      # Embed as image element with data URI
+      $logo_element = qq{
+  <image x="$logo_x" y="$logo_y" width="$logo_size" height="$logo_size" href="$logo_image"/>};
+    }
+    elsif ($logo) {
+      # Extract inner content from SVG (remove outer svg tags)
+      my $logo_inner = $logo;
+      $logo_inner =~ s/<\?xml[^>]*\?>//g;
+      $logo_inner =~ s/<svg[^>]*>//g;
+      $logo_inner =~ s/<\/svg>//g;
+
+      # Get viewBox from original SVG for proper scaling
+      my ($vb) = $logo =~ /viewBox="([^"]+)"/;
+      $vb //= "0 0 512 512";
+
+      $logo_element = qq{
+  <svg x="$logo_x" y="$logo_y" width="$logo_size" height="$logo_size" viewBox="$vb">
+    $logo_inner
+  </svg>};
+    }
+
+    return qq{<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 $size $size" width="$size" height="$size">
+  <rect width="100%" height="100%" fill="white"/>
+  <g fill="black">
+    $rects_str
+  </g>$logo_element
+</svg>};
+  });
+
+  # Register helper for Swish QR code SVG with Swish logo (PNG embedded as base64)
+  $app->helper(swish_qr_svg => sub ($c, %params) {
+    my $url = $c->swish_payment_url(%params);
+
+    # Read Swish logo PNG and encode as base64 data URI
+    my $logo_path = $c->app->home->child('src/swish/Swish icon qr-code.png');
+    my $logo_data_uri = '';
+    if (-f $logo_path) {
+      require MIME::Base64;
+      my $png_data = Mojo::File->new($logo_path)->slurp;
+      my $base64 = MIME::Base64::encode_base64($png_data, '');
+      $logo_data_uri = "data:image/png;base64,$base64";
+    }
+
+    return $c->qr_svg($url,
+      size => $params{size} || 200,
+      logo_image => $logo_data_uri,
+      logo_ratio => 0.25,
+    );
   });
 
 }
@@ -373,6 +503,36 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Swish_CancelResponse'
+
+  /swish/qr:
+    get:
+      operationId: Swish.qr
+      x-mojo-to: Swish#qr
+      summary: Generate Swish QR code SVG
+      tags: [Swish]
+      parameters:
+        - name: payee
+          in: query
+          schema:
+            type: string
+          description: Payee alias (phone number)
+        - name: amount
+          in: query
+          schema:
+            type: integer
+          description: Amount in ore (smallest currency unit)
+        - name: message
+          in: query
+          schema:
+            type: string
+          description: Payment message
+      responses:
+        '200':
+          description: SVG QR code
+          content:
+            image/svg+xml:
+              schema:
+                type: string
 
 components:
   schemas:

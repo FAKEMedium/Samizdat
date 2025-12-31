@@ -35,7 +35,6 @@ sub register ($self, $app, $conf) {
   $manager->get('images')                             ->to('#images')            ->name('web_images');
   $manager->get('source/*docpath')                    ->to('#source')            ->name('web_source');
   $manager->get('source')                             ->to('#source', docpath => '')->name('web_source_root');
-  $manager->get('new')                                ->to('#addcontent')        ->name('web_new');
   $manager->get('/')                                  ->to('#index')             ->name('web_index');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)

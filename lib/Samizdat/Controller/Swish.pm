@@ -162,6 +162,26 @@ sub get_payment ($self) {
   return $self->render(json => { error => 'Payment not found' }, status => 404);
 }
 
+sub qr ($self) {
+  my $payee = $self->param('payee') || '';
+  my $amount = $self->param('amount') || 0;
+  my $message = $self->param('message') || '';
+
+  my $svg = $self->swish_qr_svg(
+    payee => $payee,
+    amount => $amount,
+    message => $message,
+  );
+
+  if ($svg) {
+    $self->res->headers->content_type('image/svg+xml');
+    return $self->render(text => $svg, format => 'svg');
+  }
+  else {
+    return $self->render(text => '', status => 500);
+  }
+}
+
 sub create_refund ($self) {
   my $params = $self->req->json;
 
