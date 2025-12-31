@@ -23,7 +23,7 @@ sub register ($self, $app, $config = {}) {
 
   # Manager routes (HTML pages only - API via OpenAPI)
   my $manager = $r->manager('nets')->to(controller => 'Nets');
-  $manager->get('/')                          ->to('#list_payments')        ->name('nets_manager_index');
+  $manager->get('/')                          ->to('#payments_index')       ->name('nets_payments_index');
 
 
   # Register model helper following the established pattern
@@ -248,8 +248,8 @@ paths:
 
   /nets/payments:
     get:
-      operationId: Nets.payments.list
-      x-mojo-to: Nets#list_payments
+      operationId: Nets.payments.index
+      x-mojo-to: Nets#payments_index
       summary: List recent payments
       tags: [Nets]
       parameters:

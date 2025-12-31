@@ -1,0 +1,64 @@
+% # Nets Payments Manager Panel
+<!-- Statistics Cards -->
+<div class="row mb-4" id="stats-cards">
+  <div class="col-md-3">
+    <div class="card text-white bg-primary mb-3 h-100">
+      <div class="card-header"><%= __('Total') %></div>
+      <div class="card-body">
+        <h4 class="card-title" id="total-amount">-</h4>
+        <p class="card-text" id="total-count">-</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-success mb-3 h-100">
+      <div class="card-header"><%= __('Charged') %></div>
+      <div class="card-body">
+        <h4 class="card-title" id="charged-amount">-</h4>
+        <p class="card-text" id="charged-count">-</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-warning mb-3 h-100">
+      <div class="card-header"><%= __('Refunded') %></div>
+      <div class="card-body">
+        <h4 class="card-title" id="refunded-amount">-</h4>
+        <p class="card-text"><%= __('Total refunds') %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="card text-white bg-info mb-3 h-100">
+      <div class="card-header"><%= __('Net Amount') %></div>
+      <div class="card-body">
+        <h4 class="card-title" id="net-amount">-</h4>
+        <p class="card-text"><%= __('After refunds') %></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Recent Payments Table -->
+<h4><%= __('Recent Payments') %></h4>
+<div class="table-responsive">
+  <table class="table table-striped table-hover" id="payments-table">
+    <thead>
+      <tr>
+        <th><%= __('Date') %></th>
+        <th><%= __('Payment ID') %></th>
+        <th><%= __('Reference') %></th>
+        <th><%= __('Status') %></th>
+        <th><%= __('Amount') %></th>
+        <th><%= __('Charged') %></th>
+        <th><%= __('Refunded') %></th>
+        <th><%= __('Method') %></th>
+      </tr>
+    </thead>
+    <tbody id="payments-tbody">
+      <tr>
+        <td colspan="8" class="text-center"><%= __('Loading...') %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

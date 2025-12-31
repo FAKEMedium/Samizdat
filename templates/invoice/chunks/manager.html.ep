@@ -34,5 +34,5 @@
   <a class="badge rounded-pill text-bg-primary" href="<%== url_for('stripe_index') %>"><%== __('Stripe') %></a>
 % }
 % if (exists config->{manager}->{nets}) {
-  <a class="badge rounded-pill text-bg-primary" href="<%== url_for('nets_index') %>"><%== __('Nets') %></a>
+  <a class="badge rounded-pill text-bg-primary" href="<%== url_for('nets_payments_index') %>"><%== __('Nets') %></a>
 % }
