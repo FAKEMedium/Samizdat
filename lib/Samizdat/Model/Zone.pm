@@ -5,6 +5,10 @@ use Mojo::Base -base, -signatures;
 use Mojo::JSON qw(decode_json encode_json);
 use Mojo::UserAgent;
 use Net::IDN::Encode qw(:all);
+use Net::DNS;
+use Net::Whois::Raw qw(whois);
+use Time::HiRes qw(gettimeofday tv_interval);
+use Socket qw(inet_aton);
 use Data::Dumper;
 
 has 'config';
@@ -12,6 +16,12 @@ has 'cache';
 has 'pdns';  # Mojo::Pg connection to PowerDNS database
 has 'pg';    # Mojo::Pg connection to main Samizdat database (for templates)
 has ua => sub { Mojo::UserAgent->new };
+
+# Get configured source IPs for outgoing DNS connections
+has 'source_ips' => sub ($self) {
+  my $ips = $self->config->{check}->{source_ips} // [];
+  return ref $ips eq 'ARRAY' ? $ips : [$ips];
+};
 
 # Get environment configuration (production or test)
 sub get_env_config ($self) {
@@ -838,6 +848,360 @@ sub search_zones ($self, $params = {}) {
   }
 
   return $results;
+}
+
+### Zone Check Methods
+
+# Check multiple zones matching a wildcard pattern
+sub check_zones ($self, $pattern) {
+  my $max_checks = $self->config->{check}->{max_checks} // 0;
+
+  # Check if pattern contains wildcards
+  if ($pattern =~ /[*?]/) {
+    say "=== Zone Check (wildcard): $pattern ===";
+
+    # Convert glob pattern to SQL LIKE pattern
+    my $sql_pattern = $pattern;
+    $sql_pattern =~ s/\*/%/g;
+    $sql_pattern =~ s/\?/_/g;
+
+    # Search for matching zones
+    my $zones = $self->search_zones({ searchterm => '' });
+
+    # Filter by pattern (search_zones doesn't support LIKE directly)
+    my @matching = grep {
+      my $name = $_->{name} =~ s/\.$//r;
+      $name =~ /^$pattern$/i || $name =~ /$sql_pattern/i;
+    } @$zones;
+
+    # Apply regex matching for glob patterns
+    my $regex = $pattern;
+    $regex =~ s/\./\\./g;
+    $regex =~ s/\*/.*/g;
+    $regex =~ s/\?/./g;
+    @matching = grep {
+      my $name = $_->{name} =~ s/\.$//r;
+      $name =~ /^$regex$/i;
+    } @$zones;
+
+    say "  Found " . scalar(@matching) . " matching zones";
+
+    my @results;
+    my $count = 0;
+    for my $zone (@matching) {
+      my $name = $zone->{name} =~ s/\.$//r;
+      push @results, $self->check_zone($name);
+
+      $count++;
+      if ($max_checks > 0 && $count >= $max_checks) {
+        say "  Stopping after $count zones (max_checks limit)";
+        last;
+      }
+    }
+
+    return {
+      success => 1,
+      pattern => $pattern,
+      total_zones => scalar(@matching),
+      checked_zones => $count,
+      results => \@results,
+    };
+  }
+
+  # No wildcard - check single zone
+  return $self->check_zone($pattern);
+}
+
+# Main zone check method - performs whois and DNS checks
+sub check_zone ($self, $zone_name) {
+  $zone_name =~ s/\.$//;  # Remove trailing dot for whois
+
+  say "=== Zone Check: $zone_name ===";
+
+  my $result = {
+    success => 1,
+    zone => $zone_name,
+    whois => {},
+    checks => [],
+    errors => [],
+  };
+
+  # Step 1: Whois lookup to get registered nameservers
+  say "Step 1: Whois lookup...";
+  my $whois_result = $self->_whois_lookup($zone_name);
+  if ($whois_result->{error}) {
+    say "  Whois error: $whois_result->{error}";
+    push @{$result->{errors}}, "Whois: $whois_result->{error}";
+  } else {
+    say "  Registrar: " . ($whois_result->{registrar} // 'unknown');
+    say "  Whois NS: " . join(', ', @{$whois_result->{nameservers} // []});
+    $result->{whois} = $whois_result;
+  }
+
+  # Step 2: Get nameservers from DNS (authoritative)
+  say "Step 2: DNS NS lookup...";
+  my $dns_ns = $self->_get_ns_from_dns($zone_name);
+  say "  DNS NS: " . join(', ', @{$dns_ns // []});
+
+  # Combine whois and DNS nameservers
+  my %all_ns;
+  for my $ns (@{$whois_result->{nameservers} // []}) {
+    $all_ns{lc($ns)} = 1;
+  }
+  for my $ns (@{$dns_ns // []}) {
+    $all_ns{lc($ns)} = 1;
+  }
+
+  my @nameservers = sort keys %all_ns;
+  say "  Combined NS: " . join(', ', @nameservers);
+
+  if (!@nameservers) {
+    say "  ERROR: No nameservers found!";
+    push @{$result->{errors}}, "No nameservers found";
+    $result->{success} = 0;
+    return $result;
+  }
+
+  # Step 3: Check each nameserver
+  my $source_ips = $self->source_ips;
+  my $source_index = 0;
+  my $rate_limit = $self->config->{check}->{rate_limit} // 2;
+  my $timeout = $self->config->{check}->{timeout} // 5;
+  my $delay = $rate_limit > 0 ? 1 / $rate_limit : 0;
+
+  my $max_checks = $self->config->{check}->{max_checks} // 0;  # 0 = unlimited
+  say "Step 3: Checking nameservers (rate_limit=$rate_limit/s, timeout=${timeout}s, delay=${delay}s, max=$max_checks)...";
+  say "  Source IPs: " . (@$source_ips ? join(', ', @$source_ips) : 'default');
+
+  my $check_count = 0;
+  for my $ns (@nameservers) {
+    # Rotate through source IPs
+    my $source_ip = @$source_ips ? $source_ips->[$source_index++ % @$source_ips] : undef;
+
+    say "  Checking $ns" . ($source_ip ? " (from $source_ip)" : "") . "...";
+    my $check = $self->_check_nameserver($zone_name, $ns, $source_ip);
+    push @{$result->{checks}}, $check;
+
+    if ($check->{reachable}) {
+      say "    OK: IP=$check->{ip}, SOA serial=" . ($check->{soa}{serial} // 'n/a') . ", $check->{response_time_ms}ms";
+    } else {
+      say "    FAILED: " . ($check->{error} // 'unknown error');
+    }
+
+    # Stop after max_checks (for testing)
+    $check_count++;
+    if ($max_checks > 0 && $check_count >= $max_checks) {
+      say "  Stopping after $check_count checks (max_checks limit)";
+      last;
+    }
+
+    # Rate limit between checks
+    Time::HiRes::sleep($delay) if $delay > 0 && $ns ne $nameservers[-1];
+  }
+
+  # Step 4: Verify consistency
+  say "Step 4: Verifying consistency...";
+  my @soa_serials = map { $_->{soa}{serial} } grep { $_->{reachable} && $_->{soa} } @{$result->{checks}};
+  my %unique_serials;
+  $unique_serials{$_}++ for @soa_serials;
+
+  if (keys %unique_serials > 1) {
+    my $msg = "SOA serial mismatch: " . join(', ', sort keys %unique_serials);
+    say "  WARNING: $msg";
+    push @{$result->{errors}}, $msg;
+  } else {
+    say "  SOA serials: " . (join(', ', sort keys %unique_serials) || 'none');
+  }
+
+  # Check NS record consistency
+  my @ns_sets = map { join(',', sort @{$_->{ns_records} // []}) }
+                grep { $_->{reachable} && $_->{ns_records} } @{$result->{checks}};
+  my %unique_ns_sets;
+  $unique_ns_sets{$_}++ for @ns_sets;
+
+  if (keys %unique_ns_sets > 1) {
+    say "  WARNING: NS records inconsistent across nameservers";
+    push @{$result->{errors}}, "NS records inconsistent across nameservers";
+  } else {
+    say "  NS records consistent: " . scalar(keys %unique_ns_sets) . " unique set(s)";
+  }
+
+  # Mark NS match status
+  my $expected_ns = $result->{whois}{nameservers} // [];
+  for my $check (@{$result->{checks}}) {
+    next unless $check->{ns_records};
+    my %expected = map { lc($_) => 1 } @$expected_ns;
+    my %actual = map { lc($_) => 1 } @{$check->{ns_records}};
+    $check->{ns_match} = _sets_equal(\%expected, \%actual);
+  }
+
+  say "=== Zone Check Complete: " . (@{$result->{errors}} ? scalar(@{$result->{errors}}) . " issue(s)" : "OK") . " ===";
+  return $result;
+}
+
+# Helper to compare two sets
+sub _sets_equal ($set_a, $set_b) {
+  return 0 if keys %$set_a != keys %$set_b;
+  for my $key (keys %$set_a) {
+    return 0 unless exists $set_b->{$key};
+  }
+  return 1;
+}
+
+# Whois lookup for a zone
+sub _whois_lookup ($self, $zone_name) {
+  my $result = {
+    nameservers => [],
+    registrar => '',
+    status => [],
+  };
+
+  eval {
+    local $Net::Whois::Raw::OMIT_MSG = 1;
+    local $Net::Whois::Raw::CHECK_FAIL = 1;
+    local $Net::Whois::Raw::TIMEOUT = 10;
+
+    my $whois_data = whois($zone_name);
+    return { error => "No whois data returned" } unless $whois_data;
+
+    # Parse nameservers (various formats)
+    my @ns;
+    while ($whois_data =~ /(?:Name\s*Server|nserver|NS|nameservers?)\s*[:\.]?\s*([a-z0-9.-]+\.[a-z]{2,})/gi) {
+      my $ns = lc($1);
+      $ns =~ s/\.$//;
+      push @ns, $ns unless grep { $_ eq $ns } @ns;
+    }
+    $result->{nameservers} = \@ns;
+
+    # Parse registrar
+    if ($whois_data =~ /(?:Registrar|Sponsoring\s+Registrar)\s*[:\.]?\s*(.+)/i) {
+      $result->{registrar} = $1;
+      $result->{registrar} =~ s/\s+$//;
+    }
+
+    # Parse status
+    while ($whois_data =~ /(?:Status|Domain\s+Status)\s*[:\.]?\s*([^\n]+)/gi) {
+      my $status = $1;
+      $status =~ s/\s+$//;
+      push @{$result->{status}}, $status;
+    }
+  };
+
+  if ($@) {
+    return { error => $@ };
+  }
+
+  return $result;
+}
+
+# Get NS records from DNS
+sub _get_ns_from_dns ($self, $zone_name) {
+  my $timeout = $self->config->{check}->{timeout} // 5;
+  my @nameservers;
+
+  eval {
+    my $resolver = Net::DNS::Resolver->new(
+      recurse => 1,
+      tcp_timeout => $timeout,
+      udp_timeout => $timeout,
+    );
+
+    my $reply = $resolver->query($zone_name, 'NS');
+    if ($reply) {
+      for my $rr ($reply->answer) {
+        next unless $rr->type eq 'NS';
+        my $ns = lc($rr->nsdname);
+        $ns =~ s/\.$//;
+        push @nameservers, $ns;
+      }
+    }
+  };
+
+  return \@nameservers;
+}
+
+# Check a specific nameserver for SOA and NS records
+sub _check_nameserver ($self, $zone_name, $ns_name, $source_ip = undef) {
+  my $timeout = $self->config->{check}->{timeout} // 5;
+
+  my $result = {
+    nameserver => $ns_name,
+    ip => '',
+    source_ip => $source_ip // 'default',
+    reachable => 0,
+    soa => undef,
+    ns_records => [],
+    ns_match => 0,
+    response_time_ms => 0,
+    error => undef,
+  };
+
+  eval {
+    # Resolve nameserver IP
+    my $ns_ip = inet_aton($ns_name);
+    unless ($ns_ip) {
+      $result->{error} = "Cannot resolve nameserver IP";
+      return;
+    }
+    $result->{ip} = join('.', unpack('C4', $ns_ip));
+
+    # Create resolver targeting this specific nameserver
+    my $resolver = Net::DNS::Resolver->new(
+      nameservers => [$result->{ip}],
+      recurse => 0,  # Non-recursive for authoritative query
+      tcp_timeout => $timeout,
+      udp_timeout => $timeout,
+    );
+
+    # Set source IP if configured
+    if ($source_ip && $source_ip ne 'default') {
+      $resolver->srcaddr($source_ip);
+    }
+
+    # Query SOA
+    my $t0 = [gettimeofday];
+    my $soa_reply = $resolver->query($zone_name, 'SOA');
+    my $elapsed = tv_interval($t0) * 1000;
+    $result->{response_time_ms} = int($elapsed);
+
+    if ($soa_reply) {
+      $result->{reachable} = 1;
+      for my $rr ($soa_reply->answer) {
+        next unless $rr->type eq 'SOA';
+        $result->{soa} = {
+          serial => $rr->serial,
+          primary => $rr->mname,
+          admin => $rr->rname,
+          refresh => $rr->refresh,
+          retry => $rr->retry,
+          expire => $rr->expire,
+          minimum => $rr->minimum,
+        };
+        last;
+      }
+    } else {
+      $result->{error} = $resolver->errorstring;
+      return;
+    }
+
+    # Query NS records
+    my $ns_reply = $resolver->query($zone_name, 'NS');
+    if ($ns_reply) {
+      for my $rr ($ns_reply->answer) {
+        next unless $rr->type eq 'NS';
+        my $ns = lc($rr->nsdname);
+        $ns =~ s/\.$//;
+        push @{$result->{ns_records}}, $ns;
+      }
+      $result->{ns_records} = [sort @{$result->{ns_records}}];
+    }
+  };
+
+  if ($@) {
+    $result->{error} = $@;
+  }
+
+  return $result;
 }
 
 1;

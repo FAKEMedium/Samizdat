@@ -513,4 +513,73 @@ sub delete_cryptokey($self) {
   });
 }
 
+
+### Zone Check
+
+# Display the zone check interface
+sub check_index ($self) {
+  my $title = $self->app->__('Zone Check');
+  my $web = { title => $title };
+
+  $web->{script} .= $self->render_to_string(template => 'zone/check/index', format => 'js');
+  $self->render(web => $web, title => $title, template => 'zone/check/index');
+}
+
+# Run a zone check (synchronous or async via Minion)
+sub check_run ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $json = $self->req->json;
+  my $zone = $json->{zone};
+
+  unless ($zone) {
+    return $self->render(json => { success => 0, error => 'Zone name required' }, status => 400);
+  }
+
+  # Async mode - queue as Minion job
+  if ($json->{async}) {
+    my $job_id = $self->minion->enqueue('zone_check', [$zone]);
+    return $self->render(json => {
+      success => 1,
+      async => 1,
+      job_id => $job_id,
+      message => $self->app->__('Check queued'),
+    });
+  }
+
+  # Synchronous mode - run check directly (supports wildcards like *.example.com)
+  my $result = $self->zone->check_zones($zone);
+  return $self->render(json => $result);
+}
+
+# Get status of a zone check job
+sub check_status ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $job_id = $self->stash('job_id');
+  my $job = $self->minion->job($job_id);
+
+  unless ($job) {
+    return $self->render(json => { success => 0, error => 'Job not found' }, status => 404);
+  }
+
+  my $info = $job->info;
+  my $response = {
+    job_id => $job_id,
+    status => $info->{state},
+  };
+
+  # Include result if job is finished
+  if ($info->{state} eq 'finished' && $info->{result}) {
+    $response->{result} = $info->{result};
+  }
+
+  # Include error if job failed
+  if ($info->{state} eq 'failed') {
+    $response->{error} = $info->{result} // 'Unknown error';
+  }
+
+  return $self->render(json => $response);
+}
+
 1;
