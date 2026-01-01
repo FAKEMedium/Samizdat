@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; vänligen dela länk och ge en stjärna på {sitename
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "(No parent - top level)"
+msgstr "(Ingen förälder - toppnivå)"
+
 msgid "1 Year"
 msgstr "1 år"
 
@@ -145,6 +148,12 @@ msgstr "Lägg till kolumn efter"
 msgid "Add Column Before"
 msgstr "Lägg till kolumn före"
 
+msgid "Add Key"
+msgstr "Lägg till nyckel"
+
+msgid "Add New Key"
+msgstr "Lägg till ny nyckel"
+
 msgid "Add Row After"
 msgstr "Lägg till rad efter"
 
@@ -181,11 +190,17 @@ msgstr "Lägg till grupp"
 msgid "Add group"
 msgstr "Lägg till grupp"
 
+msgid "Add item"
+msgstr "Lägg till objekt"
+
 msgid "Add mail domain"
 msgstr "Ny maildomän"
 
 msgid "Add mailbox"
 msgstr "Lägg till brevlåda"
+
+msgid "Add nameserver"
+msgstr "Lägg till namnserver"
 
 msgid "Add page"
 msgstr "Lägg till sida"
@@ -235,17 +250,26 @@ msgstr "Adress krävs"
 msgid "Admin"
 msgstr "Administratör"
 
+msgid "Admin Email"
+msgstr "Admin-e-post"
+
 msgid "Admin access required"
 msgstr "Administratörsbehörighet krävs"
 
 msgid "Admin access required for DNS management"
 msgstr "Administratörsbehörighet krävs för DNS-hantering"
 
+msgid "Admin contact"
+msgstr "Adminkontakt"
+
 msgid "Admininistration panel"
 msgstr "Kontrollpanel"
 
 msgid "Advertising"
 msgstr "Annonsering"
+
+msgid "After refunds"
+msgstr "Efter återbetalningar"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "Efter registrering kan du lägga till mer information om dig själv, lätta på din delningspolicy och anpassa din upplevelse."
@@ -280,11 +304,23 @@ msgstr "Alias"
 msgid "All"
 msgstr "Alla"
 
+msgid "All Invoices"
+msgstr "Alla fakturor"
+
 msgid "All Messages"
 msgstr "Alla meddelanden"
 
 msgid "All Sectors"
 msgstr "Alla sektorer"
+
+msgid "All accounts"
+msgstr "Alla konton"
+
+msgid "All customers"
+msgstr "Alla kunder"
+
+msgid "All domains"
+msgstr "Alla domäner"
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Tillåt cookies för att klistra in bekräftelsekod från e-post"
@@ -292,8 +328,17 @@ msgstr "Tillåt cookies för att klistra in bekräftelsekod från e-post"
 msgid "Amount"
 msgstr "Summa"
 
+msgid "Amount and items are required"
+msgstr "Belopp och artiklar krävs"
+
+msgid "Amount in Swedish Kronor"
+msgstr "Belopp i svenska kronor"
+
 msgid "Amount incl. VAT"
 msgstr "Summa inkl. moms"
+
+msgid "Amount is required"
+msgstr "Belopp krävs"
 
 msgid "Amount to pay incl. VAT: {totalcost} {currency}"
 msgstr "Belopp att betala inkl. moms: {totalcost} {currency}"
@@ -313,6 +358,9 @@ msgstr "Ett fel uppstod"
 msgid "An error occurred during login. Please try again."
 msgstr "Ett fel uppstod vid inloggning. Försök igen."
 
+msgid "An error occurred. Please try again."
+msgstr "Ett fel uppstod. Försök igen."
+
 msgid "Are you sure you want to delete this alias?"
 msgstr "Är du säker på att du vill ta bort detta alias?"
 
@@ -322,14 +370,26 @@ msgstr "Är du säker på att du vill ta bort denna cachepost?"
 msgid "Are you sure you want to delete this certificate?"
 msgstr "Är du säker på att du vill ta bort detta certifikat?"
 
+msgid "Are you sure you want to delete this contact?"
+msgstr "Är du säker på att du vill radera denna kontakt?"
+
 msgid "Are you sure you want to delete this domain?"
 msgstr "Är du säker på att du vill ta bort denna domän?"
 
 msgid "Are you sure you want to delete this example?"
 msgstr "Är du säker på att du vill ta bort detta exempel?"
 
+msgid "Are you sure you want to delete this item?"
+msgstr "Är du säker på att du vill radera detta objekt?"
+
+msgid "Are you sure you want to delete this key?"
+msgstr "Är du säker på att du vill radera denna nyckel?"
+
 msgid "Are you sure you want to delete this mailbox?"
 msgstr "Är du säker på att du vill ta bort denna brevlåda?"
+
+msgid "Are you sure you want to delete this menu?"
+msgstr "Är du säker på att du vill radera denna meny?"
 
 msgid "Are you sure you want to delete this message?"
 msgstr "Är du säker på att du vill ta bort detta meddelande?"
@@ -361,8 +421,14 @@ msgstr "Minst {min} tecken från: {chars}"
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr "Minst {min} tecken: {upper} versal, {lower} gemen, {num} siffra, {special} specialtecken"
 
+msgid "Auth-Info code from current registrar"
+msgstr "Auth-Info-kod från nuvarande registrar"
+
 msgid "Authentication required"
 msgstr "Autentisering krävs"
+
+msgid "Authorization code"
+msgstr "Auktoriseringskod"
 
 msgid "Authorize"
 msgstr "Auktorisera"
@@ -388,6 +454,9 @@ msgstr "BIC/Swift"
 msgid "BIC/Swift address"
 msgstr "BIC/Swift-adress"
 
+msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
+msgstr "BIND/AXFR-format med fullständiga namn (som exporterat av DNS-servrar)"
+
 msgid "BIS - $sector"
 msgstr "BIS - $sector"
 
@@ -407,7 +476,7 @@ msgid "BIS Badges"
 msgstr "BIS-märken"
 
 msgid "BIS Check"
-msgstr ""
+msgstr "BIS-kontroll"
 
 msgid "BIS Check: $domain_name"
 msgstr "BIS-kontroll: $domain_name"
@@ -424,11 +493,23 @@ msgstr "Tillbaka till sammanställning"
 msgid "Back to List"
 msgstr "Tillbaka till listan"
 
+msgid "Back to Zones"
+msgstr "Tillbaka till zoner"
+
 msgid "Back to domains"
 msgstr "Tillbaka till domäner"
 
 msgid "Back to list"
 msgstr "Tillbaka till listan"
+
+msgid "Back to menu"
+msgstr "Tillbaka till meny"
+
+msgid "Back to menus"
+msgstr "Tillbaka till menyer"
+
+msgid "Background"
+msgstr "Bakgrund"
 
 msgid "Balance"
 msgstr "Balans"
@@ -441,6 +522,9 @@ msgstr "Bankgironumret är samma som tidigare, men IBAN och BIC/SWIFT är annorl
 
 msgid "Barred"
 msgstr "Spärrade"
+
+msgid "Base URL"
+msgstr "Bas-URL"
 
 msgid "Based in Sweden - Compliance Dashboard"
 msgstr "Based in Sweden - sammanställning"
@@ -459,6 +543,9 @@ msgstr "Blockerad"
 
 msgid "Blocked ip number"
 msgstr "Blockerat ip-nummer"
+
+msgid "Body"
+msgstr "Innehåll"
 
 msgid "Bold"
 msgstr "Fet"
@@ -514,6 +601,12 @@ msgstr "Captcha-bild"
 msgid "Captcha was wrong"
 msgstr "Felaktig captcha"
 
+msgid "Card Payment"
+msgstr "Kortbetalning"
+
+msgid "Cash invoice"
+msgstr "Kontantfaktura"
+
 msgid "Category"
 msgstr "Kategori"
 
@@ -549,6 +642,21 @@ msgstr "Ändrade status."
 
 msgid "Changes saved successfully."
 msgstr "Ändringar sparades."
+
+msgid "Charged"
+msgstr "Debiterad"
+
+msgid "Charged At"
+msgstr "Debiterad"
+
+msgid "Check"
+msgstr "Kontrollera"
+
+msgid "Check failed"
+msgstr "Kontroll misslyckades"
+
+msgid "Check queued"
+msgstr "Kontroll köad"
 
 msgid "Check zones"
 msgstr "Kontrollera zoner"
@@ -613,6 +721,9 @@ msgstr "Cloud Act gäller (US-leverantör)"
 msgid "Code Block"
 msgstr "Kodblock"
 
+msgid "Combined Value"
+msgstr "Kombinerat värde"
+
 msgid "Comma separated"
 msgstr "Kommaseparerad"
 
@@ -644,7 +755,7 @@ msgid "Compliance by Sector"
 msgstr "Efterlevnad per sektor"
 
 msgid "Compliance score"
-msgstr ""
+msgstr "Efterlevnadspoäng"
 
 msgid "Compliant"
 msgstr "Efterlevnad"
@@ -654,6 +765,9 @@ msgstr "Kompatibel (svensk hosting)"
 
 msgid "Compliant Domains"
 msgstr "Kompatibla domäner"
+
+msgid "Components"
+msgstr "Komponenter"
 
 msgid "Confirm"
 msgstr "Bekräfta"
@@ -690,6 +804,12 @@ msgstr "Kontaktdetaljer"
 
 msgid "Contact Information"
 msgstr "Kontaktinformation"
+
+msgid "Contact created"
+msgstr "Kontakt skapad"
+
+msgid "Contact deleted"
+msgstr "Kontakt raderad"
 
 msgid "Contact details"
 msgstr "Kontaktdetaljer"
@@ -739,6 +859,12 @@ msgstr "Land (faktura)"
 msgid "Country selector"
 msgstr "Landsväljare"
 
+msgid "Create"
+msgstr "Skapa"
+
+msgid "Create Payment"
+msgstr "Skapa betalning"
+
 msgid "Create contact"
 msgstr "Skapa kontakt"
 
@@ -753,6 +879,9 @@ msgstr "Skapad"
 
 msgid "Created {created} by {creator}"
 msgstr "Skapad {created} av {creator}"
+
+msgid "Creating payment..."
+msgstr "Skapar betalning..."
 
 msgid "Credit invoice"
 msgstr "Kreditfaktura"
@@ -780,6 +909,12 @@ msgstr "Krediterade faktura: {number}"
 
 msgid "Critical"
 msgstr "Kritisk"
+
+msgid "Cryptokey created successfully"
+msgstr "Kryptonyckel skapad"
+
+msgid "Cryptokey deleted successfully"
+msgstr "Kryptonyckel raderad"
 
 msgid "Currency"
 msgstr "Valuta"
@@ -820,6 +955,9 @@ msgstr "DNS-kontrollresultat"
 msgid "DNS Zones"
 msgstr "DNS-zoner"
 
+msgid "DNS Zones for customer {id}"
+msgstr "DNS-zoner för kund {id}"
+
 msgid "DNS domains"
 msgstr "DNS-domäner"
 
@@ -834,6 +972,12 @@ msgstr "DNS-zoner"
 
 msgid "DNSSEC Key Data"
 msgstr "DNSSEC-nyckeldata"
+
+msgid "DNSSEC Keys"
+msgstr "DNSSEC-nycklar"
+
+msgid "DS Records"
+msgstr "DS-poster"
 
 msgid "Dark"
 msgstr "Mörkt"
@@ -865,8 +1009,14 @@ msgstr "Skuld"
 msgid "Decide which parts of your personal data you want to show different groups."
 msgstr "Bestäm vilka delar av din personliga information du vill visa olika grupper."
 
+msgid "Declined"
+msgstr "Avvisad"
+
 msgid "Default"
 msgstr "Standard"
+
+msgid "Definitions"
+msgstr "Definitioner"
 
 msgid "Delete"
 msgstr "Ta bort"
@@ -879,6 +1029,12 @@ msgstr "Radera rad"
 
 msgid "Delete Table"
 msgstr "Radera tabell"
+
+msgid "Delete this record?"
+msgstr "Radera denna post?"
+
+msgid "Delete this template and all its records?"
+msgstr "Radera denna mall och alla dess poster?"
 
 msgid "Delivery Address"
 msgstr "Leveransadress"
@@ -913,6 +1069,9 @@ msgstr "Rabatt"
 msgid "Display Name"
 msgstr "Visningsnamn"
 
+msgid "Do not renew"
+msgstr "Förnya inte"
+
 msgid "Do you want to credit the invoice?"
 msgstr "Vill du kreditera fakturan?"
 
@@ -940,11 +1099,17 @@ msgstr "Domän togs bort"
 msgid "Domain details"
 msgstr "Domändetaljer"
 
+msgid "Domain name"
+msgstr "Domännamn"
+
 msgid "Domain name is required"
 msgstr "Domännamn krävs"
 
 msgid "Domain not found"
 msgstr "Domänen hittades inte"
+
+msgid "Domain registered"
+msgstr "Domän registrerad"
 
 msgid "Domain registration"
 msgstr "Domänregistrering"
@@ -956,7 +1121,10 @@ msgid "Domain saved successfully"
 msgstr "Domän sparades"
 
 msgid "Domain specific compliance with standard of Based in Sweden"
-msgstr ""
+msgstr "Domänspecifik efterlevnad av Based in Sweden-standarden"
+
+msgid "Domain transfer initiated"
+msgstr "Domänöverföring påbörjad"
 
 msgid "Domain updated successfully"
 msgstr "Domän uppdaterades"
@@ -976,11 +1144,17 @@ msgstr "Ladda ner PDF-faktura - betala NU"
 msgid "Draft"
 msgstr "Utkast"
 
+msgid "Due Date"
+msgstr "Förfallodatum"
+
 msgid "Due date"
 msgstr "Förfallodatum"
 
 msgid "Due to"
 msgstr "Förfallodatum"
+
+msgid "Duplicate"
+msgstr "Duplicera"
 
 msgid "EPP"
 msgstr "EPP"
@@ -997,8 +1171,17 @@ msgstr "Redigera certifikat"
 msgid "Edit Example"
 msgstr "Redigera exempel"
 
+msgid "Edit Record"
+msgstr "Redigera post"
+
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
+
+msgid "Edit menu item: {id}"
+msgstr "Redigera menyobjekt: {id}"
+
+msgid "Edit menu: {name}"
+msgstr "Redigera meny: {name}"
 
 msgid "Edit page {docpath}"
 msgstr "Redigera sida {docpath}"
@@ -1150,6 +1333,9 @@ msgstr "Ange användarnamn och lösenord"
 msgid "Enter valid email"
 msgstr "Ange giltig epostadress"
 
+msgid "Enter your Swedish phone number to receive a Swish payment request."
+msgstr "Ange ditt svenska telefonnummer för att ta emot en Swish-betalningsförfrågan."
+
 msgid "Enter your email"
 msgstr "Skriv in din epostadress"
 
@@ -1180,6 +1366,9 @@ msgstr "Fel vid omsändning av faktura"
 msgid "Error sending reminder"
 msgstr "Fel i påminnelseutskick"
 
+msgid "Errors"
+msgstr "Fel"
+
 msgid "Euro"
 msgstr "Euro"
 
@@ -1198,11 +1387,17 @@ msgstr "Exempel uppdaterades"
 msgid "Examples"
 msgstr "Exempel"
 
+msgid "Exception Occurred"
+msgstr "Undantag uppstod"
+
 msgid "Expand menu"
 msgstr "Expandera meny"
 
 msgid "Expand personal menu."
 msgstr "Expandera personlig meny"
+
+msgid "Expire"
+msgstr "Utgår"
 
 msgid "Expired"
 msgstr "Utgången"
@@ -1219,6 +1414,15 @@ msgstr "Förfaller"
 msgid "Expiring domains"
 msgstr "Förfallande domäner"
 
+msgid "Expiry"
+msgstr "Utgång"
+
+msgid "Export"
+msgstr "Exportera"
+
+msgid "Export zone file"
+msgstr "Exportera zonfil"
+
 msgid "FAKE Medium"
 msgstr "FAKE Medium"
 
@@ -1227,6 +1431,9 @@ msgstr "FAKE News per land"
 
 msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr "SLUTMEDDELANDE: Detta är en sista påminnelse angående er förfallna faktura."
+
+msgid "Failed"
+msgstr "Misslyckades"
 
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
@@ -1246,8 +1453,20 @@ msgstr "Kunde inte kontrollera körning"
 msgid "Failed to create certificate"
 msgstr "Misslyckades skapa certifikat"
 
+msgid "Failed to create contact"
+msgstr "Kunde inte skapa kontakt"
+
+msgid "Failed to create cryptokey"
+msgstr "Kunde inte skapa kryptonyckel"
+
 msgid "Failed to create example"
 msgstr "Misslyckades skapa exempel"
+
+msgid "Failed to create key"
+msgstr "Kunde inte skapa nyckel"
+
+msgid "Failed to create payment"
+msgstr "Kunde inte skapa betalning"
 
 msgid "Failed to create record"
 msgstr "Misslyckades skapa post"
@@ -1261,11 +1480,20 @@ msgstr "Misslyckades ta bort alias"
 msgid "Failed to delete certificate"
 msgstr "Misslyckades ta bort certifikat"
 
+msgid "Failed to delete contact"
+msgstr "Kunde inte radera kontakt"
+
+msgid "Failed to delete cryptokey"
+msgstr "Kunde inte radera kryptonyckel"
+
 msgid "Failed to delete domain"
 msgstr "Misslyckades ta bort domän"
 
 msgid "Failed to delete example"
 msgstr "Misslyckades ta bort exempel"
+
+msgid "Failed to delete key"
+msgstr "Kunde inte radera nyckel"
 
 msgid "Failed to delete mailbox"
 msgstr "Misslyckades ta bort brevlåda"
@@ -1279,6 +1507,15 @@ msgstr "Misslyckades ta bort post"
 msgid "Failed to delete zone"
 msgstr "Misslyckades ta bort zon"
 
+msgid "Failed to export zone"
+msgstr "Kunde inte exportera zon"
+
+msgid "Failed to import zone"
+msgstr "Kunde inte importera zon"
+
+msgid "Failed to initiate transfer"
+msgstr "Kunde inte påbörja överföring"
+
 msgid "Failed to load conversation"
 msgstr "Misslyckades ladda konversation"
 
@@ -1286,16 +1523,22 @@ msgid "Failed to load dashboard data"
 msgstr "Misslyckades ladda sammanställningsdata"
 
 msgid "Failed to load domain"
-msgstr ""
+msgstr "Kunde inte ladda domän"
 
 msgid "Failed to load domain details"
 msgstr "Misslyckades ladda domändetaljer"
 
 msgid "Failed to navigate"
-msgstr ""
+msgstr "Kunde inte navigera"
+
+msgid "Failed to process refund"
+msgstr "Kunde inte behandla återbetalning"
 
 msgid "Failed to regenerate invoice PDF"
 msgstr "Misslyckades med att återskapa PDF"
+
+msgid "Failed to register domain"
+msgstr "Kunde inte registrera domän"
 
 msgid "Failed to reprint invoice"
 msgstr "Misslyckades trycka om faktura"
@@ -1351,8 +1594,14 @@ msgstr "Misslyckades uppdatera post"
 msgid "Failed to update zone"
 msgstr "Misslyckades uppdatera zon"
 
+msgid "Failed/Refunded"
+msgstr "Misslyckades/Återbetald"
+
 msgid "Failed:"
 msgstr "Misslyckades:"
+
+msgid "Fax"
+msgstr "Fax"
 
 msgid "Featured"
 msgstr "Utvald"
@@ -1390,6 +1639,9 @@ msgstr "Förnamn"
 msgid "Flags"
 msgstr "Flaggor"
 
+msgid "Flow"
+msgstr "Flöde"
+
 msgid "For more information, visit the Fortnox website:"
 msgstr "För mer information, besök Fortnoxs webbplats:"
 
@@ -1426,17 +1678,29 @@ msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 msgid "Forward To"
 msgstr "Skicka vidare till"
 
+msgid "Forward zones"
+msgstr "Framåtzoner"
+
+msgid "Found"
+msgstr "Hittades"
+
 msgid "From"
 msgstr "Från"
 
 msgid "From 2025-11-01 we are using Sparbanken Syd."
 msgstr "Från och med 2025-11-01 använder vi Sparbanken Syd."
 
+msgid "From Template"
+msgstr "Från mall"
+
 msgid "Full"
 msgstr "Full"
 
 msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr "Ge ett litet ekonomiskt bidrag till {slug} via buymeacoffee"
+
+msgid "Go Back"
+msgstr "Gå tillbaka"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
 msgstr "Besök {confirmationlink} för att bekräfta din underskrift och hämta din bild."
@@ -1492,8 +1756,11 @@ msgstr "Webbhotellsleverantörer"
 msgid "Hosting provider statistics for tracked domains"
 msgstr "Webbhotellsleverantörsstatistik för spårade domäner"
 
+msgid "Hostname"
+msgstr "Värdnamn"
+
 msgid "How well different Swedish organizations comply with having control of own infrastructure"
-msgstr ""
+msgstr "Hur väl olika svenska organisationer efterlever kravet på kontroll över egen infrastruktur"
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
@@ -1510,8 +1777,23 @@ msgstr "ID krävs"
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr "OMEDELBAR BETALNING KRÄVS"
 
+msgid "IP"
+msgstr "IP"
+
 msgid "IP Address"
 msgstr "IP-adress"
+
+msgid "IPv4 Address"
+msgstr "IPv4-adress"
+
+msgid "IPv4 reverse"
+msgstr "IPv4 omvänd"
+
+msgid "IPv6 Address"
+msgstr "IPv6-adress"
+
+msgid "IPv6 reverse"
+msgstr "IPv6 omvänd"
 
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
@@ -1555,6 +1837,15 @@ msgstr "Agera som"
 msgid "Impersonate {who}"
 msgstr "Agera som {who}"
 
+msgid "Import"
+msgstr "Importera"
+
+msgid "Import zone"
+msgstr "Importera zon"
+
+msgid "In"
+msgstr "In"
+
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "I din personliga meny hittar du bl.a. din panel."
 
@@ -1567,6 +1858,12 @@ msgstr "Inklusive moms"
 msgid "Insert Table"
 msgstr "Infoga tabell"
 
+msgid "Instruction ID"
+msgstr "Instruktions-ID"
+
+msgid "Interest invoice"
+msgstr "Räntefaktura"
+
 msgid "Invalid confirmation link"
 msgstr "Ogiltig bekräftelselänk"
 
@@ -1578,6 +1875,9 @@ msgstr "Ogiltiga formulärdata"
 
 msgid "Invalid invoice ID"
 msgstr "Ogiltigt faktura-ID"
+
+msgid "Invalid items format"
+msgstr "Ogiltigt artikelformat"
 
 msgid "Invalid password"
 msgstr "Ogiltigt lösenord"
@@ -1594,8 +1894,20 @@ msgstr "Faktura"
 msgid "Invoice (credited)"
 msgstr "Faktura (krediterad)"
 
+msgid "Invoice Date"
+msgstr "Fakturadatum"
+
 msgid "Invoice Details"
 msgstr "Fakturadetaljer"
+
+msgid "Invoice Number"
+msgstr "Fakturanummer"
+
+msgid "Invoice Rows"
+msgstr "Fakturarader"
+
+msgid "Invoice Type"
+msgstr "Fakturatyp"
 
 msgid "Invoice address"
 msgstr "Faktureringsadress"
@@ -1666,6 +1978,9 @@ msgstr "Faktura {number}"
 msgid "Invoice {number}, customer #{customerid}"
 msgstr "Faktura {number}, kund #{customerid}"
 
+msgid "Invoice {num}"
+msgstr "Faktura {num}"
+
 msgid "Invoices"
 msgstr "Fakturor"
 
@@ -1685,6 +2000,9 @@ msgstr[1] "Fakturering, {number} rader"
 
 msgid "Issuer"
 msgstr "Utfärdare"
+
+msgid "Issues found"
+msgstr "Problem hittades"
 
 msgid "It can be configured to display everything publicly as well."
 msgstr "Det kan konfigureras för att visa allt offentligt också."
@@ -1707,11 +2025,23 @@ msgstr "Kursiv"
 msgid "Item Number"
 msgstr "Artikelnummer"
 
+msgid "Item deleted"
+msgstr "Objekt raderat"
+
+msgid "Item saved"
+msgstr "Objekt sparat"
+
 msgid "Item:"
 msgstr "Artikel:"
 
 msgid "JSON only"
 msgstr "Endast JSON"
+
+msgid "Job failed"
+msgstr "Jobb misslyckades"
+
+msgid "Job queued"
+msgstr "Jobb köat"
 
 msgid "Keep me logged in"
 msgstr "Håll mig inloggad"
@@ -1719,8 +2049,17 @@ msgstr "Håll mig inloggad"
 msgid "Key"
 msgstr "Nyckel"
 
+msgid "Key Type"
+msgstr "Nyckeltyp"
+
 msgid "Key and display_name required"
 msgstr "Nyckel och visningsnamn krävs"
+
+msgid "Key created"
+msgstr "Nyckel skapad"
+
+msgid "Key deleted"
+msgstr "Nyckel raderad"
 
 msgid "Key, name and country_code required"
 msgstr "Nyckel, namn och landskod krävs"
@@ -1737,6 +2076,9 @@ msgstr "Envelope"
 msgid "Language"
 msgstr "Språk"
 
+msgid "Language:"
+msgstr "Språk:"
+
 msgid "Languages"
 msgstr "Språk"
 
@@ -1749,11 +2091,17 @@ msgstr "Senaste påminnelse"
 msgid "Latest"
 msgstr "Senaste"
 
+msgid "Leave empty for items without a link"
+msgstr "Lämna tomt för objekt utan länk"
+
 msgid "Legal proceedings"
 msgstr "Rättsliga åtgärder"
 
 msgid "Legend"
 msgstr "Teckenförklaring"
+
+msgid "License"
+msgstr "Licens"
 
 msgid "Light"
 msgstr "Ljust"
@@ -1815,6 +2163,9 @@ msgstr "Förlorat lösenordet?"
 msgid "Low"
 msgstr "Låg"
 
+msgid "Lower values have higher priority"
+msgstr "Lägre värden har högre prioritet"
+
 msgid "MB"
 msgstr "MB"
 
@@ -1832,6 +2183,9 @@ msgstr "MX-poster"
 
 msgid "Mail"
 msgstr "Epost"
+
+msgid "Mail Server"
+msgstr "Mailserver"
 
 msgid "Mail admin"
 msgstr "Mailadmin"
@@ -1893,6 +2247,21 @@ msgstr "Markera betalning"
 msgid "Medium"
 msgstr "Medel"
 
+msgid "Menu Items"
+msgstr "Menyobjekt"
+
+msgid "Menu Settings"
+msgstr "Menyinställningar"
+
+msgid "Menu created"
+msgstr "Meny skapad"
+
+msgid "Menu deleted"
+msgstr "Meny raderad"
+
+msgid "Menu saved"
+msgstr "Meny sparad"
+
 msgid "Menus"
 msgstr "Menyer"
 
@@ -1917,11 +2286,17 @@ msgstr "Sidnumrering av meddelanden"
 msgid "Messages will appear here once sent or received"
 msgstr "Meddelanden visas här när de skickas eller tas emot"
 
+msgid "Method"
+msgstr "Metod"
+
 msgid "Mild"
 msgstr "Mild"
 
 msgid "Minimal local customer data is stored in Fortnox."
 msgstr "Minimal lokal kunddata lagras i Fortnox."
+
+msgid "Minimum TTL"
+msgstr "Minsta TTL"
 
 msgid "Missing customer or invoice ID"
 msgstr "Kundnummer eller faktura-ID saknas"
@@ -1931,6 +2306,9 @@ msgstr "Filen saknas, vårt fel?"
 
 msgid "Missing invoice information"
 msgstr "Saknad fakturainformatiin"
+
+msgid "Missing payment ID"
+msgstr "Betalnings-ID saknas"
 
 msgid "Missing username or password"
 msgstr "Användarnamn eller lösenord saknas"
@@ -1959,17 +2337,35 @@ msgstr "Namn"
 msgid "Name Servers"
 msgstr "Namnservrar"
 
+msgid "Nameserver"
+msgstr "Namnserver"
+
+msgid "Nameserver Checks"
+msgstr "Namnserverkontroller"
+
+msgid "Nameservers"
+msgstr "Namnservrar"
+
 msgid "Negative impact on credit rating"
 msgstr "Negativ påverkan på kreditbetyg"
 
 msgid "Net"
 msgstr "Netto"
 
+msgid "Net Amount"
+msgstr "Nettobelopp"
+
 msgid "Net amount"
 msgstr "Nettobelopp"
 
 msgid "Net amount:"
 msgstr "Summa netto:"
+
+msgid "Nets"
+msgstr "Nets"
+
+msgid "Nets Payments"
+msgstr "Nets-betalningar"
 
 msgid "Network error - please try again"
 msgstr "Nätverksfel - försök igen"
@@ -1986,8 +2382,20 @@ msgstr "Nytt certifikat"
 msgid "New Example"
 msgstr "Nytt exempel"
 
+msgid "New Menu"
+msgstr "Ny meny"
+
+msgid "New Record"
+msgstr "Ny post"
+
+msgid "New Template"
+msgstr "Ny mall"
+
 msgid "New account"
 msgstr "Nytt konto"
+
+msgid "New contact"
+msgstr "Ny kontakt"
 
 msgid "New customer"
 msgstr "Ny kund"
@@ -2000,6 +2408,12 @@ msgstr "Ny faktura för kund #{customerid}"
 
 msgid "New invoice pack"
 msgstr "Ny samlingsfaktura"
+
+msgid "New menu"
+msgstr "Ny meny"
+
+msgid "New menu item"
+msgstr "Nytt menyobjekt"
 
 msgid "New record"
 msgstr "Ny post"
@@ -2022,8 +2436,14 @@ msgstr "Nej"
 msgid "No A/AAAA records"
 msgstr "Inga A/AAAA-poster"
 
+msgid "No DNSSEC keys configured"
+msgstr "Inga DNSSEC-nycklar konfigurerade"
+
 msgid "No MX records"
 msgstr "Inga MX-poster"
+
+msgid "No account"
+msgstr "Inget konto"
 
 msgid "No cache entries found"
 msgstr "Inga cacheposter hittades"
@@ -2043,6 +2463,9 @@ msgstr "Inga kontakter hittades"
 msgid "No customer #{customerid}."
 msgstr "Ingen kund #{customerid}."
 
+msgid "No customer assigned"
+msgstr "Ingen kund tilldelad"
+
 msgid "No data available"
 msgstr "Ingen tillgänglig data"
 
@@ -2052,11 +2475,26 @@ msgstr "Inga domäner hittades"
 msgid "No examples found"
 msgstr "Inga exempel hittades"
 
+msgid "No invoice rows"
+msgstr "Inga fakturarader"
+
 msgid "No invoice template."
 msgstr "Ingen fakturamall."
 
+msgid "No invoices found"
+msgstr "Inga fakturor hittades"
+
 msgid "No invoicing"
 msgstr "Faktureras inte"
+
+msgid "No matches found"
+msgstr "Inga träffar hittades"
+
+msgid "No menu items. Click \"Add item\" to create one."
+msgstr "Inga menyobjekt. Klicka på \"Lägg till objekt\" för att skapa ett."
+
+msgid "No menus found"
+msgstr "Inga menyer hittades"
 
 msgid "No messages found"
 msgstr "Inga meddelanden hittades"
@@ -2065,7 +2503,7 @@ msgid "No messages yet"
 msgstr "Inga meddelanden än"
 
 msgid "No more domains in this direction"
-msgstr ""
+msgstr "Inga fler domäner i denna riktning"
 
 msgid "No pages found."
 msgstr "Inga sidor hittades."
@@ -2076,17 +2514,38 @@ msgstr "Inga betalningar hittades"
 msgid "No provider data available"
 msgstr "Ingen leverantörsdata tillgänglig"
 
+msgid "No records"
+msgstr "Inga poster"
+
+msgid "No records found"
+msgstr "Inga poster hittades"
+
 msgid "No selected customer."
 msgstr "Ingen kund vald."
 
+msgid "No template (empty zone)"
+msgstr "Ingen mall (tom zon)"
+
+msgid "No templates yet"
+msgstr "Inga mallar ännu"
+
+msgid "No title"
+msgstr "Ingen titel"
+
 msgid "Non-compliant (Foreign hosting)"
 msgstr "Ej kompatibel (utländsk hosting)"
+
+msgid "None (root level)"
+msgstr "Ingen (rotnivå)"
 
 msgid "Normal"
 msgstr "Normal"
 
 msgid "Not found"
 msgstr "Hittades inte"
+
+msgid "Note"
+msgstr "Anteckning"
 
 msgid "Notes"
 msgstr "Anteckningar"
@@ -2097,8 +2556,14 @@ msgstr "Nummer"
 msgid "Numbered List"
 msgstr "Numrerad lista"
 
+msgid "OK"
+msgstr "OK"
+
 msgid "OVERDUE"
 msgstr "Förfallna"
+
+msgid "Open Swish App"
+msgstr "Öppna Swish-appen"
 
 msgid "Open invoice"
 msgstr "Öppen faktura"
@@ -2118,8 +2583,29 @@ msgstr "Öppna fakturor"
 msgid "Open list"
 msgstr "Öppna lista"
 
+msgid "Open zone list"
+msgstr "Öppna zonlistan"
+
+msgid "Operation ID:"
+msgstr "Operations-ID:"
+
 msgid "Options"
 msgstr "Variabler"
+
+msgid "Or scan QR code with Swish app"
+msgstr "Eller skanna QR-kod med Swish-appen"
+
+msgid "Order"
+msgstr "Ordning"
+
+msgid "Order number or reference"
+msgstr "Ordernummer eller referens"
+
+msgid "Order saved"
+msgstr "Ordning sparad"
+
+msgid "Org number"
+msgstr "Organisationsnummer"
 
 msgid "Org. Id"
 msgstr "Org. nr"
@@ -2205,6 +2691,12 @@ msgstr "Papper i skrivmaskin"
 msgid "Paragraph"
 msgstr "Stycke"
 
+msgid "Parameters"
+msgstr "Parametrar"
+
+msgid "Parent Item"
+msgstr "Överordnat objekt"
+
 msgid "Password"
 msgstr "Lösenord"
 
@@ -2226,6 +2718,15 @@ msgstr "Lösenordet måste innehålla minst {min} versal"
 msgid "Password was wrong or username doesn't exist."
 msgstr "Lösenordet var fel eller användarnamnet finns inte."
 
+msgid "Pay"
+msgstr "Betala"
+
+msgid "Pay instantly with Swish"
+msgstr "Betala direkt med Swish"
+
+msgid "Pay with Swish"
+msgstr "Betala med Swish"
+
 msgid "PayPal"
 msgstr "PayPal"
 
@@ -2234,6 +2735,9 @@ msgstr "PayPal-betalningar"
 
 msgid "Paydate"
 msgstr "Betaldatum"
+
+msgid "Payer"
+msgstr "Betalare"
 
 msgid "Payer Email"
 msgstr "Betalarens e-post"
@@ -2244,8 +2748,23 @@ msgstr "Betalning"
 msgid "Payment Cancelled"
 msgstr "Betalning avbruten"
 
+msgid "Payment Details"
+msgstr "Betalningsdetaljer"
+
+msgid "Payment ID"
+msgstr "Betalnings-ID"
+
+msgid "Payment ID:"
+msgstr "Betalnings-ID:"
+
 msgid "Payment Information"
 msgstr "Betalningsinformation"
+
+msgid "Payment Intent"
+msgstr "Betalningsavsikt"
+
+msgid "Payment Method"
+msgstr "Betalningsmetod"
 
 msgid "Payment Reminder"
 msgstr "Betalningspåminnelse"
@@ -2256,11 +2775,41 @@ msgstr "Betalning lyckades"
 msgid "Payment due to: {duedate}"
 msgstr "Förfallodatum: {duedate}"
 
+msgid "Payment failed"
+msgstr "Betalning misslyckades"
+
+msgid "Payment for..."
+msgstr "Betalning för..."
+
+msgid "Payment must be charged before refund"
+msgstr "Betalningen måste debiteras före återbetalning"
+
+msgid "Payment not found"
+msgstr "Betalning hittades inte"
+
 msgid "Payment reminder: Invoice {number}"
 msgstr "Betalningspåminnelse: Faktura {number}"
 
+msgid "Payment request sent! Open your Swish app to confirm."
+msgstr "Betalningsförfrågan skickad! Öppna Swish-appen för att bekräfta."
+
+msgid "Payment successful!"
+msgstr "Betalning lyckades!"
+
 msgid "Payment terms"
 msgstr "Betalningsvillkor"
+
+msgid "Payment timeout. Please check your Swish app."
+msgstr "Betalningstid utgången. Kontrollera din Swish-app."
+
+msgid "Payment was declined or cancelled."
+msgstr "Betalningen avvisades eller avbröts."
+
+msgid "Payment with Nets Easy"
+msgstr "Betalning med Nets Easy"
+
+msgid "Payment:"
+msgstr "Betalning:"
 
 msgid "Payments"
 msgstr "Betalningar"
@@ -2277,6 +2826,9 @@ msgstr "Väntande"
 msgid "People rocketing to the sky"
 msgstr "Människor som skjuts mot himlen"
 
+msgid "Period"
+msgstr "Period"
+
 msgid "Personal"
 msgstr "Personlig"
 
@@ -2290,6 +2842,9 @@ msgid "Phone"
 msgstr "Telefon"
 
 msgid "Phone Number"
+msgstr "Telefonnummer"
+
+msgid "Phone number"
 msgstr "Telefonnummer"
 
 msgid "Please check your confirmation link or register again."
@@ -2328,6 +2883,9 @@ msgstr "Plusgiro"
 msgid "Polls"
 msgstr "Omröstningar"
 
+msgid "Port"
+msgstr "Port"
+
 msgid "Posta faktura"
 msgstr "Mail invoice"
 
@@ -2339,6 +2897,12 @@ msgstr "Postnummer (faktura)"
 
 msgid "Postal mail"
 msgstr "Snigelpost"
+
+msgid "Pre-populate zone with template records"
+msgstr "Fyll i zonen med mallposter"
+
+msgid "Preference"
+msgstr "Preferens"
 
 msgid "Preferred Language"
 msgstr "Föredraget språk"
@@ -2364,6 +2928,9 @@ msgstr "Pris"
 msgid "Price List"
 msgstr "Prislista"
 
+msgid "Primary NS"
+msgstr "Primär NS"
+
 msgid "Priority"
 msgstr "Prioritet"
 
@@ -2378,6 +2945,9 @@ msgstr "Behörighetsgrupper"
 
 msgid "Privileges"
 msgstr "Behörigheter"
+
+msgid "Proceed to Payment"
+msgstr "Gå till betalning"
 
 msgid "Products"
 msgstr "Produkter"
@@ -2466,6 +3036,9 @@ msgstr "Senaste underskrifterna"
 msgid "Recommended by"
 msgstr "Rekommenderad av"
 
+msgid "Record"
+msgstr "Post"
+
 msgid "Record Name"
 msgstr "Post-namn"
 
@@ -2474,6 +3047,9 @@ msgstr "Post-typ"
 
 msgid "Record Value"
 msgstr "Postvärde"
+
+msgid "Record added"
+msgstr "Post tillagd"
 
 msgid "Record created successfully"
 msgstr "Lyckades skapa post"
@@ -2490,17 +3066,29 @@ msgstr "Post hittades inte"
 msgid "Record saved successfully"
 msgstr "Sparade post"
 
+msgid "Record updated"
+msgstr "Post uppdaterad"
+
 msgid "Record updated successfully"
 msgstr "Uppdaterade post"
 
 msgid "Records"
 msgstr "Poster"
 
+msgid "Reference"
+msgstr "Referens"
+
 msgid "References"
 msgstr "Referenser"
 
 msgid "Refresh"
 msgstr "Uppdatera"
+
+msgid "Refund amount exceeds available amount"
+msgstr "Återbetalningsbelopp överstiger tillgängligt belopp"
+
+msgid "Refunded"
+msgstr "Återbetald"
 
 msgid "Refunded/Failed"
 msgstr "Återbetald/Misslyckad"
@@ -2511,11 +3099,17 @@ msgstr "Återbetalt:"
 msgid "Regards"
 msgstr "Vänligen"
 
+msgid "Regexp"
+msgstr "Regexp"
+
 msgid "Register"
 msgstr "Registrera"
 
 msgid "Register account"
 msgstr "Registrera konto"
+
+msgid "Register domain"
+msgstr "Registrera domän"
 
 msgid "Register to create and publish content."
 msgstr "Registrera för att skapa och publicera innehåll."
@@ -2535,6 +3129,9 @@ msgstr "Registrerade betalningar och leverantörsfakturor hämtas från Fortnox 
 msgid "Registrant"
 msgstr "Registrant"
 
+msgid "Registrant contact"
+msgstr "Registrantkontakt"
+
 msgid "Registrar"
 msgstr "Registrator"
 
@@ -2550,6 +3147,9 @@ msgstr "Register"
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "Kvar att betala: {amount} {currency}"
 
+msgid "Remarks"
+msgstr "Anmärkningar"
+
 msgid "Remind"
 msgstr "Påminn"
 
@@ -2559,11 +3159,20 @@ msgstr "Påminnelse skickades"
 msgid "Renew"
 msgstr "Förnya"
 
+msgid "Replacement"
+msgstr "Ersättning"
+
 msgid "Reprint"
 msgstr "Regenerera"
 
 msgid "Reprint invoice"
 msgstr "Skriv om faktura"
+
+msgid "Required"
+msgstr "Obligatorisk"
+
+msgid "Required for most TLDs. Get this from your current registrar."
+msgstr "Krävs för de flesta toppdomäner. Hämta detta från din nuvarande registrar."
 
 msgid "Resend"
 msgstr "Skicka igen"
@@ -2573,6 +3182,12 @@ msgstr "Skicka om faktura"
 
 msgid "Resources"
 msgstr "Resurser"
+
+msgid "Response"
+msgstr "Svar"
+
+msgid "Retry"
+msgstr "Försök igen"
 
 msgid "Return to Home"
 msgstr "Återgå till start"
@@ -2595,6 +3210,9 @@ msgstr "Körnings-ID krävs"
 msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
 msgstr "Körning startad. Använd /manager/bis/runs/:id/check för att börja kontrollera domäner."
 
+msgid "Running checks..."
+msgstr "Kör kontroller..."
+
 msgid "SEK"
 msgstr "kr"
 
@@ -2616,8 +3234,14 @@ msgstr "SMS skickat"
 msgid "SMS sent successfully!"
 msgstr "SMS skickat!"
 
+msgid "SOA Serial"
+msgstr "SOA-serienummer"
+
 msgid "SWISH"
 msgstr "SWISH"
+
+msgid "Same as registrant"
+msgstr "Samma som registrant"
 
 msgid "Samizdat"
 msgstr "Samizdat"
@@ -2640,8 +3264,23 @@ msgstr "Spara"
 msgid "Save Settings"
 msgstr "Spara inställningar"
 
+msgid "Save Template"
+msgstr "Spara mall"
+
+msgid "Save failed"
+msgstr "Sparning misslyckades"
+
 msgid "Saved successfully"
 msgstr "Sparades"
+
+msgid "Scan QR code or tap to open Swish app"
+msgstr "Skanna QR-kod eller tryck för att öppna Swish-appen"
+
+msgid "Scan the QR code with your Swish app for immediate payment."
+msgstr "Skanna QR-koden med din Swish-app för omedelbar betalning."
+
+msgid "Scan the QR code with your Swish app or enter the details manually."
+msgstr "Skanna QR-koden med din Swish-app eller ange uppgifterna manuellt."
 
 msgid "Score"
 msgstr "Poäng"
@@ -2661,11 +3300,20 @@ msgstr "Sök cache"
 msgid "Search certificates..."
 msgstr "Sök certifikat..."
 
+msgid "Search contact"
+msgstr "Sök kontakt"
+
 msgid "Search contacts..."
 msgstr "Sök kontakter..."
 
 msgid "Search content"
 msgstr "Sök innehåll"
+
+msgid "Search customer (min 3 chars)..."
+msgstr "Sök kund (minst 3 tecken)..."
+
+msgid "Search domain"
+msgstr "Sök domän"
 
 msgid "Search domains..."
 msgstr "Sök domäner..."
@@ -2721,6 +3369,9 @@ msgstr "Sök webbplats"
 msgid "Search for zone"
 msgstr "Sök zon"
 
+msgid "Search menus..."
+msgstr "Sök menyer..."
+
 msgid "Search pages..."
 msgstr "Sök sidor..."
 
@@ -2742,8 +3393,17 @@ msgstr "Välj"
 msgid "Select Format"
 msgstr "Välj format"
 
+msgid "Select a template to edit or create a new one"
+msgstr "Välj en mall att redigera eller skapa en ny"
+
+msgid "Select all"
+msgstr "Välj alla"
+
 msgid "Select art.no."
 msgstr "Välj art.nr."
+
+msgid "Select contact..."
+msgstr "Välj kontakt..."
 
 msgid "Select country"
 msgstr "Välj land"
@@ -2781,11 +3441,20 @@ msgstr "Skickar..."
 msgid "Sent"
 msgstr "Skickat"
 
+msgid "Serial"
+msgstr "Serienummer"
+
 msgid "Servers"
 msgstr "Servrar"
 
+msgid "Service"
+msgstr "Tjänst"
+
 msgid "Service interruption"
 msgstr "Avbrott i tjänsterna"
+
+msgid "Session:"
+msgstr "Session:"
 
 msgid "Set the height attribute."
 msgstr "Sätt height-attributet."
@@ -2829,8 +3498,14 @@ msgstr "Webbplats"
 msgid "Site content"
 msgstr "Webbplatsinnehåll"
 
+msgid "Skip links"
+msgstr "Hoppa över länkar"
+
 msgid "Skip menu"
 msgstr "Hoppa över meny"
+
+msgid "Skip to main content"
+msgstr "Hoppa till huvudinnehåll"
 
 msgid "Snapback evaluation"
 msgstr "Snapbackutvärdering"
@@ -2877,11 +3552,20 @@ msgstr "Statistik"
 msgid "Status"
 msgstr "Status"
 
+msgid "Street"
+msgstr "Gata"
+
 msgid "Strictly for Rymdweb"
 msgstr "Endast för Rymdweb"
 
 msgid "Strikethrough"
 msgstr "Genomstruken"
+
+msgid "Stripe"
+msgstr "Stripe"
+
+msgid "Stripe Payments"
+msgstr "Stripe-betalningar"
 
 msgid "Stuff"
 msgstr "Blandat"
@@ -2891,6 +3575,9 @@ msgstr "Ämne"
 
 msgid "Submit"
 msgstr "Skicka"
+
+msgid "Succeeded"
+msgstr "Lyckades"
 
 msgid "Summa"
 msgstr "Amount"
@@ -2916,6 +3603,12 @@ msgstr "Förnamn"
 msgid "Swedish"
 msgstr "Svenska"
 
+msgid "Swish Payments"
+msgstr "Swish-betalningar"
+
+msgid "Swish number"
+msgstr "Swish-nummer"
+
 msgid "Sync Messages"
 msgstr "Synkronisera meddelanden"
 
@@ -2934,11 +3627,20 @@ msgstr "Synkroniserar..."
 msgid "TTL"
 msgstr "TTL"
 
+msgid "Tag"
+msgstr "Tagg"
+
 msgid "Tags"
 msgstr "Taggar"
 
+msgid "Target"
+msgstr "Mål"
+
 msgid "Tech"
 msgstr "Teknik"
+
+msgid "Tech contact"
+msgstr "Teknisk kontakt"
 
 msgid "Technical"
 msgstr "Teknik"
@@ -2952,8 +3654,29 @@ msgstr "Teknikfrågor:"
 msgid "Telephone"
 msgstr "Telefon"
 
+msgid "Template"
+msgstr "Mall"
+
+msgid "Template created"
+msgstr "Mall skapad"
+
+msgid "Template deleted"
+msgstr "Mall raderad"
+
+msgid "Template duplicated"
+msgstr "Mall duplicerad"
+
+msgid "Template updated"
+msgstr "Mall uppdaterad"
+
+msgid "Templates"
+msgstr "Mallar"
+
 msgid "Terms of Payment"
 msgstr "Betalningsvillkor"
+
+msgid "Terms of service"
+msgstr "Användarvillkor"
 
 msgid "Test"
 msgstr "Test"
@@ -2973,11 +3696,20 @@ msgstr "Tack för att du kontaktar oss."
 msgid "Thank you for your business"
 msgstr "Tack för att ni använder våra tjänster"
 
+msgid "Thank you for your payment."
+msgstr "Tack för din betalning."
+
+msgid "Thank you for your payment. Your Swish transaction has been completed."
+msgstr "Tack för din betalning. Din Swish-transaktion har slutförts."
+
 msgid "Thank you for your payment. Your transaction has been completed."
 msgstr "Tack för din betalning. Din transaktion har slutförts."
 
 msgid "Thank you for your prompt attention to this matter."
 msgstr "Vi hoppas ni hanterar detta snarast."
+
+msgid "Thank you! Your payment has been processed successfully."
+msgstr "Tack! Din betalning har behandlats."
 
 msgid "The Samizdat project"
 msgstr "Projektet Samizdat"
@@ -3009,11 +3741,20 @@ msgstr "Den äldsta gjordes {failuretime} av &quot;{username}&quot;."
 msgid "The page {docpath} wasn't found."
 msgstr "Sidan {docpath} kunde inte hittas."
 
+msgid "The payment process was interrupted. This could be because:"
+msgstr "Betalningsprocessen avbröts. Detta kan bero på:"
+
+msgid "The payment session expired"
+msgstr "Betalningssessionen gick ut"
+
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "Aktien är noterad på Nasdaq Stockholms huvudlista."
 
 msgid "Theme"
 msgstr "Tema"
+
+msgid "There was an issue with your payment method"
+msgstr "Det uppstod ett problem med din betalningsmetod"
 
 msgid "This confirmation link is invalid or has expired"
 msgstr "Denna bekräftelselänk är ogiltig eller har förfallit"
@@ -3042,6 +3783,15 @@ msgstr "Detta är en automatisk påminnelse. Underlåtenhet att betala kan leda 
 msgid "This might be an oversight, so we wanted to send a friendly reminder."
 msgstr "Eftersom det är lätt att missa en betalning vill vi skicka en vänlig påminnelse."
 
+msgid "This resource has no input parameters."
+msgstr "Denna resurs har inga indataparametrar."
+
+msgid "This resource is deprecated!"
+msgstr "Denna resurs är utfasad!"
+
+msgid "This resource is not documented."
+msgstr "Denna resurs är inte dokumenterad."
+
 msgid "This will result in additional fees and may affect your credit rating."
 msgstr "Detta kommer att resultera i extra avgifter och kan påverka er kreditvärdighet."
 
@@ -3051,11 +3801,17 @@ msgstr "Tid"
 msgid "Title"
 msgstr "Titel"
 
+msgid "Titles by Language"
+msgstr "Titlar per språk"
+
 msgid "Toggle menu"
 msgstr "Visa meny"
 
 msgid "Tot"
 msgstr "Tot"
+
+msgid "Total"
+msgstr "Totalt"
 
 msgid "Total Domains"
 msgstr "Totalt antal domäner"
@@ -3063,11 +3819,17 @@ msgstr "Totalt antal domäner"
 msgid "Total Records"
 msgstr "Totalt antal poster"
 
+msgid "Total refunds"
+msgstr "Totala återbetalningar"
+
 msgid "Total to pay"
 msgstr "Totalt att betala"
 
 msgid "Total: {count} customers"
 msgstr "Totalt: {count} kunder"
+
+msgid "Totals"
+msgstr "Summor"
 
 msgid "Tough"
 msgstr "Tuff"
@@ -3084,6 +3846,12 @@ msgstr "Transaktions-ID:"
 msgid "Transfer"
 msgstr "Överföring"
 
+msgid "Transfer domain"
+msgstr "Överför domän"
+
+msgid "Try Again"
+msgstr "Försök igen"
+
 msgid "Type"
 msgstr "Typ"
 
@@ -3092,6 +3860,9 @@ msgstr "BRÅDSKANDE: Sista betalningspåminnelsen"
 
 msgid "URGENT: Final payment reminder - Invoice {number}"
 msgstr "BRÅDSKANDE: Sista betalningspåminnelsen - Faktura {number}"
+
+msgid "URI Path"
+msgstr "URI-sökväg"
 
 msgid "Unauthenticated"
 msgstr "Oautentiserad"
@@ -3107,6 +3878,9 @@ msgstr "Okänt fel"
 
 msgid "Unpaid"
 msgstr "Obetalade"
+
+msgid "Untitled"
+msgstr "Utan titel"
 
 msgid "Update"
 msgstr "Uppdatera"
@@ -3143,6 +3917,15 @@ msgstr "Förbrukning"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
 msgstr "Använd <code>flags</code> för flagg-ikoner eller <code>anysvg</code> för applikationens startsida."
+
+msgid "Use @ for the zone apex"
+msgstr "Använd @ för zonens apex"
+
+msgid "Use @ for zone apex"
+msgstr "Använd @ för zonens apex"
+
+msgid "Use @ for zone apex, or subdomain name"
+msgstr "Använd @ för zonens apex, eller subdomännamn"
 
 msgid "Use this if you don't need the prefixed default classes."
 msgstr "Använd detta om du inte behöver de fördefinierade klasserna."
@@ -3216,6 +3999,9 @@ msgstr "Värde"
 msgid "Value for the class attribute."
 msgstr "Värde för klass-attributet."
 
+msgid "Version"
+msgstr "Version"
+
 msgid "View"
 msgstr "Visa"
 
@@ -3258,6 +4044,15 @@ msgstr "Webbplats"
 msgid "Websites"
 msgstr "Webbplatser"
 
+msgid "Weight"
+msgstr "Vikt"
+
+msgid "What happened?"
+msgstr "Vad hände?"
+
+msgid "Whois Information"
+msgstr "Whois-information"
+
 msgid "Whois data for {ip}"
 msgstr "Whois-data för {ip}"
 
@@ -3282,6 +4077,12 @@ msgstr "Du kan också posta i våra diskussioner."
 msgid "You can now log in to your account."
 msgstr "Du kan nu logga in på ditt konto."
 
+msgid "You can try again or choose a different payment method."
+msgstr "Du kan försöka igen eller välja en annan betalningsmetod."
+
+msgid "You clicked the back or cancel button"
+msgstr "Du klickade på bakåt- eller avbryt-knappen"
+
 msgid "You have cancelled the payment process."
 msgstr "Du har avbrutit betalningsprocessen."
 
@@ -3297,11 +4098,17 @@ msgstr "Du behöver acceptera registreringsvillkoren."
 msgid "You were logged in as {username}."
 msgstr "Du var inloggad som {username}."
 
+msgid "You will be redirected to Nets secure checkout page."
+msgstr "Du kommer att omdirigeras till Nets säkra kassasida."
+
 msgid "You will receive a confirmation email shortly."
 msgstr "Du kommer snart att få ett bekräftelsemail."
 
 msgid "Your Reference"
 msgstr "Er referens"
+
+msgid "Your Swish payment was cancelled or declined."
+msgstr "Din Swish-betalning avbröts eller avvisades."
 
 msgid "Your VAT Id"
 msgstr "Ert momsreg. nr"
@@ -3324,14 +4131,32 @@ msgstr "Ditt meddelande syns nedanför."
 msgid "Your name"
 msgstr "Ditt namn"
 
+msgid "Your payment was cancelled or failed."
+msgstr "Din betalning avbröts eller misslyckades."
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr "Din betalning avbröts. Ingen debitering gjordes."
+
 msgid "Zip Code"
 msgstr "Postnummer"
+
+msgid "Zone Check"
+msgstr "Zonkontroll"
+
+msgid "Zone File Content"
+msgstr "Zonfilsinnehåll"
 
 msgid "Zone Kind"
 msgstr "Zon-typ"
 
 msgid "Zone Name"
 msgstr "Zonens namn"
+
+msgid "Zone Records"
+msgstr "Zonposter"
+
+msgid "Zone Templates"
+msgstr "Zonmallar"
 
 msgid "Zone created successfully"
 msgstr "Lyckades skapa zon"
@@ -3341,6 +4166,9 @@ msgstr "Tog bort zon"
 
 msgid "Zone deleted successfully"
 msgstr "Zonen togs bort"
+
+msgid "Zone imported successfully"
+msgstr "Zon importerad"
 
 msgid "Zone management"
 msgstr "Zonhantering"
@@ -3375,6 +4203,9 @@ msgstr "certifikat"
 msgid "characters"
 msgstr "tecken"
 
+msgid "charged"
+msgstr "debiterad"
+
 msgid "compliant"
 msgstr "kompatibel"
 
@@ -3387,8 +4218,14 @@ msgstr "kontrollpanel"
 msgid "customer"
 msgstr "kund"
 
+msgid "customers"
+msgstr "kunder"
+
 msgid "database"
 msgstr "databas"
+
+msgid "declined"
+msgstr "avvisad"
 
 msgid "domain"
 msgstr "domän"
@@ -3396,8 +4233,17 @@ msgstr "domän"
 msgid "email"
 msgstr "e-post"
 
+msgid "errors"
+msgstr "fel"
+
 msgid "example"
 msgstr "exempel"
+
+msgid "failed"
+msgstr "misslyckades"
+
+msgid "for registrar"
+msgstr "för registrar"
 
 msgid "invoice"
 msgstr "faktura"
@@ -3411,8 +4257,14 @@ msgstr "maildomän"
 msgid "main firewall"
 msgstr "huvudbrandvägg"
 
+msgid "net balance"
+msgstr "nettosaldo"
+
 msgid "new messages retrieved."
 msgstr "nya meddelanden hämtade."
+
+msgid "of"
+msgstr "av"
 
 msgid "our web"
 msgstr "vår webbplats"
@@ -3429,8 +4281,17 @@ msgstr "produkt"
 msgid "record(s)"
 msgstr "post(er)"
 
+msgid "records"
+msgstr "poster"
+
+msgid "refunded"
+msgstr "återbetald"
+
 msgid "seconds"
 msgstr "sekunder"
+
+msgid "selected"
+msgstr "markerade"
 
 msgid "standby firewall"
 msgstr "standbybrandvägg"
@@ -3443,6 +4304,12 @@ msgstr "användare"
 
 msgid "website"
 msgstr "webbplats"
+
+msgid "year"
+msgstr "år"
+
+msgid "years"
+msgstr "år"
 
 msgid "{code}: Authentication required"
 msgstr "{code}: Inloggning krävs"

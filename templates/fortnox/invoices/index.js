@@ -12,13 +12,14 @@ async function loadInvoices(page = 1) {
 
     if (data.fortnox && data.fortnox.invoice) {
       const invoices = data.fortnox.invoice.Invoices || [];
+      const meta = data.fortnox.invoice.MetaInformation || {};
       const perpage = data.fortnox.perpage || 25;
+      const totalPages = meta['@TotalPages'] || 1;
       const tbody = document.querySelector('#invoices tbody');
       let html = '';
       let totalAmount = 0;
       let totalBalance = 0;
 
-      // Data comes sorted from API (descending by invoicedate)
       invoices.forEach(invoice => {
         const invoiceNumber = invoice.DocumentNumber || '';
         const customerName = invoice.CustomerName || '';
@@ -29,7 +30,6 @@ async function loadInvoices(page = 1) {
         totalAmount += total;
         totalBalance += balance;
 
-        // Highlight unpaid invoices
         const rowClass = balance > 0 ? 'table-warning' : '';
 
         html += `
@@ -46,35 +46,64 @@ async function loadInvoices(page = 1) {
 
       tbody.innerHTML = html || '<tr><td colspan="6" class="text-muted text-center"><%== __("No invoices found") %></td></tr>';
 
-      // Update footer with totals and pagination
-      const tfoot = document.querySelector('#invoices tfoot th');
-      const hasMore = invoices.length >= perpage;
-      const hasPrev = page > 1;
+      // Update totals
+      document.querySelector('#invoiceTotals').innerHTML =
+        `<%== __('Total') %>: ${totalAmount.toFixed(2)} | <%== __('Balance') %>: ${totalBalance.toFixed(2)}`;
 
-      let footerHtml = `<%== __('Total') %>: ${totalAmount.toFixed(2)} | <%== __('Balance') %>: ${totalBalance.toFixed(2)}`;
-      if (hasPrev || hasMore) {
-        footerHtml += ' <span class="float-end">';
-        if (hasPrev) {
-          footerHtml += `<a href="#" class="btn-prev">&laquo; <%== __('Previous') %></a>`;
+      // Build Bootstrap pagination
+      const pagination = document.querySelector('#invoicePagination');
+      let paginationHtml = '';
+
+      // Previous button
+      paginationHtml += `<li class="page-item ${page <= 1 ? 'disabled' : ''}">
+        <a class="page-link" href="#" data-page="${page - 1}">&laquo;</a>
+      </li>`;
+
+      // Page numbers (show max 5 pages around current)
+      const startPage = Math.max(1, page - 2);
+      const endPage = Math.min(totalPages, page + 2);
+
+      if (startPage > 1) {
+        paginationHtml += `<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>`;
+        if (startPage > 2) {
+          paginationHtml += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
         }
-        footerHtml += ` <%== __('Page') %> ${page} `;
-        if (hasMore) {
-          footerHtml += `<a href="#" class="btn-next"><%== __('Next') %> &raquo;</a>`;
-        }
-        footerHtml += '</span>';
       }
-      tfoot.innerHTML = footerHtml;
 
-      // Attach event listeners for pagination
-      const prevBtn = tfoot.querySelector('.btn-prev');
-      const nextBtn = tfoot.querySelector('.btn-next');
-      if (prevBtn) prevBtn.addEventListener('click', (e) => { e.preventDefault(); loadInvoices(page - 1); });
-      if (nextBtn) nextBtn.addEventListener('click', (e) => { e.preventDefault(); loadInvoices(page + 1); });
+      for (let i = startPage; i <= endPage; i++) {
+        paginationHtml += `<li class="page-item ${i === page ? 'active' : ''}">
+          <a class="page-link" href="#" data-page="${i}">${i}</a>
+        </li>`;
+      }
+
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+          paginationHtml += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+        }
+        paginationHtml += `<li class="page-item"><a class="page-link" href="#" data-page="${totalPages}">${totalPages}</a></li>`;
+      }
+
+      // Next button
+      paginationHtml += `<li class="page-item ${page >= totalPages ? 'disabled' : ''}">
+        <a class="page-link" href="#" data-page="${page + 1}">&raquo;</a>
+      </li>`;
+
+      pagination.innerHTML = paginationHtml;
+
+      // Attach click handlers
+      pagination.querySelectorAll('a.page-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetPage = parseInt(link.dataset.page);
+          if (targetPage >= 1 && targetPage <= totalPages && targetPage !== page) {
+            loadInvoices(targetPage);
+          }
+        });
+      });
     }
   } catch (error) {
     console.error('Failed to load invoices:', error);
   }
 }
 
-// Load invoices on page load
 loadInvoices();

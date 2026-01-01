@@ -29,6 +29,9 @@ msgstr "&copy;2023 &mdash; пожалуйста, поделитесь ссылк
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
+msgid "(No parent - top level)"
+msgstr ""
+
 msgid "1 Year"
 msgstr ""
 
@@ -152,6 +155,12 @@ msgstr "Добавить столбец после"
 msgid "Add Column Before"
 msgstr "Добавить столбец перед"
 
+msgid "Add Key"
+msgstr ""
+
+msgid "Add New Key"
+msgstr ""
+
 msgid "Add Row After"
 msgstr "Добавить строку после"
 
@@ -188,10 +197,16 @@ msgstr "Добавить группу"
 msgid "Add group"
 msgstr "Добавить группу"
 
+msgid "Add item"
+msgstr ""
+
 msgid "Add mail domain"
 msgstr "Новый почтовый домен"
 
 msgid "Add mailbox"
+msgstr ""
+
+msgid "Add nameserver"
 msgstr ""
 
 msgid "Add page"
@@ -242,10 +257,16 @@ msgstr ""
 msgid "Admin"
 msgstr ""
 
+msgid "Admin Email"
+msgstr ""
+
 msgid "Admin access required"
 msgstr ""
 
 msgid "Admin access required for DNS management"
+msgstr ""
+
+msgid "Admin contact"
 msgstr ""
 
 msgid "Admininistration panel"
@@ -253,6 +274,9 @@ msgstr "Панель управления"
 
 msgid "Advertising"
 msgstr "Реклама"
+
+msgid "After refunds"
+msgstr ""
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "После регистрации вы сможете добавить больше данных о себе, изменить настройки доступа и настроить свой опыт."
@@ -287,10 +311,22 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+msgid "All Invoices"
+msgstr ""
+
 msgid "All Messages"
 msgstr ""
 
 msgid "All Sectors"
+msgstr ""
+
+msgid "All accounts"
+msgstr ""
+
+msgid "All customers"
+msgstr ""
+
+msgid "All domains"
 msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
@@ -299,8 +335,17 @@ msgstr "Разрешить cookies для вставки кода подтвер
 msgid "Amount"
 msgstr "Сумма"
 
+msgid "Amount and items are required"
+msgstr ""
+
+msgid "Amount in Swedish Kronor"
+msgstr ""
+
 msgid "Amount incl. VAT"
 msgstr "Сумма с НДС"
+
+msgid "Amount is required"
+msgstr ""
 
 msgid "Amount to pay incl. VAT: {totalcost} {currency}"
 msgstr "Сумма к оплате с НДС: {totalcost} {currency}"
@@ -320,6 +365,9 @@ msgstr "Произошла ошибка"
 msgid "An error occurred during login. Please try again."
 msgstr ""
 
+msgid "An error occurred. Please try again."
+msgstr ""
+
 msgid "Are you sure you want to delete this alias?"
 msgstr ""
 
@@ -329,13 +377,25 @@ msgstr ""
 msgid "Are you sure you want to delete this certificate?"
 msgstr ""
 
+msgid "Are you sure you want to delete this contact?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr ""
 
 msgid "Are you sure you want to delete this example?"
 msgstr ""
 
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+msgid "Are you sure you want to delete this key?"
+msgstr ""
+
 msgid "Are you sure you want to delete this mailbox?"
+msgstr ""
+
+msgid "Are you sure you want to delete this menu?"
 msgstr ""
 
 msgid "Are you sure you want to delete this message?"
@@ -368,7 +428,13 @@ msgstr "Минимум {min} символов из: {chars}"
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 msgstr "Минимум {min} символов: {upper} заглавных, {lower} строчных, {num} цифр, {special} спецсимволов"
 
+msgid "Auth-Info code from current registrar"
+msgstr ""
+
 msgid "Authentication required"
+msgstr ""
+
+msgid "Authorization code"
 msgstr ""
 
 msgid "Authorize"
@@ -397,6 +463,9 @@ msgstr "Адрес БИК/Swift"
 
 msgid "BIC/Swift address:"
 msgstr "Адрес БИК/Swift:"
+
+msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
+msgstr ""
 
 msgid "BIS - $sector"
 msgstr ""
@@ -434,10 +503,22 @@ msgstr ""
 msgid "Back to List"
 msgstr ""
 
+msgid "Back to Zones"
+msgstr ""
+
 msgid "Back to domains"
 msgstr ""
 
 msgid "Back to list"
+msgstr ""
+
+msgid "Back to menu"
+msgstr ""
+
+msgid "Back to menus"
+msgstr ""
+
+msgid "Background"
 msgstr ""
 
 msgid "Balance"
@@ -454,6 +535,9 @@ msgstr "Bankgiro:"
 
 msgid "Barred"
 msgstr "Заблокировано"
+
+msgid "Base URL"
+msgstr ""
 
 msgid "Based in Sweden - Compliance Dashboard"
 msgstr ""
@@ -472,6 +556,9 @@ msgstr "Заблокирован"
 
 msgid "Blocked ip number"
 msgstr "Заблокированный IP-адрес"
+
+msgid "Body"
+msgstr ""
 
 msgid "Bold"
 msgstr "Жирный"
@@ -530,6 +617,12 @@ msgstr "Изображение капчи"
 msgid "Captcha was wrong"
 msgstr "Неверная капча"
 
+msgid "Card Payment"
+msgstr ""
+
+msgid "Cash invoice"
+msgstr ""
+
 msgid "Category"
 msgstr ""
 
@@ -564,6 +657,21 @@ msgid "Changed status."
 msgstr "Статус изменен."
 
 msgid "Changes saved successfully."
+msgstr ""
+
+msgid "Charged"
+msgstr ""
+
+msgid "Charged At"
+msgstr ""
+
+msgid "Check"
+msgstr ""
+
+msgid "Check failed"
+msgstr ""
+
+msgid "Check queued"
 msgstr ""
 
 msgid "Check zones"
@@ -632,6 +740,9 @@ msgstr ""
 msgid "Code Block"
 msgstr "Блок кода"
 
+msgid "Combined Value"
+msgstr ""
+
 msgid "Comma separated"
 msgstr ""
 
@@ -674,6 +785,9 @@ msgstr ""
 msgid "Compliant Domains"
 msgstr ""
 
+msgid "Components"
+msgstr ""
+
 msgid "Confirm"
 msgstr "Подтвердить"
 
@@ -709,6 +823,12 @@ msgstr ""
 
 msgid "Contact Information"
 msgstr "Контактная информация"
+
+msgid "Contact created"
+msgstr ""
+
+msgid "Contact deleted"
+msgstr ""
 
 msgid "Contact details"
 msgstr ""
@@ -758,6 +878,12 @@ msgstr "Страна (для счетов)"
 msgid "Country selector"
 msgstr "Выбор страны"
 
+msgid "Create"
+msgstr ""
+
+msgid "Create Payment"
+msgstr ""
+
 msgid "Create contact"
 msgstr "Создать контакт"
 
@@ -772,6 +898,9 @@ msgstr ""
 
 msgid "Created {created} by {creator}"
 msgstr "Создано {created} пользователем {creator}"
+
+msgid "Creating payment..."
+msgstr ""
 
 msgid "Credit invoice"
 msgstr "Кредитный счет"
@@ -798,6 +927,12 @@ msgid "Credited invoice: {number}"
 msgstr "Кредитованный счет: {number}"
 
 msgid "Critical"
+msgstr ""
+
+msgid "Cryptokey created successfully"
+msgstr ""
+
+msgid "Cryptokey deleted successfully"
 msgstr ""
 
 msgid "Currency"
@@ -842,6 +977,9 @@ msgstr ""
 msgid "DNS Zones"
 msgstr "DNS-зоны"
 
+msgid "DNS Zones for customer {id}"
+msgstr ""
+
 msgid "DNS domains"
 msgstr "DNS-домены"
 
@@ -855,6 +993,12 @@ msgid "DNS zones"
 msgstr "DNS-зоны"
 
 msgid "DNSSEC Key Data"
+msgstr ""
+
+msgid "DNSSEC Keys"
+msgstr ""
+
+msgid "DS Records"
 msgstr ""
 
 msgid "Dark"
@@ -890,7 +1034,13 @@ msgstr "Долг"
 msgid "Decide which parts of your personal data you want to show different groups."
 msgstr "Выберите, какие части ваших личных данных вы хотите показывать разным группам."
 
+msgid "Declined"
+msgstr ""
+
 msgid "Default"
+msgstr ""
+
+msgid "Definitions"
 msgstr ""
 
 msgid "Delete"
@@ -904,6 +1054,12 @@ msgstr "Удалить строку"
 
 msgid "Delete Table"
 msgstr "Удалить таблицу"
+
+msgid "Delete this record?"
+msgstr ""
+
+msgid "Delete this template and all its records?"
+msgstr ""
 
 msgid "Delivery Address"
 msgstr "Адрес доставки"
@@ -938,6 +1094,9 @@ msgstr "Скидка"
 msgid "Display Name"
 msgstr ""
 
+msgid "Do not renew"
+msgstr ""
+
 msgid "Do you want to credit the invoice?"
 msgstr "Вы хотите выдать кредит по счету?"
 
@@ -965,10 +1124,16 @@ msgstr ""
 msgid "Domain details"
 msgstr ""
 
+msgid "Domain name"
+msgstr ""
+
 msgid "Domain name is required"
 msgstr ""
 
 msgid "Domain not found"
+msgstr ""
+
+msgid "Domain registered"
 msgstr ""
 
 msgid "Domain registration"
@@ -984,6 +1149,9 @@ msgid "Domain saved successfully"
 msgstr ""
 
 msgid "Domain specific compliance with standard of Based in Sweden"
+msgstr ""
+
+msgid "Domain transfer initiated"
 msgstr ""
 
 msgid "Domain updated successfully"
@@ -1010,6 +1178,9 @@ msgstr ""
 msgid "Draft"
 msgstr ""
 
+msgid "Due Date"
+msgstr ""
+
 msgid "Due date"
 msgstr "Срок оплаты"
 
@@ -1018,6 +1189,9 @@ msgstr "Срок оплаты"
 
 msgid "Due to:"
 msgstr "Срок оплаты:"
+
+msgid "Duplicate"
+msgstr ""
 
 msgid "EPP"
 msgstr "EPP"
@@ -1034,8 +1208,17 @@ msgstr ""
 msgid "Edit Example"
 msgstr ""
 
+msgid "Edit Record"
+msgstr ""
+
 msgid "Edit customer {customerid}"
 msgstr "Редактировать клиента {customerid}"
+
+msgid "Edit menu item: {id}"
+msgstr ""
+
+msgid "Edit menu: {name}"
+msgstr ""
 
 msgid "Edit page {docpath}"
 msgstr ""
@@ -1190,6 +1373,9 @@ msgstr "Введите имя пользователя и пароль"
 msgid "Enter valid email"
 msgstr "Введите действительный адрес эл. почты"
 
+msgid "Enter your Swedish phone number to receive a Swish payment request."
+msgstr ""
+
 msgid "Enter your email"
 msgstr "Введите ваш адрес эл. почты"
 
@@ -1220,6 +1406,9 @@ msgstr ""
 msgid "Error sending reminder"
 msgstr ""
 
+msgid "Errors"
+msgstr ""
+
 msgid "Euro"
 msgstr "Евро"
 
@@ -1238,11 +1427,17 @@ msgstr ""
 msgid "Examples"
 msgstr "Примеры"
 
+msgid "Exception Occurred"
+msgstr ""
+
 msgid "Expand menu"
 msgstr "Развернуть меню"
 
 msgid "Expand personal menu."
 msgstr "Развернуть личное меню"
+
+msgid "Expire"
+msgstr ""
 
 msgid "Expired"
 msgstr ""
@@ -1259,6 +1454,15 @@ msgstr ""
 msgid "Expiring domains"
 msgstr "Истекающие домены"
 
+msgid "Expiry"
+msgstr ""
+
+msgid "Export"
+msgstr ""
+
+msgid "Export zone file"
+msgstr ""
+
 msgid "FAKE Medium"
 msgstr "FAKE Medium"
 
@@ -1266,6 +1470,9 @@ msgid "FAKE News by country"
 msgstr "FAKE News по странам"
 
 msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "Failed"
 msgstr ""
 
 msgid "Failed login from {ip}"
@@ -1286,7 +1493,19 @@ msgstr ""
 msgid "Failed to create certificate"
 msgstr ""
 
+msgid "Failed to create contact"
+msgstr ""
+
+msgid "Failed to create cryptokey"
+msgstr ""
+
 msgid "Failed to create example"
+msgstr ""
+
+msgid "Failed to create key"
+msgstr ""
+
+msgid "Failed to create payment"
 msgstr ""
 
 msgid "Failed to create record"
@@ -1301,10 +1520,19 @@ msgstr ""
 msgid "Failed to delete certificate"
 msgstr ""
 
+msgid "Failed to delete contact"
+msgstr ""
+
+msgid "Failed to delete cryptokey"
+msgstr ""
+
 msgid "Failed to delete domain"
 msgstr ""
 
 msgid "Failed to delete example"
+msgstr ""
+
+msgid "Failed to delete key"
 msgstr ""
 
 msgid "Failed to delete mailbox"
@@ -1318,6 +1546,15 @@ msgstr "Не удалось удалить запись"
 
 msgid "Failed to delete zone"
 msgstr "Не удалось удалить зону"
+
+msgid "Failed to export zone"
+msgstr ""
+
+msgid "Failed to import zone"
+msgstr ""
+
+msgid "Failed to initiate transfer"
+msgstr ""
 
 msgid "Failed to load conversation"
 msgstr ""
@@ -1334,7 +1571,13 @@ msgstr ""
 msgid "Failed to navigate"
 msgstr ""
 
+msgid "Failed to process refund"
+msgstr ""
+
 msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
+msgid "Failed to register domain"
 msgstr ""
 
 msgid "Failed to reprint invoice"
@@ -1391,7 +1634,13 @@ msgstr "Не удалось обновить запись"
 msgid "Failed to update zone"
 msgstr "Не удалось обновить зону"
 
+msgid "Failed/Refunded"
+msgstr ""
+
 msgid "Failed:"
+msgstr ""
+
+msgid "Fax"
 msgstr ""
 
 msgid "Featured"
@@ -1430,6 +1679,9 @@ msgstr "Имя"
 msgid "Flags"
 msgstr ""
 
+msgid "Flow"
+msgstr ""
+
 msgid "For more information, visit the Fortnox website:"
 msgstr "Для получения дополнительной информации посетите веб-сайт Fortnox:"
 
@@ -1466,10 +1718,19 @@ msgstr "Fortnox была основана в 2001 году со штаб-ква�
 msgid "Forward To"
 msgstr ""
 
+msgid "Forward zones"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
 msgid "From"
 msgstr "От"
 
 msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr ""
+
+msgid "From Template"
 msgstr ""
 
 msgid "Full"
@@ -1480,6 +1741,9 @@ msgstr "Оказать небольшую финансовую поддержк�
 
 msgid "Give small financial support to {user} at buymeacoffee"
 msgstr "Оказать небольшую финансовую поддержку {user} на buymeacoffee"
+
+msgid "Go Back"
+msgstr ""
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
 msgstr "Перейдите по ссылке {confirmationlink}, чтобы подтвердить подпись и получить ваше изображение."
@@ -1535,6 +1799,9 @@ msgstr ""
 msgid "Hosting provider statistics for tracked domains"
 msgstr ""
 
+msgid "Hostname"
+msgstr ""
+
 msgid "How well different Swedish organizations comply with having control of own infrastructure"
 msgstr ""
 
@@ -1556,7 +1823,22 @@ msgstr ""
 msgid "IMMEDIATE PAYMENT REQUIRED"
 msgstr ""
 
+msgid "IP"
+msgstr ""
+
 msgid "IP Address"
+msgstr ""
+
+msgid "IPv4 Address"
+msgstr ""
+
+msgid "IPv4 reverse"
+msgstr ""
+
+msgid "IPv6 Address"
+msgstr ""
+
+msgid "IPv6 reverse"
 msgstr ""
 
 msgid "Identification code"
@@ -1601,6 +1883,15 @@ msgstr "Действовать от имени"
 msgid "Impersonate {who}"
 msgstr ""
 
+msgid "Import"
+msgstr ""
+
+msgid "Import zone"
+msgstr ""
+
+msgid "In"
+msgstr ""
+
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "В вашем личном меню вы найдете вашу {panel} среди прочего."
 
@@ -1613,6 +1904,12 @@ msgstr "Включая НДС"
 msgid "Insert Table"
 msgstr "Вставить таблицу"
 
+msgid "Instruction ID"
+msgstr ""
+
+msgid "Interest invoice"
+msgstr ""
+
 msgid "Invalid confirmation link"
 msgstr "Недействительная ссылка подтверждения"
 
@@ -1623,6 +1920,9 @@ msgid "Invalid form data"
 msgstr ""
 
 msgid "Invalid invoice ID"
+msgstr ""
+
+msgid "Invalid items format"
 msgstr ""
 
 msgid "Invalid password"
@@ -1640,7 +1940,19 @@ msgstr "Счет"
 msgid "Invoice (credited)"
 msgstr "Счет (кредитован)"
 
+msgid "Invoice Date"
+msgstr ""
+
 msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice Number"
+msgstr ""
+
+msgid "Invoice Rows"
+msgstr ""
+
+msgid "Invoice Type"
 msgstr ""
 
 msgid "Invoice address"
@@ -1721,6 +2033,9 @@ msgstr "Счет {number}"
 msgid "Invoice {number}, customer #{customerid}"
 msgstr "Счет {number}, клиент #{customerid}"
 
+msgid "Invoice {num}"
+msgstr ""
+
 msgid "Invoices"
 msgstr "Счета"
 
@@ -1745,6 +2060,9 @@ msgstr[2] "Выставление счета, {number} позиций"
 msgid "Issuer"
 msgstr ""
 
+msgid "Issues found"
+msgstr ""
+
 msgid "It can be configured to display everything publicly as well."
 msgstr "Также можно настроить публичное отображение всего."
 
@@ -1766,10 +2084,22 @@ msgstr "Курсив"
 msgid "Item Number"
 msgstr ""
 
+msgid "Item deleted"
+msgstr ""
+
+msgid "Item saved"
+msgstr ""
+
 msgid "Item:"
 msgstr ""
 
 msgid "JSON only"
+msgstr ""
+
+msgid "Job failed"
+msgstr ""
+
+msgid "Job queued"
 msgstr ""
 
 msgid "Keep me logged in"
@@ -1778,7 +2108,16 @@ msgstr "Оставаться в системе"
 msgid "Key"
 msgstr ""
 
+msgid "Key Type"
+msgstr ""
+
 msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key created"
+msgstr ""
+
+msgid "Key deleted"
 msgstr ""
 
 msgid "Key, name and country_code required"
@@ -1796,6 +2135,9 @@ msgstr "Конверт"
 msgid "Language"
 msgstr "Язык"
 
+msgid "Language:"
+msgstr ""
+
 msgid "Languages"
 msgstr "Языки"
 
@@ -1808,10 +2150,16 @@ msgstr ""
 msgid "Latest"
 msgstr "Последние"
 
+msgid "Leave empty for items without a link"
+msgstr ""
+
 msgid "Legal proceedings"
 msgstr ""
 
 msgid "Legend"
+msgstr ""
+
+msgid "License"
 msgstr ""
 
 msgid "Light"
@@ -1874,6 +2222,9 @@ msgstr "Забыли пароль?"
 msgid "Low"
 msgstr ""
 
+msgid "Lower values have higher priority"
+msgstr ""
+
 msgid "MB"
 msgstr "МБ"
 
@@ -1891,6 +2242,9 @@ msgstr "MX-записи"
 
 msgid "Mail"
 msgstr "Почта"
+
+msgid "Mail Server"
+msgstr ""
 
 msgid "Mail admin"
 msgstr "Почтовый админ"
@@ -1952,6 +2306,21 @@ msgstr "Отметить оплату"
 msgid "Medium"
 msgstr ""
 
+msgid "Menu Items"
+msgstr ""
+
+msgid "Menu Settings"
+msgstr ""
+
+msgid "Menu created"
+msgstr ""
+
+msgid "Menu deleted"
+msgstr ""
+
+msgid "Menu saved"
+msgstr ""
+
 msgid "Menus"
 msgstr "Меню"
 
@@ -1976,11 +2345,17 @@ msgstr ""
 msgid "Messages will appear here once sent or received"
 msgstr ""
 
+msgid "Method"
+msgstr ""
+
 msgid "Mild"
 msgstr "Мягкий"
 
 msgid "Minimal local customer data is stored in Fortnox."
 msgstr "Минимальные локальные данные клиентов хранятся в Fortnox."
+
+msgid "Minimum TTL"
+msgstr ""
 
 msgid "Missing customer or invoice ID"
 msgstr ""
@@ -1989,6 +2364,9 @@ msgid "Missing file, our bad?"
 msgstr "Отсутствующий файл, наша ошибка?"
 
 msgid "Missing invoice information"
+msgstr ""
+
+msgid "Missing payment ID"
 msgstr ""
 
 msgid "Missing username or password"
@@ -2018,17 +2396,35 @@ msgstr "Имя"
 msgid "Name Servers"
 msgstr ""
 
+msgid "Nameserver"
+msgstr ""
+
+msgid "Nameserver Checks"
+msgstr ""
+
+msgid "Nameservers"
+msgstr ""
+
 msgid "Negative impact on credit rating"
 msgstr ""
 
 msgid "Net"
 msgstr "Нетто"
 
+msgid "Net Amount"
+msgstr ""
+
 msgid "Net amount"
 msgstr "Сумма нетто"
 
 msgid "Net amount:"
 msgstr "Сумма нетто:"
+
+msgid "Nets"
+msgstr ""
+
+msgid "Nets Payments"
+msgstr ""
 
 msgid "Network error - please try again"
 msgstr "Сетевая ошибка - попробуйте снова"
@@ -2045,8 +2441,20 @@ msgstr ""
 msgid "New Example"
 msgstr ""
 
+msgid "New Menu"
+msgstr ""
+
+msgid "New Record"
+msgstr ""
+
+msgid "New Template"
+msgstr ""
+
 msgid "New account"
 msgstr "Новый аккаунт"
+
+msgid "New contact"
+msgstr ""
 
 msgid "New customer"
 msgstr "Новый клиент"
@@ -2062,6 +2470,12 @@ msgstr "Новый счет для клиента {customerid}"
 
 msgid "New invoice pack"
 msgstr "Новый пакет счетов"
+
+msgid "New menu"
+msgstr ""
+
+msgid "New menu item"
+msgstr ""
 
 msgid "New record"
 msgstr "Новая запись"
@@ -2084,7 +2498,13 @@ msgstr "Нет"
 msgid "No A/AAAA records"
 msgstr ""
 
+msgid "No DNSSEC keys configured"
+msgstr ""
+
 msgid "No MX records"
+msgstr ""
+
+msgid "No account"
 msgstr ""
 
 msgid "No cache entries found"
@@ -2105,6 +2525,9 @@ msgstr ""
 msgid "No customer #{customerid}."
 msgstr "Нет клиента #{customerid}."
 
+msgid "No customer assigned"
+msgstr ""
+
 msgid "No data available"
 msgstr ""
 
@@ -2114,11 +2537,26 @@ msgstr ""
 msgid "No examples found"
 msgstr ""
 
+msgid "No invoice rows"
+msgstr ""
+
 msgid "No invoice template."
 msgstr "Нет шаблона счета."
 
+msgid "No invoices found"
+msgstr ""
+
 msgid "No invoicing"
 msgstr "Без выставления счетов"
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No menu items. Click \"Add item\" to create one."
+msgstr ""
+
+msgid "No menus found"
+msgstr ""
 
 msgid "No messages found"
 msgstr ""
@@ -2138,16 +2576,37 @@ msgstr ""
 msgid "No provider data available"
 msgstr ""
 
+msgid "No records"
+msgstr ""
+
+msgid "No records found"
+msgstr ""
+
 msgid "No selected customer."
 msgstr "Клиент не выбран."
 
+msgid "No template (empty zone)"
+msgstr ""
+
+msgid "No templates yet"
+msgstr ""
+
+msgid "No title"
+msgstr ""
+
 msgid "Non-compliant (Foreign hosting)"
+msgstr ""
+
+msgid "None (root level)"
 msgstr ""
 
 msgid "Normal"
 msgstr "Обычный"
 
 msgid "Not found"
+msgstr ""
+
+msgid "Note"
 msgstr ""
 
 msgid "Notes"
@@ -2159,7 +2618,13 @@ msgstr "Номер"
 msgid "Numbered List"
 msgstr "Нумерованный список"
 
+msgid "OK"
+msgstr ""
+
 msgid "OVERDUE"
+msgstr ""
+
+msgid "Open Swish App"
 msgstr ""
 
 msgid "Open invoice"
@@ -2180,8 +2645,29 @@ msgstr "Открытые счета"
 msgid "Open list"
 msgstr "Открыть список"
 
+msgid "Open zone list"
+msgstr ""
+
+msgid "Operation ID:"
+msgstr ""
+
 msgid "Options"
 msgstr "Параметры"
+
+msgid "Or scan QR code with Swish app"
+msgstr ""
+
+msgid "Order"
+msgstr ""
+
+msgid "Order number or reference"
+msgstr ""
+
+msgid "Order saved"
+msgstr ""
+
+msgid "Org number"
+msgstr ""
 
 msgid "Org. Id"
 msgstr "ИНН"
@@ -2270,6 +2756,12 @@ msgstr "Бумага в пишущей машинке"
 msgid "Paragraph"
 msgstr ""
 
+msgid "Parameters"
+msgstr ""
+
+msgid "Parent Item"
+msgstr ""
+
 msgid "Password"
 msgstr "Пароль"
 
@@ -2291,6 +2783,15 @@ msgstr "Пароль должен содержать минимум {min} заг
 msgid "Password was wrong or username doesn't exist."
 msgstr "Неверный пароль или имя пользователя не существует."
 
+msgid "Pay"
+msgstr ""
+
+msgid "Pay instantly with Swish"
+msgstr ""
+
+msgid "Pay with Swish"
+msgstr ""
+
 msgid "PayPal"
 msgstr ""
 
@@ -2299,6 +2800,9 @@ msgstr ""
 
 msgid "Paydate"
 msgstr "Дата оплаты"
+
+msgid "Payer"
+msgstr ""
 
 msgid "Payer Email"
 msgstr ""
@@ -2309,7 +2813,22 @@ msgstr "Оплата"
 msgid "Payment Cancelled"
 msgstr ""
 
+msgid "Payment Details"
+msgstr ""
+
+msgid "Payment ID"
+msgstr ""
+
+msgid "Payment ID:"
+msgstr ""
+
 msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Intent"
+msgstr ""
+
+msgid "Payment Method"
 msgstr ""
 
 msgid "Payment Reminder"
@@ -2321,7 +2840,25 @@ msgstr ""
 msgid "Payment due to: {duedate}"
 msgstr "Срок оплаты: {duedate}"
 
+msgid "Payment failed"
+msgstr ""
+
+msgid "Payment for..."
+msgstr ""
+
+msgid "Payment must be charged before refund"
+msgstr ""
+
+msgid "Payment not found"
+msgstr ""
+
 msgid "Payment reminder: Invoice {number}"
+msgstr ""
+
+msgid "Payment request sent! Open your Swish app to confirm."
+msgstr ""
+
+msgid "Payment successful!"
 msgstr ""
 
 msgid "Payment terms"
@@ -2329,6 +2866,18 @@ msgstr "Условия оплаты"
 
 msgid "Payment terms:"
 msgstr "Условия оплаты:"
+
+msgid "Payment timeout. Please check your Swish app."
+msgstr ""
+
+msgid "Payment was declined or cancelled."
+msgstr ""
+
+msgid "Payment with Nets Easy"
+msgstr ""
+
+msgid "Payment:"
+msgstr ""
 
 msgid "Payments"
 msgstr "Платежи"
@@ -2348,6 +2897,9 @@ msgstr ""
 msgid "People rocketing to the sky"
 msgstr "Люди, летящие к небу"
 
+msgid "Period"
+msgstr ""
+
 msgid "Personal"
 msgstr "Личный"
 
@@ -2361,6 +2913,9 @@ msgid "Phone"
 msgstr "Телефон"
 
 msgid "Phone Number"
+msgstr ""
+
+msgid "Phone number"
 msgstr ""
 
 msgid "Please check your confirmation link or register again."
@@ -2399,6 +2954,9 @@ msgstr "Plusgiro"
 msgid "Polls"
 msgstr ""
 
+msgid "Port"
+msgstr ""
+
 msgid "Posta faktura"
 msgstr "Отправить счет"
 
@@ -2413,6 +2971,12 @@ msgstr "Обычная почта"
 
 msgid "Postgiro"
 msgstr "Postgiro"
+
+msgid "Pre-populate zone with template records"
+msgstr ""
+
+msgid "Preference"
+msgstr ""
 
 msgid "Preferred Language"
 msgstr ""
@@ -2438,6 +3002,9 @@ msgstr "Цена"
 msgid "Price List"
 msgstr "Прайс-лист"
 
+msgid "Primary NS"
+msgstr ""
+
 msgid "Priority"
 msgstr "Приоритет"
 
@@ -2452,6 +3019,9 @@ msgstr "Наборы привилегий"
 
 msgid "Privileges"
 msgstr "Привилегии"
+
+msgid "Proceed to Payment"
+msgstr ""
 
 msgid "Products"
 msgstr "Продукты"
@@ -2540,6 +3110,9 @@ msgstr "Последние подписи"
 msgid "Recommended by"
 msgstr "Рекомендовано"
 
+msgid "Record"
+msgstr ""
+
 msgid "Record Name"
 msgstr "Имя записи"
 
@@ -2547,6 +3120,9 @@ msgid "Record Type"
 msgstr "Тип записи"
 
 msgid "Record Value"
+msgstr ""
+
+msgid "Record added"
 msgstr ""
 
 msgid "Record created successfully"
@@ -2564,16 +3140,28 @@ msgstr ""
 msgid "Record saved successfully"
 msgstr ""
 
+msgid "Record updated"
+msgstr ""
+
 msgid "Record updated successfully"
 msgstr "Запись успешно обновлена"
 
 msgid "Records"
 msgstr "Записи"
 
+msgid "Reference"
+msgstr ""
+
 msgid "References"
 msgstr "Ссылки"
 
 msgid "Refresh"
+msgstr ""
+
+msgid "Refund amount exceeds available amount"
+msgstr ""
+
+msgid "Refunded"
 msgstr ""
 
 msgid "Refunded/Failed"
@@ -2585,11 +3173,17 @@ msgstr ""
 msgid "Regards"
 msgstr "С уважением"
 
+msgid "Regexp"
+msgstr ""
+
 msgid "Register"
 msgstr "Регистрация"
 
 msgid "Register account"
 msgstr "Зарегистрировать аккаунт"
+
+msgid "Register domain"
+msgstr ""
 
 msgid "Register to create and publish content."
 msgstr "Зарегистрируйтесь, чтобы создавать и публиковать контент."
@@ -2612,6 +3206,9 @@ msgstr "Зарегистрированные платежи и счета пос
 msgid "Registrant"
 msgstr ""
 
+msgid "Registrant contact"
+msgstr ""
+
 msgid "Registrar"
 msgstr "Регистратор"
 
@@ -2627,6 +3224,9 @@ msgstr ""
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "Осталось оплатить: {amount} {currency}"
 
+msgid "Remarks"
+msgstr ""
+
 msgid "Remind"
 msgstr "Напомнить"
 
@@ -2636,10 +3236,19 @@ msgstr ""
 msgid "Renew"
 msgstr ""
 
+msgid "Replacement"
+msgstr ""
+
 msgid "Reprint"
 msgstr "Пересоздать"
 
 msgid "Reprint invoice"
+msgstr ""
+
+msgid "Required"
+msgstr ""
+
+msgid "Required for most TLDs. Get this from your current registrar."
 msgstr ""
 
 msgid "Resend"
@@ -2650,6 +3259,12 @@ msgstr ""
 
 msgid "Resources"
 msgstr "Ресурсы"
+
+msgid "Response"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
 
 msgid "Return to Home"
 msgstr ""
@@ -2675,6 +3290,9 @@ msgstr ""
 msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
 msgstr ""
 
+msgid "Running checks..."
+msgstr ""
+
 msgid "SEK"
 msgstr "SEK"
 
@@ -2696,7 +3314,13 @@ msgstr ""
 msgid "SMS sent successfully!"
 msgstr ""
 
+msgid "SOA Serial"
+msgstr ""
+
 msgid "SWISH"
+msgstr ""
+
+msgid "Same as registrant"
 msgstr ""
 
 msgid "Samizdat"
@@ -2720,7 +3344,22 @@ msgstr "Сохранить"
 msgid "Save Settings"
 msgstr ""
 
+msgid "Save Template"
+msgstr ""
+
+msgid "Save failed"
+msgstr ""
+
 msgid "Saved successfully"
+msgstr ""
+
+msgid "Scan QR code or tap to open Swish app"
+msgstr ""
+
+msgid "Scan the QR code with your Swish app for immediate payment."
+msgstr ""
+
+msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
 msgid "Score"
@@ -2741,11 +3380,20 @@ msgstr ""
 msgid "Search certificates..."
 msgstr ""
 
+msgid "Search contact"
+msgstr ""
+
 msgid "Search contacts..."
 msgstr ""
 
 msgid "Search content"
 msgstr "Поиск содержания"
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domain"
+msgstr ""
 
 msgid "Search domains..."
 msgstr ""
@@ -2801,6 +3449,9 @@ msgstr "Поиск веб-сайта"
 msgid "Search for zone"
 msgstr "Поиск зоны"
 
+msgid "Search menus..."
+msgstr ""
+
 msgid "Search pages..."
 msgstr "Поиск страниц..."
 
@@ -2822,8 +3473,17 @@ msgstr "Выбрать"
 msgid "Select Format"
 msgstr ""
 
+msgid "Select a template to edit or create a new one"
+msgstr ""
+
+msgid "Select all"
+msgstr ""
+
 msgid "Select art.no."
 msgstr "Выбрать арт. №"
+
+msgid "Select contact..."
+msgstr ""
 
 msgid "Select country"
 msgstr "Выбрать страну"
@@ -2861,10 +3521,19 @@ msgstr ""
 msgid "Sent"
 msgstr ""
 
+msgid "Serial"
+msgstr ""
+
 msgid "Servers"
 msgstr "Серверы"
 
+msgid "Service"
+msgstr ""
+
 msgid "Service interruption"
+msgstr ""
+
+msgid "Session:"
 msgstr ""
 
 msgid "Set the height attribute."
@@ -2912,8 +3581,14 @@ msgstr "Сайт"
 msgid "Site content"
 msgstr "Содержимое сайта"
 
+msgid "Skip links"
+msgstr ""
+
 msgid "Skip menu"
 msgstr "Пропустить меню"
+
+msgid "Skip to main content"
+msgstr ""
 
 msgid "Snapback evaluation"
 msgstr "Оценка Snapback"
@@ -2960,11 +3635,20 @@ msgstr "Статистика"
 msgid "Status"
 msgstr ""
 
+msgid "Street"
+msgstr ""
+
 msgid "Strictly for Rymdweb"
 msgstr "Строго для Rymdweb"
 
 msgid "Strikethrough"
 msgstr "Зачёркнутый"
+
+msgid "Stripe"
+msgstr ""
+
+msgid "Stripe Payments"
+msgstr ""
 
 msgid "Stuff"
 msgstr "Разное"
@@ -2974,6 +3658,9 @@ msgstr "Тема"
 
 msgid "Submit"
 msgstr "Отправить"
+
+msgid "Succeeded"
+msgstr ""
 
 msgid "Summa"
 msgstr "Сумма"
@@ -2999,6 +3686,12 @@ msgstr "Фамилия"
 msgid "Swedish"
 msgstr "Шведский"
 
+msgid "Swish Payments"
+msgstr ""
+
+msgid "Swish number"
+msgstr ""
+
 msgid "Sync Messages"
 msgstr ""
 
@@ -3017,10 +3710,19 @@ msgstr ""
 msgid "TTL"
 msgstr ""
 
+msgid "Tag"
+msgstr ""
+
 msgid "Tags"
 msgstr ""
 
+msgid "Target"
+msgstr ""
+
 msgid "Tech"
+msgstr ""
+
+msgid "Tech contact"
 msgstr ""
 
 msgid "Technical"
@@ -3035,8 +3737,29 @@ msgstr "Технические вопросы:"
 msgid "Telephone"
 msgstr "Телефон"
 
+msgid "Template"
+msgstr ""
+
+msgid "Template created"
+msgstr ""
+
+msgid "Template deleted"
+msgstr ""
+
+msgid "Template duplicated"
+msgstr ""
+
+msgid "Template updated"
+msgstr ""
+
+msgid "Templates"
+msgstr ""
+
 msgid "Terms of Payment"
 msgstr "Условия оплаты"
+
+msgid "Terms of service"
+msgstr ""
 
 msgid "Test"
 msgstr "Тест"
@@ -3056,10 +3779,19 @@ msgstr "Спасибо, что связались с нами."
 msgid "Thank you for your business"
 msgstr ""
 
+msgid "Thank you for your payment."
+msgstr ""
+
+msgid "Thank you for your payment. Your Swish transaction has been completed."
+msgstr ""
+
 msgid "Thank you for your payment. Your transaction has been completed."
 msgstr ""
 
 msgid "Thank you for your prompt attention to this matter."
+msgstr ""
+
+msgid "Thank you! Your payment has been processed successfully."
 msgstr ""
 
 msgid "The Samizdat project"
@@ -3092,10 +3824,19 @@ msgstr "Самая старая попытка была сделана {failuret
 msgid "The page {docpath} wasn't found."
 msgstr "Страница {docpath} не найдена."
 
+msgid "The payment process was interrupted. This could be because:"
+msgstr ""
+
+msgid "The payment session expired"
+msgstr ""
+
 msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "Акции котируются на основном списке Nasdaq Stockholm."
 
 msgid "Theme"
+msgstr ""
+
+msgid "There was an issue with your payment method"
 msgstr ""
 
 msgid "This confirmation link is invalid or has expired"
@@ -3125,6 +3866,15 @@ msgstr ""
 msgid "This might be an oversight, so we wanted to send a friendly reminder."
 msgstr ""
 
+msgid "This resource has no input parameters."
+msgstr ""
+
+msgid "This resource is deprecated!"
+msgstr ""
+
+msgid "This resource is not documented."
+msgstr ""
+
 msgid "This will result in additional fees and may affect your credit rating."
 msgstr ""
 
@@ -3137,11 +3887,17 @@ msgstr ""
 msgid "Title"
 msgstr ""
 
+msgid "Titles by Language"
+msgstr ""
+
 msgid "Toggle menu"
 msgstr "Переключить меню"
 
 msgid "Tot"
 msgstr "Всего"
+
+msgid "Total"
+msgstr ""
 
 msgid "Total Domains"
 msgstr ""
@@ -3149,11 +3905,17 @@ msgstr ""
 msgid "Total Records"
 msgstr ""
 
+msgid "Total refunds"
+msgstr ""
+
 msgid "Total to pay"
 msgstr ""
 
 msgid "Total: {count} customers"
 msgstr "Всего: {count} клиентов"
+
+msgid "Totals"
+msgstr ""
 
 msgid "Tough"
 msgstr "Жесткий"
@@ -3170,6 +3932,12 @@ msgstr ""
 msgid "Transfer"
 msgstr "Перевод"
 
+msgid "Transfer domain"
+msgstr ""
+
+msgid "Try Again"
+msgstr ""
+
 msgid "Type"
 msgstr "Тип"
 
@@ -3177,6 +3945,9 @@ msgid "URGENT: Final Payment Reminder"
 msgstr ""
 
 msgid "URGENT: Final payment reminder - Invoice {number}"
+msgstr ""
+
+msgid "URI Path"
 msgstr ""
 
 msgid "Unauthenticated"
@@ -3193,6 +3964,9 @@ msgstr ""
 
 msgid "Unpaid"
 msgstr "Неоплаченные"
+
+msgid "Untitled"
+msgstr ""
 
 msgid "Update"
 msgstr "Обновить"
@@ -3229,6 +4003,15 @@ msgstr "Использование"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
 msgstr "Используйте <code>flags</code> для иконок флагов или <code>anysvg</code> для домашней страницы приложения."
+
+msgid "Use @ for the zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex, or subdomain name"
+msgstr ""
 
 msgid "Use the invoice number as message when you pay."
 msgstr "Укажите номер счета в качестве сообщения при оплате."
@@ -3311,6 +4094,9 @@ msgstr ""
 msgid "Value for the class attribute."
 msgstr "Значение для атрибута class."
 
+msgid "Version"
+msgstr ""
+
 msgid "View"
 msgstr ""
 
@@ -3353,6 +4139,15 @@ msgstr ""
 msgid "Websites"
 msgstr "Веб-сайты"
 
+msgid "Weight"
+msgstr ""
+
+msgid "What happened?"
+msgstr ""
+
+msgid "Whois Information"
+msgstr ""
+
 msgid "Whois data for {ip}"
 msgstr "Данные Whois для {ip}"
 
@@ -3377,6 +4172,12 @@ msgstr "Вы также можете оставить сообщение в на
 msgid "You can now log in to your account."
 msgstr "Теперь вы можете войти в свою учётную запись."
 
+msgid "You can try again or choose a different payment method."
+msgstr ""
+
+msgid "You clicked the back or cancel button"
+msgstr ""
+
 msgid "You have cancelled the payment process."
 msgstr ""
 
@@ -3392,11 +4193,17 @@ msgstr "Вам необходимо принять условия регистр
 msgid "You were logged in as {username}."
 msgstr "Вы вошли как {username}."
 
+msgid "You will be redirected to Nets secure checkout page."
+msgstr ""
+
 msgid "You will receive a confirmation email shortly."
 msgstr ""
 
 msgid "Your Reference"
 msgstr "Ваша ссылка"
+
+msgid "Your Swish payment was cancelled or declined."
+msgstr ""
 
 msgid "Your VAT Id"
 msgstr "Ваш номер НДС"
@@ -3425,14 +4232,32 @@ msgstr "Ваше сообщение приведено ниже."
 msgid "Your name"
 msgstr "Ваше имя"
 
+msgid "Your payment was cancelled or failed."
+msgstr ""
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr ""
+
 msgid "Zip Code"
 msgstr "Почтовый индекс"
+
+msgid "Zone Check"
+msgstr ""
+
+msgid "Zone File Content"
+msgstr ""
 
 msgid "Zone Kind"
 msgstr "Тип зоны"
 
 msgid "Zone Name"
 msgstr "Имя зоны"
+
+msgid "Zone Records"
+msgstr ""
+
+msgid "Zone Templates"
+msgstr ""
 
 msgid "Zone created successfully"
 msgstr "Зона успешно создана"
@@ -3442,6 +4267,9 @@ msgstr ""
 
 msgid "Zone deleted successfully"
 msgstr "Зона успешно удалена"
+
+msgid "Zone imported successfully"
+msgstr ""
 
 msgid "Zone management"
 msgstr "Управление зоной"
@@ -3476,6 +4304,9 @@ msgstr ""
 msgid "characters"
 msgstr ""
 
+msgid "charged"
+msgstr ""
+
 msgid "compliant"
 msgstr ""
 
@@ -3488,8 +4319,14 @@ msgstr "панель управления"
 msgid "customer"
 msgstr "клиент"
 
+msgid "customers"
+msgstr ""
+
 msgid "database"
 msgstr "база данных"
+
+msgid "declined"
+msgstr ""
 
 msgid "domain"
 msgstr "домен"
@@ -3497,7 +4334,16 @@ msgstr "домен"
 msgid "email"
 msgstr ""
 
+msgid "errors"
+msgstr ""
+
 msgid "example"
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "for registrar"
 msgstr ""
 
 msgid "invoice"
@@ -3512,7 +4358,13 @@ msgstr "почтовый домен"
 msgid "main firewall"
 msgstr "основной файрвол"
 
+msgid "net balance"
+msgstr ""
+
 msgid "new messages retrieved."
+msgstr ""
+
+msgid "of"
 msgstr ""
 
 msgid "our web"
@@ -3530,7 +4382,16 @@ msgstr "продукт"
 msgid "record(s)"
 msgstr ""
 
+msgid "records"
+msgstr ""
+
+msgid "refunded"
+msgstr ""
+
 msgid "seconds"
+msgstr ""
+
+msgid "selected"
 msgstr ""
 
 msgid "standby firewall"
@@ -3547,6 +4408,12 @@ msgstr "веб-сайт"
 
 msgid "wensite"
 msgstr "веб-сайт"
+
+msgid "year"
+msgstr ""
+
+msgid "years"
+msgstr ""
 
 msgid "{code}: Authentication required"
 msgstr "{code}: Требуется авторизация"

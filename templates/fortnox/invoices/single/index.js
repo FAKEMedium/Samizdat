@@ -17,6 +17,14 @@ async function loadInvoice() {
   }
 }
 
+// Translation map for invoice types from Fortnox API
+const invoiceTypeTranslations = {
+  'INVOICE': '<%== __("Invoice") %>',
+  'CREDIT': '<%== __("Credit invoice") %>',
+  'CASH': '<%== __("Cash invoice") %>',
+  'INTEREST': '<%== __("Interest invoice") %>'
+};
+
 function populateInvoiceDetails(invoice) {
   // Invoice Details
   document.getElementById('documentNumber').textContent = invoice.DocumentNumber || '';
@@ -24,7 +32,8 @@ function populateInvoiceDetails(invoice) {
   document.getElementById('dueDate').textContent = invoice.DueDate || '';
   document.getElementById('termsOfPayment').textContent = invoice.TermsOfPayment || '';
   document.getElementById('currency').textContent = invoice.Currency || '';
-  document.getElementById('invoiceType').textContent = invoice.InvoiceType || '';
+  const invoiceType = invoice.InvoiceType || '';
+  document.getElementById('invoiceType').textContent = invoiceTypeTranslations[invoiceType] || invoiceType;
 
   // Customer Info
   document.getElementById('customerNumber').textContent = invoice.CustomerNumber || '';
