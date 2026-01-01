@@ -92,9 +92,26 @@ manager:
     cardnumber: 4
     dbtype: postgresql
     type: powerdns
-    api:
-      url: http://ns.example.com:8081/api/v1/servers/localhost
-      key: s3cr3tk3y
+    default_env: test
+    env:
+      production:
+        name: ns1.fakenews.com
+        api:
+          key: s3cr3tk3y
+          url: http://ns.fakenews.com:8081/api/v1/servers/localhost
+        dsn: postgresql://samizdat@localhost/powerdns
+      test:
+        name: ns1.example.com
+        api:
+          key: s3cr3tk3y
+          url: http://ns.example.com:8081/api/v1/servers/localhost
+        dsn: postgresql://samizdat:s3cr3t@example.com:5432/powerdns
+    check:
+      source_ips:                 # Round-robin source IPs for DNS checks
+        - 192.168.1.1
+      rate_limit: 2               # Queries per second
+      timeout: 2                  # Seconds
+      max_checks: 5               # Stop after N checks (0 = unlimited, for testing)
   website:
     cardnumber: 5
     dbtype: postgresql

@@ -144,7 +144,12 @@ sub invoices ($self) {
   } else {
     my $page = int($self->param('page') // 1);
     my $perpage = $self->app->config->{pagination}->{perpage} || 25;
-    my $options = {'qp' => {'limit' => $perpage, 'page' => $page}};
+    my $options = {'qp' => {
+      'limit' => $perpage,
+      'page' => $page,
+      'sortby' => 'documentnumber',
+      'sortorder' => 'descending'
+    }};
     my $invoice = $self->app->fortnox->getInvoice($invoiceid, $options);
     my $fortnox = { title => $title };
     $fortnox->{invoice} = $invoice;
