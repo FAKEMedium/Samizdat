@@ -1,0 +1,80 @@
+<form class="d-flex gap-2 mb-4" id="checkForm">
+  <div class="input-group flex-grow-1" style="max-width: 400px;">
+    <input type="text" class="form-control" name="zone" id="zoneName" placeholder="<%== __('Enter zone name') %>" required>
+    <button type="submit" class="btn btn-primary" id="checkButton">
+      <%== icon 'search', {} %>
+      <span class="ms-1"><%== __('Check') %></span>
+    </button>
+  </div>
+  <div class="form-check form-switch align-self-center">
+    <input type="checkbox" class="form-check-input" id="asyncMode" name="async">
+    <label class="form-check-label" for="asyncMode"><%== __('Background') %></label>
+  </div>
+</form>
+
+<div id="results" class="d-none">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <span><%== __('Whois Information') %></span>
+      <span id="whoisStatus" class="badge"></span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-4">
+          <strong><%== __('Registrar') %>:</strong>
+          <span id="registrar">-</span>
+        </div>
+        <div class="col-md-4">
+          <strong><%== __('Nameservers') %>:</strong>
+          <ul id="whoisNS" class="list-unstyled mb-0"></ul>
+        </div>
+        <div class="col-md-4">
+          <strong><%== __('Status') %>:</strong>
+          <ul id="whoisStatus" class="list-unstyled mb-0"></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><%== __('Nameserver Checks') %></div>
+    <div class="card-body p-0">
+      <table class="table table-sm mb-0" id="checksTable">
+        <thead>
+          <tr>
+            <th><%== __('Nameserver') %></th>
+            <th><%== __('IP') %></th>
+            <th><%== __('SOA Serial') %></th>
+            <th><%== __('NS Records') %></th>
+            <th class="text-end"><%== __('Response') %></th>
+            <th><%== __('Status') %></th>
+          </tr>
+        </thead>
+        <tbody id="checksBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div id="errors" class="alert alert-warning mt-3 d-none">
+    <strong><%== __('Issues found') %>:</strong>
+    <ul id="errorList" class="mb-0"></ul>
+  </div>
+</div>
+
+<div id="loading" class="d-none text-center py-4">
+  <div class="spinner-border text-primary" role="status">
+    <span class="visually-hidden"><%== __('Loading...') %></span>
+  </div>
+  <p class="mt-2" id="loadingText"><%== __('Running checks...') %></p>
+</div>
+
+<div id="jobStatus" class="d-none">
+  <div class="alert alert-info">
+    <strong><%== __('Job queued') %>:</strong>
+    <span id="jobId"></span>
+    <button type="button" class="btn btn-sm btn-outline-primary ms-2" id="refreshJob">
+      <%== icon 'arrow-clockwise', {} %>
+      <%== __('Refresh') %>
+    </button>
+  </div>
+</div>

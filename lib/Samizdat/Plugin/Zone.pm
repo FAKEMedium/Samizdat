@@ -14,6 +14,7 @@ sub register($self, $app, $conf) {
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('zones')->to(controller => 'Zone');
+  $manager->get('/check')                                        ->to('#check_index')             ->name('zone_check_index');
   $manager->get('/#zone_id/records/new')                         ->to('#new_record')              ->name('zone_record_new');
   $manager->get('/#zone_id/records/#record_id')                  ->to('#edit_record')             ->name('zone_record_edit');
   $manager->get('/#zone_id/records')                             ->to('#records')                 ->name('zone_record_index');
@@ -56,6 +57,12 @@ sub register($self, $app, $conf) {
       pg     => $c->pg,     # Main Samizdat database (for templates)
     });
     return $model;
+  });
+
+  # Minion task for background zone checks (supports wildcards)
+  $app->minion->add_task(zone_check => sub ($job, $zone) {
+    my $result = $job->app->zone->check_zones($zone);
+    $job->finish($result);
   });
 }
 
@@ -132,6 +139,57 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Zone_Zone'
+
+  /zones/check:
+    get:
+      operationId: Zone.check.index
+      x-mojo-to: Zone#check_index
+      summary: Zone check interface
+      tags: [Zone Check]
+      responses:
+        '200':
+          description: Check interface
+          content:
+            text/html:
+              schema:
+                type: string
+    post:
+      operationId: Zone.check.run
+      x-mojo-to: Zone#check_run
+      summary: Run zone check
+      tags: [Zone Check]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Zone_CheckRequest'
+      responses:
+        '200':
+          description: Check results
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone_CheckResponse'
+
+  /zones/check/{job_id}:
+    get:
+      operationId: Zone.check.status
+      x-mojo-to: Zone#check_status
+      summary: Get check job status
+      tags: [Zone Check]
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Job status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Zone_CheckJobStatus'
 
   /zones/import:
     post:
@@ -800,3 +858,85 @@ components:
           type: string
         description:
           type: string
+    Zone_CheckRequest:
+      type: object
+      required:
+        - zone
+      properties:
+        zone:
+          type: string
+          description: Zone name to check
+        async:
+          type: boolean
+          description: Run check as background job
+          default: false
+    Zone_CheckResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        zone:
+          type: string
+        whois:
+          type: object
+          properties:
+            nameservers:
+              type: array
+              items:
+                type: string
+            registrar:
+              type: string
+            status:
+              type: array
+              items:
+                type: string
+        checks:
+          type: array
+          items:
+            $ref: '#/components/schemas/Zone_NSCheck'
+        errors:
+          type: array
+          items:
+            type: string
+    Zone_NSCheck:
+      type: object
+      properties:
+        nameserver:
+          type: string
+        ip:
+          type: string
+        source_ip:
+          type: string
+        reachable:
+          type: boolean
+        soa:
+          type: object
+          properties:
+            serial:
+              type: integer
+            primary:
+              type: string
+            admin:
+              type: string
+            match:
+              type: boolean
+        ns_records:
+          type: array
+          items:
+            type: string
+        ns_match:
+          type: boolean
+        response_time_ms:
+          type: integer
+        error:
+          type: string
+    Zone_CheckJobStatus:
+      type: object
+      properties:
+        job_id:
+          type: integer
+        status:
+          type: string
+          enum: [inactive, active, finished, failed]
+        result:
+          $ref: '#/components/schemas/Zone_CheckResponse'
