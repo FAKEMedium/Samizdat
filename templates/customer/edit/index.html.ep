@@ -472,7 +472,7 @@
     </div>
   </div>
   <div class="col-md-5 d-print-none">
-    <button id="submitbutton" type="submit" onclick="updateCustomer();" class="btn btn-primary form-control"><%== __('Save') %></button>
+    <button id="submitbutton" type="submit" class="btn btn-primary form-control"><%== __('Save') %></button>
   </div>
   <div class="col-md-7 d-print-none">
     <div class="text-end blank" id="creator"></div>
