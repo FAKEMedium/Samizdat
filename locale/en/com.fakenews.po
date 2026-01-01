@@ -1354,6 +1354,9 @@ msgstr ""
 msgid "English"
 msgstr ""
 
+msgid "Enter a title first to translate from"
+msgstr ""
+
 msgid "Enter code"
 msgstr ""
 
@@ -3952,6 +3955,15 @@ msgid "Transfer"
 msgstr ""
 
 msgid "Transfer domain"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translating..."
+msgstr ""
+
+msgid "Translation complete"
 msgstr ""
 
 msgid "Try Again"
