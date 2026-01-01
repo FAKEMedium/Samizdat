@@ -258,15 +258,15 @@ async function fetchCustomerZones(customerid) {
 
 
 function populateForm(formdata, method) {
-  let customer = formdata.customer;
-  let domains = formdata.domains;
-  let invoices = formdata.invoices;
-  let invoiceitems = formdata.invoiceitems;
-  let databases = formdata.databases;
-  let sites = formdata.sites;
-  let maildomains = formdata.maildomains;
-  let subscriptions = formdata.subscriptions;
-  let userlogins = formdata.userlogins;
+  let customer = formdata.customer || {};
+  let domains = formdata.domains || [];
+  let invoices = formdata.invoices || [];
+  let invoiceitems = formdata.invoiceitems || {};
+  let databases = formdata.databases || [];
+  let sites = formdata.sites || [];
+  let maildomains = formdata.maildomains || [];
+  let subscriptions = formdata.subscriptions || [];
+  let userlogins = formdata.userlogins || [];
 
   // Customer data, including default values for new customer
   for (const field of [<%== join ", ", map "\"$_\"" => @{$fields} %>]) {
@@ -297,7 +297,7 @@ function populateForm(formdata, method) {
   // Use addEventListener instead of onclick for CSP compliance
   document.querySelector('#minid').onclick = (e) => { e.preventDefault(); getId('first', 1000); };
   document.querySelector('#maxid').onclick = (e) => { e.preventDefault(); getId('newest', 1000); };
-  if (0 == customer.customerid) {
+  if (!customer.customerid) {
     thisurl = `<%== url_for('customer_index') %>`;
     document.querySelector('#dataform').action = `<%== url_for('customer_index') %>`;
     document.querySelector('#submitbutton').innerHTML = `<%== __('Create customer') %>`;
@@ -486,8 +486,10 @@ function populateForm(formdata, method) {
   document.querySelector('#domainlistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/domains`;
 
   // DNS zones - fetch from Zone model via customer-specific endpoint
-  document.querySelector('#zonelistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/zones`;
-  fetchCustomerZones(customer.customerid);
+  if (customer.customerid) {
+    document.querySelector('#zonelistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/zones`;
+    fetchCustomerZones(customer.customerid);
+  }
 
   // Websites
   snippet = '';
@@ -584,13 +586,13 @@ function populateForm(formdata, method) {
     document.querySelector('#datausage').classList.remove("d-none");
 
   }
-  if (customer.updater != '') {
+  if (customer.updater && customer.updated) {
     document.querySelector('#updater').innerHTML = "<%== __x('Updated {updated} by {updater}', updated => 'updated', updater => 'updater') %>"
       .replace('updated', customer.updated.substring(0, 10))
       .replace('updater', customer.updater);
     document.querySelector('#updater').classList.remove("d-none");
   }
-  if (customer.creator != '') {
+  if (customer.creator && customer.created) {
     document.querySelector('#creator').innerHTML = "<%== __x('Created {created} by {creator}', created => 'created', creator => 'creator') %>"
       .replace('created', customer.created.substring(0, 10))
       .replace('creator', customer.creator);
