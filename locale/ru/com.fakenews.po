@@ -20,12 +20,6 @@ msgstr ""
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
 msgstr "№{number}: {firstname} {lastname}, {city}, {country}"
 
-msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2022 &mdash; пожалуйста, поделитесь ссылкой и поставьте звезду на {sitename}!"
-
-msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2023 &mdash; пожалуйста, поделитесь ссылкой и поставьте звезду на {sitename}!"
-
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
@@ -1351,6 +1345,9 @@ msgstr "Конец бокового содержания"
 
 msgid "English"
 msgstr "Английский"
+
+msgid "Enter a title first to translate from"
+msgstr ""
 
 msgid "Enter code"
 msgstr "Введите код"
@@ -3933,6 +3930,15 @@ msgid "Transfer"
 msgstr "Перевод"
 
 msgid "Transfer domain"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translating..."
+msgstr ""
+
+msgid "Translation complete"
 msgstr ""
 
 msgid "Try Again"

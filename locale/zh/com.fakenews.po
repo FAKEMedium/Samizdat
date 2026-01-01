@@ -20,12 +20,6 @@ msgstr ""
 msgid "#{number}: {firstname} {lastname}, {city}, {country}"
 msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
 
-msgid "&copy;2022 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2022 &mdash; 请分享并在{sitename}上加星！"
-
-msgid "&copy;2023 &mdash; please share and add star on {sitename}!"
-msgstr "&copy;2023 &mdash; 请分享并在{sitename}上加星！"
-
 msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
@@ -1337,6 +1331,9 @@ msgstr "侧边内容结束"
 
 msgid "English"
 msgstr "英语"
+
+msgid "Enter a title first to translate from"
+msgstr ""
 
 msgid "Enter code"
 msgstr "输入代码"
@@ -3917,6 +3914,15 @@ msgid "Transfer"
 msgstr "转账"
 
 msgid "Transfer domain"
+msgstr ""
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translating..."
+msgstr ""
+
+msgid "Translation complete"
 msgstr ""
 
 msgid "Try Again"

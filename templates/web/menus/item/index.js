@@ -41,12 +41,73 @@
     container.innerHTML = languages.map(lang => `
       <div class="mb-3">
         <label class="form-label">${lang.title}</label>
-        <input type="text" class="form-control title-input" 
-               data-languageid="${lang.languageid}" 
+        <input type="text" class="form-control title-input"
+               data-languageid="${lang.languageid}"
+               data-langcode="${lang.code}"
                value="${titles[lang.languageid] || ""}">
       </div>
     `).join("");
   }
+
+  // Translate functionality using Anthropic API
+  async function translateTitles() {
+    const inputs = document.querySelectorAll(".title-input");
+    let sourceInput = null;
+    let sourceText = "";
+    let sourceLangCode = "";
+
+    // Find the first input with text as source
+    for (const input of inputs) {
+      if (input.value.trim()) {
+        sourceInput = input;
+        sourceText = input.value.trim();
+        sourceLangCode = input.getAttribute("data-langcode");
+        break;
+      }
+    }
+
+    if (!sourceText) {
+      window.showToast("<%= __('Enter a title first to translate from') %>", "warning");
+      return;
+    }
+
+    const translateBtn = document.querySelector("#translateBtn");
+    const originalBtnHtml = translateBtn.innerHTML;
+    translateBtn.disabled = true;
+    translateBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span><%= __("Translating...") %>';
+
+    // Translate to each empty language field
+    for (const input of inputs) {
+      if (input === sourceInput) continue;
+      if (input.value.trim()) continue; // Skip already filled fields
+
+      const targetLangCode = input.getAttribute("data-langcode");
+      if (!targetLangCode) continue;
+
+      try {
+        const result = await window.authenticatedFetch("<%= url_for('Web.translate') %>", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            markdown: sourceText,
+            target_language: targetLangCode
+          })
+        });
+
+        if (result && result.success && result.translated) {
+          input.value = result.translated.trim();
+        }
+      } catch (err) {
+        console.error(`Translation to ${targetLangCode} failed:`, err);
+      }
+    }
+
+    translateBtn.disabled = false;
+    translateBtn.innerHTML = originalBtnHtml;
+    window.showToast("<%= __('Translation complete') %>");
+  }
+
+  document.querySelector("#translateBtn")?.addEventListener("click", translateTitles);
 
   // Form submission
   document.querySelector("#itemForm")?.addEventListener("submit", async (e) => {
