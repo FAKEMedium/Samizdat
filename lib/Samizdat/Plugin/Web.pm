@@ -475,30 +475,28 @@ With C<docpath>, all share one file:
 
 =head2 Nginx Regex Routes for Dynamic Parameters
 
-Configure nginx to rewrite dynamic URLs to the shared cached path:
+Configure nginx to rewrite dynamic URLs to the shared cached path.
+The manager URL prefix is configurable (e.g., C</manager/> or C</rs/>).
 
-    # Customer edit pages - any customer ID uses same cached template
-    location ~ ^/manager/customers/\d+/edit$ {
+    # Menu edit page - any menu ID uses same cached template
+    # /rs/web/menus/123 -> /rs/web/menus/menu/index.html
+    location ~ ^/(manager|rs)/web/menus/\d+/?$ {
         root /path/to/public;
-        try_files /manager/customers/customer/edit/index.html @backend;
+        try_files /$1/web/menus/menu/index.html @backend;
     }
 
-    # Domain pages - any domain name uses same cached template
-    location ~ ^/bis/domain/[^/]+$ {
+    # Menu item pages - any menu/item ID uses same cached template
+    # /rs/web/menus/123/items/456 -> /rs/web/menus/menu/item/index.html
+    location ~ ^/(manager|rs)/web/menus/\d+/items/(\d+|new)/?$ {
         root /path/to/public;
-        try_files /bis/domain/index.html @backend;
+        try_files /$1/web/menus/menu/item/index.html @backend;
     }
 
-    # Zone records - zone_id is variable
-    location ~ ^/manager/zones/[^/]+/records$ {
+    # Source browser with path - all paths use same template
+    # /rs/web/src/documentation/guides -> /rs/web/src/index.html
+    location ~ ^/(manager|rs)/web/src/.+$ {
         root /path/to/public;
-        try_files /manager/zones/_zone_id/records/index.html @backend;
-    }
-
-    # Nested dynamic parameters - zone_id and record_id
-    location ~ ^/manager/zones/[^/]+/records/[^/]+$ {
-        root /path/to/public;
-        try_files /manager/zones/_zone_id/records/_record_id/index.html @backend;
+        try_files /$1/web/src/index.html @backend;
     }
 
     # Fallback to application

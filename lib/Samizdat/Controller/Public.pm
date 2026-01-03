@@ -5,8 +5,8 @@ use Mojo::JSON qw(j);
 use Mojo::Home;
 
 sub countries ($self) {
-  my $docpath = $self->stash('docpath');
-  my $web = { docpath => 'country/index.html' };
+  $self->stash(docpath => 'country/index.html');
+  my $web = {};
   $self->stash('status', 200);
   my $title = $self->app->__x('{sitename} by country',
     sitename => $self->app->{config}->{sitename}
@@ -21,7 +21,8 @@ sub country ($self) {
   my $docpath = 'country/' . $country;
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath =>  $docpath);
   my $title = $self->app->__('404: Missing document');
-  my $web = { docpath => sprintf('%s/index.html', $docpath) };
+  $self->stash(docpath => sprintf('%s/index.html', $docpath));
+  my $web = {};
   my $search = lc $country;
   $search =~ s/[^a-z]+//g;
   my $cc = '';
@@ -42,9 +43,9 @@ sub country ($self) {
     }
   } else {
     $self->stash('status', 404);
+    $self->stash(docpath => '404.html');
     $web = {
       url         => $docpath,
-      docpath     => '404.html',
       title       => $title,
       main        => $html,
       children    => [],

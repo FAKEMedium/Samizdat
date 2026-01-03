@@ -11,9 +11,8 @@ sub icons ($self) {
     push @{ $icons }, $icon->basename('.svg') if ($icon =~ /\.svg$/);
   });
   $self->stash(icons => $icons);
-  my $web = {
-    docpath => 'project/icons/index.html'
-  };
+  $self->stash(docpath => 'project/icons/index.html');
+  my $web = {};
   $self->stash('status', 200);
   my $title = $self->app->__('Bootstrap icons helper');
   $self->stash(title => $title);
