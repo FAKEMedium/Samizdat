@@ -33,6 +33,9 @@ sub register ($self, $app, $conf) {
   $manager->get('menus')                              ->to('#menus')             ->name('web_menus');
   $manager->get('languages')                          ->to('#languages')         ->name('web_languages');
   $manager->get('images')                             ->to('#images')            ->name('web_images');
+  $manager->get('new')                                ->to('#addcontent')        ->name('web_new');
+  $manager->get('src/*srcpath')                       ->to('#src')               ->name('web_src');
+  $manager->get('src')                                ->to('#src', srcpath => '')->name('web_src_root');
   $manager->get('source/*docpath')                    ->to('#source')            ->name('web_source');
   $manager->get('source')                             ->to('#source', docpath => '')->name('web_source_root');
   $manager->get('/')                                  ->to('#index')             ->name('web_index');
@@ -937,30 +940,6 @@ paths:
               schema:
                 $ref: '#/components/schemas/Web_Result'
 
-  /web/save:
-    post:
-      operationId: Web.save
-      x-mojo-to: Web#save
-      summary: Save content changes
-      tags: [Web]
-      requestBody:
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                docpath:
-                  type: string
-                content:
-                  type: string
-      responses:
-        '200':
-          description: Content saved
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Web_Result'
-
   /web/translate:
     post:
       operationId: Web.translate
@@ -1027,6 +1006,134 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Web_ImageListResponse'
+
+  /web/src/{srcpath}:
+    get:
+      operationId: Web.src.list
+      x-mojo-to: Web#src
+      summary: List directory structure
+      tags: [Web]
+      parameters:
+        - name: srcpath
+          in: path
+          required: true
+          x-mojo-placeholder: "*"
+          schema:
+            type: string
+          description: Directory path (%2F-encoded, _ for root)
+      responses:
+        '200':
+          description: Directory listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_FileTreeResponse'
+    post:
+      operationId: Web.src.create
+      x-mojo-to: Web#src
+      summary: Create new directory or file
+      tags: [Web]
+      parameters:
+        - name: srcpath
+          in: path
+          required: true
+          x-mojo-placeholder: "*"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Web_FileTreeInput'
+      responses:
+        '200':
+          description: Item created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+    put:
+      operationId: Web.src.save
+      x-mojo-to: Web#src_save
+      summary: Save content changes
+      tags: [Web]
+      parameters:
+        - name: srcpath
+          in: path
+          required: true
+          x-mojo-placeholder: "*"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                editors:
+                  type: array
+                  items:
+                    type: object
+                format:
+                  type: string
+                target:
+                  type: string
+      responses:
+        '200':
+          description: Content saved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+
+    patch:
+      operationId: Web.src.rename
+      x-mojo-to: Web#src_rename
+      summary: Rename file or directory
+      tags: [Web]
+      parameters:
+        - name: srcpath
+          in: path
+          required: true
+          x-mojo-placeholder: "*"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                newPath:
+                  type: string
+              required:
+                - newPath
+      responses:
+        '200':
+          description: Item renamed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
+    delete:
+      operationId: Web.src.delete
+      x-mojo-to: Web#src_delete
+      summary: Delete file or directory
+      tags: [Web]
+      parameters:
+        - name: srcpath
+          in: path
+          required: true
+          x-mojo-placeholder: "*"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Item deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Web_Result'
 
 components:
   schemas:
@@ -1128,3 +1235,48 @@ components:
           type: string
         message:
           type: string
+    Web_FileTreeItem:
+      type: object
+      properties:
+        name:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+          enum: [directory, file]
+        hasChildren:
+          type: boolean
+        languages:
+          type: array
+          items:
+            type: string
+    Web_FileTreeResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        path:
+          type: string
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/Web_FileTreeItem'
+    Web_FileTreeInput:
+      type: object
+      properties:
+        path:
+          type: string
+        type:
+          type: string
+          enum: [directory, file, sidecard]
+        language:
+          type: string
+          description: Language code (e.g., en, sv, ru)
+        target:
+          type: string
+          enum: [file, database]
+          description: Storage target for content
+      required:
+        - path
+        - type

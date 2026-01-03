@@ -493,18 +493,47 @@ sub users ($self) {
   return 1;
 }
 
+
+sub listusers ($self) {
+  my $title = $self->app->__('Users');
+  my $accept = $self->req->headers->accept // '';
+
+  if ($accept =~ /json/) {
+    return unless $self->access({ admin => 1 });
+
+    my $page = $self->param('page') // 1;
+    my $limit = $self->param('limit') // 25;
+    my $offset = ($page - 1) * $limit;
+
+    my $users = $self->app->account->list_users($limit, $offset);
+    my $total = $self->app->account->count_users();
+
+    return $self->render(json => {
+      success => 1,
+      users => $users,
+      page => $page,
+      limit => $limit,
+      total => $total
+    });
+  } else {
+    my $web = { title => $title };
+    $web->{script} .= $self->render_to_string(template => 'account/users/index', format => 'js');
+    return $self->render(template => 'account/users/index', web => $web, title => $title);
+  }
+}
+
 sub settings ($self) {
   my $title = $self->app->__('Account settings');
   if ($self->req->headers->accept =~ m{application/json}) {
     return unless $self->access({ 'valid-user' => 1 });
     my $user = $self->authenticated_user();
 
-    # Check if user is authenticated
-    unless ($user && $user->{userid}) {
+    # access() already verified authentication, but check user object exists
+    unless ($user) {
       return $self->render(json => {
         success => 0,
-        error => 'Not authenticated'
-      }, status => 401);
+        error => 'Session error'
+      }, status => 500);
     }
 
     if ($self->req->method eq 'POST') {
@@ -512,20 +541,26 @@ sub settings ($self) {
       return $self->update_profile();
     } else {
       # Return current profile data as JSON
-      my $profile;
-      eval {
-        $profile = $self->app->account->get_profile($user->{userid});
-      };
-      if ($@) {
-        return $self->render(json => {
-          success => 0,
-          error => "Failed to get profile: $@"
-        }, status => 500);
+      my $profile = {};
+
+      # Config-only users (superadmin) may not have a userid
+      if ($user->{userid}) {
+        eval {
+          $profile = $self->app->account->get_profile($user->{userid});
+        };
+        if ($@) {
+          $self->app->log->warn("Failed to get profile for userid $user->{userid}: $@");
+          # Continue with empty profile instead of failing
+        }
       }
+
+      # Include username for display
+      $profile->{basic} //= {};
+      $profile->{basic}{username} //= $user->{username};
 
       return $self->render(json => {
         success => 1,
-        profile => $profile // {}
+        profile => $profile
       });
     }
   } else {
@@ -541,6 +576,14 @@ sub settings ($self) {
 sub update_profile ($self) {
   return unless $self->access({ 'valid-user' => 1 });
   my $user = $self->authenticated_user();
+
+  # Config-only users (superadmin) cannot update profile
+  unless ($user->{userid}) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Config-only users cannot update profile'
+    }, status => 403);
+  }
 
   my $profile_data = $self->req->json;
   unless ($profile_data) {

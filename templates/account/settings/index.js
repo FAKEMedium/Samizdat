@@ -3,10 +3,11 @@
 const profileForm = document.getElementById('profileForm');
 const saveStatus = document.getElementById('saveStatus');
 const currentImagePreview = document.getElementById('currentImagePreview');
+const settingsApiUrl = '<%= url_for("Account.settings.get") %>';
 
 // Load current profile data
 async function loadProfile() {
-    const result = await window.authenticatedFetch(window.location.pathname, {
+    const result = await window.authenticatedFetch(settingsApiUrl, {
         method: 'GET'
     });
 
@@ -93,7 +94,7 @@ profileForm.addEventListener('submit', async (e) => {
     }
     
     // Save profile data
-    const result = await window.authenticatedFetch(window.location.pathname, {
+    const result = await window.authenticatedFetch(settingsApiUrl, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

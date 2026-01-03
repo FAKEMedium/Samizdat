@@ -188,13 +188,13 @@ sub startup {
   });
   $app->hook(before_routes => sub ($c) {
     my $language;
-    
+
     # 1. Check language cookie first
     my $cookie_lang = $c->cookie('language') // '';
     if (exists($c->config->{locale}->{languages}->{$cookie_lang})) {
       $language = $cookie_lang;
     }
-    
+
     # 2. If no valid cookie, check Accept-Language header
     if (!$language) {
       my $accept_lang = $c->req->headers->accept_language // '';
@@ -208,7 +208,7 @@ sub startup {
         }
       }
     }
-    
+
     # 3. Fall back to default language
     $language //= $c->config->{locale}->{default_language};
     

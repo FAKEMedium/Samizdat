@@ -987,6 +987,69 @@ sub save_content ($self, $params) {
 }
 
 
+# Save content to file (markdown in src/public)
+sub save_content_to_file ($self, $params) {
+  my $docpath = $params->{docpath};
+  my $element_id = $params->{element_id};
+  my $content = $params->{content};
+  my $frontmatter = $params->{frontmatter};
+  my $language = $params->{language};
+
+  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Determine the file path based on element_id
+  my ($markdown_src, $sidecard_base);
+
+  if ($element_id eq 'headline' || $element_id eq 'thecontent' || $element_id eq 'element-0') {
+    # Main content: points to README_xx.md (with language suffix)
+    $markdown_src = $docpath;
+    $markdown_src =~ s|^/||;  # Remove leading slash
+    $markdown_src =~ s|/$||;  # Remove trailing slash
+    $markdown_src = $markdown_src ? "${markdown_src}/README_${language}.md" : "README_${language}.md";
+  } elsif ($element_id =~ /^(.+)-content$/) {
+    # Sidecard content
+    $sidecard_base = $1;
+    $sidecard_base =~ s/_[a-z]{2}$//;  # Remove existing language suffix if present
+    my $dir_path = $docpath;
+    $dir_path =~ s|^/||;  # Remove leading slash
+    $dir_path =~ s|/$||;  # Remove trailing slash
+    $markdown_src = $dir_path ? "${dir_path}/${sidecard_base}_${language}.md" : "${sidecard_base}_${language}.md";
+  } else {
+    # Other elements - use element_id as filename
+    my $dir_path = $docpath;
+    $dir_path =~ s|^/||;
+    $dir_path =~ s|/$||;
+    $markdown_src = $dir_path ? "${dir_path}/${element_id}_${language}.md" : "${element_id}_${language}.md";
+  }
+
+  my $file = $src_public->child($markdown_src);
+
+  # Ensure parent directory exists
+  eval { $file->dirname->make_path };
+
+  # Build content with frontmatter if provided
+  my $file_content = $content;
+  if ($frontmatter && $frontmatter =~ /\S/) {
+    $frontmatter =~ s/^\s+//;
+    $frontmatter =~ s/\s+$//;
+    # Ensure YAML delimiters
+    $frontmatter =~ s/^---\s*\n?//;
+    $frontmatter =~ s/\n?---\s*$//;
+    $file_content = "---\n${frontmatter}\n---\n\n${content}";
+  }
+
+  # Write to file
+  eval { $file->spew(Encode::encode('UTF-8', $file_content)) };
+  if ($@) {
+    warn "Failed to save to file $markdown_src: $@";
+    die "Failed to save to file: $@";
+  }
+
+  # Return the file path as identifier (since we're not using database)
+  return $markdown_src;
+}
+
+
 # Helper to ensure sidecard connection exists (for UPDATE case where connection may be missing)
 sub _ensure_sidecard_connection ($self, $docpath, $sidecard_resource_id, $language_id, $language = undef) {
   # Find the main resource for this docpath in current language
@@ -1543,6 +1606,248 @@ sub invalidate_cache ($self, $docpath, $language = undef) {
   # Remove gzipped version for this language only
   my $gz_file = $public->child("${cache_path}.gz");
   $gz_file->remove if -e $gz_file;
+}
+
+
+# File tree operations for content management
+
+sub filetree_list ($self, $path = '') {
+  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Sanitize path - prevent directory traversal
+  $path =~ s|^/+||;
+  $path =~ s|\.\./||g;
+
+  my $dir = $path ? $src_public->child($path) : $src_public;
+
+  return { success => 0, error => 'Directory not found' } unless -d $dir;
+
+  my @items;
+  my $languages = $self->locale->{languages} // {};
+  my @lang_codes = keys %$languages;
+
+  $dir->list({dir => 1})->each(sub ($file, $num) {
+    my $name = $file->basename;
+
+    # Skip hidden files
+    return if $name =~ /^\./;
+
+    my $rel_path = $path ? "$path/$name" : $name;
+    my $is_dir = -d $file;
+
+    if ($is_dir) {
+      # Check if directory has children
+      my $has_children = $file->list({dir => 1})->size > 0;
+
+      # Check which README_xx.md languages exist in this directory
+      my @readme_langs;
+      for my $lang (@lang_codes) {
+        my $readme = $file->child("README_${lang}.md");
+        push @readme_langs, $lang if -f $readme;
+      }
+
+      push @items, {
+        name => $name,
+        path => $rel_path,
+        type => 'directory',
+        hasChildren => $has_children ? \1 : \0,
+        readmeLanguages => \@readme_langs,
+      };
+    } else {
+      # For markdown files with language suffix, group by base name
+      if ($name =~ /^(.+)_([a-z]{2})\.md$/) {
+        my ($base, $lang) = ($1, $2);
+        # Find existing item for this base name or create new
+        my ($existing) = grep { $_->{name} eq $base && $_->{type} eq 'file' } @items;
+        if ($existing) {
+          push @{$existing->{languages}}, $lang;
+        } else {
+          push @items, {
+            name => $base,
+            path => $rel_path,
+            type => 'file',
+            hasChildren => \0,
+            languages => [$lang],
+          };
+        }
+      }
+      # Show other files too (images, etc.)
+      elsif ($name !~ /^\./) {
+        push @items, {
+          name => $name,
+          path => $rel_path,
+          type => 'file',
+          hasChildren => \0,
+        };
+      }
+    }
+  });
+
+  # Sort: directories first, then alphabetically
+  @items = sort {
+    ($a->{type} eq 'directory' ? 0 : 1) <=> ($b->{type} eq 'directory' ? 0 : 1)
+    || $a->{name} cmp $b->{name}
+  } @items;
+
+  return {
+    success => 1,
+    path => $path,
+    items => \@items,
+  };
+}
+
+
+sub filetree_create ($self, $path, $type, $language = undef, $target = 'file') {
+  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Sanitize path
+  $path =~ s|^/+||;
+  $path =~ s|\.\./||g;
+
+  return { success => 0, error => 'Invalid path' } unless $path;
+
+  if ($type eq 'directory') {
+    my $dir = $src_public->child($path);
+    return { success => 0, error => 'Directory already exists' } if -e $dir;
+
+    eval { $dir->make_path };
+    return { success => 0, error => "Failed to create directory: $@" } if $@;
+
+    return { success => 1, message => 'Directory created', path => $path };
+  }
+  elsif ($type eq 'file') {
+    # Main content - always README_xx.md
+    $language //= $self->locale->{default_language} // 'en';
+
+    # Path is the folder, filename is always README_xx.md
+    $path =~ s|/$||;
+    my $alias = $path ? "/$path/" : "/";
+    my $filename = $path ? "${path}/README_${language}.md" : "README_${language}.md";
+
+    # Default content for new page
+    my $content = "---\ntitle: New Page\ndescription: \n---\n\n# New Page\n\nContent goes here.\n";
+
+    return $self->_create_content($src_public, $filename, $alias, $content, $language, $target);
+  }
+  elsif ($type eq 'sidecard') {
+    # Side content - NN-name_xx.md
+    $language //= $self->locale->{default_language} // 'en';
+
+    # Strip any suffix patterns from the base name
+    my $basename = $path;
+    $basename =~ s|.*/||;  # Get just the filename part
+    $basename =~ s/(_[a-z]{2})?\.md$//;  # Strip _xx.md or .md
+    $basename =~ s/_[a-z]{2}$//;  # Strip _xx
+
+    # Get directory part
+    my $dir_part = $path;
+    $dir_part =~ s|/[^/]+$|| or $dir_part = '';
+
+    my $filename = $dir_part ? "${dir_part}/${basename}_${language}.md" : "${basename}_${language}.md";
+    my $alias = '';  # Sidecards have empty alias
+
+    # Default content for sidecard
+    my $content = "# Side Content\n\nContent goes here.\n";
+
+    return $self->_create_content($src_public, $filename, $alias, $content, $language, $target);
+  }
+
+  return { success => 0, error => 'Invalid type' };
+}
+
+# Helper to create content in file or database
+sub _create_content ($self, $src_public, $filename, $alias, $content, $language, $target) {
+  if ($target eq 'database') {
+    my $language_id = $self->languages->{$language} // 1;
+
+    # Check if already exists in database
+    my $existing = $self->database->db->query(
+      'SELECT resourceid FROM web.resources WHERE src = ?',
+      $filename
+    )->hash;
+    return { success => 0, error => 'Resource already exists in database' } if $existing;
+
+    # Insert new resource
+    eval {
+      $self->database->db->query(
+        'INSERT INTO web.resources (alias, src, content, languageid, contenttype, templateid, webserviceid)
+         VALUES (?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
+        $alias, $filename, $content, $language_id
+      );
+    };
+    return { success => 0, error => "Failed to create in database: $@" } if $@;
+
+    return { success => 1, message => 'Created in database', path => $filename, target => 'database' };
+  }
+  else {
+    # Save to file (default behavior)
+    my $file = $src_public->child($filename);
+    return { success => 0, error => 'File already exists' } if -e $file;
+
+    # Ensure parent directory exists
+    eval { $file->dirname->make_path };
+
+    eval { $file->spew(Encode::encode('UTF-8', $content)) };
+    return { success => 0, error => "Failed to create file: $@" } if $@;
+
+    return { success => 1, message => 'File created', path => $filename, target => 'file' };
+  }
+}
+
+
+sub filetree_rename ($self, $old_path, $new_path) {
+  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Sanitize paths
+  $old_path =~ s|^/+||;
+  $old_path =~ s|\.\./||g;
+  $new_path =~ s|^/+||;
+  $new_path =~ s|\.\./||g;
+
+  return { success => 0, error => 'Invalid paths' } unless $old_path && $new_path;
+
+  my $old_file = $src_public->child($old_path);
+  my $new_file = $src_public->child($new_path);
+
+  return { success => 0, error => 'Source not found' } unless -e $old_file;
+  return { success => 0, error => 'Destination already exists' } if -e $new_file;
+
+  # Ensure parent directory exists
+  eval { $new_file->dirname->make_path };
+
+  eval { rename($old_file->to_string, $new_file->to_string) or die $! };
+  return { success => 0, error => "Failed to rename: $@" } if $@;
+
+  return { success => 1, message => 'Renamed successfully' };
+}
+
+
+sub filetree_delete ($self, $path) {
+  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+
+  # Sanitize path
+  $path =~ s|^/+||;
+  $path =~ s|\.\./||g;
+
+  return { success => 0, error => 'Invalid path' } unless $path;
+  return { success => 0, error => 'Cannot delete root' } if $path eq '' || $path eq '/';
+
+  my $target = $src_public->child($path);
+  return { success => 0, error => 'Not found' } unless -e $target;
+
+  if (-d $target) {
+    # Check if directory is empty (only allow deleting empty dirs for safety)
+    my $count = $target->list->size;
+    return { success => 0, error => 'Directory not empty' } if $count > 0;
+
+    eval { rmdir($target->to_string) or die $! };
+    return { success => 0, error => "Failed to delete directory: $@" } if $@;
+  } else {
+    eval { unlink($target->to_string) or die $! };
+    return { success => 0, error => "Failed to delete file: $@" } if $@;
+  }
+
+  return { success => 1, message => 'Deleted successfully' };
 }
 
 1;

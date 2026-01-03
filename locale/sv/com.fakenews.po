@@ -2529,6 +2529,9 @@ msgstr "Inga mallar ännu"
 msgid "No title"
 msgstr "Ingen titel"
 
+msgid "No users found"
+msgstr ""
+
 msgid "Non-compliant (Foreign hosting)"
 msgstr "Ej kompatibel (utländsk hosting)"
 

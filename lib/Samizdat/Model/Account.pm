@@ -621,7 +621,7 @@ sub update_profile ($self, $userid, $profile_data) {
     }
 
     # TODO: Handle images table when its structure is known
-    
+
     $tx->commit;
   };
   if ($@) {
@@ -629,5 +629,33 @@ sub update_profile ($self, $userid, $profile_data) {
     die "Profile update failed: $@";
   }
 }
+
+
+sub list_users ($self, $limit = 25, $offset = 0) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{dbtype}) {
+    return $db->query('SELECT * FROM snapusers ORDER BY id DESC LIMIT ? OFFSET ?', $limit, $offset)->hashes->to_array;
+  } else {
+    return $db->query('
+      SELECT u.userid, u.username, u.activated, u.blocked, u.created,
+             c.displayname, c.email
+      FROM account.users u
+      LEFT JOIN account.contacts c ON u.contactid = c.contactid
+      ORDER BY u.userid DESC
+      LIMIT ? OFFSET ?
+    ', $limit, $offset)->hashes->to_array;
+  }
+}
+
+
+sub count_users ($self) {
+  my $db = $self->database->db;
+  if ('mysql' eq $self->config->{dbtype}) {
+    return $db->query('SELECT COUNT(*) AS count FROM snapusers')->hash->{count};
+  } else {
+    return $db->query('SELECT COUNT(*) AS count FROM account.users')->hash->{count};
+  }
+}
+
 
 1;
