@@ -103,8 +103,11 @@ sub menus ($self) {
   } else {
     # HTML page loads first, then JS makes authenticated API calls
     my $title = $self->app->__('Menus');
+    my $docpath = $self->url_for('web_menus')->to_string;
+    $docpath =~ s|^/||;  # Remove leading slash
+    $docpath .= '/index.html';
+    $self->stash(docpath => $docpath);
     my $web = {
-      docpath => 'manager/web/menus/index.html',
       title   => $title,
       head    => { title => $title }
     };
@@ -156,8 +159,11 @@ sub menu ($self) {
     }
 
     my $title = $self->app->__x('Edit menu: {name}', name => $menu->{name});
+    my $docpath = $self->url_for('web_menus')->to_string;
+    $docpath =~ s|^/||;  # Remove leading slash
+    $docpath .= '/menu/index.html';  # Generic path without menu ID
+    $self->stash(docpath => $docpath);
     my $web = {
-      docpath => 'manager/web/menus/menu/index.html',
       title   => $title,
       head    => { title => $title }
     };
@@ -245,8 +251,11 @@ sub menuitem ($self) {
       $title = $self->app->__x('Edit menu item: {id}', id => $menuitemid);
     }
 
+    my $docpath = $self->url_for('web_menus')->to_string;
+    $docpath =~ s|^/||;  # Remove leading slash
+    $docpath .= '/menu/item/index.html';  # Generic path without menu/item IDs
+    $self->stash(docpath => $docpath);
     my $web = {
-      docpath => 'manager/web/menus/item/index.html',
       title   => $title,
       head    => { title => $title }
     };
@@ -386,7 +395,7 @@ sub manifest ($self) {
   # Slashes get escaped in Mojo::JSON. Undo that!
   $manifest =~ s/\\//g;
 
-  $self->render(text => $manifest, web => { docpath => 'manifest.json' }, format => 'json');
+  $self->render(text => $manifest, docpath => 'manifest.json', web => {}, format => 'json');
 }
 
 sub robots ($self) {
@@ -581,6 +590,10 @@ sub src ($self) {
 
   # HTML page request
   unless ($self->req->headers->accept =~ m{application/json}) {
+    my $docpath = $self->url_for('web_src_root')->to_string;
+    $docpath =~ s|^/||;  # Remove leading slash
+    $docpath .= '/index.html';  # All src paths use same cached template
+    $self->stash(docpath => $docpath);
     my $web = { css => '', script => '' };
     $web->{script} = $self->render_to_string(template => 'web/src/index', format => 'js');
     return $self->render(template => 'web/src/index', format => 'html', web => $web, srcpath => $srcpath);

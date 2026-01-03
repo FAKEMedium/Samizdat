@@ -52,7 +52,8 @@ sub index($self) {
       pollid   => $pollid,
     };
     $self->stash(template => 'poll/index');
-    my $web = { docpath => 'poll/index.html' };
+    $self->stash(docpath => 'poll/index.html');
+    my $web = {};
     my $title = $self->app->__('Sign poll!');
 
     if ('post' eq $method) {
@@ -90,7 +91,7 @@ sub index($self) {
         $title = $self->app->__('Confirmation request sent');
         $self->stash(template => 'poll/submit');
       }
-      delete $web->{docpath};
+      $self->stash(docpath => undef);  # Don't cache POST responses
     }
     $self->stash(form => $form);
     $self->stash(valid => $valid);
