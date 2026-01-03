@@ -17,7 +17,7 @@ sub index ($self) {
     $self->render(json => {
       pages => $self->app->web->geturis({
         searchterm => $searchterm,
-        language   => $self->app->language,
+        language   => $self->_get_content_language(),
         languages  => $self->config->{locale}->{languages},
       })
     });
@@ -47,8 +47,9 @@ sub pass ($self) {
 
 sub editor ($self) {
   my $docpath = $self->stash('docpath');
+  my $content_language = $self->_get_content_language();
   my $docs = $self->app->web->getlist($docpath, {
-    language => $self->app->language,
+    language => $content_language,
     languages => $self->config->{locale}->{languages},
   });
   if (!exists($docs->{$docpath})) {
@@ -275,10 +276,16 @@ sub menuitems_reorder ($self) {
 # It will also try to lookup the uri in the database.
 sub getdoc ($self) {
   my $docpath = $self->stash('docpath');
+  # Normalize: ensure trailing slash for non-empty docpath
+  $docpath .= '/' if $docpath ne '' && $docpath !~ m|/$|;
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);
   my $title = $self->app->__('404: Missing document');
+
+  # Check for language query parameter (for editing specific language versions)
+  my $content_language = $self->_get_content_language();
+
   my $docs = $self->app->web->getlist($docpath, {
-    language => $self->app->language,
+    language => $content_language,
     languages => $self->config->{locale}->{languages},
   });
   my $path = sprintf("%s%s", $docpath, 'index.html');
@@ -544,24 +551,89 @@ sub editor_toolbar ($self) {
 }
 
 # Render new content modal (for new docs or fallback/translation options)
+# Dynamic data (target language, content path) comes from sessionStorage set by JS
 sub addcontent ($self) {
   return unless $self->access({ admin => 1 });
 
-  # Only set target_language if explicitly passed (for fallback mode)
-  my $target_language = $self->param('target_language') // '';
   my $default_language = $self->config->{locale}->{default_language} // 'en';
   my $has_anthropic = exists($self->config->{anthropic}) && $self->config->{anthropic}->{api_key} ? 1 : 0;
 
   $self->stash(
-    target_language => $target_language,
     default_language => $default_language,
     has_anthropic => $has_anthropic
   );
 
   my $web = { css => '', script => '' };
   $web->{script} = $self->render_to_string(template => 'web/new/index', format => 'js');
-  $self->render(template => 'web/new/index', format => 'html', web => $web);
+  $self->render(template => 'web/new/index', format => 'html', layout => 'modal', web => $web);
 }
+
+
+# Src browser page (HTML) and API operations
+sub src ($self) {
+  return unless $self->access({ admin => 1 });
+
+  # Get path from stash (URL) or query param (API)
+  my $srcpath = $self->stash('srcpath') // $self->param('path') // '';
+  $srcpath = '' if $srcpath eq '_';  # _ is placeholder for root
+  $srcpath =~ s|^/||;
+  $srcpath =~ s|/$||;
+
+  # HTML page request
+  unless ($self->req->headers->accept =~ m{application/json}) {
+    my $web = { css => '', script => '' };
+    $web->{script} = $self->render_to_string(template => 'web/src/index', format => 'js');
+    return $self->render(template => 'web/src/index', format => 'html', web => $web, srcpath => $srcpath);
+  }
+
+  # API: Create new item
+  if ($self->req->method eq 'POST') {
+    my $data = $self->req->json;
+    my $path = $data->{path} // '';
+    my $type = $data->{type} // 'directory';
+    my $language = $data->{language};
+    my $target = $data->{target} // 'file';  # 'file' or 'database'
+
+    my $result = $self->app->web->filetree_create($path, $type, $language, $target);
+    return $self->render(json => $result);
+  }
+
+  # GET - list directory
+  my $result = $self->app->web->filetree_list($srcpath);
+  $self->render(json => $result);
+}
+
+
+sub src_rename ($self) {
+  return unless $self->access({ admin => 1 });
+
+  # Get old path from URL
+  my $old_path = $self->stash('srcpath') // '';
+  $old_path = '' if $old_path eq '_';  # _ is placeholder for root
+  $old_path =~ s|^/||;
+  $old_path =~ s|/$||;
+
+  my $data = $self->req->json // {};
+  my $new_path = $data->{newPath} // '';
+
+  my $result = $self->app->web->filetree_rename($old_path, $new_path);
+  $self->render(json => $result);
+}
+
+
+sub src_delete ($self) {
+  return unless $self->access({ admin => 1 });
+
+  # Get path from URL
+  my $path = $self->stash('srcpath') // '';
+  $path = '' if $path eq '_';  # _ is placeholder for root
+  $path =~ s|^/||;
+  $path =~ s|/$||;
+
+  my $result = $self->app->web->filetree_delete($path);
+  $self->render(json => $result);
+}
+
 
 # Get raw source content for editing (returns JSON with markdown/source)
 sub source ($self) {
@@ -572,7 +644,7 @@ sub source ($self) {
   $docpath =~ s|/$||;
   $docpath = $docpath ? "/$docpath/" : "/";
 
-  my $language = $self->app->language;
+  my $language = $self->_get_content_language();
 
   # Get source content from model
   my $source_data = $self->app->web->get_source_content($docpath, $language);
@@ -688,8 +760,8 @@ sub translate ($self) {
   $self->render(json => { success => 0, error => $error }, status => 500);
 }
 
-# Save editable content to database
-sub save ($self) {
+# Save editable content to file or database
+sub src_save ($self) {
   # Check authentication first - require admin access for content editing
   return unless $self->access({ admin => 1 });
 
@@ -697,39 +769,30 @@ sub save ($self) {
   my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
   my $user = $self->app->account->session($authcookie) if $authcookie;
 
-  # Handle both single editor and batch editor formats
-  my $request_data;
-  if ($self->req->headers->content_type && $self->req->headers->content_type =~ /application\/json/) {
-    # New batch format
-    $request_data = $self->req->json;
-  } else {
-    # Legacy single editor format
-    $request_data = {
-      docpath => $self->param('docpath'),
-      editors => {
-        ($self->param('element_id') || 'thecontent') => $self->param('content')
-      }
-    };
-  }
-  
-  my $docpath = $request_data->{docpath};
-  my $editors = $request_data->{editors};
-  my $frontmatter = delete $editors->{frontmatter};  # Extract frontmatter separately
+  # Get path from URL (srcpath stash)
+  my $srcpath = $self->stash('srcpath') // '';
+  $srcpath = '' if $srcpath eq '_';  # _ is placeholder for root
+  $srcpath =~ s|^/||;
+  $srcpath =~ s|/$||;
 
-  # Normalize docpath - remove double slashes and ensure single trailing slash for directories
-  $docpath =~ s|//+|/|g;  # Replace multiple slashes with single slash
-  $docpath =~ s|/$||;     # Remove trailing slash
-  $docpath .= '/' if $docpath ne ''; # Add back single trailing slash for non-root
-  $docpath = '/' if $docpath eq '';  # Root case
-  
+  my $request_data = $self->req->json // {};
+
+  # Build docpath from srcpath
+  my $docpath = $srcpath ? "/$srcpath/" : "/";
+  my $editors = $request_data->{editors};
+  my $frontmatter = delete $editors->{frontmatter} if $editors;  # Extract frontmatter separately
+  my $target = $request_data->{target} // 'file';  # 'file' or 'database'
+
   # Validate input
-  unless ($docpath && $editors && ref($editors) eq 'HASH') {
+  unless ($editors && ref($editors) eq 'HASH') {
     return $self->render(json => {
       success => 0,
-      error => 'Missing required parameters: docpath, editors'
+      error => 'Missing required parameter: editors'
     }, status => 400);
   }
-  
+
+  my $content_language = $self->_get_content_language();
+
   eval {
     # Save all editors for this page
     # Sort to ensure main content is saved FIRST (headline, thecontent, element-0)
@@ -747,34 +810,59 @@ sub save ($self) {
 
       # Pass frontmatter only for main content
       my $is_main = grep { $element_id eq $_ } @main_ids;
-      my $resource_id = $self->app->web->save_content({
+
+      my $save_params = {
         docpath => $docpath,
         element_id => $element_id,
         content => $content,
         frontmatter => $is_main ? $frontmatter : undef,
-        language => $self->app->language,
+        language => $content_language,
         user_id => $user->{userid}
-      });
-      push @resource_ids, $resource_id;
+      };
+
+      my $resource_id;
+      if ($target eq 'file') {
+        $resource_id = $self->app->web->save_content_to_file($save_params);
+      } else {
+        $resource_id = $self->app->web->save_content($save_params);
+      }
+      push @resource_ids, $resource_id if $resource_id;
     }
-    
+
     # Invalidate cache for this docpath and language
-    $self->app->web->invalidate_cache($docpath, $self->app->language);
-    
+    $self->app->web->invalidate_cache($docpath, $content_language);
+
     $self->render(json => {
       success => 1,
-      message => 'Content saved successfully',
+      message => "Content saved to $target successfully",
       resource_ids => \@resource_ids,
-      editors_saved => scalar(@resource_ids)
+      editors_saved => scalar(@resource_ids),
+      target => $target
     });
   };
   if ($@) {
-    $self->app->log->error("Failed to save content: $@");
+    $self->app->log->error("Failed to save content to $target: $@");
     $self->render(json => {
       success => 0,
-      error => 'Failed to save content'
+      error => "Failed to save content to $target"
     }, status => 500);
   }
+}
+
+# Get content language from editlanguage cookie or fall back to app language
+# The editlanguage cookie takes priority for content operations (editing Hindi in English UI)
+sub _get_content_language ($self) {
+  # Check query param first (for API calls)
+  my $query_lang = $self->param('language') // '';
+  if ($query_lang && exists($self->config->{locale}->{languages}->{$query_lang})) {
+    return $query_lang;
+  }
+  # Then check cookie (for editor sessions)
+  my $edit_lang = $self->cookie('editlanguage') // '';
+  if ($edit_lang && exists($self->config->{locale}->{languages}->{$edit_lang})) {
+    return $edit_lang;
+  }
+  return $self->app->language;
 }
 
 1;

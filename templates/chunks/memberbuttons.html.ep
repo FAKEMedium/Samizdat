@@ -4,9 +4,18 @@
   <span class="d-sm-inline d-none ms-1"><%= __('Edit') %></span>
 </button>
 <% } %>
-<button id="savePageButton" type="button" class="btn btn-sm btn-success d-none rounded-lg" data-action="save" title="<%== __('Save') %>">
-  <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
-</button>
+<div id="savePageButtonGroup" class="btn-group d-none">
+  <button id="savePageButton" type="button" class="btn btn-sm btn-success rounded-start" data-action="save" data-target="file" title="<%== __('Save to file') %>">
+    <%== icon('check-lg') %> <span class="d-none d-sm-inline"><%== __('Save') %></span>
+  </button>
+  <button type="button" class="btn btn-sm btn-success dropdown-toggle dropdown-toggle-split rounded-end" data-bs-toggle="dropdown" aria-expanded="false" title="<%== __('Save options') %>">
+    <span class="visually-hidden"><%== __('Toggle Dropdown') %></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li><a class="dropdown-item" href="#" data-save-target="file"><%== icon('file-earmark-text') %> <%== __('Save to file') %></a></li>
+    <li><a class="dropdown-item" href="#" data-save-target="database"><%== icon('database') %> <%== __('Save to database') %></a></li>
+  </ul>
+</div>
 <button id="cancelPageButton" type="button" class="btn btn-sm btn-outline-secondary d-none rounded-lg" data-action="cancel" title="<%== __('Cancel') %>">
   <%== icon('x-lg') %> <span class="d-none d-sm-inline"><%== __('Cancel') %></span>
 </button>

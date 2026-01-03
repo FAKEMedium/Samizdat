@@ -248,6 +248,18 @@ paths:
                 $ref: '#/components/schemas/Account_Result'
 
   /account/settings:
+    get:
+      operationId: Account.settings.get
+      x-mojo-to: Account#settings
+      summary: Get account settings
+      tags: [Account]
+      responses:
+        '200':
+          description: Settings data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account_Result'
     post:
       operationId: Account.settings.update
       x-mojo-to: Account#settings
@@ -255,7 +267,7 @@ paths:
       tags: [Account]
       requestBody:
         content:
-          application/x-www-form-urlencoded:
+          application/json:
             schema:
               $ref: '#/components/schemas/Account_SettingsInput'
       responses:

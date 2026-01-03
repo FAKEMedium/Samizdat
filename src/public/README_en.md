@@ -1,20 +1,12 @@
 ---
-description: Everything about fake news. Samizdat is a content management platform with ability to keep content on a USB stick
-keywords:
-  - censorship
-  - CMS
-  - fake news
-  - samizdat
-  - publishing
-  - artificial intelligence
-  - open source
 author: FAKE Medium
-title: FAKE News
 category: articles
-tags:
-  - fake news
-  - Sweden
-  - Joe Biden
+description: Everything about fake news. Samizdat is a content management platform
+  with ability to keep content on a USB stick
+keywords: censorship, CMS, fake news, samizdat, publishing, artificial intelligence,
+  open source
+tags: fake news, Sweden, Joe Biden
+title: FAKE News
 ---
 
 # FAKE News

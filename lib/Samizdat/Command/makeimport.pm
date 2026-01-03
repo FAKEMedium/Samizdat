@@ -22,9 +22,16 @@ sub run ($self, @args) {
     $select = sprintf('SELECT u.*, a.* FROM %s u JOIN %s a ON u.id = a.internalKey WHERE active = 1 ORDER BY u.id ASC',
       $users, $attributes);
     $dbfrom->query($select)->hashes->each(sub($user, $num) {
+      # Skip if user already exists
+      my $existing = $dbto->select('account.users', ['userid'], {username => $user->{username}})->hash;
+      if ($existing) {
+        say "Skipping existing user: $user->{username}";
+        return;
+      }
+
       my $countryid = undef;
       if ($user->{country}) {
-        $countryid = $dbto->select('public.countries', ['countryid'], {cc => $user->{country}})->hash->{$countryid} // undef;
+        $countryid = $dbto->select('public.countries', ['countryid'], {cc => $user->{country}})->hash->{countryid} // undef;
       }
       my $stateid = undef;
       if ($user->{state} && $countryid) {
@@ -59,6 +66,7 @@ sub run ($self, @args) {
         $dbto->query('UPDATE account.contacts SET countryid = ?, stateid = ?, givenname = ?, commonname = ? WHERE contacts.contactid = ?',
           $countryid, $stateid, $givenname, $commonname, $user->{id});
         $tx->commit;
+        say "Imported user: $user->{username}";
       };
       die $@ if $@;
     });

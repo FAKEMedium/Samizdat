@@ -1,9 +1,6 @@
-% layout 'modal';
-% my $target_lang = stash('target_language') // '';
 % my $default_lang = stash('default_language') // 'en';
 % my $has_anthropic = stash('has_anthropic') // 0;
-% my $is_fallback = $target_lang ne '';
-<div class="modal-content" data-languages-url="<%= url_for('web_languages') %>" data-is-fallback="<%= $is_fallback ? 1 : 0 %>" data-target-lang="<%= $target_lang %>" data-default-lang="<%= $default_lang %>" data-has-anthropic="<%= $has_anthropic %>" data-translate-url="<%= url_for('Web.translate') %>">
+<div class="modal-content" data-languages-url="<%= url_for('web_languages') %>" data-filetree-url="<%= url_for('Web.filetree.list') %>" data-src-url="<%= url_for('Web.src.list') %>" data-source-url="<%= url_for('web_source_root') %>" data-default-lang="<%= $default_lang %>" data-has-anthropic="<%= $has_anthropic ? 1 : 0 %>" data-translate-url="<%= url_for('Web.translate') %>">
   <div class="modal-header">
     <h5 class="modal-title" id="modalTitle"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>

@@ -57,15 +57,22 @@ window.openModalFromUrl = async function(url) {
         modalDialog.innerHTML = await response.text();
 
         // Execute any scripts in the modal (innerHTML doesn't run them)
+        // Use eval() for inline scripts since CSP allows 'unsafe-eval' but blocks
+        // inline scripts when hashes are present (hashes override 'unsafe-inline')
         const scripts = modalDialog.querySelectorAll('script');
         scripts.forEach(oldScript => {
-            const newScript = document.createElement('script');
             if (oldScript.src) {
+                const newScript = document.createElement('script');
                 newScript.src = oldScript.src;
+                oldScript.parentNode.replaceChild(newScript, oldScript);
             } else {
-                newScript.textContent = oldScript.textContent;
+                try {
+                    eval(oldScript.textContent);
+                } catch (e) {
+                    console.error('Error executing modal script:', e);
+                }
+                oldScript.remove();
             }
-            oldScript.parentNode.replaceChild(newScript, oldScript);
         });
 
         const universalModal = bootstrap.Modal.getOrCreateInstance(modalEl);
@@ -381,12 +388,23 @@ function setupEditorToolbarHandlers() {
 }
 
 /**
- * Handle save
+ * Encode path for URL (convert / to %2F)
  */
-async function handleSave() {
+function encodeSrcPath(path) {
+    // Remove leading/trailing slashes and encode
+    path = path.replace(/^\/|\/$/g, '');
+    if (!path) return '_';  // _ is placeholder for root
+    return path.split('/').map(encodeURIComponent).join('%2F');
+}
+
+/**
+ * Handle save
+ * @param {string} target - 'file' or 'database'
+ */
+async function handleSave(target = 'file') {
     const currentPath = window.location.pathname;
-    const saveUrl = theContent?.dataset.save;
-    if (!saveUrl) {
+    const saveUrlBase = theContent?.dataset.save;
+    if (!saveUrlBase) {
         alert('Save URL not found');
         return;
     }
@@ -397,22 +415,26 @@ async function handleSave() {
     }
 
     const editorData = window.toastUIMarkdown.getContent(true);
-    console.log('Saving markdown content:', editorData);
+    console.log(`Saving markdown content to ${target}:`, editorData);
+
+    // Build URL with encoded path
+    const encodedPath = encodeSrcPath(currentPath);
+    const saveUrl = `${saveUrlBase}/${encodedPath}`;
 
     try {
         const response = await fetch(saveUrl, {
-            method: 'POST',
+            method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
-                docpath: currentPath,
                 editors: editorData,
-                format: 'markdown'
+                format: 'markdown',
+                target: target
             })
         });
 
         const result = await response.json();
         if (result.success) {
-            console.log('Markdown content saved successfully, reloading page...');
+            console.log(`Content saved to ${target} successfully, reloading page...`);
             window.location.reload();
         } else {
             alert('Failed to save: ' + result.error);
@@ -447,7 +469,25 @@ function restoreHeadlinenav() {
 
 // Get save/cancel buttons from headline
 const saveButton = document.getElementById('savePageButton');
+const saveButtonGroup = document.getElementById('savePageButtonGroup');
 const cancelButton = document.getElementById('cancelPageButton');
+
+// Current save target (file or database)
+let currentSaveTarget = 'file';
+
+// Helper to hide save UI
+function hideSaveUI() {
+    if (editButton) editButton.classList.remove('d-none');
+    if (saveButtonGroup) saveButtonGroup.classList.add('d-none');
+    if (cancelButton) cancelButton.classList.add('d-none');
+}
+
+// Helper to show save UI
+function showSaveUI() {
+    if (editButton) editButton.classList.add('d-none');
+    if (saveButtonGroup) saveButtonGroup.classList.remove('d-none');
+    if (cancelButton) cancelButton.classList.remove('d-none');
+}
 
 if (theContent && editButton) {
     // Check if user is authenticated (button visibility is controlled by auth class toggling)
@@ -475,9 +515,7 @@ if (theContent && editButton) {
             }
 
             // Show save/cancel, hide edit
-            if (editButton) editButton.classList.add('d-none');
-            if (saveButton) saveButton.classList.remove('d-none');
-            if (cancelButton) cancelButton.classList.remove('d-none');
+            showSaveUI();
 
             // Replace headlinenav content with mode toggler only
             if (headlinenav && originalHeadlinenavContent === null) {
@@ -494,14 +532,30 @@ if (theContent && editButton) {
     });
     console.log('Edit button click handler attached');
 
-    // Handle save button click
+    // Handle save button click (main button)
     if (saveButton) {
         saveButton.addEventListener('click', async () => {
-            await handleSave();
-            // Restore UI
-            if (editButton) editButton.classList.remove('d-none');
-            if (saveButton) saveButton.classList.add('d-none');
-            if (cancelButton) cancelButton.classList.add('d-none');
+            const target = saveButton.dataset.target || 'file';
+            await handleSave(target);
+            hideSaveUI();
+        });
+    }
+
+    // Handle dropdown save target selection
+    if (saveButtonGroup) {
+        saveButtonGroup.querySelectorAll('[data-save-target]').forEach(item => {
+            item.addEventListener('click', async (e) => {
+                e.preventDefault();
+                const target = item.dataset.saveTarget;
+                currentSaveTarget = target;
+                // Update main button's target for future clicks
+                if (saveButton) {
+                    saveButton.dataset.target = target;
+                }
+                // Perform save with selected target
+                await handleSave(target);
+                hideSaveUI();
+            });
         });
     }
 
@@ -509,10 +563,20 @@ if (theContent && editButton) {
     if (cancelButton) {
         cancelButton.addEventListener('click', () => {
             handleCancel();
-            // Restore UI
-            if (editButton) editButton.classList.remove('d-none');
-            if (saveButton) saveButton.classList.add('d-none');
-            if (cancelButton) cancelButton.classList.add('d-none');
+            hideSaveUI();
         });
+    }
+
+    // Auto-trigger edit mode if ?edit=1 is in URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('edit') === '1') {
+        // Remove edit param from URL to avoid re-triggering on reload
+        urlParams.delete('edit');
+        const newUrl = urlParams.toString()
+            ? `${window.location.pathname}?${urlParams.toString()}`
+            : window.location.pathname;
+        window.history.replaceState({}, '', newUrl);
+        // Trigger edit mode
+        editButton.click();
     }
 }
