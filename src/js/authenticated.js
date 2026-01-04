@@ -580,3 +580,58 @@ if (theContent && editButton) {
         editButton.click();
     }
 }
+
+// Service Worker registration for caching dynamic routes
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/assets/sw.js', { scope: '/' })
+        .then(registration => {
+            console.log('Service Worker registered:', registration.scope);
+
+            // Check for updates periodically
+            setInterval(() => {
+                registration.update();
+            }, 60 * 60 * 1000); // Check every hour
+        })
+        .catch(error => {
+            console.error('Service Worker registration failed:', error);
+        });
+
+    // Listen for SW updates
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+        console.log('Service Worker updated, reloading...');
+        // Optionally reload to get fresh content
+        // window.location.reload();
+    });
+}
+
+// Helper to refresh SW config (call after route changes)
+window.refreshServiceWorker = async function() {
+    if (!navigator.serviceWorker.controller) return;
+
+    return new Promise((resolve) => {
+        const messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = (event) => {
+            resolve(event.data);
+        };
+        navigator.serviceWorker.controller.postMessage(
+            { type: 'REFRESH_CONFIG' },
+            [messageChannel.port2]
+        );
+    });
+};
+
+// Helper to clear SW cache
+window.clearServiceWorkerCache = async function() {
+    if (!navigator.serviceWorker.controller) return;
+
+    return new Promise((resolve) => {
+        const messageChannel = new MessageChannel();
+        messageChannel.port1.onmessage = (event) => {
+            resolve(event.data);
+        };
+        navigator.serviceWorker.controller.postMessage(
+            { type: 'CLEAR_CACHE' },
+            [messageChannel.port2]
+        );
+    });
+};

@@ -410,6 +410,54 @@ sub ads ($self) {
   $self->render(text => $self->config->{ads}, docpath => 'ads.txt', format => 'txt');
 }
 
+# Service Worker routes configuration
+# Returns JSON with route patterns for client-side caching
+sub sw_routes ($self) {
+  my $config = $self->config;
+  my $manager_url = $config->{manager}->{url} || '/manager/';
+  $manager_url =~ s|^/||;
+  $manager_url =~ s|/$||;
+
+  # Build routes from config or use defaults
+  my $sw_config = $config->{serviceworker} || {};
+  my @routes;
+
+  # Get registered routes from config
+  if ($sw_config->{routes}) {
+    for my $route (@{$sw_config->{routes}}) {
+      # Replace {manager} placeholder with actual manager URL
+      my $pattern = $route->{pattern};
+      my $cache_path = $route->{cachePath};
+      $pattern =~ s/\{manager\}/$manager_url/g;
+      $cache_path =~ s/\{manager\}/$manager_url/g;
+
+      push @routes, {
+        pattern    => $pattern,
+        cachePath  => $cache_path,
+        revalidate => $route->{revalidate} // 0,
+      };
+    }
+  }
+
+  $self->render(json => {
+    routes          => \@routes,
+    defaultLanguage => $config->{locale}->{default_language} || 'en',
+    precache        => $sw_config->{precache} || [],
+    version         => $sw_config->{version} || 1,
+  });
+}
+
+# Service Worker JavaScript
+# Renders the sw.js template with version from config
+sub sw_js ($self) {
+  my $sw_config = $self->config->{serviceworker} || {};
+  my $version = $sw_config->{version} || 1;
+
+  $self->res->headers->content_type('application/javascript');
+  $self->res->headers->header('Service-Worker-Allowed' => '/');
+  $self->render(template => 'sw', format => 'js', version => $version);
+}
+
 # Gather exploiting bots
 sub banbot ($docpath, $ip) {
   if ($docpath =~ /(

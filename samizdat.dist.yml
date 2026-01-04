@@ -29,6 +29,23 @@ anthropic:
   # Available models: claude-sonnet-4-20250514, claude-3-5-sonnet-20241022, claude-3-opus-20240229
   model: claude-sonnet-4-20250514
 
+# Service Worker configuration for client-side caching of dynamic routes
+# Use {manager} placeholder - replaced with actual manager URL at runtime
+# Use {lang} placeholder - replaced with language code from cookie
+# Run "make swcache" to generate cached files
+serviceworker:
+  version: 1
+  routes:
+    # Menu editor - /rs/web/menus/123 -> /rs/web/menus/menu/index.{lang}.html
+    - pattern: "^/({manager})/web/menus/\\d+/?$"
+      cachePath: "/{manager}/web/menus/menu/index.{lang}.html"
+    # Menu item editor
+    - pattern: "^/({manager})/web/menus/\\d+/items/(\\d+|new)/?$"
+      cachePath: "/{manager}/web/menus/menu/item/index.{lang}.html"
+    # Source browser
+    - pattern: "^/({manager})/web/src/.+"
+      cachePath: "/{manager}/web/src/index.{lang}.html"
+
 # API configuration - JSON endpoints, no static caching
 # OpenAPI spec is auto-generated from plugin fragments
 api:
