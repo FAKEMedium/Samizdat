@@ -1,0 +1,104 @@
+#!/bin/sh
+
+# PROVIDE: minion
+# REQUIRE: LOGIN postgresql redis samizdat
+# KEYWORD: shutdown
+
+# Add the following lines to /etc/rc.conf to enable minion worker:
+# minion_enable="YES"
+# minion_user="www"
+# minion_group="www"
+# minion_dir="/usr/local/www/samizdat"
+# minion_pidfile="/var/run/minion.pid"
+# minion_logfile="/var/log/minion.log"
+# minion_jobs="2"
+
+. /etc/rc.subr
+
+name="minion"
+rcvar=minion_enable
+
+load_rc_config $name
+
+: ${minion_enable="NO"}
+: ${minion_user="www"}
+: ${minion_group="www"}
+: ${minion_dir="/usr/local/www/samizdat"}
+: ${minion_pidfile="/var/run/minion.pid"}
+: ${minion_logfile="/var/log/minion.log"}
+: ${minion_jobs="2"}
+: ${minion_mode="production"}
+
+pidfile="${minion_pidfile}"
+command="${minion_dir}/bin/samizdat"
+command_args="minion worker -j ${minion_jobs}"
+procname="perl"
+
+required_dirs="${minion_dir}"
+
+minion_prestart()
+{
+    # Set environment for the daemon
+    export MOJO_MODE="${minion_mode}"
+    export MOJO_HOME="${minion_dir}"
+    export HOME="${minion_dir}"
+    export PWD="${minion_dir}"
+
+    # Ensure PID file directory exists
+    install -d -o "${minion_user}" -g "${minion_group}" -m 755 "$(dirname ${minion_pidfile})"
+
+    # Ensure log file exists with proper permissions
+    touch "${minion_logfile}"
+    chown "${minion_user}:${minion_group}" "${minion_logfile}"
+    chmod 640 "${minion_logfile}"
+
+    # Change to app directory
+    cd "${minion_dir}"
+}
+
+start_precmd="minion_prestart"
+
+minion_stop()
+{
+    if [ -f "${minion_pidfile}" ]; then
+        echo "Stopping ${name}."
+        kill -TERM $(cat "${minion_pidfile}") 2>/dev/null
+        rm -f "${minion_pidfile}"
+    else
+        # Try to find and kill minion worker processes
+        pgrep -f "samizdat.*minion worker" | xargs kill -TERM 2>/dev/null
+        echo "${name} stopped."
+    fi
+}
+
+stop_cmd="minion_stop"
+
+# Status check
+minion_status()
+{
+    if [ -f "${minion_pidfile}" ]; then
+        pid=$(cat "${minion_pidfile}")
+        if kill -0 "${pid}" 2>/dev/null; then
+            echo "${name} is running as pid ${pid}."
+            return 0
+        else
+            echo "${name} pidfile exists but process is not running."
+            return 1
+        fi
+    else
+        # Check for running workers without pidfile
+        pids=$(pgrep -f "samizdat.*minion worker")
+        if [ -n "${pids}" ]; then
+            echo "${name} is running (pids: ${pids})."
+            return 0
+        fi
+        echo "${name} is not running."
+        return 1
+    fi
+}
+
+status_cmd="minion_status"
+
+extra_commands="status"
+
+run_rc_command "$1"

@@ -1137,13 +1137,28 @@ sub _check_nameserver ($self, $zone_name, $ns_name, $source_ip = undef) {
   };
 
   eval {
-    # Resolve nameserver IP
-    my $ns_ip = inet_aton($ns_name);
-    unless ($ns_ip) {
-      $result->{error} = "Cannot resolve nameserver IP";
+    # Resolve nameserver IP using Net::DNS with timeout
+    my $lookup = Net::DNS::Resolver->new(
+      tcp_timeout => $timeout,
+      udp_timeout => $timeout,
+    );
+    my $a_reply = $lookup->query($ns_name, 'A');
+    unless ($a_reply) {
+      $result->{error} = "Cannot resolve nameserver IP: " . ($lookup->errorstring // 'timeout');
       return;
     }
-    $result->{ip} = join('.', unpack('C4', $ns_ip));
+    my $ns_ip;
+    for my $rr ($a_reply->answer) {
+      if ($rr->type eq 'A') {
+        $ns_ip = $rr->address;
+        last;
+      }
+    }
+    unless ($ns_ip) {
+      $result->{error} = "No A record for nameserver";
+      return;
+    }
+    $result->{ip} = $ns_ip;
 
     # Create resolver targeting this specific nameserver
     my $resolver = Net::DNS::Resolver->new(

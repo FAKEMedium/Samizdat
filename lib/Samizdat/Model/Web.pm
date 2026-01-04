@@ -5,7 +5,6 @@ use Mojo::DOM;
 use Mojo::Home;
 use Text::MultiMarkdown;
 use Mojo::Util qw(decode);
-use MojoX::MIME::Types;
 use YAML::XS;
 use Data::Dumper;
 use IPC::Open2;
@@ -24,7 +23,6 @@ has 'languages' => sub ($self) {
   return $self->public->languages();
 };
 
-my $types = MojoX::MIME::Types->new;
 my $md = Text::MultiMarkdown->new(
   empty_element_suffix     => ' />',
   tab_width                => 2,
@@ -44,7 +42,7 @@ sub getlist ($self, $url, $options = {}) {
   $save_docpath =~ s|^/||;   # Remove leading slash
   $save_docpath =~ s|/$||;   # Remove trailing slash
   $save_docpath = $save_docpath ? "/$save_docpath/" : "/";  # Add proper slashes
-
+say $save_docpath;
   if ($self->has_database_content($save_docpath, $options->{language} // 'en')) {
     return $self->get_database_content($save_docpath, $options->{language} // 'en');
   }

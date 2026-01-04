@@ -140,7 +140,7 @@ sub startup {
       say "Registered OAuth2 provider: $module";
     }
   }
-  $app->plugin('Minion', { Pg => $config->{dsn}->{pg} . '/minion' });
+  $app->plugin('Minion', { Pg => $config->{dsn}->{pg} });
   $app->plugin('Cache');
   $app->plugin('Account');
   $app->plugin('Public');

@@ -38,6 +38,7 @@ Install modules:
 * `sudo cpanm HTML::FormatText HTML::TreeBuilder Business::Tax::VAT::Validation`
 * `sudo cpanm Session::Token Mojolicious::Plugin::Util::RandomString Mojolicious::Plugin::OAuth2 Crypt::OpenSSL::Bignum Crypt::OpenSSL::RSA Mojo::JWT`
 * `sudo cpanm Mojolicious::Plugin::Captcha Mojolicious::Plugin::Mail Test::Harness`
+* `sudo cpanm Mojolicious::Plugin::Minion`
 * `sudo cpanm Net::DNS::Resolver Net::IP Net::IDN::Encode Net::Whois::Raw`
 * `sudo cpanm Text::QRCode`
 
