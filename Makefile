@@ -46,6 +46,9 @@ static_zh:
 static_all: static_en static_sv static_de static_fr static_es static_pl static_pt static_ru static_hi static_ar static_zh
 	echo "All static files generated. Cache is warm."
 
+swcache:
+	bin/samizdat makeswcache
+
 clean:
 	rm -rf public/*
 	mkdir -p public/assets

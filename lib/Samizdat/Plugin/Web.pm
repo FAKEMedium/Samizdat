@@ -48,6 +48,8 @@ sub register ($self, $app, $conf) {
   $web->get('robots.txt')                  ->to('#robots',    docpath => 'robots.txt');
   $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
   $web->get('ads.txt')                     ->to('#ads',       docpath => 'ads.txt');
+  $web->get('sw-routes.json')              ->to('#sw_routes', docpath => undef)->name('sw_routes');
+  $web->get('assets/sw.js')                ->to('#sw_js',     docpath => 'assets/sw.js')->name('sw_js');
 
   # Home page route - specific route here, wildcard catch-all registered separately in Samizdat.pm
   # after OpenAPI routes to ensure proper route priority
@@ -528,6 +530,21 @@ Enable static compression in nginx:
 Nginx will automatically serve C<.gz> or C<.br> files when the client
 supports compression, without needing to compress on-the-fly.
 
+=head2 Service Worker
+
+The Service Worker at C</assets/sw.js> provides client-side caching for
+dynamic routes. When serving the cached file directly, nginx must add the
+C<Service-Worker-Allowed> header to permit the worker to control the entire
+site (service workers normally only control paths at or below their location):
+
+    location = /assets/sw.js {
+        add_header Service-Worker-Allowed /;
+        add_header Cache-Control "no-cache";
+    }
+
+The C<no-cache> directive ensures browsers check for updates, while still
+allowing conditional requests (304 Not Modified).
+
 =head2 Complete Nginx Configuration Example
 
     server {
@@ -543,6 +560,12 @@ supports compression, without needing to compress on-the-fly.
         location /media/ {
             expires 1y;
             add_header Cache-Control "public, immutable";
+        }
+
+        # Service Worker - requires special header for root scope
+        location = /assets/sw.js {
+            add_header Service-Worker-Allowed /;
+            add_header Cache-Control "no-cache";
         }
 
         # API routes - always proxy
