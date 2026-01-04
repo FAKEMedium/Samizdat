@@ -85,6 +85,56 @@ sub register ($self, $app, $conf) {
     return $model;
   });
 
+  # Minion task for background image conversion
+  $app->minion->add_task(convert_image => sub ($job, $args) {
+    my $srcfile = $args->{srcfile};
+    my $ext = $args->{ext};
+    my $url = $args->{url};
+    my $width = $args->{width};
+    my $type = $args->{type} // 'webp';  # webp or png
+
+    my $img = Imager->new;
+    $img->read(file => sprintf("%s.%s", $srcfile, $ext)) or do {
+      $job->fail("Cannot read image: " . $img->errstr);
+      return;
+    };
+
+    my $imgdata = '';
+    my $outfile;
+
+    if ($type eq 'png') {
+      # PNG fallback - scale if needed
+      if ($img->getwidth > $width) {
+        $img = $img->scale(xpixels => $width);
+      }
+      $img->write(data => \$imgdata, type => 'png') or do {
+        $job->fail("Cannot write PNG: " . $img->errstr);
+        return;
+      };
+      $outfile = $public->child(sprintf('%s.png', $url));
+    } else {
+      # WebP conversion
+      my $converted = $img->scale(xpixels => $width);
+      $converted->write(
+        data                 => \$imgdata,
+        type                 => 'webp',
+        webp_method          => 6,
+        webp_sns_strength    => 80,
+        webp_pass            => 10,
+        webp_quality         => 75,
+        webp_alpha_filtering => 2,
+      ) or do {
+        $job->fail("Cannot write WebP: " . $converted->errstr);
+        return;
+      };
+      $outfile = $public->child(sprintf('%s_%d.webp', $url, $width));
+    }
+
+    $outfile->dirname->make_path({mode => 0750});
+    $outfile->spew($imgdata);
+    $job->finish({ file => $outfile->to_string, size => length($imgdata) });
+  });
+
 
   # Content shown in the headline area, default is share buttons
   $app->helper(headline => sub ($self, $chunkname =  'chunks/sharebuttons') {
@@ -349,15 +399,17 @@ sub register ($self, $app, $conf) {
 
         if ('' ne $ext) {
           $image->read(file => sprintf("%s.%s",  $srcfile, $ext)) or die $image->errstr;
-          my $colwidth = my $width = $image->getwidth();
+          my $width = $image->getwidth();
           my $imgdata = '';
-          my $done = 0;
-          for my $col (
-            sort {$c->config->{manager}->{web}->{imageconversion}->{width}->{$a} <=> $c->config->{manager}->{web}->{imageconversion}->{width}->{$b}}
-              keys %{ $c->config->{manager}->{web}->{imageconversion}->{width} }
-          ) {
-            $colwidth = $c->config->{manager}->{web}->{imageconversion}->{width}->{$col};
-            my $converted = $image->scale(xpixels => $colwidth);
+
+          # Get all configured widths
+          my @widths = sort { $a <=> $b }
+            values %{ $c->config->{manager}->{web}->{imageconversion}->{width} };
+          my $max_width = $widths[-1];
+
+          # Convert only the requested size synchronously
+          if ($wantedsize && grep { $_ == $wantedsize } @widths) {
+            my $converted = $image->scale(xpixels => $wantedsize);
             $converted->write(
               data                 => \$imgdata,
               type                 => 'webp',
@@ -368,34 +420,75 @@ sub register ($self, $app, $conf) {
               webp_alpha_filtering => 2,
             ) or die $converted->errstr;
 
-            my $webpfile = $public->child(sprintf('%s_%d.webp', $url, $colwidth));
+            my $webpfile = $public->child(sprintf('%s_%d.webp', $url, $wantedsize));
             $webpfile->dirname->make_path({mode => 0750});
             $webpfile->spew($imgdata);
-            if ($colwidth == $wantedsize) {
-              $c->stash('status', 200);
-              $c->tx->res->headers->content_type('image/webp');
-              $$output = $imgdata;
-              $done = 1;
+
+            $c->stash('status', 200);
+            $c->tx->res->headers->content_type('image/webp');
+            $$output = $imgdata;
+          } else {
+            # No specific size requested or invalid size - generate PNG fallback
+            if ($width > $max_width) {
+              $image = $image->scale(xpixels => $max_width);
             }
-          }
+            $image->write(data => \$imgdata, type => 'png') or die $image->errstr;
 
-          # PNG fallback with the maximum column width
-          if ($width > $colwidth) {
-            $image = $image->scale(xpixels => $colwidth);
-          }
+            my $pngfile = $public->child(sprintf('%s.png', $url));
+            $pngfile->dirname->make_path({mode => 0750});
+            $pngfile->spew($imgdata);
 
-          $image->write(
-              data                 => \$imgdata,
-              type                 => 'png',
-          ) or die $image->errstr;
-
-          my $pngfile = $public->child(sprintf('%s.png', $url));
-          $pngfile->dirname->make_path({mode => 0750});
-          $pngfile->spew($imgdata);
-          if (!$done) {
             $c->stash('status', 200);
             $c->tx->res->headers->content_type('image/png');
             $$output = $imgdata;
+          }
+
+          # Queue background jobs for other sizes (check for existing jobs)
+          my $srcfile_str = $srcfile->to_string;
+          for my $w (@widths) {
+            next if $wantedsize && $w == $wantedsize;  # Skip the one we just did
+
+            # Check if file already exists
+            my $webpfile = $public->child(sprintf('%s_%d.webp', $url, $w));
+            next if -e $webpfile->to_string;
+
+            # Check for existing pending/active jobs for this image+size
+            my $note_key = "convert:${srcfile_str}:${w}";
+            my $existing = $c->app->minion->jobs({
+              tasks => ['convert_image'],
+              states => ['inactive', 'active'],
+              notes => [$note_key],
+            })->total;
+            next if $existing > 0;
+
+            # Queue the job with a note for deduplication
+            $c->app->minion->enqueue(convert_image => [{
+              srcfile => $srcfile_str,
+              ext     => $ext,
+              url     => $url,
+              width   => $w,
+              type    => 'webp',
+            }] => { notes => { $note_key => 1 } });
+          }
+
+          # Queue PNG fallback if not exists
+          my $pngfile = $public->child(sprintf('%s.png', $url));
+          unless (-e $pngfile->to_string) {
+            my $note_key = "convert:${srcfile_str}:png";
+            my $existing = $c->app->minion->jobs({
+              tasks => ['convert_image'],
+              states => ['inactive', 'active'],
+              notes => [$note_key],
+            })->total;
+            unless ($existing > 0) {
+              $c->app->minion->enqueue(convert_image => [{
+                srcfile => $srcfile_str,
+                ext     => $ext,
+                url     => $url,
+                width   => $max_width,
+                type    => 'png',
+              }] => { notes => { $note_key => 1 } });
+            }
           }
         }
       }
@@ -533,9 +626,14 @@ supports compression, without needing to compress on-the-fly.
 =head2 Service Worker
 
 The Service Worker at C</assets/sw.js> provides client-side caching for
-dynamic routes. When serving the cached file directly, nginx must add the
-C<Service-Worker-Allowed> header to permit the worker to control the entire
-site (service workers normally only control paths at or below their location):
+dynamic routes. It requires the C<Service-Worker-Allowed: /> header to
+control the entire site (service workers normally only control paths at
+or below their location).
+
+B<Development (morbo)>: Routes are matched before static files, so the
+controller always handles requests and adds the required header.
+
+B<Production (nginx)>: Serve the cached file directly with the required header:
 
     location = /assets/sw.js {
         add_header Service-Worker-Allowed /;

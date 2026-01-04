@@ -41,9 +41,11 @@ sub index ($self) {
   }
 }
 
+
 sub pass ($self) {
   return 1;
 }
+
 
 sub editor ($self) {
   my $docpath = $self->stash('docpath');
@@ -116,6 +118,7 @@ sub menus ($self) {
   }
 }
 
+
 # Single menu editor - view/update menu and its items
 sub menu ($self) {
   my $menuid = $self->stash('menuid');
@@ -172,6 +175,7 @@ sub menu ($self) {
     $self->render(template => 'web/menus/menu/index', web => $web, title => $title, menu => $menu);
   }
 }
+
 
 # Menu item editor - view/create/update/delete menu item
 sub menuitem ($self) {
@@ -264,6 +268,7 @@ sub menuitem ($self) {
   }
 }
 
+
 # Reorder menu items
 sub menuitems_reorder ($self) {
   return unless $self->access({ admin => 1 });
@@ -285,7 +290,14 @@ sub menuitems_reorder ($self) {
 # It will also try to lookup the uri in the database.
 sub getdoc ($self) {
   my $docpath = $self->stash('docpath');
-  # Normalize: ensure trailing slash for non-empty docpath
+
+  # Handle image requests - skip document lookup, let after_render handle conversion
+  if ($docpath =~ /\.(webp|png|jpg|jpeg|gif|svg|ico)$/i) {
+    $self->stash(web => { url => "/$docpath" });
+    return $self->render(data => '', status => 404);
+  }
+
+  # Normalize: ensure trailing slash for non-empty docpath (but not for files)
   $docpath .= '/' if $docpath ne '' && $docpath !~ m|/$|;
   my $html = $self->app->__x("The page {docpath} wasn't found.", docpath => '/' . $docpath);
   my $title = $self->app->__('404: Missing document');
