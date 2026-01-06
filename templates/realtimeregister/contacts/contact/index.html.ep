@@ -1,6 +1,14 @@
 <div id="contactDetails" class="card">
-  <div class="card-header">
+  <div class="card-header d-flex justify-content-between align-items-center">
     <h2 class="h5 mb-0"><%== __('Contact details') %></h2>
+    <div class="d-none" id="contactActions">
+      <button type="button" id="editContactBtn" class="btn btn-sm btn-primary">
+        <%== icon 'pencil-fill' %> <%== __('Edit') %>
+      </button>
+      <button type="button" id="deleteContactBtn" class="btn btn-sm btn-danger ms-2">
+        <%== icon 'trash-fill' %> <%== __('Delete') %>
+      </button>
+    </div>
   </div>
   <div class="card-body">
     <div class="spinner-border" role="status">

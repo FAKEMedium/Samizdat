@@ -35,8 +35,8 @@ sub register ($self, $app, $conf) {
       config            => $self->config->{manager}->{domain},
       pg                => $self->pg,
       mysql             => $self->mysql,
-      epp               => $self->can('epp') ? $self->epp : undef,
-      realtimeregister  => $self->can('realtimeregister') ? $self->realtimeregister : undef,
+      epp               => $app->renderer->helpers->{epp} ? $self->epp : undef,
+      realtimeregister  => $app->renderer->helpers->{realtimeregister} ? $self->realtimeregister : undef,
     });
     return $model;
   });

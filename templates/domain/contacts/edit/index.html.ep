@@ -1,101 +1,119 @@
-<div class="modal-header">
-  <h5 class="modal-title"><%== __('New contact') %></h5>
-  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
-</div>
-<form id="contactForm">
-  <div class="modal-body">
-    <div class="row g-3">
-      <div class="col-md-6">
-        <label for="handle" class="form-label"><%== __('Handle') %> *</label>
-        <input type="text" class="form-control" id="handle" name="handle" required>
-      </div>
-      <div class="col-md-6">
-        <label for="name" class="form-label"><%== __('Name') %> *</label>
-        <input type="text" class="form-control" id="name" name="name" required>
-      </div>
-      <div class="col-md-6">
-        <label for="organization" class="form-label"><%== __('Organization') %></label>
-        <input type="text" class="form-control" id="organization" name="organization">
-      </div>
-      <div class="col-md-6">
-        <label for="email" class="form-label"><%== __('Email') %> *</label>
-        <input type="email" class="form-control" id="email" name="email" required>
-      </div>
-      <div class="col-md-6">
-        <label for="phone" class="form-label"><%== __('Phone') %></label>
-        <input type="tel" class="form-control" id="phone" name="phone">
-      </div>
-      <div class="col-md-6">
-        <label for="fax" class="form-label"><%== __('Fax') %></label>
-        <input type="tel" class="form-control" id="fax" name="fax">
-      </div>
-      <div class="col-12">
-        <label for="street" class="form-label"><%== __('Street') %></label>
-        <textarea class="form-control" id="street" name="street" rows="2"></textarea>
-      </div>
-      <div class="col-md-4">
-        <label for="postalCode" class="form-label"><%== __('Postal code') %></label>
-        <input type="text" class="form-control" id="postalCode" name="postalCode">
-      </div>
-      <div class="col-md-4">
-        <label for="city" class="form-label"><%== __('City') %></label>
-        <input type="text" class="form-control" id="city" name="city">
-      </div>
-      <div class="col-md-4">
-        <label for="country" class="form-label"><%== __('Country') %></label>
-        <input type="text" class="form-control" id="country" name="country" maxlength="2" placeholder="SE">
-      </div>
-      <div class="col-md-6">
-        <label for="orgno" class="form-label"><%== __('Org number') %></label>
-        <input type="text" class="form-control" id="orgno" name="orgno">
-      </div>
-      <div class="col-md-6">
-        <label for="vatno" class="form-label"><%== __('VAT number') %></label>
-        <input type="text" class="form-control" id="vatno" name="vatno">
-      </div>
-    </div>
+<form id="contactForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== title %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
   </div>
+
+  <div class="modal-body">
+    <div class="mb-3" id="customerField">
+      <label for="customerSearch" class="form-label"><%== __('Customer') %> <span class="text-danger">*</span></label>
+      <input type="text" id="customerSearch" class="form-control mb-2" placeholder="<%== __('Search customer (min 3 chars)...') %>">
+      <select id="customer" name="customer" class="form-select">
+        <option value=""><%== __('Select customer first...') %></option>
+      </select>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label"><%== __('Registries & Handles') %> <span class="text-danger">*</span></label>
+      <div class="row g-2">
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-text">
+              <input class="form-check-input mt-0" type="checkbox" id="registrySE" name="registries" value="se">
+            </div>
+            <span class="input-group-text">.SE</span>
+            <input type="text" id="handleSE" name="handleSE" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-text">
+              <input class="form-check-input mt-0" type="checkbox" id="registryNU" name="registries" value="nu">
+            </div>
+            <span class="input-group-text">.NU</span>
+            <input type="text" id="handleNU" name="handleNU" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-text">
+              <input class="form-check-input mt-0" type="checkbox" id="registryRR" name="registries" value="rr">
+            </div>
+            <span class="input-group-text">RR</span>
+            <input type="text" id="handleRR" name="handleRR" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
+          </div>
+        </div>
+      </div>
+      <div class="form-text"><%== __('Select registries and set handles for each') %></div>
+    </div>
+
+    <fieldset id="contactFields" disabled>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="name" class="form-label"><%== __('Name') %> <span class="text-danger">*</span></label>
+            <input type="text" id="name" name="name" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="organization" class="form-label"><%== __('Organization') %></label>
+            <input type="text" id="organization" name="organization" class="form-control">
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-6">
+              <label for="orgno" class="form-label"><%== __('Org. Number') %></label>
+              <input type="text" id="orgno" name="orgno" class="form-control" placeholder="556677-8899">
+            </div>
+            <div class="col-md-6">
+              <label for="vatno" class="form-label"><%== __('VAT Number') %></label>
+              <input type="text" id="vatno" name="vatno" class="form-control" placeholder="SE556677889901">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label"><%== __('Email') %> <span class="text-danger">*</span></label>
+            <input type="email" id="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label for="voice" class="form-label"><%== __('Phone') %> <span class="text-danger">*</span></label>
+            <input type="tel" id="voice" name="voice" class="form-control" required placeholder="+46.701234567">
+            <div class="form-text"><%== __('International format: +CC.NNNNNNNN') %></div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="street" class="form-label"><%== __('Street Address') %> <span class="text-danger">*</span></label>
+            <textarea id="street" name="street" class="form-control" rows="2" required placeholder="<%== __('Street address (one line per row)') %>"></textarea>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-4">
+              <label for="postalCode" class="form-label"><%== __('Postal Code') %> <span class="text-danger">*</span></label>
+              <input type="text" id="postalCode" name="postalCode" class="form-control" required>
+            </div>
+            <div class="col-md-8">
+              <label for="city" class="form-label"><%== __('City') %> <span class="text-danger">*</span></label>
+              <input type="text" id="city" name="city" class="form-control" required>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="state" class="form-label"><%== __('State/Province') %></label>
+            <input type="text" id="state" name="state" class="form-control">
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label"><%== __('Country') %> <span class="text-danger">*</span></label>
+            <select id="country" name="country" class="form-select" required>
+              <option value=""><%== __('Select country...') %></option>
+% my $countries = countrylist();
+% for my $cc (sort { $countries->{$a} cmp $countries->{$b} } keys %$countries) {
+              <option value="<%= $cc %>"><%= $countries->{$cc} %></option>
+% }
+            </select>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
   <div class="modal-footer">
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
-    <button type="submit" class="btn btn-primary"><%== __('Create') %></button>
+    <button type="submit" class="btn btn-primary" id="submitBtn" disabled><%== __('Create Contact') %></button>
   </div>
 </form>
-<script id="modalscript">
-(function() {
-  const form = document.querySelector('#contactForm');
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-    const data = {
-      handle: formData.get('handle'),
-      name: formData.get('name'),
-      organization: formData.get('organization'),
-      email: formData.get('email'),
-      phone: formData.get('phone'),
-      fax: formData.get('fax'),
-      street: formData.get('street')?.split('\n').filter(s => s.trim()) || [],
-      postalCode: formData.get('postalCode'),
-      city: formData.get('city'),
-      country: formData.get('country'),
-      orgno: formData.get('orgno'),
-      vatno: formData.get('vatno'),
-    };
-
-    const result = await window.authenticatedFetch('<%== url_for('Domain.contact.create') %>', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
-
-    if (result && result.success) {
-      window.showToast?.('<%== __("Contact created") %>');
-      bootstrap.Modal.getInstance(document.querySelector('#universalmodal'))?.hide();
-      window.location.href = '<%== url_for('domain_contacts') %>/' + data.handle;
-    } else {
-      alert(result?.error || '<%== __("Failed to create contact") %>');
-    }
-  });
-})();
-</script>

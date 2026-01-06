@@ -29,16 +29,20 @@ sub index ($self) {
 
     if ($simple && $searchterm && length($searchterm) >= 3) {
       # Simple mode for selectors - search active customers, return minimal data
+      my @or_conditions = (
+        firstname    => { -like => sprintf('%%%s%%', $searchterm) },
+        lastname     => { -like => sprintf('%%%s%%', $searchterm) },
+        contactemail => { -like => sprintf('%%%s%%', $searchterm) },
+        company      => { -like => sprintf('%%%s%%', $searchterm) },
+      );
+      # Only search by customerid if searchterm is numeric
+      if ($searchterm =~ /^\d+$/) {
+        unshift @or_conditions, customerid => [ int $searchterm ];
+      }
       $params->{where} = {
         -and => [
           { active => 1 },
-          -or => [
-            customerid   => [ int $searchterm ],
-            firstname    => { -like => sprintf('%%%s%%', $searchterm) },
-            lastname     => { -like => sprintf('%%%s%%', $searchterm) },
-            contactemail => { -like => sprintf('%%%s%%', $searchterm) },
-            company      => { -like => sprintf('%%%s%%', $searchterm) },
-          ]
+          -or => \@or_conditions
         ]
       };
       $params->{limit} = { -limit => 20 };

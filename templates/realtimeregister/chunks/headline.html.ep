@@ -1,15 +1,19 @@
 <div class="d-flex justify-content-between align-items-start w-100">
   <div>
-    <a href="<%= url_for('rtr_domains') %>" class="btn btn-primary align-self-start">
+    <a href="<%= url_for('rtr_domains') %>" class="btn btn-primary align-self-start" title="<%== __('Domains') %>">
       <%== icon 'globe' %>
-      <span class="d-sm-inline d-none"><%== __('Domains') %></span>
     </a>
-    <a href="<%= url_for('rtr_contacts') %>" class="btn btn-primary align-self-start">
+    <a href="<%= url_for('rtr_contacts') %>" class="btn btn-primary align-self-start" title="<%== __('Contacts') %>">
       <%== icon 'people' %>
-      <span class="d-sm-inline d-none"><%== __('Contacts') %></span>
+    </a>
+    <a href="<%= url_for('rtr_transactions') %>" class="btn btn-primary align-self-start" title="<%== __('Transactions') %>">
+      <%== icon 'receipt' %>
+    </a>
+    <a href="<%= url_for('rtr_pricelist') %>" class="btn btn-primary align-self-start" title="<%== __('Prices') %>">
+      <%== icon 'currency-euro' %>
     </a>
   </div>
-  <div id="pagination-controls" class="btn-group align-self-start" role="group">
+  <nav id="pagination-controls" aria-label="<%== __('Page navigation') %>">
     <!-- Pagination will be inserted here by JavaScript -->
-  </div>
+  </nav>
 </div>

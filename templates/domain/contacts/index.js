@@ -151,9 +151,11 @@
     }
   });
 
-  // New contact button
-  document.querySelector('#newContact')?.addEventListener('click', () => {
-    window.location.href = '<%== url_for('domain_contact_new') %>';
+  // New contact button - opens modal with all registries available
+  document.querySelector('#newContact')?.addEventListener('click', async () => {
+    const modalDialog = document.querySelector('#universalmodal #modalDialog');
+    if (modalDialog) modalDialog.classList.add('modal-xl');
+    await window.openModalFromUrl('<%== url_for('domain_contact_new') %>');
   });
 
   // Initial load
