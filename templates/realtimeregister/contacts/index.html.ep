@@ -1,7 +1,12 @@
-<div class="input-group mb-3">
-  <input type="text" class="form-control" id="searchterm" placeholder="<%== __('Search contacts...') %>">
-  <button class="btn btn-primary" id="searchButton">
-    <%== icon 'search' %>
+<div class="d-flex gap-2 mb-3">
+  <div class="input-group">
+    <input type="text" class="form-control" id="searchterm" placeholder="<%== __('Search contacts...') %>">
+    <button class="btn btn-primary" id="searchButton">
+      <%== icon 'search' %>
+    </button>
+  </div>
+  <button type="button" class="btn btn-success text-nowrap flex-shrink-0" id="newContact">
+    <%== icon 'plus-lg' %> <%== __('Add New') %>
   </button>
 </div>
 

@@ -85,24 +85,72 @@ sub contact_get ($self, $handle) {
 }
 
 sub contact_create ($self, $data) {
-  my $handle = $data->{handle} or return { success => 0, error => 'Handle required' };
+  my $registries = $data->{registries} // [];
 
-  # Prefer RealtimeRegister if available
-  if ($self->realtimeregister) {
-    my $rr_data = $self->_to_rr_contact($data);
-    my $result = $self->realtimeregister->createContact($rr_data);
-    return { success => $result ? 1 : 0, contact => $result };
+  # Registries can be array of strings (legacy) or array of {registry, handle} objects
+  # Normalize to array of {registry, handle}
+  my @reg_list;
+  for my $reg (@$registries) {
+    if (ref $reg eq 'HASH') {
+      push @reg_list, $reg;
+    } else {
+      # Legacy format: just registry name, handle from $data
+      push @reg_list, { registry => $reg, handle => $data->{handle} };
+    }
   }
 
-  # Fall back to EPP
-  if ($self->epp) {
-    my $epp_data = $self->_to_epp_contact($data);
-    my $info = {};
-    my $success = $self->epp->contact_create($handle, $epp_data, $info);
-    return { success => $success ? 1 : 0, contact => $info };
+  # If no registries specified, use default behavior (prefer RTR)
+  if (!@reg_list) {
+    my $handle = $data->{handle} or return { success => 0, error => 'Handle required' };
+    @reg_list = $self->realtimeregister ? [{ registry => 'rr', handle => $handle }]
+              : $self->epp ? [{ registry => 'se', handle => $handle }]
+              : ();
   }
 
-  return { success => 0, error => 'No contact backend available' };
+  my @results;
+  my @errors;
+
+  for my $reg_info (@reg_list) {
+    my $registry = $reg_info->{registry};
+    my $handle = $reg_info->{handle} or do {
+      push @errors, uc($registry) . ": Handle required";
+      next;
+    };
+
+    # Create contact data with this handle
+    my $contact_data = { %$data, handle => $handle };
+
+    if ($registry eq 'rr' && $self->realtimeregister) {
+      my $rr_data = $self->_to_rr_contact($contact_data);
+      my $result = $self->realtimeregister->createContact($rr_data);
+      if ($result && !$result->{error}) {
+        push @results, { registry => 'rr', success => 1, contact => $result, handle => $handle };
+      } else {
+        my $err_msg = $result->{error} // 'Failed to create contact';
+        push @errors, "RR: $err_msg";
+      }
+    }
+    elsif (($registry eq 'se' || $registry eq 'nu') && $self->epp) {
+      my $epp_data = $self->_to_epp_contact($contact_data);
+      my $info = {};
+      my $success = $self->epp->contact_create($handle, $epp_data, $info);
+      if ($success) {
+        push @results, { registry => $registry, success => 1, contact => $info, handle => $handle };
+      } else {
+        push @errors, uc($registry) . ": " . ($info->{error} // 'Failed to create contact');
+      }
+    }
+  }
+
+  my $success = @results > 0;
+  return {
+    success => $success ? 1 : 0,
+    results => \@results,
+    errors  => \@errors,
+    toast   => $success
+      ? sprintf('Contact created in %d registr%s', scalar @results, @results == 1 ? 'y' : 'ies')
+      : join(', ', @errors),
+  };
 }
 
 sub contact_update ($self, $handle, $data) {
@@ -224,12 +272,13 @@ sub _to_rr_contact ($self, $data) {
     name         => $data->{name},
     organization => $data->{organization},
     email        => $data->{email},
-    phone        => $data->{phone},
+    voice        => $data->{phone},  # RTR uses 'voice', E164a format: +31.384530759
     fax          => $data->{fax},
     addressLine  => $data->{street},
     city         => $data->{city},
     postalCode   => $data->{postalCode},
     country      => $data->{country},
+    # RTR doesn't use orgno/vatno directly - these are SE/NU specific
   };
 }
 

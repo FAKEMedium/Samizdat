@@ -20,10 +20,11 @@ sub api_url ($self) {
 # Make API request with authentication
 sub _api_request ($self, $method, $endpoint, $data = undef) {
   my $url = $self->api_url() . $endpoint;
+  my $api_key = $self->config->{api_key} // '';
   my $tx;
 
   my $headers = {
-    'Authorization' => 'ApiKey ' . $self->config->{api_key},
+    'Authorization' => "ApiKey $api_key",
     'Content-Type'  => 'application/json',
     'Accept'        => 'application/json',
   };
@@ -92,7 +93,8 @@ sub getContact ($self, $contact_handle) {
 
 sub createContact ($self, $contact_data) {
   my $customer = $self->config->{customer};
-  return $self->_api_request('POST', "v2/customers/$customer/contacts", $contact_data);
+  my $handle = $contact_data->{handle} or return { error => 'Handle required' };
+  return $self->_api_request('POST', "v2/customers/$customer/contacts/$handle", $contact_data);
 }
 
 sub updateContact ($self, $contact_handle, $contact_data) {
@@ -103,6 +105,35 @@ sub updateContact ($self, $contact_handle, $contact_data) {
 sub deleteContact ($self, $contact_handle) {
   my $customer = $self->config->{customer};
   return $self->_api_request('DELETE', "v2/customers/$customer/contacts/$contact_handle", undef);
+}
+
+# Pricelist operations
+
+sub getPricelist ($self, $params = {}) {
+  my $customer = $self->config->{customer};
+  my $currency = $params->{currency} // $self->default_currency;
+  return $self->_api_request('GET', "v2/customers/$customer/pricelist?currency=$currency", undef);
+}
+
+sub currencies ($self) {
+  my $cfg = $self->config->{currency} // ['EUR'];
+  return ref $cfg eq 'ARRAY' ? $cfg : [$cfg];
+}
+
+sub default_currency ($self) {
+  return $self->currencies->[0];
+}
+
+# Financial transactions
+
+sub getTransactions ($self, $params = {}) {
+  my $query = Mojo::Parameters->new(%$params)->to_string;
+  my $endpoint = 'v2/billing/financialtransactions' . ($query ? "?$query" : '');
+  return $self->_api_request('GET', $endpoint, undef);
+}
+
+sub getTransaction ($self, $id) {
+  return $self->_api_request('GET', "v2/billing/financialtransactions/$id", undef);
 }
 
 1;

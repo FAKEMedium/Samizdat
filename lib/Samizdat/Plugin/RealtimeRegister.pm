@@ -15,8 +15,12 @@ sub register ($self, $app, $conf) {
   my $manager = $r->manager('realtimeregister')->to(controller => 'RealtimeRegister');
   $manager->get('domains/#domain')          ->to('#domain')           ->name('rtr_domain');
   $manager->get('domains')                  ->to('#domains')          ->name('rtr_domains');
+  $manager->get('contacts/new')             ->to('#new_contact')      ->name('rtr_contacts_new');
   $manager->get('contacts/:handle')         ->to('#contact')          ->name('rtr_contact');
   $manager->get('contacts')                 ->to('#contacts')         ->name('rtr_contacts');
+  $manager->get('transactions/:id')         ->to('#transaction')      ->name('rtr_transaction');
+  $manager->get('transactions')             ->to('#transactions')     ->name('rtr_transactions');
+  $manager->get('pricelist')                ->to('#pricelist')        ->name('rtr_pricelist');
   $manager->get('/')                        ->to('#index')            ->name('rtr_index');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
@@ -322,6 +326,75 @@ paths:
               schema:
                 type: object
 
+  /realtimeregister/pricelist:
+    get:
+      operationId: RTR.pricelist.index
+      x-mojo-to: RealtimeRegister#pricelist
+      summary: Get price list
+      tags: [RealtimeRegister]
+      parameters:
+        - name: currency
+          in: query
+          description: Currency for prices (USD or EUR)
+          schema:
+            type: string
+            enum: [USD, EUR]
+      responses:
+        '200':
+          description: Price list data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RTR_PricelistResponse'
+
+  /realtimeregister/transactions:
+    get:
+      operationId: RTR.transactions.index
+      x-mojo-to: RealtimeRegister#transactions
+      summary: List financial transactions
+      tags: [RealtimeRegister]
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+        - name: offset
+          in: query
+          schema:
+            type: integer
+        - name: order
+          in: query
+          description: Field to sort by (prefix with - for descending)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of transactions
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RTR_TransactionListResponse'
+
+  /realtimeregister/transactions/{id}:
+    get:
+      operationId: RTR.transactions.get
+      x-mojo-to: RealtimeRegister#transaction
+      summary: Get transaction details
+      tags: [RealtimeRegister]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Transaction data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RTR_Transaction'
+
 components:
   schemas:
     RTR_Domain:
@@ -412,3 +485,116 @@ components:
           type: integer
         total:
           type: integer
+    RTR_PricelistResponse:
+      type: object
+      properties:
+        pricelist:
+          type: object
+          properties:
+            prices:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTR_Price'
+            priceChanges:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTR_PriceChange'
+            promos:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTR_Promo'
+    RTR_Price:
+      type: object
+      properties:
+        product:
+          type: string
+        action:
+          type: string
+        currency:
+          type: string
+        price:
+          type: integer
+          description: Price in cents
+    RTR_PriceChange:
+      type: object
+      properties:
+        product:
+          type: string
+        action:
+          type: string
+        currency:
+          type: string
+        price:
+          type: integer
+        effectiveDate:
+          type: string
+          format: date
+    RTR_Promo:
+      type: object
+      properties:
+        product:
+          type: string
+        action:
+          type: string
+        currency:
+          type: string
+        price:
+          type: integer
+        startDate:
+          type: string
+          format: date
+        endDate:
+          type: string
+          format: date
+        active:
+          type: boolean
+    RTR_Transaction:
+      type: object
+      properties:
+        id:
+          type: integer
+        customer:
+          type: string
+        date:
+          type: string
+          format: date-time
+        amount:
+          type: integer
+          description: Amount in cents
+        currency:
+          type: string
+        processId:
+          type: integer
+        processType:
+          type: string
+        processIdentifier:
+          type: string
+        processAction:
+          type: string
+        billables:
+          type: array
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+              action:
+                type: string
+              quantity:
+                type: integer
+              amount:
+                type: integer
+              providerName:
+                type: string
+    RTR_TransactionListResponse:
+      type: object
+      properties:
+        transactions:
+          type: object
+          properties:
+            entities:
+              type: array
+              items:
+                $ref: '#/components/schemas/RTR_Transaction'
+            pagination:
+              $ref: '#/components/schemas/RTR_Pagination'

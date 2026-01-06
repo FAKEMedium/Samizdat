@@ -1,7 +1,11 @@
 // RealtimeRegister contact detail
 const contactDetails = document.getElementById('contactDetails');
+const contactActions = document.getElementById('contactActions');
+const editContactBtn = document.getElementById('editContactBtn');
+const deleteContactBtn = document.getElementById('deleteContactBtn');
 const handle = window.location.pathname.split('/').pop();
 const apiUrl = `<%== url_for('RTR.contacts.index') %>/${handle}`;
+let currentContact = null;
 
 fetch(apiUrl, {
   headers: { 'Accept': 'application/json' },
@@ -70,8 +74,55 @@ fetch(apiUrl, {
       </div>
     ` : ''}
   `;
+
+  // Show action buttons and store contact
+  currentContact = contact;
+  contactActions.classList.remove('d-none');
 })
 .catch(error => {
   console.error('Error loading contact:', error);
   contactDetails.querySelector('.card-body').innerHTML = '<p class="text-danger"><%== __('Error loading contact details') %></p>';
+});
+
+// Edit button handler - opens edit modal
+editContactBtn.addEventListener('click', async () => {
+  if (!currentContact) return;
+
+  const modalDialog = document.querySelector('#universalmodal #modalDialog');
+  if (modalDialog) modalDialog.classList.add('modal-xl');
+
+  // Open edit form with handle parameter
+  await window.openModalFromUrl(`<%== url_for('domain_contact_new') %>?handle=${encodeURIComponent(currentContact.handle)}&registries=rr`);
+});
+
+// Delete button handler
+deleteContactBtn.addEventListener('click', async () => {
+  if (!currentContact) return;
+
+  // Confirm deletion
+  if (!confirm(`<%== __('Are you sure you want to delete contact') %> "${currentContact.handle}"?`)) {
+    return;
+  }
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'DELETE',
+      headers: { 'Accept': 'application/json' },
+      credentials: 'same-origin'
+    });
+
+    if (response.ok) {
+      window.showToast('<%== __('Contact deleted successfully') %>');
+      // Redirect to contacts list
+      setTimeout(() => {
+        window.location.href = '<%== url_for('RTR.contacts.index') %>';
+      }, 500);
+    } else {
+      const data = await response.json().catch(() => ({}));
+      window.showToast(data.error || '<%== __('Failed to delete contact') %>');
+    }
+  } catch (error) {
+    console.error('Error deleting contact:', error);
+    window.showToast('<%== __('Error deleting contact') %>');
+  }
 });

@@ -219,10 +219,16 @@ sub contact ($self) {
 
 sub contact_edit ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $registries = $self->param('registries') // '';
+  my $handle = $self->param('handle') // '';
 
   if ($accept !~ /json/) {
-    my $title = $self->app->__('New contact');
+    my $title = $handle ? $self->app->__('Edit contact') : $self->app->__('New contact');
     my $web = { title => $title };
+    $self->stash(
+      preselected_registries => $registries,
+      edit_handle => $handle,
+    );
     $web->{script} .= $self->render_to_string(template => 'domain/contacts/edit/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'domain/contacts/edit/index', layout => 'modal', status => 200);
   } else {

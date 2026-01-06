@@ -16,6 +16,13 @@ sub countries ($self) {
 }
 
 
+sub countries_json ($self) {
+  my $languageid = $self->public->languages->{$self->app->language} // 1;
+  my $countries = $self->public->countries({ languageid => $languageid });
+  $self->render(json => { countries => $countries });
+}
+
+
 sub country ($self) {
   my $country = $self->stash('country');
   my $docpath = 'country/' . $country;

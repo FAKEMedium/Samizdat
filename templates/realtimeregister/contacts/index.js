@@ -105,5 +105,12 @@ searchterm.addEventListener('keypress', (e) => {
   if (e.key === 'Enter') loadContacts(searchterm.value);
 });
 
+// New contact button handler - opens domain contacts form with RR pre-selected
+document.getElementById('newContact')?.addEventListener('click', async () => {
+  const modalDialog = document.querySelector('#universalmodal #modalDialog');
+  if (modalDialog) modalDialog.classList.add('modal-xl');
+  await window.openModalFromUrl('<%= url_for('domain_contact_new') %>?registries=rr');
+});
+
 // Load contacts on page load
 loadContacts();

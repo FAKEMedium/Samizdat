@@ -62,14 +62,27 @@ sub getLanguages ($self, $codes = undef, $display_languageid = 1) {
 
 =head2 countries
 
-Get country data.
+Get country data with localized names.
 
     my $countries = $public->countries();
+    my $countries = $public->countries({ languageid => 2 });  # Swedish names
+
+Returns arrayref of hashrefs with 'code' and 'name' keys.
 
 =cut
 
 sub countries ($self, $options = {}) {
+  my $display_languageid = $options->{languageid} // 1;
 
+  my $sql = q{
+    SELECT c.cc AS code, cn.countryname AS name
+    FROM countries c
+    LEFT JOIN countrynames cn ON c.countryid = cn.countryid AND cn.languageid = ?
+    WHERE cn.countryname IS NOT NULL
+    ORDER BY cn.countryname
+  };
+
+  return $self->pg->db->query($sql, $display_languageid)->hashes->to_array;
 }
 
 1;
