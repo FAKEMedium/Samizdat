@@ -4,7 +4,7 @@ use Mojo::Base 'Mojolicious::Command', -signatures;
 use Mojo::File 'path';
 use File::Spec;
 
-has description => 'Recursively create relative symlinks for .js, .tex, and .css files';
+has description => 'Recursively create relative symlinks for .js, .tex, .css, and .md files';
 has usage       => "Usage: APPLICATION makeeplinks [DIRECTORY]\n";
 
 sub run ($self, @args) {
@@ -20,8 +20,8 @@ sub run ($self, @args) {
     # Skip if it's not a regular file
     return unless -f $file;
 
-    # Handle `.js`, `.tex`, and `.css` files for symlink creation
-    if ($file->basename =~ /\.(js|tex|css)$/) {
+    # Handle `.js`, `.tex`, `.css`, and `.md` files for symlink creation
+    if ($file->basename =~ /\.(js|tex|css|md)$/) {
       my $target = $file->realpath->to_string;    # Absolute path of the target file
       my $link   = path($file . '.ep')->to_string; # Symlink name as a string
 

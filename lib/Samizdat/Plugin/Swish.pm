@@ -121,6 +121,8 @@ sub register ($self, $app, $config = {}) {
     my $logo_size = $size * $logo_ratio;
     my $logo_x = ($size - $logo_size) / 2;
     my $logo_y = ($size - $logo_size) / 2;
+    my $logo_center = $size / 2;
+    my $logo_radius = $logo_size / 2;
 
     my @rects;
     for my $y (0 .. $rows - 1) {
@@ -129,12 +131,12 @@ sub register ($self, $app, $config = {}) {
           my $px = ($x + $margin) * $cell_size;
           my $py = ($y + $margin) * $cell_size;
 
-          # Skip cells that would be covered by the logo
+          # Skip cells that would be covered by the circular logo
           if ($has_logo) {
             my $cell_center_x = $px + $cell_size / 2;
             my $cell_center_y = $py + $cell_size / 2;
-            next if $cell_center_x >= $logo_x && $cell_center_x <= $logo_x + $logo_size &&
-                    $cell_center_y >= $logo_y && $cell_center_y <= $logo_y + $logo_size;
+            my $dist = sqrt(($cell_center_x - $logo_center)**2 + ($cell_center_y - $logo_center)**2);
+            next if $dist <= $logo_radius;
           }
 
           push @rects, qq{<rect x="$px" y="$py" width="$cell_size" height="$cell_size"/>};
@@ -147,9 +149,15 @@ sub register ($self, $app, $config = {}) {
     # Build logo element if provided
     my $logo_element = '';
     if ($logo_image) {
-      # Embed as image element with data URI
+      # Embed as image element with data URI, clipped to circle
       $logo_element = qq{
-  <image x="$logo_x" y="$logo_y" width="$logo_size" height="$logo_size" href="$logo_image"/>};
+  <defs>
+    <clipPath id="swish-logo-clip">
+      <circle cx="$logo_center" cy="$logo_center" r="$logo_radius"/>
+    </clipPath>
+  </defs>
+  <circle cx="$logo_center" cy="$logo_center" r="$logo_radius" fill="white"/>
+  <image x="$logo_x" y="$logo_y" width="$logo_size" height="$logo_size" href="$logo_image" clip-path="url(#swish-logo-clip)"/>};
     }
     elsif ($logo) {
       # Extract inner content from SVG (remove outer svg tags)

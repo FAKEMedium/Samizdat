@@ -49,36 +49,6 @@ function getInvoices(){
   sendData('GET');
 }
 
-async function updatePaymentDate(invoiceId, paymentDate) {
-  try {
-    const response = await fetch(`<%== url_for('Invoice.update', invoiceid => '_IID_') %>`.replace('_IID_', invoiceId), {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({ paydate: paymentDate })
-    });
-
-    if (!response.ok) {
-      if (response.status === 401) {
-        const data = await response.json();
-        if (window.handle401Error) {
-          window.handle401Error(data.error || `<%== __("Authentication required") %>`);
-        } else {
-          window.location.href = `<%== url_for('account_login') %>`;
-        }
-      } else {
-        alert(`<%== __('Failed to update payment date') %>`);
-      }
-    }
-  } catch (e) {
-    console.error('Error updating payment date:', e);
-    alert(`<%== __('Failed to update payment date') %>`);
-  }
-}
-
-
 function populateForm(formdata, method) {
   let invoices = formdata.invoices;
   let customer = formdata.customer;
@@ -110,8 +80,18 @@ function populateForm(formdata, method) {
     // Create payment date cell based on state
     let paymentCell = '';
     if (invoice.state === 'fakturerad') {
-      // Show date input field for unpaid invoices
-      paymentCell = `<input type="date" class="form-control form-control-sm" name="paydate_${invoice.invoiceid}" value="${invoice.paydate ? invoice.paydate.substring(0, 10) : ''}" onchange="updatePaymentDate(${invoice.invoiceid}, this.value)">`;
+      // Show payment button for unpaid invoices
+      paymentCell = `<button type="button" class="btn btn-sm btn-outline-primary payment-btn"
+        data-invoiceid="${invoice.invoiceid}"
+        data-customerid="${invoice.customerid}"
+        data-customername="${invoice.customername || ''}"
+        data-fakturanummer="${invoice.fakturanummer}"
+        data-invoicedate="${invoice.invoicedate ? invoice.invoicedate.substring(0, 10) : ''}"
+        data-debt="${invoice.debt || invoice.totalcost}"
+        data-totalcost="${invoice.totalcost}"
+        data-currency="${invoice.currency || ''}">
+        <%== icon 'clipboard-plus' %>
+      </button>`;
     } else if (invoice.state === 'bokford') {
       // Show payment date for paid invoices
       paymentCell = invoice.paydate ? invoice.paydate.substring(0, 10) : '';
@@ -156,5 +136,27 @@ function populateForm(formdata, method) {
 function dropToast(){
   document.querySelector('#toast-messages').innerHTML = '';
 }
+
+// Refresh function called after payment modal submission
+window.refreshInvoiceData = function() {
+  getInvoices();
+};
+
+// Event delegation for payment buttons
+document.querySelector('#invoices tbody').addEventListener('click', (e) => {
+  const btn = e.target.closest('.payment-btn');
+  if (btn && typeof window.openPaymentModal === 'function') {
+    window.openPaymentModal({
+      invoiceid: btn.dataset.invoiceid,
+      customerid: btn.dataset.customerid,
+      customerName: btn.dataset.customername,
+      fakturanummer: btn.dataset.fakturanummer,
+      invoicedate: btn.dataset.invoicedate,
+      debt: btn.dataset.debt,
+      totalcost: btn.dataset.totalcost,
+      currency: btn.dataset.currency
+    });
+  }
+});
 
 getInvoices();

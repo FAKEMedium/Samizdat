@@ -83,7 +83,7 @@
 %   my $payee_alias = $swish_config->{env}->{$env}->{payee_alias};
 %   if ($payee_alias) {
 %     my $amount_ore = int($invoice->{totalcost} * 100);
-%     my $message = __x('Invoice {num}', num => $invoice->{fakturanummer});
+%     my $message = $invoice->{fakturanummer};
 %     my $qr_svg = swish_qr_svg(payee => $payee_alias, amount => $amount_ore, message => $message, size => 200);
 <div style="background: #00796B; color: white; padding: 15px; margin: 20px 0; border-radius: 5px;">
   <h3 style="color: white; margin-top: 0;"><%== __('Pay instantly with Swish') %></h3>

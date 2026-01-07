@@ -8,6 +8,10 @@ import { Editor } from '@toast-ui/editor';
 
 console.log('Toast UI imports loaded successfully');
 
+// Expose Editor class globally for other components (e.g., reminder modal)
+window.toastui = window.toastui || {};
+window.toastui.Editor = Editor;
+
 /**
  * Toast UI Markdown Editor Manager
  * Edit complete markdown documents (title + content together)

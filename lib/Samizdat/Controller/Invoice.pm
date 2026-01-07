@@ -3,6 +3,7 @@ package Samizdat::Controller::Invoice;
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::JSON qw(decode_json encode_json);
 use Mojo::Util qw(decode encode b64_encode);
+use Encode qw(decode_utf8 is_utf8);
 use UUID qw(uuid);
 use Date::Format;
 use MIME::Lite;
@@ -33,6 +34,7 @@ sub index ($self) {
         id     => 'customer-toast',
       }
     );
+    $web->{script} .= $self->render_to_string(template => 'invoice/chunks/paymentmodal', format => 'js');
     $web->{script} .= $self->render_to_string(template => 'invoice/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/index', invoices => [], cache => 1);
   } else {
@@ -294,6 +296,51 @@ sub update ($self, $makejson = 1) {
 }
 
 
+# Simple update for individual invoice fields (e.g., payment date from list view)
+sub updateSimple ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $invoiceid = $self->stash('invoiceid');
+  return $self->render(json => { error => 'Missing invoice ID' }, status => 400) unless $invoiceid;
+
+  my $data = $self->req->json // {};
+
+  # Only allow specific fields to be updated via this endpoint
+  my %allowed = map { $_ => 1 } qw(paydate state);
+  my %update_data;
+  for my $field (keys %$data) {
+    if ($allowed{$field}) {
+      $update_data{$field} = $data->{$field};
+    }
+  }
+
+  return $self->render(json => { error => 'No valid fields to update' }, status => 400) unless %update_data;
+
+  # If paydate is set and state is 'fakturerad', also mark as paid
+  if (exists $update_data{paydate} && $update_data{paydate}) {
+    my $invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid } })->[0];
+    if ($invoice && $invoice->{state} eq 'fakturerad') {
+      $update_data{state} = 'bokford';
+    }
+  }
+
+  my $result = $self->app->invoice->updateinvoice($invoiceid, \%update_data);
+
+  if ($result) {
+    return $self->render(json => { success => 1, invoiceid => $invoiceid });
+  } else {
+    return $self->render(json => { error => 'Failed to update invoice' }, status => 500);
+  }
+}
+
+
+# Render payment modal HTML chunk
+sub paymentModal ($self) {
+  return unless $self->access({ admin => 1 });
+  return $self->render(template => 'invoice/chunks/paymentmodal', format => 'html', layout => undef);
+}
+
+
 sub edit ($self) {
   my $title = $self->app->__('Open invoice');
   my $web = {title => $title};
@@ -378,6 +425,7 @@ sub handle ($self) {
   if ($accept !~ /json/) {
     # Override cache path to match template structure and share cache between /invoices/ and /customers/:customerid/invoices/ routes
     $self->stash(docpath => '/invoices/handle/index.html');
+    $web->{script} .= $self->render_to_string(template => 'invoice/chunks/paymentmodal', format => 'js');
     $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handlelinks');
   } else {
@@ -566,14 +614,34 @@ sub remind ($self) {
     my $reminders = $self->app->invoice->reminders($invoiceid);
     my $reminder_count = scalar(@$reminders);
 
-    # Get custom message from form
+    # Get custom message from form (Markdown) and convert to HTML
     my $custom_message = $self->param('mailmessage') || '';
+    if ($custom_message) {
+      # Convert Markdown to HTML using pandoc
+      eval {
+        require IPC::Open2;
+        my $pid = IPC::Open2::open2(my $out, my $in, 'pandoc', '-f', 'markdown', '-t', 'html');
+        binmode($in, ':encoding(UTF-8)');
+        binmode($out, ':encoding(UTF-8)');
+        print $in $custom_message;
+        close $in;
+        $custom_message = do { local $/; <$out> };
+        waitpid($pid, 0);
+      };
+    }
+
+    my $message = $self->render_to_string(
+      template => 'invoice/remind/mild',
+      invoicedata => $invoicedata,
+      message => $custom_message,
+      format => 'html'
+    );
 
     # Send reminder email using the plugin helper
     my $action = $reminder_type eq 'tough' ? 'reminder_tough' : 'reminder_mild';
     my $email_result = $self->send_invoice_email($invoicedata, {
       action => $action,
-      message => $custom_message
+      message => $message
     });
 
     if (!$email_result->{success}) {
@@ -628,25 +696,23 @@ sub remind ($self) {
       customer => $data->{customer}
     };
 
+    # Render markdown templates - ensure proper UTF-8 character strings
     my $mild_message = $self->render_to_string(
-      template => 'invoice/remind/mildhtml',
+      template => 'invoice/remind/mild',
       invoicedata => $invoicedata,
-      message => '',  # Empty message to show default template content
-      format => 'mail'
+      format => 'md'
     );
-
     my $tough_message = $self->render_to_string(
-      template => 'invoice/remind/toughhtml',
+      template => 'invoice/remind/tough',
       invoicedata => $invoicedata,
-      message => '',  # Empty message to show default template content
-      format => 'mail'
+      format => 'html'
     );
 
     $web->{script} = $self->render_to_string(
       template => 'invoice/remind/index',
       format => 'js',
       mild_message => $mild_message,
-      tough_message => $tough_message
+      tough_message => $tough_message,
     );
 
     return $self->render(
@@ -656,8 +722,7 @@ sub remind ($self) {
       title => $title,
       reminder_count => $reminder_count,
       invoice => $data->{invoice},
-      customer => $data->{customer},
-      mild_message => $mild_message
+      customer => $data->{customer}
     );
   }
 
