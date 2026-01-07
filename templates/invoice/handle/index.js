@@ -174,7 +174,6 @@ function populateForm(formdata, method, dataform) {
       document.querySelector('#headline').innerHTML = `<%==__('Credit invoice') %> ${invoice.fakturanummer}`;
     }
   }
-  document.querySelector('#amount').value = invoice.debt;
   document.querySelector('#invoicedate').innerHTML = invoice.invoicedate;
   document.querySelector('#totalcost').innerHTML = invoice.totalcost;
   document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.totalcost * (1 - 1 / (1 + invoice.vat)));
@@ -366,12 +365,36 @@ window.resendInvoice = async function() {
 }
 
 window.markPayment = function() {
-  // TODO: Implement mark payment functionality
-  alert('Mark payment functionality not yet implemented');
+  // Open payment modal with current invoice data
+  if (typeof window.openPaymentModal === 'function') {
+    window.openPaymentModal({
+      invoiceid: window.invoiceid,
+      customerid: window.customerid,
+      customerName: document.querySelector('#customer')?.textContent || '',
+      fakturanummer: window.fakturanummer,
+      invoicedate: document.querySelector('#invoicedate')?.textContent || '',
+      debt: debt,
+      totalcost: document.querySelector('#totalcost')?.textContent || '',
+      currency: document.querySelector('.currency')?.textContent || ''
+    });
+  } else {
+    alert('<%== __("Payment modal not available") %>');
+  }
 }
 
 function getInvoice(dataform) {
   sendForm('GET', dataform);
 }
+
+// Refresh function called after payment modal submission
+window.refreshInvoiceData = function() {
+  getInvoice('#dataform');
+};
+
+// Event listeners for buttons (CSP-compliant, no inline onclick)
+document.getElementById('resendBtn')?.addEventListener('click', () => window.resendInvoice());
+document.getElementById('reprintBtn')?.addEventListener('click', () => window.reprintInvoice());
+document.getElementById('creditBtn')?.addEventListener('click', () => window.makeCreditInvoice('#dataform'));
+document.getElementById('paymentbutton')?.addEventListener('click', () => window.markPayment('#dataform'));
 
 getInvoice('#dataform');

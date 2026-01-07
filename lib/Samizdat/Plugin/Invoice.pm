@@ -18,15 +18,17 @@ sub register ($self, $app, $conf) {
   # Customer specific invoice routes (HTML pages only - GET)
   my $customer = $r->manager('customers/:customerid/invoices')->to(controller => 'Invoice');
   $customer->get('open')                                            ->to('#edit')                 ->name('invoice_edit');
-  $customer->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_handle');
+  $customer->get('/:invoiceid')                                     ->to('#handle')               ->name('invoice_customer_handle');
   $customer->get('/:invoiceid/payment')                             ->to('#payment')              ->name('invoice_payment');
   $customer->get('/:invoiceid/remind')                              ->to('#remind')               ->name('invoice_remind');
-  $customer->get('/')                                               ->to('#index')                ->name('invoice_index');
+  $customer->get('/')                                               ->to('#index')                ->name('invoice_customer_index');
 
   # Invoice root routes (HTML pages, can be cached)
   my $manager = $r->manager('invoices')->to(controller => 'Invoice');
   $manager->get('/open')                                            ->to('#open')                 ->name('invoice_open');
+  $manager->get('/payment-modal')                                   ->to('#paymentModal')         ->name('invoice_payment_modal');
   $manager->get('/:invoiceid')                                      ->to('#handle')               ->name('invoice_handle');
+  # PUT /invoices/{invoiceid} is defined in OpenAPI spec (operationId: Invoice.update)
   $manager->get('/')                                                ->to('#index')                ->name('invoice_index');
 
   # Customer specific product routes
@@ -712,6 +714,42 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Invoice_FormData'
+    put:
+      operationId: Invoice.update
+      x-mojo-to: Invoice#updateSimple
+      summary: Update invoice fields
+      tags: [Invoices]
+      parameters:
+        - name: invoiceid
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                field:
+                  type: string
+                  description: Field name to update
+                value:
+                  type: string
+                  description: New value for the field
+      responses:
+        '200':
+          description: Update successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  message:
+                    type: string
 
   /invoices:
     get:
