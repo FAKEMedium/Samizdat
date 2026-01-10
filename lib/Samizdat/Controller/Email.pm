@@ -392,7 +392,7 @@ sub domain_page ($self) {
 
   # HTML view
   if ($accept !~ /json/) {
-    $self->stash(docpath => $self->url_for('email_domain_new') . '/index.html');
+    $self->stash(docpath => $self->url_for('email_domain_edit') . '/index.html');
     my $title = $domain ? $domain : $self->app->__('New domain');
     my $web = { title => $title };
     $web->{script} = $self->render_to_string(template => 'email/domain/index', format => 'js');
@@ -419,7 +419,7 @@ sub mailbox_page ($self) {
   my $domain = $self->param('domain');
   my $username = $self->param('username');
 
-  $self->stash(docpath => $self->url_for('email_mailbox_new', domain => 'domain') . '/index.html');
+  $self->stash(docpath => $self->url_for('email_mailbox_edit', domain => 'domain') . '/index.html');
   my $title = $username ? $self->app->__('Edit mailbox') : $self->app->__('Add mailbox');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'email/domain/mailbox/index', format => 'js');
@@ -436,7 +436,7 @@ sub mailbox_page ($self) {
 sub admin_page ($self) {
   my $username = $self->param('username');
 
-  $self->stash(docpath => $self->url_for('email_admin_new') . '/index.html');
+  $self->stash(docpath => $self->url_for('email_admin_edit') . '/index.html');
   my $title = $username ? $self->app->__('Edit admin') : $self->app->__('Add admin');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'email/admins/admin/index', format => 'js');
@@ -453,7 +453,7 @@ sub admin_page ($self) {
 sub alias_page ($self) {
   my $address = $self->param('address');
 
-  $self->stash(docpath => $self->url_for('email_alias_new', domain => 'domain') . '/index.html');
+  $self->stash(docpath => $self->url_for('email_alias_edit', domain => 'domain') . '/index.html');
   my $title = $address ? $self->app->__('Edit forwarding') : $self->app->__('Add forwarding');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'email/domain/forwarding/index', format => 'js');

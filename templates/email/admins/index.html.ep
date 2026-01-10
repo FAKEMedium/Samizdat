@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="col-md-6 text-end">
-    <a href="<%== url_for('email_admin_new') %>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#universalmodal">
+    <a href="<%== url_for('email_admin_edit') %>" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#universalmodal">
       <%== icon 'plus', {} %>
       <span><%== __('Add admin') %></span>
     </a>

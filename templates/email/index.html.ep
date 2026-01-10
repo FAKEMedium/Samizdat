@@ -12,7 +12,7 @@
     <input type="hidden" name="customerid">
   </div>
   <div class="col-md-4 text-end">
-    <a href="<%== url_for('email_domain_new') %>" class="btn btn-primary">
+    <a href="<%== url_for('email_domain_edit') %>" class="btn btn-primary">
       <%== icon 'plus', {} %>
       <span><%== __('Add domain') %></span>
     </a>
