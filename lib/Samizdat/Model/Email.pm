@@ -94,8 +94,13 @@ sub get_mailboxes ($self, $params = {}) {
   if (keys %$where) {
     my @conditions;
     for my $key (keys %$where) {
-      push @conditions, "$key = ?";
-      push @bind, $where->{$key};
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
     }
     $sql .= ' WHERE ' . join(' AND ', @conditions);
   }
@@ -173,8 +178,13 @@ sub get_aliases ($self, $params = {}) {
 
   if (keys %$where) {
     for my $key (keys %$where) {
-      push @conditions, "$key = ?";
-      push @bind, $where->{$key};
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
     }
   }
 
@@ -432,8 +442,13 @@ sub count_mailboxes ($self, $params = {}) {
   if (keys %$where) {
     my @conditions;
     for my $key (keys %$where) {
-      push @conditions, "$key = ?";
-      push @bind, $where->{$key};
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
     }
     $sql .= ' WHERE ' . join(' AND ', @conditions);
   }
@@ -457,8 +472,13 @@ sub count_aliases ($self, $params = {}) {
 
   if (keys %$where) {
     for my $key (keys %$where) {
-      push @conditions, "$key = ?";
-      push @bind, $where->{$key};
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
     }
   }
 

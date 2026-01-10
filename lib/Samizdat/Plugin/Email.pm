@@ -15,12 +15,16 @@ sub register ($self, $app, $conf) {
   # Route order: most specific first
   my $manager = $r->manager('email')->to(controller => 'Email');
 
-  # Admin routes (modal)
-  $manager->get('/admin/#username')                          ->to('#admin_page')                ->name('email_admin');
-  $manager->get('/admin')                                    ->to('#admin_page')                ->name('email_admin_new');
+  # Admin routes (modal) - under /admins
+  $manager->get('/admins/admin/#username')                   ->to('#admin_page')                ->name('email_admin');
+  $manager->get('/admins/admin')                             ->to('#admin_page')                ->name('email_admin_new');
 
   # Domain routes (full page)
   $manager->get('/domain')                                   ->to('#domain_page')               ->name('email_domain_new');
+
+  # List pages (before /#domain to avoid capture)
+  $manager->get('/admins')                                   ->to('#admins_page')               ->name('email_admins');
+  $manager->get('/mailboxes')                                ->to('#mailboxes_page')            ->name('email_mailboxes');
 
   # Domain-specific routes (most specific first)
   $manager->get('/#domain/admins/#admin')                    ->to('#domain_admin')              ->name('email_domain_admin');
@@ -268,6 +272,20 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Email_Result'
+
+  /email/mailboxes:
+    get:
+      operationId: Email.mailboxes.all
+      x-mojo-to: Email#mailboxes_index
+      summary: List all mailboxes
+      tags: [Email]
+      responses:
+        '200':
+          description: List of mailboxes
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_MailboxListResponse'
 
   /email/domains/{domain}/mailboxes:
     get:
