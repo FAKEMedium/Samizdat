@@ -195,6 +195,11 @@ sub admins_index ($self) {
   });
   my $total = $self->app->email->count_admins({ where => $where });
 
+  # Add domains for each admin
+  for my $admin (@$data) {
+    $admin->{domains} = $self->app->email->get_admin_domains($admin->{username});
+  }
+
   return $self->render(json => {
     success => 1,
     data => $data,
