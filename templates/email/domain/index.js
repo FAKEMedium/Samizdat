@@ -313,7 +313,7 @@
   });
 
   document.getElementById('addMailboxBtn')?.addEventListener('click', async () => {
-    await openModal(`<%== url_for('email_mailbox_new', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(editingDomain)));
+    await openModal(`<%== url_for('email_mailbox_edit', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(editingDomain)));
   });
 
   // Alias domain buttons
@@ -362,7 +362,7 @@
   });
 
   document.getElementById('addAliasBtn')?.addEventListener('click', async () => {
-    await openModal(`<%== url_for('email_alias_new', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(editingDomain)));
+    await openModal(`<%== url_for('email_alias_edit', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(editingDomain)));
   });
 
   // Initialize

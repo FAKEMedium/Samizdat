@@ -17,10 +17,10 @@ sub register ($self, $app, $conf) {
 
   # Admin routes (modal) - under /admins
   $manager->get('/admins/admin/#username')                   ->to('#admin_page')                ->name('email_admin');
-  $manager->get('/admins/admin')                             ->to('#admin_page')                ->name('email_admin_new');
+  $manager->get('/admins/admin')                             ->to('#admin_page')                ->name('email_admin_edit');
 
   # Domain routes (full page)
-  $manager->get('/domain')                                   ->to('#domain_page')               ->name('email_domain_new');
+  $manager->get('/domain')                                   ->to('#domain_page')               ->name('email_domain_edit');
 
   # List pages (before /#domain to avoid capture)
   $manager->get('/admins')                                   ->to('#admins_page')               ->name('email_admins');
@@ -30,9 +30,9 @@ sub register ($self, $app, $conf) {
   $manager->get('/#domain/admins/#admin')                    ->to('#domain_admin')              ->name('email_domain_admin');
   $manager->get('/#domain/admins')                           ->to('#domain_admins')             ->name('email_domain_admins');
   $manager->get('/#domain/alias/#address')                   ->to('#alias_page')                ->name('email_alias');
-  $manager->get('/#domain/alias')                            ->to('#alias_page')                ->name('email_alias_new');
+  $manager->get('/#domain/alias')                            ->to('#alias_page')                ->name('email_alias_edit');
   $manager->get('/#domain/mailbox/#username')                ->to('#mailbox_page')              ->name('email_mailbox');
-  $manager->get('/#domain/mailbox')                          ->to('#mailbox_page')              ->name('email_mailbox_new');
+  $manager->get('/#domain/mailbox')                          ->to('#mailbox_page')              ->name('email_mailbox_edit');
   $manager->get('/#domain')                                  ->to('#domain_page')               ->name('email_domain');
 
   # Main index
