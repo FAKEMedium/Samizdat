@@ -23,7 +23,7 @@
     // Pre-fill domain part for new alias
     addressInput.value = '@' + domain;
     addressInput.focus();
-    addressInput.setSelectionRange(0, 0);
+    try { addressInput.setSelectionRange(0, 0); } catch (e) {}
   }
 
   // Load existing alias data

@@ -26,8 +26,11 @@ document.querySelector('#cardcol-<%== $service %> h5.card-header').innerHTML = `
   function doSearch() {
     const type = getSelectedType();
     const term = searchInput.value;
-    let url = basePath + '?type=' + type + 's';
-    if (term) url += '&searchterm=' + encodeURIComponent(term);
+    // Navigate to type-specific path: /email/admins, /email/mailboxes, or /email (domains)
+    let url = basePath;
+    if (type === 'admin') url += '/admins';
+    else if (type === 'mailbox') url += '/mailboxes';
+    if (term) url += '?searchterm=' + encodeURIComponent(term);
     window.location.href = url;
   }
 

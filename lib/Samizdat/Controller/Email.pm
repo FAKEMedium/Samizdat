@@ -15,7 +15,7 @@ my $mailbox_checkfields = [qw(active)];
 my $alias_fields = [qw(address goto domain)];
 my $alias_checkfields = [qw(active)];
 
-# Index action - HTML page for email management
+# Index action - HTML page for email management (domains list)
 sub index ($self) {
   my $accept = $self->req->headers->accept || '';
 
@@ -35,6 +35,46 @@ sub index ($self) {
 
   # JSON - redirect to domains_index as default
   return $self->domains_index;
+}
+
+# Admins list page
+sub admins_page ($self) {
+  my $accept = $self->req->headers->accept || '';
+
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Email Admins');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/admins/index', format => 'js');
+
+    return $self->render(
+      web => $web,
+      title => $title,
+      template => 'email/admins/index',
+      status => 200
+    );
+  }
+
+  return $self->admins_index;
+}
+
+# Mailboxes list page
+sub mailboxes_page ($self) {
+  my $accept = $self->req->headers->accept || '';
+
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Email Mailboxes');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/mailboxes/index', format => 'js');
+
+    return $self->render(
+      web => $web,
+      title => $title,
+      template => 'email/mailboxes/index',
+      status => 200
+    );
+  }
+
+  return $self->mailboxes_index;
 }
 
 # Helper for pagination params
@@ -352,7 +392,7 @@ sub domain_page ($self) {
 
   # HTML view
   if ($accept !~ /json/) {
-    $self->stash(docpath => '/email/domain/index.html');
+    $self->stash(docpath => $self->url_for('email_domain_new') . '/index.html');
     my $title = $domain ? $domain : $self->app->__('New domain');
     my $web = { title => $title };
     $web->{script} = $self->render_to_string(template => 'email/domain/index', format => 'js');
@@ -379,7 +419,7 @@ sub mailbox_page ($self) {
   my $domain = $self->param('domain');
   my $username = $self->param('username');
 
-  $self->stash(docpath => '/email/domain/mailbox/index.html');
+  $self->stash(docpath => $self->url_for('email_mailbox_new', domain => 'domain') . '/index.html');
   my $title = $username ? $self->app->__('Edit mailbox') : $self->app->__('Add mailbox');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'email/domain/mailbox/index', format => 'js');
@@ -396,14 +436,14 @@ sub mailbox_page ($self) {
 sub admin_page ($self) {
   my $username = $self->param('username');
 
-  $self->stash(docpath => '/email/admin/index.html');
+  $self->stash(docpath => $self->url_for('email_admin_new') . '/index.html');
   my $title = $username ? $self->app->__('Edit admin') : $self->app->__('Add admin');
   my $web = { title => $title };
-  $web->{script} = $self->render_to_string(template => 'email/admin/index', format => 'js');
+  $web->{script} = $self->render_to_string(template => 'email/admins/admin/index', format => 'js');
   return $self->render(
     web => $web,
     title => $title,
-    template => 'email/admin/index',
+    template => 'email/admins/admin/index',
     layout => 'modal',
     status => 200
   );
@@ -413,7 +453,7 @@ sub admin_page ($self) {
 sub alias_page ($self) {
   my $address = $self->param('address');
 
-  $self->stash(docpath => '/email/domain/forwarding/index.html');
+  $self->stash(docpath => $self->url_for('email_alias_new', domain => 'domain') . '/index.html');
   my $title = $address ? $self->app->__('Edit forwarding') : $self->app->__('Add forwarding');
   my $web = { title => $title };
   $web->{script} = $self->render_to_string(template => 'email/domain/forwarding/index', format => 'js');

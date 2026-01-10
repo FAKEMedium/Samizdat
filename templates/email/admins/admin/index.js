@@ -1,9 +1,9 @@
 (function() {
   const modalDialog = document.querySelector('#modalDialog');
   const sourceUrl = modalDialog?.dataset.sourceUrl || '';
-  // URL pattern: /email/admin or /email/admin/:username
-  const adminMatch = sourceUrl.match(/\/email\/admin\/([^/]+)$/);
-  const editingAdmin = adminMatch ? decodeURIComponent(adminMatch[1]) : null;
+  // URL pattern: /email/admins/admin or /email/admins/admin/:username
+  const adminMatch = sourceUrl.match(/\/email\/admins\/admin(?:\/(.+))?$/);
+  const editingAdmin = adminMatch && adminMatch[1] ? decodeURIComponent(adminMatch[1]) : null;
 
   const form = document.getElementById('adminForm');
   const usernameInput = document.getElementById('username');

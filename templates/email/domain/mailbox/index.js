@@ -25,7 +25,7 @@
     // Pre-fill domain part for new mailbox
     usernameInput.value = '@' + domain;
     usernameInput.focus();
-    usernameInput.setSelectionRange(0, 0);
+    try { usernameInput.setSelectionRange(0, 0); } catch (e) {}
   }
 
   // Load existing mailbox data
