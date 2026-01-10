@@ -1,0 +1,38 @@
+<form id="mailboxForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== __('Add mailbox') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="username" class="form-label"><%== __('Email address') %></label>
+      <input type="email" id="username" name="username" class="form-control" required placeholder="user@example.com">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label"><%== __('Password') %></label>
+      <input type="password" id="password" name="password" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="name" class="form-label"><%== __('Display name') %></label>
+      <input type="text" id="name" name="name" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="quota" class="form-label"><%== __('Quota (MB)') %></label>
+      <input type="number" id="quota" name="quota" class="form-control" value="1024" min="0">
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="active" name="active" checked>
+      <label class="form-check-label" for="active"><%== __('Active') %></label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Create mailbox') %></button>
+  </div>
+</form>

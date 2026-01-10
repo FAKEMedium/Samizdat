@@ -15,97 +15,184 @@ my $mailbox_checkfields = [qw(active)];
 my $alias_fields = [qw(address goto domain)];
 my $alias_checkfields = [qw(active)];
 
-# Index action - list domains/mailboxes/aliases
+# Index action - HTML page for email management
 sub index ($self) {
   my $accept = $self->req->headers->accept || '';
-  my $type = $self->param('type') || 'domains';
 
   # HTML view
   if ($accept !~ /json/) {
     my $title = $self->app->__('Email Management');
     my $web = { title => $title };
-
-    # Render type-specific template if type is set
-    my $template = 'email/index';
-    if ($type && $type =~ /^(domains|mailboxes|aliases|quotas)$/) {
-      $template = "email/$type/index";
-      $web->{script} = $self->render_to_string(
-        template => $template,
-        format => 'js'
-      );
-    }
+    $web->{script} = $self->render_to_string(template => 'email/index', format => 'js');
 
     return $self->render(
       web => $web,
       title => $title,
-      template => $template,
+      template => 'email/index',
       status => 200
     );
   }
 
-  # JSON API response
-  else {
-    return unless $self->access({ 'valid-user' => 1 });
+  # JSON - redirect to domains_index as default
+  return $self->domains_index;
+}
 
-    my $customerid = $self->param('customerid');
-    my $domain = $self->param('domain');
-    my $page = $self->param('page') || 1;
-    my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 10;
-    my $offset = ($page - 1) * $limit;
+# Helper for pagination params
+sub _pagination_params ($self) {
+  my $page = $self->param('page') || 1;
+  my $limit = $self->param('limit') || $self->app->config->{pagination}->{perpage} || 50;
+  my $offset = ($page - 1) * $limit;
+  return ($page, $limit, $offset);
+}
 
-    my $data;
-    my $total;
-    my $where = {};
+# List domains
+sub domains_index ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
 
-    # Filter by customer if provided
-    $where->{customerid} = $customerid if $customerid;
-    $where->{domain} = $domain if $domain && $type ne 'domains';
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $customerid = $self->param('customerid');
+  my $searchterm = $self->param('searchterm') || '';
 
-    if ($type eq 'domains') {
-      $data = $self->app->email->get_domains({
-        where => $where,
-        limit => $limit,
-        offset => $offset
-      });
-      $total = $self->app->email->count_domains({ where => $where });
+  my $where = {};
+  $where->{customerid} = $customerid if $customerid;
+  $where->{domain} = { -like => sprintf('%%%s%%', $searchterm) } if $searchterm;
+
+  my $data = $self->app->email->get_domains({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+  my $total = $self->app->email->count_domains({ where => $where });
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => $total,
+      pages => int(($total + $limit - 1) / $limit)
     }
-    elsif ($type eq 'mailboxes') {
-      $data = $self->app->email->get_mailboxes({
-        where => $where,
-        limit => $limit,
-        offset => $offset
-      });
-      $total = $self->app->email->count_mailboxes({ where => $where });
-    }
-    elsif ($type eq 'aliases') {
-      $data = $self->app->email->get_aliases({
-        where => $where,
-        limit => $limit,
-        offset => $offset
-      });
-      $total = $self->app->email->count_aliases({ where => $where });
-    }
-    elsif ($type eq 'quotas') {
-      $data = $self->app->email->get_quotas({
-        where => $where,
-        limit => $limit,
-        offset => $offset
-      });
-      $total = scalar @{$data}; # Quotas don't have a count method
-    }
+  });
+}
 
-    return $self->render(json => {
-      success => 1,
-      type => $type,
-      data => $data,
-      pagination => {
-        page => $page,
-        limit => $limit,
-        total => $total,
-        pages => int(($total + $limit - 1) / $limit)
-      }
-    });
-  }
+# List mailboxes for a domain
+sub mailboxes_index ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
+
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $domain = $self->param('domain');
+  my $searchterm = $self->param('searchterm') || '';
+
+  my $where = {};
+  $where->{domain} = $domain if $domain;
+  $where->{username} = { -like => sprintf('%%%s%%', $searchterm) } if $searchterm;
+
+  my $data = $self->app->email->get_mailboxes({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+  my $total = $self->app->email->count_mailboxes({ where => $where });
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => $total,
+      pages => int(($total + $limit - 1) / $limit)
+    }
+  });
+}
+
+# List aliases
+sub aliases_index ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
+
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $domain = $self->param('domain');
+  my $searchterm = $self->param('searchterm') || '';
+
+  my $where = {};
+  $where->{domain} = $domain if $domain;
+  $where->{address} = { -like => sprintf('%%%s%%', $searchterm) } if $searchterm;
+
+  my $data = $self->app->email->get_aliases({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+  my $total = $self->app->email->count_aliases({ where => $where });
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => $total,
+      pages => int(($total + $limit - 1) / $limit)
+    }
+  });
+}
+
+# List admins
+sub admins_index ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
+
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $searchterm = $self->param('searchterm') || '';
+
+  my $where = {};
+  $where->{username} = { -like => sprintf('%%%s%%', $searchterm) } if $searchterm;
+
+  my $data = $self->app->email->get_admins({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+  my $total = $self->app->email->count_admins({ where => $where });
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => $total,
+      pages => int(($total + $limit - 1) / $limit)
+    }
+  });
+}
+
+# List quotas
+sub quotas_index ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
+
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $searchterm = $self->param('searchterm') || '';
+
+  my $where = {};
+  $where->{username} = { -like => sprintf('%%%s%%', $searchterm) } if $searchterm;
+
+  my $data = $self->app->email->get_quotas({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => scalar @$data,
+      pages => 1
+    }
+  });
 }
 
 # Domain actions
@@ -127,10 +214,18 @@ sub domain ($self) {
     # Get domain statistics
     my $stats = $self->app->email->domain_stats($domain);
 
+    # Check if this is an alias domain (points TO another domain)
+    my $alias_domain = $self->app->email->find_alias_domain($domain);
+
+    # Get alias domains that point TO this domain
+    my $alias_domains = $self->app->email->get_alias_domains_for_target($domain);
+
     return $self->render(json => {
       success => 1,
       domain => $data,
-      stats => $stats
+      stats => $stats,
+      alias_domain => $alias_domain,
+      alias_domains => $alias_domains
     });
   }
   elsif ($method eq 'POST') {
@@ -142,7 +237,32 @@ sub domain ($self) {
       }, status => 400);
     }
 
+    # Check if alias domain
+    my $is_alias = $self->param('isAliasDomain');
+    my $target_domain = $self->param('targetDomain');
+
+    # Validate: target domains cannot become alias domains
+    if ($is_alias && $target_domain) {
+      my $existing_aliases = $self->app->email->get_alias_domains_for_target($formdata->{domain}->{domain});
+      if ($existing_aliases && @$existing_aliases > 0) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__('Cannot make this domain an alias domain - it has alias domains pointing to it')
+        }, status => 400);
+      }
+    }
+
     my $result = $self->app->email->create_domain($formdata->{domain});
+
+    # Create alias domain entry if requested
+    if ($is_alias && $target_domain && $result) {
+      $self->app->email->create_alias_domain({
+        alias_domain => $formdata->{domain}->{domain},
+        target_domain => $target_domain,
+        active => $formdata->{domain}->{active} // 1
+      });
+    }
+
     return $self->render(json => {
       success => 1,
       domain => $result,
@@ -151,6 +271,22 @@ sub domain ($self) {
   }
   elsif ($method eq 'PUT' || $method eq 'PATCH') {
     my $formdata = $self->_formdata('domain');
+
+    # Check if trying to make this an alias domain
+    my $is_alias = $self->param('isAliasDomain');
+    my $target_domain = $self->param('targetDomain');
+
+    # Validate: target domains cannot become alias domains
+    if ($is_alias && $target_domain) {
+      my $existing_aliases = $self->app->email->get_alias_domains_for_target($domain);
+      if ($existing_aliases && @$existing_aliases > 0) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__('Cannot make this domain an alias domain - it has alias domains pointing to it')
+        }, status => 400);
+      }
+    }
+
     my $result = $self->app->email->update_domain($domain, $formdata->{domain});
 
     unless ($result) {
@@ -158,6 +294,32 @@ sub domain ($self) {
         success => 0,
         error => $self->app->__('Failed to update domain')
       }, status => 500);
+    }
+
+    # Handle alias domain changes
+    my $current_alias = $self->app->email->find_alias_domain($domain);
+    if ($is_alias && $target_domain) {
+      if ($current_alias) {
+        # Update existing alias domain if target changed
+        if ($current_alias->{target_domain} ne $target_domain) {
+          $self->app->email->delete_alias_domain($domain);
+          $self->app->email->create_alias_domain({
+            alias_domain => $domain,
+            target_domain => $target_domain,
+            active => $formdata->{domain}->{active} // 1
+          });
+        }
+      } else {
+        # Create new alias domain entry
+        $self->app->email->create_alias_domain({
+          alias_domain => $domain,
+          target_domain => $target_domain,
+          active => $formdata->{domain}->{active} // 1
+        });
+      }
+    } elsif ($current_alias && !$is_alias) {
+      # Remove alias domain entry if unchecked
+      $self->app->email->delete_alias_domain($domain);
     }
 
     return $self->render(json => {
@@ -183,9 +345,139 @@ sub domain ($self) {
   }
 }
 
+# Domain page (full page - new or edit)
+sub domain_page ($self) {
+  my $domain = $self->param('domain');
+  my $accept = $self->req->headers->accept || '';
+
+  # HTML view
+  if ($accept !~ /json/) {
+    $self->stash(docpath => '/email/domain/index.html');
+    my $title = $domain ? $domain : $self->app->__('New domain');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/domain/index', format => 'js');
+
+    # Show sidebar with administrators card when editing existing domain
+    if ($domain) {
+      $web->{sidebar} = $self->render_to_string(template => 'email/domain/sidebar', format => 'html');
+    }
+
+    return $self->render(
+      web => $web,
+      title => $title,
+      template => 'email/domain/index',
+      status => 200
+    );
+  }
+
+  # JSON - redirect to domain action
+  return $self->domain;
+}
+
+# Mailbox page (modal - new or edit) - HTML only, data via OpenAPI
+sub mailbox_page ($self) {
+  my $domain = $self->param('domain');
+  my $username = $self->param('username');
+
+  $self->stash(docpath => '/email/domain/mailbox/index.html');
+  my $title = $username ? $self->app->__('Edit mailbox') : $self->app->__('Add mailbox');
+  my $web = { title => $title };
+  $web->{script} = $self->render_to_string(template => 'email/domain/mailbox/index', format => 'js');
+  return $self->render(
+    web => $web,
+    title => $title,
+    template => 'email/domain/mailbox/index',
+    layout => 'modal',
+    status => 200
+  );
+}
+
+# Admin page (modal - new or edit) - HTML only, data via OpenAPI
+sub admin_page ($self) {
+  my $username = $self->param('username');
+
+  $self->stash(docpath => '/email/admin/index.html');
+  my $title = $username ? $self->app->__('Edit admin') : $self->app->__('Add admin');
+  my $web = { title => $title };
+  $web->{script} = $self->render_to_string(template => 'email/admin/index', format => 'js');
+  return $self->render(
+    web => $web,
+    title => $title,
+    template => 'email/admin/index',
+    layout => 'modal',
+    status => 200
+  );
+}
+
+# Alias page (modal - new or edit) - HTML only, data via OpenAPI
+sub alias_page ($self) {
+  my $address = $self->param('address');
+
+  $self->stash(docpath => '/email/domain/forwarding/index.html');
+  my $title = $address ? $self->app->__('Edit forwarding') : $self->app->__('Add forwarding');
+  my $web = { title => $title };
+  $web->{script} = $self->render_to_string(template => 'email/domain/forwarding/index', format => 'js');
+  return $self->render(
+    web => $web,
+    title => $title,
+    template => 'email/domain/forwarding/index',
+    layout => 'modal',
+    status => 200
+  );
+}
+
+# Domain admins list
+sub domain_admins ($self) {
+  my $domain = $self->param('domain');
+  my $accept = $self->req->headers->accept || '';
+
+  return unless $self->access({ admin => 1 });
+
+  # TODO: Implement domain_admins table lookup
+  return $self->render(json => {
+    success => 1,
+    admins => []
+  });
+}
+
+# Domain admin actions (add/remove admin from domain)
+sub domain_admin ($self) {
+  my $domain = $self->param('domain');
+  my $admin = $self->param('admin');
+  my $method = $self->req->method;
+
+  return unless $self->access({ admin => 1 });
+
+  # TODO: Implement domain_admins table operations
+  return $self->render(json => {
+    success => 1,
+    message => 'Not yet implemented'
+  });
+}
+
+# Get available target domains for alias domain
+sub available_targets ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $customerid = $self->param('customerid');
+  unless ($customerid) {
+    return $self->render(json => {
+      success => 0,
+      error => $self->app->__('Customer ID is required')
+    }, status => 400);
+  }
+
+  my $domains = $self->app->email->get_available_target_domains($customerid);
+  return $self->render(json => {
+    success => 1,
+    domains => $domains
+  });
+}
+
 # Mailbox actions
 sub mailbox ($self) {
   my $username = $self->param('username');
+  my $domain = $self->param('domain');
   my $method = $self->req->method;
 
   return unless $self->access({ admin => 1 });
@@ -215,6 +507,22 @@ sub mailbox ($self) {
         success => 0,
         error => $self->app->__('Username is required')
       }, status => 400);
+    }
+
+    # Normalize and validate username domain
+    my $mailbox_username = $formdata->{mailbox}->{username};
+    if ($mailbox_username !~ /\@/) {
+      # No @ - append current domain
+      $formdata->{mailbox}->{username} = $mailbox_username . '@' . $domain;
+    } elsif ($mailbox_username =~ /\@(.+)$/) {
+      # Has @ - verify domain matches
+      my $username_domain = $1;
+      if (lc($username_domain) ne lc($domain)) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__('Mailbox domain must match the current domain')
+        }, status => 400);
+      }
     }
 
     my $result = $self->app->email->create_mailbox($formdata->{mailbox});
@@ -353,6 +661,83 @@ sub quota ($self) {
     return $self->render(json => {
       success => 1,
       message => $self->app->__('Quota updated successfully')
+    });
+  }
+}
+
+# Admin actions
+sub admin ($self) {
+  my $username = $self->param('username');
+  my $method = $self->req->method;
+
+  return unless $self->access({ admin => 1 });
+
+  if ($method eq 'GET') {
+    my $data = $self->app->email->find_admin($username);
+    unless ($data) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Admin not found')
+      }, status => 404);
+    }
+
+    return $self->render(json => {
+      success => 1,
+      admin => $data
+    });
+  }
+  elsif ($method eq 'POST') {
+    my $json = $self->req->json || {};
+    unless ($json->{username}) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Username is required')
+      }, status => 400);
+    }
+    unless ($json->{password}) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Password is required')
+      }, status => 400);
+    }
+
+    my $result = $self->app->email->create_admin($json);
+    return $self->render(json => {
+      success => 1,
+      admin => $result,
+      message => $self->app->__('Admin created successfully')
+    });
+  }
+  elsif ($method eq 'PUT' || $method eq 'PATCH') {
+    my $json = $self->req->json || {};
+    my $result = $self->app->email->update_admin($username, $json);
+
+    unless ($result) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Failed to update admin')
+      }, status => 500);
+    }
+
+    return $self->render(json => {
+      success => 1,
+      admin => $result,
+      message => $self->app->__('Admin updated successfully')
+    });
+  }
+  elsif ($method eq 'DELETE') {
+    my $result = $self->app->email->delete_admin($username);
+
+    unless ($result) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Failed to delete admin')
+      }, status => 500);
+    }
+
+    return $self->render(json => {
+      success => 1,
+      message => $self->app->__('Admin deleted successfully')
     });
   }
 }

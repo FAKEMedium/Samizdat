@@ -11,33 +11,28 @@ sub register ($self, $app, $conf) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{Email} = $openapi_yaml if $openapi_yaml;
 
-  # Email management routes (HTML pages only - GET)
+  # Email management routes (HTML pages)
+  # Route order: most specific first
   my $manager = $r->manager('email')->to(controller => 'Email');
 
-  # Domain routes
-  $manager->get('/domains/:domain')                          ->to('#domain')                    ->name('email_domain');
-  $manager->get('/domains')                                  ->to('#index', type => 'domains')  ->name('email_domains');
+  # Admin routes (modal)
+  $manager->get('/admin/#username')                          ->to('#admin_page')                ->name('email_admin');
+  $manager->get('/admin')                                    ->to('#admin_page')                ->name('email_admin_new');
 
-  # Mailbox routes (nested under domains)
-  $manager->get('/domains/:domain/mailboxes/:username')      ->to('#mailbox')                   ->name('email_mailbox');
-  $manager->get('/domains/:domain/mailboxes')                ->to('#index', type => 'mailboxes')->name('email_domain_mailboxes');
+  # Domain routes (full page)
+  $manager->get('/domain')                                   ->to('#domain_page')               ->name('email_domain_new');
 
-  # Alias routes
-  $manager->get('/aliases/:address')                         ->to('#alias')                     ->name('email_alias');
-  $manager->get('/aliases')                                  ->to('#index', type => 'aliases')  ->name('email_aliases');
+  # Domain-specific routes (most specific first)
+  $manager->get('/#domain/admins/#admin')                    ->to('#domain_admin')              ->name('email_domain_admin');
+  $manager->get('/#domain/admins')                           ->to('#domain_admins')             ->name('email_domain_admins');
+  $manager->get('/#domain/alias/#address')                   ->to('#alias_page')                ->name('email_alias');
+  $manager->get('/#domain/alias')                            ->to('#alias_page')                ->name('email_alias_new');
+  $manager->get('/#domain/mailbox/#username')                ->to('#mailbox_page')              ->name('email_mailbox');
+  $manager->get('/#domain/mailbox')                          ->to('#mailbox_page')              ->name('email_mailbox_new');
+  $manager->get('/#domain')                                  ->to('#domain_page')               ->name('email_domain');
 
-  # Quota routes
-  $manager->get('/quotas/:username')                         ->to('#quota')                     ->name('email_quota');
-  $manager->get('/quotas')                                   ->to('#index', type => 'quotas')   ->name('email_quotas');
-
+  # Main index
   $manager->get('/')                                         ->to('#index')                     ->name('email_index');
-
-  # Customer-specific email routes (HTML pages only - GET)
-  my $customer = $r->manager('customers/:customerid/email')->to(controller => 'Email');
-  $customer->get('/')                                        ->to('#index')                     ->name('email_customer_index');
-  $customer->get('/domains')                                 ->to('#index', type => 'domains')  ->name('email_customer_domains');
-  $customer->get('/mailboxes')                               ->to('#index', type => 'mailboxes')->name('email_customer_mailboxes');
-  $customer->get('/aliases')                                 ->to('#index', type => 'aliases')  ->name('email_customer_aliases');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
 
@@ -161,9 +156,7 @@ paths:
   /email/domains:
     get:
       operationId: Email.domains.index
-      x-mojo-to: Email#index
-      x-mojo-params:
-        type: domains
+      x-mojo-to: Email#domains_index
       summary: List email domains
       tags: [Email]
       responses:
@@ -190,6 +183,27 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Email_Result'
+
+  /email/domains/available-targets:
+    get:
+      operationId: Email.domains.available_targets
+      x-mojo-to: Email#available_targets
+      summary: Get domains available as alias targets
+      tags: [Email]
+      parameters:
+        - name: customerid
+          in: query
+          required: true
+          schema:
+            type: integer
+          description: Customer ID to filter domains
+      responses:
+        '200':
+          description: List of available target domains
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_DomainListResponse'
 
   /email/domains/{domain}:
     get:
@@ -258,9 +272,7 @@ paths:
   /email/domains/{domain}/mailboxes:
     get:
       operationId: Email.mailboxes.index
-      x-mojo-to: Email#index
-      x-mojo-params:
-        type: mailboxes
+      x-mojo-to: Email#mailboxes_index
       summary: List mailboxes for domain
       tags: [Email]
       parameters:
@@ -318,6 +330,7 @@ paths:
         - name: username
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -342,6 +355,7 @@ paths:
         - name: username
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -371,6 +385,7 @@ paths:
         - name: username
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -381,14 +396,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Email_Result'
 
-  /email/aliases:
+  /email/domains/{domain}/aliases:
     get:
       operationId: Email.aliases.index
-      x-mojo-to: Email#index
-      x-mojo-params:
-        type: aliases
-      summary: List email aliases
+      x-mojo-to: Email#aliases_index
+      summary: List email aliases for domain
       tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
       responses:
         '200':
           description: List of aliases
@@ -401,6 +421,13 @@ paths:
       x-mojo-to: Email#alias
       summary: Create alias
       tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
       requestBody:
         content:
           application/json:
@@ -414,16 +441,23 @@ paths:
               schema:
                 $ref: '#/components/schemas/Email_Result'
 
-  /email/aliases/{address}:
+  /email/domains/{domain}/aliases/{address}:
     get:
       operationId: Email.aliases.get
       x-mojo-to: Email#alias
       summary: Get alias details
       tags: [Email]
       parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
         - name: address
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -439,9 +473,16 @@ paths:
       summary: Update alias
       tags: [Email]
       parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
         - name: address
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -462,9 +503,16 @@ paths:
       summary: Delete alias
       tags: [Email]
       parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
         - name: address
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -478,9 +526,7 @@ paths:
   /email/quotas:
     get:
       operationId: Email.quotas.index
-      x-mojo-to: Email#index
-      x-mojo-params:
-        type: quotas
+      x-mojo-to: Email#quotas_index
       summary: List email quotas
       tags: [Email]
       responses:
@@ -501,6 +547,7 @@ paths:
         - name: username
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -519,6 +566,7 @@ paths:
         - name: username
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       requestBody:
@@ -529,6 +577,101 @@ paths:
       responses:
         '200':
           description: Quota updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/admins:
+    get:
+      operationId: Email.admins.index
+      x-mojo-to: Email#admins_index
+      summary: List email admins
+      tags: [Email]
+      responses:
+        '200':
+          description: List of admins
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_AdminListResponse'
+    post:
+      operationId: Email.admins.create
+      x-mojo-to: Email#admin
+      summary: Create admin
+      tags: [Email]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email_AdminInput'
+      responses:
+        '200':
+          description: Admin created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/admins/{username}:
+    get:
+      operationId: Email.admins.get
+      x-mojo-to: Email#admin
+      summary: Get admin details
+      tags: [Email]
+      parameters:
+        - name: username
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Admin'
+    put:
+      operationId: Email.admins.update
+      x-mojo-to: Email#admin
+      summary: Update admin
+      tags: [Email]
+      parameters:
+        - name: username
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email_AdminInput'
+      responses:
+        '200':
+          description: Admin updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+    delete:
+      operationId: Email.admins.delete
+      x-mojo-to: Email#admin
+      summary: Delete admin
+      tags: [Email]
+      parameters:
+        - name: username
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin deleted
           content:
             application/json:
               schema:
@@ -659,6 +802,49 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Email_Quota'
+    Email_Admin:
+      type: object
+      properties:
+        username:
+          type: string
+        phone:
+          type: string
+        email_other:
+          type: string
+        active:
+          type: boolean
+        superadmin:
+          type: boolean
+        created:
+          type: string
+        modified:
+          type: string
+    Email_AdminInput:
+      type: object
+      required:
+        - username
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+        email_other:
+          type: string
+        active:
+          type: boolean
+        superadmin:
+          type: boolean
+    Email_AdminListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email_Admin'
     Email_Result:
       type: object
       properties:

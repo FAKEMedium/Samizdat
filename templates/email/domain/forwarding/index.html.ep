@@ -1,0 +1,29 @@
+<form id="aliasForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== __('Add forwarding') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="address" class="form-label"><%== __('From address') %></label>
+      <input type="email" id="address" name="address" class="form-control" required placeholder="alias@example.com">
+    </div>
+
+    <div class="mb-3">
+      <label for="goto" class="form-label"><%== __('Forward to') %></label>
+      <input type="text" id="goto" name="goto" class="form-control" required placeholder="user@example.com">
+      <div class="form-text"><%== __('Comma-separated list of email addresses') %></div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="active" name="active" checked>
+      <label class="form-check-label" for="active"><%== __('Active') %></label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Create forwarding') %></button>
+  </div>
+</form>

@@ -1,0 +1,44 @@
+<form id="adminForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== __('Add admin') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="username" class="form-label"><%== __('Username (email)') %></label>
+      <input type="email" id="username" name="username" class="form-control" required placeholder="admin@example.com">
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label"><%== __('Password') %></label>
+      <input type="password" id="password" name="password" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label"><%== __('Phone') %></label>
+      <input type="tel" id="phone" name="phone" class="form-control">
+    </div>
+
+    <div class="mb-3">
+      <label for="email_other" class="form-label"><%== __('Alternative email') %></label>
+      <input type="email" id="email_other" name="email_other" class="form-control">
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="superadmin" name="superadmin">
+      <label class="form-check-label" for="superadmin"><%== __('Superadmin') %></label>
+      <div class="form-text"><%== __('Can manage all domains') %></div>
+    </div>
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="active" name="active" checked>
+      <label class="form-check-label" for="active"><%== __('Active') %></label>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Create admin') %></button>
+  </div>
+</form>
