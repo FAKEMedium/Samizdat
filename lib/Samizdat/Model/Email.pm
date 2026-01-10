@@ -400,6 +400,15 @@ sub count_admins ($self, $params = {}) {
   return $result->{count} || 0;
 }
 
+sub get_admin_domains ($self, $username) {
+  return $self->database->query(
+    'SELECT da.domain, d.description FROM postfix.domain_admins da
+     JOIN postfix.domain d ON d.domain = da.domain
+     WHERE da.username = ? AND da.active ORDER BY da.domain',
+    $username
+  )->hashes->to_array;
+}
+
 sub _hash_password ($self, $password) {
   # Use dovecot-compatible Argon2id password hashing
   require Crypt::Argon2;

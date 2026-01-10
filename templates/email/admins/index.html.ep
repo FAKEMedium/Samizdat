@@ -19,6 +19,7 @@
   <thead>
     <tr>
       <th><%== __('Username') %></th>
+      <th><%== __('Domains') %></th>
       <th><%== __('Active') %></th>
       <th><%== __('Superadmin') %></th>
       <th class="text-end"><%== __('Actions') %></th>
@@ -27,6 +28,20 @@
   <tbody id="adminsList">
   </tbody>
 </table>
+
+<div class="modal fade" id="domainsModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Managed domains') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="domainsList" class="list-group"></ul>
+      </div>
+    </div>
+  </div>
+</div>
 
 <nav id="pagination" aria-label="<%== __('Page navigation') %>">
   <ul class="pagination justify-content-center">
