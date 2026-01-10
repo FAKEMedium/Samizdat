@@ -148,11 +148,8 @@ async function sendData(method, customerid = 0) {
   try {
     const response = await fetch(url, request);
     if (!response.ok) {
-      if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || 'Authentication required');
-        window.location.href = '<%== url_for('account_login') %>';
-      } else {
+      // 401 errors are handled by global fetch interceptor in apidom.js
+      if (response.status !== 401) {
         alert('Request failed: ' + response.statusText);
       }
     } else {
@@ -195,11 +192,8 @@ window.getId = async function getId(what, customerid = 0) {
   try {
     const response = await fetch(url, request);
     if (!response.ok) {
-      if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || 'Authentication required');
-        window.location.href = '<%== url_for('account_login') %>';
-      } else {
+      // 401 errors are handled by global fetch interceptor in apidom.js
+      if (response.status !== 401) {
         alert('Request failed: ' + response.statusText);
       }
       return false;
