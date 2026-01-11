@@ -66,7 +66,7 @@ A frontend to PowerDNS Authoritative Server, using API with optional extra suppo
 ### Email
 
 A frontend to Postfix mail server, using Dovecot for IMAP/POP3 access and PostgreSQL backend.
-It's intended to be a drop-in replacement for Postfixadmin, but with extensions
+It's intended to be a drop-in replacement for [Postfixadmin](https://github.com/postfixadmin/postfixadmin), but with extensions
 like customer connection.
 
 - Create, edit and delete domains
