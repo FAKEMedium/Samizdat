@@ -216,6 +216,11 @@
     }
   });
 
+  // Reload data when modal closes (keeps current page)
+  document.getElementById('universalmodal')?.addEventListener('hidden.bs.modal', () => {
+    loadData();
+  });
+
   // Initial load
   loadData();
 })();

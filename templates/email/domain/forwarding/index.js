@@ -102,7 +102,6 @@
       window.showToast(result.message || '<%== __("Alias saved successfully") %>');
       const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
       if (modal) modal.hide();
-      setTimeout(() => location.reload(), 500);
     } else {
       const error = result?.error || '<%== __("Failed to save alias") %>';
       // Check if error is about goto field
