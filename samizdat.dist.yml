@@ -138,6 +138,11 @@ manager:
   email:
     cardnumber: 7
     dbtype: mysql
+    domain:
+      aliases: 0                # Default max aliases per domain
+      mailboxes: 0              # Default max mailboxes per domain
+      maxquota: 15000           # Default max quota per mailbox in MB
+      quota: 2000000            # Default total quota per domain in MB
   product:
     cardnumber: 8
     dbtype: postgresql

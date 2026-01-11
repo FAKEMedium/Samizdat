@@ -25,3 +25,4 @@
 </form>
 <a id="newDomainBtn" class="badge rounded-pill text-bg-primary"><%== icon 'plus', {} %> <%== __('Add domain') %></a>
 <a id="newAdminBtn" class="badge rounded-pill text-bg-primary"><%== icon 'plus', {} %> <%== __('Add admin') %></a>
+<a id="logBtn" class="badge rounded-pill text-bg-primary" href="<%== url_for('email_log') %>"><%== icon 'plus', {} %> <%== __('Log') %></a>

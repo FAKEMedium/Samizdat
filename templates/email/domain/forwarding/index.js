@@ -39,18 +39,45 @@
     if (data && data.alias) {
       const a = data.alias;
       addressInput.value = a.address || '';
-      gotoInput.value = a.goto || '';
+      // Display emails one per line for readability
+      gotoInput.value = (a.goto || '').split(',').map(s => s.trim()).join('\n');
       document.getElementById('active').checked = a.active !== false;
     }
   }
 
+  // Parse goto field: split by comma, newline, or whitespace and clean up
+  function parseGoto(value) {
+    return value
+      .split(/[\s,]+/)
+      .map(s => s.trim())
+      .filter(s => s && s.includes('@'))
+      .join(',');
+  }
+
+  // Clear validation state
+  function clearValidation() {
+    gotoInput.classList.remove('is-invalid');
+    document.getElementById('gotoFeedback').textContent = '';
+  }
+
+  // Show validation error
+  function showError(field, message) {
+    field.classList.add('is-invalid');
+    const feedback = document.getElementById(field.id + 'Feedback');
+    if (feedback) feedback.textContent = message;
+  }
+
+  // Clear on input
+  gotoInput.addEventListener('input', clearValidation);
+
   // Form submission
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+    clearValidation();
 
     const formData = {
       address: addressInput.value,
-      goto: gotoInput.value,
+      goto: parseGoto(gotoInput.value),
       active: document.getElementById('active').checked
     };
 
@@ -77,7 +104,13 @@
       if (modal) modal.hide();
       setTimeout(() => location.reload(), 500);
     } else {
-      window.showToast(result?.error || '<%== __("Failed to save alias") %>', 'danger');
+      const error = result?.error || '<%== __("Failed to save alias") %>';
+      // Check if error is about goto field
+      if (error.toLowerCase().includes('email') || error.toLowerCase().includes('forward') || error.toLowerCase().includes('address')) {
+        showError(gotoInput, error);
+      } else {
+        window.showToast(error, 'danger');
+      }
     }
   });
 

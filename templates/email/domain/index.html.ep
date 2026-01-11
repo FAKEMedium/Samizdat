@@ -39,6 +39,29 @@
     </div>
   </div>
 
+  <div class="row" id="limitsRow">
+    <div class="col-md-3 mb-3">
+      <label for="aliases" class="form-label"><%== __('Forwards') %></label>
+      <input type="number" id="aliases" name="aliases" class="form-control" value="<%== $c->app->config->{manager}->{email}->{domain}->{aliases} // 0 %>">
+      <div class="form-text">-1 = <%== __('disable') %>, 0 = <%== __('unlimited') %></div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="mailboxes" class="form-label"><%== __('Mailboxes') %></label>
+      <input type="number" id="mailboxes" name="mailboxes" class="form-control" value="<%== $c->app->config->{manager}->{email}->{domain}->{mailboxes} // 0 %>">
+      <div class="form-text">-1 = <%== __('disable') %>, 0 = <%== __('unlimited') %></div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="maxquota" class="form-label"><%== __('Mailbox quota') %> (MB)</label>
+      <input type="number" id="maxquota" name="maxquota" class="form-control" value="<%== $c->app->config->{manager}->{email}->{domain}->{maxquota} // 0 %>">
+      <div class="form-text">-1 = <%== __('disable') %>, 0 = <%== __('unlimited') %></div>
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="quota" class="form-label"><%== __('Domain quota') %> (MB)</label>
+      <input type="number" id="quota" name="quota" class="form-control" value="<%== $c->app->config->{manager}->{email}->{domain}->{quota} // 0 %>">
+      <div class="form-text">-1 = <%== __('disable') %>, 0 = <%== __('unlimited') %></div>
+    </div>
+  </div>
+
   <div class="d-flex gap-2">
     <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Save') %></button>
     <button type="button" class="btn btn-danger" id="deleteBtn" style="display: none;"><%== __('Delete') %></button>
@@ -97,4 +120,52 @@
     <tbody id="aliasesList">
     </tbody>
   </table>
+</div>
+
+<div class="modal fade" id="vacationModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Vacation / Auto-reply') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <form id="vacationForm">
+          <input type="hidden" id="vacationEmail">
+          <div class="mb-3">
+            <label for="vacationSubject" class="form-label"><%== __('Subject') %></label>
+            <input type="text" class="form-control" id="vacationSubject" placeholder="<%== __('Out of office') %>">
+          </div>
+          <div class="mb-3">
+            <label for="vacationBody" class="form-label"><%== __('Message') %></label>
+            <textarea class="form-control" id="vacationBody" rows="4"></textarea>
+          </div>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="vacationFrom" class="form-label"><%== __('Active from') %></label>
+              <input type="date" class="form-control" id="vacationFrom">
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="vacationUntil" class="form-label"><%== __('Active until') %></label>
+              <input type="date" class="form-control" id="vacationUntil">
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="vacationInterval" class="form-label"><%== __('Reply interval (seconds)') %></label>
+            <input type="number" class="form-control" id="vacationInterval" value="0" min="0">
+            <div class="form-text"><%== __('0 = reply once per sender') %></div>
+          </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="vacationActive">
+            <label class="form-check-label" for="vacationActive"><%== __('Active') %></label>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger me-auto" id="deleteVacationBtn" style="display: none;"><%== __('Delete') %></button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+        <button type="button" class="btn btn-primary" id="saveVacationBtn"><%== __('Save') %></button>
+      </div>
+    </div>
+  </div>
 </div>

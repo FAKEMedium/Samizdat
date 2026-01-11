@@ -38,33 +38,144 @@
       const active = a.active ? '<span class="badge bg-success"><%== __("Yes") %></span>' : '<span class="badge bg-secondary"><%== __("No") %></span>';
       const superadmin = a.superadmin ? '<span class="badge bg-primary"><%== __("Yes") %></span>' : '<span class="badge bg-secondary"><%== __("No") %></span>';
       const domainCount = a.domains?.length || 0;
-      const domainBadge = domainCount > 0
-        ? `<a href="#" class="badge bg-info text-decoration-none" data-admin-idx="${idx}">${domainCount}</a>`
-        : '<span class="badge bg-secondary">0</span>';
+      const domainBadge = `<a href="#" class="badge ${domainCount > 0 ? 'bg-info' : 'bg-secondary'} text-decoration-none" data-admin-idx="${idx}">${domainCount}</a>`;
       return `<tr>
         <td>${a.username}</td>
         <td>${domainBadge}</td>
         <td>${active}</td>
         <td>${superadmin}</td>
-        <td class="text-end"><a href="${url}" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'pencil-fill', {} %></a></td>
+        <td class="text-end">
+          <a href="${url}" class="btn btn-sm btn-secondary" data-bs-toggle="modal" data-bs-target="#universalmodal"><%== icon 'pencil-fill', {} %></a>
+          <button type="button" class="btn btn-sm btn-danger btn-delete-admin" data-username="${a.username}"><%== icon 'trash-fill', {} %></button>
+        </td>
       </tr>`;
     }).join('');
   }
 
-  // Handle domain badge clicks
-  document.getElementById('adminsList').addEventListener('click', (e) => {
+  // Current admin being edited in modal
+  let currentModalAdmin = null;
+  let allDomains = [];
+
+  // Fetch all domains for search (exclude alias domains)
+  async function fetchAllDomains() {
+    const data = await window.authenticatedFetch('<%== url_for("Email.domains.index") %>?limit=1000&exclude_alias_domains=1');
+    allDomains = data?.data || [];
+  }
+
+  // Render managed domains list with remove buttons
+  function renderManagedDomains(admin) {
+    const list = document.getElementById('domainsList');
+    if (!admin.domains?.length) {
+      list.innerHTML = '<li class="list-group-item text-muted"><%== __("No domains") %></li>';
+      return;
+    }
+    list.innerHTML = admin.domains.map(d => {
+      const href = `<%== url_for('email_domain', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(d.domain));
+      return `<li class="list-group-item d-flex justify-content-between align-items-center">
+        <a href="${href}">${d.domain}${d.description ? ' <small class="text-muted">- ' + d.description + '</small>' : ''}</a>
+        <button type="button" class="btn btn-sm btn-outline-danger btn-remove-domain" data-domain="${d.domain}"><%== icon 'x', {} %></button>
+      </li>`;
+    }).join('');
+  }
+
+  // Filter and render search results
+  function renderSearchResults(searchTerm) {
+    const results = document.getElementById('domainSearchResults');
+    if (!searchTerm) {
+      results.innerHTML = '';
+      return;
+    }
+    const managedDomains = new Set((currentModalAdmin?.domains || []).map(d => d.domain));
+    const filtered = allDomains
+      .filter(d => d.domain.toLowerCase().includes(searchTerm.toLowerCase()) && !managedDomains.has(d.domain))
+      .slice(0, 10);
+    if (!filtered.length) {
+      results.innerHTML = '<li class="list-group-item text-muted"><%== __("No results") %></li>';
+      return;
+    }
+    results.innerHTML = filtered.map(d =>
+      `<li class="list-group-item d-flex justify-content-between align-items-center">
+        ${d.domain}${d.description ? ' <small class="text-muted">- ' + d.description + '</small>' : ''}
+        <button type="button" class="btn btn-sm btn-outline-success btn-add-domain" data-domain="${d.domain}"><%== icon 'plus', {} %></button>
+      </li>`
+    ).join('');
+  }
+
+  // Handle table clicks (domain badges and delete buttons)
+  document.getElementById('adminsList').addEventListener('click', async (e) => {
+    // Domain badge click - open modal
     const badge = e.target.closest('[data-admin-idx]');
     if (badge) {
       e.preventDefault();
       const idx = parseInt(badge.dataset.adminIdx);
-      const admin = adminsData[idx];
-      if (admin?.domains?.length) {
-        const list = document.getElementById('domainsList');
-        list.innerHTML = admin.domains.map(d => {
-          const href = `<%== url_for('email_domain', domain => '_DOM_') %>`.replace('_DOM_', encodeURIComponent(d.domain));
-          return `<a href="${href}" class="list-group-item list-group-item-action">${d.domain}${d.description ? ' <small class="text-muted">- ' + d.description + '</small>' : ''}</a>`;
-        }).join('');
-        new bootstrap.Modal(document.getElementById('domainsModal')).show();
+      currentModalAdmin = adminsData[idx];
+      document.getElementById('domainSearch').value = '';
+      document.getElementById('domainSearchResults').innerHTML = '';
+      renderManagedDomains(currentModalAdmin);
+      if (!allDomains.length) await fetchAllDomains();
+      new bootstrap.Modal(document.getElementById('domainsModal')).show();
+      return;
+    }
+
+    // Delete admin button click
+    const deleteBtn = e.target.closest('.btn-delete-admin');
+    if (deleteBtn) {
+      const username = deleteBtn.dataset.username;
+      if (!confirm(`<%== __("Delete admin") %> ${username}?`)) return;
+
+      const result = await window.authenticatedFetch(
+        `<%== url_for('Email.admins.delete', username => '_USR_') %>`.replace('_USR_', encodeURIComponent(username)),
+        { method: 'DELETE' }
+      );
+      if (result?.success) {
+        window.showToast(result.message);
+        loadData();
+      } else {
+        window.showToast(result?.error || '<%== __("Failed to delete admin") %>', 'danger');
+      }
+    }
+  });
+
+  // Domain search input
+  document.getElementById('domainSearch').addEventListener('input', (e) => {
+    renderSearchResults(e.target.value);
+  });
+
+  // Handle add/remove domain in modal
+  document.getElementById('domainsModal').addEventListener('click', async (e) => {
+    const addBtn = e.target.closest('.btn-add-domain');
+    if (addBtn && currentModalAdmin) {
+      const domain = addBtn.dataset.domain;
+      const result = await window.authenticatedFetch(
+        `<%== url_for('Email.domain_admins.add', domain => '_DOM_', admin => '_ADM_') %>`.replace('_DOM_', encodeURIComponent(domain)).replace('_ADM_', encodeURIComponent(currentModalAdmin.username)),
+        { method: 'POST' }
+      );
+      if (result?.success) {
+        currentModalAdmin.domains = currentModalAdmin.domains || [];
+        currentModalAdmin.domains.push({ domain });
+        renderManagedDomains(currentModalAdmin);
+        document.getElementById('domainSearch').value = '';
+        renderSearchResults('');
+        loadData(); // Refresh table
+      } else {
+        window.showToast(result?.error || '<%== __("Failed to add domain") %>', 'danger');
+      }
+      return;
+    }
+
+    const removeBtn = e.target.closest('.btn-remove-domain');
+    if (removeBtn && currentModalAdmin) {
+      const domain = removeBtn.dataset.domain;
+      const result = await window.authenticatedFetch(
+        `<%== url_for('Email.domain_admins.remove', domain => '_DOM_', admin => '_ADM_') %>`.replace('_DOM_', encodeURIComponent(domain)).replace('_ADM_', encodeURIComponent(currentModalAdmin.username)),
+        { method: 'DELETE' }
+      );
+      if (result?.success) {
+        currentModalAdmin.domains = currentModalAdmin.domains.filter(d => d.domain !== domain);
+        renderManagedDomains(currentModalAdmin);
+        loadData(); // Refresh table
+      } else {
+        window.showToast(result?.error || '<%== __("Failed to remove domain") %>', 'danger');
       }
     }
   });

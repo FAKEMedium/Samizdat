@@ -12,8 +12,9 @@
 
     <div class="mb-3">
       <label for="goto" class="form-label"><%== __('Forward to') %></label>
-      <input type="text" id="goto" name="goto" class="form-control" required placeholder="user@example.com">
-      <div class="form-text"><%== __('Comma-separated list of email addresses') %></div>
+      <textarea id="goto" name="goto" class="form-control" rows="3" required placeholder="user@example.com"></textarea>
+      <div class="invalid-feedback" id="gotoFeedback"></div>
+      <div class="form-text"><%== __('One email per line, or separated by comma/space') %></div>
     </div>
 
     <div class="mb-3 form-check">
