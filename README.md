@@ -66,7 +66,17 @@ A frontend to PowerDNS Authoritative Server, using API with optional extra suppo
 ### Email
 
 A frontend to Postfix mail server, using Dovecot for IMAP/POP3 access and PostgreSQL backend.
-This module is still under development. It's intended to be a drop-in replacement for Postfixadmin.
+It's intended to be a drop-in replacement for Postfixadmin, but with extensions
+like customer connection.
+
+- Create, edit and delete domains
+- Create, edit and delete mailboxes
+- Create, edit and delete aliases and forwards
+- Create, edit and delete admins
+- Password management with secure hashing (Dovecot compatible argon2id)
+- Vacation auto-replies
+- Quota management for mailboxes
+- Logging
 
 
 ### Domains
@@ -125,6 +135,7 @@ When enabled, other modules can use this for sending SMS notifications, 2FA code
 - JavaScript (ES6) for client-side interactivity
 - CSS3
 - HTML5
+- OpenAPI/REST for API endpoints handling data
 - Git for version control
 - [Bootstrap 5](https://getbootstrap.com/) for UI components and layout
 - PostgreSQL for data storage
@@ -140,7 +151,6 @@ When enabled, other modules can use this for sending SMS notifications, 2FA code
 
 ### Plans for future development
 
-- [OpenAPI/Swagger](https://github.com/jhthorsen/mojolicious-plugin-openapi) endpoints/documentation for the API
 - ActivityPub support for decentralized publishing
 - More payment gateways
 - Additional hosting modules (e.g., FTP, Certificates, Databases)
