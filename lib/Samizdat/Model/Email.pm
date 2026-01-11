@@ -71,7 +71,7 @@ sub create_domain ($self, $data) {
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
   my $result = $tx->db->insert('postfix.domain', $data, {returning => '*'})->hash;
-  $self->_log($tx->db, 'create_domain', $result->{domain}, {domain => $result->{domain}});
+  $self->_log($tx->db, 'create_domain', $result->{domain}, $result->{domain});
   $tx->commit;
   return $result;
 }
@@ -81,13 +81,21 @@ sub update_domain ($self, $domain, $data) {
   my $tx = $db->begin;
   $data->{modified} = \'NOW()';
   my $result = $tx->db->update('postfix.domain', $data, {domain => $domain}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'edit_domain', $domain, $data);
+  $self->_log($tx->db, 'edit_domain', $domain, $domain);
   $tx->commit;
   return $result;
 }
 
 sub delete_domain ($self, $domain) {
   my $db = $self->database;
+
+  # Check if domain has alias domains pointing to it
+  my $alias_domains = $db->select('postfix.alias_domain', ['alias_domain'], {target_domain => $domain})->hashes->to_array;
+  if (@$alias_domains) {
+    my @names = map { $_->{alias_domain} } @$alias_domains;
+    die "Cannot delete domain '$domain': has alias domains (" . join(', ', @names) . ")\n";
+  }
+
   my $tx = $db->begin;
 
   # Delete all aliases for this domain
@@ -99,12 +107,9 @@ sub delete_domain ($self, $domain) {
   # Delete alias_domain entry if this domain is an alias domain
   $tx->db->delete('postfix.alias_domain', {alias_domain => $domain});
 
-  # Delete alias_domain entries where this domain is the target
-  $tx->db->delete('postfix.alias_domain', {target_domain => $domain});
-
   # Delete the domain itself
   my $result = $tx->db->delete('postfix.domain', {domain => $domain}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_domain', $domain, {domain => $domain});
+  $self->_log($tx->db, 'delete_domain', $domain, $domain);
   $tx->commit;
 
   return $result;
@@ -164,7 +169,7 @@ sub create_mailbox ($self, $data) {
   $data->{maildir} ||= $data->{username} . '/';
 
   my $result = $tx->db->insert('postfix.mailbox', $data, {returning => '*'})->hash;
-  $self->_log($tx->db, 'create_mailbox', $result->{domain}, {username => $result->{username}});
+  $self->_log($tx->db, 'create_mailbox', $result->{domain}, $result->{username});
   $tx->commit;
   return $result;
 }
@@ -174,7 +179,7 @@ sub update_mailbox ($self, $username, $data) {
   my $tx = $db->begin;
   $data->{modified} = \'NOW()';
   my $result = $tx->db->update('postfix.mailbox', $data, {username => $username}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'edit_mailbox', $result->{domain}, {username => $username});
+  $self->_log($tx->db, 'edit_mailbox', $result->{domain}, $username);
   $tx->commit;
   return $result;
 }
@@ -196,7 +201,7 @@ sub delete_mailbox ($self, $username) {
   }
 
   my $result = $tx->db->delete('postfix.mailbox', {username => $username}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_mailbox', $domain, {username => $username});
+  $self->_log($tx->db, 'delete_mailbox', $domain, $username);
   $tx->commit;
 
   return $result;
@@ -255,7 +260,10 @@ sub create_alias ($self, $data) {
   }
 
   my $result = $tx->db->insert('postfix.alias', $data, {returning => '*'})->hash;
-  $self->_log($tx->db, 'create_alias', $result->{domain}, {address => $result->{address}, goto => $result->{goto}});
+  # Log each forward target separately
+  for my $goto (split /,/, $result->{goto}) {
+    $self->_log($tx->db, 'create_alias', $result->{domain}, "$result->{address} -> $goto");
+  }
   $tx->commit;
   return $result;
 }
@@ -265,7 +273,10 @@ sub update_alias ($self, $address, $data) {
   my $tx = $db->begin;
   $data->{modified} = \'NOW()';
   my $result = $tx->db->update('postfix.alias', $data, {address => $address}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'edit_alias', $result->{domain}, {address => $address, goto => $data->{goto}});
+  # Log each forward target separately
+  for my $goto (split /,/, $result->{goto}) {
+    $self->_log($tx->db, 'edit_alias', $result->{domain}, "$address -> $goto");
+  }
   $tx->commit;
   return $result;
 }
@@ -275,7 +286,7 @@ sub delete_alias ($self, $address) {
   my $tx = $db->begin;
   my ($domain) = $address =~ /\@(.+)$/;
   my $result = $tx->db->delete('postfix.alias', {address => $address}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_alias', $domain, {address => $address});
+  $self->_log($tx->db, 'delete_alias', $domain, $address);
   $tx->commit;
   return $result;
 }
@@ -348,7 +359,9 @@ sub create_alias_domain ($self, $data) {
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
   my $result = $tx->db->insert('postfix.alias_domain', $data, {returning => '*'})->hash;
-  $self->_log($tx->db, 'create_alias_domain', $result->{alias_domain}, {target_domain => $result->{target_domain}});
+  # Log to both domains
+  $self->_log($tx->db, 'create_alias_domain', $result->{alias_domain}, $result->{target_domain});
+  $self->_log($tx->db, 'create_alias_domain', $result->{target_domain}, $result->{alias_domain});
   $tx->commit;
   return $result;
 }
@@ -357,7 +370,9 @@ sub delete_alias_domain ($self, $domain) {
   my $db = $self->database;
   my $tx = $db->begin;
   my $result = $tx->db->delete('postfix.alias_domain', {alias_domain => $domain}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_alias_domain', $domain, {target_domain => $result->{target_domain}});
+  # Log to both domains
+  $self->_log($tx->db, 'delete_alias_domain', $domain, $result->{target_domain});
+  $self->_log($tx->db, 'delete_alias_domain', $result->{target_domain}, $domain);
   $tx->commit;
   return $result;
 }
@@ -433,7 +448,7 @@ sub create_admin ($self, $data) {
     $data->{password} = $self->_hash_password($data->{password});
   }
   my $result = $tx->db->insert('postfix.admin', $data, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
-  $self->_log($tx->db, 'create_admin', '', {username => $result->{username}});
+  $self->_log($tx->db, 'create_admin', '', $result->{username});
   $tx->commit;
   return $result;
 }
@@ -447,7 +462,7 @@ sub update_admin ($self, $username, $data) {
     $data->{password} = $self->_hash_password($data->{password});
   }
   my $result = $tx->db->update('postfix.admin', $data, {username => $username}, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
-  $self->_log($tx->db, 'edit_admin', '', {username => $username});
+  $self->_log($tx->db, 'edit_admin', '', $username);
   $tx->commit;
   return $result;
 }
@@ -458,7 +473,7 @@ sub delete_admin ($self, $username) {
   # Delete domain_admins connections first
   $tx->db->delete('postfix.domain_admins', {username => $username});
   my $result = $tx->db->delete('postfix.admin', {username => $username}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_admin', '', {username => $username});
+  $self->_log($tx->db, 'delete_admin', '', $username);
   $tx->commit;
   return $result;
 }

@@ -448,6 +448,7 @@
       if (result && result.success) {
         window.showToast(result.message);
         loadDomain(); // Reload to refresh alias domains list
+        loadDomainLog();
       } else {
         window.showToast(result?.error || '<%== __("Failed to delete alias domain") %>', 'danger');
       }

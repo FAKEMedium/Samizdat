@@ -408,7 +408,16 @@ sub domain ($self) {
     });
   }
   elsif ($method eq 'DELETE') {
-    my $result = $self->app->email->delete_domain($domain);
+    my $result = eval { $self->app->email->delete_domain($domain) };
+
+    if ($@) {
+      my $error = $@;
+      $error =~ s/\s+at .+ line \d+.*//s;  # Clean up die message
+      return $self->render(json => {
+        success => 0,
+        error => $error
+      }, status => 400);
+    }
 
     unless ($result) {
       return $self->render(json => {
