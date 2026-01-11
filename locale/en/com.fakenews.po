@@ -32,6 +32,9 @@ msgstr "&copy;{year}&nbsp;{author}"
 msgid "(No parent - top level)"
 msgstr ""
 
+msgid "0 = reply once per sender"
+msgstr ""
+
 msgid "1 Year"
 msgstr ""
 
@@ -127,6 +130,9 @@ msgstr "Account confirmation"
 msgid "Account settings"
 msgstr ""
 
+msgid "Action"
+msgstr ""
+
 msgid "Actions"
 msgstr "Actions"
 
@@ -139,6 +145,12 @@ msgstr ""
 msgid "Active"
 msgstr ""
 
+msgid "Active from"
+msgstr ""
+
+msgid "Active until"
+msgstr ""
+
 msgid "Add"
 msgstr ""
 
@@ -149,6 +161,9 @@ msgid "Add Column Before"
 msgstr ""
 
 msgid "Add Key"
+msgstr ""
+
+msgid "Add New"
 msgstr ""
 
 msgid "Add New Key"
@@ -169,6 +184,9 @@ msgstr ""
 msgid "Add certificate"
 msgstr ""
 
+msgid "Add contact"
+msgstr ""
+
 msgid "Add content"
 msgstr ""
 
@@ -182,6 +200,9 @@ msgid "Add domain"
 msgstr ""
 
 msgid "Add example"
+msgstr ""
+
+msgid "Add forwarding"
 msgstr ""
 
 msgid "Add grop"
@@ -209,6 +230,9 @@ msgid "Add poll"
 msgstr ""
 
 msgid "Add product"
+msgstr ""
+
+msgid "Add side content"
 msgstr ""
 
 msgid "Add subscription"
@@ -247,6 +271,12 @@ msgstr ""
 msgid "Address is required"
 msgstr ""
 
+msgid "Address line 1"
+msgstr ""
+
+msgid "Address line 2 (optional)"
+msgstr ""
+
 msgid "Admin"
 msgstr ""
 
@@ -262,7 +292,28 @@ msgstr ""
 msgid "Admin contact"
 msgstr ""
 
+msgid "Admin created successfully"
+msgstr ""
+
+msgid "Admin deleted successfully"
+msgstr ""
+
+msgid "Admin not found"
+msgstr ""
+
+msgid "Admin saved successfully"
+msgstr ""
+
+msgid "Admin updated successfully"
+msgstr ""
+
 msgid "Admininistration panel"
+msgstr ""
+
+msgid "Administrators"
+msgstr ""
+
+msgid "Admins"
 msgstr ""
 
 msgid "Advertising"
@@ -287,6 +338,12 @@ msgid "Alias created successfully"
 msgstr ""
 
 msgid "Alias deleted successfully"
+msgstr ""
+
+msgid "Alias domain"
+msgstr ""
+
+msgid "Alias domains"
 msgstr ""
 
 msgid "Alias not found"
@@ -316,6 +373,9 @@ msgstr ""
 msgid "All accounts"
 msgstr ""
 
+msgid "All actions"
+msgstr ""
+
 msgid "All customers"
 msgstr ""
 
@@ -325,10 +385,16 @@ msgstr ""
 msgid "Allow cookies to paste confirmation code from email"
 msgstr ""
 
+msgid "Alternative email"
+msgstr ""
+
 msgid "Amount"
 msgstr ""
 
 msgid "Amount and items are required"
+msgstr ""
+
+msgid "Amount due"
 msgstr ""
 
 msgid "Amount in Swedish Kronor"
@@ -359,6 +425,12 @@ msgid "An error occurred during login. Please try again."
 msgstr ""
 
 msgid "An error occurred. Please try again."
+msgstr ""
+
+msgid "Apply"
+msgstr ""
+
+msgid "Are you sure you want to delete contact"
 msgstr ""
 
 msgid "Are you sure you want to delete this alias?"
@@ -413,6 +485,9 @@ msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
 msgstr ""
 
 msgid "At least 8 characters including capitals and digits"
+msgstr ""
+
+msgid "At least one valid forward address is required"
 msgstr ""
 
 msgid "At least {min} characters from: {chars}"
@@ -538,6 +613,9 @@ msgstr ""
 msgid "Basic Information"
 msgstr ""
 
+msgid "Billable Items"
+msgstr ""
+
 msgid "Billing"
 msgstr ""
 
@@ -598,7 +676,22 @@ msgstr ""
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr ""
 
+msgid "Can manage all domains"
+msgstr ""
+
 msgid "Cancel"
+msgstr ""
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
 msgstr ""
 
 msgid "Captcha code from image"
@@ -691,6 +784,9 @@ msgstr ""
 msgid "City (billing)"
 msgstr ""
 
+msgid "Clear"
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr ""
 
@@ -704,6 +800,9 @@ msgid "Click to pop reminder dialog."
 msgstr ""
 
 msgid "Click to regenerate PDF."
+msgstr ""
+
+msgid "Click to register payment."
 msgstr ""
 
 msgid "Click to search matching records."
@@ -823,13 +922,22 @@ msgstr ""
 msgid "Contact created"
 msgstr ""
 
+msgid "Contact created successfully"
+msgstr ""
+
 msgid "Contact deleted"
+msgstr ""
+
+msgid "Contact deleted successfully"
 msgstr ""
 
 msgid "Contact details"
 msgstr ""
 
 msgid "Contact not found"
+msgstr ""
+
+msgid "Contact updated successfully"
 msgstr ""
 
 msgid "Contact {sender} if you have questions."
@@ -880,13 +988,25 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
+msgid "Create Contact"
+msgstr ""
+
 msgid "Create Payment"
+msgstr ""
+
+msgid "Create admin"
 msgstr ""
 
 msgid "Create contact"
 msgstr ""
 
 msgid "Create customer"
+msgstr ""
+
+msgid "Create forwarding"
+msgstr ""
+
+msgid "Create mailbox"
 msgstr ""
 
 msgid "Create new record"
@@ -937,6 +1057,12 @@ msgstr ""
 msgid "Currency"
 msgstr ""
 
+msgid "Current Prices"
+msgstr ""
+
+msgid "Currently managed"
+msgstr ""
+
 msgid "Customer"
 msgstr ""
 
@@ -944,6 +1070,9 @@ msgid "Customer #{customerid}"
 msgstr ""
 
 msgid "Customer ID"
+msgstr ""
+
+msgid "Customer ID is required"
 msgstr ""
 
 msgid "Customer Id"
@@ -1003,6 +1132,9 @@ msgstr ""
 msgid "Dark"
 msgstr ""
 
+msgid "Data"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr ""
 
@@ -1054,10 +1186,28 @@ msgstr ""
 msgid "Delete Table"
 msgstr ""
 
+msgid "Delete admin"
+msgstr ""
+
+msgid "Delete this alias domain?"
+msgstr ""
+
+msgid "Delete this alias?"
+msgstr ""
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr ""
+
+msgid "Delete this mailbox?"
+msgstr ""
+
 msgid "Delete this record?"
 msgstr ""
 
 msgid "Delete this template and all its records?"
+msgstr ""
+
+msgid "Delete vacation settings?"
 msgstr ""
 
 msgid "Delivery Address"
@@ -1099,6 +1249,9 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
+msgid "Display name"
+msgstr ""
+
 msgid "Do not renew"
 msgstr ""
 
@@ -1120,7 +1273,13 @@ msgstr ""
 msgid "Domain Name"
 msgstr ""
 
+msgid "Domain added successfully"
+msgstr ""
+
 msgid "Domain created successfully"
+msgstr ""
+
+msgid "Domain deleted"
 msgstr ""
 
 msgid "Domain deleted successfully"
@@ -1138,6 +1297,9 @@ msgstr ""
 msgid "Domain not found"
 msgstr ""
 
+msgid "Domain quota"
+msgstr ""
+
 msgid "Domain registered"
 msgstr ""
 
@@ -1145,6 +1307,9 @@ msgid "Domain registration"
 msgstr ""
 
 msgid "Domain registtration"
+msgstr ""
+
+msgid "Domain removed successfully"
 msgstr ""
 
 msgid "Domain required"
@@ -1213,7 +1378,19 @@ msgstr ""
 msgid "Edit Record"
 msgstr ""
 
+msgid "Edit admin"
+msgstr ""
+
+msgid "Edit contact"
+msgstr ""
+
 msgid "Edit customer {customerid}"
+msgstr ""
+
+msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit mailbox"
 msgstr ""
 
 msgid "Edit menu item: {id}"
@@ -1237,6 +1414,9 @@ msgstr ""
 msgid "Edit {who}"
 msgstr ""
 
+msgid "Effective Date"
+msgstr ""
+
 msgid "Ekonomi"
 msgstr ""
 
@@ -1255,10 +1435,22 @@ msgstr ""
 msgid "Email Address"
 msgstr ""
 
+msgid "Email Admins"
+msgstr ""
+
 msgid "Email Confirmed!"
 msgstr ""
 
+msgid "Email Domain Management"
+msgstr ""
+
 msgid "Email Invoice"
+msgstr ""
+
+msgid "Email Log"
+msgstr ""
+
+msgid "Email Mailboxes"
 msgstr ""
 
 msgid "Email Management"
@@ -1268,6 +1460,9 @@ msgid "Email Offer"
 msgstr ""
 
 msgid "Email Order"
+msgstr ""
+
+msgid "Email address"
 msgstr ""
 
 msgid "Email confirmation"
@@ -1304,6 +1499,9 @@ msgid "Empty company name"
 msgstr ""
 
 msgid "Empty country"
+msgstr ""
+
+msgid "Empty directory"
 msgstr ""
 
 msgid "Empty first name"
@@ -1387,6 +1585,9 @@ msgstr ""
 msgid "Enter zone name"
 msgstr ""
 
+msgid "Error deleting contact"
+msgstr ""
+
 msgid "Error loading contact details"
 msgstr ""
 
@@ -1400,6 +1601,15 @@ msgid "Error loading domains"
 msgstr ""
 
 msgid "Error loading payments"
+msgstr ""
+
+msgid "Error loading price list"
+msgstr ""
+
+msgid "Error loading transaction"
+msgstr ""
+
+msgid "Error loading transactions"
 msgstr ""
 
 msgid "Error reprinting invoice"
@@ -1483,6 +1693,9 @@ msgstr ""
 msgid "Failed login from {ip}"
 msgstr ""
 
+msgid "Failed to add admin"
+msgstr ""
+
 msgid "Failed to add domain"
 msgstr ""
 
@@ -1519,7 +1732,13 @@ msgstr ""
 msgid "Failed to create zone"
 msgstr ""
 
+msgid "Failed to delete admin"
+msgstr ""
+
 msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete alias domain"
 msgstr ""
 
 msgid "Failed to delete certificate"
@@ -1552,6 +1771,9 @@ msgstr "Failed to delete message: {error}"
 msgid "Failed to delete record"
 msgstr ""
 
+msgid "Failed to delete vacation settings"
+msgstr ""
+
 msgid "Failed to delete zone"
 msgstr ""
 
@@ -1576,6 +1798,15 @@ msgstr ""
 msgid "Failed to load domain details"
 msgstr ""
 
+msgid "Failed to load payment form"
+msgstr ""
+
+msgid "Failed to load price list"
+msgstr ""
+
+msgid "Failed to load transactions"
+msgstr ""
+
 msgid "Failed to navigate"
 msgstr ""
 
@@ -1588,6 +1819,15 @@ msgstr ""
 msgid "Failed to register domain"
 msgstr ""
 
+msgid "Failed to register payment"
+msgstr ""
+
+msgid "Failed to remove admin"
+msgstr ""
+
+msgid "Failed to remove domain"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
@@ -1597,10 +1837,25 @@ msgstr ""
 msgid "Failed to resend invoice email"
 msgstr ""
 
+msgid "Failed to save admin"
+msgstr ""
+
+msgid "Failed to save alias"
+msgstr ""
+
 msgid "Failed to save certificate"
 msgstr ""
 
+msgid "Failed to save domain"
+msgstr ""
+
+msgid "Failed to save mailbox"
+msgstr ""
+
 msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save vacation settings"
 msgstr ""
 
 msgid "Failed to save zone"
@@ -1621,10 +1876,16 @@ msgstr ""
 msgid "Failed to start run"
 msgstr ""
 
+msgid "Failed to update admin"
+msgstr ""
+
 msgid "Failed to update alias"
 msgstr ""
 
 msgid "Failed to update certificate"
+msgstr ""
+
+msgid "Failed to update contact"
 msgstr ""
 
 msgid "Failed to update domain"
@@ -1657,13 +1918,28 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
+msgid "File"
+msgstr ""
+
 msgid "File archive"
+msgstr ""
+
+msgid "File: stored in src/public. Database: stored in PostgreSQL."
 msgstr ""
 
 msgid "Fill the form correctly!"
 msgstr ""
 
 msgid "Filter Domains"
+msgstr ""
+
+msgid "Filter by customer"
+msgstr ""
+
+msgid "Filter by domain"
+msgstr ""
+
+msgid "Filter by username"
 msgstr ""
 
 msgid "Final Payment Reminder"
@@ -1673,6 +1949,9 @@ msgid "Final payment reminder - Invoice {number}"
 msgstr ""
 
 msgid "Financial Information"
+msgstr ""
+
+msgid "Financial Transactions"
 msgstr ""
 
 msgid "Find the credit invoice attached as PDF."
@@ -1729,7 +2008,19 @@ msgstr ""
 msgid "Forward To"
 msgstr ""
 
+msgid "Forward to"
+msgstr ""
+
 msgid "Forward zones"
+msgstr ""
+
+msgid "Forwarding"
+msgstr ""
+
+msgid "Forwards"
+msgstr ""
+
+msgid "Forwards to"
 msgstr ""
 
 msgid "Found"
@@ -1742,6 +2033,9 @@ msgid "From 2025-11-01 we are using Sparbanken Syd."
 msgstr ""
 
 msgid "From Template"
+msgstr ""
+
+msgid "From address"
 msgstr ""
 
 msgid "Full"
@@ -1775,6 +2069,9 @@ msgid "Handle"
 msgstr ""
 
 msgid "Handle contact information"
+msgstr ""
+
+msgid "Handle required for"
 msgstr ""
 
 msgid "Handled invoice"
@@ -1855,6 +2152,9 @@ msgstr ""
 msgid "Identification code"
 msgstr ""
 
+msgid "Identifier"
+msgstr ""
+
 msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
 msgstr ""
 
@@ -1921,10 +2221,16 @@ msgstr ""
 msgid "Interest invoice"
 msgstr ""
 
+msgid "International format: +CC.NNNNNNNN"
+msgstr ""
+
 msgid "Invalid confirmation link"
 msgstr ""
 
 msgid "Invalid email"
+msgstr ""
+
+msgid "Invalid email addresses"
 msgstr ""
 
 msgid "Invalid form data"
@@ -2160,6 +2466,9 @@ msgstr ""
 msgid "Latest"
 msgstr ""
 
+msgid "Leave blank to keep current"
+msgstr ""
+
 msgid "Leave empty for items without a link"
 msgstr ""
 
@@ -2194,6 +2503,9 @@ msgid "Lista fakturor"
 msgstr ""
 
 msgid "Loading..."
+msgstr ""
+
+msgid "Log"
 msgstr ""
 
 msgid "Log in"
@@ -2277,7 +2589,13 @@ msgstr ""
 msgid "Mailbox deleted successfully"
 msgstr ""
 
+msgid "Mailbox domain must match the current domain"
+msgstr ""
+
 msgid "Mailbox not found"
+msgstr ""
+
+msgid "Mailbox quota"
 msgstr ""
 
 msgid "Mailbox saved successfully"
@@ -2302,6 +2620,9 @@ msgid "Manage domains and contacts through the RealtimeRegister API."
 msgstr ""
 
 msgid "Manage site"
+msgstr ""
+
+msgid "Managed domains"
 msgstr ""
 
 msgid "Manager"
@@ -2356,6 +2677,9 @@ msgid "Messages will appear here once sent or received"
 msgstr "Messages will appear here once sent or received"
 
 msgid "Method"
+msgstr ""
+
+msgid "Method not allowed"
 msgstr ""
 
 msgid "Mild"
@@ -2448,10 +2772,16 @@ msgstr ""
 msgid "New Certificate"
 msgstr ""
 
+msgid "New Contact"
+msgstr ""
+
 msgid "New Example"
 msgstr ""
 
 msgid "New Menu"
+msgstr ""
+
+msgid "New Price"
 msgstr ""
 
 msgid "New Record"
@@ -2469,7 +2799,13 @@ msgstr ""
 msgid "New customer"
 msgstr ""
 
+msgid "New domain"
+msgstr ""
+
 msgid "New example"
+msgstr ""
+
+msgid "New folder"
 msgstr ""
 
 msgid "New invoice for customer #{customerid}"
@@ -2517,6 +2853,18 @@ msgstr ""
 msgid "No account"
 msgstr ""
 
+msgid "No activity"
+msgstr ""
+
+msgid "No administrators"
+msgstr ""
+
+msgid "No alias domains"
+msgstr ""
+
+msgid "No aliases"
+msgstr ""
+
 msgid "No cache entries found"
 msgstr ""
 
@@ -2541,6 +2889,9 @@ msgstr ""
 msgid "No data available"
 msgstr ""
 
+msgid "No domains"
+msgstr ""
+
 msgid "No domains found"
 msgstr ""
 
@@ -2557,6 +2908,12 @@ msgid "No invoices found"
 msgstr ""
 
 msgid "No invoicing"
+msgstr ""
+
+msgid "No log entries"
+msgstr ""
+
+msgid "No mailboxes"
 msgstr ""
 
 msgid "No matches found"
@@ -2583,6 +2940,9 @@ msgstr ""
 msgid "No payments found"
 msgstr ""
 
+msgid "No price data available"
+msgstr ""
+
 msgid "No provider data available"
 msgstr ""
 
@@ -2590,6 +2950,12 @@ msgid "No records"
 msgstr ""
 
 msgid "No records found"
+msgstr ""
+
+msgid "No results"
+msgstr ""
+
+msgid "No results found"
 msgstr ""
 
 msgid "No selected customer."
@@ -2602,6 +2968,9 @@ msgid "No templates yet"
 msgstr ""
 
 msgid "No title"
+msgstr ""
+
+msgid "No transactions found"
 msgstr ""
 
 msgid "No users found"
@@ -2635,6 +3004,12 @@ msgid "OK"
 msgstr ""
 
 msgid "OVERDUE"
+msgstr ""
+
+msgid "One email per line, or separated by comma/space"
+msgstr ""
+
+msgid "Only letters, numbers, underscore and hyphen"
 msgstr ""
 
 msgid "Open Swish App"
@@ -2688,10 +3063,16 @@ msgstr ""
 msgid "Org number"
 msgstr ""
 
+msgid "Org number cannot be changed for SE/NU contacts"
+msgstr ""
+
 msgid "Org. Id"
 msgstr ""
 
 msgid "Org. Id:"
+msgstr ""
+
+msgid "Org. Number"
 msgstr ""
 
 msgid "Org.no."
@@ -2716,6 +3097,9 @@ msgid "Our Reference"
 msgstr ""
 
 msgid "Our reference"
+msgstr ""
+
+msgid "Out of office"
 msgstr ""
 
 msgid "Over time, more web hosting features have been added."
@@ -2784,6 +3168,9 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+msgid "Password is required"
+msgstr ""
+
 msgid "Password must be at least {min} characters"
 msgstr ""
 
@@ -2797,6 +3184,9 @@ msgid "Password must contain at least {min} special character(s)"
 msgstr ""
 
 msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr ""
+
+msgid "Password requires: "
 msgstr ""
 
 msgid "Password was wrong or username doesn't exist."
@@ -2856,6 +3246,9 @@ msgstr ""
 msgid "Payment Successful"
 msgstr ""
 
+msgid "Payment date"
+msgstr ""
+
 msgid "Payment due to: {duedate}"
 msgstr ""
 
@@ -2865,10 +3258,16 @@ msgstr ""
 msgid "Payment for..."
 msgstr ""
 
+msgid "Payment modal not available"
+msgstr ""
+
 msgid "Payment must be charged before refund"
 msgstr ""
 
 msgid "Payment not found"
+msgstr ""
+
+msgid "Payment registered successfully"
 msgstr ""
 
 msgid "Payment reminder: Invoice {number}"
@@ -2946,6 +3345,9 @@ msgstr ""
 msgid "Please enter a message"
 msgstr "Please enter a message"
 
+msgid "Please enter a payment date"
+msgstr ""
+
 msgid "Please enter a valid email address"
 msgstr "Please enter a valid email address"
 
@@ -2967,6 +3369,9 @@ msgstr ""
 msgid "Please logout and login as a user with proper authorization instead."
 msgstr ""
 
+msgid "Please select at least one registry"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr ""
 
@@ -2977,6 +3382,9 @@ msgid "Port"
 msgstr ""
 
 msgid "Posta faktura"
+msgstr ""
+
+msgid "Postal Code"
 msgstr ""
 
 msgid "Postal code"
@@ -3021,6 +3429,9 @@ msgstr ""
 msgid "Price List"
 msgstr ""
 
+msgid "Prices"
+msgstr ""
+
 msgid "Primary NS"
 msgstr ""
 
@@ -3042,10 +3453,19 @@ msgstr ""
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process ID"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
 msgid "Products"
 msgstr ""
 
 msgid "Profile Image"
+msgstr ""
+
+msgid "Promotions"
 msgstr ""
 
 msgid "Protocol"
@@ -3121,6 +3541,9 @@ msgid "Recent Messages"
 msgstr "Recent Messages"
 
 msgid "Recent Payments"
+msgstr ""
+
+msgid "Recent activity"
 msgstr ""
 
 msgid "Recent signatures"
@@ -3204,6 +3627,9 @@ msgstr ""
 msgid "Register domain"
 msgstr ""
 
+msgid "Register payment"
+msgstr ""
+
 msgid "Register to create and publish content."
 msgstr ""
 
@@ -3237,6 +3663,9 @@ msgstr ""
 msgid "Registries"
 msgstr ""
 
+msgid "Registries & Handles"
+msgstr ""
+
 msgid "Registry"
 msgstr ""
 
@@ -3252,10 +3681,16 @@ msgstr ""
 msgid "Reminder sent successfully"
 msgstr ""
 
+msgid "Rename"
+msgstr ""
+
 msgid "Renew"
 msgstr ""
 
 msgid "Replacement"
+msgstr ""
+
+msgid "Reply interval (seconds)"
 msgstr ""
 
 msgid "Reprint"
@@ -3301,6 +3736,9 @@ msgid "Round off:"
 msgstr ""
 
 msgid "Rounding"
+msgstr ""
+
+msgid "Route all mail to another domain"
 msgstr ""
 
 msgid "Run ID required"
@@ -3366,7 +3804,19 @@ msgstr ""
 msgid "Save Template"
 msgstr ""
 
+msgid "Save changes"
+msgstr ""
+
 msgid "Save failed"
+msgstr ""
+
+msgid "Save options"
+msgstr ""
+
+msgid "Save to database"
+msgstr ""
+
+msgid "Save to file"
 msgstr ""
 
 msgid "Saved successfully"
@@ -3393,6 +3843,9 @@ msgstr ""
 msgid "Search"
 msgstr ""
 
+msgid "Search admin to add"
+msgstr ""
+
 msgid "Search cache"
 msgstr ""
 
@@ -3414,6 +3867,9 @@ msgstr ""
 msgid "Search domain"
 msgstr ""
 
+msgid "Search domain to add"
+msgstr ""
+
 msgid "Search domains..."
 msgstr ""
 
@@ -3427,6 +3883,9 @@ msgid "Search field for {what}"
 msgstr ""
 
 msgid "Search for SMS"
+msgstr ""
+
+msgid "Search for admin"
 msgstr ""
 
 msgid "Search for certificates"
@@ -3451,6 +3910,9 @@ msgid "Search for invoice"
 msgstr ""
 
 msgid "Search for mail domain"
+msgstr ""
+
+msgid "Search for mailbox"
 msgstr ""
 
 msgid "Search for poll"
@@ -3510,7 +3972,22 @@ msgstr ""
 msgid "Select country or click flags to see detail"
 msgstr ""
 
+msgid "Select country..."
+msgstr ""
+
+msgid "Select customer"
+msgstr ""
+
+msgid "Select customer first..."
+msgstr ""
+
 msgid "Select invoice pack"
+msgstr ""
+
+msgid "Select registries and set handles for each"
+msgstr ""
+
+msgid "Select target domain"
 msgstr ""
 
 msgid "Select type"
@@ -3588,6 +4065,12 @@ msgstr ""
 msgid "Shown as"
 msgstr ""
 
+msgid "Side content"
+msgstr ""
+
+msgid "Sidecard name"
+msgstr ""
+
 msgid "Sign poll to kick Sergei Shoigu!"
 msgstr ""
 
@@ -3630,6 +4113,9 @@ msgstr ""
 msgid "Source code on Github"
 msgstr ""
 
+msgid "Source files"
+msgstr ""
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr ""
 
@@ -3654,13 +4140,28 @@ msgstr ""
 msgid "Started"
 msgstr ""
 
+msgid "State/Province"
+msgstr ""
+
 msgid "Statistics"
 msgstr ""
 
 msgid "Status"
 msgstr "Status"
 
+msgid "Storage"
+msgstr ""
+
+msgid "Storage target"
+msgstr ""
+
 msgid "Street"
+msgstr ""
+
+msgid "Street Address"
+msgstr ""
+
+msgid "Street address (one line per row)"
 msgstr ""
 
 msgid "Strictly for Rymdweb"
@@ -3691,6 +4192,9 @@ msgid "Summa"
 msgstr ""
 
 msgid "Super panel"
+msgstr ""
+
+msgid "Superadmin"
 msgstr ""
 
 msgid "Superadmin access required"
@@ -3742,6 +4246,9 @@ msgid "Tags"
 msgstr ""
 
 msgid "Target"
+msgstr ""
+
+msgid "Target domain"
 msgstr ""
 
 msgid "Tech"
@@ -3909,10 +4416,16 @@ msgstr ""
 msgid "Time"
 msgstr "Time"
 
+msgid "Timestamp"
+msgstr ""
+
 msgid "Title"
 msgstr ""
 
 msgid "Titles by Language"
+msgstr ""
+
+msgid "Toggle Dropdown"
 msgstr ""
 
 msgid "Toggle menu"
@@ -3948,10 +4461,22 @@ msgstr ""
 msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
 msgstr ""
 
+msgid "Transaction"
+msgstr ""
+
+msgid "Transaction Details"
+msgstr ""
+
 msgid "Transaction ID"
 msgstr ""
 
 msgid "Transaction ID:"
+msgstr ""
+
+msgid "Transaction not found"
+msgstr ""
+
+msgid "Transactions"
 msgstr ""
 
 msgid "Transfer"
@@ -3990,6 +4515,9 @@ msgstr ""
 msgid "Underline"
 msgstr ""
 
+msgid "Unique identifier for this contact"
+msgstr ""
+
 msgid "Unknown"
 msgstr "Unknown"
 
@@ -4002,7 +4530,13 @@ msgstr ""
 msgid "Untitled"
 msgstr ""
 
+msgid "Upcoming Price Changes"
+msgstr ""
+
 msgid "Update"
+msgstr ""
+
+msgid "Update Contact"
 msgstr ""
 
 msgid "Update and send page."
@@ -4056,6 +4590,9 @@ msgstr ""
 msgid "Used to make class names."
 msgstr ""
 
+msgid "User"
+msgstr ""
+
 msgid "User manual"
 msgstr ""
 
@@ -4063,6 +4600,9 @@ msgid "User registration"
 msgstr "User registration"
 
 msgid "Username"
+msgstr ""
+
+msgid "Username (email)"
 msgstr ""
 
 msgid "Username already exists"
@@ -4122,6 +4662,18 @@ msgstr ""
 msgid "VAT:"
 msgstr ""
 
+msgid "Vacation"
+msgstr ""
+
+msgid "Vacation / Auto-reply"
+msgstr ""
+
+msgid "Vacation settings deleted"
+msgstr ""
+
+msgid "Vacation settings saved"
+msgstr ""
+
 msgid "Value"
 msgstr ""
 
@@ -4138,6 +4690,9 @@ msgid "View Details"
 msgstr ""
 
 msgid "View Public Dashboard"
+msgstr ""
+
+msgid "View all"
 msgstr ""
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
@@ -4326,6 +4881,9 @@ msgstr ""
 msgid "add {fee}"
 msgstr ""
 
+msgid "at least {length} characters"
+msgstr ""
+
 msgid "billing@rymdweb.com"
 msgstr ""
 
@@ -4360,6 +4918,9 @@ msgid "database"
 msgstr ""
 
 msgid "declined"
+msgstr ""
+
+msgid "disable"
 msgstr ""
 
 msgid "domain"
@@ -4434,6 +4995,9 @@ msgstr ""
 msgid "supporters"
 msgstr ""
 
+msgid "unlimited"
+msgstr ""
+
 msgid "user"
 msgstr ""
 
@@ -4465,6 +5029,18 @@ msgid "{cost} {currency}"
 msgstr ""
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
+msgstr ""
+
+msgid "{count} lowercase"
+msgstr ""
+
+msgid "{count} number(s)"
+msgstr ""
+
+msgid "{count} special character(s)"
+msgstr ""
+
+msgid "{count} uppercase"
 msgstr ""
 
 msgid "{days} Days"

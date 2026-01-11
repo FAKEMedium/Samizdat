@@ -36,3 +36,7 @@
 % if (exists app->renderer->helpers->{nets}) {
   <a class="badge rounded-pill text-bg-primary" href="<%== url_for('nets_payments_index') %>"><%== __('Nets') %></a>
 % }
+% if (exists app->renderer->helpers->{fortnox}) {
+  <a class="badge rounded-pill text-bg-primary" href="<%== url_for('fortnox_payments') %>"><%== __('Payments') %></a>
+  <a class="badge rounded-pill text-bg-primary" href="<%== url_for('fortnox_manager') %>"><%== __('Fortnox') %></a>
+% }

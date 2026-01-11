@@ -26,6 +26,9 @@ msgstr "&copy;{year}&nbsp;{author}"
 msgid "(No parent - top level)"
 msgstr "(Ingen förälder - toppnivå)"
 
+msgid "0 = reply once per sender"
+msgstr "0 = svara en gång per avsändare"
+
 msgid "1 Year"
 msgstr "1 år"
 
@@ -121,6 +124,9 @@ msgstr "Kontobekräftelse"
 msgid "Account settings"
 msgstr "Kontoinställningar"
 
+msgid "Action"
+msgstr "Åtgärd"
+
 msgid "Actions"
 msgstr "Åtgärder"
 
@@ -133,6 +139,12 @@ msgstr "Aktivera integration"
 msgid "Active"
 msgstr "Aktiv"
 
+msgid "Active from"
+msgstr "Aktiv från"
+
+msgid "Active until"
+msgstr "Aktiv till"
+
 msgid "Add"
 msgstr "Lägg till"
 
@@ -144,6 +156,9 @@ msgstr "Lägg till kolumn före"
 
 msgid "Add Key"
 msgstr "Lägg till nyckel"
+
+msgid "Add New"
+msgstr "Lägg till ny"
 
 msgid "Add New Key"
 msgstr "Lägg till ny nyckel"
@@ -163,6 +178,9 @@ msgstr "Lägg till alias"
 msgid "Add certificate"
 msgstr "Lägg till certifikat"
 
+msgid "Add contact"
+msgstr "Lägg till kontakt"
+
 msgid "Add content"
 msgstr "Lägg till innehåll"
 
@@ -177,6 +195,9 @@ msgstr "Ny domän"
 
 msgid "Add example"
 msgstr "Lägg till exempel"
+
+msgid "Add forwarding"
+msgstr "Lägg till vidarebefordran"
 
 msgid "Add grop"
 msgstr "Lägg till grupp"
@@ -204,6 +225,9 @@ msgstr "Lägg till omröstning"
 
 msgid "Add product"
 msgstr "Ny produkt"
+
+msgid "Add side content"
+msgstr "Lägg till sidoinnehåll"
 
 msgid "Add subscription"
 msgstr "Ny prenumeration"
@@ -241,6 +265,12 @@ msgstr "Adresskontroll"
 msgid "Address is required"
 msgstr "Adress krävs"
 
+msgid "Address line 1"
+msgstr "Adressrad 1"
+
+msgid "Address line 2 (optional)"
+msgstr "Adressrad 2 (valfri)"
+
 msgid "Admin"
 msgstr "Administratör"
 
@@ -256,8 +286,29 @@ msgstr "Administratörsbehörighet krävs för DNS-hantering"
 msgid "Admin contact"
 msgstr "Adminkontakt"
 
+msgid "Admin created successfully"
+msgstr "Administratör skapades"
+
+msgid "Admin deleted successfully"
+msgstr "Administratör togs bort"
+
+msgid "Admin not found"
+msgstr "Administratör hittades inte"
+
+msgid "Admin saved successfully"
+msgstr "Administratör sparades"
+
+msgid "Admin updated successfully"
+msgstr "Administratör uppdaterades"
+
 msgid "Admininistration panel"
 msgstr "Kontrollpanel"
+
+msgid "Administrators"
+msgstr "Administratörer"
+
+msgid "Admins"
+msgstr "Admins"
 
 msgid "Advertising"
 msgstr "Annonsering"
@@ -282,6 +333,12 @@ msgstr "Alias skapades"
 
 msgid "Alias deleted successfully"
 msgstr "Alias togs bort"
+
+msgid "Alias domain"
+msgstr "Aliasdomän"
+
+msgid "Alias domains"
+msgstr "Aliasdomäner"
 
 msgid "Alias not found"
 msgstr "Alias hittades inte"
@@ -310,6 +367,9 @@ msgstr "Alla sektorer"
 msgid "All accounts"
 msgstr "Alla konton"
 
+msgid "All actions"
+msgstr "Alla åtgärder"
+
 msgid "All customers"
 msgstr "Alla kunder"
 
@@ -319,11 +379,17 @@ msgstr "Alla domäner"
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Tillåt cookies för att klistra in bekräftelsekod från e-post"
 
+msgid "Alternative email"
+msgstr "Alternativ e-post"
+
 msgid "Amount"
 msgstr "Summa"
 
 msgid "Amount and items are required"
 msgstr "Belopp och artiklar krävs"
+
+msgid "Amount due"
+msgstr "Att betala"
 
 msgid "Amount in Swedish Kronor"
 msgstr "Belopp i svenska kronor"
@@ -354,6 +420,12 @@ msgstr "Ett fel uppstod vid inloggning. Försök igen."
 
 msgid "An error occurred. Please try again."
 msgstr "Ett fel uppstod. Försök igen."
+
+msgid "Apply"
+msgstr "Tillämpa"
+
+msgid "Are you sure you want to delete contact"
+msgstr "Är du säker på att du vill ta bort kontakten"
 
 msgid "Are you sure you want to delete this alias?"
 msgstr "Är du säker på att du vill ta bort detta alias?"
@@ -408,6 +480,9 @@ msgstr "Åtminstone 3 tecken från a-z 0-9 -, måste börja med a-z"
 
 msgid "At least 8 characters including capitals and digits"
 msgstr "Åtminstone 8 tecken inklusive versaler och siffror"
+
+msgid "At least one valid forward address is required"
+msgstr "Minst en giltig vidarebefordringsadress krävs"
 
 msgid "At least {min} characters from: {chars}"
 msgstr "Minst {min} tecken från: {chars}"
@@ -526,6 +601,9 @@ msgstr "Based in Sweden - sammanställning"
 msgid "Basic Information"
 msgstr "Grundinformation"
 
+msgid "Billable Items"
+msgstr "Fakturerbara artiklar"
+
 msgid "Billing"
 msgstr "Ekonomi"
 
@@ -583,8 +661,23 @@ msgstr "Cachepost hittades inte eller kunde inte tas bort"
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "Anrop av hjälpfunktionen lägger till svg-koden i symboltabellen i början av dokumentet, plus en inline-referens till den."
 
+msgid "Can manage all domains"
+msgstr "Kan hantera alla domäner"
+
 msgid "Cancel"
 msgstr "Avbryt"
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr "Kan inte vara aliasdomän (har aliasdomäner som pekar till den)"
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har aliasdomäner som pekar till den"
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har vidarebefordringar"
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har brevlådor"
 
 msgid "Captcha code from image"
 msgstr "Kod från captcha-bild"
@@ -676,6 +769,9 @@ msgstr "Stad"
 msgid "City (billing)"
 msgstr "Ort (faktura)"
 
+msgid "Clear"
+msgstr "Rensa"
+
 msgid "Click to pop dialog."
 msgstr "Klicka för att öppna dialog."
 
@@ -690,6 +786,9 @@ msgstr "Klicka för att öppna påminnelsefönstret."
 
 msgid "Click to regenerate PDF."
 msgstr "Klicka för att återskapa PDF."
+
+msgid "Click to register payment."
+msgstr "Klicka för att registrera betalning."
 
 msgid "Click to search matching records."
 msgstr "Klicka för matchande poster."
@@ -802,14 +901,23 @@ msgstr "Kontaktinformation"
 msgid "Contact created"
 msgstr "Kontakt skapad"
 
+msgid "Contact created successfully"
+msgstr "Kontakt skapades"
+
 msgid "Contact deleted"
 msgstr "Kontakt raderad"
+
+msgid "Contact deleted successfully"
+msgstr "Kontakt togs bort"
 
 msgid "Contact details"
 msgstr "Kontaktdetaljer"
 
 msgid "Contact not found"
 msgstr "Kontakt hittades inte"
+
+msgid "Contact updated successfully"
+msgstr "Kontakt uppdaterades"
 
 msgid "Contact {sender} if you have questions."
 msgstr "Kontakta {sender} om du har frågor."
@@ -856,14 +964,26 @@ msgstr "Landsväljare"
 msgid "Create"
 msgstr "Skapa"
 
+msgid "Create Contact"
+msgstr "Skapa kontakt"
+
 msgid "Create Payment"
 msgstr "Skapa betalning"
+
+msgid "Create admin"
+msgstr "Skapa administratör"
 
 msgid "Create contact"
 msgstr "Skapa kontakt"
 
 msgid "Create customer"
 msgstr "Skapa kund"
+
+msgid "Create forwarding"
+msgstr "Skapa vidarebefordran"
+
+msgid "Create mailbox"
+msgstr "Skapa brevlåda"
 
 msgid "Create new record"
 msgstr "Skapa ny post"
@@ -913,6 +1033,12 @@ msgstr "Kryptonyckel raderad"
 msgid "Currency"
 msgstr "Valuta"
 
+msgid "Current Prices"
+msgstr "Aktuella priser"
+
+msgid "Currently managed"
+msgstr "Hanteras för närvarande"
+
 msgid "Customer"
 msgstr "Kund"
 
@@ -921,6 +1047,9 @@ msgstr "Kund #{customerid}"
 
 msgid "Customer ID"
 msgstr "Kund-ID"
+
+msgid "Customer ID is required"
+msgstr "Kund-ID krävs"
 
 msgid "Customer Id"
 msgstr "Kundnummer"
@@ -976,6 +1105,9 @@ msgstr "DS-poster"
 msgid "Dark"
 msgstr "Mörkt"
 
+msgid "Data"
+msgstr "Data"
+
 msgid "Data usage: {usage}"
 msgstr "Dataanvändning: {usage}"
 
@@ -1024,11 +1156,29 @@ msgstr "Radera rad"
 msgid "Delete Table"
 msgstr "Radera tabell"
 
+msgid "Delete admin"
+msgstr "Ta bort administratör"
+
+msgid "Delete this alias domain?"
+msgstr "Ta bort denna aliasdomän?"
+
+msgid "Delete this alias?"
+msgstr "Ta bort detta alias?"
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr "Ta bort denna domän och alla dess brevlådor?"
+
+msgid "Delete this mailbox?"
+msgstr "Ta bort denna brevlåda?"
+
 msgid "Delete this record?"
 msgstr "Radera denna post?"
 
 msgid "Delete this template and all its records?"
 msgstr "Radera denna mall och alla dess poster?"
+
+msgid "Delete vacation settings?"
+msgstr "Ta bort semesterinställningar?"
 
 msgid "Delivery Address"
 msgstr "Leveransadress"
@@ -1063,6 +1213,9 @@ msgstr "Rabatt"
 msgid "Display Name"
 msgstr "Visningsnamn"
 
+msgid "Display name"
+msgstr "Visningsnamn"
+
 msgid "Do not renew"
 msgstr "Förnya inte"
 
@@ -1084,8 +1237,14 @@ msgstr "Domänregelefterlevnadspoäng"
 msgid "Domain Name"
 msgstr "Domännamn"
 
+msgid "Domain added successfully"
+msgstr "Domän lades till"
+
 msgid "Domain created successfully"
 msgstr "Domän skapades"
+
+msgid "Domain deleted"
+msgstr "Domän borttagen"
 
 msgid "Domain deleted successfully"
 msgstr "Domän togs bort"
@@ -1102,11 +1261,17 @@ msgstr "Domännamn krävs"
 msgid "Domain not found"
 msgstr "Domänen hittades inte"
 
+msgid "Domain quota"
+msgstr "Domänkvot"
+
 msgid "Domain registered"
 msgstr "Domän registrerad"
 
 msgid "Domain registration"
 msgstr "Domänregistrering"
+
+msgid "Domain removed successfully"
+msgstr "Domän togs bort"
 
 msgid "Domain required"
 msgstr "Domän krävs"
@@ -1168,8 +1333,20 @@ msgstr "Redigera exempel"
 msgid "Edit Record"
 msgstr "Redigera post"
 
+msgid "Edit admin"
+msgstr "Redigera administratör"
+
+msgid "Edit contact"
+msgstr "Redigera kontakt"
+
 msgid "Edit customer {customerid}"
 msgstr "Redigera kund {customerid}"
+
+msgid "Edit forwarding"
+msgstr "Redigera vidarebefordran"
+
+msgid "Edit mailbox"
+msgstr "Redigera brevlåda"
 
 msgid "Edit menu item: {id}"
 msgstr "Redigera menyobjekt: {id}"
@@ -1192,6 +1369,9 @@ msgstr "Redigera zon"
 msgid "Edit {who}"
 msgstr "Redigera {who}"
 
+msgid "Effective Date"
+msgstr "Giltighetsdatum"
+
 msgid "Email"
 msgstr "Epost"
 
@@ -1207,11 +1387,23 @@ msgstr "Epost (faktura)"
 msgid "Email Address"
 msgstr "E-postadress"
 
+msgid "Email Admins"
+msgstr "E-postadministratörer"
+
 msgid "Email Confirmed!"
 msgstr "E-post bekräftad!"
 
+msgid "Email Domain Management"
+msgstr "E-postdomänhantering"
+
 msgid "Email Invoice"
 msgstr "Maila faktura"
+
+msgid "Email Log"
+msgstr "E-postlogg"
+
+msgid "Email Mailboxes"
+msgstr "E-postbrevlådor"
 
 msgid "Email Management"
 msgstr "Mailhantering"
@@ -1221,6 +1413,9 @@ msgstr "Maila offert"
 
 msgid "Email Order"
 msgstr "Maila order"
+
+msgid "Email address"
+msgstr "E-postadress"
 
 msgid "Email confirmation"
 msgstr "E-postbekräftelse"
@@ -1257,6 +1452,9 @@ msgstr "Företag saknas"
 
 msgid "Empty country"
 msgstr "Tomt land"
+
+msgid "Empty directory"
+msgstr "Tom katalog"
 
 msgid "Empty first name"
 msgstr "Tomt förnamn"
@@ -1339,6 +1537,9 @@ msgstr "Skriv in din epostadress"
 msgid "Enter zone name"
 msgstr "Ange namn på zon"
 
+msgid "Error deleting contact"
+msgstr "Fel vid borttagning av kontakt"
+
 msgid "Error loading contact details"
 msgstr "Fel vid laddning av kontaktdetaljer"
 
@@ -1353,6 +1554,15 @@ msgstr "Fel vid laddning av domäner"
 
 msgid "Error loading payments"
 msgstr "Fel vid laddning av betalningar"
+
+msgid "Error loading price list"
+msgstr "Fel vid laddning av prislista"
+
+msgid "Error loading transaction"
+msgstr "Fel vid laddning av transaktion"
+
+msgid "Error loading transactions"
+msgstr "Fel vid laddning av transaktioner"
 
 msgid "Error reprinting invoice"
 msgstr "Fel vid omtryckning av faktura"
@@ -1435,6 +1645,9 @@ msgstr "Misslyckades"
 msgid "Failed login from {ip}"
 msgstr "Misslyckad inloggning från {ip}"
 
+msgid "Failed to add admin"
+msgstr "Kunde inte lägga till administratör"
+
 msgid "Failed to add domain"
 msgstr "Kunde inte lägga till domän"
 
@@ -1471,8 +1684,14 @@ msgstr "Misslyckades skapa post"
 msgid "Failed to create zone"
 msgstr "Misslyckades skapa zon"
 
+msgid "Failed to delete admin"
+msgstr "Kunde inte ta bort administratör"
+
 msgid "Failed to delete alias"
 msgstr "Misslyckades ta bort alias"
+
+msgid "Failed to delete alias domain"
+msgstr "Kunde inte ta bort aliasdomän"
 
 msgid "Failed to delete certificate"
 msgstr "Misslyckades ta bort certifikat"
@@ -1501,6 +1720,9 @@ msgstr "Misslyckades ta bort meddelande"
 msgid "Failed to delete record"
 msgstr "Misslyckades ta bort post"
 
+msgid "Failed to delete vacation settings"
+msgstr "Kunde inte ta bort semesterinställningar"
+
 msgid "Failed to delete zone"
 msgstr "Misslyckades ta bort zon"
 
@@ -1525,6 +1747,15 @@ msgstr "Kunde inte ladda domän"
 msgid "Failed to load domain details"
 msgstr "Misslyckades ladda domändetaljer"
 
+msgid "Failed to load payment form"
+msgstr "Kunde inte ladda betalningsformulär"
+
+msgid "Failed to load price list"
+msgstr "Kunde inte ladda prislista"
+
+msgid "Failed to load transactions"
+msgstr "Kunde inte ladda transaktioner"
+
 msgid "Failed to navigate"
 msgstr "Kunde inte navigera"
 
@@ -1537,6 +1768,15 @@ msgstr "Misslyckades med att återskapa PDF"
 msgid "Failed to register domain"
 msgstr "Kunde inte registrera domän"
 
+msgid "Failed to register payment"
+msgstr "Kunde inte registrera betalning"
+
+msgid "Failed to remove admin"
+msgstr "Kunde inte ta bort administratör"
+
+msgid "Failed to remove domain"
+msgstr "Kunde inte ta bort domän"
+
 msgid "Failed to reprint invoice"
 msgstr "Misslyckades trycka om faktura"
 
@@ -1546,11 +1786,26 @@ msgstr "Misslyckades skicka om faktura"
 msgid "Failed to resend invoice email"
 msgstr "Misslyckades med att maila faktura"
 
+msgid "Failed to save admin"
+msgstr "Kunde inte spara administratör"
+
+msgid "Failed to save alias"
+msgstr "Kunde inte spara alias"
+
 msgid "Failed to save certificate"
 msgstr "Misslyckades spara certifikat"
 
+msgid "Failed to save domain"
+msgstr "Kunde inte spara domän"
+
+msgid "Failed to save mailbox"
+msgstr "Kunde inte spara brevlåda"
+
 msgid "Failed to save record"
 msgstr "Misslyckades spara post"
+
+msgid "Failed to save vacation settings"
+msgstr "Kunde inte spara semesterinställningar"
 
 msgid "Failed to save zone"
 msgstr "Misslyckades spara zon"
@@ -1567,11 +1822,17 @@ msgstr "Misslyckades skicka påminnelse"
 msgid "Failed to start run"
 msgstr "Kunde inte starta körning"
 
+msgid "Failed to update admin"
+msgstr "Kunde inte uppdatera administratör"
+
 msgid "Failed to update alias"
 msgstr "Misslyckades uppdatera alias"
 
 msgid "Failed to update certificate"
 msgstr "Misslyckades uppdatera certifikat"
+
+msgid "Failed to update contact"
+msgstr "Kunde inte uppdatera kontakt"
 
 msgid "Failed to update domain"
 msgstr "Misslyckades uppdatera domän"
@@ -1603,14 +1864,29 @@ msgstr "Fax"
 msgid "Featured"
 msgstr "Utvald"
 
+msgid "File"
+msgstr "Fil"
+
 msgid "File archive"
 msgstr "Filarkiv"
+
+msgid "File: stored in src/public. Database: stored in PostgreSQL."
+msgstr "Fil: lagrad i src/public. Databas: lagrad i PostgreSQL."
 
 msgid "Fill the form correctly!"
 msgstr "Fyll i formuläret ordentligt!"
 
 msgid "Filter Domains"
 msgstr "Filtrera domäner"
+
+msgid "Filter by customer"
+msgstr "Filtrera på kund"
+
+msgid "Filter by domain"
+msgstr "Filtrera på domän"
+
+msgid "Filter by username"
+msgstr "Filtrera på användarnamn"
 
 msgid "Final Payment Reminder"
 msgstr "Sista betalningspåminnelsen"
@@ -1620,6 +1896,9 @@ msgstr "Sista betalningspåminnelsen - faktura {nummber}"
 
 msgid "Financial Information"
 msgstr "Ekonomisk information"
+
+msgid "Financial Transactions"
+msgstr "Finansiella transaktioner"
 
 msgid "Find the credit invoice attached as PDF."
 msgstr "Kreditfakturan bifogas som PDF."
@@ -1675,8 +1954,20 @@ msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
 msgid "Forward To"
 msgstr "Skicka vidare till"
 
+msgid "Forward to"
+msgstr "Vidarebefordra till"
+
 msgid "Forward zones"
 msgstr "Framåtzoner"
+
+msgid "Forwarding"
+msgstr "Vidarebefordran"
+
+msgid "Forwards"
+msgstr "Vidarebefordringar"
+
+msgid "Forwards to"
+msgstr "Vidarebefordrar till"
 
 msgid "Found"
 msgstr "Hittades"
@@ -1689,6 +1980,9 @@ msgstr "Från och med 2025-11-01 använder vi Sparbanken Syd."
 
 msgid "From Template"
 msgstr "Från mall"
+
+msgid "From address"
+msgstr "Avsändaradress"
 
 msgid "Full"
 msgstr "Full"
@@ -1719,6 +2013,9 @@ msgstr "Handtag"
 
 msgid "Handle contact information"
 msgstr "Hantera kontaktinformation"
+
+msgid "Handle required for"
+msgstr "Handtag krävs för"
 
 msgid "Handled invoice"
 msgstr "Hanterade faktura"
@@ -1795,6 +2092,9 @@ msgstr "IPv6 omvänd"
 msgid "Identification code"
 msgstr "Personnummer/Organisationsnummer"
 
+msgid "Identifier"
+msgstr "Identifierare"
+
 msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
 msgstr "Om betalning inte erhålls inom 7 dagar från detta meddelandes datum, kommer ärendet att överlämnas till vårt inkassobolag."
 
@@ -1861,11 +2161,17 @@ msgstr "Instruktions-ID"
 msgid "Interest invoice"
 msgstr "Räntefaktura"
 
+msgid "International format: +CC.NNNNNNNN"
+msgstr "Internationellt format: +CC.NNNNNNNN"
+
 msgid "Invalid confirmation link"
 msgstr "Ogiltig bekräftelselänk"
 
 msgid "Invalid email"
 msgstr "Ogiltig epostadress"
+
+msgid "Invalid email addresses"
+msgstr "Ogiltiga e-postadresser"
 
 msgid "Invalid form data"
 msgstr "Ogiltiga formulärdata"
@@ -2088,6 +2394,9 @@ msgstr "Senaste påminnelse"
 msgid "Latest"
 msgstr "Senaste"
 
+msgid "Leave blank to keep current"
+msgstr "Lämna tomt för att behålla nuvarande"
+
 msgid "Leave empty for items without a link"
 msgstr "Lämna tomt för objekt utan länk"
 
@@ -2123,6 +2432,9 @@ msgstr "List invoices"
 
 msgid "Loading..."
 msgstr "Laddar..."
+
+msgid "Log"
+msgstr "Logg"
 
 msgid "Log in"
 msgstr "Logga in"
@@ -2205,8 +2517,14 @@ msgstr "Brevlåda skapades"
 msgid "Mailbox deleted successfully"
 msgstr "Brevlåda togs bort"
 
+msgid "Mailbox domain must match the current domain"
+msgstr "Brevlådens domän måste matcha nuvarande domän"
+
 msgid "Mailbox not found"
 msgstr "Brevlåda hittades inte"
+
+msgid "Mailbox quota"
+msgstr "Brevlådekvot"
 
 msgid "Mailbox saved successfully"
 msgstr "Brevlåda sparades"
@@ -2231,6 +2549,9 @@ msgstr "Hantera domäner och kontakter via RealtimeRegister API."
 
 msgid "Manage site"
 msgstr "Hantera webbplats"
+
+msgid "Managed domains"
+msgstr "Hanterade domäner"
 
 msgid "Manager"
 msgstr "Hanterare"
@@ -2285,6 +2606,9 @@ msgstr "Meddelanden visas här när de skickas eller tas emot"
 
 msgid "Method"
 msgstr "Metod"
+
+msgid "Method not allowed"
+msgstr "Metod inte tillåten"
 
 msgid "Mild"
 msgstr "Mild"
@@ -2376,11 +2700,17 @@ msgstr "Går aldrig ut"
 msgid "New Certificate"
 msgstr "Nytt certifikat"
 
+msgid "New Contact"
+msgstr "Ny kontakt"
+
 msgid "New Example"
 msgstr "Nytt exempel"
 
 msgid "New Menu"
 msgstr "Ny meny"
+
+msgid "New Price"
+msgstr "Nytt pris"
 
 msgid "New Record"
 msgstr "Ny post"
@@ -2397,8 +2727,14 @@ msgstr "Ny kontakt"
 msgid "New customer"
 msgstr "Ny kund"
 
+msgid "New domain"
+msgstr "Ny domän"
+
 msgid "New example"
 msgstr "Nytt exempel"
+
+msgid "New folder"
+msgstr "Ny mapp"
 
 msgid "New invoice for customer #{customerid}"
 msgstr "Ny faktura för kund #{customerid}"
@@ -2442,6 +2778,18 @@ msgstr "Inga MX-poster"
 msgid "No account"
 msgstr "Inget konto"
 
+msgid "No activity"
+msgstr "Ingen aktivitet"
+
+msgid "No administrators"
+msgstr "Inga administratörer"
+
+msgid "No alias domains"
+msgstr "Inga aliasdomäner"
+
+msgid "No aliases"
+msgstr "Inga alias"
+
 msgid "No cache entries found"
 msgstr "Inga cacheposter hittades"
 
@@ -2466,6 +2814,9 @@ msgstr "Ingen kund tilldelad"
 msgid "No data available"
 msgstr "Ingen tillgänglig data"
 
+msgid "No domains"
+msgstr "Inga domäner"
+
 msgid "No domains found"
 msgstr "Inga domäner hittades"
 
@@ -2483,6 +2834,12 @@ msgstr "Inga fakturor hittades"
 
 msgid "No invoicing"
 msgstr "Faktureras inte"
+
+msgid "No log entries"
+msgstr "Inga loggposter"
+
+msgid "No mailboxes"
+msgstr "Inga brevlådor"
 
 msgid "No matches found"
 msgstr "Inga träffar hittades"
@@ -2508,6 +2865,9 @@ msgstr "Inga sidor hittades."
 msgid "No payments found"
 msgstr "Inga betalningar hittades"
 
+msgid "No price data available"
+msgstr "Ingen prisdata tillgänglig"
+
 msgid "No provider data available"
 msgstr "Ingen leverantörsdata tillgänglig"
 
@@ -2516,6 +2876,12 @@ msgstr "Inga poster"
 
 msgid "No records found"
 msgstr "Inga poster hittades"
+
+msgid "No results"
+msgstr "Inga resultat"
+
+msgid "No results found"
+msgstr "Inga resultat hittades"
 
 msgid "No selected customer."
 msgstr "Ingen kund vald."
@@ -2529,8 +2895,11 @@ msgstr "Inga mallar ännu"
 msgid "No title"
 msgstr "Ingen titel"
 
+msgid "No transactions found"
+msgstr "Inga transaktioner hittades"
+
 msgid "No users found"
-msgstr ""
+msgstr "Inga användare hittades"
 
 msgid "Non-compliant (Foreign hosting)"
 msgstr "Ej kompatibel (utländsk hosting)"
@@ -2561,6 +2930,12 @@ msgstr "OK"
 
 msgid "OVERDUE"
 msgstr "Förfallna"
+
+msgid "One email per line, or separated by comma/space"
+msgstr "En e-post per rad, eller separerade med komma/mellanslag"
+
+msgid "Only letters, numbers, underscore and hyphen"
+msgstr "Endast bokstäver, siffror, understreck och bindestreck"
 
 msgid "Open Swish App"
 msgstr "Öppna Swish-appen"
@@ -2607,8 +2982,14 @@ msgstr "Ordning sparad"
 msgid "Org number"
 msgstr "Organisationsnummer"
 
+msgid "Org number cannot be changed for SE/NU contacts"
+msgstr "Organisationsnummer kan inte ändras för SE/NU-kontakter"
+
 msgid "Org. Id"
 msgstr "Org. nr"
+
+msgid "Org. Number"
+msgstr "Org.nummer"
 
 msgid "Org.no."
 msgstr "Org.nr."
@@ -2633,6 +3014,9 @@ msgstr "Vår referens"
 
 msgid "Our reference"
 msgstr "Vår referens"
+
+msgid "Out of office"
+msgstr "Frånvarande"
 
 msgid "Over time, more web hosting features have been added."
 msgstr "Med tiden har fler webbhotell-funktioner lagts till."
@@ -2700,6 +3084,9 @@ msgstr "Överordnat objekt"
 msgid "Password"
 msgstr "Lösenord"
 
+msgid "Password is required"
+msgstr "Lösenord krävs"
+
 msgid "Password must be at least {min} characters"
 msgstr "Lösenordet måste vara minst {min} tecken"
 
@@ -2714,6 +3101,9 @@ msgstr "Lösenordet måste innehålla minst {min} specialtecken"
 
 msgid "Password must contain at least {min} uppercase letter(s)"
 msgstr "Lösenordet måste innehålla minst {min} versal"
+
+msgid "Password requires: "
+msgstr "Lösenordet kräver: "
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "Lösenordet var fel eller användarnamnet finns inte."
@@ -2772,6 +3162,9 @@ msgstr "Betalningspåminnelse"
 msgid "Payment Successful"
 msgstr "Betalning lyckades"
 
+msgid "Payment date"
+msgstr "Betaldatum"
+
 msgid "Payment due to: {duedate}"
 msgstr "Förfallodatum: {duedate}"
 
@@ -2781,11 +3174,17 @@ msgstr "Betalning misslyckades"
 msgid "Payment for..."
 msgstr "Betalning för..."
 
+msgid "Payment modal not available"
+msgstr "Betalningsmodal inte tillgänglig"
+
 msgid "Payment must be charged before refund"
 msgstr "Betalningen måste debiteras före återbetalning"
 
 msgid "Payment not found"
 msgstr "Betalning hittades inte"
+
+msgid "Payment registered successfully"
+msgstr "Betalning registrerades"
 
 msgid "Payment reminder: Invoice {number}"
 msgstr "Betalningspåminnelse: Faktura {number}"
@@ -2856,6 +3255,9 @@ msgstr "Vänligen bekräfta din e-postadress genom att klicka på följande län
 msgid "Please enter a message"
 msgstr "Ange ett meddelande"
 
+msgid "Please enter a payment date"
+msgstr "Ange ett betaldatum"
+
 msgid "Please enter a valid email address"
 msgstr "Ange en giltig e-postadress"
 
@@ -2877,6 +3279,9 @@ msgstr "Logga in för att få åtkomst."
 msgid "Please logout and login as a user with proper authorization instead."
 msgstr "Logga in som en användare med rätt behörighet istället."
 
+msgid "Please select at least one registry"
+msgstr "Välj minst ett register"
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -2888,6 +3293,9 @@ msgstr "Port"
 
 msgid "Posta faktura"
 msgstr "Mail invoice"
+
+msgid "Postal Code"
+msgstr "Postnummer"
 
 msgid "Postal code"
 msgstr "Postnummer"
@@ -2928,6 +3336,9 @@ msgstr "Pris"
 msgid "Price List"
 msgstr "Prislista"
 
+msgid "Prices"
+msgstr "Priser"
+
 msgid "Primary NS"
 msgstr "Primär NS"
 
@@ -2949,11 +3360,20 @@ msgstr "Behörigheter"
 msgid "Proceed to Payment"
 msgstr "Gå till betalning"
 
+msgid "Process ID"
+msgstr "Process-ID"
+
+msgid "Product"
+msgstr "Produkt"
+
 msgid "Products"
 msgstr "Produkter"
 
 msgid "Profile Image"
 msgstr "Profilbild"
+
+msgid "Promotions"
+msgstr "Kampanjer"
 
 msgid "Protocol"
 msgstr "Protokoll"
@@ -3029,6 +3449,9 @@ msgstr "Senaste meddelanden"
 
 msgid "Recent Payments"
 msgstr "Senaste betalningar"
+
+msgid "Recent activity"
+msgstr "Senaste aktivitet"
 
 msgid "Recent signatures"
 msgstr "Senaste underskrifterna"
@@ -3111,6 +3534,9 @@ msgstr "Registrera konto"
 msgid "Register domain"
 msgstr "Registrera domän"
 
+msgid "Register payment"
+msgstr "Registrera betalning"
+
 msgid "Register to create and publish content."
 msgstr "Registrera för att skapa och publicera innehåll."
 
@@ -3141,6 +3567,9 @@ msgstr "Registrering funkar inte än"
 msgid "Registries"
 msgstr "Register"
 
+msgid "Registries & Handles"
+msgstr "Register & handtag"
+
 msgid "Registry"
 msgstr "Register"
 
@@ -3156,11 +3585,17 @@ msgstr "Påminn"
 msgid "Reminder sent successfully"
 msgstr "Påminnelse skickades"
 
+msgid "Rename"
+msgstr "Byt namn"
+
 msgid "Renew"
 msgstr "Förnya"
 
 msgid "Replacement"
 msgstr "Ersättning"
+
+msgid "Reply interval (seconds)"
+msgstr "Svarsintervall (sekunder)"
 
 msgid "Reprint"
 msgstr "Regenerera"
@@ -3203,6 +3638,9 @@ msgstr "Avrundning"
 
 msgid "Rounding"
 msgstr "Avrundning"
+
+msgid "Route all mail to another domain"
+msgstr "Dirigera all e-post till en annan domän"
 
 msgid "Run ID required"
 msgstr "Körnings-ID krävs"
@@ -3267,8 +3705,20 @@ msgstr "Spara inställningar"
 msgid "Save Template"
 msgstr "Spara mall"
 
+msgid "Save changes"
+msgstr "Spara ändringar"
+
 msgid "Save failed"
 msgstr "Sparning misslyckades"
+
+msgid "Save options"
+msgstr "Spara inställningar"
+
+msgid "Save to database"
+msgstr "Spara till databas"
+
+msgid "Save to file"
+msgstr "Spara till fil"
 
 msgid "Saved successfully"
 msgstr "Sparades"
@@ -3294,6 +3744,9 @@ msgstr "Poäng (Låg till Hög)"
 msgid "Search"
 msgstr "Sök"
 
+msgid "Search admin to add"
+msgstr "Sök administratör att lägga till"
+
 msgid "Search cache"
 msgstr "Sök cache"
 
@@ -3315,6 +3768,9 @@ msgstr "Sök kund (minst 3 tecken)..."
 msgid "Search domain"
 msgstr "Sök domän"
 
+msgid "Search domain to add"
+msgstr "Sök domän att lägga till"
+
 msgid "Search domains..."
 msgstr "Sök domäner..."
 
@@ -3329,6 +3785,9 @@ msgstr "Sökfält för {what}"
 
 msgid "Search for SMS"
 msgstr "Sök SMS"
+
+msgid "Search for admin"
+msgstr "Sök administratör"
 
 msgid "Search for certificates"
 msgstr "Sök certifikat"
@@ -3353,6 +3812,9 @@ msgstr "Sök faktura"
 
 msgid "Search for mail domain"
 msgstr "Sök maildomän"
+
+msgid "Search for mailbox"
+msgstr "Sök brevlåda"
 
 msgid "Search for poll"
 msgstr "Sök omröstning"
@@ -3411,8 +3873,23 @@ msgstr "Välj land"
 msgid "Select country or click flags to see detail"
 msgstr "Välj land eller klicka på flaggor för detaljer"
 
+msgid "Select country..."
+msgstr "Välj land..."
+
+msgid "Select customer"
+msgstr "Välj kund"
+
+msgid "Select customer first..."
+msgstr "Välj kund först..."
+
 msgid "Select invoice pack"
 msgstr "Välj samlingsfaktura"
+
+msgid "Select registries and set handles for each"
+msgstr "Välj register och ange handtag för var och en"
+
+msgid "Select target domain"
+msgstr "Välj måldomän"
 
 msgid "Select type"
 msgstr "Välj typ"
@@ -3489,6 +3966,12 @@ msgstr "Dela {what} på {where}"
 msgid "Shown as"
 msgstr "Visas som"
 
+msgid "Side content"
+msgstr "Sidoinnehåll"
+
+msgid "Sidecard name"
+msgstr "Sidokortsnamn"
+
 msgid "Sign poll!"
 msgstr "Skriv under upprop!"
 
@@ -3522,6 +4005,9 @@ msgstr "Sortera efter"
 msgid "Source code on Github"
 msgstr "Källkod på Github"
 
+msgid "Source files"
+msgstr "Källfiler"
+
 msgid "Space separated list of extra classes to append the prefixed default classes."
 msgstr "Lista separerad med mellanslag av extra klasser som ska läggas till de fördefinierade klasserna."
 
@@ -3546,14 +4032,29 @@ msgstr "Börja sidoinnehåll"
 msgid "Started"
 msgstr "Startad"
 
+msgid "State/Province"
+msgstr "Region/provins"
+
 msgid "Statistics"
 msgstr "Statistik"
 
 msgid "Status"
 msgstr "Status"
 
+msgid "Storage"
+msgstr "Lagring"
+
+msgid "Storage target"
+msgstr "Lagringsmål"
+
 msgid "Street"
 msgstr "Gata"
+
+msgid "Street Address"
+msgstr "Gatuadress"
+
+msgid "Street address (one line per row)"
+msgstr "Gatuadress (en rad per rad)"
 
 msgid "Strictly for Rymdweb"
 msgstr "Endast för Rymdweb"
@@ -3584,6 +4085,9 @@ msgstr "Amount"
 
 msgid "Super panel"
 msgstr "Superpanel"
+
+msgid "Superadmin"
+msgstr "Superadministratör"
 
 msgid "Superadmin access required"
 msgstr "Superadministratörsbehörighet krävs"
@@ -3635,6 +4139,9 @@ msgstr "Taggar"
 
 msgid "Target"
 msgstr "Mål"
+
+msgid "Target domain"
+msgstr "Måldomän"
 
 msgid "Tech"
 msgstr "Teknik"
@@ -3798,11 +4305,17 @@ msgstr "Detta kommer att resultera i extra avgifter och kan påverka er kreditv�
 msgid "Time"
 msgstr "Tid"
 
+msgid "Timestamp"
+msgstr "Tidsstämpel"
+
 msgid "Title"
 msgstr "Titel"
 
 msgid "Titles by Language"
 msgstr "Titlar per språk"
+
+msgid "Toggle Dropdown"
+msgstr "Växla rullgardin"
 
 msgid "Toggle menu"
 msgstr "Visa meny"
@@ -3837,11 +4350,23 @@ msgstr "Tuff"
 msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
 msgstr "Spårar svenska organisationers hosting-efterlevnad för datasuveränitet"
 
+msgid "Transaction"
+msgstr "Transaktion"
+
+msgid "Transaction Details"
+msgstr "Transaktionsdetaljer"
+
 msgid "Transaction ID"
 msgstr "Transaktions-ID"
 
 msgid "Transaction ID:"
 msgstr "Transaktions-ID:"
+
+msgid "Transaction not found"
+msgstr "Transaktion hittades inte"
+
+msgid "Transactions"
+msgstr "Transaktioner"
 
 msgid "Transfer"
 msgstr "Överföring"
@@ -3879,6 +4404,9 @@ msgstr "Oautentiserad"
 msgid "Underline"
 msgstr "Understruken"
 
+msgid "Unique identifier for this contact"
+msgstr "Unik identifierare för denna kontakt"
+
 msgid "Unknown"
 msgstr "Okänd"
 
@@ -3891,8 +4419,14 @@ msgstr "Obetalade"
 msgid "Untitled"
 msgstr "Utan titel"
 
+msgid "Upcoming Price Changes"
+msgstr "Kommande prisändringar"
+
 msgid "Update"
 msgstr "Uppdatera"
+
+msgid "Update Contact"
+msgstr "Uppdatera kontakt"
 
 msgid "Update and send page."
 msgstr "Uppdatera och skicka sida."
@@ -3942,6 +4476,9 @@ msgstr "Använd detta om du inte behöver de fördefinierade klasserna."
 msgid "Used to make class names."
 msgstr "Används för att skapa klassnamn."
 
+msgid "User"
+msgstr "Användare"
+
 msgid "User manual"
 msgstr "Användarmanual"
 
@@ -3950,6 +4487,9 @@ msgstr "Användarregistrering"
 
 msgid "Username"
 msgstr "Användarnamn"
+
+msgid "Username (email)"
+msgstr "Användarnamn (e-post)"
 
 msgid "Username already exists"
 msgstr "Användarnamnet finns redan"
@@ -4002,6 +4542,18 @@ msgstr "Momssats"
 msgid "VAT {rate}\\%"
 msgstr "Moms {rate}\\%"
 
+msgid "Vacation"
+msgstr "Semester"
+
+msgid "Vacation / Auto-reply"
+msgstr "Semester / Autosvar"
+
+msgid "Vacation settings deleted"
+msgstr "Semesterinställningar borttagna"
+
+msgid "Vacation settings saved"
+msgstr "Semesterinställningar sparade"
+
 msgid "Value"
 msgstr "Värde"
 
@@ -4019,6 +4571,9 @@ msgstr "Visa detaljer"
 
 msgid "View Public Dashboard"
 msgstr "Visa offentlig instrumentpanel"
+
+msgid "View all"
+msgstr "Visa alla"
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
 msgstr "Visa och hantera Redis-cacheposter. Använd mönster som \"fortnox:*\", \"user:*\" eller \"*\" för att filtrera poster."
@@ -4200,6 +4755,9 @@ msgstr "lägg till 3\\%"
 msgid "add {fee}"
 msgstr "lägg till {fee}"
 
+msgid "at least {length} characters"
+msgstr "minst {length} tecken"
+
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
@@ -4235,6 +4793,9 @@ msgstr "databas"
 
 msgid "declined"
 msgstr "avvisad"
+
+msgid "disable"
+msgstr "inaktivera"
 
 msgid "domain"
 msgstr "domän"
@@ -4308,6 +4869,9 @@ msgstr "standbybrandvägg"
 msgid "supporters"
 msgstr "supportrar"
 
+msgid "unlimited"
+msgstr "obegränsad"
+
 msgid "user"
 msgstr "användare"
 
@@ -4337,6 +4901,18 @@ msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 msgstr "{count} misslyckade inloggningsförsök har gjorts från {ip} senaste {minutes} minuterna."
+
+msgid "{count} lowercase"
+msgstr "{count} gemen"
+
+msgid "{count} number(s)"
+msgstr "{count} siffra"
+
+msgid "{count} special character(s)"
+msgstr "{count} specialtecken"
+
+msgid "{count} uppercase"
+msgstr "{count} versal"
 
 msgid "{days} Days"
 msgstr "{days} dagar"
