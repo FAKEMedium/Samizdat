@@ -1,0 +1,41 @@
+<%== include 'email/chunks/manager' %>
+
+<div class="row mb-3">
+  <div class="col-md-3">
+    <label for="filterUsername" class="form-label"><%== __('Username') %></label>
+    <input type="text" class="form-control" id="filterUsername" placeholder="<%== __('Filter by username') %>">
+  </div>
+  <div class="col-md-3">
+    <label for="filterDomain" class="form-label"><%== __('Domain') %></label>
+    <input type="text" class="form-control" id="filterDomain" placeholder="<%== __('Filter by domain') %>">
+  </div>
+  <div class="col-md-3">
+    <label for="filterAction" class="form-label"><%== __('Action') %></label>
+    <select class="form-select" id="filterAction">
+      <option value=""><%== __('All actions') %></option>
+    </select>
+  </div>
+  <div class="col-md-3 d-flex align-items-end">
+    <button type="button" class="btn btn-primary" id="applyFilters"><%== __('Apply') %></button>
+    <button type="button" class="btn btn-secondary ms-2" id="clearFilters"><%== __('Clear') %></button>
+  </div>
+</div>
+
+<table class="table table-sm table-striped" id="logTable">
+  <thead>
+    <tr>
+      <th><%== __('Timestamp') %></th>
+      <th><%== __('User') %></th>
+      <th><%== __('Domain') %></th>
+      <th><%== __('Action') %></th>
+      <th><%== __('Data') %></th>
+    </tr>
+  </thead>
+  <tbody id="logList">
+  </tbody>
+</table>
+
+<nav id="paginationNav">
+  <ul class="pagination" id="pagination">
+  </ul>
+</nav>

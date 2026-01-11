@@ -1,8 +1,15 @@
-<div id="domainAdminsSection" class="card" style="display: none;">
-  <div class="card-header d-flex justify-content-between align-items-center">
-    <span><%== __('Administrators') %></span>
-    <button type="button" class="btn btn-sm btn-outline-primary" id="addDomainAdminBtn"><%== icon 'plus', {} %></button>
-  </div>
-  <ul class="list-group list-group-flush" id="domainAdminsList">
-  </ul>
+<div id="domainAdminsSection" style="display: none;">
+<%== include 'chunks/sidecard', card => {
+  docpath => 'adminsCard',
+  title => __('Administrators'),
+  main => '<input type="text" id="adminSearch" class="form-control form-control-sm mb-2" placeholder="' . __('Search admin to add') . '..." autocomplete="off"><ul id="adminSearchResults" class="list-group list-group-flush"></ul><ul class="list-group list-group-flush" id="domainAdminsList"></ul>'
+} %>
+</div>
+
+<div id="domainLogSection" style="display: none;">
+<%== include 'chunks/sidecard', card => {
+  docpath => 'logCard',
+  title => __('Recent activity'),
+  main => '<ul class="list-group list-group-flush small" id="domainLogList"></ul><div id="domainLogMore" class="text-center mt-2" style="display: none;"><a href="#" id="domainLogLink" class="small">' . __('View all') . ' &rarr;</a></div>'
+} %>
 </div>

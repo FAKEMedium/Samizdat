@@ -25,6 +25,7 @@ sub register ($self, $app, $conf) {
   # List pages (before /#domain to avoid capture)
   $manager->get('/admins')                                   ->to('#admins_page')               ->name('email_admins');
   $manager->get('/mailboxes')                                ->to('#mailboxes_page')            ->name('email_mailboxes');
+  $manager->get('/log')                                      ->to('#log_page')                  ->name('email_log');
 
   # Domain-specific routes (most specific first)
   $manager->get('/#domain/admins/#admin')                    ->to('#domain_admin')              ->name('email_domain_admin');
@@ -47,6 +48,8 @@ sub register ($self, $app, $conf) {
       pg     => $self->pg,
       mysql  => $self->mysql,
     });
+    # Set current user for logging (from session or 'system' for CLI)
+    $model->current_user($self->session('user') // 'system');
     return $model;
   });
 }
@@ -187,6 +190,46 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Email_Result'
+
+  /email/log:
+    get:
+      operationId: Email.logs.index
+      x-mojo-to: Email#logs_index
+      summary: List email management logs
+      tags: [Email]
+      parameters:
+        - name: username
+          in: query
+          schema:
+            type: string
+          description: Filter by username
+        - name: domain
+          in: query
+          schema:
+            type: string
+          description: Filter by domain
+        - name: action
+          in: query
+          schema:
+            type: string
+          description: Filter by action type
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of log entries
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_LogListResponse'
 
   /email/domains/available-targets:
     get:
@@ -695,6 +738,143 @@ paths:
               schema:
                 $ref: '#/components/schemas/Email_Result'
 
+  /email/{domain}/admins:
+    get:
+      operationId: Email.domain_admins.index
+      x-mojo-to: Email#domain_admins
+      summary: List domain admins
+      tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of domain admins
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/vacation/{email}:
+    get:
+      operationId: Email.vacation.get
+      x-mojo-to: Email#vacation
+      summary: Get vacation settings
+      tags: [Email]
+      parameters:
+        - name: email
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vacation settings
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+    put:
+      operationId: Email.vacation.update
+      x-mojo-to: Email#vacation
+      summary: Update vacation settings
+      tags: [Email]
+      parameters:
+        - name: email
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Vacation updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+    delete:
+      operationId: Email.vacation.delete
+      x-mojo-to: Email#vacation
+      summary: Delete vacation settings
+      tags: [Email]
+      parameters:
+        - name: email
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Vacation deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/{domain}/admins/{admin}:
+    post:
+      operationId: Email.domain_admins.add
+      x-mojo-to: Email#domain_admin
+      summary: Add admin to domain
+      tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+        - name: admin
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin added to domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+    delete:
+      operationId: Email.domain_admins.remove
+      x-mojo-to: Email#domain_admin
+      summary: Remove admin from domain
+      tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+        - name: admin
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Admin removed from domain
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
 components:
   schemas:
     Email_Domain:
@@ -872,3 +1052,46 @@ components:
           type: string
         message:
           type: string
+    Email_Log:
+      type: object
+      properties:
+        id:
+          type: integer
+        timestamp:
+          type: string
+          format: date-time
+        username:
+          type: string
+        domain:
+          type: string
+        action:
+          type: string
+        data:
+          type: string
+    Email_LogListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email_Log'
+        actions:
+          type: array
+          items:
+            type: object
+            properties:
+              action:
+                type: string
+        pagination:
+          type: object
+          properties:
+            page:
+              type: integer
+            limit:
+              type: integer
+            total:
+              type: integer
+            pages:
+              type: integer

@@ -72,7 +72,8 @@ async function loadAlias(address) {
     if (result.success) {
       const a = result.alias;
       document.getElementById('address').value = a.address || '';
-      document.getElementById('goto').value = a.goto || '';
+      // Display emails one per line for readability
+      document.getElementById('goto').value = (a.goto || '').split(',').map(s => s.trim()).join('\n');
       document.getElementById('alias_active').checked = a.active || false;
       document.getElementById('address').readOnly = true;
     }
@@ -81,12 +82,42 @@ async function loadAlias(address) {
   }
 }
 
+// Parse goto field: split by comma, newline, or whitespace and clean up
+function parseGoto(value) {
+  return value
+    .split(/[\s,]+/)
+    .map(s => s.trim())
+    .filter(s => s && s.includes('@'))
+    .join(',');
+}
+
+// Clear validation state
+function clearGotoValidation() {
+  const gotoField = document.getElementById('goto');
+  gotoField.classList.remove('is-invalid');
+  document.getElementById('gotoFeedback').textContent = '';
+}
+
+// Show validation error on goto field
+function showGotoError(message) {
+  const gotoField = document.getElementById('goto');
+  gotoField.classList.add('is-invalid');
+  document.getElementById('gotoFeedback').textContent = message;
+}
+
+// Clear validation on input
+document.getElementById('goto').addEventListener('input', clearGotoValidation);
+
 async function saveAlias() {
   const form = document.getElementById('aliasForm');
   const address = document.getElementById('address').value;
   const isEdit = document.getElementById('address').readOnly;
 
+  clearGotoValidation();
+
   const data = new FormData(form);
+  // Parse goto field before submission
+  data.set('goto', parseGoto(data.get('goto')));
 
   try {
     const url = isEdit
@@ -105,7 +136,13 @@ async function saveAlias() {
       bootstrap.Modal.getInstance(document.getElementById('aliasModal')).hide();
       getAliases();
     } else {
-      showToast('Error: ' + (result.error || 'Unknown error'), 'danger');
+      const error = result.error || 'Unknown error';
+      // Check if error is about goto field
+      if (error.toLowerCase().includes('email') || error.toLowerCase().includes('forward') || error.toLowerCase().includes('address')) {
+        showGotoError(error);
+      } else {
+        showToast('Error: ' + error, 'danger');
+      }
     }
   } catch (error) {
     showToast('Error saving alias: ' + error.message, 'danger');

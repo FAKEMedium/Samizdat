@@ -15,13 +15,16 @@ my $mailbox_checkfields = [qw(active)];
 my $alias_fields = [qw(address goto domain)];
 my $alias_checkfields = [qw(active)];
 
+# Email validation regex
+my $email_re = qr/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 # Index action - HTML page for email management (domains list)
 sub index ($self) {
   my $accept = $self->req->headers->accept || '';
 
   # HTML view
   if ($accept !~ /json/) {
-    my $title = $self->app->__('Email Management');
+    my $title = $self->app->__('Email Domain Management');
     my $web = { title => $title };
     $web->{script} = $self->render_to_string(template => 'email/index', format => 'js');
 
@@ -29,6 +32,7 @@ sub index ($self) {
       web => $web,
       title => $title,
       template => 'email/index',
+      headline => 'email/chunks/headlinebuttons',
       status => 200
     );
   }
@@ -50,6 +54,7 @@ sub admins_page ($self) {
       web => $web,
       title => $title,
       template => 'email/admins/index',
+      headline => 'email/chunks/headlinebuttons',
       status => 200
     );
   }
@@ -70,6 +75,7 @@ sub mailboxes_page ($self) {
       web => $web,
       title => $title,
       template => 'email/mailboxes/index',
+      headline => 'email/chunks/headlinebuttons',
       status => 200
     );
   }
@@ -92,6 +98,7 @@ sub domains_index ($self) {
   my ($page, $limit, $offset) = $self->_pagination_params;
   my $customerid = $self->param('customerid');
   my $searchterm = $self->param('searchterm') || '';
+  my $exclude_alias_domains = $self->param('exclude_alias_domains');
 
   my $where = {};
   $where->{customerid} = $customerid if $customerid;
@@ -100,7 +107,8 @@ sub domains_index ($self) {
   my $data = $self->app->email->get_domains({
     where => $where,
     limit => $limit,
-    offset => $offset
+    offset => $offset,
+    exclude_alias_domains => $exclude_alias_domains
   });
   my $total = $self->app->email->count_domains({ where => $where });
 
@@ -274,6 +282,7 @@ sub domain ($self) {
     });
   }
   elsif ($method eq 'POST') {
+    my $json = $self->req->json || {};
     my $formdata = $self->_formdata('domain');
     unless ($formdata->{domain}->{domain}) {
       return $self->render(json => {
@@ -282,9 +291,9 @@ sub domain ($self) {
       }, status => 400);
     }
 
-    # Check if alias domain
-    my $is_alias = $self->param('isAliasDomain');
-    my $target_domain = $self->param('targetDomain');
+    # Check if alias domain (read from JSON body)
+    my $is_alias = $json->{isAliasDomain};
+    my $target_domain = $json->{targetDomain};
 
     # Validate: target domains cannot become alias domains
     if ($is_alias && $target_domain) {
@@ -295,6 +304,9 @@ sub domain ($self) {
           error => $self->app->__('Cannot make this domain an alias domain - it has alias domains pointing to it')
         }, status => 400);
       }
+      # Set mailboxes = -1 and transport = virtual for alias domains
+      $formdata->{domain}->{mailboxes} = -1;
+      $formdata->{domain}->{transport} = 'virtual';
     }
 
     my $result = $self->app->email->create_domain($formdata->{domain});
@@ -315,11 +327,12 @@ sub domain ($self) {
     });
   }
   elsif ($method eq 'PUT' || $method eq 'PATCH') {
+    my $json = $self->req->json || {};
     my $formdata = $self->_formdata('domain');
 
-    # Check if trying to make this an alias domain
-    my $is_alias = $self->param('isAliasDomain');
-    my $target_domain = $self->param('targetDomain');
+    # Check if trying to make this an alias domain (read from JSON body)
+    my $is_alias = $json->{isAliasDomain};
+    my $target_domain = $json->{targetDomain};
 
     # Validate: target domains cannot become alias domains
     if ($is_alias && $target_domain) {
@@ -330,6 +343,27 @@ sub domain ($self) {
           error => $self->app->__('Cannot make this domain an alias domain - it has alias domains pointing to it')
         }, status => 400);
       }
+
+      # Cannot become alias if it has mailboxes
+      my $mailbox_count = $self->app->email->count_mailboxes({ where => { domain => $domain } });
+      if ($mailbox_count > 0) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__('Cannot make this domain an alias domain - it has mailboxes')
+        }, status => 400);
+      }
+
+      # Cannot become alias if it has forwards
+      my $alias_count = $self->app->email->count_aliases({ where => { domain => $domain } });
+      if ($alias_count > 0) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__('Cannot make this domain an alias domain - it has forwardings')
+        }, status => 400);
+      }
+      # Set mailboxes = -1 and transport = virtual for alias domains
+      $formdata->{domain}->{mailboxes} = -1;
+      $formdata->{domain}->{transport} = 'virtual';
     }
 
     my $result = $self->app->email->update_domain($domain, $formdata->{domain});
@@ -411,6 +445,7 @@ sub domain_page ($self) {
       web => $web,
       title => $title,
       template => 'email/domain/index',
+      headline => 'email/chunks/headlinebuttons',
       status => 200
     );
   }
@@ -474,14 +509,13 @@ sub alias_page ($self) {
 # Domain admins list
 sub domain_admins ($self) {
   my $domain = $self->param('domain');
-  my $accept = $self->req->headers->accept || '';
 
   return unless $self->access({ admin => 1 });
 
-  # TODO: Implement domain_admins table lookup
+  my $admins = $self->app->email->get_domain_admins($domain);
   return $self->render(json => {
     success => 1,
-    admins => []
+    admins => $admins
   });
 }
 
@@ -493,11 +527,37 @@ sub domain_admin ($self) {
 
   return unless $self->access({ admin => 1 });
 
-  # TODO: Implement domain_admins table operations
+  if ($method eq 'POST') {
+    my $result = $self->app->email->add_admin_domain($admin, $domain);
+    unless ($result) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Failed to add domain')
+      }, status => 500);
+    }
+    return $self->render(json => {
+      success => 1,
+      message => $self->app->__('Domain added successfully')
+    });
+  }
+  elsif ($method eq 'DELETE') {
+    my $result = $self->app->email->remove_admin_domain($admin, $domain);
+    unless ($result) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Failed to remove domain')
+      }, status => 500);
+    }
+    return $self->render(json => {
+      success => 1,
+      message => $self->app->__('Domain removed successfully')
+    });
+  }
+
   return $self->render(json => {
-    success => 1,
-    message => 'Not yet implemented'
-  });
+    success => 0,
+    error => $self->app->__('Method not allowed')
+  }, status => 405);
 }
 
 # Get available target domains for alias domain
@@ -641,6 +701,22 @@ sub alias ($self) {
       }, status => 400);
     }
 
+    # Validate and clean goto field
+    my ($goto, $invalid) = $self->_validate_goto($formdata->{alias}->{goto});
+    if (@$invalid) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Invalid email addresses') . ': ' . join(', ', @$invalid)
+      }, status => 400);
+    }
+    unless ($goto) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('At least one valid forward address is required')
+      }, status => 400);
+    }
+    $formdata->{alias}->{goto} = $goto;
+
     my $result = $self->app->email->create_alias($formdata->{alias});
     return $self->render(json => {
       success => 1,
@@ -650,6 +726,23 @@ sub alias ($self) {
   }
   elsif ($method eq 'PUT' || $method eq 'PATCH') {
     my $formdata = $self->_formdata('alias');
+
+    # Validate and clean goto field
+    my ($goto, $invalid) = $self->_validate_goto($formdata->{alias}->{goto});
+    if (@$invalid) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Invalid email addresses') . ': ' . join(', ', @$invalid)
+      }, status => 400);
+    }
+    unless ($goto) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('At least one valid forward address is required')
+      }, status => 400);
+    }
+    $formdata->{alias}->{goto} = $goto;
+
     my $result = $self->app->email->update_alias($address, $formdata->{alias});
 
     unless ($result) {
@@ -787,9 +880,33 @@ sub admin ($self) {
   }
 }
 
+# Private helper to validate and clean goto field
+# Returns (cleaned_goto_string, invalid_emails_arrayref)
+sub _validate_goto ($self, $goto_value) {
+  return ('', []) unless defined $goto_value && $goto_value =~ /\S/;
+
+  # Split by comma, newline, or whitespace
+  my @emails = grep { $_ } map { s/^\s+|\s+$//gr } split(/[\s,]+/, $goto_value);
+
+  my @valid;
+  my @invalid;
+
+  for my $email (@emails) {
+    next unless $email;
+    if ($email =~ $email_re) {
+      push @valid, lc($email);
+    } else {
+      push @invalid, $email;
+    }
+  }
+
+  return (join(',', @valid), \@invalid);
+}
+
 # Private helper to extract form data
 sub _formdata ($self, $type) {
-  my $result = $self->req->params->to_hash;
+  # Check for JSON body first, fallback to form params
+  my $result = $self->req->json || $self->req->params->to_hash;
   my $formdata = { $type => {} };
 
   my $fields;
@@ -819,6 +936,117 @@ sub _formdata ($self, $type) {
   }
 
   return $formdata;
+}
+
+# Log page
+sub log_page ($self) {
+  my $accept = $self->req->headers->accept || '';
+
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Email Log');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/log/index', format => 'js');
+
+    return $self->render(
+      web => $web,
+      title => $title,
+      template => 'email/log/index',
+      headline => 'email/chunks/headlinebuttons',
+      status => 200
+    );
+  }
+
+  return $self->logs_index;
+}
+
+# List logs
+sub logs_index ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my ($page, $limit, $offset) = $self->_pagination_params;
+  my $username = $self->param('username');
+  my $domain = $self->param('domain');
+  my $action = $self->param('action');
+
+  my $where = {};
+  $where->{username} = $username if $username;
+  $where->{domain} = $domain if $domain;
+  $where->{action} = $action if $action;
+
+  my $data = $self->app->email->get_logs({
+    where => $where,
+    limit => $limit,
+    offset => $offset
+  });
+  my $total = $self->app->email->count_logs({ where => $where });
+  my $actions = $self->app->email->get_log_actions();
+
+  return $self->render(json => {
+    success => 1,
+    data => $data,
+    actions => $actions,
+    pagination => {
+      page => $page,
+      limit => $limit,
+      total => $total,
+      pages => int(($total + $limit - 1) / $limit)
+    }
+  });
+}
+
+# Vacation actions
+sub vacation ($self) {
+  my $email = $self->param('email');
+  my $method = $self->req->method;
+
+  return unless $self->access({ admin => 1 });
+
+  if ($method eq 'GET') {
+    my $data = $self->app->email->find_vacation($email);
+    return $self->render(json => {
+      success => 1,
+      vacation => $data || { email => $email, active => 0 }
+    });
+  }
+  elsif ($method eq 'POST' || $method eq 'PUT') {
+    my $json = $self->req->json || {};
+
+    # Extract domain from email
+    my ($local, $domain) = split('@', $email);
+
+    my $vacation_data = {
+      email => $email,
+      domain => $domain,
+      subject => $json->{subject} // '',
+      body => $json->{body} // '',
+      active => $json->{active} ? 1 : 0,
+      activefrom => $json->{activefrom} || undef,
+      activeuntil => $json->{activeuntil} || undef,
+      interval_time => $json->{interval_time} // 0
+    };
+
+    my $existing = $self->app->email->find_vacation($email);
+    my $result;
+
+    if ($existing) {
+      $result = $self->app->email->update_vacation($email, $vacation_data);
+    } else {
+      $result = $self->app->email->create_vacation($vacation_data);
+    }
+
+    return $self->render(json => {
+      success => 1,
+      vacation => $result,
+      message => $self->app->__('Vacation settings saved')
+    });
+  }
+  elsif ($method eq 'DELETE') {
+    my $result = $self->app->email->delete_vacation($email);
+    return $self->render(json => {
+      success => 1,
+      message => $self->app->__('Vacation settings deleted')
+    });
+  }
 }
 
 1;

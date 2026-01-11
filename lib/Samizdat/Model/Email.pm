@@ -7,9 +7,21 @@ use Data::Dumper;
 has 'config';
 has 'pg';
 has 'mysql';
+has 'current_user' => 'system';  # Set by controller/command for logging
 
 sub database ($self) {
   return ('mysql' eq ($self->config->{dbtype} // 'postgresql')) ? $self->mysql->db : $self->pg->db;
+}
+
+# Internal logging helper (uses provided db handle for transactions)
+sub _log ($self, $db, $action, $domain, $data = {}) {
+  require Mojo::JSON;
+  $db->insert('postfix.log', {
+    username => $self->current_user,
+    domain => $domain // '',
+    action => $action,
+    data => ref $data ? Mojo::JSON::encode_json($data) : ($data // '')
+  });
 }
 
 # Domain methods
@@ -18,10 +30,16 @@ sub get_domains ($self, $params = {}) {
   my $order = $params->{order} || 'domain ASC';
   my $limit = $params->{limit};
   my $offset = $params->{offset} || 0;
+  my $exclude_alias_domains = $params->{exclude_alias_domains};
 
   my $sql = 'SELECT * FROM postfix.domain';
   my @bind;
   my @conditions = ("domain != 'ALL'");  # Exclude ALL (used for defaults)
+
+  # Exclude domains that are alias domains
+  if ($exclude_alias_domains) {
+    push @conditions, 'domain NOT IN (SELECT alias_domain FROM postfix.alias_domain)';
+  }
 
   if (keys %$where) {
     for my $key (keys %$where) {
@@ -48,14 +66,24 @@ sub find_domain ($self, $domain) {
 }
 
 sub create_domain ($self, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
-  return $self->database->insert('postfix.domain', $data, {returning => '*'})->hash;
+  my $result = $tx->db->insert('postfix.domain', $data, {returning => '*'})->hash;
+  $self->_log($tx->db, 'create_domain', $result->{domain}, $result);
+  $tx->commit;
+  return $result;
 }
 
 sub update_domain ($self, $domain, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{modified} = \'NOW()';
-  return $self->database->update('postfix.domain', $data, {domain => $domain}, {returning => '*'})->hash;
+  my $result = $tx->db->update('postfix.domain', $data, {domain => $domain}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'edit_domain', $domain, $data);
+  $tx->commit;
+  return $result;
 }
 
 sub delete_domain ($self, $domain) {
@@ -76,6 +104,7 @@ sub delete_domain ($self, $domain) {
 
   # Delete the domain itself
   my $result = $tx->db->delete('postfix.domain', {domain => $domain}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'delete_domain', $domain, $result);
   $tx->commit;
 
   return $result;
@@ -84,21 +113,24 @@ sub delete_domain ($self, $domain) {
 # Mailbox methods
 sub get_mailboxes ($self, $params = {}) {
   my $where = $params->{where} || {};
-  my $order = $params->{order} || 'username ASC';
+  my $order = $params->{order} || 'm.username ASC';
   my $limit = $params->{limit};
   my $offset = $params->{offset} || 0;
 
-  my $sql = 'SELECT * FROM postfix.mailbox';
+  my $sql = 'SELECT m.*, COALESCE(v.active, false) AS vacation_active
+             FROM postfix.mailbox m
+             LEFT JOIN postfix.vacation v ON v.email = m.username';
   my @bind;
 
   if (keys %$where) {
     my @conditions;
     for my $key (keys %$where) {
+      my $col = $key =~ /\./ ? $key : "m.$key";
       if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
-        push @conditions, "$key ILIKE ?";
+        push @conditions, "$col ILIKE ?";
         push @bind, $where->{$key}{'-like'};
       } else {
-        push @conditions, "$key = ?";
+        push @conditions, "$col = ?";
         push @bind, $where->{$key};
       }
     }
@@ -117,6 +149,8 @@ sub find_mailbox ($self, $username) {
 }
 
 sub create_mailbox ($self, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
 
@@ -129,12 +163,20 @@ sub create_mailbox ($self, $data) {
   # Set maildir path if not provided
   $data->{maildir} ||= $data->{username} . '/';
 
-  return $self->database->insert('postfix.mailbox', $data, {returning => '*'})->hash;
+  my $result = $tx->db->insert('postfix.mailbox', $data, {returning => '*'})->hash;
+  $self->_log($tx->db, 'create_mailbox', $result->{domain}, {username => $result->{username}});
+  $tx->commit;
+  return $result;
 }
 
 sub update_mailbox ($self, $username, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{modified} = \'NOW()';
-  return $self->database->update('postfix.mailbox', $data, {username => $username}, {returning => '*'})->hash;
+  my $result = $tx->db->update('postfix.mailbox', $data, {username => $username}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'edit_mailbox', $result->{domain}, {username => $username});
+  $tx->commit;
+  return $result;
 }
 
 sub delete_mailbox ($self, $username) {
@@ -154,6 +196,7 @@ sub delete_mailbox ($self, $username) {
   }
 
   my $result = $tx->db->delete('postfix.mailbox', {username => $username}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'delete_mailbox', $domain, {username => $username});
   $tx->commit;
 
   return $result;
@@ -201,6 +244,8 @@ sub find_alias ($self, $address) {
 }
 
 sub create_alias ($self, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
 
@@ -209,16 +254,30 @@ sub create_alias ($self, $data) {
     $data->{domain} = $1;
   }
 
-  return $self->database->insert('postfix.alias', $data, {returning => '*'})->hash;
+  my $result = $tx->db->insert('postfix.alias', $data, {returning => '*'})->hash;
+  $self->_log($tx->db, 'create_alias', $result->{domain}, {address => $result->{address}, goto => $result->{goto}});
+  $tx->commit;
+  return $result;
 }
 
 sub update_alias ($self, $address, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{modified} = \'NOW()';
-  return $self->database->update('postfix.alias', $data, {address => $address}, {returning => '*'})->hash;
+  my $result = $tx->db->update('postfix.alias', $data, {address => $address}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'edit_alias', $result->{domain}, {address => $address, goto => $data->{goto}});
+  $tx->commit;
+  return $result;
 }
 
 sub delete_alias ($self, $address) {
-  return $self->database->delete('postfix.alias', {address => $address}, {returning => '*'})->hash;
+  my $db = $self->database;
+  my $tx = $db->begin;
+  my ($domain) = $address =~ /\@(.+)$/;
+  my $result = $tx->db->delete('postfix.alias', {address => $address}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'delete_alias', $domain, {address => $address});
+  $tx->commit;
+  return $result;
 }
 
 # Quota methods
@@ -284,13 +343,23 @@ sub find_alias_domain ($self, $domain) {
 }
 
 sub create_alias_domain ($self, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
-  return $self->database->insert('postfix.alias_domain', $data, {returning => '*'})->hash;
+  my $result = $tx->db->insert('postfix.alias_domain', $data, {returning => '*'})->hash;
+  $self->_log($tx->db, 'create_alias_domain', $result->{alias_domain}, {target_domain => $result->{target_domain}});
+  $tx->commit;
+  return $result;
 }
 
 sub delete_alias_domain ($self, $domain) {
-  return $self->database->delete('postfix.alias_domain', {alias_domain => $domain}, {returning => '*'})->hash;
+  my $db = $self->database;
+  my $tx = $db->begin;
+  my $result = $tx->db->delete('postfix.alias_domain', {alias_domain => $domain}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'delete_alias_domain', $domain, {target_domain => $result->{target_domain}});
+  $tx->commit;
+  return $result;
 }
 
 # Get alias domains that point TO a given target domain
@@ -355,26 +424,43 @@ sub find_admin ($self, $username) {
 }
 
 sub create_admin ($self, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
   # Hash password if provided
   if ($data->{password}) {
     $data->{password} = $self->_hash_password($data->{password});
   }
-  return $self->database->insert('postfix.admin', $data, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
+  my $result = $tx->db->insert('postfix.admin', $data, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
+  $self->_log($tx->db, 'create_admin', '', {username => $result->{username}});
+  $tx->commit;
+  return $result;
 }
 
 sub update_admin ($self, $username, $data) {
+  my $db = $self->database;
+  my $tx = $db->begin;
   $data->{modified} = \'NOW()';
   # Hash password if provided
   if ($data->{password}) {
     $data->{password} = $self->_hash_password($data->{password});
   }
-  return $self->database->update('postfix.admin', $data, {username => $username}, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
+  my $result = $tx->db->update('postfix.admin', $data, {username => $username}, {returning => 'username, created, modified, active, superadmin, phone, email_other'})->hash;
+  $self->_log($tx->db, 'edit_admin', '', {username => $username});
+  $tx->commit;
+  return $result;
 }
 
 sub delete_admin ($self, $username) {
-  return $self->database->delete('postfix.admin', {username => $username}, {returning => '*'})->hash;
+  my $db = $self->database;
+  my $tx = $db->begin;
+  # Delete domain_admins connections first
+  $tx->db->delete('postfix.domain_admins', {username => $username});
+  my $result = $tx->db->delete('postfix.admin', {username => $username}, {returning => '*'})->hash;
+  $self->_log($tx->db, 'delete_admin', '', {username => $username});
+  $tx->commit;
+  return $result;
 }
 
 sub count_admins ($self, $params = {}) {
@@ -407,6 +493,49 @@ sub get_admin_domains ($self, $username) {
      WHERE da.username = ? AND da.active ORDER BY da.domain',
     $username
   )->hashes->to_array;
+}
+
+sub get_domain_admins ($self, $domain) {
+  return $self->database->query(
+    'SELECT da.username FROM postfix.domain_admins da
+     WHERE da.domain = ? AND da.active ORDER BY da.username',
+    $domain
+  )->hashes->to_array;
+}
+
+sub add_admin_domain ($self, $username, $domain) {
+  return $self->database->insert('postfix.domain_admins', {
+    username => $username,
+    domain => $domain,
+    active => 1
+  }, {returning => '*'})->hash;
+}
+
+sub remove_admin_domain ($self, $username, $domain) {
+  return $self->database->delete('postfix.domain_admins', {
+    username => $username,
+    domain => $domain
+  }, {returning => '*'})->hash;
+}
+
+# Vacation methods
+sub find_vacation ($self, $email) {
+  return $self->database->query('SELECT * FROM postfix.vacation WHERE email = ?', $email)->hash;
+}
+
+sub create_vacation ($self, $data) {
+  $data->{created} = \'NOW()';
+  $data->{modified} = \'NOW()';
+  return $self->database->insert('postfix.vacation', $data, {returning => '*'})->hash;
+}
+
+sub update_vacation ($self, $email, $data) {
+  $data->{modified} = \'NOW()';
+  return $self->database->update('postfix.vacation', $data, {email => $email}, {returning => '*'})->hash;
+}
+
+sub delete_vacation ($self, $email) {
+  return $self->database->delete('postfix.vacation', {email => $email}, {returning => '*'})->hash;
 }
 
 sub _hash_password ($self, $password) {
@@ -519,6 +648,70 @@ sub domain_stats ($self, $domain) {
   };
 
   return $self->database->query($sql, $domain)->hash;
+}
+
+# Log methods
+sub get_logs ($self, $params = {}) {
+  my $where = $params->{where} || {};
+  my $order = $params->{order} || 'timestamp DESC';
+  my $limit = $params->{limit};
+  my $offset = $params->{offset} || 0;
+
+  my $sql = 'SELECT * FROM postfix.log';
+  my @bind;
+  my @conditions;
+
+  if (keys %$where) {
+    for my $key (keys %$where) {
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
+    }
+  }
+
+  $sql .= ' WHERE ' . join(' AND ', @conditions) if @conditions;
+  $sql .= " ORDER BY $order";
+  $sql .= " LIMIT $limit" if $limit;
+  $sql .= " OFFSET $offset" if $offset;
+
+  return $self->database->query($sql, @bind)->hashes->to_array;
+}
+
+sub count_logs ($self, $params = {}) {
+  my $where = $params->{where} || {};
+  my $sql = 'SELECT COUNT(*) as count FROM postfix.log';
+  my @bind;
+  my @conditions;
+
+  if (keys %$where) {
+    for my $key (keys %$where) {
+      if (ref $where->{$key} eq 'HASH' && exists $where->{$key}{'-like'}) {
+        push @conditions, "$key ILIKE ?";
+        push @bind, $where->{$key}{'-like'};
+      } else {
+        push @conditions, "$key = ?";
+        push @bind, $where->{$key};
+      }
+    }
+  }
+
+  $sql .= ' WHERE ' . join(' AND ', @conditions) if @conditions;
+  my $result = $self->database->query($sql, @bind)->hash;
+  return $result->{count} || 0;
+}
+
+sub create_log ($self, $data) {
+  $data->{timestamp} //= \'NOW()';
+  return $self->database->insert('postfix.log', $data, {returning => '*'})->hash;
+}
+
+sub get_log_actions ($self) {
+  my $sql = 'SELECT DISTINCT action FROM postfix.log ORDER BY action';
+  return $self->database->query($sql)->hashes->to_array;
 }
 
 1;

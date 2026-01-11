@@ -37,6 +37,13 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
+        <div class="mb-3">
+          <div class="input-group">
+            <input type="text" id="domainSearch" class="form-control" placeholder="<%== __('Search domain to add') %>..." autocomplete="off">
+          </div>
+          <ul id="domainSearchResults" class="list-group mt-1"></ul>
+        </div>
+        <h6><%== __('Currently managed') %></h6>
         <ul id="domainsList" class="list-group"></ul>
       </div>
     </div>

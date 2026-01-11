@@ -35,8 +35,9 @@
           </div>
           <div class="mb-3">
             <label for="goto" class="form-label"><%== __('Forward To') %></label>
-            <input type="text" class="form-control" id="goto" name="goto" required>
-            <small class="form-text text-muted"><%== __('Comma-separated list of email addresses') %></small>
+            <textarea class="form-control" id="goto" name="goto" rows="3" required></textarea>
+            <div class="invalid-feedback" id="gotoFeedback"></div>
+            <small class="form-text text-muted"><%== __('One email per line, or separated by comma/space') %></small>
           </div>
           <div class="form-check mb-3">
             <input type="checkbox" class="form-check-input" id="alias_active" name="active">
