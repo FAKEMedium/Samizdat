@@ -71,7 +71,7 @@ sub create_domain ($self, $data) {
   $data->{created} = \'NOW()';
   $data->{modified} = \'NOW()';
   my $result = $tx->db->insert('postfix.domain', $data, {returning => '*'})->hash;
-  $self->_log($tx->db, 'create_domain', $result->{domain}, $result);
+  $self->_log($tx->db, 'create_domain', $result->{domain}, {domain => $result->{domain}});
   $tx->commit;
   return $result;
 }
@@ -104,7 +104,7 @@ sub delete_domain ($self, $domain) {
 
   # Delete the domain itself
   my $result = $tx->db->delete('postfix.domain', {domain => $domain}, {returning => '*'})->hash;
-  $self->_log($tx->db, 'delete_domain', $domain, $result);
+  $self->_log($tx->db, 'delete_domain', $domain, {domain => $domain});
   $tx->commit;
 
   return $result;

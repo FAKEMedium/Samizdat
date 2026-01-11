@@ -48,8 +48,14 @@ sub register ($self, $app, $conf) {
       pg     => $self->pg,
       mysql  => $self->mysql,
     });
-    # Set current user for logging (from session or 'system' for CLI)
-    $model->current_user($self->session('user') // 'system');
+    # Set current user for logging
+    my $username = $self->session('user');
+    if ($username) {
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $model->current_user(exists $superadmins->{$username} ? 'superadmin' : $username);
+    } else {
+      $model->current_user('system');
+    }
     return $model;
   });
 }
