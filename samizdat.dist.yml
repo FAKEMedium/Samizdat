@@ -143,6 +143,13 @@ manager:
       mailboxes: 0              # Default max mailboxes per domain
       maxquota: 15000           # Default max quota per mailbox in MB
       quota: 2000000            # Default total quota per domain in MB
+    password:
+      minlength: 8
+      minuppercase: 1
+      minlowercase: 1
+      minnumbers: 1
+      minspecial: 1
+      chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
   product:
     cardnumber: 8
     dbtype: postgresql
@@ -296,6 +303,33 @@ manager:
       production:
         publishable_key: pk_live_xxx              # Production publishable key
         secret_key: sk_live_xxx                   # Production secret key
+  account:
+    cookiedomain: .example.com
+    authcookiename: samizauth
+    datacookiename: samizdata
+    username:
+      minlength: 3
+      chars: a-z0-9                               # database comparisons will be case insensitive.
+    password:
+      minlength: 8
+      minuppercase: 1
+      minlowercase: 1
+      minnumbers: 1
+      minspecial: 1
+      chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
+    passwordmethods:                              # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
+      - mysql
+      - sha512
+      - pbkdf2
+      - bcrypt
+      - argon2id
+    convertpasswordto: argon2id                   # Convert validated passwords to methods equal to, or better, than this methods strength
+    blocktime: 180                                # Number of minutes a user will be blocked
+    blocklimit: 4                                 # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
+    blockperiod: 10                               # Time window in minutes that unsuccessful login attempts will be counted
+    sessiontimeout: 3600                          # Session timeout in seconds
+    superadmins:                                  # List of username: password that have full access to everything, mainly for bootstrapping.
+#      superadmin: s3cr3t_Pa55w0r6                # CHANGE!!!
 screenshots:
   -
     src: /media/images/samizdat.jpg
@@ -388,33 +422,6 @@ nginx: 1
 cache: 1
 bundlename: samizdat
 timezone: Etc/UTC
-account:
-  cookiedomain: .example.com
-  authcookiename: samizauth
-  datacookiename: samizdata
-  username:
-    minlength: 3
-    chars: a-z0-9                           # database comparisons will be case insensitive.
-  password:
-    minlength: 8
-    minuppercase: 1
-    minlowercase: 1
-    minnumbers: 1
-    minspecial: 1
-    chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
-  passwordmethods:                          # Try these methods for password validation. They should be listed by strength. Used to migrate other user databases.
-    - mysql
-    - sha512
-    - pbkdf2
-    - bcrypt
-    - argon2id
-  convertpasswordto: argon2id               # Convert validated passwords to methods equal to, or better, than this methods strength
-  blocktime: 180                            # Number of minutes a user will be blocked
-  blocklimit: 4                             # Unsuccessful login attempts per blockperiod from a specific ip before it gets blocked
-  blockperiod: 10                           # Time window in minutes that unsuccessful login attempts will be counted
-  sessiontimeout: 3600                      # Session timeout in seconds
-  superadmins:                              # List of username: password that have full access to everything, mainly for bootstrapping.
-#    superadmin: s3cr3t_Pa55w0r6            # CHANGE!!!
 dsn:
   pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
   redis: redis://127.0.0.1:6379/1

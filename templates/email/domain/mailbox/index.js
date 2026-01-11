@@ -11,8 +11,22 @@
   const form = document.getElementById('mailboxForm');
   const usernameInput = document.getElementById('username');
   const passwordInput = document.getElementById('password');
+  const passwordError = document.getElementById('passwordError');
   const submitBtn = document.getElementById('submitBtn');
   const modalTitle = document.getElementById('modaltitle');
+
+  function showError(input, errorEl, message) {
+    input.classList.add('is-invalid');
+    errorEl.textContent = message;
+  }
+
+  function clearError(input, errorEl) {
+    input.classList.remove('is-invalid');
+    errorEl.textContent = '';
+  }
+
+  // Clear error on input
+  passwordInput.addEventListener('input', () => clearError(passwordInput, passwordError));
 
   // Update UI for edit mode
   if (editingMailbox) {
@@ -85,9 +99,14 @@
       window.showToast(result.message || '<%== __("Mailbox saved successfully") %>');
       const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
       if (modal) modal.hide();
-      setTimeout(() => location.reload(), 500);
     } else {
-      window.showToast(result?.error || '<%== __("Failed to save mailbox") %>', 'danger');
+      const error = result?.error || '<%== __("Failed to save mailbox") %>';
+      // Show inline error if password-related
+      if (error.toLowerCase().includes('password')) {
+        showError(passwordInput, passwordError, error);
+      } else {
+        window.showToast(error, 'danger');
+      }
     }
   });
 

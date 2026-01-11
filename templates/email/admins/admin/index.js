@@ -76,7 +76,6 @@
       window.showToast(result.message || '<%== __("Admin saved successfully") %>');
       const modal = bootstrap.Modal.getInstance(document.querySelector('#universalmodal'));
       if (modal) modal.hide();
-      setTimeout(() => location.reload(), 500);
     } else {
       window.showToast(result?.error || '<%== __("Failed to save admin") %>', 'danger');
     }

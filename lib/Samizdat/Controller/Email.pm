@@ -18,6 +18,41 @@ my $alias_checkfields = [qw(active)];
 # Email validation regex
 my $email_re = qr/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+# Password validation helper - returns error message or undef if valid
+sub _validate_password ($self, $password) {
+  my $cfg = $self->app->config->{manager}->{email}->{password} || {};
+  my @errors;
+
+  my $minlength = $cfg->{minlength} // 8;
+  push @errors, $self->app->__x('at least {length} characters', length => $minlength) if length($password) < $minlength;
+
+  my $minuppercase = $cfg->{minuppercase} // 0;
+  if ($minuppercase > 0) {
+    my $count = () = $password =~ /[A-Z]/g;
+    push @errors, $self->app->__x('{count} uppercase', count => $minuppercase) if $count < $minuppercase;
+  }
+
+  my $minlowercase = $cfg->{minlowercase} // 0;
+  if ($minlowercase > 0) {
+    my $count = () = $password =~ /[a-z]/g;
+    push @errors, $self->app->__x('{count} lowercase', count => $minlowercase) if $count < $minlowercase;
+  }
+
+  my $minnumbers = $cfg->{minnumbers} // 0;
+  if ($minnumbers > 0) {
+    my $count = () = $password =~ /[0-9]/g;
+    push @errors, $self->app->__x('{count} number(s)', count => $minnumbers) if $count < $minnumbers;
+  }
+
+  my $minspecial = $cfg->{minspecial} // 0;
+  if ($minspecial > 0) {
+    my $count = () = $password =~ /[^a-zA-Z0-9]/g;
+    push @errors, $self->app->__x('{count} special character(s)', count => $minspecial) if $count < $minspecial;
+  }
+
+  return @errors ? $self->app->__('Password requires: ') . join(', ', @errors) : undef;
+}
+
 # Index action - HTML page for email management (domains list)
 sub index ($self) {
   my $accept = $self->req->headers->accept || '';
@@ -639,6 +674,21 @@ sub mailbox ($self) {
       }
     }
 
+    # Validate password (required for new mailbox)
+    my $password = $formdata->{mailbox}->{password};
+    unless ($password) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Password is required')
+      }, status => 400);
+    }
+    if (my $pwd_error = $self->_validate_password($password)) {
+      return $self->render(json => {
+        success => 0,
+        error => $pwd_error
+      }, status => 400);
+    }
+
     my $result = $self->app->email->create_mailbox($formdata->{mailbox});
     return $self->render(json => {
       success => 1,
@@ -648,6 +698,17 @@ sub mailbox ($self) {
   }
   elsif ($method eq 'PUT' || $method eq 'PATCH') {
     my $formdata = $self->_formdata('mailbox');
+
+    # Validate password if provided
+    if (my $password = $formdata->{mailbox}->{password}) {
+      if (my $pwd_error = $self->_validate_password($password)) {
+        return $self->render(json => {
+          success => 0,
+          error => $pwd_error
+        }, status => 400);
+      }
+    }
+
     my $result = $self->app->email->update_mailbox($username, $formdata->{mailbox});
 
     unless ($result) {
