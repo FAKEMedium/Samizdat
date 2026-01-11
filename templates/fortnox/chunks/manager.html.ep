@@ -1,11 +1,9 @@
 <ul>
   <li><a href="<%== url_for('fortnox_auth') %>"><%== __('Authorize') %></a></li>
   <li><a href="<%== url_for('fortnox_logout') %>"><%== __('Log out') %></a></li>
-  <li><a href="<%== url_for('fortnox_manager') %>"><%== __('Panel') %></a></li>
   <li><a href="<%== url_for('fortnox_customer') %>"><%== __('Customers') %></a></li>
   <li><a href="<%== url_for('fortnox_customer', customerid => 3323) %>"><%== __('Test customer') %></a></li>
   <li><a href="<%== url_for('fortnox_invoices') %>"><%== __('Invoices') %></a></li>
-  <li><a href="<%== url_for('fortnox_payments') %>"><%== __('Payments') %></a></li>
   <li><a href="https://apps.fortnox.se/apidocs"><%== __('API docs') %></a></li>
   <li><a href="https://fortnox.se/developer"><%== __('Developer docs') %></a></li>
   <li><a href="<%== url_for('fortnox_index') %>"><%== __('Fortnox integration') %></a></li>
