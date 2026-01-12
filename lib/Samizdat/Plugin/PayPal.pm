@@ -23,6 +23,7 @@ sub register ($self, $app, $config = {}) {
   # Manager routes
   my $manager = $r->manager('paypal')->to(controller => 'PayPal');
   $manager->get('/')                      ->to('#index')                ->name('paypal_index');
+  $manager->get('/transactions')          ->to('#transactions')         ->name('paypal_transactions');
 
 
   # Register model helper following the established pattern
@@ -141,6 +142,8 @@ The plugin registers the following routes:
 =over 4
 
 =item * GET /manager/paypal - PayPal payments panel
+
+=item * GET /manager/paypal/transactions - Fetch live transactions from PayPal
 
 =back
 
@@ -339,6 +342,31 @@ paths:
               schema:
                 type: string
 
+  /paypal/transactions:
+    get:
+      operationId: PayPal.transactions
+      x-mojo-to: PayPal#transactions
+      summary: Fetch live transactions from PayPal Transaction Search API
+      tags: [PayPal]
+      parameters:
+        - name: start_date
+          in: query
+          description: Start date in ISO 8601 format (e.g., 2024-01-01T00:00:00Z)
+          schema:
+            type: string
+        - name: end_date
+          in: query
+          description: End date in ISO 8601 format (e.g., 2024-12-31T23:59:59Z)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction list from PayPal
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PayPal_TransactionsResponse'
+
 components:
   schemas:
     PayPal_ConfigResponse:
@@ -448,3 +476,38 @@ components:
             $ref: '#/components/schemas/PayPal_Payment'
         stats:
           $ref: '#/components/schemas/PayPal_Stats'
+    PayPal_TransactionsResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        transactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/PayPal_Transaction'
+        total_items:
+          type: integer
+        total_pages:
+          type: integer
+        error:
+          type: string
+    PayPal_Transaction:
+      type: object
+      properties:
+        transaction_id:
+          type: string
+        transaction_status:
+          type: string
+        transaction_subject:
+          type: string
+        transaction_amount:
+          type: object
+          properties:
+            value:
+              type: string
+            currency_code:
+              type: string
+        transaction_updated_date:
+          type: string
+        payer_info:
+          type: object

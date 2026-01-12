@@ -70,10 +70,101 @@ fetch('<%== url_for('PayPal.index') %>', {
     '<tr><td colspan="7" class="text-center text-danger"><%= __("Error loading payments") %></td></tr>';
 });
 
-function formatCurrency(amount) {
+function formatCurrency(amount, currency = 'USD') {
   if (amount === null || amount === undefined) return '-';
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD'
+    currency: currency
   }).format(amount);
 }
+
+// Set default date range (last 30 days)
+const today = new Date();
+const thirtyDaysAgo = new Date(today);
+thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+document.getElementById('start-date').value = thirtyDaysAgo.toISOString().split('T')[0];
+document.getElementById('end-date').value = today.toISOString().split('T')[0];
+
+// Fetch live transactions from PayPal API
+document.getElementById('fetch-transactions').addEventListener('click', async function() {
+  const startDate = document.getElementById('start-date').value;
+  const endDate = document.getElementById('end-date').value;
+  const tbody = document.getElementById('live-transactions-tbody');
+  const infoDiv = document.getElementById('live-transactions-info');
+
+  if (!startDate || !endDate) {
+    alert('<%= __("Please select both start and end dates") %>');
+    return;
+  }
+
+  // Show loading
+  tbody.innerHTML = '<tr><td colspan="6" class="text-center"><%= __("Loading...") %></td></tr>';
+  infoDiv.textContent = '';
+
+  try {
+    const startISO = startDate + 'T00:00:00-00:00';
+    const endISO = endDate + 'T23:59:59-00:00';
+
+    const response = await fetch(`<%== url_for('paypal_transactions') %>?start_date=${encodeURIComponent(startISO)}&end_date=${encodeURIComponent(endISO)}`, {
+      headers: { 'Accept': 'application/json' }
+    });
+
+    const data = await response.json();
+
+    if (data.success && data.transactions) {
+      if (data.transactions.length > 0) {
+        tbody.innerHTML = '';
+        data.transactions.forEach(txn => {
+          const row = document.createElement('tr');
+
+          // Parse transaction info
+          const txnInfo = txn.transaction_info || {};
+          const payerInfo = txn.payer_info || {};
+
+          // Format date
+          const dateStr = txnInfo.transaction_updated_date
+            ? new Date(txnInfo.transaction_updated_date).toLocaleString()
+            : '-';
+
+          // Status badge
+          const status = txnInfo.transaction_status || 'Unknown';
+          let statusClass = 'secondary';
+          if (status === 'S') statusClass = 'success';  // Successful
+          else if (status === 'P') statusClass = 'warning';  // Pending
+          else if (status === 'D') statusClass = 'danger';  // Denied
+          else if (status === 'V') statusClass = 'info';  // Reversed
+
+          const statusLabels = { 'S': 'Success', 'P': 'Pending', 'D': 'Denied', 'V': 'Reversed' };
+
+          // Amount
+          const amount = txnInfo.transaction_amount?.value || '0';
+          const currency = txnInfo.transaction_amount?.currency_code || 'USD';
+
+          // Payer info
+          const payerName = payerInfo.payer_name?.alternate_full_name || payerInfo.email_address || '-';
+
+          row.innerHTML = `
+            <td>${dateStr}</td>
+            <td><small>${txnInfo.transaction_id || '-'}</small></td>
+            <td><span class="badge bg-${statusClass}">${statusLabels[status] || status}</span></td>
+            <td>${payerName}</td>
+            <td>${txnInfo.transaction_subject || '-'}</td>
+            <td>${formatCurrency(parseFloat(amount), currency)}</td>
+          `;
+
+          tbody.appendChild(row);
+        });
+
+        infoDiv.textContent = `<%= __("Total") %>: ${data.total_items || data.transactions.length} <%= __("transactions") %>`;
+      } else {
+        tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted"><%= __("No transactions found for selected date range") %></td></tr>';
+      }
+    } else {
+      tbody.innerHTML = `<tr><td colspan="6" class="text-center text-danger">${data.error || '<%= __("Error fetching transactions") %>'}</td></tr>`;
+    }
+  } catch (error) {
+    console.error('Error fetching live transactions:', error);
+    tbody.innerHTML = '<tr><td colspan="6" class="text-center text-danger"><%= __("Error fetching transactions") %></td></tr>';
+  }
+});

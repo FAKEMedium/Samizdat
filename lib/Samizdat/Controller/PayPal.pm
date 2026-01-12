@@ -202,6 +202,31 @@ sub capture_order ($self) {
   }
 }
 
+sub transactions ($self) {
+  # Fetch live transactions from PayPal Transaction Search API
+  return unless $self->access({ admin => 1 });
+
+  my $start_date = $self->param('start_date');
+  my $end_date = $self->param('end_date');
+
+  my $result = $self->paypal->fetch_transactions(
+    start_date => $start_date,
+    end_date => $end_date,
+  );
+
+  if ($result->{error}) {
+    return $self->render(json => { success => 0, error => $result->{error} }, status => 500);
+  }
+
+  $self->tx->res->headers->content_type('application/json; charset=UTF-8');
+  return $self->render(json => {
+    success => 1,
+    transactions => $result->{transactions},
+    total_items => $result->{total_items},
+    total_pages => $result->{total_pages},
+  }, status => 200);
+}
+
 1;
 
 =head1 NAME
