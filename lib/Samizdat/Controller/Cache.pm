@@ -129,10 +129,12 @@ sub delete($self) {
 sub purge($self) {
   return if !$self->access({ 'superadmin' => 1 });
 
-  my $pattern = $self->param('pattern') || '*';
+  my $json = $self->req->json // {};
+  my $pattern = $json->{pattern} // $self->param('pattern') // '*';
+  my $confirmed = $json->{confirmed} // $self->param('confirmed');
 
   # Safety check - require explicit confirmation for wildcard
-  if ($pattern eq '*' && !$self->param('confirmed')) {
+  if ($pattern eq '*' && !$confirmed) {
     return $self->render(json => {
       error => 'Confirmation required',
       message => $self->app->__('Purging all cache requires confirmation')
