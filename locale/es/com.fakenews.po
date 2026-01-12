@@ -30,7 +30,7 @@ msgid "0 = reply once per sender"
 msgstr ""
 
 msgid "1 Year"
-msgstr ""
+msgstr "1 Año"
 
 msgid "1 database"
 msgid_plural "{number} databases"
@@ -77,7 +77,7 @@ msgid "A"
 msgstr ""
 
 msgid "A Records"
-msgstr ""
+msgstr "Registros A"
 
 msgid "A confirmation link was mailed to {email}."
 msgstr "Se ha enviado un enlace de confirmación a {email}."
@@ -92,7 +92,7 @@ msgid "A {rate} interest will be charged on overdue payments"
 msgstr "Se cobrará un interés del {rate} por pagos atrasados"
 
 msgid "A/AAAA Records"
-msgstr ""
+msgstr "Registros A/AAAA"
 
 msgid "API docs"
 msgstr "Documentación API"
@@ -110,22 +110,22 @@ msgid "About Fortnox"
 msgstr "Acerca de Fortnox"
 
 msgid "Access denied"
-msgstr ""
+msgstr "Acceso denegado"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Según nuestros registros, la factura {number} sigue sin pagar."
 
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 msgid "Account confirmation"
 msgstr "Confirmación de cuenta"
 
 msgid "Account settings"
-msgstr ""
+msgstr "Configuración de cuenta"
 
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 msgid "Actions"
 msgstr "Acciones"
@@ -140,10 +140,10 @@ msgid "Active"
 msgstr "Activo"
 
 msgid "Active from"
-msgstr ""
+msgstr "Activo desde"
 
 msgid "Active until"
-msgstr ""
+msgstr "Activo hasta"
 
 msgid "Add"
 msgstr "Añadir"
@@ -155,13 +155,13 @@ msgid "Add Column Before"
 msgstr "Añadir columna antes"
 
 msgid "Add Key"
-msgstr ""
+msgstr "Agregar clave"
 
 msgid "Add New"
-msgstr ""
+msgstr "Agregar nuevo"
 
 msgid "Add New Key"
-msgstr ""
+msgstr "Agregar nueva clave"
 
 msgid "Add Row After"
 msgstr "Añadir fila después"
@@ -170,16 +170,16 @@ msgid "Add Row Before"
 msgstr "Añadir fila antes"
 
 msgid "Add admin"
-msgstr ""
+msgstr "Agregar administrador"
 
 msgid "Add alias"
-msgstr ""
+msgstr "Agregar alias"
 
 msgid "Add certificate"
-msgstr ""
+msgstr "Agregar certificado"
 
 msgid "Add contact"
-msgstr ""
+msgstr "Agregar contacto"
 
 msgid "Add content"
 msgstr "Añadir contenido"
@@ -194,10 +194,10 @@ msgid "Add domain"
 msgstr "Añadir dominio"
 
 msgid "Add example"
-msgstr ""
+msgstr "Agregar ejemplo"
 
 msgid "Add forwarding"
-msgstr ""
+msgstr "Agregar reenvío"
 
 msgid "Add grop"
 msgstr "Añadir grupo"
@@ -206,28 +206,28 @@ msgid "Add group"
 msgstr "Añadir grupo"
 
 msgid "Add item"
-msgstr ""
+msgstr "Agregar elemento"
 
 msgid "Add mail domain"
 msgstr "Añadir dominio de correo"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "Agregar buzón"
 
 msgid "Add nameserver"
-msgstr ""
+msgstr "Agregar servidor DNS"
 
 msgid "Add page"
 msgstr "Añadir página"
 
 msgid "Add poll"
-msgstr ""
+msgstr "Agregar encuesta"
 
 msgid "Add product"
 msgstr "Añadir producto"
 
 msgid "Add side content"
-msgstr ""
+msgstr "Agregar contenido lateral"
 
 msgid "Add subscription"
 msgstr "Añadir suscripción"
@@ -263,22 +263,22 @@ msgid "Address check"
 msgstr "Verificación de dirección"
 
 msgid "Address is required"
-msgstr ""
+msgstr "La dirección es requerida"
 
 msgid "Address line 1"
-msgstr ""
+msgstr "Línea de dirección 1"
 
 msgid "Address line 2 (optional)"
-msgstr ""
+msgstr "Línea de dirección 2 (opcional)"
 
 msgid "Admin"
-msgstr ""
+msgstr "Administrador"
 
 msgid "Admin Email"
-msgstr ""
+msgstr "Correo del administrador"
 
 msgid "Admin access required"
-msgstr ""
+msgstr "Se requiere acceso de administrador"
 
 msgid "Admin access required for DNS management"
 msgstr ""
@@ -305,10 +305,10 @@ msgid "Admininistration panel"
 msgstr "Panel de administración"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Administradores"
 
 msgid "Admins"
-msgstr ""
+msgstr "Administradores"
 
 msgid "Advertising"
 msgstr "Publicidad"
@@ -320,10 +320,10 @@ msgid "After registration you can add more data about yourself, loosen your shar
 msgstr "Después del registro puede añadir más datos sobre usted, modificar su política de compartición y personalizar su experiencia."
 
 msgid "Algorithm"
-msgstr ""
+msgstr "Algoritmo"
 
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 msgid "Alias Address"
 msgstr ""
@@ -350,10 +350,10 @@ msgid "Alias updated successfully"
 msgstr ""
 
 msgid "Aliases"
-msgstr ""
+msgstr "Alias"
 
 msgid "All"
-msgstr ""
+msgstr "Todo"
 
 msgid "All Invoices"
 msgstr ""
@@ -389,7 +389,7 @@ msgid "Amount and items are required"
 msgstr ""
 
 msgid "Amount due"
-msgstr ""
+msgstr "Monto adeudado"
 
 msgid "Amount in Swedish Kronor"
 msgstr ""
@@ -422,7 +422,7 @@ msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "Aplicar"
 
 msgid "Are you sure you want to delete contact"
 msgstr ""
@@ -560,10 +560,10 @@ msgid "Back"
 msgstr "Atrás"
 
 msgid "Back to Dashboard"
-msgstr ""
+msgstr "Volver al panel"
 
 msgid "Back to List"
-msgstr ""
+msgstr "Volver a la lista"
 
 msgid "Back to Zones"
 msgstr ""
@@ -584,7 +584,7 @@ msgid "Background"
 msgstr ""
 
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 msgid "Bankgiro"
 msgstr "Bankgiro"
@@ -704,10 +704,10 @@ msgid "Cash invoice"
 msgstr ""
 
 msgid "Category"
-msgstr ""
+msgstr "Categoría"
 
 msgid "Certificate"
-msgstr ""
+msgstr "Certificado"
 
 msgid "Certificate Chain"
 msgstr ""
@@ -728,7 +728,7 @@ msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
-msgstr ""
+msgstr "Certificados"
 
 msgid "Change password"
 msgstr "Cambiar contraseña"
@@ -746,7 +746,7 @@ msgid "Charged At"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Verificar"
 
 msgid "Check failed"
 msgstr ""
@@ -779,6 +779,9 @@ msgid "City (billing)"
 msgstr "Ciudad (facturación)"
 
 msgid "Clear"
+msgstr "Limpiar"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
 msgid "Click to pop dialog."
@@ -845,7 +848,7 @@ msgid "Company"
 msgstr "Empresa"
 
 msgid "Completed"
-msgstr ""
+msgstr "Completado"
 
 msgid "Compliance"
 msgstr ""
@@ -938,7 +941,7 @@ msgid "Contact: {email} or call us directly."
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
+msgstr "Contactos"
 
 msgid "Content"
 msgstr "Contenido"
@@ -977,7 +980,7 @@ msgid "Country selector"
 msgstr "Selector de país"
 
 msgid "Create"
-msgstr ""
+msgstr "Crear"
 
 msgid "Create Contact"
 msgstr ""
@@ -1004,7 +1007,7 @@ msgid "Create new record"
 msgstr "Crear nuevo registro"
 
 msgid "Created"
-msgstr ""
+msgstr "Creado"
 
 msgid "Created {created} by {creator}"
 msgstr "Creado el {created} por {creator}"
@@ -1160,7 +1163,7 @@ msgid "Declined"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "Predeterminado"
 
 msgid "Definitions"
 msgstr ""
@@ -1226,7 +1229,7 @@ msgid "Direction"
 msgstr ""
 
 msgid "Disabled"
-msgstr ""
+msgstr "Deshabilitado"
 
 msgid "Discount"
 msgstr "Descuento"
@@ -1526,6 +1529,9 @@ msgid "Empty telephone"
 msgstr "Teléfono vacío"
 
 msgid "Enabled"
+msgstr "Habilitado"
+
+msgid "End Date"
 msgstr ""
 
 msgid "End main content"
@@ -1573,6 +1579,9 @@ msgstr "Introducir nombre de zona"
 msgid "Error deleting contact"
 msgstr ""
 
+msgid "Error fetching transactions"
+msgstr ""
+
 msgid "Error loading contact details"
 msgstr ""
 
@@ -1586,7 +1595,7 @@ msgid "Error loading domains"
 msgstr ""
 
 msgid "Error loading payments"
-msgstr ""
+msgstr "Error al cargar pagos"
 
 msgid "Error loading price list"
 msgstr ""
@@ -1658,7 +1667,7 @@ msgid "Expiry"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Exportar"
 
 msgid "Export zone file"
 msgstr ""
@@ -1673,7 +1682,7 @@ msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed"
-msgstr ""
+msgstr "Fallido"
 
 msgid "Failed login from {ip}"
 msgstr "Inicio de sesión fallido desde {ip}"
@@ -1897,8 +1906,11 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-msgid "File"
+msgid "Fetch from PayPal"
 msgstr ""
+
+msgid "File"
+msgstr "Archivo"
 
 msgid "File archive"
 msgstr "Archivo de ficheros"
@@ -1969,6 +1981,9 @@ msgstr "Fortnox"
 msgid "Fortnox Warning"
 msgstr ""
 
+msgid "Fortnox authorization required"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Integración Fortnox"
 
@@ -2036,7 +2051,7 @@ msgid "Gross"
 msgstr "Bruto"
 
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 msgid "HTML result"
 msgstr "Resultado HTML"
@@ -2102,7 +2117,7 @@ msgid "IBAN:"
 msgstr "IBAN:"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "ID required"
 msgstr ""
@@ -2174,7 +2189,7 @@ msgid "Impersonate {who}"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Importar"
 
 msgid "Import zone"
 msgstr ""
@@ -2401,7 +2416,7 @@ msgid "Keep me logged in"
 msgstr "Mantenerme conectado"
 
 msgid "Key"
-msgstr ""
+msgstr "Clave"
 
 msgid "Key Type"
 msgstr ""
@@ -2481,11 +2496,14 @@ msgstr "Listar zonas"
 msgid "Lista fakturor"
 msgstr "Lista de facturas"
 
-msgid "Loading..."
+msgid "Live Transactions"
 msgstr ""
 
+msgid "Loading..."
+msgstr "Cargando..."
+
 msgid "Log"
-msgstr ""
+msgstr "Registro"
 
 msgid "Log in"
 msgstr "Iniciar sesión"
@@ -2560,7 +2578,7 @@ msgid "Mail sent through own servers"
 msgstr "Correo enviado a través de servidores propios"
 
 msgid "Mailbox"
-msgstr ""
+msgstr "Buzón"
 
 msgid "Mailbox created successfully"
 msgstr ""
@@ -2584,7 +2602,7 @@ msgid "Mailbox updated successfully"
 msgstr ""
 
 msgid "Mailboxes"
-msgstr ""
+msgstr "Buzones"
 
 msgid "Mailboxes for"
 msgstr ""
@@ -2605,7 +2623,7 @@ msgid "Managed domains"
 msgstr ""
 
 msgid "Manager"
-msgstr ""
+msgstr "Gestor"
 
 msgid "Manuals"
 msgstr "Manuales"
@@ -2647,7 +2665,7 @@ msgid "Message sent"
 msgstr "Mensaje enviado"
 
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 msgid "Messages pagination"
 msgstr ""
@@ -2815,7 +2833,7 @@ msgid "Newsletter"
 msgstr "Boletín"
 
 msgid "Next"
-msgstr ""
+msgstr "Siguiente"
 
 msgid "No"
 msgstr "No"
@@ -2917,6 +2935,9 @@ msgid "No pages found."
 msgstr "No se encontraron páginas."
 
 msgid "No payments found"
+msgstr "No se encontraron pagos"
+
+msgid "No payments selected"
 msgstr ""
 
 msgid "No price data available"
@@ -2952,6 +2973,12 @@ msgstr ""
 msgid "No transactions found"
 msgstr ""
 
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
+
 msgid "No users found"
 msgstr ""
 
@@ -2980,7 +3007,7 @@ msgid "Numbered List"
 msgstr "Lista numerada"
 
 msgid "OK"
-msgstr ""
+msgstr "Aceptar"
 
 msgid "OVERDUE"
 msgstr ""
@@ -3025,7 +3052,7 @@ msgid "Or scan QR code with Swish app"
 msgstr ""
 
 msgid "Order"
-msgstr ""
+msgstr "Orden"
 
 msgid "Order number or reference"
 msgstr ""
@@ -3055,7 +3082,7 @@ msgid "Organisation Number"
 msgstr "Número de Organización"
 
 msgid "Organization"
-msgstr ""
+msgstr "Organización"
 
 msgid "Organizational number"
 msgstr "Número organizacional"
@@ -3103,7 +3130,7 @@ msgid "PEM format (stored securely)"
 msgstr ""
 
 msgid "Page"
-msgstr ""
+msgstr "Página"
 
 msgid "Page navigation"
 msgstr ""
@@ -3178,7 +3205,7 @@ msgid "PayPal"
 msgstr ""
 
 msgid "PayPal Payments"
-msgstr ""
+msgstr "Pagos de PayPal"
 
 msgid "Paydate"
 msgstr "Fecha de pago"
@@ -3187,7 +3214,7 @@ msgid "Payer"
 msgstr ""
 
 msgid "Payer Email"
-msgstr ""
+msgstr "Correo del pagador"
 
 msgid "Payment"
 msgstr "Pago"
@@ -3283,7 +3310,7 @@ msgid "Paypal:"
 msgstr "Paypal:"
 
 msgid "Pending"
-msgstr ""
+msgstr "Pendiente"
 
 msgid "People rocketing to the sky"
 msgstr "Personas disparando hacia el cielo"
@@ -3345,6 +3372,9 @@ msgstr "Por favor cierre sesión e inicie sesión como un usuario con la autoriz
 msgid "Please select at least one registry"
 msgstr ""
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3352,7 +3382,7 @@ msgid "Polls"
 msgstr ""
 
 msgid "Port"
-msgstr ""
+msgstr "Puerto"
 
 msgid "Posta faktura"
 msgstr "Enviar factura por correo"
@@ -3394,7 +3424,7 @@ msgid "Preview"
 msgstr ""
 
 msgid "Previous"
-msgstr ""
+msgstr "Anterior"
 
 msgid "Price"
 msgstr "Precio"
@@ -3426,11 +3456,23 @@ msgstr "Privilegios"
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
 msgstr ""
 
-msgid "Product"
+msgid "Process selected"
 msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
+
+msgid "Product"
+msgstr "Producto"
 
 msgid "Products"
 msgstr "Productos"
@@ -3445,7 +3487,7 @@ msgid "Protocol"
 msgstr ""
 
 msgid "Provider"
-msgstr ""
+msgstr "Proveedor"
 
 msgid "Public Key"
 msgstr ""
@@ -3514,7 +3556,7 @@ msgid "Recent Messages"
 msgstr ""
 
 msgid "Recent Payments"
-msgstr ""
+msgstr "Pagos recientes"
 
 msgid "Recent activity"
 msgstr ""
@@ -3526,7 +3568,7 @@ msgid "Recommended by"
 msgstr "Recomendado por"
 
 msgid "Record"
-msgstr ""
+msgstr "Registro"
 
 msgid "Record Name"
 msgstr "Nombre de Registro"
@@ -3571,7 +3613,7 @@ msgid "References"
 msgstr "Referencias"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Actualizar"
 
 msgid "Refund amount exceeds available amount"
 msgstr ""
@@ -3673,7 +3715,7 @@ msgid "Reprint invoice"
 msgstr ""
 
 msgid "Required"
-msgstr ""
+msgstr "Requerido"
 
 msgid "Required for most TLDs. Get this from your current registrar."
 msgstr ""
@@ -3805,7 +3847,7 @@ msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
 msgid "Score"
-msgstr ""
+msgstr "Puntuación"
 
 msgid "Score (High to Low)"
 msgstr ""
@@ -3916,7 +3958,7 @@ msgid "Search web content"
 msgstr "Buscar contenido web"
 
 msgid "Sector"
-msgstr ""
+msgstr "Sector"
 
 msgid "Sector Statistics"
 msgstr ""
@@ -3997,7 +4039,7 @@ msgid "Servers"
 msgstr "Servidores"
 
 msgid "Service"
-msgstr ""
+msgstr "Servicio"
 
 msgid "Service interruption"
 msgstr ""
@@ -4092,6 +4134,9 @@ msgstr "Precio especial"
 msgid "Start"
 msgstr "Inicio"
 
+msgid "Start Date"
+msgstr ""
+
 msgid "Start New Check Run"
 msgstr ""
 
@@ -4114,7 +4159,7 @@ msgid "Statistics"
 msgstr "Estadísticas"
 
 msgid "Status"
-msgstr ""
+msgstr "Estado"
 
 msgid "Storage"
 msgstr ""
@@ -4123,7 +4168,7 @@ msgid "Storage target"
 msgstr ""
 
 msgid "Street"
-msgstr ""
+msgstr "Calle"
 
 msgid "Street Address"
 msgstr ""
@@ -4207,13 +4252,13 @@ msgid "TTL"
 msgstr ""
 
 msgid "Tag"
-msgstr ""
+msgstr "Etiqueta"
 
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 msgid "Target"
-msgstr ""
+msgstr "Destino"
 
 msgid "Target domain"
 msgstr ""
@@ -4237,7 +4282,7 @@ msgid "Telephone"
 msgstr "Teléfono"
 
 msgid "Template"
-msgstr ""
+msgstr "Plantilla"
 
 msgid "Template created"
 msgstr ""
@@ -4252,7 +4297,7 @@ msgid "Template updated"
 msgstr ""
 
 msgid "Templates"
-msgstr ""
+msgstr "Plantillas"
 
 msgid "Terms of Payment"
 msgstr "Términos de Pago"
@@ -4381,13 +4426,13 @@ msgid "Tillbaka"
 msgstr "Atrás"
 
 msgid "Time"
-msgstr ""
+msgstr "Hora"
 
 msgid "Timestamp"
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 msgid "Titles by Language"
 msgstr ""
@@ -4402,7 +4447,7 @@ msgid "Tot"
 msgstr "Total"
 
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 msgid "Total Domains"
 msgstr ""
@@ -4435,7 +4480,7 @@ msgid "Transaction Details"
 msgstr ""
 
 msgid "Transaction ID"
-msgstr ""
+msgstr "ID de transacción"
 
 msgid "Transaction ID:"
 msgstr ""
@@ -4444,7 +4489,7 @@ msgid "Transaction not found"
 msgstr ""
 
 msgid "Transactions"
-msgstr ""
+msgstr "Transacciones"
 
 msgid "Transfer"
 msgstr "Transferencia"
@@ -4486,7 +4531,7 @@ msgid "Unique identifier for this contact"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 msgid "Unknown error"
 msgstr ""
@@ -4558,7 +4603,7 @@ msgid "Used to make class names."
 msgstr "Utilizado para crear nombres de clase."
 
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 msgid "User manual"
 msgstr "Manual de usuario"
@@ -4588,7 +4633,7 @@ msgid "Username must be at least {min} characters"
 msgstr "El nombre de usuario debe tener al menos {min} caracteres"
 
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 msgid "Users and groups"
 msgstr "Usuarios y grupos"
@@ -4642,16 +4687,16 @@ msgid "Vacation settings saved"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Valor"
 
 msgid "Value for the class attribute."
 msgstr "Valor para el atributo class."
 
 msgid "Version"
-msgstr ""
+msgstr "Versión"
 
 msgid "View"
-msgstr ""
+msgstr "Ver"
 
 msgid "View Details"
 msgstr ""
@@ -4690,7 +4735,7 @@ msgid "Web sites"
 msgstr "Sitios web"
 
 msgid "Website"
-msgstr ""
+msgstr "Sitio web"
 
 msgid "Websites"
 msgstr "Sitios web"
@@ -4903,9 +4948,15 @@ msgid "example"
 msgstr ""
 
 msgid "failed"
-msgstr ""
+msgstr "fallido"
 
 msgid "for registrar"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
 msgstr ""
 
 msgid "invoice"
@@ -4933,7 +4984,7 @@ msgid "our web"
 msgstr "nuestra web"
 
 msgid "payments"
-msgstr ""
+msgstr "pagos"
 
 msgid "poll"
 msgstr ""
@@ -4948,7 +4999,7 @@ msgid "records"
 msgstr ""
 
 msgid "refunded"
-msgstr ""
+msgstr "reembolsado"
 
 msgid "seconds"
 msgstr ""
@@ -4961,6 +5012,9 @@ msgstr "cortafuegos en espera"
 
 msgid "supporters"
 msgstr "seguidores"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr ""

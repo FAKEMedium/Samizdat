@@ -13,43 +13,14 @@
       </select>
     </div>
 
-    <div class="mb-3">
-      <label class="form-label"><%== __('Registries & Handles') %> <span class="text-danger">*</span></label>
-      <div class="row g-2">
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-text">
-              <input class="form-check-input mt-0" type="checkbox" id="registrySE" name="registries" value="se">
-            </div>
-            <span class="input-group-text">.SE</span>
-            <input type="text" id="handleSE" name="handleSE" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-text">
-              <input class="form-check-input mt-0" type="checkbox" id="registryNU" name="registries" value="nu">
-            </div>
-            <span class="input-group-text">.NU</span>
-            <input type="text" id="handleNU" name="handleNU" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="input-group">
-            <div class="input-group-text">
-              <input class="form-check-input mt-0" type="checkbox" id="registryRR" name="registries" value="rr">
-            </div>
-            <span class="input-group-text">RR</span>
-            <input type="text" id="handleRR" name="handleRR" class="form-control" placeholder="<%== __('Handle') %>" pattern="[a-zA-Z0-9]+">
-          </div>
-        </div>
-      </div>
-      <div class="form-text"><%== __('Select registries and set handles for each') %></div>
-    </div>
-
     <fieldset id="contactFields" disabled>
       <div class="row">
         <div class="col-md-6">
+          <div class="mb-3">
+            <label for="handle" class="form-label"><%== __('Handle') %> <span class="text-danger">*</span></label>
+            <input type="text" id="handle" name="handle" class="form-control" required pattern="[a-zA-Z0-9_-]+" title="<%== __('Only letters, numbers, underscore and hyphen') %>">
+            <div class="form-text"><%== __('Unique identifier for this contact') %></div>
+          </div>
           <div class="mb-3">
             <label for="name" class="form-label"><%== __('Name') %> <span class="text-danger">*</span></label>
             <input type="text" id="name" name="name" class="form-control" required>
@@ -58,25 +29,9 @@
             <label for="organization" class="form-label"><%== __('Organization') %></label>
             <input type="text" id="organization" name="organization" class="form-control">
           </div>
-          <div class="row mb-3">
-            <div class="col-md-6">
-              <label for="orgno" class="form-label"><%== __('Org. Number') %></label>
-              <input type="text" id="orgno" name="orgno" class="form-control" placeholder="556677-8899">
-            </div>
-            <div class="col-md-6">
-              <label for="vatno" class="form-label"><%== __('VAT Number') %></label>
-              <input type="text" id="vatno" name="vatno" class="form-control" placeholder="SE556677889901">
-            </div>
-          </div>
           <div class="mb-3">
             <label for="email" class="form-label"><%== __('Email') %> <span class="text-danger">*</span></label>
             <input type="email" id="email" name="email" class="form-control" required>
-            <div class="form-check mt-2" id="designatedAgentGroup" style="display:none;">
-              <input class="form-check-input" type="checkbox" id="designatedAgent" name="designatedAgent">
-              <label class="form-check-label" for="designatedAgent">
-                <%== __('I am acting as designated agent for this email change') %>
-              </label>
-            </div>
           </div>
           <div class="mb-3">
             <label for="voice" class="form-label"><%== __('Phone') %> <span class="text-danger">*</span></label>
@@ -85,9 +40,11 @@
           </div>
         </div>
         <div class="col-md-6">
+          <h6><%== __('Address') %></h6>
           <div class="mb-3">
-            <label for="street" class="form-label"><%== __('Street Address') %> <span class="text-danger">*</span></label>
-            <textarea id="street" name="street" class="form-control" rows="2" required placeholder="<%== __('Street address (one line per row)') %>"></textarea>
+            <label for="addressLine0" class="form-label"><%== __('Street Address') %> <span class="text-danger">*</span></label>
+            <input type="text" id="addressLine0" name="addressLine0" class="form-control mb-2" required placeholder="<%== __('Address line 1') %>">
+            <input type="text" id="addressLine1" name="addressLine1" class="form-control" placeholder="<%== __('Address line 2 (optional)') %>">
           </div>
           <div class="row mb-3">
             <div class="col-md-4">

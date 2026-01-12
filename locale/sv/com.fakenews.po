@@ -772,6 +772,9 @@ msgstr "Ort (faktura)"
 msgid "Clear"
 msgstr "Rensa"
 
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr "Klicka för att öppna dialog."
 
@@ -1495,6 +1498,9 @@ msgstr "Telefon saknas"
 msgid "Enabled"
 msgstr "Aktiverad"
 
+msgid "End Date"
+msgstr ""
+
 msgid "End main content"
 msgstr "Slut på huvudinnehåll"
 
@@ -1539,6 +1545,9 @@ msgstr "Ange namn på zon"
 
 msgid "Error deleting contact"
 msgstr "Fel vid borttagning av kontakt"
+
+msgid "Error fetching transactions"
+msgstr ""
 
 msgid "Error loading contact details"
 msgstr "Fel vid laddning av kontaktdetaljer"
@@ -1864,6 +1873,9 @@ msgstr "Fax"
 msgid "Featured"
 msgstr "Utvald"
 
+msgid "Fetch from PayPal"
+msgstr ""
+
 msgid "File"
 msgstr "Fil"
 
@@ -1935,6 +1947,9 @@ msgstr "Fortnox"
 
 msgid "Fortnox Warning"
 msgstr "Fortnox-varning"
+
+msgid "Fortnox authorization required"
+msgstr ""
 
 msgid "Fortnox integration"
 msgstr "Fortnox-integration"
@@ -2430,6 +2445,9 @@ msgstr "Lista zoner"
 msgid "Lista fakturor"
 msgstr "List invoices"
 
+msgid "Live Transactions"
+msgstr ""
+
 msgid "Loading..."
 msgstr "Laddar..."
 
@@ -2865,6 +2883,9 @@ msgstr "Inga sidor hittades."
 msgid "No payments found"
 msgstr "Inga betalningar hittades"
 
+msgid "No payments selected"
+msgstr ""
+
 msgid "No price data available"
 msgstr "Ingen prisdata tillgänglig"
 
@@ -2897,6 +2918,12 @@ msgstr "Ingen titel"
 
 msgid "No transactions found"
 msgstr "Inga transaktioner hittades"
+
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
 
 msgid "No users found"
 msgstr "Inga användare hittades"
@@ -3282,6 +3309,9 @@ msgstr "Logga in som en användare med rätt behörighet istället."
 msgid "Please select at least one registry"
 msgstr "Välj minst ett register"
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3360,8 +3390,20 @@ msgstr "Behörigheter"
 msgid "Proceed to Payment"
 msgstr "Gå till betalning"
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
 msgstr "Process-ID"
+
+msgid "Process selected"
+msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
 
 msgid "Product"
 msgstr "Produkt"
@@ -4016,6 +4058,9 @@ msgstr "Rabatt"
 
 msgid "Start"
 msgstr "Start"
+
+msgid "Start Date"
+msgstr ""
 
 msgid "Start New Check Run"
 msgstr "Starta ny kontrollkörning"
@@ -4815,6 +4860,12 @@ msgstr "misslyckades"
 msgid "for registrar"
 msgstr "för registrar"
 
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
+msgstr ""
+
 msgid "invoice"
 msgstr "faktura"
 
@@ -4868,6 +4919,9 @@ msgstr "standbybrandvägg"
 
 msgid "supporters"
 msgstr "supportrar"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr "obegränsad"

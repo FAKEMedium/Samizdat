@@ -30,7 +30,7 @@ msgid "0 = reply once per sender"
 msgstr ""
 
 msgid "1 Year"
-msgstr ""
+msgstr "سنة واحدة"
 
 msgid "1 database"
 msgid_plural "{number} databases"
@@ -105,7 +105,7 @@ msgid "A"
 msgstr ""
 
 msgid "A Records"
-msgstr ""
+msgstr "سجلات A"
 
 msgid "A confirmation link was mailed to {email}."
 msgstr "تم إرسال رابط تأكيد إلى {email}."
@@ -120,7 +120,7 @@ msgid "A {rate} interest will be charged on overdue payments"
 msgstr "سيتم فرض فائدة بنسبة {rate} على المدفوعات المتأخرة"
 
 msgid "A/AAAA Records"
-msgstr ""
+msgstr "سجلات A/AAAA"
 
 msgid "API docs"
 msgstr "وثائق API"
@@ -138,22 +138,22 @@ msgid "About Fortnox"
 msgstr "حول Fortnox"
 
 msgid "Access denied"
-msgstr ""
+msgstr "تم رفض الوصول"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "وفقًا لملاحظاتنا، الفاتورة {number} لا تزال غير مدفوعة."
 
 msgid "Account"
-msgstr ""
+msgstr "الحساب"
 
 msgid "Account confirmation"
 msgstr "تأكيد الحساب"
 
 msgid "Account settings"
-msgstr ""
+msgstr "إعدادات الحساب"
 
 msgid "Action"
-msgstr ""
+msgstr "إجراء"
 
 msgid "Actions"
 msgstr "إجراءات"
@@ -168,10 +168,10 @@ msgid "Active"
 msgstr "نشط"
 
 msgid "Active from"
-msgstr ""
+msgstr "نشط من"
 
 msgid "Active until"
-msgstr ""
+msgstr "نشط حتى"
 
 msgid "Add"
 msgstr "إضافة"
@@ -183,13 +183,13 @@ msgid "Add Column Before"
 msgstr "إضافة عمود قبل"
 
 msgid "Add Key"
-msgstr ""
+msgstr "إضافة مفتاح"
 
 msgid "Add New"
-msgstr ""
+msgstr "إضافة جديد"
 
 msgid "Add New Key"
-msgstr ""
+msgstr "إضافة مفتاح جديد"
 
 msgid "Add Row After"
 msgstr "إضافة صف بعد"
@@ -198,16 +198,16 @@ msgid "Add Row Before"
 msgstr "إضافة صف قبل"
 
 msgid "Add admin"
-msgstr ""
+msgstr "إضافة مسؤول"
 
 msgid "Add alias"
-msgstr ""
+msgstr "إضافة اسم مستعار"
 
 msgid "Add certificate"
-msgstr ""
+msgstr "إضافة شهادة"
 
 msgid "Add contact"
-msgstr ""
+msgstr "إضافة جهة اتصال"
 
 msgid "Add content"
 msgstr "إضافة محتوى"
@@ -222,10 +222,10 @@ msgid "Add domain"
 msgstr "إضافة نطاق"
 
 msgid "Add example"
-msgstr ""
+msgstr "إضافة مثال"
 
 msgid "Add forwarding"
-msgstr ""
+msgstr "إضافة تحويل"
 
 msgid "Add grop"
 msgstr "إضافة مجموعة"
@@ -234,28 +234,28 @@ msgid "Add group"
 msgstr "إضافة مجموعة"
 
 msgid "Add item"
-msgstr ""
+msgstr "إضافة عنصر"
 
 msgid "Add mail domain"
 msgstr "إضافة نطاق بريد"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "إضافة صندوق بريد"
 
 msgid "Add nameserver"
-msgstr ""
+msgstr "إضافة خادم أسماء"
 
 msgid "Add page"
 msgstr "إضافة صفحة"
 
 msgid "Add poll"
-msgstr ""
+msgstr "إضافة استطلاع"
 
 msgid "Add product"
 msgstr "إضافة منتج"
 
 msgid "Add side content"
-msgstr ""
+msgstr "إضافة محتوى جانبي"
 
 msgid "Add subscription"
 msgstr "إضافة اشتراك"
@@ -273,7 +273,7 @@ msgid "Add zone"
 msgstr "إضافة منطقة"
 
 msgid "Additional collection fees"
-msgstr ""
+msgstr "رسوم تحصيل إضافية"
 
 msgid "Address"
 msgstr "العنوان"
@@ -291,124 +291,124 @@ msgid "Address check"
 msgstr "التحقق من العنوان"
 
 msgid "Address is required"
-msgstr ""
+msgstr "العنوان مطلوب"
 
 msgid "Address line 1"
-msgstr ""
+msgstr "سطر العنوان 1"
 
 msgid "Address line 2 (optional)"
-msgstr ""
+msgstr "سطر العنوان 2 (اختياري)"
 
 msgid "Admin"
-msgstr ""
+msgstr "المسؤول"
 
 msgid "Admin Email"
-msgstr ""
+msgstr "بريد المسؤول"
 
 msgid "Admin access required"
-msgstr ""
+msgstr "يتطلب وصول المسؤول"
 
 msgid "Admin access required for DNS management"
 msgstr ""
 
 msgid "Admin contact"
-msgstr ""
+msgstr "جهة اتصال المسؤول"
 
 msgid "Admin created successfully"
-msgstr ""
+msgstr "تم إنشاء المسؤول بنجاح"
 
 msgid "Admin deleted successfully"
-msgstr ""
+msgstr "تم حذف المسؤول بنجاح"
 
 msgid "Admin not found"
-msgstr ""
+msgstr "المسؤول غير موجود"
 
 msgid "Admin saved successfully"
-msgstr ""
+msgstr "تم حفظ المسؤول بنجاح"
 
 msgid "Admin updated successfully"
-msgstr ""
+msgstr "تم تحديث المسؤول بنجاح"
 
 msgid "Admininistration panel"
 msgstr "لوحة الإدارة"
 
 msgid "Administrators"
-msgstr ""
+msgstr "المسؤولون"
 
 msgid "Admins"
-msgstr ""
+msgstr "المسؤولون"
 
 msgid "Advertising"
 msgstr "الإعلان"
 
 msgid "After refunds"
-msgstr ""
+msgstr "بعد المبالغ المستردة"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 msgstr "بعد التسجيل، يمكنك إضافة المزيد من البيانات عن نفسك، وتخفيف سياسة المشاركة، وتخصيص تجربتك."
 
 msgid "Algorithm"
-msgstr ""
+msgstr "الخوارزمية"
 
 msgid "Alias"
-msgstr ""
+msgstr "اسم مستعار"
 
 msgid "Alias Address"
 msgstr ""
 
 msgid "Alias created successfully"
-msgstr ""
+msgstr "تم إنشاء الاسم المستعار بنجاح"
 
 msgid "Alias deleted successfully"
-msgstr ""
+msgstr "تم حذف الاسم المستعار بنجاح"
 
 msgid "Alias domain"
-msgstr ""
+msgstr "نطاق مستعار"
 
 msgid "Alias domains"
-msgstr ""
+msgstr "نطاقات مستعارة"
 
 msgid "Alias not found"
-msgstr ""
+msgstr "الاسم المستعار غير موجود"
 
 msgid "Alias saved successfully"
-msgstr ""
+msgstr "تم حفظ الاسم المستعار بنجاح"
 
 msgid "Alias updated successfully"
-msgstr ""
+msgstr "تم تحديث الاسم المستعار بنجاح"
 
 msgid "Aliases"
-msgstr ""
+msgstr "الأسماء المستعارة"
 
 msgid "All"
-msgstr ""
+msgstr "الكل"
 
 msgid "All Invoices"
-msgstr ""
+msgstr "جميع الفواتير"
 
 msgid "All Messages"
-msgstr ""
+msgstr "جميع الرسائل"
 
 msgid "All Sectors"
 msgstr ""
 
 msgid "All accounts"
-msgstr ""
+msgstr "جميع الحسابات"
 
 msgid "All actions"
 msgstr ""
 
 msgid "All customers"
-msgstr ""
+msgstr "جميع العملاء"
 
 msgid "All domains"
-msgstr ""
+msgstr "جميع النطاقات"
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "السماح بملفات تعريف الارتباط للصق رمز التأكيد من البريد الإلكتروني"
 
 msgid "Alternative email"
-msgstr ""
+msgstr "بريد إلكتروني بديل"
 
 msgid "Amount"
 msgstr "المبلغ"
@@ -417,7 +417,7 @@ msgid "Amount and items are required"
 msgstr ""
 
 msgid "Amount due"
-msgstr ""
+msgstr "المبلغ المستحق"
 
 msgid "Amount in Swedish Kronor"
 msgstr ""
@@ -426,7 +426,7 @@ msgid "Amount incl. VAT"
 msgstr "المبلغ شامل ضريبة القيمة المضافة"
 
 msgid "Amount is required"
-msgstr ""
+msgstr "المبلغ مطلوب"
 
 msgid "Amount to pay incl. VAT: {totalcost} {currency}"
 msgstr "المبلغ المستحق شامل ضريبة القيمة المضافة: {totalcost} {currency}"
@@ -450,7 +450,7 @@ msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "تطبيق"
 
 msgid "Are you sure you want to delete contact"
 msgstr ""
@@ -522,22 +522,22 @@ msgid "Auth-Info code from current registrar"
 msgstr ""
 
 msgid "Authentication required"
-msgstr ""
+msgstr "المصادقة مطلوبة"
 
 msgid "Authorization code"
-msgstr ""
+msgstr "رمز التفويض"
 
 msgid "Authorize"
 msgstr "تخويل"
 
 msgid "Auto Renew"
-msgstr ""
+msgstr "تجديد تلقائي"
 
 msgid "Auto-renew"
-msgstr ""
+msgstr "تجديد تلقائي"
 
 msgid "Average Score"
-msgstr ""
+msgstr "متوسط النتيجة"
 
 msgid "Avg Score"
 msgstr ""
@@ -588,10 +588,10 @@ msgid "Back"
 msgstr "رجوع"
 
 msgid "Back to Dashboard"
-msgstr ""
+msgstr "العودة إلى لوحة التحكم"
 
 msgid "Back to List"
-msgstr ""
+msgstr "العودة إلى القائمة"
 
 msgid "Back to Zones"
 msgstr ""
@@ -600,19 +600,19 @@ msgid "Back to domains"
 msgstr ""
 
 msgid "Back to list"
-msgstr ""
+msgstr "العودة إلى القائمة"
 
 msgid "Back to menu"
-msgstr ""
+msgstr "العودة إلى القائمة"
 
 msgid "Back to menus"
-msgstr ""
+msgstr "العودة إلى القوائم"
 
 msgid "Background"
-msgstr ""
+msgstr "الخلفية"
 
 msgid "Balance"
-msgstr ""
+msgstr "الرصيد"
 
 msgid "Bankgiro"
 msgstr "Bankgiro"
@@ -627,7 +627,7 @@ msgid "Barred"
 msgstr "محظور"
 
 msgid "Base URL"
-msgstr ""
+msgstr "الرابط الأساسي"
 
 msgid "Based in Sweden - Compliance Dashboard"
 msgstr ""
@@ -636,13 +636,13 @@ msgid "Basic Information"
 msgstr "المعلومات الأساسية"
 
 msgid "Billable Items"
-msgstr ""
+msgstr "العناصر القابلة للفوترة"
 
 msgid "Billing"
 msgstr "الفواتير"
 
 msgid "Bio"
-msgstr ""
+msgstr "السيرة الذاتية"
 
 msgid "Blocked"
 msgstr "محظور"
@@ -651,7 +651,7 @@ msgid "Blocked ip number"
 msgstr "رقم IP محظور"
 
 msgid "Body"
-msgstr ""
+msgstr "المحتوى"
 
 msgid "Bold"
 msgstr "غامق"
@@ -681,7 +681,7 @@ msgid "Bytes Used"
 msgstr ""
 
 msgid "Cache"
-msgstr ""
+msgstr "ذاكرة التخزين المؤقت"
 
 msgid "Cache Entry Details"
 msgstr ""
@@ -726,37 +726,37 @@ msgid "Captcha was wrong"
 msgstr "الكابتشا كانت خاطئة"
 
 msgid "Card Payment"
-msgstr ""
+msgstr "الدفع بالبطاقة"
 
 msgid "Cash invoice"
-msgstr ""
+msgstr "فاتورة نقدية"
 
 msgid "Category"
-msgstr ""
+msgstr "الفئة"
 
 msgid "Certificate"
-msgstr ""
+msgstr "شهادة"
 
 msgid "Certificate Chain"
 msgstr ""
 
 msgid "Certificate created successfully"
-msgstr ""
+msgstr "تم إنشاء الشهادة بنجاح"
 
 msgid "Certificate deleted successfully"
-msgstr ""
+msgstr "تم حذف الشهادة بنجاح"
 
 msgid "Certificate not found"
-msgstr ""
+msgstr "الشهادة غير موجودة"
 
 msgid "Certificate renewal initiated"
 msgstr ""
 
 msgid "Certificate updated successfully"
-msgstr ""
+msgstr "تم تحديث الشهادة بنجاح"
 
 msgid "Certificates"
-msgstr ""
+msgstr "الشهادات"
 
 msgid "Change password"
 msgstr "تغيير كلمة المرور"
@@ -765,16 +765,16 @@ msgid "Changed status."
 msgstr "تم تغيير الحالة."
 
 msgid "Changes saved successfully."
-msgstr ""
+msgstr "تم حفظ التغييرات بنجاح."
 
 msgid "Charged"
-msgstr ""
+msgstr "تم الشحن"
 
 msgid "Charged At"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "فحص"
 
 msgid "Check failed"
 msgstr ""
@@ -807,6 +807,9 @@ msgid "City (billing)"
 msgstr "المدينة (الفواتير)"
 
 msgid "Clear"
+msgstr "مسح"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
 msgid "Click to pop dialog."
@@ -867,19 +870,19 @@ msgid "Comments"
 msgstr "التعليقات"
 
 msgid "Common Name"
-msgstr ""
+msgstr "الاسم الشائع"
 
 msgid "Company"
 msgstr "الشركة"
 
 msgid "Completed"
-msgstr ""
+msgstr "مكتمل"
 
 msgid "Compliance"
-msgstr ""
+msgstr "الامتثال"
 
 msgid "Compliance Rate"
-msgstr ""
+msgstr "معدل الامتثال"
 
 msgid "Compliance Trends"
 msgstr ""
@@ -888,10 +891,10 @@ msgid "Compliance by Sector"
 msgstr ""
 
 msgid "Compliance score"
-msgstr ""
+msgstr "نتيجة الامتثال"
 
 msgid "Compliant"
-msgstr ""
+msgstr "متوافق"
 
 msgid "Compliant (Swedish hosting)"
 msgstr ""
@@ -927,37 +930,37 @@ msgid "Confirmation request sent"
 msgstr "تم إرسال طلب التأكيد"
 
 msgid "Connection error. Please try again."
-msgstr ""
+msgstr "خطأ في الاتصال. يرجى المحاولة مرة أخرى."
 
 msgid "Contact"
 msgstr "اتصال"
 
 msgid "Contact Details"
-msgstr ""
+msgstr "تفاصيل الاتصال"
 
 msgid "Contact Information"
 msgstr "معلومات الاتصال"
 
 msgid "Contact created"
-msgstr ""
+msgstr "تم إنشاء جهة الاتصال"
 
 msgid "Contact created successfully"
-msgstr ""
+msgstr "تم إنشاء جهة الاتصال بنجاح"
 
 msgid "Contact deleted"
-msgstr ""
+msgstr "تم حذف جهة الاتصال"
 
 msgid "Contact deleted successfully"
-msgstr ""
+msgstr "تم حذف جهة الاتصال بنجاح"
 
 msgid "Contact details"
-msgstr ""
+msgstr "تفاصيل الاتصال"
 
 msgid "Contact not found"
-msgstr ""
+msgstr "جهة الاتصال غير موجودة"
 
 msgid "Contact updated successfully"
-msgstr ""
+msgstr "تم تحديث جهة الاتصال بنجاح"
 
 msgid "Contact {sender} if you have questions."
 msgstr "اتصل بـ {sender} إذا كانت لديك أسئلة."
@@ -966,7 +969,7 @@ msgid "Contact: {email} or call us directly."
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
+msgstr "جهات الاتصال"
 
 msgid "Content"
 msgstr "المحتوى"
@@ -984,7 +987,7 @@ msgid "Contributing"
 msgstr "المساهمة"
 
 msgid "Control panel"
-msgstr ""
+msgstr "لوحة التحكم"
 
 msgid "Conversation with"
 msgstr ""
@@ -1005,16 +1008,16 @@ msgid "Country selector"
 msgstr "محدد البلد"
 
 msgid "Create"
-msgstr ""
+msgstr "إنشاء"
 
 msgid "Create Contact"
-msgstr ""
+msgstr "إنشاء جهة اتصال"
 
 msgid "Create Payment"
-msgstr ""
+msgstr "إنشاء دفعة"
 
 msgid "Create admin"
-msgstr ""
+msgstr "إنشاء مسؤول"
 
 msgid "Create contact"
 msgstr "إنشاء جهة اتصال"
@@ -1023,22 +1026,22 @@ msgid "Create customer"
 msgstr "إنشاء عميل"
 
 msgid "Create forwarding"
-msgstr ""
+msgstr "إنشاء تحويل"
 
 msgid "Create mailbox"
-msgstr ""
+msgstr "إنشاء صندوق بريد"
 
 msgid "Create new record"
 msgstr "إنشاء سجل جديد"
 
 msgid "Created"
-msgstr ""
+msgstr "تم الإنشاء"
 
 msgid "Created {created} by {creator}"
 msgstr "تم الإنشاء في {created} بواسطة {creator}"
 
 msgid "Creating payment..."
-msgstr ""
+msgstr "جاري إنشاء الدفعة..."
 
 msgid "Credit invoice"
 msgstr "فاتورة ائتمان"
@@ -1065,7 +1068,7 @@ msgid "Credited invoice: {number}"
 msgstr "فاتورة معتمدة: {number}"
 
 msgid "Critical"
-msgstr ""
+msgstr "حرج"
 
 msgid "Cryptokey created successfully"
 msgstr ""
@@ -1077,10 +1080,10 @@ msgid "Currency"
 msgstr "العملة"
 
 msgid "Current Prices"
-msgstr ""
+msgstr "الأسعار الحالية"
 
 msgid "Currently managed"
-msgstr ""
+msgstr "تدار حالياً"
 
 msgid "Customer"
 msgstr "العميل"
@@ -1089,10 +1092,10 @@ msgid "Customer #{customerid}"
 msgstr "العميل #{customerid}"
 
 msgid "Customer ID"
-msgstr ""
+msgstr "رقم العميل"
 
 msgid "Customer ID is required"
-msgstr ""
+msgstr "رقم العميل مطلوب"
 
 msgid "Customer Id"
 msgstr "معرف العميل"
@@ -1143,7 +1146,7 @@ msgid "DNSSEC Key Data"
 msgstr ""
 
 msgid "DNSSEC Keys"
-msgstr ""
+msgstr "مفاتيح DNSSEC"
 
 msgid "DS Records"
 msgstr ""
@@ -1188,7 +1191,7 @@ msgid "Declined"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "افتراضي"
 
 msgid "Definitions"
 msgstr ""
@@ -1254,7 +1257,7 @@ msgid "Direction"
 msgstr ""
 
 msgid "Disabled"
-msgstr ""
+msgstr "معطل"
 
 msgid "Discount"
 msgstr "خصم"
@@ -1293,7 +1296,7 @@ msgid "Domain created successfully"
 msgstr ""
 
 msgid "Domain deleted"
-msgstr ""
+msgstr "تم حذف النطاق"
 
 msgid "Domain deleted successfully"
 msgstr ""
@@ -1302,13 +1305,13 @@ msgid "Domain details"
 msgstr ""
 
 msgid "Domain name"
-msgstr ""
+msgstr "اسم النطاق"
 
 msgid "Domain name is required"
 msgstr ""
 
 msgid "Domain not found"
-msgstr ""
+msgstr "النطاق غير موجود"
 
 msgid "Domain quota"
 msgstr ""
@@ -1476,7 +1479,7 @@ msgid "Email Order"
 msgstr "طلب البريد الإلكتروني"
 
 msgid "Email address"
-msgstr ""
+msgstr "عنوان البريد الإلكتروني"
 
 msgid "Email confirmation"
 msgstr "تأكيد البريد الإلكتروني"
@@ -1554,6 +1557,9 @@ msgid "Empty telephone"
 msgstr "الهاتف فارغ"
 
 msgid "Enabled"
+msgstr "مفعل"
+
+msgid "End Date"
 msgstr ""
 
 msgid "End main content"
@@ -1601,6 +1607,9 @@ msgstr "أدخل اسم المنطقة"
 msgid "Error deleting contact"
 msgstr ""
 
+msgid "Error fetching transactions"
+msgstr ""
+
 msgid "Error loading contact details"
 msgstr ""
 
@@ -1614,7 +1623,7 @@ msgid "Error loading domains"
 msgstr ""
 
 msgid "Error loading payments"
-msgstr ""
+msgstr "خطأ في تحميل المدفوعات"
 
 msgid "Error loading price list"
 msgstr ""
@@ -1686,7 +1695,7 @@ msgid "Expiry"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "تصدير"
 
 msgid "Export zone file"
 msgstr ""
@@ -1701,7 +1710,7 @@ msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed"
-msgstr ""
+msgstr "فشل"
 
 msgid "Failed login from {ip}"
 msgstr "فشل تسجيل الدخول من {ip}"
@@ -1920,13 +1929,16 @@ msgid "Failed:"
 msgstr ""
 
 msgid "Fax"
-msgstr ""
+msgstr "فاكس"
 
 msgid "Featured"
 msgstr ""
 
-msgid "File"
+msgid "Fetch from PayPal"
 msgstr ""
+
+msgid "File"
+msgstr "ملف"
 
 msgid "File archive"
 msgstr "أرشيف الملفات"
@@ -1997,6 +2009,9 @@ msgstr "Fortnox"
 msgid "Fortnox Warning"
 msgstr ""
 
+msgid "Fortnox authorization required"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "تكامل Fortnox"
 
@@ -2022,7 +2037,7 @@ msgid "Forward zones"
 msgstr ""
 
 msgid "Forwarding"
-msgstr ""
+msgstr "التحويل"
 
 msgid "Forwards"
 msgstr ""
@@ -2064,7 +2079,7 @@ msgid "Gross"
 msgstr "إجمالي"
 
 msgid "Groups"
-msgstr ""
+msgstr "المجموعات"
 
 msgid "HTML result"
 msgstr "نتيجة HTML"
@@ -2130,7 +2145,7 @@ msgid "IBAN:"
 msgstr "IBAN:"
 
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 msgid "ID required"
 msgstr ""
@@ -2142,7 +2157,7 @@ msgid "IP"
 msgstr ""
 
 msgid "IP Address"
-msgstr ""
+msgstr "عنوان IP"
 
 msgid "IPv4 Address"
 msgstr ""
@@ -2202,7 +2217,7 @@ msgid "Impersonate {who}"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "استيراد"
 
 msgid "Import zone"
 msgstr ""
@@ -2214,7 +2229,7 @@ msgid "In your personal menu you find your {panel} among other things."
 msgstr "في قائمتك الشخصية تجد {panel} من بين أشياء أخرى."
 
 msgid "Inactive"
-msgstr ""
+msgstr "غير نشط"
 
 msgid "Including VAT"
 msgstr "شامل ضريبة القيمة المضافة"
@@ -2409,7 +2424,7 @@ msgid "Italic"
 msgstr "مائل"
 
 msgid "Item Number"
-msgstr ""
+msgstr "رقم العنصر"
 
 msgid "Item deleted"
 msgstr ""
@@ -2433,7 +2448,7 @@ msgid "Keep me logged in"
 msgstr "البقاء متصلًا"
 
 msgid "Key"
-msgstr ""
+msgstr "مفتاح"
 
 msgid "Key Type"
 msgstr ""
@@ -2513,11 +2528,14 @@ msgstr "قائمة المناطق"
 msgid "Lista fakturor"
 msgstr "قائمة الفواتير"
 
-msgid "Loading..."
+msgid "Live Transactions"
 msgstr ""
 
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
 msgid "Log"
-msgstr ""
+msgstr "سجل"
 
 msgid "Log in"
 msgstr "تسجيل الدخول"
@@ -2592,7 +2610,7 @@ msgid "Mail sent through own servers"
 msgstr "البريد المرسل عبر الخوادم الخاصة"
 
 msgid "Mailbox"
-msgstr ""
+msgstr "صندوق البريد"
 
 msgid "Mailbox created successfully"
 msgstr ""
@@ -2616,7 +2634,7 @@ msgid "Mailbox updated successfully"
 msgstr ""
 
 msgid "Mailboxes"
-msgstr ""
+msgstr "صناديق البريد"
 
 msgid "Mailboxes for"
 msgstr ""
@@ -2637,7 +2655,7 @@ msgid "Managed domains"
 msgstr ""
 
 msgid "Manager"
-msgstr ""
+msgstr "المدير"
 
 msgid "Manuals"
 msgstr "الأدلة"
@@ -2679,7 +2697,7 @@ msgid "Message sent"
 msgstr "تم إرسال الرسالة"
 
 msgid "Messages"
-msgstr ""
+msgstr "الرسائل"
 
 msgid "Messages pagination"
 msgstr ""
@@ -2733,7 +2751,7 @@ msgid "NS"
 msgstr ""
 
 msgid "NS Records"
-msgstr ""
+msgstr "سجلات NS"
 
 msgid "Name"
 msgstr "الاسم"
@@ -2742,13 +2760,13 @@ msgid "Name Servers"
 msgstr ""
 
 msgid "Nameserver"
-msgstr ""
+msgstr "خادم الأسماء"
 
 msgid "Nameserver Checks"
 msgstr ""
 
 msgid "Nameservers"
-msgstr ""
+msgstr "خوادم الأسماء"
 
 msgid "Negative impact on credit rating"
 msgstr ""
@@ -2847,7 +2865,7 @@ msgid "Newsletter"
 msgstr "النشرة الإخبارية"
 
 msgid "Next"
-msgstr ""
+msgstr "التالي"
 
 msgid "No"
 msgstr "لا"
@@ -2949,6 +2967,9 @@ msgid "No pages found."
 msgstr "لم يتم العثور على أي صفحات."
 
 msgid "No payments found"
+msgstr "لم يتم العثور على مدفوعات"
+
+msgid "No payments selected"
 msgstr ""
 
 msgid "No price data available"
@@ -2964,10 +2985,10 @@ msgid "No records found"
 msgstr ""
 
 msgid "No results"
-msgstr ""
+msgstr "لا توجد نتائج"
 
 msgid "No results found"
-msgstr ""
+msgstr "لم يتم العثور على نتائج"
 
 msgid "No selected customer."
 msgstr "لم يتم تحديد عميل."
@@ -2984,6 +3005,12 @@ msgstr ""
 msgid "No transactions found"
 msgstr ""
 
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
+
 msgid "No users found"
 msgstr ""
 
@@ -2997,7 +3024,7 @@ msgid "Normal"
 msgstr "عادي"
 
 msgid "Not found"
-msgstr ""
+msgstr "غير موجود"
 
 msgid "Note"
 msgstr ""
@@ -3012,7 +3039,7 @@ msgid "Numbered List"
 msgstr "قائمة مرقمة"
 
 msgid "OK"
-msgstr ""
+msgstr "موافق"
 
 msgid "OVERDUE"
 msgstr ""
@@ -3057,7 +3084,7 @@ msgid "Or scan QR code with Swish app"
 msgstr ""
 
 msgid "Order"
-msgstr ""
+msgstr "طلب"
 
 msgid "Order number or reference"
 msgstr ""
@@ -3087,7 +3114,7 @@ msgid "Organisation Number"
 msgstr "رقم المؤسسة"
 
 msgid "Organization"
-msgstr ""
+msgstr "المنظمة"
 
 msgid "Organizational number"
 msgstr "الرقم التنظيمي"
@@ -3135,7 +3162,7 @@ msgid "PEM format (stored securely)"
 msgstr ""
 
 msgid "Page"
-msgstr ""
+msgstr "صفحة"
 
 msgid "Page navigation"
 msgstr ""
@@ -3210,16 +3237,16 @@ msgid "PayPal"
 msgstr ""
 
 msgid "PayPal Payments"
-msgstr ""
+msgstr "مدفوعات PayPal"
 
 msgid "Paydate"
 msgstr "تاريخ الدفع"
 
 msgid "Payer"
-msgstr ""
+msgstr "الدافع"
 
 msgid "Payer Email"
-msgstr ""
+msgstr "بريد الدافع"
 
 msgid "Payment"
 msgstr "الدفع"
@@ -3315,7 +3342,7 @@ msgid "Paypal:"
 msgstr "باي بال:"
 
 msgid "Pending"
-msgstr ""
+msgstr "قيد الانتظار"
 
 msgid "People rocketing to the sky"
 msgstr "أشخاص ينطلقون إلى السماء"
@@ -3377,6 +3404,9 @@ msgstr "يرجى تسجيل الخروج وتسجيل الدخول كمستخد�
 msgid "Please select at least one registry"
 msgstr ""
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3384,7 +3414,7 @@ msgid "Polls"
 msgstr ""
 
 msgid "Port"
-msgstr ""
+msgstr "المنفذ"
 
 msgid "Posta faktura"
 msgstr "فاتورة بريدية"
@@ -3423,10 +3453,10 @@ msgid "Press Register to regenerate"
 msgstr "اضغط على تسجيل لإعادة الإنشاء"
 
 msgid "Preview"
-msgstr ""
+msgstr "معاينة"
 
 msgid "Previous"
-msgstr ""
+msgstr "السابق"
 
 msgid "Price"
 msgstr "السعر"
@@ -3458,11 +3488,23 @@ msgstr "الصلاحيات"
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
 msgstr ""
 
-msgid "Product"
+msgid "Process selected"
 msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
+
+msgid "Product"
+msgstr "منتج"
 
 msgid "Products"
 msgstr "المنتجات"
@@ -3477,13 +3519,13 @@ msgid "Protocol"
 msgstr ""
 
 msgid "Provider"
-msgstr ""
+msgstr "المزود"
 
 msgid "Public Key"
 msgstr ""
 
 msgid "Published"
-msgstr ""
+msgstr "منشور"
 
 msgid "Purge"
 msgstr ""
@@ -3510,7 +3552,7 @@ msgid "Quarter"
 msgstr "ربع سنة"
 
 msgid "Quota"
-msgstr ""
+msgstr "الحصة"
 
 msgid "Quota (MB)"
 msgstr ""
@@ -3534,7 +3576,7 @@ msgid "RealtimeRegister API Integration"
 msgstr ""
 
 msgid "Received"
-msgstr ""
+msgstr "مستلم"
 
 msgid "Receiver"
 msgstr "المستلم"
@@ -3546,7 +3588,7 @@ msgid "Recent Messages"
 msgstr ""
 
 msgid "Recent Payments"
-msgstr ""
+msgstr "المدفوعات الأخيرة"
 
 msgid "Recent activity"
 msgstr ""
@@ -3558,7 +3600,7 @@ msgid "Recommended by"
 msgstr "موصى به من قبل"
 
 msgid "Record"
-msgstr ""
+msgstr "سجل"
 
 msgid "Record Name"
 msgstr "اسم السجل"
@@ -3603,13 +3645,13 @@ msgid "References"
 msgstr "المراجع"
 
 msgid "Refresh"
-msgstr ""
+msgstr "تحديث"
 
 msgid "Refund amount exceeds available amount"
 msgstr ""
 
 msgid "Refunded"
-msgstr ""
+msgstr "مسترد"
 
 msgid "Refunded/Failed"
 msgstr ""
@@ -3654,7 +3696,7 @@ msgid "Registered payments and supplier invoices are retrieved from Fortnox and 
 msgstr "يتم استرداد المدفوعات المسجلة وفواتير الموردين من Fortnox وعرضها في الواجهة المحلية."
 
 msgid "Registrant"
-msgstr ""
+msgstr "المسجل"
 
 msgid "Registrant contact"
 msgstr ""
@@ -3690,7 +3732,7 @@ msgid "Rename"
 msgstr ""
 
 msgid "Renew"
-msgstr ""
+msgstr "تجديد"
 
 msgid "Replacement"
 msgstr ""
@@ -3705,7 +3747,7 @@ msgid "Reprint invoice"
 msgstr ""
 
 msgid "Required"
-msgstr ""
+msgstr "مطلوب"
 
 msgid "Required for most TLDs. Get this from your current registrar."
 msgstr ""
@@ -3720,10 +3762,10 @@ msgid "Resources"
 msgstr "الموارد"
 
 msgid "Response"
-msgstr ""
+msgstr "استجابة"
 
 msgid "Retry"
-msgstr ""
+msgstr "إعادة المحاولة"
 
 msgid "Return to Home"
 msgstr ""
@@ -3837,7 +3879,7 @@ msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
 msgid "Score"
-msgstr ""
+msgstr "النتيجة"
 
 msgid "Score (High to Low)"
 msgstr ""
@@ -3948,7 +3990,7 @@ msgid "Search web content"
 msgstr "بحث في محتوى الويب"
 
 msgid "Sector"
-msgstr ""
+msgstr "القطاع"
 
 msgid "Sector Statistics"
 msgstr ""
@@ -4020,7 +4062,7 @@ msgid "Sending..."
 msgstr ""
 
 msgid "Sent"
-msgstr ""
+msgstr "مرسل"
 
 msgid "Serial"
 msgstr ""
@@ -4029,7 +4071,7 @@ msgid "Servers"
 msgstr "الخوادم"
 
 msgid "Service"
-msgstr ""
+msgstr "الخدمة"
 
 msgid "Service interruption"
 msgstr ""
@@ -4124,6 +4166,9 @@ msgstr "سعر خاص"
 msgid "Start"
 msgstr "البدء"
 
+msgid "Start Date"
+msgstr ""
+
 msgid "Start New Check Run"
 msgstr ""
 
@@ -4137,7 +4182,7 @@ msgid "Start side content"
 msgstr "بداية المحتوى الجانبي"
 
 msgid "Started"
-msgstr ""
+msgstr "بدأ"
 
 msgid "State/Province"
 msgstr ""
@@ -4146,7 +4191,7 @@ msgid "Statistics"
 msgstr "الإحصائيات"
 
 msgid "Status"
-msgstr ""
+msgstr "الحالة"
 
 msgid "Storage"
 msgstr ""
@@ -4155,7 +4200,7 @@ msgid "Storage target"
 msgstr ""
 
 msgid "Street"
-msgstr ""
+msgstr "الشارع"
 
 msgid "Street Address"
 msgstr ""
@@ -4236,16 +4281,16 @@ msgid "Syncing..."
 msgstr ""
 
 msgid "TTL"
-msgstr ""
+msgstr "TTL"
 
 msgid "Tag"
-msgstr ""
+msgstr "وسم"
 
 msgid "Tags"
-msgstr ""
+msgstr "الوسوم"
 
 msgid "Target"
-msgstr ""
+msgstr "الهدف"
 
 msgid "Target domain"
 msgstr ""
@@ -4269,7 +4314,7 @@ msgid "Telephone"
 msgstr "الهاتف"
 
 msgid "Template"
-msgstr ""
+msgstr "قالب"
 
 msgid "Template created"
 msgstr ""
@@ -4284,7 +4329,7 @@ msgid "Template updated"
 msgstr ""
 
 msgid "Templates"
-msgstr ""
+msgstr "القوالب"
 
 msgid "Terms of Payment"
 msgstr "شروط الدفع"
@@ -4365,7 +4410,7 @@ msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "السهم مدرج في القائمة الرئيسية لبورصة ناسداك ستوكهولم."
 
 msgid "Theme"
-msgstr ""
+msgstr "السمة"
 
 msgid "There was an issue with your payment method"
 msgstr ""
@@ -4413,13 +4458,13 @@ msgid "Tillbaka"
 msgstr "رجوع"
 
 msgid "Time"
-msgstr ""
+msgstr "الوقت"
 
 msgid "Timestamp"
-msgstr ""
+msgstr "الطابع الزمني"
 
 msgid "Title"
-msgstr ""
+msgstr "العنوان"
 
 msgid "Titles by Language"
 msgstr ""
@@ -4434,7 +4479,7 @@ msgid "Tot"
 msgstr "المجموع"
 
 msgid "Total"
-msgstr ""
+msgstr "المجموع"
 
 msgid "Total Domains"
 msgstr ""
@@ -4467,7 +4512,7 @@ msgid "Transaction Details"
 msgstr ""
 
 msgid "Transaction ID"
-msgstr ""
+msgstr "رقم المعاملة"
 
 msgid "Transaction ID:"
 msgstr ""
@@ -4476,7 +4521,7 @@ msgid "Transaction not found"
 msgstr ""
 
 msgid "Transactions"
-msgstr ""
+msgstr "المعاملات"
 
 msgid "Transfer"
 msgstr "تحويل"
@@ -4518,7 +4563,7 @@ msgid "Unique identifier for this contact"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "غير معروف"
 
 msgid "Unknown error"
 msgstr ""
@@ -4551,7 +4596,7 @@ msgid "Update invoice, customer #{customerid}"
 msgstr "تحديث الفاتورة، العميل #{customerid}"
 
 msgid "Updated"
-msgstr ""
+msgstr "محدث"
 
 msgid "Updated customer"
 msgstr "تم تحديث العميل"
@@ -4590,7 +4635,7 @@ msgid "Used to make class names."
 msgstr "تستخدم لإنشاء أسماء الفئات."
 
 msgid "User"
-msgstr ""
+msgstr "المستخدم"
 
 msgid "User manual"
 msgstr "دليل المستخدم"
@@ -4620,7 +4665,7 @@ msgid "Username must be at least {min} characters"
 msgstr "يجب أن يكون اسم المستخدم {min} أحرف على الأقل"
 
 msgid "Users"
-msgstr ""
+msgstr "المستخدمون"
 
 msgid "Users and groups"
 msgstr "المستخدمون والمجموعات"
@@ -4674,16 +4719,16 @@ msgid "Vacation settings saved"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "القيمة"
 
 msgid "Value for the class attribute."
 msgstr "قيمة لسمة الفئة."
 
 msgid "Version"
-msgstr ""
+msgstr "الإصدار"
 
 msgid "View"
-msgstr ""
+msgstr "عرض"
 
 msgid "View Details"
 msgstr ""
@@ -4722,13 +4767,13 @@ msgid "Web sites"
 msgstr "مواقع الويب"
 
 msgid "Website"
-msgstr ""
+msgstr "الموقع"
 
 msgid "Websites"
 msgstr "مواقع الويب"
 
 msgid "Weight"
-msgstr ""
+msgstr "الوزن"
 
 msgid "What happened?"
 msgstr ""
@@ -4935,9 +4980,15 @@ msgid "example"
 msgstr ""
 
 msgid "failed"
-msgstr ""
+msgstr "فشل"
 
 msgid "for registrar"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
 msgstr ""
 
 msgid "invoice"
@@ -4953,7 +5004,7 @@ msgid "main firewall"
 msgstr "جدار الحماية الرئيسي"
 
 msgid "net balance"
-msgstr ""
+msgstr "الرصيد الصافي"
 
 msgid "new messages retrieved."
 msgstr ""
@@ -4965,7 +5016,7 @@ msgid "our web"
 msgstr "موقعنا"
 
 msgid "payments"
-msgstr ""
+msgstr "المدفوعات"
 
 msgid "poll"
 msgstr ""
@@ -4980,7 +5031,7 @@ msgid "records"
 msgstr ""
 
 msgid "refunded"
-msgstr ""
+msgstr "مسترد"
 
 msgid "seconds"
 msgstr ""
@@ -4993,6 +5044,9 @@ msgstr "جدار الحماية الاحتياطي"
 
 msgid "supporters"
 msgstr "المؤيدون"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr ""

@@ -30,7 +30,7 @@ msgid "0 = reply once per sender"
 msgstr ""
 
 msgid "1 Year"
-msgstr ""
+msgstr "1 год"
 
 msgid "1 database"
 msgid_plural "{number} databases"
@@ -117,22 +117,22 @@ msgid "About Fortnox"
 msgstr "О Fortnox"
 
 msgid "Access denied"
-msgstr ""
+msgstr "Доступ запрещен"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "По нашим данным, счет {number} до сих пор не оплачен."
 
 msgid "Account"
-msgstr ""
+msgstr "Аккаунт"
 
 msgid "Account confirmation"
 msgstr "Подтверждение аккаунта"
 
 msgid "Account settings"
-msgstr ""
+msgstr "Настройки аккаунта"
 
 msgid "Action"
-msgstr ""
+msgstr "Действие"
 
 msgid "Actions"
 msgstr "Действия"
@@ -147,10 +147,10 @@ msgid "Active"
 msgstr "Активный"
 
 msgid "Active from"
-msgstr ""
+msgstr "Активен с"
 
 msgid "Active until"
-msgstr ""
+msgstr "Активен до"
 
 msgid "Add"
 msgstr "Добавить"
@@ -162,10 +162,10 @@ msgid "Add Column Before"
 msgstr "Добавить столбец перед"
 
 msgid "Add Key"
-msgstr ""
+msgstr "Добавить ключ"
 
 msgid "Add New"
-msgstr ""
+msgstr "Добавить новый"
 
 msgid "Add New Key"
 msgstr ""
@@ -177,16 +177,16 @@ msgid "Add Row Before"
 msgstr "Добавить строку перед"
 
 msgid "Add admin"
-msgstr ""
+msgstr "Добавить администратора"
 
 msgid "Add alias"
-msgstr ""
+msgstr "Добавить алиас"
 
 msgid "Add certificate"
-msgstr ""
+msgstr "Добавить сертификат"
 
 msgid "Add contact"
-msgstr ""
+msgstr "Добавить контакт"
 
 msgid "Add content"
 msgstr "Добавить контент"
@@ -213,13 +213,13 @@ msgid "Add group"
 msgstr "Добавить группу"
 
 msgid "Add item"
-msgstr ""
+msgstr "Добавить элемент"
 
 msgid "Add mail domain"
 msgstr "Новый почтовый домен"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "Добавить почтовый ящик"
 
 msgid "Add nameserver"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Address line 2 (optional)"
 msgstr ""
 
 msgid "Admin"
-msgstr ""
+msgstr "Администратор"
 
 msgid "Admin Email"
 msgstr ""
@@ -312,7 +312,7 @@ msgid "Admininistration panel"
 msgstr "Панель управления"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Администраторы"
 
 msgid "Admins"
 msgstr ""
@@ -327,10 +327,10 @@ msgid "After registration you can add more data about yourself, loosen your shar
 msgstr "После регистрации вы сможете добавить больше данных о себе, изменить настройки доступа и настроить свой опыт."
 
 msgid "Algorithm"
-msgstr ""
+msgstr "Алгоритм"
 
 msgid "Alias"
-msgstr ""
+msgstr "Алиас"
 
 msgid "Alias Address"
 msgstr ""
@@ -357,10 +357,10 @@ msgid "Alias updated successfully"
 msgstr ""
 
 msgid "Aliases"
-msgstr ""
+msgstr "Алиасы"
 
 msgid "All"
-msgstr ""
+msgstr "Все"
 
 msgid "All Invoices"
 msgstr ""
@@ -396,7 +396,7 @@ msgid "Amount and items are required"
 msgstr ""
 
 msgid "Amount due"
-msgstr ""
+msgstr "К оплате"
 
 msgid "Amount in Swedish Kronor"
 msgstr ""
@@ -429,7 +429,7 @@ msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "Применить"
 
 msgid "Are you sure you want to delete contact"
 msgstr ""
@@ -591,7 +591,7 @@ msgid "Background"
 msgstr ""
 
 msgid "Balance"
-msgstr ""
+msgstr "Баланс"
 
 msgid "Bankgiro"
 msgstr "Bankgiro"
@@ -711,10 +711,10 @@ msgid "Cash invoice"
 msgstr ""
 
 msgid "Category"
-msgstr ""
+msgstr "Категория"
 
 msgid "Certificate"
-msgstr ""
+msgstr "Сертификат"
 
 msgid "Certificate Chain"
 msgstr ""
@@ -735,7 +735,7 @@ msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
-msgstr ""
+msgstr "Сертификаты"
 
 msgid "Change password"
 msgstr "Изменить пароль"
@@ -753,7 +753,7 @@ msgid "Charged At"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Проверить"
 
 msgid "Check failed"
 msgstr ""
@@ -786,6 +786,9 @@ msgid "City (billing)"
 msgstr "Город (для счетов)"
 
 msgid "Clear"
+msgstr "Очистить"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
 msgid "Click to pop dialog."
@@ -852,7 +855,7 @@ msgid "Company"
 msgstr "Компания"
 
 msgid "Completed"
-msgstr ""
+msgstr "Завершено"
 
 msgid "Compliance"
 msgstr ""
@@ -945,7 +948,7 @@ msgid "Contact: {email} or call us directly."
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
+msgstr "Контакты"
 
 msgid "Content"
 msgstr "Содержание"
@@ -981,7 +984,7 @@ msgid "Country selector"
 msgstr "Выбор страны"
 
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
 msgid "Create Contact"
 msgstr ""
@@ -1008,7 +1011,7 @@ msgid "Create new record"
 msgstr "Создать новую запись"
 
 msgid "Created"
-msgstr ""
+msgstr "Создано"
 
 msgid "Created {created} by {creator}"
 msgstr "Создано {created} пользователем {creator}"
@@ -1164,7 +1167,7 @@ msgid "Declined"
 msgstr ""
 
 msgid "Default"
-msgstr ""
+msgstr "По умолчанию"
 
 msgid "Definitions"
 msgstr ""
@@ -1230,7 +1233,7 @@ msgid "Direction"
 msgstr ""
 
 msgid "Disabled"
-msgstr ""
+msgstr "Отключено"
 
 msgid "Discount"
 msgstr "Скидка"
@@ -1533,6 +1536,9 @@ msgid "Empty telephone"
 msgstr "Пустой телефон"
 
 msgid "Enabled"
+msgstr "Включено"
+
+msgid "End Date"
 msgstr ""
 
 msgid "End main content"
@@ -1580,6 +1586,9 @@ msgstr "Введите имя зоны"
 msgid "Error deleting contact"
 msgstr ""
 
+msgid "Error fetching transactions"
+msgstr ""
+
 msgid "Error loading contact details"
 msgstr ""
 
@@ -1593,7 +1602,7 @@ msgid "Error loading domains"
 msgstr ""
 
 msgid "Error loading payments"
-msgstr ""
+msgstr "Ошибка загрузки платежей"
 
 msgid "Error loading price list"
 msgstr ""
@@ -1665,7 +1674,7 @@ msgid "Expiry"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Экспорт"
 
 msgid "Export zone file"
 msgstr ""
@@ -1680,7 +1689,7 @@ msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed"
-msgstr ""
+msgstr "Ошибка"
 
 msgid "Failed login from {ip}"
 msgstr "Неудачная попытка входа с {ip}"
@@ -1904,8 +1913,11 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
-msgid "File"
+msgid "Fetch from PayPal"
 msgstr ""
+
+msgid "File"
+msgstr "Файл"
 
 msgid "File archive"
 msgstr "Архив файлов"
@@ -1976,6 +1988,9 @@ msgstr "Fortnox"
 msgid "Fortnox Warning"
 msgstr ""
 
+msgid "Fortnox authorization required"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Интеграция Fortnox"
 
@@ -2043,7 +2058,7 @@ msgid "Gross"
 msgstr "Брутто"
 
 msgid "Groups"
-msgstr ""
+msgstr "Группы"
 
 msgid "HTML result"
 msgstr "Результат HTML"
@@ -2109,7 +2124,7 @@ msgid "IBAN:"
 msgstr "IBAN:"
 
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 msgid "ID required"
 msgstr ""
@@ -2181,7 +2196,7 @@ msgid "Impersonate {who}"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Импорт"
 
 msgid "Import zone"
 msgstr ""
@@ -2409,7 +2424,7 @@ msgid "Keep me logged in"
 msgstr "Оставаться в системе"
 
 msgid "Key"
-msgstr ""
+msgstr "Ключ"
 
 msgid "Key Type"
 msgstr ""
@@ -2489,11 +2504,14 @@ msgstr "Список зон"
 msgid "Lista fakturor"
 msgstr "Список счетов"
 
-msgid "Loading..."
+msgid "Live Transactions"
 msgstr ""
 
+msgid "Loading..."
+msgstr "Загрузка..."
+
 msgid "Log"
-msgstr ""
+msgstr "Журнал"
 
 msgid "Log in"
 msgstr "Войти"
@@ -2568,7 +2586,7 @@ msgid "Mail sent through own servers"
 msgstr "Почта отправляется через собственные серверы"
 
 msgid "Mailbox"
-msgstr ""
+msgstr "Почтовый ящик"
 
 msgid "Mailbox created successfully"
 msgstr ""
@@ -2592,7 +2610,7 @@ msgid "Mailbox updated successfully"
 msgstr ""
 
 msgid "Mailboxes"
-msgstr ""
+msgstr "Почтовые ящики"
 
 msgid "Mailboxes for"
 msgstr ""
@@ -2613,7 +2631,7 @@ msgid "Managed domains"
 msgstr ""
 
 msgid "Manager"
-msgstr ""
+msgstr "Менеджер"
 
 msgid "Manuals"
 msgstr "Руководства"
@@ -2655,7 +2673,7 @@ msgid "Message sent"
 msgstr "Сообщение отправлено"
 
 msgid "Messages"
-msgstr ""
+msgstr "Сообщения"
 
 msgid "Messages pagination"
 msgstr ""
@@ -2823,7 +2841,7 @@ msgid "Newsletter"
 msgstr "Рассылка"
 
 msgid "Next"
-msgstr ""
+msgstr "Далее"
 
 msgid "No"
 msgstr "Нет"
@@ -2925,6 +2943,9 @@ msgid "No pages found."
 msgstr "Страницы не найдены."
 
 msgid "No payments found"
+msgstr "Платежи не найдены"
+
+msgid "No payments selected"
 msgstr ""
 
 msgid "No price data available"
@@ -2960,6 +2981,12 @@ msgstr ""
 msgid "No transactions found"
 msgstr ""
 
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
+
 msgid "No users found"
 msgstr ""
 
@@ -2988,7 +3015,7 @@ msgid "Numbered List"
 msgstr "Нумерованный список"
 
 msgid "OK"
-msgstr ""
+msgstr "ОК"
 
 msgid "OVERDUE"
 msgstr ""
@@ -3033,7 +3060,7 @@ msgid "Or scan QR code with Swish app"
 msgstr ""
 
 msgid "Order"
-msgstr ""
+msgstr "Заказ"
 
 msgid "Order number or reference"
 msgstr ""
@@ -3063,7 +3090,7 @@ msgid "Organisation Number"
 msgstr "Номер организации"
 
 msgid "Organization"
-msgstr ""
+msgstr "Организация"
 
 msgid "Organizational number"
 msgstr "ИНН"
@@ -3111,7 +3138,7 @@ msgid "PEM format (stored securely)"
 msgstr ""
 
 msgid "Page"
-msgstr ""
+msgstr "Страница"
 
 msgid "Page navigation"
 msgstr ""
@@ -3186,7 +3213,7 @@ msgid "PayPal"
 msgstr ""
 
 msgid "PayPal Payments"
-msgstr ""
+msgstr "Платежи PayPal"
 
 msgid "Paydate"
 msgstr "Дата оплаты"
@@ -3291,7 +3318,7 @@ msgid "Paypal:"
 msgstr "Paypal:"
 
 msgid "Pending"
-msgstr ""
+msgstr "Ожидание"
 
 msgid "People rocketing to the sky"
 msgstr "Люди, летящие к небу"
@@ -3353,6 +3380,9 @@ msgstr "Пожалуйста, выйдите и войдите как польз
 msgid "Please select at least one registry"
 msgstr ""
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3360,7 +3390,7 @@ msgid "Polls"
 msgstr ""
 
 msgid "Port"
-msgstr ""
+msgstr "Порт"
 
 msgid "Posta faktura"
 msgstr "Отправить счет"
@@ -3402,7 +3432,7 @@ msgid "Preview"
 msgstr ""
 
 msgid "Previous"
-msgstr ""
+msgstr "Назад"
 
 msgid "Price"
 msgstr "Цена"
@@ -3434,11 +3464,23 @@ msgstr "Привилегии"
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
 msgstr ""
 
-msgid "Product"
+msgid "Process selected"
 msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
+
+msgid "Product"
+msgstr "Продукт"
 
 msgid "Products"
 msgstr "Продукты"
@@ -3453,7 +3495,7 @@ msgid "Protocol"
 msgstr ""
 
 msgid "Provider"
-msgstr ""
+msgstr "Провайдер"
 
 msgid "Public Key"
 msgstr ""
@@ -3522,7 +3564,7 @@ msgid "Recent Messages"
 msgstr ""
 
 msgid "Recent Payments"
-msgstr ""
+msgstr "Последние платежи"
 
 msgid "Recent activity"
 msgstr ""
@@ -3534,7 +3576,7 @@ msgid "Recommended by"
 msgstr "Рекомендовано"
 
 msgid "Record"
-msgstr ""
+msgstr "Запись"
 
 msgid "Record Name"
 msgstr "Имя записи"
@@ -3579,7 +3621,7 @@ msgid "References"
 msgstr "Ссылки"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Обновить"
 
 msgid "Refund amount exceeds available amount"
 msgstr ""
@@ -3681,7 +3723,7 @@ msgid "Reprint invoice"
 msgstr ""
 
 msgid "Required"
-msgstr ""
+msgstr "Обязательно"
 
 msgid "Required for most TLDs. Get this from your current registrar."
 msgstr ""
@@ -3813,7 +3855,7 @@ msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
 msgid "Score"
-msgstr ""
+msgstr "Оценка"
 
 msgid "Score (High to Low)"
 msgstr ""
@@ -3924,7 +3966,7 @@ msgid "Search web content"
 msgstr "Поиск веб-содержания"
 
 msgid "Sector"
-msgstr ""
+msgstr "Сектор"
 
 msgid "Sector Statistics"
 msgstr ""
@@ -4005,7 +4047,7 @@ msgid "Servers"
 msgstr "Серверы"
 
 msgid "Service"
-msgstr ""
+msgstr "Сервис"
 
 msgid "Service interruption"
 msgstr ""
@@ -4100,6 +4142,9 @@ msgstr "Специальная цена"
 msgid "Start"
 msgstr "Начало"
 
+msgid "Start Date"
+msgstr ""
+
 msgid "Start New Check Run"
 msgstr ""
 
@@ -4122,7 +4167,7 @@ msgid "Statistics"
 msgstr "Статистика"
 
 msgid "Status"
-msgstr ""
+msgstr "Статус"
 
 msgid "Storage"
 msgstr ""
@@ -4131,7 +4176,7 @@ msgid "Storage target"
 msgstr ""
 
 msgid "Street"
-msgstr ""
+msgstr "Улица"
 
 msgid "Street Address"
 msgstr ""
@@ -4215,13 +4260,13 @@ msgid "TTL"
 msgstr ""
 
 msgid "Tag"
-msgstr ""
+msgstr "Тег"
 
 msgid "Tags"
-msgstr ""
+msgstr "Теги"
 
 msgid "Target"
-msgstr ""
+msgstr "Цель"
 
 msgid "Target domain"
 msgstr ""
@@ -4245,7 +4290,7 @@ msgid "Telephone"
 msgstr "Телефон"
 
 msgid "Template"
-msgstr ""
+msgstr "Шаблон"
 
 msgid "Template created"
 msgstr ""
@@ -4260,7 +4305,7 @@ msgid "Template updated"
 msgstr ""
 
 msgid "Templates"
-msgstr ""
+msgstr "Шаблоны"
 
 msgid "Terms of Payment"
 msgstr "Условия оплаты"
@@ -4389,13 +4434,13 @@ msgid "Tillbaka"
 msgstr "Назад"
 
 msgid "Time"
-msgstr ""
+msgstr "Время"
 
 msgid "Timestamp"
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "Заголовок"
 
 msgid "Titles by Language"
 msgstr ""
@@ -4410,7 +4455,7 @@ msgid "Tot"
 msgstr "Всего"
 
 msgid "Total"
-msgstr ""
+msgstr "Всего"
 
 msgid "Total Domains"
 msgstr ""
@@ -4443,7 +4488,7 @@ msgid "Transaction Details"
 msgstr ""
 
 msgid "Transaction ID"
-msgstr ""
+msgstr "ID транзакции"
 
 msgid "Transaction ID:"
 msgstr ""
@@ -4452,7 +4497,7 @@ msgid "Transaction not found"
 msgstr ""
 
 msgid "Transactions"
-msgstr ""
+msgstr "Транзакции"
 
 msgid "Transfer"
 msgstr "Перевод"
@@ -4494,7 +4539,7 @@ msgid "Unique identifier for this contact"
 msgstr ""
 
 msgid "Unknown"
-msgstr ""
+msgstr "Неизвестно"
 
 msgid "Unknown error"
 msgstr ""
@@ -4566,7 +4611,7 @@ msgid "Used to make class names."
 msgstr "Используется для создания имен классов."
 
 msgid "User"
-msgstr ""
+msgstr "Пользователь"
 
 msgid "User manual"
 msgstr "Руководство пользователя"
@@ -4596,7 +4641,7 @@ msgid "Username must be at least {min} characters"
 msgstr "Имя пользователя должно содержать минимум {min} символов"
 
 msgid "Users"
-msgstr ""
+msgstr "Пользователи"
 
 msgid "Users and groups"
 msgstr "Пользователи и группы"
@@ -4650,16 +4695,16 @@ msgid "Vacation settings saved"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Значение"
 
 msgid "Value for the class attribute."
 msgstr "Значение для атрибута class."
 
 msgid "Version"
-msgstr ""
+msgstr "Версия"
 
 msgid "View"
-msgstr ""
+msgstr "Просмотр"
 
 msgid "View Details"
 msgstr ""
@@ -4698,7 +4743,7 @@ msgid "Web sites"
 msgstr "Веб-сайты"
 
 msgid "Website"
-msgstr ""
+msgstr "Сайт"
 
 msgid "Websites"
 msgstr "Веб-сайты"
@@ -4911,9 +4956,15 @@ msgid "example"
 msgstr ""
 
 msgid "failed"
-msgstr ""
+msgstr "ошибка"
 
 msgid "for registrar"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
 msgstr ""
 
 msgid "invoice"
@@ -4941,7 +4992,7 @@ msgid "our web"
 msgstr "наш сайт"
 
 msgid "payments"
-msgstr ""
+msgstr "платежи"
 
 msgid "poll"
 msgstr ""
@@ -4956,7 +5007,7 @@ msgid "records"
 msgstr ""
 
 msgid "refunded"
-msgstr ""
+msgstr "возвращено"
 
 msgid "seconds"
 msgstr ""
@@ -4969,6 +5020,9 @@ msgstr "резервный файрвол"
 
 msgid "supporters"
 msgstr "сторонники"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr ""

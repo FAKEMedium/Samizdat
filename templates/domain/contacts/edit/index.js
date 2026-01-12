@@ -17,6 +17,7 @@
   // Check if we're in edit mode
   const editHandle = '<%== $edit_handle // '' %>';
   const isEditMode = editHandle !== '';
+  let originalEmail = '';  // Store original email to detect changes
 
   // Pre-select registries from stash (passed via URL param to controller)
   const preselectedRegistries = '<%== $preselected_registries // '' %>'.split(',').filter(Boolean);
@@ -46,8 +47,8 @@
     contactFields.disabled = false;
     submitBtn.textContent = '<%== __("Update Contact") %>';
 
-    // Load contact data
-    window.authenticatedFetch(`<%== url_for('domain_contacts') %>/${encodeURIComponent(editHandle)}`)
+    // Load contact data using OpenAPI endpoint
+    window.authenticatedFetch(`<%== url_for('Domain.contact.get', handle => '__HANDLE__') %>`.replace('__HANDLE__', encodeURIComponent(editHandle)))
       .then(data => {
         if (data && data.contact) {
           populateFormFromContact(data.contact);
@@ -60,6 +61,20 @@
   // Listen for registry checkbox changes
   registryCheckboxes.forEach(cb => {
     cb.addEventListener('change', updateSubmitState);
+  });
+
+  // Show designatedAgent checkbox when email changes in edit mode (RR registry)
+  document.getElementById('email').addEventListener('input', () => {
+    if (!isEditMode) return;
+    const newEmail = document.getElementById('email').value.trim();
+    const designatedAgentGroup = document.getElementById('designatedAgentGroup');
+    const rrSelected = preselectedRegistries.includes('rr');
+    if (rrSelected && newEmail && newEmail !== originalEmail) {
+      designatedAgentGroup.style.display = 'block';
+    } else {
+      designatedAgentGroup.style.display = 'none';
+      document.getElementById('designatedAgent').checked = false;
+    }
   });
 
   // Customer search
@@ -210,6 +225,7 @@
     document.getElementById('orgno').value = contact.orgno || '';
     document.getElementById('vatno').value = contact.vatno || '';
     document.getElementById('email').value = contact.email || '';
+    originalEmail = contact.email || '';  // Store for change detection
     document.getElementById('voice').value = contact.phone || contact.voice || '';
 
     // Address - join array with newlines for textarea
@@ -280,9 +296,14 @@
       }
     });
 
-    // Use PUT for edit, POST for create
+    // Include designatedAgent when email changes in edit mode (for RR)
+    if (isEditMode && data.email !== originalEmail) {
+      data.designatedAgent = document.getElementById('designatedAgent').checked;
+    }
+
+    // Use PUT for edit, POST for create - use OpenAPI operationIds
     const url = isEditMode
-      ? `<%== url_for('domain_contacts') %>/${encodeURIComponent(editHandle)}`
+      ? `<%== url_for('Domain.contact.update', handle => '__HANDLE__') %>`.replace('__HANDLE__', encodeURIComponent(editHandle))
       : '<%== url_for('Domain.contact.create') %>';
     const method = isEditMode ? 'PUT' : 'POST';
 
