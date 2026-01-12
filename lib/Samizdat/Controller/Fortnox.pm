@@ -179,13 +179,10 @@ sub invoicenav ($self) {
 
 
 sub payments ($self) {
-  # Require admin access for payment management
-  return unless $self->access({ admin => 1 });
-
   my $title = $self->app->__('Payments');
   my $web = { title => $title };
   my $number = int($self->stash('number') // 0);
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $accept = $self->req->headers->accept // '';
   if ($accept !~ /json/) {
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
@@ -197,6 +194,9 @@ sub payments ($self) {
       return $self->render(web => $web, title => $title, template => 'fortnox/payments/index');
     }
   } else {
+    # Require admin access for JSON data
+    return unless $self->access({ admin => 1 });
+
     # Refresh cache only if requested via ?refresh=1 parameter
     if ($self->param('refresh')) {
       $self->app->fortnox->updateCache('InvoicePayments');
