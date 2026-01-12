@@ -127,9 +127,31 @@ Returns a hashref with api, client_id, and secret for the current environment.
 
 sub get_env_config ($self) {
   my $config = $self->config;
-  my $env = $config->{default_env} || 'sandbox';
+  my $env_name = $config->{default_env} || 'production';
+  my $env = $config->{env}->{$env_name} || {};
 
-  return $config->{env}->{$env};
+  # Determine API URL: use explicit config, or derive from env name
+  my $api_url = $env->{api} || ($env_name =~ /sandbox|test/
+    ? 'https://api-m.sandbox.paypal.com'
+    : 'https://api-m.paypal.com');
+
+  # Support nested apps structure: env.production.apps.AppName
+  if ($env->{apps}) {
+    my $app_name = $config->{default_app} || (keys %{$env->{apps}})[0];
+    my $app = $env->{apps}->{$app_name} || {};
+    return {
+      api => $api_url,
+      client_id => $app->{client_id},
+      secret => $app->{secret},
+    };
+  }
+
+  # Fallback: direct env structure (env.production.client_id)
+  return {
+    api => $api_url,
+    client_id => $env->{client_id},
+    secret => $env->{secret},
+  };
 }
 
 =head2 get_access_token
@@ -475,7 +497,7 @@ sub store_ipn_event ($self, $params) {
 
 =head2 get_transaction
 
-Retrieve a transaction by transaction ID.
+Retrieve a transaction by transaction ID from local database.
 
     my $txn = $paypal->get_transaction($txn_id);
 
@@ -491,6 +513,69 @@ sub get_transaction ($self, $txn_id) {
   )->hash;
 
   return $result;
+}
+
+=head2 fetch_transactions
+
+Fetch transactions from PayPal Transaction Search API.
+
+    my $transactions = $paypal->fetch_transactions(
+      start_date => '2025-01-01T00:00:00Z',
+      end_date   => '2025-01-12T23:59:59Z',
+    );
+
+Returns arrayref of transactions from PayPal.
+
+=cut
+
+sub fetch_transactions ($self, %params) {
+  my $token = $self->get_access_token();
+  return [] unless $token;
+
+  my $env_config = $self->get_env_config();
+  my $api_url = $env_config->{api};
+
+  # Default to last 30 days if no dates provided
+  my $end_date = $params{end_date} || do {
+    my @t = gmtime(time);
+    sprintf("%04d-%02d-%02dT23:59:59Z", $t[5]+1900, $t[4]+1, $t[3]);
+  };
+  my $start_date = $params{start_date} || do {
+    my @t = gmtime(time - 30*24*60*60);
+    sprintf("%04d-%02d-%02dT00:00:00Z", $t[5]+1900, $t[4]+1, $t[3]);
+  };
+
+  my $url = Mojo::URL->new("$api_url/v1/reporting/transactions");
+  $url->query(
+    start_date => $start_date,
+    end_date => $end_date,
+    fields => 'all',
+    page_size => $params{page_size} || 100,
+    page => $params{page} || 1,
+  );
+
+  my $tx = $self->ua->get(
+    $url => {
+      'Authorization' => "Bearer $token",
+      'Content-Type' => 'application/json'
+    }
+  );
+
+  if ($tx->result->is_success) {
+    my $data = $tx->result->json;
+    return {
+      transactions => $data->{transaction_details} || [],
+      total_items => $data->{total_items} || 0,
+      total_pages => $data->{total_pages} || 1,
+      page => $data->{page} || 1,
+    };
+  } else {
+    warn "Failed to fetch PayPal transactions: " . $tx->result->code . " " . $tx->result->message;
+    if ($tx->result->json) {
+      warn "PayPal error: " . encode_json($tx->result->json);
+    }
+    return { transactions => [], error => $tx->result->message };
+  }
 }
 
 =head2 get_recent_payments
@@ -597,24 +682,29 @@ sub get_payment_stats ($self) {
 The PayPal model requires configuration in samizdat.yml:
 
     paypal:
-      cardnumber: 16
       dbtype: postgresql
-      currency: USD
-      default_env: sandbox  # or production
-      oauth2:
-        token_url_template: '{api}/v1/oauth2/token'
+      business: billing@example.com
+      default_env: production  # or test
+      currency: SEK
+      ipn_url: https://example.com/paypal/ipn
       env:
-        sandbox:
-          api: https://api-m.sandbox.paypal.com
-          client_id: your-sandbox-client-id
-          secret: your-sandbox-secret
         production:
-          api: https://api-m.paypal.com
-          client_id: your-production-client-id
-          secret: your-production-secret
+          apps:
+            My_App:
+              client_id: your-production-client-id
+              secret: your-production-secret
+        test:
+          apps:
+            Test_App:
+              client_id: your-sandbox-client-id
+              secret: your-sandbox-secret
 
-The oauth2 section follows the pattern used by other OAuth2-enabled modules
-and enables automatic provider registration by Samizdat.pm.
+You can have multiple apps per environment. Use C<default_app> to specify
+which app to use, otherwise the first app is used.
+
+API URLs are derived from environment name:
+- production: https://api-m.paypal.com
+- test: https://api-m.sandbox.paypal.com
 
 =head1 IPN SETUP
 
