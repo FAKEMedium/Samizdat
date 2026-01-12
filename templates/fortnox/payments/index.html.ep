@@ -1,9 +1,11 @@
-<table id="payments" class="table table-sm table-striped sortable">
+<table id="payments" class="table table-sm table-striped">
   <thead>
     <tr class="orange">
+      <th><input type="checkbox" class="form-check-input" id="selectAll"></th>
       <th><%== __('Invoice number') %></th>
       <th><%== __('Customer') %></th>
       <th><%== __('Date') %></th>
+      <th class="text-end"><%== __('Debt') %></th>
       <th class="text-end"><%== __('Amount') %></th>
     </tr>
   </thead>
@@ -14,7 +16,12 @@
 
 <div class="d-flex justify-content-between align-items-center mt-3">
   <div id="paymentTotals" class="text-muted"></div>
-  <nav aria-label="Payment pagination">
-    <ul class="pagination pagination-sm mb-0" id="paymentPagination"></ul>
-  </nav>
+  <div>
+    <button type="button" class="btn btn-outline-secondary btn-sm" id="refreshPayments">
+      <%== __('Refresh') %>
+    </button>
+    <button type="button" class="btn btn-primary" id="processSelected" style="display: none;">
+      <%== __('Process selected') %>
+    </button>
+  </div>
 </div>

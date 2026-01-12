@@ -114,8 +114,8 @@ function populateForm(formdata, method, dataform) {
   let customer = formdata.customer;
   let invoice = formdata.invoice;
   let invoiceitems = formdata.invoiceitems;
-  let payments = formdata.payments;
-  let reminders = formdata.reminders;
+  let payments = formdata.payments || [];
+  let reminders = formdata.reminders || [];
 
   // Determine percustomer from current URL - check if we're under the customer route
   let customerBaseUrl = `<%== url_for('customer_index') %>`;

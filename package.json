@@ -57,13 +57,12 @@
     "terser-webpack-plugin": "^5.3.7",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^4.13.1",
+    "webpack-dev-server": "^5.2.2",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {
     "@popperjs/core": "^2.11.6",
     "@tiptap/core": "^3.1.0",
-    "@toast-ui/editor": "^3.2.2",
     "@tiptap/extension-image": "^3.1.0",
     "@tiptap/extension-link": "^3.1.0",
     "@tiptap/extension-table": "^3.3.0",
@@ -71,6 +70,7 @@
     "@tiptap/extension-table-header": "^3.3.0",
     "@tiptap/extension-table-row": "^3.3.0",
     "@tiptap/starter-kit": "^3.1.0",
+    "@toast-ui/editor": "^3.1.0",
     "bootstrap": "^5.3.8",
     "bootstrap-icons": "^1.10.4",
     "sprintf-js": "^1.1.3",

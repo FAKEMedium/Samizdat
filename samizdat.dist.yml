@@ -93,6 +93,11 @@ manager:
       XXXXX Big City
     contact: contact@example.com
     billingcontact: billing@example.com
+    preferredcurrency: SEK
+    currencies:
+      - SEK
+      - EUR
+    paymentdifference: 1   # Maximum difference in % to accept as full payment
   domain:
     cardnumber: 3
     dbtype: mysql

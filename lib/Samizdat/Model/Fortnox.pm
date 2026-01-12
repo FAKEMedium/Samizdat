@@ -88,7 +88,7 @@ has 'default_resources' => sub ($self) {
     },
     'InvoicePayments' => {
       'key' => 'Number',
-      'cache' => 0,
+      'cache' => 1,
       'single' => {
         'name' => 'InvoicePayment'
       },
@@ -96,6 +96,7 @@ has 'default_resources' => sub ($self) {
       'qp' => {
         'sortby' => 'paymentdate',
         'sortorder' => 'descending',
+        'limit' => 500
       }
     },
     'PredefinedAccounts' => {
@@ -542,7 +543,6 @@ sub externalInvoice ($self, $DocumentNumber = 0) {
 sub creditInvoice ($self, $DocumentNumber = 0) {
   if ($DocumentNumber) {
     my $result = $self->callAPI('Invoices', 'put', $DocumentNumber, {}, 'credit');
-    say Dumper $result;
     return $result;
   }
 }
@@ -611,10 +611,15 @@ sub putInvoice ($self, $DocumentNumber = 0) {
 }
 
 
-sub getInvoicePayment ($self, $Number = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
-  my $result = $self->callAPI('InvoicePayments', 'get', $Number, $options);
-  say Dumper $result;
-  return $result;
+sub getInvoicePayment ($self, $Number = 0, $options = {}) {
+  # For single payment, always fetch from API
+  if ($Number) {
+    return $self->callAPI('InvoicePayments', 'get', $Number, $options);
+  }
+
+  # For list, use cache
+  $self->updateCache('InvoicePayments') if (!exists($self->data->{InvoicePayments}));
+  return { InvoicePayments => $self->data->{InvoicePayments} // [] };
 }
 
 
@@ -657,7 +662,6 @@ sub getInvoiceCustomerNames ($self, $invoice_numbers = []) {
 
 sub getCustomer ($self, $CustomerNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   my $result = $self->callAPI('Customers', 'get', $CustomerNumber, $options);
-  say Dumper $result;
   return $result;
 }
 
