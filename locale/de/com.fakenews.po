@@ -781,6 +781,9 @@ msgstr "Stadt (Rechnung)"
 msgid "Clear"
 msgstr "Löschen"
 
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr "Klicken zum Öffnen des Dialogs."
 
@@ -1528,6 +1531,9 @@ msgstr "Leere Telefonnummer"
 msgid "Enabled"
 msgstr "Aktiviert"
 
+msgid "End Date"
+msgstr ""
+
 msgid "End main content"
 msgstr "Ende Hauptinhalt"
 
@@ -1572,6 +1578,9 @@ msgstr "Zonennamen eingeben"
 
 msgid "Error deleting contact"
 msgstr "Fehler beim Löschen des Kontakts"
+
+msgid "Error fetching transactions"
+msgstr ""
 
 msgid "Error loading contact details"
 msgstr "Fehler beim Laden der Kontaktdetails"
@@ -1897,6 +1906,9 @@ msgstr "Fax"
 msgid "Featured"
 msgstr "Hervorgehoben"
 
+msgid "Fetch from PayPal"
+msgstr ""
+
 msgid "File"
 msgstr "Datei"
 
@@ -1968,6 +1980,9 @@ msgstr "Fortnox"
 
 msgid "Fortnox Warning"
 msgstr "Fortnox-Warnung"
+
+msgid "Fortnox authorization required"
+msgstr ""
 
 msgid "Fortnox integration"
 msgstr "Fortnox-Integration"
@@ -2481,6 +2496,9 @@ msgstr "Zonen auflisten"
 msgid "Lista fakturor"
 msgstr "Rechnungen auflisten"
 
+msgid "Live Transactions"
+msgstr ""
+
 msgid "Loading..."
 msgstr "Wird geladen..."
 
@@ -2919,6 +2937,9 @@ msgstr "Keine Seiten gefunden."
 msgid "No payments found"
 msgstr "Keine Zahlungen gefunden"
 
+msgid "No payments selected"
+msgstr ""
+
 msgid "No price data available"
 msgstr "Keine Preisdaten verfügbar"
 
@@ -2951,6 +2972,12 @@ msgstr "Kein Titel"
 
 msgid "No transactions found"
 msgstr "Keine Transaktionen gefunden"
+
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
 
 msgid "No users found"
 msgstr "Keine Benutzer gefunden"
@@ -3345,6 +3372,9 @@ msgstr "Bitte melden Sie sich ab und melden Sie sich stattdessen als Benutzer mi
 msgid "Please select at least one registry"
 msgstr "Bitte wählen Sie mindestens eine Registry aus"
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3426,8 +3456,20 @@ msgstr "Berechtigungen"
 msgid "Proceed to Payment"
 msgstr "Zur Zahlung fortfahren"
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
 msgstr "Prozess-ID"
+
+msgid "Process selected"
+msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
 
 msgid "Product"
 msgstr "Produkt"
@@ -4091,6 +4133,9 @@ msgstr "Sonderpreis"
 
 msgid "Start"
 msgstr "Start"
+
+msgid "Start Date"
+msgstr ""
 
 msgid "Start New Check Run"
 msgstr "Neuen Prüflauf starten"
@@ -4908,6 +4953,12 @@ msgstr "fehlgeschlagen"
 msgid "for registrar"
 msgstr "für Registrar"
 
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
+msgstr ""
+
 msgid "invoice"
 msgstr "Rechnung"
 
@@ -4961,6 +5012,9 @@ msgstr "Standby-Firewall"
 
 msgid "supporters"
 msgstr "Unterstützer"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr "unbegrenzt"

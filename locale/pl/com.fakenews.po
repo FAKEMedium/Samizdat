@@ -117,22 +117,22 @@ msgid "About Fortnox"
 msgstr "O Fortnox"
 
 msgid "Access denied"
-msgstr ""
+msgstr "Dostęp zabroniony"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "Według naszych notatek faktura {number} pozostaje niezapłacona."
 
 msgid "Account"
-msgstr ""
+msgstr "Konto"
 
 msgid "Account confirmation"
 msgstr "Potwierdzenie konta"
 
 msgid "Account settings"
-msgstr ""
+msgstr "Ustawienia konta"
 
 msgid "Action"
-msgstr ""
+msgstr "Akcja"
 
 msgid "Actions"
 msgstr "Akcje"
@@ -147,10 +147,10 @@ msgid "Active"
 msgstr "Aktywny"
 
 msgid "Active from"
-msgstr ""
+msgstr "Aktywny od"
 
 msgid "Active until"
-msgstr ""
+msgstr "Aktywny do"
 
 msgid "Add"
 msgstr "Dodaj"
@@ -162,10 +162,10 @@ msgid "Add Column Before"
 msgstr "Dodaj kolumnę przed"
 
 msgid "Add Key"
-msgstr ""
+msgstr "Dodaj klucz"
 
 msgid "Add New"
-msgstr ""
+msgstr "Dodaj nowy"
 
 msgid "Add New Key"
 msgstr ""
@@ -177,16 +177,16 @@ msgid "Add Row Before"
 msgstr "Dodaj wiersz przed"
 
 msgid "Add admin"
-msgstr ""
+msgstr "Dodaj administratora"
 
 msgid "Add alias"
-msgstr ""
+msgstr "Dodaj alias"
 
 msgid "Add certificate"
-msgstr ""
+msgstr "Dodaj certyfikat"
 
 msgid "Add contact"
-msgstr ""
+msgstr "Dodaj kontakt"
 
 msgid "Add content"
 msgstr "Dodaj treść"
@@ -213,13 +213,13 @@ msgid "Add group"
 msgstr "Dodaj grupę"
 
 msgid "Add item"
-msgstr ""
+msgstr "Dodaj element"
 
 msgid "Add mail domain"
 msgstr "Dodaj domenę pocztową"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "Dodaj skrzynkę"
 
 msgid "Add nameserver"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Address line 2 (optional)"
 msgstr ""
 
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 msgid "Admin Email"
 msgstr ""
@@ -312,7 +312,7 @@ msgid "Admininistration panel"
 msgstr "Panel administracyjny"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Administratorzy"
 
 msgid "Admins"
 msgstr ""
@@ -327,10 +327,10 @@ msgid "After registration you can add more data about yourself, loosen your shar
 msgstr "Po rejestracji możesz dodać więcej danych o sobie, poluzować politykę udostępniania i dostosować swoje doświadczenie."
 
 msgid "Algorithm"
-msgstr ""
+msgstr "Algorytm"
 
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 msgid "Alias Address"
 msgstr ""
@@ -357,10 +357,10 @@ msgid "Alias updated successfully"
 msgstr ""
 
 msgid "Aliases"
-msgstr ""
+msgstr "Aliasy"
 
 msgid "All"
-msgstr ""
+msgstr "Wszystko"
 
 msgid "All Invoices"
 msgstr ""
@@ -396,7 +396,7 @@ msgid "Amount and items are required"
 msgstr ""
 
 msgid "Amount due"
-msgstr ""
+msgstr "Kwota do zapłaty"
 
 msgid "Amount in Swedish Kronor"
 msgstr ""
@@ -429,7 +429,7 @@ msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "Zastosuj"
 
 msgid "Are you sure you want to delete contact"
 msgstr ""
@@ -591,7 +591,7 @@ msgid "Background"
 msgstr ""
 
 msgid "Balance"
-msgstr ""
+msgstr "Saldo"
 
 msgid "Bankgiro"
 msgstr "Bankgiro"
@@ -711,10 +711,10 @@ msgid "Cash invoice"
 msgstr ""
 
 msgid "Category"
-msgstr ""
+msgstr "Kategoria"
 
 msgid "Certificate"
-msgstr ""
+msgstr "Certyfikat"
 
 msgid "Certificate Chain"
 msgstr ""
@@ -735,7 +735,7 @@ msgid "Certificate updated successfully"
 msgstr ""
 
 msgid "Certificates"
-msgstr ""
+msgstr "Certyfikaty"
 
 msgid "Change password"
 msgstr "Zmień hasło"
@@ -753,7 +753,7 @@ msgid "Charged At"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "Sprawdź"
 
 msgid "Check failed"
 msgstr ""
@@ -786,6 +786,9 @@ msgid "City (billing)"
 msgstr "Miasto (fakturowe)"
 
 msgid "Clear"
+msgstr "Wyczyść"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
 msgid "Click to pop dialog."
@@ -852,7 +855,7 @@ msgid "Company"
 msgstr "Firma"
 
 msgid "Completed"
-msgstr ""
+msgstr "Zakończone"
 
 msgid "Compliance"
 msgstr ""
@@ -945,7 +948,7 @@ msgid "Contact: {email} or call us directly."
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
+msgstr "Kontakty"
 
 msgid "Content"
 msgstr "Zawartość"
@@ -984,7 +987,7 @@ msgid "Country selector"
 msgstr "Wybór kraju"
 
 msgid "Create"
-msgstr ""
+msgstr "Utwórz"
 
 msgid "Create Contact"
 msgstr ""
@@ -1011,7 +1014,7 @@ msgid "Create new record"
 msgstr "Utwórz nowy rekord"
 
 msgid "Created"
-msgstr ""
+msgstr "Utworzono"
 
 msgid "Created {created} by {creator}"
 msgstr "Utworzono {created} przez {creator}"
@@ -1535,6 +1538,9 @@ msgstr "Pusty telefon"
 msgid "Enabled"
 msgstr ""
 
+msgid "End Date"
+msgstr ""
+
 msgid "End main content"
 msgstr "Koniec głównej treści"
 
@@ -1578,6 +1584,9 @@ msgid "Enter zone name"
 msgstr "Wprowadź nazwę strefy"
 
 msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error fetching transactions"
 msgstr ""
 
 msgid "Error loading contact details"
@@ -1665,7 +1674,7 @@ msgid "Expiry"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "Eksportuj"
 
 msgid "Export zone file"
 msgstr ""
@@ -1680,7 +1689,7 @@ msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed"
-msgstr ""
+msgstr "Niepowodzenie"
 
 msgid "Failed login from {ip}"
 msgstr "Nieudane logowanie z {ip}"
@@ -1904,6 +1913,9 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
+msgid "Fetch from PayPal"
+msgstr ""
+
 msgid "File"
 msgstr ""
 
@@ -1974,6 +1986,9 @@ msgid "Fortnox"
 msgstr "Fortnox"
 
 msgid "Fortnox Warning"
+msgstr ""
+
+msgid "Fortnox authorization required"
 msgstr ""
 
 msgid "Fortnox integration"
@@ -2181,7 +2196,7 @@ msgid "Impersonate {who}"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "Importuj"
 
 msgid "Import zone"
 msgstr ""
@@ -2489,8 +2504,11 @@ msgstr "Lista stref"
 msgid "Lista fakturor"
 msgstr "Lista faktur"
 
-msgid "Loading..."
+msgid "Live Transactions"
 msgstr ""
+
+msgid "Loading..."
+msgstr "Ładowanie..."
 
 msgid "Log"
 msgstr ""
@@ -2655,7 +2673,7 @@ msgid "Message sent"
 msgstr "Wiadomość wysłana"
 
 msgid "Messages"
-msgstr ""
+msgstr "Wiadomości"
 
 msgid "Messages pagination"
 msgstr ""
@@ -2823,7 +2841,7 @@ msgid "Newsletter"
 msgstr "Newsletter"
 
 msgid "Next"
-msgstr ""
+msgstr "Następny"
 
 msgid "No"
 msgstr "Nie"
@@ -2927,6 +2945,9 @@ msgstr "Nie znaleziono stron."
 msgid "No payments found"
 msgstr ""
 
+msgid "No payments selected"
+msgstr ""
+
 msgid "No price data available"
 msgstr ""
 
@@ -2960,6 +2981,12 @@ msgstr ""
 msgid "No transactions found"
 msgstr ""
 
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
+
 msgid "No users found"
 msgstr ""
 
@@ -2988,7 +3015,7 @@ msgid "Numbered List"
 msgstr "Lista numerowana"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OVERDUE"
 msgstr ""
@@ -3033,7 +3060,7 @@ msgid "Or scan QR code with Swish app"
 msgstr ""
 
 msgid "Order"
-msgstr ""
+msgstr "Zamówienie"
 
 msgid "Order number or reference"
 msgstr ""
@@ -3111,7 +3138,7 @@ msgid "PEM format (stored securely)"
 msgstr ""
 
 msgid "Page"
-msgstr ""
+msgstr "Strona"
 
 msgid "Page navigation"
 msgstr ""
@@ -3291,7 +3318,7 @@ msgid "Paypal:"
 msgstr "Paypal:"
 
 msgid "Pending"
-msgstr ""
+msgstr "Oczekujące"
 
 msgid "People rocketing to the sky"
 msgstr "Ludzie leczący ku niebu"
@@ -3353,6 +3380,9 @@ msgstr "Wyloguj się i zaloguj jako użytkownik z odpowiednimi uprawnieniami."
 msgid "Please select at least one registry"
 msgstr ""
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "Plusgiro"
 
@@ -3402,7 +3432,7 @@ msgid "Preview"
 msgstr ""
 
 msgid "Previous"
-msgstr ""
+msgstr "Poprzedni"
 
 msgid "Price"
 msgstr "Cena"
@@ -3434,7 +3464,19 @@ msgstr "Uprawnienia"
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
+msgstr ""
+
+msgid "Process selected"
+msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
 msgstr ""
 
 msgid "Product"
@@ -3579,7 +3621,7 @@ msgid "References"
 msgstr "Referencje"
 
 msgid "Refresh"
-msgstr ""
+msgstr "Odśwież"
 
 msgid "Refund amount exceeds available amount"
 msgstr ""
@@ -4100,6 +4142,9 @@ msgstr "Cena specjalna"
 msgid "Start"
 msgstr "Start"
 
+msgid "Start Date"
+msgstr ""
+
 msgid "Start New Check Run"
 msgstr ""
 
@@ -4122,7 +4167,7 @@ msgid "Statistics"
 msgstr "Statystyki"
 
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 msgid "Storage"
 msgstr ""
@@ -4395,7 +4440,7 @@ msgid "Timestamp"
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "Tytuł"
 
 msgid "Titles by Language"
 msgstr ""
@@ -4410,7 +4455,7 @@ msgid "Tot"
 msgstr "Razem"
 
 msgid "Total"
-msgstr ""
+msgstr "Razem"
 
 msgid "Total Domains"
 msgstr ""
@@ -4566,7 +4611,7 @@ msgid "Used to make class names."
 msgstr "Używane do tworzenia nazw klas."
 
 msgid "User"
-msgstr ""
+msgstr "Użytkownik"
 
 msgid "User manual"
 msgstr "Instrukcja użytkownika"
@@ -4596,7 +4641,7 @@ msgid "Username must be at least {min} characters"
 msgstr "Nazwa użytkownika musi mieć co najmniej {min} znaków"
 
 msgid "Users"
-msgstr ""
+msgstr "Użytkownicy"
 
 msgid "Users and groups"
 msgstr "Użytkownicy i grupy"
@@ -4650,7 +4695,7 @@ msgid "Vacation settings saved"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "Wartość"
 
 msgid "Value for the class attribute."
 msgstr "Wartość dla atrybutu class."
@@ -4659,7 +4704,7 @@ msgid "Version"
 msgstr ""
 
 msgid "View"
-msgstr ""
+msgstr "Widok"
 
 msgid "View Details"
 msgstr ""
@@ -4698,7 +4743,7 @@ msgid "Web sites"
 msgstr "Strony internetowe"
 
 msgid "Website"
-msgstr ""
+msgstr "Strona WWW"
 
 msgid "Websites"
 msgstr "Strony internetowe"
@@ -4916,6 +4961,12 @@ msgstr ""
 msgid "for registrar"
 msgstr ""
 
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
+msgstr ""
+
 msgid "invoice"
 msgstr "faktura"
 
@@ -4941,7 +4992,7 @@ msgid "our web"
 msgstr "nasza strona"
 
 msgid "payments"
-msgstr ""
+msgstr "płatności"
 
 msgid "poll"
 msgstr ""
@@ -4969,6 +5020,9 @@ msgstr "zapora zapasowa"
 
 msgid "supporters"
 msgstr "wspieracz"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr ""

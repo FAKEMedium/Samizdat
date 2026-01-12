@@ -110,22 +110,22 @@ msgid "About Fortnox"
 msgstr "Fortnox के बारे में"
 
 msgid "Access denied"
-msgstr ""
+msgstr "पहुंच अस्वीकृत"
 
 msgid "According to our notes invoice {number} remains unpaid."
 msgstr "हमारे रिकॉर्ड के अनुसार इनवॉइस {number} अभी तक अवैतनिक है।"
 
 msgid "Account"
-msgstr ""
+msgstr "खाता"
 
 msgid "Account confirmation"
 msgstr "खाता पुष्टिकरण"
 
 msgid "Account settings"
-msgstr ""
+msgstr "खाता सेटिंग्स"
 
 msgid "Action"
-msgstr ""
+msgstr "कार्रवाई"
 
 msgid "Actions"
 msgstr "कार्य"
@@ -272,7 +272,7 @@ msgid "Address line 2 (optional)"
 msgstr ""
 
 msgid "Admin"
-msgstr ""
+msgstr "व्यवस्थापक"
 
 msgid "Admin Email"
 msgstr ""
@@ -353,7 +353,7 @@ msgid "Aliases"
 msgstr ""
 
 msgid "All"
-msgstr ""
+msgstr "सभी"
 
 msgid "All Invoices"
 msgstr ""
@@ -422,7 +422,7 @@ msgid "An error occurred. Please try again."
 msgstr ""
 
 msgid "Apply"
-msgstr ""
+msgstr "लागू करें"
 
 msgid "Are you sure you want to delete contact"
 msgstr ""
@@ -584,7 +584,7 @@ msgid "Background"
 msgstr ""
 
 msgid "Balance"
-msgstr ""
+msgstr "शेष"
 
 msgid "Bankgiro"
 msgstr "बैंकगिरो"
@@ -704,7 +704,7 @@ msgid "Cash invoice"
 msgstr ""
 
 msgid "Category"
-msgstr ""
+msgstr "श्रेणी"
 
 msgid "Certificate"
 msgstr ""
@@ -746,7 +746,7 @@ msgid "Charged At"
 msgstr ""
 
 msgid "Check"
-msgstr ""
+msgstr "जांचें"
 
 msgid "Check failed"
 msgstr ""
@@ -779,6 +779,9 @@ msgid "City (billing)"
 msgstr "शहर (बिलिंग)"
 
 msgid "Clear"
+msgstr "साफ करें"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
 msgid "Click to pop dialog."
@@ -845,7 +848,7 @@ msgid "Company"
 msgstr "कंपनी"
 
 msgid "Completed"
-msgstr ""
+msgstr "पूर्ण"
 
 msgid "Compliance"
 msgstr ""
@@ -938,7 +941,7 @@ msgid "Contact: {email} or call us directly."
 msgstr ""
 
 msgid "Contacts"
-msgstr ""
+msgstr "संपर्क"
 
 msgid "Content"
 msgstr "सामग्री"
@@ -977,7 +980,7 @@ msgid "Country selector"
 msgstr "देश चयनकर्ता"
 
 msgid "Create"
-msgstr ""
+msgstr "बनाएं"
 
 msgid "Create Contact"
 msgstr ""
@@ -1004,7 +1007,7 @@ msgid "Create new record"
 msgstr "नया रिकॉर्ड बनाएं"
 
 msgid "Created"
-msgstr ""
+msgstr "बनाया गया"
 
 msgid "Created {created} by {creator}"
 msgstr "{creator} द्वारा {created} को बनाया गया"
@@ -1528,6 +1531,9 @@ msgstr "खाली टेलीफोन"
 msgid "Enabled"
 msgstr ""
 
+msgid "End Date"
+msgstr ""
+
 msgid "End main content"
 msgstr "मुख्य सामग्री समाप्त"
 
@@ -1571,6 +1577,9 @@ msgid "Enter zone name"
 msgstr "ज़ोन नाम दर्ज करें"
 
 msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error fetching transactions"
 msgstr ""
 
 msgid "Error loading contact details"
@@ -1658,7 +1667,7 @@ msgid "Expiry"
 msgstr ""
 
 msgid "Export"
-msgstr ""
+msgstr "निर्यात"
 
 msgid "Export zone file"
 msgstr ""
@@ -1673,7 +1682,7 @@ msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 msgstr ""
 
 msgid "Failed"
-msgstr ""
+msgstr "विफल"
 
 msgid "Failed login from {ip}"
 msgstr "{ip} से लॉगिन विफल"
@@ -1897,6 +1906,9 @@ msgstr ""
 msgid "Featured"
 msgstr ""
 
+msgid "Fetch from PayPal"
+msgstr ""
+
 msgid "File"
 msgstr ""
 
@@ -1967,6 +1979,9 @@ msgid "Fortnox"
 msgstr "Fortnox"
 
 msgid "Fortnox Warning"
+msgstr ""
+
+msgid "Fortnox authorization required"
 msgstr ""
 
 msgid "Fortnox integration"
@@ -2174,7 +2189,7 @@ msgid "Impersonate {who}"
 msgstr ""
 
 msgid "Import"
-msgstr ""
+msgstr "आयात"
 
 msgid "Import zone"
 msgstr ""
@@ -2481,8 +2496,11 @@ msgstr "ज़ोन सूची"
 msgid "Lista fakturor"
 msgstr "इनवॉइस सूची"
 
-msgid "Loading..."
+msgid "Live Transactions"
 msgstr ""
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
 
 msgid "Log"
 msgstr ""
@@ -2647,7 +2665,7 @@ msgid "Message sent"
 msgstr "संदेश भेजा गया"
 
 msgid "Messages"
-msgstr ""
+msgstr "संदेश"
 
 msgid "Messages pagination"
 msgstr ""
@@ -2815,7 +2833,7 @@ msgid "Newsletter"
 msgstr "न्यूज़लेटर"
 
 msgid "Next"
-msgstr ""
+msgstr "अगला"
 
 msgid "No"
 msgstr "नहीं"
@@ -2919,6 +2937,9 @@ msgstr "कोई पेज नहीं मिला।"
 msgid "No payments found"
 msgstr ""
 
+msgid "No payments selected"
+msgstr ""
+
 msgid "No price data available"
 msgstr ""
 
@@ -2952,6 +2973,12 @@ msgstr ""
 msgid "No transactions found"
 msgstr ""
 
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "No unprocessed payments"
+msgstr ""
+
 msgid "No users found"
 msgstr ""
 
@@ -2980,7 +3007,7 @@ msgid "Numbered List"
 msgstr "संख्याबद्ध सूची"
 
 msgid "OK"
-msgstr ""
+msgstr "ठीक"
 
 msgid "OVERDUE"
 msgstr ""
@@ -3025,7 +3052,7 @@ msgid "Or scan QR code with Swish app"
 msgstr ""
 
 msgid "Order"
-msgstr ""
+msgstr "ऑर्डर"
 
 msgid "Order number or reference"
 msgstr ""
@@ -3103,7 +3130,7 @@ msgid "PEM format (stored securely)"
 msgstr ""
 
 msgid "Page"
-msgstr ""
+msgstr "पृष्ठ"
 
 msgid "Page navigation"
 msgstr ""
@@ -3283,7 +3310,7 @@ msgid "Paypal:"
 msgstr "पेपाल:"
 
 msgid "Pending"
-msgstr ""
+msgstr "लंबित"
 
 msgid "People rocketing to the sky"
 msgstr "लोग आकाश की ओर उड़ते हुए"
@@ -3345,6 +3372,9 @@ msgstr "कृपया लॉगआउट करें और उचित प�
 msgid "Please select at least one registry"
 msgstr ""
 
+msgid "Please select both start and end dates"
+msgstr ""
+
 msgid "Plusgiro"
 msgstr "प्लसगिरो"
 
@@ -3394,7 +3424,7 @@ msgid "Preview"
 msgstr ""
 
 msgid "Previous"
-msgstr ""
+msgstr "पिछला"
 
 msgid "Price"
 msgstr "मूल्य"
@@ -3426,7 +3456,19 @@ msgstr "विशेषाधिकार"
 msgid "Proceed to Payment"
 msgstr ""
 
+msgid "Process"
+msgstr ""
+
 msgid "Process ID"
+msgstr ""
+
+msgid "Process selected"
+msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
 msgstr ""
 
 msgid "Product"
@@ -3571,7 +3613,7 @@ msgid "References"
 msgstr "संदर्भ"
 
 msgid "Refresh"
-msgstr ""
+msgstr "रिफ्रेश"
 
 msgid "Refund amount exceeds available amount"
 msgstr ""
@@ -4092,6 +4134,9 @@ msgstr "विशेष मूल्य"
 msgid "Start"
 msgstr "शुरू करें"
 
+msgid "Start Date"
+msgstr ""
+
 msgid "Start New Check Run"
 msgstr ""
 
@@ -4114,7 +4159,7 @@ msgid "Statistics"
 msgstr "आँकड़े"
 
 msgid "Status"
-msgstr ""
+msgstr "स्थिति"
 
 msgid "Storage"
 msgstr ""
@@ -4387,7 +4432,7 @@ msgid "Timestamp"
 msgstr ""
 
 msgid "Title"
-msgstr ""
+msgstr "शीर्षक"
 
 msgid "Titles by Language"
 msgstr ""
@@ -4402,7 +4447,7 @@ msgid "Tot"
 msgstr "कुल"
 
 msgid "Total"
-msgstr ""
+msgstr "कुल"
 
 msgid "Total Domains"
 msgstr ""
@@ -4558,7 +4603,7 @@ msgid "Used to make class names."
 msgstr "क्लास नाम बनाने के लिए उपयोग किया जाता है।"
 
 msgid "User"
-msgstr ""
+msgstr "उपयोगकर्ता"
 
 msgid "User manual"
 msgstr "उपयोगकर्ता मैनुअल"
@@ -4588,7 +4633,7 @@ msgid "Username must be at least {min} characters"
 msgstr "उपयोगकर्ता नाम में कम से कम {min} अक्षर होने चाहिए"
 
 msgid "Users"
-msgstr ""
+msgstr "उपयोगकर्ता"
 
 msgid "Users and groups"
 msgstr "उपयोगकर्ता और समूह"
@@ -4642,7 +4687,7 @@ msgid "Vacation settings saved"
 msgstr ""
 
 msgid "Value"
-msgstr ""
+msgstr "मूल्य"
 
 msgid "Value for the class attribute."
 msgstr "क्लास विशेषता के लिए मान।"
@@ -4651,7 +4696,7 @@ msgid "Version"
 msgstr ""
 
 msgid "View"
-msgstr ""
+msgstr "देखें"
 
 msgid "View Details"
 msgstr ""
@@ -4690,7 +4735,7 @@ msgid "Web sites"
 msgstr "वेब साइट"
 
 msgid "Website"
-msgstr ""
+msgstr "वेबसाइट"
 
 msgid "Websites"
 msgstr "वेबसाइट"
@@ -4908,6 +4953,12 @@ msgstr ""
 msgid "for registrar"
 msgstr ""
 
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
+msgstr ""
+
 msgid "invoice"
 msgstr "इनवॉइस"
 
@@ -4933,7 +4984,7 @@ msgid "our web"
 msgstr "हमारी वेब"
 
 msgid "payments"
-msgstr ""
+msgstr "भुगतान"
 
 msgid "poll"
 msgstr ""
@@ -4961,6 +5012,9 @@ msgstr "स्टैंडबाय फायरवॉल"
 
 msgid "supporters"
 msgstr "समर्थक"
+
+msgid "transactions"
+msgstr ""
 
 msgid "unlimited"
 msgstr ""

@@ -70,7 +70,16 @@ sub createDomain ($self, $domain_data) {
 }
 
 sub updateDomain ($self, $domain_name, $domain_data) {
-  return $self->_api_request('PUT', "v2/domains/$domain_name", $domain_data);
+  # RTR API uses POST to /v2/domains/{domainName}/update
+  # Convert boolean designatedAgent to API enum: NONE, OLD, NEW, BOTH
+  if (exists $domain_data->{designatedAgent}) {
+    if ($domain_data->{designatedAgent} && $domain_data->{designatedAgent} !~ /^(NONE|OLD|NEW|BOTH)$/) {
+      $domain_data->{designatedAgent} = 'BOTH';
+    } elsif (!$domain_data->{designatedAgent}) {
+      delete $domain_data->{designatedAgent};
+    }
+  }
+  return $self->_api_request('POST', "v2/domains/$domain_name/update", $domain_data);
 }
 
 sub deleteDomain ($self, $domain_name) {
@@ -99,7 +108,17 @@ sub createContact ($self, $contact_data) {
 
 sub updateContact ($self, $contact_handle, $contact_data) {
   my $customer = $self->config->{customer};
-  return $self->_api_request('PUT', "v2/customers/$customer/contacts/$contact_handle", $contact_data);
+  # RTR API uses POST to /update endpoint (same pattern as domain update)
+  # Convert boolean designatedAgent to API enum: NONE, OLD, NEW, BOTH
+  # (email change is treated like owner change, requires designatedAgent)
+  if (exists $contact_data->{designatedAgent}) {
+    if ($contact_data->{designatedAgent} && $contact_data->{designatedAgent} !~ /^(NONE|OLD|NEW|BOTH)$/) {
+      $contact_data->{designatedAgent} = 'BOTH';
+    } elsif (!$contact_data->{designatedAgent}) {
+      delete $contact_data->{designatedAgent};
+    }
+  }
+  return $self->_api_request('POST', "v2/customers/$customer/contacts/$contact_handle/update", $contact_data);
 }
 
 sub deleteContact ($self, $contact_handle) {

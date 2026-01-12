@@ -177,10 +177,11 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/RTR_Domain'
-    put:
+    post:
       operationId: RTR.domains.update
       x-mojo-to: RealtimeRegister#update_domain
       summary: Update domain
+      description: Update domain settings (nameservers, contacts, auto-renew, privacy)
       tags: [RealtimeRegister]
       parameters:
         - name: domain
@@ -193,7 +194,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RTR_DomainInput'
+              $ref: '#/components/schemas/RTR_DomainUpdateInput'
       responses:
         '200':
           description: Updated domain
@@ -428,6 +429,46 @@ components:
           type: array
           items:
             type: string
+    RTR_DomainUpdateInput:
+      type: object
+      description: Fields that can be updated on a domain
+      properties:
+        registrant:
+          type: string
+          description: New registrant contact handle
+        designatedAgent:
+          type: boolean
+          description: Whether acting as designated agent for registrant change
+        privacyProtect:
+          type: boolean
+          description: Enable/disable privacy protection
+        autoRenew:
+          type: boolean
+          description: Enable/disable auto-renewal
+        autoRenewPeriod:
+          type: integer
+          description: Renewal period in months
+        ns:
+          type: array
+          description: List of nameservers
+          items:
+            type: string
+        contacts:
+          type: object
+          description: Contact handles by role
+          properties:
+            admin:
+              type: array
+              items:
+                type: string
+            billing:
+              type: array
+              items:
+                type: string
+            tech:
+              type: array
+              items:
+                type: string
     RTR_DomainListResponse:
       type: object
       properties:
