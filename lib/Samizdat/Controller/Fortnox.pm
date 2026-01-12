@@ -197,35 +197,104 @@ sub payments ($self) {
       return $self->render(web => $web, title => $title, template => 'fortnox/payments/index');
     }
   } else {
-    my $invoiceid = int($self->param('invoiceid') // 0);
-    my $page = int($self->param('page') // 1);
-    my $perpage = $self->app->config->{pagination}->{perpage} || 25;
-    my $options = {'qp' => {
-      'limit' => $perpage,
-      'page' => $page,
-      'sortby' => 'paymentdate',
-      'sortorder' => 'descending',
-    }};
-    if ($invoiceid) {
-      $options->{qp}->{invoicenumber} = $invoiceid;
+    # Refresh cache only if requested via ?refresh=1 parameter
+    if ($self->param('refresh')) {
+      $self->app->fortnox->updateCache('InvoicePayments');
     }
-    my $payment = $self->app->fortnox->getInvoicePayment($number, $options);
+    my $payment = $self->app->fortnox->getInvoicePayment($number);
 
-    # Enrich payments with customer names from cached invoice data
-    if ($payment && $payment->{InvoicePayments}) {
-      my @invoice_numbers = map { $_->{InvoiceNumber} } @{$payment->{InvoicePayments}};
-      my $customer_names = $self->app->fortnox->getInvoiceCustomerNames(\@invoice_numbers);
-      for my $p (@{$payment->{InvoicePayments}}) {
-        $p->{CustomerName} = $customer_names->{$p->{InvoiceNumber}} // '';
+    # Get local invoices with remaining debt for comparison
+    # Customer name comes from local database, not Fortnox API
+    my $unpaid_invoices = $self->app->invoice->get({
+      where => {
+        debt  => { '>' => 0 },
+        state => 'fakturerad'
       }
+    });
+    # Map by fakturanummer for quick lookup, include customer info
+    my %unpaid_map;
+    for my $inv (@$unpaid_invoices) {
+      my $customer = $self->app->customer->get({ where => { customerid => $inv->{customerid} } })->[0];
+      $unpaid_map{$inv->{fakturanummer}} = {
+        invoiceid    => $inv->{invoiceid},
+        customerid   => $inv->{customerid},
+        customername => $customer ? $self->app->customer->name($customer) : '',
+        totalcost    => $inv->{totalcost},
+        debt         => $inv->{debt},
+      };
     }
 
     my $fortnox = { title => $title };
     $fortnox->{payment} = $payment;
-    $fortnox->{page} = $page;
-    $fortnox->{perpage} = $perpage;
+    $fortnox->{unpaid_invoices} = \%unpaid_map;
     return $self->render(json => { fortnox => $fortnox });
   }
+}
+
+
+sub process_payments ($self) {
+  # Require admin access
+  return unless $self->access({ admin => 1 });
+
+  my $data = $self->req->json;
+  my $payments = $data->{payments} // [];
+  my $processed = 0;
+  my $current_user = $self->session->{user} // $self->session->{username} // 'fortnox';
+
+  for my $payment (@$payments) {
+    my $invoice_number = $payment->{invoiceNumber};
+    my $paydate = $payment->{date};  # Date from Fortnox (bank date)
+    my $amount = $payment->{amount} + 0;  # Ensure numeric
+
+    next unless $invoice_number && $paydate && $amount > 0;
+
+    # Find local invoice by fakturanummer
+    my $invoices = $self->app->invoice->get({
+      where => { fakturanummer => $invoice_number }
+    });
+
+    if (@$invoices) {
+      my $invoice = $invoices->[0];
+
+      # Add payment record to invoicepayment table
+      $self->app->invoice->addpayment({
+        invoiceid  => $invoice->{invoiceid},
+        customerid => $invoice->{customerid},
+        paydate    => $paydate,
+        amount     => $amount,
+        updater    => $current_user
+      });
+
+      # Calculate new debt
+      my $new_debt = ($invoice->{debt} || $invoice->{totalcost}) - $amount;
+      $new_debt = 0 if $new_debt < 0;
+
+      # Check if remaining debt is within acceptable exchange rate difference
+      my $totalcost = $invoice->{totalcost} || 1;
+      my $payment_diff_pct = $self->app->config->{manager}->{invoice}->{paymentdifference} // 1;
+      my $max_diff = $totalcost * ($payment_diff_pct / 100);
+      my $is_fully_paid = ($new_debt <= $max_diff);
+
+      # Update invoice
+      my $update = {
+        debt    => $is_fully_paid ? 0 : $new_debt,
+        updated => \['NOW()'],
+      };
+
+      # When fully paid: set paydate, state, and bookingdate
+      if ($is_fully_paid) {
+        $update->{paydate}     = $paydate;  # Date from Fortnox (bank date)
+        $update->{state}       = 'bokford';
+        $update->{bookingdate} = \['NOW()'];
+      }
+
+      $self->app->invoice->updateinvoice($invoice->{invoiceid}, $update);
+
+      $processed++;
+    }
+  }
+
+  return $self->render(json => { success => 1, processed => $processed });
 }
 
 

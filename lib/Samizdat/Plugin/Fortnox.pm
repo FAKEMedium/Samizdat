@@ -380,6 +380,35 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Fortnox_PaymentListResponse'
+    post:
+      operationId: Fortnox.payments.process
+      x-mojo-to: Fortnox#process_payments
+      summary: Process selected payments
+      tags: [Fortnox]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                payments:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      invoiceNumber:
+                        type: string
+                      amount:
+                        type: string
+                      date:
+                        type: string
+      responses:
+        '200':
+          description: Processing result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Fortnox_Result'
 
   /fortnox/payments/{number}:
     get:
