@@ -20,7 +20,7 @@ sub register ($self, $app, $conf) {
   my $customers = $r->manager('customers/:customerid/domains') ->to(controller => 'Domain');
   $customers->get('/register')                                 ->to('#register')        ->name('customer_domain_register');
   $customers->get('/transfer')                                 ->to('#transfer')        ->name('customer_domain_transfer');
-  $customers->get('/:domainid')                                ->to('#get')             ->name('domain_get');
+  $customers->get('/#domainid')                                ->to('#get')             ->name('domain_get');
   $customers->get('/')                                         ->to('#index')           ->name('customer_domains');
 
   my $contacts = $r->manager('domain/contacts')->to(controller => 'Domain');

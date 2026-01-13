@@ -33,7 +33,8 @@ sub index($self) {
 
     # Get keys matching pattern
     my $redis = $self->cache->{redis};
-    my @all_keys = $redis->db->keys($pattern);
+    my $keys_result = $redis->db->keys($pattern);
+    my @all_keys = ref($keys_result) eq 'ARRAY' ? @$keys_result : ($keys_result);
 
     my $total = scalar @all_keys;
     my $offset = ($page - 1) * $limit;
@@ -75,7 +76,12 @@ sub index($self) {
   }
 }
 
-# Show action - view cache entry details
+# View action - render modal template
+sub view($self) {
+  return $self->render(template => 'cache/view/index', layout => 'modal');
+}
+
+# Show action - view cache entry details (API)
 sub show($self) {
   return if !$self->access({ 'superadmin' => 1 });
 
@@ -88,9 +94,24 @@ sub show($self) {
     return $self->render(json => { error => 'Key not found' }, status => 404);
   }
 
-  my $value = $self->cache->get($key);
-  my $ttl = $redis->db->ttl($key);
+  # Get raw value from Redis (not through cache model which adds session prefix)
   my $type = $redis->db->type($key);
+  my $ttl = $redis->db->ttl($key);
+  my $value;
+
+  if ($type eq 'string') {
+    $value = $redis->db->get($key);
+    # Try to decode JSON for display
+    eval { $value = decode_json($value); };
+  } elsif ($type eq 'hash') {
+    $value = $redis->db->hgetall($key);
+  } elsif ($type eq 'list') {
+    $value = $redis->db->lrange($key, 0, -1);
+  } elsif ($type eq 'set') {
+    $value = $redis->db->smembers($key);
+  } elsif ($type eq 'zset') {
+    $value = $redis->db->zrange($key, 0, -1, 'WITHSCORES');
+  }
 
   return $self->render(json => {
     success => 1,
@@ -110,7 +131,9 @@ sub delete($self) {
   my $key = $self->param('key');
   return $self->render(json => { error => 'Key required' }, status => 400) unless $key;
 
-  my $deleted = $self->cache->del($key);
+  # Delete raw key directly (not through cache model which adds session prefix)
+  my $redis = $self->cache->{redis};
+  my $deleted = $redis->db->del($key);
 
   if ($deleted) {
     return $self->render(json => {
@@ -142,11 +165,13 @@ sub purge($self) {
   }
 
   my $redis = $self->cache->{redis};
-  my @keys = $redis->db->keys($pattern);
+  my $keys_result = $redis->db->keys($pattern);
+  my @keys = ref($keys_result) eq 'ARRAY' ? @$keys_result : ($keys_result);
   my $count = 0;
 
+  # Delete raw keys directly (not through cache model)
   foreach my $key (@keys) {
-    $count += $self->cache->del($key);
+    $count += $redis->db->del($key);
   }
 
   return $self->render(json => {

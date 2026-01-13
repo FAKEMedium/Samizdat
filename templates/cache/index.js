@@ -1,5 +1,8 @@
 let currentPage = 1;
-let currentPattern = '*';
+let currentPattern = new URLSearchParams(window.location.search).get('pattern') || '*';
+
+// Set the search input to match URL param
+document.getElementById('pattern').value = currentPattern;
 
 // Universal modal elements
 const universalModal = new bootstrap.Modal('#universalmodal');
