@@ -27,7 +27,7 @@ msgid "(No parent - top level)"
 msgstr ""
 
 msgid "0 = reply once per sender"
-msgstr ""
+msgstr "0 = 每个发件人回复一次"
 
 msgid "1 Year"
 msgstr "1年"
@@ -85,7 +85,7 @@ msgid "A {rate} interest will be charged on overdue payments"
 msgstr "逾期付款将收取 {rate} 的利息"
 
 msgid "A/AAAA Records"
-msgstr ""
+msgstr "A/AAAA 记录"
 
 msgid "API docs"
 msgstr "API 文档"
@@ -150,11 +150,14 @@ msgstr "前面添加列"
 msgid "Add Key"
 msgstr "添加密钥"
 
+msgid "Add Nameserver"
+msgstr "添加域名服务器"
+
 msgid "Add New"
 msgstr "新增"
 
 msgid "Add New Key"
-msgstr ""
+msgstr "添加新密钥"
 
 msgid "Add Row After"
 msgstr "后面添加行"
@@ -187,10 +190,10 @@ msgid "Add domain"
 msgstr "添加域名"
 
 msgid "Add example"
-msgstr ""
+msgstr "添加示例"
 
 msgid "Add forwarding"
-msgstr ""
+msgstr "添加转发"
 
 msgid "Add grop"
 msgstr "添加组"
@@ -208,7 +211,7 @@ msgid "Add mailbox"
 msgstr "添加邮箱"
 
 msgid "Add nameserver"
-msgstr ""
+msgstr "添加域名服务器"
 
 msgid "Add page"
 msgstr "添加页面"
@@ -256,37 +259,40 @@ msgid "Address check"
 msgstr "地址检查"
 
 msgid "Address is required"
-msgstr ""
+msgstr "地址是必需的"
 
 msgid "Address line 1"
-msgstr ""
+msgstr "地址行 1"
 
 msgid "Address line 2 (optional)"
-msgstr ""
+msgstr "地址行 2（可选）"
 
 msgid "Admin"
 msgstr "管理员"
 
+msgid "Admin Contact"
+msgstr "管理联系人"
+
 msgid "Admin Email"
-msgstr ""
+msgstr "管理员邮箱"
 
 msgid "Admin access required"
-msgstr ""
+msgstr "需要管理员权限"
 
 msgid "Admin access required for DNS management"
 msgstr ""
 
 msgid "Admin contact"
-msgstr ""
+msgstr "管理员联系人"
 
 msgid "Admin created successfully"
-msgstr ""
+msgstr "管理员创建成功"
 
 msgid "Admin deleted successfully"
-msgstr ""
+msgstr "管理员删除成功"
 
 msgid "Admin not found"
-msgstr ""
+msgstr "管理员未找到"
 
 msgid "Admin saved successfully"
 msgstr ""
@@ -301,7 +307,7 @@ msgid "Administrators"
 msgstr "管理员"
 
 msgid "Admins"
-msgstr ""
+msgstr "管理员"
 
 msgid "Advertising"
 msgstr "广告"
@@ -349,31 +355,31 @@ msgid "All"
 msgstr "全部"
 
 msgid "All Invoices"
-msgstr ""
+msgstr "所有发票"
 
 msgid "All Messages"
-msgstr ""
+msgstr "所有消息"
 
 msgid "All Sectors"
 msgstr ""
 
 msgid "All accounts"
-msgstr ""
+msgstr "所有账户"
 
 msgid "All actions"
-msgstr ""
+msgstr "所有操作"
 
 msgid "All customers"
-msgstr ""
+msgstr "所有客户"
 
 msgid "All domains"
-msgstr ""
+msgstr "所有域名"
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "允许使用 cookie 从邮件粘贴确认码"
 
 msgid "Alternative email"
-msgstr ""
+msgstr "备用邮箱"
 
 msgid "Amount"
 msgstr "金额"
@@ -391,7 +397,7 @@ msgid "Amount incl. VAT"
 msgstr "含税金额"
 
 msgid "Amount is required"
-msgstr ""
+msgstr "金额是必需的"
 
 msgid "Amount to pay incl. VAT: {totalcost} {currency}"
 msgstr "含税应付金额：{totalcost} {currency}"
@@ -403,7 +409,7 @@ msgid "Amount to pay: {totalcost} {currency}"
 msgstr "应付金额：{totalcost} {currency}"
 
 msgid "Amount:"
-msgstr ""
+msgstr "金额："
 
 msgid "An error occurred"
 msgstr "发生错误"
@@ -412,7 +418,7 @@ msgid "An error occurred during login. Please try again."
 msgstr ""
 
 msgid "An error occurred. Please try again."
-msgstr ""
+msgstr "发生错误。请重试。"
 
 msgid "Apply"
 msgstr "应用"
@@ -421,7 +427,7 @@ msgid "Are you sure you want to delete contact"
 msgstr ""
 
 msgid "Are you sure you want to delete this alias?"
-msgstr ""
+msgstr "您确定要删除此别名吗？"
 
 msgid "Are you sure you want to delete this cache entry?"
 msgstr ""
@@ -430,10 +436,10 @@ msgid "Are you sure you want to delete this certificate?"
 msgstr ""
 
 msgid "Are you sure you want to delete this contact?"
-msgstr ""
+msgstr "您确定要删除此联系人吗？"
 
 msgid "Are you sure you want to delete this domain?"
-msgstr ""
+msgstr "您确定要删除此域名吗？"
 
 msgid "Are you sure you want to delete this example?"
 msgstr ""
@@ -445,7 +451,7 @@ msgid "Are you sure you want to delete this key?"
 msgstr ""
 
 msgid "Are you sure you want to delete this mailbox?"
-msgstr ""
+msgstr "您确定要删除此邮箱吗？"
 
 msgid "Are you sure you want to delete this menu?"
 msgstr ""
@@ -461,6 +467,9 @@ msgstr ""
 
 msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
 msgstr ""
+
+msgid "Are you sure you want to purge all cache?"
+msgstr "您确定要清除所有缓存吗？"
 
 msgid "Are you sure you want to resend this invoice?"
 msgstr ""
@@ -487,10 +496,10 @@ msgid "Auth-Info code from current registrar"
 msgstr ""
 
 msgid "Authentication required"
-msgstr ""
+msgstr "需要身份验证"
 
 msgid "Authorization code"
-msgstr ""
+msgstr "授权码"
 
 msgid "Authorize"
 msgstr "授权"
@@ -499,10 +508,10 @@ msgid "Auto Renew"
 msgstr ""
 
 msgid "Auto-renew"
-msgstr ""
+msgstr "自动续费"
 
 msgid "Average Score"
-msgstr ""
+msgstr "平均分"
 
 msgid "Avg Score"
 msgstr ""
@@ -553,28 +562,28 @@ msgid "Back"
 msgstr "返回"
 
 msgid "Back to Dashboard"
-msgstr ""
+msgstr "返回仪表板"
 
 msgid "Back to List"
 msgstr ""
 
 msgid "Back to Zones"
-msgstr ""
+msgstr "返回区域"
 
 msgid "Back to domains"
-msgstr ""
+msgstr "返回域名"
 
 msgid "Back to list"
-msgstr ""
+msgstr "返回列表"
 
 msgid "Back to menu"
-msgstr ""
+msgstr "返回菜单"
 
 msgid "Back to menus"
 msgstr ""
 
 msgid "Background"
-msgstr ""
+msgstr "背景"
 
 msgid "Balance"
 msgstr "余额"
@@ -592,7 +601,7 @@ msgid "Barred"
 msgstr "已禁止"
 
 msgid "Base URL"
-msgstr ""
+msgstr "基础 URL"
 
 msgid "Based in Sweden - Compliance Dashboard"
 msgstr ""
@@ -606,8 +615,11 @@ msgstr ""
 msgid "Billing"
 msgstr "账单"
 
+msgid "Billing Contact"
+msgstr "账单联系人"
+
 msgid "Bio"
-msgstr ""
+msgstr "简介"
 
 msgid "Blocked"
 msgstr "已封锁"
@@ -616,7 +628,7 @@ msgid "Blocked ip number"
 msgstr "已封锁的IP地址"
 
 msgid "Body"
-msgstr ""
+msgstr "正文"
 
 msgid "Bold"
 msgstr "粗体"
@@ -643,22 +655,25 @@ msgid "By default no information about you is shared."
 msgstr "默认情况下不会分享您的任何信息。"
 
 msgid "Bytes Used"
-msgstr ""
+msgstr "已用字节"
 
 msgid "Cache"
-msgstr ""
+msgstr "缓存"
 
 msgid "Cache Entry Details"
-msgstr ""
+msgstr "缓存条目详情"
 
 msgid "Cache Management"
-msgstr ""
+msgstr "缓存管理"
 
 msgid "Cache entry deleted successfully"
-msgstr ""
+msgstr "缓存条目删除成功"
 
 msgid "Cache entry not found or could not be deleted"
 msgstr ""
+
+msgid "Cache purged"
+msgstr "缓存已清除"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "调用助手会将 SVG 代码添加到文档开头的符号表中，并添加内联引用。"
@@ -691,7 +706,7 @@ msgid "Captcha was wrong"
 msgstr "验证码错误"
 
 msgid "Card Payment"
-msgstr ""
+msgstr "卡支付"
 
 msgid "Cash invoice"
 msgstr ""
@@ -703,16 +718,16 @@ msgid "Certificate"
 msgstr "证书"
 
 msgid "Certificate Chain"
-msgstr ""
+msgstr "证书链"
 
 msgid "Certificate created successfully"
-msgstr ""
+msgstr "证书创建成功"
 
 msgid "Certificate deleted successfully"
-msgstr ""
+msgstr "证书删除成功"
 
 msgid "Certificate not found"
-msgstr ""
+msgstr "证书未找到"
 
 msgid "Certificate renewal initiated"
 msgstr ""
@@ -730,7 +745,7 @@ msgid "Changed status."
 msgstr "状态已更改。"
 
 msgid "Changes saved successfully."
-msgstr ""
+msgstr "更改保存成功。"
 
 msgid "Charged"
 msgstr ""
@@ -742,7 +757,7 @@ msgid "Check"
 msgstr "检查"
 
 msgid "Check failed"
-msgstr ""
+msgstr "检查失败"
 
 msgid "Check queued"
 msgstr ""
@@ -844,7 +859,7 @@ msgid "Completed"
 msgstr "已完成"
 
 msgid "Compliance"
-msgstr ""
+msgstr "合规性"
 
 msgid "Compliance Rate"
 msgstr ""
@@ -859,7 +874,7 @@ msgid "Compliance score"
 msgstr ""
 
 msgid "Compliant"
-msgstr ""
+msgstr "合规"
 
 msgid "Compliant (Swedish hosting)"
 msgstr ""
@@ -895,7 +910,7 @@ msgid "Confirmation request sent"
 msgstr "确认请求已发送"
 
 msgid "Connection error. Please try again."
-msgstr ""
+msgstr "连接错误。请重试。"
 
 msgid "Contact"
 msgstr "联系"
@@ -907,25 +922,28 @@ msgid "Contact Information"
 msgstr "联系信息"
 
 msgid "Contact created"
-msgstr ""
+msgstr "联系人已创建"
 
 msgid "Contact created successfully"
-msgstr ""
+msgstr "联系人创建成功"
 
 msgid "Contact deleted"
-msgstr ""
+msgstr "联系人已删除"
 
 msgid "Contact deleted successfully"
-msgstr ""
+msgstr "联系人删除成功"
 
 msgid "Contact details"
-msgstr ""
+msgstr "联系方式"
+
+msgid "Contact handle"
+msgstr "联系人标识"
 
 msgid "Contact not found"
-msgstr ""
+msgstr "联系人未找到"
 
 msgid "Contact updated successfully"
-msgstr ""
+msgstr "联系人更新成功"
 
 msgid "Contact {sender} if you have questions."
 msgstr "如有疑问，请联系 {sender}。"
@@ -952,7 +970,7 @@ msgid "Contributing"
 msgstr "贡献"
 
 msgid "Control panel"
-msgstr ""
+msgstr "控制面板"
 
 msgid "Conversation with"
 msgstr ""
@@ -976,13 +994,13 @@ msgid "Create"
 msgstr "创建"
 
 msgid "Create Contact"
-msgstr ""
+msgstr "创建联系人"
 
 msgid "Create Payment"
-msgstr ""
+msgstr "创建支付"
 
 msgid "Create admin"
-msgstr ""
+msgstr "创建管理员"
 
 msgid "Create contact"
 msgstr "创建联系人"
@@ -994,7 +1012,7 @@ msgid "Create forwarding"
 msgstr ""
 
 msgid "Create mailbox"
-msgstr ""
+msgstr "创建邮箱"
 
 msgid "Create new record"
 msgstr "创建新记录"
@@ -1033,7 +1051,7 @@ msgid "Credited invoice: {number}"
 msgstr "已贷记发票：{number}"
 
 msgid "Critical"
-msgstr ""
+msgstr "关键"
 
 msgid "Cryptokey created successfully"
 msgstr ""
@@ -1045,7 +1063,7 @@ msgid "Currency"
 msgstr "货币"
 
 msgid "Current Prices"
-msgstr ""
+msgstr "当前价格"
 
 msgid "Currently managed"
 msgstr ""
@@ -1057,7 +1075,7 @@ msgid "Customer #{customerid}"
 msgstr "客户 #{customerid}"
 
 msgid "Customer ID"
-msgstr ""
+msgstr "客户 ID"
 
 msgid "Customer ID is required"
 msgstr ""
@@ -1087,7 +1105,7 @@ msgid "DNS Admin"
 msgstr "DNS 管理"
 
 msgid "DNS Check Results"
-msgstr ""
+msgstr "DNS 检查结果"
 
 msgid "DNS Zones"
 msgstr "DNS 区域"
@@ -1111,16 +1129,16 @@ msgid "DNSSEC Key Data"
 msgstr ""
 
 msgid "DNSSEC Keys"
-msgstr ""
+msgstr "DNSSEC 密钥"
 
 msgid "DS Records"
 msgstr ""
 
 msgid "Dark"
-msgstr ""
+msgstr "深色"
 
 msgid "Data"
-msgstr ""
+msgstr "数据"
 
 msgid "Data usage: {usage}"
 msgstr "数据使用量：{usage}"
@@ -1144,7 +1162,7 @@ msgid "Date:"
 msgstr "日期："
 
 msgid "Dear"
-msgstr ""
+msgstr "亲爱的"
 
 msgid "Debt"
 msgstr "债务"
@@ -1153,13 +1171,13 @@ msgid "Decide which parts of your personal data you want to show different group
 msgstr "决定您想向不同群组展示哪些个人数据。"
 
 msgid "Declined"
-msgstr ""
+msgstr "已拒绝"
 
 msgid "Default"
 msgstr "默认"
 
 msgid "Definitions"
-msgstr ""
+msgstr "定义"
 
 msgid "Delete"
 msgstr "删除"
@@ -1174,7 +1192,7 @@ msgid "Delete Table"
 msgstr "删除表格"
 
 msgid "Delete admin"
-msgstr ""
+msgstr "删除管理员"
 
 msgid "Delete this alias domain?"
 msgstr ""
@@ -1219,7 +1237,7 @@ msgid "Development"
 msgstr "开发"
 
 msgid "Direction"
-msgstr ""
+msgstr "方向"
 
 msgid "Disabled"
 msgstr "已禁用"
@@ -1228,10 +1246,10 @@ msgid "Discount"
 msgstr "折扣"
 
 msgid "Display Name"
-msgstr ""
+msgstr "显示名称"
 
 msgid "Display name"
-msgstr ""
+msgstr "显示名称"
 
 msgid "Do not renew"
 msgstr ""
@@ -1255,7 +1273,7 @@ msgid "Domain Name"
 msgstr ""
 
 msgid "Domain added successfully"
-msgstr ""
+msgstr "域名添加成功"
 
 msgid "Domain created successfully"
 msgstr ""
@@ -1352,6 +1370,9 @@ msgstr "编辑"
 
 msgid "Edit Certificate"
 msgstr ""
+
+msgid "Edit Domain"
+msgstr "编辑域名"
 
 msgid "Edit Example"
 msgstr ""
@@ -1525,7 +1546,7 @@ msgid "Enabled"
 msgstr "已启用"
 
 msgid "End Date"
-msgstr ""
+msgstr "结束日期"
 
 msgid "End main content"
 msgstr "主要内容结束"
@@ -1573,7 +1594,7 @@ msgid "Error deleting contact"
 msgstr ""
 
 msgid "Error fetching transactions"
-msgstr ""
+msgstr "获取交易时出错"
 
 msgid "Error loading contact details"
 msgstr ""
@@ -1607,6 +1628,9 @@ msgstr ""
 
 msgid "Error sending reminder"
 msgstr ""
+
+msgid "Error updating domain"
+msgstr "更新域名时出错"
 
 msgid "Errors"
 msgstr ""
@@ -1797,6 +1821,9 @@ msgstr ""
 msgid "Failed to process refund"
 msgstr ""
 
+msgid "Failed to purge cache"
+msgstr "清除缓存失败"
+
 msgid "Failed to regenerate invoice PDF"
 msgstr ""
 
@@ -1900,7 +1927,7 @@ msgid "Featured"
 msgstr ""
 
 msgid "Fetch from PayPal"
-msgstr ""
+msgstr "从PayPal获取"
 
 msgid "File"
 msgstr "文件"
@@ -1975,7 +2002,7 @@ msgid "Fortnox Warning"
 msgstr ""
 
 msgid "Fortnox authorization required"
-msgstr ""
+msgstr "需要Fortnox授权"
 
 msgid "Fortnox integration"
 msgstr "Fortnox 集成"
@@ -2102,6 +2129,12 @@ msgstr ""
 
 msgid "I accept the terms for registration."
 msgstr "我接受注册条款。"
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "我作为此注册人变更的指定代理人"
+
+msgid "I am acting as designated agent for this email change"
+msgstr "我作为此邮箱变更的指定代理人"
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -2468,7 +2501,7 @@ msgid "License"
 msgstr ""
 
 msgid "Light"
-msgstr ""
+msgstr "浅色"
 
 msgid "Link"
 msgstr "链接"
@@ -2489,7 +2522,7 @@ msgid "Lista fakturor"
 msgstr "发票列表"
 
 msgid "Live Transactions"
-msgstr ""
+msgstr "实时交易"
 
 msgid "Loading..."
 msgstr "加载中..."
@@ -2720,13 +2753,13 @@ msgid "Name Servers"
 msgstr ""
 
 msgid "Nameserver"
-msgstr ""
+msgstr "域名服务器"
 
 msgid "Nameserver Checks"
 msgstr ""
 
 msgid "Nameservers"
-msgstr ""
+msgstr "域名服务器"
 
 msgid "Negative impact on credit rating"
 msgstr ""
@@ -2735,7 +2768,7 @@ msgid "Net"
 msgstr "净额"
 
 msgid "Net Amount"
-msgstr ""
+msgstr "净额"
 
 msgid "Net amount"
 msgstr "净金额"
@@ -2753,16 +2786,16 @@ msgid "Network error - please try again"
 msgstr "网络错误 - 请重试"
 
 msgid "Never"
-msgstr ""
+msgstr "从不"
 
 msgid "Never expires"
 msgstr ""
 
 msgid "New Certificate"
-msgstr ""
+msgstr "新证书"
 
 msgid "New Contact"
-msgstr ""
+msgstr "新联系人"
 
 msgid "New Example"
 msgstr ""
@@ -2783,19 +2816,19 @@ msgid "New account"
 msgstr "新账户"
 
 msgid "New contact"
-msgstr ""
+msgstr "新联系人"
 
 msgid "New customer"
 msgstr "新客户"
 
 msgid "New domain"
-msgstr ""
+msgstr "新域名"
 
 msgid "New example"
 msgstr ""
 
 msgid "New folder"
-msgstr ""
+msgstr "新文件夹"
 
 msgid "New invoice for customer #{customerid}"
 msgstr "客户 #{customerid} 的新发票"
@@ -2807,7 +2840,7 @@ msgid "New invoice pack"
 msgstr "新发票包"
 
 msgid "New menu"
-msgstr ""
+msgstr "新菜单"
 
 msgid "New menu item"
 msgstr ""
@@ -2860,6 +2893,9 @@ msgstr ""
 msgid "No certificates found"
 msgstr ""
 
+msgid "No changes to save"
+msgstr "没有需要保存的更改"
+
 msgid "No charges have been made to your account."
 msgstr ""
 
@@ -2876,13 +2912,13 @@ msgid "No customer assigned"
 msgstr ""
 
 msgid "No data available"
-msgstr ""
+msgstr "无可用数据"
 
 msgid "No domains"
 msgstr ""
 
 msgid "No domains found"
-msgstr ""
+msgstr "未找到域名"
 
 msgid "No examples found"
 msgstr ""
@@ -2894,7 +2930,7 @@ msgid "No invoice template."
 msgstr "没有发票模板。"
 
 msgid "No invoices found"
-msgstr ""
+msgstr "未找到发票"
 
 msgid "No invoicing"
 msgstr "不开票"
@@ -2903,7 +2939,7 @@ msgid "No log entries"
 msgstr ""
 
 msgid "No mailboxes"
-msgstr ""
+msgstr "无邮箱"
 
 msgid "No matches found"
 msgstr ""
@@ -2915,7 +2951,7 @@ msgid "No menus found"
 msgstr ""
 
 msgid "No messages found"
-msgstr ""
+msgstr "未找到消息"
 
 msgid "No messages yet"
 msgstr ""
@@ -2930,7 +2966,7 @@ msgid "No payments found"
 msgstr "未找到付款"
 
 msgid "No payments selected"
-msgstr ""
+msgstr "未选择付款"
 
 msgid "No price data available"
 msgstr ""
@@ -2945,10 +2981,10 @@ msgid "No records found"
 msgstr ""
 
 msgid "No results"
-msgstr ""
+msgstr "无结果"
 
 msgid "No results found"
-msgstr ""
+msgstr "未找到结果"
 
 msgid "No selected customer."
 msgstr "未选择客户。"
@@ -2960,19 +2996,19 @@ msgid "No templates yet"
 msgstr ""
 
 msgid "No title"
-msgstr ""
+msgstr "无标题"
 
 msgid "No transactions found"
 msgstr ""
 
 msgid "No transactions found for selected date range"
-msgstr ""
+msgstr "所选日期范围内未找到交易"
 
 msgid "No unprocessed payments"
-msgstr ""
+msgstr "没有未处理的付款"
 
 msgid "No users found"
-msgstr ""
+msgstr "未找到用户"
 
 msgid "Non-compliant (Foreign hosting)"
 msgstr ""
@@ -2984,10 +3020,10 @@ msgid "Normal"
 msgstr "普通"
 
 msgid "Not found"
-msgstr ""
+msgstr "未找到"
 
 msgid "Note"
-msgstr ""
+msgstr "备注"
 
 msgid "Notes"
 msgstr "备注"
@@ -3161,7 +3197,7 @@ msgid "Password"
 msgstr "密码"
 
 msgid "Password is required"
-msgstr ""
+msgstr "密码是必需的"
 
 msgid "Password must be at least {min} characters"
 msgstr "密码必须至少包含 {min} 个字符"
@@ -3185,7 +3221,7 @@ msgid "Password was wrong or username doesn't exist."
 msgstr "密码错误或用户名不存在。"
 
 msgid "Pay"
-msgstr ""
+msgstr "支付"
 
 msgid "Pay instantly with Swish"
 msgstr ""
@@ -3203,7 +3239,7 @@ msgid "Paydate"
 msgstr "付款日期"
 
 msgid "Payer"
-msgstr ""
+msgstr "付款人"
 
 msgid "Payer Email"
 msgstr ""
@@ -3215,10 +3251,10 @@ msgid "Payment Cancelled"
 msgstr ""
 
 msgid "Payment Details"
-msgstr ""
+msgstr "支付详情"
 
 msgid "Payment ID"
-msgstr ""
+msgstr "支付 ID"
 
 msgid "Payment ID:"
 msgstr ""
@@ -3230,22 +3266,22 @@ msgid "Payment Intent"
 msgstr ""
 
 msgid "Payment Method"
-msgstr ""
+msgstr "支付方式"
 
 msgid "Payment Reminder"
-msgstr ""
+msgstr "付款提醒"
 
 msgid "Payment Successful"
 msgstr ""
 
 msgid "Payment date"
-msgstr ""
+msgstr "支付日期"
 
 msgid "Payment due to: {duedate}"
 msgstr "付款截止日期：{duedate}"
 
 msgid "Payment failed"
-msgstr ""
+msgstr "支付失败"
 
 msgid "Payment for..."
 msgstr ""
@@ -3257,7 +3293,7 @@ msgid "Payment must be charged before refund"
 msgstr ""
 
 msgid "Payment not found"
-msgstr ""
+msgstr "支付未找到"
 
 msgid "Payment registered successfully"
 msgstr ""
@@ -3269,7 +3305,7 @@ msgid "Payment request sent! Open your Swish app to confirm."
 msgstr ""
 
 msgid "Payment successful!"
-msgstr ""
+msgstr "支付成功！"
 
 msgid "Payment terms"
 msgstr "付款条款"
@@ -3287,7 +3323,7 @@ msgid "Payment with Nets Easy"
 msgstr ""
 
 msgid "Payment:"
-msgstr ""
+msgstr "支付："
 
 msgid "Payments"
 msgstr "付款"
@@ -3308,7 +3344,7 @@ msgid "People rocketing to the sky"
 msgstr "人们飞向天空"
 
 msgid "Period"
-msgstr ""
+msgstr "期限"
 
 msgid "Personal"
 msgstr "个人"
@@ -3323,10 +3359,10 @@ msgid "Phone"
 msgstr "电话"
 
 msgid "Phone Number"
-msgstr ""
+msgstr "电话号码"
 
 msgid "Phone number"
-msgstr ""
+msgstr "电话号码"
 
 msgid "Please check your confirmation link or register again."
 msgstr "请检查您的确认链接或重新注册。"
@@ -3365,7 +3401,7 @@ msgid "Please select at least one registry"
 msgstr ""
 
 msgid "Please select both start and end dates"
-msgstr ""
+msgstr "请选择开始和结束日期"
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
@@ -3380,7 +3416,7 @@ msgid "Posta faktura"
 msgstr "邮寄发票"
 
 msgid "Postal Code"
-msgstr ""
+msgstr "邮政编码"
 
 msgid "Postal code"
 msgstr "邮政编码"
@@ -3413,7 +3449,7 @@ msgid "Press Register to regenerate"
 msgstr "按注册以重新生成"
 
 msgid "Preview"
-msgstr ""
+msgstr "预览"
 
 msgid "Previous"
 msgstr "上一步"
@@ -3425,7 +3461,7 @@ msgid "Price List"
 msgstr "价格表"
 
 msgid "Prices"
-msgstr ""
+msgstr "价格"
 
 msgid "Primary NS"
 msgstr ""
@@ -3437,7 +3473,7 @@ msgid "Privacy Protection"
 msgstr ""
 
 msgid "Private Key"
-msgstr ""
+msgstr "私钥"
 
 msgid "Privilege sets"
 msgstr "权限集"
@@ -3449,19 +3485,19 @@ msgid "Proceed to Payment"
 msgstr ""
 
 msgid "Process"
-msgstr ""
+msgstr "处理"
 
 msgid "Process ID"
 msgstr ""
 
 msgid "Process selected"
-msgstr ""
+msgstr "处理选中项"
 
 msgid "Processed"
-msgstr ""
+msgstr "已处理"
 
 msgid "Processing failed"
-msgstr ""
+msgstr "处理失败"
 
 msgid "Product"
 msgstr "产品"
@@ -3470,7 +3506,7 @@ msgid "Products"
 msgstr "产品"
 
 msgid "Profile Image"
-msgstr ""
+msgstr "头像"
 
 msgid "Promotions"
 msgstr ""
@@ -3482,16 +3518,16 @@ msgid "Provider"
 msgstr "提供商"
 
 msgid "Public Key"
-msgstr ""
+msgstr "公钥"
 
 msgid "Published"
-msgstr ""
+msgstr "已发布"
 
 msgid "Purge"
-msgstr ""
+msgstr "清除"
 
 msgid "Purge All"
-msgstr ""
+msgstr "全部清除"
 
 msgid "Purged %d cache entries"
 msgstr ""
@@ -3512,7 +3548,7 @@ msgid "Quarter"
 msgstr "季度"
 
 msgid "Quota"
-msgstr ""
+msgstr "配额"
 
 msgid "Quota (MB)"
 msgstr ""
@@ -3536,7 +3572,7 @@ msgid "RealtimeRegister API Integration"
 msgstr ""
 
 msgid "Received"
-msgstr ""
+msgstr "已收到"
 
 msgid "Receiver"
 msgstr "接收者"
@@ -3545,13 +3581,13 @@ msgid "Recent Check Runs"
 msgstr ""
 
 msgid "Recent Messages"
-msgstr ""
+msgstr "最近消息"
 
 msgid "Recent Payments"
 msgstr "最近付款"
 
 msgid "Recent activity"
-msgstr ""
+msgstr "最近活动"
 
 msgid "Recent signatures"
 msgstr "最近的签名"
@@ -3572,25 +3608,25 @@ msgid "Record Value"
 msgstr ""
 
 msgid "Record added"
-msgstr ""
+msgstr "记录已添加"
 
 msgid "Record created successfully"
 msgstr "记录创建成功"
 
 msgid "Record deleted"
-msgstr ""
+msgstr "记录已删除"
 
 msgid "Record deleted successfully"
 msgstr "记录删除成功"
 
 msgid "Record not found"
-msgstr ""
+msgstr "记录未找到"
 
 msgid "Record saved successfully"
-msgstr ""
+msgstr "记录保存成功"
 
 msgid "Record updated"
-msgstr ""
+msgstr "记录已更新"
 
 msgid "Record updated successfully"
 msgstr "记录更新成功"
@@ -3599,7 +3635,7 @@ msgid "Records"
 msgstr "记录"
 
 msgid "Reference"
-msgstr ""
+msgstr "参考"
 
 msgid "References"
 msgstr "参考资料"
@@ -3611,7 +3647,7 @@ msgid "Refund amount exceeds available amount"
 msgstr ""
 
 msgid "Refunded"
-msgstr ""
+msgstr "已退款"
 
 msgid "Refunded/Failed"
 msgstr ""
@@ -3632,10 +3668,10 @@ msgid "Register account"
 msgstr "注册账户"
 
 msgid "Register domain"
-msgstr ""
+msgstr "注册域名"
 
 msgid "Register payment"
-msgstr ""
+msgstr "注册支付"
 
 msgid "Register to create and publish content."
 msgstr "注册以创建和发布内容。"
@@ -3656,7 +3692,7 @@ msgid "Registered payments and supplier invoices are retrieved from Fortnox and 
 msgstr "已登记的付款和供应商发票从 Fortnox 检索并在本地界面中显示。"
 
 msgid "Registrant"
-msgstr ""
+msgstr "注册人"
 
 msgid "Registrant contact"
 msgstr ""
@@ -3674,19 +3710,22 @@ msgid "Registries & Handles"
 msgstr ""
 
 msgid "Registry"
-msgstr ""
+msgstr "注册局"
 
 msgid "Remaining amount to pay: {amount} {currency}"
 msgstr "剩余应付金额：{amount} {currency}"
 
 msgid "Remarks"
-msgstr ""
+msgstr "备注"
 
 msgid "Remind"
 msgstr "提醒"
 
 msgid "Reminder sent successfully"
 msgstr ""
+
+msgid "Remove"
+msgstr "删除"
 
 msgid "Rename"
 msgstr ""
@@ -4022,7 +4061,7 @@ msgid "Sending..."
 msgstr ""
 
 msgid "Sent"
-msgstr ""
+msgstr "已发送"
 
 msgid "Serial"
 msgstr ""
@@ -4127,7 +4166,7 @@ msgid "Start"
 msgstr "开始"
 
 msgid "Start Date"
-msgstr ""
+msgstr "开始日期"
 
 msgid "Start New Check Run"
 msgstr ""
@@ -4258,6 +4297,9 @@ msgstr ""
 msgid "Tech"
 msgstr ""
 
+msgid "Tech Contact"
+msgstr "技术联系人"
+
 msgid "Tech contact"
 msgstr ""
 
@@ -4370,7 +4412,7 @@ msgid "The stock is listed on Nasdaq Stockholm's main list."
 msgstr "该股票在纳斯达克斯德哥尔摩主板上市。"
 
 msgid "Theme"
-msgstr ""
+msgstr "主题"
 
 msgid "There was an issue with your payment method"
 msgstr ""
@@ -4556,7 +4598,7 @@ msgid "Update invoice, customer #{customerid}"
 msgstr "更新发票，客户 #{customerid}"
 
 msgid "Updated"
-msgstr ""
+msgstr "已更新"
 
 msgid "Updated customer"
 msgstr "已更新客户"
@@ -4892,19 +4934,19 @@ msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
 
 msgid "cache"
-msgstr ""
+msgstr "缓存"
 
 msgid "certificates"
-msgstr ""
+msgstr "证书"
 
 msgid "characters"
-msgstr ""
+msgstr "字符"
 
 msgid "charged"
 msgstr ""
 
 msgid "compliant"
-msgstr ""
+msgstr "合规"
 
 msgid "content"
 msgstr "内容"
@@ -4916,16 +4958,16 @@ msgid "customer"
 msgstr "客户"
 
 msgid "customers"
-msgstr ""
+msgstr "客户"
 
 msgid "database"
 msgstr "数据库"
 
 msgid "declined"
-msgstr ""
+msgstr "已拒绝"
 
 msgid "disable"
-msgstr ""
+msgstr "禁用"
 
 msgid "domain"
 msgstr "域名"
@@ -4946,10 +4988,10 @@ msgid "for registrar"
 msgstr ""
 
 msgid "from PayPal API"
-msgstr ""
+msgstr "来自PayPal API"
 
 msgid "from database"
-msgstr ""
+msgstr "来自数据库"
 
 msgid "invoice"
 msgstr "发票"
@@ -4988,7 +5030,7 @@ msgid "record(s)"
 msgstr ""
 
 msgid "records"
-msgstr ""
+msgstr "记录"
 
 msgid "refunded"
 msgstr "已退款"
@@ -5006,7 +5048,7 @@ msgid "supporters"
 msgstr "支持者"
 
 msgid "transactions"
-msgstr ""
+msgstr "交易"
 
 msgid "unlimited"
 msgstr ""
