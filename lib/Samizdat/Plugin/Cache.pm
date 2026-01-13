@@ -13,7 +13,7 @@ sub register ($self, $app, $conf) {
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('cache')->to(controller => 'Cache');
-  $manager->get('/view')          ->to(template => 'cache/view/index')->name('cache_view');
+  $manager->get('/view')          ->to('#view')   ->name('cache_view');
   $manager->get('/')              ->to('#index')  ->name('cache_index');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
@@ -136,6 +136,7 @@ paths:
         - name: key
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:
@@ -154,6 +155,7 @@ paths:
         - name: key
           in: path
           required: true
+          x-mojo-placeholder: "#"
           schema:
             type: string
       responses:

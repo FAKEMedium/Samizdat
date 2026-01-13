@@ -388,6 +388,7 @@ sub register ($self, $app, $conf) {
         if ($url =~ s/_(\d+)$//) {
           $wantedsize = $1;
         }
+        $url =~ s|^/||;  # Strip leading slash to avoid double slash in path
         my $srcfile = $publicsrc->child($url);
 
         my $ext = '';

@@ -1,7 +1,7 @@
 <form name="searchcache" method="get" action="<%== url_for('cache_index') %>">
   <div class="row mb-3">
     <div class="input-group">
-      <input class="form-control" type="text" name="searchterm" aria-label="<%== __x('Search field for {what}', what => __('cache')) %>" placeholder="<%== __('Search cache') %>..." />
+      <input class="form-control" type="text" name="pattern" aria-label="<%== __x('Search field for {what}', what => __('cache')) %>" placeholder="<%== __('Search cache') %>..." />
       <button class="btn btn-primary btn-sm rounded-lg" type="submit" aria-label="<%== __('Search') %>">
         <%== icon 'search', {} %>
       </button>
