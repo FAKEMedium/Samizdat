@@ -204,7 +204,7 @@ sub payments ($self) {
     my $payment = $self->app->fortnox->getInvoicePayment($number);
 
     # Return early if Fortnox API failed (no point querying local invoices)
-    if (!$payment || $payment->{error}) {
+    if (!$payment || $payment->{error} || !exists $payment->{InvoicePayments}) {
       return $self->render(json => {
         error => $payment->{error} // 'Failed to fetch payments from Fortnox'
       }, status => 502);

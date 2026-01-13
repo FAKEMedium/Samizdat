@@ -254,6 +254,12 @@ sub updateCache ($self, $resource = undef) {
         }
         $page++;
       } until ($has_error || !ref($fetch) || !exists($fetch->{'MetaInformation'}) or $fetch->{'MetaInformation'}->{'@CurrentPage'} >= $fetch->{'MetaInformation'}->{'@TotalPages'});
+
+      # Return error if API failed
+      if ($has_error) {
+        return { error => 1, message => $fetch->{message} // 'API error' };
+      }
+
       $self->data->{$resource} = $list;
       $self->saveCache;
     }
@@ -617,8 +623,12 @@ sub getInvoicePayment ($self, $Number = 0, $options = {}) {
     return $self->callAPI('InvoicePayments', 'get', $Number, $options);
   }
 
-  # For list, use cache
-  $self->updateCache('InvoicePayments') if (!exists($self->data->{InvoicePayments}));
+  # For list, use cache - check for errors
+  if (!exists($self->data->{InvoicePayments})) {
+    my $result = $self->updateCache('InvoicePayments');
+    # Propagate error if update failed
+    return $result if ref($result) eq 'HASH' && $result->{error};
+  }
   return { InvoicePayments => $self->data->{InvoicePayments} // [] };
 }
 
