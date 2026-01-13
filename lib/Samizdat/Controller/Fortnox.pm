@@ -203,6 +203,13 @@ sub payments ($self) {
     }
     my $payment = $self->app->fortnox->getInvoicePayment($number);
 
+    # Return early if Fortnox API failed (no point querying local invoices)
+    if (!$payment || $payment->{error}) {
+      return $self->render(json => {
+        error => $payment->{error} // 'Failed to fetch payments from Fortnox'
+      }, status => 502);
+    }
+
     # Get local invoices with remaining debt for comparison
     # Customer name comes from local database, not Fortnox API
     my $unpaid_invoices = $self->app->invoice->get({
