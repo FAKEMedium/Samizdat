@@ -30,13 +30,13 @@ msgid "&copy;{year}&nbsp;{author}"
 msgstr "&copy;{year}&nbsp;{author}"
 
 msgid "(No parent - top level)"
-msgstr ""
+msgstr "(No parent - top level)"
 
 msgid "0 = reply once per sender"
-msgstr ""
+msgstr "0 = reply once per sender"
 
 msgid "1 Year"
-msgstr ""
+msgstr "1 Year"
 
 msgid "1 database"
 msgid_plural "{number} databases"
@@ -77,1162 +77,1180 @@ msgid "404: Missing document"
 msgstr "404: Missing document"
 
 msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
-msgstr ""
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
 
 msgid "A"
-msgstr ""
+msgstr "A"
 
 msgid "A Records"
-msgstr ""
+msgstr "A Records"
 
 msgid "A confirmation link was mailed to {email}."
-msgstr ""
+msgstr "A confirmation link was mailed to {email}."
 
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
-msgstr ""
+msgstr "A sub-goal is to test open accounting, where figures can be presented continuously after being anonymized."
 
 msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
-msgstr ""
+msgstr "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
 
 msgid "A {rate} interest will be charged on overdue payments"
-msgstr ""
+msgstr "A {rate} interest will be charged on overdue payments"
 
 msgid "A/AAAA Records"
-msgstr ""
+msgstr "A/AAAA Records"
 
 msgid "API docs"
-msgstr ""
+msgstr "API docs"
 
 msgid "AS Name"
-msgstr ""
+msgstr "AS Name"
 
 msgid "ASN"
-msgstr ""
+msgstr "ASN"
 
 msgid "About"
-msgstr ""
+msgstr "About"
 
 msgid "About Fortnox"
-msgstr ""
+msgstr "About Fortnox"
 
 msgid "Access denied"
 msgstr "Access denied"
 
 msgid "According to our notes invoice {number} remains unpaid."
-msgstr ""
+msgstr "According to our notes invoice {number} remains unpaid."
 
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 msgid "Account confirmation"
 msgstr "Account confirmation"
 
 msgid "Account settings"
-msgstr ""
+msgstr "Account settings"
 
 msgid "Action"
-msgstr ""
+msgstr "Action"
 
 msgid "Actions"
 msgstr "Actions"
 
 msgid "Activate Samizdat Fortnox integration"
-msgstr ""
+msgstr "Activate Samizdat Fortnox integration"
 
 msgid "Activate integration"
-msgstr ""
+msgstr "Activate integration"
 
 msgid "Active"
-msgstr ""
+msgstr "Active"
 
 msgid "Active from"
-msgstr ""
+msgstr "Active from"
 
 msgid "Active until"
-msgstr ""
+msgstr "Active until"
 
 msgid "Add"
-msgstr ""
+msgstr "Add"
 
 msgid "Add Column After"
-msgstr ""
+msgstr "Add Column After"
 
 msgid "Add Column Before"
-msgstr ""
+msgstr "Add Column Before"
 
 msgid "Add Key"
-msgstr ""
+msgstr "Add Key"
+
+msgid "Add Nameserver"
+msgstr "Add Nameserver"
 
 msgid "Add New"
-msgstr ""
+msgstr "Add New"
 
 msgid "Add New Key"
-msgstr ""
+msgstr "Add New Key"
 
 msgid "Add Row After"
-msgstr ""
+msgstr "Add Row After"
 
 msgid "Add Row Before"
-msgstr ""
+msgstr "Add Row Before"
 
 msgid "Add admin"
-msgstr ""
+msgstr "Add admin"
 
 msgid "Add alias"
-msgstr ""
+msgstr "Add alias"
 
 msgid "Add certificate"
-msgstr ""
+msgstr "Add certificate"
 
 msgid "Add contact"
-msgstr ""
+msgstr "Add contact"
 
 msgid "Add content"
-msgstr ""
+msgstr "Add content"
 
 msgid "Add customer"
-msgstr ""
+msgstr "Add customer"
 
 msgid "Add database"
-msgstr ""
+msgstr "Add database"
 
 msgid "Add domain"
-msgstr ""
+msgstr "Add domain"
 
 msgid "Add example"
-msgstr ""
+msgstr "Add example"
 
 msgid "Add forwarding"
-msgstr ""
+msgstr "Add forwarding"
 
 msgid "Add grop"
-msgstr ""
+msgstr "Add grop"
 
 msgid "Add group"
-msgstr ""
+msgstr "Add group"
 
 msgid "Add item"
-msgstr ""
+msgstr "Add item"
 
 msgid "Add mail domain"
-msgstr ""
+msgstr "Add mail domain"
 
 msgid "Add mailbox"
-msgstr ""
+msgstr "Add mailbox"
 
 msgid "Add nameserver"
-msgstr ""
+msgstr "Add nameserver"
 
 msgid "Add page"
-msgstr ""
+msgstr "Add page"
 
 msgid "Add poll"
-msgstr ""
+msgstr "Add poll"
 
 msgid "Add product"
-msgstr ""
+msgstr "Add product"
 
 msgid "Add side content"
-msgstr ""
+msgstr "Add side content"
 
 msgid "Add subscription"
-msgstr ""
+msgstr "Add subscription"
 
 msgid "Add user"
-msgstr ""
+msgstr "Add user"
 
 msgid "Add voucher"
-msgstr ""
+msgstr "Add voucher"
 
 msgid "Add website"
-msgstr ""
+msgstr "Add website"
 
 msgid "Add zone"
-msgstr ""
+msgstr "Add zone"
 
 msgid "Additional collection fees"
-msgstr ""
+msgstr "Additional collection fees"
 
 msgid "Address"
-msgstr ""
+msgstr "Address"
 
 msgid "Address (billing)"
-msgstr ""
+msgstr "Address (billing)"
 
 msgid "Address 1"
-msgstr ""
+msgstr "Address 1"
 
 msgid "Address 2"
-msgstr ""
+msgstr "Address 2"
 
 msgid "Address check"
-msgstr ""
+msgstr "Address check"
 
 msgid "Address is required"
-msgstr ""
+msgstr "Address is required"
 
 msgid "Address line 1"
-msgstr ""
+msgstr "Address line 1"
 
 msgid "Address line 2 (optional)"
-msgstr ""
+msgstr "Address line 2 (optional)"
 
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
+
+msgid "Admin Contact"
+msgstr "Admin Contact"
 
 msgid "Admin Email"
-msgstr ""
+msgstr "Admin Email"
 
 msgid "Admin access required"
-msgstr ""
+msgstr "Admin access required"
 
 msgid "Admin access required for DNS management"
-msgstr ""
+msgstr "Admin access required for DNS management"
 
 msgid "Admin contact"
-msgstr ""
+msgstr "Admin contact"
 
 msgid "Admin created successfully"
-msgstr ""
+msgstr "Admin created successfully"
 
 msgid "Admin deleted successfully"
-msgstr ""
+msgstr "Admin deleted successfully"
 
 msgid "Admin not found"
-msgstr ""
+msgstr "Admin not found"
 
 msgid "Admin saved successfully"
-msgstr ""
+msgstr "Admin saved successfully"
 
 msgid "Admin updated successfully"
-msgstr ""
+msgstr "Admin updated successfully"
 
 msgid "Admininistration panel"
-msgstr ""
+msgstr "Admininistration panel"
 
 msgid "Administrators"
-msgstr ""
+msgstr "Administrators"
 
 msgid "Admins"
-msgstr ""
+msgstr "Admins"
 
 msgid "Advertising"
-msgstr ""
+msgstr "Advertising"
 
 msgid "After refunds"
-msgstr ""
+msgstr "After refunds"
 
 msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
-msgstr ""
+msgstr "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
 
 msgid "Algorithm"
-msgstr ""
+msgstr "Algorithm"
 
 msgid "Alias"
-msgstr ""
+msgstr "Alias"
 
 msgid "Alias Address"
-msgstr ""
+msgstr "Alias Address"
 
 msgid "Alias created successfully"
-msgstr ""
+msgstr "Alias created successfully"
 
 msgid "Alias deleted successfully"
-msgstr ""
+msgstr "Alias deleted successfully"
 
 msgid "Alias domain"
-msgstr ""
+msgstr "Alias domain"
 
 msgid "Alias domains"
-msgstr ""
+msgstr "Alias domains"
 
 msgid "Alias not found"
-msgstr ""
+msgstr "Alias not found"
 
 msgid "Alias saved successfully"
-msgstr ""
+msgstr "Alias saved successfully"
 
 msgid "Alias updated successfully"
-msgstr ""
+msgstr "Alias updated successfully"
 
 msgid "Aliases"
-msgstr ""
+msgstr "Aliases"
 
 msgid "All"
-msgstr ""
+msgstr "All"
 
 msgid "All Invoices"
-msgstr ""
+msgstr "All Invoices"
 
 msgid "All Messages"
 msgstr "All Messages"
 
 msgid "All Sectors"
-msgstr ""
+msgstr "All Sectors"
 
 msgid "All accounts"
-msgstr ""
+msgstr "All accounts"
 
 msgid "All actions"
-msgstr ""
+msgstr "All actions"
 
 msgid "All customers"
-msgstr ""
+msgstr "All customers"
 
 msgid "All domains"
-msgstr ""
+msgstr "All domains"
 
 msgid "Allow cookies to paste confirmation code from email"
-msgstr ""
+msgstr "Allow cookies to paste confirmation code from email"
 
 msgid "Alternative email"
-msgstr ""
+msgstr "Alternative email"
 
 msgid "Amount"
-msgstr ""
+msgstr "Amount"
 
 msgid "Amount and items are required"
-msgstr ""
+msgstr "Amount and items are required"
 
 msgid "Amount due"
-msgstr ""
+msgstr "Amount due"
 
 msgid "Amount in Swedish Kronor"
-msgstr ""
+msgstr "Amount in Swedish Kronor"
 
 msgid "Amount incl. VAT"
-msgstr ""
+msgstr "Amount incl. VAT"
 
 msgid "Amount is required"
-msgstr ""
+msgstr "Amount is required"
 
 msgid "Amount to pay incl. VAT: {totalcost} {currency}"
-msgstr ""
+msgstr "Amount to pay incl. VAT: {totalcost} {currency}"
 
 msgid "Amount to pay including {percent} VAT: {totalcost} {currency}"
-msgstr ""
+msgstr "Amount to pay including {percent} VAT: {totalcost} {currency}"
 
 msgid "Amount to pay: {totalcost} {currency}"
-msgstr ""
+msgstr "Amount to pay: {totalcost} {currency}"
 
 msgid "Amount:"
-msgstr ""
+msgstr "Amount:"
 
 msgid "An error occurred"
 msgstr "An error occurred"
 
 msgid "An error occurred during login. Please try again."
-msgstr ""
+msgstr "An error occurred during login. Please try again."
 
 msgid "An error occurred. Please try again."
-msgstr ""
+msgstr "An error occurred. Please try again."
 
 msgid "Apply"
-msgstr ""
+msgstr "Apply"
 
 msgid "Are you sure you want to delete contact"
-msgstr ""
+msgstr "Are you sure you want to delete contact"
 
 msgid "Are you sure you want to delete this alias?"
-msgstr ""
+msgstr "Are you sure you want to delete this alias?"
 
 msgid "Are you sure you want to delete this cache entry?"
-msgstr ""
+msgstr "Are you sure you want to delete this cache entry?"
 
 msgid "Are you sure you want to delete this certificate?"
-msgstr ""
+msgstr "Are you sure you want to delete this certificate?"
 
 msgid "Are you sure you want to delete this contact?"
-msgstr ""
+msgstr "Are you sure you want to delete this contact?"
 
 msgid "Are you sure you want to delete this domain?"
-msgstr ""
+msgstr "Are you sure you want to delete this domain?"
 
 msgid "Are you sure you want to delete this example?"
-msgstr ""
+msgstr "Are you sure you want to delete this example?"
 
 msgid "Are you sure you want to delete this item?"
-msgstr ""
+msgstr "Are you sure you want to delete this item?"
 
 msgid "Are you sure you want to delete this key?"
-msgstr ""
+msgstr "Are you sure you want to delete this key?"
 
 msgid "Are you sure you want to delete this mailbox?"
-msgstr ""
+msgstr "Are you sure you want to delete this mailbox?"
 
 msgid "Are you sure you want to delete this menu?"
-msgstr ""
+msgstr "Are you sure you want to delete this menu?"
 
 msgid "Are you sure you want to delete this message?"
 msgstr "Are you sure you want to delete this message?"
 
 msgid "Are you sure you want to delete this record?"
-msgstr ""
+msgstr "Are you sure you want to delete this record?"
 
 msgid "Are you sure you want to delete this zone?"
-msgstr ""
+msgstr "Are you sure you want to delete this zone?"
 
 msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
-msgstr ""
+msgstr "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+
+msgid "Are you sure you want to purge all cache?"
+msgstr "Are you sure you want to purge all cache?"
 
 msgid "Are you sure you want to resend this invoice?"
-msgstr ""
+msgstr "Are you sure you want to resend this invoice?"
 
 msgid "Article"
-msgstr ""
+msgstr "Article"
 
 msgid "At least 3 characters from a-z 0-9 -, must start with a-z"
-msgstr ""
+msgstr "At least 3 characters from a-z 0-9 -, must start with a-z"
 
 msgid "At least 8 characters including capitals and digits"
-msgstr ""
+msgstr "At least 8 characters including capitals and digits"
 
 msgid "At least one valid forward address is required"
-msgstr ""
+msgstr "At least one valid forward address is required"
 
 msgid "At least {min} characters from: {chars}"
-msgstr ""
+msgstr "At least {min} characters from: {chars}"
 
 msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
-msgstr ""
+msgstr "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
 
 msgid "Auth-Info code from current registrar"
-msgstr ""
+msgstr "Auth-Info code from current registrar"
 
 msgid "Authentication required"
-msgstr ""
+msgstr "Authentication required"
 
 msgid "Authorization code"
-msgstr ""
+msgstr "Authorization code"
 
 msgid "Authorize"
-msgstr ""
+msgstr "Authorize"
 
 msgid "Auto Renew"
-msgstr ""
+msgstr "Auto Renew"
 
 msgid "Auto-renew"
-msgstr ""
+msgstr "Auto-renew"
 
 msgid "Average Score"
-msgstr ""
+msgstr "Average Score"
 
 msgid "Avg Score"
-msgstr ""
+msgstr "Avg Score"
 
 msgid "Avg score"
-msgstr ""
+msgstr "Avg score"
 
 msgid "BIC/Swift"
-msgstr ""
+msgstr "BIC/Swift"
 
 msgid "BIC/Swift address"
-msgstr ""
+msgstr "BIC/Swift address"
 
 msgid "BIC/Swift address:"
-msgstr ""
+msgstr "BIC/Swift address:"
 
 msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
-msgstr ""
+msgstr "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
 
 msgid "BIS - $sector"
-msgstr ""
+msgstr "BIS - $sector"
 
 msgid "BIS - Compliance Trends"
-msgstr ""
+msgstr "BIS - Compliance Trends"
 
 msgid "BIS - Hosting Providers"
-msgstr ""
+msgstr "BIS - Hosting Providers"
 
 msgid "BIS Badge"
-msgstr ""
+msgstr "BIS Badge"
 
 msgid "BIS Badge (100% compliant)"
-msgstr ""
+msgstr "BIS Badge (100% compliant)"
 
 msgid "BIS Badges"
-msgstr ""
+msgstr "BIS Badges"
 
 msgid "BIS Check"
-msgstr ""
+msgstr "BIS Check"
 
 msgid "BIS Check: $domain_name"
-msgstr ""
+msgstr "BIS Check: $domain_name"
 
 msgid "BIS Manager"
-msgstr ""
+msgstr "BIS Manager"
 
 msgid "Back"
-msgstr ""
+msgstr "Back"
 
 msgid "Back to Dashboard"
-msgstr ""
+msgstr "Back to Dashboard"
 
 msgid "Back to List"
-msgstr ""
+msgstr "Back to List"
 
 msgid "Back to Zones"
-msgstr ""
+msgstr "Back to Zones"
 
 msgid "Back to domains"
-msgstr ""
+msgstr "Back to domains"
 
 msgid "Back to list"
-msgstr ""
+msgstr "Back to list"
 
 msgid "Back to menu"
-msgstr ""
+msgstr "Back to menu"
 
 msgid "Back to menus"
-msgstr ""
+msgstr "Back to menus"
 
 msgid "Background"
-msgstr ""
+msgstr "Background"
 
 msgid "Balance"
-msgstr ""
+msgstr "Balance"
 
 msgid "Bankgiro"
-msgstr ""
+msgstr "Bankgiro"
 
 msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
-msgstr ""
+msgstr "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
 
 msgid "Bankgiro:"
-msgstr ""
+msgstr "Bankgiro:"
 
 msgid "Barred"
-msgstr ""
+msgstr "Barred"
 
 msgid "Base URL"
-msgstr ""
+msgstr "Base URL"
 
 msgid "Based in Sweden - Compliance Dashboard"
-msgstr ""
+msgstr "Based in Sweden - Compliance Dashboard"
 
 msgid "Basic Information"
-msgstr ""
+msgstr "Basic Information"
 
 msgid "Billable Items"
-msgstr ""
+msgstr "Billable Items"
 
 msgid "Billing"
-msgstr ""
+msgstr "Billing"
+
+msgid "Billing Contact"
+msgstr "Billing Contact"
 
 msgid "Bio"
-msgstr ""
+msgstr "Bio"
 
 msgid "Blocked"
-msgstr ""
+msgstr "Blocked"
 
 msgid "Blocked ip number"
-msgstr ""
+msgstr "Blocked ip number"
 
 msgid "Body"
-msgstr ""
+msgstr "Body"
 
 msgid "Bold"
-msgstr ""
+msgstr "Bold"
 
 msgid "Bootstrap icons"
-msgstr ""
+msgstr "Bootstrap icons"
 
 msgid "Bootstrap icons helper"
-msgstr ""
+msgstr "Bootstrap icons helper"
 
 msgid "Buddy price"
-msgstr ""
+msgstr "Buddy price"
 
 msgid "Bullet List"
-msgstr ""
+msgstr "Bullet List"
 
 msgid "Buy {slug} a coffee"
-msgstr ""
+msgstr "Buy {slug} a coffee"
 
 msgid "Buy {user} a coffee"
-msgstr ""
+msgstr "Buy {user} a coffee"
 
 msgid "By default no information about you is shared."
-msgstr ""
+msgstr "By default no information about you is shared."
 
 msgid "Bytes Used"
-msgstr ""
+msgstr "Bytes Used"
 
 msgid "Cache"
-msgstr ""
+msgstr "Cache"
 
 msgid "Cache Entry Details"
-msgstr ""
+msgstr "Cache Entry Details"
 
 msgid "Cache Management"
-msgstr ""
+msgstr "Cache Management"
 
 msgid "Cache entry deleted successfully"
-msgstr ""
+msgstr "Cache entry deleted successfully"
 
 msgid "Cache entry not found or could not be deleted"
-msgstr ""
+msgstr "Cache entry not found or could not be deleted"
+
+msgid "Cache purged"
+msgstr "Cache purged"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
-msgstr ""
+msgstr "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 
 msgid "Can manage all domains"
-msgstr ""
+msgstr "Can manage all domains"
 
 msgid "Cancel"
-msgstr ""
+msgstr "Cancel"
 
 msgid "Cannot be alias domain (has alias domains pointing to it)"
-msgstr ""
+msgstr "Cannot be alias domain (has alias domains pointing to it)"
 
 msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
-msgstr ""
+msgstr "Cannot make this domain an alias domain - it has alias domains pointing to it"
 
 msgid "Cannot make this domain an alias domain - it has forwardings"
-msgstr ""
+msgstr "Cannot make this domain an alias domain - it has forwardings"
 
 msgid "Cannot make this domain an alias domain - it has mailboxes"
-msgstr ""
+msgstr "Cannot make this domain an alias domain - it has mailboxes"
 
 msgid "Captcha code from image"
-msgstr ""
+msgstr "Captcha code from image"
 
 msgid "Captcha image"
-msgstr ""
+msgstr "Captcha image"
 
 msgid "Captcha was wrong"
 msgstr "Captcha was wrong"
 
 msgid "Card Payment"
-msgstr ""
+msgstr "Card Payment"
 
 msgid "Cash invoice"
-msgstr ""
+msgstr "Cash invoice"
 
 msgid "Category"
-msgstr ""
+msgstr "Category"
 
 msgid "Certificate"
-msgstr ""
+msgstr "Certificate"
 
 msgid "Certificate Chain"
-msgstr ""
+msgstr "Certificate Chain"
 
 msgid "Certificate created successfully"
-msgstr ""
+msgstr "Certificate created successfully"
 
 msgid "Certificate deleted successfully"
-msgstr ""
+msgstr "Certificate deleted successfully"
 
 msgid "Certificate not found"
-msgstr ""
+msgstr "Certificate not found"
 
 msgid "Certificate renewal initiated"
-msgstr ""
+msgstr "Certificate renewal initiated"
 
 msgid "Certificate updated successfully"
-msgstr ""
+msgstr "Certificate updated successfully"
 
 msgid "Certificates"
-msgstr ""
+msgstr "Certificates"
 
 msgid "Change password"
-msgstr ""
+msgstr "Change password"
 
 msgid "Changed status."
-msgstr ""
+msgstr "Changed status."
 
 msgid "Changes saved successfully."
-msgstr ""
+msgstr "Changes saved successfully."
 
 msgid "Charged"
-msgstr ""
+msgstr "Charged"
 
 msgid "Charged At"
-msgstr ""
+msgstr "Charged At"
 
 msgid "Check"
-msgstr ""
+msgstr "Check"
 
 msgid "Check failed"
-msgstr ""
+msgstr "Check failed"
 
 msgid "Check queued"
-msgstr ""
+msgstr "Check queued"
 
 msgid "Check zones"
-msgstr ""
+msgstr "Check zones"
 
 msgid "Choose a password"
-msgstr ""
+msgstr "Choose a password"
 
 msgid "Choose a password."
-msgstr ""
+msgstr "Choose a password."
 
 msgid "Choose a username"
-msgstr ""
+msgstr "Choose a username"
 
 msgid "Choose a username."
-msgstr ""
+msgstr "Choose a username."
 
 msgid "Choose language"
-msgstr ""
+msgstr "Choose language"
 
 msgid "City"
-msgstr ""
+msgstr "City"
 
 msgid "City (billing)"
-msgstr ""
+msgstr "City (billing)"
 
 msgid "Clear"
-msgstr ""
+msgstr "Clear"
 
 msgid "Click \"Fetch from PayPal\" to load live transactions"
-msgstr ""
+msgstr "Click \"Fetch from PayPal\" to load live transactions"
 
 msgid "Click to pop dialog."
-msgstr ""
+msgstr "Click to pop dialog."
 
 msgid "Click to pop login dialog."
-msgstr ""
+msgstr "Click to pop login dialog."
 
 msgid "Click to pop payment dialog."
-msgstr ""
+msgstr "Click to pop payment dialog."
 
 msgid "Click to pop reminder dialog."
-msgstr ""
+msgstr "Click to pop reminder dialog."
 
 msgid "Click to regenerate PDF."
-msgstr ""
+msgstr "Click to regenerate PDF."
 
 msgid "Click to register payment."
-msgstr ""
+msgstr "Click to register payment."
 
 msgid "Click to search matching records."
-msgstr ""
+msgstr "Click to search matching records."
 
 msgid "Click to search matching zones."
-msgstr ""
+msgstr "Click to search matching zones."
 
 msgid "Click to send a credit invoice."
-msgstr ""
+msgstr "Click to send a credit invoice."
 
 msgid "Click to send again."
-msgstr ""
+msgstr "Click to send again."
 
 msgid "Click to send agin."
-msgstr ""
+msgstr "Click to send agin."
 
 msgid "Close"
 msgstr "Close"
 
 msgid "Cloud Act"
-msgstr ""
+msgstr "Cloud Act"
 
 msgid "Cloud Act Applies (US provider)"
-msgstr ""
+msgstr "Cloud Act Applies (US provider)"
 
 msgid "Code Block"
-msgstr ""
+msgstr "Code Block"
 
 msgid "Combined Value"
-msgstr ""
+msgstr "Combined Value"
 
 msgid "Comma separated"
-msgstr ""
+msgstr "Comma separated"
 
 msgid "Comma-separated list of email addresses"
-msgstr ""
+msgstr "Comma-separated list of email addresses"
 
 msgid "Comments"
-msgstr ""
+msgstr "Comments"
 
 msgid "Common Name"
-msgstr ""
+msgstr "Common Name"
 
 msgid "Company"
-msgstr ""
+msgstr "Company"
 
 msgid "Completed"
-msgstr ""
+msgstr "Completed"
 
 msgid "Compliance"
-msgstr ""
+msgstr "Compliance"
 
 msgid "Compliance Rate"
-msgstr ""
+msgstr "Compliance Rate"
 
 msgid "Compliance Trends"
-msgstr ""
+msgstr "Compliance Trends"
 
 msgid "Compliance by Sector"
-msgstr ""
+msgstr "Compliance by Sector"
 
 msgid "Compliance score"
-msgstr ""
+msgstr "Compliance score"
 
 msgid "Compliant"
-msgstr ""
+msgstr "Compliant"
 
 msgid "Compliant (Swedish hosting)"
-msgstr ""
+msgstr "Compliant (Swedish hosting)"
 
 msgid "Compliant Domains"
-msgstr ""
+msgstr "Compliant Domains"
 
 msgid "Components"
-msgstr ""
+msgstr "Components"
 
 msgid "Confirm"
-msgstr ""
+msgstr "Confirm"
 
 msgid "Confirm poll signature"
-msgstr ""
+msgstr "Confirm poll signature"
 
 msgid "Confirm your email address"
-msgstr ""
+msgstr "Confirm your email address"
 
 msgid "Confirmation Failed"
-msgstr ""
+msgstr "Confirmation Failed"
 
 msgid "Confirmation code"
-msgstr ""
+msgstr "Confirmation code"
 
 msgid "Confirmation error:"
-msgstr ""
+msgstr "Confirmation error:"
 
 msgid "Confirmation failed"
-msgstr ""
+msgstr "Confirmation failed"
 
 msgid "Confirmation request sent"
-msgstr ""
+msgstr "Confirmation request sent"
 
 msgid "Connected"
 msgstr "Connected"
 
 msgid "Connection error. Please try again."
-msgstr ""
+msgstr "Connection error. Please try again."
 
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 msgid "Contact Details"
-msgstr ""
+msgstr "Contact Details"
 
 msgid "Contact Information"
-msgstr ""
+msgstr "Contact Information"
 
 msgid "Contact created"
-msgstr ""
+msgstr "Contact created"
 
 msgid "Contact created successfully"
-msgstr ""
+msgstr "Contact created successfully"
 
 msgid "Contact deleted"
-msgstr ""
+msgstr "Contact deleted"
 
 msgid "Contact deleted successfully"
-msgstr ""
+msgstr "Contact deleted successfully"
 
 msgid "Contact details"
-msgstr ""
+msgstr "Contact details"
+
+msgid "Contact handle"
+msgstr "Contact handle"
 
 msgid "Contact not found"
-msgstr ""
+msgstr "Contact not found"
 
 msgid "Contact updated successfully"
-msgstr ""
+msgstr "Contact updated successfully"
 
 msgid "Contact {sender} if you have questions."
-msgstr ""
+msgstr "Contact {sender} if you have questions."
 
 msgid "Contact: {email} or call us directly."
-msgstr ""
+msgstr "Contact: {email} or call us directly."
 
 msgid "Contacts"
-msgstr ""
+msgstr "Contacts"
 
 msgid "Content"
-msgstr ""
+msgstr "Content"
 
 msgid "Continue"
-msgstr ""
+msgstr "Continue"
 
 msgid "Continues on next page..."
-msgstr ""
+msgstr "Continues on next page..."
 
 msgid "Contribute"
-msgstr ""
+msgstr "Contribute"
 
 msgid "Contributing"
-msgstr ""
+msgstr "Contributing"
 
 msgid "Control panel"
-msgstr ""
+msgstr "Control panel"
 
 msgid "Conversation with"
-msgstr ""
+msgstr "Conversation with"
 
 msgid "Corporate identity number"
-msgstr ""
+msgstr "Corporate identity number"
 
 msgid "Couldn't use code for verification."
-msgstr ""
+msgstr "Couldn't use code for verification."
 
 msgid "Country"
-msgstr ""
+msgstr "Country"
 
 msgid "Country (billing)"
-msgstr ""
+msgstr "Country (billing)"
 
 msgid "Country selector"
-msgstr ""
+msgstr "Country selector"
 
 msgid "Create"
-msgstr ""
+msgstr "Create"
 
 msgid "Create Contact"
-msgstr ""
+msgstr "Create Contact"
 
 msgid "Create Payment"
-msgstr ""
+msgstr "Create Payment"
 
 msgid "Create admin"
-msgstr ""
+msgstr "Create admin"
 
 msgid "Create contact"
-msgstr ""
+msgstr "Create contact"
 
 msgid "Create customer"
-msgstr ""
+msgstr "Create customer"
 
 msgid "Create forwarding"
-msgstr ""
+msgstr "Create forwarding"
 
 msgid "Create mailbox"
-msgstr ""
+msgstr "Create mailbox"
 
 msgid "Create new record"
-msgstr ""
+msgstr "Create new record"
 
 msgid "Created"
-msgstr ""
+msgstr "Created"
 
 msgid "Created {created} by {creator}"
-msgstr ""
+msgstr "Created {created} by {creator}"
 
 msgid "Creating payment..."
-msgstr ""
+msgstr "Creating payment..."
 
 msgid "Credit invoice"
-msgstr ""
+msgstr "Credit invoice"
 
 msgid "Credit invoice {fakturanummer}"
-msgstr ""
+msgstr "Credit invoice {fakturanummer}"
 
 msgid "Credit invoice {number}"
-msgstr ""
+msgstr "Credit invoice {number}"
 
 msgid "Credit trustability"
-msgstr ""
+msgstr "Credit trustability"
 
 msgid "Creditability"
-msgstr ""
+msgstr "Creditability"
 
 msgid "Credited amount incl. VAT: {totalcost} {currency}"
-msgstr ""
+msgstr "Credited amount incl. VAT: {totalcost} {currency}"
 
 msgid "Credited invoice"
-msgstr ""
+msgstr "Credited invoice"
 
 msgid "Credited invoice: {number}"
-msgstr ""
+msgstr "Credited invoice: {number}"
 
 msgid "Critical"
-msgstr ""
+msgstr "Critical"
 
 msgid "Cryptokey created successfully"
-msgstr ""
+msgstr "Cryptokey created successfully"
 
 msgid "Cryptokey deleted successfully"
-msgstr ""
+msgstr "Cryptokey deleted successfully"
 
 msgid "Currency"
-msgstr ""
+msgstr "Currency"
 
 msgid "Current Prices"
-msgstr ""
+msgstr "Current Prices"
 
 msgid "Currently managed"
-msgstr ""
+msgstr "Currently managed"
 
 msgid "Customer"
-msgstr ""
+msgstr "Customer"
 
 msgid "Customer #{customerid}"
-msgstr ""
+msgstr "Customer #{customerid}"
 
 msgid "Customer ID"
-msgstr ""
+msgstr "Customer ID"
 
 msgid "Customer ID is required"
-msgstr ""
+msgstr "Customer ID is required"
 
 msgid "Customer Id"
-msgstr ""
+msgstr "Customer Id"
 
 msgid "Customer Id:"
-msgstr ""
+msgstr "Customer Id:"
 
 msgid "Customer Number"
-msgstr ""
+msgstr "Customer Number"
 
 msgid "Customer newsletter"
-msgstr ""
+msgstr "Customer newsletter"
 
 msgid "Customers"
-msgstr ""
+msgstr "Customers"
 
 msgid "Customers get a list of invoices and open invoice items"
-msgstr ""
+msgstr "Customers get a list of invoices and open invoice items"
 
 msgid "DNS"
-msgstr ""
+msgstr "DNS"
 
 msgid "DNS Admin"
-msgstr ""
+msgstr "DNS Admin"
 
 msgid "DNS Check Results"
-msgstr ""
+msgstr "DNS Check Results"
 
 msgid "DNS Zones"
-msgstr ""
+msgstr "DNS Zones"
 
 msgid "DNS Zones for customer {id}"
-msgstr ""
+msgstr "DNS Zones for customer {id}"
 
 msgid "DNS domains"
-msgstr ""
+msgstr "DNS domains"
 
 msgid "DNS management"
-msgstr ""
+msgstr "DNS management"
 
 msgid "DNS zone"
-msgstr ""
+msgstr "DNS zone"
 
 msgid "DNS zones"
-msgstr ""
+msgstr "DNS zones"
 
 msgid "DNSSEC Key Data"
-msgstr ""
+msgstr "DNSSEC Key Data"
 
 msgid "DNSSEC Keys"
-msgstr ""
+msgstr "DNSSEC Keys"
 
 msgid "DS Records"
-msgstr ""
+msgstr "DS Records"
 
 msgid "Dark"
-msgstr ""
+msgstr "Dark"
 
 msgid "Data"
-msgstr ""
+msgstr "Data"
 
 msgid "Data usage: {usage}"
-msgstr ""
+msgstr "Data usage: {usage}"
 
 msgid "Database"
-msgstr ""
+msgstr "Database"
 
 msgid "Database error"
-msgstr ""
+msgstr "Database error"
 
 msgid "Database error occurred"
-msgstr ""
+msgstr "Database error occurred"
 
 msgid "Databases"
-msgstr ""
+msgstr "Databases"
 
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 msgid "Date:"
-msgstr ""
+msgstr "Date:"
 
 msgid "Dear"
-msgstr ""
+msgstr "Dear"
 
 msgid "Debt"
-msgstr ""
+msgstr "Debt"
 
 msgid "Decide which parts of your personal data you want to show different groups."
-msgstr ""
+msgstr "Decide which parts of your personal data you want to show different groups."
 
 msgid "Declined"
-msgstr ""
+msgstr "Declined"
 
 msgid "Default"
-msgstr ""
+msgstr "Default"
 
 msgid "Definitions"
-msgstr ""
+msgstr "Definitions"
 
 msgid "Delete"
-msgstr ""
+msgstr "Delete"
 
 msgid "Delete Column"
-msgstr ""
+msgstr "Delete Column"
 
 msgid "Delete Row"
-msgstr ""
+msgstr "Delete Row"
 
 msgid "Delete Table"
-msgstr ""
+msgstr "Delete Table"
 
 msgid "Delete admin"
-msgstr ""
+msgstr "Delete admin"
 
 msgid "Delete this alias domain?"
-msgstr ""
+msgstr "Delete this alias domain?"
 
 msgid "Delete this alias?"
-msgstr ""
+msgstr "Delete this alias?"
 
 msgid "Delete this domain and all its mailboxes?"
-msgstr ""
+msgstr "Delete this domain and all its mailboxes?"
 
 msgid "Delete this mailbox?"
-msgstr ""
+msgstr "Delete this mailbox?"
 
 msgid "Delete this record?"
-msgstr ""
+msgstr "Delete this record?"
 
 msgid "Delete this template and all its records?"
-msgstr ""
+msgstr "Delete this template and all its records?"
 
 msgid "Delete vacation settings?"
-msgstr ""
+msgstr "Delete vacation settings?"
 
 msgid "Delivery Address"
-msgstr ""
+msgstr "Delivery Address"
 
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 msgid "Despite previous reminders, payment has not been received."
-msgstr ""
+msgstr "Despite previous reminders, payment has not been received."
 
 msgid "Destroyed"
-msgstr ""
+msgstr "Destroyed"
 
 msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
-msgstr ""
+msgstr "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
 
 msgid "Developer docs"
-msgstr ""
+msgstr "Developer docs"
 
 msgid "Development"
-msgstr ""
+msgstr "Development"
 
 msgid "Device Status"
 msgstr "Device Status"
@@ -1241,1147 +1259,1162 @@ msgid "Direction"
 msgstr "Direction"
 
 msgid "Disabled"
-msgstr ""
+msgstr "Disabled"
 
 msgid "Disconnected"
 msgstr "Disconnected"
 
 msgid "Discount"
-msgstr ""
+msgstr "Discount"
 
 msgid "Display Name"
-msgstr ""
+msgstr "Display Name"
 
 msgid "Display name"
-msgstr ""
+msgstr "Display name"
 
 msgid "Do not renew"
-msgstr ""
+msgstr "Do not renew"
 
 msgid "Do you want to credit the invoice?"
-msgstr ""
+msgstr "Do you want to credit the invoice?"
 
 msgid "Domain"
-msgstr ""
+msgstr "Domain"
 
 msgid "Domain (A-Z)"
-msgstr ""
+msgstr "Domain (A-Z)"
 
 msgid "Domain (Z-A)"
-msgstr ""
+msgstr "Domain (Z-A)"
 
 msgid "Domain Compliance Scores"
-msgstr ""
+msgstr "Domain Compliance Scores"
 
 msgid "Domain Name"
-msgstr ""
+msgstr "Domain Name"
 
 msgid "Domain added successfully"
-msgstr ""
+msgstr "Domain added successfully"
 
 msgid "Domain created successfully"
-msgstr ""
+msgstr "Domain created successfully"
 
 msgid "Domain deleted"
-msgstr ""
+msgstr "Domain deleted"
 
 msgid "Domain deleted successfully"
-msgstr ""
+msgstr "Domain deleted successfully"
 
 msgid "Domain details"
-msgstr ""
+msgstr "Domain details"
 
 msgid "Domain name"
-msgstr ""
+msgstr "Domain name"
 
 msgid "Domain name is required"
-msgstr ""
+msgstr "Domain name is required"
 
 msgid "Domain not found"
-msgstr ""
+msgstr "Domain not found"
 
 msgid "Domain quota"
-msgstr ""
+msgstr "Domain quota"
 
 msgid "Domain registered"
-msgstr ""
+msgstr "Domain registered"
 
 msgid "Domain registration"
-msgstr ""
+msgstr "Domain registration"
 
 msgid "Domain registtration"
-msgstr ""
+msgstr "Domain registtration"
 
 msgid "Domain removed successfully"
-msgstr ""
+msgstr "Domain removed successfully"
 
 msgid "Domain required"
-msgstr ""
+msgstr "Domain required"
 
 msgid "Domain saved successfully"
-msgstr ""
+msgstr "Domain saved successfully"
 
 msgid "Domain specific compliance with standard of Based in Sweden"
-msgstr ""
+msgstr "Domain specific compliance with standard of Based in Sweden"
 
 msgid "Domain transfer initiated"
-msgstr ""
+msgstr "Domain transfer initiated"
 
 msgid "Domain updated successfully"
-msgstr ""
+msgstr "Domain updated successfully"
 
 msgid "Domains"
-msgstr ""
+msgstr "Domains"
 
 msgid "Domains in this Sector"
-msgstr ""
+msgstr "Domains in this Sector"
 
 msgid "DomÃ¤nregistrering"
-msgstr ""
+msgstr "DomÃ¤nregistrering"
 
 msgid "Download Invoice PDF"
-msgstr ""
+msgstr "Download Invoice PDF"
 
 msgid "Download Invoice PDF - PAY NOW"
-msgstr ""
+msgstr "Download Invoice PDF - PAY NOW"
 
 msgid "Draft"
-msgstr ""
+msgstr "Draft"
 
 msgid "Due Date"
-msgstr ""
+msgstr "Due Date"
 
 msgid "Due date"
-msgstr ""
+msgstr "Due date"
 
 msgid "Due to"
-msgstr ""
+msgstr "Due to"
 
 msgid "Due to:"
-msgstr ""
+msgstr "Due to:"
 
 msgid "Duplicate"
-msgstr ""
+msgstr "Duplicate"
 
 msgid "EPP"
-msgstr ""
+msgstr "EPP"
 
 msgid "Economy"
-msgstr ""
+msgstr "Economy"
 
 msgid "Edit"
-msgstr ""
+msgstr "Edit"
 
 msgid "Edit Certificate"
-msgstr ""
+msgstr "Edit Certificate"
+
+msgid "Edit Domain"
+msgstr "Edit Domain"
 
 msgid "Edit Example"
-msgstr ""
+msgstr "Edit Example"
 
 msgid "Edit Record"
-msgstr ""
+msgstr "Edit Record"
 
 msgid "Edit admin"
-msgstr ""
+msgstr "Edit admin"
 
 msgid "Edit contact"
-msgstr ""
+msgstr "Edit contact"
 
 msgid "Edit customer {customerid}"
-msgstr ""
+msgstr "Edit customer {customerid}"
 
 msgid "Edit forwarding"
-msgstr ""
+msgstr "Edit forwarding"
 
 msgid "Edit mailbox"
-msgstr ""
+msgstr "Edit mailbox"
 
 msgid "Edit menu item: {id}"
-msgstr ""
+msgstr "Edit menu item: {id}"
 
 msgid "Edit menu: {name}"
-msgstr ""
+msgstr "Edit menu: {name}"
 
 msgid "Edit page {docpath}"
-msgstr ""
+msgstr "Edit page {docpath}"
 
 msgid "Edit record"
-msgstr ""
+msgstr "Edit record"
 
 msgid "Edit this page"
-msgstr ""
+msgstr "Edit this page"
 
 msgid "Edit zone"
-msgstr ""
+msgstr "Edit zone"
 
 msgid "Edit {who}"
-msgstr ""
+msgstr "Edit {who}"
 
 msgid "Effective Date"
-msgstr ""
+msgstr "Effective Date"
 
 msgid "Ekonomi"
-msgstr ""
+msgstr "Ekonomi"
 
 msgid "Email"
-msgstr ""
+msgstr "Email"
 
 msgid "Email %s has been verified"
-msgstr ""
+msgstr "Email %s has been verified"
 
 msgid "Email %s verified"
-msgstr ""
+msgstr "Email %s verified"
 
 msgid "Email (billing)"
-msgstr ""
+msgstr "Email (billing)"
 
 msgid "Email Address"
-msgstr ""
+msgstr "Email Address"
 
 msgid "Email Admins"
-msgstr ""
+msgstr "Email Admins"
 
 msgid "Email Confirmed!"
-msgstr ""
+msgstr "Email Confirmed!"
 
 msgid "Email Domain Management"
-msgstr ""
+msgstr "Email Domain Management"
 
 msgid "Email Invoice"
-msgstr ""
+msgstr "Email Invoice"
 
 msgid "Email Log"
-msgstr ""
+msgstr "Email Log"
 
 msgid "Email Mailboxes"
-msgstr ""
+msgstr "Email Mailboxes"
 
 msgid "Email Management"
-msgstr ""
+msgstr "Email Management"
 
 msgid "Email Offer"
-msgstr ""
+msgstr "Email Offer"
 
 msgid "Email Order"
-msgstr ""
+msgstr "Email Order"
 
 msgid "Email address"
-msgstr ""
+msgstr "Email address"
 
 msgid "Email confirmation"
 msgstr "Email confirmation"
 
 msgid "Email not valid"
-msgstr ""
+msgstr "Email not valid"
 
 msgid "Email someone about {what}"
-msgstr ""
+msgstr "Email someone about {what}"
 
 msgid "Email to a friend"
-msgstr ""
+msgstr "Email to a friend"
 
 msgid "Empty VAT"
-msgstr ""
+msgstr "Empty VAT"
 
 msgid "Empty VAT number"
-msgstr ""
+msgstr "Empty VAT number"
 
 msgid "Empty address"
-msgstr ""
+msgstr "Empty address"
 
 msgid "Empty billingaddress"
-msgstr ""
+msgstr "Empty billingaddress"
 
 msgid "Empty city"
-msgstr ""
+msgstr "Empty city"
 
 msgid "Empty code"
-msgstr ""
+msgstr "Empty code"
 
 msgid "Empty company name"
-msgstr ""
+msgstr "Empty company name"
 
 msgid "Empty country"
-msgstr ""
+msgstr "Empty country"
 
 msgid "Empty directory"
-msgstr ""
+msgstr "Empty directory"
 
 msgid "Empty first name"
-msgstr ""
+msgstr "Empty first name"
 
 msgid "Empty freetext"
-msgstr ""
+msgstr "Empty freetext"
 
 msgid "Empty last name"
-msgstr ""
+msgstr "Empty last name"
 
 msgid "Empty message"
-msgstr ""
+msgstr "Empty message"
 
 msgid "Empty mobile"
-msgstr ""
+msgstr "Empty mobile"
 
 msgid "Empty name"
-msgstr ""
+msgstr "Empty name"
 
 msgid "Empty postal code"
-msgstr ""
+msgstr "Empty postal code"
 
 msgid "Empty recommendation"
-msgstr ""
+msgstr "Empty recommendation"
 
 msgid "Empty reference"
-msgstr ""
+msgstr "Empty reference"
 
 msgid "Empty subject"
-msgstr ""
+msgstr "Empty subject"
 
 msgid "Empty surname"
-msgstr ""
+msgstr "Empty surname"
 
 msgid "Empty telephone"
-msgstr ""
+msgstr "Empty telephone"
 
 msgid "Enabled"
-msgstr ""
+msgstr "Enabled"
 
 msgid "End Date"
-msgstr ""
+msgstr "End Date"
 
 msgid "End main content"
-msgstr ""
+msgstr "End main content"
 
 msgid "End side content"
-msgstr ""
+msgstr "End side content"
 
 msgid "English"
-msgstr ""
+msgstr "English"
 
 msgid "Enter a title first to translate from"
-msgstr ""
+msgstr "Enter a title first to translate from"
 
 msgid "Enter code"
-msgstr ""
+msgstr "Enter code"
 
 msgid "Enter code from captcha image"
-msgstr ""
+msgstr "Enter code from captcha image"
 
 msgid "Enter password"
-msgstr ""
+msgstr "Enter password"
 
 msgid "Enter record name"
-msgstr ""
+msgstr "Enter record name"
 
 msgid "Enter username"
-msgstr ""
+msgstr "Enter username"
 
 msgid "Enter username and password"
-msgstr ""
+msgstr "Enter username and password"
 
 msgid "Enter valid email"
-msgstr ""
+msgstr "Enter valid email"
 
 msgid "Enter your Swedish phone number to receive a Swish payment request."
-msgstr ""
+msgstr "Enter your Swedish phone number to receive a Swish payment request."
 
 msgid "Enter your email"
-msgstr ""
+msgstr "Enter your email"
 
 msgid "Enter zone name"
-msgstr ""
+msgstr "Enter zone name"
 
 msgid "Error deleting contact"
-msgstr ""
+msgstr "Error deleting contact"
 
 msgid "Error fetching transactions"
-msgstr ""
+msgstr "Error fetching transactions"
 
 msgid "Error loading contact details"
-msgstr ""
+msgstr "Error loading contact details"
 
 msgid "Error loading contacts"
-msgstr ""
+msgstr "Error loading contacts"
 
 msgid "Error loading domain details"
-msgstr ""
+msgstr "Error loading domain details"
 
 msgid "Error loading domains"
-msgstr ""
+msgstr "Error loading domains"
 
 msgid "Error loading payments"
-msgstr ""
+msgstr "Error loading payments"
 
 msgid "Error loading price list"
-msgstr ""
+msgstr "Error loading price list"
 
 msgid "Error loading transaction"
-msgstr ""
+msgstr "Error loading transaction"
 
 msgid "Error loading transactions"
-msgstr ""
+msgstr "Error loading transactions"
 
 msgid "Error reprinting invoice"
-msgstr ""
+msgstr "Error reprinting invoice"
 
 msgid "Error resending invoice"
-msgstr ""
+msgstr "Error resending invoice"
 
 msgid "Error sending reminder"
-msgstr ""
+msgstr "Error sending reminder"
+
+msgid "Error updating domain"
+msgstr "Error updating domain"
 
 msgid "Errors"
-msgstr ""
+msgstr "Errors"
 
 msgid "Euro"
-msgstr ""
+msgstr "Euro"
 
 msgid "Example created successfully"
-msgstr ""
+msgstr "Example created successfully"
 
 msgid "Example deleted successfully"
-msgstr ""
+msgstr "Example deleted successfully"
 
 msgid "Example not found"
-msgstr ""
+msgstr "Example not found"
 
 msgid "Example updated successfully"
-msgstr ""
+msgstr "Example updated successfully"
 
 msgid "Examples"
-msgstr ""
+msgstr "Examples"
 
 msgid "Exception Occurred"
-msgstr ""
+msgstr "Exception Occurred"
 
 msgid "Expand menu"
-msgstr ""
+msgstr "Expand menu"
 
 msgid "Expand personal menu."
-msgstr ""
+msgstr "Expand personal menu."
 
 msgid "Expire"
-msgstr ""
+msgstr "Expire"
 
 msgid "Expired"
-msgstr ""
+msgstr "Expired"
 
 msgid "Expires"
-msgstr ""
+msgstr "Expires"
 
 msgid "Expires At"
-msgstr ""
+msgstr "Expires At"
 
 msgid "Expiring"
-msgstr ""
+msgstr "Expiring"
 
 msgid "Expiring domains"
-msgstr ""
+msgstr "Expiring domains"
 
 msgid "Expiry"
-msgstr ""
+msgstr "Expiry"
 
 msgid "Export"
-msgstr ""
+msgstr "Export"
 
 msgid "Export zone file"
-msgstr ""
+msgstr "Export zone file"
 
 msgid "FAKE Medium"
-msgstr ""
+msgstr "FAKE Medium"
 
 msgid "FAKE News by country"
-msgstr ""
+msgstr "FAKE News by country"
 
 msgid "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
-msgstr ""
+msgstr "FINAL NOTICE: This is a final reminder regarding your overdue invoice."
 
 msgid "Failed"
-msgstr ""
+msgstr "Failed"
 
 msgid "Failed login from {ip}"
-msgstr ""
+msgstr "Failed login from {ip}"
 
 msgid "Failed to add admin"
-msgstr ""
+msgstr "Failed to add admin"
 
 msgid "Failed to add domain"
-msgstr ""
+msgstr "Failed to add domain"
 
 msgid "Failed to add provider"
-msgstr ""
+msgstr "Failed to add provider"
 
 msgid "Failed to add tag"
-msgstr ""
+msgstr "Failed to add tag"
 
 msgid "Failed to check run"
-msgstr ""
+msgstr "Failed to check run"
 
 msgid "Failed to create certificate"
-msgstr ""
+msgstr "Failed to create certificate"
 
 msgid "Failed to create contact"
-msgstr ""
+msgstr "Failed to create contact"
 
 msgid "Failed to create cryptokey"
-msgstr ""
+msgstr "Failed to create cryptokey"
 
 msgid "Failed to create example"
-msgstr ""
+msgstr "Failed to create example"
 
 msgid "Failed to create key"
-msgstr ""
+msgstr "Failed to create key"
 
 msgid "Failed to create payment"
-msgstr ""
+msgstr "Failed to create payment"
 
 msgid "Failed to create record"
-msgstr ""
+msgstr "Failed to create record"
 
 msgid "Failed to create zone"
-msgstr ""
+msgstr "Failed to create zone"
 
 msgid "Failed to delete admin"
-msgstr ""
+msgstr "Failed to delete admin"
 
 msgid "Failed to delete alias"
-msgstr ""
+msgstr "Failed to delete alias"
 
 msgid "Failed to delete alias domain"
-msgstr ""
+msgstr "Failed to delete alias domain"
 
 msgid "Failed to delete certificate"
-msgstr ""
+msgstr "Failed to delete certificate"
 
 msgid "Failed to delete contact"
-msgstr ""
+msgstr "Failed to delete contact"
 
 msgid "Failed to delete cryptokey"
-msgstr ""
+msgstr "Failed to delete cryptokey"
 
 msgid "Failed to delete domain"
-msgstr ""
+msgstr "Failed to delete domain"
 
 msgid "Failed to delete example"
-msgstr ""
+msgstr "Failed to delete example"
 
 msgid "Failed to delete key"
-msgstr ""
+msgstr "Failed to delete key"
 
 msgid "Failed to delete mailbox"
-msgstr ""
+msgstr "Failed to delete mailbox"
 
 msgid "Failed to delete message"
-msgstr ""
+msgstr "Failed to delete message"
 
 msgid "Failed to delete message: {error}"
 msgstr "Failed to delete message: {error}"
 
 msgid "Failed to delete record"
-msgstr ""
+msgstr "Failed to delete record"
 
 msgid "Failed to delete vacation settings"
-msgstr ""
+msgstr "Failed to delete vacation settings"
 
 msgid "Failed to delete zone"
-msgstr ""
+msgstr "Failed to delete zone"
 
 msgid "Failed to export zone"
-msgstr ""
+msgstr "Failed to export zone"
 
 msgid "Failed to import zone"
-msgstr ""
+msgstr "Failed to import zone"
 
 msgid "Failed to initiate transfer"
-msgstr ""
+msgstr "Failed to initiate transfer"
 
 msgid "Failed to load conversation"
-msgstr ""
+msgstr "Failed to load conversation"
 
 msgid "Failed to load dashboard data"
-msgstr ""
+msgstr "Failed to load dashboard data"
 
 msgid "Failed to load domain"
-msgstr ""
+msgstr "Failed to load domain"
 
 msgid "Failed to load domain details"
-msgstr ""
+msgstr "Failed to load domain details"
 
 msgid "Failed to load payment form"
-msgstr ""
+msgstr "Failed to load payment form"
 
 msgid "Failed to load price list"
-msgstr ""
+msgstr "Failed to load price list"
 
 msgid "Failed to load transactions"
-msgstr ""
+msgstr "Failed to load transactions"
 
 msgid "Failed to navigate"
-msgstr ""
+msgstr "Failed to navigate"
 
 msgid "Failed to process refund"
-msgstr ""
+msgstr "Failed to process refund"
+
+msgid "Failed to purge cache"
+msgstr "Failed to purge cache"
 
 msgid "Failed to regenerate invoice PDF"
-msgstr ""
+msgstr "Failed to regenerate invoice PDF"
 
 msgid "Failed to register domain"
-msgstr ""
+msgstr "Failed to register domain"
 
 msgid "Failed to register payment"
-msgstr ""
+msgstr "Failed to register payment"
 
 msgid "Failed to remove admin"
-msgstr ""
+msgstr "Failed to remove admin"
 
 msgid "Failed to remove domain"
-msgstr ""
+msgstr "Failed to remove domain"
 
 msgid "Failed to reprint invoice"
-msgstr ""
+msgstr "Failed to reprint invoice"
 
 msgid "Failed to resend invoice"
-msgstr ""
+msgstr "Failed to resend invoice"
 
 msgid "Failed to resend invoice email"
-msgstr ""
+msgstr "Failed to resend invoice email"
 
 msgid "Failed to save admin"
-msgstr ""
+msgstr "Failed to save admin"
 
 msgid "Failed to save alias"
-msgstr ""
+msgstr "Failed to save alias"
 
 msgid "Failed to save certificate"
-msgstr ""
+msgstr "Failed to save certificate"
 
 msgid "Failed to save domain"
-msgstr ""
+msgstr "Failed to save domain"
 
 msgid "Failed to save mailbox"
-msgstr ""
+msgstr "Failed to save mailbox"
 
 msgid "Failed to save record"
-msgstr ""
+msgstr "Failed to save record"
 
 msgid "Failed to save vacation settings"
-msgstr ""
+msgstr "Failed to save vacation settings"
 
 msgid "Failed to save zone"
-msgstr ""
+msgstr "Failed to save zone"
 
 msgid "Failed to send SMS"
-msgstr ""
+msgstr "Failed to send SMS"
 
 msgid "Failed to send SMS: {error}"
 msgstr "Failed to send SMS: {error}"
 
 msgid "Failed to send invoice to Fortnox"
-msgstr ""
+msgstr "Failed to send invoice to Fortnox"
 
 msgid "Failed to send reminder"
-msgstr ""
+msgstr "Failed to send reminder"
 
 msgid "Failed to start run"
-msgstr ""
+msgstr "Failed to start run"
 
 msgid "Failed to update admin"
-msgstr ""
+msgstr "Failed to update admin"
 
 msgid "Failed to update alias"
-msgstr ""
+msgstr "Failed to update alias"
 
 msgid "Failed to update certificate"
-msgstr ""
+msgstr "Failed to update certificate"
 
 msgid "Failed to update contact"
-msgstr ""
+msgstr "Failed to update contact"
 
 msgid "Failed to update domain"
-msgstr ""
+msgstr "Failed to update domain"
 
 msgid "Failed to update example"
-msgstr ""
+msgstr "Failed to update example"
 
 msgid "Failed to update mailbox"
-msgstr ""
+msgstr "Failed to update mailbox"
 
 msgid "Failed to update payment date"
-msgstr ""
+msgstr "Failed to update payment date"
 
 msgid "Failed to update record"
-msgstr ""
+msgstr "Failed to update record"
 
 msgid "Failed to update zone"
-msgstr ""
+msgstr "Failed to update zone"
 
 msgid "Failed/Refunded"
-msgstr ""
+msgstr "Failed/Refunded"
 
 msgid "Failed:"
-msgstr ""
+msgstr "Failed:"
 
 msgid "Fax"
-msgstr ""
+msgstr "Fax"
 
 msgid "Featured"
-msgstr ""
+msgstr "Featured"
 
 msgid "Fetch from PayPal"
-msgstr ""
+msgstr "Fetch from PayPal"
 
 msgid "File"
-msgstr ""
+msgstr "File"
 
 msgid "File archive"
-msgstr ""
+msgstr "File archive"
 
 msgid "File: stored in src/public. Database: stored in PostgreSQL."
-msgstr ""
+msgstr "File: stored in src/public. Database: stored in PostgreSQL."
 
 msgid "Fill the form correctly!"
-msgstr ""
+msgstr "Fill the form correctly!"
 
 msgid "Filter Domains"
-msgstr ""
+msgstr "Filter Domains"
 
 msgid "Filter by customer"
-msgstr ""
+msgstr "Filter by customer"
 
 msgid "Filter by domain"
-msgstr ""
+msgstr "Filter by domain"
 
 msgid "Filter by username"
-msgstr ""
+msgstr "Filter by username"
 
 msgid "Final Payment Reminder"
-msgstr ""
+msgstr "Final Payment Reminder"
 
 msgid "Final payment reminder - Invoice {number}"
-msgstr ""
+msgstr "Final payment reminder - Invoice {number}"
 
 msgid "Financial Information"
-msgstr ""
+msgstr "Financial Information"
 
 msgid "Financial Transactions"
-msgstr ""
+msgstr "Financial Transactions"
 
 msgid "Find the credit invoice attached as PDF."
-msgstr ""
+msgstr "Find the credit invoice attached as PDF."
 
 msgid "Find the invoice attached as PDF."
-msgstr ""
+msgstr "Find the invoice attached as PDF."
 
 msgid "Find your invoice attached as PDF."
-msgstr ""
+msgstr "Find your invoice attached as PDF."
 
 msgid "First name"
-msgstr ""
+msgstr "First name"
 
 msgid "Flags"
-msgstr ""
+msgstr "Flags"
 
 msgid "Flow"
-msgstr ""
+msgstr "Flow"
 
 msgid "For more information, visit the Fortnox website:"
-msgstr ""
+msgstr "For more information, visit the Fortnox website:"
 
 msgid "For questions, please contact us at {email}."
-msgstr ""
+msgstr "For questions, please contact us at {email}."
 
 msgid "Foreign"
-msgstr ""
+msgstr "Foreign"
 
 msgid "Form submission error:"
-msgstr ""
+msgstr "Form submission error:"
 
 msgid "Fortnox"
-msgstr ""
+msgstr "Fortnox"
 
 msgid "Fortnox Warning"
-msgstr ""
+msgstr "Fortnox Warning"
 
 msgid "Fortnox authorization required"
-msgstr ""
+msgstr "Fortnox authorization required"
 
 msgid "Fortnox integration"
-msgstr ""
+msgstr "Fortnox integration"
 
 msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
-msgstr ""
+msgstr "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
 
 msgid "Fortnox panel"
-msgstr ""
+msgstr "Fortnox panel"
 
 msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
-msgstr ""
+msgstr "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
 
 msgid "Fortnox was founded in 2001 with headquarters in Växjö."
-msgstr ""
+msgstr "Fortnox was founded in 2001 with headquarters in Växjö."
 
 msgid "Forward To"
-msgstr ""
+msgstr "Forward To"
 
 msgid "Forward to"
-msgstr ""
+msgstr "Forward to"
 
 msgid "Forward zones"
-msgstr ""
+msgstr "Forward zones"
 
 msgid "Forwarding"
-msgstr ""
+msgstr "Forwarding"
 
 msgid "Forwards"
-msgstr ""
+msgstr "Forwards"
 
 msgid "Forwards to"
-msgstr ""
+msgstr "Forwards to"
 
 msgid "Found"
-msgstr ""
+msgstr "Found"
 
 msgid "From"
-msgstr ""
+msgstr "From"
 
 msgid "From 2025-11-01 we are using Sparbanken Syd."
-msgstr ""
+msgstr "From 2025-11-01 we are using Sparbanken Syd."
 
 msgid "From Template"
-msgstr ""
+msgstr "From Template"
 
 msgid "From address"
-msgstr ""
+msgstr "From address"
 
 msgid "Full"
-msgstr ""
+msgstr "Full"
 
 msgid "Give small financial support to {slug} at buymeacoffee"
-msgstr ""
+msgstr "Give small financial support to {slug} at buymeacoffee"
 
 msgid "Give small financial support to {user} at buymeacoffee"
-msgstr ""
+msgstr "Give small financial support to {user} at buymeacoffee"
 
 msgid "Go Back"
-msgstr ""
+msgstr "Go Back"
 
 msgid "Go to {confirmationlink} to confirm your signature and claim your image."
-msgstr ""
+msgstr "Go to {confirmationlink} to confirm your signature and claim your image."
 
 msgid "Gross"
-msgstr ""
+msgstr "Gross"
 
 msgid "Groups"
-msgstr ""
+msgstr "Groups"
 
 msgid "HTML result"
-msgstr ""
+msgstr "HTML result"
 
 msgid "Halfyear"
-msgstr ""
+msgstr "Halfyear"
 
 msgid "Handle"
-msgstr ""
+msgstr "Handle"
 
 msgid "Handle contact information"
-msgstr ""
+msgstr "Handle contact information"
 
 msgid "Handle required for"
-msgstr ""
+msgstr "Handle required for"
 
 msgid "Handled invoice"
-msgstr ""
+msgstr "Handled invoice"
 
 msgid "Heading 1"
-msgstr ""
+msgstr "Heading 1"
 
 msgid "Heading 2"
-msgstr ""
+msgstr "Heading 2"
 
 msgid "Heading 3"
-msgstr ""
+msgstr "Heading 3"
 
 msgid "High"
-msgstr ""
+msgstr "High"
 
 msgid "Highlights"
-msgstr ""
+msgstr "Highlights"
 
 msgid "Historical Data"
-msgstr ""
+msgstr "Historical Data"
 
 msgid "Historical compliance trends over time"
-msgstr ""
+msgstr "Historical compliance trends over time"
 
 msgid "Hosting Provider Summary"
-msgstr ""
+msgstr "Hosting Provider Summary"
 
 msgid "Hosting Providers"
-msgstr ""
+msgstr "Hosting Providers"
 
 msgid "Hosting provider statistics for tracked domains"
-msgstr ""
+msgstr "Hosting provider statistics for tracked domains"
 
 msgid "Hostname"
-msgstr ""
+msgstr "Hostname"
 
 msgid "How well different Swedish organizations comply with having control of own infrastructure"
-msgstr ""
+msgstr "How well different Swedish organizations comply with having control of own infrastructure"
 
 msgid "I accept the terms for registration."
-msgstr ""
+msgstr "I accept the terms for registration."
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "I am acting as Designated Agent for this registrant change"
+
+msgid "I am acting as designated agent for this email change"
+msgstr "I am acting as designated agent for this email change"
 
 msgid "IBAN"
-msgstr ""
+msgstr "IBAN"
 
 msgid "IBAN:"
-msgstr ""
+msgstr "IBAN:"
 
 msgid "ID"
 msgstr "ID"
 
 msgid "ID required"
-msgstr ""
+msgstr "ID required"
 
 msgid "IMMEDIATE PAYMENT REQUIRED"
-msgstr ""
+msgstr "IMMEDIATE PAYMENT REQUIRED"
 
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 msgid "IP Address"
-msgstr ""
+msgstr "IP Address"
 
 msgid "IPv4 Address"
-msgstr ""
+msgstr "IPv4 Address"
 
 msgid "IPv4 reverse"
-msgstr ""
+msgstr "IPv4 reverse"
 
 msgid "IPv6 Address"
-msgstr ""
+msgstr "IPv6 Address"
 
 msgid "IPv6 reverse"
-msgstr ""
+msgstr "IPv6 reverse"
 
 msgid "Identification code"
-msgstr ""
+msgstr "Identification code"
 
 msgid "Identifier"
-msgstr ""
+msgstr "Identifier"
 
 msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
-msgstr ""
+msgstr "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
 
 msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
-msgstr ""
+msgstr "If payment is not received within 7 days, this matter will be transferred to our collection agency."
 
 msgid "If you did not register an account, please ignore this email."
-msgstr ""
+msgstr "If you did not register an account, please ignore this email."
 
 msgid "If you experienced any issues, please contact our support team."
-msgstr ""
+msgstr "If you experienced any issues, please contact our support team."
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
-msgstr ""
+msgstr "If you have already made payment, please contact us IMMEDIATELY with proof of payment to avoid further action."
 
 msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
-msgstr ""
+msgstr "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
 
 msgid "If you have already paid, please disregard this reminder."
-msgstr ""
+msgstr "If you have already paid, please disregard this reminder."
 
 msgid "Image"
-msgstr ""
+msgstr "Image"
 
 msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
-msgstr ""
+msgstr "Immediate action is required to avoid additional fees and potential collection proceedings."
 
 msgid "Immediate action is required to avoid:"
-msgstr ""
+msgstr "Immediate action is required to avoid:"
 
 msgid "Immediate payment required!!!"
-msgstr ""
+msgstr "Immediate payment required!!!"
 
 msgid "Impersonate"
-msgstr ""
+msgstr "Impersonate"
 
 msgid "Impersonate {who}"
-msgstr ""
+msgstr "Impersonate {who}"
 
 msgid "Import"
-msgstr ""
+msgstr "Import"
 
 msgid "Import zone"
-msgstr ""
+msgstr "Import zone"
 
 msgid "In"
-msgstr ""
+msgstr "In"
 
 msgid "In your personal menu you find your {panel} among other things."
-msgstr ""
+msgstr "In your personal menu you find your {panel} among other things."
 
 msgid "Inactive"
-msgstr ""
+msgstr "Inactive"
 
 msgid "Including VAT"
-msgstr ""
+msgstr "Including VAT"
 
 msgid "Insert Table"
-msgstr ""
+msgstr "Insert Table"
 
 msgid "Instruction ID"
-msgstr ""
+msgstr "Instruction ID"
 
 msgid "Interest invoice"
-msgstr ""
+msgstr "Interest invoice"
 
 msgid "International format: +CC.NNNNNNNN"
-msgstr ""
+msgstr "International format: +CC.NNNNNNNN"
 
 msgid "Invalid confirmation link"
-msgstr ""
+msgstr "Invalid confirmation link"
 
 msgid "Invalid email"
-msgstr ""
+msgstr "Invalid email"
 
 msgid "Invalid email addresses"
-msgstr ""
+msgstr "Invalid email addresses"
 
 msgid "Invalid form data"
-msgstr ""
+msgstr "Invalid form data"
 
 msgid "Invalid invoice ID"
-msgstr ""
+msgstr "Invalid invoice ID"
 
 msgid "Invalid items format"
-msgstr ""
+msgstr "Invalid items format"
 
 msgid "Invalid password"
-msgstr ""
+msgstr "Invalid password"
 
 msgid "Invalid request"
-msgstr ""
+msgstr "Invalid request"
 
 msgid "Invalid username"
-msgstr ""
+msgstr "Invalid username"
 
 msgid "Invoice"
-msgstr ""
+msgstr "Invoice"
 
 msgid "Invoice (credited)"
-msgstr ""
+msgstr "Invoice (credited)"
 
 msgid "Invoice Date"
-msgstr ""
+msgstr "Invoice Date"
 
 msgid "Invoice Details"
-msgstr ""
+msgstr "Invoice Details"
 
 msgid "Invoice Number"
-msgstr ""
+msgstr "Invoice Number"
 
 msgid "Invoice Rows"
-msgstr ""
+msgstr "Invoice Rows"
 
 msgid "Invoice Type"
-msgstr ""
+msgstr "Invoice Type"
 
 msgid "Invoice address"
-msgstr ""
+msgstr "Invoice address"
 
 msgid "Invoice credited m"
-msgstr ""
+msgstr "Invoice credited m"
 
 msgid "Invoice currency"
-msgstr ""
+msgstr "Invoice currency"
 
 msgid "Invoice currency is {currency}."
-msgstr ""
+msgstr "Invoice currency is {currency}."
 
 msgid "Invoice customer #{customerid}"
-msgstr ""
+msgstr "Invoice customer #{customerid}"
 
 msgid "Invoice customer {customerid}"
-msgstr ""
+msgstr "Invoice customer {customerid}"
 
 msgid "Invoice date"
-msgstr ""
+msgstr "Invoice date"
 
 msgid "Invoice for completed services"
-msgstr ""
+msgstr "Invoice for completed services"
 
 msgid "Invoice is credited"
-msgstr ""
+msgstr "Invoice is credited"
 
 msgid "Invoice must be in fakturerad state to send reminders"
-msgstr ""
+msgstr "Invoice must be in fakturerad state to send reminders"
 
 msgid "Invoice number"
-msgstr ""
+msgstr "Invoice number"
 
 msgid "Invoice number: {fakturanummer}"
-msgstr ""
+msgstr "Invoice number: {fakturanummer}"
 
 msgid "Invoice period"
-msgstr ""
+msgstr "Invoice period"
 
 msgid "Invoice questions"
-msgstr ""
+msgstr "Invoice questions"
 
 msgid "Invoice questions can be directed to {url}."
-msgstr ""
+msgstr "Invoice questions can be directed to {url}."
 
 msgid "Invoice questions:"
-msgstr ""
+msgstr "Invoice questions:"
 
 msgid "Invoice reminder, {number}"
-msgstr ""
+msgstr "Invoice reminder, {number}"
 
 msgid "Invoice reprinted successfully"
-msgstr ""
+msgstr "Invoice reprinted successfully"
 
 msgid "Invoice resent successfully"
-msgstr ""
+msgstr "Invoice resent successfully"
 
 msgid "Invoice type"
-msgstr ""
+msgstr "Invoice type"
 
 msgid "Invoice {fakturanummer}"
-msgstr ""
+msgstr "Invoice {fakturanummer}"
 
 msgid "Invoice {fakturanummer} has been credited."
-msgstr ""
+msgstr "Invoice {fakturanummer} has been credited."
 
 msgid "Invoice {invoiceid, customer {customerid}"
-msgstr ""
+msgstr "Invoice {invoiceid, customer {customerid}"
 
 msgid "Invoice {invoiceid}, customer #{customerid}"
-msgstr ""
+msgstr "Invoice {invoiceid}, customer #{customerid}"
 
 msgid "Invoice {number}"
-msgstr ""
+msgstr "Invoice {number}"
 
 msgid "Invoice {number}, customer #{customerid}"
-msgstr ""
+msgstr "Invoice {number}, customer #{customerid}"
 
 msgid "Invoice {num}"
-msgstr ""
+msgstr "Invoice {num}"
 
 msgid "Invoices"
-msgstr ""
+msgstr "Invoices"
 
 msgid "Invoices are created with LATEX type setting software"
-msgstr ""
+msgstr "Invoices are created with LATEX type setting software"
 
 msgid "Invoices, customer #{customerid}"
-msgstr ""
+msgstr "Invoices, customer #{customerid}"
 
 msgid "Invoices, customer {customerid}"
-msgstr ""
+msgstr "Invoices, customer {customerid}"
 
 msgid "Invoicing"
-msgstr ""
+msgstr "Invoicing"
 
 msgid "Invoicing, 1 item"
 msgid_plural "Invoicing, {number} items"
@@ -2389,289 +2422,289 @@ msgstr[0] ""
 msgstr[1] ""
 
 msgid "Issuer"
-msgstr ""
+msgstr "Issuer"
 
 msgid "Issues found"
-msgstr ""
+msgstr "Issues found"
 
 msgid "It can be configured to display everything publicly as well."
-msgstr ""
+msgstr "It can be configured to display everything publicly as well."
 
 msgid "It is currently only available to Rymdweb."
-msgstr ""
+msgstr "It is currently only available to Rymdweb."
 
 msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
-msgstr ""
+msgstr "It is designed to help small and medium-sized businesses manage their finances efficiently."
 
 msgid "It's also available at"
-msgstr ""
+msgstr "It's also available at"
 
 msgid "It's also available at {url}."
-msgstr ""
+msgstr "It's also available at {url}."
 
 msgid "Italic"
-msgstr ""
+msgstr "Italic"
 
 msgid "Item Number"
-msgstr ""
+msgstr "Item Number"
 
 msgid "Item deleted"
-msgstr ""
+msgstr "Item deleted"
 
 msgid "Item saved"
-msgstr ""
+msgstr "Item saved"
 
 msgid "Item:"
-msgstr ""
+msgstr "Item:"
 
 msgid "JSON only"
-msgstr ""
+msgstr "JSON only"
 
 msgid "Job failed"
-msgstr ""
+msgstr "Job failed"
 
 msgid "Job queued"
-msgstr ""
+msgstr "Job queued"
 
 msgid "Keep me logged in"
-msgstr ""
+msgstr "Keep me logged in"
 
 msgid "Key"
-msgstr ""
+msgstr "Key"
 
 msgid "Key Type"
-msgstr ""
+msgstr "Key Type"
 
 msgid "Key and display_name required"
-msgstr ""
+msgstr "Key and display_name required"
 
 msgid "Key created"
-msgstr ""
+msgstr "Key created"
 
 msgid "Key deleted"
-msgstr ""
+msgstr "Key deleted"
 
 msgid "Key, name and country_code required"
-msgstr ""
+msgstr "Key, name and country_code required"
 
 msgid "Kick Russian defense minister Sergei Shoigu!"
-msgstr ""
+msgstr "Kick Russian defense minister Sergei Shoigu!"
 
 msgid "Kunder"
-msgstr ""
+msgstr "Kunder"
 
 msgid "Kuvert"
-msgstr ""
+msgstr "Kuvert"
 
 msgid "Language"
-msgstr ""
+msgstr "Language"
 
 msgid "Language:"
-msgstr ""
+msgstr "Language:"
 
 msgid "Languages"
-msgstr ""
+msgstr "Languages"
 
 msgid "Last name"
-msgstr ""
+msgstr "Last name"
 
 msgid "Last reminder"
-msgstr ""
+msgstr "Last reminder"
 
 msgid "Latest"
-msgstr ""
+msgstr "Latest"
 
 msgid "Leave blank to keep current"
-msgstr ""
+msgstr "Leave blank to keep current"
 
 msgid "Leave empty for items without a link"
-msgstr ""
+msgstr "Leave empty for items without a link"
 
 msgid "Legal proceedings"
-msgstr ""
+msgstr "Legal proceedings"
 
 msgid "Legend"
-msgstr ""
+msgstr "Legend"
 
 msgid "License"
-msgstr ""
+msgstr "License"
 
 msgid "Light"
-msgstr ""
+msgstr "Light"
 
 msgid "Link"
-msgstr ""
+msgstr "Link"
 
 msgid "Link to control panel"
-msgstr ""
+msgstr "Link to control panel"
 
 msgid "Link to personal data"
-msgstr ""
+msgstr "Link to personal data"
 
 msgid "Link to personal settings"
-msgstr ""
+msgstr "Link to personal settings"
 
 msgid "List zones"
-msgstr ""
+msgstr "List zones"
 
 msgid "Lista fakturor"
-msgstr ""
+msgstr "Lista fakturor"
 
 msgid "Live Transactions"
-msgstr ""
+msgstr "Live Transactions"
 
 msgid "Loading..."
-msgstr ""
+msgstr "Loading..."
 
 msgid "Log"
-msgstr ""
+msgstr "Log"
 
 msgid "Log in"
-msgstr ""
+msgstr "Log in"
 
 msgid "Log out"
-msgstr ""
+msgstr "Log out"
 
 msgid "Log out and end current session"
-msgstr ""
+msgstr "Log out and end current session"
 
 msgid "Login"
-msgstr ""
+msgstr "Login"
 
 msgid "Login blocked"
-msgstr ""
+msgstr "Login blocked"
 
 msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
-msgstr ""
+msgstr "Login is temporarily blocked due to excessive failed attempts from {ip}."
 
 msgid "Logotype"
-msgstr ""
+msgstr "Logotype"
 
 msgid "Logotype leading to start"
-msgstr ""
+msgstr "Logotype leading to start"
 
 msgid "Logotype leading to start page"
-msgstr ""
+msgstr "Logotype leading to start page"
 
 msgid "Logotype linked to {site}"
-msgstr ""
+msgstr "Logotype linked to {site}"
 
 msgid "Lost password?"
-msgstr ""
+msgstr "Lost password?"
 
 msgid "Low"
-msgstr ""
+msgstr "Low"
 
 msgid "Lower values have higher priority"
-msgstr ""
+msgstr "Lower values have higher priority"
 
 msgid "MB"
-msgstr ""
+msgstr "MB"
 
 msgid "MOSS"
-msgstr ""
+msgstr "MOSS"
 
 msgid "MX"
-msgstr ""
+msgstr "MX"
 
 msgid "MX Records"
-msgstr ""
+msgstr "MX Records"
 
 msgid "MX records"
-msgstr ""
+msgstr "MX records"
 
 msgid "Mail"
-msgstr ""
+msgstr "Mail"
 
 msgid "Mail Server"
-msgstr ""
+msgstr "Mail Server"
 
 msgid "Mail admin"
-msgstr ""
+msgstr "Mail admin"
 
 msgid "Mail domains"
-msgstr ""
+msgstr "Mail domains"
 
 msgid "Mail dump"
-msgstr ""
+msgstr "Mail dump"
 
 msgid "Mail sent through own servers"
-msgstr ""
+msgstr "Mail sent through own servers"
 
 msgid "Mailbox"
-msgstr ""
+msgstr "Mailbox"
 
 msgid "Mailbox created successfully"
-msgstr ""
+msgstr "Mailbox created successfully"
 
 msgid "Mailbox deleted successfully"
-msgstr ""
+msgstr "Mailbox deleted successfully"
 
 msgid "Mailbox domain must match the current domain"
-msgstr ""
+msgstr "Mailbox domain must match the current domain"
 
 msgid "Mailbox not found"
-msgstr ""
+msgstr "Mailbox not found"
 
 msgid "Mailbox quota"
-msgstr ""
+msgstr "Mailbox quota"
 
 msgid "Mailbox saved successfully"
-msgstr ""
+msgstr "Mailbox saved successfully"
 
 msgid "Mailbox updated successfully"
-msgstr ""
+msgstr "Mailbox updated successfully"
 
 msgid "Mailboxes"
-msgstr ""
+msgstr "Mailboxes"
 
 msgid "Mailboxes for"
-msgstr ""
+msgstr "Mailboxes for"
 
 msgid "Make invoice"
-msgstr ""
+msgstr "Make invoice"
 
 msgid "Manage Based in Sweden compliance tracking"
-msgstr ""
+msgstr "Manage Based in Sweden compliance tracking"
 
 msgid "Manage domains and contacts through the RealtimeRegister API."
-msgstr ""
+msgstr "Manage domains and contacts through the RealtimeRegister API."
 
 msgid "Manage site"
-msgstr ""
+msgstr "Manage site"
 
 msgid "Managed domains"
-msgstr ""
+msgstr "Managed domains"
 
 msgid "Manager"
-msgstr ""
+msgstr "Manager"
 
 msgid "Manuals"
-msgstr ""
+msgstr "Manuals"
 
 msgid "Mark payment"
-msgstr ""
+msgstr "Mark payment"
 
 msgid "Medium"
-msgstr ""
+msgstr "Medium"
 
 msgid "Menu Items"
-msgstr ""
+msgstr "Menu Items"
 
 msgid "Menu Settings"
-msgstr ""
+msgstr "Menu Settings"
 
 msgid "Menu created"
-msgstr ""
+msgstr "Menu created"
 
 msgid "Menu deleted"
-msgstr ""
+msgstr "Menu deleted"
 
 msgid "Menu saved"
-msgstr ""
+msgstr "Menu saved"
 
 msgid "Menus"
-msgstr ""
+msgstr "Menus"
 
 msgid "Message"
 msgstr "Message"
@@ -2680,268 +2713,271 @@ msgid "Message Details"
 msgstr "Message Details"
 
 msgid "Message must be 160 characters or less"
-msgstr ""
+msgstr "Message must be 160 characters or less"
 
 msgid "Message sent"
-msgstr ""
+msgstr "Message sent"
 
 msgid "Messages"
-msgstr ""
+msgstr "Messages"
 
 msgid "Messages pagination"
-msgstr ""
+msgstr "Messages pagination"
 
 msgid "Messages will appear here once sent or received"
 msgstr "Messages will appear here once sent or received"
 
 msgid "Method"
-msgstr ""
+msgstr "Method"
 
 msgid "Method not allowed"
-msgstr ""
+msgstr "Method not allowed"
 
 msgid "Mild"
-msgstr ""
+msgstr "Mild"
 
 msgid "Minimal local customer data is stored in Fortnox."
-msgstr ""
+msgstr "Minimal local customer data is stored in Fortnox."
 
 msgid "Minimum TTL"
-msgstr ""
+msgstr "Minimum TTL"
 
 msgid "Missing customer or invoice ID"
-msgstr ""
+msgstr "Missing customer or invoice ID"
 
 msgid "Missing file, our bad?"
-msgstr ""
+msgstr "Missing file, our bad?"
 
 msgid "Missing invoice information"
-msgstr ""
+msgstr "Missing invoice information"
 
 msgid "Missing payment ID"
-msgstr ""
+msgstr "Missing payment ID"
 
 msgid "Missing username or password"
-msgstr ""
+msgstr "Missing username or password"
 
 msgid "Mobile"
-msgstr ""
+msgstr "Mobile"
 
 msgid "Modifications were saved."
-msgstr ""
+msgstr "Modifications were saved."
 
 msgid "Month"
-msgstr ""
+msgstr "Month"
 
 msgid "Multiple languages and country specific modifications"
-msgstr ""
+msgstr "Multiple languages and country specific modifications"
 
 msgid "NS"
-msgstr ""
+msgstr "NS"
 
 msgid "NS Records"
-msgstr ""
+msgstr "NS Records"
 
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 msgid "Name Servers"
-msgstr ""
+msgstr "Name Servers"
 
 msgid "Nameserver"
-msgstr ""
+msgstr "Nameserver"
 
 msgid "Nameserver Checks"
-msgstr ""
+msgstr "Nameserver Checks"
 
 msgid "Nameservers"
-msgstr ""
+msgstr "Nameservers"
 
 msgid "Negative impact on credit rating"
-msgstr ""
+msgstr "Negative impact on credit rating"
 
 msgid "Net"
-msgstr ""
+msgstr "Net"
 
 msgid "Net Amount"
-msgstr ""
+msgstr "Net Amount"
 
 msgid "Net amount"
-msgstr ""
+msgstr "Net amount"
 
 msgid "Net amount:"
-msgstr ""
+msgstr "Net amount:"
 
 msgid "Nets"
-msgstr ""
+msgstr "Nets"
 
 msgid "Nets Payments"
-msgstr ""
+msgstr "Nets Payments"
 
 msgid "Network error - please try again"
-msgstr ""
+msgstr "Network error - please try again"
 
 msgid "Never"
-msgstr ""
+msgstr "Never"
 
 msgid "Never expires"
-msgstr ""
+msgstr "Never expires"
 
 msgid "New Certificate"
-msgstr ""
+msgstr "New Certificate"
 
 msgid "New Contact"
-msgstr ""
+msgstr "New Contact"
 
 msgid "New Example"
-msgstr ""
+msgstr "New Example"
 
 msgid "New Menu"
-msgstr ""
+msgstr "New Menu"
 
 msgid "New Price"
-msgstr ""
+msgstr "New Price"
 
 msgid "New Record"
-msgstr ""
+msgstr "New Record"
 
 msgid "New Template"
-msgstr ""
+msgstr "New Template"
 
 msgid "New account"
-msgstr ""
+msgstr "New account"
 
 msgid "New contact"
-msgstr ""
+msgstr "New contact"
 
 msgid "New customer"
-msgstr ""
+msgstr "New customer"
 
 msgid "New domain"
-msgstr ""
+msgstr "New domain"
 
 msgid "New example"
-msgstr ""
+msgstr "New example"
 
 msgid "New folder"
-msgstr ""
+msgstr "New folder"
 
 msgid "New invoice for customer #{customerid}"
-msgstr ""
+msgstr "New invoice for customer #{customerid}"
 
 msgid "New invoice for customer {customerid}"
-msgstr ""
+msgstr "New invoice for customer {customerid}"
 
 msgid "New invoice pack"
-msgstr ""
+msgstr "New invoice pack"
 
 msgid "New menu"
-msgstr ""
+msgstr "New menu"
 
 msgid "New menu item"
-msgstr ""
+msgstr "New menu item"
 
 msgid "New record"
-msgstr ""
+msgstr "New record"
 
 msgid "New zone"
-msgstr ""
+msgstr "New zone"
 
 msgid "Newest"
-msgstr ""
+msgstr "Newest"
 
 msgid "Newsletter"
-msgstr ""
+msgstr "Newsletter"
 
 msgid "Next"
-msgstr ""
+msgstr "Next"
 
 msgid "No"
-msgstr ""
+msgstr "No"
 
 msgid "No A/AAAA records"
-msgstr ""
+msgstr "No A/AAAA records"
 
 msgid "No DNSSEC keys configured"
-msgstr ""
+msgstr "No DNSSEC keys configured"
 
 msgid "No MX records"
-msgstr ""
+msgstr "No MX records"
 
 msgid "No account"
-msgstr ""
+msgstr "No account"
 
 msgid "No activity"
-msgstr ""
+msgstr "No activity"
 
 msgid "No administrators"
-msgstr ""
+msgstr "No administrators"
 
 msgid "No alias domains"
-msgstr ""
+msgstr "No alias domains"
 
 msgid "No aliases"
-msgstr ""
+msgstr "No aliases"
 
 msgid "No cache entries found"
-msgstr ""
+msgstr "No cache entries found"
 
 msgid "No certificates found"
-msgstr ""
+msgstr "No certificates found"
+
+msgid "No changes to save"
+msgstr "No changes to save"
 
 msgid "No charges have been made to your account."
-msgstr ""
+msgstr "No charges have been made to your account."
 
 msgid "No check data available"
-msgstr ""
+msgstr "No check data available"
 
 msgid "No contacts found"
-msgstr ""
+msgstr "No contacts found"
 
 msgid "No customer #{customerid}."
-msgstr ""
+msgstr "No customer #{customerid}."
 
 msgid "No customer assigned"
-msgstr ""
+msgstr "No customer assigned"
 
 msgid "No data available"
-msgstr ""
+msgstr "No data available"
 
 msgid "No domains"
-msgstr ""
+msgstr "No domains"
 
 msgid "No domains found"
-msgstr ""
+msgstr "No domains found"
 
 msgid "No examples found"
-msgstr ""
+msgstr "No examples found"
 
 msgid "No invoice rows"
-msgstr ""
+msgstr "No invoice rows"
 
 msgid "No invoice template."
-msgstr ""
+msgstr "No invoice template."
 
 msgid "No invoices found"
-msgstr ""
+msgstr "No invoices found"
 
 msgid "No invoicing"
-msgstr ""
+msgstr "No invoicing"
 
 msgid "No log entries"
-msgstr ""
+msgstr "No log entries"
 
 msgid "No mailboxes"
-msgstr ""
+msgstr "No mailboxes"
 
 msgid "No matches found"
-msgstr ""
+msgstr "No matches found"
 
 msgid "No menu items. Click \"Add item\" to create one."
-msgstr ""
+msgstr "No menu items. Click \"Add item\" to create one."
 
 msgid "No menus found"
-msgstr ""
+msgstr "No menus found"
 
 msgid "No messages found"
 msgstr "No messages found"
@@ -2950,121 +2986,121 @@ msgid "No messages yet"
 msgstr "No messages yet"
 
 msgid "No more domains in this direction"
-msgstr ""
+msgstr "No more domains in this direction"
 
 msgid "No pages found."
-msgstr ""
+msgstr "No pages found."
 
 msgid "No payments found"
-msgstr ""
+msgstr "No payments found"
 
 msgid "No payments selected"
-msgstr ""
+msgstr "No payments selected"
 
 msgid "No price data available"
-msgstr ""
+msgstr "No price data available"
 
 msgid "No provider data available"
-msgstr ""
+msgstr "No provider data available"
 
 msgid "No records"
-msgstr ""
+msgstr "No records"
 
 msgid "No records found"
-msgstr ""
+msgstr "No records found"
 
 msgid "No results"
-msgstr ""
+msgstr "No results"
 
 msgid "No results found"
-msgstr ""
+msgstr "No results found"
 
 msgid "No selected customer."
-msgstr ""
+msgstr "No selected customer."
 
 msgid "No template (empty zone)"
-msgstr ""
+msgstr "No template (empty zone)"
 
 msgid "No templates yet"
-msgstr ""
+msgstr "No templates yet"
 
 msgid "No title"
-msgstr ""
+msgstr "No title"
 
 msgid "No transactions found"
-msgstr ""
+msgstr "No transactions found"
 
 msgid "No transactions found for selected date range"
-msgstr ""
+msgstr "No transactions found for selected date range"
 
 msgid "No unprocessed payments"
-msgstr ""
+msgstr "No unprocessed payments"
 
 msgid "No users found"
-msgstr ""
+msgstr "No users found"
 
 msgid "Non-compliant (Foreign hosting)"
-msgstr ""
+msgstr "Non-compliant (Foreign hosting)"
 
 msgid "None (root level)"
-msgstr ""
+msgstr "None (root level)"
 
 msgid "Normal"
-msgstr ""
+msgstr "Normal"
 
 msgid "Not found"
-msgstr ""
+msgstr "Not found"
 
 msgid "Note"
-msgstr ""
+msgstr "Note"
 
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 msgid "Number"
-msgstr ""
+msgstr "Number"
 
 msgid "Numbered List"
-msgstr ""
+msgstr "Numbered List"
 
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 msgid "OVERDUE"
-msgstr ""
+msgstr "OVERDUE"
 
 msgid "One email per line, or separated by comma/space"
-msgstr ""
+msgstr "One email per line, or separated by comma/space"
 
 msgid "Only letters, numbers, underscore and hyphen"
-msgstr ""
+msgstr "Only letters, numbers, underscore and hyphen"
 
 msgid "Open Swish App"
-msgstr ""
+msgstr "Open Swish App"
 
 msgid "Open invoice"
-msgstr ""
+msgstr "Open invoice"
 
 msgid "Open invoice for customer"
-msgstr ""
+msgstr "Open invoice for customer"
 
 msgid "Open invoice for customer #{customerid}"
-msgstr ""
+msgstr "Open invoice for customer #{customerid}"
 
 msgid "Open invoice items"
-msgstr ""
+msgstr "Open invoice items"
 
 msgid "Open invoices"
-msgstr ""
+msgstr "Open invoices"
 
 msgid "Open list"
-msgstr ""
+msgstr "Open list"
 
 msgid "Open zone list"
-msgstr ""
+msgstr "Open zone list"
 
 msgid "Operation ID:"
-msgstr ""
+msgstr "Operation ID:"
 
 msgid "Operator"
 msgstr "Operator"
@@ -3073,286 +3109,286 @@ msgid "Operator: {operator}"
 msgstr "Operator: {operator}"
 
 msgid "Options"
-msgstr ""
+msgstr "Options"
 
 msgid "Or scan QR code with Swish app"
-msgstr ""
+msgstr "Or scan QR code with Swish app"
 
 msgid "Order"
-msgstr ""
+msgstr "Order"
 
 msgid "Order number or reference"
-msgstr ""
+msgstr "Order number or reference"
 
 msgid "Order saved"
-msgstr ""
+msgstr "Order saved"
 
 msgid "Org number"
-msgstr ""
+msgstr "Org number"
 
 msgid "Org number cannot be changed for SE/NU contacts"
-msgstr ""
+msgstr "Org number cannot be changed for SE/NU contacts"
 
 msgid "Org. Id"
-msgstr ""
+msgstr "Org. Id"
 
 msgid "Org. Id:"
-msgstr ""
+msgstr "Org. Id:"
 
 msgid "Org. Number"
-msgstr ""
+msgstr "Org. Number"
 
 msgid "Org.no."
-msgstr ""
+msgstr "Org.no."
 
 msgid "Organisation Number"
-msgstr ""
+msgstr "Organisation Number"
 
 msgid "Organization"
-msgstr ""
+msgstr "Organization"
 
 msgid "Organizational number"
-msgstr ""
+msgstr "Organizational number"
 
 msgid "Original due date"
-msgstr ""
+msgstr "Original due date"
 
 msgid "Our Plusgiro will soon disappear too."
-msgstr ""
+msgstr "Our Plusgiro will soon disappear too."
 
 msgid "Our Reference"
-msgstr ""
+msgstr "Our Reference"
 
 msgid "Our reference"
-msgstr ""
+msgstr "Our reference"
 
 msgid "Out of office"
-msgstr ""
+msgstr "Out of office"
 
 msgid "Over time, more web hosting features have been added."
-msgstr ""
+msgstr "Over time, more web hosting features have been added."
 
 msgid "Overall"
-msgstr ""
+msgstr "Overall"
 
 msgid "Overall Score"
-msgstr ""
+msgstr "Overall Score"
 
 msgid "Overdue Invoice Details"
-msgstr ""
+msgstr "Overdue Invoice Details"
 
 msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
-msgstr ""
+msgstr "Overdue payments will be charged a reminder fee  and {rate} interest."
 
 msgid "Ownership"
-msgstr ""
+msgstr "Ownership"
 
 msgid "PDF viewer"
-msgstr ""
+msgstr "PDF viewer"
 
 msgid "PEM format"
-msgstr ""
+msgstr "PEM format"
 
 msgid "PEM format (stored securely)"
-msgstr ""
+msgstr "PEM format (stored securely)"
 
 msgid "Page"
-msgstr ""
+msgstr "Page"
 
 msgid "Page navigation"
-msgstr ""
+msgstr "Page navigation"
 
 msgid "Page {number} of {total}"
-msgstr ""
+msgstr "Page {number} of {total}"
 
 msgid "PageSpeed result 100 100 100 100"
-msgstr ""
+msgstr "PageSpeed result 100 100 100 100"
 
 msgid "Pagination"
-msgstr ""
+msgstr "Pagination"
 
 msgid "Paid"
-msgstr ""
+msgstr "Paid"
 
 msgid "Paid amount"
-msgstr ""
+msgstr "Paid amount"
 
 msgid "Panel"
-msgstr ""
+msgstr "Panel"
 
 msgid "Paper in typewriter"
-msgstr ""
+msgstr "Paper in typewriter"
 
 msgid "Paragraph"
-msgstr ""
+msgstr "Paragraph"
 
 msgid "Parameters"
-msgstr ""
+msgstr "Parameters"
 
 msgid "Parent Item"
-msgstr ""
+msgstr "Parent Item"
 
 msgid "Password"
-msgstr ""
+msgstr "Password"
 
 msgid "Password is required"
-msgstr ""
+msgstr "Password is required"
 
 msgid "Password must be at least {min} characters"
-msgstr ""
+msgstr "Password must be at least {min} characters"
 
 msgid "Password must contain at least {min} lowercase letter(s)"
-msgstr ""
+msgstr "Password must contain at least {min} lowercase letter(s)"
 
 msgid "Password must contain at least {min} number(s)"
-msgstr ""
+msgstr "Password must contain at least {min} number(s)"
 
 msgid "Password must contain at least {min} special character(s)"
-msgstr ""
+msgstr "Password must contain at least {min} special character(s)"
 
 msgid "Password must contain at least {min} uppercase letter(s)"
-msgstr ""
+msgstr "Password must contain at least {min} uppercase letter(s)"
 
 msgid "Password requires: "
-msgstr ""
+msgstr "Password requires: "
 
 msgid "Password was wrong or username doesn't exist."
-msgstr ""
+msgstr "Password was wrong or username doesn't exist."
 
 msgid "Pay"
-msgstr ""
+msgstr "Pay"
 
 msgid "Pay instantly with Swish"
-msgstr ""
+msgstr "Pay instantly with Swish"
 
 msgid "Pay with Swish"
-msgstr ""
+msgstr "Pay with Swish"
 
 msgid "PayPal"
-msgstr ""
+msgstr "PayPal"
 
 msgid "PayPal Payments"
-msgstr ""
+msgstr "PayPal Payments"
 
 msgid "Paydate"
-msgstr ""
+msgstr "Paydate"
 
 msgid "Payer"
-msgstr ""
+msgstr "Payer"
 
 msgid "Payer Email"
-msgstr ""
+msgstr "Payer Email"
 
 msgid "Payment"
-msgstr ""
+msgstr "Payment"
 
 msgid "Payment Cancelled"
-msgstr ""
+msgstr "Payment Cancelled"
 
 msgid "Payment Details"
-msgstr ""
+msgstr "Payment Details"
 
 msgid "Payment ID"
-msgstr ""
+msgstr "Payment ID"
 
 msgid "Payment ID:"
-msgstr ""
+msgstr "Payment ID:"
 
 msgid "Payment Information"
-msgstr ""
+msgstr "Payment Information"
 
 msgid "Payment Intent"
-msgstr ""
+msgstr "Payment Intent"
 
 msgid "Payment Method"
-msgstr ""
+msgstr "Payment Method"
 
 msgid "Payment Reminder"
-msgstr ""
+msgstr "Payment Reminder"
 
 msgid "Payment Successful"
-msgstr ""
+msgstr "Payment Successful"
 
 msgid "Payment date"
-msgstr ""
+msgstr "Payment date"
 
 msgid "Payment due to: {duedate}"
-msgstr ""
+msgstr "Payment due to: {duedate}"
 
 msgid "Payment failed"
-msgstr ""
+msgstr "Payment failed"
 
 msgid "Payment for..."
-msgstr ""
+msgstr "Payment for..."
 
 msgid "Payment modal not available"
-msgstr ""
+msgstr "Payment modal not available"
 
 msgid "Payment must be charged before refund"
-msgstr ""
+msgstr "Payment must be charged before refund"
 
 msgid "Payment not found"
-msgstr ""
+msgstr "Payment not found"
 
 msgid "Payment registered successfully"
-msgstr ""
+msgstr "Payment registered successfully"
 
 msgid "Payment reminder: Invoice {number}"
-msgstr ""
+msgstr "Payment reminder: Invoice {number}"
 
 msgid "Payment request sent! Open your Swish app to confirm."
-msgstr ""
+msgstr "Payment request sent! Open your Swish app to confirm."
 
 msgid "Payment successful!"
-msgstr ""
+msgstr "Payment successful!"
 
 msgid "Payment terms"
-msgstr ""
+msgstr "Payment terms"
 
 msgid "Payment terms:"
-msgstr ""
+msgstr "Payment terms:"
 
 msgid "Payment timeout. Please check your Swish app."
-msgstr ""
+msgstr "Payment timeout. Please check your Swish app."
 
 msgid "Payment was declined or cancelled."
-msgstr ""
+msgstr "Payment was declined or cancelled."
 
 msgid "Payment with Nets Easy"
-msgstr ""
+msgstr "Payment with Nets Easy"
 
 msgid "Payment:"
-msgstr ""
+msgstr "Payment:"
 
 msgid "Payments"
-msgstr ""
+msgstr "Payments"
 
 msgid "Payments may take up to one week to become visible in the control panel."
-msgstr ""
+msgstr "Payments may take up to one week to become visible in the control panel."
 
 msgid "Paypal"
-msgstr ""
+msgstr "Paypal"
 
 msgid "Paypal:"
-msgstr ""
+msgstr "Paypal:"
 
 msgid "Pending"
-msgstr ""
+msgstr "Pending"
 
 msgid "People rocketing to the sky"
-msgstr ""
+msgstr "People rocketing to the sky"
 
 msgid "Period"
-msgstr ""
+msgstr "Period"
 
 msgid "Personal"
-msgstr ""
+msgstr "Personal"
 
 msgid "Personal menu"
-msgstr ""
+msgstr "Personal menu"
 
 msgid "Personal panel"
-msgstr ""
+msgstr "Personal panel"
 
 msgid "Phone"
 msgstr "Phone"
@@ -3361,19 +3397,19 @@ msgid "Phone Number"
 msgstr "Phone Number"
 
 msgid "Phone number"
-msgstr ""
+msgstr "Phone number"
 
 msgid "Please check your confirmation link or register again."
-msgstr ""
+msgstr "Please check your confirmation link or register again."
 
 msgid "Please confirm your email address by clicking the following link:"
-msgstr ""
+msgstr "Please confirm your email address by clicking the following link:"
 
 msgid "Please enter a message"
 msgstr "Please enter a message"
 
 msgid "Please enter a payment date"
-msgstr ""
+msgstr "Please enter a payment date"
 
 msgid "Please enter a valid email address"
 msgstr "Please enter a valid email address"
@@ -3382,424 +3418,427 @@ msgid "Please enter a valid phone number"
 msgstr "Please enter a valid phone number"
 
 msgid "Please find attached invoice"
-msgstr ""
+msgstr "Please find attached invoice"
 
 msgid "Please include the invoice number as reference when making the payment."
-msgstr ""
+msgstr "Please include the invoice number as reference when making the payment."
 
 msgid "Please log in to access that page"
-msgstr ""
+msgstr "Please log in to access that page"
 
 msgid "Please login to access resource."
-msgstr ""
+msgstr "Please login to access resource."
 
 msgid "Please logout and login as a user with proper authorization instead."
-msgstr ""
+msgstr "Please logout and login as a user with proper authorization instead."
 
 msgid "Please select at least one registry"
-msgstr ""
+msgstr "Please select at least one registry"
 
 msgid "Please select both start and end dates"
-msgstr ""
+msgstr "Please select both start and end dates"
 
 msgid "Plusgiro"
-msgstr ""
+msgstr "Plusgiro"
 
 msgid "Polls"
-msgstr ""
+msgstr "Polls"
 
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 msgid "Posta faktura"
-msgstr ""
+msgstr "Posta faktura"
 
 msgid "Postal Code"
-msgstr ""
+msgstr "Postal Code"
 
 msgid "Postal code"
-msgstr ""
+msgstr "Postal code"
 
 msgid "Postal code (billing)"
-msgstr ""
+msgstr "Postal code (billing)"
 
 msgid "Postal mail"
-msgstr ""
+msgstr "Postal mail"
 
 msgid "Postgiro"
-msgstr ""
+msgstr "Postgiro"
 
 msgid "Pre-populate zone with template records"
-msgstr ""
+msgstr "Pre-populate zone with template records"
 
 msgid "Preference"
-msgstr ""
+msgstr "Preference"
 
 msgid "Preferred Language"
-msgstr ""
+msgstr "Preferred Language"
 
 msgid "Presentation"
-msgstr ""
+msgstr "Presentation"
 
 msgid "Press \"{buttontext}\" to regenerate"
-msgstr ""
+msgstr "Press \"{buttontext}\" to regenerate"
 
 msgid "Press Register to regenerate"
-msgstr ""
+msgstr "Press Register to regenerate"
 
 msgid "Preview"
-msgstr ""
+msgstr "Preview"
 
 msgid "Previous"
-msgstr ""
+msgstr "Previous"
 
 msgid "Price"
-msgstr ""
+msgstr "Price"
 
 msgid "Price List"
-msgstr ""
+msgstr "Price List"
 
 msgid "Prices"
-msgstr ""
+msgstr "Prices"
 
 msgid "Primary NS"
-msgstr ""
+msgstr "Primary NS"
 
 msgid "Priority"
-msgstr ""
+msgstr "Priority"
 
 msgid "Privacy Protection"
-msgstr ""
+msgstr "Privacy Protection"
 
 msgid "Private Key"
-msgstr ""
+msgstr "Private Key"
 
 msgid "Privilege sets"
-msgstr ""
+msgstr "Privilege sets"
 
 msgid "Privileges"
-msgstr ""
+msgstr "Privileges"
 
 msgid "Proceed to Payment"
-msgstr ""
+msgstr "Proceed to Payment"
 
 msgid "Process"
-msgstr ""
+msgstr "Process"
 
 msgid "Process ID"
-msgstr ""
+msgstr "Process ID"
 
 msgid "Process selected"
-msgstr ""
+msgstr "Process selected"
 
 msgid "Processed"
-msgstr ""
+msgstr "Processed"
 
 msgid "Processing failed"
-msgstr ""
+msgstr "Processing failed"
 
 msgid "Product"
-msgstr ""
+msgstr "Product"
 
 msgid "Products"
-msgstr ""
+msgstr "Products"
 
 msgid "Profile Image"
-msgstr ""
+msgstr "Profile Image"
 
 msgid "Promotions"
-msgstr ""
+msgstr "Promotions"
 
 msgid "Protocol"
-msgstr ""
+msgstr "Protocol"
 
 msgid "Provider"
-msgstr ""
+msgstr "Provider"
 
 msgid "Public Key"
-msgstr ""
+msgstr "Public Key"
 
 msgid "Published"
-msgstr ""
+msgstr "Published"
 
 msgid "Purge"
-msgstr ""
+msgstr "Purge"
 
 msgid "Purge All"
-msgstr ""
+msgstr "Purge All"
 
 msgid "Purged %d cache entries"
-msgstr ""
+msgstr "Purged %d cache entries"
 
 msgid "Purging all cache requires confirmation"
-msgstr ""
+msgstr "Purging all cache requires confirmation"
 
 msgid "Qty"
-msgstr ""
+msgstr "Qty"
 
 msgid "Qty."
-msgstr ""
+msgstr "Qty."
 
 msgid "Quantity"
-msgstr ""
+msgstr "Quantity"
 
 msgid "Quarter"
-msgstr ""
+msgstr "Quarter"
 
 msgid "Quota"
-msgstr ""
+msgstr "Quota"
 
 msgid "Quota (MB)"
-msgstr ""
+msgstr "Quota (MB)"
 
 msgid "Quota updated successfully"
-msgstr ""
+msgstr "Quota updated successfully"
 
 msgid "Quotas"
-msgstr ""
+msgstr "Quotas"
 
 msgid "Quote"
-msgstr ""
+msgstr "Quote"
 
 msgid "Re:"
-msgstr ""
+msgstr "Re:"
 
 msgid "Realtime Register"
-msgstr ""
+msgstr "Realtime Register"
 
 msgid "RealtimeRegister API Integration"
-msgstr ""
+msgstr "RealtimeRegister API Integration"
 
 msgid "Received"
 msgstr "Received"
 
 msgid "Receiver"
-msgstr ""
+msgstr "Receiver"
 
 msgid "Recent Check Runs"
-msgstr ""
+msgstr "Recent Check Runs"
 
 msgid "Recent Messages"
 msgstr "Recent Messages"
 
 msgid "Recent Payments"
-msgstr ""
+msgstr "Recent Payments"
 
 msgid "Recent activity"
-msgstr ""
+msgstr "Recent activity"
 
 msgid "Recent signatures"
-msgstr ""
+msgstr "Recent signatures"
 
 msgid "Recommended by"
-msgstr ""
+msgstr "Recommended by"
 
 msgid "Record"
-msgstr ""
+msgstr "Record"
 
 msgid "Record Name"
-msgstr ""
+msgstr "Record Name"
 
 msgid "Record Type"
-msgstr ""
+msgstr "Record Type"
 
 msgid "Record Value"
-msgstr ""
+msgstr "Record Value"
 
 msgid "Record added"
-msgstr ""
+msgstr "Record added"
 
 msgid "Record created successfully"
-msgstr ""
+msgstr "Record created successfully"
 
 msgid "Record deleted"
-msgstr ""
+msgstr "Record deleted"
 
 msgid "Record deleted successfully"
-msgstr ""
+msgstr "Record deleted successfully"
 
 msgid "Record not found"
-msgstr ""
+msgstr "Record not found"
 
 msgid "Record saved successfully"
-msgstr ""
+msgstr "Record saved successfully"
 
 msgid "Record updated"
-msgstr ""
+msgstr "Record updated"
 
 msgid "Record updated successfully"
-msgstr ""
+msgstr "Record updated successfully"
 
 msgid "Records"
-msgstr ""
+msgstr "Records"
 
 msgid "Reference"
-msgstr ""
+msgstr "Reference"
 
 msgid "References"
-msgstr ""
+msgstr "References"
 
 msgid "Refresh"
 msgstr "Refresh"
 
 msgid "Refund amount exceeds available amount"
-msgstr ""
+msgstr "Refund amount exceeds available amount"
 
 msgid "Refunded"
-msgstr ""
+msgstr "Refunded"
 
 msgid "Refunded/Failed"
-msgstr ""
+msgstr "Refunded/Failed"
 
 msgid "Refunded:"
-msgstr ""
+msgstr "Refunded:"
 
 msgid "Regards"
-msgstr ""
+msgstr "Regards"
 
 msgid "Regexp"
-msgstr ""
+msgstr "Regexp"
 
 msgid "Register"
-msgstr ""
+msgstr "Register"
 
 msgid "Register account"
-msgstr ""
+msgstr "Register account"
 
 msgid "Register domain"
-msgstr ""
+msgstr "Register domain"
 
 msgid "Register payment"
-msgstr ""
+msgstr "Register payment"
 
 msgid "Register to create and publish content."
-msgstr ""
+msgstr "Register to create and publish content."
 
 msgid "Registered for F-tax"
-msgstr ""
+msgstr "Registered for F-tax"
 
 msgid "Registered office"
-msgstr ""
+msgstr "Registered office"
 
 msgid "Registered office:"
-msgstr ""
+msgstr "Registered office:"
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
-msgstr ""
+msgstr "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local customer interface."
 
 msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
-msgstr ""
+msgstr "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
 
 msgid "Registrant"
-msgstr ""
+msgstr "Registrant"
 
 msgid "Registrant contact"
-msgstr ""
+msgstr "Registrant contact"
 
 msgid "Registrar"
-msgstr ""
+msgstr "Registrar"
 
 msgid "Registration is currently non-functional"
-msgstr ""
+msgstr "Registration is currently non-functional"
 
 msgid "Registries"
-msgstr ""
+msgstr "Registries"
 
 msgid "Registries & Handles"
-msgstr ""
+msgstr "Registries & Handles"
 
 msgid "Registry"
-msgstr ""
+msgstr "Registry"
 
 msgid "Remaining amount to pay: {amount} {currency}"
-msgstr ""
+msgstr "Remaining amount to pay: {amount} {currency}"
 
 msgid "Remarks"
-msgstr ""
+msgstr "Remarks"
 
 msgid "Remind"
-msgstr ""
+msgstr "Remind"
 
 msgid "Reminder sent successfully"
-msgstr ""
+msgstr "Reminder sent successfully"
+
+msgid "Remove"
+msgstr "Remove"
 
 msgid "Rename"
-msgstr ""
+msgstr "Rename"
 
 msgid "Renew"
-msgstr ""
+msgstr "Renew"
 
 msgid "Replacement"
-msgstr ""
+msgstr "Replacement"
 
 msgid "Reply interval (seconds)"
-msgstr ""
+msgstr "Reply interval (seconds)"
 
 msgid "Reprint"
-msgstr ""
+msgstr "Reprint"
 
 msgid "Reprint invoice"
-msgstr ""
+msgstr "Reprint invoice"
 
 msgid "Required"
-msgstr ""
+msgstr "Required"
 
 msgid "Required for most TLDs. Get this from your current registrar."
-msgstr ""
+msgstr "Required for most TLDs. Get this from your current registrar."
 
 msgid "Resend"
-msgstr ""
+msgstr "Resend"
 
 msgid "Resend invoice"
-msgstr ""
+msgstr "Resend invoice"
 
 msgid "Resources"
-msgstr ""
+msgstr "Resources"
 
 msgid "Response"
-msgstr ""
+msgstr "Response"
 
 msgid "Retry"
-msgstr ""
+msgstr "Retry"
 
 msgid "Return to Home"
-msgstr ""
+msgstr "Return to Home"
 
 msgid "Roles"
-msgstr ""
+msgstr "Roles"
 
 msgid "Roomservice"
-msgstr ""
+msgstr "Roomservice"
 
 msgid "Round off"
-msgstr ""
+msgstr "Round off"
 
 msgid "Round off:"
-msgstr ""
+msgstr "Round off:"
 
 msgid "Rounding"
-msgstr ""
+msgstr "Rounding"
 
 msgid "Route all mail to another domain"
-msgstr ""
+msgstr "Route all mail to another domain"
 
 msgid "Run ID required"
-msgstr ""
+msgstr "Run ID required"
 
 msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
-msgstr ""
+msgstr "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
 
 msgid "Running checks..."
-msgstr ""
+msgstr "Running checks..."
 
 msgid "SEK"
-msgstr ""
+msgstr "SEK"
 
 msgid "SMS"
-msgstr ""
+msgstr "SMS"
 
 msgid "SMS Conversation"
-msgstr ""
+msgstr "SMS Conversation"
 
 msgid "SMS Management"
 msgstr "SMS Management"
@@ -3811,313 +3850,313 @@ msgid "SMS sent successfully"
 msgstr "SMS sent successfully"
 
 msgid "SMS sent successfully!"
-msgstr ""
+msgstr "SMS sent successfully!"
 
 msgid "SOA Serial"
-msgstr ""
+msgstr "SOA Serial"
 
 msgid "SWISH"
-msgstr ""
+msgstr "SWISH"
 
 msgid "Same as registrant"
-msgstr ""
+msgstr "Same as registrant"
 
 msgid "Samizdat"
-msgstr ""
+msgstr "Samizdat"
 
 msgid "Samizdat Fortnox integration"
-msgstr ""
+msgstr "Samizdat Fortnox integration"
 
 msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
-msgstr ""
+msgstr "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
 
 msgid "Samizdat uses the Bootstrap icons from {link}."
-msgstr ""
+msgstr "Samizdat uses the Bootstrap icons from {link}."
 
 msgid "Samples of fabric"
-msgstr ""
+msgstr "Samples of fabric"
 
 msgid "Save"
-msgstr ""
+msgstr "Save"
 
 msgid "Save Settings"
-msgstr ""
+msgstr "Save Settings"
 
 msgid "Save Template"
-msgstr ""
+msgstr "Save Template"
 
 msgid "Save changes"
-msgstr ""
+msgstr "Save changes"
 
 msgid "Save failed"
-msgstr ""
+msgstr "Save failed"
 
 msgid "Save options"
-msgstr ""
+msgstr "Save options"
 
 msgid "Save to database"
-msgstr ""
+msgstr "Save to database"
 
 msgid "Save to file"
-msgstr ""
+msgstr "Save to file"
 
 msgid "Saved successfully"
-msgstr ""
+msgstr "Saved successfully"
 
 msgid "Scan QR code or tap to open Swish app"
-msgstr ""
+msgstr "Scan QR code or tap to open Swish app"
 
 msgid "Scan the QR code with your Swish app for immediate payment."
-msgstr ""
+msgstr "Scan the QR code with your Swish app for immediate payment."
 
 msgid "Scan the QR code with your Swish app or enter the details manually."
-msgstr ""
+msgstr "Scan the QR code with your Swish app or enter the details manually."
 
 msgid "Score"
-msgstr ""
+msgstr "Score"
 
 msgid "Score (High to Low)"
-msgstr ""
+msgstr "Score (High to Low)"
 
 msgid "Score (Low to High)"
-msgstr ""
+msgstr "Score (Low to High)"
 
 msgid "Search"
-msgstr ""
+msgstr "Search"
 
 msgid "Search admin to add"
-msgstr ""
+msgstr "Search admin to add"
 
 msgid "Search cache"
-msgstr ""
+msgstr "Search cache"
 
 msgid "Search certificates..."
-msgstr ""
+msgstr "Search certificates..."
 
 msgid "Search contact"
-msgstr ""
+msgstr "Search contact"
 
 msgid "Search contacts..."
-msgstr ""
+msgstr "Search contacts..."
 
 msgid "Search content"
-msgstr ""
+msgstr "Search content"
 
 msgid "Search customer (min 3 chars)..."
-msgstr ""
+msgstr "Search customer (min 3 chars)..."
 
 msgid "Search domain"
-msgstr ""
+msgstr "Search domain"
 
 msgid "Search domain to add"
-msgstr ""
+msgstr "Search domain to add"
 
 msgid "Search domains..."
-msgstr ""
+msgstr "Search domains..."
 
 msgid "Search example"
-msgstr ""
+msgstr "Search example"
 
 msgid "Search examples"
-msgstr ""
+msgstr "Search examples"
 
 msgid "Search field for {what}"
-msgstr ""
+msgstr "Search field for {what}"
 
 msgid "Search for SMS"
-msgstr ""
+msgstr "Search for SMS"
 
 msgid "Search for admin"
-msgstr ""
+msgstr "Search for admin"
 
 msgid "Search for certificates"
-msgstr ""
+msgstr "Search for certificates"
 
 msgid "Search for customer"
-msgstr ""
+msgstr "Search for customer"
 
 msgid "Search for database"
-msgstr ""
+msgstr "Search for database"
 
 msgid "Search for domain"
-msgstr ""
+msgstr "Search for domain"
 
 msgid "Search for email"
-msgstr ""
+msgstr "Search for email"
 
 msgid "Search for example"
-msgstr ""
+msgstr "Search for example"
 
 msgid "Search for invoice"
-msgstr ""
+msgstr "Search for invoice"
 
 msgid "Search for mail domain"
-msgstr ""
+msgstr "Search for mail domain"
 
 msgid "Search for mailbox"
-msgstr ""
+msgstr "Search for mailbox"
 
 msgid "Search for poll"
-msgstr ""
+msgstr "Search for poll"
 
 msgid "Search for product"
-msgstr ""
+msgstr "Search for product"
 
 msgid "Search for user or group"
-msgstr ""
+msgstr "Search for user or group"
 
 msgid "Search for website"
-msgstr ""
+msgstr "Search for website"
 
 msgid "Search for zone"
-msgstr ""
+msgstr "Search for zone"
 
 msgid "Search menus..."
-msgstr ""
+msgstr "Search menus..."
 
 msgid "Search pages..."
-msgstr ""
+msgstr "Search pages..."
 
 msgid "Search pattern (e.g. fortnox:*, user:*)"
-msgstr ""
+msgstr "Search pattern (e.g. fortnox:*, user:*)"
 
 msgid "Search web content"
-msgstr ""
+msgstr "Search web content"
 
 msgid "Sector"
-msgstr ""
+msgstr "Sector"
 
 msgid "Sector Statistics"
-msgstr ""
+msgstr "Sector Statistics"
 
 msgid "Select"
-msgstr ""
+msgstr "Select"
 
 msgid "Select Format"
-msgstr ""
+msgstr "Select Format"
 
 msgid "Select a template to edit or create a new one"
-msgstr ""
+msgstr "Select a template to edit or create a new one"
 
 msgid "Select all"
-msgstr ""
+msgstr "Select all"
 
 msgid "Select art.no."
-msgstr ""
+msgstr "Select art.no."
 
 msgid "Select contact..."
-msgstr ""
+msgstr "Select contact..."
 
 msgid "Select country"
-msgstr ""
+msgstr "Select country"
 
 msgid "Select country or click flags to see detail"
-msgstr ""
+msgstr "Select country or click flags to see detail"
 
 msgid "Select country..."
-msgstr ""
+msgstr "Select country..."
 
 msgid "Select customer"
-msgstr ""
+msgstr "Select customer"
 
 msgid "Select customer first..."
-msgstr ""
+msgstr "Select customer first..."
 
 msgid "Select invoice pack"
-msgstr ""
+msgstr "Select invoice pack"
 
 msgid "Select registries and set handles for each"
-msgstr ""
+msgstr "Select registries and set handles for each"
 
 msgid "Select target domain"
-msgstr ""
+msgstr "Select target domain"
 
 msgid "Select type"
-msgstr ""
+msgstr "Select type"
 
 msgid "Send SMS"
 msgstr "Send SMS"
 
 msgid "Send again"
-msgstr ""
+msgstr "Send again"
 
 msgid "Send invoice questions to {url}."
-msgstr ""
+msgstr "Send invoice questions to {url}."
 
 msgid "Send message"
-msgstr ""
+msgstr "Send message"
 
 msgid "Send now"
-msgstr ""
+msgstr "Send now"
 
 msgid "Send reminder"
-msgstr ""
+msgstr "Send reminder"
 
 msgid "Sending..."
-msgstr ""
+msgstr "Sending..."
 
 msgid "Sent"
 msgstr "Sent"
 
 msgid "Serial"
-msgstr ""
+msgstr "Serial"
 
 msgid "Servers"
-msgstr ""
+msgstr "Servers"
 
 msgid "Service"
-msgstr ""
+msgstr "Service"
 
 msgid "Service interruption"
-msgstr ""
+msgstr "Service interruption"
 
 msgid "Session:"
-msgstr ""
+msgstr "Session:"
 
 msgid "Set the height attribute."
-msgstr ""
+msgstr "Set the height attribute."
 
 msgid "Set the id attribute."
-msgstr ""
+msgstr "Set the id attribute."
 
 msgid "Set the title attribute."
-msgstr ""
+msgstr "Set the title attribute."
 
 msgid "Set the width attribute."
-msgstr ""
+msgstr "Set the width attribute."
 
 msgid "Settings"
-msgstr ""
+msgstr "Settings"
 
 msgid "Share on Facebook"
-msgstr ""
+msgstr "Share on Facebook"
 
 msgid "Share on LinkedIn"
-msgstr ""
+msgstr "Share on LinkedIn"
 
 msgid "Share on Telegram"
-msgstr ""
+msgstr "Share on Telegram"
 
 msgid "Share on Twitter"
-msgstr ""
+msgstr "Share on Twitter"
 
 msgid "Share {what} on {where}"
-msgstr ""
+msgstr "Share {what} on {where}"
 
 msgid "Shown as"
-msgstr ""
+msgstr "Shown as"
 
 msgid "Side content"
-msgstr ""
+msgstr "Side content"
 
 msgid "Sidecard name"
-msgstr ""
+msgstr "Sidecard name"
 
 msgid "Sign poll to kick Sergei Shoigu!"
-msgstr ""
+msgstr "Sign poll to kick Sergei Shoigu!"
 
 msgid "Sign poll!"
-msgstr ""
+msgstr "Sign poll!"
 
 msgid "Signal Strength"
 msgstr "Signal Strength"
@@ -4126,998 +4165,1001 @@ msgid "Signal: {signal}%"
 msgstr "Signal: {signal}%"
 
 msgid "Site"
-msgstr ""
+msgstr "Site"
 
 msgid "Site content"
-msgstr ""
+msgstr "Site content"
 
 msgid "Skip links"
-msgstr ""
+msgstr "Skip links"
 
 msgid "Skip menu"
-msgstr ""
+msgstr "Skip menu"
 
 msgid "Skip to main content"
-msgstr ""
+msgstr "Skip to main content"
 
 msgid "Snapback evaluation"
-msgstr ""
+msgstr "Snapback evaluation"
 
 msgid "Snapback only"
-msgstr ""
+msgstr "Snapback only"
 
 msgid "Snapback scheduler"
-msgstr ""
+msgstr "Snapback scheduler"
 
 msgid "Sort by"
-msgstr ""
+msgstr "Sort by"
 
 msgid "Source code on Github"
-msgstr ""
+msgstr "Source code on Github"
 
 msgid "Source files"
-msgstr ""
+msgstr "Source files"
 
 msgid "Space separated list of extra classes to append the prefixed default classes."
-msgstr ""
+msgstr "Space separated list of extra classes to append the prefixed default classes."
 
 msgid "Special price"
-msgstr ""
+msgstr "Special price"
 
 msgid "Start"
-msgstr ""
+msgstr "Start"
 
 msgid "Start Date"
-msgstr ""
+msgstr "Start Date"
 
 msgid "Start New Check Run"
-msgstr ""
+msgstr "Start New Check Run"
 
 msgid "Start a conversation by sending a message"
-msgstr ""
+msgstr "Start a conversation by sending a message"
 
 msgid "Start main content"
-msgstr ""
+msgstr "Start main content"
 
 msgid "Start side content"
-msgstr ""
+msgstr "Start side content"
 
 msgid "Started"
-msgstr ""
+msgstr "Started"
 
 msgid "State/Province"
-msgstr ""
+msgstr "State/Province"
 
 msgid "Statistics"
-msgstr ""
+msgstr "Statistics"
 
 msgid "Status"
 msgstr "Status"
 
 msgid "Storage"
-msgstr ""
+msgstr "Storage"
 
 msgid "Storage target"
-msgstr ""
+msgstr "Storage target"
 
 msgid "Street"
-msgstr ""
+msgstr "Street"
 
 msgid "Street Address"
-msgstr ""
+msgstr "Street Address"
 
 msgid "Street address (one line per row)"
-msgstr ""
+msgstr "Street address (one line per row)"
 
 msgid "Strictly for Rymdweb"
-msgstr ""
+msgstr "Strictly for Rymdweb"
 
 msgid "Strikethrough"
-msgstr ""
+msgstr "Strikethrough"
 
 msgid "Stripe"
-msgstr ""
+msgstr "Stripe"
 
 msgid "Stripe Payments"
-msgstr ""
+msgstr "Stripe Payments"
 
 msgid "Stuff"
-msgstr ""
+msgstr "Stuff"
 
 msgid "Subject"
-msgstr ""
+msgstr "Subject"
 
 msgid "Submit"
-msgstr ""
+msgstr "Submit"
 
 msgid "Succeeded"
-msgstr ""
+msgstr "Succeeded"
 
 msgid "Summa"
-msgstr ""
+msgstr "Summa"
 
 msgid "Super panel"
-msgstr ""
+msgstr "Super panel"
 
 msgid "Superadmin"
-msgstr ""
+msgstr "Superadmin"
 
 msgid "Superadmin access required"
-msgstr ""
+msgstr "Superadmin access required"
 
 msgid "Supplier invoices"
-msgstr ""
+msgstr "Supplier invoices"
 
 msgid "Support for both production and test environments"
-msgstr ""
+msgstr "Support for both production and test environments"
 
 msgid "Supported formats: JPG, PNG, WebP. Max size: 2MB"
-msgstr ""
+msgstr "Supported formats: JPG, PNG, WebP. Max size: 2MB"
 
 msgid "Surname"
-msgstr ""
+msgstr "Surname"
 
 msgid "Swedish"
-msgstr ""
+msgstr "Swedish"
 
 msgid "Swish Payments"
-msgstr ""
+msgstr "Swish Payments"
 
 msgid "Swish number"
-msgstr ""
+msgstr "Swish number"
 
 msgid "Sync Messages"
-msgstr ""
+msgstr "Sync Messages"
 
 msgid "Sync completed!"
-msgstr ""
+msgstr "Sync completed!"
 
 msgid "Sync failed"
-msgstr ""
+msgstr "Sync failed"
 
 msgid "Sync messages"
-msgstr ""
+msgstr "Sync messages"
 
 msgid "Syncing..."
-msgstr ""
+msgstr "Syncing..."
 
 msgid "TTL"
-msgstr ""
+msgstr "TTL"
 
 msgid "Tag"
-msgstr ""
+msgstr "Tag"
 
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 msgid "Target"
-msgstr ""
+msgstr "Target"
 
 msgid "Target domain"
-msgstr ""
+msgstr "Target domain"
 
 msgid "Tech"
-msgstr ""
+msgstr "Tech"
+
+msgid "Tech Contact"
+msgstr "Tech Contact"
 
 msgid "Tech contact"
-msgstr ""
+msgstr "Tech contact"
 
 msgid "Technical"
-msgstr ""
+msgstr "Technical"
 
 msgid "Technical questions"
-msgstr ""
+msgstr "Technical questions"
 
 msgid "Technical questions:"
-msgstr ""
+msgstr "Technical questions:"
 
 msgid "Telephone"
-msgstr ""
+msgstr "Telephone"
 
 msgid "Template"
-msgstr ""
+msgstr "Template"
 
 msgid "Template created"
-msgstr ""
+msgstr "Template created"
 
 msgid "Template deleted"
-msgstr ""
+msgstr "Template deleted"
 
 msgid "Template duplicated"
-msgstr ""
+msgstr "Template duplicated"
 
 msgid "Template updated"
-msgstr ""
+msgstr "Template updated"
 
 msgid "Templates"
-msgstr ""
+msgstr "Templates"
 
 msgid "Terms of Payment"
-msgstr ""
+msgstr "Terms of Payment"
 
 msgid "Terms of service"
-msgstr ""
+msgstr "Terms of service"
 
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 msgid "Test customer"
-msgstr ""
+msgstr "Test customer"
 
 msgid "Text"
-msgstr ""
+msgstr "Text"
 
 msgid "Text Editor"
-msgstr ""
+msgstr "Text Editor"
 
 msgid "Thank you for contacting us."
-msgstr ""
+msgstr "Thank you for contacting us."
 
 msgid "Thank you for your business"
-msgstr ""
+msgstr "Thank you for your business"
 
 msgid "Thank you for your payment."
-msgstr ""
+msgstr "Thank you for your payment."
 
 msgid "Thank you for your payment. Your Swish transaction has been completed."
-msgstr ""
+msgstr "Thank you for your payment. Your Swish transaction has been completed."
 
 msgid "Thank you for your payment. Your transaction has been completed."
-msgstr ""
+msgstr "Thank you for your payment. Your transaction has been completed."
 
 msgid "Thank you for your prompt attention to this matter."
-msgstr ""
+msgstr "Thank you for your prompt attention to this matter."
 
 msgid "Thank you! Your payment has been processed successfully."
-msgstr ""
+msgstr "Thank you! Your payment has been processed successfully."
 
 msgid "The Samizdat project"
-msgstr ""
+msgstr "The Samizdat project"
 
 msgid "The default is used for the Bootstrap icons set."
-msgstr ""
+msgstr "The default is used for the Bootstrap icons set."
 
 msgid "The form was submitted from {ip}"
-msgstr ""
+msgstr "The form was submitted from {ip}"
 
 msgid "The invoice is also available at"
-msgstr ""
+msgstr "The invoice is also available at"
 
 msgid "The invoice was due to {duedate}."
-msgstr ""
+msgstr "The invoice was due to {duedate}."
 
 msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
-msgstr ""
+msgstr "The limit is {blocklimit} attempts per {blocktime} minutes."
 
 msgid "The limit is {limit}."
-msgstr ""
+msgstr "The limit is {limit}."
 
 msgid "The login function uses javascript, cookies and AJAX."
-msgstr ""
+msgstr "The login function uses javascript, cookies and AJAX."
 
 msgid "The oldest was made {failuretime} by &quot;{username}&quot;."
-msgstr ""
+msgstr "The oldest was made {failuretime} by &quot;{username}&quot;."
 
 msgid "The page {docpath} wasn't found."
-msgstr ""
+msgstr "The page {docpath} wasn't found."
 
 msgid "The payment process was interrupted. This could be because:"
-msgstr ""
+msgstr "The payment process was interrupted. This could be because:"
 
 msgid "The payment session expired"
-msgstr ""
+msgstr "The payment session expired"
 
 msgid "The stock is listed on Nasdaq Stockholm's main list."
-msgstr ""
+msgstr "The stock is listed on Nasdaq Stockholm's main list."
 
 msgid "Theme"
-msgstr ""
+msgstr "Theme"
 
 msgid "There was an issue with your payment method"
-msgstr ""
+msgstr "There was an issue with your payment method"
 
 msgid "This confirmation link is invalid or has expired"
-msgstr ""
+msgstr "This confirmation link is invalid or has expired"
 
 msgid "This demonstration shows the result of Samizdat's SVG template helper."
-msgstr ""
+msgstr "This demonstration shows the result of Samizdat's SVG template helper."
 
 msgid "This field is required"
 msgstr "This field is required"
 
 msgid "This file is distributed under the same license as the {project} package."
-msgstr ""
+msgstr "This file is distributed under the same license as the {project} package."
 
 msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
-msgstr ""
+msgstr "This integration handles invoicing independently and synchronizes invoices with Fortnox."
 
 msgid "This integration is developed and maintained by Rymdweb AB."
-msgstr ""
+msgstr "This integration is developed and maintained by Rymdweb AB."
 
 msgid "This is a final reminder regarding your overdue invoice."
-msgstr ""
+msgstr "This is a final reminder regarding your overdue invoice."
 
 msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
-msgstr ""
+msgstr "This is an automated reminder. Failure to pay may result in service interruption and legal action."
 
 msgid "This might be an oversight, so we wanted to send a friendly reminder."
-msgstr ""
+msgstr "This might be an oversight, so we wanted to send a friendly reminder."
 
 msgid "This resource has no input parameters."
-msgstr ""
+msgstr "This resource has no input parameters."
 
 msgid "This resource is deprecated!"
-msgstr ""
+msgstr "This resource is deprecated!"
 
 msgid "This resource is not documented."
-msgstr ""
+msgstr "This resource is not documented."
 
 msgid "This will result in additional fees and may affect your credit rating."
-msgstr ""
+msgstr "This will result in additional fees and may affect your credit rating."
 
 msgid "Tillbaka"
-msgstr ""
+msgstr "Tillbaka"
 
 msgid "Time"
 msgstr "Time"
 
 msgid "Timestamp"
-msgstr ""
+msgstr "Timestamp"
 
 msgid "Title"
-msgstr ""
+msgstr "Title"
 
 msgid "Titles by Language"
-msgstr ""
+msgstr "Titles by Language"
 
 msgid "Toggle Dropdown"
-msgstr ""
+msgstr "Toggle Dropdown"
 
 msgid "Toggle menu"
-msgstr ""
+msgstr "Toggle menu"
 
 msgid "Tot"
-msgstr ""
+msgstr "Tot"
 
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 msgid "Total Domains"
-msgstr ""
+msgstr "Total Domains"
 
 msgid "Total Records"
-msgstr ""
+msgstr "Total Records"
 
 msgid "Total refunds"
-msgstr ""
+msgstr "Total refunds"
 
 msgid "Total to pay"
-msgstr ""
+msgstr "Total to pay"
 
 msgid "Total: {count} customers"
-msgstr ""
+msgstr "Total: {count} customers"
 
 msgid "Totals"
-msgstr ""
+msgstr "Totals"
 
 msgid "Tough"
-msgstr ""
+msgstr "Tough"
 
 msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
-msgstr ""
+msgstr "Tracking Swedish organizations' hosting compliance for data sovereignty"
 
 msgid "Transaction"
-msgstr ""
+msgstr "Transaction"
 
 msgid "Transaction Details"
-msgstr ""
+msgstr "Transaction Details"
 
 msgid "Transaction ID"
-msgstr ""
+msgstr "Transaction ID"
 
 msgid "Transaction ID:"
-msgstr ""
+msgstr "Transaction ID:"
 
 msgid "Transaction not found"
-msgstr ""
+msgstr "Transaction not found"
 
 msgid "Transactions"
-msgstr ""
+msgstr "Transactions"
 
 msgid "Transfer"
-msgstr ""
+msgstr "Transfer"
 
 msgid "Transfer domain"
-msgstr ""
+msgstr "Transfer domain"
 
 msgid "Translate"
-msgstr ""
+msgstr "Translate"
 
 msgid "Translating..."
-msgstr ""
+msgstr "Translating..."
 
 msgid "Translation complete"
-msgstr ""
+msgstr "Translation complete"
 
 msgid "Try Again"
-msgstr ""
+msgstr "Try Again"
 
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 msgid "URGENT: Final Payment Reminder"
-msgstr ""
+msgstr "URGENT: Final Payment Reminder"
 
 msgid "URGENT: Final payment reminder - Invoice {number}"
-msgstr ""
+msgstr "URGENT: Final payment reminder - Invoice {number}"
 
 msgid "URI Path"
-msgstr ""
+msgstr "URI Path"
 
 msgid "Unauthenticated"
-msgstr ""
+msgstr "Unauthenticated"
 
 msgid "Underline"
-msgstr ""
+msgstr "Underline"
 
 msgid "Unique identifier for this contact"
-msgstr ""
+msgstr "Unique identifier for this contact"
 
 msgid "Unknown"
 msgstr "Unknown"
 
 msgid "Unknown error"
-msgstr ""
+msgstr "Unknown error"
 
 msgid "Unpaid"
-msgstr ""
+msgstr "Unpaid"
 
 msgid "Untitled"
-msgstr ""
+msgstr "Untitled"
 
 msgid "Upcoming Price Changes"
-msgstr ""
+msgstr "Upcoming Price Changes"
 
 msgid "Update"
-msgstr ""
+msgstr "Update"
 
 msgid "Update Contact"
-msgstr ""
+msgstr "Update Contact"
 
 msgid "Update and send page."
-msgstr ""
+msgstr "Update and send page."
 
 msgid "Update and send."
-msgstr ""
+msgstr "Update and send."
 
 msgid "Update customer"
-msgstr ""
+msgstr "Update customer"
 
 msgid "Update invoice, customer #{customerid}"
-msgstr ""
+msgstr "Update invoice, customer #{customerid}"
 
 msgid "Updated"
-msgstr ""
+msgstr "Updated"
 
 msgid "Updated customer"
-msgstr ""
+msgstr "Updated customer"
 
 msgid "Updated invoice"
-msgstr ""
+msgstr "Updated invoice"
 
 msgid "Updated {updated} by {updater}"
-msgstr ""
+msgstr "Updated {updated} by {updater}"
 
 msgid "Upload Profile Image"
-msgstr ""
+msgstr "Upload Profile Image"
 
 msgid "Usage"
-msgstr ""
+msgstr "Usage"
 
 msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
-msgstr ""
+msgstr "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
 
 msgid "Use @ for the zone apex"
-msgstr ""
+msgstr "Use @ for the zone apex"
 
 msgid "Use @ for zone apex"
-msgstr ""
+msgstr "Use @ for zone apex"
 
 msgid "Use @ for zone apex, or subdomain name"
-msgstr ""
+msgstr "Use @ for zone apex, or subdomain name"
 
 msgid "Use the invoice number as message when you pay."
-msgstr ""
+msgstr "Use the invoice number as message when you pay."
 
 msgid "Use this if you don't need the prefixed default classes."
-msgstr ""
+msgstr "Use this if you don't need the prefixed default classes."
 
 msgid "Used to make class names."
-msgstr ""
+msgstr "Used to make class names."
 
 msgid "User"
-msgstr ""
+msgstr "User"
 
 msgid "User manual"
-msgstr ""
+msgstr "User manual"
 
 msgid "User registration"
 msgstr "User registration"
 
 msgid "Username"
-msgstr ""
+msgstr "Username"
 
 msgid "Username (email)"
-msgstr ""
+msgstr "Username (email)"
 
 msgid "Username already exists"
 msgstr "Username already exists"
 
 msgid "Username can only contain {chars}"
-msgstr ""
+msgstr "Username can only contain {chars}"
 
 msgid "Username could not be created"
 msgstr "Username could not be created"
 
 msgid "Username is required"
-msgstr ""
+msgstr "Username is required"
 
 msgid "Username must be at least {min} characters"
-msgstr ""
+msgstr "Username must be at least {min} characters"
 
 msgid "Users"
-msgstr ""
+msgstr "Users"
 
 msgid "Users and groups"
-msgstr ""
+msgstr "Users and groups"
 
 msgid "VAT"
-msgstr ""
+msgstr "VAT"
 
 msgid "VAT ({percent}%)"
-msgstr ""
+msgstr "VAT ({percent}%)"
 
 msgid "VAT Id"
-msgstr ""
+msgstr "VAT Id"
 
 msgid "VAT Id:"
-msgstr ""
+msgstr "VAT Id:"
 
 msgid "VAT Number"
-msgstr ""
+msgstr "VAT Number"
 
 msgid "VAT Type"
-msgstr ""
+msgstr "VAT Type"
 
 msgid "VAT lookup, {vatno}"
-msgstr ""
+msgstr "VAT lookup, {vatno}"
 
 msgid "VAT number"
-msgstr ""
+msgstr "VAT number"
 
 msgid "VAT number lookup"
-msgstr ""
+msgstr "VAT number lookup"
 
 msgid "VAT percentage"
-msgstr ""
+msgstr "VAT percentage"
 
 msgid "VAT {rate}\\%"
-msgstr ""
+msgstr "VAT {rate}\\%"
 
 msgid "VAT:"
-msgstr ""
+msgstr "VAT:"
 
 msgid "Vacation"
-msgstr ""
+msgstr "Vacation"
 
 msgid "Vacation / Auto-reply"
-msgstr ""
+msgstr "Vacation / Auto-reply"
 
 msgid "Vacation settings deleted"
-msgstr ""
+msgstr "Vacation settings deleted"
 
 msgid "Vacation settings saved"
-msgstr ""
+msgstr "Vacation settings saved"
 
 msgid "Value"
-msgstr ""
+msgstr "Value"
 
 msgid "Value for the class attribute."
-msgstr ""
+msgstr "Value for the class attribute."
 
 msgid "Version"
-msgstr ""
+msgstr "Version"
 
 msgid "View"
-msgstr ""
+msgstr "View"
 
 msgid "View Details"
-msgstr ""
+msgstr "View Details"
 
 msgid "View Public Dashboard"
-msgstr ""
+msgstr "View Public Dashboard"
 
 msgid "View all"
-msgstr ""
+msgstr "View all"
 
 msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
-msgstr ""
+msgstr "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
 
 msgid "View and manage domain registrations"
-msgstr ""
+msgstr "View and manage domain registrations"
 
 msgid "WARNING: Legal Action Pending"
-msgstr ""
+msgstr "WARNING: Legal Action Pending"
 
 msgid "We noticed that we have not yet received payment for the invoice below."
-msgstr ""
+msgstr "We noticed that we have not yet received payment for the invoice below."
 
 msgid "We will also store it for statistics and to prevent robot registrations."
-msgstr ""
+msgstr "We will also store it for statistics and to prevent robot registrations."
 
 msgid "We will email a confirmation request."
-msgstr ""
+msgstr "We will email a confirmation request."
 
 msgid "We will reply as soon as possible."
-msgstr ""
+msgstr "We will reply as soon as possible."
 
 msgid "Web"
-msgstr ""
+msgstr "Web"
 
 msgid "Web sites"
-msgstr ""
+msgstr "Web sites"
 
 msgid "Website"
-msgstr ""
+msgstr "Website"
 
 msgid "Websites"
-msgstr ""
+msgstr "Websites"
 
 msgid "Weight"
-msgstr ""
+msgstr "Weight"
 
 msgid "What happened?"
-msgstr ""
+msgstr "What happened?"
 
 msgid "Whois Information"
-msgstr ""
+msgstr "Whois Information"
 
 msgid "Whois data for {ip}"
-msgstr ""
+msgstr "Whois data for {ip}"
 
 msgid "Write the invoice number as message when you pay."
-msgstr ""
+msgstr "Write the invoice number as message when you pay."
 
 msgid "Wrong captcha"
-msgstr ""
+msgstr "Wrong captcha"
 
 msgid "Year"
-msgstr ""
+msgstr "Year"
 
 msgid "Yes"
-msgstr ""
+msgstr "Yes"
 
 msgid "You MUST include the invoice number as reference when making the payment."
-msgstr ""
+msgstr "You MUST include the invoice number as reference when making the payment."
 
 msgid "You can also post in our discussions."
-msgstr ""
+msgstr "You can also post in our discussions."
 
 msgid "You can now log in to your account."
-msgstr ""
+msgstr "You can now log in to your account."
 
 msgid "You can try again or choose a different payment method."
-msgstr ""
+msgstr "You can try again or choose a different payment method."
 
 msgid "You clicked the back or cancel button"
-msgstr ""
+msgstr "You clicked the back or cancel button"
 
 msgid "You have cancelled the payment process."
-msgstr ""
+msgstr "You have cancelled the payment process."
 
 msgid "You have registered a new user account on {site}."
-msgstr ""
+msgstr "You have registered a new user account on {site}."
 
 msgid "You have {remaining} tries left."
-msgstr ""
+msgstr "You have {remaining} tries left."
 
 msgid "You need to accept registration terms."
-msgstr ""
+msgstr "You need to accept registration terms."
 
 msgid "You were logged in as {username}."
-msgstr ""
+msgstr "You were logged in as {username}."
 
 msgid "You will be redirected to Nets secure checkout page."
-msgstr ""
+msgstr "You will be redirected to Nets secure checkout page."
 
 msgid "You will receive a confirmation email shortly."
-msgstr ""
+msgstr "You will receive a confirmation email shortly."
 
 msgid "Your Reference"
-msgstr ""
+msgstr "Your Reference"
 
 msgid "Your Swish payment was cancelled or declined."
-msgstr ""
+msgstr "Your Swish payment was cancelled or declined."
 
 msgid "Your VAT Id"
-msgstr ""
+msgstr "Your VAT Id"
 
 msgid "Your VAT Id:"
-msgstr ""
+msgstr "Your VAT Id:"
 
 msgid "Your contact"
-msgstr ""
+msgstr "Your contact"
 
 msgid "Your contact:"
-msgstr ""
+msgstr "Your contact:"
 
 msgid "Your email"
-msgstr ""
+msgstr "Your email"
 
 msgid "Your ip {ip} will be appended to the confirmation request."
-msgstr ""
+msgstr "Your ip {ip} will be appended to the confirmation request."
 
 msgid "Your ip {ip} will be appended to the message."
-msgstr ""
+msgstr "Your ip {ip} will be appended to the message."
 
 msgid "Your message appears below."
-msgstr ""
+msgstr "Your message appears below."
 
 msgid "Your name"
-msgstr ""
+msgstr "Your name"
 
 msgid "Your payment was cancelled or failed."
-msgstr ""
+msgstr "Your payment was cancelled or failed."
 
 msgid "Your payment was cancelled. No charges were made."
-msgstr ""
+msgstr "Your payment was cancelled. No charges were made."
 
 msgid "Zip Code"
-msgstr ""
+msgstr "Zip Code"
 
 msgid "Zone Check"
-msgstr ""
+msgstr "Zone Check"
 
 msgid "Zone File Content"
-msgstr ""
+msgstr "Zone File Content"
 
 msgid "Zone Kind"
-msgstr ""
+msgstr "Zone Kind"
 
 msgid "Zone Name"
-msgstr ""
+msgstr "Zone Name"
 
 msgid "Zone Records"
-msgstr ""
+msgstr "Zone Records"
 
 msgid "Zone Templates"
-msgstr ""
+msgstr "Zone Templates"
 
 msgid "Zone created successfully"
-msgstr ""
+msgstr "Zone created successfully"
 
 msgid "Zone deleted"
-msgstr ""
+msgstr "Zone deleted"
 
 msgid "Zone deleted successfully"
-msgstr ""
+msgstr "Zone deleted successfully"
 
 msgid "Zone imported successfully"
-msgstr ""
+msgstr "Zone imported successfully"
 
 msgid "Zone management"
-msgstr ""
+msgstr "Zone management"
 
 msgid "Zone not found"
-msgstr ""
+msgstr "Zone not found"
 
 msgid "Zone records"
-msgstr ""
+msgstr "Zone records"
 
 msgid "Zone saved successfully"
-msgstr ""
+msgstr "Zone saved successfully"
 
 msgid "Zone updated successfully"
-msgstr ""
+msgstr "Zone updated successfully"
 
 msgid "add 3\\%"
-msgstr ""
+msgstr "add 3\\%"
 
 msgid "add {fee}"
-msgstr ""
+msgstr "add {fee}"
 
 msgid "at least {length} characters"
-msgstr ""
+msgstr "at least {length} characters"
 
 msgid "billing@rymdweb.com"
-msgstr ""
+msgstr "billing@rymdweb.com"
 
 msgid "cache"
-msgstr ""
+msgstr "cache"
 
 msgid "certificates"
-msgstr ""
+msgstr "certificates"
 
 msgid "characters"
 msgstr "characters"
 
 msgid "charged"
-msgstr ""
+msgstr "charged"
 
 msgid "compliant"
-msgstr ""
+msgstr "compliant"
 
 msgid "content"
-msgstr ""
+msgstr "content"
 
 msgid "control panel"
-msgstr ""
+msgstr "control panel"
 
 msgid "customer"
-msgstr ""
+msgstr "customer"
 
 msgid "customers"
-msgstr ""
+msgstr "customers"
 
 msgid "database"
-msgstr ""
+msgstr "database"
 
 msgid "declined"
-msgstr ""
+msgstr "declined"
 
 msgid "disable"
-msgstr ""
+msgstr "disable"
 
 msgid "domain"
-msgstr ""
+msgstr "domain"
 
 msgid "email"
-msgstr ""
+msgstr "email"
 
 msgid "errors"
-msgstr ""
+msgstr "errors"
 
 msgid "example"
-msgstr ""
+msgstr "example"
 
 msgid "failed"
-msgstr ""
+msgstr "failed"
 
 msgid "for registrar"
-msgstr ""
+msgstr "for registrar"
 
 msgid "from PayPal API"
-msgstr ""
+msgstr "from PayPal API"
 
 msgid "from database"
-msgstr ""
+msgstr "from database"
 
 msgid "invoice"
-msgstr ""
+msgstr "invoice"
 
 msgid "login attempts"
-msgstr ""
+msgstr "login attempts"
 
 msgid "mail domain"
-msgstr ""
+msgstr "mail domain"
 
 msgid "main firewall"
-msgstr ""
+msgstr "main firewall"
 
 msgid "net balance"
-msgstr ""
+msgstr "net balance"
 
 msgid "new messages retrieved."
-msgstr ""
+msgstr "new messages retrieved."
 
 msgid "of"
-msgstr ""
+msgstr "of"
 
 msgid "our web"
-msgstr ""
+msgstr "our web"
 
 msgid "payments"
-msgstr ""
+msgstr "payments"
 
 msgid "poll"
-msgstr ""
+msgstr "poll"
 
 msgid "product"
-msgstr ""
+msgstr "product"
 
 msgid "record(s)"
-msgstr ""
+msgstr "record(s)"
 
 msgid "records"
-msgstr ""
+msgstr "records"
 
 msgid "refunded"
-msgstr ""
+msgstr "refunded"
 
 msgid "seconds"
-msgstr ""
+msgstr "seconds"
 
 msgid "selected"
-msgstr ""
+msgstr "selected"
 
 msgid "standby firewall"
-msgstr ""
+msgstr "standby firewall"
 
 msgid "supporters"
-msgstr ""
+msgstr "supporters"
 
 msgid "transactions"
-msgstr ""
+msgstr "transactions"
 
 msgid "unlimited"
-msgstr ""
+msgstr "unlimited"
 
 msgid "user"
-msgstr ""
+msgstr "user"
 
 msgid "website"
-msgstr ""
+msgstr "website"
 
 msgid "wensite"
-msgstr ""
+msgstr "wensite"
 
 msgid "year"
-msgstr ""
+msgstr "year"
 
 msgid "years"
-msgstr ""
+msgstr "years"
 
 msgid "{code}: Authentication required"
-msgstr ""
+msgstr "{code}: Authentication required"
 
 msgid "{code}: No authorization"
-msgstr ""
+msgstr "{code}: No authorization"
 
 msgid "{code}: Not in this universe"
-msgstr ""
+msgstr "{code}: Not in this universe"
 
 msgid "{cost}"
-msgstr ""
+msgstr "{cost}"
 
 msgid "{cost} {currency}"
-msgstr ""
+msgstr "{cost} {currency}"
 
 msgid "{count} failed login attempts have been made from {ip} last {minutes} minutes."
-msgstr ""
+msgstr "{count} failed login attempts have been made from {ip} last {minutes} minutes."
 
 msgid "{count} lowercase"
-msgstr ""
+msgstr "{count} lowercase"
 
 msgid "{count} number(s)"
-msgstr ""
+msgstr "{count} number(s)"
 
 msgid "{count} special character(s)"
-msgstr ""
+msgstr "{count} special character(s)"
 
 msgid "{count} uppercase"
-msgstr ""
+msgstr "{count} uppercase"
 
 msgid "{days} Days"
-msgstr ""
+msgstr "{days} Days"
 
 msgid "{number} days"
-msgstr ""
+msgstr "{number} days"
 
 msgid "{number} signatures since {date}"
-msgstr ""
+msgstr "{number} signatures since {date}"
 
 msgid "{reminder_type} reminder sent successfully"
-msgstr ""
+msgstr "{reminder_type} reminder sent successfully"
 
 msgid "{server}, main firewall"
-msgstr ""
+msgstr "{server}, main firewall"
 
 msgid "{server}, standby firewall"
-msgstr ""
+msgstr "{server}, standby firewall"
 
 msgid "{sitename} by country"
-msgstr ""
+msgstr "{sitename} by country"
 
 msgid "{sitename} in {country}"
-msgstr ""
+msgstr "{sitename} in {country}"
 

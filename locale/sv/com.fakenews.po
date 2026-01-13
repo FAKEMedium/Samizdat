@@ -157,6 +157,9 @@ msgstr "Lägg till kolumn före"
 msgid "Add Key"
 msgstr "Lägg till nyckel"
 
+msgid "Add Nameserver"
+msgstr "Lägg till namnserver"
+
 msgid "Add New"
 msgstr "Lägg till ny"
 
@@ -274,6 +277,9 @@ msgstr "Adressrad 2 (valfri)"
 msgid "Admin"
 msgstr "Administratör"
 
+msgid "Admin Contact"
+msgstr "Administrativ kontakt"
+
 msgid "Admin Email"
 msgstr "Admin-e-post"
 
@@ -284,7 +290,7 @@ msgid "Admin access required for DNS management"
 msgstr "Administratörsbehörighet krävs för DNS-hantering"
 
 msgid "Admin contact"
-msgstr "Adminkontakt"
+msgstr "Administrativ kontakt"
 
 msgid "Admin created successfully"
 msgstr "Administratör skapades"
@@ -469,6 +475,9 @@ msgstr "Är du säker på att du vill ta bort denna zon?"
 msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
 msgstr "Är du säker på att du vill rensa ALLA cacheposter? Detta kan inte ångras!"
 
+msgid "Are you sure you want to purge all cache?"
+msgstr "Är du säker på att du vill rensa all cache?"
+
 msgid "Are you sure you want to resend this invoice?"
 msgstr "Är du säker på att du vill skicka om denna faktura?"
 
@@ -607,6 +616,9 @@ msgstr "Fakturerbara artiklar"
 msgid "Billing"
 msgstr "Ekonomi"
 
+msgid "Billing Contact"
+msgstr "Faktureringskontakt"
+
 msgid "Bio"
 msgstr "Biografi"
 
@@ -657,6 +669,9 @@ msgstr "Cachepost togs bort"
 
 msgid "Cache entry not found or could not be deleted"
 msgstr "Cachepost hittades inte eller kunde inte tas bort"
+
+msgid "Cache purged"
+msgstr "Cache rensad"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "Anrop av hjälpfunktionen lägger till svg-koden i symboltabellen i början av dokumentet, plus en inline-referens till den."
@@ -773,7 +788,7 @@ msgid "Clear"
 msgstr "Rensa"
 
 msgid "Click \"Fetch from PayPal\" to load live transactions"
-msgstr ""
+msgstr "Klicka på \"Hämta från PayPal\" för att ladda aktuella transaktioner"
 
 msgid "Click to pop dialog."
 msgstr "Klicka för att öppna dialog."
@@ -915,6 +930,9 @@ msgstr "Kontakt togs bort"
 
 msgid "Contact details"
 msgstr "Kontaktdetaljer"
+
+msgid "Contact handle"
+msgstr "Kontakthandtag"
 
 msgid "Contact not found"
 msgstr "Kontakt hittades inte"
@@ -1330,6 +1348,9 @@ msgstr "Redigera"
 msgid "Edit Certificate"
 msgstr "Redigera certifikat"
 
+msgid "Edit Domain"
+msgstr "Redigera domän"
+
 msgid "Edit Example"
 msgstr "Redigera exempel"
 
@@ -1499,7 +1520,7 @@ msgid "Enabled"
 msgstr "Aktiverad"
 
 msgid "End Date"
-msgstr ""
+msgstr "Slutdatum"
 
 msgid "End main content"
 msgstr "Slut på huvudinnehåll"
@@ -1547,7 +1568,7 @@ msgid "Error deleting contact"
 msgstr "Fel vid borttagning av kontakt"
 
 msgid "Error fetching transactions"
-msgstr ""
+msgstr "Fel vid hämtning av transaktioner"
 
 msgid "Error loading contact details"
 msgstr "Fel vid laddning av kontaktdetaljer"
@@ -1581,6 +1602,9 @@ msgstr "Fel vid omsändning av faktura"
 
 msgid "Error sending reminder"
 msgstr "Fel i påminnelseutskick"
+
+msgid "Error updating domain"
+msgstr "Fel vid uppdatering av domän"
 
 msgid "Errors"
 msgstr "Fel"
@@ -1771,6 +1795,9 @@ msgstr "Kunde inte navigera"
 msgid "Failed to process refund"
 msgstr "Kunde inte behandla återbetalning"
 
+msgid "Failed to purge cache"
+msgstr "Misslyckades med att rensa cache"
+
 msgid "Failed to regenerate invoice PDF"
 msgstr "Misslyckades med att återskapa PDF"
 
@@ -1874,7 +1901,7 @@ msgid "Featured"
 msgstr "Utvald"
 
 msgid "Fetch from PayPal"
-msgstr ""
+msgstr "Hämta från PayPal"
 
 msgid "File"
 msgstr "Fil"
@@ -1949,7 +1976,7 @@ msgid "Fortnox Warning"
 msgstr "Fortnox-varning"
 
 msgid "Fortnox authorization required"
-msgstr ""
+msgstr "Fortnox-auktorisering krävs"
 
 msgid "Fortnox integration"
 msgstr "Fortnox-integration"
@@ -2073,6 +2100,12 @@ msgstr "Hur väl olika svenska organisationer efterlever kravet på kontroll öv
 
 msgid "I accept the terms for registration."
 msgstr "Jag accepterar registreringsvillkoren"
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "Jag agerar som Designated Agent för denna registrantändring"
+
+msgid "I am acting as designated agent for this email change"
+msgstr "Jag agerar som designated agent för denna e-poständring"
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -2446,7 +2479,7 @@ msgid "Lista fakturor"
 msgstr "List invoices"
 
 msgid "Live Transactions"
-msgstr ""
+msgstr "Aktuella transaktioner"
 
 msgid "Loading..."
 msgstr "Laddar..."
@@ -2814,6 +2847,9 @@ msgstr "Inga cacheposter hittades"
 msgid "No certificates found"
 msgstr "Inga certifikat hittades"
 
+msgid "No changes to save"
+msgstr "Inga ändringar att spara"
+
 msgid "No charges have been made to your account."
 msgstr "Inga debiteringar har gjorts på ditt konto."
 
@@ -2884,7 +2920,7 @@ msgid "No payments found"
 msgstr "Inga betalningar hittades"
 
 msgid "No payments selected"
-msgstr ""
+msgstr "Inga betalningar valda"
 
 msgid "No price data available"
 msgstr "Ingen prisdata tillgänglig"
@@ -2920,10 +2956,10 @@ msgid "No transactions found"
 msgstr "Inga transaktioner hittades"
 
 msgid "No transactions found for selected date range"
-msgstr ""
+msgstr "Inga transaktioner hittades för valt datumintervall"
 
 msgid "No unprocessed payments"
-msgstr ""
+msgstr "Inga obehandlade betalningar"
 
 msgid "No users found"
 msgstr "Inga användare hittades"
@@ -3310,7 +3346,7 @@ msgid "Please select at least one registry"
 msgstr "Välj minst ett register"
 
 msgid "Please select both start and end dates"
-msgstr ""
+msgstr "Vänligen välj både start- och slutdatum"
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
@@ -3391,19 +3427,19 @@ msgid "Proceed to Payment"
 msgstr "Gå till betalning"
 
 msgid "Process"
-msgstr ""
+msgstr "Bearbeta"
 
 msgid "Process ID"
 msgstr "Process-ID"
 
 msgid "Process selected"
-msgstr ""
+msgstr "Bearbeta valda"
 
 msgid "Processed"
-msgstr ""
+msgstr "Bearbetad"
 
 msgid "Processing failed"
-msgstr ""
+msgstr "Bearbetning misslyckades"
 
 msgid "Product"
 msgstr "Produkt"
@@ -3626,6 +3662,9 @@ msgstr "Påminn"
 
 msgid "Reminder sent successfully"
 msgstr "Påminnelse skickades"
+
+msgid "Remove"
+msgstr "Ta bort"
 
 msgid "Rename"
 msgstr "Byt namn"
@@ -4060,7 +4099,7 @@ msgid "Start"
 msgstr "Start"
 
 msgid "Start Date"
-msgstr ""
+msgstr "Startdatum"
 
 msgid "Start New Check Run"
 msgstr "Starta ny kontrollkörning"
@@ -4190,6 +4229,9 @@ msgstr "Måldomän"
 
 msgid "Tech"
 msgstr "Teknik"
+
+msgid "Tech Contact"
+msgstr "Teknisk kontakt"
 
 msgid "Tech contact"
 msgstr "Teknisk kontakt"
@@ -4861,10 +4903,10 @@ msgid "for registrar"
 msgstr "för registrar"
 
 msgid "from PayPal API"
-msgstr ""
+msgstr "från PayPal API"
 
 msgid "from database"
-msgstr ""
+msgstr "från databas"
 
 msgid "invoice"
 msgstr "faktura"
@@ -4921,7 +4963,7 @@ msgid "supporters"
 msgstr "supportrar"
 
 msgid "transactions"
-msgstr ""
+msgstr "transaktioner"
 
 msgid "unlimited"
 msgstr "obegränsad"

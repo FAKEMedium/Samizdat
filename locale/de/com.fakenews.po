@@ -157,6 +157,9 @@ msgstr "Spalte davor einfügen"
 msgid "Add Key"
 msgstr "Schlüssel hinzufügen"
 
+msgid "Add Nameserver"
+msgstr "Nameserver hinzufügen"
+
 msgid "Add New"
 msgstr "Neu hinzufügen"
 
@@ -273,6 +276,9 @@ msgstr "Adresszeile 2 (optional)"
 
 msgid "Admin"
 msgstr "Administrator"
+
+msgid "Admin Contact"
+msgstr "Admin-Kontakt"
 
 msgid "Admin Email"
 msgstr "Admin-E-Mail"
@@ -469,6 +475,9 @@ msgstr "Sind Sie sicher, dass Sie diese Zone löschen möchten?"
 msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
 msgstr "Sind Sie sicher, dass Sie ALLE Cache-Einträge löschen möchten? Dies kann nicht rückgängig gemacht werden!"
 
+msgid "Are you sure you want to purge all cache?"
+msgstr "Sind Sie sicher, dass Sie den gesamten Cache löschen möchten?"
+
 msgid "Are you sure you want to resend this invoice?"
 msgstr "Sind Sie sicher, dass Sie diese Rechnung erneut senden möchten?"
 
@@ -613,6 +622,9 @@ msgstr "Abrechenbare Posten"
 msgid "Billing"
 msgstr "Abrechnung"
 
+msgid "Billing Contact"
+msgstr "Rechnungskontakt"
+
 msgid "Bio"
 msgstr "Bio"
 
@@ -666,6 +678,9 @@ msgstr "Cache-Eintrag erfolgreich gelöscht"
 
 msgid "Cache entry not found or could not be deleted"
 msgstr "Cache-Eintrag nicht gefunden oder konnte nicht gelöscht werden"
+
+msgid "Cache purged"
+msgstr "Cache geleert"
 
 msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
 msgstr "Der Aufruf des Helfers fügt den SVG-Code der Symboltabelle am Anfang des Dokuments hinzu, sowie eine Inline-Referenz darauf."
@@ -782,7 +797,7 @@ msgid "Clear"
 msgstr "Löschen"
 
 msgid "Click \"Fetch from PayPal\" to load live transactions"
-msgstr ""
+msgstr "Klicken Sie auf \"Von PayPal abrufen\", um Live-Transaktionen zu laden"
 
 msgid "Click to pop dialog."
 msgstr "Klicken zum Öffnen des Dialogs."
@@ -927,6 +942,9 @@ msgstr "Kontakt erfolgreich gelöscht"
 
 msgid "Contact details"
 msgstr "Kontaktdetails"
+
+msgid "Contact handle"
+msgstr "Kontakt-Handle"
 
 msgid "Contact not found"
 msgstr "Kontakt nicht gefunden"
@@ -1360,6 +1378,9 @@ msgstr "Bearbeiten"
 msgid "Edit Certificate"
 msgstr "Zertifikat bearbeiten"
 
+msgid "Edit Domain"
+msgstr "Domain bearbeiten"
+
 msgid "Edit Example"
 msgstr "Beispiel bearbeiten"
 
@@ -1532,7 +1553,7 @@ msgid "Enabled"
 msgstr "Aktiviert"
 
 msgid "End Date"
-msgstr ""
+msgstr "Enddatum"
 
 msgid "End main content"
 msgstr "Ende Hauptinhalt"
@@ -1580,7 +1601,7 @@ msgid "Error deleting contact"
 msgstr "Fehler beim Löschen des Kontakts"
 
 msgid "Error fetching transactions"
-msgstr ""
+msgstr "Fehler beim Abrufen der Transaktionen"
 
 msgid "Error loading contact details"
 msgstr "Fehler beim Laden der Kontaktdetails"
@@ -1614,6 +1635,9 @@ msgstr "Fehler beim erneuten Senden der Rechnung"
 
 msgid "Error sending reminder"
 msgstr "Fehler beim Senden der Mahnung"
+
+msgid "Error updating domain"
+msgstr "Fehler beim Aktualisieren der Domain"
 
 msgid "Errors"
 msgstr "Fehler"
@@ -1804,6 +1828,9 @@ msgstr "Navigation fehlgeschlagen"
 msgid "Failed to process refund"
 msgstr "Rückerstattung konnte nicht verarbeitet werden"
 
+msgid "Failed to purge cache"
+msgstr "Cache konnte nicht geleert werden"
+
 msgid "Failed to regenerate invoice PDF"
 msgstr "Rechnungs-PDF konnte nicht neu generiert werden"
 
@@ -1907,7 +1934,7 @@ msgid "Featured"
 msgstr "Hervorgehoben"
 
 msgid "Fetch from PayPal"
-msgstr ""
+msgstr "Von PayPal abrufen"
 
 msgid "File"
 msgstr "Datei"
@@ -1982,7 +2009,7 @@ msgid "Fortnox Warning"
 msgstr "Fortnox-Warnung"
 
 msgid "Fortnox authorization required"
-msgstr ""
+msgstr "Fortnox-Autorisierung erforderlich"
 
 msgid "Fortnox integration"
 msgstr "Fortnox-Integration"
@@ -2109,6 +2136,12 @@ msgstr "Wie gut verschiedene schwedische Organisationen die Kontrolle über ihre
 
 msgid "I accept the terms for registration."
 msgstr "Ich akzeptiere die Registrierungsbedingungen."
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "Ich handle als Designated Agent für diese Registrantenänderung"
+
+msgid "I am acting as designated agent for this email change"
+msgstr "Ich handle als Designated Agent für diese E-Mail-Änderung"
 
 msgid "IBAN"
 msgstr "IBAN"
@@ -2497,7 +2530,7 @@ msgid "Lista fakturor"
 msgstr "Rechnungen auflisten"
 
 msgid "Live Transactions"
-msgstr ""
+msgstr "Live-Transaktionen"
 
 msgid "Loading..."
 msgstr "Wird geladen..."
@@ -2868,6 +2901,9 @@ msgstr "Keine Cache-Einträge gefunden"
 msgid "No certificates found"
 msgstr "Keine Zertifikate gefunden"
 
+msgid "No changes to save"
+msgstr "Keine Änderungen zu speichern"
+
 msgid "No charges have been made to your account."
 msgstr "Es wurden keine Belastungen auf Ihrem Konto vorgenommen."
 
@@ -2938,7 +2974,7 @@ msgid "No payments found"
 msgstr "Keine Zahlungen gefunden"
 
 msgid "No payments selected"
-msgstr ""
+msgstr "Keine Zahlungen ausgewählt"
 
 msgid "No price data available"
 msgstr "Keine Preisdaten verfügbar"
@@ -2974,10 +3010,10 @@ msgid "No transactions found"
 msgstr "Keine Transaktionen gefunden"
 
 msgid "No transactions found for selected date range"
-msgstr ""
+msgstr "Keine Transaktionen für den ausgewählten Zeitraum gefunden"
 
 msgid "No unprocessed payments"
-msgstr ""
+msgstr "Keine unverarbeiteten Zahlungen"
 
 msgid "No users found"
 msgstr "Keine Benutzer gefunden"
@@ -3373,7 +3409,7 @@ msgid "Please select at least one registry"
 msgstr "Bitte wählen Sie mindestens eine Registry aus"
 
 msgid "Please select both start and end dates"
-msgstr ""
+msgstr "Bitte wählen Sie sowohl Start- als auch Enddatum aus"
 
 msgid "Plusgiro"
 msgstr "Plusgiro"
@@ -3457,19 +3493,19 @@ msgid "Proceed to Payment"
 msgstr "Zur Zahlung fortfahren"
 
 msgid "Process"
-msgstr ""
+msgstr "Verarbeiten"
 
 msgid "Process ID"
 msgstr "Prozess-ID"
 
 msgid "Process selected"
-msgstr ""
+msgstr "Ausgewählte verarbeiten"
 
 msgid "Processed"
-msgstr ""
+msgstr "Verarbeitet"
 
 msgid "Processing failed"
-msgstr ""
+msgstr "Verarbeitung fehlgeschlagen"
 
 msgid "Product"
 msgstr "Produkt"
@@ -3695,6 +3731,9 @@ msgstr "Erinnern"
 
 msgid "Reminder sent successfully"
 msgstr "Erinnerung erfolgreich gesendet"
+
+msgid "Remove"
+msgstr "Entfernen"
 
 msgid "Rename"
 msgstr "Umbenennen"
@@ -4135,7 +4174,7 @@ msgid "Start"
 msgstr "Start"
 
 msgid "Start Date"
-msgstr ""
+msgstr "Startdatum"
 
 msgid "Start New Check Run"
 msgstr "Neuen Prüflauf starten"
@@ -4265,6 +4304,9 @@ msgstr "Ziel-Domain"
 
 msgid "Tech"
 msgstr "Technik"
+
+msgid "Tech Contact"
+msgstr "Tech-Kontakt"
 
 msgid "Tech contact"
 msgstr "Technischer Kontakt"
@@ -4954,10 +4996,10 @@ msgid "for registrar"
 msgstr "für Registrar"
 
 msgid "from PayPal API"
-msgstr ""
+msgstr "von PayPal API"
 
 msgid "from database"
-msgstr ""
+msgstr "aus Datenbank"
 
 msgid "invoice"
 msgstr "Rechnung"
@@ -5014,7 +5056,7 @@ msgid "supporters"
 msgstr "Unterstützer"
 
 msgid "transactions"
-msgstr ""
+msgstr "Transaktionen"
 
 msgid "unlimited"
 msgstr "unbegrenzt"
