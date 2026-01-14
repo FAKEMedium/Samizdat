@@ -1,0 +1,18 @@
+% my $actions_card = {
+%   docpath => 'mail-actions',
+%   title   => __('Actions'),
+%   main    => '<div class="d-grid gap-2">'
+%            . '<button id="editBtn" class="btn btn-outline-primary btn-sm">' . icon('pencil') . ' ' . __('Edit') . '</button>'
+%            . '<button id="copyBtn" class="btn btn-outline-info btn-sm">' . icon('copy') . ' ' . __('Copy as draft') . '</button>'
+%            . '<button id="queueBtn" class="btn btn-outline-success btn-sm" disabled>' . icon('send') . ' ' . __('Queue') . '</button>'
+%            . '<button id="deleteBtn" class="btn btn-outline-danger btn-sm">' . icon('trash') . ' ' . __('Delete') . '</button>'
+%            . '</div>',
+% };
+%== include 'chunks/sidecard', card => $actions_card
+
+% my $stats_card = {
+%   docpath => 'mail-stats',
+%   title   => __('Statistics'),
+%   main    => '<div id="statsContent"><p class="text-muted">' . __('Loading...') . '</p></div>',
+% };
+%== include 'chunks/sidecard', card => $stats_card

@@ -1,0 +1,29 @@
+<div id="mailInfo">
+  <p class="text-muted"><%== __('Loading...') %></p>
+</div>
+
+<h2 class="h5 mt-4"><%== __('Content') %></h2>
+<ul class="nav nav-tabs mb-3" id="contentTabs" role="tablist"></ul>
+<div class="tab-content" id="contentTabContent"></div>
+
+<div id="bouncesSection" style="display: none;" class="mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-2">
+    <h2 class="h5 mb-0"><%== __('Bounces') %></h2>
+    <button id="removeMarkedBtn" class="btn btn-sm btn-outline-danger" disabled><%== __('Remove marked') %> (0)</button>
+  </div>
+  <p class="small text-muted"><%== __('Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested.') %></p>
+  <div class="table-responsive">
+    <table id="bouncesTable" class="table table-sm table-hover">
+      <thead>
+        <tr>
+          <th style="width: 30px;"></th>
+          <th><%== __('Email') %></th>
+          <th><%== __('Type') %></th>
+          <th><%== __('Code') %></th>
+          <th><%== __('Diagnostic') %></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<form id="mailForm" class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title" id="modaltitle"><%== title %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+  </div>
+
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="name" class="form-label"><%== __('Name') %> <span class="text-danger">*</span></label>
+      <input type="text" id="name" name="name" class="form-control" required>
+    </div>
+
+    <div id="contentSection" style="display: none;">
+      <h6><%== __('Content') %></h6>
+      <ul class="nav nav-tabs mb-3" id="langTabs" role="tablist"></ul>
+      <div class="tab-content" id="langTabContent"></div>
+    </div>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+    <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Save') %></button>
+  </div>
+</form>

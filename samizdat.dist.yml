@@ -155,6 +155,17 @@ manager:
       minnumbers: 1
       minspecial: 1
       chars: a-zA-Z0-9!@#$%^&*()_+[]{}|;':",.<>?/~`
+  mailer:
+    cardnumber: 16
+    dbtype: postgresql
+    secret: change-this-to-random-string     # Used for magic link tokens
+    # Rate limiting for bulk sends
+    batch_size: 50                           # Emails per batch
+    batch_delay: 60                          # Seconds between batches
+    # Pandoc for markdown to HTML conversion
+    pandoc: /usr/bin/pandoc
+    # Bounce processing interval (minutes)
+    bounce_check_interval: 15
   product:
     cardnumber: 8
     dbtype: postgresql

@@ -1,0 +1,16 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0"><%== __('Unsubscriptions') %></h5>
+  <span id="unsubCount" class="text-muted"></span>
+</div>
+
+<table id="unsubscriptions" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th><%== __('Email') %></th>
+      <th><%== __('Reason') %></th>
+      <th><%== __('Date') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>

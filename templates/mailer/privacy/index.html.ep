@@ -1,0 +1,62 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="h3 mb-4"><%== __('Your Data') %></h1>
+      
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2 class="h5 mb-0"><%== __('Personal Information') %></h2>
+        </div>
+        <div class="card-body" id="addressInfo">
+          <p class="text-muted"><%== __('Loading...') %></p>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2 class="h5 mb-0"><%== __('List Memberships') %></h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm" id="listsTable">
+            <thead>
+              <tr>
+                <th><%== __('List') %></th>
+                <th><%== __('Description') %></th>
+                <th><%== __('Subscribed') %></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2 class="h5 mb-0"><%== __('Mail History') %></h2>
+        </div>
+        <div class="card-body">
+          <table class="table table-sm" id="deliveriesTable">
+            <thead>
+              <tr>
+                <th><%== __('Mail') %></th>
+                <th><%== __('Status') %></th>
+                <th><%== __('Sent') %></th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card border-danger">
+        <div class="card-header bg-danger text-white">
+          <h2 class="h5 mb-0"><%== __('Delete My Data') %></h2>
+        </div>
+        <div class="card-body">
+          <p class="text-muted"><%== __('This will permanently delete all your data from our system. This action cannot be undone.') %></p>
+          <button id="deleteBtn" class="btn btn-danger"><%== __('Delete All My Data') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

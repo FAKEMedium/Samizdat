@@ -1,0 +1,23 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <select id="filterType" class="form-select form-select-sm" style="width: auto;">
+    <option value=""><%== __('All types') %></option>
+    <option value="hard"><%== __('Hard bounce') %></option>
+    <option value="soft"><%== __('Soft bounce') %></option>
+    <option value="complaint"><%== __('Complaint') %></option>
+    <option value="delayed"><%== __('Delayed') %></option>
+  </select>
+  <span id="bounceCount" class="text-muted"></span>
+</div>
+
+<table id="bounces" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th><%== __('Email') %></th>
+      <th><%== __('Type') %></th>
+      <th><%== __('Code') %></th>
+      <th><%== __('Received') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
