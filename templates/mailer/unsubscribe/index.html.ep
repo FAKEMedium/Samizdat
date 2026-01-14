@@ -1,0 +1,51 @@
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-body text-center">
+          <h4 class="card-title mb-4"><%== __('Unsubscribe from mailings') %></h4>
+
+          <div id="loading" class="py-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden"><%== __('Loading...') %></span>
+            </div>
+          </div>
+
+          <div id="confirmSection" style="display: none;">
+            <p class="text-muted mb-4"><%== __('Click the button below to unsubscribe from our mailing list.') %></p>
+            <p id="emailDisplay" class="fw-bold mb-4"></p>
+
+            <div class="mb-3">
+              <label for="reason" class="form-label"><%== __('Reason (optional)') %></label>
+              <select id="reason" class="form-select">
+                <option value=""><%== __('Select a reason...') %></option>
+                <option value="no_longer_interested"><%== __('No longer interested') %></option>
+                <option value="too_many_emails"><%== __('Too many emails') %></option>
+                <option value="never_subscribed"><%== __('Never subscribed') %></option>
+                <option value="other"><%== __('Other') %></option>
+              </select>
+            </div>
+
+            <button id="unsubscribeBtn" class="btn btn-danger">
+              <%== __('Unsubscribe') %>
+            </button>
+          </div>
+
+          <div id="successSection" style="display: none;">
+            <div class="text-success mb-3">
+              <%== icon 'check-circle', {size => 48} %>
+            </div>
+            <p><%== __('You have been successfully unsubscribed.') %></p>
+          </div>
+
+          <div id="errorSection" style="display: none;">
+            <div class="text-danger mb-3">
+              <%== icon 'exclamation-circle', {size => 48} %>
+            </div>
+            <p id="errorMessage" class="text-danger"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

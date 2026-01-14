@@ -1,0 +1,18 @@
+<a href="<%= url_for('mailer_index') %>" class="btn btn-primary btn-sm mx-1 align-self-center" title="<%== __('Mails') %>">
+  <%== icon 'envelope' %>
+</a>
+<a href="<%= url_for('mailer_lists') %>" class="btn btn-primary btn-sm mx-1 align-self-center" title="<%== __('Lists') %>">
+  <%== icon 'list-ul' %>
+</a>
+<a href="<%= url_for('mailer_addresses') %>" class="btn btn-primary btn-sm mx-1 align-self-center" title="<%== __('Addresses') %>">
+  <%== icon 'people' %>
+</a>
+<a href="<%= url_for('mailer_unsubscriptions') %>" class="btn btn-primary btn-sm mx-1 align-self-center" title="<%== __('Unsubscriptions') %>">
+  <%== icon 'person-x' %>
+</a>
+<a href="<%= url_for('mailer_bounces') %>" class="btn btn-primary btn-sm mx-1 align-self-center" title="<%== __('Bounces') %>">
+  <%== icon 'exclamation-triangle' %>
+</a>
+<a href="<%= url_for('mailer_new') %>" class="btn btn-success btn-sm mx-1 align-self-center" title="<%== __('New') %>">
+  <%== icon 'plus-lg' %>
+</a>

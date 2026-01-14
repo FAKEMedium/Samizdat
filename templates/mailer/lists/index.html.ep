@@ -1,0 +1,112 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h5 class="mb-0"><%== __('Mailing Lists') %></h5>
+  <button type="button" class="btn btn-primary btn-sm" id="newList">
+    <%== icon 'plus-lg', {} %> <%== __('New list') %>
+  </button>
+</div>
+
+<table id="lists" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th><%== __('Name') %></th>
+      <th><%== __('Description') %></th>
+      <th><%== __('Addresses') %></th>
+      <th><%== __('Public') %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<!-- Import Modal -->
+<div class="modal fade" id="importModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Import addresses') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <ul class="nav nav-tabs mb-3" role="tablist">
+          <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#importText"><%== __('Text') %></button>
+          </li>
+          <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#importCsv"><%== __('CSV') %></button>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div class="tab-pane fade show active" id="importText">
+            <p class="text-muted small"><%== __('Paste text containing email addresses. They will be extracted automatically.') %></p>
+            <textarea id="importTextData" class="form-control" rows="8" placeholder="<%== __('Paste emails here...') %>"></textarea>
+          </div>
+          <div class="tab-pane fade" id="importCsv">
+            <p class="text-muted small"><%== __('Paste CSV data. Map columns below (only email is required).') %></p>
+            <textarea id="importCsvData" class="form-control mb-3" rows="6" placeholder="<%== __('Paste CSV here...') %>"></textarea>
+            <div class="row g-2">
+              <div class="col-3">
+                <label class="form-label small"><%== __('Email column') %></label>
+                <input type="number" id="colEmail" class="form-control form-control-sm" value="0" min="0">
+              </div>
+              <div class="col-3">
+                <label class="form-label small"><%== __('Name column') %></label>
+                <input type="number" id="colName" class="form-control form-control-sm" placeholder="-">
+              </div>
+              <div class="col-3">
+                <label class="form-label small"><%== __('First name col') %></label>
+                <input type="number" id="colFirstName" class="form-control form-control-sm" placeholder="-">
+              </div>
+              <div class="col-3">
+                <label class="form-label small"><%== __('Last name col') %></label>
+                <input type="number" id="colLastName" class="form-control form-control-sm" placeholder="-">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-3">
+          <label class="form-label small"><%== __('Source') %></label>
+          <select id="importSource" class="form-select form-select-sm">
+            <option value="import"><%== __('Import') %></option>
+            <option value="scrape"><%== __('Scrape') %></option>
+            <option value="purchase"><%== __('Purchase') %></option>
+            <option value="manual"><%== __('Manual') %></option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+        <button type="button" class="btn btn-primary" id="doImport"><%== __('Import') %></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Review Modal -->
+<div class="modal fade" id="reviewModal" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Review imported addresses') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body">
+        <div id="reviewSummary" class="alert alert-info mb-3"></div>
+        <table id="reviewTable" class="table table-sm">
+          <thead>
+            <tr>
+              <th><%== __('Email') %></th>
+              <th><%== __('Name') %></th>
+              <th><%== __('First name') %></th>
+              <th><%== __('Last name') %></th>
+              <th><%== __('Status') %></th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+      </div>
+    </div>
+  </div>
+</div>

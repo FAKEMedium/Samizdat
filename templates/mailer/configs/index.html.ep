@@ -1,0 +1,33 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="h5 mb-0"><%== __('Settings') %></h2>
+  <button id="addConfigBtn" class="btn btn-sm btn-primary"><%== icon('plus') %> <%== __('Add') %></button>
+</div>
+
+<table id="configsTable" class="table table-sm table-hover">
+  <thead>
+    <tr>
+      <th><%== __('Key') %></th>
+      <th><%== __('Value') %></th>
+      <th style="width: 100px;"></th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<div class="card mt-4">
+  <div class="card-header"><%== __('Common settings') %></div>
+  <div class="card-body">
+    <dl class="row mb-0 small">
+      <dt class="col-sm-3">sender_name</dt>
+      <dd class="col-sm-9"><%== __('Default From name') %></dd>
+      <dt class="col-sm-3">sender_email</dt>
+      <dd class="col-sm-9"><%== __('Default From email') %></dd>
+      <dt class="col-sm-3">reply_to</dt>
+      <dd class="col-sm-9"><%== __('Reply-To address') %></dd>
+      <dt class="col-sm-3">organization</dt>
+      <dd class="col-sm-9"><%== __('Organization header') %></dd>
+      <dt class="col-sm-3">footer_text</dt>
+      <dd class="col-sm-9"><%== __('Footer added to all emails') %></dd>
+    </dl>
+  </div>
+</div>
