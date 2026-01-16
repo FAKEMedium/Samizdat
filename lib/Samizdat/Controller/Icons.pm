@@ -10,6 +10,12 @@ sub icons ($self) {
     my $icon = shift;
     push @{ $icons }, $icon->basename('.svg') if ($icon =~ /\.svg$/);
   });
+
+  my $accept = $self->req->headers->accept // '';
+  if ($accept =~ /json/) {
+    return $self->render(json => { icons => $icons }, status => 200);
+  }
+
   $self->stash(icons => $icons);
   $self->stash(docpath => 'project/icons/index.html');
   my $web = {};

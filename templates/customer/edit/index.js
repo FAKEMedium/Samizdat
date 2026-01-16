@@ -38,6 +38,25 @@ function openSMSModal(phoneNumber) {
   universalModal.show();
 }
 
+// Open VAT lookup modal
+function openVATModal(vatno) {
+  modalDialog.innerHTML = `<%== web->indent(eval { trim include 'customer/vatno/index', format => 'html'}, 2) %>`;
+
+  // Pre-fill VAT number if provided
+  if (vatno) {
+    const inputField = document.querySelector('#vatlookup-input');
+    if (inputField) {
+      inputField.value = vatno;
+    }
+    window.vatnoForLookup = vatno;
+  }
+
+  // Initialize VAT modal functionality
+  <%== web->indent(eval { trim include 'customer/vatno/index', format => 'js'}, 1) %>
+
+  universalModal.show();
+}
+
 // Initialize SMS form in modal
 function initializeSMSFormInModal() {
   const modalForm = document.querySelector('#universalmodal #smsForm');
@@ -310,10 +329,13 @@ function populateForm(formdata, method) {
   document.querySelector('#previd').onclick = (e) => { e.preventDefault(); getId('prev', customer.customerid); };
   document.querySelector('#nextid').onclick = (e) => { e.preventDefault(); getId('next', customer.customerid); };
 
-  if (Object.hasOwn(customer, 'vatno') && ('' != customer.vatno)) {
-    document.querySelector('#vatlookup').href = `<%== url_for('vatno') %>/${customer.vatno}`;
-    document.querySelector('#vatlookup').classList.remove("d-none");
-  }
+  // VAT lookup modal - always show icon, pre-fill with existing vatno if available
+  const vatlookupBtn = document.querySelector('#vatlookup');
+  vatlookupBtn.onclick = (e) => {
+    e.preventDefault();
+    openVATModal(document.querySelector('#vatno').value || '');
+  };
+  vatlookupBtn.classList.remove("d-none");
   if (Object.hasOwn(customer, 'contactemail') && ('' != customer.contactemail)) {
     document.querySelector('#mailto').href = 'mailto:' + customer.contactemail;
     document.querySelector('#mailto').classList.remove("d-none");

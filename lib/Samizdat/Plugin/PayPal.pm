@@ -12,13 +12,7 @@ sub register ($self, $app, $config = {}) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{PayPal} = $openapi_yaml if $openapi_yaml;
 
-  # Public routes (non-API)
-  my $paypal = $r->home('/paypal')->to(controller => 'PayPal');
-  $paypal->post('/ipn')                   ->to('#ipn')                  ->name('paypal_ipn');
-  $paypal->get('/success')                ->to('#success')              ->name('paypal_success');
-  $paypal->get('/cancel')                 ->to('#cancel')               ->name('paypal_cancel');
-
-  # API routes are defined in OpenAPI spec (__DATA__ section)
+  # API routes (ipn, success, cancel) defined in OpenAPI spec (__DATA__ section)
 
   # Manager routes
   my $manager = $r->manager('paypal')->to(controller => 'PayPal');

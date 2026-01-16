@@ -68,7 +68,7 @@ This plugin provides bulk email campaigns with:
   GET  /manager/mailer/search                - Search mails/addresses/bounces
   GET  /manager/mailer/unsubscribe/:token    - Unsubscribe page
   GET  /manager/mailer/privacy/:private_id       - Privacy self-service data view
-  POST /manager/mailer/privacy/:private_id/delete - Privacy data deletion request
+  DELETE /manager/mailer/privacy/:private_id   - Privacy data deletion request
 
 =head1 SEE ALSO
 
@@ -219,8 +219,8 @@ paths:
         '200':
           description: Address deleted
 
-  /mailer/addresses/bulk-delete:
-    post:
+  /mailer/addresses/bulk:
+    delete:
       operationId: Mailer.addresses.bulk_delete
       x-mojo-to: Mailer#addresses_bulk_delete
       summary: Bulk delete addresses
@@ -953,8 +953,8 @@ paths:
               schema:
                 $ref: '#/components/schemas/Mailer_PrivacyResponse'
 
-  /manager/mailer/privacy/{private_id}/delete:
-    post:
+  /manager/mailer/privacy/{private_id}:
+    delete:
       operationId: Mailer.privacy.delete
       x-mojo-to: Mailer#privacy_delete
       summary: Request Privacy data deletion

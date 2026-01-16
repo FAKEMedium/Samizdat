@@ -112,7 +112,7 @@ sub create_payment ($self) {
 
   # Build callback URL
   my $callback_url = $params->{callback_url} ||
-    $self->url_for('swish_callback')->to_abs->to_string;
+    $self->url_for('Swish.callback')->to_abs->to_string;
 
   my $payment = $self->swish->create_payment(
     amount => $params->{amount},
@@ -194,7 +194,7 @@ sub create_refund ($self) {
   }
 
   my $callback_url = $params->{callback_url} ||
-    $self->url_for('swish_callback')->to_abs->to_string;
+    $self->url_for('Swish.callback')->to_abs->to_string;
 
   my $refund = $self->swish->create_refund(
     original_payment_reference => $params->{original_payment_reference},

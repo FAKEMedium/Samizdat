@@ -7,7 +7,7 @@ use Data::Dumper;
 my $scriptname = 'customers';
 my $fields = [qw(customerid company firstname lastname address zip city contactemail country orgno phone1 phone2 freetext)];
 push @{$fields}, qw(reference recommendedby period currency invoicetype lang trust vatno vat);
-my $checkfields = [qw(snapbackonly newsletter moss)];
+my $checkfields = [qw(newsletter moss active)];
 my $setfields = [qw(created creator updated updater)];
 
 sub index ($self) {
@@ -191,17 +191,36 @@ sub sync ($self) {
 sub vatno ($self) {
   my $hvatn = Business::Tax::VAT::Validation->new();
   my $vatno = $self->param('vatno') // '';
-  my $title = ('' eq $vatno) ? $self->app->__('VAT number lookup') : $self->app->__x('VAT lookup, {vatno}', vatno => $vatno);
-  my $web = { title => $title };
   my $info = {};
   my $error = '';
-  if ($vatno =~ s/(AT|BE|BG|CY|CZ|DE|DK|EE|EL|ES|FI|FR|GB|HU|IE|IT|LU|LT|LV|MT|NL|PL|PT|RO|SE|SI|SK)(.+)/$2/) {
-    if ($hvatn->check($2, $1)){
+  my $valid = 0;
+  my $country = '';
+
+  if ($vatno =~ s/^(AT|BE|BG|CY|CZ|DE|DK|EE|EL|ES|FI|FR|GB|HU|IE|IT|LU|LT|LV|MT|NL|PL|PT|RO|SE|SI|SK)(.+)/$2/) {
+    $country = $1;
+    if ($hvatn->check($2, $1)) {
       $info = $hvatn->information();
+      $valid = 1;
     } else {
       $error = $hvatn->get_last_error;
     }
+  } elsif ($vatno ne '') {
+    $error = 'Invalid VAT number format. Must start with country code (e.g., SE, DE, FR).';
   }
+
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  if ($accept =~ /json/) {
+    return $self->render(json => {
+      vatno   => $vatno,
+      country => $country,
+      info    => $info,
+      error   => $error,
+      valid   => $valid,
+    });
+  }
+
+  my $title = ('' eq $vatno) ? $self->app->__('VAT number lookup') : $self->app->__x('VAT lookup, {vatno}', vatno => $vatno);
+  my $web = { title => $title };
   $self->render(
     title => $title,
     web => $web,

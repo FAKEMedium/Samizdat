@@ -12,13 +12,7 @@ sub register ($self, $app, $config = {}) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{Stripe} = $openapi_yaml if $openapi_yaml;
 
-  # Public routes (non-API)
-  my $stripe = $r->home('/stripe')->to(controller => 'Stripe');
-  $stripe->post('/webhook')               ->to('#webhook')               ->name('stripe_webhook');
-  $stripe->get('/success')                ->to('#success')               ->name('stripe_success');
-  $stripe->get('/cancel')                 ->to('#cancel')                ->name('stripe_cancel');
-
-  # API routes are defined in OpenAPI spec (__DATA__ section)
+  # API routes (webhook, success, cancel) defined in OpenAPI spec (__DATA__ section)
 
   # Manager routes (HTML page only - API via OpenAPI)
   my $manager = $r->manager('stripe')->to(controller => 'Stripe');
@@ -339,6 +333,65 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Stripe_PaymentsResponse'
+
+  /stripe/webhook:
+    post:
+      operationId: Stripe.webhook
+      x-mojo-to: Stripe#webhook
+      summary: Stripe webhook endpoint
+      description: Receives webhook events from Stripe
+      tags: [Stripe]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Webhook processed
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /stripe/success:
+    get:
+      operationId: Stripe.success
+      x-mojo-to: Stripe#success
+      summary: Payment success return URL
+      tags: [Stripe]
+      parameters:
+        - name: session_id
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+
+  /stripe/cancel:
+    get:
+      operationId: Stripe.cancel
+      x-mojo-to: Stripe#cancel
+      summary: Payment cancel return URL
+      tags: [Stripe]
+      responses:
+        '200':
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cancelled:
+                    type: boolean
 
 components:
   schemas:

@@ -7,6 +7,7 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Mojo::Home;
 use Mojo::Template;
 use Mojo::DOM;
+use Mojo::Loader qw(data_section);
 
 my $xml = Mojo::DOM->new->xml(1);
 
@@ -34,8 +35,13 @@ my $iconrepo = Mojo::Home->new('src/icons/icons/');
 my $anyrepo = Mojo::Home->new();
 
 sub register ($self, $app, $conf) {
+  # Store OpenAPI fragment
+  my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
+  $app->config->{openapi_fragments}{Icons} = $openapi_yaml if $openapi_yaml;
+
   my $r = $app->routes;
-  $r->any([qw( GET POST )] => '/project/icons')->to(controller => 'Icons', action => 'icons');
+  # GET for HTML page, API routes handled by OpenAPI
+  $r->get('/project/icons')->to(controller => 'Icons', action => 'icons')->name('icons_index');
 
   $app->helper(
     icon => sub($c, $icon, $options = {}) {
@@ -117,3 +123,28 @@ sub register ($self, $app, $conf) {
 }
 
 1;
+
+__DATA__
+@@ openapi.yaml
+# OpenAPI 3.0 fragment for Icons API
+paths:
+  /project/icons:
+    get:
+      tags:
+        - Icons
+      summary: List available icons
+      description: Returns list of available Bootstrap icons. Returns HTML page or JSON based on Accept header.
+      operationId: Icons.index
+      responses:
+        '200':
+          description: List of icon names
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  icons:
+                    type: array
+                    items:
+                      type: string
+                    description: List of icon names (without .svg extension)

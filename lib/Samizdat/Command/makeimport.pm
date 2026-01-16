@@ -51,11 +51,12 @@ sub run ($self, @args) {
         $dbto->query('INSERT INTO account.contacts (contactid, email, displayname) VALUES (?, ?, ?)',
           $user->{id}, $user->{email}, $user->{fullname}
         );
-        $dbto->query('INSERT INTO account."users" (userid, contactid, username, activated, blocked, created) VALUES (?, ?, ?, ?, ?, to_timestamp(?))',
-          $user->{id}, $user->{id}, $user->{username}, $user->{active}, $user->{blocked}, $user->{createdon}
+        # New schema: create password first, get passwordid, then create user with passwordid
+        my $passwordid = $dbto->query('INSERT INTO account.passwords (passwordpbkdf2) VALUES (?) RETURNING passwordid',
+          $passwordpbkdf2)->hash->{passwordid};
+        $dbto->query('INSERT INTO account."users" (userid, contactid, passwordid, username, activated, blocked, created) VALUES (?, ?, ?, ?, ?, ?, to_timestamp(?))',
+          $user->{id}, $user->{id}, $passwordid, $user->{username}, $user->{active}, $user->{blocked}, $user->{createdon}
         );
-        $dbto->query('INSERT INTO account.passwords (userid, passwordpbkdf2) VALUES (?, ?)',
-          $user->{id}, $passwordpbkdf2);
         $dbto->query('INSERT INTO account.presentations (userid) VALUES (?)',
           $user->{id});
         $dbto->query('UPDATE account.contacts SET address = ?, pc = ?, city = ?, telephone = ?, mobile = ?, website = ?, dob = to_timestamp(?) WHERE contacts.contactid = ?',
