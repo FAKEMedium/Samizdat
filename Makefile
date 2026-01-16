@@ -1,6 +1,12 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
+migratemysql:
+	bin/samizdat migratemysql --purge
+	bin/samizdat migratemysql --table=customer
+	bin/samizdat migratemysql --table=snapusers
+	bin/samizdat migratemysql --table=databases
+
 syncinvoices:
 	bin/samizdat makesyncinvoices
 

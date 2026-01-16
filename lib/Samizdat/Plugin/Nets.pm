@@ -12,14 +12,7 @@ sub register ($self, $app, $config = {}) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{Nets} = $openapi_yaml if $openapi_yaml;
 
-  # Public routes (non-API)
-  my $nets = $r->home('/nets')->to(controller => 'Nets');
-  $nets->get('/success')                      ->to('#success')              ->name('nets_success');
-  $nets->get('/cancel')                       ->to('#cancel')               ->name('nets_cancel');
-  $nets->post('/webhook')                     ->to('#webhook')              ->name('nets_webhook');
-  $nets->get('/')                             ->to('#index')                ->name('nets_index');
-
-  # API routes are defined in OpenAPI spec (__DATA__ section)
+  # API routes (webhook, success, cancel, index) defined in OpenAPI spec (__DATA__ section)
 
   # Manager routes (HTML pages only - API via OpenAPI)
   my $manager = $r->manager('nets')->to(controller => 'Nets');
@@ -295,6 +288,79 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Nets_RefundResponse'
+
+  /nets/webhook:
+    post:
+      operationId: Nets.webhook
+      x-mojo-to: Nets#webhook
+      summary: Nets webhook endpoint
+      description: Receives webhook events from Nets Easy Checkout
+      tags: [Nets]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+      responses:
+        '200':
+          description: Webhook processed
+          content:
+            text/plain:
+              schema:
+                type: string
+
+  /nets/success:
+    get:
+      operationId: Nets.success
+      x-mojo-to: Nets#success
+      summary: Payment success return URL
+      tags: [Nets]
+      parameters:
+        - name: paymentId
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Payment successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+
+  /nets/cancel:
+    get:
+      operationId: Nets.cancel
+      x-mojo-to: Nets#cancel
+      summary: Payment cancel return URL
+      tags: [Nets]
+      responses:
+        '200':
+          description: Payment cancelled
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  cancelled:
+                    type: boolean
+
+  /nets:
+    get:
+      operationId: Nets.index
+      x-mojo-to: Nets#index
+      summary: Nets payment page
+      tags: [Nets]
+      responses:
+        '200':
+          description: Nets payment page
+          content:
+            application/json:
+              schema:
+                type: object
 
 components:
   schemas:

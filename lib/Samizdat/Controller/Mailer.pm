@@ -81,7 +81,7 @@ sub show ($self) {
   }
 }
 
-# Edit mail (modal)
+# Edit mail (modal or full page)
 sub edit ($self) {
   my $mailid = int($self->param('mailid') // 0);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
@@ -91,7 +91,10 @@ sub edit ($self) {
     my $web = { title => $title };
     $self->stash(mailid => $mailid);
     $web->{script} .= $self->render_to_string(template => 'mailer/edit/index', format => 'js');
-    return $self->render(web => $web, title => $title, template => 'mailer/edit/index', layout => 'modal', status => 200);
+    # Use modal layout for AJAX requests, full layout for direct page visits
+    my $is_ajax = $self->req->headers->header('X-Requested-With') // '';
+    my $layout = ($is_ajax eq 'XMLHttpRequest') ? 'modal' : undef;
+    return $self->render(web => $web, title => $title, template => 'mailer/edit/index', layout => $layout, status => 200);
   } else {
     return unless $self->access({ admin => 1 });
 
@@ -113,10 +116,12 @@ sub create ($self) {
 
   my $json = $self->req->json // {};
   my $userid = $self->session('userid');
+  my $customerid = $self->session('customerid');
 
   my $mail = $self->app->mailer->mail_create({
-    name    => $json->{name},
-    creator => $userid,
+    name       => $json->{name},
+    creator    => $userid,
+    customerid => $customerid,
   });
 
   return $self->render(json => {

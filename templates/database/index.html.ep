@@ -1,0 +1,31 @@
+<form class="align-items-center d-print-none mb-3 d-flex flex-wrap gap-2" id="dataform">
+  <div class="input-group flex-grow-1" style="min-width: 200px; max-width: 400px;">
+    <input type="text" class="form-control" name="searchterm" id="searchterm" placeholder="<%== __('Search database') %>">
+    <button id="searchbutton" type="submit" class="btn btn-primary" title="<%== __('Search') %>">
+      <%== icon 'search', {} %>
+    </button>
+  </div>
+  <select id="filterType" class="form-select" style="width: auto;">
+    <option value=""><%== __('All types') %></option>
+    <!-- Types populated from API -->
+  </select>
+</form>
+
+<div class="mb-2 d-flex justify-content-between align-items-center">
+  <div id="pagination-info" class="text-muted small"></div>
+</div>
+
+<table id="databases" class="table table-striped table-sm sortable">
+  <thead>
+    <tr>
+      <th><%== __('Database') %></th>
+      <th><%== __('Type') %></th>
+      <th><%== __('Username') %></th>
+      <th><%== __('Customer') %></th>
+      <th class="text-end"><%== __('Usage') %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <!-- Data will be injected here by JavaScript -->
+  </tbody>
+</table>

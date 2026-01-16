@@ -13,12 +13,11 @@ sub register ($self, $app, $config = {}) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{Swish} = $openapi_yaml if $openapi_yaml;
 
-  # Public routes (non-API)
+  # Public routes (non-API) - only qr is not in OpenAPI
   my $swish = $r->home('/swish')->to(controller => 'Swish');
-  $swish->post('/callback')             ->to('#callback')             ->name('swish_callback');
-  $swish->get('/success')               ->to('#success')              ->name('swish_success');
-  $swish->get('/cancel')                ->to('#cancel')               ->name('swish_cancel');
   $swish->get('/qr')                    ->to('#qr')                   ->name('swish_qr');
+
+  # API routes: callback, success, cancel defined in OpenAPI spec (__DATA__ section)
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
 
@@ -233,7 +232,7 @@ Samizdat::Plugin::Swish - Swish mobile payment integration plugin
     amount => 10000,
     payer_alias => '46701234567',
     message => 'Order #123',
-    callback_url => $c->url_for('swish_callback')->to_abs,
+    callback_url => $c->url_for('Swish.callback')->to_abs,
   );
 
 =head1 DESCRIPTION

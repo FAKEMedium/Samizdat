@@ -57,17 +57,19 @@ sub addUser ($self, $username, $attribs = {}) {
       )->hash->{contactid};
 
       if ($contactid =~ /^\d+$/ && $contactid > 0) {
+        # Create password record first (new schema: users reference passwords)
+        $passwordid = $db->insert('account.passwords',
+          {},
+          { returning => 'passwordid' }
+        )->hash->{passwordid};
+
+        # Create user with contactid and passwordid
         $attribs->{contactid} = $contactid;
+        $attribs->{passwordid} = $passwordid if $passwordid;
         $userid = $db->insert('account.users',
           $attribs,
           { returning => 'userid' }
         )->hash->{userid};
-        if ($userid =~ /^\d+$/) {
-          $passwordid = $db->insert('account.passwords',
-            { userid => $userid },
-            { returning => 'passwordid' }
-          )->hash->{passwordid};
-        }
       }
       $tx->commit;
     };
@@ -241,9 +243,12 @@ sub savePassword ($self, $userid, $password) {
       { returning => 'id' }
     )->hash->{id};
   } else {
+    # New schema: look up passwordid from users table
+    my $user = $db->select('account.users', ['passwordid'], { userid => $userid })->hash;
+    return unless $user && $user->{passwordid};
     $db->update('account.passwords',
       $attribs,
-      { 'passwords.userid' => $userid },
+      { 'passwords.passwordid' => $user->{passwordid} },
       { returning => 'passwordid' }
     )->hash->{passwordid};
   }
@@ -262,8 +267,9 @@ sub validatePassword ($self, $username, $plain) {
     if ('mysql' eq $self->config->{dbtype}) {
       $result = $db->select([ 'snapusers', [ -left => 'passwords', id => 'userid' ] ], 'passwords.*', {'snapusers.username' => $username})->hash;
     } else {
-      $result = $db->select([ 'account.users', [ -left => 'account.passwords', 'passwords.userid' => 'users.userid' ] ],
-        'passwords.*', {'users.username' => $username})->hash;
+      # New schema: join users.passwordid to passwords.passwordid
+      $result = $db->select([ 'account.users', [ -left => 'account.passwords', 'users.passwordid' => 'passwords.passwordid' ] ],
+        ['passwords.*', 'users.userid'], {'users.username' => $username})->hash;
     }
     for my $method (@{ $self->config->{passwordmethods} }) {
       if ($method eq "sha512") {
