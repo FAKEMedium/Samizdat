@@ -1,139 +1,187 @@
 package Samizdat::Model::Certificate;
 
 use Mojo::Base -base, -signatures;
-use Data::Dumper;
 
 has 'pg';
 has 'config';
 
-# Get certificates from database with optional filtering
 sub get ($self, $params = {}) {
-  my $where = $params->{where} || {};
-  my $order = $params->{order} || 'created DESC';
+  my $db = $self->pg->db;
+  my $where = $params->{where} // {};
   my $limit = $params->{limit};
-  my $offset = $params->{offset} || 0;
+  my $offset = $params->{offset} // 0;
 
-  # Build SQL query dynamically
-  my $sql = 'SELECT * FROM certificates.certificates';
+  my $where_sql = '';
   my @bind;
 
-  if (keys %$where) {
-    my @conditions;
-    for my $key (keys %$where) {
-      if (ref $where->{$key} eq 'HASH') {
-        # Handle operators like {-like => '%value%'}
-        my ($op, $val) = each %{$where->{$key}};
-        $op =~ s/^-//;
-        push @conditions, "$key $op ?";
-        push @bind, $val;
-      } elsif (ref $where->{$key} eq 'ARRAY') {
-        # Handle IN queries
-        my $placeholders = join(',', ('?') x @{$where->{$key}});
-        push @conditions, "$key IN ($placeholders)";
-        push @bind, @{$where->{$key}};
-      } else {
-        push @conditions, "$key = ?";
-        push @bind, $where->{$key};
-      }
-    }
-    $sql .= ' WHERE ' . join(' AND ', @conditions);
+  if ($where->{certificateid}) {
+    $where_sql = 'WHERE c.certificateid = ?';
+    push @bind, $where->{certificateid};
+  } elsif ($where->{customerid}) {
+    $where_sql = 'WHERE c.customerid = ?';
+    push @bind, $where->{customerid};
+  } elsif ($where->{hash}) {
+    $where_sql = 'WHERE c.hash = ?';
+    push @bind, $where->{hash};
   }
 
-  $sql .= " ORDER BY $order";
-  $sql .= " LIMIT $limit" if $limit;
-  $sql .= " OFFSET $offset" if $offset;
+  my $limit_sql = '';
+  $limit_sql .= " LIMIT $limit" if $limit;
+  $limit_sql .= " OFFSET $offset" if $offset;
 
-  return $self->pg->db->query($sql, @bind)->hashes->to_array;
+  my $sql = qq{
+    SELECT
+      c.certificateid,
+      c.customerid,
+      c.value,
+      c.fullvalue,
+      c.notafter,
+      c.keyfile,
+      c.certfile,
+      c.hash,
+      c.issuerid,
+      i.issuername
+    FROM certificate.certificates c
+    LEFT JOIN certificate.issuers i ON c.issuerid = i.issuerid
+    $where_sql
+    ORDER BY c.notafter DESC
+    $limit_sql
+  };
+
+  return $db->query($sql, @bind)->hashes->to_array;
 }
 
-# Get a single certificate by ID
 sub find ($self, $id) {
-  return $self->pg->db->query('SELECT * FROM certificates.certificates WHERE certificateid = ?', $id)->hash;
+  my $results = $self->get({ where => { certificateid => $id } });
+  return $results->[0];
 }
 
-# Create a new certificate
+sub find_by_hash ($self, $hash) {
+  my $results = $self->get({ where => { hash => $hash } });
+  return $results->[0];
+}
+
 sub create ($self, $data) {
-  # Set timestamps
-  $data->{created} = \'NOW()';
-  $data->{updated} = \'NOW()';
+  my $db = $self->pg->db;
 
-  return $self->pg->db->insert('certificates.certificates', $data, {returning => '*'})->hash;
+  my $insert = {
+    customerid => $data->{customerid},
+    value      => $data->{value},
+    fullvalue  => $data->{fullvalue},
+    notafter   => $data->{notafter},
+    keyfile    => $data->{keyfile},
+    certfile   => $data->{certfile},
+    hash       => $data->{hash} // _generate_hash($data->{value}),
+    issuerid   => $data->{issuerid},
+  };
+
+  return $db->insert('certificate.certificates', $insert, { returning => '*' })->hash;
 }
 
-# Update an existing certificate
 sub update ($self, $id, $data) {
-  # Update timestamp
-  $data->{updated} = \'NOW()';
+  my $db = $self->pg->db;
 
-  return $self->pg->db->update('certificates.certificates', $data, {certificateid => $id}, {returning => '*'})->hash;
+  my $update = {};
+  $update->{customerid} = $data->{customerid} if exists $data->{customerid};
+  $update->{value}      = $data->{value} if exists $data->{value};
+  $update->{fullvalue}  = $data->{fullvalue} if exists $data->{fullvalue};
+  $update->{notafter}   = $data->{notafter} if exists $data->{notafter};
+  $update->{keyfile}    = $data->{keyfile} if exists $data->{keyfile};
+  $update->{certfile}   = $data->{certfile} if exists $data->{certfile};
+  $update->{hash}       = $data->{hash} if exists $data->{hash};
+  $update->{issuerid}   = $data->{issuerid} if exists $data->{issuerid};
+
+  return $db->update('certificate.certificates', $update, { certificateid => $id }, { returning => '*' })->hash if %$update;
+  return $self->find($id);
 }
 
-# Delete a certificate
 sub delete ($self, $id) {
-  return $self->pg->db->delete('certificates.certificates', {certificateid => $id}, {returning => '*'})->hash;
+  my $db = $self->pg->db;
+  return $db->delete('certificate.certificates', { certificateid => $id }, { returning => '*' })->hash;
 }
 
-# Count certificates matching criteria
 sub count ($self, $params = {}) {
-  my $where = $params->{where} || {};
+  my $db = $self->pg->db;
+  my $where = $params->{where} // {};
 
-  my $sql = 'SELECT COUNT(*) as count FROM certificates.certificates';
+  my $sql = 'SELECT COUNT(*) as count FROM certificate.certificates';
   my @bind;
 
-  if (keys %$where) {
-    my @conditions;
-    for my $key (keys %$where) {
-      push @conditions, "$key = ?";
-      push @bind, $where->{$key};
-    }
-    $sql .= ' WHERE ' . join(' AND ', @conditions);
+  if ($where->{customerid}) {
+    $sql .= ' WHERE customerid = ?';
+    push @bind, $where->{customerid};
   }
 
-  my $result = $self->pg->db->query($sql, @bind)->hash;
-  return $result->{count} || 0;
+  return $db->query($sql, @bind)->hash->{count} // 0;
 }
 
-# Search certificates with full-text search
-sub search ($self, $searchterm, $params = {}) {
-  my $limit = $params->{limit} || 50;
-  my $offset = $params->{offset} || 0;
-
-  my $sql = q{
-    SELECT * FROM certificates.certificates
-    WHERE
-      domain ILIKE ? OR
-      commonname ILIKE ? OR
-      issuer ILIKE ?
-    ORDER BY created DESC
-    LIMIT ? OFFSET ?
-  };
-
-  my $pattern = '%' . $searchterm . '%';
-
-  return $self->pg->db->query($sql, $pattern, $pattern, $pattern, $limit, $offset)->hashes->to_array;
-}
-
-# Get expiring certificates (within X days)
 sub get_expiring ($self, $days = 30) {
-  my $sql = q{
-    SELECT * FROM certificates.certificates
-    WHERE expires_at <= NOW() + INTERVAL '? days'
-      AND expires_at > NOW()
-    ORDER BY expires_at ASC
+  my $db = $self->pg->db;
+
+  my $sql = qq{
+    SELECT
+      c.certificateid,
+      c.customerid,
+      c.notafter,
+      c.keyfile,
+      c.certfile,
+      c.hash,
+      i.issuername
+    FROM certificate.certificates c
+    LEFT JOIN certificate.issuers i ON c.issuerid = i.issuerid
+    WHERE c.notafter <= NOW() + INTERVAL '$days days'
+      AND c.notafter > NOW()
+    ORDER BY c.notafter ASC
   };
 
-  return $self->pg->db->query($sql, $days)->hashes->to_array;
+  return $db->query($sql)->hashes->to_array;
 }
 
-# Get expired certificates
 sub get_expired ($self) {
+  my $db = $self->pg->db;
+
   my $sql = q{
-    SELECT * FROM certificates.certificates
-    WHERE expires_at <= NOW()
-    ORDER BY expires_at DESC
+    SELECT
+      c.certificateid,
+      c.customerid,
+      c.notafter,
+      c.keyfile,
+      c.certfile,
+      c.hash,
+      i.issuername
+    FROM certificate.certificates c
+    LEFT JOIN certificate.issuers i ON c.issuerid = i.issuerid
+    WHERE c.notafter <= NOW()
+    ORDER BY c.notafter DESC
   };
 
-  return $self->pg->db->query($sql)->hashes->to_array;
+  return $db->query($sql)->hashes->to_array;
+}
+
+sub issuers ($self) {
+  my $db = $self->pg->db;
+  return $db->select('certificate.issuers', '*', undef, { -order_by => 'issuername' })->hashes->to_array;
+}
+
+sub find_issuer ($self, $id) {
+  my $db = $self->pg->db;
+  return $db->select('certificate.issuers', '*', { issuerid => $id })->hash;
+}
+
+sub find_issuer_by_name ($self, $name) {
+  my $db = $self->pg->db;
+  return $db->select('certificate.issuers', '*', { issuername => $name })->hash;
+}
+
+sub create_issuer ($self, $name) {
+  my $db = $self->pg->db;
+  return $db->insert('certificate.issuers', { issuername => $name }, { returning => '*' })->hash;
+}
+
+sub _generate_hash ($value) {
+  return undef unless $value;
+  require Digest::SHA;
+  return Digest::SHA::sha256_hex($value);
 }
 
 1;

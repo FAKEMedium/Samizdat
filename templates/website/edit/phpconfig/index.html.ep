@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title"><%== __('PHP Configuration') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  </div>
+  <div class="modal-body">
+    <p class="text-muted small"><%== __('PHP-FPM pool configuration. Will be merged with default .php.conf') %></p>
+    <textarea class="form-control font-monospace" id="phpconfig" rows="15" placeholder="pm = dynamic ..."></textarea>
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-danger" id="deletePhpConfig"><%== __('Delete') %></button>
+    <div>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+      <button type="button" class="btn btn-primary" id="savePhpConfig"><%== __('Save') %></button>
+    </div>
+  </div>
+</div>

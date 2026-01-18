@@ -1,33 +1,17 @@
 package Samizdat::Controller::Certificate;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
-use Data::Dumper;
 
-# Field definitions for validation and form handling
-my $fields = [ qw(domain commonname issuer certificate privatekey chain expires_at status notes) ];
-my $checkfields = [ qw(active autorenew) ];
-my $setfields = [ qw(created creator updated updater) ];
+# Field definitions matching migration 24 schema
+my $fields = [qw(customerid value fullvalue notafter keyfile certfile hash issuerid)];
 
+sub index ($self) {
+  my $accept = $self->req->headers->accept // '';
 
-# Index action - list all certificates or return JSON data
-sub index($self) {
-  my $accept = $self->req->headers->accept || '';
-
-  # HTML view
   if ($accept !~ /json/) {
     my $title = $self->app->__('Certificates');
     my $web = { title => $title };
-
-    # Render JavaScript template into web->script for inclusion in layout
-    $web->{script} = $self->render_to_string(
-      template => 'certificates/index',
-      format   => 'js'
-    );
-
-    $self->stash(
-      headline => 'certificate/chunks/headline'
-    );
-
+    $web->{script} .= $self->render_to_string(template => 'certificate/index', format => 'js');
     return $self->render(
       web      => $web,
       title    => $title,
@@ -35,259 +19,187 @@ sub index($self) {
       status   => 200
     );
   } else {
-    # JSON API response
-    # Require authentication for JSON data
-    return if !$self->access({ 'valid-user' => 1 });
+    return unless $self->access({ admin => 1 });
 
-    my $searchterm = $self->param('searchterm') || '';
-    my $page = $self->param('page') || 1;
-    my $limit = $self->param('limit') || $self->perpage;
+    my $customerid = $self->param('customerid');
+    my $page = $self->param('page') // 1;
+    my $limit = $self->param('limit') // $self->perpage;
     my $offset = ($page - 1) * $limit;
 
-    my $certificates;
-    if ($searchterm) {
-      $certificates = $self->app->certificate->search($searchterm, {
-        limit  => $limit,
-        offset => $offset
-      });
-    } else {
-      $certificates = $self->app->certificate->get({
-        limit  => $limit,
-        offset => $offset
-      });
-    }
+    my $params = { limit => $limit, offset => $offset };
+    $params->{where} = { customerid => int($customerid) } if $customerid;
 
-    my $total = $self->app->certificate->count();
+    my $certificates = $self->certificate->get($params);
+    my $total = $self->certificate->count($params);
 
     return $self->render(json => {
+      success      => 1,
       certificates => $certificates,
       pagination   => {
         page  => $page,
         limit => $limit,
         total => $total,
         pages => int(($total + $limit - 1) / $limit)
-      },
-      searchterm => $searchterm
+      }
     });
   }
 }
 
-
-# Show action - display single certificate
-sub show($self) {
+sub show ($self) {
   my $id = $self->param('id');
-  my $accept = $self->req->headers->accept || '';
+  my $accept = $self->req->headers->accept // '';
 
   if ($accept !~ /json/) {
-    # Set docpath to ensure static cache goes to /show/index.html instead of /<id>/index.html
-    $self->stash(docpath => '/certificate/show/index.html');
-    my $certificate = $self->app->certificate->find($id);
-    if (!$certificate) {
-      return $self->render(
-        template => 'not_found',
-        status   => 404
-      );
-    }
-
-    my $title = $certificate->{domain};
+    $self->stash(docpath => '/certificates/show/index.html');
+    my $title = $self->app->__('Certificate');
     my $web = { title => $title };
-
-    $web->{script} = $self->render_to_string(
-      template => 'certificate/show/index',
-      format   => 'js'
-    );
-
+    $web->{script} .= $self->render_to_string(template => 'certificate/show/index', format => 'js');
     return $self->render(
-      web         => $web,
-      title       => $title,
-      certificate => $certificate,
-      template    => 'certificate/show/index'
+      web      => $web,
+      title    => $title,
+      template => 'certificate/show/index',
+      status   => 200
     );
   } else {
-    # JSON API response
+    return unless $self->access({ admin => 1 });
 
-    return if !$self->access({ 'valid-user' => 1 });
-
-    my $certificate = $self->app->certificate->find($id);
+    my $certificate = $self->certificate->find(int($id));
     if (!$certificate) {
-      return $self->render(json => { success => 0, error => $self->app->__('Certificate not found') }, status => 404);
+      return $self->render(json => { success => 0, error => 'Certificate not found' }, status => 404);
     }
 
     return $self->render(json => { success => 1, certificate => $certificate });
   }
 }
 
-# Edit action - show edit form or return data for editing
-sub edit($self) {
-  my $id = $self->param('id') || 'new';
-  my $accept = $self->req->headers->accept || '';
+sub edit ($self) {
+  my $id = $self->param('id') // 'new';
+  my $accept = $self->req->headers->accept // '';
 
   if ($accept !~ /json/) {
-    # Set docpath to ensure static cache goes to /edit/index.html instead of /<id>/edit/index.html
-    $self->stash(docpath => '/certificate/edit/index.html');
-    my $certificate = {};
-    my $title = $self->app->__('New Certificate');
-
-    if ($id ne 'new') {
-      $certificate = $self->app->certificate->find($id) || {};
-      $title = $self->app->__('Edit Certificate');
-    }
-
+    $self->stash(docpath => '/certificates/edit/index.html');
+    my $title = $id eq 'new' ? $self->app->__('New Certificate') : $self->app->__('Edit Certificate');
     my $web = { title => $title };
-
-    # Include toast notification template
-    my $toast = $self->render_to_string(
-      template => 'chunks/toast',
-      format   => 'html',
-      toast    => {
-        title => $self->app->__('Updated'),
-        body  => $self->app->__('Changes saved successfully.'),
-        icon  => $self->app->icon('check-circle-fill', { extraclass => 'mx-2 text-success' }),
-        time  => '',
-        id    => 'certificate-toast',
-      }
-    );
-
-    $web->{script} = $self->render_to_string(
-      template => 'certificate/edit/index',
-      format   => 'js',
-      toast    => $toast
-    );
-
-    $self->stash(
-      fields      => $fields,
-      checkfields => $checkfields,
-      setfields   => $setfields
-    );
-
+    $web->{script} .= $self->render_to_string(template => 'certificate/edit/index', format => 'js');
     return $self->render(
-      web         => $web,
-      title       => $title,
-      certificate => $certificate,
-      template    => 'certificate/edit/index'
+      web      => $web,
+      title    => $title,
+      template => 'certificate/edit/index',
+      status   => 200
     );
   } else {
-    # JSON API response
-
-    return if !$self->access({ admin => 1 });
+    return unless $self->access({ admin => 1 });
 
     if ($id eq 'new') {
-      return $self->render(json => {
-        success     => 1,
-        certificate => {
-          status   => 'active',
-          active   => 1,
-          autorenew => 0
-        }
-      });
+      my $issuers = $self->certificate->issuers;
+      return $self->render(json => { success => 1, certificate => {}, issuers => $issuers });
     }
 
-    my $certificate = $self->app->certificate->find($id);
+    my $certificate = $self->certificate->find(int($id));
     if (!$certificate) {
-      return $self->render(json => { success => 0, error => $self->app->__('Certificate not found') }, status => 404);
+      return $self->render(json => { success => 0, error => 'Certificate not found' }, status => 404);
     }
 
-    return $self->render(json => { success => 1, certificate => $certificate });
+    my $issuers = $self->certificate->issuers;
+    return $self->render(json => { success => 1, certificate => $certificate, issuers => $issuers });
   }
 }
 
+sub create ($self) {
+  return unless $self->access({ admin => 1 });
 
-# Create action - handle POST to create new certificate
-sub create($self) {
-  # Require admin access for creation
-  return if !$self->access({ admin => 1 });
+  my $data = $self->req->json // $self->req->params->to_hash;
 
-  my $formdata = $self->_formdata();
-  if (!$formdata) {
-    return $self->render(json => { success => 0, error => $self->app->__('Invalid form data') }, status => 400);
-  }
-
-  # Add creator information
-  $formdata->{certificate}->{creator} = $self->session('userid');
-
-  my $certificate = $self->app->certificate->create($formdata->{certificate});
+  my $certificate = $self->certificate->create($data);
   if (!$certificate) {
-    return $self->render(json => { success => 0, error => $self->app->__('Failed to create certificate') }, status => 500);
+    return $self->render(json => { success => 0, error => 'Failed to create certificate' }, status => 500);
   }
-  return $self->render(json => { success => 1, certificate => $certificate, message => $self->app->__('Certificate created successfully') });
+
+  return $self->render(json => { success => 1, certificate => $certificate }, status => 201);
 }
 
+sub update ($self) {
+  return unless $self->access({ admin => 1 });
 
-# Update action - handle PUT/PATCH to update certificate
-sub update($self) {
-  # Require admin access for updates
-  return if !$self->access({ admin => 1 });
+  my $id = int($self->param('id'));
+  my $data = $self->req->json // $self->req->params->to_hash;
 
-  my $id = $self->param('id');
-  my $formdata = $self->_formdata();
-  if (!$formdata) {
-    return $self->render(json => { success => 0, error => $self->app->__('Invalid form data') }, status => 400);
-  }
-
-  # Add updater information
-  $formdata->{certificate}->{updater} = $self->session('userid');
-
-  my $certificate = $self->app->certificate->update($id, $formdata->{certificate});
+  my $certificate = $self->certificate->update($id, $data);
   if (!$certificate) {
-    return $self->render(json => { success => 0, error => $self->app->__('Failed to update certificate') }, status => 500);
+    return $self->render(json => { success => 0, error => 'Failed to update certificate' }, status => 500);
   }
 
-  return $self->render(json => { success => 1, certificate => $certificate, message => $self->app->__('Certificate updated successfully') });
+  return $self->render(json => { success => 1, certificate => $certificate });
 }
 
+sub delete ($self) {
+  return unless $self->access({ admin => 1 });
 
-# Delete action - handle DELETE request
-sub delete($self) {
-  # Require admin access for deletion
-  return if !$self->access({ admin => 1 });
+  my $id = int($self->param('id'));
 
-  my $id = $self->param('id');
-
-  my $certificate = $self->app->certificate->delete($id);
+  my $certificate = $self->certificate->delete($id);
   if (!$certificate) {
-    return $self->render(json => { success => 0, error => $self->app->__('Failed to delete certificate') }, status => 500);
+    return $self->render(json => { success => 0, error => 'Failed to delete certificate' }, status => 500);
   }
 
-  return $self->render(json => { success => 1, message => $self->app->__('Certificate deleted successfully') });
+  return $self->render(json => { success => 1, message => 'Certificate deleted' });
 }
 
-# Expiring action - show certificates expiring soon
-sub expiring($self) {
-  return if !$self->access({ 'valid-user' => 1 });
+sub expiring ($self) {
+  my $accept = $self->req->headers->accept // '';
 
-  my $days = $self->param('days') || 30;
-  my $certificates = $self->app->certificate->get_expiring($days);
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Expiring Certificates');
+    my $web = { title => $title };
+    return $self->render(
+      web      => $web,
+      title    => $title,
+      template => 'certificate/expiring/index',
+      status   => 200
+    );
+  } else {
+    return unless $self->access({ admin => 1 });
 
-  return $self->render(json => { success => 1, certificates => $certificates });
-}
+    my $days = $self->param('days') // 30;
+    my $certificates = $self->certificate->get_expiring(int($days));
 
-# Renew action - trigger certificate renewal
-sub renew($self) {
-  return if !$self->access({ admin => 1 });
-
-  my $id = $self->param('id');
-
-  # TODO: Implement certificate renewal logic (e.g., ACME/Let's Encrypt)
-
-  return $self->render(json => { success => 1, message => $self->app->__('Certificate renewal initiated') });
-}
-
-# Private helper to extract and validate form data
-sub _formdata($self) {
-  my $result = $self->req->params->to_hash;
-  my $formdata = { certificate => {} };
-
-  # Extract regular fields
-  for my $field (@{$fields}) {
-    $formdata->{certificate}->{$field} = $result->{$field} if defined $result->{$field};
+    return $self->render(json => { success => 1, certificates => $certificates, days => $days });
   }
+}
 
-  # Extract checkbox fields (convert to integer)
-  for my $checkfield (@{$checkfields}) {
-    $formdata->{certificate}->{$checkfield} = $result->{$checkfield} ? 1 : 0;
+sub renew ($self) {
+  my $accept = $self->req->headers->accept // '';
+
+  if ($accept !~ /json/) {
+    $self->stash(docpath => '/certificates/renew/index.html');
+    my $title = $self->app->__('Renew Certificate');
+    my $web = { title => $title };
+    return $self->render(
+      web      => $web,
+      title    => $title,
+      template => 'certificate/renew/index',
+      status   => 200
+    );
+  } else {
+    return unless $self->access({ admin => 1 });
+
+    my $id = int($self->param('id'));
+
+    # TODO: Implement certificate renewal logic (e.g., ACME/Let's Encrypt)
+    # This would typically:
+    # 1. Generate new CSR
+    # 2. Submit to CA (Let's Encrypt, etc.)
+    # 3. Update certificate record with new value/fullvalue/notafter
+
+    return $self->render(json => { success => 1, message => 'Certificate renewal initiated' });
   }
+}
 
-  return $formdata;
+sub issuers ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $issuers = $self->certificate->issuers;
+  return $self->render(json => { success => 1, issuers => $issuers });
 }
 
 1;

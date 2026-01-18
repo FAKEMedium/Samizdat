@@ -1,0 +1,17 @@
+<div class="modal-content">
+  <div class="modal-header">
+    <h5 class="modal-title"><%== __('Server Extra Configuration') %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  </div>
+  <div class="modal-body">
+    <p class="text-muted small"><%== __('Additional Apache/Nginx configuration directives') %></p>
+    <textarea class="form-control font-monospace" id="serverextra" rows="15" placeholder="# Extra directives ..."></textarea>
+  </div>
+  <div class="modal-footer justify-content-between">
+    <button type="button" class="btn btn-danger" id="deleteServerExtra"><%== __('Delete') %></button>
+    <div>
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+      <button type="button" class="btn btn-primary" id="saveServerExtra"><%== __('Save') %></button>
+    </div>
+  </div>
+</div>

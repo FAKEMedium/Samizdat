@@ -11,6 +11,25 @@ siteurl: https://example.com:3443/
 host: example.com
 extraplugins:
   - Example
+#  - Fortnox
+#  - Customer
+#  - Swish
+#  - PayPal
+#  - Stripe
+#  - Invoice
+#  - Domain
+#  - Zone
+#  - Email
+#  - Database
+#  - Website
+#  - Certificate
+#  - SMS
+#  - Poll
+#  - BuyMeACoffee
+#  - RealtimeRegister
+#  - EPP
+#  - BIS
+#  - Mailer
 logotype:
   file: public/media/images/fakenews.svg
   width: 194
@@ -138,8 +157,14 @@ manager:
     cardnumber: 5
     dbtype: postgresql
   database:
-    cardnumber: 6
     dbtype: postgresql
+    cardnumber: 6
+    phpmyadmin:
+      url: /phpmyadmin/
+    phppgadmin:
+      url: /phppgadmin/
+    phpldapadmin:
+      url: /phpldapadmin/
   email:
     cardnumber: 7
     dbtype: mysql

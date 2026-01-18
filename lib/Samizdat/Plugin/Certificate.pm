@@ -11,14 +11,18 @@ sub register ($self, $app, $conf) {
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
   $app->config->{openapi_fragments}{Certificate} = $openapi_yaml if $openapi_yaml;
 
-  # Manager routes (HTML pages only - GET)
+  # Manager routes
   my $manager = $r->manager('certificates')->to(controller => 'Certificate');
+  $manager->get('/issuers')               ->to('#issuers')              ->name('certificate_issuers');
   $manager->get('/renew/:id')             ->to('#renew')                ->name('certificate_renew');
   $manager->get('/new')                   ->to('#edit', id => 'new')    ->name('certificate_new');
   $manager->get('/expiring')              ->to('#expiring')             ->name('certificate_expiring');
   $manager->get('/:id/edit')              ->to('#edit')                 ->name('certificate_edit');
   $manager->get('/:id')                   ->to('#show')                 ->name('certificate_show');
   $manager->get('/')                      ->to('#index')                ->name('certificate_index');
+  $manager->post('/')                     ->to('#create')               ->name('certificate_create');
+  $manager->put('/:id')                   ->to('#update')               ->name('certificate_update');
+  $manager->delete('/:id')                ->to('#delete')               ->name('certificate_delete');
 
   # API routes are defined in OpenAPI spec (__DATA__ section)
 
@@ -275,39 +279,52 @@ components:
       properties:
         certificateid:
           type: integer
-        domain:
+        customerid:
+          type: integer
+        value:
           type: string
-        common_name:
+          description: Certificate PEM content
+        fullvalue:
           type: string
-        issuer:
-          type: string
-        valid_from:
-          type: string
-          format: date-time
-        valid_until:
-          type: string
-          format: date-time
-        status:
-          type: string
-          enum: [active, expired, pending]
-        auto_renew:
-          type: boolean
-        created_at:
+          description: Full chain PEM content
+        notafter:
           type: string
           format: date-time
+          description: Certificate expiration date
+        keyfile:
+          type: string
+          description: Path to private key file
+        certfile:
+          type: string
+          description: Path to certificate file
+        hash:
+          type: string
+          description: Certificate hash for identification
+        issuerid:
+          type: integer
+        issuername:
+          type: string
+          description: Certificate authority name
     Certificate_Input:
       type: object
-      required:
-        - domain
       properties:
-        domain:
+        customerid:
+          type: integer
+        value:
           type: string
-        common_name:
+        fullvalue:
           type: string
-        organization:
+        notafter:
           type: string
-        auto_renew:
-          type: boolean
+          format: date-time
+        keyfile:
+          type: string
+        certfile:
+          type: string
+        hash:
+          type: string
+        issuerid:
+          type: integer
     Certificate_ListResponse:
       type: object
       properties:

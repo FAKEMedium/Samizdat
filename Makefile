@@ -6,6 +6,7 @@ migratemysql:
 	bin/samizdat migratemysql --table=customer
 	bin/samizdat migratemysql --table=snapusers
 	bin/samizdat migratemysql --table=databases
+	bin/samizdat migratemysql --table=website
 
 syncinvoices:
 	bin/samizdat makesyncinvoices
