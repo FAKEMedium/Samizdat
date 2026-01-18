@@ -1,16 +1,16 @@
-// Certificate list handler with pagination and search
+// Website list handler with pagination and search
 let currentPage = 1;
 let totalPages = 1;
 let searchTerm = '';
 
-// Load certificates on page load
-loadCertificates();
+// Load websites on page load
+loadWebsites();
 
 // Search functionality
 document.getElementById('searchButton').addEventListener('click', () => {
   searchTerm = document.getElementById('searchterm').value;
   currentPage = 1;
-  loadCertificates();
+  loadWebsites();
 });
 
 // Enter key in search field
@@ -18,12 +18,12 @@ document.getElementById('searchterm').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') {
     searchTerm = e.target.value;
     currentPage = 1;
-    loadCertificates();
+    loadWebsites();
   }
 });
 
-// Load certificates from API
-async function loadCertificates() {
+// Load websites from API
+async function loadWebsites() {
   const params = new URLSearchParams({
     page: currentPage,
     limit: 20
@@ -32,61 +32,49 @@ async function loadCertificates() {
     params.append('searchterm', searchTerm);
   }
 
-  const data = await window.authenticatedFetch(`${window.location.pathname}?${params}`, {
+  const data = await window.authenticatedFetch(`<%== url_for('Website.index') %>?${params}`, {
     method: 'GET'
   });
 
   if (data) {
-    populateTable(data.certificates);
-    updatePagination(data.pagination);
+    populateTable(data.websites);
+    if (data.pagination) {
+      updatePagination(data.pagination);
+    }
   }
 }
 
-// Populate the table with certificates
-function populateTable(certificates) {
-  const tbody = document.querySelector('#certificates tbody');
+// Populate the table with websites
+function populateTable(websites) {
+  const tbody = document.querySelector('#websites tbody');
 
-  if (!certificates || certificates.length === 0) {
+  if (!websites || websites.length === 0) {
     tbody.innerHTML = `
       <tr>
-        <td colspan="7" class="text-center"><%== __('No certificates found') %></td>
+        <td colspan="6" class="text-center"><%== __('No websites found') %></td>
       </tr>
     `;
     return;
   }
 
   let snippet = '';
-  certificates.forEach(cert => {
-    const expiresDate = cert.expires_at ? new Date(cert.expires_at).toLocaleDateString() : '';
-    const statusClass = cert.status === 'active' ? 'success' : 'secondary';
-
-    // Check if certificate is expiring soon (within 30 days)
-    const daysUntilExpiry = cert.expires_at ? Math.floor((new Date(cert.expires_at) - new Date()) / (1000 * 60 * 60 * 24)) : null;
-    const expiryWarning = daysUntilExpiry !== null && daysUntilExpiry < 30 && daysUntilExpiry > 0
-      ? `<span class="badge bg-warning ms-2">${daysUntilExpiry} days</span>`
-      : daysUntilExpiry !== null && daysUntilExpiry <= 0
-      ? `<span class="badge bg-danger ms-2">Expired</span>`
-      : '';
+  websites.forEach(website => {
+    const statusClass = website.active ? 'success' : 'secondary';
+    const statusText = website.active ? '<%== __("Active") %>' : '<%== __("Inactive") %>';
 
     snippet += `
-      <tr data-id="${cert.certificateid}">
-        <td>${cert.certificateid}</td>
+      <tr data-id="${website.websiteid}">
+        <td>${website.websiteid}</td>
         <td>
-          <a href="<%= url_for('certificate_show') %>/${cert.certificateid}">${cert.domain || ''}</a>
+          <a href="${'<%== url_for('website_edit', websiteid => '_ID_') %>'.replace('_ID_', website.websiteid)}">${website.domainname || '<%== __("No domain") %>'}</a>
         </td>
-        <td>${cert.commonname || ''}</td>
-        <td>${cert.issuer || ''}</td>
-        <td>${expiresDate}${expiryWarning}</td>
+        <td>${website.servername || ''}</td>
+        <td><code>${website.home || ''}</code></td>
         <td>
-          <span class="badge bg-${statusClass}">${cert.status || 'unknown'}</span>
+          <span class="badge bg-${statusClass}">${statusText}</span>
         </td>
         <td class="text-end">
-          <a href="<%= url_for('certificate_edit') %>/${cert.certificateid}/edit"
-             class="btn btn-sm btn-secondary"
-             title="<%== __('Edit') %>">
-            <%== icon 'pencil-fill' %>
-          </a>
-          <button data-id="${cert.certificateid}"
+          <button data-id="${website.websiteid}"
                   class="btn btn-sm btn-danger btn-delete"
                   title="<%== __('Delete') %>">
             <%== icon 'trash-fill' %>
@@ -101,10 +89,10 @@ function populateTable(certificates) {
   // Attach delete handlers
   document.querySelectorAll('.btn-delete').forEach(btn => {
     btn.addEventListener('click', async () => {
-      if (!confirm('<%== __("Are you sure you want to delete this certificate?") %>')) return;
+      if (!confirm('<%== __("Are you sure you want to delete this website?") %>')) return;
 
       const id = btn.getAttribute('data-id');
-      await deleteCertificate(id);
+      await deleteWebsite(id);
     });
   });
 }
@@ -117,6 +105,8 @@ function updatePagination(pagination) {
   totalPages = pagination.pages;
 
   const paginationEl = document.getElementById('pagination');
+  if (!paginationEl) return;
+
   let paginationHtml = '';
 
   // Previous button
@@ -134,37 +124,15 @@ function updatePagination(pagination) {
     `;
   }
 
-  // Page numbers (show max 5 pages)
+  // Page numbers
   let startPage = Math.max(1, currentPage - 2);
   let endPage = Math.min(totalPages, startPage + 4);
-
-  if (startPage > 1) {
-    paginationHtml += `
-      <li class="page-item">
-        <a class="page-link" href="#" data-page="1">1</a>
-      </li>
-    `;
-    if (startPage > 2) {
-      paginationHtml += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
-    }
-  }
 
   for (let i = startPage; i <= endPage; i++) {
     const active = i === currentPage ? 'active' : '';
     paginationHtml += `
       <li class="page-item ${active}">
         <a class="page-link" href="#" data-page="${i}">${i}</a>
-      </li>
-    `;
-  }
-
-  if (endPage < totalPages) {
-    if (endPage < totalPages - 1) {
-      paginationHtml += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
-    }
-    paginationHtml += `
-      <li class="page-item">
-        <a class="page-link" href="#" data-page="${totalPages}">${totalPages}</a>
       </li>
     `;
   }
@@ -191,20 +159,20 @@ function updatePagination(pagination) {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       currentPage = parseInt(link.getAttribute('data-page'));
-      loadCertificates();
+      loadWebsites();
     });
   });
 }
 
-// Delete a certificate
-async function deleteCertificate(id) {
-  const result = await window.authenticatedFetch(`<%== url_for('Certificate.delete', id => '_ID_') %>`.replace('_ID_', id), {
+// Delete a website
+async function deleteWebsite(id) {
+  const result = await window.authenticatedFetch(`<%== url_for('Website.delete', websiteid => '_ID_') %>`.replace('_ID_', id), {
     method: 'DELETE'
   });
 
   if (result && result.success) {
-    showToast('success', '<%== __("Certificate deleted successfully") %>');
-    loadCertificates(); // Reload the list
+    showToast('success', '<%== __("Website deleted successfully") %>');
+    loadWebsites();
   }
 }
 
@@ -227,9 +195,10 @@ function showToast(type, message) {
   `;
 
   const toastContainer = document.getElementById('toast-messages');
-  toastContainer.innerHTML = toastHtml;
-
-  const toastEl = toastContainer.querySelector('.toast');
-  const toast = new bootstrap.Toast(toastEl);
-  toast.show();
+  if (toastContainer) {
+    toastContainer.innerHTML = toastHtml;
+    const toastEl = toastContainer.querySelector('.toast');
+    const toast = new bootstrap.Toast(toastEl);
+    toast.show();
+  }
 }

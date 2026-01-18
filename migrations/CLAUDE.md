@@ -16,7 +16,9 @@ other databases like SQLite (Mojo::SQLite) and MySQL (Mojo::mysql) too.
 - `account` - User accounts, contacts, passwords, authentication
 - `customer` - Customer entities, billing, invoices, services
 - `database` - Database management (added migration 22)
-- `web` - Website content, pages, homes
+- `web` - Samizdat app content (resources, menus, templates)
+- `website` - Web hosting infrastructure (webservices, domains, servers) (added migration 24)
+- `certificate` - SSL certificate management (added migration 24)
 - `mailer` - Email system (lists, addresses, mails, deliveries)
 - `poll` - Polling/survey system
 
@@ -138,6 +140,82 @@ identification may differ between countries (e.g., Swedish orgno analysis).
 | 1              | mariadb    | MariaDB/MySQL database         |
 | 2              | postgresql | PostgreSQL database            |
 | 3              | valkey     | Valkey (Redis-compatible) store|
+
+#### Web Hosting (website schema, added migration 24)
+
+Moved from `web` schema to separate hosting concerns from app content.
+Renamed `webservices` to `websites`, `webserviceid` to `websiteid`.
+
+- `website.websites` - Hosted websites/services
+  - `websiteid` - Primary key
+  - `customerid` - FK to customer.customers
+  - `home` - Home directory path (renamed from `path`)
+  - `primarydomain` - FK to website.domains
+  - `serverid` - FK to website.servers
+  - `passwordid` - FK to account.passwords (FTP/SSH access)
+  - `certificateid` - FK to certificate.certificates
+  - `shellid` - FK to website.shells
+  - `ipsetid` - FK to website.ipsets
+  - `redirecturl` - Redirect URL if applicable
+  - `active` - Service is active
+  - `web_usage` - Storage usage in bytes
+
+- `website.domains` - Domain names
+  - `domainid` - Primary key
+  - `websiteid` - FK to website.websites
+  - `domainname` - Unique domain name
+  - `customerid` - FK to customer.customers
+  - `incert` - Include in multi-SAN certificate (default true)
+
+- `website.servers` - Physical/virtual servers
+  - `serverid` - Primary key
+  - `hostname` - Server hostname
+  - `jailname` - FreeBSD jail name (if applicable)
+  - `servertypeid` - FK to website.servertypes
+
+- `website.servertypes` - Server software types
+  - `servertypeid` - Primary key
+  - `servertypename` - Type name (nginx, apache2, openresty, mojolicious)
+
+- `website.shells` - User shells for FTP/SSH access
+  - `shellid` - Primary key
+  - `shell` - Shell path (/bin/ftponly, /bin/bash, etc.)
+
+- `website.ipsets` - IP address groups per server
+  - `ipsetid` - Primary key
+  - `serverid` - FK to website.servers
+
+- `website.ips` - IP addresses
+  - `ipid` - Primary key
+  - `ipsetid` - FK to website.ipsets
+  - `ip` - IP address (inet type)
+
+- `website.serverextras` - Extra Apache/Nginx configuration
+  - `serverextraid` - Primary key
+  - `configextra` - Configuration directives
+  - `websiteid` - FK to website.websites
+
+- `website.phpconfigs` - PHP configuration per website
+  - `phpconfigid` - Primary key
+  - `phpconfig` - PHP configuration
+  - `websiteid` - FK to website.websites
+
+#### SSL Certificates (certificate schema, added migration 24)
+
+- `certificate.certificates` - SSL/TLS certificates
+  - `certificateid` - Primary key
+  - `customerid` - FK to customer.customers
+  - `value` - Certificate PEM content
+  - `fullvalue` - Full chain PEM content
+  - `notafter` - Expiration timestamp
+  - `keyfile` - Path to private key file
+  - `certfile` - Path to certificate file
+  - `hash` - Certificate hash for identification
+  - `issuerid` - FK to certificate.issuers
+
+- `certificate.issuers` - Certificate authorities
+  - `issuerid` - Primary key
+  - `issuername` - CA name (Let's Encrypt, DigiCert, etc.)
 
 ### Reference Data (public schema)
 

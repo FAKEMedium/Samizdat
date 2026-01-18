@@ -1,0 +1,94 @@
+<form id="websiteForm">
+  <div class="card mb-3">
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <h5 class="mb-0"><%== __('Website Configuration') %></h5>
+      <button type="submit" class="btn btn-primary btn-sm" id="saveBtn">
+        <%== icon 'check' %> <%== __('Save') %>
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label class="form-label"><%== __('Customer') %></label>
+          <div class="form-control-plaintext">
+            <a href="#" id="customerid" class="text-decoration-none">-</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="serverid" class="form-label"><%== __('Server') %></label>
+          <select class="form-select" id="serverid" name="serverid">
+            <option value=""><%== __('Select server...') %></option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="shellid" class="form-label"><%== __('Shell') %></label>
+          <select class="form-select" id="shellid" name="shellid">
+            <option value=""><%== __('Select shell...') %></option>
+          </select>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label class="form-label"><%== __('Home Directory') %></label>
+          <div class="form-control-plaintext font-monospace" id="home">-</div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="ip4" class="form-label"><%== __('IPv4 Override') %></label>
+          <input type="text" class="form-control" id="ip4" name="ip4" placeholder="<%== __('Leave empty for server default') %>">
+        </div>
+        <div class="col-md-6">
+          <label for="ip6" class="form-label"><%== __('IPv6 Override') %></label>
+          <input type="text" class="form-control" id="ip6" name="ip6" placeholder="<%== __('Leave empty for server default') %>">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-12">
+          <label for="redirecturl" class="form-label"><%== __('Redirect URL') %></label>
+          <input type="text" class="form-control" id="redirecturl" name="redirecturl" placeholder="https://example.com">
+          <div class="form-text"><%== __('If set, all requests will redirect to this URL') %></div>
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <div class="col-md-3">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="active" name="active" value="1">
+            <label class="form-check-label" for="active"><%== __('Active') %></label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="ip_only" name="ip_only" value="1">
+            <label class="form-check-label" for="ip_only"><%== __('IP Only') %></label>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check d-inline-block">
+            <input type="checkbox" class="form-check-input" id="php_enabled" name="php_enabled" value="1">
+            <label class="form-check-label" for="php_enabled"><%== __('PHP') %></label>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary ms-2" id="phpConfigBtn">
+            <%== icon 'gear' %>
+          </button>
+        </div>
+        <div class="col-md-3">
+          <div class="form-check d-inline-block">
+            <input type="checkbox" class="form-check-input" id="serverextra_enabled" name="serverextra_enabled" value="1">
+            <label class="form-check-label" for="serverextra_enabled"><%== __('Server Extra') %></label>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary ms-2" id="serverextraConfigBtn">
+            <%== icon 'gear' %>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,83 @@
+<div class="mb-3 d-flex justify-content-between">
+  <a href="<%== url_for('website_index') %>" class="btn btn-secondary">
+    <%== icon 'arrow-left' %> <%== __('Back to List') %>
+  </a>
+  <div class="d-flex gap-2">
+    <a href="#" id="editBtn" class="btn btn-primary">
+      <%== icon 'pencil' %> <%== __('Edit') %>
+    </a>
+    <button class="btn btn-danger" id="deleteBtn">
+      <%== icon 'trash' %> <%== __('Delete') %>
+    </button>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-header">
+    <h5 class="mb-0"><%== __('Website Details') %></h5>
+  </div>
+  <div class="card-body">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <strong><%== __('Primary Domain') %>:</strong>
+        <p id="domainname">-</p>
+      </div>
+      <div class="col-md-6">
+        <strong><%== __('Server') %>:</strong>
+        <p id="servername">-</p>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <strong><%== __('Home Directory') %>:</strong>
+        <p><code id="home">-</code></p>
+      </div>
+      <div class="col-md-6">
+        <strong><%== __('Shell') %>:</strong>
+        <p id="shell">-</p>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <strong><%== __('IPv4') %>:</strong>
+        <p id="ip4">-</p>
+      </div>
+      <div class="col-md-6">
+        <strong><%== __('IPv6') %>:</strong>
+        <p id="ip6">-</p>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <strong><%== __('Status') %>:</strong>
+        <p id="status">-</p>
+      </div>
+      <div class="col-md-6">
+        <strong><%== __('Redirect URL') %>:</strong>
+        <p id="redirecturl">-</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h5 class="mb-0"><%== __('Domains') %></h5>
+    <button class="btn btn-sm btn-primary" id="addDomainBtn">
+      <%== icon 'plus' %> <%== __('Add Domain') %>
+    </button>
+  </div>
+  <div class="card-body">
+    <table class="table table-striped" id="domainsTable">
+      <thead>
+        <tr>
+          <th><%== __('Domain') %></th>
+          <th><%== __('In Cert') %></th>
+          <th class="text-end"><%== __('Actions') %></th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>

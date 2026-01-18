@@ -72,8 +72,8 @@ sub index ($self) {
     }
 
     # Apply parameters
-    $options->{where}->{invoicedate} = {'>', '2017'};
-    $options->{where}->{state} = [];
+    $options->{where}->{invoicedate} = { '>' => '2017' };
+    my @states;
 
     # Search by invoice number if numeric
     if ($searchterm =~ /^\d+$/) {
@@ -82,18 +82,23 @@ sub index ($self) {
 
     # Always apply state filters (checkboxes are "among these")
     if ($paid) {
-      push @{$options->{where}->{state}}, 'bokford';
+      push @states, 'bokford';
     }
     if ($unpaid) {
-      push @{$options->{where}->{state}}, 'fakturerad';
+      push @states, 'fakturerad';
     }
     if ($destroyed) {
-      push @{$options->{where}->{state}}, 'raderad';
-      push @{$options->{where}->{state}}, 'krediterad';
+      push @states, 'raderad';
+      push @states, 'krediterad';
     }
 
-    # Default: exclude 'obehandlad' if no state filters selected
-    $options->{where}->{state} = {'!=', 'obehandlad'} if (! scalar @{ $options->{where}->{state} });
+    # Apply state filter
+    if (@states) {
+      $options->{where}->{state} = { '-in' => \@states };
+    } else {
+      # Default: exclude 'obehandlad' if no state filters selected
+      $options->{where}->{state} = { '!=' => 'obehandlad' };
+    }
 
     my $invoices = $self->app->invoice->get($options);
 

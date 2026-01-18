@@ -31,6 +31,21 @@ sub _get_mysql ($self, $where, $limit) {
   my $customers = [];
 
   $db->select('customer', '*', $where, $limit)->hashes->each(sub ($customer, $num) {
+    # Normalize fields to match PostgreSQL format
+    # lang: 'sv_SE' -> 'sv'
+    if ($customer->{lang}) {
+      $customer->{lang} = lc(substr($customer->{lang}, 0, 2));
+    }
+    # currency: 'sek' -> 'SEK'
+    if ($customer->{currency}) {
+      $customer->{currency} = uc($customer->{currency});
+    }
+    # trust: 'blocked'/'normal'/'trusted' -> 0/1/2
+    my %trust_map = (blocked => 0, normal => 1, trusted => 2);
+    if ($customer->{trust} && exists $trust_map{$customer->{trust}}) {
+      $customer->{trust} = $trust_map{$customer->{trust}};
+    }
+
     # Fill in billing fields from primary if empty
     $customer->{billingemail}   ||= $customer->{contactemail};
     $customer->{billingcity}    ||= $customer->{city};
@@ -305,9 +320,36 @@ sub databases ($self, $params = {}) {
 }
 
 sub sites ($self, $params = {}) {
-  my $db = $self->database;
   my $where = $params->{where} // {};
-  return $db->select('Domain', '*', $where)->hashes;
+
+  if ($self->dbtype eq 'mysql') {
+    return $self->database->select('Domain', '*', $where)->hashes;
+  } else {
+    # PostgreSQL: query website.websites joined with domains
+    my $db = $self->app->pg->db;
+    my $where_sql = '';
+    my @bind;
+
+    if ($where->{customerid}) {
+      $where_sql = 'WHERE w.customerid = ?';
+      push @bind, $where->{customerid};
+    }
+
+    return $db->query(qq{
+      SELECT
+        w.websiteid,
+        w.customerid,
+        w.home,
+        w.active,
+        w.web_usage,
+        d.domainname,
+        d.domainid
+      FROM website.websites w
+      LEFT JOIN website.domains d ON w.primarydomain = d.domainid
+      $where_sql
+      ORDER BY d.domainname
+    }, @bind)->hashes;
+  }
 }
 
 sub userlogins ($self, $params = {}) {

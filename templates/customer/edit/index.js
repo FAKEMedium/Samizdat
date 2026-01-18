@@ -340,14 +340,14 @@ function populateForm(formdata, method) {
     document.querySelector('#mailto').href = 'mailto:' + customer.contactemail;
     document.querySelector('#mailto').classList.remove("d-none");
   }
-  if (Object.hasOwn(customer, 'phone1') && ('' != customer.phone1)) {
+  if (Object.hasOwn(customer, 'phone1') && customer.phone1) {
     let tel1 = customer.phone1.replace(/[^+0-9]+/g, '');
     if ('' != tel1) {
       document.querySelector('#tel1').href = 'tel:' + tel1;
       document.querySelector('#tel1').classList.remove("d-none");
     }
   }
-  if (Object.hasOwn(customer, 'phone2') && ('' != customer.phone2)) {
+  if (Object.hasOwn(customer, 'phone2') && customer.phone2) {
     let tel2 = customer.phone2.replace(/[^+0-9]+/g, '');
     if ('' != tel2) {
       document.querySelector('#tel2').href = 'tel:' + tel2;
@@ -429,6 +429,7 @@ function populateForm(formdata, method) {
                 </tr>`;
   }
   document.querySelector('#invoices tbody').innerHTML = snippet;
+  document.querySelector('#invoicelistlink').href = `<%== url_for('customer_index') %>/${customer.customerid}/invoices`;
   document.querySelectorAll('.currencynote').forEach((currencynote) => {
     currencynote.innerHTML = `${'<%== __x("Invoice currency is {currency}.", currency => "customercurrency") %>'.replace('customercurrency', customer.currency.toUpperCase())}`;
   });
@@ -512,15 +513,15 @@ function populateForm(formdata, method) {
   let nrsites = 0;
   let webusage = 0;
   let datausage = 0;
-  sites = sites.sortBy('domainName');
+  sites = sites.sortBy('domainname');
   for (const site of sites) {
     nrsites++;
-    webusage += site.webusage;
-    datausage += site.webusage;
+    webusage += site.web_usage || 0;
+    datausage += site.web_usage || 0;
     snippet += `
-                <tr data-domainPK="${site.domainPK}">
-                  <td><a class="d-block" href="<%== url_for('customer_index') %>/${customer.customerid}/sites/${site.domainName}">${site.domainName}</a></td>
-                  <td class="text-end">${shortbytes(site.webusage)}</td>
+                <tr data-websiteid="${site.websiteid}">
+                  <td><a class="d-block" href="<%== url_for('website_edit', websiteid => '_ID_') %>".replace('_ID_', site.websiteid)>${site.domainname || site.home || site.websiteid}</a></td>
+                  <td class="text-end">${shortbytes(site.web_usage || 0)}</td>
                 </tr>`;
   }
   document.querySelector('#sites tbody').innerHTML = snippet;
@@ -561,7 +562,7 @@ function populateForm(formdata, method) {
     datausage += database.db_usage;
     snippet += `
                 <tr data-databasename="${database.databasename}">
-                  <td><a href="<%== sprintf('/phpmyadmin/index.php?route=/database/structure&server=1&db=', config->{siteurl}) %>${database.databasename}"><%== icon 'link' %></a></td>
+                  <td><a href="<%== sprintf('%sindex.php?route=/database/structure&server=1&db=', config->{manager}->{database}->{phpmyadmin}->{url}) %>${database.databasename}"><%== icon 'link' %></a></td>
                   <td><a class="d-block" href="<%== url_for('customer_index') %>/${customer.customerid}/databases/${database.databasename}">${database.databasename}</a></td>
                   <td>${database.username}</td>
                   <td class="text-end">${shortbytes(database.db_usage)}</td>

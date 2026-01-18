@@ -285,6 +285,7 @@ sub register ($self, $app, $conf) {
         $web->{head}->{meta}->{property}->{'og:image:height'} ||= $img->{height};
       }
     }
+
   });
 
 
