@@ -23,6 +23,7 @@ sub register ($self, $app, $conf) {
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('fortnox')->to(controller => 'Fortnox');
+  $manager->get('/customers/:customerid/:to')->to('#customernav') ->name('fortnox_customer_nav');
   $manager->get('/customers/:customerid')   ->to('#customers')    ->name('fortnox_customer');
   $manager->get('/customers')               ->to('#customers')    ->name('fortnox_customers');
   $manager->get('/invoices/:invoiceid/:to') ->to('#invoicenav')   ->name('fortnox_invoice_nav');
@@ -140,16 +141,22 @@ The controller sets C<docpath> to ensure shared cached templates.
     # Fortnox customer details
     location ~ ^/manager/fortnox/customers/[^/]+$ {
         root /path/to/public;
-        try_files /manager/fortnox/customers/single/index.html @backend;
+        try_files /manager/fortnox/customers/customer/index.html @backend;
+    }
+
+    # Customer navigation - always proxy (returns redirect)
+    location ~ ^/manager/fortnox/customers/[^/]+/(prev|next)$ {
+        proxy_pass http://127.0.0.1:3000;
+        proxy_set_header Host $host;
     }
 
     # Fortnox invoice details
     location ~ ^/manager/fortnox/invoices/\d+$ {
         root /path/to/public;
-        try_files /manager/fortnox/invoices/single/index.html @backend;
+        try_files /manager/fortnox/invoices/invoice/index.html @backend;
     }
 
-    # Invoice navigation - always proxy (returns redirect/data)
+    # Invoice navigation - always proxy (returns redirect)
     location ~ ^/manager/fortnox/invoices/\d+/(prev|next)$ {
         proxy_pass http://127.0.0.1:3000;
         proxy_set_header Host $host;
@@ -158,7 +165,7 @@ The controller sets C<docpath> to ensure shared cached templates.
     # Fortnox payment details
     location ~ ^/manager/fortnox/payments/\d+$ {
         root /path/to/public;
-        try_files /manager/fortnox/payments/single/index.html @backend;
+        try_files /manager/fortnox/payments/payment/index.html @backend;
     }
 
     # OAuth routes - always proxy (stateful)

@@ -95,31 +95,61 @@ sub pauth ($self) {
 sub customers ($self) {
   my $title = $self->app->__('Customers');
   my $web = { title => $title };
-  my $customerid = int($self->stash('customerid') // 0);
-  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $customerid = $self->stash('customerid') // '';
+  my $accept = $self->req->headers->accept // '';
+
   if ($accept !~ /json/) {
     if ($customerid) {
       # Override cache path for dynamic customer ID to prevent creating separate cached files
-      $self->stash(docpath => '/fortnox/customers/single/index.html');
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/customers/single/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/customers/single/index', layout => 'modal');
+      $self->stash(docpath => '/fortnox/customers/customer/index.html');
+      $web->{script} = $self->render_to_string(format => 'js', template => 'fortnox/customers/customer/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/customers/customer/index');
     } else {
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/customers/index');
+      $web->{script} = $self->render_to_string(format => 'js', template => 'fortnox/customers/index');
       return $self->render(web => $web, title => $title, template => 'fortnox/customers/index');
     }
   } else {
     # Require admin access for JSON customer data
     return unless $self->access({ admin => 1 });
 
-    my $customer = $self->app->fortnox->getCustomer($customerid);
-    say Dumper($customer);
-    if (exists($customer->{Customers})) {
-      my $fortnox = {
-        title => $title,
-      };
-      $fortnox->{customers} = $customer->{Customers};
-      return $self->render(json => { fortnox => $fortnox });
+    my $result = $self->app->fortnox->getCustomer($customerid);
+
+    # Check if result is auth URL (string) instead of data (hash)
+    if (!ref($result)) {
+      my $auth_url = $result;
+      $auth_url =~ s/\s+$//;
+      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
     }
+
+    my $fortnox = { title => $title };
+
+    if ($customerid && exists($result->{Customer})) {
+      # Single customer
+      $fortnox->{customer} = $result->{Customer};
+    } elsif (exists($result->{Customers})) {
+      # Customer list
+      $fortnox->{customers} = $result->{Customers};
+    }
+
+    return $self->render(json => { fortnox => $fortnox });
+  }
+}
+
+
+sub customernav ($self) {
+  # Require admin access for customer navigation
+  return unless $self->access({ admin => 1 });
+
+  my $customerid = $self->stash('customerid') // '';
+  my $to = $self->stash('to') // 'next';
+
+  my $next_id = $self->app->fortnox->navCustomer($to, $customerid);
+
+  if ($next_id) {
+    return $self->redirect_to($self->url_for('fortnox_customer', customerid => $next_id));
+  } else {
+    # Stay on current customer if no prev/next available
+    return $self->redirect_to($self->url_for('fortnox_customer', customerid => $customerid));
   }
 }
 
@@ -134,9 +164,9 @@ sub invoices ($self) {
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
     if ($invoiceid) {
-      $self->stash(docpath => '/fortnox/invoices/single/index.html');
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/single/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/invoices/single/index');
+      $self->stash(docpath => '/fortnox/invoices/invoice/index.html');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/invoice/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/invoices/invoice/index');
     } else {
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/index');
       return $self->render(web => $web, title => $title, template => 'fortnox/invoices/index');
@@ -151,6 +181,14 @@ sub invoices ($self) {
       'sortorder' => 'descending'
     }};
     my $invoice = $self->app->fortnox->getInvoice($invoiceid, $options);
+
+    # Check if result is auth URL (string) instead of data (hash)
+    if (!ref($invoice)) {
+      my $auth_url = $invoice;
+      $auth_url =~ s/\s+$//;
+      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+    }
+
     my $fortnox = { title => $title };
     $fortnox->{invoice} = $invoice;
     $fortnox->{page} = $page;
@@ -186,9 +224,9 @@ sub payments ($self) {
   if ($accept !~ /json/) {
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
-      $self->stash(docpath => '/fortnox/payments/single/index.html');
-      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/payments/single/index');
-      return $self->render(web => $web, title => $title, template => 'fortnox/payments/single/index', layout => 'modal');
+      $self->stash(docpath => '/fortnox/payments/payment/index.html');
+      $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/payments/payment/index');
+      return $self->render(web => $web, title => $title, template => 'fortnox/payments/payment/index', layout => 'modal');
     } else {
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/payments/index');
       return $self->render(web => $web, title => $title, template => 'fortnox/payments/index');
@@ -202,6 +240,13 @@ sub payments ($self) {
       $self->app->fortnox->updateCache('InvoicePayments');
     }
     my $payment = $self->app->fortnox->getInvoicePayment($number);
+
+    # Check if result is auth URL (string) instead of data (hash)
+    if (!ref($payment)) {
+      my $auth_url = $payment;
+      $auth_url =~ s/\s+$//;
+      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+    }
 
     # Return early if Fortnox API failed (no point querying local invoices)
     if (!$payment || $payment->{error} || !exists $payment->{InvoicePayments}) {
@@ -347,7 +392,16 @@ sub manager ($self) {
     $web->{script} .= $self->render_to_string(format => 'js');
     return $self->render(web => $web, title => $title, template => 'fortnox/manager/index');
   } else {
-    $fortnox->{archive} = $self->app->fortnox->getArchive();
+    my $archive = $self->app->fortnox->getArchive();
+
+    # Check if result is auth URL (string) instead of data (hash)
+    if (!ref($archive)) {
+      my $auth_url = $archive;
+      $auth_url =~ s/\s+$//;
+      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+    }
+
+    $fortnox->{archive} = $archive;
     return $self->render(json => { fortnox => $fortnox });
   }
 }

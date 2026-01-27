@@ -7,7 +7,13 @@ async function loadCustomer() {
     });
     
     const data = await response.json();
-    
+
+    // Handle Fortnox auth redirect
+    if (response.status === 401 && data.auth_url) {
+      window.location.href = data.auth_url;
+      return;
+    }
+
     if (data.fortnox && data.fortnox.customer) {
       const customer = data.fortnox.customer;
       populateCustomerDetails(customer);
@@ -23,6 +29,13 @@ function populateCustomerDetails(customer) {
   document.getElementById('name').textContent = customer.Name || '';
   document.getElementById('organisationNumber').textContent = customer.OrganisationNumber || '';
   document.getElementById('vatNumber').textContent = customer.VATNumber || '';
+
+  // Set navigation links
+  const custNum = customer.CustomerNumber;
+  if (custNum) {
+    document.getElementById('nav-prev').href = `<%== url_for('fortnox_customer_nav', customerid => '_CID_', to => 'prev') %>`.replace('_CID_', custNum);
+    document.getElementById('nav-next').href = `<%== url_for('fortnox_customer_nav', customerid => '_CID_', to => 'next') %>`.replace('_CID_', custNum);
+  }
   
   // Contact Information
   document.getElementById('email').textContent = customer.Email || '';

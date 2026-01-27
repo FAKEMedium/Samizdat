@@ -44,8 +44,6 @@ sub _api_request ($self, $method, $endpoint, $data = undef) {
   my $result = $tx->result;
 
   if ($result->is_error) {
-    say "RealtimeRegister API error: " . $result->code . " - " . $result->message;
-    say "Response body: " . ($result->body // 'empty');
     return { error => $result->message, code => $result->code };
   }
 
@@ -84,6 +82,10 @@ sub updateDomain ($self, $domain_name, $domain_data) {
 
 sub deleteDomain ($self, $domain_name) {
   return $self->_api_request('DELETE', "v2/domains/$domain_name", undef);
+}
+
+sub renewDomain ($self, $domain_name, $period = 1) {
+  return $self->_api_request('POST', "v2/domains/$domain_name/renew", { period => $period });
 }
 
 # Contact operations

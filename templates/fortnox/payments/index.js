@@ -10,6 +10,12 @@ async function loadPayments(refresh = false) {
 
     const data = await response.json();
 
+    // Handle Fortnox auth redirect (401 with auth_url)
+    if (response.status === 401 && data.auth_url) {
+      window.location.href = data.auth_url;
+      return;
+    }
+
     // Check for Fortnox authorization error (403, ErrorInformation, or empty payment response)
     if (response.status === 403 || data.ErrorInformation ||
         (data.fortnox && data.fortnox.payment && !data.fortnox.payment.InvoicePayments)) {

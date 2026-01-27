@@ -105,6 +105,23 @@ sub delete_domain ($self) {
   return $self->render(json => { success => 1 });
 }
 
+
+sub renew_domain ($self) {
+  return unless $self->access({ admin => 1 });
+
+  my $domain_name = $self->stash('domain');
+  my $data = $self->req->json // {};
+  my $period = $data->{period} // 1;
+
+  my $result = $self->app->realtimeregister->renewDomain($domain_name, $period);
+
+  if ($result->{error}) {
+    return $self->render(json => { error => $result->{error} }, status => 400);
+  }
+
+  return $self->render(json => { success => 1, domain => $result });
+}
+
 # Contact management
 
 sub contacts ($self) {

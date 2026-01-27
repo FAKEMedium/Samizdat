@@ -67,8 +67,8 @@ sub register ($self, $app, $conf) {
     );
 
     $image->random();
-    $image->create('ttf', 'ellipse', '#ff0000');
-    $image->particle(500, 0);
+    $image->create('ttf', 'ec', '#ff0000');
+    $image->particle(7000, 0);
 
     my ($image_data, undef, $random_string) = $image->out(force => 'png');
 

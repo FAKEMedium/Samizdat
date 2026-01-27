@@ -8,6 +8,12 @@ async function loadInvoice() {
 
     const data = await response.json();
 
+    // Handle Fortnox auth redirect
+    if (response.status === 401 && data.auth_url) {
+      window.location.href = data.auth_url;
+      return;
+    }
+
     if (data.fortnox && data.fortnox.invoice) {
       const invoice = data.fortnox.invoice.Invoice || data.fortnox.invoice;
       populateInvoiceDetails(invoice);

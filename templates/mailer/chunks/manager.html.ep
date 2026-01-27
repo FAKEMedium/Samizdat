@@ -23,9 +23,9 @@
     </div>
   </div>
 </form>
-<a id="newMailBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_new') %>"><%== icon 'plus', {} %> <%== __('New mail') %></a>
-<a id="addressesBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_addresses') %>"><%== icon 'people', {} %> <%== __('Addresses') %></a>
-<a id="listsBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_lists') %>"><%== icon 'list-ul', {} %> <%== __('Lists') %></a>
-<a id="unsubscriptionsBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_unsubscriptions') %>"><%== icon 'person-x', {} %> <%== __('Unsubscriptions') %></a>
-<a id="bouncesBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_bounces') %>"><%== icon 'exclamation-triangle', {} %> <%== __('Bounces') %></a>
-<a id="configsBtn" class="badge rounded-pill text-bg-secondary" href="<%= url_for('mailer_configs') %>"><%== icon 'gear', {} %> <%== __('Settings') %></a>
+<a id="newMailBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_new') %>"><%== __('New mail') %></a>
+<a id="addressesBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_addresses') %>"><%== __('Addresses') %></a>
+<a id="listsBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_lists') %>"><%== __('Lists') %></a>
+<a id="unsubscriptionsBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_unsubscriptions') %>"><%== __('Unsubscriptions') %></a>
+<a id="bouncesBtn" class="badge rounded-pill text-bg-primary" href="<%= url_for('mailer_bounces') %>"><%== __('Bounces') %></a>
+<a id="configsBtn" class="badge rounded-pill text-bg-secondary" href="<%= url_for('mailer_configs') %>"><%== __('Settings') %></a>

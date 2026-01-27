@@ -222,6 +222,45 @@ paths:
               schema:
                 type: object
 
+  /realtimeregister/domains/{domain}/renew:
+    post:
+      operationId: RTR.domains.renew
+      x-mojo-to: RealtimeRegister#renew_domain
+      summary: Renew domain
+      description: Renew a domain registration for a specified period
+      tags: [RealtimeRegister]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                period:
+                  type: integer
+                  description: Renewal period in years (1-10)
+                  minimum: 1
+                  maximum: 10
+                  default: 1
+      responses:
+        '200':
+          description: Domain renewed
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                  domain:
+                    $ref: '#/components/schemas/RTR_Domain'
+
   /realtimeregister/contacts:
     get:
       operationId: RTR.contacts.index

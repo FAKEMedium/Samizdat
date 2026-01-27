@@ -287,6 +287,54 @@ sub register ($self, $app, $conf) {
       my $is_credit = $options->{credit} || 0;
       my $original_invoiceid = $options->{original_invoiceid};
 
+      # Check Fortnox session and invoice number consistency before creating
+      if ($is_create && $self->app->renderer->helpers->{fortnox} && $self->app->config->{manager}->{invoice}->{usefortnox}) {
+        my $fortnox = $self->fortnox;
+
+        # Fetch latest invoice from Fortnox to validate session and check number consistency
+        my $latest = $fortnox->getInvoice(0, { qp => { limit => 1, sortby => 'documentnumber', sortorder => 'descending' } });
+
+        # Check for errors - callAPI returns login URL string if no token
+        if (!$latest || !ref($latest) || $latest->{error} || $latest->{ErrorInformation} || !exists $latest->{Invoices}) {
+          my $auth_url = ref($latest) ? $fortnox->getLogin() : $latest;
+          my $err = ref($latest) ? ($latest->{ErrorInformation}->{Message} // $latest->{ErrorInformation}->{message} // $latest->{error} // 'Session invalid or expired') : 'Not authenticated';
+
+          # Fallback: construct OAuth URL from config if getLogin() returned 0/empty
+          if (!$auth_url) {
+            my $oauth = $self->app->config->{manager}->{fortnox}->{oauth2};
+            use Mojo::Util qw(url_escape);
+            $auth_url = sprintf('%s&client_id=%s&redirect_uri=%s&scope=%s&access_type=%s&state=login',
+              $oauth->{authorize_url}, $oauth->{client_id}, url_escape($oauth->{redirect_uri}), url_escape($oauth->{scope}), $oauth->{access_type} // 'offline');
+          }
+
+          return {
+            error => "Fortnox session error: $err",
+            status => 401,
+            auth_url => $auth_url,
+            needs_auth => 1
+          };
+        }
+
+        # Check invoice number consistency
+        my $our_next = $self->invoice->nextnumber;
+        if ($latest->{Invoices} && @{$latest->{Invoices}}) {
+          my $fortnox_latest = $latest->{Invoices}->[0]->{DocumentNumber};
+          if ($fortnox_latest) {
+            # Extract years from invoice numbers (first 4 digits)
+            my $our_year = substr($our_next, 0, 4);
+            my $fortnox_year = substr($fortnox_latest, 0, 4);
+
+            # Only compare if same year - new year resets the sequence
+            if ($our_year eq $fortnox_year && $fortnox_latest >= $our_next) {
+              return {
+                error => "Invoice number mismatch: Fortnox has $fortnox_latest, our next is $our_next",
+                status => 409
+              };
+            }
+          }
+        }
+      }
+
       # Handle credit invoice creation
       if ($is_credit && $original_invoiceid) {
         # Get original invoice
@@ -300,6 +348,41 @@ sub register ($self, $app, $conf) {
           where => { customerid => $original_invoice->{customerid} }
         })->[0];
         return { error => 'Customer not found', status => 404 } unless $customer;
+
+        # Check if original invoice can be credited in Fortnox (must be booked)
+        if ($self->app->renderer->helpers->{fortnox} && $self->app->config->{manager}->{invoice}->{usefortnox}) {
+          my $fortnox = $self->fortnox;
+          my $fortnox_invoice = $fortnox->getInvoice($original_invoice->{fakturanummer});
+
+          # Check for auth errors
+          if (!ref($fortnox_invoice)) {
+            return {
+              error => 'Fortnox authentication required',
+              status => 401,
+              auth_url => $fortnox_invoice,
+              needs_auth => 1
+            };
+          }
+
+          # Check if invoice exists and is booked in Fortnox
+          if ($fortnox_invoice && $fortnox_invoice->{Invoice}) {
+            my $booked = $fortnox_invoice->{Invoice}->{Booked};
+            if (!$booked) {
+              return {
+                error => $self->app->__('Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first.'),
+                status => 400,
+                fortnox_error => 'Invoice not booked'
+              };
+            }
+          } elsif ($fortnox_invoice && ($fortnox_invoice->{error} || $fortnox_invoice->{ErrorInformation})) {
+            my $msg = $fortnox_invoice->{ErrorInformation}->{message} // $fortnox_invoice->{message} // 'Unknown error';
+            return {
+              error => $self->app->__x('Fortnox error: {error}', error => $msg),
+              status => 400,
+              fortnox_error => $msg
+            };
+          }
+        }
 
         # Use original invoice's currency and VAT for the credit invoice
         $customer->{currency} = $original_invoice->{currency};
@@ -466,18 +549,15 @@ sub register ($self, $app, $conf) {
         $customer->{billingcity} = '\ \ ' . $customer->{billingcity} if $customer->{billingcity};
       }
 
-      # Process invoice items - validate and escape
+      # Process invoice items - validate included items
       for my $itemid (keys %$invoiceitems) {
         my $item = $invoiceitems->{$itemid};
 
         # Skip items not included
         next unless $item->{include};
 
-        # Escape description for LaTeX
-        my $description = $item->{invoiceitemtext} || $item->{description} || '';
-        $item->{invoiceitemtext} = $self->tex_escape($description);
-        # Handle double dashes after escaping to avoid issues with IDN domains like xn--t-1ga.se
-        $item->{invoiceitemtext} =~ s/--/-\\mbox{}-/g;
+        # Ensure description is set
+        $item->{invoiceitemtext} ||= $item->{description} || '';
       }
 
       # Calculate all invoice amounts using model method
@@ -567,6 +647,80 @@ sub register ($self, $app, $conf) {
               # No unincluded items - create empty obehandlad invoice for future use
               $self->invoice->addinvoice($customer);
             }
+          }
+        }
+
+        # Push to Fortnox if configured
+        if ($self->app->renderer->helpers->{fortnox} && $self->app->config->{manager}->{invoice}->{usefortnox}) {
+          my $fortnox = $self->fortnox;
+          my $fortnox_result;
+
+          # For credit invoices, use Fortnox credit endpoint on the original invoice
+          if ($is_credit && $invoice->{kreditfakturaavser}) {
+            $fortnox_result = $fortnox->creditInvoice($invoice->{kreditfakturaavser});
+          } else {
+            # Build Fortnox invoice payload for regular invoices
+            my $fortnox_payload = {
+              Invoice => {
+                CustomerNumber            => $customer->{customerid},
+                InvoiceDate               => substr($invoice->{invoicedate}, 0, 10),
+                Currency                  => uc($invoice->{currency} || 'SEK'),
+                DocumentNumber            => $invoice->{fakturanummer},
+                InvoiceType               => 'INVOICE',
+                InvoiceRows               => [],
+                Language                  => uc(substr($customer->{billinglang} || 'SV', 0, 2)),
+                ExternalInvoiceReference2 => $invoice->{uuid},
+              }
+            };
+
+            # Add invoice rows
+            for my $itemid (keys %$invoiceitems) {
+              my $item = $invoiceitems->{$itemid};
+              push @{$fortnox_payload->{Invoice}->{InvoiceRows}}, {
+                ArticleNumber     => $item->{articlenumber},
+                Description       => $item->{invoiceitemtext},
+                DeliveredQuantity => $item->{number},
+                Price             => $item->{price},
+              };
+            }
+
+            # Post invoice to Fortnox
+            # Note: Rounding (öresavrundning) is controlled by Fortnox company settings,
+            # not per-invoice. Configure in Fortnox: Inställningar → Fakturering → Avrundning
+            $fortnox_result = $fortnox->postInvoice($fortnox_payload);
+          }
+          if ($fortnox_result && !$fortnox_result->{error} && !$fortnox_result->{ErrorInformation}) {
+            $self->app->log->info("Posted invoice $invoice->{fakturanummer} to Fortnox");
+
+            # Upload PDF to Fortnox inbox and attach to invoice
+            my $pdfpath = sprintf('%s/%s.pdf',
+              $self->app->config->{manager}->{invoice}->{invoicedir},
+              $invoice->{uuid}
+            );
+
+            if (-f $pdfpath) {
+              my $inbox_result = $fortnox->postInbox($pdfpath);
+              if ($inbox_result && $inbox_result->{File} && $inbox_result->{File}->{ArchiveFileId}) {
+                my $fileid = $inbox_result->{File}->{ArchiveFileId};
+                my $attach_result = $fortnox->attachment('post', $fileid, $invoice->{fakturanummer}, 'F');
+                # Success returns array, error returns hash with {error: 1}
+                if ($attach_result && ref($attach_result) eq 'ARRAY') {
+                  $self->app->log->info("Attached PDF (file $fileid) to invoice $invoice->{fakturanummer} in Fortnox");
+                } elsif ($attach_result && ref($attach_result) eq 'HASH' && !$attach_result->{error}) {
+                  $self->app->log->info("Attached PDF (file $fileid) to invoice $invoice->{fakturanummer} in Fortnox");
+                } else {
+                  my $err = (ref($attach_result) eq 'HASH') ? ($attach_result->{message} // $attach_result->{error} // 'unknown') : ($attach_result // 'no response');
+                  $self->app->log->warn("Failed to attach PDF to Fortnox invoice $invoice->{fakturanummer}: $err");
+                }
+              } else {
+                $self->app->log->warn("Failed to upload PDF to Fortnox inbox: " . ($inbox_result->{message} // $inbox_result->{error} // 'unknown'));
+              }
+            } else {
+              $self->app->log->warn("PDF file not found for Fortnox upload: $pdfpath");
+            }
+          } else {
+            my $err = $fortnox_result->{ErrorInformation}->{message} // $fortnox_result->{error} // 'unknown';
+            $self->app->log->warn("Failed to post invoice to Fortnox: $err");
           }
         }
       }

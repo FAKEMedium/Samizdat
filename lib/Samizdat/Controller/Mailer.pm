@@ -266,7 +266,7 @@ sub addresses_import ($self) {
   return $self->render(json => {
     success  => 1,
     imported => $count,
-    toast    => sprintf($self->app->__('Imported %d addresses'), $count),
+    toast    => $self->app->__x('Imported {count} addresses', count => $count),
   }, status => 201);
 }
 
@@ -615,7 +615,7 @@ sub addresses_bulk_delete ($self) {
   return $self->render(json => {
     success => 1,
     deleted => $deleted,
-    toast   => sprintf($self->app->__('Removed %d addresses'), $deleted),
+    toast   => $self->app->__x('Removed {count} addresses', count => $deleted),
   });
 }
 

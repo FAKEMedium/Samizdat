@@ -3,9 +3,13 @@
 % my $customer = $formdata->{customer};
 % my $invoice = $formdata->{invoice};
 % my $invoiceitems = $formdata->{invoiceitems};
-% my $currency = { sek => 'kr', eur => '\texteuro'};
+% my $ccy = lc($customer->{currency} // 'sek');
+% my $is_swedish_customer = ($customer->{billingcountry} && $customer->{billingcountry} eq 'SE');
+% my $currency_symbols = { sek => ($is_swedish_customer ? 'kr' : 'SEK'), eur => '\texteuro'};
+% my $currency = $currency_symbols->{$ccy} // uc($ccy);
 % my $countries = countrylist;
 % my $vat = $formdata->{vat};
+% my $is_reverse_charge = ($customer->{billingcountry} && $customer->{billingcountry} ne 'SE' && ($customer->{company} || $customer->{vatno}) && $vat == 0) ? 1 : 0;
 \documentclass[11pt,a4paper,onecolumn,notitlepage]{article}
 \usepackage{graphicx,calc,color,colortbl,array,textcomp,xtab,fancyhdr,lastpage,ltablex,geometry,ae,aecompl,enumerate,helvet}
 \usepackage[utf8]{inputenc}
@@ -185,7 +189,7 @@
 \footnotesize {\textbf {<%= __('Registered office') %>:} <%== config->{manager}->{invoice}->{office} %>}\newline
 % }
 % if (exists(config->{manager}->{invoice}->{ftax}) && (config->{manager}->{invoice}->{ftax})) {
-\footnotesize {<%== __('Registered for F-tax') %>}\newline
+\footnotesize {<%== __('Approved for F-tax') %>}\newline
 % }
 \vfill
 % if ($customer->{billinglang} && $customer->{billinglang} =~ /^(sv)/i) {
@@ -195,30 +199,30 @@
 %   $invoice->{net_amount} =~ tr/\./,/;
 %   $vat =~ tr/\./,/;
 % }
-% if ('eur' eq $customer->{currency} && (!$customer->{billinglang} || $customer->{billinglang} !~ /^(sv)/i)) {
+% if ('eur' eq $ccy && (!$customer->{billinglang} || $customer->{billinglang} !~ /^(sv)/i)) {
 {\huge \textbf {\
 %   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
-<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency) %>\
 %   } else {
-<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency) %>\
 %   }
 }}
 \vfill
-\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
-\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency %>}\newline
+\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %><%= $is_reverse_charge ? ' (' . __('reverse charge') . ')' : '' %>:} <%== $invoice->{vatcost} %> <%=$currency %>}\newline
 % } else {
 {\huge \textbf {\
 %   if (exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser}) {
-<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Credited amount incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency) %>\
 %   } else {
-<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency->{ $customer->{currency} }) %>\
+<%== __x('Amount to pay incl. VAT: {totalcost} {currency}', totalcost => $invoice->{totalcost},	currency => $currency) %>\
 %   }
 }}
 \vfill
-\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency->{ $customer->{currency} } %>}\newline
-\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %>:} <%== $invoice->{vatcost} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize {\textbf {<%== __('Net amount') %>:} <%== $invoice->{net_amount} %> <%=$currency %>}\newline
+\footnotesize {\textbf {<%== __x('VAT {rate}\%', rate => $vat) %><%= $is_reverse_charge ? ' (' . __('reverse charge') . ')' : '' %>:} <%== $invoice->{vatcost} %> <%=$currency %>}\newline
 %   if ($invoice->{diff}) {
-\footnotesize {\textbf {<%== __('Rounding') %>:} <%== $invoice->{diff} %> <%=$currency->{ $customer->{currency} } %>}\newline
+\footnotesize {\textbf {<%== __('Rounding') %>:} <%== $invoice->{diff} %> <%=$currency %>}\newline
 %   }
 % }
 % if (!(exists($invoice->{kreditfakturaavser}) && $invoice->{kreditfakturaavser})) {
@@ -258,6 +262,9 @@
 % my $i = 0;
 % for my $invoiceitemid (sort { $invoiceitems->{$a}->{invoiceitemtext} cmp $invoiceitems->{$b}->{invoiceitemtext} } keys %$invoiceitems) {
 %   my $invoiceitem = $invoiceitems->{$invoiceitemid};
+%   # LaTeX escape the invoice item text
+%   my $itemtext = tex_escape($invoiceitem->{invoiceitemtext} // '');
+%   $itemtext =~ s/--/-\\mbox{}-/g;  # Handle double dashes for IDN domains like xn--example.se
 %
 %   my $cost = $invoiceitem->{price};
 %   my $net = $invoiceitem->{price} * $invoiceitem->{number};
@@ -291,16 +298,16 @@
 %   if (($i % 2) && ($i != scalar keys %$invoiceitems)) {
 \rowcolor {gray1}\
 %   }
-\small {<%== $invoiceitem->{invoiceitemtext} %>} & & \
+\small {<%== $itemtext %>} & & \
 %   if (1 == $invoiceitem->{number}) {
 & \
 %   } else {
 \small {<%= $invoiceitem->{number} %>} & \
 %   }
-\small {<%== __x('{cost}', cost => $cost, currency => $currency->{ $customer->{currency} }) %>} & \
-\small {<%== __x('{cost}', cost => $net, currency => $currency->{ $customer->{currency} }) %>} & \
-\small {<%== __x('{cost}', cost => $vatcost, currency => $currency->{ $customer->{currency} }) %>} & \
-\small {<%== __x('{cost}', cost => $gross, currency => $currency->{ $customer->{currency} }) %>}\\\
+\small {<%== __x('{cost}', cost => $cost, currency => $currency) %>} & \
+\small {<%== __x('{cost}', cost => $net, currency => $currency) %>} & \
+\small {<%== __x('{cost}', cost => $vatcost, currency => $currency) %>} & \
+\small {<%== __x('{cost}', cost => $gross, currency => $currency) %>}\\\
 
 %   $i++;
 % }

@@ -44,9 +44,16 @@ async function sendForm(method, dataform='#dataform') {
       if (response.status === 401) {
         const data = await response.json();
         alert(data.error || `<%== __('Authentication required') %>`);
-        window.location.href = `<%== url_for('account_login') %>`;
+        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
+        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
       } else {
-        alert('Request failed: ' + response.statusText);
+        // Try to get error message from JSON response
+        try {
+          const data = await response.json();
+          alert(data.error || '<%== __("Request failed") %>: ' + response.statusText);
+        } catch {
+          alert('<%== __("Request failed") %>: ' + response.statusText);
+        }
       }
     } else {
       let formdata = await response.json();
@@ -54,7 +61,7 @@ async function sendForm(method, dataform='#dataform') {
     }
   } catch (e) {
     console.error('Request error:', e);
-    alert('Request failed');
+    alert('<%== __("Request failed") %>');
   }
 }
 
@@ -93,9 +100,16 @@ window.getId = async function getId(what, customerid = 0, invoiceid = 0, percust
       if (response.status === 401) {
         const data = await response.json();
         alert(data.error || `<%== __('Authentication required') %>`);
-        window.location.href = `<%== url_for('account_login') %>`;
+        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
+        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
       } else {
-        alert('Request failed: ' + response.statusText);
+        // Try to get error message from JSON response
+        try {
+          const data = await response.json();
+          alert(data.error || '<%== __("Request failed") %>: ' + response.statusText);
+        } catch {
+          alert('<%== __("Request failed") %>: ' + response.statusText);
+        }
       }
       return false;
     } else {

@@ -161,8 +161,8 @@ sub create ($self, $credit = 0) {
   # Require admin access for invoice management
   return unless $self->access({ admin => 1 });
 
-  my $customerid = int $self->stash('customerid');
-  my $invoiceid = int $self->stash('invoiceid');
+  my $customerid = int($self->stash('customerid') // 0);
+  my $invoiceid = int($self->stash('invoiceid') // 0);
 
   # Get customer to determine billing language
   my $customer = $self->app->customer->get({ where => { customerid => $customerid } })->[0];
@@ -202,26 +202,18 @@ sub create ($self, $credit = 0) {
   if ($result->{error}) {
     my $type = $credit ? 'credit invoice' : 'invoice';
     $self->app->log->error("Cannot create $type - " . $result->{error});
+
+    # If Fortnox needs re-authentication, return auth URL for client-side redirect
+    if ($result->{needs_auth} && $result->{auth_url}) {
+      my $auth_url = $result->{auth_url};
+      $auth_url =~ s/\s+$//;  # Remove trailing whitespace/newline
+      return $self->render(json => { error => $result->{error}, auth_url => $auth_url, needs_auth => 1 }, status => 401);
+    }
+
     return $self->render(json => { error => $result->{error} }, status => $result->{status} || 500);
   }
 
-  # Handle Fortnox integration if configured
-  if ($self->app->fortnox and $self->config->{manager}->{invoice}->{usefortnox}) {
-    my $invoice = $result->{invoice};
-    my $fortnoxinvoice = {
-      CustomerNumber            => $invoice->{customerid},
-      InvoiceDate               => substr($invoice->{invoicedate}, 0, 10),
-      Currency                  => uc($invoice->{currency} || 'SEK'),
-      DocumentNumber            => $invoice->{fakturanummer},
-      InvoiceType               => 'INVOICE',
-      InvoiceRows               => [],
-      Language                  => uc substr($lang, 0, 2),
-      ExternalInvoiceReference1 => $invoice->{fakturanummer},
-      ExternalInvoiceReference2 => $invoice->{uuid}
-    };
-    # TODO: Implement Fortnox posting when ready
-    # my $status = $self->app->fortnox->postInvoice($invoice, $result->{formdata}->{invoiceitems}, $result->{customer});
-  }
+  # Fortnox integration is handled automatically in process_invoice helper
 
   # Prepare invoice data for email
   my $invoicedata = {
@@ -239,19 +231,24 @@ sub create ($self, $credit = 0) {
   }
 
   if ($credit) {
-    $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
+    return $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
       $self->config->{manager}->{url}, $result->{invoice}->{customerid}, $result->{invoice}->{invoiceid}
     ));
-  } else {
-    $self->render(data => $result->{pdf}, format => 'pdf');
-    $self->res->headers->header('Content-Disposition' =>
-      sprintf('inline; filename="%s.pdf"', $result->{invoice}->{uuid})
-    );
-    $self->res->headers->content_type('application/pdf');
-    # Add custom header to trigger print dialog on client side for snailmail
-    $self->res->headers->header('X-Print-Dialog' => 'true') if ($result->{customer}->{invoicetype} // '') eq 'snailmail';
-    return 1;
   }
+
+  # Return PDF
+  if (!$result->{pdf}) {
+    $self->app->log->error("PDF generation failed for invoice " . $result->{invoice}->{fakturanummer});
+    return $self->render(json => { error => 'PDF generation failed' }, status => 500);
+  }
+
+  $self->res->headers->content_type('application/pdf');
+  $self->res->headers->header('Content-Disposition' =>
+    sprintf('inline; filename="%s.pdf"', $result->{invoice}->{uuid})
+  );
+  # Add custom header to trigger print dialog on client side for snailmail
+  $self->res->headers->header('X-Print-Dialog' => 'true') if ($result->{customer}->{invoicetype} // '') eq 'snailmail';
+  return $self->render(data => $result->{pdf});
 }
 
 
@@ -273,7 +270,7 @@ sub update ($self, $makejson = 1) {
   $extra->{customerid} = $formdata->{customer}->{customerid};
   $extra->{invoiceid} = $formdata->{invoice}->{invoiceid};
 
-  if ((int $extra->{number} > 0) && ('' ne $extra->{invoiceitemtext}) && ($extra->{price} > 0.0)) {
+  if ((int($extra->{number} || 0) > 0) && ('' ne ($extra->{invoiceitemtext} // '')) && (($extra->{price} || 0) > 0.0)) {
     $self->app->invoice->addinvoiceitem($extra);
   }
 
@@ -375,8 +372,8 @@ sub edit ($self) {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
 
-    my $customerid = int $self->stash('customerid');
-    my $invoiceid = int $self->stash('invoiceid');
+    my $customerid = int($self->stash('customerid') // 0);
+    my $invoiceid = int($self->stash('invoiceid') // 0);
 
     # If no invoiceid, get the open invoice for this customer
     if (!$invoiceid && $customerid) {
@@ -442,8 +439,8 @@ sub handle ($self) {
     # Require admin access for JSON invoice data
     return unless $self->access({ admin => 1 });
 
-    my $customerid = int $self->stash('customerid');
-    my $invoiceid = int $self->stash('invoiceid');
+    my $customerid = int($self->stash('customerid') // 0);
+    my $invoiceid = int($self->stash('invoiceid') // 0);
 
     # Get form data from model
     my $formdata = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
@@ -455,8 +452,8 @@ sub handle ($self) {
 
 
 sub nav ($self) {
-  my $invoiceid = int $self->stash('invoiceid');
-  my $customerid = int $self->stash('customerid');
+  my $invoiceid = int($self->stash('invoiceid') // 0);
+  my $customerid = int($self->stash('customerid') // 0);
   my $to = $self->stash('to');
   $self->stash(percustomer => $customerid);
 

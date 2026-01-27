@@ -147,6 +147,9 @@ msgstr "后面添加列"
 msgid "Add Column Before"
 msgstr "前面添加列"
 
+msgid "Add Domain"
+msgstr ""
+
 msgid "Add Key"
 msgstr "添加密钥"
 
@@ -240,6 +243,9 @@ msgstr "添加网站"
 msgid "Add zone"
 msgstr "添加区域"
 
+msgid "Additional Apache/Nginx configuration directives"
+msgstr ""
+
 msgid "Additional collection fees"
 msgstr ""
 
@@ -258,6 +264,9 @@ msgstr "地址2"
 msgid "Address check"
 msgstr "地址检查"
 
+msgid "Address deleted"
+msgstr ""
+
 msgid "Address is required"
 msgstr "地址是必需的"
 
@@ -266,6 +275,9 @@ msgstr "地址行 1"
 
 msgid "Address line 2 (optional)"
 msgstr "地址行 2（可选）"
+
+msgid "Addresses"
+msgstr ""
 
 msgid "Admin"
 msgstr "管理员"
@@ -354,6 +366,9 @@ msgstr "别名"
 msgid "All"
 msgstr "全部"
 
+msgid "All Customers"
+msgstr ""
+
 msgid "All Invoices"
 msgstr "所有发票"
 
@@ -374,6 +389,12 @@ msgstr "所有客户"
 
 msgid "All domains"
 msgstr "所有域名"
+
+msgid "All sources"
+msgstr ""
+
+msgid "All types"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "允许使用 cookie 从邮件粘贴确认码"
@@ -423,6 +444,12 @@ msgstr "发生错误。请重试。"
 msgid "Apply"
 msgstr "应用"
 
+msgid "Approved for F-tax"
+msgstr ""
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr ""
+
 msgid "Are you sure you want to delete contact"
 msgstr ""
 
@@ -433,6 +460,9 @@ msgid "Are you sure you want to delete this cache entry?"
 msgstr ""
 
 msgid "Are you sure you want to delete this certificate?"
+msgstr ""
+
+msgid "Are you sure you want to delete this configuration?"
 msgstr ""
 
 msgid "Are you sure you want to delete this contact?"
@@ -461,6 +491,9 @@ msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "您确定要删除此记录吗？"
+
+msgid "Are you sure you want to delete this website?"
+msgstr ""
 
 msgid "Are you sure you want to delete this zone?"
 msgstr ""
@@ -630,6 +663,9 @@ msgstr "已封锁的IP地址"
 msgid "Body"
 msgstr "正文"
 
+msgid "Body (Markdown)"
+msgstr ""
+
 msgid "Bold"
 msgstr "粗体"
 
@@ -638,6 +674,18 @@ msgstr "Bootstrap 图标"
 
 msgid "Bootstrap icons helper"
 msgstr "Bootstrap 图标助手"
+
+msgid "Bounce"
+msgstr ""
+
+msgid "Bounce deleted"
+msgstr ""
+
+msgid "Bounced"
+msgstr ""
+
+msgid "Bounces"
+msgstr ""
 
 msgid "Buddy price"
 msgstr "优惠价格"
@@ -656,6 +704,9 @@ msgstr "默认情况下不会分享您的任何信息。"
 
 msgid "Bytes Used"
 msgstr "已用字节"
+
+msgid "CSV"
+msgstr ""
 
 msgid "Cache"
 msgstr "缓存"
@@ -792,6 +843,9 @@ msgstr "清除"
 msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr "点击打开对话框。"
 
@@ -834,6 +888,9 @@ msgstr ""
 msgid "Cloud Act Applies (US provider)"
 msgstr ""
 
+msgid "Code"
+msgstr ""
+
 msgid "Code Block"
 msgstr "代码块"
 
@@ -852,8 +909,14 @@ msgstr "评论"
 msgid "Common Name"
 msgstr ""
 
+msgid "Common settings"
+msgstr ""
+
 msgid "Company"
 msgstr "公司"
+
+msgid "Complaint"
+msgstr ""
 
 msgid "Completed"
 msgstr "已完成"
@@ -883,6 +946,12 @@ msgid "Compliant Domains"
 msgstr ""
 
 msgid "Components"
+msgstr ""
+
+msgid "Configuration deleted"
+msgstr ""
+
+msgid "Configuration saved"
 msgstr ""
 
 msgid "Confirm"
@@ -957,6 +1026,9 @@ msgstr "联系人"
 msgid "Content"
 msgstr "内容"
 
+msgid "Content saved"
+msgstr ""
+
 msgid "Continue"
 msgstr "继续"
 
@@ -973,6 +1045,12 @@ msgid "Control panel"
 msgstr "控制面板"
 
 msgid "Conversation with"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy as draft"
 msgstr ""
 
 msgid "Corporate identity number"
@@ -1065,6 +1143,9 @@ msgstr "货币"
 msgid "Current Prices"
 msgstr "当前价格"
 
+msgid "Current expiry"
+msgstr ""
+
 msgid "Currently managed"
 msgstr ""
 
@@ -1140,6 +1221,9 @@ msgstr "深色"
 msgid "Data"
 msgstr "数据"
 
+msgid "Data not found"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "数据使用量：{usage}"
 
@@ -1176,14 +1260,29 @@ msgstr "已拒绝"
 msgid "Default"
 msgstr "默认"
 
+msgid "Default From email"
+msgstr ""
+
+msgid "Default From name"
+msgstr ""
+
 msgid "Definitions"
 msgstr "定义"
+
+msgid "Delayed"
+msgstr ""
 
 msgid "Delete"
 msgstr "删除"
 
+msgid "Delete All My Data"
+msgstr ""
+
 msgid "Delete Column"
 msgstr "删除列"
+
+msgid "Delete My Data"
+msgstr ""
 
 msgid "Delete Row"
 msgstr "删除行"
@@ -1194,13 +1293,28 @@ msgstr "删除表格"
 msgid "Delete admin"
 msgstr "删除管理员"
 
+msgid "Delete domain"
+msgstr ""
+
+msgid "Delete this address?"
+msgstr ""
+
 msgid "Delete this alias domain?"
 msgstr ""
 
 msgid "Delete this alias?"
 msgstr ""
 
+msgid "Delete this bounce record?"
+msgstr ""
+
 msgid "Delete this domain and all its mailboxes?"
+msgstr ""
+
+msgid "Delete this list?"
+msgstr ""
+
+msgid "Delete this mail?"
 msgstr ""
 
 msgid "Delete this mailbox?"
@@ -1236,6 +1350,9 @@ msgstr "开发者文档"
 msgid "Development"
 msgstr "开发"
 
+msgid "Diagnostic"
+msgstr ""
+
 msgid "Direction"
 msgstr "方向"
 
@@ -1270,6 +1387,9 @@ msgid "Domain Compliance Scores"
 msgstr ""
 
 msgid "Domain Name"
+msgstr ""
+
+msgid "Domain added"
 msgstr ""
 
 msgid "Domain added successfully"
@@ -1380,6 +1500,9 @@ msgstr ""
 msgid "Edit Record"
 msgstr ""
 
+msgid "Edit Website"
+msgstr ""
+
 msgid "Edit admin"
 msgstr ""
 
@@ -1390,6 +1513,9 @@ msgid "Edit customer {customerid}"
 msgstr "编辑客户 {customerid}"
 
 msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit mail"
 msgstr ""
 
 msgid "Edit mailbox"
@@ -1465,6 +1591,9 @@ msgid "Email Order"
 msgstr "邮件订单"
 
 msgid "Email address"
+msgstr ""
+
+msgid "Email column"
 msgstr ""
 
 msgid "Email confirmation"
@@ -1557,6 +1686,9 @@ msgstr "侧边内容结束"
 msgid "English"
 msgstr "英语"
 
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
 msgid "Enter a title first to translate from"
 msgstr ""
 
@@ -1565,6 +1697,9 @@ msgstr "输入代码"
 
 msgid "Enter code from captcha image"
 msgstr "输入验证码图片中的代码"
+
+msgid "Enter domain name:"
+msgstr ""
 
 msgid "Enter password"
 msgstr "输入密码"
@@ -1586,6 +1721,12 @@ msgstr ""
 
 msgid "Enter your email"
 msgstr "输入您的电子邮件"
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr ""
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr ""
 
 msgid "Enter zone name"
 msgstr "输入区域名称"
@@ -1618,6 +1759,9 @@ msgid "Error loading transaction"
 msgstr ""
 
 msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
 msgstr ""
 
 msgid "Error reprinting invoice"
@@ -1675,6 +1819,9 @@ msgid "Expires At"
 msgstr ""
 
 msgid "Expiring"
+msgstr ""
+
+msgid "Expiring Certificates"
 msgstr ""
 
 msgid "Expiring domains"
@@ -1755,6 +1902,9 @@ msgstr ""
 msgid "Failed to delete certificate"
 msgstr ""
 
+msgid "Failed to delete configuration"
+msgstr ""
+
 msgid "Failed to delete contact"
 msgstr ""
 
@@ -1821,6 +1971,9 @@ msgstr ""
 msgid "Failed to process refund"
 msgstr ""
 
+msgid "Failed to process unsubscription."
+msgstr ""
+
 msgid "Failed to purge cache"
 msgstr "清除缓存失败"
 
@@ -1839,6 +1992,9 @@ msgstr ""
 msgid "Failed to remove domain"
 msgstr ""
 
+msgid "Failed to renew domain"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
@@ -1855,6 +2011,9 @@ msgid "Failed to save alias"
 msgstr ""
 
 msgid "Failed to save certificate"
+msgstr ""
+
+msgid "Failed to save configuration"
 msgstr ""
 
 msgid "Failed to save domain"
@@ -1882,6 +2041,9 @@ msgid "Failed to send reminder"
 msgstr ""
 
 msgid "Failed to start run"
+msgstr ""
+
+msgid "Failed to unsubscribe."
 msgstr ""
 
 msgid "Failed to update admin"
@@ -1913,6 +2075,9 @@ msgstr "更新记录失败"
 
 msgid "Failed to update zone"
 msgstr "更新区域失败"
+
+msgid "Failed to verify token."
+msgstr ""
 
 msgid "Failed/Refunded"
 msgstr ""
@@ -1977,10 +2142,16 @@ msgstr "请查看附件中的您的发票 PDF。"
 msgid "First name"
 msgstr "名字"
 
+msgid "First name col"
+msgstr ""
+
 msgid "Flags"
 msgstr ""
 
 msgid "Flow"
+msgstr ""
+
+msgid "Footer added to all emails"
 msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
@@ -2091,6 +2262,12 @@ msgstr ""
 msgid "Handled invoice"
 msgstr "已处理发票"
 
+msgid "Hard bounce"
+msgstr ""
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr ""
+
 msgid "Heading 1"
 msgstr "标题 1"
 
@@ -2110,6 +2287,12 @@ msgid "Historical Data"
 msgstr ""
 
 msgid "Historical compliance trends over time"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Home Directory"
 msgstr ""
 
 msgid "Hosting Provider Summary"
@@ -2157,13 +2340,28 @@ msgstr ""
 msgid "IP Address"
 msgstr ""
 
+msgid "IP Only"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
 msgid "IPv4 Address"
+msgstr ""
+
+msgid "IPv4 Override"
 msgstr ""
 
 msgid "IPv4 reverse"
 msgstr ""
 
+msgid "IPv6"
+msgstr ""
+
 msgid "IPv6 Address"
+msgstr ""
+
+msgid "IPv6 Override"
 msgstr ""
 
 msgid "IPv6 reverse"
@@ -2179,6 +2377,12 @@ msgid "If payment is not received within 7 days from the date of this notice, th
 msgstr ""
 
 msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
+
+msgid "If set, all requests will redirect to this URL"
+msgstr ""
+
+msgid "If this email is in our system, you will receive a link shortly."
 msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
@@ -2217,16 +2421,37 @@ msgstr ""
 msgid "Import"
 msgstr "导入"
 
+msgid "Import addresses"
+msgstr ""
+
+msgid "Import complete"
+msgstr ""
+
 msgid "Import zone"
 msgstr ""
 
+msgid "Imported"
+msgstr ""
+
+msgid "Imported %d addresses"
+msgstr ""
+
+msgid "Imported {count} addresses"
+msgstr ""
+
 msgid "In"
+msgstr ""
+
+msgid "In Cert"
 msgstr ""
 
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "在您的个人菜单中，您可以找到您的 {panel} 等内容。"
 
 msgid "Inactive"
+msgstr ""
+
+msgid "Include in certificate"
 msgstr ""
 
 msgid "Including VAT"
@@ -2260,6 +2485,12 @@ msgid "Invalid invoice ID"
 msgstr ""
 
 msgid "Invalid items format"
+msgstr ""
+
+msgid "Invalid or expired token."
+msgstr ""
+
+msgid "Invalid or missing unsubscribe token."
 msgstr ""
 
 msgid "Invalid password"
@@ -2479,6 +2710,9 @@ msgstr "语言"
 msgid "Last name"
 msgstr "姓氏"
 
+msgid "Last name col"
+msgstr ""
+
 msgid "Last reminder"
 msgstr ""
 
@@ -2489,6 +2723,9 @@ msgid "Leave blank to keep current"
 msgstr ""
 
 msgid "Leave empty for items without a link"
+msgstr ""
+
+msgid "Leave empty for server default"
 msgstr ""
 
 msgid "Legal proceedings"
@@ -2515,11 +2752,26 @@ msgstr "个人数据链接"
 msgid "Link to personal settings"
 msgstr "个人设置链接"
 
+msgid "Linked"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List Memberships"
+msgstr ""
+
+msgid "List name:"
+msgstr ""
+
 msgid "List zones"
 msgstr "列出区域"
 
 msgid "Lista fakturor"
 msgstr "发票列表"
+
+msgid "Lists"
+msgstr ""
 
 msgid "Live Transactions"
 msgstr "实时交易"
@@ -2560,6 +2812,9 @@ msgstr "指向起始页的标志"
 msgid "Logotype linked to {site}"
 msgstr "链接到 {site} 的标志"
 
+msgid "Lookup"
+msgstr ""
+
 msgid "Lost password?"
 msgstr "忘记密码？"
 
@@ -2587,11 +2842,23 @@ msgstr "MX 记录"
 msgid "Mail"
 msgstr "邮件"
 
+msgid "Mail History"
+msgstr ""
+
 msgid "Mail Server"
 msgstr ""
 
 msgid "Mail admin"
 msgstr "邮件管理"
+
+msgid "Mail copied as draft"
+msgstr ""
+
+msgid "Mail created"
+msgstr ""
+
+msgid "Mail deleted"
+msgstr ""
 
 msgid "Mail domains"
 msgstr "邮件域名"
@@ -2601,6 +2868,9 @@ msgstr "邮件转储"
 
 msgid "Mail sent through own servers"
 msgstr "通过自有服务器发送邮件"
+
+msgid "Mail updated"
+msgstr ""
 
 msgid "Mailbox"
 msgstr "邮箱"
@@ -2632,6 +2902,15 @@ msgstr "邮箱"
 msgid "Mailboxes for"
 msgstr ""
 
+msgid "Mailer"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mails"
+msgstr ""
+
 msgid "Make invoice"
 msgstr "创建发票"
 
@@ -2649,6 +2928,9 @@ msgstr ""
 
 msgid "Manager"
 msgstr "管理器"
+
+msgid "Manual"
+msgstr ""
 
 msgid "Manuals"
 msgstr "手册"
@@ -2752,6 +3034,9 @@ msgstr "名称"
 msgid "Name Servers"
 msgstr ""
 
+msgid "Name column"
+msgstr ""
+
 msgid "Nameserver"
 msgstr "域名服务器"
 
@@ -2791,6 +3076,12 @@ msgstr "从不"
 msgid "Never expires"
 msgstr ""
 
+msgid "Never subscribed"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
 msgid "New Certificate"
 msgstr "新证书"
 
@@ -2810,6 +3101,9 @@ msgid "New Record"
 msgstr ""
 
 msgid "New Template"
+msgstr ""
+
+msgid "New Website"
 msgstr ""
 
 msgid "New account"
@@ -2838,6 +3132,12 @@ msgstr "客户 {customerid} 的新发票"
 
 msgid "New invoice pack"
 msgstr "新发票包"
+
+msgid "New list"
+msgstr ""
+
+msgid "New mail"
+msgstr ""
 
 msgid "New menu"
 msgstr "新菜单"
@@ -2878,6 +3178,9 @@ msgstr ""
 msgid "No activity"
 msgstr ""
 
+msgid "No addresses"
+msgstr ""
+
 msgid "No administrators"
 msgstr ""
 
@@ -2885,6 +3188,9 @@ msgid "No alias domains"
 msgstr ""
 
 msgid "No aliases"
+msgstr ""
+
+msgid "No bounces"
 msgstr ""
 
 msgid "No cache entries found"
@@ -2905,6 +3211,9 @@ msgstr ""
 msgid "No contacts found"
 msgstr ""
 
+msgid "No content defined yet"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "没有客户 #{customerid}。"
 
@@ -2913,6 +3222,12 @@ msgstr ""
 
 msgid "No data available"
 msgstr "无可用数据"
+
+msgid "No details available"
+msgstr ""
+
+msgid "No domain"
+msgstr ""
 
 msgid "No domains"
 msgstr ""
@@ -2935,11 +3250,23 @@ msgstr "未找到发票"
 msgid "No invoicing"
 msgstr "不开票"
 
+msgid "No lists"
+msgstr ""
+
 msgid "No log entries"
+msgstr ""
+
+msgid "No longer interested"
 msgstr ""
 
 msgid "No mailboxes"
 msgstr "无邮箱"
+
+msgid "No mails"
+msgstr ""
+
+msgid "No mails received"
+msgstr ""
 
 msgid "No matches found"
 msgstr ""
@@ -2989,6 +3316,12 @@ msgstr "未找到结果"
 msgid "No selected customer."
 msgstr "未选择客户。"
 
+msgid "No settings configured"
+msgstr ""
+
+msgid "No source content to translate"
+msgstr ""
+
 msgid "No template (empty zone)"
 msgstr ""
 
@@ -3007,8 +3340,14 @@ msgstr "所选日期范围内未找到交易"
 msgid "No unprocessed payments"
 msgstr "没有未处理的付款"
 
+msgid "No unsubscriptions"
+msgstr ""
+
 msgid "No users found"
 msgstr "未找到用户"
+
+msgid "No websites found"
+msgstr ""
 
 msgid "Non-compliant (Foreign hosting)"
 msgstr ""
@@ -3021,6 +3360,9 @@ msgstr "普通"
 
 msgid "Not found"
 msgstr "未找到"
+
+msgid "Not subscribed to any lists"
+msgstr ""
 
 msgid "Note"
 msgstr "备注"
@@ -3112,10 +3454,16 @@ msgstr "组织编号"
 msgid "Organization"
 msgstr "组织"
 
+msgid "Organization header"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "组织号码"
 
 msgid "Original due date"
+msgstr ""
+
+msgid "Other"
 msgstr ""
 
 msgid "Our Plusgiro will soon disappear too."
@@ -3155,6 +3503,15 @@ msgid "PEM format"
 msgstr ""
 
 msgid "PEM format (stored securely)"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "PHP Configuration"
+msgstr ""
+
+msgid "PHP-FPM pool configuration. Will be merged with default .php.conf"
 msgstr ""
 
 msgid "Page"
@@ -3219,6 +3576,18 @@ msgstr ""
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "密码错误或用户名不存在。"
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr ""
+
+msgid "Paste CSV here..."
+msgstr ""
+
+msgid "Paste emails here..."
+msgstr ""
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr ""
 
 msgid "Pay"
 msgstr "支付"
@@ -3349,6 +3718,9 @@ msgstr "期限"
 msgid "Personal"
 msgstr "个人"
 
+msgid "Personal Information"
+msgstr ""
+
 msgid "Personal menu"
 msgstr "个人菜单"
 
@@ -3463,6 +3835,12 @@ msgstr "价格表"
 msgid "Prices"
 msgstr "价格"
 
+msgid "Primary"
+msgstr ""
+
+msgid "Primary Domain"
+msgstr ""
+
 msgid "Primary NS"
 msgstr ""
 
@@ -3517,11 +3895,17 @@ msgstr ""
 msgid "Provider"
 msgstr "提供商"
 
+msgid "Public"
+msgstr ""
+
 msgid "Public Key"
 msgstr "公钥"
 
 msgid "Published"
 msgstr "已发布"
+
+msgid "Purchase"
+msgstr ""
 
 msgid "Purge"
 msgstr "清除"
@@ -3547,6 +3931,12 @@ msgstr "数量"
 msgid "Quarter"
 msgstr "季度"
 
+msgid "Queue"
+msgstr ""
+
+msgid "Queue this mail for sending?"
+msgstr ""
+
 msgid "Quota"
 msgstr "配额"
 
@@ -3569,6 +3959,12 @@ msgid "Realtime Register"
 msgstr ""
 
 msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "Reason (optional)"
 msgstr ""
 
 msgid "Received"
@@ -3633,6 +4029,9 @@ msgstr "记录更新成功"
 
 msgid "Records"
 msgstr "记录"
+
+msgid "Redirect URL"
+msgstr ""
 
 msgid "Reference"
 msgstr "参考"
@@ -3727,16 +4126,40 @@ msgstr ""
 msgid "Remove"
 msgstr "删除"
 
+msgid "Remove marked"
+msgstr ""
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr ""
+
+msgid "Removed %d addresses"
+msgstr ""
+
+msgid "Removed {count} addresses"
+msgstr ""
+
 msgid "Rename"
 msgstr ""
 
 msgid "Renew"
 msgstr ""
 
+msgid "Renew Certificate"
+msgstr ""
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
 msgid "Replacement"
 msgstr ""
 
 msgid "Reply interval (seconds)"
+msgstr ""
+
+msgid "Reply-To address"
 msgstr ""
 
 msgid "Reprint"
@@ -3767,6 +4190,12 @@ msgid "Retry"
 msgstr ""
 
 msgid "Return to Home"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Review imported addresses"
 msgstr ""
 
 msgid "Roles"
@@ -3853,10 +4282,16 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+msgid "Save content"
+msgstr ""
+
 msgid "Save failed"
 msgstr ""
 
 msgid "Save options"
+msgstr ""
+
+msgid "Save the website first"
 msgstr ""
 
 msgid "Save to database"
@@ -3877,6 +4312,9 @@ msgstr ""
 msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
+msgid "Scheduled"
+msgstr ""
+
 msgid "Score"
 msgstr "分数"
 
@@ -3884,6 +4322,9 @@ msgid "Score (High to Low)"
 msgstr ""
 
 msgid "Score (Low to High)"
+msgstr ""
+
+msgid "Scrape"
 msgstr ""
 
 msgid "Search"
@@ -3908,6 +4349,9 @@ msgid "Search content"
 msgstr "搜索内容"
 
 msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search database"
 msgstr ""
 
 msgid "Search domain"
@@ -3988,6 +4432,9 @@ msgstr ""
 msgid "Search web content"
 msgstr "搜索网页内容"
 
+msgid "Search websites..."
+msgstr ""
+
 msgid "Sector"
 msgstr "行业"
 
@@ -3998,6 +4445,9 @@ msgid "Select"
 msgstr "选择"
 
 msgid "Select Format"
+msgstr ""
+
+msgid "Select a reason..."
 msgstr ""
 
 msgid "Select a template to edit or create a new one"
@@ -4033,6 +4483,12 @@ msgstr "选择发票包"
 msgid "Select registries and set handles for each"
 msgstr ""
 
+msgid "Select server..."
+msgstr ""
+
+msgid "Select shell..."
+msgstr ""
+
 msgid "Select target domain"
 msgstr ""
 
@@ -4048,6 +4504,9 @@ msgstr "重新发送"
 msgid "Send invoice questions to {url}."
 msgstr "将发票问题发送至 {url}。"
 
+msgid "Send link"
+msgstr ""
+
 msgid "Send message"
 msgstr "发送消息"
 
@@ -4057,6 +4516,9 @@ msgstr "立即发送"
 msgid "Send reminder"
 msgstr "发送提醒"
 
+msgid "Sending"
+msgstr ""
+
 msgid "Sending..."
 msgstr ""
 
@@ -4064,6 +4526,18 @@ msgid "Sent"
 msgstr "已发送"
 
 msgid "Serial"
+msgstr ""
+
+msgid "Server"
+msgstr ""
+
+msgid "Server Extra"
+msgstr ""
+
+msgid "Server Extra Configuration"
+msgstr ""
+
+msgid "Server default"
 msgstr ""
 
 msgid "Servers"
@@ -4078,6 +4552,9 @@ msgstr ""
 msgid "Session:"
 msgstr ""
 
+msgid "Set as primary"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "设置高度属性。"
 
@@ -4089,6 +4566,15 @@ msgstr "设置标题属性。"
 
 msgid "Set the width attribute."
 msgstr "设置宽度属性。"
+
+msgid "Setting deleted"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting saved"
+msgstr ""
 
 msgid "Settings"
 msgstr "设置"
@@ -4108,6 +4594,9 @@ msgstr "分享到 Twitter"
 msgid "Share {what} on {where}"
 msgstr "在 {where} 上分享 {what}"
 
+msgid "Shell"
+msgstr ""
+
 msgid "Shown as"
 msgstr "显示为"
 
@@ -4122,6 +4611,9 @@ msgstr "签署请愿踢走谢尔盖·绍伊古！"
 
 msgid "Sign poll!"
 msgstr "签署请愿！"
+
+msgid "Signup"
+msgstr ""
 
 msgid "Site"
 msgstr "网站"
@@ -4147,7 +4639,13 @@ msgstr "仅 Snapback"
 msgid "Snapback scheduler"
 msgstr "Snapback 调度程序"
 
+msgid "Soft bounce"
+msgstr ""
+
 msgid "Sort by"
+msgstr ""
+
+msgid "Source"
 msgstr ""
 
 msgid "Source code on Github"
@@ -4227,6 +4725,9 @@ msgstr "主题"
 
 msgid "Submit"
 msgstr "提交"
+
+msgid "Subscribed"
+msgstr ""
 
 msgid "Succeeded"
 msgstr ""
@@ -4453,6 +4954,9 @@ msgstr ""
 msgid "This resource is not documented."
 msgstr ""
 
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr ""
+
 msgid "This will result in additional fees and may affect your credit rating."
 msgstr ""
 
@@ -4476,6 +4980,9 @@ msgstr ""
 
 msgid "Toggle menu"
 msgstr "切换菜单"
+
+msgid "Too many emails"
+msgstr ""
 
 msgid "Tot"
 msgstr "总计"
@@ -4540,6 +5047,9 @@ msgstr ""
 msgid "Translation complete"
 msgstr ""
 
+msgid "Translation failed"
+msgstr ""
+
 msgid "Try Again"
 msgstr ""
 
@@ -4573,6 +5083,18 @@ msgstr ""
 msgid "Unpaid"
 msgstr "未付款"
 
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Unsubscribe from mailings"
+msgstr ""
+
+msgid "Unsubscription removed"
+msgstr ""
+
+msgid "Unsubscriptions"
+msgstr ""
+
 msgid "Untitled"
 msgstr ""
 
@@ -4583,6 +5105,9 @@ msgid "Update"
 msgstr "更新"
 
 msgid "Update Contact"
+msgstr ""
+
+msgid "Update and send"
 msgstr ""
 
 msgid "Update and send page."
@@ -4687,6 +5212,9 @@ msgstr "增值税 ID："
 msgid "VAT Number"
 msgstr "增值税号"
 
+msgid "VAT Number Lookup"
+msgstr ""
+
 msgid "VAT Type"
 msgstr "增值税类型"
 
@@ -4698,6 +5226,9 @@ msgstr "增值税号"
 
 msgid "VAT number lookup"
 msgstr "增值税号查询"
+
+msgid "VAT number not valid"
+msgstr ""
 
 msgid "VAT percentage"
 msgstr "增值税百分比"
@@ -4718,6 +5249,9 @@ msgid "Vacation settings deleted"
 msgstr ""
 
 msgid "Vacation settings saved"
+msgstr ""
+
+msgid "Valid"
 msgstr ""
 
 msgid "Value"
@@ -4747,6 +5281,9 @@ msgstr ""
 msgid "View and manage domain registrations"
 msgstr ""
 
+msgid "View details"
+msgstr ""
+
 msgid "WARNING: Legal Action Pending"
 msgstr ""
 
@@ -4770,6 +5307,18 @@ msgstr "网站"
 
 msgid "Website"
 msgstr "网站"
+
+msgid "Website Configuration"
+msgstr ""
+
+msgid "Website Details"
+msgstr ""
+
+msgid "Website deleted successfully"
+msgstr ""
+
+msgid "Website saved successfully"
+msgstr ""
 
 msgid "Websites"
 msgstr "网站"
@@ -4813,6 +5362,12 @@ msgstr ""
 msgid "You clicked the back or cancel button"
 msgstr ""
 
+msgid "You have been successfully unsubscribed."
+msgstr ""
+
+msgid "You have been unsubscribed"
+msgstr ""
+
 msgid "You have cancelled the payment process."
 msgstr ""
 
@@ -4834,6 +5389,9 @@ msgstr ""
 msgid "You will receive a confirmation email shortly."
 msgstr ""
 
+msgid "Your Data"
+msgstr ""
+
 msgid "Your Reference"
 msgstr "您的参考"
 
@@ -4851,6 +5409,12 @@ msgstr "您的联系人"
 
 msgid "Your contact:"
 msgstr "您的联系人："
+
+msgid "Your data has been deleted"
+msgstr ""
+
+msgid "Your data has been deleted."
+msgstr ""
 
 msgid "Your email"
 msgstr "您的电子邮件"
@@ -4927,11 +5491,17 @@ msgstr "加 3\\%"
 msgid "add {fee}"
 msgstr "加 {fee}"
 
+msgid "addresses"
+msgstr ""
+
 msgid "at least {length} characters"
 msgstr ""
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "bounces"
+msgstr ""
 
 msgid "cache"
 msgstr "缓存"
@@ -4954,6 +5524,9 @@ msgstr "内容"
 msgid "control panel"
 msgstr "控制面板"
 
+msgid "created"
+msgstr ""
+
 msgid "customer"
 msgstr "客户"
 
@@ -4962,6 +5535,9 @@ msgstr "客户"
 
 msgid "database"
 msgstr "数据库"
+
+msgid "databases"
+msgstr ""
 
 msgid "declined"
 msgstr "已拒绝"
@@ -4981,6 +5557,9 @@ msgstr ""
 msgid "example"
 msgstr ""
 
+msgid "existing"
+msgstr ""
+
 msgid "failed"
 msgstr "失败"
 
@@ -4996,8 +5575,14 @@ msgstr "来自数据库"
 msgid "invoice"
 msgstr "发票"
 
+msgid "linked"
+msgstr ""
+
 msgid "login attempts"
 msgstr "登录尝试"
+
+msgid "mail"
+msgstr ""
 
 msgid "mail domain"
 msgstr "邮件域名"
@@ -5005,7 +5590,16 @@ msgstr "邮件域名"
 msgid "main firewall"
 msgstr "主防火墙"
 
+msgid "months"
+msgstr ""
+
+msgid "need review"
+msgstr ""
+
 msgid "net balance"
+msgstr ""
+
+msgid "new"
 msgstr ""
 
 msgid "new messages retrieved."
@@ -5035,10 +5629,19 @@ msgstr "记录"
 msgid "refunded"
 msgstr "已退款"
 
+msgid "results"
+msgstr ""
+
+msgid "reverse charge"
+msgstr ""
+
 msgid "seconds"
 msgstr ""
 
 msgid "selected"
+msgstr ""
+
+msgid "sent"
 msgstr ""
 
 msgid "standby firewall"
@@ -5051,6 +5654,9 @@ msgid "transactions"
 msgstr "交易"
 
 msgid "unlimited"
+msgstr ""
+
+msgid "unsubscribed"
 msgstr ""
 
 msgid "user"

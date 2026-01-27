@@ -258,8 +258,8 @@ sub _getdata ($self, $customerid) {
   my $formdata = {
     subscriptions => $self->app->invoice->subscriptions($params),
     customer      => $self->app->customer->get($params)->[0],
-    databases     => $self->app->customer->databases($params),
-    sites         => $self->app->customer->sites($params),
+    databases     => $self->app->renderer->helpers->{database} ? $self->app->database->get($params) : [],
+    sites         => $self->app->renderer->helpers->{website} ? $self->app->website->get_by_customer($customerid) : [],
     domains       => $self->app->domain->get($params),
     maildomains   => $self->app->email->get_domains($params),
     userlogins    => $self->app->customer->userlogins($params),
