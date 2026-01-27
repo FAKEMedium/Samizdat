@@ -3,7 +3,7 @@
     <div class="col-12">
       <nav class="d-flex justify-content-between align-items-center">
         <a href="#" id="nav-prev" class="btn btn-outline-secondary btn-sm">&laquo; <%== __('Previous') %></a>
-        <a href="<%== url_for('fortnox_invoices') %>" class="btn btn-outline-primary btn-sm"><%== __('All Invoices') %></a>
+        <a href="<%== url_for('Fortnox.invoices.index') %>" class="btn btn-outline-primary btn-sm"><%== __('All Invoices') %></a>
         <a href="#" id="nav-next" class="btn btn-outline-secondary btn-sm"><%== __('Next') %> &raquo;</a>
       </nav>
     </div>

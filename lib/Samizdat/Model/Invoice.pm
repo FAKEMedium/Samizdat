@@ -256,7 +256,7 @@ sub addreminder ($self, $invoiceid =  0) {
 #   -  number
 #   -  include (0 = pass to new invoice,  > 0 means to include)
 # invoice has
-#   - totalcost (including vat, corrected for rounding off, no decimals for sek, 2 decimals for eur)
+#   - totalcost (including vat, corrected for rounding off, 2 decimals for all currencies)
 #   - vat (0 <= vat <= 1)
 #   - currency (sek or eur)
 sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
@@ -273,24 +273,10 @@ sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
     }
   }
 
-  # Rounding calculations based on currency
+  # Rounding to 0.01 (2 decimals) for all currencies
+  # Note: Fortnox doesn't support per-currency rounding settings
   my $diff = 0;
-  my $totalcost = $vatcost + $net_amount;
-  if ($invoice_currency && $invoice_currency =~ /(sek)/i) {
-    # Swedish rounding rules - round to whole number
-    if ($totalcost =~ /(\d+)[\.]{1}(\d+)/) {
-      my $whole = $1;
-      my $decimal = $2;
-      if ($decimal =~ /^[5-9]/) {
-        $totalcost = $whole + 1.0;
-      } else {
-        $totalcost = $whole;
-      }
-    }
-  } else {
-    # EUR and other currencies - keep 2 decimals
-    $totalcost = sprintf("%.2f", $totalcost);
-  }
+  my $totalcost = sprintf("%.2f", $vatcost + $net_amount);
 
   # Format diff
   $diff = sprintf("%.5f", $totalcost - $net_amount - $vatcost);

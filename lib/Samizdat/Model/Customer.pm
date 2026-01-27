@@ -312,46 +312,6 @@ sub archive ($self, $customerid) {
   return 0;
 }
 
-sub databases ($self, $params = {}) {
-  my $db = $self->database;
-  my $where = $params->{where} // {};
-  my $table = ($self->dbtype eq 'mysql') ? '`databases`' : 'database.databases';
-  return $db->select($table, '*', $where)->hashes;
-}
-
-sub sites ($self, $params = {}) {
-  my $where = $params->{where} // {};
-
-  if ($self->dbtype eq 'mysql') {
-    return $self->database->select('Domain', '*', $where)->hashes;
-  } else {
-    # PostgreSQL: query website.websites joined with domains
-    my $db = $self->app->pg->db;
-    my $where_sql = '';
-    my @bind;
-
-    if ($where->{customerid}) {
-      $where_sql = 'WHERE w.customerid = ?';
-      push @bind, $where->{customerid};
-    }
-
-    return $db->query(qq{
-      SELECT
-        w.websiteid,
-        w.customerid,
-        w.home,
-        w.active,
-        w.web_usage,
-        d.domainname,
-        d.domainid
-      FROM website.websites w
-      LEFT JOIN website.domains d ON w.primarydomain = d.domainid
-      $where_sql
-      ORDER BY d.domainname
-    }, @bind)->hashes;
-  }
-}
-
 sub userlogins ($self, $params = {}) {
   my $where = $params->{where} // {};
 

@@ -154,6 +154,9 @@ msgstr "कॉलम बाद जोड़ें"
 msgid "Add Column Before"
 msgstr "कॉलम पहले जोड़ें"
 
+msgid "Add Domain"
+msgstr ""
+
 msgid "Add Key"
 msgstr ""
 
@@ -247,6 +250,9 @@ msgstr "वेबसाइट जोड़ें"
 msgid "Add zone"
 msgstr "ज़ेत्र जोड़ें"
 
+msgid "Additional Apache/Nginx configuration directives"
+msgstr ""
+
 msgid "Additional collection fees"
 msgstr ""
 
@@ -265,6 +271,9 @@ msgstr "पता 2"
 msgid "Address check"
 msgstr "पता जांच"
 
+msgid "Address deleted"
+msgstr ""
+
 msgid "Address is required"
 msgstr "पता आवश्यक है"
 
@@ -273,6 +282,9 @@ msgstr "पता पंक्ति 1"
 
 msgid "Address line 2 (optional)"
 msgstr "पता पंक्ति 2 (वैकल्पिक)"
+
+msgid "Addresses"
+msgstr ""
 
 msgid "Admin"
 msgstr "व्यवस्थापक"
@@ -361,6 +373,9 @@ msgstr ""
 msgid "All"
 msgstr "सभी"
 
+msgid "All Customers"
+msgstr ""
+
 msgid "All Invoices"
 msgstr "सभी चालान"
 
@@ -381,6 +396,12 @@ msgstr "सभी ग्राहक"
 
 msgid "All domains"
 msgstr "सभी डोमेन"
+
+msgid "All sources"
+msgstr ""
+
+msgid "All types"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "ईमेल से पुष्टिकरण कोड पेस्ट करने के लिए कुकीज़ की अनुमति दें"
@@ -430,6 +451,12 @@ msgstr "एक त्रुटि हुई। कृपया पुनः प�
 msgid "Apply"
 msgstr "लागू करें"
 
+msgid "Approved for F-tax"
+msgstr ""
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr ""
+
 msgid "Are you sure you want to delete contact"
 msgstr ""
 
@@ -440,6 +467,9 @@ msgid "Are you sure you want to delete this cache entry?"
 msgstr ""
 
 msgid "Are you sure you want to delete this certificate?"
+msgstr ""
+
+msgid "Are you sure you want to delete this configuration?"
 msgstr ""
 
 msgid "Are you sure you want to delete this contact?"
@@ -468,6 +498,9 @@ msgstr ""
 
 msgid "Are you sure you want to delete this record?"
 msgstr "क्या आप वाकई इस रिकॉर्ड को हटाना चाहते हैं?"
+
+msgid "Are you sure you want to delete this website?"
+msgstr ""
 
 msgid "Are you sure you want to delete this zone?"
 msgstr ""
@@ -637,6 +670,9 @@ msgstr "अवरुद्ध आईपी नंबर"
 msgid "Body"
 msgstr "मुख्य भाग"
 
+msgid "Body (Markdown)"
+msgstr ""
+
 msgid "Bold"
 msgstr "मोटा"
 
@@ -645,6 +681,18 @@ msgstr "बूटस्ट्रैप आइकन"
 
 msgid "Bootstrap icons helper"
 msgstr "बूटस्ट्रैप आइकन हेल्पर"
+
+msgid "Bounce"
+msgstr ""
+
+msgid "Bounce deleted"
+msgstr ""
+
+msgid "Bounced"
+msgstr ""
+
+msgid "Bounces"
+msgstr ""
 
 msgid "Buddy price"
 msgstr "बडी प्राइस"
@@ -663,6 +711,9 @@ msgstr "डिफ़ॉल्ट रूप से आपके बारे म�
 
 msgid "Bytes Used"
 msgstr "उपयोग किए गए बाइट"
+
+msgid "CSV"
+msgstr ""
 
 msgid "Cache"
 msgstr "कैश"
@@ -799,6 +850,9 @@ msgstr "साफ करें"
 msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr ""
 
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr "डायलॉग खोलने के लिए क्लिक करें।"
 
@@ -841,6 +895,9 @@ msgstr ""
 msgid "Cloud Act Applies (US provider)"
 msgstr ""
 
+msgid "Code"
+msgstr ""
+
 msgid "Code Block"
 msgstr "कोड ब्लॉक"
 
@@ -859,8 +916,14 @@ msgstr "टिप्पणियाँ"
 msgid "Common Name"
 msgstr ""
 
+msgid "Common settings"
+msgstr ""
+
 msgid "Company"
 msgstr "कंपनी"
+
+msgid "Complaint"
+msgstr ""
 
 msgid "Completed"
 msgstr "पूर्ण"
@@ -890,6 +953,12 @@ msgid "Compliant Domains"
 msgstr ""
 
 msgid "Components"
+msgstr ""
+
+msgid "Configuration deleted"
+msgstr ""
+
+msgid "Configuration saved"
 msgstr ""
 
 msgid "Confirm"
@@ -964,6 +1033,9 @@ msgstr "संपर्क"
 msgid "Content"
 msgstr "सामग्री"
 
+msgid "Content saved"
+msgstr ""
+
 msgid "Continue"
 msgstr "जारी रखें"
 
@@ -980,6 +1052,12 @@ msgid "Control panel"
 msgstr "नियंत्रण कक्ष"
 
 msgid "Conversation with"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy as draft"
 msgstr ""
 
 msgid "Corporate identity number"
@@ -1072,6 +1150,9 @@ msgstr "मुद्रा"
 msgid "Current Prices"
 msgstr "वर्तमान मूल्य"
 
+msgid "Current expiry"
+msgstr ""
+
 msgid "Currently managed"
 msgstr ""
 
@@ -1147,6 +1228,9 @@ msgstr "डार्क"
 msgid "Data"
 msgstr "डेटा"
 
+msgid "Data not found"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "डेटा उपयोग: {usage}"
 
@@ -1183,14 +1267,29 @@ msgstr "अस्वीकृत"
 msgid "Default"
 msgstr "डिफ़ॉल्ट"
 
+msgid "Default From email"
+msgstr ""
+
+msgid "Default From name"
+msgstr ""
+
 msgid "Definitions"
 msgstr "परिभाषाएं"
+
+msgid "Delayed"
+msgstr ""
 
 msgid "Delete"
 msgstr "हटाएं"
 
+msgid "Delete All My Data"
+msgstr ""
+
 msgid "Delete Column"
 msgstr "कॉलम हटाएं"
+
+msgid "Delete My Data"
+msgstr ""
 
 msgid "Delete Row"
 msgstr "पंक्ति हटाएं"
@@ -1201,13 +1300,28 @@ msgstr "तालिका हटाएं"
 msgid "Delete admin"
 msgstr "व्यवस्थापक हटाएं"
 
+msgid "Delete domain"
+msgstr ""
+
+msgid "Delete this address?"
+msgstr ""
+
 msgid "Delete this alias domain?"
 msgstr ""
 
 msgid "Delete this alias?"
 msgstr ""
 
+msgid "Delete this bounce record?"
+msgstr ""
+
 msgid "Delete this domain and all its mailboxes?"
+msgstr ""
+
+msgid "Delete this list?"
+msgstr ""
+
+msgid "Delete this mail?"
 msgstr ""
 
 msgid "Delete this mailbox?"
@@ -1243,6 +1357,9 @@ msgstr "डेवलपर दस्तावेज़"
 msgid "Development"
 msgstr "विकास"
 
+msgid "Diagnostic"
+msgstr ""
+
 msgid "Direction"
 msgstr "दिशा"
 
@@ -1277,6 +1394,9 @@ msgid "Domain Compliance Scores"
 msgstr ""
 
 msgid "Domain Name"
+msgstr ""
+
+msgid "Domain added"
 msgstr ""
 
 msgid "Domain added successfully"
@@ -1387,6 +1507,9 @@ msgstr ""
 msgid "Edit Record"
 msgstr ""
 
+msgid "Edit Website"
+msgstr ""
+
 msgid "Edit admin"
 msgstr ""
 
@@ -1397,6 +1520,9 @@ msgid "Edit customer {customerid}"
 msgstr "ग्राहक {customerid} संपादित करें"
 
 msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit mail"
 msgstr ""
 
 msgid "Edit mailbox"
@@ -1472,6 +1598,9 @@ msgid "Email Order"
 msgstr "ईमेल आदेश"
 
 msgid "Email address"
+msgstr ""
+
+msgid "Email column"
 msgstr ""
 
 msgid "Email confirmation"
@@ -1564,6 +1693,9 @@ msgstr "पार्श्व सामग्री समाप्त"
 msgid "English"
 msgstr "अंग्रेज़ी"
 
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
 msgid "Enter a title first to translate from"
 msgstr ""
 
@@ -1572,6 +1704,9 @@ msgstr "कोड दर्ज करें"
 
 msgid "Enter code from captcha image"
 msgstr "कैप्चा छवि से कोड दर्ज करें"
+
+msgid "Enter domain name:"
+msgstr ""
 
 msgid "Enter password"
 msgstr "पासवर्ड दर्ज करें"
@@ -1593,6 +1728,12 @@ msgstr ""
 
 msgid "Enter your email"
 msgstr "अपना ईमेल दर्ज करें"
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr ""
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr ""
 
 msgid "Enter zone name"
 msgstr "ज़ोन नाम दर्ज करें"
@@ -1625,6 +1766,9 @@ msgid "Error loading transaction"
 msgstr ""
 
 msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
 msgstr ""
 
 msgid "Error reprinting invoice"
@@ -1682,6 +1826,9 @@ msgid "Expires At"
 msgstr ""
 
 msgid "Expiring"
+msgstr ""
+
+msgid "Expiring Certificates"
 msgstr ""
 
 msgid "Expiring domains"
@@ -1762,6 +1909,9 @@ msgstr ""
 msgid "Failed to delete certificate"
 msgstr ""
 
+msgid "Failed to delete configuration"
+msgstr ""
+
 msgid "Failed to delete contact"
 msgstr ""
 
@@ -1828,6 +1978,9 @@ msgstr ""
 msgid "Failed to process refund"
 msgstr ""
 
+msgid "Failed to process unsubscription."
+msgstr ""
+
 msgid "Failed to purge cache"
 msgstr "कैश साफ़ करने में विफल"
 
@@ -1846,6 +1999,9 @@ msgstr ""
 msgid "Failed to remove domain"
 msgstr ""
 
+msgid "Failed to renew domain"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr ""
 
@@ -1862,6 +2018,9 @@ msgid "Failed to save alias"
 msgstr ""
 
 msgid "Failed to save certificate"
+msgstr ""
+
+msgid "Failed to save configuration"
 msgstr ""
 
 msgid "Failed to save domain"
@@ -1889,6 +2048,9 @@ msgid "Failed to send reminder"
 msgstr ""
 
 msgid "Failed to start run"
+msgstr ""
+
+msgid "Failed to unsubscribe."
 msgstr ""
 
 msgid "Failed to update admin"
@@ -1920,6 +2082,9 @@ msgstr "रिकॉर्ड अपडेट करने में विफ�
 
 msgid "Failed to update zone"
 msgstr "ज़ोन अपडेट करने में विफल"
+
+msgid "Failed to verify token."
+msgstr ""
 
 msgid "Failed/Refunded"
 msgstr ""
@@ -1984,10 +2149,16 @@ msgstr "अपना इनवॉइस संलग्न PDF के रूप 
 msgid "First name"
 msgstr "पहला नाम"
 
+msgid "First name col"
+msgstr ""
+
 msgid "Flags"
 msgstr ""
 
 msgid "Flow"
+msgstr ""
+
+msgid "Footer added to all emails"
 msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
@@ -2098,6 +2269,12 @@ msgstr ""
 msgid "Handled invoice"
 msgstr "संभाला गया इनवॉइस"
 
+msgid "Hard bounce"
+msgstr ""
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr ""
+
 msgid "Heading 1"
 msgstr "शीर्षक 1"
 
@@ -2117,6 +2294,12 @@ msgid "Historical Data"
 msgstr ""
 
 msgid "Historical compliance trends over time"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Home Directory"
 msgstr ""
 
 msgid "Hosting Provider Summary"
@@ -2164,13 +2347,28 @@ msgstr ""
 msgid "IP Address"
 msgstr ""
 
+msgid "IP Only"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
 msgid "IPv4 Address"
+msgstr ""
+
+msgid "IPv4 Override"
 msgstr ""
 
 msgid "IPv4 reverse"
 msgstr ""
 
+msgid "IPv6"
+msgstr ""
+
 msgid "IPv6 Address"
+msgstr ""
+
+msgid "IPv6 Override"
 msgstr ""
 
 msgid "IPv6 reverse"
@@ -2186,6 +2384,12 @@ msgid "If payment is not received within 7 days from the date of this notice, th
 msgstr ""
 
 msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+msgstr ""
+
+msgid "If set, all requests will redirect to this URL"
+msgstr ""
+
+msgid "If this email is in our system, you will receive a link shortly."
 msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
@@ -2224,16 +2428,37 @@ msgstr ""
 msgid "Import"
 msgstr "आयात"
 
+msgid "Import addresses"
+msgstr ""
+
+msgid "Import complete"
+msgstr ""
+
 msgid "Import zone"
 msgstr ""
 
+msgid "Imported"
+msgstr ""
+
+msgid "Imported %d addresses"
+msgstr ""
+
+msgid "Imported {count} addresses"
+msgstr ""
+
 msgid "In"
+msgstr ""
+
+msgid "In Cert"
 msgstr ""
 
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "अपने व्यक्तिगत मेनू में आप अन्य चीज़ों के अलावा अपना {panel} पाएंगे।"
 
 msgid "Inactive"
+msgstr ""
+
+msgid "Include in certificate"
 msgstr ""
 
 msgid "Including VAT"
@@ -2267,6 +2492,12 @@ msgid "Invalid invoice ID"
 msgstr ""
 
 msgid "Invalid items format"
+msgstr ""
+
+msgid "Invalid or expired token."
+msgstr ""
+
+msgid "Invalid or missing unsubscribe token."
 msgstr ""
 
 msgid "Invalid password"
@@ -2487,6 +2718,9 @@ msgstr "भाषाएँ"
 msgid "Last name"
 msgstr "अंतिम नाम"
 
+msgid "Last name col"
+msgstr ""
+
 msgid "Last reminder"
 msgstr ""
 
@@ -2497,6 +2731,9 @@ msgid "Leave blank to keep current"
 msgstr ""
 
 msgid "Leave empty for items without a link"
+msgstr ""
+
+msgid "Leave empty for server default"
 msgstr ""
 
 msgid "Legal proceedings"
@@ -2523,11 +2760,26 @@ msgstr "व्यक्तिगत डेटा का लिंक"
 msgid "Link to personal settings"
 msgstr "व्यक्तिगत सेटिंग्स का लिंक"
 
+msgid "Linked"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List Memberships"
+msgstr ""
+
+msgid "List name:"
+msgstr ""
+
 msgid "List zones"
 msgstr "ज़ोन सूची"
 
 msgid "Lista fakturor"
 msgstr "इनवॉइस सूची"
+
+msgid "Lists"
+msgstr ""
 
 msgid "Live Transactions"
 msgstr "लाइव ट्रांजैक्शन"
@@ -2568,6 +2820,9 @@ msgstr "लोगोटाइप शुरुआती पृष्ठ की �
 msgid "Logotype linked to {site}"
 msgstr "{site} से जुड़ा लोगो"
 
+msgid "Lookup"
+msgstr ""
+
 msgid "Lost password?"
 msgstr "पासवर्ड खो गया?"
 
@@ -2595,11 +2850,23 @@ msgstr "एमएक्स रिकॉर्ड"
 msgid "Mail"
 msgstr "मेल"
 
+msgid "Mail History"
+msgstr ""
+
 msgid "Mail Server"
 msgstr ""
 
 msgid "Mail admin"
 msgstr "मेल एडमिन"
+
+msgid "Mail copied as draft"
+msgstr ""
+
+msgid "Mail created"
+msgstr ""
+
+msgid "Mail deleted"
+msgstr ""
 
 msgid "Mail domains"
 msgstr "मेल डोमेन"
@@ -2609,6 +2876,9 @@ msgstr "मेल डंप"
 
 msgid "Mail sent through own servers"
 msgstr "अपने सर्वर के माध्यम से भेजी गई मेल"
+
+msgid "Mail updated"
+msgstr ""
 
 msgid "Mailbox"
 msgstr "मेलबॉक्स"
@@ -2640,6 +2910,15 @@ msgstr "मेलबॉक्स"
 msgid "Mailboxes for"
 msgstr ""
 
+msgid "Mailer"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mails"
+msgstr ""
+
 msgid "Make invoice"
 msgstr "इनवॉइस बनाएं"
 
@@ -2656,6 +2935,9 @@ msgid "Managed domains"
 msgstr ""
 
 msgid "Manager"
+msgstr ""
+
+msgid "Manual"
 msgstr ""
 
 msgid "Manuals"
@@ -2760,6 +3042,9 @@ msgstr "नाम"
 msgid "Name Servers"
 msgstr ""
 
+msgid "Name column"
+msgstr ""
+
 msgid "Nameserver"
 msgstr "नेमसर्वर"
 
@@ -2799,6 +3084,12 @@ msgstr "कभी नहीं"
 msgid "Never expires"
 msgstr ""
 
+msgid "Never subscribed"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
 msgid "New Certificate"
 msgstr "नया प्रमाणपत्र"
 
@@ -2818,6 +3109,9 @@ msgid "New Record"
 msgstr ""
 
 msgid "New Template"
+msgstr ""
+
+msgid "New Website"
 msgstr ""
 
 msgid "New account"
@@ -2846,6 +3140,12 @@ msgstr "ग्राहक {customerid} के लिए नया इनवॉ�
 
 msgid "New invoice pack"
 msgstr "नया इनवॉइस पैक"
+
+msgid "New list"
+msgstr ""
+
+msgid "New mail"
+msgstr ""
 
 msgid "New menu"
 msgstr "नया मेनू"
@@ -2886,6 +3186,9 @@ msgstr ""
 msgid "No activity"
 msgstr ""
 
+msgid "No addresses"
+msgstr ""
+
 msgid "No administrators"
 msgstr ""
 
@@ -2893,6 +3196,9 @@ msgid "No alias domains"
 msgstr ""
 
 msgid "No aliases"
+msgstr ""
+
+msgid "No bounces"
 msgstr ""
 
 msgid "No cache entries found"
@@ -2913,6 +3219,9 @@ msgstr ""
 msgid "No contacts found"
 msgstr ""
 
+msgid "No content defined yet"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "कोई ग्राहक नहीं #{customerid}।"
 
@@ -2921,6 +3230,12 @@ msgstr ""
 
 msgid "No data available"
 msgstr "कोई डेटा उपलब्ध नहीं"
+
+msgid "No details available"
+msgstr ""
+
+msgid "No domain"
+msgstr ""
 
 msgid "No domains"
 msgstr ""
@@ -2943,11 +3258,23 @@ msgstr "कोई चालान नहीं मिला"
 msgid "No invoicing"
 msgstr "कोई बिलिंग नहीं"
 
+msgid "No lists"
+msgstr ""
+
 msgid "No log entries"
+msgstr ""
+
+msgid "No longer interested"
 msgstr ""
 
 msgid "No mailboxes"
 msgstr "कोई मेलबॉक्स नहीं"
+
+msgid "No mails"
+msgstr ""
+
+msgid "No mails received"
+msgstr ""
 
 msgid "No matches found"
 msgstr ""
@@ -2997,6 +3324,12 @@ msgstr "कोई परिणाम नहीं मिला"
 msgid "No selected customer."
 msgstr "कोई ग्राहक चयनित नहीं।"
 
+msgid "No settings configured"
+msgstr ""
+
+msgid "No source content to translate"
+msgstr ""
+
 msgid "No template (empty zone)"
 msgstr ""
 
@@ -3015,8 +3348,14 @@ msgstr "चयनित तिथि सीमा के लिए कोई ट
 msgid "No unprocessed payments"
 msgstr "कोई असंसाधित भुगतान नहीं"
 
+msgid "No unsubscriptions"
+msgstr ""
+
 msgid "No users found"
 msgstr "कोई उपयोगकर्ता नहीं मिला"
+
+msgid "No websites found"
+msgstr ""
 
 msgid "Non-compliant (Foreign hosting)"
 msgstr ""
@@ -3029,6 +3368,9 @@ msgstr "सामान्य"
 
 msgid "Not found"
 msgstr "नहीं मिला"
+
+msgid "Not subscribed to any lists"
+msgstr ""
 
 msgid "Note"
 msgstr "नोट"
@@ -3120,10 +3462,16 @@ msgstr "संगठन संख्या"
 msgid "Organization"
 msgstr "संगठन"
 
+msgid "Organization header"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "संगठनात्मक संख्या"
 
 msgid "Original due date"
+msgstr ""
+
+msgid "Other"
 msgstr ""
 
 msgid "Our Plusgiro will soon disappear too."
@@ -3163,6 +3511,15 @@ msgid "PEM format"
 msgstr ""
 
 msgid "PEM format (stored securely)"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "PHP Configuration"
+msgstr ""
+
+msgid "PHP-FPM pool configuration. Will be merged with default .php.conf"
 msgstr ""
 
 msgid "Page"
@@ -3227,6 +3584,18 @@ msgstr ""
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "पासवर्ड गलत था या उपयोगकर्ता नाम मौजूद नहीं है।"
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr ""
+
+msgid "Paste CSV here..."
+msgstr ""
+
+msgid "Paste emails here..."
+msgstr ""
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr ""
 
 msgid "Pay"
 msgstr "भुगतान करें"
@@ -3357,6 +3726,9 @@ msgstr "अवधि"
 msgid "Personal"
 msgstr "व्यक्तिगत"
 
+msgid "Personal Information"
+msgstr ""
+
 msgid "Personal menu"
 msgstr "व्यक्तिगत मेनू"
 
@@ -3471,6 +3843,12 @@ msgstr "मूल्य सूची"
 msgid "Prices"
 msgstr "मूल्य"
 
+msgid "Primary"
+msgstr ""
+
+msgid "Primary Domain"
+msgstr ""
+
 msgid "Primary NS"
 msgstr ""
 
@@ -3525,11 +3903,17 @@ msgstr ""
 msgid "Provider"
 msgstr ""
 
+msgid "Public"
+msgstr ""
+
 msgid "Public Key"
 msgstr "सार्वजनिक कुंजी"
 
 msgid "Published"
 msgstr "प्रकाशित"
+
+msgid "Purchase"
+msgstr ""
 
 msgid "Purge"
 msgstr "साफ़ करें"
@@ -3555,6 +3939,12 @@ msgstr "मात्रा"
 msgid "Quarter"
 msgstr "तिमाही"
 
+msgid "Queue"
+msgstr ""
+
+msgid "Queue this mail for sending?"
+msgstr ""
+
 msgid "Quota"
 msgstr "कोटा"
 
@@ -3577,6 +3967,12 @@ msgid "Realtime Register"
 msgstr ""
 
 msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "Reason (optional)"
 msgstr ""
 
 msgid "Received"
@@ -3641,6 +4037,9 @@ msgstr "रिकॉर्ड सफलतापूर्वक अपडेट 
 
 msgid "Records"
 msgstr "रिकॉर्ड"
+
+msgid "Redirect URL"
+msgstr ""
 
 msgid "Reference"
 msgstr "संदर्भ"
@@ -3735,16 +4134,40 @@ msgstr ""
 msgid "Remove"
 msgstr "हटाएं"
 
+msgid "Remove marked"
+msgstr ""
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr ""
+
+msgid "Removed %d addresses"
+msgstr ""
+
+msgid "Removed {count} addresses"
+msgstr ""
+
 msgid "Rename"
 msgstr ""
 
 msgid "Renew"
 msgstr ""
 
+msgid "Renew Certificate"
+msgstr ""
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
 msgid "Replacement"
 msgstr ""
 
 msgid "Reply interval (seconds)"
+msgstr ""
+
+msgid "Reply-To address"
 msgstr ""
 
 msgid "Reprint"
@@ -3775,6 +4198,12 @@ msgid "Retry"
 msgstr ""
 
 msgid "Return to Home"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Review imported addresses"
 msgstr ""
 
 msgid "Roles"
@@ -3861,10 +4290,16 @@ msgstr ""
 msgid "Save changes"
 msgstr ""
 
+msgid "Save content"
+msgstr ""
+
 msgid "Save failed"
 msgstr ""
 
 msgid "Save options"
+msgstr ""
+
+msgid "Save the website first"
 msgstr ""
 
 msgid "Save to database"
@@ -3885,6 +4320,9 @@ msgstr ""
 msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr ""
 
+msgid "Scheduled"
+msgstr ""
+
 msgid "Score"
 msgstr "स्कोर"
 
@@ -3892,6 +4330,9 @@ msgid "Score (High to Low)"
 msgstr ""
 
 msgid "Score (Low to High)"
+msgstr ""
+
+msgid "Scrape"
 msgstr ""
 
 msgid "Search"
@@ -3916,6 +4357,9 @@ msgid "Search content"
 msgstr "सामग्री खोजें"
 
 msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search database"
 msgstr ""
 
 msgid "Search domain"
@@ -3996,6 +4440,9 @@ msgstr ""
 msgid "Search web content"
 msgstr "वेब सामग्री खोजें"
 
+msgid "Search websites..."
+msgstr ""
+
 msgid "Sector"
 msgstr ""
 
@@ -4006,6 +4453,9 @@ msgid "Select"
 msgstr "चुनें"
 
 msgid "Select Format"
+msgstr ""
+
+msgid "Select a reason..."
 msgstr ""
 
 msgid "Select a template to edit or create a new one"
@@ -4041,6 +4491,12 @@ msgstr "इनवॉइस पैक चुनें"
 msgid "Select registries and set handles for each"
 msgstr ""
 
+msgid "Select server..."
+msgstr ""
+
+msgid "Select shell..."
+msgstr ""
+
 msgid "Select target domain"
 msgstr ""
 
@@ -4056,6 +4512,9 @@ msgstr "फिर से भेजें"
 msgid "Send invoice questions to {url}."
 msgstr "इनवॉइस प्रश्न {url} पर भेजें।"
 
+msgid "Send link"
+msgstr ""
+
 msgid "Send message"
 msgstr "संदेश भेजें"
 
@@ -4065,6 +4524,9 @@ msgstr "अभी भेजें"
 msgid "Send reminder"
 msgstr "रिमाइंडर भेजें"
 
+msgid "Sending"
+msgstr ""
+
 msgid "Sending..."
 msgstr ""
 
@@ -4072,6 +4534,18 @@ msgid "Sent"
 msgstr "भेजा गया"
 
 msgid "Serial"
+msgstr ""
+
+msgid "Server"
+msgstr ""
+
+msgid "Server Extra"
+msgstr ""
+
+msgid "Server Extra Configuration"
+msgstr ""
+
+msgid "Server default"
 msgstr ""
 
 msgid "Servers"
@@ -4086,6 +4560,9 @@ msgstr ""
 msgid "Session:"
 msgstr ""
 
+msgid "Set as primary"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "ऊंचाई विशेषता सेट करें।"
 
@@ -4097,6 +4574,15 @@ msgstr "शीर्षक विशेषता सेट करें।"
 
 msgid "Set the width attribute."
 msgstr "चौड़ाई विशेषता सेट करें।"
+
+msgid "Setting deleted"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting saved"
+msgstr ""
 
 msgid "Settings"
 msgstr "सेटिंग्स"
@@ -4116,6 +4602,9 @@ msgstr "ट्विटर पर शेयर करें"
 msgid "Share {what} on {where}"
 msgstr "{what} को {where} पर शेयर करें"
 
+msgid "Shell"
+msgstr ""
+
 msgid "Shown as"
 msgstr "इस रूप में दिखाया गया"
 
@@ -4130,6 +4619,9 @@ msgstr "सर्गेई शोइगु को किक करने के 
 
 msgid "Sign poll!"
 msgstr "पोल पर हस्ताक्षर करें!"
+
+msgid "Signup"
+msgstr ""
 
 msgid "Site"
 msgstr "साइट"
@@ -4155,7 +4647,13 @@ msgstr "केवल स्नैपबैक"
 msgid "Snapback scheduler"
 msgstr "स्नैपबैक शेड्यूलर"
 
+msgid "Soft bounce"
+msgstr ""
+
 msgid "Sort by"
+msgstr ""
+
+msgid "Source"
 msgstr ""
 
 msgid "Source code on Github"
@@ -4235,6 +4733,9 @@ msgstr "विषय"
 
 msgid "Submit"
 msgstr "सबमिट करें"
+
+msgid "Subscribed"
+msgstr ""
 
 msgid "Succeeded"
 msgstr ""
@@ -4461,6 +4962,9 @@ msgstr ""
 msgid "This resource is not documented."
 msgstr ""
 
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr ""
+
 msgid "This will result in additional fees and may affect your credit rating."
 msgstr ""
 
@@ -4484,6 +4988,9 @@ msgstr ""
 
 msgid "Toggle menu"
 msgstr "मेनू टॉगल करें"
+
+msgid "Too many emails"
+msgstr ""
 
 msgid "Tot"
 msgstr "कुल"
@@ -4548,6 +5055,9 @@ msgstr ""
 msgid "Translation complete"
 msgstr ""
 
+msgid "Translation failed"
+msgstr ""
+
 msgid "Try Again"
 msgstr ""
 
@@ -4581,6 +5091,18 @@ msgstr ""
 msgid "Unpaid"
 msgstr "अवैतनिक"
 
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Unsubscribe from mailings"
+msgstr ""
+
+msgid "Unsubscription removed"
+msgstr ""
+
+msgid "Unsubscriptions"
+msgstr ""
+
 msgid "Untitled"
 msgstr ""
 
@@ -4591,6 +5113,9 @@ msgid "Update"
 msgstr "अपडेट करें"
 
 msgid "Update Contact"
+msgstr ""
+
+msgid "Update and send"
 msgstr ""
 
 msgid "Update and send page."
@@ -4695,6 +5220,9 @@ msgstr "वैट आईडी:"
 msgid "VAT Number"
 msgstr "वैट संख्या"
 
+msgid "VAT Number Lookup"
+msgstr ""
+
 msgid "VAT Type"
 msgstr "वैट प्रकार"
 
@@ -4706,6 +5234,9 @@ msgstr "वैट नंबर"
 
 msgid "VAT number lookup"
 msgstr "वैट नंबर लुकअप"
+
+msgid "VAT number not valid"
+msgstr ""
 
 msgid "VAT percentage"
 msgstr "वैट प्रतिशत"
@@ -4726,6 +5257,9 @@ msgid "Vacation settings deleted"
 msgstr ""
 
 msgid "Vacation settings saved"
+msgstr ""
+
+msgid "Valid"
 msgstr ""
 
 msgid "Value"
@@ -4755,6 +5289,9 @@ msgstr ""
 msgid "View and manage domain registrations"
 msgstr ""
 
+msgid "View details"
+msgstr ""
+
 msgid "WARNING: Legal Action Pending"
 msgstr ""
 
@@ -4778,6 +5315,18 @@ msgstr "वेब साइट"
 
 msgid "Website"
 msgstr "वेबसाइट"
+
+msgid "Website Configuration"
+msgstr ""
+
+msgid "Website Details"
+msgstr ""
+
+msgid "Website deleted successfully"
+msgstr ""
+
+msgid "Website saved successfully"
+msgstr ""
 
 msgid "Websites"
 msgstr "वेबसाइट"
@@ -4821,6 +5370,12 @@ msgstr ""
 msgid "You clicked the back or cancel button"
 msgstr ""
 
+msgid "You have been successfully unsubscribed."
+msgstr ""
+
+msgid "You have been unsubscribed"
+msgstr ""
+
 msgid "You have cancelled the payment process."
 msgstr ""
 
@@ -4842,6 +5397,9 @@ msgstr ""
 msgid "You will receive a confirmation email shortly."
 msgstr ""
 
+msgid "Your Data"
+msgstr ""
+
 msgid "Your Reference"
 msgstr "आपका संदर्भ"
 
@@ -4859,6 +5417,12 @@ msgstr "आपका संपर्क"
 
 msgid "Your contact:"
 msgstr "आपका संपर्क:"
+
+msgid "Your data has been deleted"
+msgstr ""
+
+msgid "Your data has been deleted."
+msgstr ""
 
 msgid "Your email"
 msgstr "आपका ईमेल"
@@ -4935,11 +5499,17 @@ msgstr "3\\% जोड़ें"
 msgid "add {fee}"
 msgstr "{fee} जोड़ें"
 
+msgid "addresses"
+msgstr ""
+
 msgid "at least {length} characters"
 msgstr ""
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "bounces"
+msgstr ""
 
 msgid "cache"
 msgstr "कैश"
@@ -4962,6 +5532,9 @@ msgstr "सामग्री"
 msgid "control panel"
 msgstr "कंट्रोल पैनल"
 
+msgid "created"
+msgstr ""
+
 msgid "customer"
 msgstr "ग्राहक"
 
@@ -4970,6 +5543,9 @@ msgstr "ग्राहक"
 
 msgid "database"
 msgstr "डेटाबेस"
+
+msgid "databases"
+msgstr ""
 
 msgid "declined"
 msgstr "अस्वीकृत"
@@ -4989,6 +5565,9 @@ msgstr ""
 msgid "example"
 msgstr ""
 
+msgid "existing"
+msgstr ""
+
 msgid "failed"
 msgstr ""
 
@@ -5004,8 +5583,14 @@ msgstr "डेटाबेस से"
 msgid "invoice"
 msgstr "इनवॉइस"
 
+msgid "linked"
+msgstr ""
+
 msgid "login attempts"
 msgstr "लॉगिन प्रयास"
+
+msgid "mail"
+msgstr ""
 
 msgid "mail domain"
 msgstr "मेल डोमेन"
@@ -5013,7 +5598,16 @@ msgstr "मेल डोमेन"
 msgid "main firewall"
 msgstr "मुख्य फायरवॉल"
 
+msgid "months"
+msgstr ""
+
+msgid "need review"
+msgstr ""
+
 msgid "net balance"
+msgstr ""
+
+msgid "new"
 msgstr ""
 
 msgid "new messages retrieved."
@@ -5043,10 +5637,19 @@ msgstr "रिकॉर्ड"
 msgid "refunded"
 msgstr ""
 
+msgid "results"
+msgstr ""
+
+msgid "reverse charge"
+msgstr ""
+
 msgid "seconds"
 msgstr ""
 
 msgid "selected"
+msgstr ""
+
+msgid "sent"
 msgstr ""
 
 msgid "standby firewall"
@@ -5059,6 +5662,9 @@ msgid "transactions"
 msgstr "ट्रांजैक्शन"
 
 msgid "unlimited"
+msgstr ""
+
+msgid "unsubscribed"
 msgstr ""
 
 msgid "user"

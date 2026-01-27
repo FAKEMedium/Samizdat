@@ -34,16 +34,23 @@ async function sendData(method) {
   if (method != 'GET') {
     request.body = formData;
   }
+
+  // For POST (invoice creation), open window BEFORE fetch to avoid popup blocker
+  let pdfWindow = null;
   if (method == 'POST') {
     request.headers.Accept = 'application/json, application/pdf';
+    pdfWindow = window.open('about:blank', '_blank');
   }
+
   try {
     const response = await fetch(url, request);
     if (!response.ok) {
+      if (pdfWindow) pdfWindow.close();
       if (response.status === 401) {
         const data = await response.json();
         alert(data.error || 'Authentication required');
-        window.location.href = `<%== url_for('account_login') %>`;
+        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
+        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
       } else {
         // Try to get error message from JSON response
         try {
@@ -57,31 +64,30 @@ async function sendData(method) {
       // Check content type
       const contentType = response.headers.get('content-type');
       if (contentType && contentType.includes('application/pdf')) {
-        // Handle PDF response - open in new window
+        // Handle PDF response
         const blob = await response.blob();
         const pdfUrl = URL.createObjectURL(blob);
         const printDialog = response.headers.get('X-Print-Dialog');
 
-        if (printDialog === 'true') {
-          // For snailmail: open in same window and trigger print dialog
-          const printWindow = window.open(pdfUrl, '_blank');
-          if (printWindow) {
-            printWindow.addEventListener('load', () => {
-              printWindow.print();
-            });
+        if (pdfWindow) {
+          pdfWindow.location.href = pdfUrl;
+          if (printDialog === 'true') {
+            pdfWindow.addEventListener('load', () => pdfWindow.print());
           }
         } else {
-          // Regular invoice: just open in new window
+          // Fallback if window wasn't pre-opened
           window.open(pdfUrl, '_blank');
         }
         // Reload the page to show updated invoice list
         setTimeout(() => window.location.reload(), 1000);
       } else {
-        // Handle JSON response
+        // Handle JSON response - close pre-opened window if any
+        if (pdfWindow) pdfWindow.close();
         populateForm(await response.json(), method);
       }
     }
   } catch (e) {
+    if (pdfWindow) pdfWindow.close();
     console.error('Request error:', e);
     alert('Request failed');
   }
@@ -131,6 +137,9 @@ function populateForm(formdata, method) {
   document.querySelector('#billinglang').value = customer.billinglang;
   document.querySelector('#headline').innerHTML = `<%==__('Open invoice for customer') %> #${customer.customerid}`;
   document.querySelector('#customerlink').href = `<%== url_for('customer_index') %>/` + customer.customerid;
+  // Update price header with currency
+  const currency = (customer.currency || 'SEK').toUpperCase();
+  document.querySelector('#price-header').innerHTML = `<%== __('Price') %> (${currency})`;
 
   let invoice = formdata.invoice;
   document.querySelector('#invoiceid').value = invoice.invoiceid;

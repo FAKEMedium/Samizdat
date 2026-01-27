@@ -10,6 +10,12 @@ async function loadInvoices(page = 1) {
 
     const data = await response.json();
 
+    // Handle Fortnox auth redirect
+    if (response.status === 401 && data.auth_url) {
+      window.location.href = data.auth_url;
+      return;
+    }
+
     if (data.fortnox && data.fortnox.invoice) {
       const invoices = data.fortnox.invoice.Invoices || [];
       const meta = data.fortnox.invoice.MetaInformation || {};
@@ -20,6 +26,7 @@ async function loadInvoices(page = 1) {
       let totalAmount = 0;
       let totalBalance = 0;
 
+      const invoiceUrlTemplate = "<%== url_for('Fortnox.invoices.get', invoiceid => '_ID_') %>";
       invoices.forEach(invoice => {
         const invoiceNumber = invoice.DocumentNumber || '';
         const customerName = invoice.CustomerName || '';
@@ -34,7 +41,7 @@ async function loadInvoices(page = 1) {
 
         html += `
           <tr class="${rowClass}">
-            <td><a href="<%== url_for('fortnox_invoice') %>/${invoiceNumber}">${invoiceNumber}</a></td>
+            <td><a href="${invoiceUrlTemplate.replace('_ID_', invoiceNumber)}">${invoiceNumber}</a></td>
             <td>${customerName}</td>
             <td>${invoiceDate}</td>
             <td>${dueDate}</td>

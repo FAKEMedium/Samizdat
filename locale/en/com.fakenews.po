@@ -160,6 +160,9 @@ msgstr "Add Column After"
 msgid "Add Column Before"
 msgstr "Add Column Before"
 
+msgid "Add Domain"
+msgstr ""
+
 msgid "Add Key"
 msgstr "Add Key"
 
@@ -253,6 +256,9 @@ msgstr "Add website"
 msgid "Add zone"
 msgstr "Add zone"
 
+msgid "Additional Apache/Nginx configuration directives"
+msgstr ""
+
 msgid "Additional collection fees"
 msgstr "Additional collection fees"
 
@@ -271,6 +277,9 @@ msgstr "Address 2"
 msgid "Address check"
 msgstr "Address check"
 
+msgid "Address deleted"
+msgstr ""
+
 msgid "Address is required"
 msgstr "Address is required"
 
@@ -279,6 +288,9 @@ msgstr "Address line 1"
 
 msgid "Address line 2 (optional)"
 msgstr "Address line 2 (optional)"
+
+msgid "Addresses"
+msgstr ""
 
 msgid "Admin"
 msgstr "Admin"
@@ -367,6 +379,9 @@ msgstr "Aliases"
 msgid "All"
 msgstr "All"
 
+msgid "All Customers"
+msgstr ""
+
 msgid "All Invoices"
 msgstr "All Invoices"
 
@@ -387,6 +402,12 @@ msgstr "All customers"
 
 msgid "All domains"
 msgstr "All domains"
+
+msgid "All sources"
+msgstr ""
+
+msgid "All types"
+msgstr ""
 
 msgid "Allow cookies to paste confirmation code from email"
 msgstr "Allow cookies to paste confirmation code from email"
@@ -436,6 +457,12 @@ msgstr "An error occurred. Please try again."
 msgid "Apply"
 msgstr "Apply"
 
+msgid "Approved for F-tax"
+msgstr ""
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr ""
+
 msgid "Are you sure you want to delete contact"
 msgstr "Are you sure you want to delete contact"
 
@@ -447,6 +474,9 @@ msgstr "Are you sure you want to delete this cache entry?"
 
 msgid "Are you sure you want to delete this certificate?"
 msgstr "Are you sure you want to delete this certificate?"
+
+msgid "Are you sure you want to delete this configuration?"
+msgstr ""
 
 msgid "Are you sure you want to delete this contact?"
 msgstr "Are you sure you want to delete this contact?"
@@ -474,6 +504,9 @@ msgstr "Are you sure you want to delete this message?"
 
 msgid "Are you sure you want to delete this record?"
 msgstr "Are you sure you want to delete this record?"
+
+msgid "Are you sure you want to delete this website?"
+msgstr ""
 
 msgid "Are you sure you want to delete this zone?"
 msgstr "Are you sure you want to delete this zone?"
@@ -643,6 +676,9 @@ msgstr "Blocked ip number"
 msgid "Body"
 msgstr "Body"
 
+msgid "Body (Markdown)"
+msgstr ""
+
 msgid "Bold"
 msgstr "Bold"
 
@@ -651,6 +687,18 @@ msgstr "Bootstrap icons"
 
 msgid "Bootstrap icons helper"
 msgstr "Bootstrap icons helper"
+
+msgid "Bounce"
+msgstr ""
+
+msgid "Bounce deleted"
+msgstr ""
+
+msgid "Bounced"
+msgstr ""
+
+msgid "Bounces"
+msgstr ""
 
 msgid "Buddy price"
 msgstr "Buddy price"
@@ -669,6 +717,9 @@ msgstr "By default no information about you is shared."
 
 msgid "Bytes Used"
 msgstr "Bytes Used"
+
+msgid "CSV"
+msgstr ""
 
 msgid "Cache"
 msgstr "Cache"
@@ -805,6 +856,9 @@ msgstr "Clear"
 msgid "Click \"Fetch from PayPal\" to load live transactions"
 msgstr "Click \"Fetch from PayPal\" to load live transactions"
 
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr ""
+
 msgid "Click to pop dialog."
 msgstr "Click to pop dialog."
 
@@ -847,6 +901,9 @@ msgstr "Cloud Act"
 msgid "Cloud Act Applies (US provider)"
 msgstr "Cloud Act Applies (US provider)"
 
+msgid "Code"
+msgstr ""
+
 msgid "Code Block"
 msgstr "Code Block"
 
@@ -865,8 +922,14 @@ msgstr "Comments"
 msgid "Common Name"
 msgstr "Common Name"
 
+msgid "Common settings"
+msgstr ""
+
 msgid "Company"
 msgstr "Company"
+
+msgid "Complaint"
+msgstr ""
 
 msgid "Completed"
 msgstr "Completed"
@@ -897,6 +960,12 @@ msgstr "Compliant Domains"
 
 msgid "Components"
 msgstr "Components"
+
+msgid "Configuration deleted"
+msgstr ""
+
+msgid "Configuration saved"
+msgstr ""
 
 msgid "Confirm"
 msgstr "Confirm"
@@ -973,6 +1042,9 @@ msgstr "Contacts"
 msgid "Content"
 msgstr "Content"
 
+msgid "Content saved"
+msgstr ""
+
 msgid "Continue"
 msgstr "Continue"
 
@@ -990,6 +1062,12 @@ msgstr "Control panel"
 
 msgid "Conversation with"
 msgstr "Conversation with"
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy as draft"
+msgstr ""
 
 msgid "Corporate identity number"
 msgstr "Corporate identity number"
@@ -1081,6 +1159,9 @@ msgstr "Currency"
 msgid "Current Prices"
 msgstr "Current Prices"
 
+msgid "Current expiry"
+msgstr ""
+
 msgid "Currently managed"
 msgstr "Currently managed"
 
@@ -1156,6 +1237,9 @@ msgstr "Dark"
 msgid "Data"
 msgstr "Data"
 
+msgid "Data not found"
+msgstr ""
+
 msgid "Data usage: {usage}"
 msgstr "Data usage: {usage}"
 
@@ -1192,14 +1276,29 @@ msgstr "Declined"
 msgid "Default"
 msgstr "Default"
 
+msgid "Default From email"
+msgstr ""
+
+msgid "Default From name"
+msgstr ""
+
 msgid "Definitions"
 msgstr "Definitions"
+
+msgid "Delayed"
+msgstr ""
 
 msgid "Delete"
 msgstr "Delete"
 
+msgid "Delete All My Data"
+msgstr ""
+
 msgid "Delete Column"
 msgstr "Delete Column"
+
+msgid "Delete My Data"
+msgstr ""
 
 msgid "Delete Row"
 msgstr "Delete Row"
@@ -1210,14 +1309,29 @@ msgstr "Delete Table"
 msgid "Delete admin"
 msgstr "Delete admin"
 
+msgid "Delete domain"
+msgstr ""
+
+msgid "Delete this address?"
+msgstr ""
+
 msgid "Delete this alias domain?"
 msgstr "Delete this alias domain?"
 
 msgid "Delete this alias?"
 msgstr "Delete this alias?"
 
+msgid "Delete this bounce record?"
+msgstr ""
+
 msgid "Delete this domain and all its mailboxes?"
 msgstr "Delete this domain and all its mailboxes?"
+
+msgid "Delete this list?"
+msgstr ""
+
+msgid "Delete this mail?"
+msgstr ""
 
 msgid "Delete this mailbox?"
 msgstr "Delete this mailbox?"
@@ -1254,6 +1368,9 @@ msgstr "Development"
 
 msgid "Device Status"
 msgstr "Device Status"
+
+msgid "Diagnostic"
+msgstr ""
 
 msgid "Direction"
 msgstr "Direction"
@@ -1293,6 +1410,9 @@ msgstr "Domain Compliance Scores"
 
 msgid "Domain Name"
 msgstr "Domain Name"
+
+msgid "Domain added"
+msgstr ""
 
 msgid "Domain added successfully"
 msgstr "Domain added successfully"
@@ -1402,6 +1522,9 @@ msgstr "Edit Example"
 msgid "Edit Record"
 msgstr "Edit Record"
 
+msgid "Edit Website"
+msgstr ""
+
 msgid "Edit admin"
 msgstr "Edit admin"
 
@@ -1413,6 +1536,9 @@ msgstr "Edit customer {customerid}"
 
 msgid "Edit forwarding"
 msgstr "Edit forwarding"
+
+msgid "Edit mail"
+msgstr ""
 
 msgid "Edit mailbox"
 msgstr "Edit mailbox"
@@ -1488,6 +1614,9 @@ msgstr "Email Order"
 
 msgid "Email address"
 msgstr "Email address"
+
+msgid "Email column"
+msgstr ""
 
 msgid "Email confirmation"
 msgstr "Email confirmation"
@@ -1579,6 +1708,9 @@ msgstr "End side content"
 msgid "English"
 msgstr "English"
 
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
 msgid "Enter a title first to translate from"
 msgstr "Enter a title first to translate from"
 
@@ -1587,6 +1719,9 @@ msgstr "Enter code"
 
 msgid "Enter code from captcha image"
 msgstr "Enter code from captcha image"
+
+msgid "Enter domain name:"
+msgstr ""
 
 msgid "Enter password"
 msgstr "Enter password"
@@ -1608,6 +1743,12 @@ msgstr "Enter your Swedish phone number to receive a Swish payment request."
 
 msgid "Enter your email"
 msgstr "Enter your email"
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr ""
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr ""
 
 msgid "Enter zone name"
 msgstr "Enter zone name"
@@ -1641,6 +1782,9 @@ msgstr "Error loading transaction"
 
 msgid "Error loading transactions"
 msgstr "Error loading transactions"
+
+msgid "Error renewing domain"
+msgstr ""
 
 msgid "Error reprinting invoice"
 msgstr "Error reprinting invoice"
@@ -1698,6 +1842,9 @@ msgstr "Expires At"
 
 msgid "Expiring"
 msgstr "Expiring"
+
+msgid "Expiring Certificates"
+msgstr ""
 
 msgid "Expiring domains"
 msgstr "Expiring domains"
@@ -1777,6 +1924,9 @@ msgstr "Failed to delete alias domain"
 msgid "Failed to delete certificate"
 msgstr "Failed to delete certificate"
 
+msgid "Failed to delete configuration"
+msgstr ""
+
 msgid "Failed to delete contact"
 msgstr "Failed to delete contact"
 
@@ -1846,6 +1996,9 @@ msgstr "Failed to navigate"
 msgid "Failed to process refund"
 msgstr "Failed to process refund"
 
+msgid "Failed to process unsubscription."
+msgstr ""
+
 msgid "Failed to purge cache"
 msgstr "Failed to purge cache"
 
@@ -1864,6 +2017,9 @@ msgstr "Failed to remove admin"
 msgid "Failed to remove domain"
 msgstr "Failed to remove domain"
 
+msgid "Failed to renew domain"
+msgstr ""
+
 msgid "Failed to reprint invoice"
 msgstr "Failed to reprint invoice"
 
@@ -1881,6 +2037,9 @@ msgstr "Failed to save alias"
 
 msgid "Failed to save certificate"
 msgstr "Failed to save certificate"
+
+msgid "Failed to save configuration"
+msgstr ""
 
 msgid "Failed to save domain"
 msgstr "Failed to save domain"
@@ -1912,6 +2071,9 @@ msgstr "Failed to send reminder"
 msgid "Failed to start run"
 msgstr "Failed to start run"
 
+msgid "Failed to unsubscribe."
+msgstr ""
+
 msgid "Failed to update admin"
 msgstr "Failed to update admin"
 
@@ -1941,6 +2103,9 @@ msgstr "Failed to update record"
 
 msgid "Failed to update zone"
 msgstr "Failed to update zone"
+
+msgid "Failed to verify token."
+msgstr ""
 
 msgid "Failed/Refunded"
 msgstr "Failed/Refunded"
@@ -2005,11 +2170,17 @@ msgstr "Find your invoice attached as PDF."
 msgid "First name"
 msgstr "First name"
 
+msgid "First name col"
+msgstr ""
+
 msgid "Flags"
 msgstr "Flags"
 
 msgid "Flow"
 msgstr "Flow"
+
+msgid "Footer added to all emails"
+msgstr ""
 
 msgid "For more information, visit the Fortnox website:"
 msgstr "For more information, visit the Fortnox website:"
@@ -2119,6 +2290,12 @@ msgstr "Handle required for"
 msgid "Handled invoice"
 msgstr "Handled invoice"
 
+msgid "Hard bounce"
+msgstr ""
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr ""
+
 msgid "Heading 1"
 msgstr "Heading 1"
 
@@ -2139,6 +2316,12 @@ msgstr "Historical Data"
 
 msgid "Historical compliance trends over time"
 msgstr "Historical compliance trends over time"
+
+msgid "Home"
+msgstr ""
+
+msgid "Home Directory"
+msgstr ""
 
 msgid "Hosting Provider Summary"
 msgstr "Hosting Provider Summary"
@@ -2185,14 +2368,29 @@ msgstr "IP"
 msgid "IP Address"
 msgstr "IP Address"
 
+msgid "IP Only"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
 msgid "IPv4 Address"
 msgstr "IPv4 Address"
+
+msgid "IPv4 Override"
+msgstr ""
 
 msgid "IPv4 reverse"
 msgstr "IPv4 reverse"
 
+msgid "IPv6"
+msgstr ""
+
 msgid "IPv6 Address"
 msgstr "IPv6 Address"
+
+msgid "IPv6 Override"
+msgstr ""
 
 msgid "IPv6 reverse"
 msgstr "IPv6 reverse"
@@ -2208,6 +2406,12 @@ msgstr "If payment is not received within 7 days from the date of this notice, t
 
 msgid "If payment is not received within 7 days, this matter will be transferred to our collection agency."
 msgstr "If payment is not received within 7 days, this matter will be transferred to our collection agency."
+
+msgid "If set, all requests will redirect to this URL"
+msgstr ""
+
+msgid "If this email is in our system, you will receive a link shortly."
+msgstr ""
 
 msgid "If you did not register an account, please ignore this email."
 msgstr "If you did not register an account, please ignore this email."
@@ -2245,17 +2449,38 @@ msgstr "Impersonate {who}"
 msgid "Import"
 msgstr "Import"
 
+msgid "Import addresses"
+msgstr ""
+
+msgid "Import complete"
+msgstr ""
+
 msgid "Import zone"
 msgstr "Import zone"
 
+msgid "Imported"
+msgstr ""
+
+msgid "Imported %d addresses"
+msgstr ""
+
+msgid "Imported {count} addresses"
+msgstr ""
+
 msgid "In"
 msgstr "In"
+
+msgid "In Cert"
+msgstr ""
 
 msgid "In your personal menu you find your {panel} among other things."
 msgstr "In your personal menu you find your {panel} among other things."
 
 msgid "Inactive"
 msgstr "Inactive"
+
+msgid "Include in certificate"
+msgstr ""
 
 msgid "Including VAT"
 msgstr "Including VAT"
@@ -2289,6 +2514,12 @@ msgstr "Invalid invoice ID"
 
 msgid "Invalid items format"
 msgstr "Invalid items format"
+
+msgid "Invalid or expired token."
+msgstr ""
+
+msgid "Invalid or missing unsubscribe token."
+msgstr ""
 
 msgid "Invalid password"
 msgstr "Invalid password"
@@ -2508,6 +2739,9 @@ msgstr "Languages"
 msgid "Last name"
 msgstr "Last name"
 
+msgid "Last name col"
+msgstr ""
+
 msgid "Last reminder"
 msgstr "Last reminder"
 
@@ -2519,6 +2753,9 @@ msgstr "Leave blank to keep current"
 
 msgid "Leave empty for items without a link"
 msgstr "Leave empty for items without a link"
+
+msgid "Leave empty for server default"
+msgstr ""
 
 msgid "Legal proceedings"
 msgstr "Legal proceedings"
@@ -2544,11 +2781,26 @@ msgstr "Link to personal data"
 msgid "Link to personal settings"
 msgstr "Link to personal settings"
 
+msgid "Linked"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List Memberships"
+msgstr ""
+
+msgid "List name:"
+msgstr ""
+
 msgid "List zones"
 msgstr "List zones"
 
 msgid "Lista fakturor"
 msgstr "Lista fakturor"
+
+msgid "Lists"
+msgstr ""
 
 msgid "Live Transactions"
 msgstr "Live Transactions"
@@ -2589,6 +2841,9 @@ msgstr "Logotype leading to start page"
 msgid "Logotype linked to {site}"
 msgstr "Logotype linked to {site}"
 
+msgid "Lookup"
+msgstr ""
+
 msgid "Lost password?"
 msgstr "Lost password?"
 
@@ -2616,11 +2871,23 @@ msgstr "MX records"
 msgid "Mail"
 msgstr "Mail"
 
+msgid "Mail History"
+msgstr ""
+
 msgid "Mail Server"
 msgstr "Mail Server"
 
 msgid "Mail admin"
 msgstr "Mail admin"
+
+msgid "Mail copied as draft"
+msgstr ""
+
+msgid "Mail created"
+msgstr ""
+
+msgid "Mail deleted"
+msgstr ""
 
 msgid "Mail domains"
 msgstr "Mail domains"
@@ -2630,6 +2897,9 @@ msgstr "Mail dump"
 
 msgid "Mail sent through own servers"
 msgstr "Mail sent through own servers"
+
+msgid "Mail updated"
+msgstr ""
 
 msgid "Mailbox"
 msgstr "Mailbox"
@@ -2661,6 +2931,15 @@ msgstr "Mailboxes"
 msgid "Mailboxes for"
 msgstr "Mailboxes for"
 
+msgid "Mailer"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mails"
+msgstr ""
+
 msgid "Make invoice"
 msgstr "Make invoice"
 
@@ -2678,6 +2957,9 @@ msgstr "Managed domains"
 
 msgid "Manager"
 msgstr "Manager"
+
+msgid "Manual"
+msgstr ""
 
 msgid "Manuals"
 msgstr "Manuals"
@@ -2781,6 +3063,9 @@ msgstr "Name"
 msgid "Name Servers"
 msgstr "Name Servers"
 
+msgid "Name column"
+msgstr ""
+
 msgid "Nameserver"
 msgstr "Nameserver"
 
@@ -2820,6 +3105,12 @@ msgstr "Never"
 msgid "Never expires"
 msgstr "Never expires"
 
+msgid "Never subscribed"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
 msgid "New Certificate"
 msgstr "New Certificate"
 
@@ -2840,6 +3131,9 @@ msgstr "New Record"
 
 msgid "New Template"
 msgstr "New Template"
+
+msgid "New Website"
+msgstr ""
 
 msgid "New account"
 msgstr "New account"
@@ -2867,6 +3161,12 @@ msgstr "New invoice for customer {customerid}"
 
 msgid "New invoice pack"
 msgstr "New invoice pack"
+
+msgid "New list"
+msgstr ""
+
+msgid "New mail"
+msgstr ""
 
 msgid "New menu"
 msgstr "New menu"
@@ -2907,6 +3207,9 @@ msgstr "No account"
 msgid "No activity"
 msgstr "No activity"
 
+msgid "No addresses"
+msgstr ""
+
 msgid "No administrators"
 msgstr "No administrators"
 
@@ -2915,6 +3218,9 @@ msgstr "No alias domains"
 
 msgid "No aliases"
 msgstr "No aliases"
+
+msgid "No bounces"
+msgstr ""
 
 msgid "No cache entries found"
 msgstr "No cache entries found"
@@ -2934,6 +3240,9 @@ msgstr "No check data available"
 msgid "No contacts found"
 msgstr "No contacts found"
 
+msgid "No content defined yet"
+msgstr ""
+
 msgid "No customer #{customerid}."
 msgstr "No customer #{customerid}."
 
@@ -2942,6 +3251,12 @@ msgstr "No customer assigned"
 
 msgid "No data available"
 msgstr "No data available"
+
+msgid "No details available"
+msgstr ""
+
+msgid "No domain"
+msgstr ""
 
 msgid "No domains"
 msgstr "No domains"
@@ -2964,11 +3279,23 @@ msgstr "No invoices found"
 msgid "No invoicing"
 msgstr "No invoicing"
 
+msgid "No lists"
+msgstr ""
+
 msgid "No log entries"
 msgstr "No log entries"
 
+msgid "No longer interested"
+msgstr ""
+
 msgid "No mailboxes"
 msgstr "No mailboxes"
+
+msgid "No mails"
+msgstr ""
+
+msgid "No mails received"
+msgstr ""
 
 msgid "No matches found"
 msgstr "No matches found"
@@ -3018,6 +3345,12 @@ msgstr "No results found"
 msgid "No selected customer."
 msgstr "No selected customer."
 
+msgid "No settings configured"
+msgstr ""
+
+msgid "No source content to translate"
+msgstr ""
+
 msgid "No template (empty zone)"
 msgstr "No template (empty zone)"
 
@@ -3036,8 +3369,14 @@ msgstr "No transactions found for selected date range"
 msgid "No unprocessed payments"
 msgstr "No unprocessed payments"
 
+msgid "No unsubscriptions"
+msgstr ""
+
 msgid "No users found"
 msgstr "No users found"
+
+msgid "No websites found"
+msgstr ""
 
 msgid "Non-compliant (Foreign hosting)"
 msgstr "Non-compliant (Foreign hosting)"
@@ -3050,6 +3389,9 @@ msgstr "Normal"
 
 msgid "Not found"
 msgstr "Not found"
+
+msgid "Not subscribed to any lists"
+msgstr ""
 
 msgid "Note"
 msgstr "Note"
@@ -3147,11 +3489,17 @@ msgstr "Organisation Number"
 msgid "Organization"
 msgstr "Organization"
 
+msgid "Organization header"
+msgstr ""
+
 msgid "Organizational number"
 msgstr "Organizational number"
 
 msgid "Original due date"
 msgstr "Original due date"
+
+msgid "Other"
+msgstr ""
 
 msgid "Our Plusgiro will soon disappear too."
 msgstr "Our Plusgiro will soon disappear too."
@@ -3191,6 +3539,15 @@ msgstr "PEM format"
 
 msgid "PEM format (stored securely)"
 msgstr "PEM format (stored securely)"
+
+msgid "PHP"
+msgstr ""
+
+msgid "PHP Configuration"
+msgstr ""
+
+msgid "PHP-FPM pool configuration. Will be merged with default .php.conf"
+msgstr ""
 
 msgid "Page"
 msgstr "Page"
@@ -3254,6 +3611,18 @@ msgstr "Password requires: "
 
 msgid "Password was wrong or username doesn't exist."
 msgstr "Password was wrong or username doesn't exist."
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr ""
+
+msgid "Paste CSV here..."
+msgstr ""
+
+msgid "Paste emails here..."
+msgstr ""
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr ""
 
 msgid "Pay"
 msgstr "Pay"
@@ -3384,6 +3753,9 @@ msgstr "Period"
 msgid "Personal"
 msgstr "Personal"
 
+msgid "Personal Information"
+msgstr ""
+
 msgid "Personal menu"
 msgstr "Personal menu"
 
@@ -3498,6 +3870,12 @@ msgstr "Price List"
 msgid "Prices"
 msgstr "Prices"
 
+msgid "Primary"
+msgstr ""
+
+msgid "Primary Domain"
+msgstr ""
+
 msgid "Primary NS"
 msgstr "Primary NS"
 
@@ -3552,11 +3930,17 @@ msgstr "Protocol"
 msgid "Provider"
 msgstr "Provider"
 
+msgid "Public"
+msgstr ""
+
 msgid "Public Key"
 msgstr "Public Key"
 
 msgid "Published"
 msgstr "Published"
+
+msgid "Purchase"
+msgstr ""
 
 msgid "Purge"
 msgstr "Purge"
@@ -3582,6 +3966,12 @@ msgstr "Quantity"
 msgid "Quarter"
 msgstr "Quarter"
 
+msgid "Queue"
+msgstr ""
+
+msgid "Queue this mail for sending?"
+msgstr ""
+
 msgid "Quota"
 msgstr "Quota"
 
@@ -3605,6 +3995,12 @@ msgstr "Realtime Register"
 
 msgid "RealtimeRegister API Integration"
 msgstr "RealtimeRegister API Integration"
+
+msgid "Reason"
+msgstr ""
+
+msgid "Reason (optional)"
+msgstr ""
 
 msgid "Received"
 msgstr "Received"
@@ -3668,6 +4064,9 @@ msgstr "Record updated successfully"
 
 msgid "Records"
 msgstr "Records"
+
+msgid "Redirect URL"
+msgstr ""
 
 msgid "Reference"
 msgstr "Reference"
@@ -3762,17 +4161,41 @@ msgstr "Reminder sent successfully"
 msgid "Remove"
 msgstr "Remove"
 
+msgid "Remove marked"
+msgstr ""
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr ""
+
+msgid "Removed %d addresses"
+msgstr ""
+
+msgid "Removed {count} addresses"
+msgstr ""
+
 msgid "Rename"
 msgstr "Rename"
 
 msgid "Renew"
 msgstr "Renew"
 
+msgid "Renew Certificate"
+msgstr ""
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
 msgid "Replacement"
 msgstr "Replacement"
 
 msgid "Reply interval (seconds)"
 msgstr "Reply interval (seconds)"
+
+msgid "Reply-To address"
+msgstr ""
 
 msgid "Reprint"
 msgstr "Reprint"
@@ -3803,6 +4226,12 @@ msgstr "Retry"
 
 msgid "Return to Home"
 msgstr "Return to Home"
+
+msgid "Review"
+msgstr ""
+
+msgid "Review imported addresses"
+msgstr ""
 
 msgid "Roles"
 msgstr "Roles"
@@ -3888,11 +4317,17 @@ msgstr "Save Template"
 msgid "Save changes"
 msgstr "Save changes"
 
+msgid "Save content"
+msgstr ""
+
 msgid "Save failed"
 msgstr "Save failed"
 
 msgid "Save options"
 msgstr "Save options"
+
+msgid "Save the website first"
+msgstr ""
 
 msgid "Save to database"
 msgstr "Save to database"
@@ -3912,6 +4347,9 @@ msgstr "Scan the QR code with your Swish app for immediate payment."
 msgid "Scan the QR code with your Swish app or enter the details manually."
 msgstr "Scan the QR code with your Swish app or enter the details manually."
 
+msgid "Scheduled"
+msgstr ""
+
 msgid "Score"
 msgstr "Score"
 
@@ -3920,6 +4358,9 @@ msgstr "Score (High to Low)"
 
 msgid "Score (Low to High)"
 msgstr "Score (Low to High)"
+
+msgid "Scrape"
+msgstr ""
 
 msgid "Search"
 msgstr "Search"
@@ -3944,6 +4385,9 @@ msgstr "Search content"
 
 msgid "Search customer (min 3 chars)..."
 msgstr "Search customer (min 3 chars)..."
+
+msgid "Search database"
+msgstr ""
 
 msgid "Search domain"
 msgstr "Search domain"
@@ -4023,6 +4467,9 @@ msgstr "Search pattern (e.g. fortnox:*, user:*)"
 msgid "Search web content"
 msgstr "Search web content"
 
+msgid "Search websites..."
+msgstr ""
+
 msgid "Sector"
 msgstr "Sector"
 
@@ -4034,6 +4481,9 @@ msgstr "Select"
 
 msgid "Select Format"
 msgstr "Select Format"
+
+msgid "Select a reason..."
+msgstr ""
 
 msgid "Select a template to edit or create a new one"
 msgstr "Select a template to edit or create a new one"
@@ -4068,6 +4518,12 @@ msgstr "Select invoice pack"
 msgid "Select registries and set handles for each"
 msgstr "Select registries and set handles for each"
 
+msgid "Select server..."
+msgstr ""
+
+msgid "Select shell..."
+msgstr ""
+
 msgid "Select target domain"
 msgstr "Select target domain"
 
@@ -4083,6 +4539,9 @@ msgstr "Send again"
 msgid "Send invoice questions to {url}."
 msgstr "Send invoice questions to {url}."
 
+msgid "Send link"
+msgstr ""
+
 msgid "Send message"
 msgstr "Send message"
 
@@ -4092,6 +4551,9 @@ msgstr "Send now"
 msgid "Send reminder"
 msgstr "Send reminder"
 
+msgid "Sending"
+msgstr ""
+
 msgid "Sending..."
 msgstr "Sending..."
 
@@ -4100,6 +4562,18 @@ msgstr "Sent"
 
 msgid "Serial"
 msgstr "Serial"
+
+msgid "Server"
+msgstr ""
+
+msgid "Server Extra"
+msgstr ""
+
+msgid "Server Extra Configuration"
+msgstr ""
+
+msgid "Server default"
+msgstr ""
 
 msgid "Servers"
 msgstr "Servers"
@@ -4113,6 +4587,9 @@ msgstr "Service interruption"
 msgid "Session:"
 msgstr "Session:"
 
+msgid "Set as primary"
+msgstr ""
+
 msgid "Set the height attribute."
 msgstr "Set the height attribute."
 
@@ -4124,6 +4601,15 @@ msgstr "Set the title attribute."
 
 msgid "Set the width attribute."
 msgstr "Set the width attribute."
+
+msgid "Setting deleted"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting saved"
+msgstr ""
 
 msgid "Settings"
 msgstr "Settings"
@@ -4142,6 +4628,9 @@ msgstr "Share on Twitter"
 
 msgid "Share {what} on {where}"
 msgstr "Share {what} on {where}"
+
+msgid "Shell"
+msgstr ""
 
 msgid "Shown as"
 msgstr "Shown as"
@@ -4163,6 +4652,9 @@ msgstr "Signal Strength"
 
 msgid "Signal: {signal}%"
 msgstr "Signal: {signal}%"
+
+msgid "Signup"
+msgstr ""
 
 msgid "Site"
 msgstr "Site"
@@ -4188,8 +4680,14 @@ msgstr "Snapback only"
 msgid "Snapback scheduler"
 msgstr "Snapback scheduler"
 
+msgid "Soft bounce"
+msgstr ""
+
 msgid "Sort by"
 msgstr "Sort by"
+
+msgid "Source"
+msgstr ""
 
 msgid "Source code on Github"
 msgstr "Source code on Github"
@@ -4268,6 +4766,9 @@ msgstr "Subject"
 
 msgid "Submit"
 msgstr "Submit"
+
+msgid "Subscribed"
+msgstr ""
 
 msgid "Succeeded"
 msgstr "Succeeded"
@@ -4494,6 +4995,9 @@ msgstr "This resource is deprecated!"
 msgid "This resource is not documented."
 msgstr "This resource is not documented."
 
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr ""
+
 msgid "This will result in additional fees and may affect your credit rating."
 msgstr "This will result in additional fees and may affect your credit rating."
 
@@ -4517,6 +5021,9 @@ msgstr "Toggle Dropdown"
 
 msgid "Toggle menu"
 msgstr "Toggle menu"
+
+msgid "Too many emails"
+msgstr ""
 
 msgid "Tot"
 msgstr "Tot"
@@ -4581,6 +5088,9 @@ msgstr "Translating..."
 msgid "Translation complete"
 msgstr "Translation complete"
 
+msgid "Translation failed"
+msgstr ""
+
 msgid "Try Again"
 msgstr "Try Again"
 
@@ -4614,6 +5124,18 @@ msgstr "Unknown error"
 msgid "Unpaid"
 msgstr "Unpaid"
 
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Unsubscribe from mailings"
+msgstr ""
+
+msgid "Unsubscription removed"
+msgstr ""
+
+msgid "Unsubscriptions"
+msgstr ""
+
 msgid "Untitled"
 msgstr "Untitled"
 
@@ -4625,6 +5147,9 @@ msgstr "Update"
 
 msgid "Update Contact"
 msgstr "Update Contact"
+
+msgid "Update and send"
+msgstr ""
 
 msgid "Update and send page."
 msgstr "Update and send page."
@@ -4728,6 +5253,9 @@ msgstr "VAT Id:"
 msgid "VAT Number"
 msgstr "VAT Number"
 
+msgid "VAT Number Lookup"
+msgstr ""
+
 msgid "VAT Type"
 msgstr "VAT Type"
 
@@ -4739,6 +5267,9 @@ msgstr "VAT number"
 
 msgid "VAT number lookup"
 msgstr "VAT number lookup"
+
+msgid "VAT number not valid"
+msgstr ""
 
 msgid "VAT percentage"
 msgstr "VAT percentage"
@@ -4760,6 +5291,9 @@ msgstr "Vacation settings deleted"
 
 msgid "Vacation settings saved"
 msgstr "Vacation settings saved"
+
+msgid "Valid"
+msgstr ""
 
 msgid "Value"
 msgstr "Value"
@@ -4788,6 +5322,9 @@ msgstr "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"
 msgid "View and manage domain registrations"
 msgstr "View and manage domain registrations"
 
+msgid "View details"
+msgstr ""
+
 msgid "WARNING: Legal Action Pending"
 msgstr "WARNING: Legal Action Pending"
 
@@ -4811,6 +5348,18 @@ msgstr "Web sites"
 
 msgid "Website"
 msgstr "Website"
+
+msgid "Website Configuration"
+msgstr ""
+
+msgid "Website Details"
+msgstr ""
+
+msgid "Website deleted successfully"
+msgstr ""
+
+msgid "Website saved successfully"
+msgstr ""
 
 msgid "Websites"
 msgstr "Websites"
@@ -4854,6 +5403,12 @@ msgstr "You can try again or choose a different payment method."
 msgid "You clicked the back or cancel button"
 msgstr "You clicked the back or cancel button"
 
+msgid "You have been successfully unsubscribed."
+msgstr ""
+
+msgid "You have been unsubscribed"
+msgstr ""
+
 msgid "You have cancelled the payment process."
 msgstr "You have cancelled the payment process."
 
@@ -4875,6 +5430,9 @@ msgstr "You will be redirected to Nets secure checkout page."
 msgid "You will receive a confirmation email shortly."
 msgstr "You will receive a confirmation email shortly."
 
+msgid "Your Data"
+msgstr ""
+
 msgid "Your Reference"
 msgstr "Your Reference"
 
@@ -4892,6 +5450,12 @@ msgstr "Your contact"
 
 msgid "Your contact:"
 msgstr "Your contact:"
+
+msgid "Your data has been deleted"
+msgstr ""
+
+msgid "Your data has been deleted."
+msgstr ""
 
 msgid "Your email"
 msgstr "Your email"
@@ -4968,11 +5532,17 @@ msgstr "add 3\\%"
 msgid "add {fee}"
 msgstr "add {fee}"
 
+msgid "addresses"
+msgstr ""
+
 msgid "at least {length} characters"
 msgstr "at least {length} characters"
 
 msgid "billing@rymdweb.com"
 msgstr "billing@rymdweb.com"
+
+msgid "bounces"
+msgstr ""
 
 msgid "cache"
 msgstr "cache"
@@ -4995,6 +5565,9 @@ msgstr "content"
 msgid "control panel"
 msgstr "control panel"
 
+msgid "created"
+msgstr ""
+
 msgid "customer"
 msgstr "customer"
 
@@ -5003,6 +5576,9 @@ msgstr "customers"
 
 msgid "database"
 msgstr "database"
+
+msgid "databases"
+msgstr ""
 
 msgid "declined"
 msgstr "declined"
@@ -5022,6 +5598,9 @@ msgstr "errors"
 msgid "example"
 msgstr "example"
 
+msgid "existing"
+msgstr ""
+
 msgid "failed"
 msgstr "failed"
 
@@ -5037,8 +5616,14 @@ msgstr "from database"
 msgid "invoice"
 msgstr "invoice"
 
+msgid "linked"
+msgstr ""
+
 msgid "login attempts"
 msgstr "login attempts"
+
+msgid "mail"
+msgstr ""
 
 msgid "mail domain"
 msgstr "mail domain"
@@ -5046,8 +5631,17 @@ msgstr "mail domain"
 msgid "main firewall"
 msgstr "main firewall"
 
+msgid "months"
+msgstr ""
+
+msgid "need review"
+msgstr ""
+
 msgid "net balance"
 msgstr "net balance"
+
+msgid "new"
+msgstr ""
 
 msgid "new messages retrieved."
 msgstr "new messages retrieved."
@@ -5076,11 +5670,20 @@ msgstr "records"
 msgid "refunded"
 msgstr "refunded"
 
+msgid "results"
+msgstr ""
+
+msgid "reverse charge"
+msgstr ""
+
 msgid "seconds"
 msgstr "seconds"
 
 msgid "selected"
 msgstr "selected"
+
+msgid "sent"
+msgstr ""
 
 msgid "standby firewall"
 msgstr "standby firewall"
@@ -5093,6 +5696,9 @@ msgstr "transactions"
 
 msgid "unlimited"
 msgstr "unlimited"
+
+msgid "unsubscribed"
+msgstr ""
 
 msgid "user"
 msgstr "user"

@@ -153,6 +153,10 @@ async function sendData(method, customerid = 0) {
   if (customerid > 0) {
     url = `<%== url_for('Customer.get', customerid => '_CID_') %>`.replace('_CID_', customerid);
     form.action = url;
+  } else if (method === 'PUT') {
+    // Use API route for PUT - extract customerid from form
+    const cid = document.querySelector('#customerid')?.value || 0;
+    url = `<%== url_for('Customer.update', customerid => '_CID_') %>`.replace('_CID_', cid);
   } else {
     url = form.action || "";
   }

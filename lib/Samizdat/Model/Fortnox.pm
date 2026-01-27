@@ -176,6 +176,7 @@ has 'default_resources' => sub ($self) {
     }
   };
 };
+
 has 'resources' => sub ($self) {
   # Merge config resources with default resources (config overrides defaults)
   my $config_resources = $self->config->{app}->{resources} // {};
@@ -352,7 +353,7 @@ sub getToken ($self, $refresh = 0) {
 
 
 sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
-  if (!exists($self->data->{access})) {
+  if (!$self->data->{access}) {
     return $self->getLogin();
   }
   $resource = lc $resource;
@@ -442,6 +443,11 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
       my $error_data = {};
       eval { $error_data = decode_json($tx->result->body); };
       return { error => 1, code => 400, message => $error_data->{ErrorInformation}->{message} // 'Bad Request' };
+    } elsif (429 == $tx->result->code) {
+      # Rate limited - wait and retry
+      say "Rate limited (429), waiting 10 seconds...";
+      sleep 10;
+      next;  # Retry the request
     } elsif ($tx->result->code =~ /^4/) {
       #          say sprintf('%s %s', $tx->result->code, Dumper $tx->result->body);
 
@@ -463,26 +469,44 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
 
 
 sub postInbox ($self, $file, $folderid = 'inbox_kf') {
+  # Check if file exists
+  unless (-f $file) {
+    return { error => 1, message => "File not found: $file" };
+  }
+
   my $url = sprintf("%s%s?folderid=%s", $self->config->{apiurl}, 'inbox', $folderid);
   my $headers = {
     'Content-Type'  => 'multipart/form-data',
     'Authorization' => sprintf('Bearer %s', $self->data->{access})
   };
-  my $tx;
-  if (1) {
+
+  while (1) {
     my $tx = $self->ua->build_tx('POST' => $url => $headers => form => {
       file => { file => $file }
     });
-#    say Dumper $tx;
     $tx = $self->ua->start($tx);
-#    say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
 
-    if (201 == $tx->result->code) {
+    my $code = $tx->result->code;
+    if ($code == 201) {
       return decode_json($tx->result->body);
     }
 
-    #  say Dumper $tx;
-#    return $tx->result;
+    # Rate limited - wait and retry
+    if ($code == 429) {
+      say "Rate limited (429), waiting 10 seconds...";
+      sleep 10;
+      next;
+    }
+
+    # Return error for other non-201 responses
+    my $body = $tx->result->body // '';
+    if ($body && $body =~ /^\{/) {
+      my $json = eval { decode_json($body) };
+      if ($json && $json->{ErrorInformation}) {
+        return { error => 1, message => $json->{ErrorInformation}{message} // "HTTP $code" };
+      }
+    }
+    return { error => 1, message => "HTTP $code: $body" };
   }
 }
 
@@ -490,31 +514,49 @@ sub postInbox ($self, $file, $folderid = 'inbox_kf') {
 sub attachment ($self, $method, $fileid, $entityid, $entitype = 'F') {
   my $url = $self->config->{attachmentsurl};
   my $tx;
-  # say $url;
-  if ('get' eq $method) {
+
+  $method = lc($method);
+
+  if ($method eq 'get') {
     $tx = $self->ua->build_tx('GET' => $url => {Accept => '*/*'} => form => {
       entityid      => $entityid,
       entitytype    => $entitype,
     });
+  } elsif ($method eq 'delete') {
+    # DELETE uses URL path with file ID
+    my $delete_url = "$url/$fileid";
+    $tx = $self->ua->build_tx('DELETE' => $delete_url => {Accept => '*/*'});
   } else {
+    # POST to create attachment
     $tx = $self->ua->build_tx(uc($method) => $url => {Accept => '*/*'} => json => [{
-      fileId        => $fileid,
-      entityId      => $entityid,
+      fileId        => "$fileid",
+      entityId      => "$entityid",
       entityType    => $entitype,
-      includeOnSend => 'true',
+      includeOnSend => \1,
     }]);
     $tx->req->headers->content_type('application/json');
   }
   $tx->req->headers->add(Authorization => sprintf('Bearer %s', $self->data->{access}));
+  say "Attachment request: $url fileId=$fileid entityId=$entityid entityType=$entitype";
   $tx = $self->ua->start($tx);
-#  say sprintf('%s %s %s', $url, $tx->result->code, Dumper $tx->result->body);
+  say "Attachment response: " . $tx->result->code . " " . ($tx->result->body // '');
 
-  if (200 == $tx->result->code) {
-#    say Dumper $tx->result->body;
-    my $result = decode_json($tx->result->body);
-    #          say Dumper $result;
-    return $result;
+  my $code = $tx->result->code;
+  if ($code == 200 || $code == 201 || $code == 204) {
+    my $body = $tx->result->body // '';
+    return {} if $code == 204 || !$body;  # DELETE returns 204 No Content
+    return decode_json($body);
   }
+
+  # Return error for non-success responses
+  my $body = $tx->result->body // '';
+  if ($body && $body =~ /^\{/) {
+    my $json = eval { decode_json($body) };
+    if ($json && $json->{ErrorInformation}) {
+      return { error => 1, message => $json->{ErrorInformation}{message} // "HTTP $code" };
+    }
+  }
+  return { error => 1, message => "HTTP $code: $body" };
 }
 
 
@@ -527,6 +569,42 @@ sub financialYears ($self) {
 sub accounts ($self) {
   $self->updateCache('Accounts') if (!exists($self->data->{Accounts}));
   return Mojo::Collection->new(@{ $self->data->{Accounts} });
+}
+
+
+# Determine Fortnox VAT type for a customer
+# Returns: 0=SEVAT, 1=SEREVERSEDVAT, 2=EUVAT, 3=EUREVERSEDVAT, 4=EXPORT
+sub vatType ($self, $customer) {
+  my $country = uc($customer->{billingcountry} // $customer->{country} // '');
+  my $has_vatno = ($customer->{vatno} && $customer->{vatno} ne '');
+
+  # EU member states (excluding Sweden)
+  # Special territories with own ISO codes:
+  #   AX = Åland (autonomous region of Finland)
+  #   GF = French Guiana, GP = Guadeloupe, MQ = Martinique, RE = Réunion, YT = Mayotte
+  #   MC = Monaco (uses French VAT system)
+  my %eu_countries = map { $_ => 1 } qw(
+    AT AX BE BG CY CZ DE DK EE ES FI FR GF GP GR HR HU IE IT LT LU LV MC MQ MT NL PL PT RE RO SI SK YT
+  );
+
+  if ($country eq 'SE') {
+    # Swedish customers - always SEVAT (normal VAT)
+    # SEREVERSEDVAT is only for construction industry reverse charge (set manually)
+    return 0;  # SEVAT
+  } elsif ($eu_countries{$country}) {
+    # EU customers (not Sweden) - reverse charge if they have VAT number
+    return $has_vatno ? 3 : 2;  # EUREVERSEDVAT or EUVAT
+  } else {
+    # Non-EU customers
+    return 4;  # EXPORT
+  }
+}
+
+
+# Get VAT type name from code
+sub vatTypeName ($self, $code) {
+  my @types = qw(SEVAT SEREVERSEDVAT EUVAT EUREVERSEDVAT EXPORT);
+  return $types[$code] // 'SEVAT';
 }
 
 
@@ -694,6 +772,35 @@ sub deleteCustomer ($self, $CustomerNumber) {
 }
 
 
+sub navCustomer ($self, $to = 'next', $CustomerNumber = '') {
+  return '' unless $CustomerNumber;
+
+  # Get cached customers or fetch if empty
+  my $list = $self->data->{Customers} // [];
+  $list = $self->updateCache('Customers') unless @$list;
+
+  # Find current position
+  my $idx;
+  for my $i (0 .. $#$list) {
+    if ($list->[$i]->{CustomerNumber} eq $CustomerNumber) {
+      $idx = $i;
+      last;
+    }
+  }
+
+  return '' unless defined $idx;
+
+  # Navigate (list is sorted by CustomerNumber ascending)
+  if ($to eq 'next' && $idx < $#$list) {
+    return $list->[$idx + 1]->{CustomerNumber};
+  } elsif ($to eq 'prev' && $idx > 0) {
+    return $list->[$idx - 1]->{CustomerNumber};
+  }
+
+  return '';
+}
+
+
 sub putCurrency ($self, $Currency, $data = {}) {
   my $result = $self->callAPI('Currencies', 'put', $Currency, $data);
   return $result;
@@ -733,21 +840,22 @@ sub postAccount ($self, $data = {}) {
 sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, page => 1}}) {
   # Hardcoded articles data (TODO: implement API/cache later)
   my $articles = [
-    { ArticleNumber => '3010', Description => 'Domäner, svensk moms', VAT => 25 },
-    { ArticleNumber => '3011', Description => 'Snapback, svensk moms', VAT => 25 },
-    { ArticleNumber => '3012', Description => 'Webhosting, svensk moms', VAT => 25 },
-    { ArticleNumber => '3013', Description => 'Konsultarbete, svensk moms', VAT => 25 },
+    { ArticleNumber => '3010', Description => 'Domäner' },
+    { ArticleNumber => '3011', Description => 'Snapback' },
+    { ArticleNumber => '3012', Description => 'Webhosting' },
+    { ArticleNumber => '3013', Description => 'Konsultarbete' },
+    { ArticleNumber => '3540', Description => 'Fakturaavgifter' },
+  ];
+=pod
     { ArticleNumber => '3110', Description => 'Domäner EU, momsfri', VAT => 0 },
     { ArticleNumber => '3111', Description => 'Snapback EU, momsfri', VAT => 0 },
     { ArticleNumber => '3112', Description => 'Webhosting EU, momsfri', VAT => 0 },
     { ArticleNumber => '3113', Description => 'Konsultarbete EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3210', Description => 'Domäner, ej EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3211', Description => 'Snapback, ej EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3212', Description => 'Webhosting, ej EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3213', Description => 'Konsultarbete, ej EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3540', Description => 'Fakturaavgifter', VAT => 25 },
-  ];
-
+    { ArticleNumber => '3210', Description => 'Domäner export, momsfri', VAT => 0 },
+    { ArticleNumber => '3211', Description => 'Snapback export, momsfri', VAT => 0 },
+    { ArticleNumber => '3212', Description => 'Webhosting export, momsfri', VAT => 0 },
+    { ArticleNumber => '3213', Description => 'Konsultarbete export, momsfri', VAT => 0 },
+=cut
   if ($ArticleNumber) {
     # Find specific article
     my ($article) = grep { $_->{ArticleNumber} eq $ArticleNumber } @$articles;

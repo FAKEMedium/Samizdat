@@ -7,6 +7,12 @@ async function loadCustomers() {
 
     const data = await response.json();
 
+    // Handle Fortnox auth redirect
+    if (response.status === 401 && data.auth_url) {
+      window.location.href = data.auth_url;
+      return;
+    }
+
     if (data.fortnox && data.fortnox.customers) {
       const customers = data.fortnox.customers || [];
       const tbody = document.querySelector('#customers tbody');
@@ -20,13 +26,14 @@ async function loadCustomers() {
         return 0;
       });
 
+      const customerUrlTemplate = "<%== url_for('Fortnox.customers.get', customerid => '_ID_') %>";
       customers.forEach(customer => {
         const customerNumber = customer.CustomerNumber || '';
         const name = customer.Name || '';
         const orgno = customer.OrganisationNumber || ''
         html += `
           <tr>
-            <td><a href="<%== url_for('fortnox_customer') %>/${customerNumber}">${customerNumber}</a></td>
+            <td><a href="${customerUrlTemplate.replace('_ID_', customerNumber)}">${customerNumber}</a></td>
             <td>${name}</td>
             <td class="text-end">${orgno}</td>
           </tr>

@@ -29,8 +29,9 @@ fetch(apiUrl, {
   currentDomain = data.domain;
   const domain = data.domain;
 
-  // Show edit button
+  // Show edit and renew buttons
   document.getElementById('editDomainBtn').style.display = 'inline-block';
+  document.getElementById('renewDomainBtn').style.display = 'inline-block';
 
   // Extract contact handles by role
   const adminContact = domain.contacts?.find(c => c.role === 'ADMIN');
@@ -325,6 +326,83 @@ function initContactAutocomplete() {
 
 // Initialize autocomplete when modal is shown
 document.getElementById('editDomainModal')?.addEventListener('shown.bs.modal', initContactAutocomplete);
+
+// Renew button click handler
+document.getElementById('renewDomainBtn').addEventListener('click', () => {
+  if (!currentDomain) return;
+
+  const modalDialog = document.getElementById('modalDialog');
+  const universalModal = new bootstrap.Modal('#universalmodal');
+
+  modalDialog.innerHTML = `
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Renew Domain') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><%== __('Renew') %> <strong>${currentDomain.domainName}</strong></p>
+        <p class="text-muted small"><%== __('Current expiry') %>: ${currentDomain.expiryDate || 'N/A'}</p>
+        <div class="mb-3">
+          <label for="renewPeriod" class="form-label"><%== __('Renewal period') %></label>
+          <select class="form-select" id="renewPeriod">
+% for my $m (12..23) {
+            <option value="<%= $m %>"<%= $m == 12 ? ' selected' : '' %>><%= $m %> <%== __('months') %></option>
+% }
+% for my $y (2..5) {
+            <option value="<%= $y * 12 %>"><%= $y %> <%== __('years') %></option>
+% }
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+        <button type="button" class="btn btn-primary" id="confirmRenewBtn">
+          <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+          <%== __('Renew') %>
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('confirmRenewBtn').addEventListener('click', async () => {
+    const btn = document.getElementById('confirmRenewBtn');
+    const spinner = btn.querySelector('.spinner-border');
+    const period = parseInt(document.getElementById('renewPeriod').value);
+
+    btn.disabled = true;
+    spinner.classList.remove('d-none');
+
+    try {
+      const response = await fetch(`${apiUrl}/renew`, {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({ period })
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        universalModal.hide();
+        window.location.reload();
+      } else {
+        alert(result.error || '<%== __('Failed to renew domain') %>');
+      }
+    } catch (error) {
+      console.error('Error renewing domain:', error);
+      alert('<%== __('Error renewing domain') %>');
+    } finally {
+      btn.disabled = false;
+      spinner.classList.add('d-none');
+    }
+  });
+
+  universalModal.show();
+});
 
 // Save domain changes
 document.getElementById('saveDomainBtn').addEventListener('click', async () => {

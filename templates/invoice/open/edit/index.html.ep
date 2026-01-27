@@ -13,7 +13,7 @@
           <th><%== __('Article') %></th>
           <th><%== __('Text') %></th>
           <th class="text-end px-2"><%== __('Qty') %></th>
-          <th class="text-end px-2"><%== __('Price') %></th>
+          <th class="text-end px-2" id="price-header"><%== __('Price') %></th>
           <th class="text-end px-2"><%== __('Net') %></th>
           <th class="text-end px-2"><%== __('Gross') %></th>
         </tr>

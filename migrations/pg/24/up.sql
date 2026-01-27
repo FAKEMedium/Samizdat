@@ -5,6 +5,9 @@
 
 SET search_path TO public,pg_catalog,web,account,customer,website,certificate;
 
+-- 0. Fix CHAR columns that pad with whitespace (should be VARCHAR)
+ALTER TABLE account.contacts ALTER COLUMN city TYPE varchar(63);
+
 -- 1. Create new schemas
 CREATE SCHEMA IF NOT EXISTS website;
 ALTER SCHEMA website OWNER TO samizdat;
