@@ -625,10 +625,25 @@ sub externalInvoice ($self, $DocumentNumber = 0) {
 
 
 sub creditInvoice ($self, $DocumentNumber = 0) {
+  say "Fortnox::creditInvoice called with DocumentNumber=$DocumentNumber";
   if ($DocumentNumber) {
     my $result = $self->callAPI('Invoices', 'put', $DocumentNumber, {}, 'credit');
+    if (ref($result) eq 'HASH') {
+      if ($result->{Invoice}) {
+        # The credit endpoint returns the ORIGINAL invoice (now credited)
+        # CreditInvoiceReference in the response points to the NEW credit invoice
+        my $credit_num = $result->{Invoice}->{CreditInvoiceReference};
+        say "Fortnox::creditInvoice: Original $DocumentNumber credited, credit invoice is $credit_num";
+        $result->{CreditInvoiceNumber} = $credit_num;
+        $result->{OriginalInvoiceNumber} = $DocumentNumber;
+      } else {
+        say "Fortnox::creditInvoice error: " . ($result->{ErrorInformation}->{message} // $result->{error} // 'unknown');
+      }
+    }
     return $result;
   }
+  say "Fortnox::creditInvoice called without DocumentNumber";
+  return;
 }
 
 
@@ -846,16 +861,6 @@ sub getArticle ($self, $ArticleNumber = 0, $options = {'qp' => {'limit' => 500, 
     { ArticleNumber => '3013', Description => 'Konsultarbete' },
     { ArticleNumber => '3540', Description => 'Fakturaavgifter' },
   ];
-=pod
-    { ArticleNumber => '3110', Description => 'Domäner EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3111', Description => 'Snapback EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3112', Description => 'Webhosting EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3113', Description => 'Konsultarbete EU, momsfri', VAT => 0 },
-    { ArticleNumber => '3210', Description => 'Domäner export, momsfri', VAT => 0 },
-    { ArticleNumber => '3211', Description => 'Snapback export, momsfri', VAT => 0 },
-    { ArticleNumber => '3212', Description => 'Webhosting export, momsfri', VAT => 0 },
-    { ArticleNumber => '3213', Description => 'Konsultarbete export, momsfri', VAT => 0 },
-=cut
   if ($ArticleNumber) {
     # Find specific article
     my ($article) = grep { $_->{ArticleNumber} eq $ArticleNumber } @$articles;

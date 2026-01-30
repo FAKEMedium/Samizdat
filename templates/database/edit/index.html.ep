@@ -1,0 +1,50 @@
+<form id="databaseForm" class="needs-validation" novalidate>
+  <input type="hidden" name="databaseid" id="databaseid">
+  <input type="hidden" name="customerid" id="customerid">
+
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label for="databasename" class="form-label"><%== __('Database name') %></label>
+      <input type="text" class="form-control" name="databasename" id="databasename" required>
+      <div class="invalid-feedback"><%== __('Database name is required') %></div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="databasetypeid" class="form-label"><%== __('Type') %></label>
+      <select class="form-select" name="databasetypeid" id="databasetypeid" required>
+        <!-- Options populated by JavaScript -->
+      </select>
+    </div>
+
+    <div class="col-md-6">
+      <label for="username" class="form-label"><%== __('Username') %></label>
+      <input type="text" class="form-control" name="username" id="username">
+    </div>
+
+    <div class="col-md-6">
+      <label for="password" class="form-label"><%== __('Password') %></label>
+      <div class="input-group">
+        <input type="password" class="form-control" name="password" id="password" autocomplete="new-password">
+        <button class="btn btn-outline-secondary" type="button" id="togglePassword" title="<%== __('Show/Hide') %>">
+          <%== icon 'eye', {} %>
+        </button>
+        <button class="btn btn-outline-secondary" type="button" id="generatePassword" title="<%== __('Generate') %>">
+          <%== icon 'shuffle', {} %>
+        </button>
+      </div>
+      <div class="form-text" id="passwordHint"></div>
+    </div>
+  </div>
+
+  <div class="mt-4 d-flex gap-2">
+    <button type="submit" class="btn btn-primary" id="submitBtn">
+      <%== icon 'check-lg', {} %> <span id="submitLabel"><%== __('Save') %></span>
+    </button>
+    <a href="<%== url_for('database_index') %>" class="btn btn-secondary">
+      <%== icon 'x-lg', {} %> <%== __('Cancel') %>
+    </a>
+    <button type="button" class="btn btn-danger ms-auto" id="deleteBtn" style="display: none;">
+      <%== icon 'trash', {} %> <%== __('Delete') %>
+    </button>
+  </div>
+</form>

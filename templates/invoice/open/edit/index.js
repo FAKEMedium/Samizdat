@@ -139,7 +139,7 @@ function populateForm(formdata, method) {
   document.querySelector('#customerlink').href = `<%== url_for('customer_index') %>/` + customer.customerid;
   // Update price header with currency
   const currency = (customer.currency || 'SEK').toUpperCase();
-  document.querySelector('#price-header').innerHTML = `<%== __('Price') %> (${currency})`;
+  document.querySelector('#price-header').innerHTML = `${currency}`;
 
   let invoice = formdata.invoice;
   document.querySelector('#invoiceid').value = invoice.invoiceid;

@@ -13,9 +13,14 @@ sub register ($self, $app, $conf) {
 
   # Cacheable HTML pages
   my $manager = $r->manager('databases')->to(controller => 'Database');
+  $manager->get('/new')                                      ->to('#add')       ->name('database_new');
+  $manager->get('/:databaseid/edit')                         ->to('#edit')      ->name('database_edit');
+  $manager->get('/:databaseid')                              ->to('#get')       ->name('database_get');
   $manager->get('/')                                         ->to('#index')     ->name('database_index');
 
   my $customers = $r->manager('customers/:customerid/databases')->to(controller => 'Database');
+  $customers->get('/new')                                    ->to('#add')       ->name('customer_database_new');
+  $customers->get('/:databasename/edit')                     ->to('#edit')      ->name('customer_database_edit');
   $customers->get('/:databasename')                          ->to('#get')       ->name('customer_database_get');
   $customers->get('/')                                       ->to('#index')     ->name('customer_databases');
 
@@ -75,6 +80,20 @@ paths:
               schema:
                 $ref: '#/components/schemas/Database_Database'
 
+  /databases/new:
+    get:
+      operationId: Database.new
+      x-mojo-to: Database#add
+      summary: New database form
+      tags: [Database]
+      responses:
+        '200':
+          description: Form data for new database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database_FormData'
+
   /databases/types:
     get:
       operationId: Database.types
@@ -88,6 +107,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Database_TypesResponse'
+
+  /databases/{databaseid}/edit:
+    get:
+      operationId: Database.edit
+      x-mojo-to: Database#edit
+      summary: Edit database form
+      tags: [Database]
+      parameters:
+        - name: databaseid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Form data for editing database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database_FormData'
 
   /databases/{databaseid}:
     get:
@@ -165,6 +204,51 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Database_ListResponse'
+
+  /customers/{customerid}/databases/new:
+    get:
+      operationId: Database.customer.new
+      x-mojo-to: Database#add
+      summary: New database form for customer
+      tags: [Database]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Form data for new database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database_FormData'
+
+  /customers/{customerid}/databases/{databasename}/edit:
+    get:
+      operationId: Database.customer.edit
+      x-mojo-to: Database#edit
+      summary: Edit database form for customer
+      tags: [Database]
+      parameters:
+        - name: customerid
+          in: path
+          required: true
+          schema:
+            type: integer
+        - name: databasename
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Form data for editing database
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Database_FormData'
 
   /customers/{customerid}/databases/{databasename}:
     get:
@@ -255,3 +339,19 @@ components:
                 type: integer
               databasetypename:
                 type: string
+    Database_FormData:
+      type: object
+      properties:
+        database:
+          $ref: '#/components/schemas/Database_Database'
+        types:
+          type: array
+          items:
+            type: object
+            properties:
+              databasetypeid:
+                type: integer
+              databasetypename:
+                type: string
+        customerid:
+          type: integer
