@@ -156,7 +156,17 @@ manager:
   website:
     cardnumber: 5
     dbtype: postgresql
-  database:
+    hooks:
+      precreate:
+      postcreate:
+        - echo "Website {domain} created for customer {customerid}"
+      preupdate:
+      postupdate:
+        - echo "Website {domain} updated for customer {customerid}"
+      predelete:
+      postdelete:
+        - echo "Website {domain} deleted for customer {customerid}"
+database:
     dbtype: postgresql
     cardnumber: 6
     phpmyadmin:

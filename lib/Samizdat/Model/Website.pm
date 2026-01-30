@@ -145,6 +145,18 @@ sub shells ($self) {
 
 sub add ($self, $website) {
   my $db = $self->pg->db;
+
+  # Prepare hook data
+  my $hook_data = {
+    customerid => $website->{customerid},
+    domain     => $website->{domainname} // '',
+    home       => $website->{home} // '',
+    serverid   => $website->{serverid} // '',
+  };
+
+  # Run pre-create hooks
+  $self->run_hooks('precreate', $hook_data);
+
   my $tx = $db->begin;
 
   my $result = $db->insert('website.websites', {
@@ -174,11 +186,19 @@ sub add ($self, $website) {
   }
 
   $tx->commit;
+
+  # Run post-create hooks
+  $hook_data->{websiteid} = $websiteid;
+  $self->run_hooks('postcreate', $hook_data);
+
   return $websiteid;
 }
 
 sub update ($self, $websiteid, $website) {
   my $db = $self->pg->db;
+
+  # Get existing website for hook data
+  my $existing = $self->get_by_id($websiteid);
 
   my $update = {};
   $update->{serverid}    = $website->{serverid} if exists $website->{serverid};
@@ -189,13 +209,52 @@ sub update ($self, $websiteid, $website) {
   $update->{redirecturl} = $website->{redirecturl} if exists $website->{redirecturl};
   $update->{active}      = $website->{active} if exists $website->{active};
 
-  return $db->update('website.websites', $update, { websiteid => $websiteid }) if %$update;
-  return 0;
+  return 0 unless %$update;
+
+  # Prepare hook data
+  my $hook_data = {
+    websiteid  => $websiteid,
+    customerid => $existing->{customerid} // '',
+    domain     => $existing->{domainname} // '',
+    home       => $existing->{home} // '',
+    serverid   => $website->{serverid} // $existing->{serverid} // '',
+  };
+
+  # Run pre-update hooks
+  $self->run_hooks('preupdate', $hook_data);
+
+  my $result = $db->update('website.websites', $update, { websiteid => $websiteid });
+
+  # Run post-update hooks
+  $self->run_hooks('postupdate', $hook_data);
+
+  return $result;
 }
 
 sub delete ($self, $websiteid) {
   my $db = $self->pg->db;
-  return $db->delete('website.websites', { websiteid => $websiteid });
+
+  # Get existing website for hook data
+  my $existing = $self->get_by_id($websiteid);
+
+  # Prepare hook data
+  my $hook_data = {
+    websiteid  => $websiteid,
+    customerid => $existing->{customerid} // '',
+    domain     => $existing->{domainname} // '',
+    home       => $existing->{home} // '',
+    serverid   => $existing->{serverid} // '',
+  };
+
+  # Run pre-delete hooks
+  $self->run_hooks('predelete', $hook_data);
+
+  my $result = $db->delete('website.websites', { websiteid => $websiteid });
+
+  # Run post-delete hooks
+  $self->run_hooks('postdelete', $hook_data);
+
+  return $result;
 }
 
 sub add_domain ($self, $domain) {
@@ -356,6 +415,37 @@ sub _ip_in_cidr ($self, $ip, $cidr, $is_ipv6) {
 
   # Compare masked addresses
   return ($ip_bin & $mask) eq ($net_bin & $mask);
+}
+
+
+# Run configured hooks for website lifecycle events
+# Hook types: precreate, postcreate, preupdate, postupdate, predelete, postdelete
+# Placeholders in commands: {customerid}, {domain}, {websiteid}, {home}, {serverid}
+sub run_hooks ($self, $hook_type, $data = {}) {
+  my $hooks = $self->config->{hooks} // {};
+  my $commands = $hooks->{$hook_type} // [];
+
+  return unless @$commands;
+
+  say "Website hooks [$hook_type]:";
+
+  for my $cmd (@$commands) {
+    # Substitute placeholders with actual values
+    my $expanded = $cmd;
+    for my $key (keys %$data) {
+      my $value = $data->{$key} // '';
+      $expanded =~ s/\{$key\}/$value/g;
+    }
+
+    # For now, just log the command (later: system() with suid wrapper)
+    say "  -> $expanded";
+
+    # TODO: Uncomment when ready to execute
+    # my $result = system($expanded);
+    # if ($result != 0) {
+    #   warn "Hook command failed: $expanded (exit code: $result)";
+    # }
+  }
 }
 
 1;

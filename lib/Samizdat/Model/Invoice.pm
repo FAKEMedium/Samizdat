@@ -256,7 +256,7 @@ sub addreminder ($self, $invoiceid =  0) {
 #   -  number
 #   -  include (0 = pass to new invoice,  > 0 means to include)
 # invoice has
-#   - totalcost (including vat, corrected for rounding off, 2 decimals for all currencies)
+#   - totalcost (including vat, corrected for rounding off, no decimals for sek, 2 decimals for eur)
 #   - vat (0 <= vat <= 1)
 #   - currency (sek or eur)
 sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
@@ -273,15 +273,39 @@ sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
     }
   }
 
-  # Rounding to 0.01 (2 decimals) for all currencies
-  # Note: Fortnox doesn't support per-currency rounding settings
+  # Rounding calculations based on currency
+  # SEK: Swedish rounding rules (öresavrundning) - round to whole number
+  # Other currencies: keep 2 decimals
   my $diff = 0;
-  my $totalcost = sprintf("%.2f", $vatcost + $net_amount);
+  my $totalcost = $vatcost + $net_amount;
+  if ($invoice_currency && $invoice_currency =~ /(sek)/i) {
+    # Swedish rounding rules - round to whole number
+    if ($totalcost =~ /(\d+)[\.]{1}(\d+)/) {
+      my $whole = $1;
+      my $decimal = $2;
+      if ($decimal =~ /^[5-9]/) {
+        $totalcost = $whole + 1.0;
+      } else {
+        $totalcost = $whole;
+      }
+    }
+  } else {
+    # EUR and other currencies - keep 2 decimals
+    $totalcost = sprintf("%.2f", $totalcost);
+  }
 
-  # Format diff
+  # Format diff (ensure dot decimal separator regardless of locale)
   $diff = sprintf("%.5f", $totalcost - $net_amount - $vatcost);
+  $diff =~ s/,/./;  # Convert comma to dot (Swedish locale)
   $diff =~ s/(\.\d*?)0+$/$1/;
   $diff =~ s/\.$//;
+
+  # Formatted diff for PDF display: 2 decimals, localized (comma for SEK)
+  my $diff_display = sprintf("%.2f", $diff + 0);
+  $diff_display =~ s/,/./;  # Ensure dot first
+  if ($invoice_currency && $invoice_currency =~ /sek/i) {
+    $diff_display =~ s/\./,/;  # Convert to comma for Swedish
+  }
 
   # Ensure amounts with exactly one decimal get a trailing zero
   $totalcost .= '0' if $totalcost =~ /^\d+\.\d$/;
@@ -295,7 +319,8 @@ sub calculate_amounts ($self, $invoiceitems, $invoice_vat, $invoice_currency) {
     vatcost => $vatcost,
     vat => $vat,
     vat_percent => $self->formatvat($vat),
-    diff => $diff
+    diff => $diff,
+    diff_display => $diff_display,  # Localized, 2 decimals for PDF
   };
 }
 

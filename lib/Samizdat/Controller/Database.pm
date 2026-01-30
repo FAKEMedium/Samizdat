@@ -56,6 +56,61 @@ sub get ($self) {
   }
 }
 
+sub add ($self) {
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $customerid = $self->param('customerid');
+
+  if ($accept !~ /json/) {
+    $self->stash(docpath => '/databases/edit/index.html');
+    my $title = $self->app->__('New Database');
+    my $web = { title => $title };
+    $web->{script} .= $self->render_to_string(template => 'database/edit/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'database/edit/index', status => 200);
+  } else {
+    return unless $self->access({ admin => 1 });
+
+    my $formdata = {
+      database   => { customerid => $customerid ? int($customerid) : undef },
+      types      => $self->app->database->get_types,
+      customerid => $customerid ? int($customerid) : undef,
+    };
+    return $self->render(json => $formdata);
+  }
+}
+
+sub edit ($self) {
+  my $accept = $self->req->headers->{headers}->{accept}->[0];
+  my $databaseid = $self->param('databaseid');
+  my $databasename = $self->param('databasename');
+  my $customerid = $self->param('customerid');
+
+  if ($accept !~ /json/) {
+    $self->stash(docpath => '/databases/edit/index.html');
+    my $title = $self->app->__('Edit Database');
+    my $web = { title => $title };
+    $web->{script} .= $self->render_to_string(template => 'database/edit/index', format => 'js');
+    return $self->render(web => $web, title => $title, template => 'database/edit/index', status => 200);
+  } else {
+    return unless $self->access({ admin => 1 });
+
+    my $params = {};
+    if ($databaseid) {
+      $params->{where} = { databaseid => int($databaseid) };
+    } elsif ($databasename) {
+      $params->{where} = { databasename => $databasename };
+      $params->{where}->{customerid} = int($customerid) if $customerid;
+    }
+
+    my $database = $self->app->database->get($params)->[0];
+    my $formdata = {
+      database   => $database,
+      types      => $self->app->database->get_types,
+      customerid => $database->{customerid},
+    };
+    return $self->render(json => $formdata);
+  }
+}
+
 sub create ($self) {
   return unless $self->access({ admin => 1 });
 
