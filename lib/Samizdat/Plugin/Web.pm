@@ -346,8 +346,9 @@ sub register ($self, $app, $conf) {
           my $font_src = $csp->{font_src} // "'self' data:";
           my $connect_src = $csp->{connect_src} // "'self'";
           my $frame_ancestors = $csp->{frame_ancestors} // "'none'";
+          my $frame_src = $csp->{frame_src} // "'self' blob:";
           # Meta tag policy (frame-ancestors not supported in meta)
-          my $csp_meta_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src";
+          my $csp_meta_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src; frame-src $frame_src";
           # Full policy for companion file (includes frame-ancestors)
           $csp_policy = "$csp_meta_policy; frame-ances tors $frame_ancestors";
           my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_meta_policy">};
