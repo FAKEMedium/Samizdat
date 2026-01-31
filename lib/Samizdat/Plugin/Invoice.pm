@@ -503,6 +503,42 @@ sub register ($self, $app, $conf) {
       # Get customer name
       $customer->{name} = $self->customer->name($customer);
 
+      # Check that customer exists in Fortnox before creating invoice
+      if ($is_create && !$is_credit && $self->app->renderer->helpers->{fortnox} && $self->app->config->{manager}->{invoice}->{usefortnox}) {
+        my $fortnox = $self->fortnox;
+        my $fortnox_customer = $fortnox->getCustomer($customerid);
+
+        # Check if customer exists in Fortnox
+        if (!$fortnox_customer || !ref($fortnox_customer) ||
+            $fortnox_customer->{error} ||
+            ($fortnox_customer->{code} && $fortnox_customer->{code} == 404) ||
+            !$fortnox_customer->{Customer}) {
+
+          $self->app->cache->del('invoice:create:lock') if $invoice_lock;
+
+          return {
+            error => $self->app->__x('Customer {id} not found in Fortnox. Create customer first.', id => $customerid),
+            status => 412,  # Precondition Failed
+            needs_customer_create => 1,
+            customerid => $customerid,
+            customer_data => {
+              customerid   => $customer->{customerid},
+              name         => $customer->{name},
+              company      => $customer->{company},
+              firstname    => $customer->{firstname},
+              lastname     => $customer->{lastname},
+              email        => $customer->{billingemail} // $customer->{email},
+              address      => $customer->{billingaddress} // $customer->{address},
+              city         => $customer->{billingcity} // $customer->{city},
+              zip          => $customer->{billingzip} // $customer->{zip},
+              country      => $customer->{billingcountry} // $customer->{country},
+              vatno        => $customer->{vatno},
+              currency     => $customer->{currency},
+            }
+          };
+        }
+      }
+
       # Get invoice items
       my $invoiceitems = $self->invoice->invoiceitems({
         where => { 'invoice.invoiceid' => $invoice->{invoiceid} }
