@@ -102,7 +102,6 @@ sub _get_pg ($self, $where, $limit) {
       l.code AS lang,
       o.orgno,
       o.vatno,
-      o.moss,
       s.currencyid,
       cur.symbol AS currency,
       s.period,
@@ -199,7 +198,6 @@ sub _add_pg ($self, $customer) {
         orgno   => $customer->{orgno},
         country => $countryid,
         vatno   => $customer->{vatno},
-        moss    => $customer->{moss} ? 1 : 0,
       }, { returning => 'orgnoid' })->hash->{orgnoid};
     }
   }

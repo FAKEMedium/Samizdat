@@ -7,7 +7,7 @@ use Data::Dumper;
 my $scriptname = 'customers';
 my $fields = [qw(customerid company firstname lastname address zip city contactemail country orgno phone1 phone2 freetext)];
 push @{$fields}, qw(reference recommendedby period currency invoicetype lang trust vatno vat);
-my $checkfields = [qw(newsletter moss active)];
+my $checkfields = [qw(newsletter active)];
 my $setfields = [qw(created creator updated updater)];
 
 sub index ($self) {
