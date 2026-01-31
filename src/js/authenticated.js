@@ -582,8 +582,9 @@ if (theContent && editButton) {
 }
 
 // Service Worker registration for caching dynamic routes
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/assets/sw.js', { scope: '/' })
+const swUrl = document.body.dataset.swUrl;
+if ('serviceWorker' in navigator && swUrl) {
+    navigator.serviceWorker.register(swUrl, { scope: '/' })
         .then(registration => {
             console.log('Service Worker registered:', registration.scope);
 

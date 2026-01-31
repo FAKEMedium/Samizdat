@@ -50,7 +50,7 @@ sub index($self) {
       my $value = $self->cache->get($key);
 
       # Truncate long values for display
-      my $preview = ref($value) ? encode_json($value) : $value;
+      my $preview = ref($value) ? encode_json($value) : ($value // '');
       if (length($preview) > 100) {
         $preview = substr($preview, 0, 100) . '...';
       }
