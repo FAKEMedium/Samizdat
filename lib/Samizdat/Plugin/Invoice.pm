@@ -763,8 +763,9 @@ sub register ($self, $app, $conf) {
             }
 
             # Add roundoff row if there's a rounding difference (öresavrundning)
-            # Fortnox doesn't have a RoundOff field in request - must use invoice row
-            if ($diff_amount) {
+            # Only for SEK - EUR keeps 2 decimals, no rounding needed
+            my $is_sek = ($invoice->{currency} // 'SEK') =~ /sek/i;
+            if ($is_sek && $diff_amount) {
               push @{$fortnox_payload->{Invoice}->{InvoiceRows}}, {
                 ArticleNumber     => '3740',  # Öresavrundning article
                 Description       => 'Öresavrundning',
