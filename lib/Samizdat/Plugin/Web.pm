@@ -49,7 +49,7 @@ sub register ($self, $app, $conf) {
   $web->get('humans.txt')                  ->to('#humans',    docpath => 'humans.txt');
   $web->get('ads.txt')                     ->to('#ads',       docpath => 'ads.txt');
   $web->get('sw-routes.json')              ->to('#sw_routes', docpath => undef)->name('sw_routes');
-  $web->get('assets/sw.js')                ->to('#sw_js',     docpath => 'assets/sw.js')->name('sw_js');
+  $web->get('sw.js')                        ->to('#sw_js',     docpath => 'sw.js')->name('sw_js');
 
   # Home page route - specific route here, wildcard catch-all registered separately in Samizdat.pm
   # after OpenAPI routes to ensure proper route priority
@@ -628,7 +628,7 @@ supports compression, without needing to compress on-the-fly.
 
 =head2 Service Worker
 
-The Service Worker at C</assets/sw.js> provides client-side caching for
+The Service Worker at C</sw.js> provides client-side caching for
 dynamic routes. It requires the C<Service-Worker-Allowed: /> header to
 control the entire site (service workers normally only control paths at
 or below their location).
@@ -638,7 +638,7 @@ controller always handles requests and adds the required header.
 
 B<Production (nginx)>: Serve the cached file directly with the required header:
 
-    location = /assets/sw.js {
+    location = /sw.js {
         add_header Service-Worker-Allowed /;
         add_header Cache-Control "no-cache";
     }
@@ -664,7 +664,7 @@ allowing conditional requests (304 Not Modified).
         }
 
         # Service Worker - requires special header for root scope
-        location = /assets/sw.js {
+        location = /sw.js {
             add_header Service-Worker-Allowed /;
             add_header Cache-Control "no-cache";
         }
