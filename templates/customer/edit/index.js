@@ -425,7 +425,7 @@ function populateForm(formdata, method) {
     }
     snippet += `
                 <tr data-invoiceid="${invoice.invoiceid}">
-                  <td><a href="<%== config->{siteurl} %>/invoice/${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
+                  <td><a href="<%== config->{manager}->{invoice}->{invoiceurl} %>${invoice.uuid}.pdf"><%== icon 'file-pdf' %></a></td>
                   <td><a class="w-auto" href="<%== url_for('customer_index') %>/${customer.customerid}/invoices/${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
                   <td>${invoice.invoicedate.substring(10, 0)}</td>
                   <td class="text-end">${invoice.totalcost}</td>

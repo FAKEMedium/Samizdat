@@ -574,25 +574,34 @@ sub accounts ($self) {
 
 # Determine Fortnox VAT type for a customer
 # Returns: 0=SEVAT, 1=SEREVERSEDVAT, 2=EUVAT, 3=EUREVERSEDVAT, 4=EXPORT
+# Reference: https://www.momsens.se/vilka-omraden-ingar-i-eus-momsomrade
 sub vatType ($self, $customer) {
   my $country = uc($customer->{billingcountry} // $customer->{country} // '');
   my $has_vatno = ($customer->{vatno} && $customer->{vatno} ne '');
 
-  # EU member states (excluding Sweden)
-  # Special territories with own ISO codes:
-  #   AX = Åland (autonomous region of Finland)
-  #   GF = French Guiana, GP = Guadeloupe, MQ = Martinique, RE = Réunion, YT = Mayotte
-  #   MC = Monaco (uses French VAT system)
-  my %eu_countries = map { $_ => 1 } qw(
-    AT AX BE BG CY CZ DE DK EE ES FI FR GF GP GR HR HU IE IT LT LU LV MC MQ MT NL PL PT RE RO SI SK YT
+  # EU VAT area member states (excluding Sweden)
+  # Includes: MC (Monaco - uses French VAT system)
+  # Excludes territories with own ISO codes outside EU VAT area:
+  #   AX (Åland), GF (French Guiana), GP (Guadeloupe), MQ (Martinique),
+  #   RE (Réunion), YT (Mayotte), IC (Canary Islands), EA (Ceuta/Melilla)
+  my %eu_vat_countries = map { $_ => 1 } qw(
+    AT BE BG CY CZ DE DK EE ES FI FR GR HR HU IE IT LT LU LV MC MT NL PL PT RO SI SK
+  );
+
+  # Territories outside EU VAT area (with own ISO codes) - treated as EXPORT
+  my %non_vat_territories = map { $_ => 1 } qw(
+    AX GF GP MQ RE YT IC EA
   );
 
   if ($country eq 'SE') {
     # Swedish customers - always SEVAT (normal VAT)
     # SEREVERSEDVAT is only for construction industry reverse charge (set manually)
     return 0;  # SEVAT
-  } elsif ($eu_countries{$country}) {
-    # EU customers (not Sweden) - reverse charge if they have VAT number
+  } elsif ($non_vat_territories{$country}) {
+    # EU territory but outside VAT area - treat as export
+    return 4;  # EXPORT
+  } elsif ($eu_vat_countries{$country}) {
+    # EU VAT area customers - reverse charge if they have VAT number
     return $has_vatno ? 3 : 2;  # EUREVERSEDVAT or EUVAT
   } else {
     # Non-EU customers
