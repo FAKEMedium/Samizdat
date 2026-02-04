@@ -787,8 +787,8 @@ sub register ($self, $app, $conf) {
               $diff_amount
             ));
 
-            # Add invoice rows
-            for my $itemid (keys %$invoiceitems) {
+            # Add invoice rows (sorted alphabetically by description)
+            for my $itemid (sort { ($invoiceitems->{$a}->{invoiceitemtext} // '') cmp ($invoiceitems->{$b}->{invoiceitemtext} // '') } keys %$invoiceitems) {
               my $item = $invoiceitems->{$itemid};
               push @{$fortnox_payload->{Invoice}->{InvoiceRows}}, {
                 ArticleNumber     => $item->{articlenumber},
