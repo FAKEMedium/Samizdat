@@ -294,10 +294,10 @@ sub getMenu ($self, $id_or_name) {
 }
 
 # Add a new menu
-sub addMenu ($self, $name, $webserviceid = 1) {
+sub addMenu ($self, $name, $websiteid = 1) {
   my $result = $self->database->db->insert('web.menus', {
     name => $name,
-    webserviceid => $webserviceid
+    websiteid => $websiteid
   }, { returning => 'menuid' });
   return $result->hash->{menuid};
 }
@@ -966,7 +966,7 @@ sub save_content ($self, $params) {
   } else {
     # Insert new resource
     my $result = $self->database->db->query(
-      'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, webserviceid)
+      'INSERT INTO web.resources (alias, src, content, owner, creator, publisher, languageid, contenttype, templateid, websiteid)
        VALUES (?, ?, ?, ?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
       $alias, $markdown_src, $content, $user_id, $user_id, $user_id, $language_id
     );
@@ -1529,7 +1529,7 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
   # Get all sidecards connected to main resource in default language
   my $default_sidecards = $self->database->db->query(
     'SELECT r.src, r.content, r.owner, r.creator, r.publisher,
-            r.contenttype, r.templateid, r.webserviceid
+            r.contenttype, r.templateid, r.websiteid
      FROM web.resources r
      JOIN web.resourceconnections rc ON r.resourceid = rc.child
      WHERE rc.parent = ? AND r.languageid = ?',
@@ -1552,7 +1552,7 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
       # Clone the sidecard resource for target language with correct src
       my $new_resource = $self->database->db->query(
         'INSERT INTO web.resources (alias, src, content, owner, creator, publisher,
-                                   languageid, contenttype, templateid, webserviceid)
+                                   languageid, contenttype, templateid, websiteid)
          VALUES (\'\', ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING resourceid',
         $target_src,
         $default_sidecard->{content},
@@ -1562,7 +1562,7 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
         $target_language_id,
         $default_sidecard->{contenttype},
         $default_sidecard->{templateid},
-        $default_sidecard->{webserviceid}
+        $default_sidecard->{websiteid}
       );
 
       my $new_resource_id = $new_resource->hash->{resourceid};
@@ -1768,7 +1768,7 @@ sub _create_content ($self, $src_public, $filename, $alias, $content, $language,
     # Insert new resource
     eval {
       $self->database->db->query(
-        'INSERT INTO web.resources (alias, src, content, languageid, contenttype, templateid, webserviceid)
+        'INSERT INTO web.resources (alias, src, content, languageid, contenttype, templateid, websiteid)
          VALUES (?, ?, ?, ?, 1, 1, 1) RETURNING resourceid',
         $alias, $filename, $content, $language_id
       );

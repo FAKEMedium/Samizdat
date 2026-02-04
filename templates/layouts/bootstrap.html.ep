@@ -84,7 +84,7 @@
       <section class="container px-0">
         <div class="row">
           <%== limiter 'start' %>
-          <div class="col-sm-8<%== exists($web->{editable}) ? ' editable' : '' %>" id="thecontent"<%== $web->{editable} ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{editable}) ? ' data-save="/web/src"' : '' %><%== exists($web->{editable}) ? sprintf(' data-source="%s"', url_for('web_source_root')) : '' %><%== exists($web->{editable}) ? sprintf(' data-new="%s"', url_for('web_new')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
+          <div class="col-sm-8<%== exists($web->{editable}) ? ' editable' : '' %>" id="thecontent"<%== $web->{editable} ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{editable}) ? sprintf(' data-save="%sweb/src"', config->{api}->{url}) : '' %><%== exists($web->{editable}) ? sprintf(' data-source="%s"', url_for('web_source_root')) : '' %><%== exists($web->{editable}) ? sprintf(' data-new="%s"', url_for('web_new')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
             <%== web->indent(eval {trim content}, 6) =%>
           </div>
           <%== limiter 'end' %>
@@ -97,7 +97,7 @@
       </section>
 % } else {
       <%== limiter 'start' %>
-      <section class="container px-0<%= eval { return $web->{editable} ? ' editable' : ''; } %>" id="thecontent"<%== exists($web->{editable}) ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{editable}) ? ' data-save="/web/src"' : '' %><%== exists($web->{editable}) ? sprintf(' data-source="%s"', url_for('web_source_root')) : '' %><%== exists($web->{editable}) ? sprintf(' data-new="%s"', url_for('web_new')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
+      <section class="container px-0<%= eval { return $web->{editable} ? ' editable' : ''; } %>" id="thecontent"<%== exists($web->{editable}) ? sprintf(' data-toolbar="%s"', url_for('web_editor_toolbar')) : '' %><%== exists($web->{editable}) ? sprintf(' data-save="%sweb/src"', config->{api}->{url}) : '' %><%== exists($web->{editable}) ? sprintf(' data-source="%s"', url_for('web_source_root')) : '' %><%== exists($web->{editable}) ? sprintf(' data-new="%s"', url_for('web_new')) : '' %><%== exists($web->{src}) ? sprintf(' data-src="%s"', $web->{src}) : '' %>>
         <%== web->indent(eval {trim content}, 4) =%>
       </section>
       <%== limiter 'end' %>

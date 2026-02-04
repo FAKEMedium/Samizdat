@@ -406,12 +406,12 @@ async function handleSave(target = 'file') {
     const saveUrlBase = theContent?.dataset.save;
     if (!saveUrlBase) {
         alert('Save URL not found');
-        return;
+        return false;
     }
 
     if (!window.toastUIMarkdown) {
         alert('Editor not initialized');
-        return;
+        return false;
     }
 
     const editorData = window.toastUIMarkdown.getContent(true);
@@ -436,12 +436,15 @@ async function handleSave(target = 'file') {
         if (result.success) {
             console.log(`Content saved to ${target} successfully, reloading page...`);
             window.location.reload();
+            return true;
         } else {
             alert('Failed to save: ' + result.error);
+            return false;
         }
     } catch (error) {
         console.error('Save error:', error);
         alert('Failed to save content. Please try again.');
+        return false;
     }
 }
 
@@ -536,8 +539,8 @@ if (theContent && editButton) {
     if (saveButton) {
         saveButton.addEventListener('click', async () => {
             const target = saveButton.dataset.target || 'file';
-            await handleSave(target);
-            hideSaveUI();
+            const success = await handleSave(target);
+            if (success) hideSaveUI();
         });
     }
 
@@ -553,8 +556,8 @@ if (theContent && editButton) {
                     saveButton.dataset.target = target;
                 }
                 // Perform save with selected target
-                await handleSave(target);
-                hideSaveUI();
+                const success = await handleSave(target);
+                if (success) hideSaveUI();
             });
         });
     }
