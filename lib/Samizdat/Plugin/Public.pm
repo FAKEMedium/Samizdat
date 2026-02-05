@@ -14,6 +14,7 @@ sub register ($self, $app, $conf) {
   $r->get('/country')->to(controller => 'Public', action => 'countries');
   $r->get('/country/#country')->to(controller => 'Public', action => 'country');
   $r->get('/countries.json')->to(controller => 'Public', action => 'countries_json')->name('countries_json');
+  $r->get('/states/#cc')   ->to(controller => 'Public', action => 'states_json')   ->name('public_states');
 
   # Store some data in the app
   $app->{countries} = { translations => {}, countrydata => {}, reverse => {} };

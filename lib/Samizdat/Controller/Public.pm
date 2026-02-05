@@ -23,6 +23,14 @@ sub countries_json ($self) {
 }
 
 
+sub states_json ($self) {
+  my $cc = $self->stash('cc');
+  my $languageid = $self->public->languages->{$self->app->language} // 1;
+  my $states = $self->public->getStates($cc, $languageid);
+  $self->render(json => { states => $states });
+}
+
+
 sub country ($self) {
   my $country = $self->stash('country');
   my $docpath = 'country/' . $country;

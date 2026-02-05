@@ -71,6 +71,18 @@ Returns arrayref of hashrefs with 'code' and 'name' keys.
 
 =cut
 
+sub getStates ($self, $cc, $languageid = 1) {
+  my $sql = q{
+    SELECT s.stateid, s.code, sn.statename
+    FROM public.states s
+    JOIN public.countries c ON s.countryid = c.countryid
+    LEFT JOIN public.statenames sn ON s.stateid = sn.stateid AND sn.languageid = ?
+    WHERE c.cc = ?
+    ORDER BY sn.statename
+  };
+  return $self->pg->db->query($sql, $languageid, uc $cc)->hashes->to_array;
+}
+
 sub countries ($self, $options = {}) {
   my $display_languageid = $options->{languageid} // 1;
 

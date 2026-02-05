@@ -7,7 +7,7 @@
   <%== __('By default no information about you is shared.') %>
 </div>
 
-<form action="<%= url_for('account_register') %>" id="dataform" method="post">
+<form action="<%= url_for('Account.register') %>" id="dataform" method="post">
   <input type="hidden" name="not_empty" id="not_empty" value="Aecoh9rit2cah">
   <div class="alert alert-light" role="alert" id="registrationalert"></div>
 

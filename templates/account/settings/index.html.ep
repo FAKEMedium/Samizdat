@@ -1,86 +1,124 @@
-<form id="profileForm" class="row g-3">
-  <!-- Basic Information -->
-  <div class="col-12">
-    <h3><%= __('Basic Information') %></h3>
-  </div>
-  
+<form id="profileForm" class="row">
   <div class="col-md-6">
-    <label for="displayname" class="form-label"><%= __('Display Name') %></label>
-    <input type="text" class="form-control" id="displayname" name="basic[displayname]">
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="givenname" name="contacts[givenname]" />
+          <label for="givenname"><%== __('First name') %></label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="commonname" name="contacts[commonname]" />
+          <label for="commonname"><%== __('Last name') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="displayname" name="contacts[displayname]" readonly />
+          <label for="displayname"><%== __('Display name') %></label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="organization" name="contacts[organization]" />
+          <label for="organization"><%== __('Organization') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="email" class="form-control" id="email" name="contacts[email]" />
+      <label for="email"><%== __('Email') %></label>
+    </div>
+    <div class="form-floating mb-2">
+      <textarea rows="2" style="height: 70px;" class="form-control" id="address" name="contacts[address]"></textarea>
+      <label for="address"><%== __('Address') %></label>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-4">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="pc" name="contacts[pc]" />
+          <label for="pc"><%== __('Postal code') %></label>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="form-floating">
+          <input type="text" class="form-control" id="city" name="contacts[city]" />
+          <label for="city"><%== __('City') %></label>
+        </div>
+      </div>
+    </div>
   </div>
-  
   <div class="col-md-6">
-    <label for="email" class="form-label"><%= __('Email') %></label>
-    <input type="email" class="form-control" id="email" name="basic[email]">
-  </div>
-
-  <!-- Contact Information -->
-  <div class="col-12">
-    <h3><%= __('Contact Information') %></h3>
-  </div>
-  
-  <div class="col-md-6">
-    <label for="phone" class="form-label"><%= __('Phone') %></label>
-    <input type="tel" class="form-control" id="phone" name="contacts[phone]">
-  </div>
-  
-  <div class="col-md-6">
-    <label for="website" class="form-label"><%= __('Website') %></label>
-    <input type="url" class="form-control" id="website" name="contacts[website]">
-  </div>
-  
-  <div class="col-12">
-    <label for="bio" class="form-label"><%= __('Bio') %></label>
-    <textarea class="form-control" id="bio" name="contacts[bio]" rows="3"></textarea>
-  </div>
-
-  <!-- Presentation Settings -->
-  <div class="col-12">
-    <h3><%= __('Presentation') %></h3>
-  </div>
-  
-  <div class="col-md-6">
-    <label for="theme" class="form-label"><%= __('Theme') %></label>
-    <select class="form-select" id="theme" name="presentations[theme]">
-      <option value="default"><%= __('Default') %></option>
-      <option value="dark"><%= __('Dark') %></option>
-      <option value="light"><%= __('Light') %></option>
-    </select>
-  </div>
-  
-  <div class="col-md-6">
-    <label for="language" class="form-label"><%= __('Preferred Language') %></label>
-    <select class="form-select" id="language" name="presentations[language]">
-      <% if (config->{locale}->{languages} && ref(config->{locale}->{languages}) eq 'ARRAY') { %>
-        <% for my $lang (@{config->{locale}->{languages}}) { %>
-        <option value="<%== $lang %>"><%= __($lang) %></option>
-        <% } %>
-      <% } else { %>
-        <option value="en">English</option>
-        <option value="sv">Svenska</option>
-      <% } %>
-    </select>
-  </div>
-
-  <!-- Profile Image -->
-  <div class="col-12">
-    <h3><%= __('Profile Image') %></h3>
-  </div>
-  
-  <div class="col-12">
-    <label for="profileImage" class="form-label"><%= __('Upload Profile Image') %></label>
-    <input type="file" class="form-control" id="profileImage" accept="image/*">
-    <div class="form-text"><%= __('Supported formats: JPG, PNG, WebP. Max size: 2MB') %></div>
-  </div>
-  
-  <div class="col-12" id="currentImagePreview">
-    <!-- Current image will be shown here -->
-  </div>
-
-  <!-- Save Button -->
-  <div class="col-12">
-    <button type="submit" class="btn btn-primary"><%= __('Save Settings') %></button>
-    <button type="button" class="btn btn-secondary" id="cancelSettings"><%= __('Cancel') %></button>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="tel" class="form-control" id="telephone" name="contacts[telephone]" />
+          <label for="telephone"><%== __('Telephone') %></label>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-floating">
+          <input type="tel" class="form-control" id="mobile" name="contacts[mobile]" />
+          <label for="mobile"><%== __('Mobile') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="url" class="form-control" id="website" name="contacts[website]" placeholder="https://example.com" pattern="https?://.+\..+" />
+      <label for="website"><%== __('Website') %></label>
+    </div>
+    <div class="form-floating mb-2">
+      <input type="date" class="form-control" id="dob" name="contacts[dob]" />
+      <label for="dob"><%== __('Date of birth') %></label>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-8">
+        <div class="form-floating">
+          <select id="country" name="contacts[country]" class="form-select">
+            <option value=""><%== __('Select country') %></option>
+% my $countries = countrylist;
+% for my $cc (sort { $countries->{$a} cmp $countries->{$b} } keys %{ $countries }) {
+            <option value="<%= $cc %>"><%= $countries->{$cc} %></option>
+% }
+          </select>
+          <label for="country"><%== __('Country') %></label>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="form-floating">
+          <select id="language" name="contacts[language]" class="form-select">
+            <option value=""><%== __('Language') %></option>
+% if (config->{locale}->{languages} && ref(config->{locale}->{languages}) eq 'HASH') {
+%   for my $lang (sort keys %{config->{locale}->{languages}}) {
+            <option value="<%== $lang %>"><%== __($lang) %></option>
+%   }
+% }
+          </select>
+          <label for="language"><%== __('Language') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2 d-none" id="staterow">
+      <div class="col-12">
+        <div class="form-floating">
+          <select id="stateid" name="contacts[stateid]" class="form-select">
+            <option value=""><%== __('Select state') %></option>
+          </select>
+          <label for="stateid"><%== __('State') %></label>
+        </div>
+      </div>
+    </div>
+    <div class="row gx-2 gy-2 gap-0 mb-2">
+      <div class="col-md-6">
+        <button type="submit" class="btn btn-primary form-control"><%== __('Save') %></button>
+      </div>
+      <div class="col-md-6">
+        <button type="button" class="btn btn-secondary form-control" id="cancelSettings"><%== __('Cancel') %></button>
+      </div>
+    </div>
   </div>
 </form>
 

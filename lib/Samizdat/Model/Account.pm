@@ -59,7 +59,7 @@ sub addUser ($self, $username, $attribs = {}) {
       if ($contactid =~ /^\d+$/ && $contactid > 0) {
         # Create password record first (new schema: users reference passwords)
         $passwordid = $db->insert('account.passwords',
-          {},
+          { changed => \'NOW()' },
           { returning => 'passwordid' }
         )->hash->{passwordid};
 
@@ -418,11 +418,17 @@ sub getLoginFailures ($self, $ip) {
 sub get_profile ($self, $userid) {
   my $db = $self->database->db;
 
-  # Get basic user info
+  # Get user with contacts, country code and language code
   my $user;
   eval {
     $user = $db->query(
-      'SELECT userid, username, displayname, email FROM account.users WHERE userid = ?',
+      'SELECT u.userid, u.username, u.contactid,
+              c.*, co.cc AS country_cc, l.code AS language_code
+       FROM account.users u
+       LEFT JOIN account.contacts c ON u.contactid = c.contactid
+       LEFT JOIN public.countries co ON c.countryid = co.countryid
+       LEFT JOIN public.languages l ON c.languageid = l.languageid
+       WHERE u.userid = ?',
       $userid
     )->hash;
   };
@@ -431,66 +437,26 @@ sub get_profile ($self, $userid) {
     return {};
   }
 
-  # Get contacts data
-  my $contacts = {};
-  eval {
-    my $contact_data = $db->query(
-      'SELECT * FROM account.contacts WHERE userid = ?',
-      $userid
-    )->hash;
-    $contacts = $contact_data || {};
-  };
-
-  # Get presentations data (one per language)
-  my $presentations = {};
-  my $fallback_presentation = undef;
-  eval {
-    my $presentation_data = $db->query(
-      'SELECT * FROM account.presentations WHERE userid = ?',
-      $userid
-    )->hashes;
-    if ($presentation_data && @$presentation_data) {
-      for my $pres (@$presentation_data) {
-        # Index by language code for easy access
-        if ($pres->{lang}) {
-          $presentations->{$pres->{lang}} = $pres;
-          # Keep first presentation as fallback for missing languages
-          $fallback_presentation //= $pres;
-        }
-      }
-    }
-  };
-
-  # Store fallback for use when a specific language variant is missing
-  if ($fallback_presentation) {
-    $presentations->{_fallback} = $fallback_presentation;
-  }
-
-  # Get images data
-  my $images = {};
-  eval {
-    my $image_data = $db->query(
-      'SELECT * FROM account.images WHERE userid = ?',
-      $userid
-    )->hashes;
-    if ($image_data) {
-      for my $img (@$image_data) {
-        $images->{$img->{imageid}} = $img;
-      }
-    }
-  };
-
-  # Organize profile data by sections
   my $profile = {
-    basic => {
-      userid => $user->{userid},
-      username => $user->{username},
-      displayname => $user->{displayname} || '',
-      email => $user->{email} || ''
-    },
-    contacts => $contacts,
-    presentations => $presentations,
-    images => $images
+    contacts => {
+      givenname    => $user->{givenname} // '',
+      commonname   => $user->{commonname} // '',
+      displayname  => $user->{displayname} // '',
+      email        => $user->{email} // '',
+      organization => $user->{organization} // '',
+      address      => $user->{address} // '',
+      pc           => $user->{pc} // '',
+      city         => $user->{city} // '',
+      telephone    => $user->{telephone} // '',
+      mobile       => $user->{mobile} // '',
+      website      => $user->{website} // '',
+      dob          => $user->{dob} // '',
+      countryid    => $user->{countryid},
+      country_cc   => $user->{country_cc} // '',
+      languageid   => $user->{languageid},
+      language_code => $user->{language_code} // '',
+      stateid      => $user->{stateid},
+    }
   };
 
   return $profile;
@@ -529,104 +495,83 @@ sub get_presentation_for_language ($self, $userid, $lang) {
 # Update user profile data
 sub update_profile ($self, $userid, $profile_data) {
   my $db = $self->database->db;
-  
+
   my $tx = $db->begin;
-  
+
+  # Look up contactid for this user
+  my $user = $db->query('SELECT contactid FROM account.users WHERE userid = ?', $userid)->hash;
+  my $contactid = $user->{contactid} if $user;
+
   eval {
-    # Update basic user info if provided
-    if (exists $profile_data->{basic}) {
-      my $basic = $profile_data->{basic};
+    # Update contacts data
+    if (exists $profile_data->{contacts} && $contactid) {
+      my $contacts = $profile_data->{contacts};
       my @updates;
       my @values;
-      
-      for my $field (qw(displayname email)) {
-        if (defined $basic->{$field}) {
+
+      # Direct text fields
+      for my $field (qw(givenname commonname email organization address pc city telephone mobile website)) {
+        if (exists $contacts->{$field}) {
           push @updates, "$field = ?";
-          push @values, $basic->{$field};
+          push @values, $contacts->{$field} // '';
         }
       }
-      
+
+      # Auto-compute displayname from givenname + commonname
+      my $given = $contacts->{givenname} // '';
+      my $common = $contacts->{commonname} // '';
+      my $display = join(' ', grep { length } $given, $common);
+      push @updates, "displayname = ?";
+      push @values, $display;
+
+      # Date of birth
+      if (exists $contacts->{dob}) {
+        push @updates, "dob = ?";
+        my $dob = $contacts->{dob};
+        push @values, (defined $dob && length $dob) ? $dob : undef;
+      }
+
+      # Resolve country alpha2 code to countryid
+      if (exists $contacts->{country}) {
+        my $cc = $contacts->{country};
+        if (defined $cc && length $cc) {
+          my $row = $db->query('SELECT countryid FROM public.countries WHERE cc = ?', uc $cc)->hash;
+          push @updates, "countryid = ?";
+          push @values, $row ? $row->{countryid} : undef;
+        } else {
+          push @updates, "countryid = ?";
+          push @values, undef;
+        }
+      }
+
+      # Resolve language code to languageid
+      if (exists $contacts->{language}) {
+        my $code = $contacts->{language};
+        if (defined $code && length $code) {
+          my $row = $db->query('SELECT languageid FROM public.languages WHERE code = ?', $code)->hash;
+          push @updates, "languageid = ?";
+          push @values, $row ? $row->{languageid} : undef;
+        } else {
+          push @updates, "languageid = ?";
+          push @values, undef;
+        }
+      }
+
+      # State (direct stateid)
+      if (exists $contacts->{stateid}) {
+        push @updates, "stateid = ?";
+        my $stateid = $contacts->{stateid};
+        push @values, (defined $stateid && length $stateid) ? $stateid : undef;
+      }
+
       if (@updates) {
-        push @values, $userid;
+        push @values, $contactid;
         $db->query(
-          "UPDATE account.users SET " . join(', ', @updates) . " WHERE userid = ?",
+          "UPDATE account.contacts SET " . join(', ', @updates) . " WHERE contactid = ?",
           @values
         );
       }
     }
-    
-    # Update contacts data
-    if (exists $profile_data->{contacts}) {
-      my $contacts = $profile_data->{contacts};
-      # Check if contact record exists
-      my $existing = $db->query('SELECT userid FROM account.contacts WHERE userid = ?', $userid)->hash;
-
-      if ($existing) {
-        # Update existing contact
-        my @fields = grep { exists $contacts->{$_} } qw(phone mobile address city zip country);
-        if (@fields) {
-          my @updates = map { "$_ = ?" } @fields;
-          my @values = map { $contacts->{$_} } @fields;
-          push @values, $userid;
-          $db->query(
-            "UPDATE account.contacts SET " . join(', ', @updates) . " WHERE userid = ?",
-            @values
-          );
-        }
-      } elsif (keys %$contacts) {
-        # Insert new contact record
-        $contacts->{userid} = $userid;
-        my @fields = keys %$contacts;
-        my @placeholders = map { '?' } @fields;
-        my @values = map { $contacts->{$_} } @fields;
-        $db->query(
-          "INSERT INTO account.contacts (" . join(', ', @fields) . ") VALUES (" . join(', ', @placeholders) . ")",
-          @values
-        );
-      }
-    }
-
-    # Update presentations data (one per language)
-    if (exists $profile_data->{presentations}) {
-      my $presentations = $profile_data->{presentations};
-
-      for my $lang (keys %$presentations) {
-        my $pres_data = $presentations->{$lang};
-
-        # Check if presentation exists for this user and language
-        my $existing = $db->query(
-          'SELECT presentationid FROM account.presentations WHERE userid = ? AND lang = ?',
-          $userid, $lang
-        )->hash;
-
-        if ($existing) {
-          # Update existing presentation
-          my @fields = grep { exists $pres_data->{$_} && $_ ne 'presentationid' && $_ ne 'userid' && $_ ne 'lang' } keys %$pres_data;
-          if (@fields) {
-            my @updates = map { "$_ = ?" } @fields;
-            my @values = map { $pres_data->{$_} } @fields;
-            push @values, $userid, $lang;
-            $db->query(
-              "UPDATE account.presentations SET " . join(', ', @updates) . " WHERE userid = ? AND lang = ?",
-              @values
-            );
-          }
-        } elsif (keys %$pres_data) {
-          # Insert new presentation
-          $pres_data->{userid} = $userid;
-          $pres_data->{lang} = $lang;
-          my @fields = grep { defined $pres_data->{$_} } keys %$pres_data;
-          my @placeholders = map { '?' } @fields;
-          my @values = map { $pres_data->{$_} } @fields;
-          $db->query(
-            "INSERT INTO account.presentations (" . join(', ', @fields) . ") VALUES (" . join(', ', @placeholders) . ")",
-            @values
-          );
-        }
-      }
-    }
-
-    # TODO: Handle images table when its structure is known
 
     $tx->commit;
   };

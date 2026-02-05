@@ -141,6 +141,18 @@ __DATA__
 # OpenAPI 3.0 fragment for Account API
 paths:
   /account/register:
+    get:
+      operationId: Account.register.get
+      x-mojo-to: Account#register
+      summary: Get registration form data
+      tags: [Account]
+      responses:
+        '200':
+          description: Form data including IP and admin mode
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account_Result'
     post:
       operationId: Account.register
       x-mojo-to: Account#register

@@ -317,6 +317,7 @@ sub register ($self) {
           $formdata->{success} = 0;
           $formdata->{error} = { reason => 'username' };
           my $error_msg = $self->app->account->last_error // '';
+          $self->app->log->error("addUser failed for '$formdata->{newusername}': $error_msg");
           if ($error_msg =~ /username_uq/i) {
             $errors->{newusername} = $self->app->__('Username already exists');
           } else {
@@ -554,9 +555,10 @@ sub settings ($self) {
         }
       }
 
-      # Include username for display
+      # Include username and session language for display
       $profile->{basic} //= {};
       $profile->{basic}{username} //= $user->{username};
+      $profile->{language} = $self->language;
 
       return $self->render(json => {
         success => 1,
@@ -590,6 +592,15 @@ sub update_profile ($self) {
     return $self->render(json => {
       success => 0,
       error => 'Invalid JSON data'
+    }, status => 400);
+  }
+
+  # Validate website URL format: empty or http(s)://
+  my $website = $profile_data->{contacts}{website} // '';
+  if (length $website && $website !~ m{^https?://.+\..+}) {
+    return $self->render(json => {
+      success => 0,
+      error => 'Website must start with http:// or https://'
     }, status => 400);
   }
 
