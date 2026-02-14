@@ -33,19 +33,10 @@ async function handleConfirmation() {
   }
 }
 
-// Show success message
+// Show success message and redirect to settings (triggers login modal)
 function showSuccess(message) {
-  const content = document.querySelector('#thecontent');
-  if (content) {
-    content.innerHTML = `
-      <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading"><%== __('Email Confirmed!') %></h4>
-        <p>${message}</p>
-        <hr>
-        <p class="mb-0"><%== __('You can now log in to your account.') %></p>
-      </div>
-    `;
-  }
+  alert(message + '\n\n' + '<%== __('You can now log in to your account.') %>');
+  window.location.href = '<%= url_for("account_settings") %>';
 }
 
 // Show error message in form or content area
