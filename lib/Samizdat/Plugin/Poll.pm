@@ -13,7 +13,7 @@ sub register ($self, $app, $conf) {
 
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('poll')->to(controller => 'Poll');
-  $manager->get('/')                                     ->to('#manager')         ->name('poll_manager');
+  $manager->get('/')                                     ->to('#index')           ->name('poll_manager');
 
   # Public routes (HTML pages)
   my $polls = $r->home('poll')->to(controller => 'Poll');
@@ -70,6 +70,8 @@ confirmation via email, and live signature display via WebSocket.
 
 =over 4
 
+=item * GET /api/poll - List polls
+
 =item * POST /api/poll/sign - Submit poll signature
 
 =item * GET /api/poll/:pollid - Get poll information
@@ -119,6 +121,25 @@ __DATA__
 @@ openapi.yaml
 # OpenAPI 3.0 fragment for Poll API
 paths:
+  /poll:
+    get:
+      operationId: Poll.index
+      x-mojo-to: Poll#index
+      summary: List polls
+      tags: [Poll]
+      parameters:
+        - name: searchterm
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of polls
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Poll_ListResponse'
+
   /poll/sign:
     post:
       operationId: Poll.sign
@@ -289,6 +310,15 @@ components:
             $ref: '#/components/schemas/Poll_Signer'
         total:
           type: integer
+    Poll_ListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        polls:
+          type: array
+          items:
+            $ref: '#/components/schemas/Poll_Poll'
     Poll_Result:
       type: object
       properties:
