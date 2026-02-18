@@ -1,12 +1,8 @@
 // Toast UI Editor with GFM Markdown support
 // Markdown-only editing of complete documents
 
-console.log('Toast UI Editor module loading...');
-
 import '@toast-ui/editor/dist/toastui-editor.css';
 import { Editor } from '@toast-ui/editor';
-
-console.log('Toast UI imports loaded successfully');
 
 // Expose Editor class globally for other components (e.g., reminder modal)
 window.toastui = window.toastui || {};
@@ -168,8 +164,6 @@ class ToastUIMarkdownManager {
       sourceUrl = baseSourceUrl + currentPath;
     }
 
-    console.log(`ToastUI: Fetching source from ${sourceUrl}`);
-
     try {
       const response = await fetch(sourceUrl, {
         method: 'GET',
@@ -184,7 +178,6 @@ class ToastUIMarkdownManager {
 
       const data = await response.json();
       if (data.success) {
-        console.log('ToastUI: Source content loaded:', data);
         return data.content;
       } else {
         console.warn('ToastUI: Source API returned error:', data.error);
@@ -314,10 +307,6 @@ class ToastUIMarkdownManager {
       }
     }
 
-    if (!markdown) {
-      console.log(`ToastUI: No markdown source for ${editorId}`);
-    }
-
     // Clear element and create editor container
     element.innerHTML = '';
     const editorContainer = document.createElement('div');
@@ -363,8 +352,6 @@ class ToastUIMarkdownManager {
 
     const editor = new Editor(editorConfig);
     this.editors.set(element, editor);
-
-    console.log(`ToastUI: Editor created for ${editorId}`);
     return editor;
   }
 
@@ -402,7 +389,6 @@ class ToastUIMarkdownManager {
 // Create global instance
 try {
   window.toastUIMarkdown = new ToastUIMarkdownManager();
-  console.log('Toast UI markdown manager created:', window.toastUIMarkdown);
 } catch (e) {
   console.error('Failed to create Toast UI markdown manager:', e);
 }
@@ -438,5 +424,3 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-
-console.log('Toast UI Markdown editor loaded');

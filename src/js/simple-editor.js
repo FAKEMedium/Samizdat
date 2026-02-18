@@ -115,7 +115,6 @@ window.createSimpleEditor = function(content, index) {
     content.addEventListener('click', () => {
         if (content.contentEditable === 'true') {
             window.currentEditor = editor;
-            console.log(`Switched to editor for element ${index}`);
         }
     });
     
@@ -124,8 +123,6 @@ window.createSimpleEditor = function(content, index) {
 
 // Initialize simple editors for all .editable elements
 window.initSimpleEditors = function() {
-    console.log('Starting simple editor initialization...');
-    
     try {
         const theContent = document.getElementById('thecontent');
         if (!theContent) {
@@ -135,13 +132,11 @@ window.initSimpleEditors = function() {
         
         // Check if #thecontent is editable - if not, don't initialize any editors
         if (!theContent.classList.contains('editable')) {
-            console.log('#thecontent is not editable, skipping editor initialization');
             return null;
         }
         
         // #thecontent is editable, so find all .editable elements to make them editable too
         const editableElements = document.querySelectorAll('.editable');
-        console.log(`#thecontent is editable, found ${editableElements.length} total .editable elements:`, editableElements);
         
         const editors = [];
         
@@ -150,8 +145,6 @@ window.initSimpleEditors = function() {
             const editor = window.createSimpleEditor(content, index);
             editors.push(editor);
         });
-        
-        console.log(`${editors.length} simple contenteditable editors initialized`);
         
         // Set up global editor reference (first one by default)
         window.currentEditor = editors[0];

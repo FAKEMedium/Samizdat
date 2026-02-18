@@ -1,3 +1,6 @@
+<div id="noservices" class="mb-3">
+  <%== __('No services available') %>
+</div>
 <div class="row row-cols-1 row-cols-sm-3 row-cols-md-4 g-4 gy-5">
   <%== web->indent($web->{main}, 1) =%>
 </div>
