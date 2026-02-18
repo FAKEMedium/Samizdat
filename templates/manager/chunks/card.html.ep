@@ -1,5 +1,6 @@
-<div class="col cardcol" id="cardcol-<%== $service %>">
-  <div class="card">
+<div class="col cardcol d-none" id="cardcol-<%== $service %>">
+  <div class="card position-relative">
+    <span class="position-absolute top-0 end-0 translate-middle badge rounded-pill bg-danger" id="badge-<%== $service %>">0</span>
     <h5 class="card-header orange border-0"><%== $service %></h5>
     <div class="card-body m-0 p-2">
       <%== web->indent($cardcontent, 3) =%>

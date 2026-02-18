@@ -162,7 +162,6 @@ window.setupSimpleToolbar = async function() {
         let toolbarElement = document.getElementById('simpleToolbar');
         if (toolbarElement) {
             toolbarElement.style.display = 'block';
-            console.log('Simple toolbar already exists, showing it');
             return;
         }
         
@@ -203,7 +202,8 @@ window.setupSimpleToolbar = async function() {
                         movedCount++;
                     }
                 });
-                console.log(`Moved ${movedCount} unique SVG symbols to main defs`);
+
+
             }
             
             // Setup toolbar button handlers
@@ -233,7 +233,6 @@ window.setupSimpleToolbar = async function() {
             makeDraggable(toolbarElement, toolbarElement.querySelector('#toolbarHandle'));
             
             window.simpleToolbar = { element: toolbarElement };
-            console.log('Simple toolbar loaded and shown');
         }
     } catch (error) {
         console.error('Failed to setup simple toolbar:', error);
@@ -319,7 +318,7 @@ function handleToolbarCommand(element) {
             }
             break;
         default:
-            console.log('Unknown command:', cmd);
+            break;
     }
     
     // Keep focus on editor
@@ -328,8 +327,6 @@ function handleToolbarCommand(element) {
 
 // Initialize page editor - dynamically load toastui.js when needed
 window.initPageEditor = async function() {
-    console.log('Loading Toast UI markdown editor...');
-
     try {
         // Load toastui.js if not already loaded
         if (!window.toastUIMarkdown) {
@@ -363,9 +360,6 @@ const headlinenav = document.getElementById('headlinenav');
 
 // Store original headlinenav content
 let originalHeadlinenavContent = null;
-
-console.log('theContent found:', theContent);
-console.log('editButton found:', editButton);
 
 /**
  * Create the editor toolbar HTML to replace headlinenav content
@@ -415,7 +409,6 @@ async function handleSave(target = 'file') {
     }
 
     const editorData = window.toastUIMarkdown.getContent(true);
-    console.log(`Saving markdown content to ${target}:`, editorData);
 
     // Build URL with encoded path
     const encodedPath = encodeSrcPath(currentPath);
@@ -434,7 +427,6 @@ async function handleSave(target = 'file') {
 
         const result = await response.json();
         if (result.success) {
-            console.log(`Content saved to ${target} successfully, reloading page...`);
             window.location.reload();
             return true;
         } else {
@@ -454,7 +446,6 @@ async function handleSave(target = 'file') {
 function handleCancel() {
     if (window.toastUIMarkdown) {
         window.toastUIMarkdown.exitEditMode(false);
-        console.log('Edit cancelled, content reverted');
     }
     restoreHeadlinenav();
 }
@@ -466,7 +457,6 @@ function restoreHeadlinenav() {
     if (headlinenav && originalHeadlinenavContent !== null) {
         headlinenav.innerHTML = originalHeadlinenavContent;
         originalHeadlinenavContent = null;
-        console.log('Headlinenav restored');
     }
 }
 
@@ -508,12 +498,8 @@ if (theContent && editButton) {
 
     // Handle edit button click
     editButton.addEventListener('click', async () => {
-        console.log('Edit button clicked!');
-
         try {
-            // Initialize Toast UI editors if not already done
             if (!window.toastUIMarkdown?.isEditMode) {
-                console.log('Initializing Toast UI markdown editor...');
                 await window.initPageEditor();
             }
 
@@ -525,15 +511,11 @@ if (theContent && editButton) {
                 originalHeadlinenavContent = headlinenav.innerHTML;
                 headlinenav.innerHTML = createEditorToolbar();
                 setupEditorToolbarHandlers();
-                console.log('Headlinenav replaced with mode toggler');
             }
-
-            console.log('Toast UI edit mode enabled');
         } catch (error) {
             console.error('Error in edit button handler:', error);
         }
     });
-    console.log('Edit button click handler attached');
 
     // Handle save button click (main button)
     if (saveButton) {
@@ -589,8 +571,6 @@ const swUrl = document.body.dataset.swUrl;
 if ('serviceWorker' in navigator && swUrl) {
     navigator.serviceWorker.register(swUrl, { scope: '/' })
         .then(registration => {
-            console.log('Service Worker registered:', registration.scope);
-
             // Check for updates periodically
             setInterval(() => {
                 registration.update();
@@ -602,8 +582,6 @@ if ('serviceWorker' in navigator && swUrl) {
 
     // Listen for SW updates
     navigator.serviceWorker.addEventListener('controllerchange', () => {
-        console.log('Service Worker updated, reloading...');
-        // Optionally reload to get fresh content
         // window.location.reload();
     });
 }

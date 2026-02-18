@@ -1,8 +1,6 @@
 // TipTap editor with Markdown support
 // Entry point for markdown-based editing
 
-console.log('TipTap module loading...');
-
 import { Editor } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import Image from '@tiptap/extension-image'
@@ -10,8 +8,6 @@ import { TableKit } from '@tiptap/extension-table'
 
 // Markdown serialization support
 import { Markdown } from 'tiptap-markdown'
-
-console.log('TipTap imports loaded successfully');
 
 /**
  * TipTap Markdown Editor Manager
@@ -45,8 +41,6 @@ class TipTapMarkdownManager {
       sourceUrl = baseSourceUrl + currentPath;
     }
 
-    console.log(`TipTap: Fetching source from ${sourceUrl}`);
-
     try {
       const response = await fetch(sourceUrl, {
         method: 'GET',
@@ -61,7 +55,6 @@ class TipTapMarkdownManager {
 
       const data = await response.json();
       if (data.success) {
-        console.log('TipTap: Source content loaded:', data);
         return data.content;
       } else {
         console.warn('TipTap: Source API returned error:', data.error);
@@ -83,7 +76,6 @@ class TipTapMarkdownManager {
     this.sourceData = await this.fetchSourceContent();
 
     const editables = document.querySelectorAll('.editable');
-    console.log(`TipTap: Entering edit mode, found ${editables.length} editable elements`);
 
     editables.forEach((element, index) => {
       this.createEditor(element, index);
@@ -148,16 +140,12 @@ class TipTapMarkdownManager {
       const cardContainer = element.closest('[data-src]');
       if (cardContainer) {
         const dataSrc = cardContainer.dataset.src;
-        console.log(`TipTap: Looking for sidecard with src="${dataSrc}" for element "${elementId}"`);
 
         for (const card of this.sourceData.sidecards) {
           if (card.src === dataSrc) {
-            // Check if we want title or content based on element ID suffix
             if (elementId.endsWith('-title')) {
-              console.log(`TipTap: Found sidecard title for ${dataSrc}`);
               return card.title || '';
             } else {
-              console.log(`TipTap: Found sidecard content for ${dataSrc}`);
               return card.content || '';
             }
           }
@@ -213,9 +201,6 @@ class TipTapMarkdownManager {
     if (!hasMarkdownSource) {
       // Fall back to element's HTML if no markdown source available
       content = element.innerHTML;
-      console.log(`TipTap: No markdown source for ${elementId}, using HTML`);
-    } else {
-      console.log(`TipTap: Using markdown source for ${elementId}`);
     }
 
     // Clear the element before creating editor to prevent duplication
@@ -244,8 +229,6 @@ class TipTapMarkdownManager {
         }
       },
       onCreate: ({ editor }) => {
-        console.log(`TipTap: Editor created for ${elementId}`);
-        // Set content after editor is ready
         if (content) {
           try {
             if (isTitle) {
@@ -257,9 +240,7 @@ class TipTapMarkdownManager {
               const parsedContent = editor.storage.markdown.parser.parse(content);
               editor.commands.setContent(parsedContent, false);
             }
-            console.log(`TipTap: Content set for ${elementId}`);
           } catch (e) {
-            console.error(`TipTap: Failed to set content for ${elementId}:`, e);
             editor.commands.setContent(content);
           }
         }
@@ -384,7 +365,6 @@ class TipTapMarkdownManager {
 // Create global instance immediately
 try {
   window.tiptapMarkdown = new TipTapMarkdownManager();
-  console.log('TipTap markdown manager created:', window.tiptapMarkdown);
 } catch (e) {
   console.error('Failed to create TipTap markdown manager:', e);
 }
@@ -422,5 +402,3 @@ style.textContent = `
   }
 `;
 document.head.appendChild(style);
-
-console.log('TipTap Markdown editor loaded');
