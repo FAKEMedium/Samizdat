@@ -8,4 +8,4 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="#" id="purgeCache"><%== __('Purge') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="#" id="purgeCache"><%== __('Purge') %></a>

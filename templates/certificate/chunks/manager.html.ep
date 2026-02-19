@@ -8,6 +8,6 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('certificate_new') %>"><%== __('Add certificate') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('certificate_expiring') %>"><%== __('Expiring') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('certificate_renew') %>"><%== __('Renew') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('certificate_new') %>"><%== __('Add certificate') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('certificate_expiring') %>"><%== __('Expiring') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('certificate_renew') %>"><%== __('Renew') %></a>

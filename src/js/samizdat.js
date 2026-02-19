@@ -11,7 +11,8 @@ import './apidom.js';
 import '@site/js/local.js';
 import './serviceworker.js';
 import './language.js';
-import { displayname, username, superadmin, messages, email, cartcount, userid } from './user.js';
+import { displayname, username, superadmin, admin, messages, email, cartcount, userid } from './user.js';
+Object.assign(window, { displayname, username, superadmin, admin, messages, email, cartcount, userid });
 
 if (username !== '') {
   // Load authenticated CSS if not already loaded

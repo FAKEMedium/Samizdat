@@ -8,7 +8,7 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="#" data-modal-url="<%== url_for('web_new') %>"><%== __('Add content') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('web_src_root') %>"><%== __('Source files') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('web_menus') %>"><%== __('Menus') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('web_languages') %>"><%== __('Languages') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="#" data-modal-url="<%== url_for('web_new') %>"><%== __('Add content') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('web_src_root') %>"><%== __('Source files') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('web_menus') %>"><%== __('Menus') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('web_languages') %>"><%== __('Languages') %></a>
