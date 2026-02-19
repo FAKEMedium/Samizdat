@@ -8,7 +8,7 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for('database_new') %>"><%== __('Add database') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('database_new') %>"><%== __('Add database') %></a>
 % if (config->{manager}->{database}->{phpmyadmin}->{url}) {
 <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{database}->{phpmyadmin}->{url} %>">PhpMyAdmin</a>
 % }

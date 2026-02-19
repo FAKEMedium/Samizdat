@@ -8,5 +8,4 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>websites/add"><%== __('Add website') %></a>
-<a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>web"><%== __('Site content') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for('website_new') %>"><%== __('Add website') %></a>

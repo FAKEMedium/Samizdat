@@ -23,6 +23,6 @@
     </div>
   </div>
 </form>
-<a id="newDomainBtn" class="badge rounded-pill text-bg-primary"><%== __('Add domain') %></a>
-<a id="newAdminBtn" class="badge rounded-pill text-bg-primary"><%== __('Add admin') %></a>
+<a id="newDomainBtn" class="badge rounded-pill text-bg-primary admin"><%== __('Add domain') %></a>
+<a id="newAdminBtn" class="badge rounded-pill text-bg-primary admin"><%== __('Add admin') %></a>
 <a id="logBtn" class="badge rounded-pill text-bg-primary" href="<%== url_for('email_log') %>"><%== __('Log') %></a>

@@ -5,6 +5,7 @@ export let username = "";
 export let displayname = "";
 export let messages = 0;
 export let superadmin = 0;
+export let admin = 0;
 export let email = "";
 export let cartcount = 0;
 
@@ -20,6 +21,7 @@ export function checkUsername() {
         email = u.e;
         displayname = u.d ? u.d : username;
         superadmin = u.s;
+        admin = u.a;
         cartcount = parseInt(u.b);
         if ("" !== username) {
             document.querySelectorAll(".auth").forEach(el => { el.classList.toggle("d-none") });

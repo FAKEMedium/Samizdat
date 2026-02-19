@@ -8,4 +8,4 @@
     </div>
   </div>
 </form>
-<a class="badge rounded-pill text-bg-primary" href="<%== url_for("poll_index") %>/add"><%== __('Add poll') %></a>
+<a class="badge rounded-pill text-bg-primary admin" href="<%== url_for("poll_index") %>/add"><%== __('Add poll') %></a>
