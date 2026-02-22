@@ -347,12 +347,8 @@ sub register ($self, $app, $conf) {
           my $connect_src = $csp->{connect_src} // "'self'";
           my $frame_ancestors = $csp->{frame_ancestors} // "'none'";
           my $frame_src = $csp->{frame_src} // "'self' blob:";
-          # Meta tag policy (frame-ancestors not supported in meta)
-          my $csp_meta_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src; frame-src $frame_src";
-          # Full policy for companion file (includes frame-ancestors)
-          $csp_policy = "$csp_meta_policy; frame-ances tors $frame_ancestors";
-          my $csp_meta = qq{<meta http-equiv="Content-Security-Policy" content="$csp_meta_policy">};
-          $$output =~ s{(</head>)}{  $csp_meta\n  $1};
+          # CSP policy for companion .csp file (OpenResty sets this as HTTP header via Lua)
+          $csp_policy = "default-src $default_src; script-src $script_src; style-src $style_src; img-src $img_src; font-src $font_src; connect-src $connect_src; frame-src $frame_src; frame-ancestors $frame_ancestors";
         }
         $c->app->web->tidyup($output);
         if ($c->config->{cache} && $docpath ne '') {
@@ -633,10 +629,14 @@ dynamic routes. It requires the C<Service-Worker-Allowed: /> header to
 control the entire site (service workers normally only control paths at
 or below their location).
 
+Run C<bin/samizdat makeswcache> to generate C<public/sw.js> and
+C<public/sw-routes.json> as static files for nginx. Both files are
+placed under C<public/{baseurl}> to match route configuration.
+
 B<Development (morbo)>: Routes are matched before static files, so the
 controller always handles requests and adds the required header.
 
-B<Production (nginx)>: Serve the cached file directly with the required header:
+B<Production (nginx)>: Serve the static file with the required header:
 
     location = /sw.js {
         add_header Service-Worker-Allowed /;

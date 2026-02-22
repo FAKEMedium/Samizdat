@@ -2,8 +2,11 @@
 const swUrl = document.body?.dataset?.swUrl;
 if ('serviceWorker' in navigator && swUrl) {
     navigator.serviceWorker
-        .register(swUrl)
+        .register(swUrl, { scope: '/' })
         .then(function (reg) {
             // console.log('Service worker registration successful');
+        })
+        .catch(function (err) {
+            console.error('Service worker registration failed:', err);
         });
 }
