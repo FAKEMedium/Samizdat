@@ -121,10 +121,10 @@ test: clean
 	ls -las public/test
 
 zip:
-	find public/assets -type f -name "*.css" -exec gzip -f -k -9 {} \;
-	find public/assets -type f -name "*.js" -exec gzip -f -k -9 {} \;
-	find public/assets -type f -name "*.css" -exec brotli -f -k -q 11 {} \;
-	find public/assets -type f -name "*.js" -exec brotli -f -k -q 11 {} \;
+	find public -type f -name "*.css" -exec gzip -f -k -9 {} \;
+	find public -type f -name "*.js" -exec gzip -f -k -9 {} \;
+	find public -type f -name "*.css" -exec brotli -f -k -q 11 {} \;
+	find public -type f -name "*.js" -exec brotli -f -k -q 11 {} \;
 
 database:
 #	sudo -u postgres -i env PGHOST=/var/run/postgresql createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
