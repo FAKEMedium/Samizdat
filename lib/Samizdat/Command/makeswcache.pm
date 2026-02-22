@@ -25,8 +25,9 @@ sub run ($self, @args) {
   my $languages = $config->{locale}->{languages} || { en => {} };
   my $default_lang = $config->{locale}->{default_language} || 'en';
 
-  # Generate sw-routes.json
-  $self->generate_routes_json($routes, $manager_url, $default_lang, $sw_config);
+  # Generate sw.js and sw-routes.json as static files
+  $self->generate_sw_js($config);
+  $self->generate_routes_json($config, $routes, $manager_url, $default_lang, $sw_config);
 
   # Generate cached HTML for each route and language
   for my $route (@$routes) {
@@ -64,7 +65,20 @@ sub run ($self, @args) {
   say "Service Worker cache generation complete.";
 }
 
-sub generate_routes_json ($self, $routes, $manager_url, $default_lang, $sw_config) {
+sub generate_sw_js ($self, $config) {
+  my $baseurl = $config->{baseurl} || '/';
+  $baseurl =~ s|^/||;  # Remove leading slash for public/ path
+
+  # sw.js is now plain JavaScript (no EP template syntax), so just copy it
+  my $src = $self->app->home->child('templates/sw.js');
+  my $dest_dir = $baseurl ? path("public/$baseurl") : path('public');
+  $dest_dir->make_path;
+  my $dest = $dest_dir->child('sw.js');
+  $dest->spew($src->slurp);
+  say "Generated $dest";
+}
+
+sub generate_routes_json ($self, $config, $routes, $manager_url, $default_lang, $sw_config) {
   my @processed_routes;
 
   for my $route (@$routes) {
@@ -89,9 +103,14 @@ sub generate_routes_json ($self, $routes, $manager_url, $default_lang, $sw_confi
     version         => $sw_config->{version} || 1,
   });
 
-  my $file = path('public/sw-routes.json');
+  # Place sw-routes.json next to sw.js (same baseurl path)
+  my $baseurl = $config->{baseurl} || '/';
+  $baseurl =~ s|^/||;
+  my $dest_dir = $baseurl ? path("public/$baseurl") : path('public');
+  $dest_dir->make_path;
+  my $file = $dest_dir->child('sw-routes.json');
   $file->spew($json);
-  say "Generated public/sw-routes.json";
+  say "Generated $file";
 }
 
 sub derive_sample_url ($self, $route, $manager_url) {
@@ -153,10 +172,11 @@ Samizdat::Command::makeswcache - Generate Service Worker cache files
   Usage: bin/samizdat makeswcache
 
   Generates:
+  - public/sw.js - Service Worker script (from templates/sw.js)
   - public/sw-routes.json - Route configuration
   - Cached HTML files for all configured routes and languages
 
-  Note: sw.js is rendered dynamically from templates/sw.js
+  Files are placed under public/{baseurl} to match route configuration.
 
 =head1 DESCRIPTION
 

@@ -7,12 +7,12 @@
  * Features:
  * - Maps dynamic URLs (e.g., /rs/web/menus/123) to static cache files
  * - Cookie-based language support
- * - Automatic cache versioning
+ * - Automatic cache versioning from config
  * - Offline support for cached pages
  */
 
-const CACHE_NAME = 'samizdat-v<%= $version %>';
-const CONFIG_URL = '/sw-routes.json';
+let CACHE_NAME = 'samizdat-v1';
+const CONFIG_URL = new URL('sw-routes.json', self.location.href).href;
 
 // Route patterns loaded from config
 let routePatterns = [];
@@ -39,7 +39,7 @@ self.addEventListener('activate', (event) => {
     Promise.all([
       // Clean old cache versions
       caches.keys().then(keys => Promise.all(
-        keys.filter(key => key !== CACHE_NAME)
+        keys.filter(key => key.startsWith('samizdat-') && key !== CACHE_NAME)
             .map(key => caches.delete(key))
       )),
       // Take control of all clients immediately
@@ -103,13 +103,24 @@ async function loadConfig() {
     if (!response.ok) throw new Error(`Config fetch failed: ${response.status}`);
 
     const config = await response.json();
+
+    // Update cache name from config version
+    if (config.version) {
+      const newCacheName = 'samizdat-v' + config.version;
+      if (newCacheName !== CACHE_NAME) {
+        // Clean up old cache
+        caches.delete(CACHE_NAME);
+        CACHE_NAME = newCacheName;
+      }
+    }
+
     routePatterns = (config.routes || []).map(route => ({
       ...route,
       regex: new RegExp(route.pattern)
     }));
     defaultLanguage = config.defaultLanguage || 'en';
 
-    console.log(`[SW] Loaded ${routePatterns.length} route patterns`);
+    console.log(`[SW] Loaded ${routePatterns.length} route patterns (${CACHE_NAME})`);
 
     // Pre-cache specified files if any
     if (config.precache && config.precache.length > 0) {

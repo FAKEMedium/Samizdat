@@ -59,9 +59,7 @@ $grid-breakpoints: (
 @import "bootstrap/scss/utilities/api";
 
 // Custom styles
-.bg-menubar {
-  background-color: #f3f3f3;
-}
+.bg-menubar { background-color: #f3f3f3;}
 .byline {background: #ffe;}
 .orange, .orange > th, .orange > td {background: #ecc562 !important;}
 .admin {box-shadow: 0px 0px 4px 1px red;}
@@ -85,16 +83,18 @@ table.captiontop caption {font-weight:bold;caption-side:top !important;}
 }
 @media screen and (min-height:768px){#contentwrapper{min-height:600px}}
 @media screen and (min-width: 1200px) {
-  #rightlinks {position: absolute !important;display: inline-block;right: -120px;top: -42px;width: 100px;}
-  #leftlinks {position: absolute !important;display: inline-block;left: -120px;top: -5px;width: 100px !important;text-align: right;}
-  #rightlinks img, #leftlinks img {width: 100px;display: block;margin: 10px 0px;}
+  #rightlinks, #leftlinks {
+    position: absolute !important;display: inline-block; width: 100px;
+    img {width: 100px;display: block;margin: 10px 0px;}
+  }
+  #rightlinks {right: -120px;top: -42px; text-align: left;}
+  #leftlinks {left: -120px; top: -5px; text-align: right;}
 }
 @media print {
+  * {box-shadow: none !important;text-decoration: none !important;}
   a {color: #000; }
-  div,card,button,.shadow {-webkit-box-shadow: none !important;-moz-box-shadow: none !important;box-shadow: none !important;text-decoration: none !important;}
   article#content {width: 100% !important;}
   aside#related {display: none !important;}
-  .shadow,button,card,div{box-shadow:none!important;}
   .pbb {break-before: page;}
   .pba {break-after: page;}
 }
