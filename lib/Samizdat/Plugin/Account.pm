@@ -15,15 +15,21 @@ sub register ($self, $app, $conf) {
   # Manager routes (HTML pages only - GET)
   my $manager = $r->manager('users')->to(controller => 'Account', admin_mode => 1);
   $manager->get('group/new')                                           ->to('#groupedit')    ->name('account_group_new');
-  $manager->get('group/:groupid')                                      ->to('#groupedit')    ->name('account_group_edit');
+  $manager->get('group/:groupid/edit')                                 ->to('#groupedit')    ->name('account_group_edit');
+  $manager->get('group/:groupid')                                      ->to('#groupedit')    ->name('account_group_view');
   $manager->get('group')                                               ->to('#group')        ->name('account_group');
   $manager->get('new')                                                 ->to('#register')     ->name('account_new');
   $manager->get('/')                                                   ->to('#listusers')    ->name('account_index');
 
   # Public routes for user presentation and listing (HTML)
-  my $users = $r->home('users')->to(controller => 'Account');
-  $users->get('/:uuid')                                                ->to('#presentation') ->name('account_presentation');
-  $users->get('/')                                                     ->to('#listusers')    ->name('listusers');
+  my $account_conf = $app->config->{manager}->{account} // {};
+  if ($account_conf->{users} && $account_conf->{users}->{show}) {
+    my $users = $r->home('users')->to(controller => 'Account');
+    $users->get('/:uuid')                                              ->to('#presentation') ->name('account_presentation');
+    if ($account_conf->{users}->{list}) {
+      $users->get('/')                                                 ->to('#listusers')    ->name('listusers');
+    }
+  }
 
   # Registration and private account management routes (HTML pages - GET)
   my $account = $r->home('account')->to(controller => 'Account');
@@ -339,6 +345,32 @@ paths:
               schema:
                 $ref: '#/components/schemas/Account_Result'
 
+  /users/{uuid}:
+    get:
+      operationId: Account.presentation
+      x-mojo-to: Account#presentation
+      summary: Get user presentation
+      tags: [Users]
+      parameters:
+        - name: uuid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: User presentation data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account_PresentationResponse'
+        '404':
+          description: User not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account_Result'
+
   /users:
     get:
       operationId: Account.users.index
@@ -547,3 +579,26 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Account_Group'
+    Account_PresentationResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        user:
+          $ref: '#/components/schemas/Account_User'
+        presentation:
+          type: object
+          properties:
+            presentationid:
+              type: integer
+            presentation:
+              type: string
+            language_code:
+              type: string
+        image:
+          type: object
+          properties:
+            imageid:
+              type: integer
+            filename:
+              type: string

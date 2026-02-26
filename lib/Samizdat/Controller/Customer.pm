@@ -122,7 +122,7 @@ sub edit ($self) {
       }
     );
     $self->stash(
-      headline => 'customer/chunks/customernavbuttons',
+      headline        => 'customer/chunks/customernavbuttons',
       scriptname      => $scriptname,
       fields          => $fields,
       checkfields     => $checkfields,

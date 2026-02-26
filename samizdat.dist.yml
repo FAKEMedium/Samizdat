@@ -381,6 +381,11 @@ database:
     sessiontimeout: 3600                          # Session timeout in seconds
     superadmins:                                  # List of username: password that have full access to everything, mainly for bootstrapping.
 #      superadmin: s3cr3t_Pa55w0r6                # CHANGE!!!
+    admins:
+      arthur:
+    users:
+      show: 1
+      list: 0
 screenshots:
   -
     src: /media/images/samizdat.jpg

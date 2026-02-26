@@ -588,8 +588,8 @@ sub list_users ($self, $limit = 25, $offset = 0) {
     return $db->query('SELECT * FROM snapusers ORDER BY id DESC LIMIT ? OFFSET ?', $limit, $offset)->hashes->to_array;
   } else {
     return $db->query('
-      SELECT u.userid, u.username, u.activated, u.blocked, u.created,
-             c.displayname, c.email
+      SELECT u.username, u.useruuid, u.activated, u.blocked, u.created,
+             c.displayname
       FROM account.users u
       LEFT JOIN account.contacts c ON u.contactid = c.contactid
       ORDER BY u.userid DESC
@@ -606,6 +606,121 @@ sub count_users ($self) {
   } else {
     return $db->query('SELECT COUNT(*) AS count FROM account.users')->hash->{count};
   }
+}
+
+
+sub list_groups ($self, $limit = 25, $offset = 0) {
+  my $db = $self->database->db;
+  return $db->query('
+    SELECT g.groupid, g.groupname,
+           COUNT(ug.usergroupid) AS member_count
+    FROM account.groups g
+    LEFT JOIN account.usergroups ug ON g.groupid = ug.groupid
+    GROUP BY g.groupid, g.groupname
+    ORDER BY g.groupname
+    LIMIT ? OFFSET ?
+  ', $limit, $offset)->hashes->to_array;
+}
+
+
+sub count_groups ($self) {
+  my $db = $self->database->db;
+  return $db->query('SELECT COUNT(*) AS count FROM account.groups')->hash->{count};
+}
+
+
+sub get_group ($self, $groupid) {
+  my $db = $self->database->db;
+  return $db->query('
+    SELECT g.groupid, g.groupname
+    FROM account.groups g
+    WHERE g.groupid = ?
+  ', $groupid)->hash;
+}
+
+
+sub get_group_members ($self, $groupid) {
+  my $db = $self->database->db;
+  return $db->query('
+    SELECT u.username, u.useruuid, c.displayname
+    FROM account.usergroups ug
+    JOIN account.users u ON ug.userid = u.userid
+    LEFT JOIN account.contacts c ON u.contactid = c.contactid
+    WHERE ug.groupid = ?
+    ORDER BY u.username
+  ', $groupid)->hashes->to_array;
+}
+
+
+sub save_group ($self, $groupid, $attribs) {
+  my $db = $self->database->db;
+  if ($groupid) {
+    $db->update('account.groups', $attribs, { groupid => $groupid });
+    return $groupid;
+  } else {
+    return $db->insert('account.groups', $attribs, { returning => 'groupid' })->hash->{groupid};
+  }
+}
+
+
+sub get_presentation ($self, $userid, $languageid = 1) {
+  my $db = $self->database->db;
+  return $db->query(
+    'SELECT p.presentationid, p.presentation, p.userid, p.languageid, l.code AS language_code
+     FROM account.presentations p
+     LEFT JOIN public.languages l ON p.languageid = l.languageid
+     WHERE p.userid = ? AND p.languageid = ?',
+    $userid, $languageid
+  )->hash;
+}
+
+
+sub get_public_user ($self, $useruuid) {
+  my $db = $self->database->db;
+  return $db->query(
+    'SELECT u.userid, u.username, u.useruuid, u.created,
+            c.displayname, c.organization, c.city, c.website,
+            co.cc AS country_cc, l.code AS language_code
+     FROM account.users u
+     LEFT JOIN account.contacts c ON u.contactid = c.contactid
+     LEFT JOIN public.countries co ON c.countryid = co.countryid
+     LEFT JOIN public.languages l ON c.languageid = l.languageid
+     WHERE u.useruuid = ?::uuid AND u.activated = true AND u.blocked = false',
+    $useruuid
+  )->hash;
+}
+
+
+sub list_public_users ($self, $limit = 25, $offset = 0) {
+  my $db = $self->database->db;
+  return $db->query('
+    SELECT u.userid, u.username, u.useruuid, u.created,
+           c.displayname, c.organization, c.city,
+           co.cc AS country_cc
+    FROM account.users u
+    LEFT JOIN account.contacts c ON u.contactid = c.contactid
+    LEFT JOIN public.countries co ON c.countryid = co.countryid
+    WHERE u.activated = true AND u.blocked = false
+    ORDER BY u.created DESC
+    LIMIT ? OFFSET ?
+  ', $limit, $offset)->hashes->to_array;
+}
+
+
+sub count_public_users ($self) {
+  my $db = $self->database->db;
+  return $db->query(
+    'SELECT COUNT(*) AS count FROM account.users WHERE activated = true AND blocked = false'
+  )->hash->{count};
+}
+
+
+sub get_user_image ($self, $userid) {
+  my $db = $self->database->db;
+  return $db->query(
+    'SELECT imageid, filename FROM account.images WHERE userid = ?',
+    $userid
+  )->hash;
 }
 
 

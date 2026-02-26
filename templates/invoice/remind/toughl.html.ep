@@ -72,7 +72,6 @@
     <%== __('You MUST include the invoice number as reference when making the payment.') %>
     <%== __('From 2025-11-01 we are using Sparbanken Syd.') %>
     <%== __('Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different.') %>
-    <%== __('Our Plusgiro will soon disappear too.') %>
   </p>
 </div>
 

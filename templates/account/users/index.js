@@ -1,4 +1,5 @@
 let currentPage = 1;
+let isAdmin = false;
 
 async function loadUsers(page = 1) {
   currentPage = page;
@@ -7,35 +8,45 @@ async function loadUsers(page = 1) {
   });
 
   if (result && result.success) {
+    isAdmin = !!result.admin;
     const users = result.users || [];
     const total = result.total || 0;
     const limit = result.limit || 25;
     const totalPages = Math.ceil(total / limit);
+    const colCount = isAdmin ? 5 : 4;
+
+    if (isAdmin) {
+      document.getElementById('statusHeader').classList.remove('d-none');
+      document.getElementById('addUserBtn').classList.remove('d-none');
+    }
 
     const tbody = document.querySelector('#users tbody');
     let html = '';
 
     users.forEach(user => {
-      const status = user.blocked ? '<span class="badge bg-danger"><%= __("Blocked") %></span>' :
-                     user.activated ? '<span class="badge bg-success"><%= __("Active") %></span>' :
-                     '<span class="badge bg-warning"><%= __("Inactive") %></span>';
       const created = user.created ? new Date(user.created).toLocaleDateString() : '';
+      const flag = user.country_cc
+        ? `<img src="/assets/flags/${user.country_cc.toLowerCase()}" width="24" height="18" alt="${user.country_cc}" />`
+        : '';
 
-      html += `
-        <tr>
-          <td>${user.userid}</td>
-          <td><a href="<%= url_for('account_index') %>/${user.username}">${user.username}</a></td>
+      html += `<tr>
+          <td><a href="/users/${user.useruuid}">${user.username}</a></td>
           <td>${user.displayname || ''}</td>
-          <td>${user.email || ''}</td>
-          <td>${created}</td>
-          <td>${status}</td>
-        </tr>
-      `;
+          <td>${flag}</td>
+          <td>${created}</td>`;
+
+      if (isAdmin) {
+        const status = user.blocked ? '<span class="badge bg-danger"><%= __("Blocked") %></span>' :
+                       user.activated ? '<span class="badge bg-success"><%= __("Active") %></span>' :
+                       '<span class="badge bg-warning"><%= __("Inactive") %></span>';
+        html += `<td>${status}</td>`;
+      }
+
+      html += `</tr>`;
     });
 
-    tbody.innerHTML = html || '<tr><td colspan="6" class="text-muted text-center"><%= __("No users found") %></td></tr>';
+    tbody.innerHTML = html || `<tr><td colspan="${colCount}" class="text-muted text-center"><%= __("No users found") %></td></tr>`;
 
-    // Build pagination
     buildPagination(page, totalPages);
   }
 }

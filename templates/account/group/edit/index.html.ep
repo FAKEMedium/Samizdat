@@ -1,0 +1,21 @@
+<div class="container">
+  <h2 id="groupTitle"><%== __('Group') %></h2>
+
+  <form id="groupForm" class="mb-4">
+    <div class="form-floating mb-3">
+      <input type="text" class="form-control" id="groupname" name="groupname" required />
+      <label for="groupname"><%== __('Group name') %></label>
+    </div>
+    <button type="submit" class="btn btn-primary"><%== __('Save') %></button>
+    <a href="<%== url_for('account_group') %>" class="btn btn-secondary"><%== __('Cancel') %></a>
+  </form>
+
+  <div id="saveStatus" class="d-none mb-3">
+    <div class="alert" role="alert"></div>
+  </div>
+
+  <div id="membersSection" class="d-none">
+    <h4><%== __('Members') %></h4>
+    <ul id="membersList" class="list-group"></ul>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container">
+  <table id="groups" class="table table-sm table-striped">
+    <thead>
+      <tr>
+        <th><%== __('Group name') %></th>
+        <th><%== __('Members') %></th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+
+  <nav aria-label="Group pagination">
+    <ul class="pagination pagination-sm" id="groupPagination"></ul>
+  </nav>
+</div>
