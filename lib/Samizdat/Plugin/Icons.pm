@@ -43,6 +43,17 @@ sub register ($self, $app, $conf) {
   # GET for HTML page, API routes handled by OpenAPI
   $r->get('/project/icons')->to(controller => 'Icons', action => 'icons')->name('icons_index');
 
+  # Serve flag SVGs as static images for JS-populated content
+  $r->get('/assets/flags/:cc' => sub ($c) {
+    my $cc = lc $c->stash('cc');
+    $cc =~ s/[^a-z]//g;
+    my $path = $flagsrepo->child(sprintf('flags/4x3/%s.svg', $cc));
+    return $c->reply->not_found unless -f $path;
+    $c->res->headers->content_type('image/svg+xml');
+    $c->res->headers->cache_control('public, max-age=86400');
+    return $c->reply->file($path);
+  })->name('flag_svg');
+
   $app->helper(
     icon => sub($c, $icon, $options = {}) {
       state $symbols = {};

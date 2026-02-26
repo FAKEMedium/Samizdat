@@ -495,8 +495,7 @@ sub users ($self) {
 }
 
 
-sub listusers ($self) {
-  my $title = $self->app->__('Users');
+sub group ($self) {
   my $accept = $self->req->headers->accept // '';
 
   if ($accept =~ /json/) {
@@ -506,16 +505,138 @@ sub listusers ($self) {
     my $limit = $self->param('limit') // 25;
     my $offset = ($page - 1) * $limit;
 
-    my $users = $self->app->account->list_users($limit, $offset);
-    my $total = $self->app->account->count_users();
+    my $groups = $self->app->account->list_groups($limit, $offset);
+    my $total = $self->app->account->count_groups();
 
     return $self->render(json => {
       success => 1,
-      users => $users,
-      page => $page,
-      limit => $limit,
-      total => $total
+      groups  => $groups,
+      page    => $page,
+      limit   => $limit,
+      total   => $total,
     });
+  }
+
+  my $title = $self->app->__('Groups');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'account/group/index', format => 'js');
+  $self->stash(headline => 'account/chunks/group');
+  return $self->render(template => 'account/group/index', web => $web, title => $title);
+}
+
+
+sub groupedit ($self) {
+  my $groupid = $self->stash('groupid') // 0;
+  my $accept = $self->req->headers->accept // '';
+
+  if ($accept =~ /json/) {
+    return unless $self->access({ admin => 1 });
+
+    if ($self->req->method eq 'POST' || $self->req->method eq 'PUT') {
+      my $groupname = $self->param('groupname') // '';
+      unless (length $groupname) {
+        return $self->render(json => { success => 0, error => 'Group name is required' }, status => 400);
+      }
+      my $saved_id = $self->app->account->save_group($groupid, { groupname => $groupname });
+      return $self->render(json => { success => 1, groupid => $saved_id });
+    }
+
+    if ($groupid) {
+      my $group = $self->app->account->get_group($groupid);
+      return $self->render(json => { success => 0, error => 'Group not found' }, status => 404) unless $group;
+      my $members = $self->app->account->get_group_members($groupid);
+      return $self->render(json => { success => 1, group => $group, members => $members });
+    }
+
+    return $self->render(json => { success => 1, group => {}, members => [] });
+  }
+
+  my $title = $groupid ? $self->app->__('Edit group') : $self->app->__('New group');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'account/group/edit/index', format => 'js');
+  return $self->render(template => 'account/group/edit/index', web => $web, title => $title);
+}
+
+
+sub presentation ($self) {
+  my $uuid = $self->stash('uuid');
+  my $accept = $self->req->headers->accept // '';
+
+  # Override docpath for static cache
+  $self->stash(docpath => '/users/user/index.html');
+
+  if ($accept =~ /json/) {
+    my $user = $self->app->account->get_public_user($uuid);
+    return $self->render(json => { success => 0, error => 'User not found' }, status => 404) unless $user;
+
+    my $lang = $self->stash('language') // 'en';
+    my $lang_row = $self->app->pg->db->select('public.languages', ['languageid'], { code => $lang })->hash;
+    my $languageid = $lang_row ? $lang_row->{languageid} : 1;
+    my $presentation = $self->app->account->get_presentation($user->{userid}, $languageid);
+    my $image = $self->app->account->get_user_image($user->{userid});
+
+    return $self->render(json => {
+      success      => 1,
+      user         => $user,
+      presentation => $presentation,
+      image        => $image,
+    });
+  }
+
+  my $title = $self->app->__('User');
+  my $web = { title => $title };
+  $web->{script} .= $self->render_to_string(template => 'account/user/index', format => 'js');
+  return $self->render(template => 'account/user/index', web => $web, title => $title);
+}
+
+
+sub listusers ($self) {
+  my $title = $self->app->__('Users');
+  my $accept = $self->req->headers->accept // '';
+
+  if ($accept =~ /json/) {
+    # Detect admin from route stash or session
+    my $admin_mode = $self->stash('admin_mode') // 0;
+    if (!$admin_mode) {
+      my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+      if ($authcookie) {
+        my $session = $self->app->account->session($authcookie);
+        if ($session && $session->{username}) {
+          my $admins = $self->config->{manager}->{account}->{admins} // {};
+          my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+          $admin_mode = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+        }
+      }
+    }
+
+    my $page = $self->param('page') // 1;
+    my $limit = $self->param('limit') // 25;
+    my $offset = ($page - 1) * $limit;
+
+    if ($admin_mode) {
+      my $users = $self->app->account->list_users($limit, $offset);
+      my $total = $self->app->account->count_users();
+      return $self->render(json => {
+        success => 1,
+        admin   => 1,
+        users   => $users,
+        page    => $page,
+        limit   => $limit,
+        total   => $total,
+      });
+    } else {
+      # Public listing (gated by users.show in plugin)
+      my $users = $self->app->account->list_public_users($limit, $offset);
+      my $total = $self->app->account->count_public_users();
+      return $self->render(json => {
+        success => 1,
+        admin   => 0,
+        users   => $users,
+        page    => $page,
+        limit   => $limit,
+        total   => $total,
+      });
+    }
   } else {
     my $web = { title => $title };
     $web->{script} .= $self->render_to_string(template => 'account/users/index', format => 'js');
