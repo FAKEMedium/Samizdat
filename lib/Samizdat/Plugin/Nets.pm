@@ -5,7 +5,7 @@ use Samizdat::Model::Nets;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
-
+  return if (!(exists($app->config->{manager}->{nets}->{env})));
   my $r = $app->routes;
 
   # Store OpenAPI fragment (parsed centrally in _load_openapi)

@@ -4,6 +4,7 @@ use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::BuyMeACoffee;
 
 sub register ($self, $app, $config = {}) {
+  return if (!(exists($app->config->{buymeacoffee}->{slug}) && $app->config->{buymeacoffee}->{slug}));
 
   my $r = $app->routes;
 

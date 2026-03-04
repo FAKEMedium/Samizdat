@@ -6,6 +6,8 @@ use Samizdat::Model::Fortnox;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $conf) {
+  return if (!(exists($app->config->{manager}->{fortnox})));
+
   my $r = $app->routes;
 
   # Store OpenAPI fragment (parsed centrally in _load_openapi)

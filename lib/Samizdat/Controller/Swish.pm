@@ -92,11 +92,12 @@ sub cancel ($self) {
 sub swish_config ($self) {
   my $config = $self->swish->config;
   my $env = $config->{default_env} || 'test';
+  my $env_config = $self->swish->get_env_config();
 
   my $data = {
     currency => $config->{currency} || 'SEK',
     env => $env,
-    payee_alias => $config->{payee_alias},
+    payee_alias => $env_config->{payee_alias},
   };
 
   $self->tx->res->headers->content_type('application/json; charset=UTF-8');
@@ -110,8 +111,10 @@ sub create_payment ($self) {
     return $self->render(json => { error => 'Amount required' }, status => 400);
   }
 
-  # Build callback URL
+  # Build callback URL: request param > config > url_for fallback
+  my $env_config = $self->swish->get_env_config();
   my $callback_url = $params->{callback_url} ||
+    $env_config->{callback_url} ||
     $self->url_for('Swish.callback')->to_abs->to_string;
 
   my $payment = $self->swish->create_payment(
@@ -193,7 +196,9 @@ sub create_refund ($self) {
     return $self->render(json => { error => 'Amount required' }, status => 400);
   }
 
+  my $env_config = $self->swish->get_env_config();
   my $callback_url = $params->{callback_url} ||
+    $env_config->{callback_url} ||
     $self->url_for('Swish.callback')->to_abs->to_string;
 
   my $refund = $self->swish->create_refund(

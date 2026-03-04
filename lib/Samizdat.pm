@@ -153,12 +153,6 @@ sub startup {
   for my $plugin (@{ $config->{extraplugins} }) {
     $app->plugin($plugin);
   }
-  if (exists($config->{buymeacoffee}->{slug}) && $config->{buymeacoffee}->{slug}) {
-    $app->plugin('BuyMeACoffee', $config->{buymeacoffee});
-  }
-  if (exists($config->{manager}->{nets}) && $config->{manager}->{nets}) {
-    $app->plugin('Nets');
-  }
   $app->plugin('DefaultHelpers');
   $app->plugin('TagHelpers');
   $app->plugin('Mail', $config->{mail});
