@@ -84,8 +84,10 @@ Returns a hashref with api URL for the current environment.
 sub get_env_config ($self) {
   my $config = $self->config;
   my $env = $config->{default_env} || 'test';
+  my $company = $config->{company}->{$env} // {};
+  my $commerce = $config->{commerce}->{$env} // {};
 
-  return $config->{env}->{$env};
+  return { %$company, %$commerce };
 }
 
 =head2 generate_instruction_id
@@ -600,10 +602,11 @@ The Swish model requires configuration in samizdat.yml:
       dbtype: postgresql
       currency: SEK
       default_env: test  # or production
-      env:
+      commerce:
         test:
           api: https://mss.cpc.getswish.net/swish-cpcapi/api/v2
           payee_alias: '1234679304'
+          callback_url: https://example.com:3443/swish/callback
           cert:
             client_cert: src/swish/Swish_Merchant_TestCertificate_1234679304.pem
             client_key: src/swish/Swish_Merchant_TestCertificate_1234679304.key
@@ -611,10 +614,16 @@ The Swish model requires configuration in samizdat.yml:
         production:
           api: https://cpc.getswish.net/swish-cpcapi/api/v2
           payee_alias: 'YOUR_SWISH_NUMBER'
+          callback_url: https://example.com/swish/callback
           cert:
             client_cert: /path/to/production_client.pem
             client_key: /path/to/production_client.key
             ca_cert: /path/to/production_ca.pem
+      company:
+        test:
+          payee_alias: '1234679304'
+        production:
+          payee_alias: 'YOUR_SWISH_NUMBER'
 
 =head1 GETTING CERTIFICATES
 

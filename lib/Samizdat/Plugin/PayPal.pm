@@ -5,6 +5,7 @@ use Samizdat::Model::PayPal;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
+  return if (!(exists($app->config->{manager}->{paypal})));
 
   my $r = $app->routes;
 

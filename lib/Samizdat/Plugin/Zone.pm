@@ -6,6 +6,8 @@ use Mojo::Pg;
 use Mojo::Loader qw(data_section);
 
 sub register($self, $app, $conf) {
+  return if (!(exists($app->config->{manager}->{zone})));
+
   my $r = $app->routes;
 
   # Store OpenAPI fragment (parsed centrally in _load_openapi)

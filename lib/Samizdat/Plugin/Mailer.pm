@@ -5,6 +5,8 @@ use Samizdat::Model::Mailer;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $conf) {
+  return if (!(exists($app->config->{manager}->{mailer})));
+
   my $r = $app->routes;
 
   # Store OpenAPI fragment

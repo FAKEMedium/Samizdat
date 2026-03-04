@@ -5,6 +5,8 @@ use Samizdat::Model::RealtimeRegister;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $conf) {
+  return if (!(exists($app->config->{manager}->{realtimeregister})));
+
   my $r = $app->routes;
 
   # Store OpenAPI fragment (parsed centrally in _load_openapi)

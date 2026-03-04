@@ -5,6 +5,7 @@ use Samizdat::Model::Stripe;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $config = {}) {
+  return if (!(exists($app->config->{manager}->{stripe})));
 
   my $r = $app->routes;
 

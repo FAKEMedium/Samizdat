@@ -263,16 +263,28 @@ swish:
   dbtype: postgresql
   currency: SEK
   default_env: test                          # test or production
-  payee_alias: '1231181189'                  # Merchant Swish number (test number shown)
-  cert:
-    client_cert: /path/to/swish_client.pem
-    client_key: /path/to/swish_client.key
-    ca_cert: /path/to/swish_ca.pem
-  env:
+  commerce:
     test:
       api: https://mss.cpc.getswish.net/swish-cpcapi/api/v2
+      payee_alias: '1234679304'
+      callback_url: https://example.com:3443/swish/callback
+      cert:
+        client_cert: src/swish/Swish_Merchant_TestCertificate_1234679304.pem
+        client_key: src/swish/Swish_Merchant_TestCertificate_1234679304.key
+        ca_cert: src/swish/Swish_TLS_RootCA.pem
     production:
       api: https://cpc.getswish.net/swish-cpcapi/api/v2
+      payee_alias: 'YOUR_SWISH_NUMBER'
+      callback_url: https://example.com/swish/callback
+      cert:
+        client_cert: /path/to/production_client.pem
+        client_key: /path/to/production_client.key
+        ca_cert: /path/to/production_ca.pem
+  company:
+    test:
+      payee_alias: '1234679304'
+    production:
+      payee_alias: 'YOUR_SWISH_NUMBER'
 ```
 
 ### Payment Flows
