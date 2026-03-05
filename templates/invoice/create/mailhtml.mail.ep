@@ -83,7 +83,7 @@
 % my $swish_config = config->{manager}->{swish};
 % if ($swish_config && 'SE' eq uc $customer->{billingcountry}) {
 %   my $env = $swish_config->{default_env} || 'test';
-%   my $payee_alias = $swish_config->{env}->{$env}->{payee_alias};
+%   my $payee_alias = $swish_config->{company}->{$env}->{payee_alias};
 %   if ($payee_alias) {
 %     # Convert amount to öre (smallest unit) for Swish
 %     my $amount_ore = int($invoice->{totalcost} * 100);
