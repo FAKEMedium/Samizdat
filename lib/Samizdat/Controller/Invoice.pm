@@ -712,7 +712,7 @@ sub remind ($self) {
     my $tough_message = $self->render_to_string(
       template => 'invoice/remind/tough',
       invoicedata => $invoicedata,
-      format => 'html'
+      format => 'md'
     );
 
     $web->{script} = $self->render_to_string(
