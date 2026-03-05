@@ -1,0 +1,2 @@
+<p><%== __('We noticed that we have not yet received payment for the invoice below.') %></p>
+<p><%== __('This might be an oversight, so we wanted to send a friendly reminder.') %></p>
