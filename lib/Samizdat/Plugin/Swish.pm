@@ -6,6 +6,7 @@ use Mojo::Loader qw(data_section);
 use Mojo::File;
 
 sub register ($self, $app, $config = {}) {
+  return unless (exists($app->config->{manager}->{swish}));
 
   my $r = $app->routes;
 

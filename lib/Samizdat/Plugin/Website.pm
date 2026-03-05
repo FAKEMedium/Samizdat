@@ -5,7 +5,7 @@ use Samizdat::Model::Website;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $conf) {
-  return if (!(exists($app->config->{manager}->{website})));
+  return unless (exists($app->config->{manager}->{website}));
 
   my $r = $app->routes;
 
