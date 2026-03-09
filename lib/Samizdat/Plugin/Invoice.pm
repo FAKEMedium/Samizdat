@@ -278,12 +278,16 @@ sub register ($self, $app, $conf) {
         # Wrap alternative + inline image in multipart/related for CID references
         my $related = MIME::Lite->new(Type => 'multipart/related');
         $related->attach($alternative);
+        my $qr_filename = sprintf('swish-qr_%s_%s_%s.png',
+          $invoicedata->{invoice}->{fakturanummer} // 'unknown',
+          $invoicedata->{invoice}->{customerid} // 'unknown',
+          $invoicedata->{invoice}->{uuid} // 'unknown');
         $related->attach(
           Data        => $swish_qr_png,
-          Type        => 'image/png',
+          Type        => "image/png; name=\"$qr_filename\"",
           Encoding    => 'base64',
           Id          => '<swish-qr@samizdat>',
-          Filename    => 'swish-qr.png',
+          Filename    => $qr_filename,
           Disposition => 'inline',
         );
         $mail->attach($related);
