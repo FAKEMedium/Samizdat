@@ -143,6 +143,15 @@ sub _get_pg ($self, $where, $limit) {
   return $customers;
 }
 
+sub get_customerid_for_user ($self, $userid) {
+  my $db = $self->app->pg->db;
+  my $row = $db->query(
+    'SELECT customerid FROM customer.entityroleusers WHERE userid = ? LIMIT 1',
+    $userid
+  )->array;
+  return $row ? $row->[0] : undef;
+}
+
 sub name ($self, $customer) {
   my $name = trim($customer->{company} // '');
   if ($name eq '') {

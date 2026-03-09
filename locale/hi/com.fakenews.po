@@ -475,6 +475,9 @@ msgstr ""
 msgid "Are you sure you want to delete this contact?"
 msgstr "क्या आप इस संपर्क को हटाना चाहते हैं?"
 
+msgid "Are you sure you want to delete this database?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr "क्या आप इस डोमेन को हटाना चाहते हैं?"
 
@@ -743,6 +746,9 @@ msgid "Cancel"
 msgstr "रद्द करें"
 
 msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr ""
+
+msgid "Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first."
 msgstr ""
 
 msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
@@ -1126,6 +1132,9 @@ msgstr "क्रेडिट विश्वसनीयता"
 msgid "Creditability"
 msgstr "साख"
 
+msgid "Credited"
+msgstr ""
+
 msgid "Credited amount incl. VAT: {totalcost} {currency}"
 msgstr "क्रेडिट राशि VAT सहित: {totalcost} {currency}"
 
@@ -1179,6 +1188,9 @@ msgstr "ग्राहक संख्या"
 
 msgid "Customer newsletter"
 msgstr "ग्राहक न्यूज़लेटर"
+
+msgid "Customer {id} not found in Fortnox. Create customer first."
+msgstr ""
 
 msgid "Customers"
 msgstr "ग्राहक"
@@ -1243,11 +1255,20 @@ msgstr "डेटाबेस त्रुटि"
 msgid "Database error occurred"
 msgstr "डेटाबेस एरर आया"
 
+msgid "Database name"
+msgstr ""
+
+msgid "Database name is required"
+msgstr ""
+
 msgid "Databases"
 msgstr "डेटाबेस"
 
 msgid "Date"
 msgstr "तिथि"
+
+msgid "Date of birth"
+msgstr ""
 
 msgid "Date:"
 msgstr "तिथि:"
@@ -1498,6 +1519,9 @@ msgstr "संपादित करें"
 msgid "Edit Certificate"
 msgstr ""
 
+msgid "Edit Database"
+msgstr ""
+
 msgid "Edit Domain"
 msgstr "डोमेन संपादित करें"
 
@@ -1520,6 +1544,9 @@ msgid "Edit customer {customerid}"
 msgstr "ग्राहक {customerid} संपादित करें"
 
 msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit group"
 msgstr ""
 
 msgid "Edit mail"
@@ -2011,6 +2038,9 @@ msgstr ""
 msgid "Failed to resend invoice email"
 msgstr ""
 
+msgid "Failed to save"
+msgstr ""
+
 msgid "Failed to save admin"
 msgstr ""
 
@@ -2182,6 +2212,9 @@ msgstr ""
 msgid "Fortnox authorization required"
 msgstr "Fortnox प्राधिकरण आवश्यक है"
 
+msgid "Fortnox error: {error}"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Fortnox एकीकरण"
 
@@ -2233,6 +2266,9 @@ msgstr ""
 msgid "Full"
 msgstr "पूर्ण"
 
+msgid "Generate"
+msgstr ""
+
 msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr "buymeacoffee पर {slug} को थोड़ा वित्तीय समर्थन दें"
 
@@ -2247,6 +2283,12 @@ msgstr "अपने हस्ताक्षर की पुष्टि क�
 
 msgid "Gross"
 msgstr "सकल"
+
+msgid "Group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
 
 msgid "Groups"
 msgstr ""
@@ -2784,6 +2826,9 @@ msgstr ""
 msgid "Live Transactions"
 msgstr "लाइव ट्रांजैक्शन"
 
+msgid "Loading"
+msgstr ""
+
 msgid "Loading..."
 msgstr "लोड हो रहा है..."
 
@@ -2949,6 +2994,12 @@ msgstr "भुगतान चिह्नित करें"
 msgid "Medium"
 msgstr ""
 
+msgid "Member since"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
 msgid "Menu Items"
 msgstr ""
 
@@ -3096,6 +3147,9 @@ msgstr "नया प्रमाणपत्र"
 msgid "New Contact"
 msgstr "नया संपर्क"
 
+msgid "New Database"
+msgstr ""
+
 msgid "New Example"
 msgstr ""
 
@@ -3131,6 +3185,9 @@ msgstr ""
 
 msgid "New folder"
 msgstr "नया फ़ोल्डर"
+
+msgid "New group"
+msgstr ""
 
 msgid "New invoice for customer #{customerid}"
 msgstr "ग्राहक #{customerid} के लिए नया इनवॉइस"
@@ -3246,6 +3303,9 @@ msgstr "कोई डोमेन नहीं मिला"
 msgid "No examples found"
 msgstr ""
 
+msgid "No groups found"
+msgstr ""
+
 msgid "No invoice rows"
 msgstr ""
 
@@ -3323,6 +3383,9 @@ msgstr "कोई परिणाम नहीं मिला"
 
 msgid "No selected customer."
 msgstr "कोई ग्राहक चयनित नहीं।"
+
+msgid "No services available"
+msgstr ""
 
 msgid "No settings configured"
 msgstr ""
@@ -4176,6 +4239,9 @@ msgstr "पुन: प्रिंट करें"
 msgid "Reprint invoice"
 msgstr ""
 
+msgid "Request failed"
+msgstr ""
+
 msgid "Required"
 msgstr "आवश्यक"
 
@@ -4306,6 +4372,9 @@ msgid "Save to database"
 msgstr ""
 
 msgid "Save to file"
+msgstr ""
+
+msgid "Saved"
 msgstr ""
 
 msgid "Saved successfully"
@@ -4497,6 +4566,9 @@ msgstr ""
 msgid "Select shell..."
 msgstr ""
 
+msgid "Select state"
+msgstr ""
+
 msgid "Select target domain"
 msgstr ""
 
@@ -4587,6 +4659,9 @@ msgstr ""
 msgid "Settings"
 msgstr "सेटिंग्स"
 
+msgid "Settings saved"
+msgstr ""
+
 msgid "Share on Facebook"
 msgstr "फेसबुक पर शेयर करें"
 
@@ -4603,6 +4678,9 @@ msgid "Share {what} on {where}"
 msgstr "{what} को {where} पर शेयर करें"
 
 msgid "Shell"
+msgstr ""
+
+msgid "Show/Hide"
 msgstr ""
 
 msgid "Shown as"
@@ -4687,6 +4765,9 @@ msgid "Start side content"
 msgstr "पार्श्व सामग्री शुरू"
 
 msgid "Started"
+msgstr ""
+
+msgid "State"
 msgstr ""
 
 msgid "State/Province"
@@ -5174,6 +5255,9 @@ msgstr "उपयोगकर्ता"
 
 msgid "User manual"
 msgstr "उपयोगकर्ता मैनुअल"
+
+msgid "User not found"
+msgstr ""
 
 msgid "User registration"
 msgstr "उपयोगकर्ता पंजीकरण"
