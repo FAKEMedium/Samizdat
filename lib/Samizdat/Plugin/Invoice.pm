@@ -253,21 +253,26 @@ sub register ($self, $app, $conf) {
         $to_email = $invoicedata->{customer}->{billingemail};
       }
 
+      # Generate Message-ID
+      my $domain = $config->{mail}->{from} =~ /@(.+)/ ? $1 : 'localhost';
+      my $message_id = sprintf('<%s.%s@%s>', time(), int(rand(100000)), $domain);
+
       # Create email
       my $mail = MIME::Lite->new(
-        From         => $config->{mail}->{from},
-        Bcc          => $config->{test}->{invoice} || $is_snailmail ? undef : $config->{mail}->{from},
-        To           => $to_email,
-        Organization => Encode::encode("MIME-Q", $config->{organization}->{name}),
-        Subject      => Encode::encode("MIME-Q", $subject),
-        'X-Mailer'   => "Samizdat",
-        Type         => 'multipart/mixed',
+        From           => $config->{mail}->{from},
+        Bcc            => $config->{test}->{invoice} || $is_snailmail ? undef : $config->{mail}->{from},
+        To             => $to_email,
+        Organization   => Encode::encode("MIME-Q", $config->{organization}->{name}),
+        Subject        => Encode::encode("MIME-Q", $subject),
+        'Message-ID'   => $message_id,
+        'X-Mailer'     => "Samizdat",
+        Type           => 'multipart/mixed',
       );
 
       # Attach plain text and html variants
       my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
-      $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
-      $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
+      $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8', Encoding => 'quoted-printable');
+      $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8', Encoding => 'quoted-printable');
 
       if ($swish_qr_png) {
         # Wrap alternative + inline image in multipart/related for CID references
@@ -276,6 +281,7 @@ sub register ($self, $app, $conf) {
         $related->attach(
           Data        => $swish_qr_png,
           Type        => 'image/png',
+          Encoding    => 'base64',
           Id          => '<swish-qr@samizdat>',
           Filename    => 'swish-qr.png',
           Disposition => 'inline',
@@ -292,6 +298,7 @@ sub register ($self, $app, $conf) {
           Path        => $pdf_path,
           Filename    => sprintf('%s.pdf', $invoicedata->{invoice}->{uuid}),
           Type        => 'application/pdf',
+          Encoding    => 'base64',
           Disposition => 'attachment'
         );
       }
