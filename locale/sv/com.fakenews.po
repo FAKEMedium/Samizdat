@@ -475,6 +475,9 @@ msgstr "Vill du verkligen ta bort denna konfiguration?"
 msgid "Are you sure you want to delete this contact?"
 msgstr "Är du säker på att du vill radera denna kontakt?"
 
+msgid "Are you sure you want to delete this database?"
+msgstr ""
+
 msgid "Are you sure you want to delete this domain?"
 msgstr "Är du säker på att du vill ta bort denna domän?"
 
@@ -735,6 +738,9 @@ msgstr "Avbryt"
 
 msgid "Cannot be alias domain (has alias domains pointing to it)"
 msgstr "Kan inte vara aliasdomän (har aliasdomäner som pekar till den)"
+
+msgid "Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first."
+msgstr ""
 
 msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
 msgstr "Kan inte göra denna domän till en aliasdomän - den har aliasdomäner som pekar till den"
@@ -1111,6 +1117,9 @@ msgstr "Kreditvärdighet"
 msgid "Creditability"
 msgstr "Kreditvärdighet"
 
+msgid "Credited"
+msgstr ""
+
 msgid "Credited amount incl. VAT: {totalcost} {currency}"
 msgstr "Krediterat belopp inkl. moms: {totalcost} {currency}"
 
@@ -1161,6 +1170,9 @@ msgstr "Kundnummer"
 
 msgid "Customer newsletter"
 msgstr "Kundnyhetsbrev"
+
+msgid "Customer {id} not found in Fortnox. Create customer first."
+msgstr ""
 
 msgid "Customers"
 msgstr "Kunder"
@@ -1225,11 +1237,20 @@ msgstr "Databasfel"
 msgid "Database error occurred"
 msgstr "Databasfel uppstod"
 
+msgid "Database name"
+msgstr ""
+
+msgid "Database name is required"
+msgstr ""
+
 msgid "Databases"
 msgstr "Databaser"
 
 msgid "Date"
 msgstr "Datum"
+
+msgid "Date of birth"
+msgstr ""
 
 msgid "Dear"
 msgstr "Kära"
@@ -1468,6 +1489,9 @@ msgstr "Redigera"
 msgid "Edit Certificate"
 msgstr "Redigera certifikat"
 
+msgid "Edit Database"
+msgstr ""
+
 msgid "Edit Domain"
 msgstr "Redigera domän"
 
@@ -1491,6 +1515,9 @@ msgstr "Redigera kund {customerid}"
 
 msgid "Edit forwarding"
 msgstr "Redigera vidarebefordran"
+
+msgid "Edit group"
+msgstr ""
 
 msgid "Edit mail"
 msgstr "Redigera mail"
@@ -1978,6 +2005,9 @@ msgstr "Misslyckades skicka om faktura"
 msgid "Failed to resend invoice email"
 msgstr "Misslyckades med att maila faktura"
 
+msgid "Failed to save"
+msgstr ""
+
 msgid "Failed to save admin"
 msgstr "Kunde inte spara administratör"
 
@@ -2149,6 +2179,9 @@ msgstr "Fortnox-varning"
 msgid "Fortnox authorization required"
 msgstr "Fortnox-auktorisering krävs"
 
+msgid "Fortnox error: {error}"
+msgstr ""
+
 msgid "Fortnox integration"
 msgstr "Fortnox-integration"
 
@@ -2200,6 +2233,9 @@ msgstr "Avsändaradress"
 msgid "Full"
 msgstr "Full"
 
+msgid "Generate"
+msgstr ""
+
 msgid "Give small financial support to {slug} at buymeacoffee"
 msgstr "Ge ett litet ekonomiskt bidrag till {slug} via buymeacoffee"
 
@@ -2211,6 +2247,12 @@ msgstr "Besök {confirmationlink} för att bekräfta din underskrift och hämta 
 
 msgid "Gross"
 msgstr "Brutto"
+
+msgid "Group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
 
 msgid "Groups"
 msgstr "Grupper"
@@ -2730,6 +2772,9 @@ msgstr "Listor"
 msgid "Live Transactions"
 msgstr "Aktuella transaktioner"
 
+msgid "Loading"
+msgstr ""
+
 msgid "Loading..."
 msgstr "Laddar..."
 
@@ -2895,6 +2940,12 @@ msgstr "Markera betalning"
 msgid "Medium"
 msgstr "Medel"
 
+msgid "Member since"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
 msgid "Menu Items"
 msgstr "Menyobjekt"
 
@@ -3042,6 +3093,9 @@ msgstr "Nytt certifikat"
 msgid "New Contact"
 msgstr "Ny kontakt"
 
+msgid "New Database"
+msgstr ""
+
 msgid "New Example"
 msgstr "Nytt exempel"
 
@@ -3077,6 +3131,9 @@ msgstr "Nytt exempel"
 
 msgid "New folder"
 msgstr "Ny mapp"
+
+msgid "New group"
+msgstr ""
 
 msgid "New invoice for customer #{customerid}"
 msgstr "Ny faktura för kund #{customerid}"
@@ -3189,6 +3246,9 @@ msgstr "Inga domäner hittades"
 msgid "No examples found"
 msgstr "Inga exempel hittades"
 
+msgid "No groups found"
+msgstr ""
+
 msgid "No invoice rows"
 msgstr "Inga fakturarader"
 
@@ -3266,6 +3326,9 @@ msgstr "Inga resultat hittades"
 
 msgid "No selected customer."
 msgstr "Ingen kund vald."
+
+msgid "No services available"
+msgstr ""
 
 msgid "No settings configured"
 msgstr "Inga inställningar konfigurerade"
@@ -4101,6 +4164,9 @@ msgstr "Regenerera"
 msgid "Reprint invoice"
 msgstr "Skriv om faktura"
 
+msgid "Request failed"
+msgstr ""
+
 msgid "Required"
 msgstr "Obligatorisk"
 
@@ -4229,6 +4295,9 @@ msgstr "Spara till databas"
 
 msgid "Save to file"
 msgstr "Spara till fil"
+
+msgid "Saved"
+msgstr ""
 
 msgid "Saved successfully"
 msgstr "Sparades"
@@ -4419,6 +4488,9 @@ msgstr "Välj server..."
 msgid "Select shell..."
 msgstr "Välj shell..."
 
+msgid "Select state"
+msgstr ""
+
 msgid "Select target domain"
 msgstr "Välj måldomän"
 
@@ -4509,6 +4581,9 @@ msgstr "Sparade inställning"
 msgid "Settings"
 msgstr "Inställningar"
 
+msgid "Settings saved"
+msgstr ""
+
 msgid "Share on Facebook"
 msgstr "Dela på Facebook"
 
@@ -4526,6 +4601,9 @@ msgstr "Dela {what} på {where}"
 
 msgid "Shell"
 msgstr "Shell"
+
+msgid "Show/Hide"
+msgstr ""
 
 msgid "Shown as"
 msgstr "Visas som"
@@ -4607,6 +4685,9 @@ msgstr "Börja sidoinnehåll"
 
 msgid "Started"
 msgstr "Startad"
+
+msgid "State"
+msgstr ""
 
 msgid "State/Province"
 msgstr "Region/provins"
@@ -5087,6 +5168,9 @@ msgstr "Användare"
 
 msgid "User manual"
 msgstr "Användarmanual"
+
+msgid "User not found"
+msgstr ""
 
 msgid "User registration"
 msgstr "Användarregistrering"

@@ -38,11 +38,29 @@ sub index ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/index', invoices => [], cache => 1);
   } else {
-    # Require admin access for JSON invoice data
-    return unless $self->access({ admin => 1 });
-    my $customerid = int $self->param('customerid');
+    # Check access: admin or valid-user
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    my $customerid = int($self->param('customerid') // 0);
     my $customer = {};
     my $options = {};
+
+    if (!$is_admin) {
+      # Non-admin: require valid-user and filter to own customer
+      return unless $self->access({ 'valid-user' => 1 });
+      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid});
+      return $self->render(json => { invoices => [], customer => {}, admin => 0 }) unless $user_customerid;
+      $customerid = $user_customerid;
+    }
+
     if ($customerid) {
       $options->{where}->{customerid} = $customerid;
       $customer = $self->app->customer->get($options)->[0];
@@ -133,6 +151,7 @@ sub index ($self) {
       unpaid     => $unpaid,
       destroyed  => $destroyed,
       searchterm => $searchterm,
+      admin      => $is_admin ? 1 : 0,
     };
 
     # Update filter and save to cookie
@@ -231,8 +250,8 @@ sub create ($self, $credit = 0) {
   }
 
   if ($credit) {
-    return $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
-      $self->config->{manager}->{url}, $result->{invoice}->{customerid}, $result->{invoice}->{invoiceid}
+    return $self->redirect_to($self->url_for('invoice_customer_handle',
+      customerid => $result->{invoice}->{customerid}, invoiceid => $result->{invoice}->{invoiceid}
     ));
   }
 
@@ -669,8 +688,8 @@ sub remind ($self) {
     }
 
     # Redirect back to invoice for HTML requests
-    return $self->redirect_to(sprintf("%scustomers/%d/invoices/%d",
-      $self->config->{manager}->{url}, $customerid, $invoiceid
+    return $self->redirect_to($self->url_for('invoice_customer_handle',
+      customerid => $customerid, invoiceid => $invoiceid
     ));
   }
 

@@ -121,14 +121,15 @@ sub login ($self) {
       expires => time + $expires,
     };
     my $authcookie = $self->app->uuid->create_str();
-    $self->app->account->addSession($authcookie, {
+    my $session_data = {
       userid     => $userid,
       username   => $user->{username},
       superadmin => $user->{superadmin},
       value      => $value,
       ip         => $ip,
       groups     => join(':', map { $_->{groupid} } @{$self->app->account->getUserGroups($userid)}),
-    }, $expires);
+    };
+    $self->app->account->addSession($authcookie, $session_data, $expires);
     $self->cookie($self->config->{manager}->{account}->{authcookiename} => $authcookie, $cookie_opts);
     $self->cookie($self->config->{manager}->{account}->{datacookiename} => $value, $cookie_opts);
 

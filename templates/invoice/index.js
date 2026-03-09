@@ -52,6 +52,12 @@ function getInvoices(){
 function populateForm(formdata, method) {
   let invoices = formdata.invoices;
   let customer = formdata.customer;
+  const isAdmin = formdata.admin ? true : false;
+
+  // Toggle admin-only columns
+  document.querySelectorAll('.admin-only').forEach(el => {
+    el.classList.toggle('d-none', !isAdmin);
+  });
 
   // Invoices
   let snippet = '';
@@ -77,38 +83,39 @@ function populateForm(formdata, method) {
       rowclass.push('text-white');
       rowclass.push('bg-success');
     }
-    // Create payment date cell based on state
+    // Create payment date cell based on state (admin only)
     let paymentCell = '';
-    if (invoice.state === 'fakturerad') {
-      // Show payment button for unpaid invoices
-      paymentCell = `<button type="button" class="btn btn-sm btn-outline-primary payment-btn"
-        data-invoiceid="${invoice.invoiceid}"
-        data-customerid="${invoice.customerid}"
-        data-customername="${invoice.customername || ''}"
-        data-fakturanummer="${invoice.fakturanummer}"
-        data-invoicedate="${invoice.invoicedate ? invoice.invoicedate.substring(0, 10) : ''}"
-        data-debt="${invoice.debt || invoice.totalcost}"
-        data-totalcost="${invoice.totalcost}"
-        data-currency="${invoice.currency || ''}">
-        <%== icon 'clipboard-plus' %>
-      </button>`;
-    } else if (invoice.state === 'bokford') {
-      // Show payment date for paid invoices
-      paymentCell = invoice.paydate ? invoice.paydate.substring(0, 10) : '';
-    } else {
-      // Empty for other states
-      paymentCell = '';
+    if (isAdmin) {
+      if (invoice.state === 'fakturerad') {
+        // Show payment button for unpaid invoices
+        paymentCell = `<button type="button" class="btn btn-sm btn-outline-primary payment-btn"
+          data-invoiceid="${invoice.invoiceid}"
+          data-customerid="${invoice.customerid}"
+          data-customername="${invoice.customername || ''}"
+          data-fakturanummer="${invoice.fakturanummer}"
+          data-invoicedate="${invoice.invoicedate ? invoice.invoicedate.substring(0, 10) : ''}"
+          data-debt="${invoice.debt || invoice.totalcost}"
+          data-totalcost="${invoice.totalcost}"
+          data-currency="${invoice.currency || ''}">
+          <%== icon 'clipboard-plus' %>
+        </button>`;
+      } else if (invoice.state === 'bokford') {
+        // Show payment date for paid invoices
+        paymentCell = invoice.paydate ? invoice.paydate.substring(0, 10) : '';
+      }
     }
 
-    // Format last reminder date with badge for count
+    // Format last reminder date with badge for count (admin only)
     let reminderCell = '';
-    if (invoice.lastreminderdate) {
-      reminderCell = invoice.lastreminderdate.substring(0, 10);
-      if (invoice.remindercount > 0) {
-        reminderCell += ` <span class="badge bg-secondary">${invoice.remindercount}</span>`;
+    if (isAdmin) {
+      if (invoice.lastreminderdate) {
+        reminderCell = invoice.lastreminderdate.substring(0, 10);
+        if (invoice.remindercount > 0) {
+          reminderCell += ` <span class="badge bg-secondary">${invoice.remindercount}</span>`;
+        }
+      } else if (invoice.remindercount > 0) {
+        reminderCell = `<span class="badge bg-secondary">${invoice.remindercount}</span>`;
       }
-    } else if (invoice.remindercount > 0) {
-      reminderCell = `<span class="badge bg-secondary">${invoice.remindercount}</span>`;
     }
 
     snippet += `
@@ -117,8 +124,8 @@ function populateForm(formdata, method) {
                   <td><a class="w-auto" href="<%== url_for('invoice_index') %>/${invoice.invoiceid}">${invoice.fakturanummer}</a></td>
                   <td>${invoice.customername || ''}</td>
                   <td>${invoice.invoicedate.substring(0, 10)}</td>
-                  <td>${reminderCell}</td>
-                  <td>${paymentCell}</td>
+                  <td class="admin-only${isAdmin ? '' : ' d-none'}">${reminderCell}</td>
+                  <td class="admin-only${isAdmin ? '' : ' d-none'}">${paymentCell}</td>
                   <td class="text-end">${invoice.totalcost}</td>
                   <td class="text-end">${invoice.totalcost}</td>
                 </tr>`;

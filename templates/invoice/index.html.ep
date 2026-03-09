@@ -6,8 +6,8 @@
         <th><%== __('Invoice number') %></th>
         <th><%== __('Customer') %></th>
         <th><%== __('Date') %></th>
-        <th><%== __('Last reminder') %></th>
-        <th><%== __('Paid') %></th>
+        <th class="admin-only d-none"><%== __('Last reminder') %></th>
+        <th class="admin-only d-none"><%== __('Paid') %></th>
         <th class="text-end"><%== __('Amount') %></th>
         <th class="text-end"><%== __('Debt') %></th>
       </tr>

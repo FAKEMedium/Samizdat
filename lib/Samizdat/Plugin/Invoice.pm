@@ -238,7 +238,7 @@ sub register ($self, $app, $conf) {
         From         => $config->{mail}->{from},
         Bcc          => $config->{test}->{invoice} || $is_snailmail ? undef : $config->{mail}->{from},
         To           => $to_email,
-        Organization => Encode::encode("MIME-Q", $config->{organization}),
+        Organization => Encode::encode("MIME-Q", $config->{organization}->{name}),
         Subject      => Encode::encode("MIME-Q", $subject),
         'X-Mailer'   => "Samizdat",
         Type         => 'multipart/mixed',
