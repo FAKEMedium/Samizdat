@@ -656,18 +656,11 @@ sub remind ($self) {
       };
     }
 
-    my $message = $self->render_to_string(
-      template => 'invoice/remind/mild',
-      invoicedata => $invoicedata,
-      message => $custom_message,
-      format => 'html'
-    );
-
     # Send reminder email using the plugin helper
     my $action = $reminder_type eq 'tough' ? 'reminder_tough' : 'reminder_mild';
     my $email_result = $self->send_invoice_email($invoicedata, {
       action => $action,
-      message => $message
+      message => $custom_message
     });
 
     if (!$email_result->{success}) {
