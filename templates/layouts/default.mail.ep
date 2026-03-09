@@ -8,9 +8,9 @@
 % $svg =~ s/[\r\n\s]+//g;
 % chomp $svg;
 % if (exists $web->{css} && '' ne $web->{css}) {
-  <style id="emailcss"> /*<![CDATA[*/
-    <%== web->indent(eval {trim $web->{css}}, 1) =%>
-  /*]]>*/ </style>
+<style id="emailcss"> /*<![CDATA[*/
+  <%== web->indent(eval {trim $web->{css}}, 1) =%>
+/*]]>*/ </style>
 % }
 <div style="background: #ffffff; padding: 10px;">
   <div>
