@@ -174,6 +174,24 @@ sub register ($self, $app, $conf) {
         }
       }
 
+      # Generate Swish QR PNG for CID attachment if applicable
+      my $swish_qr_png;
+      my $swish_config = $config->{manager}->{swish};
+      if ($swish_config && 'SE' eq uc($invoicedata->{customer}->{billingcountry} // '')) {
+        my $env = $swish_config->{default_env} || 'test';
+        my $payee_alias = $swish_config->{company}->{$env}->{payee_alias};
+        if ($payee_alias && $invoicedata->{invoice}->{totalcost}) {
+          my $amount_ore = int($invoicedata->{invoice}->{totalcost} * 100);
+          $swish_qr_png = $self->swish_qr_png(
+            payee   => $payee_alias,
+            amount  => $amount_ore,
+            message => $invoicedata->{invoice}->{fakturanummer},
+            size    => 200,
+          );
+          $invoicedata->{swish_qr_cid} = 'swish-qr@samizdat' if $swish_qr_png;
+        }
+      }
+
       # Render email templates
       my ($htmldata, $txtdata);
 
@@ -248,7 +266,22 @@ sub register ($self, $app, $conf) {
       my $alternative = MIME::Lite->new(Type => 'multipart/alternative');
       $alternative->attach(Data => $txtdata, Type => 'text/plain; charset=UTF-8');
       $alternative->attach(Data => $htmldata, Type => 'text/html; charset=UTF-8');
-      $mail->attach($alternative);
+
+      if ($swish_qr_png) {
+        # Wrap alternative + inline image in multipart/related for CID references
+        my $related = MIME::Lite->new(Type => 'multipart/related');
+        $related->attach($alternative);
+        $related->attach(
+          Data        => $swish_qr_png,
+          Type        => 'image/png',
+          Id          => '<swish-qr@samizdat>',
+          Filename    => 'swish-qr.png',
+          Disposition => 'inline',
+        );
+        $mail->attach($related);
+      } else {
+        $mail->attach($alternative);
+      }
 
       # Attach PDF if it exists
       if ($invoicedata->{invoice}->{uuid}) {
