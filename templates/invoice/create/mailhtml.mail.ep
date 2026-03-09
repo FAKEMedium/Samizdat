@@ -101,7 +101,7 @@
       <%== $qr_svg %>
     </div>
     % }
-    <div>
+    <div style="margin-left: 20px;">
       <p style="margin: 5px 0;"><strong><%== __('Swish number') %>:</strong> <%== $payee_alias %></p>
       <p style="margin: 5px 0;"><strong><%== __('Amount') %>:</strong> <%== $invoice->{totalcost} %> <%== $invoice->{currency} %></p>
       <p style="margin: 5px 0;"><strong><%== __('Message') %>:</strong> <%== $message %></p>
