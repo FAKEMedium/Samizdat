@@ -220,6 +220,10 @@ sub register ($self, $app, $conf) {
       # Always convert HTML to text for plain text version
       $txtdata = $self->html_to_text($htmldata);
 
+      # Encode to UTF-8 bytes for MIME::Lite quoted-printable encoding
+      $htmldata = Encode::encode('UTF-8', $htmldata) if Encode::is_utf8($htmldata);
+      $txtdata  = Encode::encode('UTF-8', $txtdata)  if Encode::is_utf8($txtdata);
+
       # Set subject based on action
       my $subject;
 
