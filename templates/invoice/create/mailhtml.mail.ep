@@ -88,11 +88,15 @@
 %     # Convert amount to öre (smallest unit) for Swish
 %     my $amount_ore = int($invoice->{totalcost} * 100);
 %     my $message = $invoice->{fakturanummer};
-%     my $qr_svg = swish_qr_svg(payee => $payee_alias, amount => $amount_ore, message => $message, size => 200);
+%     my $qr_svg = $invoicedata->{swish_qr_cid} ? undef : swish_qr_svg(payee => $payee_alias, amount => $amount_ore, message => $message, size => 200);
 <div style="background: #00796B; color: white; padding: 15px; margin: 20px 0; border-radius: 5px;">
   <h3 style="color: white; margin-top: 0;"><%== __('Pay with Swish') %></h3>
   <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-    % if ($qr_svg) {
+    % if ($invoicedata->{swish_qr_cid}) {
+    <div style="background: white; padding: 10px; border-radius: 5px;">
+      <img src="cid:<%== $invoicedata->{swish_qr_cid} %>" width="200" height="200" alt="Swish QR" style="display: block;">
+    </div>
+    % } elsif ($qr_svg) {
     <div style="background: white; padding: 10px; border-radius: 5px; width: 200px; height: 200px; max-width: 200px; max-height: 200px; overflow: hidden;">
       <%== $qr_svg %>
     </div>

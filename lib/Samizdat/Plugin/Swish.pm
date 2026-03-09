@@ -205,6 +205,29 @@ sub register ($self, $app, $config = {}) {
     );
   });
 
+  # Register helper for Swish QR code as PNG bytes (for email CID attachments)
+  $app->helper(swish_qr_png => sub ($c, %params) {
+    my $svg = $c->swish_qr_svg(%params);
+    return undef unless $svg;
+
+    my $png;
+    eval {
+      require IPC::Open2;
+      my $pid = IPC::Open2::open2(my $out, my $in, 'rsvg-convert', '--format=png');
+      binmode($in);
+      binmode($out);
+      print $in $svg;
+      close $in;
+      $png = do { local $/; <$out> };
+      waitpid($pid, 0);
+    };
+    if ($@) {
+      $c->app->log->error("rsvg-convert failed: $@");
+      return undef;
+    }
+    return $png;
+  });
+
 }
 
 
