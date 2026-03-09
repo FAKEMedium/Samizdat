@@ -209,8 +209,10 @@ sub register ($self, $app, $conf) {
       if ($invoicedata->{invoice}->{kreditfakturaavser} || $action eq 'credit') {
         $htmldata = $self->render_mail(template => 'invoice/credit/mailhtml', layout => 'default', invoicedata => $invoicedata);
       } elsif ($action eq 'reminder' || $action eq 'reminder_mild' || $action eq 'reminder_tough') {
-        # For reminders, just render the message with the default layout
-        $htmldata = $self->render_mail(template => 'invoice/remind/message', layout => 'default', message => $message);
+        # Re-render reminder template with invoicedata so CID references resolve
+        my $template = $action eq 'reminder_tough' ? 'invoice/remind/tough' : 'invoice/remind/mild';
+        my $body = $self->render_to_string(template => $template, format => 'html', invoicedata => $invoicedata, message => $message);
+        $htmldata = $self->render_mail(template => 'invoice/remind/message', layout => 'default', message => $body);
       } else {
         $htmldata = $self->render_mail(template => 'invoice/create/mailhtml', layout => 'default', invoicedata => $invoicedata);
       }
