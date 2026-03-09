@@ -78,7 +78,7 @@
   <h3 style="color: white; margin-top: 0;"><%== __('Pay with Swish') %></h3>
   <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
     % if ($qr_svg) {
-    <div style="background: white; padding: 10px; border-radius: 5px;">
+    <div style="background: white; padding: 10px; border-radius: 5px; width: 200px; height: 200px; max-width: 200px; max-height: 200px; overflow: hidden;">
       <%== $qr_svg %>
     </div>
     % }
