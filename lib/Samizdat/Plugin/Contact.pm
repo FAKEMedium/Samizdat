@@ -10,7 +10,7 @@ sub register ($self, $app, $conf = {}) {
 
   my $r = $app->routes;
   # GET for HTML page, API routes handled by OpenAPI
-  $r->get('/contact')->to(controller => 'Contact', action => 'index')->name('contact_index');
+  $r->any(['GET', 'POST'] => '/contact')->to(controller => 'Contact', action => 'index')->name('contact_index');
 }
 
 1;
