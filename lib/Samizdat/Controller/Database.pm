@@ -10,21 +10,38 @@ sub index ($self) {
     $web->{script} .= $self->render_to_string(template => 'database/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'database/index', databases => [], status => 200);
   } else {
-    return unless $self->access({ admin => 1 });
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
 
-    my $customerid = $self->param('customerid');
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    my $customerid = int($self->param('customerid') // 0);
+
+    if (!$is_admin) {
+      return unless $self->access({ 'valid-user' => 1 });
+      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
+      return $self->render(json => { databases => [], admin => 0 }) unless $user_customerid;
+      $customerid = $user_customerid;
+    }
+
     my $params = {};
-    $params->{where} = { customerid => int($customerid) } if $customerid;
+    $params->{where} = { customerid => $customerid } if $customerid;
 
     my $formdata = {
       databases => $self->app->database->get($params),
+      admin     => $is_admin ? 1 : 0,
     };
     return $self->render(json => $formdata);
   }
 }
 
 sub types ($self) {
-  return unless $self->access({ admin => 1 });
+  return unless $self->access({ 'valid-user' => 1 });
   return $self->render(json => { types => $self->app->database->get_types });
 }
 
@@ -41,18 +58,34 @@ sub get ($self) {
     $web->{script} .= $self->render_to_string(template => 'database/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'database/index', status => 200);
   } else {
-    return unless $self->access({ admin => 1 });
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    if (!$is_admin) {
+      return unless $self->access({ 'valid-user' => 1 });
+      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
+      return $self->render(json => { error => 'Database not found' }, status => 404) unless $user_customerid;
+      $customerid = $user_customerid;
+    }
 
     my $params = {};
     if ($databaseid) {
       $params->{where} = { databaseid => int($databaseid) };
+      $params->{where}->{customerid} = $customerid if $customerid && !$is_admin;
     } elsif ($databasename) {
       $params->{where} = { databasename => $databasename };
       $params->{where}->{customerid} = int($customerid) if $customerid;
     }
 
     my $database = $self->app->database->get($params)->[0];
-    return $self->render(json => { database => $database });
+    return $self->render(json => { database => $database, admin => $is_admin ? 1 : 0 });
   }
 }
 
