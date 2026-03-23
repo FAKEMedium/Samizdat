@@ -18,6 +18,7 @@ sub index ($self) {
   keys %{$self->app->config->{manager}};
 
   for my $service (@services) {
+    next unless $self->app->renderer->get_helper($service);
     $web->{script} .= $self->render_to_string(template => sprintf('%s/chunks/manager', $service), format => 'js', service => $service);
     my $cardcontent =  $self->render_to_string(template => sprintf('%s/chunks/manager', $service), format => 'html', service => $service);
     my $card = $self->render_to_string(template => 'manager/chunks/card', cardcontent => $cardcontent, service => $service, format => 'html');
