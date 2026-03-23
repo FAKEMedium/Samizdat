@@ -1,11 +1,9 @@
-% # Swish payment button container
+% # Swish payment button container - company flow (QR code / direct link)
 <div id="swish-button-container" class="swish-payment">
   <div class="mb-3">
-    <label for="swish-phone" class="form-label"><%= __('Phone number') %></label>
-    <input type="tel" class="form-control" id="swish-phone" placeholder="07XXXXXXXX">
-    <div class="form-text"><%= __('Enter your Swedish phone number to receive a Swish payment request.') %></div>
+    <%== swish_qr_svg(amount => $params->{amount}, message => $params->{message}, size => 250) %>
   </div>
-  <button type="button" class="btn btn-success" id="swish-pay-btn">
+  <a href="<%== swish_payment_url(amount => $params->{amount}, message => $params->{message}) %>" class="btn btn-success">
     <%== anysvg
         'swish-icon',
         'src/public/media/images/swish.svg',
@@ -18,8 +16,7 @@
           width      => 24,
         }
     %>
-    <%= __('Pay with Swish') %>
-  </button>
-  <div id="swish-status" class="mb-3" style="display:none;"></div>
-  <div id="swish-qr" class="mb-3" style="display:none;"></div>
+    <%= __('Open Swish App') %>
+  </a>
+  <p class="text-muted small mt-2"><%= __('Scan QR code or tap button to pay with Swish') %></p>
 </div>

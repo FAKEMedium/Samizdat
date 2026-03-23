@@ -6,6 +6,7 @@ use Mojo::Util qw(trim);
 use Mojo::JSON qw(decode_json encode_json);
 use Date::Format;
 use Data::Dumper;
+use SQL::Abstract;
 
 has 'config';
 has 'pg';
@@ -14,6 +15,11 @@ has 'customer';  # Customer model helper
 
 sub database ($self) {
   return ('mysql' eq ($self->config->{dbtype} // 'postgresql')) ? $self->mysql->db : $self->pg->db;
+}
+
+sub count ($self, $where = {}) {
+  my $db = $self->database;
+  return $db->select('invoice', 'COUNT(*) AS total', $where)->hash->{total};
 }
 
 sub get ($self, $params = {}) {
@@ -32,7 +38,17 @@ sub get ($self, $params = {}) {
   my $lastreminderdate = "(SELECT MAX(reminderdate) FROM invoicereminder WHERE invoicereminder.invoiceid = invoice.invoiceid) AS lastreminderdate";
   my $remindercount = "(SELECT COUNT(*) FROM invoicereminder WHERE invoicereminder.invoiceid = invoice.invoiceid) AS remindercount";
 
-  my $invoices = $db->select('invoice', "*, $due, $duedate, $lastreminderdate, $remindercount", $where, $limit)->hashes;
+  # Extract pagination from limit hash (select() 4th arg only handles ordering)
+  my $pg_limit = delete $limit->{-limit};
+  my $pg_offset = delete $limit->{-offset};
+
+  my $order = %$limit ? $limit : undef;
+
+  my ($sql, @bind) = SQL::Abstract->new->select('invoice', "*, $due, $duedate, $lastreminderdate, $remindercount", $where, $order);
+  $sql .= sprintf(' LIMIT %d', int $pg_limit) if $pg_limit;
+  $sql .= sprintf(' OFFSET %d', int $pg_offset) if $pg_offset;
+
+  my $invoices = $db->query($sql, @bind)->hashes;
   return $invoices;
 }
 

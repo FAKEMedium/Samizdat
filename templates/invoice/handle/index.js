@@ -130,6 +130,19 @@ function populateForm(formdata, method, dataform) {
   let invoiceitems = formdata.invoiceitems;
   let payments = formdata.payments || [];
   let reminders = formdata.reminders || [];
+  const isAdmin = !!formdata.admin;
+
+  // Hide admin-only buttons for non-admin users
+  ['paymentbutton', 'creditBtn', 'remindbutton', 'reprintBtn'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('d-none', !isAdmin);
+  });
+
+  // Show pay button for non-admin users on unpaid invoices
+  const payBtn = document.getElementById('payBtn');
+  if (payBtn) {
+    payBtn.classList.toggle('d-none', isAdmin || invoice.state !== 'fakturerad');
+  }
 
   // Determine percustomer from current URL - check if we're under the customer route
   let customerBaseUrl = `<%== url_for('customer_index') %>`;
@@ -138,6 +151,10 @@ function populateForm(formdata, method, dataform) {
   // Use onclick assignment instead of setAttribute for CSP compliance
   document.querySelector('#previd').onclick = (e) => { e.preventDefault(); getId('prev', invoice.customerid, invoice.invoiceid, percustomer); };
   document.querySelector('#nextid').onclick = (e) => { e.preventDefault(); getId('next', invoice.customerid, invoice.invoiceid, percustomer); };
+
+  // Hide nav arrows for non-admin users
+  document.querySelector('#previd')?.closest('.nav-item')?.classList.toggle('d-none', !isAdmin);
+  document.querySelector('#nextid')?.closest('.nav-item')?.classList.toggle('d-none', !isAdmin);
 
   if (percustomer) {
     thisurl = `<%== url_for('customer_index') %>/${invoice.customerid}/invoices/${invoice.invoiceid}`;
@@ -171,7 +188,7 @@ function populateForm(formdata, method, dataform) {
 
   if (parseInt(invoice.due) > 0) {
     document.querySelector('#duebox').classList.remove('d-none');
-  } else {
+  } else if (isAdmin) {
     document.querySelector(dataform).classList.add('d-none');
   }
   document.querySelector('#creditedbox').classList.add('d-none');
@@ -192,13 +209,13 @@ function populateForm(formdata, method, dataform) {
   document.querySelector('#totalcost').innerHTML = invoice.totalcost;
   document.querySelector('#vat').innerHTML = sprintf('%.2f', invoice.totalcost * (1 - 1 / (1 + invoice.vat)));
   if (invoice.state !== 'fakturerad') {
-    document.querySelector(dataform).classList.add('d-none');
+    if (isAdmin) {
+      document.querySelector(dataform).classList.add('d-none');
+    }
     document.querySelector('#remindbutton').href = '#';
-//    document.querySelector('#paymentbutton').href = '#';
   } else {
     document.querySelector(dataform).classList.remove('d-none');
     document.querySelector('#duebox').classList.remove('d-none');
-//    document.querySelector('#paymentbutton').href = `<%== url_for('customer_index') %>/${invoice.customerid}/invoices/${invoice.invoiceid}/payment`;
     document.querySelector('#remindbutton').href = `<%== url_for('customer_index') %>/${invoice.customerid}/invoices/${invoice.invoiceid}/remind`;
   }
   var pdfoffcanvas = document.getElementById('pdfoffcanvas');
@@ -410,5 +427,20 @@ document.getElementById('resendBtn')?.addEventListener('click', () => window.res
 document.getElementById('reprintBtn')?.addEventListener('click', () => window.reprintInvoice());
 document.getElementById('creditBtn')?.addEventListener('click', () => window.makeCreditInvoice('#dataform'));
 document.getElementById('paymentbutton')?.addEventListener('click', () => window.markPayment('#dataform'));
+document.getElementById('payBtn')?.addEventListener('click', () => {
+  const invoiceid = document.querySelector('#invoiceid')?.value;
+  if (!invoiceid) return;
+  const payUrl = `<%== url_for('invoice_pay', invoiceid => '_IID_') %>`.replace('_IID_', invoiceid);
+  const modalDialog = document.querySelector('#universalmodal #modalDialog');
+  if (!modalDialog) return;
+  fetch(payUrl, { headers: { 'Accept': 'text/html' } })
+    .then(r => r.text())
+    .then(html => {
+      modalDialog.innerHTML = html;
+      const modal = new bootstrap.Modal(document.getElementById('universalmodal'));
+      modal.show();
+    })
+    .catch(err => console.error('Error loading pay modal:', err));
+});
 
 getInvoice('#dataform');

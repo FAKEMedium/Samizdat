@@ -16,6 +16,10 @@
   <input type="hidden" name="customerid" id="customerid">
   <input type="hidden" name="invoiceid" id="invoiceid">
   <div class="input-group justify-content-end">
+    <button type="button" class="btn btn-success mx-1 d-none" id="payBtn">
+      <%== icon 'credit-card', {} %>
+      <span class="d-sm-inline d-none ms-1"><%== __('Pay') %></span>
+    </button>
     <button type="button" class="btn btn-primary mx-1" id="paymentbutton" title="<%== __('Click to register payment.') %>">
       <%== icon 'clipboard-plus-fill', {} %>
       <span class="d-sm-inline d-none"><%== __('Mark payment') %></span>

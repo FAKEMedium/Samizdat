@@ -27,6 +27,7 @@ sub register ($self, $app, $conf) {
   my $manager = $r->manager('invoices')->to(controller => 'Invoice');
   $manager->get('/open')                                            ->to('#open')                 ->name('invoice_open');
   $manager->get('/payment-modal')                                   ->to('#paymentModal')         ->name('invoice_payment_modal');
+  $manager->get('/:invoiceid/pay')                                   ->to('#pay')                  ->name('invoice_pay');
   $manager->get('/:invoiceid')                                      ->to('#handle')               ->name('invoice_handle');
   # PUT /invoices/{invoiceid} is defined in OpenAPI spec (operationId: Invoice.update)
   $manager->get('/')                                                ->to('#index')                ->name('invoice_index');

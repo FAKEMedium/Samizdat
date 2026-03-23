@@ -1,9 +1,11 @@
+let currentPage = 1;
+
 const form = document.querySelector("#dataform");
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
-async function sendData(method) {
+async function sendData(method, page) {
   const url = form.action || "";
   const target = form.target || "";
   const formData = new FormData(form);
@@ -17,8 +19,12 @@ async function sendData(method) {
   if (method == 'POST') {
     request.headers.Accept = 'application/json, application/pdf';
   }
+  let fetchUrl = window.location.pathname;
+  if (method === 'GET' && page) {
+    fetchUrl += `?page=${page}`;
+  }
   try {
-    const response = await fetch(window.location, request);
+    const response = await fetch(fetchUrl, request);
     if (!response.ok) {
       if (response.status === 401) {
         const data = await response.json();
@@ -45,8 +51,9 @@ function updateInvoice() {
   sendData('PUT');
 }
 
-function getInvoices(){
-  sendData('GET');
+function getInvoices(page = 1){
+  currentPage = page;
+  sendData('GET', page);
 }
 
 function populateForm(formdata, method) {
@@ -127,10 +134,17 @@ function populateForm(formdata, method) {
                   <td class="admin-only${isAdmin ? '' : ' d-none'}">${reminderCell}</td>
                   <td class="admin-only${isAdmin ? '' : ' d-none'}">${paymentCell}</td>
                   <td class="text-end">${invoice.totalcost}</td>
-                  <td class="text-end">${invoice.totalcost}</td>
+                  <td class="text-end">${invoice.debt || invoice.totalcost}</td>
                 </tr>`;
   }
   document.querySelector('#invoices tbody').innerHTML = snippet;
+
+  // Pagination
+  const total = formdata.total || 0;
+  const limit = formdata.limit || 25;
+  const page = formdata.page || 1;
+  const totalPages = Math.ceil(total / limit);
+  buildPagination(page, totalPages);
 
   if ('PUT' == method) {
     document.querySelector('#toast-messages').innerHTML = `
@@ -144,9 +158,66 @@ function dropToast(){
   document.querySelector('#toast-messages').innerHTML = '';
 }
 
+function buildPagination(page, totalPages) {
+  const pagination = document.querySelector('#invoicePagination');
+  if (!pagination) return;
+  if (totalPages <= 1) {
+    pagination.innerHTML = '';
+    return;
+  }
+  let html = '';
+
+  // Previous
+  html += `<li class="page-item ${page <= 1 ? 'disabled' : ''}">
+    <a class="page-link" href="#" data-page="${page - 1}">&laquo;</a>
+  </li>`;
+
+  // Pages
+  const startPage = Math.max(1, page - 2);
+  const endPage = Math.min(totalPages, page + 2);
+
+  if (startPage > 1) {
+    html += `<li class="page-item"><a class="page-link" href="#" data-page="1">1</a></li>`;
+    if (startPage > 2) {
+      html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+    }
+  }
+
+  for (let i = startPage; i <= endPage; i++) {
+    html += `<li class="page-item ${i === page ? 'active' : ''}">
+      <a class="page-link" href="#" data-page="${i}">${i}</a>
+    </li>`;
+  }
+
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      html += `<li class="page-item disabled"><span class="page-link">...</span></li>`;
+    }
+    html += `<li class="page-item"><a class="page-link" href="#" data-page="${totalPages}">${totalPages}</a></li>`;
+  }
+
+  // Next
+  html += `<li class="page-item ${page >= totalPages ? 'disabled' : ''}">
+    <a class="page-link" href="#" data-page="${page + 1}">&raquo;</a>
+  </li>`;
+
+  pagination.innerHTML = html;
+
+  // Click handlers
+  pagination.querySelectorAll('a.page-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetPage = parseInt(link.dataset.page);
+      if (targetPage >= 1 && targetPage <= totalPages && targetPage !== page) {
+        getInvoices(targetPage);
+      }
+    });
+  });
+}
+
 // Refresh function called after payment modal submission
 window.refreshInvoiceData = function() {
-  getInvoices();
+  getInvoices(currentPage);
 };
 
 // Event delegation for payment buttons
