@@ -56,7 +56,7 @@ sub index ($self) {
     if (!$is_admin) {
       # Non-admin: require valid-user and filter to own customer
       return unless $self->access({ 'valid-user' => 1 });
-      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid});
+      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
       return $self->render(json => { invoices => [], customer => {}, admin => 0 }) unless $user_customerid;
       $customerid = $user_customerid;
     }
@@ -118,6 +118,16 @@ sub index ($self) {
       $options->{where}->{state} = { '!=' => 'obehandlad' };
     }
 
+    # Pagination
+    my $page = int($self->param('page') // 1);
+    $page = 1 if $page < 1;
+    my $limit = int($self->app->config->{pagination}->{perpage} // 25);
+    my $offset = ($page - 1) * $limit;
+
+    my $total = $self->app->invoice->count($options->{where});
+
+    $options->{limit} = { -desc => 'invoicedate', -limit => $limit, -offset => $offset };
+
     my $invoices = $self->app->invoice->get($options);
 
     # Get unique customer IDs from invoices
@@ -152,6 +162,9 @@ sub index ($self) {
       destroyed  => $destroyed,
       searchterm => $searchterm,
       admin      => $is_admin ? 1 : 0,
+      page       => $page,
+      limit      => $limit,
+      total      => $total,
     };
 
     # Update filter and save to cookie
@@ -431,9 +444,6 @@ sub edit ($self) {
 
 
 sub handle ($self) {
-  # Require admin access for invoice handling
-  return unless $self->access({ admin => 1 });
-
   my $title = $self->app->__x('Invoice');
   my $web = {title => $title};
   my $toast = $self->render_to_string(
@@ -455,18 +465,98 @@ sub handle ($self) {
     $web->{script} .= $self->render_to_string(template => 'invoice/handle/index', format => 'js', toast => $toast);
     return $self->render(web => $web, title => $title, template => 'invoice/handle/index', headline => 'invoice/chunks/handlelinks');
   } else {
-    # Require admin access for JSON invoice data
-    return unless $self->access({ admin => 1 });
+    # Check access: admin or valid-user
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
 
     my $customerid = int($self->stash('customerid') // 0);
     my $invoiceid = int($self->stash('invoiceid') // 0);
+
+    if (!$is_admin) {
+      # Non-admin: require valid-user and filter to own customer
+      return unless $self->access({ 'valid-user' => 1 });
+      my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
+      return $self->render(json => { error => 'Invoice not found' }, status => 404) unless $user_customerid;
+      $customerid = $user_customerid;
+    }
 
     # Get form data from model
     my $formdata = $self->app->invoice->get_invoice_formdata($invoiceid, $customerid);
     return $self->render(json => { error => 'Invoice not found' }) unless $formdata;
 
+    $formdata->{admin} = $is_admin ? 1 : 0;
+
     return $self->render(json => $formdata);
   }
+}
+
+
+sub pay ($self) {
+  # Check access: admin or valid-user with own invoice
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+  my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+  my $is_admin = 0;
+
+  if ($session && $session->{username}) {
+    my $admins = $self->config->{manager}->{account}->{admins} // {};
+    my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+    $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+  }
+
+  my $invoiceid = int($self->stash('invoiceid') // 0);
+
+  if (!$is_admin) {
+    return unless $self->access({ 'valid-user' => 1 });
+    my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
+    return $self->render(text => 'Not found', status => 404) unless $user_customerid;
+
+    # Verify invoice belongs to user and is unpaid
+    my $invoice = $self->app->invoice->get({ where => { invoiceid => $invoiceid, customerid => $user_customerid } })->[0];
+    return $self->render(text => 'Not found', status => 404) unless $invoice;
+    return $self->render(text => 'Invoice is not payable', status => 400) unless $invoice->{state} eq 'fakturerad';
+  }
+
+  # Fetch invoice data for modal display
+  my $data = $self->app->invoice->get_invoice_and_customer($invoiceid);
+  return $self->render(text => $data->{error}, status => $data->{status}) if $data->{error};
+
+  my $invoice = $data->{invoice};
+  my $customer = $data->{customer};
+
+  # Calculate amounts
+  my $invoiceitems = $self->app->invoice->invoiceitems({ where => { 'invoice.invoiceid' => $invoiceid } });
+  my $amounts = $self->app->invoice->calculate_amounts($invoiceitems, $invoice->{vat}, $invoice->{currency});
+
+  my $title = $self->app->__x('Pay invoice {number}', number => $invoice->{fakturanummer});
+  my $web = { title => $title };
+
+  # Check which payment helpers are available
+  my $payment_methods = {
+    swish  => (exists $self->app->renderer->helpers->{swish}  && uc($invoice->{currency} // '') eq 'SEK') ? 1 : 0,
+    paypal => exists($self->app->renderer->helpers->{paypal}) ? 1 : 0,
+    stripe => exists($self->app->renderer->helpers->{stripe}) ? 1 : 0,
+    nets   => exists($self->app->renderer->helpers->{nets})   ? 1 : 0,
+  };
+
+  $web->{script} = $self->render_to_string(template => 'invoice/pay/index', format => 'js');
+
+  return $self->render(
+    template        => 'invoice/pay/index',
+    layout          => 'modal',
+    web             => $web,
+    title           => $title,
+    invoice         => $invoice,
+    customer        => $customer,
+    amounts         => $amounts,
+    payment_methods => $payment_methods,
+  );
 }
 
 
@@ -751,8 +841,20 @@ sub remind ($self) {
 
 # Resend an invoice email (no rendering of PDF)
 sub resend ($self) {
-  # Require admin access for invoice operations
-  return unless $self->access({ admin => 1 });
+  # Check access: admin or valid-user
+  my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+  my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+  my $is_admin = 0;
+
+  if ($session && $session->{username}) {
+    my $admins = $self->config->{manager}->{account}->{admins} // {};
+    my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+    $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+  }
+
+  if (!$is_admin) {
+    return unless $self->access({ 'valid-user' => 1 });
+  }
 
   my $invoiceid = int $self->stash('invoiceid') // $self->param('invoiceid') // 0;
 
@@ -771,6 +873,14 @@ sub resend ($self) {
 
   # Get invoice and customer data from model
   my $invoicedata = $self->app->invoice->get_invoice_and_customer($invoiceid);
+
+  # Non-admin: verify invoice belongs to own customer
+  if (!$is_admin && !$invoicedata->{error}) {
+    my $user_customerid = $self->app->customer->get_customerid_for_user($session->{userid}, $session->{username});
+    if (!$user_customerid || $invoicedata->{invoice}->{customerid} != $user_customerid) {
+      return $self->render(json => { error => $self->app->__('Invoice not found') }, status => 404);
+    }
+  }
   if ($invoicedata->{error}) {
     return $self->render(json => { error => $invoicedata->{error} }, status => $invoicedata->{status});
   }

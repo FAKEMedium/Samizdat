@@ -143,13 +143,22 @@ sub _get_pg ($self, $where, $limit) {
   return $customers;
 }
 
-sub get_customerid_for_user ($self, $userid) {
-  my $db = $self->app->pg->db;
-  my $row = $db->query(
-    'SELECT customerid FROM customer.entityroleusers WHERE userid = ? LIMIT 1',
-    $userid
-  )->array;
-  return $row ? $row->[0] : undef;
+sub get_customerid_for_user ($self, $userid, $username = undef) {
+  if ($self->dbtype eq 'mysql') {
+    my $db = $self->database;
+    my $row = $db->query(
+      'SELECT customerid FROM snapusers WHERE userlogin = ? AND customerid > 0 LIMIT 1',
+      $username
+    )->array;
+    return $row ? $row->[0] : undef;
+  } else {
+    my $db = $self->app->pg->db;
+    my $row = $db->query(
+      'SELECT customerid FROM customer.entityroleusers WHERE userid = ? LIMIT 1',
+      $userid
+    )->array;
+    return $row ? $row->[0] : undef;
+  }
 }
 
 sub name ($self, $customer) {

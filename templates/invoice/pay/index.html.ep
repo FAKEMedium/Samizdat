@@ -1,0 +1,65 @@
+<div class="modal-content" id="pay-modal-content" data-amount="<%= $amounts->{totalcost} %>" data-currency="<%= uc($invoice->{currency} // 'SEK') %>" data-invoiceid="<%= $invoice->{invoiceid} %>" data-fakturanummer="<%= $invoice->{fakturanummer} %>">
+  <div class="modal-header">
+    <h5 class="modal-title me-auto"><%== __x('Pay invoice {number}', number => $invoice->{fakturanummer}) %></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%= __('Close') %>"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <div class="d-flex justify-content-between">
+        <span class="fw-bold"><%== __('Amount') %></span>
+        <span><%= $amounts->{totalcost} %> <%= uc($invoice->{currency} // 'SEK') %></span>
+      </div>
+      <div class="d-flex justify-content-between">
+        <span class="fw-bold"><%== __('Due date') %></span>
+        <span><%= $invoice->{duedate} %></span>
+      </div>
+    </div>
+    <hr>
+% my @methods;
+% push @methods, { id => 'nets',   label => 'Nets' }   if $payment_methods->{nets};
+% push @methods, { id => 'swish',  label => 'Swish' }  if $payment_methods->{swish};
+% push @methods, { id => 'paypal', label => 'PayPal' } if $payment_methods->{paypal};
+% push @methods, { id => 'stripe', label => 'Stripe' } if $payment_methods->{stripe};
+% if (@methods) {
+    <fieldset>
+      <legend class="visually-hidden"><%= __('Payment method') %></legend>
+      <div class="d-flex flex-wrap gap-3 mb-3" role="radiogroup" aria-label="<%= __('Payment method') %>">
+%   for my $i (0 .. $#methods) {
+%     my $m = $methods[$i];
+%     my $checked = $i == 0 ? ' checked' : '';
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="paymethod" id="paymethod-<%= $m->{id} %>" value="<%= $m->{id} %>"<%= $checked %> aria-controls="paypanel-<%= $m->{id} %>">
+          <label class="form-check-label" for="paymethod-<%= $m->{id} %>"><%= $m->{label} %></label>
+        </div>
+%   }
+      </div>
+    </fieldset>
+% my $first_method = $methods[0]->{id};
+% if ($payment_methods->{nets}) {
+    <div id="paypanel-nets" class="pay-panel" role="region" aria-label="Nets"<%= $first_method ne 'nets' ? ' hidden' : '' %>>
+      <a href="<%== url_for('nets_payments_index') %>" class="btn btn-outline-primary"><%== __('Pay with Nets') %></a>
+    </div>
+% }
+% if ($payment_methods->{swish}) {
+    <div id="paypanel-swish" class="pay-panel" role="region" aria-label="Swish"<%= $first_method ne 'swish' ? ' hidden' : '' %>>
+      <%== swishbutton(amount => $amounts->{totalcost}, message => $invoice->{fakturanummer}, invoiceid => $invoice->{invoiceid}) %>
+    </div>
+% }
+% if ($payment_methods->{paypal}) {
+    <div id="paypanel-paypal" class="pay-panel" role="region" aria-label="PayPal"<%= $first_method ne 'paypal' ? ' hidden' : '' %>>
+      <%== paypalbutton(amount => $amounts->{totalcost}, currency => uc($invoice->{currency} // 'USD'), invoiceid => $invoice->{invoiceid}) %>
+    </div>
+% }
+% if ($payment_methods->{stripe}) {
+    <div id="paypanel-stripe" class="pay-panel" role="region" aria-label="Stripe"<%= $first_method ne 'stripe' ? ' hidden' : '' %>>
+      <%== stripebutton(amount => $amounts->{totalcost}, currency => uc($invoice->{currency} // 'SEK'), invoiceid => $invoice->{invoiceid}) %>
+    </div>
+% }
+% } else {
+    <div class="alert alert-info"><%== __('No payment methods are currently available.') %></div>
+% }
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Close') %></button>
+  </div>
+</div>

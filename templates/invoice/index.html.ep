@@ -22,4 +22,7 @@
       </tr>
     </tfoot>
   </table>
+  <nav aria-label="pagination">
+    <ul class="pagination pagination-sm" id="invoicePagination"></ul>
+  </nav>
 </form>
