@@ -161,6 +161,26 @@ sub get_customerid_for_user ($self, $userid, $username = undef) {
   }
 }
 
+sub get_customers_for_user ($self, $userid, $languageid = 1) {
+  my $db = $self->app->pg->db;
+  return $db->query(qq{
+    SELECT
+      c.customerid,
+      co.displayname AS company,
+      co.givenname AS firstname,
+      co.commonname AS lastname,
+      co.email AS contactemail,
+      STRING_AGG(rn.rolename, ', ' ORDER BY eru.roleid) AS roles
+    FROM customer.entityroleusers eru
+    JOIN customer.customers c ON eru.customerid = c.customerid
+    LEFT JOIN account.contacts co ON c.contactid = co.contactid
+    LEFT JOIN account.rolenames rn ON eru.roleid = rn.roleid AND rn.languageid = ?
+    WHERE eru.userid = ?
+    GROUP BY c.customerid, co.displayname, co.givenname, co.commonname, co.email
+    ORDER BY c.customerid
+  }, $languageid, $userid)->hashes->to_array;
+}
+
 sub name ($self, $customer) {
   my $name = trim($customer->{company} // '');
   if ($name eq '') {
