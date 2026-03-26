@@ -1,5 +1,5 @@
 % my $trusts = {'blocked' => __('Blocked'), 'normal' => __('Normal'), 'trusted' => __('Full')};
-<table class="table table-sm table-striped sortable" id="customers">
+<table class="table table-sm table-striped sortable d-none" id="customers">
   <thead>
     <tr>
       <th><%== __('Customer Id') %></th>
@@ -9,6 +9,21 @@
     </tr>
   </thead>
   <tbody>
-    <!-- Data will be injected here by JavaScript -->
   </tbody>
 </table>
+<table class="table table-sm table-striped sortable d-none" id="mycustomers">
+  <thead>
+    <tr>
+      <th><%== __('Customer Id') %></th>
+      <th><%== __('Company') %></th>
+      <th><%== __('Name') %></th>
+      <th><%== __('Roles') %></th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<div class="d-none" id="no-affiliations">
+  <p><%== __('You are not connected to any customer accounts.') %></p>
+  <p><%== __('Ask an existing customer to invite you, or create a new customer account.') %></p>
+</div>

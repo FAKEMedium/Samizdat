@@ -20,8 +20,22 @@ sub index ($self) {
     return $self->render(web => $web, title => $title, template => 'customer/index', customers => [], status => 200);
 
   } else {
-    # Require admin access for customer data
-    return unless $self->access({ admin => 1 });
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    if (!$is_admin) {
+      return unless $self->access({ 'valid-user' => 1 });
+      my $languageid = $session->{languages_id} // 1;
+      my $customers = $self->app->customer->get_customers_for_user($session->{userid}, $languageid);
+      return $self->render(json => { customers => $customers, admin => 0 });
+    }
 
     my $searchterm = $self->param('searchterm');
     my $simple = $self->param('simple');  # For dropdowns - returns id+name only, active customers
@@ -75,7 +89,8 @@ sub index ($self) {
     }
     my $formdata = {
       customers  => $self->app->customer->get($params),
-      searchterm => $searchterm
+      searchterm => $searchterm,
+      admin      => 1,
     };
     return $self->render(json => $formdata);
   }
