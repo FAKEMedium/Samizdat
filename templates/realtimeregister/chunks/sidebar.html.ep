@@ -1,1 +1,1 @@
-<img src="/media/images/register.png" class="img-fluid" alt="<%== __('Realtime Register') %>" width="512" height="512">
+<img src="/media/images/register.png" class="img-fluid d-print-none" alt="<%== __('Realtime Register') %>" width="512" height="512">

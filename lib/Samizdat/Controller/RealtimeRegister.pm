@@ -235,8 +235,47 @@ sub transactions ($self) {
     $params->{limit} = $self->param('limit') if $self->param('limit');
     $params->{offset} = $self->param('offset') if $self->param('offset');
     $params->{order} = $self->param('order') // '-date';  # Default: newest first
-    my $transactions = $self->app->realtimeregister->getTransactions($params);
-    return $self->render(json => { transactions => $transactions });
+
+    # Date range filtering
+    my $startDate = $self->param('startDate');
+    my $endDate   = $self->param('endDate');
+    $params->{'date:gte'} = "${startDate}T00:00:00Z" if $startDate;
+    $params->{'date:lte'} = "${endDate}T23:59:59Z"   if $endDate;
+
+    my $rtr = $self->app->realtimeregister;
+    my $transactions = $rtr->getTransactions($params);
+    my $result = { transactions => $transactions };
+
+    # Compute totals and balances for the period
+    if ($startDate || $endDate) {
+      # Fetch all transactions in the date range (reuse working getTransactions)
+      my $allInRange = $rtr->getTransactions({
+        'date:gte' => "${startDate}T00:00:00Z",
+        'date:lte' => "${endDate}T23:59:59Z",
+        limit      => 100,
+        offset     => 0,
+      });
+      my $totals = $rtr->sumTransactions($allInRange->{entities});
+      $result->{ingoing}  = $totals->{ingoing};
+      $result->{outgoing} = $totals->{outgoing};
+
+      # If current balance provided, compute opening/closing by working backwards
+      my $currentBalance = $self->param('currentBalance');
+      if (defined $currentBalance && $startDate) {
+        $currentBalance = int($currentBalance * 100);  # EUR to cents
+        # Sum everything from startDate to now
+        my $allFromStart = $rtr->getTransactions({
+          'date:gte' => "${startDate}T00:00:00Z",
+          limit      => 100,
+          offset     => 0,
+        });
+        my $sumFromStart = $rtr->sumTransactions($allFromStart->{entities});
+        $result->{openingBalance} = $currentBalance - $sumFromStart->{net};
+        $result->{closingBalance} = $result->{openingBalance} + $totals->{net};
+      }
+    }
+
+    return $self->render(json => $result);
   }
 }
 

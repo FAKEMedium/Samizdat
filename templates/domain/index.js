@@ -6,6 +6,18 @@
   const customerFilter = document.querySelector('#customerFilter');
   const searchtermInput = document.querySelector('#searchterm');
 
+  // Sort state from cookie, default: domainname ascending
+  function getSortCookie() {
+    const match = document.cookie.match(/(?:^|;\s*)domain_sort=([^;]*)/);
+    return match ? decodeURIComponent(match[1]) : 'domainname';
+  }
+  function setSortCookie(value) {
+    const d = new Date();
+    d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+    document.cookie = `domain_sort=${value};expires=${d.toUTCString()};path=/;secure;SameSite=None;`;
+  }
+  let currentSort = getSortCookie();
+
   // State
   let currentPage = 1;
 
@@ -63,7 +75,8 @@
     let searchterm = formdata.searchterm || '';
     let snippet = '';
 
-    domains = domains.sortBy('-curexpiry');
+    domains = domains.sortBy(currentSort);
+    updateSortIndicators();
     for (const domain of domains) {
       let name = domain.domainname || '';
       if (searchterm) {
@@ -181,6 +194,33 @@
       name: cb.closest('tr').dataset.domainname
     }));
   }
+
+  // Sort column headers
+  function updateSortIndicators() {
+    document.querySelectorAll('th.sortable').forEach(th => {
+      const field = th.dataset.sort;
+      const bare = currentSort.replace(/^[+-]/, '');
+      const arrow = bare === field ? (currentSort[0] === '-' ? ' \u25BC' : ' \u25B2') : '';
+      // Remove old indicator, add new
+      th.textContent = th.textContent.replace(/ [\u25B2\u25BC]$/, '') + arrow;
+      th.style.cursor = 'pointer';
+    });
+  }
+
+  document.querySelector('#domains thead').addEventListener('click', (e) => {
+    const th = e.target.closest('th.sortable');
+    if (!th) return;
+    const field = th.dataset.sort;
+    const bare = currentSort.replace(/^[+-]/, '');
+    if (bare === field) {
+      // Toggle direction
+      currentSort = currentSort[0] === '-' ? field : '-' + field;
+    } else {
+      currentSort = field;
+    }
+    setSortCookie(currentSort);
+    fetchDomains(currentPage);
+  });
 
   // Search form handler
   document.querySelector('#dataform')?.addEventListener('submit', (e) => {

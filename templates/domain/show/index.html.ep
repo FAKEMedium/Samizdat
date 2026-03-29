@@ -1,0 +1,49 @@
+<div class="card mb-3">
+  <div class="card-header d-flex justify-content-between align-items-center">
+    <h2 class="h5 mb-0" id="domainTitle">
+      <div class="spinner-border spinner-border-sm" role="status"></div>
+    </h2>
+    <div id="domainNav" class="btn-group btn-group-sm"></div>
+  </div>
+  <div class="card-body" id="domainInfo">
+    <div class="text-center">
+      <div class="spinner-border spinner-border-sm" role="status">
+        <span class="visually-hidden"><%== __('Loading...') %></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row g-3" id="domainPanels" style="display: none;">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="h6 mb-0"><%== __('Nameservers') %></h3>
+      </div>
+      <div class="card-body" id="nameserversPanel">
+        <p class="text-muted"><%== __('Loading...') %></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="h6 mb-0"><%== __('Actions') %></h3>
+      </div>
+      <div class="card-body" id="actionsPanel">
+        <div class="d-flex flex-wrap gap-2">
+          <button class="btn btn-sm btn-outline-primary" id="btnAuthcode" disabled><%== __('Auth code') %></button>
+          <button class="btn btn-sm btn-outline-primary admin" id="btnRenew" disabled><%== __('Renew') %></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-12" id="dnssecCard" style="display: none;">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="h6 mb-0">DNSSEC</h3>
+      </div>
+      <div class="card-body" id="dnssecPanel"></div>
+    </div>
+  </div>
+</div>

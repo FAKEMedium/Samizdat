@@ -10,7 +10,20 @@ sub index ($self) {
     $web->{script} .= $self->render_to_string(template => 'domain/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'domain/index', domains => [], status => 200);
   } else {
-    return unless $self->access({ admin => 1 });
+    # Check admin status for access control
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    if (!$is_admin) {
+      return unless $self->access({ 'valid-user' => 1 });
+    }
 
     my $searchterm = $self->param('searchterm') // '';
     my $page = int($self->param('page') // 1);
@@ -21,6 +34,17 @@ sub index ($self) {
 
     # Build where clause
     my @conditions;
+
+    # Non-admin users: restrict to their customers
+    my @allowed_customerids;
+    if (!$is_admin && $session) {
+      my $user_customers = $self->app->customer->get_customers_for_user(
+        $session->{userid}, 1, $session->{username}
+      );
+      @allowed_customerids = map { $_->{customerid} } @$user_customers;
+      return $self->render(json => { domains => [], total => 0, pages => 0 }) unless @allowed_customerids;
+      push @conditions, { customerid => \@allowed_customerids };
+    }
 
     if ($searchterm ne '') {
       push @conditions, { domainname => { -like => sprintf('%%%s%%', $searchterm) } };
@@ -33,6 +57,10 @@ sub index ($self) {
     }
 
     if ($customerid ne '') {
+      # Non-admin: verify the requested customerid is in their allowed list
+      if (!$is_admin && !grep { $_ == int($customerid) } @allowed_customerids) {
+        return $self->render(json => { domains => [], total => 0, pages => 0 });
+      }
       push @conditions, { customerid => int($customerid) };
     }
 
@@ -55,7 +83,13 @@ sub index ($self) {
     my $customers = [];
     if ($page == 1 && $customerid eq '') {
       my %counts;
-      $counts{$_->{customerid}}++ for @{$self->app->domain->get({})};
+      if ($is_admin) {
+        $counts{$_->{customerid}}++ for @{$self->app->domain->get({})};
+      } else {
+        # Non-admin: only count domains for allowed customers
+        my $allowed_domains = $self->app->domain->get({ where => { customerid => \@allowed_customerids } });
+        $counts{$_->{customerid}}++ for @$allowed_domains;
+      }
       $customers = [ map { { id => $_, count => $counts{$_} } } sort { $a <=> $b } keys %counts ];
     }
 
@@ -68,6 +102,7 @@ sub index ($self) {
       total      => $total,
       pages      => int(($total + $per_page - 1) / $per_page),
       filter     => $filter,
+      admin      => $is_admin ? \1 : \0,
     };
     return $self->render(json => $formdata);
   }
@@ -103,12 +138,66 @@ sub get ($self) {
     $web->{script} .= $self->render_to_string(template => 'domain/show/index', format => 'js');
     return $self->render(web => $web, title => $title, template => 'domain/show/index', status => 200);
   } else {
-    return unless $self->access({ admin => 1 });
+    # Check admin or valid user with access to this customer
+    my $authcookie = $self->cookie($self->config->{manager}->{account}->{authcookiename});
+    my $session = $authcookie ? $self->app->account->session($authcookie) : undef;
+    my $is_admin = 0;
+
+    if ($session && $session->{username}) {
+      my $admins = $self->config->{manager}->{account}->{admins} // {};
+      my $superadmins = $self->config->{manager}->{account}->{superadmins} // {};
+      $is_admin = 1 if exists $admins->{$session->{username}} || exists $superadmins->{$session->{username}};
+    }
+
+    my @allowed;
+    if (!$is_admin) {
+      return unless $self->access({ 'valid-user' => 1 });
+      # Verify user belongs to this customer
+      my $user_customers = $self->app->customer->get_customers_for_user(
+        $session->{userid}, 1, $session->{username}
+      );
+      @allowed = map { $_->{customerid} } @$user_customers;
+      unless (grep { $_ == $customerid } @allowed) {
+        return $self->render(json => { error => 'Access denied' }, status => 403);
+      }
+    }
 
     my $params = { where => { domainid => $domainid } };
     my $domain = $self->app->domain->get($params)->[0];
-    return $self->render(json => { domain => $domain });
+
+    # Verify domain belongs to an allowed customer
+    if (!$is_admin && $domain) {
+      unless (grep { $_ == $domain->{customerid} } @allowed) {
+        return $self->render(json => { error => 'Access denied' }, status => 403);
+      }
+    }
+
+    my $allowed_ref = $is_admin ? undef : \@allowed;
+    my $neighbours = $self->app->domain->neighbours($domainid, $allowed_ref);
+
+    return $self->render(json => {
+      domain     => $domain,
+      neighbours => $neighbours,
+      admin      => $is_admin ? \1 : \0,
+    });
   }
+}
+
+sub registry_info ($self) {
+  return unless $self->access({ 'valid-user' => 1 });
+
+  my $domainid = int($self->param('domainid') // 0);
+  my $domain = $self->app->domain->get({ where => { domainid => $domainid } })->[0];
+  return $self->render(json => { error => 'Not found' }, status => 404) unless $domain;
+
+  my $info;
+  eval { $info = $self->app->domain->domain_info($domain->{domainname}) };
+  if ($@) {
+    $self->app->log->warn("Registry lookup failed for $domain->{domainname}: $@");
+    return $self->render(json => { error => 'Registry unavailable' });
+  }
+
+  return $self->render(json => { registryInfo => $info });
 }
 
 sub register_create ($self) {

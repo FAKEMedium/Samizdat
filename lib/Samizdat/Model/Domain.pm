@@ -2,17 +2,47 @@ package Samizdat::Model::Domain;
 
 use Mojo::Base -base, -signatures;
 use Mojo::Util qw(trim);
-use Data::Dumper;
 
 has 'config';
 has 'pg';
 has 'mysql';
+has 'registries';   # hashref of id => Registry adapter instance
+
+# Legacy accessors for backward compatibility during transition
 has 'epp';
 has 'realtimeregister';
 
 sub database ($self) {
   return ('mysql' eq ($self->config->{dbtype} // 'postgresql')) ? $self->mysql->db : $self->pg->db;
 }
+
+# Get a specific registry adapter by id
+sub registry ($self, $id) {
+  return $self->registries->{$id} if $self->registries && $self->registries->{$id};
+  return undef;
+}
+
+# Find the right registry for a domain name (by TLD matching from config)
+sub registry_for ($self, $domainname) {
+  return undef unless $self->registries;
+  my $tld = (split /\./, $domainname)[-1];
+  for my $id (keys %{$self->registries}) {
+    my $reg = $self->registries->{$id};
+    my $tlds = $reg->config->{tlds} // [];
+    return $reg if grep { lc($_) eq lc($tld) } @$tlds;
+  }
+  # Fall back to first available registry
+  my ($first) = values %{$self->registries};
+  return $first;
+}
+
+# List all configured registry ids
+sub registry_ids ($self) {
+  return [] unless $self->registries;
+  return [sort keys %{$self->registries}];
+}
+
+# Database domain operations
 
 sub get ($self, $params = {}) {
   my $db = $self->database;
@@ -32,113 +62,86 @@ sub get ($self, $params = {}) {
   return $db->select(@args)->hashes;
 }
 
-sub neighbours ($self, $domainid) {
+sub neighbours ($self, $domainid, $customerids = undef) {
   my $db = $self->database;
+  my $filter = '';
+  my @bind;
+  if ($customerids && @$customerids) {
+    my $placeholders = join ',', map { '?' } @$customerids;
+    $filter = " AND customerid IN ($placeholders)";
+    @bind = @$customerids;
+  }
   my $result = {
-    minid  => $db->query('SELECT MIN(domainid) AS minid FROM domain')->hash->{minid},
-    maxid  => $db->query('SELECT MAX(domainid) AS maxid FROM domain')->hash->{maxid},
-    previd => $db->query('SELECT MAX(domainid) AS previd FROM domain WHERE domainid < ?', $domainid)->hash->{previd},
-    nextid => $db->query('SELECT MIN(domainid) AS nextid FROM domain WHERE domainid > ?', $domainid)->hash->{nextid},
+    minid  => $db->query("SELECT MIN(domainid) AS minid FROM domain WHERE 1=1$filter", @bind)->hash->{minid},
+    maxid  => $db->query("SELECT MAX(domainid) AS maxid FROM domain WHERE 1=1$filter", @bind)->hash->{maxid},
+    previd => $db->query("SELECT MAX(domainid) AS previd FROM domain WHERE domainid < ?$filter", $domainid, @bind)->hash->{previd},
+    nextid => $db->query("SELECT MIN(domainid) AS nextid FROM domain WHERE domainid > ?$filter", $domainid, @bind)->hash->{nextid},
   };
-  $result->{previd} //= $result->{minid};
-  $result->{nextid} //= $result->{maxid};
+  $result->{previd} //= $result->{maxid};
+  $result->{nextid} //= $result->{minid};
   return $result;
 }
 
-# Contact management - delegates to EPP or RealtimeRegister
+# Contact management - dispatches through registry adapters
 
 sub contacts ($self, $params = {}) {
   my @contacts;
-
-  # Get from RealtimeRegister if available
-  if ($self->realtimeregister) {
-    my $rr_contacts = $self->realtimeregister->getContacts($params) // [];
-    for my $c (@$rr_contacts) {
-      push @contacts, $self->_normalize_rr_contact($c);
-    }
+  for my $reg (values %{$self->registries // {}}) {
+    push @contacts, @{$reg->contact_list($params) // []};
   }
-
-  # Get from EPP if available (EPP doesn't have list, skip)
-  # EPP contacts are typically retrieved by handle only
-
   return \@contacts;
 }
 
 sub contact_get ($self, $handle) {
   return undef unless $handle;
-
-  # Try RealtimeRegister first
-  if ($self->realtimeregister) {
-    my $contact = $self->realtimeregister->getContact($handle);
-    return $self->_normalize_rr_contact($contact) if $contact;
+  for my $reg (values %{$self->registries // {}}) {
+    my $contact = $reg->contact_get($handle);
+    return $contact if $contact;
   }
-
-  # Try EPP
-  if ($self->epp) {
-    my $info = {};
-    if ($self->epp->contact_info($handle, $info)) {
-      return $self->_normalize_epp_contact($info);
-    }
-  }
-
   return undef;
 }
 
 sub contact_create ($self, $data) {
-  my $registries = $data->{registries} // [];
+  my $registries_param = $data->{registries} // [];
 
-  # Registries can be array of strings (legacy) or array of {registry, handle} objects
   # Normalize to array of {registry, handle}
   my @reg_list;
-  for my $reg (@$registries) {
+  for my $reg (@$registries_param) {
     if (ref $reg eq 'HASH') {
       push @reg_list, $reg;
     } else {
-      # Legacy format: just registry name, handle from $data
       push @reg_list, { registry => $reg, handle => $data->{handle} };
     }
   }
 
-  # If no registries specified, use default behavior (prefer RTR)
+  # Default: use first available registry
   if (!@reg_list) {
     my $handle = $data->{handle} or return { success => 0, error => 'Handle required' };
-    @reg_list = $self->realtimeregister ? [{ registry => 'rr', handle => $handle }]
-              : $self->epp ? [{ registry => 'se', handle => $handle }]
-              : ();
+    my @ids = @{$self->registry_ids};
+    @reg_list = map { { registry => $_, handle => $handle } } @ids;
   }
 
   my @results;
   my @errors;
 
   for my $reg_info (@reg_list) {
-    my $registry = $reg_info->{registry};
+    my $registry_id = $reg_info->{registry};
     my $handle = $reg_info->{handle} or do {
-      push @errors, uc($registry) . ": Handle required";
+      push @errors, uc($registry_id) . ": Handle required";
       next;
     };
 
-    # Create contact data with this handle
-    my $contact_data = { %$data, handle => $handle };
-
-    if ($registry eq 'rr' && $self->realtimeregister) {
-      my $rr_data = $self->_to_rr_contact($contact_data);
-      my $result = $self->realtimeregister->createContact($rr_data);
-      if ($result && !$result->{error}) {
-        push @results, { registry => 'rr', success => 1, contact => $result, handle => $handle };
-      } else {
-        my $err_msg = $result->{error} // 'Failed to create contact';
-        push @errors, "RR: $err_msg";
-      }
+    my $reg = $self->registry($registry_id);
+    unless ($reg) {
+      push @errors, uc($registry_id) . ": Registry not configured";
+      next;
     }
-    elsif (($registry eq 'se' || $registry eq 'nu') && $self->epp) {
-      my $epp_data = $self->_to_epp_contact($contact_data);
-      my $info = {};
-      my $success = $self->epp->contact_create($handle, $epp_data, $info);
-      if ($success) {
-        push @results, { registry => $registry, success => 1, contact => $info, handle => $handle };
-      } else {
-        push @errors, uc($registry) . ": " . ($info->{error} // 'Failed to create contact');
-      }
+
+    my $result = $reg->contact_create($handle, { %$data, handle => $handle });
+    if ($result->{success}) {
+      push @results, { registry => $registry_id, %$result };
+    } else {
+      push @errors, uc($registry_id) . ": " . ($result->{error} // 'Failed to create contact');
     }
   }
 
@@ -156,19 +159,10 @@ sub contact_create ($self, $data) {
 sub contact_update ($self, $handle, $data) {
   return { success => 0, error => 'Handle required' } unless $handle;
 
-  # Prefer RealtimeRegister if available
-  if ($self->realtimeregister) {
-    my $rr_data = $self->_to_rr_contact($data);
-    my $result = $self->realtimeregister->updateContact($handle, $rr_data);
-    return { success => $result ? 1 : 0, contact => $result };
-  }
-
-  # Fall back to EPP
-  if ($self->epp) {
-    my $epp_data = $self->_to_epp_contact($data);
-    my $info = {};
-    my $success = $self->epp->contact_update($handle, $epp_data, $info);
-    return { success => $success ? 1 : 0, contact => $info };
+  for my $reg (values %{$self->registries // {}}) {
+    next unless $reg->capabilities->{contacts};
+    my $result = $reg->contact_update($handle, $data);
+    return $result if $result->{success};
   }
 
   return { success => 0, error => 'No contact backend available' };
@@ -177,127 +171,49 @@ sub contact_update ($self, $handle, $data) {
 sub contact_delete ($self, $handle) {
   return { success => 0, error => 'Handle required' } unless $handle;
 
-  # Prefer RealtimeRegister if available
-  if ($self->realtimeregister) {
-    my $result = $self->realtimeregister->deleteContact($handle);
-    return { success => 1 };
-  }
-
-  # Fall back to EPP
-  if ($self->epp) {
-    my $info = {};
-    my $success = $self->epp->contact_delete($handle, $info);
-    return { success => $success ? 1 : 0 };
+  for my $reg (values %{$self->registries // {}}) {
+    next unless $reg->capabilities->{contacts};
+    my $result = $reg->contact_delete($handle);
+    return $result if $result->{success};
   }
 
   return { success => 0, error => 'No contact backend available' };
 }
 
-# Domain transfer - initiates transfer from another registrar
+# Domain operations - dispatched through registry adapters
+
 sub transfer ($self, $data) {
   my $domainname = $data->{domainname} or return { success => 0, error => 'Domain name required' };
   my $authcode = $data->{authcode} // '';
 
-  # Prefer RealtimeRegister if available
-  if ($self->realtimeregister) {
-    my $transfer_data = {
-      domainName => $domainname,
-      authcode   => $authcode,
-      registrant => $data->{registrant},
-      period     => $data->{period} // 1,
-    };
-    # Add contacts if provided
-    $transfer_data->{admin} = $data->{admin} if $data->{admin};
-    $transfer_data->{tech} = $data->{tech} if $data->{tech};
+  my $reg = $self->registry_for($domainname);
+  return { success => 0, error => 'No registry available for this domain' } unless $reg;
 
-    my $result = $self->realtimeregister->transferDomain($transfer_data);
-    return { success => $result ? 1 : 0, domain => $result };
-  }
-
-  # Fall back to EPP
-  if ($self->epp) {
-    my $info = {};
-    my $success = $self->epp->domain_transfer($domainname, $authcode, $info);
-    return { success => $success ? 1 : 0, domain => $info };
-  }
-
-  return { success => 0, error => 'No domain backend available' };
+  return $reg->domain_transfer($domainname, $authcode, $data);
 }
 
-# Normalize RealtimeRegister contact to common format
-sub _normalize_rr_contact ($self, $c) {
-  return undef unless $c;
-  return {
-    handle       => $c->{handle},
-    name         => $c->{name},
-    organization => $c->{organization} // '',
-    email        => $c->{email},
-    phone        => $c->{phone} // $c->{voice} // '',
-    fax          => $c->{fax} // '',
-    street       => $c->{addressLine} // [],
-    city         => $c->{city} // '',
-    postalCode   => $c->{postalCode} // '',
-    country      => $c->{country} // '',
-    orgno        => '',
-    vatno        => '',
-    source       => 'realtimeregister',
-  };
+sub domain_info ($self, $domainname) {
+  my $reg = $self->registry_for($domainname);
+  return undef unless $reg;
+  return $reg->domain_info($domainname);
 }
 
-# Normalize EPP contact to common format
-sub _normalize_epp_contact ($self, $c) {
-  return undef unless $c;
-  my @street = ref $c->{street} eq 'ARRAY' ? @{$c->{street}} : split(/[\n\r]+/, $c->{street} // '');
-  return {
-    handle       => $c->{id} // $c->{registrant},
-    name         => $c->{name} // '',
-    organization => $c->{org} // '',
-    email        => $c->{email} // '',
-    phone        => $c->{voice} // '',
-    fax          => $c->{fax} // '',
-    street       => \@street,
-    city         => $c->{city} // '',
-    postalCode   => $c->{pc} // '',
-    country      => $c->{cc} // '',
-    orgno        => $c->{orgno} // '',
-    vatno        => $c->{vatno} // '',
-    source       => 'epp',
-  };
+sub domain_renew ($self, $domainname, $curexpiry, $period) {
+  my $reg = $self->registry_for($domainname);
+  return { success => 0, error => 'No registry available' } unless $reg;
+  return $reg->domain_renew($domainname, $curexpiry, $period);
 }
 
-# Convert common format to RealtimeRegister format
-sub _to_rr_contact ($self, $data) {
-  return {
-    handle       => $data->{handle},
-    name         => $data->{name},
-    organization => $data->{organization},
-    email        => $data->{email},
-    voice        => $data->{phone},  # RTR uses 'voice', E164a format: +31.384530759
-    fax          => $data->{fax},
-    addressLine  => $data->{street},
-    city         => $data->{city},
-    postalCode   => $data->{postalCode},
-    country      => $data->{country},
-    # RTR doesn't use orgno/vatno directly - these are SE/NU specific
-  };
+sub generate_authcode ($self, $domainname) {
+  my $reg = $self->registry_for($domainname);
+  return { success => 0, error => 'No registry available' } unless $reg;
+  return $reg->generate_authcode($domainname);
 }
 
-# Convert common format to EPP format
-sub _to_epp_contact ($self, $data) {
-  my $street = ref $data->{street} eq 'ARRAY' ? join("\n", @{$data->{street}}) : $data->{street};
-  return {
-    name   => $data->{name},
-    org    => $data->{organization},
-    email  => $data->{email},
-    voice  => $data->{phone},
-    fax    => $data->{fax},
-    street => $street,
-    city   => $data->{city},
-    pc     => $data->{postalCode},
-    cc     => $data->{country},
-    orgno  => $data->{orgno},
-    vatno  => $data->{vatno},
-  };
+sub set_nameservers ($self, $domainname, $nameservers) {
+  my $reg = $self->registry_for($domainname);
+  return { success => 0, error => 'No registry available' } unless $reg;
+  return $reg->set_nameservers($domainname, $nameservers);
 }
 
 1;

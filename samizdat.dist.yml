@@ -120,15 +120,43 @@ manager:
   domain:
     cardnumber: 3
     dbtype: mysql
-    epp:
-      test:
-        host: epp.iis.se
-        bindto: ourIP
+    epp:                                # EPP client config (per TLD, used by EPP plugin)
+      se:                               # .se TLD configuration
+        host: epp.iis.se               # Direct connect (or use remote_host + ports for tunnel)
+        # remote_host: 10.0.0.1        # Tunnel mode: socat/stunnel host
+        # ports:                        # Tunnel mode: round-robin port list
+        #   - 701
+        #   - 702
+        bindto: 0.0.0.0                # Local IP to bind to
         username: ourID
         password: ourPassword
         ssl_key: /path/to/our/key.pem
         ssl_cert: /path/to/our/cert.pem
         ssl_ca: /path/to/ca-certificates.crt
+      nu:                               # .nu TLD configuration (can share certs with .se)
+        host: epp.iis.nu
+        bindto: 0.0.0.0
+        username: ourID
+        password: ourPassword
+        ssl_key: /path/to/our/key.pem
+        ssl_cert: /path/to/our/cert.pem
+        ssl_ca: /path/to/ca-certificates.crt
+    registries:                         # Registry adapters for unified domain management
+      se:                               # Registry ID, referenced by registryid in domain table
+        type: epp                       # Adapter: Samizdat::Model::Domain::Registry::EPP
+        label: "IIS (.se/.nu)"          # Display name for admin UI
+        tlds:                           # TLDs handled by this registry
+          - se
+          - nu
+      rtr:
+        type: realtimeregister          # Adapter: Samizdat::Model::Domain::Registry::RTR
+        label: "Realtime Register"
+        tlds:                           # TLDs handled by this registry
+          - com
+          - net
+          - org
+          - io
+          - dev
   zone:
     cardnumber: 4
     dbtype: postgresql
