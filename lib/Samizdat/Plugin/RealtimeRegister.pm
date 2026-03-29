@@ -409,6 +409,23 @@ paths:
           description: Field to sort by (prefix with - for descending)
           schema:
             type: string
+        - name: startDate
+          in: query
+          description: Start date for filtering (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: endDate
+          in: query
+          description: End date for filtering (YYYY-MM-DD)
+          schema:
+            type: string
+            format: date
+        - name: currentBalance
+          in: query
+          description: Current account balance in EUR for computing opening/closing balance
+          schema:
+            type: number
       responses:
         '200':
           description: List of transactions

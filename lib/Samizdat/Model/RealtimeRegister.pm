@@ -148,13 +148,29 @@ sub default_currency ($self) {
 # Financial transactions
 
 sub getTransactions ($self, $params = {}) {
-  my $query = Mojo::Parameters->new(%$params)->to_string;
+  my @parts;
+  for my $k (sort keys %$params) {
+    my $v = $params->{$k};
+    push @parts, "$k=$v" if defined $v;
+  }
+  my $query = join '&', @parts;
   my $endpoint = 'v2/billing/financialtransactions' . ($query ? "?$query" : '');
   return $self->_api_request('GET', $endpoint, undef);
 }
 
 sub getTransaction ($self, $id) {
   return $self->_api_request('GET', "v2/billing/financialtransactions/$id", undef);
+}
+
+# Sum transactions from entities list, returns { ingoing, outgoing, net } in cents
+sub sumTransactions ($self, $entities, $currency = 'EUR') {
+  my ($ingoing, $outgoing) = (0, 0);
+  for my $t (@{$entities || []}) {
+    my $amount = $t->{chargesPerAccount}{$currency} // 0;
+    if ($amount > 0) { $ingoing  += $amount }
+    else             { $outgoing += $amount }
+  }
+  return { ingoing => $ingoing, outgoing => $outgoing, net => $ingoing + $outgoing };
 }
 
 1;

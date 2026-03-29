@@ -2,6 +2,8 @@ package Samizdat::Plugin::Domain;
 
 use Mojo::Base 'Mojolicious::Plugin', -signatures;
 use Samizdat::Model::Domain;
+use Samizdat::Model::Domain::Registry::EPP;
+use Samizdat::Model::Domain::Registry::RTR;
 use Mojo::Loader qw(data_section);
 
 sub register ($self, $app, $conf) {
@@ -22,6 +24,7 @@ sub register ($self, $app, $conf) {
   my $customers = $r->manager('customers/:customerid/domains') ->to(controller => 'Domain');
   $customers->get('/register')                                 ->to('#register')        ->name('customer_domain_register');
   $customers->get('/transfer')                                 ->to('#transfer')        ->name('customer_domain_transfer');
+  $customers->get('/#domainid/registry')                        ->to('#registry_info')   ->name('domain_registry_info');
   $customers->get('/#domainid')                                ->to('#get')             ->name('domain_get');
   $customers->get('/')                                         ->to('#index')           ->name('customer_domains');
 
@@ -33,13 +36,54 @@ sub register ($self, $app, $conf) {
   # API-only routes handled by OpenAPI (POST, PUT, DELETE)
 
   $app->helper(domain => sub ($self) {
-    state $model = Samizdat::Model::Domain->new({
-      config            => $self->config->{manager}->{domain},
-      pg                => $self->pg,
-      mysql             => $self->mysql,
-      epp               => $app->renderer->helpers->{epp} ? $self->epp : undef,
-      realtimeregister  => $app->renderer->helpers->{realtimeregister} ? $self->realtimeregister : undef,
-    });
+    state $model = do {
+      my $domain_config = $self->config->{manager}->{domain};
+      my $has_epp = $app->renderer->helpers->{epp};
+      my $has_rtr = $app->renderer->helpers->{realtimeregister};
+
+      # Build registry adapters from config
+      my %registries;
+      my $reg_config = $domain_config->{registries} // {};
+
+      for my $id (keys %$reg_config) {
+        my $rc = $reg_config->{$id};
+        my $type = $rc->{type} // '';
+
+        if ($type eq 'epp' && $has_epp) {
+          $registries{$id} = Samizdat::Model::Domain::Registry::EPP->new(
+            client => $self->epp, config => $rc, id => $id,
+          );
+        } elsif ($type eq 'realtimeregister' && $has_rtr) {
+          $registries{$id} = Samizdat::Model::Domain::Registry::RTR->new(
+            client => $self->realtimeregister, config => $rc, id => $id,
+          );
+        }
+      }
+
+      # Backward compatibility: auto-detect from old config if no registries defined
+      if (!%registries) {
+        if ($has_epp) {
+          $registries{se} = Samizdat::Model::Domain::Registry::EPP->new(
+            client => $self->epp, config => { tlds => ['se', 'nu'] }, id => 'se',
+          );
+        }
+        if ($has_rtr) {
+          $registries{rtr} = Samizdat::Model::Domain::Registry::RTR->new(
+            client => $self->realtimeregister, config => { tlds => [] }, id => 'rtr',
+          );
+        }
+      }
+
+      Samizdat::Model::Domain->new({
+        config     => $domain_config,
+        pg         => $self->pg,
+        mysql      => $self->mysql,
+        registries => \%registries,
+        # Legacy accessors
+        epp              => $has_epp ? $self->epp : undef,
+        realtimeregister => $has_rtr ? $self->realtimeregister : undef,
+      });
+    };
     return $model;
   });
 }

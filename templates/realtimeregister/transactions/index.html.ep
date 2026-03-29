@@ -1,8 +1,39 @@
-<div class="card">
+<div class="card mb-3">
   <div class="card-header">
     <h2 class="h5 mb-0"><%== __('Financial Transactions') %></h2>
   </div>
   <div class="card-body">
+    <div class="row g-3 mb-3 align-items-end">
+      <div class="col-auto">
+        <label for="startDate" class="form-label"><%== __('Start date') %></label>
+        <input type="date" class="form-control form-control-sm" id="startDate">
+      </div>
+      <div class="col-auto">
+        <label for="endDate" class="form-label"><%== __('End date') %></label>
+        <input type="date" class="form-control form-control-sm" id="endDate">
+      </div>
+      <div class="col-auto">
+        <label for="currentBalance" class="form-label"><%== __('Current balance') %> (EUR)</label>
+        <input type="number" step="0.01" class="form-control form-control-sm" id="currentBalance" placeholder="960.68">
+      </div>
+      <div class="col-auto">
+        <button class="btn btn-sm btn-primary" id="filterBtn"><%== __('Filter') %></button>
+      </div>
+    </div>
+    <div class="row g-3 mb-3" id="balanceRow" style="display: none;">
+      <div class="col-auto">
+        <span class="badge bg-secondary"><%== __('Opening balance') %>: <span id="balanceIn">-</span></span>
+      </div>
+      <div class="col-auto">
+        <span class="badge bg-secondary"><%== __('Closing balance') %>: <span id="balanceOut">-</span></span>
+      </div>
+      <div class="col-auto">
+        <span class="badge bg-success"><%== __('Ingoing') %>: <span id="totalIn">-</span></span>
+      </div>
+      <div class="col-auto">
+        <span class="badge bg-danger"><%== __('Outgoing') %>: <span id="totalOut">-</span></span>
+      </div>
+    </div>
     <div class="table-responsive">
       <table class="table table-sm table-striped table-hover" id="transactionsTable">
         <thead>

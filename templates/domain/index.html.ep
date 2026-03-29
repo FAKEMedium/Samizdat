@@ -30,9 +30,9 @@
   <thead>
     <tr>
       <th><input type="checkbox" id="select-all" title="<%== __('Select all') %>"></th>
-      <th><%== __('Domain') %></th>
-      <th><%== __('Customer') %></th>
-      <th><%== __('Expiry') %></th>
+      <th class="sortable" data-sort="domainname"><%== __('Domain') %></th>
+      <th class="sortable" data-sort="customerid"><%== __('Customer') %></th>
+      <th class="sortable" data-sort="curexpiry"><%== __('Expiry') %></th>
     </tr>
   </thead>
   <tbody>

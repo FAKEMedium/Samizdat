@@ -161,7 +161,18 @@ sub get_customerid_for_user ($self, $userid, $username = undef) {
   }
 }
 
-sub get_customers_for_user ($self, $userid, $languageid = 1) {
+sub get_customers_for_user ($self, $userid, $languageid = 1, $username = undef) {
+  if ($self->dbtype eq 'mysql' && $username) {
+    my $db = $self->database;
+    return $db->query(qq{
+      SELECT DISTINCT s.customerid, c.firstname, c.lastname, c.company, c.contactemail
+      FROM snapusers s
+      JOIN customer c ON s.customerid = c.customerid
+      WHERE s.userlogin = ? AND s.customerid > 0
+      ORDER BY s.customerid
+    }, $username)->hashes->to_array;
+  }
+
   my $db = $self->app->pg->db;
   return $db->query(qq{
     SELECT
