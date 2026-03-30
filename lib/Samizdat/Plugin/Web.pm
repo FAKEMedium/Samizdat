@@ -299,6 +299,11 @@ sub register ($self, $app, $conf) {
       $$output =~ s{        <!-- symbols -->\n}[
         $c->app->web->indent(join("\n", sort {$a cmp $b} map $symbols->{$_}, keys %{ $symbols }), 4)
       ]eu;
+      # Tell browsers/proxies to cache HTML and JSON responses separately
+      $c->res->headers->header('Vary' => 'Accept');
+      if ('json' eq $format) {
+        $c->res->headers->cache_control('no-store');
+      }
       if ('html' eq $format && 404 != $c->{stash}->{status} && uc($c->req->method) eq 'GET') {
         my $docpath = $c->stash('docpath') // eval {
           my $docpath = $c->req->url->to_abs->path->to_string;

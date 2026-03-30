@@ -1,3 +1,12 @@
+<ul class="nav nav-pills mb-3">
+  <li class="nav-item">
+    <a class="nav-link active" id="tabUnprocessed" href="#"><%== __('Unprocessed') %></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="tabAll" href="#"><%== __('All payments') %></a>
+  </li>
+</ul>
+
 <table id="payments" class="table table-sm table-striped">
   <thead>
     <tr class="orange">
@@ -25,3 +34,8 @@
     </button>
   </div>
 </div>
+
+<nav aria-label="pagination" class="mt-3" id="paginationNav" style="display: none;">
+  <ul id="pagination" class="pagination justify-content-center">
+  </ul>
+</nav>

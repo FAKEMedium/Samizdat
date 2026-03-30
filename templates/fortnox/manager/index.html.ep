@@ -4,8 +4,8 @@
     <div class="card">
       <h5 class="card-header orange border-0"><%== __('Development') %></h5>
       <div class="card-body m-0 p-2">
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>fortnox/customers/3323"><%== __('Test customer') %></a>
-        <a class="badge rounded-pill text-bg-primary" href="<%== config->{manager}->{url} %>fortnox/logout"><%== __('Log out') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="<%== url_for('fortnox_customer', customerid => 3323) %>"><%== __('Test customer') %></a>
+        <a class="badge rounded-pill text-bg-primary" href="<%== url_for('fortnox_logout') %>"><%== __('Log out') %></a>
         <a class="badge rounded-pill text-bg-primary" href="https://apps.fortnox.se/apidocs"><%== __('API docs') %></a>
         <a class="badge rounded-pill text-bg-primary" href="https://fortnox.se/developer"><%== __('Developer docs') %></a>
         <a class="badge rounded-pill text-bg-primary" href="<%== url_for('fortnox_index') %>"><%== __('Fortnox integration') %></a>
@@ -25,6 +25,9 @@
     <div class="card">
       <h5 class="card-header orange border-0"><%== __('Payments') %></h5>
       <div class="card-body m-0 p-2">
+        <ul>
+          <li><a href="<%== url_for('fortnox_payments') %>"><%== __('Payments') %></a></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -42,7 +45,7 @@
       <h5 class="card-header orange border-0"><%== __('Invoices') %></h5>
       <div class="card-body m-0 p-2">
         <ul>
-          <li><a href="<%== url_for('Fortnox.invoices.index') %>"><%== __('Invoices') %></a></li>
+          <li><a href="<%== url_for('fortnox_invoices') %>"><%== __('Invoices') %></a></li>
         </ul>
       </div>
     </div>
@@ -53,7 +56,7 @@
       <h5 class="card-header orange border-0"><%== __('Customers') %></h5>
       <div class="card-body m-0 p-2">
         <ul>
-          <li><a href="<%== url_for('Fortnox.customers.index') %>"><%== __('Customers') %></a></li>
+          <li><a href="<%== url_for('fortnox_customers') %>"><%== __('Customers') %></a></li>
         </ul>
       </div>
     </div>
