@@ -276,9 +276,19 @@ sub payments ($self) {
       };
     }
 
+    # Paginate the payment list (latest first)
+    my $page = int($self->param('page') // 1);
+    my $perpage = $self->app->config->{pagination}->{perpage} || 25;
+    my @all_payments = reverse @{ $payment->{InvoicePayments} };
+    my $start = ($page - 1) * $perpage;
+    my $end = $start + $perpage - 1;
+    $end = $#all_payments if $end > $#all_payments;
+    my @paged = $start <= $#all_payments ? @all_payments[$start..$end] : ();
+
     my $fortnox = { title => $title };
-    $fortnox->{payment} = $payment;
+    $fortnox->{payment} = { InvoicePayments => \@paged };
     $fortnox->{unpaid_invoices} = \%unpaid_map;
+    $fortnox->{perpage} = $perpage;
     return $self->render(json => { fortnox => $fortnox });
   }
 }

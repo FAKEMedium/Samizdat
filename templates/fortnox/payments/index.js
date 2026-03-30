@@ -1,8 +1,10 @@
-async function loadPayments(refresh = false) {
+let currentView = 'unprocessed';
+let currentPage = 1;
+
+async function loadPayments(page = 1, refresh = false) {
   try {
-    const url = refresh
-      ? `<%== url_for('Fortnox.payments.index') %>?refresh=1`
-      : `<%== url_for('Fortnox.payments.index') %>`;
+    let url = `<%== url_for('Fortnox.payments.index') %>?page=${page}`;
+    if (refresh) url += '&refresh=1';
     const response = await fetch(url, {
       method: 'GET',
       headers: { Accept: 'application/json' }
@@ -26,55 +28,76 @@ async function loadPayments(refresh = false) {
     }
 
     if (data.fortnox && data.fortnox.payment) {
-      const payments = data.fortnox.payment.InvoicePayments || [];
+      const allPayments = data.fortnox.payment.InvoicePayments || [];
       const unpaidInvoices = data.fortnox.unpaid_invoices || {};
+      const perpage = data.fortnox.perpage || 25;
       const tbody = document.querySelector('#payments tbody');
+
+      let payments;
+      if (currentView === 'unprocessed') {
+        payments = allPayments.filter(p => unpaidInvoices[p.InvoiceNumber]);
+      } else {
+        payments = allPayments;
+      }
+
       let html = '';
       let total = 0;
       let count = 0;
 
-      // Filter payments to only those matching unpaid local invoices
       payments.forEach(payment => {
         const invoiceNumber = payment.InvoiceNumber || '';
         const localInvoice = unpaidInvoices[invoiceNumber];
-        if (!localInvoice) return; // Skip if already paid locally
-
-        const invoiceid = localInvoice.invoiceid || '';
-        const customerid = localInvoice.customerid || '';
-        const customerName = localInvoice.customername || '';
-        const debt = parseFloat(localInvoice.debt) || 0;
+        const customerName = localInvoice ? localInvoice.customername : '';
+        const debt = localInvoice ? parseFloat(localInvoice.debt) || 0 : 0;
+        const invoiceid = localInvoice ? localInvoice.invoiceid : '';
+        const customerid = localInvoice ? localInvoice.customerid : '';
         const date = payment.PaymentDate || '';
         const amount = parseFloat(payment.Amount) || 0;
         const paymentNumber = payment.Number || '';
         total += amount;
         count++;
 
+        const showCheckbox = currentView === 'unprocessed' && localInvoice;
+
         html += `
           <tr>
-            <td><input type="checkbox" class="form-check-input payment-checkbox"
+            <td>${showCheckbox ? `<input type="checkbox" class="form-check-input payment-checkbox"
                        data-invoice="${invoiceNumber}"
                        data-amount="${amount}"
                        data-date="${date}"
-                       data-number="${paymentNumber}"></td>
-            <td><a href="<%== url_for('invoice_handle', invoiceid => '__ID__') =~ s/__ID__//r %>${invoiceid}">${invoiceNumber}</a></td>
-            <td><a href="<%== url_for('customer_edit', customerid => '__ID__') =~ s/__ID__//r %>${customerid}">${customerName}</a></td>
+                       data-number="${paymentNumber}">` : ''}</td>
+            <td>${invoiceid
+              ? `<a href="<%== url_for('invoice_handle', invoiceid => '__ID__') =~ s/__ID__//r %>${invoiceid}">${invoiceNumber}</a>`
+              : invoiceNumber}</td>
+            <td>${customerid
+              ? `<a href="<%== url_for('customer_edit', customerid => '__ID__') =~ s/__ID__//r %>${customerid}">${customerName}</a>`
+              : customerName}</td>
             <td>${date}</td>
-            <td class="text-end">${debt.toFixed(2)}</td>
+            <td class="text-end">${debt ? debt.toFixed(2) : ''}</td>
             <td class="text-end">${amount.toFixed(2)}</td>
           </tr>
         `;
       });
 
       if (count === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center"><%== __("No unprocessed payments") %></td></tr>';
+        tbody.innerHTML = '<tr><td colspan="6" class="text-muted text-center"><%== __("No payments") %></td></tr>';
         document.querySelector('#processSelected').style.display = 'none';
       } else {
         tbody.innerHTML = html;
-        document.querySelector('#processSelected').style.display = 'inline-block';
+        document.querySelector('#processSelected').style.display = currentView === 'unprocessed' ? 'inline-block' : 'none';
       }
 
-      // Update totals
+      document.querySelector('#selectAll').style.display = currentView === 'unprocessed' ? '' : 'none';
       document.querySelector('#paymentTotals').innerHTML = `<%== __('Total') %>: ${total.toFixed(2)} (${count} <%== __('payments') %>)`;
+
+      // Pagination for "all" view
+      const paginationNav = document.querySelector('#paginationNav');
+      if (currentView === 'all' && allPayments.length >= perpage) {
+        paginationNav.style.display = '';
+        renderPagination(page, allPayments.length >= perpage);
+      } else {
+        paginationNav.style.display = 'none';
+      }
 
       // Select all checkbox handler
       document.querySelector('#selectAll')?.addEventListener('change', (e) => {
@@ -86,6 +109,26 @@ async function loadPayments(refresh = false) {
   } catch (error) {
     console.error('Failed to load payments:', error);
   }
+}
+
+function renderPagination(page, hasMore) {
+  const ul = document.querySelector('#pagination');
+  let html = '';
+  if (page > 1) {
+    html += `<li class="page-item"><a class="page-link" href="#" data-page="${page - 1}">&laquo;</a></li>`;
+  }
+  html += `<li class="page-item active"><span class="page-link">${page}</span></li>`;
+  if (hasMore) {
+    html += `<li class="page-item"><a class="page-link" href="#" data-page="${page + 1}">&raquo;</a></li>`;
+  }
+  ul.innerHTML = html;
+  ul.querySelectorAll('a[data-page]').forEach(a => {
+    a.addEventListener('click', (e) => {
+      e.preventDefault();
+      currentPage = parseInt(a.dataset.page);
+      loadPayments(currentPage);
+    });
+  });
 }
 
 async function processSelected() {
@@ -109,7 +152,7 @@ async function processSelected() {
   }
 
   try {
-    const response = await fetch('<%== url_for('Fortnox.payments.index') %>', {
+    const response = await fetch('<%== url_for('Fortnox.payments.process') %>', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -121,7 +164,7 @@ async function processSelected() {
     const result = await response.json();
     if (result.success) {
       alert(`<%== __("Processed") %> ${result.processed} <%== __("payments") %>`);
-      loadPayments(); // Reload to show updated list
+      loadPayments();
     } else {
       alert(result.error || '<%== __("Processing failed") %>');
     }
@@ -131,6 +174,24 @@ async function processSelected() {
   }
 }
 
+document.querySelector('#tabUnprocessed').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentView = 'unprocessed';
+  currentPage = 1;
+  document.querySelector('#tabUnprocessed').classList.add('active');
+  document.querySelector('#tabAll').classList.remove('active');
+  loadPayments();
+});
+
+document.querySelector('#tabAll').addEventListener('click', (e) => {
+  e.preventDefault();
+  currentView = 'all';
+  currentPage = 1;
+  document.querySelector('#tabAll').classList.add('active');
+  document.querySelector('#tabUnprocessed').classList.remove('active');
+  loadPayments();
+});
+
 document.querySelector('#processSelected').addEventListener('click', processSelected);
-document.querySelector('#refreshPayments').addEventListener('click', () => loadPayments(true));
+document.querySelector('#refreshPayments').addEventListener('click', () => loadPayments(currentPage, true));
 loadPayments();
