@@ -37,7 +37,11 @@ async function loadPayments(page = 1, refresh = false) {
       if (currentView === 'unprocessed') {
         payments = allPayments.filter(p => unpaidInvoices[p.InvoiceNumber]);
       } else {
-        payments = allPayments;
+        payments = [...allPayments].sort((a, b) => {
+          const aNum = parseInt(a.InvoiceNumber) || 0;
+          const bNum = parseInt(b.InvoiceNumber) || 0;
+          return bNum - aNum;
+        });
       }
 
       let html = '';
