@@ -30,6 +30,7 @@ extraplugins:
 #  - EPP
 #  - BIS
 #  - Mailer
+#  - Chat
 logotype:
   file: public/media/images/fakenews.svg
   width: 194
