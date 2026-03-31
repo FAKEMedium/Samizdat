@@ -1,0 +1,6 @@
+<a href="<%== url_for('chat_index') %>" class="btn btn-success btn-sm mx-1 align-self-center" id="newChatBtn" title="<%== __('New') %>">
+  <%== icon 'plus-lg' %>
+</a>
+<a href="#" class="btn btn-primary btn-sm mx-1 align-self-center" id="saveBtn" title="<%== __('Save') %>">
+  <%== icon 'floppy' %>
+</a>

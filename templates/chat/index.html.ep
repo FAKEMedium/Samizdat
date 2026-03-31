@@ -1,0 +1,8 @@
+<div id="chatMessages" class="border rounded p-3 mb-3" style="height: 70vh; overflow-y: auto;">
+</div>
+<form id="chatForm" class="d-flex gap-2">
+  <textarea id="chatInput" class="form-control" rows="2"
+            placeholder="<%== __('Type a message...') %>"
+            autofocus></textarea>
+  <button type="submit" class="btn btn-primary" id="sendBtn"><%== __('Send') %></button>
+</form>

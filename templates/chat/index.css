@@ -1,0 +1,32 @@
+#chatMessages .message {
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  max-width: 85%;
+}
+#chatMessages .message.user {
+  background: var(--bs-primary-bg-subtle);
+  margin-left: auto;
+  text-align: right;
+}
+#chatMessages .message.assistant {
+  background: var(--bs-secondary-bg-subtle);
+}
+#chatMessages .message pre {
+  background: var(--bs-dark);
+  color: var(--bs-light);
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  overflow-x: auto;
+  text-align: left;
+}
+#chatMessages .message code:not(pre code) {
+  background: var(--bs-tertiary-bg);
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+}
+#chatMessages .message .copy-btn {
+  display: block;
+  font-size: 0.75rem;
+  padding: 0.125rem 0.5rem;
+}
