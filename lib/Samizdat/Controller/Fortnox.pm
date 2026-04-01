@@ -259,10 +259,11 @@ sub payments ($self) {
     # Customer name comes from local database, not Fortnox API
     my $unpaid_invoices = $self->app->invoice->get({
       where => {
-        debt  => { '>' => 0 },
-        state => 'fakturerad'
+        paydate => { LIKE => '0000-00-00%' },
+        state   => 'fakturerad'
       }
     });
+
     # Map by fakturanummer for quick lookup, include customer info
     my %unpaid_map;
     for my $inv (@$unpaid_invoices) {
