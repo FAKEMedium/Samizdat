@@ -302,6 +302,12 @@ sub payments ($self) {
     $fortnox->{unprocessed_payments} = \@unprocessed;
     $fortnox->{unpaid_invoices} = \%unpaid_map;
     $fortnox->{perpage} = $perpage;
+    $fortnox->{debug} = {
+      total_fortnox_payments => scalar @all_payments,
+      local_unpaid_count     => scalar keys %unpaid_map,
+      local_unpaid_fnums     => [sort keys %unpaid_map],
+      unprocessed_count      => scalar @unprocessed,
+    };
     return $self->render(json => { fortnox => $fortnox });
   }
 }
