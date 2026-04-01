@@ -264,10 +264,18 @@ sub payments ($self) {
       }
     });
 
+    # Batch-fetch all needed customers in one query
+    my @customer_ids = map { $_->{customerid} } @$unpaid_invoices;
+    my %customer_map;
+    if (@customer_ids) {
+      my $customers = $self->app->customer->get({ where => { customerid => \@customer_ids } });
+      %customer_map = map { $_->{customerid} => $_ } @$customers;
+    }
+
     # Map by fakturanummer for quick lookup, include customer info
     my %unpaid_map;
     for my $inv (@$unpaid_invoices) {
-      my $customer = $self->app->customer->get({ where => { customerid => $inv->{customerid} } })->[0];
+      my $customer = $customer_map{$inv->{customerid}};
       $unpaid_map{$inv->{fakturanummer}} = {
         invoiceid    => $inv->{invoiceid},
         customerid   => $inv->{customerid},
