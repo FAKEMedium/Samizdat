@@ -276,10 +276,13 @@ sub payments ($self) {
       };
     }
 
-    # Paginate the payment list (latest first)
+    # Split payments: unprocessed (matching unpaid local invoices) and all (paginated)
+    my @all_payments = reverse @{ $payment->{InvoicePayments} };
+    my @unprocessed = grep { $unpaid_map{$_->{InvoiceNumber}} } @all_payments;
+
+    # Paginate only the "all" view
     my $page = int($self->param('page') // 1);
     my $perpage = $self->app->config->{pagination}->{perpage} || 25;
-    my @all_payments = reverse @{ $payment->{InvoicePayments} };
     my $start = ($page - 1) * $perpage;
     my $end = $start + $perpage - 1;
     $end = $#all_payments if $end > $#all_payments;
@@ -287,6 +290,7 @@ sub payments ($self) {
 
     my $fortnox = { title => $title };
     $fortnox->{payment} = { InvoicePayments => \@paged };
+    $fortnox->{unprocessed_payments} = \@unprocessed;
     $fortnox->{unpaid_invoices} = \%unpaid_map;
     $fortnox->{perpage} = $perpage;
     return $self->render(json => { fortnox => $fortnox });
