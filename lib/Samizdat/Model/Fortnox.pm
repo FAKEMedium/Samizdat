@@ -725,6 +725,11 @@ sub getInvoicePayment ($self, $Number = 0, $options = {}) {
     return $self->callAPI('InvoicePayments', 'get', $Number, $options);
   }
 
+  # Require valid token - trigger auth flow if missing
+  if (!$self->data->{access}) {
+    return $self->getLogin();
+  }
+
   # For list, use cache - check for errors
   if (!exists($self->data->{InvoicePayments})) {
     my $result = $self->updateCache('InvoicePayments');
