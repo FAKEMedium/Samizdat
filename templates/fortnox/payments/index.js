@@ -29,13 +29,14 @@ async function loadPayments(page = 1, refresh = false) {
 
     if (data.fortnox && data.fortnox.payment) {
       const allPayments = data.fortnox.payment.InvoicePayments || [];
+      const unprocessedPayments = data.fortnox.unprocessed_payments || [];
       const unpaidInvoices = data.fortnox.unpaid_invoices || {};
       const perpage = data.fortnox.perpage || 25;
       const tbody = document.querySelector('#payments tbody');
 
       let payments;
       if (currentView === 'unprocessed') {
-        payments = allPayments.filter(p => unpaidInvoices[p.InvoiceNumber]);
+        payments = unprocessedPayments;
       } else {
         payments = [...allPayments].sort((a, b) => {
           const aNum = parseInt(a.InvoiceNumber) || 0;
