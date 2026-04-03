@@ -44,7 +44,9 @@ sub _api_request ($self, $method, $endpoint, $data = undef) {
   my $result = $tx->result;
 
   if ($result->is_error) {
-    return { error => $result->message, code => $result->code };
+    my $body = $result->json // {};
+    my $message = $body->{message} // $body->{error} // $result->message;
+    return { error => $message, code => $result->code, detail => $body };
   }
 
   return $result->json // {};
