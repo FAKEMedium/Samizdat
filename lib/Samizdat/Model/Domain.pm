@@ -31,9 +31,10 @@ sub registry_for ($self, $domainname) {
     my $tlds = $reg->config->{tlds} // [];
     return $reg if grep { lc($_) eq lc($tld) } @$tlds;
   }
-  # Fall back to first available registry
-  my ($first) = values %{$self->registries};
-  return $first;
+  # Fall back to registry with broadest TLD coverage (fewest explicit TLDs = most general)
+  my ($fallback) = sort { scalar(@{$a->config->{tlds} // []}) <=> scalar(@{$b->config->{tlds} // []}) }
+                   values %{$self->registries};
+  return $fallback;
 }
 
 # List all configured registry ids
