@@ -119,6 +119,12 @@ sub renew_domain ($self) {
     return $self->render(json => { error => $result->{error} }, status => 400);
   }
 
+  # Update expiry date in database if available
+  if (my $expiry = $result->{expiryDate}) {
+    $expiry =~ s/T.*//;  # Extract date part from ISO datetime
+    eval { $self->domain->update_expiry($domain_name, $expiry) };
+  }
+
   return $self->render(json => { success => 1, domain => $result });
 }
 
