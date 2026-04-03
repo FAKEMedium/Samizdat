@@ -51,7 +51,8 @@ sub domain_transfer ($self, $domainname, $authcode, $data) {
   $transfer_data->{admin} = $data->{admin} if $data->{admin};
   $transfer_data->{tech}  = $data->{tech}  if $data->{tech};
   my $result = $self->client->transferDomain($transfer_data);
-  return { success => $result && !$result->{error} ? 1 : 0, info => $result };
+  my $success = $result && !$result->{error} ? 1 : 0;
+  return { success => $success, info => $result, ($result->{error} ? (error => $result->{error}) : ()) };
 }
 
 sub generate_authcode ($self, $domainname) {
