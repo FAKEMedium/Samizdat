@@ -44,12 +44,18 @@ sub domain_renew ($self, $domainname, $curexpiry, $period) {
 sub domain_transfer ($self, $domainname, $authcode, $data) {
   my $transfer_data = {
     domainName => $domainname,
-    authcode   => $authcode,
+    customer   => $self->client->config->{customer},
     registrant => $data->{registrant},
     period     => $data->{period} // 1,
   };
-  $transfer_data->{admin} = $data->{admin} if $data->{admin};
-  $transfer_data->{tech}  = $data->{tech}  if $data->{tech};
+  $transfer_data->{authcode} = $authcode if $authcode;
+
+  # Build contacts array from admin/tech handles
+  my @contacts;
+  push @contacts, { role => 'ADMIN', handle => $data->{admin} } if $data->{admin};
+  push @contacts, { role => 'TECH',  handle => $data->{tech} }  if $data->{tech};
+  $transfer_data->{contacts} = \@contacts if @contacts;
+
   my $result = $self->client->transferDomain($transfer_data);
   my $success = $result && !$result->{error} ? 1 : 0;
   return { success => $success, info => $result, ($result->{error} ? (error => $result->{error}) : ()) };
