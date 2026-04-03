@@ -204,6 +204,11 @@ sub domain_renew ($self, $domainname, $curexpiry, $period) {
   return $reg->domain_renew($domainname, $curexpiry, $period);
 }
 
+sub update_expiry ($self, $domainname, $expiry_date) {
+  my $db = $self->database;
+  $db->update('domain', { curexpiry => $expiry_date }, { domainname => $domainname });
+}
+
 sub generate_authcode ($self, $domainname) {
   my $reg = $self->registry_for($domainname);
   return { success => 0, error => 'No registry available' } unless $reg;
