@@ -88,6 +88,12 @@ sub renewDomain ($self, $domain_name, $period = 1) {
   return $self->_api_request('POST', "v2/domains/$domain_name/renew", { period => $period });
 }
 
+sub transferDomain ($self, $transfer_data) {
+  my $domain_name = $transfer_data->{domainName} or return { error => 'Domain name required' };
+  return $self->_api_request('POST', "v2/domains/$domain_name/transfer", $transfer_data);
+}
+
+
 # Contact operations
 
 sub getContacts ($self, $params = {}) {
