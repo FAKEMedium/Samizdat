@@ -98,10 +98,6 @@ sub customers ($self) {
   my $accept = $self->req->headers->accept // '';
 
   if ($accept !~ /json/) {
-    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
-    if (!$self->app->fortnox->data->{access}) {
-      return $self->redirect_to($self->url_for('fortnox_auth'));
-    }
     if ($customerid) {
       # Override cache path for dynamic customer ID to prevent creating separate cached files
       $self->stash(docpath => '/fortnox/customers/customer/index.html');
@@ -166,10 +162,6 @@ sub invoices ($self) {
   my $invoiceid = int($self->stash('invoiceid') // 0);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
-    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
-    if (!$self->app->fortnox->data->{access}) {
-      return $self->redirect_to($self->url_for('fortnox_auth'));
-    }
     if ($invoiceid) {
       $self->stash(docpath => '/fortnox/invoices/invoice/index.html');
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/invoice/index');
@@ -229,10 +221,6 @@ sub payments ($self) {
   my $number = int($self->stash('number') // 0);
   my $accept = $self->req->headers->accept // '';
   if ($accept !~ /json/) {
-    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
-    if (!$self->app->fortnox->data->{access}) {
-      return $self->redirect_to($self->url_for('fortnox_auth'));
-    }
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
       $self->stash(docpath => '/fortnox/payments/payment/index.html');
