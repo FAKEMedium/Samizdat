@@ -4,7 +4,6 @@ use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::Util;
 use Data::Dumper;
 
-
 sub redirect ($self) {
   $self->redirect_to($self->url_for('manager_index'));
 }
