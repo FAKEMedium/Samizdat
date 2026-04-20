@@ -230,6 +230,10 @@ window.simpleFetch = simpleFetch;
                     try {
                         const clonedResponse = response.clone();
                         const data = await clonedResponse.json();
+                        if (data.auth_url) {
+                            window.location.href = data.auth_url;
+                            return response;
+                        }
                         if (window.handle401Error) {
                             window.handle401Error(data.error || 'Authentication required');
                         }
