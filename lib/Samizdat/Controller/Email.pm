@@ -326,6 +326,13 @@ sub domain ($self) {
       }, status => 400);
     }
 
+    unless ($self->app->email->validate_domain_name($formdata->{domain}->{domain})) {
+      return $self->render(json => {
+        success => 0,
+        error => $self->app->__('Invalid domain name syntax')
+      }, status => 400);
+    }
+
     # Check if alias domain (read from JSON body)
     my $is_alias = $json->{isAliasDomain};
     my $target_domain = $json->{targetDomain};
@@ -514,6 +521,102 @@ sub mailbox_page ($self) {
     layout => 'modal',
     status => 200
   );
+}
+
+# Mailbox sync page (modal) - imapsync job launcher
+sub mailbox_sync_page ($self) {
+  my $domain = $self->param('domain');
+  my $username = $self->param('username');
+
+  # Cache under a generic path so each mailbox doesn't create its own file
+  $self->stash(docpath => $self->url_for('email_mailbox_edit', domain => 'domain') . '/sync/index.html');
+
+  my $default_dst_host = $self->app->config->{manager}->{email}->{imap_host}
+    // $self->app->config->{manager}->{email}->{host}
+    // 'localhost';
+
+  my $title = $self->app->__('Sync mailbox');
+  my $web = { title => $title };
+  $self->stash(
+    username         => $username,
+    domain           => $domain,
+    default_dst_host => $default_dst_host,
+  );
+  $web->{script} = $self->render_to_string(template => 'email/domain/mailbox/sync/index', format => 'js');
+  return $self->render(
+    web => $web,
+    title => $title,
+    template => 'email/domain/mailbox/sync/index',
+    layout => 'modal',
+    status => 200
+  );
+}
+
+# Mailbox sync API - enqueues a Minion job
+sub mailbox_sync ($self) {
+  my $domain = $self->param('domain');
+  my $username = $self->param('username');
+
+  return unless $self->access({ admin => 1 });
+
+  my $json = $self->req->json || {};
+  my $src = $json->{source} || {};
+  my $dst = $json->{dest}   || {};
+
+  # Basic sanity checks
+  for my $side (['source', $src], ['dest', $dst]) {
+    my ($name, $s) = @$side;
+    for my $f (qw(host user password)) {
+      unless (defined $s->{$f} && length $s->{$f}) {
+        return $self->render(json => {
+          success => 0,
+          error => $self->app->__x('{side} {field} is required', side => $name, field => $f)
+        }, status => 400);
+      }
+    }
+  }
+
+  # Make sure the mailbox actually exists before scheduling
+  my $mailbox = $self->app->email->find_mailbox($username);
+  unless ($mailbox) {
+    return $self->render(json => {
+      success => 0,
+      error => $self->app->__('Mailbox not found')
+    }, status => 404);
+  }
+
+  my $job_args = {
+    domain        => $domain,
+    username      => $username,
+    source        => {
+      host     => $src->{host},
+      port     => $src->{port} || 993,
+      user     => $src->{user},
+      password => $src->{password},
+      ssl      => $src->{ssl} ? 1 : 0,
+    },
+    dest => {
+      host     => $dst->{host},
+      port     => $dst->{port} || 993,
+      user     => $dst->{user},
+      password => $dst->{password},
+      ssl      => $dst->{ssl} ? 1 : 0,
+    },
+    dry_run       => $json->{dry_run}       ? 1 : 0,
+    delete_source => $json->{delete_source} ? 1 : 0,
+    skip_existing => $json->{skip_existing} ? 1 : 0,
+    requested_by  => $self->session('user') // 'system',
+  };
+
+  my $job_id = $self->app->minion->enqueue(email_imap_sync => [$job_args] => {
+    notes => { domain => $domain, mailbox => $username, kind => 'imap_sync' },
+  });
+
+  return $self->render(json => {
+    success => 1,
+    job_id  => $job_id,
+    message => $self->app->__('Sync job enqueued'),
+  });
 }
 
 # Admin page (modal - new or edit) - HTML only, data via OpenAPI

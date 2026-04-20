@@ -1,4 +1,4 @@
-package Samizdat::Model::Mailer;
+  package Samizdat::Model::Mailer;
 
 use Mojo::Base -base, -signatures;
 

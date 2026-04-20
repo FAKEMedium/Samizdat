@@ -65,6 +65,21 @@ sub find_domain ($self, $domain) {
   return $self->database->query('SELECT * FROM postfix.domain WHERE domain = ?', $domain)->hash;
 }
 
+# Validate a domain name syntactically (RFC 1035 / 1123).
+# Returns 1 if valid, 0 otherwise. Accepts ASCII / punycode (xn--) labels.
+sub validate_domain_name ($self, $domain) {
+  return 0 unless defined $domain && length $domain;
+  return 0 if length $domain > 253;
+  return 0 unless $domain =~ /\./;  # must have at least one dot
+  my @labels = split /\./, $domain, -1;
+  for my $label (@labels) {
+    return 0 unless $label =~ /\A[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?\z/;
+  }
+  # TLD must be at least 2 chars and either all alphabetic or a punycode label
+  return 0 unless $labels[-1] =~ /\A(?:[a-zA-Z]{2,}|xn--[a-zA-Z0-9-]+)\z/;
+  return 1;
+}
+
 sub create_domain ($self, $data) {
   my $db = $self->database;
   my $tx = $db->begin;

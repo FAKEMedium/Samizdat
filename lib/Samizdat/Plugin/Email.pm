@@ -34,6 +34,7 @@ sub register ($self, $app, $conf) {
   $manager->get('/#domain/admins')                           ->to('#domain_admins')             ->name('email_domain_admins');
   $manager->get('/#domain/alias/#address')                   ->to('#alias_page')                ->name('email_alias');
   $manager->get('/#domain/alias')                            ->to('#alias_page')                ->name('email_alias_edit');
+  $manager->get('/#domain/mailbox/#username/sync')           ->to('#mailbox_sync_page')         ->name('email_mailbox_sync');
   $manager->get('/#domain/mailbox/#username')                ->to('#mailbox_page')              ->name('email_mailbox');
   $manager->get('/#domain/mailbox')                          ->to('#mailbox_page')              ->name('email_mailbox_edit');
   $manager->get('/#domain')                                  ->to('#domain_page')               ->name('email_domain');
@@ -59,6 +60,64 @@ sub register ($self, $app, $conf) {
       $model->current_user('system');
     }
     return $model;
+  });
+
+  # Minion task: IMAP sync via imapsync. The job args carry full connection
+  # details; passwords are written to a temporary file and passed with
+  # --passfile1/--passfile2 so they don't appear in the process list.
+  $app->minion->add_task(email_imap_sync => sub ($job, $args) {
+    require File::Temp;
+    require IPC::Run3;
+
+    my $src = $args->{source} || {};
+    my $dst = $args->{dest}   || {};
+
+    my $src_pw = File::Temp->new(UNLINK => 1, TEMPLATE => 'imapsync-src-XXXXXX', TMPDIR => 1);
+    my $dst_pw = File::Temp->new(UNLINK => 1, TEMPLATE => 'imapsync-dst-XXXXXX', TMPDIR => 1);
+    chmod 0600, $src_pw->filename, $dst_pw->filename;
+    print $src_pw $src->{password} // ''; close $src_pw;
+    print $dst_pw $dst->{password} // ''; close $dst_pw;
+
+    my @cmd = (
+      'imapsync',
+      '--host1'     => $src->{host},
+      '--port1'     => $src->{port} || 993,
+      '--user1'     => $src->{user},
+      '--passfile1' => $src_pw->filename,
+      '--host2'     => $dst->{host},
+      '--port2'     => $dst->{port} || 993,
+      '--user2'     => $dst->{user},
+      '--passfile2' => $dst_pw->filename,
+      '--nofoldersizes',
+    );
+    push @cmd, '--ssl1'    if $src->{ssl};
+    push @cmd, '--ssl2'    if $dst->{ssl};
+    push @cmd, '--dry'     if $args->{dry_run};
+    push @cmd, '--delete'  if $args->{delete_source};
+    push @cmd, '--useuid'  if $args->{skip_existing};
+
+    my ($out, $err);
+    my $ok = eval { IPC::Run3::run3(\@cmd, \undef, \$out, \$err); 1 };
+    my $exit = $?;
+
+    if (!$ok) {
+      return $job->fail({ error => "imapsync failed to run: $@", stdout => $out // '', stderr => $err // '' });
+    }
+    if ($exit != 0) {
+      return $job->fail({
+        error  => "imapsync exited with code " . ($exit >> 8),
+        stdout => $out // '',
+        stderr => $err // '',
+      });
+    }
+
+    return $job->finish({
+      success => 1,
+      domain   => $args->{domain},
+      username => $args->{username},
+      dry_run  => $args->{dry_run},
+      stdout   => $out // '',
+    });
   });
 }
 
@@ -382,6 +441,38 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Email_Result'
+
+  /email/domains/{domain}/mailboxes/{username}/sync:
+    post:
+      operationId: Email.mailboxes.sync
+      x-mojo-to: Email#mailbox_sync
+      summary: Enqueue IMAP sync job for this mailbox
+      tags: [Email]
+      parameters:
+        - name: domain
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+        - name: username
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email_MailboxSyncInput'
+      responses:
+        '200':
+          description: Sync job enqueued
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_MailboxSyncResult'
 
   /email/domains/{domain}/mailboxes/{username}:
     get:
@@ -955,6 +1046,52 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Email_Mailbox'
+    Email_MailboxSyncEndpoint:
+      type: object
+      required:
+        - host
+        - user
+        - password
+      properties:
+        host:
+          type: string
+        port:
+          type: integer
+          default: 993
+        user:
+          type: string
+        password:
+          type: string
+        ssl:
+          type: boolean
+          default: true
+    Email_MailboxSyncInput:
+      type: object
+      required:
+        - source
+        - dest
+      properties:
+        source:
+          $ref: '#/components/schemas/Email_MailboxSyncEndpoint'
+        dest:
+          $ref: '#/components/schemas/Email_MailboxSyncEndpoint'
+        dry_run:
+          type: boolean
+        delete_source:
+          type: boolean
+        skip_existing:
+          type: boolean
+    Email_MailboxSyncResult:
+      type: object
+      properties:
+        success:
+          type: boolean
+        job_id:
+          type: integer
+        message:
+          type: string
+        error:
+          type: string
     Email_Alias:
       type: object
       properties:

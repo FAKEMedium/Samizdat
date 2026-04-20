@@ -33,6 +33,7 @@
   </div>
 
   <div class="modal-footer">
+    <button type="button" class="btn btn-info me-auto" id="syncBtn" style="display: none;"><%== __('Sync') %>…</button>
     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
     <button type="submit" class="btn btn-primary" id="submitBtn"><%== __('Create mailbox') %></button>
   </div>
