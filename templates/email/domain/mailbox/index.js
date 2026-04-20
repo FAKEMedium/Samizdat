@@ -35,6 +35,18 @@
     usernameInput.disabled = true;
     passwordInput.required = false;
     passwordInput.placeholder = '<%== __("Leave blank to keep current") %>';
+
+    // Show and wire the Sync button (only available for existing mailboxes)
+    const syncBtn = document.getElementById('syncBtn');
+    if (syncBtn) {
+      syncBtn.style.display = '';
+      syncBtn.addEventListener('click', () => {
+        const syncUrl = `<%== url_for('email_mailbox_sync', domain => '_DOM_', username => '_USR_') %>`
+          .replace('_DOM_', encodeURIComponent(domain))
+          .replace('_USR_', encodeURIComponent(editingMailbox));
+        window.openModalFromUrl(syncUrl);
+      });
+    }
   } else if (domain) {
     // Pre-fill domain part for new mailbox
     usernameInput.value = '@' + domain;
