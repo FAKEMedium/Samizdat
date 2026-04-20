@@ -301,12 +301,15 @@ sub getLogin($self) {
     account_type  => $self->config->{oauth2}->{account_type},
     state         => $self->data->{state},
   })->result;
+  say sprintf("getLogin: %s %s", $response->code, $response->message);
+  say sprintf("getLogin headers: %s", $response->headers->to_string);
   if ($response->headers->header('Location')) {
     $self->data->{state} = 'code';
     $self->saveCache;
     my $redirect = sprintf("https://apps.fortnox.se%s\n", $response->headers->header('Location'));
     return $redirect;
   }
+  say sprintf("getLogin body: %s", $response->body);
   return 0;
 }
 
