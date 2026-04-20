@@ -99,6 +99,14 @@ sub customers ($self) {
   my $accept = $self->req->headers->accept // '';
 
   if ($accept !~ /json/) {
+    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
+    if (!$self->app->fortnox->data->{access}) {
+      if (my $redirect_url = $self->app->fortnox->getLogin) {
+        $redirect_url =~ s/\s+$//;
+        return $self->redirect_to($redirect_url);
+      }
+      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+    }
     if ($customerid) {
       # Override cache path for dynamic customer ID to prevent creating separate cached files
       $self->stash(docpath => '/fortnox/customers/customer/index.html');
@@ -163,6 +171,14 @@ sub invoices ($self) {
   my $invoiceid = int($self->stash('invoiceid') // 0);
   my $accept = $self->req->headers->{headers}->{accept}->[0];
   if ($accept !~ /json/) {
+    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
+    if (!$self->app->fortnox->data->{access}) {
+      if (my $redirect_url = $self->app->fortnox->getLogin) {
+        $redirect_url =~ s/\s+$//;
+        return $self->redirect_to($redirect_url);
+      }
+      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+    }
     if ($invoiceid) {
       $self->stash(docpath => '/fortnox/invoices/invoice/index.html');
       $web->{script} .= $self->render_to_string(format => 'js', template => 'fortnox/invoices/invoice/index');
@@ -222,6 +238,14 @@ sub payments ($self) {
   my $number = int($self->stash('number') // 0);
   my $accept = $self->req->headers->accept // '';
   if ($accept !~ /json/) {
+    # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
+    if (!$self->app->fortnox->data->{access}) {
+      if (my $redirect_url = $self->app->fortnox->getLogin) {
+        $redirect_url =~ s/\s+$//;
+        return $self->redirect_to($redirect_url);
+      }
+      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+    }
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
       $self->stash(docpath => '/fortnox/payments/payment/index.html');
