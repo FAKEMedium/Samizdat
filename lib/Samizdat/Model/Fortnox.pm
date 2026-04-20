@@ -301,15 +301,17 @@ sub getLogin($self) {
     account_type  => $self->config->{oauth2}->{account_type},
     state         => $self->data->{state},
   })->result;
-  say sprintf("getLogin: %s %s", $response->code, $response->message);
-  say sprintf("getLogin headers: %s", $response->headers->to_string);
+  my $redirect_path;
   if ($response->headers->header('Location')) {
+    $redirect_path = $response->headers->header('Location');
+  } elsif ($response->body =~ /http-equiv="REFRESH"[^>]+url=([^">\s]+)/i) {
+    $redirect_path = $1;
+  }
+  if ($redirect_path) {
     $self->data->{state} = 'code';
     $self->saveCache;
-    my $redirect = sprintf("https://apps.fortnox.se%s\n", $response->headers->header('Location'));
-    return $redirect;
+    return sprintf("https://apps.fortnox.se%s", $redirect_path);
   }
-  say sprintf("getLogin body: %s", $response->body);
   return 0;
 }
 
