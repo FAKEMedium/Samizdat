@@ -100,11 +100,7 @@ sub customers ($self) {
   if ($accept !~ /json/) {
     # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
     if (!$self->app->fortnox->data->{access}) {
-      if (my $redirect_url = $self->app->fortnox->getLogin) {
-        $redirect_url =~ s/\s+$//;
-        return $self->redirect_to($redirect_url);
-      }
-      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+      return $self->redirect_to($self->url_for('fortnox_auth'));
     }
     if ($customerid) {
       # Override cache path for dynamic customer ID to prevent creating separate cached files
@@ -172,11 +168,7 @@ sub invoices ($self) {
   if ($accept !~ /json/) {
     # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
     if (!$self->app->fortnox->data->{access}) {
-      if (my $redirect_url = $self->app->fortnox->getLogin) {
-        $redirect_url =~ s/\s+$//;
-        return $self->redirect_to($redirect_url);
-      }
-      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+      return $self->redirect_to($self->url_for('fortnox_auth'));
     }
     if ($invoiceid) {
       $self->stash(docpath => '/fortnox/invoices/invoice/index.html');
@@ -239,11 +231,7 @@ sub payments ($self) {
   if ($accept !~ /json/) {
     # Check Fortnox auth before rendering HTML - redirect to OAuth if needed
     if (!$self->app->fortnox->data->{access}) {
-      if (my $redirect_url = $self->app->fortnox->getLogin) {
-        $redirect_url =~ s/\s+$//;
-        return $self->redirect_to($redirect_url);
-      }
-      return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
+      return $self->redirect_to($self->url_for('fortnox_auth'));
     }
     if ($number) {
       # Override cache path for dynamic payment number to prevent creating separate cached files
