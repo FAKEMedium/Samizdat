@@ -295,6 +295,7 @@ sub getLogin($self) {
   $self->data->{state} = 'login';
   my $response = $self->ua->get($self->config->{oauth2}->{authorize_url} => {Accept => '*/*'} => form => {
     client_id     => $self->config->{oauth2}->{client_id},
+    redirect_uri  => $self->config->{oauth2}->{redirect_uri},
     scope         => $self->config->{oauth2}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
