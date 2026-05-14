@@ -48,8 +48,6 @@ sub register ($self, $app, $conf) {
   $app->helper(email => sub ($self) {
     state $model = Samizdat::Model::Email->new({
       config => $self->config->{manager}->{email} || {},
-      pg     => $self->pg,
-      mysql  => $self->mysql,
     });
     # Set current user for logging
     my $username = $self->session('user');
@@ -61,6 +59,11 @@ sub register ($self, $app, $conf) {
     }
     return $model;
   });
+
+  # Postfixadmin DB connection + local postfix CLI ops. Parallels the `pdns`
+  # helper in Samizdat::Plugin::Zone. Lives on the email model so there is
+  # one source of truth for the connection pool.
+  $app->helper(postfix => sub ($c) { $c->email->postfix });
 
   # Minion task: IMAP sync via imapsync. The job args carry full connection
   # details; passwords are written to a temporary file and passed with

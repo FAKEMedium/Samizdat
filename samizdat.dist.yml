@@ -195,7 +195,7 @@ manager:
       predelete:
       postdelete:
         - echo "Website {domain} deleted for customer {customerid}"
-database:
+  database:
     dbtype: postgresql
     cardnumber: 6
     phpmyadmin:
@@ -206,7 +206,19 @@ database:
       url: /phpldapadmin/
   email:
     cardnumber: 7
-    dbtype: mysql
+    # Postfixadmin database. DSN scheme picks the driver:
+    #   mysql://...           -> Mojo::mysql
+    #   postgresql://... or postgres://...  -> Mojo::Pg
+    default_env: test
+    env:
+      production:
+        dsn: mysql://postfixadmin:s3cr3t@mail.fakenews.com/postfixadmin
+      test:
+        dsn: mysql://postfixadmin:s3cr3t@localhost/postfixadmin
+    # Local postfix command-line ops (queue management, reload, postmap, etc.)
+    postfix:
+      bindir: /usr/sbin       # postqueue, postsuper, postconf, postmap, postfix
+      reload_via:             # optional: 'sudo' / 'doas' prefix for `postfix reload`
     domain:
       aliases: 0                # Default max aliases per domain
       mailboxes: 0              # Default max mailboxes per domain
@@ -303,14 +315,33 @@ database:
     api_key: someapikey
     customer: yourcustomerhandle  # Customer handle for API requests
     currency:
-      - EUR
-      - USD
+      - EUR                       # Default currency code for domain registrations (can be overridden per domain). Should be a currency supported by the registry, e.g. EUR for Realtime Register. Check your registry's documentation for supported currencies.
+#      - USD
     default_env: production  # production or test - determines which API endpoint to use
     env:
       production:
         api: https://api.yoursrs.com/
       test:
         api: https://api.yoursrs-ote.com/
+    # These are the tld:s we allow registration for. They should be listed by strength, i.e. the one we want the most should be listed first, as the system will try them in order until it finds one that works.
+    # "all" is a special value that will try all tlds supported by the registry, but it is better to list them explicitly if you know which ones you want to use, as it will be faster and more reliable.
+    # Prices are in this site's default currency (not the registry's currency), and can be set per tld, or as a multiplier for all tlds. If a tld has a specific price set, it will use that price, otherwise it will use the registry price multiplied by the multiplier (or 1 if no multiplier is set).
+    # Prices are used for calculating the price for the customer.
+    tld:
+      - com:
+          price:
+            create: 14
+            renew: 14
+            transfer: 14
+            restore: 100
+            lock: 200
+      - net:
+      - org:
+      - all:
+          price:
+            multiplier: 1.8 # Multiplier for pricing when using "all" tld option, as these tlds are usually more expensive. The system will take the price from the registry and multiply it by this value to get the final price for the customer.
+            exclude:
+              - io  # Exclude .io from the "all" option, as it is very expensive and we don't want to offer it to customers.
   paypal:
     dbtype: postgresql
     currency: USD                             # Default currency code (USD, EUR, SEK, etc)
