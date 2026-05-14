@@ -2,16 +2,20 @@ package Samizdat::Model::Email;
 
 use Mojo::Base -base, -signatures;
 use Mojo::Util qw(trim);
+use Samizdat::Model::Email::Postfix;
 use Data::Dumper;
 
 has 'config';
-has 'pg';
-has 'mysql';
 has 'current_user' => 'system';  # Set by controller/command for logging
 
-sub database ($self) {
-  return ('mysql' eq ($self->config->{dbtype} // 'postgresql')) ? $self->mysql->db : $self->pg->db;
-}
+# Postfixadmin DB connection + local postfix command-line ops. Owned by this
+# model; consumers reach it via $email->postfix (or via the `postfix` helper).
+has postfix => sub ($self) {
+  Samizdat::Model::Email::Postfix->new(config => $self->config);
+};
+
+# Per-request DB handle on the postfixadmin connection
+sub database ($self) { $self->postfix->db->db }
 
 # Internal logging helper (uses provided db handle for transactions)
 sub _log ($self, $db, $action, $domain, $data = {}) {
@@ -621,7 +625,7 @@ sub count_mailboxes ($self, $params = {}) {
     $sql .= ' WHERE ' . join(' AND ', @conditions);
   }
 
-  my $result = $self->pg->db->query($sql, @bind)->hash;
+  my $result = $self->database->query($sql, @bind)->hash;
   return $result->{count} || 0;
 }
 

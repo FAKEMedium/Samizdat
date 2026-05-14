@@ -323,8 +323,46 @@ sub pricelist ($self) {
     my $params = {};
     $params->{currency} = $self->param('currency') if $self->param('currency');
     my $pricelist = $rtr->getPricelist($params);
-    return $self->render(json => { pricelist => $pricelist });
+    return $self->render(json => {
+      pricelist       => $pricelist,
+      customer_prices => $self->_rtr_customer_prices_config,
+    });
   }
+}
+
+# Normalize the manager.realtimeregister.tld config into a frontend-friendly
+# structure. Returns a hashref with explicit TLD order, per-TLD whole-unit
+# prices, the catch-all multiplier, the exclude list, and the currency those
+# explicit prices are denominated in.
+sub _rtr_customer_prices_config ($self) {
+  my $rtr = $self->app->realtimeregister;
+  my $tld_config = $rtr->config->{tld} // [];
+
+  my (@explicit, %prices, @exclude);
+  my $multiplier = 1.0;
+
+  for my $entry (@$tld_config) {
+    next unless ref $entry eq 'HASH';
+    my ($name, $cfg) = %$entry;
+    if ($name eq 'all') {
+      my $price = ($cfg && ref $cfg eq 'HASH') ? $cfg->{price} : undef;
+      $multiplier = $price->{multiplier} + 0 if $price && defined $price->{multiplier};
+      @exclude = map { lc } @{$price->{exclude} // []} if $price;
+    }
+    else {
+      my $tld = lc $name;
+      push @explicit, $tld;
+      $prices{$tld} = ($cfg && ref $cfg eq 'HASH' && $cfg->{price}) ? $cfg->{price} : {};
+    }
+  }
+
+  return {
+    explicit   => \@explicit,
+    prices     => \%prices,
+    multiplier => $multiplier + 0,
+    exclude    => \@exclude,
+    currency   => $rtr->default_currency,
+  };
 }
 
 1;

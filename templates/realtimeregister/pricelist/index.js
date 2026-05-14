@@ -9,6 +9,9 @@ const PAGE_SIZE = 25;
 let currentMatrix = [];   // full matrix for the loaded currency
 let filteredMatrix = [];  // currentMatrix narrowed by filterInput
 let currentPage = 1;
+let customerPrices = { explicit: [], prices: {}, multiplier: 1, exclude: [], currency: defaultCurrency };
+let explicitOrder = new Map();   // tld -> rank (for sort)
+let excludedTlds = new Set();
 
 // Pre-render each column's SVG via the `icon` helper so they're inlined at
 // template-render time (same pattern as realtimeregister/domains/index.js).
@@ -16,52 +19,144 @@ const icCreate   = '<%== icon "plus-circle" %>';
 const icRenew    = '<%== icon "arrow-clockwise" %>';
 const icTransfer = '<%== icon "arrow-left-right" %>';
 const icRestore  = '<%== icon "arrow-counterclockwise" %>';
-const icPrivacy  = '<%== icon "eye-slash" %>';
-const icProtect  = '<%== icon "shield-check" %>';
 const icLock     = '<%== icon "lock-fill" %>';
 
-// `actions` lists the RTR action names that map into each column (first match wins).
+// `actions` lists the RTR action names that feed into each column.
+// `cfgKey` is the matching key in samizdat.yml's manager.realtimeregister.tld[*].price.
+// Privacy/Protect intentionally omitted: RTR bundles them as `PRIVACY_PROTECT`
+// and we filter out TLDs that charge for it (see buildMatrix), so the column
+// would be uninformative.
 const COLUMNS = [
-  { key: 'CREATE',        title: `<%== __('Create') %>`,        icon: icCreate,   actions: ['CREATE'] },
-  { key: 'RENEW',         title: `<%== __('Renew') %>`,         icon: icRenew,    actions: ['RENEW'] },
-  { key: 'TRANSFER',      title: `<%== __('Transfer') %>`,      icon: icTransfer, actions: ['TRANSFER'] },
-  { key: 'RESTORE',       title: `<%== __('Restore') %>`,       icon: icRestore,  actions: ['RESTORE'] },
-  { key: 'PRIVACY',       title: `<%== __('Privacy') %>`,       icon: icPrivacy,  actions: ['PRIVACY', 'WHOIS_PRIVACY', 'WHOISPRIVACY'] },
-  { key: 'PROTECT',       title: `<%== __('Protect') %>`,       icon: icProtect,  actions: ['PROTECT', 'DOMAIN_PROTECT', 'DOMAINPROTECT'] },
-  { key: 'REGISTRY_LOCK', title: `<%== __('Registry Lock') %>`, icon: icLock,     actions: ['REGISTRY_LOCK', 'REGISTRYLOCK', 'LOCK'] },
+  { key: 'CREATE',        title: `<%== __('Create') %>`,        icon: icCreate,   actions: ['CREATE'],                                              cfgKey: 'create'   },
+  { key: 'RENEW',         title: `<%== __('Renew') %>`,         icon: icRenew,    actions: ['RENEW'],                                               cfgKey: 'renew'    },
+  { key: 'TRANSFER',      title: `<%== __('Transfer') %>`,      icon: icTransfer, actions: ['TRANSFER'],                                            cfgKey: 'transfer' },
+  { key: 'RESTORE',       title: `<%== __('Restore') %>`,       icon: icRestore,  actions: ['RESTORE', 'TRANSFER_RESTORE'],                         cfgKey: 'restore'  },
+  { key: 'REGISTRY_LOCK', title: `<%== __('Registry Lock') %>`, icon: icLock,     actions: ['REGISTRY_LOCK', 'REGISTRYLOCK', 'LOCK'],               cfgKey: 'lock'     },
 ];
 
-const ACTION_TO_COL = {};
-for (const col of COLUMNS) for (const a of col.actions) ACTION_TO_COL[a] = col.key;
+// One action can feed multiple columns (left as one-to-many so future bundled
+// actions can fan out without restructuring).
+const ACTION_TO_COLS = {};
+for (const col of COLUMNS) for (const a of col.actions) {
+  (ACTION_TO_COLS[a] ||= []).push(col.key);
+}
 
 function formatPrice(cents, currency) {
   return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency }).format(cents / 100);
 }
 
-// Map a price row to { tld, col }, or null if it doesn't fit the matrix.
-// All columns are actions on the same domain_<tld> product.
+// Customer prices in samizdat.yml are whole units (no cents). Display them
+// without fractional digits so `1.8 × 7.50` doesn't show "13.5".
+function formatCustomer(units, currency) {
+  return new Intl.NumberFormat('en-US', { style: 'currency', currency: currency, maximumFractionDigits: 0 }).format(units);
+}
+
+// Customer price for a (tld, column) — returns whole units, or null if neither
+// an explicit nor a multiplier-derived price applies. Explicit YAML prices are
+// only honored when the displayed currency matches the configured default
+// (otherwise we'd be applying a SEK figure to a EUR cell).
+function customerPriceFor(tld, col, registryCents, currency) {
+  const cfgPrices = customerPrices.prices[tld];
+  if (cfgPrices && cfgPrices[col.cfgKey] !== undefined && currency === customerPrices.currency) {
+    return Number(cfgPrices[col.cfgKey]);
+  }
+  if (registryCents === undefined) return null;
+  const multiplier = customerPrices.multiplier || 1;
+  return Math.ceil((registryCents / 100) * multiplier);
+}
+
+// Defensive fallback for registry-lock if RTR ever exposes it as a separate
+// product instead of an action on `domain_<tld>`. Optional `_<tld>` tail makes
+// it per-TLD; without one it's a flat add-on applied to every row.
+const ADDON_PRODUCT_PATTERNS = [
+  { rx: /^(?:registry[_-]?)?lock(?:[_-](.+))?$/i, col: 'REGISTRY_LOCK' },
+];
+
+// Map a price row to an array of { kind: 'tld'|'global', tld, col }, or null
+// if irrelevant. Returns an array because a single row (e.g. PRIVACY_PROTECT)
+// can fill multiple columns.
 function classify(product, action) {
   const m = /^domain_(.+)$/.exec(product);
-  if (!m) return null;
-  const col = ACTION_TO_COL[(action || '').toUpperCase()];
-  if (!col) return null;
-  return { tld: m[1].toLowerCase(), col };
+  if (m) {
+    const cols = ACTION_TO_COLS[(action || '').toUpperCase()];
+    if (!cols || !cols.length) return null;
+    const tld = m[1].toLowerCase();
+    // RTR ships compound products like `domain_3rd_level` and `domain_co_uk`
+    // where the suffix isn't a single TLD — drop anything with underscores.
+    if (tld.includes('_')) return null;
+    return cols.map(col => ({ kind: 'tld', tld, col }));
+  }
+  for (const g of ADDON_PRODUCT_PATTERNS) {
+    const am = g.rx.exec(product);
+    if (am) {
+      if (am[1] && am[1].toLowerCase().includes('_')) return null;
+      return [am[1]
+        ? { kind: 'tld', tld: am[1].toLowerCase(), col: g.col }
+        : { kind: 'global', col: g.col }];
+    }
+  }
+  return null;
 }
 
 function buildMatrix(prices) {
   const byTld = new Map();
+  const globalAddons = {}; // col -> lowest-priced row across all matches
+  const ppCharged = new Set(); // TLDs where the registry charges for privacy/protect
+
   for (const p of prices) {
     if (/_sld$/.test(p.product)) continue;
-    const c = classify(p.product, p.action);
-    if (!c) continue;
-    if (!byTld.has(c.tld)) byTld.set(c.tld, { tld: c.tld, currency: p.currency, cells: {} });
-    const row = byTld.get(c.tld);
-    // If the registry lists multiple matches for one cell, keep the lowest.
-    if (row.cells[c.col] === undefined || p.price < row.cells[c.col]) {
-      row.cells[c.col] = p.price;
+
+    // Skip TLDs whose registry charges for privacy/protect — we only offer
+    // domains where privacy is included at no extra cost.
+    if (p.action === 'PRIVACY_PROTECT' && p.price > 0) {
+      const dm = /^domain_(.+)$/.exec(p.product);
+      if (dm) ppCharged.add(dm[1].toLowerCase());
+    }
+
+    const classifications = classify(p.product, p.action);
+    if (!classifications) continue;
+
+    for (const c of classifications) {
+      if (c.kind === 'global') {
+        const prev = globalAddons[c.col];
+        if (!prev || p.price < prev.price) globalAddons[c.col] = p;
+        continue;
+      }
+
+      if (excludedTlds.has(c.tld)) continue;
+      if (!byTld.has(c.tld)) byTld.set(c.tld, { tld: c.tld, currency: p.currency, cells: {} });
+      const row = byTld.get(c.tld);
+      // If the registry lists multiple matches for one cell, keep the lowest.
+      if (row.cells[c.col] === undefined || p.price < row.cells[c.col]) {
+        row.cells[c.col] = p.price;
+      }
     }
   }
-  return [...byTld.values()].sort((a, b) => a.tld < b.tld ? -1 : 1);
+
+  // Drop TLDs where the registry charges for privacy/protect.
+  for (const tld of ppCharged) byTld.delete(tld);
+  if (ppCharged.size) console.log(`dropped ${ppCharged.size} TLDs with paid privacy/protect`);
+
+  // Apply flat add-on prices (registry lock without TLD suffix) to every
+  // row that doesn't already have a per-TLD price for that column.
+  for (const row of byTld.values()) {
+    for (const [col, p] of Object.entries(globalAddons)) {
+      if (row.cells[col] === undefined) row.cells[col] = p.price;
+    }
+  }
+  if (Object.keys(globalAddons).length) {
+    console.log('global addon prices applied:', Object.fromEntries(
+      Object.entries(globalAddons).map(([col, p]) => [col, `${p.product} | ${p.action} | ${p.price}`])
+    ));
+  }
+
+  // Explicitly-configured TLDs first (in config order), then alphabetical.
+  return [...byTld.values()].sort((a, b) => {
+    const ra = explicitOrder.has(a.tld) ? explicitOrder.get(a.tld) : Infinity;
+    const rb = explicitOrder.has(b.tld) ? explicitOrder.get(b.tld) : Infinity;
+    if (ra !== rb) return ra - rb;
+    return a.tld < b.tld ? -1 : 1;
+  });
 }
 
 // Recompute filteredMatrix from the current filter input and reset to page 1.
@@ -96,7 +191,14 @@ function renderTable() {
     html += `<tr><td>.${row.tld}</td>`;
     for (const col of COLUMNS) {
       const v = row.cells[col.key];
-      html += `<td class="text-end">${v !== undefined ? formatPrice(v, row.currency) : '<span class="text-muted">—</span>'}</td>`;
+      if (v === undefined) {
+        html += `<td class="text-end"><span class="text-muted">—</span></td>`;
+        continue;
+      }
+      const cust = customerPriceFor(row.tld, col, v, row.currency);
+      const rrHtml = `<small class="text-muted d-block">${formatPrice(v, row.currency)}</small>`;
+      const custHtml = (cust !== null) ? `<strong>${formatCustomer(cust, row.currency)}</strong>` : '';
+      html += `<td class="text-end">${rrHtml}${custHtml}</td>`;
     }
     html += '</tr>';
   }
@@ -157,6 +259,12 @@ async function loadPricelist(currency) {
       return;
     }
 
+    if (data.customer_prices) {
+      customerPrices = data.customer_prices;
+      explicitOrder = new Map((customerPrices.explicit || []).map((t, i) => [t.toLowerCase(), i]));
+      excludedTlds = new Set((customerPrices.exclude || []).map(t => t.toLowerCase()));
+    }
+
     // ---- debug: inspect what RTR actually returned ----
     window.__rtrPricelist = data.pricelist;
     const prices = data.pricelist.prices || [];
@@ -166,6 +274,7 @@ async function loadPricelist(currency) {
       actions.add(p.action);
       pairs.add(`${p.product} | ${p.action}`);
     }
+    const unmatched = [...products].filter(p => !classify(p, 'CREATE') && !/^domain_/.test(p)).sort();
     console.group('RTR pricelist debug');
     console.log('raw response:', data.pricelist);
     console.log('rows total:', prices.length);
@@ -173,6 +282,7 @@ async function loadPricelist(currency) {
     console.log('unique actions:', [...actions].sort());
     console.log('unique product prefixes:', [...new Set([...products].map(p => p.split('_')[0]))].sort());
     console.log('product|action pairs (first 30):', [...pairs].slice(0, 30));
+    console.log('non-domain products that did NOT match any classifier:', unmatched);
     console.groupEnd();
     // ---------------------------------------------------
 
