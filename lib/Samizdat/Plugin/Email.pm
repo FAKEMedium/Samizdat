@@ -29,6 +29,10 @@ sub register ($self, $app, $conf) {
   $manager->get('/mailboxes')                                ->to('#mailboxes_page')            ->name('email_mailboxes');
   $manager->get('/log')                                      ->to('#log_page')                  ->name('email_log');
 
+  # Postfix mail-queue management (superadmin-only; HTML pages, JSON via OpenAPI)
+  $manager->get('/mailq/message/#id')                        ->to('#mailq_show_page')           ->name('email_mailq_show');
+  $manager->get('/mailq')                                    ->to('#mailq_index_page')          ->name('email_mailq_index');
+
   # Domain-specific routes (most specific first)
   $manager->get('/#domain/admins/#admin')                    ->to('#domain_admin')              ->name('email_domain_admin');
   $manager->get('/#domain/admins')                           ->to('#domain_admins')             ->name('email_domain_admins');
@@ -47,7 +51,8 @@ sub register ($self, $app, $conf) {
   # Helper to access email model
   $app->helper(email => sub ($self) {
     state $model = Samizdat::Model::Email->new({
-      config => $self->config->{manager}->{email} || {},
+      config       => $self->config->{manager}->{email} || {},
+      fallback_dsn => $self->config->{dsn}{pg},
     });
     # Set current user for logging
     my $username = $self->session('user');
@@ -59,11 +64,6 @@ sub register ($self, $app, $conf) {
     }
     return $model;
   });
-
-  # Postfixadmin DB connection + local postfix CLI ops. Parallels the `pdns`
-  # helper in Samizdat::Plugin::Zone. Lives on the email model so there is
-  # one source of truth for the connection pool.
-  $app->helper(postfix => sub ($c) { $c->email->postfix });
 
   # Minion task: IMAP sync via imapsync. The job args carry full connection
   # details; passwords are written to a temporary file and passed with
@@ -977,6 +977,135 @@ paths:
               schema:
                 $ref: '#/components/schemas/Email_Result'
 
+  /email/mailq:
+    get:
+      operationId: Email.mailq.index
+      x-mojo-to: Email#mailq_index
+      summary: List queued postfix messages (superadmin)
+      tags: [Email Mailq]
+      responses:
+        '200':
+          description: Queue listing
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_MailqListResponse'
+
+  /email/mailq/flush:
+    post:
+      operationId: Email.mailq.flush
+      x-mojo-to: Email#mailq_flush
+      summary: Flush deferred queue (superadmin)
+      tags: [Email Mailq]
+      responses:
+        '200':
+          description: Flush result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/mailq/purge:
+    post:
+      operationId: Email.mailq.purge
+      x-mojo-to: Email#mailq_purge
+      summary: Purge queued messages by filter (superadmin)
+      tags: [Email Mailq]
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Email_MailqPurgeInput'
+      responses:
+        '200':
+          description: Purge result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_MailqPurgeResult'
+
+  /email/mailq/{id}:
+    get:
+      operationId: Email.mailq.show
+      x-mojo-to: Email#mailq_show
+      summary: View queued message (superadmin)
+      tags: [Email Mailq]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Message content
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_MailqMessage'
+    delete:
+      operationId: Email.mailq.delete
+      x-mojo-to: Email#mailq_delete
+      summary: Delete queued message (superadmin)
+      tags: [Email Mailq]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Delete result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/mailq/{id}/hold:
+    post:
+      operationId: Email.mailq.hold
+      x-mojo-to: Email#mailq_hold
+      summary: Hold queued message (superadmin)
+      tags: [Email Mailq]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Hold result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
+  /email/mailq/{id}/release:
+    post:
+      operationId: Email.mailq.release
+      x-mojo-to: Email#mailq_release
+      summary: Release queued message (superadmin)
+      tags: [Email Mailq]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          x-mojo-placeholder: "#"
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Release result
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Email_Result'
+
 components:
   schemas:
     Email_Domain:
@@ -1243,3 +1372,88 @@ components:
               type: integer
             pages:
               type: integer
+    Email_MailqEntry:
+      type: object
+      properties:
+        queue_id:
+          type: string
+        queue_name:
+          type: string
+          description: Queue (incoming/active/deferred/hold/corrupt)
+        arrival_time:
+          type: integer
+        message_size:
+          type: integer
+        sender:
+          type: string
+        recipients:
+          type: array
+          items:
+            type: object
+            properties:
+              address:
+                type: string
+              delay_reason:
+                type: string
+    Email_MailqListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Email_MailqEntry'
+        total:
+          type: integer
+    Email_MailqMessage:
+      type: object
+      properties:
+        success:
+          type: boolean
+        id:
+          type: string
+        content:
+          type: string
+          description: Raw message text from postcat
+    Email_MailqPurgeInput:
+      type: object
+      description: |
+        At least one filter regex must be set, OR confirm must be 'all' to
+        purge every queued message. Use dry_run=true to preview.
+      properties:
+        filter:
+          type: object
+          properties:
+            sender:
+              type: string
+              description: Regex matched against sender address
+            recipient:
+              type: string
+              description: Regex matched against any recipient address
+            queue:
+              type: string
+              description: Regex matched against queue name (deferred/active/hold/...)
+        confirm:
+          type: string
+          enum: [all]
+          description: Required when no filter is given
+        dry_run:
+          type: boolean
+    Email_MailqPurgeResult:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        matched:
+          type: integer
+        deleted:
+          type: integer
+        dry_run:
+          type: boolean
+        ids:
+          type: array
+          items:
+            type: string
+        error:
+          type: string

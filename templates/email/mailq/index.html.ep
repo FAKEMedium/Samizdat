@@ -1,0 +1,64 @@
+<form name="mailqfilter" class="row mb-3 g-2">
+  <div class="col-md-3">
+    <input class="form-control form-control-sm" type="text" name="sender" placeholder="<%== __('Sender regex') %>..." autocomplete="off">
+  </div>
+  <div class="col-md-3">
+    <input class="form-control form-control-sm" type="text" name="recipient" placeholder="<%== __('Recipient regex') %>..." autocomplete="off">
+  </div>
+  <div class="col-md-2">
+    <input class="form-control form-control-sm" type="text" name="queue" placeholder="<%== __('Queue regex') %>..." autocomplete="off">
+  </div>
+  <div class="col-md-4 text-end">
+    <button type="submit" class="btn btn-sm btn-primary">
+      <%== icon 'funnel', {} %>
+      <span><%== __('Filter') %></span>
+    </button>
+    <button type="button" id="btnFlush" class="btn btn-sm btn-secondary" title="<%== __('Flush deferred queue') %>">
+      <%== icon 'arrow-clockwise', {} %>
+      <span><%== __('Flush') %></span>
+    </button>
+    <button type="button" id="btnPurge" class="btn btn-sm btn-danger" title="<%== __('Purge matching messages') %>">
+      <%== icon 'trash', {} %>
+      <span><%== __('Purge') %></span>
+    </button>
+  </div>
+</form>
+
+<div id="mailqSummary" class="text-muted small mb-2"></div>
+
+<table id="mailqTable" class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th><%== __('Queue') %></th>
+      <th><%== __('ID') %></th>
+      <th><%== __('Size') %></th>
+      <th><%== __('Arrival') %></th>
+      <th><%== __('Sender') %></th>
+      <th><%== __('Recipients') %></th>
+      <th class="text-end"><%== __('Actions') %></th>
+    </tr>
+  </thead>
+  <tbody id="mailqList">
+  </tbody>
+</table>
+
+<div class="modal fade" id="purgeModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%== __('Confirm purge') %></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="<%== __('Close') %>"></button>
+      </div>
+      <div class="modal-body">
+        <p id="purgeSummary"></p>
+        <p class="text-danger"><strong><%== __('This deletes queued messages permanently.') %></strong></p>
+        <p><%== __('Type') %> <code>DELETE</code> <%== __('to confirm') %>:</p>
+        <input type="text" class="form-control" id="purgeConfirm" autocomplete="off">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><%== __('Cancel') %></button>
+        <button type="button" class="btn btn-danger" id="btnPurgeConfirm" disabled><%== __('Purge') %></button>
+      </div>
+    </div>
+  </div>
+</div>

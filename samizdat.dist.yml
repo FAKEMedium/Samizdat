@@ -206,7 +206,10 @@ manager:
       url: /phpldapadmin/
   email:
     cardnumber: 7
-    # Postfixadmin database. DSN scheme picks the driver:
+    # Postfixadmin database. The env block is optional — if omitted, the model
+    # falls back to the main samizdat DSN (top-level `dsn.pg`) and uses the
+    # `postfix` schema there. Set env.<name>.dsn to point at a separate
+    # postfixadmin install. DSN scheme picks the driver:
     #   mysql://...           -> Mojo::mysql
     #   postgresql://... or postgres://...  -> Mojo::Pg
     default_env: test

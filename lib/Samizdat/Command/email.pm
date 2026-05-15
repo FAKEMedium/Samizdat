@@ -19,7 +19,8 @@ sub run ($self, @args) {
   # Initialize email model with 'system' user for CLI.
   # The Email model owns the postfixadmin DB connection via its `postfix` attr.
   my $email = Samizdat::Model::Email->new({
-    config => $self->app->config->{manager}->{email} || {},
+    config       => $self->app->config->{manager}->{email} || {},
+    fallback_dsn => $self->app->config->{dsn}{pg},
   });
   $email->current_user('system');
 

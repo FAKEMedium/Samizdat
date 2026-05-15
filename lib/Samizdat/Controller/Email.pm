@@ -1222,4 +1222,114 @@ sub vacation ($self) {
   }
 }
 
+# Postfix mail-queue (mailq) management. All endpoints superadmin-only.
+
+sub mailq_index_page ($self) {
+  my $accept = $self->req->headers->accept || '';
+
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Mail Queue');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/mailq/index', format => 'js');
+
+    return $self->render(
+      web      => $web,
+      title    => $title,
+      template => 'email/mailq/index',
+      headline => 'email/chunks/headlinebuttons',
+      status   => 200,
+    );
+  }
+
+  return $self->mailq_index;
+}
+
+sub mailq_show_page ($self) {
+  my $accept = $self->req->headers->accept || '';
+
+  if ($accept !~ /json/) {
+    my $title = $self->app->__('Queued Message');
+    my $web = { title => $title };
+    $web->{script} = $self->render_to_string(template => 'email/mailq/message/index', format => 'js');
+
+    return $self->render(
+      web      => $web,
+      title    => $title,
+      template => 'email/mailq/message/index',
+      headline => 'email/chunks/headlinebuttons',
+      docpath  => '/manager/email/mailq/message/index.html',
+      status   => 200,
+    );
+  }
+
+  return $self->mailq_show;
+}
+
+sub mailq_index ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $items = $self->app->email->postfix->queue_list;
+  return $self->render(json => {
+    success => 1,
+    data    => $items,
+    total   => scalar @$items,
+  });
+}
+
+sub mailq_show ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $id = $self->stash('id');
+  my $content = $self->app->email->postfix->queue_view($id);
+  return $self->render(json => { success => 0, error => 'not found' }, status => 404)
+    unless defined $content;
+  return $self->render(json => { success => 1, id => $id, content => $content });
+}
+
+sub mailq_hold ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $r = $self->app->email->postfix->queue_hold($self->stash('id'));
+  return $self->render(json => {
+    success => $r->{ok} ? 1 : 0,
+    ($r->{ok} ? (message => $self->app->__('Held')) : (error => $r->{stderr})),
+  });
+}
+
+sub mailq_release ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $r = $self->app->email->postfix->queue_release($self->stash('id'));
+  return $self->render(json => {
+    success => $r->{ok} ? 1 : 0,
+    ($r->{ok} ? (message => $self->app->__('Released')) : (error => $r->{stderr})),
+  });
+}
+
+sub mailq_delete ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $r = $self->app->email->postfix->queue_delete($self->stash('id'));
+  return $self->render(json => {
+    success => $r->{ok} ? 1 : 0,
+    ($r->{ok} ? (message => $self->app->__('Deleted')) : (error => $r->{stderr})),
+  });
+}
+
+sub mailq_flush ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $r = $self->app->email->postfix->queue_flush;
+  return $self->render(json => {
+    success => $r->{ok} ? 1 : 0,
+    ($r->{ok} ? (message => $self->app->__('Queue flushed')) : (error => $r->{stderr})),
+  });
+}
+
+sub mailq_purge ($self) {
+  return unless $self->access({ superadmin => 1 });
+  my $body = $self->req->json || {};
+  my $result = $self->app->email->postfix->queue_purge({
+    filter  => $body->{filter}  || {},
+    confirm => $body->{confirm} // '',
+    dry_run => $body->{dry_run} ? 1 : 0,
+  });
+  my $status = $result->{ok} ? 200 : 400;
+  return $self->render(json => $result, status => $status);
+}
+
 1;
