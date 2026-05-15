@@ -174,7 +174,7 @@ The codebase is designed to be modular and extensible. Key implementation notes 
 - Use index.js for route specific javascript. We run "make eplinks" for index.js.ep generation. It's because js and ep files get different treatment in IntelliJ.
 - The associated javascript gets rendered and appended into $web->{script}, and inserted into bootstrap.html.ep layout, which wraps it in a DOMContentLoaded handler. JavaScript templates should NOT include their own DOMContentLoaded listeners.
 - A similar approach is used for CSS files, where a .css.ep file is symlinked to the .css file in the templates tree. $web->{css} is used to render the CSS files into the head of bootstrap.html.ep.
-- Primarily use index.* template names for easier pickup by OpenResty.
+- **IMPORTANT — template naming**: every page template MUST be `<dir>/index.html.ep` (with `index.js` + `index.js.ep` symlink). NEVER add a sibling like `show.html.ep` or `edit.html.ep` next to an `index.html.ep`. For a second view, create a new subdir and use `index.*` inside it. Example: `templates/email/admins/index.*` (list) vs `templates/email/admins/admin/index.*` (detail). This pattern is required for OpenResty static-cache pickup.
 - Code is developed in IntelliJ Ultimate for Ubuntu, but intended to run in a FreeBSD jailed environment.
 - Most modules exist in all 3 of Model, Controller, and Plugin directories, with the Controller directory being the most important.
 - The plugin adds routes and a helper based on the associated model. Some routes are named so the url_for helper can be used to generate URLs.

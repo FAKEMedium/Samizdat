@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <a href="<%== url_for('email_mailq_index') %>" class="btn btn-sm btn-secondary">
+    <%== icon 'arrow-left', {} %>
+    <span><%== __('Back to queue') %></span>
+  </a>
+  <div>
+    <button type="button" class="btn btn-sm btn-warning" id="btnHold"    title="<%== __('Hold') %>"><%== icon 'pause-fill', {} %> <%== __('Hold') %></button>
+    <button type="button" class="btn btn-sm btn-success" id="btnRelease" title="<%== __('Release') %>"><%== icon 'play-fill', {} %> <%== __('Release') %></button>
+    <button type="button" class="btn btn-sm btn-danger"  id="btnDelete"  title="<%== __('Delete') %>"><%== icon 'trash', {} %> <%== __('Delete') %></button>
+  </div>
+</div>
+
+<h5 id="mailqId" class="font-monospace"></h5>
+<pre id="mailqBody" class="border rounded p-3 bg-light small" style="white-space: pre-wrap; word-break: break-word;"></pre>

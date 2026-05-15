@@ -6,12 +6,16 @@ use Samizdat::Model::Email::Postfix;
 use Data::Dumper;
 
 has 'config';
+has 'fallback_dsn';  # main samizdat DSN, used when manager.email has no env block
 has 'current_user' => 'system';  # Set by controller/command for logging
 
 # Postfixadmin DB connection + local postfix command-line ops. Owned by this
 # model; consumers reach it via $email->postfix (or via the `postfix` helper).
 has postfix => sub ($self) {
-  Samizdat::Model::Email::Postfix->new(config => $self->config);
+  Samizdat::Model::Email::Postfix->new(
+    config       => $self->config,
+    fallback_dsn => $self->fallback_dsn,
+  );
 };
 
 # Per-request DB handle on the postfixadmin connection
