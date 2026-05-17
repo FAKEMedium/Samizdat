@@ -11,7 +11,6 @@
 /log/
 /.idea/
 /.vscode/
-/.claude/
 /lib/Samizdat/Model/EPP-PRIVATE.md
 /lib/Samizdat/Model/EPP.pm
 /lib/Samizdat/Plugin/EPP.pm
@@ -24,7 +23,7 @@
 /server.crt
 /server.key
 /swagger-v1.json
-/.claude/
+# .claude: share team config, keep personal overrides local
 /.claude/settings.local.json
 /.idea/
 /.npm/
