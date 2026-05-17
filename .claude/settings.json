@@ -1,0 +1,28 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Edit|Write|Read",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "perl \"$CLAUDE_PROJECT_DIR/.claude/hooks/block-secrets.pl\"",
+            "statusMessage": "Checking for secret files"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "perl \"$CLAUDE_PROJECT_DIR/.claude/hooks/perl-syntax-check.pl\"",
+            "statusMessage": "perl -c on edited Perl"
+          }
+        ]
+      }
+    ]
+  }
+}

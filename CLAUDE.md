@@ -196,6 +196,24 @@ make test
 # Run a specific test
 prove -l -v t/00-basic.t
 ```
+## Claude Code Automations
+
+Team-shared Claude Code config lives in `.claude/` (committed; only
+`.claude/settings.local.json` is personal/git-ignored):
+
+- **Hooks** (`.claude/settings.json` + `.claude/hooks/`):
+  - `block-secrets.pl` (PreToolUse) — refuses Edit/Write/Read of secret files
+    (`*.key`, `*.p12`, `samizdat.yml`, `*.rc`, `*_dump.sql`, etc.). Pull a value
+    out of `samizdat.yml` with `grep` via Bash instead of reading the file.
+  - `perl-syntax-check.pl` (PostToolUse) — runs `perl -c -Ilib` on edited
+    `.pm`/`.pl`/`.t` files.
+- **Subagents** (`.claude/agents/`): `samizdat-conventions-reviewer` (MVC
+  layering, model ownership, template/route naming, dbtype, i18n) and
+  `payments-security-reviewer` (Stripe/PayPal/Swish/Nets/Fortnox/EPP, certs).
+- **Skills** (`.claude/skills/`): `/new-module` scaffolds the
+  Model+Controller+Plugin trio (+ optional CLI command); `/create-migration`
+  creates the next `migrations/pg/<N>/` up/down pair.
+
 ## Todo List
 
 - Build lua scripts for OpenResty to handle authorization and injecting small bits of data into a cookie. Use redis for data sharing with the application
