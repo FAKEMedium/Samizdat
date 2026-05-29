@@ -225,6 +225,15 @@ sub saveCache ($self) {
 }
 
 
+sub reload ($self) {
+  # The model is a per-process singleton whose `data` is otherwise loaded from
+  # Redis only once. Re-read the shared cache so token changes and logouts
+  # performed by other hypnotoad workers take effect in this worker too.
+  $self->data($self->_loadCache);
+  return $self->data;
+}
+
+
 sub updateCache ($self, $resource = undef) {
   my $resources = [];
   if ($resource) {
@@ -281,13 +290,18 @@ sub removeCache ($self) {
   my $redis_key = 'fortnox:cache';
   $self->cache->del($redis_key);
 
-  # Reset to empty cache
-  $self->Cache({
+  my $empty = {
     'state'   => '',
     'access'  => '',
     'refresh' => '',
-    'code'    => ''
-  });
+    'code'    => '',
+  };
+  # Reset the in-memory copy too. The model is a per-process singleton whose
+  # `data` is loaded from Redis only once, so without this the worker keeps
+  # using the old tokens and writes them straight back to Redis on the next
+  # saveCache, undoing the logout.
+  $self->data($empty);
+  $self->_saveCache($empty);
 }
 
 
@@ -362,6 +376,10 @@ sub getToken ($self, $refresh = 0) {
 
 
 sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
+  # Sync with the shared Redis cache before checking the token, so a logout in
+  # another worker is honoured here. Safe: nothing has mutated data yet, and all
+  # writes are write-through via saveCache.
+  $self->reload;
   if (!$self->data->{access}) {
     return $self->getLogin();
   }
@@ -734,7 +752,9 @@ sub getInvoicePayment ($self, $Number = 0, $options = {}) {
     return $self->callAPI('InvoicePayments', 'get', $Number, $options);
   }
 
-  # Require valid token - trigger auth flow if missing
+  # Require valid token - trigger auth flow if missing (reload first so a logout
+  # in another worker is honoured)
+  $self->reload;
   if (!$self->data->{access}) {
     return $self->getLogin();
   }
