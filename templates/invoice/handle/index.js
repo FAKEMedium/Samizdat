@@ -42,10 +42,10 @@ async function sendForm(method, dataform='#dataform') {
     const response = await fetch(url, request);
     if (!response.ok) {
       if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || `<%== __('Authentication required') %>`);
-        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
-        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
+        // Defer to the global fetch interceptor (apidom.js): it opens the login
+        // form in #universalmodal, or redirects to data.auth_url (e.g. Fortnox).
+        // Navigating away here would clobber the modal.
+        return;
       } else {
         // Try to get error message from JSON response
         try {
@@ -98,10 +98,10 @@ window.getId = async function getId(what, customerid = 0, invoiceid = 0, percust
     const response = await fetch(url, request);
     if (!response.ok) {
       if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || `<%== __('Authentication required') %>`);
-        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
-        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
+        // Defer to the global fetch interceptor (apidom.js): it opens the login
+        // form in #universalmodal, or redirects to data.auth_url (e.g. Fortnox).
+        // Navigating away here would clobber the modal.
+        return;
       } else {
         // Try to get error message from JSON response
         try {
