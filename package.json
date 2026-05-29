@@ -38,10 +38,10 @@
     "babel-loader": "^9.2.1",
     "clean-webpack-plugin": "^1.0.1",
     "css-loader": "^6.7.3",
-    "css-minimizer-webpack-plugin": "^4.2.2",
+    "css-minimizer-webpack-plugin": "^8.0.0",
     "glob": "^13.0.6",
     "html-webpack-plugin": "^5.5.0",
-    "image-minimizer-webpack-plugin": "^3.8.2",
+    "image-minimizer-webpack-plugin": "^5.0.0",
     "katex": "^0.16.21",
     "mini-css-extract-plugin": "^2.7.5",
     "postcss": "^8.4.21",
@@ -57,7 +57,7 @@
     "terser-webpack-plugin": "^5.3.7",
     "webpack": "^5.76.3",
     "webpack-cli": "^5.0.1",
-    "webpack-dev-server": "^5.2.2",
+    "webpack-dev-server": "^5.2.4",
     "webpack-merge": "^6.0.1"
   },
   "dependencies": {

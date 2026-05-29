@@ -7,12 +7,9 @@ async function sendData() {
     const response = await fetch(window.location, request);
     if (!response.ok) {
       if (response.status === 401) {
-        const data = await response.json();
-        if (window.handle401Error) {
-          window.handle401Error(data.error || '<%== __("Authentication required") %>');
-        } else {
-          window.location.href = '<%== url_for('account_login') %>';
-        }
+        // Handled by the global fetch interceptor (apidom.js), which opens the
+        // login form in #universalmodal. Don't double-handle it here.
+        return;
       } else {
         alert('Request failed: ' + response.statusText);
       }

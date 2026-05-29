@@ -68,9 +68,8 @@ async function handlePaymentSubmit(event) {
 
     if (!response.ok) {
       if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || '<%== __("Authentication required") %>');
-        window.location.href = '<%== url_for("account_login") %>';
+        // Defer to the global fetch interceptor (apidom.js): it opens the login
+        // form in #universalmodal. Navigating away here would clobber the modal.
         return;
       }
       throw new Error('<%== __("Failed to register payment") %>');

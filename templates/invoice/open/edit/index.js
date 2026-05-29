@@ -47,10 +47,10 @@ async function sendData(method) {
     if (!response.ok) {
       if (pdfWindow) pdfWindow.close();
       if (response.status === 401) {
-        const data = await response.json();
-        alert(data.error || 'Authentication required');
-        // Redirect to external auth URL (e.g., Fortnox) if provided, otherwise account login
-        window.location.href = data.auth_url || `<%== url_for('account_login') %>`;
+        // Defer to the global fetch interceptor (apidom.js): it opens the login
+        // form in #universalmodal, or redirects to data.auth_url (e.g. Fortnox).
+        // Navigating away here would clobber the modal.
+        return;
       } else {
         // Try to get error message from JSON response
         try {
