@@ -14,7 +14,8 @@ async function loadPayments(page = 1, refresh = false) {
 
     // Handle Fortnox auth redirect (401 with auth_url)
     if (response.status === 401 && data.auth_url) {
-      window.location.href = data.auth_url;
+      // Handled by the global fetch interceptor (apidom.js), which routes
+      // through /fortnox/auth so the server returns us here afterwards.
       return;
     }
 

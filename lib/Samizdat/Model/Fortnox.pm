@@ -291,7 +291,10 @@ sub removeCache ($self) {
 }
 
 
-sub getLogin($self) {
+sub getLogin($self, $oauth_state = 'login') {
+  # $oauth_state is the OAuth state parameter Fortnox echoes back to our
+  # redirect_uri. The internal cache state machine ('login'/'code'/'api') is
+  # tracked separately in $self->data->{state}.
   $self->data->{state} = 'login';
   my $response = $self->ua->get($self->config->{oauth2}->{authorize_url} => {Accept => '*/*'} => form => {
     client_id     => $self->config->{oauth2}->{client_id},
@@ -299,7 +302,7 @@ sub getLogin($self) {
     scope         => $self->config->{oauth2}->{scope},
     access_type   => $self->config->{oauth2}->{access_type},
     account_type  => $self->config->{oauth2}->{account_type},
-    state         => $self->data->{state},
+    state         => $oauth_state,
   })->result;
   my $redirect_path;
   if ($response->headers->header('Location')) {
@@ -323,7 +326,7 @@ sub getToken ($self, $refresh = 0) {
   ));
   my $response;
   if ($refresh) {
-    say "Refreshing token with refresh_token: " . substr($self->data->{refresh} // '', 0, 20) . "...";
+    say "Refreshing Fortnox access token";
     $response = $self->ua->post($url => { Accept => '*/*' } => form => {
       grant_type    => 'refresh_token',
       refresh_token => $self->data->{refresh},

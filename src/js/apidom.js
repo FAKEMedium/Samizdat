@@ -231,7 +231,11 @@ window.simpleFetch = simpleFetch;
                         const clonedResponse = response.clone();
                         const data = await clonedResponse.json();
                         if (data.auth_url) {
-                            window.location.href = data.auth_url;
+                            // Round-trip through our own OAuth route so the server can
+                            // remember which page to send us back to once Fortnox
+                            // authentication completes (passed back via the OAuth state).
+                            const ret = location.pathname + location.search + location.hash;
+                            window.location.href = '/fortnox/auth?return=' + encodeURIComponent(ret);
                             return response;
                         }
                         if (window.handle401Error) {
