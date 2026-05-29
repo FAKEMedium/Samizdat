@@ -2,7 +2,6 @@ package Samizdat::Controller::Fortnox;
 
 use Mojo::Base 'Mojolicious::Controller', -signatures;
 use Mojo::Util;
-use Data::Dumper;
 
 
 sub redirect ($self) {
@@ -10,11 +9,37 @@ sub redirect ($self) {
 }
 
 
+# Accept only local absolute paths, so the OAuth return path can never be
+# abused as an open redirect to a foreign host. redirect_to re-parses the
+# string and decodes one more layer of percent escapes (notably %2F -> /), so
+# we validate both the value and its decoded form: otherwise "/%2F%2Fevil.com"
+# would surface as "///evil.com" (a protocol-relative redirect) in Location.
+sub _local_path ($self, $path) {
+  return undef unless defined($path) && length($path);
+  for my $p ($path, Mojo::Util::url_unescape($path)) {
+    return undef if $p =~ m{[\x00-\x1f]};  # control chars (incl. CR/LF)
+    return undef unless $p =~ m{^/};       # must be a local absolute path
+    return undef if $p =~ m{^/[/\\]};      # reject //host and /\host
+  }
+  return $path;
+}
+
+# Resolve where to send the user once Fortnox auth completes: a return path
+# passed in directly (initiating leg) or echoed back by Fortnox in the OAuth
+# state parameter (callback leg). Falls back to the manager dashboard.
+sub _auth_return ($self) {
+  my $return = $self->_local_path($self->param('return'));
+  if (!$return && ($self->param('state') // '') =~ /^return:(.+)\z/s) {
+    $return = $self->_local_path($1);
+  }
+  return $self->redirect_to($return // $self->url_for('manager_index'));
+}
+
 sub auth ($self) {
   # Initialize Fortnox session (creates 'fortnox' cookie)
   $self->session->{fortnox_active} = 1;
   $self->session(expiration => 7200);  # 2 hours
-  say Dumper $self->req->params->to_hash;
+
   # Force cache session ID to be created now (before OAuth redirect)
   # This ensures the same session ID is used when redirected back
   unless ($self->session->{cache_session_id}) {
@@ -22,25 +47,27 @@ sub auth ($self) {
     $self->session->{cache_session_id} = $session_id;
   }
 
-  my $state = $self->param("state") // '';
-  my $code = $self->param("code") // '';
-  $self->app->fortnox->data->{state} = $state if ($state);
-  $self->app->fortnox->data->{code} = $code if ($code);
-  say "Fortnox auth - state: $state, code: " . ($code ? 'present' : 'none');
-  say Dumper %{ $self->app->fortnox->data };
+  my $fortnox = $self->app->fortnox;
+  my $code = $self->param('code') // '';
+  $fortnox->data->{code} = $code if ($code);
 
-  if ('' ne $self->app->fortnox->data->{access}) {
-
-  } elsif ('' ne $self->app->fortnox->data->{refresh}) {
-    $self->app->fortnox->getToken(1);
-  } elsif ('' ne $self->app->fortnox->data->{code}) {
-    $self->app->fortnox->getToken(0);
+  if ('' ne $fortnox->data->{access}) {
+    # Already have an access token.
+  } elsif ('' ne $fortnox->data->{refresh}) {
+    $fortnox->getToken(1);
+  } elsif ('' ne $fortnox->data->{code}) {
+    $fortnox->getToken(0);
   } else {
-    my $redirect = $self->app->fortnox->getLogin();
-    say $redirect;
-    return $self->redirect_to($redirect);
+    # No credentials yet: start the OAuth dance. Carry the page the user came
+    # from in the OAuth state parameter so Fortnox echoes it back to us.
+    my $oauth_state = 'login';
+    if (my $return = $self->_local_path($self->param('return'))) {
+      $oauth_state = 'return:' . $return;
+    }
+    return $self->redirect_to($fortnox->getLogin($oauth_state));
   }
-  $self->redirect_to($self->url_for('manager_index'));
+
+  return $self->_auth_return;
 }
 
 sub pauth ($self) {
@@ -59,34 +86,26 @@ sub pauth ($self) {
 
   # Check if we got a code back from Fortnox
   if (my $code = $self->param('code')) {
-    say "Got OAuth code from Fortnox: $code";
-
-    # Verify state parameter
-    my $state = $self->param('state');
-    if ($state && $state ne 'login') {
-      say "State verified: $state";
-    }
-
     # Store code and exchange for tokens
     $fortnox->data->{code} = $code;
     $fortnox->saveCache;
 
     if ($fortnox->getToken) {
-      say "Fortnox OAuth successful";
-      say "Access token: " . $fortnox->data->{access};
-      return $self->redirect_to($self->url_for('manager_index'));
+      return $self->_auth_return;
     } else {
-      say "Failed to exchange code for token";
       return $self->render(text => "Authentication failed: Could not get access token", status => 401);
     }
   }
 
-  # No code, so initiate OAuth flow using Fortnox model's getLogin
-  if (my $redirect_url = $fortnox->getLogin) {
-    say "Redirecting to Fortnox: $redirect_url";
+  # No code, so initiate OAuth flow using Fortnox model's getLogin. Carry the
+  # return path in the OAuth state so Fortnox echoes it back on the callback.
+  my $oauth_state = 'login';
+  if (my $return = $self->_local_path($self->param('return'))) {
+    $oauth_state = 'return:' . $return;
+  }
+  if (my $redirect_url = $fortnox->getLogin($oauth_state)) {
     return $self->redirect_to($redirect_url);
   } else {
-    say "Failed to get login URL from Fortnox";
     return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
   }
 }

@@ -9,7 +9,8 @@ async function loadCustomers() {
 
     // Handle Fortnox auth redirect
     if (response.status === 401 && data.auth_url) {
-      window.location.href = data.auth_url;
+      // Handled by the global fetch interceptor (apidom.js), which routes
+      // through /fortnox/auth so the server returns us here afterwards.
       return;
     }
 
