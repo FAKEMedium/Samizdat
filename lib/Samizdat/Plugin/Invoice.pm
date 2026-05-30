@@ -369,21 +369,12 @@ sub register ($self, $app, $conf) {
           # Check for errors - callAPI returns login URL string if no token
           if (!$latest || !ref($latest) || $latest->{error} || $latest->{ErrorInformation} || !exists $latest->{Invoices}) {
             $self->app->cache->del($lock_key);  # Release lock on error
-            my $auth_url = ref($latest) ? $fortnox->getLogin() : $latest;
             my $err = ref($latest) ? ($latest->{ErrorInformation}->{Message} // $latest->{ErrorInformation}->{message} // $latest->{error} // 'Session invalid or expired') : 'Not authenticated';
-
-            # Fallback: construct OAuth URL from config if getLogin() returned 0/empty
-            if (!$auth_url) {
-              my $oauth = $self->app->config->{manager}->{fortnox}->{oauth2};
-              use Mojo::Util qw(url_escape);
-              $auth_url = sprintf('%s&client_id=%s&redirect_uri=%s&scope=%s&access_type=%s&state=login',
-                $oauth->{authorize_url}, $oauth->{client_id}, url_escape($oauth->{redirect_uri}), url_escape($oauth->{scope}), $oauth->{access_type} // 'offline');
-            }
 
             return {
               error => "Fortnox session error: $err",
               status => 401,
-              auth_url => $auth_url,
+              auth_url => $self->url_for('fortnox_auth')->to_string,
               needs_auth => 1
             };
           }
@@ -454,7 +445,7 @@ sub register ($self, $app, $conf) {
             return {
               error => 'Fortnox authentication required',
               status => 401,
-              auth_url => $fortnox_invoice,
+              auth_url => $self->url_for('fortnox_auth')->to_string,
               needs_auth => 1
             };
           }

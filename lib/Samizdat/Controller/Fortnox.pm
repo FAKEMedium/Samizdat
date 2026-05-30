@@ -38,6 +38,21 @@ sub _auth_return ($self) {
   return $self->redirect_to($return // $self->url_for('manager_index'));
 }
 
+# Render the JSON 401 that tells the frontend to (re)authenticate with Fortnox.
+# auth_url points at our own OAuth-init route; the general 401 interceptor
+# navigates there and appends its own return path, so the route stays a Fortnox
+# concern and never leaks into shared frontend code.
+sub _fortnox_auth_required ($self) {
+  return $self->render(
+    json => {
+      error      => 'Fortnox authentication required',
+      auth_url   => $self->url_for('fortnox_auth')->to_string,
+      needs_auth => 1,
+    },
+    status => 401,
+  );
+}
+
 sub auth ($self) {
   # Initialize Fortnox session (creates 'fortnox' cookie)
   $self->session->{fortnox_active} = 1;
@@ -106,9 +121,7 @@ sub customers ($self) {
 
     # Check if result is auth URL (string) instead of data (hash)
     if (!ref($result)) {
-      my $auth_url = $result;
-      $auth_url =~ s/\s+$//;
-      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+      return $self->_fortnox_auth_required;
     }
 
     my $fortnox = { title => $title };
@@ -174,9 +187,7 @@ sub invoices ($self) {
 
     # Check if result is auth URL (string) instead of data (hash)
     if (!ref($invoice)) {
-      my $auth_url = $invoice;
-      $auth_url =~ s/\s+$//;
-      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+      return $self->_fortnox_auth_required;
     }
 
     my $fortnox = { title => $title };
@@ -233,9 +244,7 @@ sub payments ($self) {
 
     # Check if result is auth URL (string) instead of data (hash)
     if (!ref($payment)) {
-      my $auth_url = $payment;
-      $auth_url =~ s/\s+$//;
-      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+      return $self->_fortnox_auth_required;
     }
 
     # Return early if Fortnox API failed (no point querying local invoices)
@@ -403,9 +412,7 @@ sub manager ($self) {
 
     # Check if result is auth URL (string) instead of data (hash)
     if (!ref($archive)) {
-      my $auth_url = $archive;
-      $auth_url =~ s/\s+$//;
-      return $self->render(json => { error => 'Fortnox authentication required', auth_url => $auth_url, needs_auth => 1 }, status => 401);
+      return $self->_fortnox_auth_required;
     }
 
     $fortnox->{archive} = $archive;

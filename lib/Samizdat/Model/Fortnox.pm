@@ -381,7 +381,10 @@ sub callAPI ($self, $resource, $method, $id = 0, $options = {}, $action = '') {
   # writes are write-through via saveCache.
   $self->reload;
   if (!$self->data->{access}) {
-    return $self->getLogin();
+    # No token: signal "auth required" to the caller with a non-ref value. The
+    # actual Fortnox OAuth redirect is built by the /fortnox/auth route, so there
+    # is no need to spend an external getLogin() round-trip on every request.
+    return 0;
   }
   $resource = lc $resource;
   my $url = $self->config->{apiurl};
@@ -756,7 +759,10 @@ sub getInvoicePayment ($self, $Number = 0, $options = {}) {
   # in another worker is honoured)
   $self->reload;
   if (!$self->data->{access}) {
-    return $self->getLogin();
+    # No token: signal "auth required" to the caller with a non-ref value. The
+    # actual Fortnox OAuth redirect is built by the /fortnox/auth route, so there
+    # is no need to spend an external getLogin() round-trip on every request.
+    return 0;
   }
 
   # For list, use cache - check for errors
