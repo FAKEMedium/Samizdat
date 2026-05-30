@@ -231,11 +231,12 @@ window.simpleFetch = simpleFetch;
                         const clonedResponse = response.clone();
                         const data = await clonedResponse.json();
                         if (data.auth_url) {
-                            // Round-trip through our own OAuth route so the server can
-                            // remember which page to send us back to once Fortnox
-                            // authentication completes (passed back via the OAuth state).
+                            // The server provides the auth-init URL (a module concern);
+                            // we generically append where to return to once auth
+                            // completes. Keeps this shared file free of plugin routes.
+                            const sep = data.auth_url.includes('?') ? '&' : '?';
                             const ret = location.pathname + location.search + location.hash;
-                            window.location.href = '/fortnox/auth?return=' + encodeURIComponent(ret);
+                            window.location.href = data.auth_url + sep + 'return=' + encodeURIComponent(ret);
                             return response;
                         }
                         if (window.handle401Error) {
