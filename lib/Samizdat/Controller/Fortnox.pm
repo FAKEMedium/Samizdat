@@ -24,11 +24,14 @@ sub _local_path ($self, $path) {
   return $path;
 }
 
-# Resolve where to send the user once Fortnox auth completes: a return path
-# passed in directly (initiating leg) or echoed back by Fortnox in the OAuth
-# state parameter (callback leg). Falls back to the manager dashboard.
+# Resolve where to send the user once Fortnox auth completes. The return path
+# is remembered in the 'fortnox' session cookie, which travels with the browser
+# across the whole round-trip (SameSite=Lax) and survives even when Fortnox does
+# not echo our state back. The request's own 'return' param and the OAuth state
+# echo are fallbacks. Falls back to the manager dashboard.
 sub _auth_return ($self) {
-  my $return = $self->_local_path($self->param('return'));
+  my $return = $self->_local_path(delete $self->session->{fortnox_return});
+  $return ||= $self->_local_path($self->param('return'));
   if (!$return && ($self->param('state') // '') =~ /^return:(.+)\z/s) {
     $return = $self->_local_path($1);
   }
@@ -47,7 +50,15 @@ sub auth ($self) {
     $self->session->{cache_session_id} = $session_id;
   }
 
+  # Remember where to return after OAuth. The 'fortnox' session cookie travels
+  # with the browser across the whole round-trip, so this survives even when
+  # Fortnox does not echo our state parameter back.
+  if (my $return = $self->_local_path($self->param('return'))) {
+    $self->session->{fortnox_return} = $return;
+  }
+
   my $fortnox = $self->app->fortnox;
+  $fortnox->reload;  # sync token state for this worker
   my $code = $self->param('code') // '';
   $fortnox->data->{code} = $code if ($code);
 
@@ -58,56 +69,16 @@ sub auth ($self) {
   } elsif ('' ne $fortnox->data->{code}) {
     $fortnox->getToken(0);
   } else {
-    # No credentials yet: start the OAuth dance. Carry the page the user came
-    # from in the OAuth state parameter so Fortnox echoes it back to us.
+    # No credentials yet: start the OAuth dance. Pass the return path in the
+    # OAuth state too, as a fallback to the session cookie.
     my $oauth_state = 'login';
-    if (my $return = $self->_local_path($self->param('return'))) {
+    if (my $return = $self->session->{fortnox_return}) {
       $oauth_state = 'return:' . $return;
     }
     return $self->redirect_to($fortnox->getLogin($oauth_state));
   }
 
   return $self->_auth_return;
-}
-
-sub pauth ($self) {
-  # Initialize Fortnox session (creates 'fortnox' cookie)
-  $self->session->{fortnox_active} = 1;
-  $self->session(expiration => 7200);  # 2 hours
-
-  # Force cache session ID to be created now (before OAuth redirect)
-  # This ensures the same session ID is used when redirected back
-  unless ($self->session->{cache_session_id}) {
-    my $session_id = Mojo::Util::md5_sum(time . $$ . rand());
-    $self->session->{cache_session_id} = $session_id;
-  }
-
-  my $fortnox = $self->app->fortnox;
-
-  # Check if we got a code back from Fortnox
-  if (my $code = $self->param('code')) {
-    # Store code and exchange for tokens
-    $fortnox->data->{code} = $code;
-    $fortnox->saveCache;
-
-    if ($fortnox->getToken) {
-      return $self->_auth_return;
-    } else {
-      return $self->render(text => "Authentication failed: Could not get access token", status => 401);
-    }
-  }
-
-  # No code, so initiate OAuth flow using Fortnox model's getLogin. Carry the
-  # return path in the OAuth state so Fortnox echoes it back on the callback.
-  my $oauth_state = 'login';
-  if (my $return = $self->_local_path($self->param('return'))) {
-    $oauth_state = 'return:' . $return;
-  }
-  if (my $redirect_url = $fortnox->getLogin($oauth_state)) {
-    return $self->redirect_to($redirect_url);
-  } else {
-    return $self->render(text => "Authentication failed: Could not initiate OAuth", status => 500);
-  }
 }
 
 
@@ -400,12 +371,6 @@ sub logout ($self) {
   $self->session(expires => 1);
 
   $self->redirect;
-}
-
-
-sub _login ($self) {
-  say $self->app->config->{manager}->{url};
-  $self->redirect_to($self->url_for('fortnox_auth'));
 }
 
 
