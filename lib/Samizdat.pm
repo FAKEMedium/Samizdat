@@ -1,6 +1,7 @@
 package Samizdat;
 
 use Mojo::Base 'Mojolicious', -signatures;
+use Mojo::Home;
 use MojoX::MIME::Types;
 use Mojo::Pg;
 use Mojo::mysql;
@@ -15,8 +16,57 @@ sub startup {
   my $config = $app->plugin('NotYAMLConfig');
   push @{$app->commands->namespaces}, 'Samizdat::Command';
   unshift @{$app->plugins->namespaces}, 'Samizdat::Plugin';
-  push @{$app->renderer->paths}, @{$config->{extratemplates}};
-  push @{$app->static->paths}, 'src/public';
+
+  # --- Install-aware path-resolution contract (see MIGRATION.md, Phase A1) ---
+  # Bases are computed once here (never per-request, never off the current working
+  # directory) so the app runs identically from a git checkout or an install under
+  # /usr/local. Read-only dist resources resolve from the installed
+  # Samizdat/resources tree when present, else the checkout; mutable output (the
+  # static cache) and config resolve from their own bases.
+  my $home = $app->home;
+  my $first_existing = sub { (grep { -d $_->to_string } @_)[0] };
+
+  # Read-only vendored data (countries / flags / icons / fonts).
+  my $sharedir = $first_existing->(
+    ($ENV{SAMIZDAT_SHARED_SRC} ? Mojo::Home->new($ENV{SAMIZDAT_SHARED_SRC}) : ()),
+    Mojo::Home->new('/usr/local/share/samizdat/src'),
+    $home->child('src'),
+  ) // $home->child('src');
+  $app->helper(sharedir => sub { $sharedir });
+
+  # Read-only dist resources by kind: installed resources tree first, checkout last.
+  my $res_env = $ENV{SAMIZDAT_RESOURCES} ? Mojo::Home->new($ENV{SAMIZDAT_RESOURCES}) : undef;
+  my $res_inc = Mojo::Home->new($INC{'Samizdat.pm'})->dirname->child('Samizdat', 'resources');
+  my %resource = (
+    templates  => [ ($res_env ? $res_env->child('templates')  : ()), $res_inc->child('templates'),  $home->child('templates')       ],
+    static     => [ ($res_env ? $res_env->child('public')     : ()), $res_inc->child('public'),      $home->child('src', 'public')   ],
+    migrations => [ ($res_env ? $res_env->child('migrations') : ()), $res_inc->child('migrations'),  $home->child('migrations', 'pg') ],
+    locale     => [ ($res_env ? $res_env->child('locale')     : ()), $res_inc->child('locale'),      $home->child('locale')          ],
+  );
+  $app->helper(resource => sub {
+    my ($c, $kind, @rel) = @_;
+    my $cands = $resource{$kind} // [ $home->child($kind) ];
+    my $dir = $first_existing->(@$cands) // $cands->[-1];
+    return @rel ? $dir->child(@rel) : $dir;
+  });
+
+  # Mutable output base (static cache: html, webp, gz/br, symlinks).
+  my $datadir = ($config->{paths} && $config->{paths}->{data})
+    ? Mojo::Home->new($config->{paths}->{data}) : $home->child('public');
+  $app->helper(datadir => sub { my ($c, @rel) = @_; @rel ? $datadir->child(@rel) : $datadir });
+
+  # Config base (thin seam for installed deployments).
+  my $confdir = $first_existing->(
+    ($ENV{SAMIZDAT_ETC} ? Mojo::Home->new($ENV{SAMIZDAT_ETC}) : ()),
+    Mojo::Home->new('/usr/local/etc/samizdat'),
+    $home,
+  ) // $home;
+  $app->helper(confdir => sub { my ($c, @rel) = @_; @rel ? $confdir->child(@rel) : $confdir });
+
+  # Templates: main resources path first, then Mojolicious fallback templates.
+  @{$app->renderer->paths} = ($app->resource('templates')->to_string, @{$config->{extratemplates}});
+  # Static: mutable per-site output (datadir) + shipped read-only assets.
+  @{$app->static->paths} = ($app->datadir->to_string, $app->resource('static')->to_string);
   $app->secrets($config->{secrets});
   $app->types(MojoX::MIME::Types->new);
 
@@ -76,7 +126,7 @@ sub startup {
     $dbh->{pg_server_prepare} = 0;
     $pg->max_connections(32);
   });
-  $app->pg->migrations->from_dir('migrations/pg')->migrate;
+  $app->pg->migrations->from_dir($app->resource('migrations')->to_string)->migrate;
   $app->pg->db->dbh->{pg_server_prepare} = 1;
 
   if (exists($config->{import}->{dsn})) {
@@ -172,7 +222,7 @@ sub startup {
     no_header_detect => 1,
   });
   $app->lexicon({
-    search_dirs => [qw(./locale)],
+    search_dirs => [ $app->resource('locale')->to_string ],
     gettext_to_maketext => 0,
     decode => 1,
     data => [

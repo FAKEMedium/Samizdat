@@ -15,6 +15,7 @@ has 'config';
 has 'database';
 has 'locale';
 has 'routes';
+has 'datadir';  # mutable static-cache output base (install-aware; see MIGRATION.md A1)
 has 'public' => sub ($self) {
   return Samizdat::Model::Public->new(pg => $self->database);
 };
@@ -1580,7 +1581,7 @@ sub ensure_language_consistency ($self, $default_main_id, $target_language_id, $
 
 # Invalidate cache for a docpath and specific language
 sub invalidate_cache ($self, $docpath, $language = undef) {
-  my $public = Mojo::Home->new('public');
+  my $public = $self->datadir // Mojo::Home->new('public');
   $language //= $self->locale->{default_language};
   
   # Normalize docpath - remove leading slash if present

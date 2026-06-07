@@ -30,9 +30,7 @@ $symbolformat .= q!><%= $content %></symbol>!;
 my $mtsymbol = Mojo::Template->new->vars(1);
 $mtsymbol->parse($symbolformat);
 
-my $flagsrepo = Mojo::Home->new('src/flag-icons/');
-my $iconrepo = Mojo::Home->new('src/icons/icons/');
-my $anyrepo = Mojo::Home->new();
+my $anyrepo = Mojo::Home->new();  # arbitrary-path SVGs (A2 follow-up)
 
 sub register ($self, $app, $conf) {
   # Store OpenAPI fragment
@@ -40,6 +38,10 @@ sub register ($self, $app, $conf) {
   $app->config->{openapi_fragments}{Icons} = $openapi_yaml if $openapi_yaml;
 
   my $r = $app->routes;
+
+  # Vendored flag/icon SVGs via the install-aware shared-data resolver.
+  my $flagsrepo = $app->sharedir->child('flag-icons');
+  my $iconrepo  = $app->sharedir->child('icons', 'icons');
   # GET for HTML page, API routes handled by OpenAPI
   $r->get('/project/icons')->to(controller => 'Icons', action => 'icons')->name('icons_index');
 

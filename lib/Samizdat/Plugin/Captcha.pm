@@ -20,31 +20,19 @@ sub register ($self, $app, $conf) {
   # Helper to create locale-aware captcha
   $app->helper(create_captcha => sub ($c, $options = {}) {
     my $language = $c->language || $c->config->{locale}->{default_language} || 'en';
-    my $app_home = $c->app->home->to_string;
-    my $shared_src = '/usr/local/share/samizdat/src';
 
     # Get language-specific config, fall back to default
     my $lang_config = $config->{language}->{$language} || $config->{language}->{default};
 
-    # Build font path - try site src/fonts first, then shared src/fonts
+    # Build font path via the install-aware shared-data resolver (src/fonts).
     my $font_rel = $options->{fontpath} || $lang_config->{font};
-    my $font_path = catfile($app_home, 'src', 'fonts', $font_rel);
+    my $font_path = $c->app->sharedir->child('fonts', $font_rel)->to_string;
 
-    # Try shared src if not found in site
-    unless (-f $font_path) {
-      my $shared_font = catfile($shared_src, 'fonts', $font_rel);
-      $font_path = $shared_font if -f $shared_font;
-    }
-
-    # Fall back to default language if still not found
+    # Fall back to default language if not found
     unless (-f $font_path) {
       $lang_config = $config->{language}->{default};
       $font_rel = $lang_config->{font};
-      $font_path = catfile($app_home, 'src', 'fonts', $font_rel);
-      unless (-f $font_path) {
-        my $shared_font = catfile($shared_src, 'fonts', $font_rel);
-        $font_path = $shared_font if -f $shared_font;
-      }
+      $font_path = $c->app->sharedir->child('fonts', $font_rel)->to_string;
     }
 
     # Get charset and process character ranges like 'A-Z'

@@ -6,7 +6,7 @@ use Data::Dumper;
 
 sub icons ($self) {
   my $icons = [];
-  Mojo::Home->new('src/icons/icons/')->list->each( sub {
+  $self->app->sharedir->child('icons', 'icons')->list->each( sub {
     my $icon = shift;
     push @{ $icons }, $icon->basename('.svg') if ($icon =~ /\.svg$/);
   });

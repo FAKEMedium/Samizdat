@@ -12,12 +12,14 @@ use IO::Compress::Brotli qw(bro);
 use Imager;
 use Data::Dumper;
 
-my $public = Mojo::Home->new('public/');
-my $templates = Mojo::Home->new('templates/');
 my $image = Imager->new;
 
 sub register ($self, $app, $conf) {
   my $r = $app->routes;
+
+  # Mutable static-cache output (datadir) + read-only templates (resources).
+  my $public = $app->datadir;
+  my $templates = $app->resource('templates');
 
   # Store OpenAPI fragment (parsed centrally in _load_openapi)
   my $openapi_yaml = data_section(__PACKAGE__, 'openapi.yaml');
@@ -80,7 +82,8 @@ sub register ($self, $app, $conf) {
     state $model = Samizdat::Model::Web->new(
       config       => $self->config->{manager}->{web},
       database     => $self->app->pg,
-      locale       => $self->config->{locale}
+      locale       => $self->config->{locale},
+      datadir      => $self->app->datadir
     );
     return $model;
   });
