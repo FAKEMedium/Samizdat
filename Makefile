@@ -58,7 +58,6 @@ swcache:
 
 clean:
 	rm -rf public/*
-	mkdir -p public/assets
 	cp -af src/public/test/README.md src/public/test/README.txt
 
 harvest:
@@ -121,10 +120,10 @@ test: clean
 	ls -las public/test
 
 zip:
-	find public -type f -name "*.css" -exec gzip -f -k -9 {} \;
-	find public -type f -name "*.js" -exec gzip -f -k -9 {} \;
-	find public -type f -name "*.css" -exec brotli -f -k -q 11 {} \;
-	find public -type f -name "*.js" -exec brotli -f -k -q 11 {} \;
+	find public lib/Samizdat/resources/public -type f -name "*.css" -exec gzip -f -k -9 {} \;
+	find public lib/Samizdat/resources/public -type f -name "*.js" -exec gzip -f -k -9 {} \;
+	find public lib/Samizdat/resources/public -type f -name "*.css" -exec brotli -f -k -q 11 {} \;
+	find public lib/Samizdat/resources/public -type f -name "*.js" -exec brotli -f -k -q 11 {} \;
 
 database:
 #	sudo -u postgres -i env PGHOST=/var/run/postgresql createuser --interactive --pwprompt --login --echo --no-createrole --no-createdb --no-superuser --no-replication samizdat
@@ -187,7 +186,7 @@ webpackinit:
 	npm i --save sprintf-js
 
 webpack:
-	mkdir -p public/assets .npm-cache
+	mkdir -p lib/Samizdat/resources/public/assets .npm-cache
 	@if [ ! -L node_modules ] && [ ! -d node_modules ]; then \
 		if [ -d /usr/local/share/samizdat/node_modules ]; then \
 			echo "Linking to system-wide node_modules"; \

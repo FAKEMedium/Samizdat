@@ -22,7 +22,7 @@ const config = {
   devtool: 'source-map',
   output: {
     filename: isDev ? '[name].[chunkhash].js' : '[name].js',
-    path: path.resolve(__dirname, 'public/assets'),
+    path: path.resolve(__dirname, 'lib/Samizdat/resources/public/assets'),
     publicPath: ''
   },
   mode: isDev ? 'development' : 'production',

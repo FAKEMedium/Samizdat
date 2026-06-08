@@ -39,7 +39,7 @@ sub startup {
   my $res_inc = Mojo::Home->new($INC{'Samizdat.pm'})->dirname->child('Samizdat', 'resources');
   my %resource = (
     templates  => [ ($res_env ? $res_env->child('templates')  : ()), $res_inc->child('templates'),  $home->child('templates')       ],
-    static     => [ ($res_env ? $res_env->child('public')     : ()), $res_inc->child('public'),      $home->child('src', 'public')   ],
+    static     => [ ($res_env ? $res_env->child('public')     : ()), $res_inc->child('public')                                       ],
     migrations => [ ($res_env ? $res_env->child('migrations') : ()), $res_inc->child('migrations'),  $home->child('migrations', 'pg') ],
     locale     => [ ($res_env ? $res_env->child('locale')     : ()), $res_inc->child('locale'),      $home->child('locale')          ],
   );
@@ -65,8 +65,13 @@ sub startup {
 
   # Templates: main resources path first, then Mojolicious fallback templates.
   @{$app->renderer->paths} = ($app->resource('templates')->to_string, @{$config->{extratemplates}});
-  # Static: mutable per-site output (datadir) + shipped read-only assets.
-  @{$app->static->paths} = ($app->datadir->to_string, $app->resource('static')->to_string);
+  # Static, override order front->back: generated cache, then per-site content
+  # (favicon/media), then the shipped read-only bundle (resources/public/assets).
+  @{$app->static->paths} = (
+    $app->datadir->to_string,                       # generated cache (public/)
+    $app->home->child('src', 'public')->to_string,  # content static (manager.web.src content)
+    $app->resource('static')->to_string,            # shipped bundle (resources/public)
+  );
   $app->secrets($config->{secrets});
   $app->types(MojoX::MIME::Types->new);
 
