@@ -1,14 +1,14 @@
 ---
 name: create-migration
-description: Create the next numbered PostgreSQL migration under migrations/pg/<N>/ with matching up.sql and reversible down.sql, following Samizdat's Mojo::Pg from_dir convention. Use when adding/altering schema for the PG database.
+description: Create the next numbered PostgreSQL migration under lib/Samizdat/resources/migrations/<N>/ with matching up.sql and reversible down.sql, following Samizdat's Mojo::Pg from_dir convention. Use when adding/altering schema for the PG database.
 disable-model-invocation: true
 ---
 
 # create-migration
 
 Create a new PostgreSQL migration. Samizdat loads migrations with
-`$app->pg->migrations->from_dir('migrations/pg')->migrate` (see `lib/Samizdat.pm`):
-each migration is a directory `migrations/pg/<N>/` containing `up.sql` and
+`$app->pg->migrations->from_dir($app->resource('migrations'))->migrate` (see `lib/Samizdat.pm`):
+each migration is a directory `lib/Samizdat/resources/migrations/<N>/` containing `up.sql` and
 `down.sql`. Migrations run in numeric order; the highest applied number is the
 current schema version.
 
@@ -16,9 +16,9 @@ current schema version.
 
 ### 1. Pick the next number
 
-List `migrations/pg/`, take the highest existing integer directory name, add 1.
+List `lib/Samizdat/resources/migrations/`, take the highest existing integer directory name, add 1.
 Do **not** reuse or renumber existing directories. Create
-`migrations/pg/<N>/up.sql` and `migrations/pg/<N>/down.sql`.
+`lib/Samizdat/resources/migrations/<N>/up.sql` and `lib/Samizdat/resources/migrations/<N>/down.sql`.
 
 ### 2. Write `up.sql`
 
@@ -41,18 +41,18 @@ Do **not** reuse or renumber existing directories. Create
   `DROP COLUMN IF EXISTS`.
 - Use `DROP ... IF EXISTS` and, for renames/moves that may be in either state,
   guarded `DO $$ ... IF EXISTS (SELECT 1 FROM information_schema...) ... $$;`
-  blocks — see `migrations/pg/24/down.sql` for the established pattern.
+  blocks — see `lib/Samizdat/resources/migrations/24/down.sql` for the established pattern.
 - Down must be safe to run whether or not up fully applied.
 
-Reference examples: `migrations/pg/23/{up,down}.sql` (simple column/FK change),
-`migrations/pg/24/{up,down}.sql` (schema split with guarded reversal).
+Reference examples: `lib/Samizdat/resources/migrations/23/{up,down}.sql` (simple column/FK change),
+`lib/Samizdat/resources/migrations/24/{up,down}.sql` (schema split with guarded reversal).
 
 ## Verify
 
 - Syntax-check against the configured DB without committing changes:
   `psql "$(grep -A2 '^dsn:' samizdat.yml | sed -n 's/.*pg: *//p')" \
    -v ON_ERROR_STOP=1 --single-transaction \
-   -c 'BEGIN;' -f migrations/pg/<N>/up.sql -c 'ROLLBACK;'`
+   -c 'BEGIN;' -f lib/Samizdat/resources/migrations/<N>/up.sql -c 'ROLLBACK;'`
   (or run up then down inside one rolled-back transaction). Use the
   `config.dsn.pg` value from `samizdat.yml` — do not hardcode credentials.
 - Optionally apply for real with the app: it migrates on startup, or run a

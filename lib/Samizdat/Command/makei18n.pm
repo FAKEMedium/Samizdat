@@ -64,7 +64,7 @@ sub run ($self, @args) {
   });
 
   #  Extract from embedded Perl in templates
-  $path = Mojo::Home->new('templates/');
+  $path = $self->app->resource('templates');
   $path->list_tree({dir => 0})->each(sub ($file, $num) {
     $extractor->clear;
     $extractor->filename($file->to_string);

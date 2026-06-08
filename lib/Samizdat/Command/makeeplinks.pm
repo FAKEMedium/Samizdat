@@ -8,8 +8,8 @@ has description => 'Recursively create relative symlinks for .js, .tex, .css, an
 has usage       => "Usage: APPLICATION makeeplinks [DIRECTORY]\n";
 
 sub run ($self, @args) {
-  # Default directory is 'templates'
-  my $dir = $args[0] // 'templates';
+  # Default directory is the resolved templates resource dir
+  my $dir = $args[0] // $self->app->resource('templates')->to_string;
 
   # Ensure the directory exists
   my $base = path($dir);

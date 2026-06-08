@@ -68,7 +68,7 @@ nginx:
 	bin/samizdat makenginx
 
 eplinks:
-	find templates/ -type l -delete
+	find lib/Samizdat/resources/templates/ -type l -delete
 	bin/samizdat makeeplinks
 
 iso: static_all

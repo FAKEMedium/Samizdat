@@ -70,7 +70,7 @@ sub generate_sw_js ($self, $config) {
   $baseurl =~ s|^/||;  # Remove leading slash for public/ path
 
   # sw.js is now plain JavaScript (no EP template syntax), so just copy it
-  my $src = $self->app->home->child('templates/sw.js');
+  my $src = $self->app->resource('templates')->child('sw.js');
   my $dest_dir = $baseurl ? path("public/$baseurl") : path('public');
   $dest_dir->make_path;
   my $dest = $dest_dir->child('sw.js');
