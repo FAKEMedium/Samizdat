@@ -1,0 +1,741 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "0 = reply once per sender"
+msgstr "0 = प्रति प्रेषक एक बार उत्तर दें"
+
+msgid "About to delete"
+msgstr ""
+
+msgid "Action"
+msgstr "कार्रवाई"
+
+msgid "Actions"
+msgstr "कार्य"
+
+msgid "Active"
+msgstr "सक्रिय"
+
+msgid "Active from"
+msgstr ""
+
+msgid "Active until"
+msgstr ""
+
+msgid "Add admin"
+msgstr ""
+
+msgid "Add alias"
+msgstr ""
+
+msgid "Add domain"
+msgstr "डोमेन जोड़ें"
+
+msgid "Add forwarding"
+msgstr "फॉरवर्डिंग जोड़ें"
+
+msgid "Add mailbox"
+msgstr ""
+
+msgid "Address"
+msgstr "पता"
+
+msgid "Address is required"
+msgstr "पता आवश्यक है"
+
+msgid "Admin"
+msgstr "व्यवस्थापक"
+
+msgid "Admin created successfully"
+msgstr "व्यवस्थापक सफलतापूर्वक बनाया गया"
+
+msgid "Admin deleted successfully"
+msgstr "व्यवस्थापक सफलतापूर्वक हटाया गया"
+
+msgid "Admin not found"
+msgstr "व्यवस्थापक नहीं मिला"
+
+msgid "Admin saved successfully"
+msgstr ""
+
+msgid "Admin updated successfully"
+msgstr ""
+
+msgid "Administrators"
+msgstr ""
+
+msgid "Admins"
+msgstr "व्यवस्थापक"
+
+msgid "Alias"
+msgstr ""
+
+msgid "Alias Address"
+msgstr ""
+
+msgid "Alias created successfully"
+msgstr ""
+
+msgid "Alias deleted successfully"
+msgstr ""
+
+msgid "Alias domain"
+msgstr ""
+
+msgid "Alias domains"
+msgstr ""
+
+msgid "Alias not found"
+msgstr ""
+
+msgid "Alias saved successfully"
+msgstr ""
+
+msgid "Alias updated successfully"
+msgstr ""
+
+msgid "All actions"
+msgstr "सभी कार्य"
+
+msgid "Alternative email"
+msgstr "वैकल्पिक ईमेल"
+
+msgid "Apply"
+msgstr "लागू करें"
+
+msgid "Are you sure you want to delete this alias?"
+msgstr "क्या आप इस उपनाम को हटाना चाहते हैं?"
+
+msgid "Arrival"
+msgstr ""
+
+msgid "At least one valid forward address is required"
+msgstr ""
+
+msgid "Back"
+msgstr "वापस"
+
+msgid "Back to queue"
+msgstr ""
+
+msgid "Can manage all domains"
+msgstr ""
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
+msgstr ""
+
+msgid "Cannot purge"
+msgstr ""
+
+msgid "Clear"
+msgstr "साफ करें"
+
+msgid "Close"
+msgstr "बंद करें"
+
+msgid "Confirm purge"
+msgstr ""
+
+msgid "Copy messages between an external IMAP account and this mailbox. Runs as a background job using imapsync."
+msgstr ""
+
+msgid "Create admin"
+msgstr "व्यवस्थापक बनाएं"
+
+msgid "Create forwarding"
+msgstr ""
+
+msgid "Create mailbox"
+msgstr "मेलबॉक्स बनाएं"
+
+msgid "Currently managed"
+msgstr ""
+
+msgid "Customer"
+msgstr "ग्राहक"
+
+msgid "Customer ID is required"
+msgstr ""
+
+msgid "Data"
+msgstr "डेटा"
+
+msgid "Delete"
+msgstr "हटाएं"
+
+msgid "Delete admin"
+msgstr "व्यवस्थापक हटाएं"
+
+msgid "Delete from source after copy"
+msgstr ""
+
+msgid "Delete this alias domain?"
+msgstr ""
+
+msgid "Delete this alias?"
+msgstr ""
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr ""
+
+msgid "Delete this mailbox?"
+msgstr ""
+
+msgid "Delete this queued message?"
+msgstr ""
+
+msgid "Delete vacation settings?"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Destination (local)"
+msgstr ""
+
+msgid "Display name"
+msgstr "प्रदर्शन नाम"
+
+msgid "Domain"
+msgstr "डोमेन"
+
+msgid "Domain added successfully"
+msgstr "डोमेन सफलतापूर्वक जोड़ा गया"
+
+msgid "Domain created successfully"
+msgstr ""
+
+msgid "Domain deleted"
+msgstr ""
+
+msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain name"
+msgstr ""
+
+msgid "Domain name is required"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domain quota"
+msgstr ""
+
+msgid "Domain removed successfully"
+msgstr ""
+
+msgid "Domain saved successfully"
+msgstr ""
+
+msgid "Domain updated successfully"
+msgstr ""
+
+msgid "Domains"
+msgstr "डोमेन"
+
+msgid "Dry run (no changes)"
+msgstr ""
+
+msgid "Edit"
+msgstr "संपादित करें"
+
+msgid "Edit admin"
+msgstr ""
+
+msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit mailbox"
+msgstr ""
+
+msgid "Email Admins"
+msgstr ""
+
+msgid "Email Domain Management"
+msgstr ""
+
+msgid "Email Log"
+msgstr ""
+
+msgid "Email Mailboxes"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Enqueuing sync job..."
+msgstr ""
+
+msgid "Failed to add admin"
+msgstr ""
+
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to delete admin"
+msgstr ""
+
+msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete alias domain"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
+msgid "Failed to delete mailbox"
+msgstr ""
+
+msgid "Failed to delete vacation settings"
+msgstr ""
+
+msgid "Failed to enqueue sync job"
+msgstr ""
+
+msgid "Failed to remove admin"
+msgstr ""
+
+msgid "Failed to remove domain"
+msgstr ""
+
+msgid "Failed to save admin"
+msgstr ""
+
+msgid "Failed to save alias"
+msgstr ""
+
+msgid "Failed to save domain"
+msgstr ""
+
+msgid "Failed to save mailbox"
+msgstr ""
+
+msgid "Failed to save vacation settings"
+msgstr ""
+
+msgid "Failed to update admin"
+msgstr ""
+
+msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Failed to update mailbox"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter by customer"
+msgstr ""
+
+msgid "Filter by domain"
+msgstr ""
+
+msgid "Filter by username"
+msgstr ""
+
+msgid "Flush"
+msgstr ""
+
+msgid "Flush deferred queue"
+msgstr ""
+
+msgid "Forward To"
+msgstr ""
+
+msgid "Forward to"
+msgstr ""
+
+msgid "Forwarding"
+msgstr ""
+
+msgid "Forwards"
+msgstr ""
+
+msgid "Forwards to"
+msgstr ""
+
+msgid "From address"
+msgstr ""
+
+msgid "Held"
+msgstr ""
+
+msgid "Hold"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "ID"
+msgstr "आईडी"
+
+msgid "Invalid domain name syntax"
+msgstr ""
+
+msgid "Invalid email addresses"
+msgstr ""
+
+msgid "Job ID"
+msgstr ""
+
+msgid "Leave blank to keep current"
+msgstr ""
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Log"
+msgstr ""
+
+msgid "Mail"
+msgstr "मेल"
+
+msgid "Mail Queue"
+msgstr ""
+
+msgid "Mail queue"
+msgstr ""
+
+msgid "Mailbox"
+msgstr "मेलबॉक्स"
+
+msgid "Mailbox created successfully"
+msgstr ""
+
+msgid "Mailbox deleted successfully"
+msgstr ""
+
+msgid "Mailbox domain must match the current domain"
+msgstr ""
+
+msgid "Mailbox not found"
+msgstr ""
+
+msgid "Mailbox quota"
+msgstr ""
+
+msgid "Mailbox saved successfully"
+msgstr ""
+
+msgid "Mailbox updated successfully"
+msgstr ""
+
+msgid "Mailboxes"
+msgstr "मेलबॉक्स"
+
+msgid "Managed domains"
+msgstr ""
+
+msgid "Manager"
+msgstr ""
+
+msgid "Message"
+msgstr "संदेश"
+
+msgid "Method not allowed"
+msgstr ""
+
+msgid "Name"
+msgstr "नाम"
+
+msgid "New domain"
+msgstr "नया डोमेन"
+
+msgid "No"
+msgstr "नहीं"
+
+msgid "No activity"
+msgstr ""
+
+msgid "No administrators"
+msgstr ""
+
+msgid "No alias domains"
+msgstr ""
+
+msgid "No aliases"
+msgstr ""
+
+msgid "No domains"
+msgstr ""
+
+msgid "No log entries"
+msgstr ""
+
+msgid "No mailboxes"
+msgstr "कोई मेलबॉक्स नहीं"
+
+msgid "No results"
+msgstr "कोई परिणाम नहीं"
+
+msgid "No results found"
+msgstr "कोई परिणाम नहीं मिला"
+
+msgid "Not found"
+msgstr "नहीं मिला"
+
+msgid "One email per line, or separated by comma/space"
+msgstr ""
+
+msgid "Options"
+msgstr "विकल्प"
+
+msgid "Out of office"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Password is required"
+msgstr "पासवर्ड आवश्यक है"
+
+msgid "Password requires: "
+msgstr ""
+
+msgid "Phone"
+msgstr "फोन"
+
+msgid "Port"
+msgstr ""
+
+msgid "Purge"
+msgstr "साफ़ करें"
+
+msgid "Purge matching messages"
+msgstr ""
+
+msgid "Queue"
+msgstr ""
+
+msgid "Queue empty"
+msgstr ""
+
+msgid "Queue flushed"
+msgstr ""
+
+msgid "Queue regex"
+msgstr ""
+
+msgid "Queued Message"
+msgstr ""
+
+msgid "Quota (MB)"
+msgstr ""
+
+msgid "Quota updated successfully"
+msgstr ""
+
+msgid "Recent activity"
+msgstr "हालिया गतिविधि"
+
+msgid "Recipient regex"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Release"
+msgstr ""
+
+msgid "Released"
+msgstr ""
+
+msgid "Reply interval (seconds)"
+msgstr ""
+
+msgid "Route all mail to another domain"
+msgstr ""
+
+msgid "Save"
+msgstr "सहेजें"
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Search"
+msgstr "खोजें"
+
+msgid "Search admin to add"
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domain to add"
+msgstr ""
+
+msgid "Search field for {what}"
+msgstr "{what} के लिए खोज फील्ड"
+
+msgid "Search for admin"
+msgstr ""
+
+msgid "Search for mail domain"
+msgstr "मेल डोमेन खोजें"
+
+msgid "Search for mailbox"
+msgstr ""
+
+msgid "Select customer"
+msgstr ""
+
+msgid "Select target domain"
+msgstr ""
+
+msgid "Sender"
+msgstr ""
+
+msgid "Sender regex"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Skip messages already present"
+msgstr ""
+
+msgid "Source (remote)"
+msgstr ""
+
+msgid "Start sync"
+msgstr ""
+
+msgid "Subject"
+msgstr "विषय"
+
+msgid "Superadmin"
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "Sync job enqueued"
+msgstr ""
+
+msgid "Sync mailbox"
+msgstr ""
+
+msgid "Target domain"
+msgstr ""
+
+msgid "This deletes queued messages permanently."
+msgstr ""
+
+msgid "Timestamp"
+msgstr ""
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "Use SSL/TLS"
+msgstr ""
+
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Username (email)"
+msgstr ""
+
+msgid "Username is required"
+msgstr ""
+
+msgid "Vacation"
+msgstr ""
+
+msgid "Vacation / Auto-reply"
+msgstr ""
+
+msgid "Vacation settings deleted"
+msgstr ""
+
+msgid "Vacation settings saved"
+msgstr ""
+
+msgid "View all"
+msgstr ""
+
+msgid "Yes"
+msgstr "हाँ"
+
+msgid "at least {length} characters"
+msgstr ""
+
+msgid "disable"
+msgstr "अक्षम करें"
+
+msgid "mail domain"
+msgstr "मेल डोमेन"
+
+msgid "matching the filter"
+msgstr ""
+
+msgid "messages"
+msgstr ""
+
+msgid "the ENTIRE queue"
+msgstr ""
+
+msgid "to confirm"
+msgstr ""
+
+msgid "unlimited"
+msgstr ""
+
+msgid "{count} lowercase"
+msgstr ""
+
+msgid "{count} number(s)"
+msgstr ""
+
+msgid "{count} special character(s)"
+msgstr ""
+
+msgid "{count} uppercase"
+msgstr ""
+
+msgid "{side} {field} is required"
+msgstr ""

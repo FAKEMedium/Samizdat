@@ -1,0 +1,165 @@
+# Rymdweb translations for the nets module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "After refunds"
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "Amount and items are required"
+msgstr ""
+
+msgid "Amount in Swedish Kronor"
+msgstr ""
+
+msgid "Amount is required"
+msgstr ""
+
+msgid "An error occurred"
+msgstr ""
+
+msgid "Card Payment"
+msgstr ""
+
+msgid "Charged"
+msgstr ""
+
+msgid "Charged At"
+msgstr ""
+
+msgid "Create Payment"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Failed to create payment"
+msgstr ""
+
+msgid "Failed to process refund"
+msgstr ""
+
+msgid "Invalid items format"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "Missing payment ID"
+msgstr ""
+
+msgid "Net Amount"
+msgstr ""
+
+msgid "Nets Payments"
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "Note"
+msgstr ""
+
+msgid "Order number or reference"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Details"
+msgstr ""
+
+msgid "Payment ID"
+msgstr ""
+
+msgid "Payment Method"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment for..."
+msgstr ""
+
+msgid "Payment must be charged before refund"
+msgstr ""
+
+msgid "Payment not found"
+msgstr ""
+
+msgid "Payment with Nets Easy"
+msgstr ""
+
+msgid "Proceed to Payment"
+msgstr ""
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Reference"
+msgstr ""
+
+msgid "Refund amount exceeds available amount"
+msgstr ""
+
+msgid "Refunded"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Thank you! Your payment has been processed successfully."
+msgstr ""
+
+msgid "The payment process was interrupted. This could be because:"
+msgstr ""
+
+msgid "The payment session expired"
+msgstr ""
+
+msgid "There was an issue with your payment method"
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Total refunds"
+msgstr ""
+
+msgid "Try Again"
+msgstr ""
+
+msgid "What happened?"
+msgstr ""
+
+msgid "You clicked the back or cancel button"
+msgstr ""
+
+msgid "You will be redirected to Nets secure checkout page."
+msgstr ""
+
+msgid "Your payment was cancelled or failed."
+msgstr ""
+
+msgid "charged"
+msgstr ""
+
+msgid "payments"
+msgstr ""

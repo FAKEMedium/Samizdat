@@ -1,0 +1,84 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Captcha code from image"
+msgstr "Captcha code from image"
+
+msgid "Captcha image"
+msgstr "Captcha image"
+
+msgid "Captcha was wrong"
+msgstr "Captcha was wrong"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Empty message"
+msgstr "Empty message"
+
+msgid "Empty name"
+msgstr "Empty name"
+
+msgid "Empty subject"
+msgstr "Empty subject"
+
+msgid "Enter code"
+msgstr "Enter code"
+
+msgid "Enter valid email"
+msgstr "Enter valid email"
+
+msgid "From"
+msgstr "From"
+
+msgid "Message"
+msgstr "Message"
+
+msgid "Paper in typewriter"
+msgstr "Paper in typewriter"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Press \"{buttontext}\" to regenerate"
+
+msgid "Send message"
+msgstr "Send message"
+
+msgid "Subject"
+msgstr "Subject"
+
+msgid "Thank you for contacting us."
+msgstr "Thank you for contacting us."
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid "We will reply as soon as possible."
+msgstr "We will reply as soon as possible."
+
+msgid "Your email"
+msgstr "Your email"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "Your ip {ip} will be appended to the message."
+
+msgid "Your message appears below."
+msgstr "Your message appears below."
+
+msgid "Your name"
+msgstr "Your name"

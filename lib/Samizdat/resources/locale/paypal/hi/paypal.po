@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "राशि"
+
+msgid "Amount:"
+msgstr "राशि:"
+
+msgid "Balance"
+msgstr "शेष"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
+msgid "Completed"
+msgstr "पूर्ण"
+
+msgid "Currency"
+msgstr "मुद्रा"
+
+msgid "Date"
+msgstr "तिथि"
+
+msgid "End Date"
+msgstr "समाप्ति तिथि"
+
+msgid "Error fetching transactions"
+msgstr "ट्रांजैक्शन प्राप्त करने में त्रुटि"
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Fetch from PayPal"
+msgstr "PayPal से प्राप्त करें"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
+
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
+msgid "Live Transactions"
+msgstr "लाइव ट्रांजैक्शन"
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "No transactions found for selected date range"
+msgstr "चयनित तिथि सीमा के लिए कोई ट्रांजैक्शन नहीं मिला"
+
+msgid "PayPal Payments"
+msgstr ""
+
+msgid "Payer"
+msgstr "भुगतानकर्ता"
+
+msgid "Payer Email"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Paypal"
+msgstr "पेपाल"
+
+msgid "Pending"
+msgstr "लंबित"
+
+msgid "Please select both start and end dates"
+msgstr "कृपया प्रारंभ और समाप्ति तिथि दोनों चुनें"
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Start Date"
+msgstr "प्रारंभ तिथि"
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "Subject"
+msgstr "विषय"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr ""
+
+msgid "Total"
+msgstr "कुल"
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You have cancelled the payment process."
+msgstr ""
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr "PayPal API से"
+
+msgid "from database"
+msgstr "डेटाबेस से"
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr "भुगतान"
+
+msgid "refunded"
+msgstr ""
+
+msgid "transactions"
+msgstr "ट्रांजैक्शन"

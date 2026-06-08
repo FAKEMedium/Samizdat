@@ -1,0 +1,177 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "After refunds"
+msgstr ""
+
+msgid "Amount"
+msgstr "राशि"
+
+msgid "Amount and items are required"
+msgstr ""
+
+msgid "Amount in Swedish Kronor"
+msgstr ""
+
+msgid "Amount is required"
+msgstr "राशि आवश्यक है"
+
+msgid "An error occurred"
+msgstr "एक त्रुटि आई"
+
+msgid "Card Payment"
+msgstr "कार्ड भुगतान"
+
+msgid "Charged"
+msgstr ""
+
+msgid "Charged At"
+msgstr ""
+
+msgid "Create Payment"
+msgstr "भुगतान बनाएं"
+
+msgid "Date"
+msgstr "तिथि"
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Failed to create payment"
+msgstr ""
+
+msgid "Failed to process refund"
+msgstr ""
+
+msgid "Invalid items format"
+msgstr ""
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Method"
+msgstr ""
+
+msgid "Missing payment ID"
+msgstr ""
+
+msgid "Net Amount"
+msgstr "शुद्ध राशि"
+
+msgid "Nets Payments"
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "Note"
+msgstr "नोट"
+
+msgid "Order number or reference"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Details"
+msgstr "भुगतान विवरण"
+
+msgid "Payment ID"
+msgstr "भुगतान आईडी"
+
+msgid "Payment Method"
+msgstr "भुगतान विधि"
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment for..."
+msgstr ""
+
+msgid "Payment must be charged before refund"
+msgstr ""
+
+msgid "Payment not found"
+msgstr "भुगतान नहीं मिला"
+
+msgid "Payment with Nets Easy"
+msgstr ""
+
+msgid "Proceed to Payment"
+msgstr ""
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Reference"
+msgstr "संदर्भ"
+
+msgid "Refund amount exceeds available amount"
+msgstr ""
+
+msgid "Refunded"
+msgstr "वापस किया गया"
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "Thank you! Your payment has been processed successfully."
+msgstr ""
+
+msgid "The payment process was interrupted. This could be because:"
+msgstr ""
+
+msgid "The payment session expired"
+msgstr ""
+
+msgid "There was an issue with your payment method"
+msgstr ""
+
+msgid "Total"
+msgstr "कुल"
+
+msgid "Total refunds"
+msgstr ""
+
+msgid "Try Again"
+msgstr ""
+
+msgid "What happened?"
+msgstr ""
+
+msgid "You clicked the back or cancel button"
+msgstr ""
+
+msgid "You will be redirected to Nets secure checkout page."
+msgstr ""
+
+msgid "Your payment was cancelled or failed."
+msgstr ""
+
+msgid "charged"
+msgstr ""
+
+msgid "payments"
+msgstr "भुगतान"

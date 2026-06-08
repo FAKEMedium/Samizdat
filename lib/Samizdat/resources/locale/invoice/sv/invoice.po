@@ -1,0 +1,591 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Summa"
+
+msgid "Amount due"
+msgstr "Att betala"
+
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "Belopp att betala inkl. moms: {totalcost} {currency}"
+
+msgid "Approved for F-tax"
+msgstr "Godkänd för F-skatt"
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr "Är du säker på att du vill skicka om denna faktura?"
+
+msgid "Article"
+msgstr "Artikel"
+
+msgid "Authentication required"
+msgstr "Autentisering krävs"
+
+msgid "BIC/Swift"
+msgstr "BIC/Swift"
+
+msgid "BIC/Swift address"
+msgstr "BIC/Swift-adress"
+
+msgid "Bankgiro"
+msgstr "Bankgiro"
+
+msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
+msgstr "Bankgironumret är samma som tidigare, men IBAN och BIC/SWIFT är annorlunda."
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first."
+msgstr ""
+
+msgid "Changed status."
+msgstr "Ändrade status."
+
+msgid "Click to pop reminder dialog."
+msgstr "Klicka för att öppna påminnelsefönstret."
+
+msgid "Click to regenerate PDF."
+msgstr "Klicka för att återskapa PDF."
+
+msgid "Click to register payment."
+msgstr "Klicka för att registrera betalning."
+
+msgid "Click to send a credit invoice."
+msgstr "Klicka för att skicka kreditfaktura."
+
+msgid "Click to send again."
+msgstr "Klicka för att skicka igen."
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact: {email} or call us directly."
+msgstr "Kontakt: {email} eller ring oss direkt."
+
+msgid "Continues on next page..."
+msgstr "Fortsätter på nästa sida..."
+
+msgid "Credit invoice"
+msgstr "Kreditfaktura"
+
+msgid "Credit invoice {number}"
+msgstr "Kreditfaktura {number}"
+
+msgid "Credited"
+msgstr ""
+
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "Krediterat belopp inkl. moms: {totalcost} {currency}"
+
+msgid "Credited invoice"
+msgstr "Krediterad faktura"
+
+msgid "Credited invoice: {number}"
+msgstr "Krediterade faktura: {number}"
+
+msgid "Customer"
+msgstr "Kund"
+
+msgid "Customer Id"
+msgstr "Kundnummer"
+
+msgid "Customer {id} not found in Fortnox. Create customer first."
+msgstr ""
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Dear"
+msgstr "Kära"
+
+msgid "Debt"
+msgstr "Skuld"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Despite previous reminders, payment has not been received."
+msgstr "Trots tidigare påminnelser har vi inte fått betalt."
+
+msgid "Do you want to credit the invoice?"
+msgstr "Vill du kreditera fakturan?"
+
+msgid "Download Invoice PDF"
+msgstr "Ladda ner PDF-faktura"
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr "Ladda ner PDF-faktura - betala NU"
+
+msgid "Due date"
+msgstr "Förfallodatum"
+
+msgid "Due to"
+msgstr "Förfallodatum"
+
+msgid "Error reprinting invoice"
+msgstr "Fel vid omtryckning av faktura"
+
+msgid "Error resending invoice"
+msgstr "Fel vid omsändning av faktura"
+
+msgid "Error sending reminder"
+msgstr "Fel i påminnelseutskick"
+
+msgid "Failed to load payment form"
+msgstr "Kunde inte ladda betalningsformulär"
+
+msgid "Failed to regenerate invoice PDF"
+msgstr "Misslyckades med att återskapa PDF"
+
+msgid "Failed to register payment"
+msgstr "Kunde inte registrera betalning"
+
+msgid "Failed to reprint invoice"
+msgstr "Misslyckades trycka om faktura"
+
+msgid "Failed to resend invoice"
+msgstr "Misslyckades skicka om faktura"
+
+msgid "Failed to resend invoice email"
+msgstr "Misslyckades med att maila faktura"
+
+msgid "Failed to send reminder"
+msgstr "Misslyckades skicka påminnelse"
+
+msgid "Fill the form correctly!"
+msgstr "Fyll i formuläret ordentligt!"
+
+msgid "Final Payment Reminder"
+msgstr "Sista betalningspåminnelsen"
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr "Sista betalningspåminnelsen - faktura {nummber}"
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "Kreditfakturan bifogas som PDF."
+
+msgid "Find your invoice attached as PDF."
+msgstr "Fakturan bifogas som PDF."
+
+msgid "For questions, please contact us at {email}."
+msgstr "Vid frågor, kontakta oss på {email}."
+
+msgid "Fortnox"
+msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr "Fortnox-varning"
+
+msgid "Fortnox error: {error}"
+msgstr ""
+
+msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr "Från och med 2025-11-01 använder vi Sparbanken Syd."
+
+msgid "Gross"
+msgstr "Brutto"
+
+msgid "Handled invoice"
+msgstr "Hanterade faktura"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr "Om betalning inte erhålls inom 7 dagar från detta meddelandes datum, kommer ärendet att överlämnas till vårt inkassobolag."
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr "Om ni redan har betalat, kontakta oss OMDELbart med bevis på betalning."
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr "Bortse från detta meddelande om ni nyligen betalat."
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr "Omedelbar åtgärd krävs för att undvika ytterligare avgifter och eventuella inkassoförfaranden."
+
+msgid "Immediate payment required!!!"
+msgstr "Omedelbar betalning krävs!!!"
+
+msgid "Including VAT"
+msgstr "Inklusive moms"
+
+msgid "Invalid invoice ID"
+msgstr "Ogiltigt faktura-ID"
+
+msgid "Invalid request"
+msgstr "Ogiltigt anrop"
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice (credited)"
+msgstr "Faktura (krediterad)"
+
+msgid "Invoice Details"
+msgstr "Fakturadetaljer"
+
+msgid "Invoice date"
+msgstr "Fakturadatum"
+
+msgid "Invoice for completed services"
+msgstr "Faktura för utförda tjänster"
+
+msgid "Invoice is credited"
+msgstr "Fakturan är krediterad"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr "Fakturan måste vara i fakturerad status för att påminnelser ska vara möjliga"
+
+msgid "Invoice not found"
+msgstr ""
+
+msgid "Invoice number"
+msgstr "Fakturanummer"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "Fakturafrågor kan skickas till {url}."
+
+msgid "Invoice reminder, {number}"
+msgstr "Fakturapåminnelse, {number}"
+
+msgid "Invoice reprinted successfully"
+msgstr "Faktura omtryckt"
+
+msgid "Invoice resent successfully"
+msgstr "Faktura skickad igen"
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "Faktura {fakturanummer} har krediterats."
+
+msgid "Invoice {number}"
+msgstr "Faktura {number}"
+
+msgid "Invoices"
+msgstr "Fakturor"
+
+msgid "Invoicing"
+msgstr "Fakturering"
+
+msgid "It's also available at"
+msgstr "Den finns också på"
+
+msgid "It's also available at {url}."
+msgstr "Den finns också på {url}."
+
+msgid "Last reminder"
+msgstr "Senaste påminnelse"
+
+msgid "Make invoice"
+msgstr "Skapa faktura"
+
+msgid "Mark payment"
+msgstr "Markera betalning"
+
+msgid "Message"
+msgstr "Meddelande"
+
+msgid "Mild"
+msgstr "Mild"
+
+msgid "Missing customer or invoice ID"
+msgstr "Kundnummer eller faktura-ID saknas"
+
+msgid "Missing invoice information"
+msgstr "Saknad fakturainformatiin"
+
+msgid "Modifications were saved."
+msgstr "Ändringarna sparades"
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Net amount"
+msgstr "Nettobelopp"
+
+msgid "Nets"
+msgstr "Nets"
+
+msgid "No payment methods are currently available."
+msgstr ""
+
+msgid "OVERDUE"
+msgstr "Förfallna"
+
+msgid "Open invoice"
+msgstr "Öppen faktura"
+
+msgid "Open invoice for customer"
+msgstr "Öppen faktura för kund"
+
+msgid "Open invoices"
+msgstr "Öppna fakturor"
+
+msgid "Organizational number"
+msgstr "Organisationsnummer"
+
+msgid "Original due date"
+msgstr "Ursprungligt förfallodatum"
+
+msgid "Overdue Invoice Details"
+msgstr "Detaljer om förfallen faktura"
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "Förfallna fakturor debiteras påminnelseavgift och {rate} ränta."
+
+msgid "PDF viewer"
+msgstr "PDF-visare"
+
+msgid "Page {number} of {total}"
+msgstr "Sida {number} av  {total}"
+
+msgid "Paid"
+msgstr "Betalad"
+
+msgid "Paid amount"
+msgstr "Betaalad summa"
+
+msgid "Pay"
+msgstr "Betala"
+
+msgid "Pay instantly with Swish"
+msgstr "Betala direkt med Swish"
+
+msgid "Pay invoice {number}"
+msgstr ""
+
+msgid "Pay with Nets"
+msgstr ""
+
+msgid "Pay with Swish"
+msgstr "Betala med Swish"
+
+msgid "PayPal"
+msgstr "PayPal"
+
+msgid "Payment"
+msgstr "Betalning"
+
+msgid "Payment Information"
+msgstr "Betalningsinformation"
+
+msgid "Payment Reminder"
+msgstr "Betalningspåminnelse"
+
+msgid "Payment date"
+msgstr "Betaldatum"
+
+msgid "Payment method"
+msgstr ""
+
+msgid "Payment modal not available"
+msgstr "Betalningsmodal inte tillgänglig"
+
+msgid "Payment registered successfully"
+msgstr "Betalning registrerades"
+
+msgid "Payment reminder: Invoice {number}"
+msgstr "Betalningspåminnelse: Faktura {number}"
+
+msgid "Payment terms"
+msgstr "Betalningsvillkor"
+
+msgid "Payments"
+msgstr "Betalningar"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "Det kan ta upp till en vecka innan betalningar blir synliga i kontrollpanelen."
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Please enter a payment date"
+msgstr "Ange ett betaldatum"
+
+msgid "Please find attached invoice"
+msgstr "Se bifogad faktura"
+
+msgid "Please include the invoice number as reference when making the payment."
+msgstr "Skriv fakturanumret som meddelande vid betalning."
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
+
+msgid "Price"
+msgstr "Pris"
+
+msgid "Qty"
+msgstr "Antal"
+
+msgid "Receiver"
+msgstr "Mottagare"
+
+msgid "Register payment"
+msgstr "Registrera betalning"
+
+msgid "Registered office"
+msgstr "Styrelsens säte"
+
+msgid "Remind"
+msgstr "Påminn"
+
+msgid "Reminder sent successfully"
+msgstr "Påminnelse skickades"
+
+msgid "Reprint"
+msgstr "Regenerera"
+
+msgid "Reprint invoice"
+msgstr "Skriv om faktura"
+
+msgid "Request failed"
+msgstr ""
+
+msgid "Resend"
+msgstr "Skicka igen"
+
+msgid "Resend invoice"
+msgstr "Skicka om faktura"
+
+msgid "Rounding"
+msgstr "Avrundning"
+
+msgid "SWISH"
+msgstr "SWISH"
+
+msgid "Scan the QR code with your Swish app for immediate payment."
+msgstr "Skanna QR-koden med din Swish-app för omedelbar betalning."
+
+msgid "Scan the QR code with your Swish app or enter the details manually."
+msgstr "Skanna QR-koden med din Swish-app eller ange uppgifterna manuellt."
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
+msgid "Search for invoice"
+msgstr "Sök faktura"
+
+msgid "Select"
+msgstr "Välj"
+
+msgid "Send again"
+msgstr "Skicka igen"
+
+msgid "Send reminder"
+msgstr "Skicka påminnelse"
+
+msgid "Stripe"
+msgstr "Stripe"
+
+msgid "Subject"
+msgstr "Ämne"
+
+msgid "Summa"
+msgstr "Amount"
+
+msgid "Swish number"
+msgstr "Swish-nummer"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Thank you for your business"
+msgstr "Tack för att ni använder våra tjänster"
+
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr "Detta är en sista påminnelse angående din förfallna faktura."
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr "Detta är en automatisk påminnelse. Underlåtenhet att betala kan leda till avbrott i tjänsterna och andra åtgärder."
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr "Eftersom det är lätt att missa en betalning vill vi skicka en vänlig påminnelse."
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr "Detta kommer att resultera i extra avgifter och kan påverka er kreditvärdighet."
+
+msgid "Total to pay"
+msgstr "Totalt att betala"
+
+msgid "Tough"
+msgstr "Tuff"
+
+msgid "Unknown error"
+msgstr "Okänt fel"
+
+msgid "Unpaid"
+msgstr "Obetalade"
+
+msgid "Update"
+msgstr "Uppdatera"
+
+msgid "Updated invoice"
+msgstr "Uppdaterade faktura"
+
+msgid "VAT"
+msgstr "Moms"
+
+msgid "VAT ({percent}%)"
+msgstr "Moms ({percent}%)"
+
+msgid "VAT number"
+msgstr "Momsregistreringsnummer"
+
+msgid "VAT {rate}\\%"
+msgstr "Moms {rate}\\%"
+
+msgid "WARNING: Legal Action Pending"
+msgstr "VARNING: Rättslig åtgärd pågår"
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr "Enligt våra noteringar är fakturan nedanför inte betalad."
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr "Du behöver ange fakturanumret som meddelande vid betalning,"
+
+msgid "Your contact"
+msgstr "Er kontakt"
+
+msgid "add {fee}"
+msgstr "lägg till {fee}"
+
+msgid "invoice"
+msgstr "faktura"
+
+msgid "our web"
+msgstr "vår webbplats"
+
+msgid "reverse charge"
+msgstr "omvänd skattskyldighet"
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{number} days"
+msgstr "{number} dagar"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr "{reminder_type} skickades"

@@ -1,0 +1,564 @@
+# FAKE Medium -
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01\n"
+"PO-Revision-Date: 2025-05-17\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "Address deleted"
+msgstr ""
+
+msgid "Addresses"
+msgstr ""
+
+msgid "All"
+msgstr "Все"
+
+msgid "All sources"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "An error occurred"
+msgstr "Произошла ошибка"
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr ""
+
+msgid "Body (Markdown)"
+msgstr ""
+
+msgid "Bounce"
+msgstr ""
+
+msgid "Bounce deleted"
+msgstr ""
+
+msgid "Bounced"
+msgstr ""
+
+msgid "Bounces"
+msgstr ""
+
+msgid "CSV"
+msgstr ""
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr ""
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Code"
+msgstr ""
+
+msgid "Common settings"
+msgstr ""
+
+msgid "Complaint"
+msgstr ""
+
+msgid "Completed"
+msgstr "Завершено"
+
+msgid "Content"
+msgstr "Содержание"
+
+msgid "Content saved"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy as draft"
+msgstr ""
+
+msgid "Created"
+msgstr "Создано"
+
+msgid "Data not found"
+msgstr ""
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Default From email"
+msgstr ""
+
+msgid "Default From name"
+msgstr ""
+
+msgid "Delayed"
+msgstr ""
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete All My Data"
+msgstr ""
+
+msgid "Delete My Data"
+msgstr ""
+
+msgid "Delete this address?"
+msgstr ""
+
+msgid "Delete this bounce record?"
+msgstr ""
+
+msgid "Delete this list?"
+msgstr ""
+
+msgid "Delete this mail?"
+msgstr ""
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Diagnostic"
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit mail"
+msgstr ""
+
+msgid "Email"
+msgstr "Эл. почта"
+
+msgid "Email column"
+msgstr ""
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr ""
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr ""
+
+msgid "Failed"
+msgstr "Ошибка"
+
+msgid "Failed to process unsubscription."
+msgstr ""
+
+msgid "Failed to unsubscribe."
+msgstr ""
+
+msgid "Failed to verify token."
+msgstr ""
+
+msgid "First name"
+msgstr "Имя"
+
+msgid "First name col"
+msgstr ""
+
+msgid "Footer added to all emails"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Hard bounce"
+msgstr ""
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr ""
+
+msgid "If this email is in our system, you will receive a link shortly."
+msgstr ""
+
+msgid "Import"
+msgstr "Импорт"
+
+msgid "Import addresses"
+msgstr ""
+
+msgid "Import complete"
+msgstr ""
+
+msgid "Imported"
+msgstr ""
+
+msgid "Imported {count} addresses"
+msgstr ""
+
+msgid "Invalid or expired token."
+msgstr ""
+
+msgid "Invalid or missing unsubscribe token."
+msgstr ""
+
+msgid "Key"
+msgstr "Ключ"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Last name"
+msgstr "Фамилия"
+
+msgid "Last name col"
+msgstr ""
+
+msgid "Linked"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List Memberships"
+msgstr ""
+
+msgid "List name:"
+msgstr ""
+
+msgid "Lists"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Mail"
+msgstr "Почта"
+
+msgid "Mail History"
+msgstr ""
+
+msgid "Mail copied as draft"
+msgstr ""
+
+msgid "Mail created"
+msgstr ""
+
+msgid "Mail deleted"
+msgstr ""
+
+msgid "Mail updated"
+msgstr ""
+
+msgid "Mailer"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mails"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Name column"
+msgstr ""
+
+msgid "Never subscribed"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "New list"
+msgstr ""
+
+msgid "New mail"
+msgstr ""
+
+msgid "No"
+msgstr "Нет"
+
+msgid "No addresses"
+msgstr ""
+
+msgid "No bounces"
+msgstr ""
+
+msgid "No content defined yet"
+msgstr ""
+
+msgid "No details available"
+msgstr ""
+
+msgid "No lists"
+msgstr ""
+
+msgid "No longer interested"
+msgstr ""
+
+msgid "No mails"
+msgstr ""
+
+msgid "No mails received"
+msgstr ""
+
+msgid "No results found"
+msgstr "Результаты не найдены"
+
+msgid "No settings configured"
+msgstr ""
+
+msgid "No source content to translate"
+msgstr ""
+
+msgid "No unsubscriptions"
+msgstr ""
+
+msgid "Not subscribed to any lists"
+msgstr ""
+
+msgid "Organization header"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr ""
+
+msgid "Paste CSV here..."
+msgstr ""
+
+msgid "Paste emails here..."
+msgstr ""
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr ""
+
+msgid "Pending"
+msgstr "Ожидание"
+
+msgid "Personal Information"
+msgstr ""
+
+msgid "Public"
+msgstr ""
+
+msgid "Purchase"
+msgstr ""
+
+msgid "Queue"
+msgstr ""
+
+msgid "Queue this mail for sending?"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "Reason (optional)"
+msgstr ""
+
+msgid "Received"
+msgstr "Получено"
+
+msgid "Remove"
+msgstr "Удалить"
+
+msgid "Remove marked"
+msgstr ""
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr ""
+
+msgid "Removed {count} addresses"
+msgstr ""
+
+msgid "Reply-To address"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Review imported addresses"
+msgstr ""
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save content"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Scrape"
+msgstr ""
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search field for {what}"
+msgstr "Поле поиска для {what}"
+
+msgid "Select a reason..."
+msgstr ""
+
+msgid "Send link"
+msgstr ""
+
+msgid "Sending"
+msgstr ""
+
+msgid "Sent"
+msgstr "Отправлено"
+
+msgid "Setting deleted"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting saved"
+msgstr ""
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Signup"
+msgstr ""
+
+msgid "Soft bounce"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Statistics"
+msgstr "Статистика"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Subject"
+msgstr "Тема"
+
+msgid "Subscribed"
+msgstr ""
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr ""
+
+msgid "Too many emails"
+msgstr ""
+
+msgid "Total"
+msgstr "Всего"
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translation complete"
+msgstr ""
+
+msgid "Translation failed"
+msgstr ""
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Unsubscribe from mailings"
+msgstr ""
+
+msgid "Unsubscription removed"
+msgstr ""
+
+msgid "Unsubscriptions"
+msgstr ""
+
+msgid "Value"
+msgstr "Значение"
+
+msgid "View details"
+msgstr ""
+
+msgid "Yes"
+msgstr "Да"
+
+msgid "You have been successfully unsubscribed."
+msgstr ""
+
+msgid "You have been unsubscribed"
+msgstr ""
+
+msgid "Your Data"
+msgstr ""
+
+msgid "Your data has been deleted"
+msgstr ""
+
+msgid "Your data has been deleted."
+msgstr ""
+
+msgid "addresses"
+msgstr ""
+
+msgid "bounces"
+msgstr ""
+
+msgid "created"
+msgstr ""
+
+msgid "existing"
+msgstr ""
+
+msgid "linked"
+msgstr ""
+
+msgid "mail"
+msgstr ""
+
+msgid "need review"
+msgstr ""
+
+msgid "new"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
+msgid "sent"
+msgstr ""
+
+msgid "unsubscribed"
+msgstr ""

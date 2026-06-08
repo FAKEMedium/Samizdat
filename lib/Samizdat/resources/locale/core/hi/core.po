@@ -1,0 +1,1389 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "(No parent - top level)"
+msgstr ""
+
+msgid "404: Missing document"
+msgstr "404: अनुपलब्ध दस्तावेज़"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "एक पुष्टिकरण लिंक {email} पर भेजा गया है।"
+
+msgid "About"
+msgstr "परिचय"
+
+msgid "Access denied"
+msgstr "पहुंच अस्वीकृत"
+
+msgid "Account"
+msgstr "खाता"
+
+msgid "Account settings"
+msgstr "खाता सेटिंग्स"
+
+msgid "Actions"
+msgstr "कार्य"
+
+msgid "Active"
+msgstr "सक्रिय"
+
+msgid "Add"
+msgstr "जोड़ें"
+
+msgid "Add content"
+msgstr "सामग्री जोड़ें"
+
+msgid "Add customer"
+msgstr "ग्राहक जोड़ें"
+
+msgid "Add group"
+msgstr "समूह जोड़ें"
+
+msgid "Add item"
+msgstr ""
+
+msgid "Add page"
+msgstr "पृष्ठ जोड़ें"
+
+msgid "Add product"
+msgstr "उत्पाद जोड़ें"
+
+msgid "Add side content"
+msgstr ""
+
+msgid "Add subscription"
+msgstr "सदस्यता जोड़ें"
+
+msgid "Add user"
+msgstr "उपयोगकर्ता जोड़ें"
+
+msgid "Address"
+msgstr "पता"
+
+msgid "Address (billing)"
+msgstr "पता (बिलिंग)"
+
+msgid "Address check"
+msgstr "पता जांच"
+
+msgid "Admin access required"
+msgstr "व्यवस्थापक पहुंच आवश्यक"
+
+msgid "Admininistration panel"
+msgstr "प्रशासन पैनल"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "पंजीकरण के बाद आप अपने बारे में अधिक जानकारी जोड़ सकते हैं, अपनी शेयरिंग नीति को बदल सकते हैं और अपने अनुभव को अनुकूलित कर सकते हैं।"
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "ईमेल से पुष्टिकरण कोड पेस्ट करने के लिए कुकीज़ की अनुमति दें"
+
+msgid "Amount"
+msgstr "राशि"
+
+msgid "An error occurred"
+msgstr "एक त्रुटि आई"
+
+msgid "An error occurred during login. Please try again."
+msgstr ""
+
+msgid "Are you sure you want to delete this cache entry?"
+msgstr ""
+
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+msgid "Are you sure you want to delete this menu?"
+msgstr ""
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr ""
+
+msgid "Are you sure you want to purge all cache?"
+msgstr "क्या आप वाकई सभी कैश साफ़ करना चाहते हैं?"
+
+msgid "Ask an existing customer to invite you, or create a new customer account."
+msgstr ""
+
+msgid "At least {min} characters from: {chars}"
+msgstr "कम से कम {min} अक्षर: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "कम से कम {min} अक्षर: {upper} बड़े अक्षर, {lower} छोटे अक्षर, {num} संख्या, {special} विशेष अक्षर"
+
+msgid "Authentication required"
+msgstr "प्रमाणीकरण आवश्यक"
+
+msgid "Back to menu"
+msgstr "मेनू पर वापस जाएं"
+
+msgid "Back to menus"
+msgstr ""
+
+msgid "Barred"
+msgstr "बाधित"
+
+msgid "Base URL"
+msgstr "बेस URL"
+
+msgid "Billing"
+msgstr "बिलिंग"
+
+msgid "Blocked"
+msgstr "अवरुद्ध"
+
+msgid "Body"
+msgstr "मुख्य भाग"
+
+msgid "Bold"
+msgstr "मोटा"
+
+msgid "Bootstrap icons"
+msgstr "बूटस्ट्रैप आइकन"
+
+msgid "Bootstrap icons helper"
+msgstr "बूटस्ट्रैप आइकन हेल्पर"
+
+msgid "Bullet List"
+msgstr "बुलेट सूची"
+
+msgid "Buy {slug} a coffee"
+msgstr "{slug} को एक कॉफी खरीदें"
+
+msgid "By default no information about you is shared."
+msgstr "डिफ़ॉल्ट रूप से आपके बारे में कोई जानकारी साझा नहीं की जाती है।"
+
+msgid "Cache"
+msgstr "कैश"
+
+msgid "Cache Entry Details"
+msgstr "कैश प्रविष्टि विवरण"
+
+msgid "Cache Management"
+msgstr "कैश प्रबंधन"
+
+msgid "Cache entry deleted successfully"
+msgstr "कैश प्रविष्टि सफलतापूर्वक हटाई गई"
+
+msgid "Cache entry not found or could not be deleted"
+msgstr ""
+
+msgid "Cache purged"
+msgstr "कैश साफ़ हो गया"
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "हेल्पर को कॉल करने से svg कोड दस्तावेज़ की शुरुआत में प्रतीक तालिका में जोड़ा जाता है, साथ ही इसका इनलाइन संदर्भ भी।"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "Captcha code from image"
+msgstr "छवि से कैप्चा कोड"
+
+msgid "Captcha image"
+msgstr "कैप्चा छवि"
+
+msgid "Captcha was wrong"
+msgstr "कैप्चा गलत था"
+
+msgid "Change password"
+msgstr "पासवर्ड बदलें"
+
+msgid "Choose a password"
+msgstr "पासवर्ड चुनें"
+
+msgid "Choose a username"
+msgstr "उपयोगकर्ता नाम चुनें"
+
+msgid "Choose language"
+msgstr "भाषा चुनें"
+
+msgid "City"
+msgstr "शहर"
+
+msgid "City (billing)"
+msgstr "शहर (बिलिंग)"
+
+msgid "Click to pop dialog."
+msgstr "डायलॉग खोलने के लिए क्लिक करें।"
+
+msgid "Click to pop login dialog."
+msgstr "लॉगिन डायलॉग खोलने के लिए क्लिक करें।"
+
+msgid "Close"
+msgstr "बंद करें"
+
+msgid "Company"
+msgstr "कंपनी"
+
+msgid "Components"
+msgstr ""
+
+msgid "Confirm"
+msgstr "पुष्टि करें"
+
+msgid "Confirmation Failed"
+msgstr "पुष्टि विफल"
+
+msgid "Confirmation code"
+msgstr "पुष्टिकरण कोड"
+
+msgid "Confirmation failed"
+msgstr "पुष्टि विफल"
+
+msgid "Connection error. Please try again."
+msgstr "कनेक्शन त्रुटि। कृपया पुनः प्रयास करें।"
+
+msgid "Contact"
+msgstr "संपर्क"
+
+msgid "Contribute"
+msgstr "योगदान दें"
+
+msgid "Control panel"
+msgstr "नियंत्रण कक्ष"
+
+msgid "Couldn't use code for verification."
+msgstr "सत्यापन के लिए कोड का उपयोग नहीं किया जा सका।"
+
+msgid "Country"
+msgstr "देश"
+
+msgid "Country (billing)"
+msgstr "देश (बिलिंग)"
+
+msgid "Country selector"
+msgstr "देश चयनकर्ता"
+
+msgid "Create"
+msgstr "बनाएं"
+
+msgid "Create customer"
+msgstr "ग्राहक बनाएं"
+
+msgid "Created"
+msgstr "बनाया गया"
+
+msgid "Created {created} by {creator}"
+msgstr "{creator} द्वारा {created} को बनाया गया"
+
+msgid "Credit trustability"
+msgstr "क्रेडिट विश्वसनीयता"
+
+msgid "Customer"
+msgstr "ग्राहक"
+
+msgid "Customer Id"
+msgstr "ग्राहक आईडी"
+
+msgid "Customers"
+msgstr "ग्राहक"
+
+msgid "DNS zones"
+msgstr "डीएनएस ज़ोन"
+
+msgid "Data usage: {usage}"
+msgstr "डेटा उपयोग: {usage}"
+
+msgid "Database"
+msgstr "डेटाबेस"
+
+msgid "Database error occurred"
+msgstr "डेटाबेस एरर आया"
+
+msgid "Databases"
+msgstr "डेटाबेस"
+
+msgid "Date"
+msgstr "तिथि"
+
+msgid "Date of birth"
+msgstr ""
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "तय करें कि आप अपने व्यक्तिगत डेटा के कौन से भाग विभिन्न समूहों को दिखाना चाहते हैं।"
+
+msgid "Definitions"
+msgstr "परिभाषाएं"
+
+msgid "Delete"
+msgstr "हटाएं"
+
+msgid "Description"
+msgstr "विवरण"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "निर्धारित करता है कि svg फ़ाइलों को किस सबडायरेक्टरी से लोड किया जाए। डिफ़ॉल्ट बूटस्ट्रैप आइकन हैं।"
+
+msgid "Display name"
+msgstr "प्रदर्शन नाम"
+
+msgid "Domain"
+msgstr "डोमेन"
+
+msgid "Domains"
+msgstr "डोमेन"
+
+msgid "Edit"
+msgstr "संपादित करें"
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Edit menu item: {id}"
+msgstr ""
+
+msgid "Edit menu: {name}"
+msgstr ""
+
+msgid "Edit page {docpath}"
+msgstr ""
+
+msgid "Edit this page"
+msgstr "इस पेज को संपादित करें"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Email %s has been verified"
+msgstr "ईमेल %s सत्यापित हो गया है"
+
+msgid "Email (billing)"
+msgstr "ईमेल (बिलिंग)"
+
+msgid "Email confirmation"
+msgstr "ईमेल पुष्टिकरण"
+
+msgid "Email not valid"
+msgstr "ईमेल मान्य नहीं है"
+
+msgid "Email someone about {what}"
+msgstr "{what} के बारे में किसी को ईमेल करें"
+
+msgid "Empty VAT"
+msgstr "खाली वैट"
+
+msgid "Empty VAT number"
+msgstr "खाली वैट नंबर"
+
+msgid "Empty address"
+msgstr "खाली पता"
+
+msgid "Empty billingaddress"
+msgstr "खाली बिलिंग पता"
+
+msgid "Empty city"
+msgstr "खाली शहर"
+
+msgid "Empty code"
+msgstr "खाली कोड"
+
+msgid "Empty company name"
+msgstr "खाली कंपनी नाम"
+
+msgid "Empty country"
+msgstr "खाली देश"
+
+msgid "Empty directory"
+msgstr ""
+
+msgid "Empty first name"
+msgstr "खाली पहला नाम"
+
+msgid "Empty freetext"
+msgstr "खाली फ्री टेक्स्ट"
+
+msgid "Empty last name"
+msgstr "खाली अंतिम नाम"
+
+msgid "Empty mobile"
+msgstr "खाली मोबाइल"
+
+msgid "Empty postal code"
+msgstr "खाली पोस्टल कोड"
+
+msgid "Empty recommendation"
+msgstr "खाली अनुशंसा"
+
+msgid "Empty reference"
+msgstr "खाली संदर्भ"
+
+msgid "Empty telephone"
+msgstr "खाली टेलीफोन"
+
+msgid "End main content"
+msgstr "मुख्य सामग्री समाप्त"
+
+msgid "End side content"
+msgstr "पार्श्व सामग्री समाप्त"
+
+msgid "English"
+msgstr "अंग्रेज़ी"
+
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
+msgid "Enter a title first to translate from"
+msgstr ""
+
+msgid "Enter code"
+msgstr "कोड दर्ज करें"
+
+msgid "Enter code from captcha image"
+msgstr "कैप्चा छवि से कोड दर्ज करें"
+
+msgid "Enter password"
+msgstr "पासवर्ड दर्ज करें"
+
+msgid "Enter username"
+msgstr "उपयोगकर्ता नाम दर्ज करें"
+
+msgid "Enter your email"
+msgstr "अपना ईमेल दर्ज करें"
+
+msgid "Euro"
+msgstr "यूरो"
+
+msgid "Examples"
+msgstr "उदाहरण"
+
+msgid "Exception Occurred"
+msgstr ""
+
+msgid "Expand menu"
+msgstr "मेनू विस्तारित करें"
+
+msgid "Expand personal menu."
+msgstr "व्यक्तिगत मेनू विस्तारित करें।"
+
+msgid "Expires"
+msgstr "समाप्त होता है"
+
+msgid "Failed to purge cache"
+msgstr "कैश साफ़ करने में विफल"
+
+msgid "Failed to save"
+msgstr ""
+
+msgid "File"
+msgstr "फ़ाइल"
+
+msgid "File: stored in src/public. Database: stored in PostgreSQL."
+msgstr ""
+
+msgid "First name"
+msgstr "पहला नाम"
+
+msgid "Full"
+msgstr "पूर्ण"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "buymeacoffee पर {slug} को थोड़ा वित्तीय समर्थन दें"
+
+msgid "Group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Groups"
+msgstr ""
+
+msgid "HTML result"
+msgstr "HTML परिणाम"
+
+msgid "Halfyear"
+msgstr "अर्धवार्षिक"
+
+msgid "Heading 1"
+msgstr "शीर्षक 1"
+
+msgid "Heading 2"
+msgstr "शीर्षक 2"
+
+msgid "Heading 3"
+msgstr "शीर्षक 3"
+
+msgid "I accept the terms for registration."
+msgstr "मैं पंजीकरण के नियमों को स्वीकार करता हूं।"
+
+msgid "ID"
+msgstr "आईडी"
+
+msgid "Identification code"
+msgstr "पहचान कोड"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "यदि आपने खाता पंजीकृत नहीं किया है, तो कृपया इस ईमेल को अनदेखा करें।"
+
+msgid "In"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Invalid confirmation link"
+msgstr "अमान्य पुष्टि लिंक"
+
+msgid "Invalid email"
+msgstr "अमान्य ईमेल"
+
+msgid "Invalid password"
+msgstr "अमान्य पासवर्ड"
+
+msgid "Invalid username"
+msgstr "अमान्य उपयोगकर्ता नाम"
+
+msgid "Invoice"
+msgstr "इनवॉइस"
+
+msgid "Invoice address"
+msgstr "इनवॉइस पता"
+
+msgid "Invoice currency"
+msgstr "इनवॉइस मुद्रा"
+
+msgid "Invoice currency is {currency}."
+msgstr "इनवॉइस मुद्रा {currency} है।"
+
+msgid "Invoice customer #{customerid}"
+msgstr "इनवॉइस ग्राहक #{customerid}"
+
+msgid "Invoice period"
+msgstr "इनवॉइस अवधि"
+
+msgid "Invoice type"
+msgstr "इनवॉइस प्रकार"
+
+msgid "Invoices"
+msgstr "इनवॉइस"
+
+msgid "Italic"
+msgstr "तिरछा"
+
+msgid "Item deleted"
+msgstr ""
+
+msgid "Item saved"
+msgstr ""
+
+msgid "Key"
+msgstr "कुंजी"
+
+msgid "Language"
+msgstr "भाषा"
+
+msgid "Language:"
+msgstr ""
+
+msgid "Languages"
+msgstr "भाषाएँ"
+
+msgid "Last name"
+msgstr "अंतिम नाम"
+
+msgid "Leave empty for items without a link"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid "Link"
+msgstr "लिंक"
+
+msgid "Link to control panel"
+msgstr "कंट्रोल पैनल का लिंक"
+
+msgid "Link to personal settings"
+msgstr "व्यक्तिगत सेटिंग्स का लिंक"
+
+msgid "Loading"
+msgstr ""
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Log in"
+msgstr "लॉग इन करें"
+
+msgid "Log out"
+msgstr "लॉग आउट करें"
+
+msgid "Log out and end current session"
+msgstr "लॉग आउट करें और वर्तमान सत्र समाप्त करें"
+
+msgid "Login blocked"
+msgstr "लॉगिन अवरुद्ध"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "{ip} से अत्यधिक विफल प्रयासों के कारण लॉगिन अस्थायी रूप से अवरुद्ध है।"
+
+msgid "Logotype"
+msgstr "लोगो"
+
+msgid "Logotype leading to start"
+msgstr "लोगोटाइप शुरुआत की ओर ले जाता है"
+
+msgid "Logotype leading to start page"
+msgstr "लोगोटाइप शुरुआती पृष्ठ की ओर ले जाता है"
+
+msgid "Logotype linked to {site}"
+msgstr "{site} से जुड़ा लोगो"
+
+msgid "Lookup"
+msgstr ""
+
+msgid "Lost password?"
+msgstr "पासवर्ड खो गया?"
+
+msgid "MB"
+msgstr "एमबी"
+
+msgid "Mail domains"
+msgstr "मेल डोमेन"
+
+msgid "Mail dump"
+msgstr "मेल डंप"
+
+msgid "Manager"
+msgstr ""
+
+msgid "Manuals"
+msgstr "मैनुअल"
+
+msgid "Member since"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Menu Items"
+msgstr ""
+
+msgid "Menu Settings"
+msgstr ""
+
+msgid "Menu created"
+msgstr ""
+
+msgid "Menu deleted"
+msgstr ""
+
+msgid "Menu saved"
+msgstr ""
+
+msgid "Menus"
+msgstr "मेनू"
+
+msgid "Messages pagination"
+msgstr ""
+
+msgid "Missing file, our bad?"
+msgstr "फ़ाइल अनुपलब्ध, हमारी गलती?"
+
+msgid "Missing username or password"
+msgstr "उपयोगकर्ता नाम या पासवर्ड अनुपलब्ध"
+
+msgid "Mobile"
+msgstr "मोबाइल"
+
+msgid "Modifications were saved."
+msgstr "संशोधन सहेजे गए।"
+
+msgid "Month"
+msgstr "महीना"
+
+msgid "Name"
+msgstr "नाम"
+
+msgid "Network error - please try again"
+msgstr "नेटवर्क त्रुटि - कृपया पुनः प्रयास करें"
+
+msgid "Never"
+msgstr "कभी नहीं"
+
+msgid "Never expires"
+msgstr ""
+
+msgid "New Menu"
+msgstr ""
+
+msgid "New account"
+msgstr "नया खाता"
+
+msgid "New customer"
+msgstr "नया ग्राहक"
+
+msgid "New folder"
+msgstr "नया फ़ोल्डर"
+
+msgid "New group"
+msgstr ""
+
+msgid "New menu"
+msgstr "नया मेनू"
+
+msgid "New menu item"
+msgstr ""
+
+msgid "Newest"
+msgstr "नवीनतम"
+
+msgid "Newsletter"
+msgstr "न्यूज़लेटर"
+
+msgid "Next"
+msgstr "अगला"
+
+msgid "No cache entries found"
+msgstr ""
+
+msgid "No groups found"
+msgstr ""
+
+msgid "No invoicing"
+msgstr "कोई बिलिंग नहीं"
+
+msgid "No menu items. Click \"Add item\" to create one."
+msgstr ""
+
+msgid "No menus found"
+msgstr ""
+
+msgid "No pages found."
+msgstr "कोई पेज नहीं मिला।"
+
+msgid "No services available"
+msgstr ""
+
+msgid "No title"
+msgstr "कोई शीर्षक नहीं"
+
+msgid "No users found"
+msgstr "कोई उपयोगकर्ता नहीं मिला"
+
+msgid "None (root level)"
+msgstr ""
+
+msgid "Normal"
+msgstr "सामान्य"
+
+msgid "Not found"
+msgstr "नहीं मिला"
+
+msgid "Notes"
+msgstr "नोट्स"
+
+msgid "Number"
+msgstr "संख्या"
+
+msgid "Numbered List"
+msgstr "संख्याबद्ध सूची"
+
+msgid "Open invoice"
+msgstr "ओपन इनवॉइस"
+
+msgid "Open invoice items"
+msgstr "ओपन इनवॉइस आइटम"
+
+msgid "Open list"
+msgstr "ओपन सूची"
+
+msgid "Operation ID:"
+msgstr ""
+
+msgid "Options"
+msgstr "विकल्प"
+
+msgid "Order saved"
+msgstr ""
+
+msgid "Organization"
+msgstr "संगठन"
+
+msgid "Our reference"
+msgstr "हमारा संदर्भ"
+
+msgid "PageSpeed result 100 100 100 100"
+msgstr "PageSpeed परिणाम 100 100 100 100"
+
+msgid "Pagination"
+msgstr ""
+
+msgid "Paid"
+msgstr "भुगतान किया गया"
+
+msgid "Panel"
+msgstr "पैनल"
+
+msgid "Paragraph"
+msgstr ""
+
+msgid "Parameters"
+msgstr ""
+
+msgid "Parent Item"
+msgstr ""
+
+msgid "Password"
+msgstr "पासवर्ड"
+
+msgid "Password must be at least {min} characters"
+msgstr "पासवर्ड में कम से कम {min} अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "पासवर्ड में कम से कम {min} छोटे अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "पासवर्ड में कम से कम {min} संख्या होनी चाहिए"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "पासवर्ड में कम से कम {min} विशेष अक्षर होने चाहिए"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "पासवर्ड में कम से कम {min} बड़े अक्षर होने चाहिए"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "पासवर्ड गलत था या उपयोगकर्ता नाम मौजूद नहीं है।"
+
+msgid "People rocketing to the sky"
+msgstr "लोग आकाश की ओर उड़ते हुए"
+
+msgid "Personal"
+msgstr "व्यक्तिगत"
+
+msgid "Personal menu"
+msgstr "व्यक्तिगत मेनू"
+
+msgid "Please check your confirmation link or register again."
+msgstr "कृपया अपने पुष्टि लिंक की जाँच करें या फिर से पंजीकरण करें।"
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "कृपया निम्न लिंक पर क्लिक करके अपने ईमेल पते की पुष्टि करें:"
+
+msgid "Please enter a valid email address"
+msgstr "कृपया एक वैध ईमेल पता दर्ज करें"
+
+msgid "Please login to access resource."
+msgstr "कृपया संसाधन तक पहुंचने के लिए लॉगिन करें।"
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "कृपया लॉगआउट करें और उचित प्राधिकरण वाले उपयोगकर्ता के रूप में लॉगिन करें।"
+
+msgid "Postal code"
+msgstr "पोस्टल कोड"
+
+msgid "Postal code (billing)"
+msgstr "पोस्टल कोड (बिलिंग)"
+
+msgid "Postal mail"
+msgstr "डाक मेल"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "पुनः उत्पन्न करने के लिए \"{buttontext}\" दबाएं"
+
+msgid "Preview"
+msgstr "पूर्वावलोकन"
+
+msgid "Previous"
+msgstr "पिछला"
+
+msgid "Privilege sets"
+msgstr "विशेषाधिकार सेट"
+
+msgid "Privileges"
+msgstr "विशेषाधिकार"
+
+msgid "Products"
+msgstr "उत्पाद"
+
+msgid "Purge"
+msgstr "साफ़ करें"
+
+msgid "Purge All"
+msgstr "सभी साफ़ करें"
+
+msgid "Purged %d cache entries"
+msgstr ""
+
+msgid "Purging all cache requires confirmation"
+msgstr ""
+
+msgid "Quarter"
+msgstr "तिमाही"
+
+msgid "Quote"
+msgstr "उद्धरण"
+
+msgid "Recommended by"
+msgstr "द्वारा अनुशंसित"
+
+msgid "Register"
+msgstr "पंजीकरण करें"
+
+msgid "Register account"
+msgstr "खाता पंजीकृत करें"
+
+msgid "Register to create and publish content."
+msgstr "सामग्री बनाने और प्रकाशित करने के लिए पंजीकरण करें।"
+
+msgid "Registration is currently non-functional"
+msgstr "पंजीकरण वर्तमान में गैर-कार्यात्मक है"
+
+msgid "Rename"
+msgstr ""
+
+msgid "Required"
+msgstr "आवश्यक"
+
+msgid "Resources"
+msgstr "संसाधन"
+
+msgid "Response"
+msgstr ""
+
+msgid "Roles"
+msgstr "भूमिकाएँ"
+
+msgid "SEK"
+msgstr "एसईके"
+
+msgid "SMS sent successfully!"
+msgstr ""
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "समिज़दात {link} से बूटस्ट्रैप आइकन का उपयोग करता है।"
+
+msgid "Save"
+msgstr "सहेजें"
+
+msgid "Save failed"
+msgstr ""
+
+msgid "Save options"
+msgstr ""
+
+msgid "Save to database"
+msgstr ""
+
+msgid "Save to file"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Search"
+msgstr "खोजें"
+
+msgid "Search cache"
+msgstr ""
+
+msgid "Search content"
+msgstr "सामग्री खोजें"
+
+msgid "Search field for {what}"
+msgstr "{what} के लिए खोज फील्ड"
+
+msgid "Search for customer"
+msgstr "ग्राहक खोजें"
+
+msgid "Search for product"
+msgstr "उत्पाद खोजें"
+
+msgid "Search for user or group"
+msgstr "उपयोगकर्ता या समूह खोजें"
+
+msgid "Search menus..."
+msgstr ""
+
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr ""
+
+msgid "Search web content"
+msgstr "वेब सामग्री खोजें"
+
+msgid "Select Format"
+msgstr ""
+
+msgid "Select country"
+msgstr "देश चुनें"
+
+msgid "Select country or click flags to see detail"
+msgstr "देश चुनें या विवरण देखने के लिए ध्वज पर क्लिक करें"
+
+msgid "Select state"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Sending..."
+msgstr ""
+
+msgid "Set the height attribute."
+msgstr "ऊंचाई विशेषता सेट करें।"
+
+msgid "Set the id attribute."
+msgstr "आईडी विशेषता सेट करें।"
+
+msgid "Set the title attribute."
+msgstr "शीर्षक विशेषता सेट करें।"
+
+msgid "Set the width attribute."
+msgstr "चौड़ाई विशेषता सेट करें।"
+
+msgid "Settings"
+msgstr "सेटिंग्स"
+
+msgid "Settings saved"
+msgstr ""
+
+msgid "Share {what} on {where}"
+msgstr "{what} को {where} पर शेयर करें"
+
+msgid "Shown as"
+msgstr "इस रूप में दिखाया गया"
+
+msgid "Side content"
+msgstr ""
+
+msgid "Sidecard name"
+msgstr ""
+
+msgid "Site"
+msgstr "साइट"
+
+msgid "Site content"
+msgstr "साइट सामग्री"
+
+msgid "Skip links"
+msgstr ""
+
+msgid "Skip to main content"
+msgstr ""
+
+msgid "Snapback evaluation"
+msgstr "स्नैपबैक मूल्यांकन"
+
+msgid "Snapback scheduler"
+msgstr "स्नैपबैक शेड्यूलर"
+
+msgid "Source files"
+msgstr ""
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "प्रीफिक्स्ड डिफ़ॉल्ट क्लासेज़ में जोड़ने के लिए अतिरिक्त क्लासेज़ की स्पेस से अलग की गई सूची।"
+
+msgid "Start main content"
+msgstr "मुख्य सामग्री शुरू"
+
+msgid "Start side content"
+msgstr "पार्श्व सामग्री शुरू"
+
+msgid "State"
+msgstr ""
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "Storage"
+msgstr ""
+
+msgid "Storage target"
+msgstr ""
+
+msgid "Stuff"
+msgstr "सामान"
+
+msgid "Super panel"
+msgstr "सुपर पैनल"
+
+msgid "Superadmin access required"
+msgstr ""
+
+msgid "Swedish"
+msgstr "स्वीडिश"
+
+msgid "TTL"
+msgstr ""
+
+msgid "Telephone"
+msgstr "टेलीफोन"
+
+msgid "Terms of service"
+msgstr ""
+
+msgid "Text Editor"
+msgstr ""
+
+msgid "The Samizdat project"
+msgstr "समिज़दात प्रोजेक्ट"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "डिफ़ॉल्ट बूटस्ट्रैप आइकन सेट के लिए उपयोग किया जाता है।"
+
+msgid "The form was submitted from {ip}"
+msgstr "फॉर्म {ip} से सबमिट किया गया था"
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "सीमा {blocktime} मिनट में {blocklimit} प्रयास है।"
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "लॉगिन फ़ंक्शन जावास्क्रिप्ट, कुकीज़ और AJAX का उपयोग करता है।"
+
+msgid "The page {docpath} wasn't found."
+msgstr "पृष्ठ {docpath} नहीं मिला।"
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "यह पुष्टि लिंक अमान्य है या समाप्त हो गया है"
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "यह प्रदर्शन समिज़दात के SVG टेम्पलेट हेल्पर के परिणाम दिखाता है।"
+
+msgid "This field is required"
+msgstr "यह फ़ील्ड आवश्यक है"
+
+msgid "This resource has no input parameters."
+msgstr ""
+
+msgid "This resource is deprecated!"
+msgstr ""
+
+msgid "This resource is not documented."
+msgstr ""
+
+msgid "Titles by Language"
+msgstr ""
+
+msgid "Toggle Dropdown"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr "मेनू टॉगल करें"
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translating..."
+msgstr ""
+
+msgid "Translation complete"
+msgstr ""
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "URI Path"
+msgstr ""
+
+msgid "Unauthenticated"
+msgstr "अप्रमाणित"
+
+msgid "Underline"
+msgstr "रेखांकित"
+
+msgid "Untitled"
+msgstr ""
+
+msgid "Update and send"
+msgstr ""
+
+msgid "Update customer"
+msgstr "ग्राहक अपडेट करें"
+
+msgid "Updated customer"
+msgstr "अपडेट किया गया ग्राहक"
+
+msgid "Updated {updated} by {updater}"
+msgstr "{updater} द्वारा {updated} को अपडेट किया गया"
+
+msgid "Usage"
+msgstr "उपयोग"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "ध्वज-आइकन के लिए <code>flags</code> या एप्लिकेशन के घर के लिए <code>anysvg</code> का उपयोग करें।"
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "इसका उपयोग करें यदि आपको प्रीफिक्स्ड डिफ़ॉल्ट क्लासेज़ की आवश्यकता नहीं है।"
+
+msgid "Used to make class names."
+msgstr "क्लास नाम बनाने के लिए उपयोग किया जाता है।"
+
+msgid "User"
+msgstr "उपयोगकर्ता"
+
+msgid "User manual"
+msgstr "उपयोगकर्ता मैनुअल"
+
+msgid "User not found"
+msgstr ""
+
+msgid "User registration"
+msgstr "उपयोगकर्ता पंजीकरण"
+
+msgid "Username"
+msgstr "उपयोगकर्ता नाम"
+
+msgid "Username already exists"
+msgstr "उपयोगकर्ता नाम पहले से मौजूद है"
+
+msgid "Username can only contain {chars}"
+msgstr "उपयोगकर्ता नाम में केवल {chars} हो सकते हैं"
+
+msgid "Username could not be created"
+msgstr "उपयोगकर्ता नाम बनाया नहीं जा सका"
+
+msgid "Username must be at least {min} characters"
+msgstr "उपयोगकर्ता नाम में कम से कम {min} अक्षर होने चाहिए"
+
+msgid "Users"
+msgstr "उपयोगकर्ता"
+
+msgid "VAT Number"
+msgstr "वैट संख्या"
+
+msgid "VAT Number Lookup"
+msgstr ""
+
+msgid "VAT lookup, {vatno}"
+msgstr "वैट लुकअप, {vatno}"
+
+msgid "VAT number"
+msgstr "वैट नंबर"
+
+msgid "VAT number lookup"
+msgstr "वैट नंबर लुकअप"
+
+msgid "VAT number not valid"
+msgstr ""
+
+msgid "VAT percentage"
+msgstr "वैट प्रतिशत"
+
+msgid "Valid"
+msgstr ""
+
+msgid "Value"
+msgstr "मूल्य"
+
+msgid "Value for the class attribute."
+msgstr "क्लास विशेषता के लिए मान।"
+
+msgid "Version"
+msgstr "संस्करण"
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "हम इसे आंकड़ों के लिए और रोबोट पंजीकरण को रोकने के लिए भी स्टोर करेंगे।"
+
+msgid "We will email a confirmation request."
+msgstr "हम एक पुष्टिकरण अनुरोध ईमेल करेंगे।"
+
+msgid "Web sites"
+msgstr "वेब साइट"
+
+msgid "Website"
+msgstr "वेबसाइट"
+
+msgid "Websites"
+msgstr "वेबसाइट"
+
+msgid "Whois data for {ip}"
+msgstr "{ip} के लिए Whois डेटा"
+
+msgid "Year"
+msgstr "वर्ष"
+
+msgid "You are not connected to any customer accounts."
+msgstr ""
+
+msgid "You can also post in our discussions."
+msgstr "आप हमारी चर्चाओं में भी पोस्ट कर सकते हैं।"
+
+msgid "You can now log in to your account."
+msgstr "आप अब अपने खाते में लॉग इन कर सकते हैं।"
+
+msgid "You have registered a new user account on {site}."
+msgstr "आपने {site} पर एक नया उपयोगकर्ता खाता पंजीकृत किया है।"
+
+msgid "You have {remaining} tries left."
+msgstr "आपके पास {remaining} प्रयास शेष हैं।"
+
+msgid "You need to accept registration terms."
+msgstr "आपको पंजीकरण शर्तों को स्वीकार करना होगा।"
+
+msgid "Your email"
+msgstr "आपका ईमेल"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "आपका आईपी {ip} पुष्टिकरण अनुरोध में जोड़ा जाएगा।"
+
+msgid "cache"
+msgstr "कैश"
+
+msgid "content"
+msgstr "सामग्री"
+
+msgid "customer"
+msgstr "ग्राहक"
+
+msgid "msg"
+msgstr ""
+
+msgid "product"
+msgstr "उत्पाद"
+
+msgid "seconds"
+msgstr ""
+
+msgid "supporters"
+msgstr "समर्थक"
+
+msgid "user"
+msgstr "उपयोगकर्ता"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: प्रमाणीकरण आवश्यक"
+
+msgid "{code}: No authorization"
+msgstr "{code}: कोई प्राधिकरण नहीं"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: इस ब्रह्मांड में नहीं"
+
+msgid "{server}, main firewall"
+msgstr "{server}, मुख्य फायरवॉल"
+
+msgid "{server}, standby firewall"
+msgstr "{server}, स्टैंडबाय फायरवॉल"
+
+msgid "{sitename} by country"
+msgstr "देश द्वारा {sitename}"
+
+msgid "{sitename} in {country}"
+msgstr "{country} में {sitename}"

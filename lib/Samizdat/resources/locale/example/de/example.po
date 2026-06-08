@@ -1,0 +1,162 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Add example"
+msgstr "Beispiel hinzufügen"
+
+msgid "All"
+msgstr "Alle"
+
+msgid "Are you sure you want to delete this example?"
+msgstr "Sind Sie sicher, dass Sie dieses Beispiel löschen möchten?"
+
+msgid "Back to list"
+msgstr "Zurück zur Liste"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Category"
+msgstr "Kategorie"
+
+msgid "Changes saved successfully."
+msgstr "Änderungen erfolgreich gespeichert."
+
+msgid "Comma separated"
+msgstr "Kommagetrennt"
+
+msgid "Content"
+msgstr "Inhalt"
+
+msgid "Created"
+msgstr "Erstellt"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Draft"
+msgstr "Entwurf"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Edit Example"
+msgstr "Beispiel bearbeiten"
+
+msgid "Example created successfully"
+msgstr "Beispiel erfolgreich erstellt"
+
+msgid "Example deleted successfully"
+msgstr "Beispiel erfolgreich gelöscht"
+
+msgid "Example not found"
+msgstr "Beispiel nicht gefunden"
+
+msgid "Example updated successfully"
+msgstr "Beispiel erfolgreich aktualisiert"
+
+msgid "Examples"
+msgstr "Beispiele"
+
+msgid "Failed to create example"
+msgstr "Beispiel konnte nicht erstellt werden"
+
+msgid "Failed to delete example"
+msgstr "Beispiel konnte nicht gelöscht werden"
+
+msgid "Failed to update example"
+msgstr "Beispiel konnte nicht aktualisiert werden"
+
+msgid "Featured"
+msgstr "Hervorgehoben"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Inactive"
+msgstr "Inaktiv"
+
+msgid "Invalid form data"
+msgstr "Ungültige Formulardaten"
+
+msgid "New Example"
+msgstr "Neues Beispiel"
+
+msgid "New example"
+msgstr "Neues Beispiel"
+
+msgid "Next"
+msgstr "Weiter"
+
+msgid "No examples found"
+msgstr "Keine Beispiele gefunden"
+
+msgid "Pagination"
+msgstr "Seitennummerierung"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Published"
+msgstr "Veröffentlicht"
+
+msgid "Samples of fabric"
+msgstr "Stoffmuster"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Saved successfully"
+msgstr "Erfolgreich gespeichert"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Search example"
+msgstr "Beispiel suchen"
+
+msgid "Search field for {what}"
+msgstr "Suchfeld für {what}"
+
+msgid "Search for example"
+msgstr "Nach Beispiel suchen"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Tags"
+msgstr "Tags"
+
+msgid "Title"
+msgstr "Titel"
+
+msgid "Updated"
+msgstr "Aktualisiert"
+
+msgid "example"
+msgstr "Beispiel"

@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Betrag"
+
+msgid "Amount:"
+msgstr "Betrag:"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr "Klicken Sie auf \"Von PayPal abrufen\", um Live-Transaktionen zu laden"
+
+msgid "Completed"
+msgstr "Abgeschlossen"
+
+msgid "Currency"
+msgstr "Währung"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "End Date"
+msgstr "Enddatum"
+
+msgid "Error fetching transactions"
+msgstr "Fehler beim Abrufen der Transaktionen"
+
+msgid "Error loading payments"
+msgstr "Fehler beim Laden der Zahlungen"
+
+msgid "Fetch from PayPal"
+msgstr "Von PayPal abrufen"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr "Wenn Sie Probleme hatten, wenden Sie sich bitte an unser Support-Team."
+
+msgid "Item Number"
+msgstr "Positionsnummer"
+
+msgid "Item:"
+msgstr "Position:"
+
+msgid "Live Transactions"
+msgstr "Live-Transaktionen"
+
+msgid "Loading..."
+msgstr "Wird geladen..."
+
+msgid "No charges have been made to your account."
+msgstr "Es wurden keine Belastungen auf Ihrem Konto vorgenommen."
+
+msgid "No payments found"
+msgstr "Keine Zahlungen gefunden"
+
+msgid "No transactions found for selected date range"
+msgstr "Keine Transaktionen für den ausgewählten Zeitraum gefunden"
+
+msgid "PayPal Payments"
+msgstr "PayPal-Zahlungen"
+
+msgid "Payer"
+msgstr "Zahler"
+
+msgid "Payer Email"
+msgstr "E-Mail des Zahlers"
+
+msgid "Payment Cancelled"
+msgstr "Zahlung storniert"
+
+msgid "Payment Successful"
+msgstr "Zahlung erfolgreich"
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Pending"
+msgstr "Ausstehend"
+
+msgid "Please select both start and end dates"
+msgstr "Bitte wählen Sie sowohl Start- als auch Enddatum aus"
+
+msgid "Recent Payments"
+msgstr "Letzte Zahlungen"
+
+msgid "Refunded/Failed"
+msgstr "Erstattet/Fehlgeschlagen"
+
+msgid "Return to Home"
+msgstr "Zur Startseite zurückkehren"
+
+msgid "Start Date"
+msgstr "Startdatum"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Subject"
+msgstr "Betreff"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr "Vielen Dank für Ihre Zahlung. Ihre Transaktion wurde abgeschlossen."
+
+msgid "Total"
+msgstr "Gesamt"
+
+msgid "Transaction ID"
+msgstr "Transaktions-ID"
+
+msgid "Transaction ID:"
+msgstr "Transaktions-ID:"
+
+msgid "You have cancelled the payment process."
+msgstr "Sie haben den Zahlungsvorgang abgebrochen."
+
+msgid "You will receive a confirmation email shortly."
+msgstr "Sie werden in Kürze eine Bestätigungs-E-Mail erhalten."
+
+msgid "failed"
+msgstr "fehlgeschlagen"
+
+msgid "from PayPal API"
+msgstr "von PayPal API"
+
+msgid "from database"
+msgstr "aus Datenbank"
+
+msgid "net balance"
+msgstr "Nettosaldo"
+
+msgid "payments"
+msgstr "Zahlungen"
+
+msgid "refunded"
+msgstr "erstattet"
+
+msgid "transactions"
+msgstr "Transaktionen"

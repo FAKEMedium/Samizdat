@@ -1,0 +1,444 @@
+# Rymdweb translations for the realtimeregister module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Action"
+msgstr ""
+
+msgid "Actions"
+msgstr ""
+
+msgid "Add Nameserver"
+msgstr ""
+
+msgid "Add New"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Address line 1"
+msgstr ""
+
+msgid "Address line 2 (optional)"
+msgstr ""
+
+msgid "Admin"
+msgstr ""
+
+msgid "Admin Contact"
+msgstr ""
+
+msgid "Algorithm"
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "Are you sure you want to delete contact"
+msgstr ""
+
+msgid "Auto Renew"
+msgstr ""
+
+msgid "Billable Items"
+msgstr ""
+
+msgid "Billing"
+msgstr ""
+
+msgid "Billing Contact"
+msgstr ""
+
+msgid "Cancel"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "Closing balance"
+msgstr ""
+
+msgid "Contact Details"
+msgstr ""
+
+msgid "Contact created successfully"
+msgstr ""
+
+msgid "Contact deleted successfully"
+msgstr ""
+
+msgid "Contact details"
+msgstr ""
+
+msgid "Contact handle"
+msgstr ""
+
+msgid "Contact not found"
+msgstr ""
+
+msgid "Contacts"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Create"
+msgstr ""
+
+msgid "Create Contact"
+msgstr ""
+
+msgid "Created"
+msgstr ""
+
+msgid "Current balance"
+msgstr ""
+
+msgid "Current expiry"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "DNSSEC Key Data"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Delete"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+msgid "Domain"
+msgstr ""
+
+msgid "Domain Name"
+msgstr ""
+
+msgid "Domain details"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domains"
+msgstr ""
+
+msgid "Edit"
+msgstr ""
+
+msgid "Edit Domain"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Enabled"
+msgstr ""
+
+msgid "End date"
+msgstr ""
+
+msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading price list"
+msgstr ""
+
+msgid "Error loading transaction"
+msgstr ""
+
+msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
+msgstr ""
+
+msgid "Error updating domain"
+msgstr ""
+
+msgid "Expires"
+msgstr ""
+
+msgid "Failed to create contact"
+msgstr ""
+
+msgid "Failed to delete contact"
+msgstr ""
+
+msgid "Failed to load price list"
+msgstr ""
+
+msgid "Failed to load transactions"
+msgstr ""
+
+msgid "Failed to renew domain"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter TLD"
+msgstr ""
+
+msgid "Financial Transactions"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr ""
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Ingoing"
+msgstr ""
+
+msgid "International format: +CC.NNNNNNNN"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Name Servers"
+msgstr ""
+
+msgid "New Contact"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No changes to save"
+msgstr ""
+
+msgid "No contacts found"
+msgstr ""
+
+msgid "No domains found"
+msgstr ""
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No price data available"
+msgstr ""
+
+msgid "No transactions found"
+msgstr ""
+
+msgid "Only letters, numbers, underscore and hyphen"
+msgstr ""
+
+msgid "Opening balance"
+msgstr ""
+
+msgid "Organization"
+msgstr ""
+
+msgid "Outgoing"
+msgstr ""
+
+msgid "Page"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Postal Code"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Price List"
+msgstr ""
+
+msgid "Price list pagination"
+msgstr ""
+
+msgid "Prices"
+msgstr ""
+
+msgid "Privacy Protection"
+msgstr ""
+
+msgid "Process ID"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Public Key"
+msgstr ""
+
+msgid "Qty"
+msgstr ""
+
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Registrant"
+msgstr ""
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr ""
+
+msgid "Registry Lock"
+msgstr ""
+
+msgid "Remove"
+msgstr ""
+
+msgid "Renew"
+msgstr ""
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Save"
+msgstr ""
+
+msgid "Search contacts..."
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Select country..."
+msgstr ""
+
+msgid "Select customer first..."
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "State/Province"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Street Address"
+msgstr ""
+
+msgid "Support for both production and test environments"
+msgstr ""
+
+msgid "TLD"
+msgstr ""
+
+msgid "Tech"
+msgstr ""
+
+msgid "Tech Contact"
+msgstr ""
+
+msgid "Transaction"
+msgstr ""
+
+msgid "Transaction Details"
+msgstr ""
+
+msgid "Transaction not found"
+msgstr ""
+
+msgid "Transactions"
+msgstr ""
+
+msgid "Transfer"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Unique identifier for this contact"
+msgstr ""
+
+msgid "Updated"
+msgstr ""
+
+msgid "View"
+msgstr ""
+
+msgid "View and manage domain registrations"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "customers"
+msgstr ""
+
+msgid "months"
+msgstr ""
+
+msgid "years"
+msgstr ""

@@ -221,12 +221,17 @@ sub startup {
     languages => [ keys %{$config->{locale}->{languages}} ],
     no_header_detect => 1,
   });
+  # Each plugin dist owns its per-module source catalogs
+  # (resources/locale/<module>/<lang>/<module>.po); `make i18n` merges them into
+  # one runtime catalog per language (resources/locale/<lang>.mo) which we load
+  # flat under the empty domain, so __('msg') resolves in code AND templates
+  # regardless of the calling package.
   $app->lexicon({
     search_dirs => [ $app->resource('locale')->to_string ],
     gettext_to_maketext => 0,
     decode => 1,
     data => [
-      '*::' => sprintf('*/%s.mo', $config->{locale}->{textdomain}),
+      '*::' => '*.mo',
       delete_lexicon => 'i-default::',
     ],
   });

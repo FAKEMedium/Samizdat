@@ -1,0 +1,105 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Balance"
+msgstr "الرصيد"
+
+msgid "Continue"
+msgstr "متابعة"
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Error loading payments"
+msgstr "خطأ في تحميل المدفوعات"
+
+msgid "Failed/Refunded"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
+
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
+msgid "Method"
+msgstr ""
+
+msgid "No payments found"
+msgstr "لم يتم العثور على مدفوعات"
+
+msgid "Pay"
+msgstr "ادفع"
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Intent"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment:"
+msgstr "الدفع:"
+
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+msgid "Recent Payments"
+msgstr "المدفوعات الأخيرة"
+
+msgid "Session:"
+msgstr ""
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Stripe Payments"
+msgstr ""
+
+msgid "Succeeded"
+msgstr ""
+
+msgid "Thank you for your payment."
+msgstr ""
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr ""
+
+msgid "failed"
+msgstr "فشل"
+
+msgid "net balance"
+msgstr "الرصيد الصافي"
+
+msgid "payments"
+msgstr "المدفوعات"
+
+msgid "refunded"
+msgstr "مسترد"

@@ -1,0 +1,105 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Betrag"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Continue"
+msgstr "Fortfahren"
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Error loading payments"
+msgstr "Fehler beim Laden der Zahlungen"
+
+msgid "Failed/Refunded"
+msgstr "Fehlgeschlagen/Erstattet"
+
+msgid "Go Back"
+msgstr "Zurück"
+
+msgid "Loading..."
+msgstr "Wird geladen..."
+
+msgid "Method"
+msgstr "Methode"
+
+msgid "No payments found"
+msgstr "Keine Zahlungen gefunden"
+
+msgid "Pay"
+msgstr "Bezahlen"
+
+msgid "Payment Cancelled"
+msgstr "Zahlung storniert"
+
+msgid "Payment Intent"
+msgstr "Zahlungsabsicht"
+
+msgid "Payment Successful"
+msgstr "Zahlung erfolgreich"
+
+msgid "Payment:"
+msgstr "Zahlung:"
+
+msgid "Pending"
+msgstr "Ausstehend"
+
+msgid "Recent Payments"
+msgstr "Letzte Zahlungen"
+
+msgid "Session:"
+msgstr "Sitzung:"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Stripe Payments"
+msgstr "Stripe-Zahlungen"
+
+msgid "Succeeded"
+msgstr "Erfolgreich"
+
+msgid "Thank you for your payment."
+msgstr "Vielen Dank für Ihre Zahlung."
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr "Ihre Zahlung wurde storniert. Es wurden keine Gebühren erhoben."
+
+msgid "failed"
+msgstr "fehlgeschlagen"
+
+msgid "net balance"
+msgstr "Nettosaldo"
+
+msgid "payments"
+msgstr "Zahlungen"
+
+msgid "refunded"
+msgstr "erstattet"

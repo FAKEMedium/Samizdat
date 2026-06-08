@@ -1,0 +1,72 @@
+# Rymdweb translations for the contact module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Captcha code from image"
+msgstr ""
+
+msgid "Captcha image"
+msgstr ""
+
+msgid "Captcha was wrong"
+msgstr ""
+
+msgid "Contact"
+msgstr ""
+
+msgid "Empty message"
+msgstr ""
+
+msgid "Empty name"
+msgstr ""
+
+msgid "Empty subject"
+msgstr ""
+
+msgid "Enter code"
+msgstr ""
+
+msgid "Enter valid email"
+msgstr ""
+
+msgid "From"
+msgstr ""
+
+msgid "Message"
+msgstr ""
+
+msgid "Paper in typewriter"
+msgstr ""
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr ""
+
+msgid "Send message"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Thank you for contacting us."
+msgstr ""
+
+msgid "This field is required"
+msgstr ""
+
+msgid "We will reply as soon as possible."
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr ""
+
+msgid "Your message appears below."
+msgstr ""
+
+msgid "Your name"
+msgstr ""

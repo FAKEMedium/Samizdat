@@ -1,0 +1,591 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Amount"
+msgstr "金额"
+
+msgid "Amount due"
+msgstr "应付金额"
+
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "含税应付金额：{totalcost} {currency}"
+
+msgid "Approved for F-tax"
+msgstr ""
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr ""
+
+msgid "Article"
+msgstr "文章"
+
+msgid "Authentication required"
+msgstr "需要身份验证"
+
+msgid "BIC/Swift"
+msgstr "BIC/Swift"
+
+msgid "BIC/Swift address"
+msgstr "BIC/Swift 地址"
+
+msgid "Bankgiro"
+msgstr "银行汇票"
+
+msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
+msgstr ""
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first."
+msgstr ""
+
+msgid "Changed status."
+msgstr "状态已更改。"
+
+msgid "Click to pop reminder dialog."
+msgstr "点击弹出提醒对话框。"
+
+msgid "Click to regenerate PDF."
+msgstr "点击重新生成 PDF。"
+
+msgid "Click to register payment."
+msgstr ""
+
+msgid "Click to send a credit invoice."
+msgstr "点击发送贷记发票。"
+
+msgid "Click to send again."
+msgstr "点击重新发送。"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Contact"
+msgstr "联系"
+
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
+msgid "Continues on next page..."
+msgstr "下一页继续..."
+
+msgid "Credit invoice"
+msgstr "贷记发票"
+
+msgid "Credit invoice {number}"
+msgstr "贷记发票 {number}"
+
+msgid "Credited"
+msgstr ""
+
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "含税贷记金额：{totalcost} {currency}"
+
+msgid "Credited invoice"
+msgstr "已贷记发票"
+
+msgid "Credited invoice: {number}"
+msgstr "已贷记发票：{number}"
+
+msgid "Customer"
+msgstr "客户"
+
+msgid "Customer Id"
+msgstr "客户 ID"
+
+msgid "Customer {id} not found in Fortnox. Create customer first."
+msgstr ""
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Dear"
+msgstr "亲爱的"
+
+msgid "Debt"
+msgstr "债务"
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
+msgid "Do you want to credit the invoice?"
+msgstr "您要贷记这张发票吗？"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
+
+msgid "Due date"
+msgstr "到期日"
+
+msgid "Due to"
+msgstr "应付至"
+
+msgid "Error reprinting invoice"
+msgstr ""
+
+msgid "Error resending invoice"
+msgstr ""
+
+msgid "Error sending reminder"
+msgstr ""
+
+msgid "Failed to load payment form"
+msgstr ""
+
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
+msgid "Failed to register payment"
+msgstr ""
+
+msgid "Failed to reprint invoice"
+msgstr ""
+
+msgid "Failed to resend invoice"
+msgstr ""
+
+msgid "Failed to resend invoice email"
+msgstr ""
+
+msgid "Failed to send reminder"
+msgstr ""
+
+msgid "Fill the form correctly!"
+msgstr "请正确填写表单！"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "请查看附件中的贷记发票 PDF。"
+
+msgid "Find your invoice attached as PDF."
+msgstr "请查看附件中的您的发票 PDF。"
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
+
+msgid "Fortnox"
+msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr ""
+
+msgid "Fortnox error: {error}"
+msgstr ""
+
+msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr ""
+
+msgid "Gross"
+msgstr "总额"
+
+msgid "Handled invoice"
+msgstr "已处理发票"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate payment required!!!"
+msgstr ""
+
+msgid "Including VAT"
+msgstr "含增值税"
+
+msgid "Invalid invoice ID"
+msgstr ""
+
+msgid "Invalid request"
+msgstr ""
+
+msgid "Invoice"
+msgstr "发票"
+
+msgid "Invoice (credited)"
+msgstr "发票（已贷记）"
+
+msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice date"
+msgstr "发票日期"
+
+msgid "Invoice for completed services"
+msgstr "已完成服务的发票"
+
+msgid "Invoice is credited"
+msgstr "发票已贷记"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
+
+msgid "Invoice not found"
+msgstr ""
+
+msgid "Invoice number"
+msgstr "发票号码"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "发票问题可发送至 {url}。"
+
+msgid "Invoice reminder, {number}"
+msgstr "发票提醒，{number}"
+
+msgid "Invoice reprinted successfully"
+msgstr ""
+
+msgid "Invoice resent successfully"
+msgstr ""
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "发票 {fakturanummer} 已贷记。"
+
+msgid "Invoice {number}"
+msgstr "发票 {number}"
+
+msgid "Invoices"
+msgstr "发票"
+
+msgid "Invoicing"
+msgstr "开票"
+
+msgid "It's also available at"
+msgstr "也可在此处获取"
+
+msgid "It's also available at {url}."
+msgstr "也可在 {url} 获取。"
+
+msgid "Last reminder"
+msgstr ""
+
+msgid "Make invoice"
+msgstr "创建发票"
+
+msgid "Mark payment"
+msgstr "标记付款"
+
+msgid "Message"
+msgstr "消息"
+
+msgid "Mild"
+msgstr "温和"
+
+msgid "Missing customer or invoice ID"
+msgstr ""
+
+msgid "Missing invoice information"
+msgstr ""
+
+msgid "Modifications were saved."
+msgstr "修改已保存。"
+
+msgid "Net"
+msgstr "净额"
+
+msgid "Net amount"
+msgstr "净金额"
+
+msgid "Nets"
+msgstr ""
+
+msgid "No payment methods are currently available."
+msgstr ""
+
+msgid "OVERDUE"
+msgstr ""
+
+msgid "Open invoice"
+msgstr "未结发票"
+
+msgid "Open invoice for customer"
+msgstr "客户的未结发票"
+
+msgid "Open invoices"
+msgstr "未结发票"
+
+msgid "Organizational number"
+msgstr "组织号码"
+
+msgid "Original due date"
+msgstr ""
+
+msgid "Overdue Invoice Details"
+msgstr ""
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "逾期付款将收取催款费和 {rate} 的利息。"
+
+msgid "PDF viewer"
+msgstr "PDF 查看器"
+
+msgid "Page {number} of {total}"
+msgstr "第 {number} 页，共 {total} 页"
+
+msgid "Paid"
+msgstr "已付款"
+
+msgid "Paid amount"
+msgstr "已付金额"
+
+msgid "Pay"
+msgstr "支付"
+
+msgid "Pay instantly with Swish"
+msgstr ""
+
+msgid "Pay invoice {number}"
+msgstr ""
+
+msgid "Pay with Nets"
+msgstr ""
+
+msgid "Pay with Swish"
+msgstr ""
+
+msgid "PayPal"
+msgstr ""
+
+msgid "Payment"
+msgstr "付款"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr "付款提醒"
+
+msgid "Payment date"
+msgstr "支付日期"
+
+msgid "Payment method"
+msgstr ""
+
+msgid "Payment modal not available"
+msgstr ""
+
+msgid "Payment registered successfully"
+msgstr ""
+
+msgid "Payment reminder: Invoice {number}"
+msgstr ""
+
+msgid "Payment terms"
+msgstr "付款条款"
+
+msgid "Payments"
+msgstr "付款"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "付款可能需要一周时间才能在控制面板中显示。"
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Please enter a payment date"
+msgstr ""
+
+msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
+msgstr ""
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
+
+msgid "Price"
+msgstr "价格"
+
+msgid "Qty"
+msgstr "数量"
+
+msgid "Receiver"
+msgstr "接收者"
+
+msgid "Register payment"
+msgstr "注册支付"
+
+msgid "Registered office"
+msgstr "注册办公室"
+
+msgid "Remind"
+msgstr "提醒"
+
+msgid "Reminder sent successfully"
+msgstr ""
+
+msgid "Reprint"
+msgstr "重新打印"
+
+msgid "Reprint invoice"
+msgstr ""
+
+msgid "Request failed"
+msgstr ""
+
+msgid "Resend"
+msgstr "重新发送"
+
+msgid "Resend invoice"
+msgstr ""
+
+msgid "Rounding"
+msgstr ""
+
+msgid "SWISH"
+msgstr ""
+
+msgid "Scan the QR code with your Swish app for immediate payment."
+msgstr ""
+
+msgid "Scan the QR code with your Swish app or enter the details manually."
+msgstr ""
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search field for {what}"
+msgstr "{what} 的搜索字段"
+
+msgid "Search for invoice"
+msgstr "搜索发票"
+
+msgid "Select"
+msgstr "选择"
+
+msgid "Send again"
+msgstr "重新发送"
+
+msgid "Send reminder"
+msgstr "发送提醒"
+
+msgid "Stripe"
+msgstr ""
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Summa"
+msgstr "总计"
+
+msgid "Swish number"
+msgstr ""
+
+msgid "Text"
+msgstr "文本"
+
+msgid "Thank you for your business"
+msgstr ""
+
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
+msgid "Total to pay"
+msgstr ""
+
+msgid "Tough"
+msgstr "严厉"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Unpaid"
+msgstr "未付款"
+
+msgid "Update"
+msgstr "更新"
+
+msgid "Updated invoice"
+msgstr "已更新发票"
+
+msgid "VAT"
+msgstr "增值税"
+
+msgid "VAT ({percent}%)"
+msgstr ""
+
+msgid "VAT number"
+msgstr "增值税号"
+
+msgid "VAT {rate}\\%"
+msgstr "增值税 {rate}\\%"
+
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
+
+msgid "Your contact"
+msgstr "您的联系人"
+
+msgid "add {fee}"
+msgstr "加 {fee}"
+
+msgid "invoice"
+msgstr "发票"
+
+msgid "our web"
+msgstr "我们的网站"
+
+msgid "reverse charge"
+msgstr ""
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{number} days"
+msgstr "{number} 天"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr ""

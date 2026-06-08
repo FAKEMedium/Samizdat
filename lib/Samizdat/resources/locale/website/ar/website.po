@@ -1,0 +1,258 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Actions"
+msgstr "إجراءات"
+
+msgid "Active"
+msgstr "نشط"
+
+msgid "Add"
+msgstr "إضافة"
+
+msgid "Add Domain"
+msgstr ""
+
+msgid "Add website"
+msgstr "إضافة موقع"
+
+msgid "Additional Apache/Nginx configuration directives"
+msgstr ""
+
+msgid "Are you sure you want to delete this configuration?"
+msgstr ""
+
+msgid "Are you sure you want to delete this domain?"
+msgstr "هل أنت متأكد من حذف هذا النطاق؟"
+
+msgid "Are you sure you want to delete this website?"
+msgstr ""
+
+msgid "Back to List"
+msgstr "العودة إلى القائمة"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "Configuration deleted"
+msgstr ""
+
+msgid "Configuration saved"
+msgstr ""
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Delete domain"
+msgstr ""
+
+msgid "Domain"
+msgstr "النطاق"
+
+msgid "Domain Name"
+msgstr ""
+
+msgid "Domain added"
+msgstr ""
+
+msgid "Domain deleted"
+msgstr "تم حذف النطاق"
+
+msgid "Domain name is required"
+msgstr ""
+
+msgid "Domains"
+msgstr "النطاقات"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit Website"
+msgstr ""
+
+msgid "Enter domain name:"
+msgstr ""
+
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to delete configuration"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
+msgid "Failed to save configuration"
+msgstr ""
+
+msgid "Home"
+msgstr ""
+
+msgid "Home Directory"
+msgstr ""
+
+msgid "ID"
+msgstr "المعرف"
+
+msgid "IP Only"
+msgstr ""
+
+msgid "IPv4"
+msgstr ""
+
+msgid "IPv4 Override"
+msgstr ""
+
+msgid "IPv6"
+msgstr ""
+
+msgid "IPv6 Override"
+msgstr ""
+
+msgid "If set, all requests will redirect to this URL"
+msgstr ""
+
+msgid "In Cert"
+msgstr ""
+
+msgid "Inactive"
+msgstr "غير نشط"
+
+msgid "Include in certificate"
+msgstr ""
+
+msgid "Leave empty for server default"
+msgstr ""
+
+msgid "Manager"
+msgstr "المدير"
+
+msgid "New Website"
+msgstr ""
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No"
+msgstr "لا"
+
+msgid "No domain"
+msgstr ""
+
+msgid "No domains"
+msgstr ""
+
+msgid "No websites found"
+msgstr ""
+
+msgid "PHP"
+msgstr ""
+
+msgid "PHP Configuration"
+msgstr ""
+
+msgid "PHP-FPM pool configuration. Will be merged with default .php.conf"
+msgstr ""
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Primary"
+msgstr ""
+
+msgid "Primary Domain"
+msgstr ""
+
+msgid "Redirect URL"
+msgstr ""
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Save the website first"
+msgstr ""
+
+msgid "Search"
+msgstr "بحث"
+
+msgid "Search field for {what}"
+msgstr "حقل البحث عن {what}"
+
+msgid "Search for website"
+msgstr "البحث عن موقع ويب"
+
+msgid "Search websites..."
+msgstr ""
+
+msgid "Select server..."
+msgstr ""
+
+msgid "Select shell..."
+msgstr ""
+
+msgid "Server"
+msgstr ""
+
+msgid "Server Extra"
+msgstr ""
+
+msgid "Server Extra Configuration"
+msgstr ""
+
+msgid "Server default"
+msgstr ""
+
+msgid "Servers"
+msgstr "الخوادم"
+
+msgid "Set as primary"
+msgstr ""
+
+msgid "Shell"
+msgstr ""
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Website"
+msgstr "الموقع"
+
+msgid "Website Configuration"
+msgstr ""
+
+msgid "Website Details"
+msgstr ""
+
+msgid "Website deleted successfully"
+msgstr ""
+
+msgid "Website saved successfully"
+msgstr ""
+
+msgid "Websites"
+msgstr "مواقع الويب"
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "website"
+msgstr "موقع الويب"

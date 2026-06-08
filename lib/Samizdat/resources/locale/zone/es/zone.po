@@ -1,0 +1,543 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Account"
+msgstr "Cuenta"
+
+msgid "Actions"
+msgstr "Acciones"
+
+msgid "Active"
+msgstr "Activo"
+
+msgid "Add Key"
+msgstr "Agregar clave"
+
+msgid "Add New Key"
+msgstr "Agregar nueva clave"
+
+msgid "Add zone"
+msgstr "Añadir zona"
+
+msgid "Admin Email"
+msgstr "Correo del administrador"
+
+msgid "Algorithm"
+msgstr "Algoritmo"
+
+msgid "All accounts"
+msgstr "Todas las cuentas"
+
+msgid "Are you sure you want to delete this key?"
+msgstr "¿Está seguro de que desea eliminar esta clave?"
+
+msgid "Are you sure you want to delete this record?"
+msgstr "¿Está seguro de que desea eliminar este registro?"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr "¿Está seguro de que desea eliminar esta zona?"
+
+msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
+msgstr ""
+
+msgid "Back to Zones"
+msgstr "Volver a zonas"
+
+msgid "Background"
+msgstr "Fondo"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Check"
+msgstr "Verificar"
+
+msgid "Check failed"
+msgstr "Verificación fallida"
+
+msgid "Check queued"
+msgstr "Verificación en cola"
+
+msgid "Check zones"
+msgstr "Verificar zonas"
+
+msgid "Click to search matching records."
+msgstr "Haga clic para buscar registros coincidentes."
+
+msgid "Click to search matching zones."
+msgstr "Haga clic para buscar zonas coincidentes."
+
+msgid "Close"
+msgstr "Cerrar"
+
+msgid "Combined Value"
+msgstr "Valor combinado"
+
+msgid "Content"
+msgstr "Contenido"
+
+msgid "Cryptokey created successfully"
+msgstr "Clave cripto creada correctamente"
+
+msgid "Cryptokey deleted successfully"
+msgstr "Clave cripto eliminada correctamente"
+
+msgid "Customer"
+msgstr "Cliente"
+
+msgid "DNS Zones"
+msgstr "Zonas DNS"
+
+msgid "DNS Zones for customer {id}"
+msgstr ""
+
+msgid "DNS zone"
+msgstr "Zona DNS"
+
+msgid "DNSSEC Keys"
+msgstr "Claves DNSSEC"
+
+msgid "DS Records"
+msgstr ""
+
+msgid "Delete"
+msgstr "Eliminar"
+
+msgid "Delete this record?"
+msgstr "¿Eliminar este registro?"
+
+msgid "Delete this template and all its records?"
+msgstr ""
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Duplicate"
+msgstr ""
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Record"
+msgstr ""
+
+msgid "Edit record"
+msgstr ""
+
+msgid "Edit zone"
+msgstr "Editar zona"
+
+msgid "Enter record name"
+msgstr "Introducir nombre de registro"
+
+msgid "Enter zone name"
+msgstr "Introducir nombre de zona"
+
+msgid "Expire"
+msgstr ""
+
+msgid "Export zone file"
+msgstr ""
+
+msgid "Failed"
+msgstr "Fallido"
+
+msgid "Failed to create cryptokey"
+msgstr ""
+
+msgid "Failed to create key"
+msgstr ""
+
+msgid "Failed to create record"
+msgstr "Error al crear registro"
+
+msgid "Failed to create zone"
+msgstr "Error al crear zona"
+
+msgid "Failed to delete cryptokey"
+msgstr ""
+
+msgid "Failed to delete key"
+msgstr ""
+
+msgid "Failed to delete record"
+msgstr "Error al eliminar registro"
+
+msgid "Failed to delete zone"
+msgstr "Error al eliminar zona"
+
+msgid "Failed to export zone"
+msgstr ""
+
+msgid "Failed to import zone"
+msgstr ""
+
+msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save zone"
+msgstr ""
+
+msgid "Failed to update record"
+msgstr "Error al actualizar registro"
+
+msgid "Failed to update zone"
+msgstr "Error al actualizar zona"
+
+msgid "Flags"
+msgstr ""
+
+msgid "Forward zones"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "From Template"
+msgstr ""
+
+msgid "Hostname"
+msgstr ""
+
+msgid "IP"
+msgstr ""
+
+msgid "IPv4 Address"
+msgstr ""
+
+msgid "IPv4 reverse"
+msgstr ""
+
+msgid "IPv6 Address"
+msgstr ""
+
+msgid "IPv6 reverse"
+msgstr ""
+
+msgid "Import"
+msgstr "Importar"
+
+msgid "Import zone"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Issues found"
+msgstr ""
+
+msgid "Job failed"
+msgstr ""
+
+msgid "Job queued"
+msgstr ""
+
+msgid "Key Type"
+msgstr ""
+
+msgid "Key created"
+msgstr ""
+
+msgid "Key deleted"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Lower values have higher priority"
+msgstr ""
+
+msgid "Mail Server"
+msgstr ""
+
+msgid "Minimum TTL"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
+msgid "Name"
+msgstr "Nombre"
+
+msgid "Nameserver"
+msgstr ""
+
+msgid "Nameserver Checks"
+msgstr ""
+
+msgid "Nameservers"
+msgstr ""
+
+msgid "New Record"
+msgstr ""
+
+msgid "New Template"
+msgstr ""
+
+msgid "New record"
+msgstr "Nuevo registro"
+
+msgid "New zone"
+msgstr "Nueva zona"
+
+msgid "No DNSSEC keys configured"
+msgstr ""
+
+msgid "No account"
+msgstr ""
+
+msgid "No customer assigned"
+msgstr ""
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No records"
+msgstr ""
+
+msgid "No records found"
+msgstr ""
+
+msgid "No template (empty zone)"
+msgstr ""
+
+msgid "No templates yet"
+msgstr ""
+
+msgid "OK"
+msgstr "Aceptar"
+
+msgid "Order"
+msgstr "Orden"
+
+msgid "Port"
+msgstr "Puerto"
+
+msgid "Pre-populate zone with template records"
+msgstr ""
+
+msgid "Preference"
+msgstr ""
+
+msgid "Primary NS"
+msgstr ""
+
+msgid "Priority"
+msgstr "Prioridad"
+
+msgid "Record"
+msgstr "Registro"
+
+msgid "Record Name"
+msgstr "Nombre de Registro"
+
+msgid "Record Type"
+msgstr "Tipo de Registro"
+
+msgid "Record added"
+msgstr ""
+
+msgid "Record created successfully"
+msgstr "Registro creado correctamente"
+
+msgid "Record deleted"
+msgstr ""
+
+msgid "Record deleted successfully"
+msgstr "Registro eliminado correctamente"
+
+msgid "Record not found"
+msgstr ""
+
+msgid "Record saved successfully"
+msgstr ""
+
+msgid "Record updated"
+msgstr ""
+
+msgid "Record updated successfully"
+msgstr "Registro actualizado correctamente"
+
+msgid "Records"
+msgstr "Registros"
+
+msgid "Refresh"
+msgstr "Actualizar"
+
+msgid "Regexp"
+msgstr ""
+
+msgid "Registrar"
+msgstr "Registrador"
+
+msgid "Replacement"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Running checks..."
+msgstr ""
+
+msgid "SOA Serial"
+msgstr ""
+
+msgid "Save"
+msgstr "Guardar"
+
+msgid "Save Template"
+msgstr ""
+
+msgid "Search"
+msgstr "Buscar"
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search field for {what}"
+msgstr "Campo de búsqueda para {what}"
+
+msgid "Search for zone"
+msgstr "Buscar zona"
+
+msgid "Select a template to edit or create a new one"
+msgstr ""
+
+msgid "Select type"
+msgstr ""
+
+msgid "Serial"
+msgstr ""
+
+msgid "Service"
+msgstr "Servicio"
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Submit"
+msgstr "Enviar"
+
+msgid "TTL"
+msgstr ""
+
+msgid "Tag"
+msgstr "Etiqueta"
+
+msgid "Target"
+msgstr "Destino"
+
+msgid "Template"
+msgstr "Plantilla"
+
+msgid "Template created"
+msgstr ""
+
+msgid "Template deleted"
+msgstr ""
+
+msgid "Template duplicated"
+msgstr ""
+
+msgid "Template updated"
+msgstr ""
+
+msgid "Templates"
+msgstr "Plantillas"
+
+msgid "Text"
+msgstr "Texto"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Use @ for the zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex, or subdomain name"
+msgstr ""
+
+msgid "Value"
+msgstr "Valor"
+
+msgid "Weight"
+msgstr ""
+
+msgid "Whois Information"
+msgstr ""
+
+msgid "Zone Check"
+msgstr ""
+
+msgid "Zone File Content"
+msgstr ""
+
+msgid "Zone Kind"
+msgstr "Tipo de Zona"
+
+msgid "Zone Name"
+msgstr "Nombre de Zona"
+
+msgid "Zone Records"
+msgstr ""
+
+msgid "Zone Templates"
+msgstr ""
+
+msgid "Zone created successfully"
+msgstr "Zona creada correctamente"
+
+msgid "Zone deleted"
+msgstr ""
+
+msgid "Zone deleted successfully"
+msgstr "Zona eliminada correctamente"
+
+msgid "Zone imported successfully"
+msgstr ""
+
+msgid "Zone not found"
+msgstr "Zona no encontrada"
+
+msgid "Zone records"
+msgstr "Registros de zona"
+
+msgid "Zone saved successfully"
+msgstr ""
+
+msgid "Zone updated successfully"
+msgstr "Zona actualizada correctamente"
+
+msgid "customers"
+msgstr "clientes"
+
+msgid "for registrar"
+msgstr ""
+
+msgid "records"
+msgstr ""

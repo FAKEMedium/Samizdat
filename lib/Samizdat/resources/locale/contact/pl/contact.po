@@ -1,0 +1,84 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Captcha code from image"
+msgstr "Kod captcha z obrazka"
+
+msgid "Captcha image"
+msgstr "Obraz captcha"
+
+msgid "Captcha was wrong"
+msgstr "Captcha była nieprawidłowa"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Empty message"
+msgstr "Pusta wiadomość"
+
+msgid "Empty name"
+msgstr "Pusta nazwa"
+
+msgid "Empty subject"
+msgstr "Pusty temat"
+
+msgid "Enter code"
+msgstr "Wprowadź kod"
+
+msgid "Enter valid email"
+msgstr "Wprowadź prawidłowy e-mail"
+
+msgid "From"
+msgstr "Od"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "Paper in typewriter"
+msgstr "Papier w maszynie do pisania"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Naciśnij \"{buttontext}\" aby ponownie wygenerować"
+
+msgid "Send message"
+msgstr "Wyślij wiadomość"
+
+msgid "Subject"
+msgstr "Temat"
+
+msgid "Thank you for contacting us."
+msgstr "Dziękujemy za kontakt."
+
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+msgid "We will reply as soon as possible."
+msgstr "Odpowiemy tak szybko, jak to możliwe."
+
+msgid "Your email"
+msgstr "Twój e-mail"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "Twoje IP {ip} zostanie dołączone do wiadomości."
+
+msgid "Your message appears below."
+msgstr "Twoja wiadomość pojawia się poniżej."
+
+msgid "Your name"
+msgstr "Twoje imię"

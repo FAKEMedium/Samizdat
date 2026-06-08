@@ -1,0 +1,543 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Account"
+msgstr "Konto"
+
+msgid "Actions"
+msgstr "Åtgärder"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Add Key"
+msgstr "Lägg till nyckel"
+
+msgid "Add New Key"
+msgstr "Lägg till ny nyckel"
+
+msgid "Add zone"
+msgstr "Lägg till zon"
+
+msgid "Admin Email"
+msgstr "Admin-e-post"
+
+msgid "Algorithm"
+msgstr "Algoritm"
+
+msgid "All accounts"
+msgstr "Alla konton"
+
+msgid "Are you sure you want to delete this key?"
+msgstr "Är du säker på att du vill radera denna nyckel?"
+
+msgid "Are you sure you want to delete this record?"
+msgstr "Är du säker på att du vill ta bort denna post?"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr "Är du säker på att du vill ta bort denna zon?"
+
+msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
+msgstr "BIND/AXFR-format med fullständiga namn (som exporterat av DNS-servrar)"
+
+msgid "Back to Zones"
+msgstr "Tillbaka till zoner"
+
+msgid "Background"
+msgstr "Bakgrund"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Check"
+msgstr "Kontrollera"
+
+msgid "Check failed"
+msgstr "Kontroll misslyckades"
+
+msgid "Check queued"
+msgstr "Kontroll köad"
+
+msgid "Check zones"
+msgstr "Kontrollera zoner"
+
+msgid "Click to search matching records."
+msgstr "Klicka för matchande poster."
+
+msgid "Click to search matching zones."
+msgstr "Klicka för matchande zoner."
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Combined Value"
+msgstr "Kombinerat värde"
+
+msgid "Content"
+msgstr "Innehåll"
+
+msgid "Cryptokey created successfully"
+msgstr "Kryptonyckel skapad"
+
+msgid "Cryptokey deleted successfully"
+msgstr "Kryptonyckel raderad"
+
+msgid "Customer"
+msgstr "Kund"
+
+msgid "DNS Zones"
+msgstr "DNS-zoner"
+
+msgid "DNS Zones for customer {id}"
+msgstr "DNS-zoner för kund {id}"
+
+msgid "DNS zone"
+msgstr "DNS-zon"
+
+msgid "DNSSEC Keys"
+msgstr "DNSSEC-nycklar"
+
+msgid "DS Records"
+msgstr "DS-poster"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Delete this record?"
+msgstr "Radera denna post?"
+
+msgid "Delete this template and all its records?"
+msgstr "Radera denna mall och alla dess poster?"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Duplicate"
+msgstr "Duplicera"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit Record"
+msgstr "Redigera post"
+
+msgid "Edit record"
+msgstr "Redigera post"
+
+msgid "Edit zone"
+msgstr "Redigera zon"
+
+msgid "Enter record name"
+msgstr "Ange namn på post"
+
+msgid "Enter zone name"
+msgstr "Ange namn på zon"
+
+msgid "Expire"
+msgstr "Utgår"
+
+msgid "Export zone file"
+msgstr "Exportera zonfil"
+
+msgid "Failed"
+msgstr "Misslyckades"
+
+msgid "Failed to create cryptokey"
+msgstr "Kunde inte skapa kryptonyckel"
+
+msgid "Failed to create key"
+msgstr "Kunde inte skapa nyckel"
+
+msgid "Failed to create record"
+msgstr "Misslyckades skapa post"
+
+msgid "Failed to create zone"
+msgstr "Misslyckades skapa zon"
+
+msgid "Failed to delete cryptokey"
+msgstr "Kunde inte radera kryptonyckel"
+
+msgid "Failed to delete key"
+msgstr "Kunde inte radera nyckel"
+
+msgid "Failed to delete record"
+msgstr "Misslyckades ta bort post"
+
+msgid "Failed to delete zone"
+msgstr "Misslyckades ta bort zon"
+
+msgid "Failed to export zone"
+msgstr "Kunde inte exportera zon"
+
+msgid "Failed to import zone"
+msgstr "Kunde inte importera zon"
+
+msgid "Failed to save record"
+msgstr "Misslyckades spara post"
+
+msgid "Failed to save zone"
+msgstr "Misslyckades spara zon"
+
+msgid "Failed to update record"
+msgstr "Misslyckades uppdatera post"
+
+msgid "Failed to update zone"
+msgstr "Misslyckades uppdatera zon"
+
+msgid "Flags"
+msgstr "Flaggor"
+
+msgid "Forward zones"
+msgstr "Framåtzoner"
+
+msgid "Found"
+msgstr "Hittades"
+
+msgid "From Template"
+msgstr "Från mall"
+
+msgid "Hostname"
+msgstr "Värdnamn"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "IPv4 Address"
+msgstr "IPv4-adress"
+
+msgid "IPv4 reverse"
+msgstr "IPv4 omvänd"
+
+msgid "IPv6 Address"
+msgstr "IPv6-adress"
+
+msgid "IPv6 reverse"
+msgstr "IPv6 omvänd"
+
+msgid "Import"
+msgstr "Importera"
+
+msgid "Import zone"
+msgstr "Importera zon"
+
+msgid "Inactive"
+msgstr "Inaktiv"
+
+msgid "Issues found"
+msgstr "Problem hittades"
+
+msgid "Job failed"
+msgstr "Jobb misslyckades"
+
+msgid "Job queued"
+msgstr "Jobb köat"
+
+msgid "Key Type"
+msgstr "Nyckeltyp"
+
+msgid "Key created"
+msgstr "Nyckel skapad"
+
+msgid "Key deleted"
+msgstr "Nyckel raderad"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Lower values have higher priority"
+msgstr "Lägre värden har högre prioritet"
+
+msgid "Mail Server"
+msgstr "Mailserver"
+
+msgid "Minimum TTL"
+msgstr "Minsta TTL"
+
+msgid "NS Records"
+msgstr "NS-poster"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Nameserver"
+msgstr "Namnserver"
+
+msgid "Nameserver Checks"
+msgstr "Namnserverkontroller"
+
+msgid "Nameservers"
+msgstr "Namnservrar"
+
+msgid "New Record"
+msgstr "Ny post"
+
+msgid "New Template"
+msgstr "Ny mall"
+
+msgid "New record"
+msgstr "Ny post"
+
+msgid "New zone"
+msgstr "Ny zon"
+
+msgid "No DNSSEC keys configured"
+msgstr "Inga DNSSEC-nycklar konfigurerade"
+
+msgid "No account"
+msgstr "Inget konto"
+
+msgid "No customer assigned"
+msgstr "Ingen kund tilldelad"
+
+msgid "No matches found"
+msgstr "Inga träffar hittades"
+
+msgid "No records"
+msgstr "Inga poster"
+
+msgid "No records found"
+msgstr "Inga poster hittades"
+
+msgid "No template (empty zone)"
+msgstr "Ingen mall (tom zon)"
+
+msgid "No templates yet"
+msgstr "Inga mallar ännu"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Order"
+msgstr "Ordning"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Pre-populate zone with template records"
+msgstr "Fyll i zonen med mallposter"
+
+msgid "Preference"
+msgstr "Preferens"
+
+msgid "Primary NS"
+msgstr "Primär NS"
+
+msgid "Priority"
+msgstr "Prioritet"
+
+msgid "Record"
+msgstr "Post"
+
+msgid "Record Name"
+msgstr "Post-namn"
+
+msgid "Record Type"
+msgstr "Post-typ"
+
+msgid "Record added"
+msgstr "Post tillagd"
+
+msgid "Record created successfully"
+msgstr "Lyckades skapa post"
+
+msgid "Record deleted"
+msgstr "Tog bort post"
+
+msgid "Record deleted successfully"
+msgstr "Tog bort post"
+
+msgid "Record not found"
+msgstr "Post hittades inte"
+
+msgid "Record saved successfully"
+msgstr "Sparade post"
+
+msgid "Record updated"
+msgstr "Post uppdaterad"
+
+msgid "Record updated successfully"
+msgstr "Uppdaterade post"
+
+msgid "Records"
+msgstr "Poster"
+
+msgid "Refresh"
+msgstr "Uppdatera"
+
+msgid "Regexp"
+msgstr "Regexp"
+
+msgid "Registrar"
+msgstr "Registrator"
+
+msgid "Replacement"
+msgstr "Ersättning"
+
+msgid "Response"
+msgstr "Svar"
+
+msgid "Retry"
+msgstr "Försök igen"
+
+msgid "Running checks..."
+msgstr "Kör kontroller..."
+
+msgid "SOA Serial"
+msgstr "SOA-serienummer"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save Template"
+msgstr "Spara mall"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search customer (min 3 chars)..."
+msgstr "Sök kund (minst 3 tecken)..."
+
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
+msgid "Search for zone"
+msgstr "Sök zon"
+
+msgid "Select a template to edit or create a new one"
+msgstr "Välj en mall att redigera eller skapa en ny"
+
+msgid "Select type"
+msgstr "Välj typ"
+
+msgid "Serial"
+msgstr "Serienummer"
+
+msgid "Service"
+msgstr "Tjänst"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Submit"
+msgstr "Skicka"
+
+msgid "TTL"
+msgstr "TTL"
+
+msgid "Tag"
+msgstr "Tagg"
+
+msgid "Target"
+msgstr "Mål"
+
+msgid "Template"
+msgstr "Mall"
+
+msgid "Template created"
+msgstr "Mall skapad"
+
+msgid "Template deleted"
+msgstr "Mall raderad"
+
+msgid "Template duplicated"
+msgstr "Mall duplicerad"
+
+msgid "Template updated"
+msgstr "Mall uppdaterad"
+
+msgid "Templates"
+msgstr "Mallar"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unknown error"
+msgstr "Okänt fel"
+
+msgid "Use @ for the zone apex"
+msgstr "Använd @ för zonens apex"
+
+msgid "Use @ for zone apex"
+msgstr "Använd @ för zonens apex"
+
+msgid "Use @ for zone apex, or subdomain name"
+msgstr "Använd @ för zonens apex, eller subdomännamn"
+
+msgid "Value"
+msgstr "Värde"
+
+msgid "Weight"
+msgstr "Vikt"
+
+msgid "Whois Information"
+msgstr "Whois-information"
+
+msgid "Zone Check"
+msgstr "Zonkontroll"
+
+msgid "Zone File Content"
+msgstr "Zonfilsinnehåll"
+
+msgid "Zone Kind"
+msgstr "Zon-typ"
+
+msgid "Zone Name"
+msgstr "Zonens namn"
+
+msgid "Zone Records"
+msgstr "Zonposter"
+
+msgid "Zone Templates"
+msgstr "Zonmallar"
+
+msgid "Zone created successfully"
+msgstr "Lyckades skapa zon"
+
+msgid "Zone deleted"
+msgstr "Tog bort zon"
+
+msgid "Zone deleted successfully"
+msgstr "Zonen togs bort"
+
+msgid "Zone imported successfully"
+msgstr "Zon importerad"
+
+msgid "Zone not found"
+msgstr "Zon hittades inte"
+
+msgid "Zone records"
+msgstr "Zoninnehåll"
+
+msgid "Zone saved successfully"
+msgstr "Sparade zon"
+
+msgid "Zone updated successfully"
+msgstr "Zonuppdatering lyckades"
+
+msgid "customers"
+msgstr "kunder"
+
+msgid "for registrar"
+msgstr "för registrar"
+
+msgid "records"
+msgstr "poster"

@@ -1,0 +1,456 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Action"
+msgstr "Ação"
+
+msgid "Actions"
+msgstr "Ações"
+
+msgid "Add Nameserver"
+msgstr "Adicionar servidor de nomes"
+
+msgid "Add New"
+msgstr "Adicionar novo"
+
+msgid "Address"
+msgstr "Endereço"
+
+msgid "Address line 1"
+msgstr "Linha de endereço 1"
+
+msgid "Address line 2 (optional)"
+msgstr "Linha de endereço 2 (opcional)"
+
+msgid "Admin"
+msgstr "Administrador"
+
+msgid "Admin Contact"
+msgstr "Contacto administrativo"
+
+msgid "Algorithm"
+msgstr "Algoritmo"
+
+msgid "Amount"
+msgstr "Valor"
+
+msgid "Are you sure you want to delete contact"
+msgstr ""
+
+msgid "Auto Renew"
+msgstr ""
+
+msgid "Billable Items"
+msgstr ""
+
+msgid "Billing"
+msgstr "Cobrança"
+
+msgid "Billing Contact"
+msgstr "Contacto de faturação"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "City"
+msgstr "Cidade"
+
+msgid "Close"
+msgstr "Fechar"
+
+msgid "Closing balance"
+msgstr ""
+
+msgid "Contact Details"
+msgstr ""
+
+msgid "Contact created successfully"
+msgstr "Contacto criado com sucesso"
+
+msgid "Contact deleted successfully"
+msgstr "Contacto eliminado com sucesso"
+
+msgid "Contact details"
+msgstr "Dados de contacto"
+
+msgid "Contact handle"
+msgstr "Identificador do contacto"
+
+msgid "Contact not found"
+msgstr "Contacto não encontrado"
+
+msgid "Contacts"
+msgstr "Contatos"
+
+msgid "Country"
+msgstr "País"
+
+msgid "Create"
+msgstr "Criar"
+
+msgid "Create Contact"
+msgstr "Criar contacto"
+
+msgid "Created"
+msgstr "Criado"
+
+msgid "Current balance"
+msgstr ""
+
+msgid "Current expiry"
+msgstr ""
+
+msgid "Customer"
+msgstr "Cliente"
+
+msgid "DNSSEC Key Data"
+msgstr ""
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Delete"
+msgstr "Excluir"
+
+msgid "Disabled"
+msgstr "Desativado"
+
+msgid "Domain"
+msgstr "Domínio"
+
+msgid "Domain Name"
+msgstr ""
+
+msgid "Domain details"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domains"
+msgstr "Domínios"
+
+msgid "Edit"
+msgstr "Editar"
+
+msgid "Edit Domain"
+msgstr "Editar domínio"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Enabled"
+msgstr "Ativado"
+
+msgid "End date"
+msgstr ""
+
+msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading price list"
+msgstr ""
+
+msgid "Error loading transaction"
+msgstr ""
+
+msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
+msgstr ""
+
+msgid "Error updating domain"
+msgstr "Erro ao atualizar o domínio"
+
+msgid "Expires"
+msgstr "Expira em"
+
+msgid "Failed to create contact"
+msgstr ""
+
+msgid "Failed to delete contact"
+msgstr ""
+
+msgid "Failed to load price list"
+msgstr ""
+
+msgid "Failed to load transactions"
+msgstr ""
+
+msgid "Failed to renew domain"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter TLD"
+msgstr ""
+
+msgid "Financial Transactions"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "Estou agindo como Agente Designado para esta mudança de titular"
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Ingoing"
+msgstr ""
+
+msgid "International format: +CC.NNNNNNNN"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Carregando..."
+
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
+msgid "Name"
+msgstr "Nome"
+
+msgid "Name Servers"
+msgstr ""
+
+msgid "New Contact"
+msgstr "Novo Contacto"
+
+msgid "Next"
+msgstr "Próximo"
+
+msgid "No"
+msgstr "Não"
+
+msgid "No changes to save"
+msgstr "Sem alterações para salvar"
+
+msgid "No contacts found"
+msgstr ""
+
+msgid "No domains found"
+msgstr "Domínios não encontrados"
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No price data available"
+msgstr ""
+
+msgid "No transactions found"
+msgstr ""
+
+msgid "Only letters, numbers, underscore and hyphen"
+msgstr ""
+
+msgid "Opening balance"
+msgstr ""
+
+msgid "Organization"
+msgstr "Organização"
+
+msgid "Outgoing"
+msgstr ""
+
+msgid "Page"
+msgstr "Página"
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Phone"
+msgstr "Telefone"
+
+msgid "Postal Code"
+msgstr "Código postal"
+
+msgid "Previous"
+msgstr "Anterior"
+
+msgid "Price List"
+msgstr "Lista de Preços"
+
+msgid "Price list pagination"
+msgstr ""
+
+msgid "Prices"
+msgstr "Preços"
+
+msgid "Privacy Protection"
+msgstr ""
+
+msgid "Process ID"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Public Key"
+msgstr "Chave pública"
+
+msgid "Qty"
+msgstr "Qtd"
+
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Registrant"
+msgstr "Registante"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr "Registo"
+
+msgid "Registry Lock"
+msgstr ""
+
+msgid "Remove"
+msgstr "Remover"
+
+msgid "Renew"
+msgstr "Renovar"
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Save"
+msgstr "Salvar"
+
+msgid "Search contacts..."
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Select country..."
+msgstr ""
+
+msgid "Select customer first..."
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "State/Province"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Street Address"
+msgstr ""
+
+msgid "Support for both production and test environments"
+msgstr ""
+
+msgid "TLD"
+msgstr ""
+
+msgid "Tech"
+msgstr ""
+
+msgid "Tech Contact"
+msgstr "Contacto técnico"
+
+msgid "Transaction"
+msgstr ""
+
+msgid "Transaction Details"
+msgstr ""
+
+msgid "Transaction not found"
+msgstr ""
+
+msgid "Transactions"
+msgstr ""
+
+msgid "Transfer"
+msgstr "Transferência"
+
+msgid "Type"
+msgstr "Tipo"
+
+msgid "Unique identifier for this contact"
+msgstr ""
+
+msgid "Updated"
+msgstr "Atualizado"
+
+msgid "View"
+msgstr "Visualizar"
+
+msgid "View and manage domain registrations"
+msgstr ""
+
+msgid "Yes"
+msgstr "Sim"
+
+msgid "customers"
+msgstr "clientes"
+
+msgid "months"
+msgstr ""
+
+msgid "years"
+msgstr ""

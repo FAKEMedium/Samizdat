@@ -1,0 +1,741 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "0 = reply once per sender"
+msgstr "0 = 每个发件人回复一次"
+
+msgid "About to delete"
+msgstr ""
+
+msgid "Action"
+msgstr "操作"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid "Active"
+msgstr "活跃"
+
+msgid "Active from"
+msgstr "有效期从"
+
+msgid "Active until"
+msgstr "有效期至"
+
+msgid "Add admin"
+msgstr "添加管理员"
+
+msgid "Add alias"
+msgstr "添加别名"
+
+msgid "Add domain"
+msgstr "添加域名"
+
+msgid "Add forwarding"
+msgstr "添加转发"
+
+msgid "Add mailbox"
+msgstr "添加邮箱"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Address is required"
+msgstr "地址是必需的"
+
+msgid "Admin"
+msgstr "管理员"
+
+msgid "Admin created successfully"
+msgstr "管理员创建成功"
+
+msgid "Admin deleted successfully"
+msgstr "管理员删除成功"
+
+msgid "Admin not found"
+msgstr "管理员未找到"
+
+msgid "Admin saved successfully"
+msgstr ""
+
+msgid "Admin updated successfully"
+msgstr ""
+
+msgid "Administrators"
+msgstr "管理员"
+
+msgid "Admins"
+msgstr "管理员"
+
+msgid "Alias"
+msgstr "别名"
+
+msgid "Alias Address"
+msgstr ""
+
+msgid "Alias created successfully"
+msgstr ""
+
+msgid "Alias deleted successfully"
+msgstr ""
+
+msgid "Alias domain"
+msgstr ""
+
+msgid "Alias domains"
+msgstr ""
+
+msgid "Alias not found"
+msgstr ""
+
+msgid "Alias saved successfully"
+msgstr ""
+
+msgid "Alias updated successfully"
+msgstr ""
+
+msgid "All actions"
+msgstr "所有操作"
+
+msgid "Alternative email"
+msgstr "备用邮箱"
+
+msgid "Apply"
+msgstr "应用"
+
+msgid "Are you sure you want to delete this alias?"
+msgstr "您确定要删除此别名吗？"
+
+msgid "Arrival"
+msgstr ""
+
+msgid "At least one valid forward address is required"
+msgstr ""
+
+msgid "Back"
+msgstr "返回"
+
+msgid "Back to queue"
+msgstr ""
+
+msgid "Can manage all domains"
+msgstr ""
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr ""
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
+msgstr ""
+
+msgid "Cannot purge"
+msgstr ""
+
+msgid "Clear"
+msgstr "清除"
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Confirm purge"
+msgstr ""
+
+msgid "Copy messages between an external IMAP account and this mailbox. Runs as a background job using imapsync."
+msgstr ""
+
+msgid "Create admin"
+msgstr "创建管理员"
+
+msgid "Create forwarding"
+msgstr ""
+
+msgid "Create mailbox"
+msgstr "创建邮箱"
+
+msgid "Currently managed"
+msgstr ""
+
+msgid "Customer"
+msgstr "客户"
+
+msgid "Customer ID is required"
+msgstr ""
+
+msgid "Data"
+msgstr "数据"
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Delete admin"
+msgstr "删除管理员"
+
+msgid "Delete from source after copy"
+msgstr ""
+
+msgid "Delete this alias domain?"
+msgstr ""
+
+msgid "Delete this alias?"
+msgstr ""
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr ""
+
+msgid "Delete this mailbox?"
+msgstr ""
+
+msgid "Delete this queued message?"
+msgstr ""
+
+msgid "Delete vacation settings?"
+msgstr ""
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Destination (local)"
+msgstr ""
+
+msgid "Display name"
+msgstr "显示名称"
+
+msgid "Domain"
+msgstr "域名"
+
+msgid "Domain added successfully"
+msgstr "域名添加成功"
+
+msgid "Domain created successfully"
+msgstr ""
+
+msgid "Domain deleted"
+msgstr ""
+
+msgid "Domain deleted successfully"
+msgstr ""
+
+msgid "Domain name"
+msgstr ""
+
+msgid "Domain name is required"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domain quota"
+msgstr ""
+
+msgid "Domain removed successfully"
+msgstr ""
+
+msgid "Domain saved successfully"
+msgstr ""
+
+msgid "Domain updated successfully"
+msgstr ""
+
+msgid "Domains"
+msgstr "域名"
+
+msgid "Dry run (no changes)"
+msgstr ""
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Edit admin"
+msgstr ""
+
+msgid "Edit forwarding"
+msgstr ""
+
+msgid "Edit mailbox"
+msgstr ""
+
+msgid "Email Admins"
+msgstr ""
+
+msgid "Email Domain Management"
+msgstr ""
+
+msgid "Email Log"
+msgstr ""
+
+msgid "Email Mailboxes"
+msgstr ""
+
+msgid "Email address"
+msgstr ""
+
+msgid "Enqueuing sync job..."
+msgstr ""
+
+msgid "Failed to add admin"
+msgstr ""
+
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to delete admin"
+msgstr ""
+
+msgid "Failed to delete alias"
+msgstr ""
+
+msgid "Failed to delete alias domain"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
+msgid "Failed to delete mailbox"
+msgstr ""
+
+msgid "Failed to delete vacation settings"
+msgstr ""
+
+msgid "Failed to enqueue sync job"
+msgstr ""
+
+msgid "Failed to remove admin"
+msgstr ""
+
+msgid "Failed to remove domain"
+msgstr ""
+
+msgid "Failed to save admin"
+msgstr ""
+
+msgid "Failed to save alias"
+msgstr ""
+
+msgid "Failed to save domain"
+msgstr ""
+
+msgid "Failed to save mailbox"
+msgstr ""
+
+msgid "Failed to save vacation settings"
+msgstr ""
+
+msgid "Failed to update admin"
+msgstr ""
+
+msgid "Failed to update alias"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Failed to update mailbox"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter by customer"
+msgstr ""
+
+msgid "Filter by domain"
+msgstr ""
+
+msgid "Filter by username"
+msgstr ""
+
+msgid "Flush"
+msgstr ""
+
+msgid "Flush deferred queue"
+msgstr ""
+
+msgid "Forward To"
+msgstr ""
+
+msgid "Forward to"
+msgstr ""
+
+msgid "Forwarding"
+msgstr ""
+
+msgid "Forwards"
+msgstr ""
+
+msgid "Forwards to"
+msgstr ""
+
+msgid "From address"
+msgstr ""
+
+msgid "Held"
+msgstr ""
+
+msgid "Hold"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Invalid domain name syntax"
+msgstr ""
+
+msgid "Invalid email addresses"
+msgstr ""
+
+msgid "Job ID"
+msgstr ""
+
+msgid "Leave blank to keep current"
+msgstr ""
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Log"
+msgstr "日志"
+
+msgid "Mail"
+msgstr "邮件"
+
+msgid "Mail Queue"
+msgstr ""
+
+msgid "Mail queue"
+msgstr ""
+
+msgid "Mailbox"
+msgstr "邮箱"
+
+msgid "Mailbox created successfully"
+msgstr ""
+
+msgid "Mailbox deleted successfully"
+msgstr ""
+
+msgid "Mailbox domain must match the current domain"
+msgstr ""
+
+msgid "Mailbox not found"
+msgstr ""
+
+msgid "Mailbox quota"
+msgstr ""
+
+msgid "Mailbox saved successfully"
+msgstr ""
+
+msgid "Mailbox updated successfully"
+msgstr ""
+
+msgid "Mailboxes"
+msgstr "邮箱"
+
+msgid "Managed domains"
+msgstr ""
+
+msgid "Manager"
+msgstr "管理器"
+
+msgid "Message"
+msgstr "消息"
+
+msgid "Method not allowed"
+msgstr ""
+
+msgid "Name"
+msgstr "名称"
+
+msgid "New domain"
+msgstr "新域名"
+
+msgid "No"
+msgstr "否"
+
+msgid "No activity"
+msgstr ""
+
+msgid "No administrators"
+msgstr ""
+
+msgid "No alias domains"
+msgstr ""
+
+msgid "No aliases"
+msgstr ""
+
+msgid "No domains"
+msgstr ""
+
+msgid "No log entries"
+msgstr ""
+
+msgid "No mailboxes"
+msgstr "无邮箱"
+
+msgid "No results"
+msgstr "无结果"
+
+msgid "No results found"
+msgstr "未找到结果"
+
+msgid "Not found"
+msgstr "未找到"
+
+msgid "One email per line, or separated by comma/space"
+msgstr ""
+
+msgid "Options"
+msgstr "选项"
+
+msgid "Out of office"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Password is required"
+msgstr "密码是必需的"
+
+msgid "Password requires: "
+msgstr ""
+
+msgid "Phone"
+msgstr "电话"
+
+msgid "Port"
+msgstr "端口"
+
+msgid "Purge"
+msgstr "清除"
+
+msgid "Purge matching messages"
+msgstr ""
+
+msgid "Queue"
+msgstr ""
+
+msgid "Queue empty"
+msgstr ""
+
+msgid "Queue flushed"
+msgstr ""
+
+msgid "Queue regex"
+msgstr ""
+
+msgid "Queued Message"
+msgstr ""
+
+msgid "Quota (MB)"
+msgstr ""
+
+msgid "Quota updated successfully"
+msgstr ""
+
+msgid "Recent activity"
+msgstr "最近活动"
+
+msgid "Recipient regex"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Release"
+msgstr ""
+
+msgid "Released"
+msgstr ""
+
+msgid "Reply interval (seconds)"
+msgstr ""
+
+msgid "Route all mail to another domain"
+msgstr ""
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save changes"
+msgstr ""
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search admin to add"
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domain to add"
+msgstr ""
+
+msgid "Search field for {what}"
+msgstr "{what} 的搜索字段"
+
+msgid "Search for admin"
+msgstr ""
+
+msgid "Search for mail domain"
+msgstr "搜索邮件域名"
+
+msgid "Search for mailbox"
+msgstr ""
+
+msgid "Select customer"
+msgstr ""
+
+msgid "Select target domain"
+msgstr ""
+
+msgid "Sender"
+msgstr ""
+
+msgid "Sender regex"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Skip messages already present"
+msgstr ""
+
+msgid "Source (remote)"
+msgstr ""
+
+msgid "Start sync"
+msgstr ""
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Superadmin"
+msgstr ""
+
+msgid "Sync"
+msgstr ""
+
+msgid "Sync job enqueued"
+msgstr ""
+
+msgid "Sync mailbox"
+msgstr ""
+
+msgid "Target domain"
+msgstr ""
+
+msgid "This deletes queued messages permanently."
+msgstr ""
+
+msgid "Timestamp"
+msgstr ""
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Use SSL/TLS"
+msgstr ""
+
+msgid "User"
+msgstr "用户"
+
+msgid "Username"
+msgstr "用户名"
+
+msgid "Username (email)"
+msgstr ""
+
+msgid "Username is required"
+msgstr ""
+
+msgid "Vacation"
+msgstr ""
+
+msgid "Vacation / Auto-reply"
+msgstr ""
+
+msgid "Vacation settings deleted"
+msgstr ""
+
+msgid "Vacation settings saved"
+msgstr ""
+
+msgid "View all"
+msgstr ""
+
+msgid "Yes"
+msgstr "是"
+
+msgid "at least {length} characters"
+msgstr ""
+
+msgid "disable"
+msgstr "禁用"
+
+msgid "mail domain"
+msgstr "邮件域名"
+
+msgid "matching the filter"
+msgstr ""
+
+msgid "messages"
+msgstr ""
+
+msgid "the ENTIRE queue"
+msgstr ""
+
+msgid "to confirm"
+msgstr ""
+
+msgid "unlimited"
+msgstr ""
+
+msgid "{count} lowercase"
+msgstr ""
+
+msgid "{count} number(s)"
+msgstr ""
+
+msgid "{count} special character(s)"
+msgstr ""
+
+msgid "{count} uppercase"
+msgstr ""
+
+msgid "{side} {field} is required"
+msgstr ""

@@ -1,0 +1,84 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Captcha code from image"
+msgstr "Captcha-Code aus dem Bild"
+
+msgid "Captcha image"
+msgstr "Captcha-Bild"
+
+msgid "Captcha was wrong"
+msgstr "Captcha war falsch"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Empty message"
+msgstr "Leere Nachricht"
+
+msgid "Empty name"
+msgstr "Leerer Name"
+
+msgid "Empty subject"
+msgstr "Leerer Betreff"
+
+msgid "Enter code"
+msgstr "Code eingeben"
+
+msgid "Enter valid email"
+msgstr "Gültige E-Mail eingeben"
+
+msgid "From"
+msgstr "Von"
+
+msgid "Message"
+msgstr "Nachricht"
+
+msgid "Paper in typewriter"
+msgstr "Papier in Schreibmaschine"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Drücken Sie \"{buttontext}\", um neu zu generieren"
+
+msgid "Send message"
+msgstr "Nachricht senden"
+
+msgid "Subject"
+msgstr "Betreff"
+
+msgid "Thank you for contacting us."
+msgstr "Vielen Dank, dass Sie uns kontaktiert haben."
+
+msgid "This field is required"
+msgstr "Dieses Feld ist erforderlich"
+
+msgid "We will reply as soon as possible."
+msgstr "Wir werden so schnell wie möglich antworten."
+
+msgid "Your email"
+msgstr "Ihre E-Mail"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "Ihre IP {ip} wird der Nachricht hinzugefügt."
+
+msgid "Your message appears below."
+msgstr "Ihre Nachricht erscheint unten."
+
+msgid "Your name"
+msgstr "Ihr Name"

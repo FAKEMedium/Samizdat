@@ -1,0 +1,144 @@
+# Rymdweb translations for the paypal module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Amount"
+msgstr ""
+
+msgid "Amount:"
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
+msgid "Completed"
+msgstr ""
+
+msgid "Currency"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "End Date"
+msgstr ""
+
+msgid "Error fetching transactions"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Fetch from PayPal"
+msgstr ""
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
+
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
+msgid "Live Transactions"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "No transactions found for selected date range"
+msgstr ""
+
+msgid "PayPal Payments"
+msgstr ""
+
+msgid "Payer"
+msgstr ""
+
+msgid "Payer Email"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Paypal"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Please select both start and end dates"
+msgstr ""
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Start Date"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Subject"
+msgstr ""
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You have cancelled the payment process."
+msgstr ""
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr ""
+
+msgid "from database"
+msgstr ""
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr ""
+
+msgid "refunded"
+msgstr ""
+
+msgid "transactions"
+msgstr ""

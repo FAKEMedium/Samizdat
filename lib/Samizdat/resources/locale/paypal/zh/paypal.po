@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Amount"
+msgstr "金额"
+
+msgid "Amount:"
+msgstr "金额："
+
+msgid "Balance"
+msgstr "余额"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
+msgid "Completed"
+msgstr "已完成"
+
+msgid "Currency"
+msgstr "货币"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "End Date"
+msgstr "结束日期"
+
+msgid "Error fetching transactions"
+msgstr "获取交易时出错"
+
+msgid "Error loading payments"
+msgstr "加载付款时出错"
+
+msgid "Fetch from PayPal"
+msgstr "从PayPal获取"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
+
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
+msgid "Live Transactions"
+msgstr "实时交易"
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No payments found"
+msgstr "未找到付款"
+
+msgid "No transactions found for selected date range"
+msgstr "所选日期范围内未找到交易"
+
+msgid "PayPal Payments"
+msgstr "PayPal付款"
+
+msgid "Payer"
+msgstr "付款人"
+
+msgid "Payer Email"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Pending"
+msgstr "待处理"
+
+msgid "Please select both start and end dates"
+msgstr "请选择开始和结束日期"
+
+msgid "Recent Payments"
+msgstr "最近付款"
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Start Date"
+msgstr "开始日期"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr ""
+
+msgid "Total"
+msgstr "总计"
+
+msgid "Transaction ID"
+msgstr "交易ID"
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You have cancelled the payment process."
+msgstr ""
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
+
+msgid "failed"
+msgstr "失败"
+
+msgid "from PayPal API"
+msgstr "来自PayPal API"
+
+msgid "from database"
+msgstr "来自数据库"
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr "付款"
+
+msgid "refunded"
+msgstr "已退款"
+
+msgid "transactions"
+msgstr "交易"

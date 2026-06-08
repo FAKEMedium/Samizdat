@@ -1,0 +1,741 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "0 = reply once per sender"
+msgstr "0 = svara en gång per avsändare"
+
+msgid "About to delete"
+msgstr ""
+
+msgid "Action"
+msgstr "Åtgärd"
+
+msgid "Actions"
+msgstr "Åtgärder"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Active from"
+msgstr "Aktiv från"
+
+msgid "Active until"
+msgstr "Aktiv till"
+
+msgid "Add admin"
+msgstr "Lägg till administratör"
+
+msgid "Add alias"
+msgstr "Lägg till alias"
+
+msgid "Add domain"
+msgstr "Ny domän"
+
+msgid "Add forwarding"
+msgstr "Lägg till vidarebefordran"
+
+msgid "Add mailbox"
+msgstr "Lägg till brevlåda"
+
+msgid "Address"
+msgstr "Adress"
+
+msgid "Address is required"
+msgstr "Adress krävs"
+
+msgid "Admin"
+msgstr "Administratör"
+
+msgid "Admin created successfully"
+msgstr "Administratör skapades"
+
+msgid "Admin deleted successfully"
+msgstr "Administratör togs bort"
+
+msgid "Admin not found"
+msgstr "Administratör hittades inte"
+
+msgid "Admin saved successfully"
+msgstr "Administratör sparades"
+
+msgid "Admin updated successfully"
+msgstr "Administratör uppdaterades"
+
+msgid "Administrators"
+msgstr "Administratörer"
+
+msgid "Admins"
+msgstr "Admins"
+
+msgid "Alias"
+msgstr "Alias"
+
+msgid "Alias Address"
+msgstr "Aliasadress"
+
+msgid "Alias created successfully"
+msgstr "Alias skapades"
+
+msgid "Alias deleted successfully"
+msgstr "Alias togs bort"
+
+msgid "Alias domain"
+msgstr "Aliasdomän"
+
+msgid "Alias domains"
+msgstr "Aliasdomäner"
+
+msgid "Alias not found"
+msgstr "Alias hittades inte"
+
+msgid "Alias saved successfully"
+msgstr "Alias sparades"
+
+msgid "Alias updated successfully"
+msgstr "Alias uppdaterades"
+
+msgid "All actions"
+msgstr "Alla åtgärder"
+
+msgid "Alternative email"
+msgstr "Alternativ e-post"
+
+msgid "Apply"
+msgstr "Tillämpa"
+
+msgid "Are you sure you want to delete this alias?"
+msgstr "Är du säker på att du vill ta bort detta alias?"
+
+msgid "Arrival"
+msgstr ""
+
+msgid "At least one valid forward address is required"
+msgstr "Minst en giltig vidarebefordringsadress krävs"
+
+msgid "Back"
+msgstr "Tillbaka"
+
+msgid "Back to queue"
+msgstr ""
+
+msgid "Can manage all domains"
+msgstr "Kan hantera alla domäner"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr "Kan inte vara aliasdomän (har aliasdomäner som pekar till den)"
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har aliasdomäner som pekar till den"
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har vidarebefordringar"
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
+msgstr "Kan inte göra denna domän till en aliasdomän - den har brevlådor"
+
+msgid "Cannot purge"
+msgstr ""
+
+msgid "Clear"
+msgstr "Rensa"
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Confirm purge"
+msgstr ""
+
+msgid "Copy messages between an external IMAP account and this mailbox. Runs as a background job using imapsync."
+msgstr ""
+
+msgid "Create admin"
+msgstr "Skapa administratör"
+
+msgid "Create forwarding"
+msgstr "Skapa vidarebefordran"
+
+msgid "Create mailbox"
+msgstr "Skapa brevlåda"
+
+msgid "Currently managed"
+msgstr "Hanteras för närvarande"
+
+msgid "Customer"
+msgstr "Kund"
+
+msgid "Customer ID is required"
+msgstr "Kund-ID krävs"
+
+msgid "Data"
+msgstr "Data"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Delete admin"
+msgstr "Ta bort administratör"
+
+msgid "Delete from source after copy"
+msgstr ""
+
+msgid "Delete this alias domain?"
+msgstr "Ta bort denna aliasdomän?"
+
+msgid "Delete this alias?"
+msgstr "Ta bort detta alias?"
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr "Ta bort denna domän och alla dess brevlådor?"
+
+msgid "Delete this mailbox?"
+msgstr "Ta bort denna brevlåda?"
+
+msgid "Delete this queued message?"
+msgstr ""
+
+msgid "Delete vacation settings?"
+msgstr "Ta bort semesterinställningar?"
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Destination (local)"
+msgstr ""
+
+msgid "Display name"
+msgstr "Visningsnamn"
+
+msgid "Domain"
+msgstr "Domän"
+
+msgid "Domain added successfully"
+msgstr "Domän lades till"
+
+msgid "Domain created successfully"
+msgstr "Domän skapades"
+
+msgid "Domain deleted"
+msgstr "Domän borttagen"
+
+msgid "Domain deleted successfully"
+msgstr "Domän togs bort"
+
+msgid "Domain name"
+msgstr "Domännamn"
+
+msgid "Domain name is required"
+msgstr "Domännamn krävs"
+
+msgid "Domain not found"
+msgstr "Domänen hittades inte"
+
+msgid "Domain quota"
+msgstr "Domänkvot"
+
+msgid "Domain removed successfully"
+msgstr "Domän togs bort"
+
+msgid "Domain saved successfully"
+msgstr "Domän sparades"
+
+msgid "Domain updated successfully"
+msgstr "Domän uppdaterades"
+
+msgid "Domains"
+msgstr "Domäner"
+
+msgid "Dry run (no changes)"
+msgstr ""
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit admin"
+msgstr "Redigera administratör"
+
+msgid "Edit forwarding"
+msgstr "Redigera vidarebefordran"
+
+msgid "Edit mailbox"
+msgstr "Redigera brevlåda"
+
+msgid "Email Admins"
+msgstr "E-postadministratörer"
+
+msgid "Email Domain Management"
+msgstr "E-postdomänhantering"
+
+msgid "Email Log"
+msgstr "E-postlogg"
+
+msgid "Email Mailboxes"
+msgstr "E-postbrevlådor"
+
+msgid "Email address"
+msgstr "E-postadress"
+
+msgid "Enqueuing sync job..."
+msgstr ""
+
+msgid "Failed to add admin"
+msgstr "Kunde inte lägga till administratör"
+
+msgid "Failed to add domain"
+msgstr "Kunde inte lägga till domän"
+
+msgid "Failed to delete admin"
+msgstr "Kunde inte ta bort administratör"
+
+msgid "Failed to delete alias"
+msgstr "Misslyckades ta bort alias"
+
+msgid "Failed to delete alias domain"
+msgstr "Kunde inte ta bort aliasdomän"
+
+msgid "Failed to delete domain"
+msgstr "Misslyckades ta bort domän"
+
+msgid "Failed to delete mailbox"
+msgstr "Misslyckades ta bort brevlåda"
+
+msgid "Failed to delete vacation settings"
+msgstr "Kunde inte ta bort semesterinställningar"
+
+msgid "Failed to enqueue sync job"
+msgstr ""
+
+msgid "Failed to remove admin"
+msgstr "Kunde inte ta bort administratör"
+
+msgid "Failed to remove domain"
+msgstr "Kunde inte ta bort domän"
+
+msgid "Failed to save admin"
+msgstr "Kunde inte spara administratör"
+
+msgid "Failed to save alias"
+msgstr "Kunde inte spara alias"
+
+msgid "Failed to save domain"
+msgstr "Kunde inte spara domän"
+
+msgid "Failed to save mailbox"
+msgstr "Kunde inte spara brevlåda"
+
+msgid "Failed to save vacation settings"
+msgstr "Kunde inte spara semesterinställningar"
+
+msgid "Failed to update admin"
+msgstr "Kunde inte uppdatera administratör"
+
+msgid "Failed to update alias"
+msgstr "Misslyckades uppdatera alias"
+
+msgid "Failed to update domain"
+msgstr "Misslyckades uppdatera domän"
+
+msgid "Failed to update mailbox"
+msgstr "Misslyckades uppdatera brevlåda"
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter by customer"
+msgstr "Filtrera på kund"
+
+msgid "Filter by domain"
+msgstr "Filtrera på domän"
+
+msgid "Filter by username"
+msgstr "Filtrera på användarnamn"
+
+msgid "Flush"
+msgstr ""
+
+msgid "Flush deferred queue"
+msgstr ""
+
+msgid "Forward To"
+msgstr "Skicka vidare till"
+
+msgid "Forward to"
+msgstr "Vidarebefordra till"
+
+msgid "Forwarding"
+msgstr "Vidarebefordran"
+
+msgid "Forwards"
+msgstr "Vidarebefordringar"
+
+msgid "Forwards to"
+msgstr "Vidarebefordrar till"
+
+msgid "From address"
+msgstr "Avsändaradress"
+
+msgid "Held"
+msgstr ""
+
+msgid "Hold"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Invalid domain name syntax"
+msgstr ""
+
+msgid "Invalid email addresses"
+msgstr "Ogiltiga e-postadresser"
+
+msgid "Job ID"
+msgstr ""
+
+msgid "Leave blank to keep current"
+msgstr "Lämna tomt för att behålla nuvarande"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Log"
+msgstr "Logg"
+
+msgid "Mail"
+msgstr "Epost"
+
+msgid "Mail Queue"
+msgstr ""
+
+msgid "Mail queue"
+msgstr ""
+
+msgid "Mailbox"
+msgstr "Brevlåda"
+
+msgid "Mailbox created successfully"
+msgstr "Brevlåda skapades"
+
+msgid "Mailbox deleted successfully"
+msgstr "Brevlåda togs bort"
+
+msgid "Mailbox domain must match the current domain"
+msgstr "Brevlådens domän måste matcha nuvarande domän"
+
+msgid "Mailbox not found"
+msgstr "Brevlåda hittades inte"
+
+msgid "Mailbox quota"
+msgstr "Brevlådekvot"
+
+msgid "Mailbox saved successfully"
+msgstr "Brevlåda sparades"
+
+msgid "Mailbox updated successfully"
+msgstr "Brevlåda uppdaterades"
+
+msgid "Mailboxes"
+msgstr "Brevlådor"
+
+msgid "Managed domains"
+msgstr "Hanterade domäner"
+
+msgid "Manager"
+msgstr "Hanterare"
+
+msgid "Message"
+msgstr "Meddelande"
+
+msgid "Method not allowed"
+msgstr "Metod inte tillåten"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "New domain"
+msgstr "Ny domän"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "No activity"
+msgstr "Ingen aktivitet"
+
+msgid "No administrators"
+msgstr "Inga administratörer"
+
+msgid "No alias domains"
+msgstr "Inga aliasdomäner"
+
+msgid "No aliases"
+msgstr "Inga alias"
+
+msgid "No domains"
+msgstr "Inga domäner"
+
+msgid "No log entries"
+msgstr "Inga loggposter"
+
+msgid "No mailboxes"
+msgstr "Inga brevlådor"
+
+msgid "No results"
+msgstr "Inga resultat"
+
+msgid "No results found"
+msgstr "Inga resultat hittades"
+
+msgid "Not found"
+msgstr "Hittades inte"
+
+msgid "One email per line, or separated by comma/space"
+msgstr "En e-post per rad, eller separerade med komma/mellanslag"
+
+msgid "Options"
+msgstr "Variabler"
+
+msgid "Out of office"
+msgstr "Frånvarande"
+
+msgid "Page navigation"
+msgstr "Sidnavigering"
+
+msgid "Password"
+msgstr "Lösenord"
+
+msgid "Password is required"
+msgstr "Lösenord krävs"
+
+msgid "Password requires: "
+msgstr "Lösenordet kräver: "
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Purge"
+msgstr "Rensa"
+
+msgid "Purge matching messages"
+msgstr ""
+
+msgid "Queue"
+msgstr "Kö"
+
+msgid "Queue empty"
+msgstr ""
+
+msgid "Queue flushed"
+msgstr ""
+
+msgid "Queue regex"
+msgstr ""
+
+msgid "Queued Message"
+msgstr ""
+
+msgid "Quota (MB)"
+msgstr "G"
+
+msgid "Quota updated successfully"
+msgstr "Uppdaterade gräns"
+
+msgid "Recent activity"
+msgstr "Senaste aktivitet"
+
+msgid "Recipient regex"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Release"
+msgstr ""
+
+msgid "Released"
+msgstr ""
+
+msgid "Reply interval (seconds)"
+msgstr "Svarsintervall (sekunder)"
+
+msgid "Route all mail to another domain"
+msgstr "Dirigera all e-post till en annan domän"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save changes"
+msgstr "Spara ändringar"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search admin to add"
+msgstr "Sök administratör att lägga till"
+
+msgid "Search customer (min 3 chars)..."
+msgstr "Sök kund (minst 3 tecken)..."
+
+msgid "Search domain to add"
+msgstr "Sök domän att lägga till"
+
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
+msgid "Search for admin"
+msgstr "Sök administratör"
+
+msgid "Search for mail domain"
+msgstr "Sök maildomän"
+
+msgid "Search for mailbox"
+msgstr "Sök brevlåda"
+
+msgid "Select customer"
+msgstr "Välj kund"
+
+msgid "Select target domain"
+msgstr "Välj måldomän"
+
+msgid "Sender"
+msgstr ""
+
+msgid "Sender regex"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Skip messages already present"
+msgstr ""
+
+msgid "Source (remote)"
+msgstr ""
+
+msgid "Start sync"
+msgstr ""
+
+msgid "Subject"
+msgstr "Ämne"
+
+msgid "Superadmin"
+msgstr "Superadministratör"
+
+msgid "Sync"
+msgstr ""
+
+msgid "Sync job enqueued"
+msgstr ""
+
+msgid "Sync mailbox"
+msgstr ""
+
+msgid "Target domain"
+msgstr "Måldomän"
+
+msgid "This deletes queued messages permanently."
+msgstr ""
+
+msgid "Timestamp"
+msgstr "Tidsstämpel"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Use SSL/TLS"
+msgstr ""
+
+msgid "User"
+msgstr "Användare"
+
+msgid "Username"
+msgstr "Användarnamn"
+
+msgid "Username (email)"
+msgstr "Användarnamn (e-post)"
+
+msgid "Username is required"
+msgstr "Användarnamn krävs"
+
+msgid "Vacation"
+msgstr "Semester"
+
+msgid "Vacation / Auto-reply"
+msgstr "Semester / Autosvar"
+
+msgid "Vacation settings deleted"
+msgstr "Semesterinställningar borttagna"
+
+msgid "Vacation settings saved"
+msgstr "Semesterinställningar sparade"
+
+msgid "View all"
+msgstr "Visa alla"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "at least {length} characters"
+msgstr "minst {length} tecken"
+
+msgid "disable"
+msgstr "inaktivera"
+
+msgid "mail domain"
+msgstr "maildomän"
+
+msgid "matching the filter"
+msgstr ""
+
+msgid "messages"
+msgstr ""
+
+msgid "the ENTIRE queue"
+msgstr ""
+
+msgid "to confirm"
+msgstr ""
+
+msgid "unlimited"
+msgstr "obegränsad"
+
+msgid "{count} lowercase"
+msgstr "{count} gemen"
+
+msgid "{count} number(s)"
+msgstr "{count} siffra"
+
+msgid "{count} special character(s)"
+msgstr "{count} specialtecken"
+
+msgid "{count} uppercase"
+msgstr "{count} versal"
+
+msgid "{side} {field} is required"
+msgstr ""

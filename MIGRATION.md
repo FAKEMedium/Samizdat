@@ -85,6 +85,12 @@ for IP/security reasons.
   per-site customization (composes with the multi-site direction).
 - Ownership: `templates/{layouts,chunks}` are core-owned; plugins write only under their
   own `<kind>/<module>/` subtree.
+- **Locale is per-module.** Each dist owns `resources/locale/<module>/<lang>/<module>.po`
+  (`make i18n` extracts per module, seeding from the legacy merged `.po` on first run). LTOO's
+  loader *overwrites* rather than merges multiple `.mo`, so a build step `msgcat`s all module
+  `.po` into one runtime catalog per language (`resources/locale/<lang>.mo`), loaded flat under
+  the empty domain so `__('msg')` resolves in code and templates. For multi-dist installs the
+  merge moves to deploy time (after the installed plugin set is known).
 
 ### 2.5 Frontend
 - Per-page JS stays **template-inline** (rendered via `render_to_string`, ships in

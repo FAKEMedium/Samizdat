@@ -1,0 +1,372 @@
+# Rymdweb translations for the fortnox module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr ""
+
+msgid "API docs"
+msgstr ""
+
+msgid "About Fortnox"
+msgstr ""
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr ""
+
+msgid "Activate integration"
+msgstr ""
+
+msgid "Active"
+msgstr ""
+
+msgid "Address"
+msgstr ""
+
+msgid "Address 1"
+msgstr ""
+
+msgid "Address 2"
+msgstr ""
+
+msgid "All Customers"
+msgstr ""
+
+msgid "All Invoices"
+msgstr ""
+
+msgid "All payments"
+msgstr ""
+
+msgid "Amount"
+msgstr ""
+
+msgid "Article"
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Basic Information"
+msgstr ""
+
+msgid "Captcha code from image"
+msgstr ""
+
+msgid "Captcha image"
+msgstr ""
+
+msgid "Captcha was wrong"
+msgstr ""
+
+msgid "Cash invoice"
+msgstr ""
+
+msgid "City"
+msgstr ""
+
+msgid "Comments"
+msgstr ""
+
+msgid "Contact Information"
+msgstr ""
+
+msgid "Country"
+msgstr ""
+
+msgid "Credit invoice"
+msgstr ""
+
+msgid "Currency"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Customer Number"
+msgstr ""
+
+msgid "Customers"
+msgstr ""
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Debt"
+msgstr ""
+
+msgid "Delivery Address"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Developer docs"
+msgstr ""
+
+msgid "Development"
+msgstr ""
+
+msgid "Discount"
+msgstr ""
+
+msgid "Due Date"
+msgstr ""
+
+msgid "Due date"
+msgstr ""
+
+msgid "Email"
+msgstr ""
+
+msgid "Email Invoice"
+msgstr ""
+
+msgid "Email Offer"
+msgstr ""
+
+msgid "Email Order"
+msgstr ""
+
+msgid "Empty name"
+msgstr ""
+
+msgid "Enter code"
+msgstr ""
+
+msgid "Enter valid email"
+msgstr ""
+
+msgid "File archive"
+msgstr ""
+
+msgid "Financial Information"
+msgstr ""
+
+msgid "For more information, visit the Fortnox website:"
+msgstr ""
+
+msgid "Fortnox authorization required"
+msgstr ""
+
+msgid "Fortnox integration"
+msgstr ""
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr ""
+
+msgid "Fortnox panel"
+msgstr ""
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr ""
+
+msgid "Highlights"
+msgstr ""
+
+msgid "Interest invoice"
+msgstr ""
+
+msgid "Invoice"
+msgstr ""
+
+msgid "Invoice Date"
+msgstr ""
+
+msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice Number"
+msgstr ""
+
+msgid "Invoice Rows"
+msgstr ""
+
+msgid "Invoice Type"
+msgstr ""
+
+msgid "Invoice number"
+msgstr ""
+
+msgid "Invoices"
+msgstr ""
+
+msgid "Invoices are created with LATEX type setting software"
+msgstr ""
+
+msgid "It is currently only available to Rymdweb."
+msgstr ""
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr ""
+
+msgid "Log out"
+msgstr ""
+
+msgid "Mail sent through own servers"
+msgstr ""
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr ""
+
+msgid "Multiple languages and country specific modifications"
+msgstr ""
+
+msgid "Name"
+msgstr ""
+
+msgid "Net"
+msgstr ""
+
+msgid "Next"
+msgstr ""
+
+msgid "No"
+msgstr ""
+
+msgid "No invoice rows"
+msgstr ""
+
+msgid "No invoices found"
+msgstr ""
+
+msgid "No payments"
+msgstr ""
+
+msgid "No payments selected"
+msgstr ""
+
+msgid "Org.no."
+msgstr ""
+
+msgid "Organisation Number"
+msgstr ""
+
+msgid "Our Reference"
+msgstr ""
+
+msgid "Over time, more web hosting features have been added."
+msgstr ""
+
+msgid "Paid"
+msgstr ""
+
+msgid "Payments"
+msgstr ""
+
+msgid "Phone"
+msgstr ""
+
+msgid "Previous"
+msgstr ""
+
+msgid "Price"
+msgstr ""
+
+msgid "Price List"
+msgstr ""
+
+msgid "Process"
+msgstr ""
+
+msgid "Process selected"
+msgstr ""
+
+msgid "Processed"
+msgstr ""
+
+msgid "Processing failed"
+msgstr ""
+
+msgid "Quantity"
+msgstr ""
+
+msgid "References"
+msgstr ""
+
+msgid "Refresh"
+msgstr ""
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr ""
+
+msgid "Remarks"
+msgstr ""
+
+msgid "Samizdat"
+msgstr ""
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr ""
+
+msgid "Source code on Github"
+msgstr ""
+
+msgid "Strictly for Rymdweb"
+msgstr ""
+
+msgid "Supplier invoices"
+msgstr ""
+
+msgid "Terms of Payment"
+msgstr ""
+
+msgid "Test customer"
+msgstr ""
+
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr ""
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr ""
+
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr ""
+
+msgid "Total"
+msgstr ""
+
+msgid "Total: {count} customers"
+msgstr ""
+
+msgid "Totals"
+msgstr ""
+
+msgid "Type"
+msgstr ""
+
+msgid "Unprocessed"
+msgstr ""
+
+msgid "VAT"
+msgstr ""
+
+msgid "VAT Number"
+msgstr ""
+
+msgid "VAT Type"
+msgstr ""
+
+msgid "Yes"
+msgstr ""
+
+msgid "Your Reference"
+msgstr ""
+
+msgid "Your email"
+msgstr ""
+
+msgid "Your name"
+msgstr ""
+
+msgid "Zip Code"
+msgstr ""
+
+msgid "payments"
+msgstr ""

@@ -1,0 +1,564 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: zh\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgid "Actions"
+msgstr "操作"
+
+msgid "Add"
+msgstr "添加"
+
+msgid "Address"
+msgstr "地址"
+
+msgid "Address deleted"
+msgstr ""
+
+msgid "Addresses"
+msgstr ""
+
+msgid "All"
+msgstr "全部"
+
+msgid "All sources"
+msgstr ""
+
+msgid "All types"
+msgstr ""
+
+msgid "An error occurred"
+msgstr "发生错误"
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr ""
+
+msgid "Body (Markdown)"
+msgstr ""
+
+msgid "Bounce"
+msgstr ""
+
+msgid "Bounce deleted"
+msgstr ""
+
+msgid "Bounced"
+msgstr ""
+
+msgid "Bounces"
+msgstr ""
+
+msgid "CSV"
+msgstr ""
+
+msgid "Cancel"
+msgstr "取消"
+
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr ""
+
+msgid "Close"
+msgstr "关闭"
+
+msgid "Code"
+msgstr ""
+
+msgid "Common settings"
+msgstr ""
+
+msgid "Complaint"
+msgstr ""
+
+msgid "Completed"
+msgstr "已完成"
+
+msgid "Content"
+msgstr "内容"
+
+msgid "Content saved"
+msgstr ""
+
+msgid "Copy"
+msgstr ""
+
+msgid "Copy as draft"
+msgstr ""
+
+msgid "Created"
+msgstr "已创建"
+
+msgid "Data not found"
+msgstr ""
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Default From email"
+msgstr ""
+
+msgid "Default From name"
+msgstr ""
+
+msgid "Delayed"
+msgstr ""
+
+msgid "Delete"
+msgstr "删除"
+
+msgid "Delete All My Data"
+msgstr ""
+
+msgid "Delete My Data"
+msgstr ""
+
+msgid "Delete this address?"
+msgstr ""
+
+msgid "Delete this bounce record?"
+msgstr ""
+
+msgid "Delete this list?"
+msgstr ""
+
+msgid "Delete this mail?"
+msgstr ""
+
+msgid "Description"
+msgstr "描述"
+
+msgid "Diagnostic"
+msgstr ""
+
+msgid "Draft"
+msgstr ""
+
+msgid "Edit"
+msgstr "编辑"
+
+msgid "Edit mail"
+msgstr ""
+
+msgid "Email"
+msgstr "电子邮件"
+
+msgid "Email column"
+msgstr ""
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr ""
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr ""
+
+msgid "Failed"
+msgstr "失败"
+
+msgid "Failed to process unsubscription."
+msgstr ""
+
+msgid "Failed to unsubscribe."
+msgstr ""
+
+msgid "Failed to verify token."
+msgstr ""
+
+msgid "First name"
+msgstr "名字"
+
+msgid "First name col"
+msgstr ""
+
+msgid "Footer added to all emails"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Hard bounce"
+msgstr ""
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr ""
+
+msgid "If this email is in our system, you will receive a link shortly."
+msgstr ""
+
+msgid "Import"
+msgstr "导入"
+
+msgid "Import addresses"
+msgstr ""
+
+msgid "Import complete"
+msgstr ""
+
+msgid "Imported"
+msgstr ""
+
+msgid "Imported {count} addresses"
+msgstr ""
+
+msgid "Invalid or expired token."
+msgstr ""
+
+msgid "Invalid or missing unsubscribe token."
+msgstr ""
+
+msgid "Key"
+msgstr "密钥"
+
+msgid "Language"
+msgstr "语言"
+
+msgid "Last name"
+msgstr "姓氏"
+
+msgid "Last name col"
+msgstr ""
+
+msgid "Linked"
+msgstr ""
+
+msgid "List"
+msgstr ""
+
+msgid "List Memberships"
+msgstr ""
+
+msgid "List name:"
+msgstr ""
+
+msgid "Lists"
+msgstr ""
+
+msgid "Loading..."
+msgstr "加载中..."
+
+msgid "Mail"
+msgstr "邮件"
+
+msgid "Mail History"
+msgstr ""
+
+msgid "Mail copied as draft"
+msgstr ""
+
+msgid "Mail created"
+msgstr ""
+
+msgid "Mail deleted"
+msgstr ""
+
+msgid "Mail updated"
+msgstr ""
+
+msgid "Mailer"
+msgstr ""
+
+msgid "Mailing Lists"
+msgstr ""
+
+msgid "Mails"
+msgstr ""
+
+msgid "Manual"
+msgstr ""
+
+msgid "Name"
+msgstr "名称"
+
+msgid "Name column"
+msgstr ""
+
+msgid "Never subscribed"
+msgstr ""
+
+msgid "New"
+msgstr ""
+
+msgid "New list"
+msgstr ""
+
+msgid "New mail"
+msgstr ""
+
+msgid "No"
+msgstr "否"
+
+msgid "No addresses"
+msgstr ""
+
+msgid "No bounces"
+msgstr ""
+
+msgid "No content defined yet"
+msgstr ""
+
+msgid "No details available"
+msgstr ""
+
+msgid "No lists"
+msgstr ""
+
+msgid "No longer interested"
+msgstr ""
+
+msgid "No mails"
+msgstr ""
+
+msgid "No mails received"
+msgstr ""
+
+msgid "No results found"
+msgstr "未找到结果"
+
+msgid "No settings configured"
+msgstr ""
+
+msgid "No source content to translate"
+msgstr ""
+
+msgid "No unsubscriptions"
+msgstr ""
+
+msgid "Not subscribed to any lists"
+msgstr ""
+
+msgid "Organization header"
+msgstr ""
+
+msgid "Other"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr ""
+
+msgid "Paste CSV here..."
+msgstr ""
+
+msgid "Paste emails here..."
+msgstr ""
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr ""
+
+msgid "Pending"
+msgstr "待处理"
+
+msgid "Personal Information"
+msgstr ""
+
+msgid "Public"
+msgstr ""
+
+msgid "Purchase"
+msgstr ""
+
+msgid "Queue"
+msgstr ""
+
+msgid "Queue this mail for sending?"
+msgstr ""
+
+msgid "Reason"
+msgstr ""
+
+msgid "Reason (optional)"
+msgstr ""
+
+msgid "Received"
+msgstr "已收到"
+
+msgid "Remove"
+msgstr "删除"
+
+msgid "Remove marked"
+msgstr ""
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr ""
+
+msgid "Removed {count} addresses"
+msgstr ""
+
+msgid "Reply-To address"
+msgstr ""
+
+msgid "Review"
+msgstr ""
+
+msgid "Review imported addresses"
+msgstr ""
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Save content"
+msgstr ""
+
+msgid "Scheduled"
+msgstr ""
+
+msgid "Scrape"
+msgstr ""
+
+msgid "Search"
+msgstr "搜索"
+
+msgid "Search field for {what}"
+msgstr "{what} 的搜索字段"
+
+msgid "Select a reason..."
+msgstr ""
+
+msgid "Send link"
+msgstr ""
+
+msgid "Sending"
+msgstr ""
+
+msgid "Sent"
+msgstr "已发送"
+
+msgid "Setting deleted"
+msgstr ""
+
+msgid "Setting key"
+msgstr ""
+
+msgid "Setting saved"
+msgstr ""
+
+msgid "Settings"
+msgstr "设置"
+
+msgid "Signup"
+msgstr ""
+
+msgid "Soft bounce"
+msgstr ""
+
+msgid "Source"
+msgstr ""
+
+msgid "Statistics"
+msgstr "统计"
+
+msgid "Status"
+msgstr "状态"
+
+msgid "Subject"
+msgstr "主题"
+
+msgid "Subscribed"
+msgstr ""
+
+msgid "Text"
+msgstr "文本"
+
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr ""
+
+msgid "Too many emails"
+msgstr ""
+
+msgid "Total"
+msgstr "总计"
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translation complete"
+msgstr ""
+
+msgid "Translation failed"
+msgstr ""
+
+msgid "Type"
+msgstr "类型"
+
+msgid "Unsubscribe"
+msgstr ""
+
+msgid "Unsubscribe from mailings"
+msgstr ""
+
+msgid "Unsubscription removed"
+msgstr ""
+
+msgid "Unsubscriptions"
+msgstr ""
+
+msgid "Value"
+msgstr "值"
+
+msgid "View details"
+msgstr ""
+
+msgid "Yes"
+msgstr "是"
+
+msgid "You have been successfully unsubscribed."
+msgstr ""
+
+msgid "You have been unsubscribed"
+msgstr ""
+
+msgid "Your Data"
+msgstr ""
+
+msgid "Your data has been deleted"
+msgstr ""
+
+msgid "Your data has been deleted."
+msgstr ""
+
+msgid "addresses"
+msgstr ""
+
+msgid "bounces"
+msgstr ""
+
+msgid "created"
+msgstr ""
+
+msgid "existing"
+msgstr ""
+
+msgid "linked"
+msgstr ""
+
+msgid "mail"
+msgstr ""
+
+msgid "need review"
+msgstr ""
+
+msgid "new"
+msgstr ""
+
+msgid "results"
+msgstr ""
+
+msgid "sent"
+msgstr ""
+
+msgid "unsubscribed"
+msgstr ""

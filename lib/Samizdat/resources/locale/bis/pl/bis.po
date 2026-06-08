@@ -1,0 +1,387 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "1 Year"
+msgstr ""
+
+msgid "A"
+msgstr ""
+
+msgid "A Records"
+msgstr ""
+
+msgid "A/AAAA Records"
+msgstr "Rekordy A/AAAA"
+
+msgid "AS Name"
+msgstr ""
+
+msgid "ASN"
+msgstr ""
+
+msgid "All"
+msgstr "Wszystko"
+
+msgid "All Sectors"
+msgstr ""
+
+msgid "Average Score"
+msgstr "Średni wynik"
+
+msgid "Avg Score"
+msgstr ""
+
+msgid "Avg score"
+msgstr ""
+
+msgid "BIS - $sector"
+msgstr ""
+
+msgid "BIS - Compliance Trends"
+msgstr ""
+
+msgid "BIS - Hosting Providers"
+msgstr ""
+
+msgid "BIS Badge"
+msgstr ""
+
+msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Badges"
+msgstr ""
+
+msgid "BIS Check"
+msgstr ""
+
+msgid "BIS Manager"
+msgstr ""
+
+msgid "Back to Dashboard"
+msgstr "Powrót do panelu"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr ""
+
+msgid "Cloud Act"
+msgstr ""
+
+msgid "Cloud Act Applies (US provider)"
+msgstr ""
+
+msgid "Completed"
+msgstr "Zakończone"
+
+msgid "Compliance"
+msgstr "Zgodność"
+
+msgid "Compliance Rate"
+msgstr ""
+
+msgid "Compliance Trends"
+msgstr ""
+
+msgid "Compliance by Sector"
+msgstr ""
+
+msgid "Compliance score"
+msgstr ""
+
+msgid "Compliant"
+msgstr "Zgodny"
+
+msgid "Compliant (Swedish hosting)"
+msgstr ""
+
+msgid "Compliant Domains"
+msgstr ""
+
+msgid "Country"
+msgstr "Kraj"
+
+msgid "Critical"
+msgstr "Krytyczny"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid "DNS Check Results"
+msgstr "Wyniki sprawdzenia DNS"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Domain"
+msgstr "Domena"
+
+msgid "Domain (A-Z)"
+msgstr ""
+
+msgid "Domain (Z-A)"
+msgstr ""
+
+msgid "Domain Compliance Scores"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domain required"
+msgstr ""
+
+msgid "Domain specific compliance with standard of Based in Sweden"
+msgstr ""
+
+msgid "Domains"
+msgstr "Domeny"
+
+msgid "Domains in this Sector"
+msgstr ""
+
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to add provider"
+msgstr ""
+
+msgid "Failed to add tag"
+msgstr ""
+
+msgid "Failed to check run"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
+msgid "Failed to load dashboard data"
+msgstr ""
+
+msgid "Failed to load domain"
+msgstr ""
+
+msgid "Failed to load domain details"
+msgstr ""
+
+msgid "Failed to navigate"
+msgstr ""
+
+msgid "Failed to start run"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Foreign"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Historical Data"
+msgstr ""
+
+msgid "Historical compliance trends over time"
+msgstr ""
+
+msgid "Hosting Provider Summary"
+msgstr ""
+
+msgid "Hosting Providers"
+msgstr ""
+
+msgid "Hosting provider statistics for tracked domains"
+msgstr ""
+
+msgid "How well different Swedish organizations comply with having control of own infrastructure"
+msgstr ""
+
+msgid "ID"
+msgstr "ID"
+
+msgid "ID required"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Invalid request"
+msgstr ""
+
+msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key, name and country_code required"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Ładowanie..."
+
+msgid "Low"
+msgstr ""
+
+msgid "MX"
+msgstr ""
+
+msgid "MX Records"
+msgstr ""
+
+msgid "Mail"
+msgstr "Poczta"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "NS"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
+msgid "Next"
+msgstr "Następny"
+
+msgid "No A/AAAA records"
+msgstr ""
+
+msgid "No MX records"
+msgstr ""
+
+msgid "No check data available"
+msgstr ""
+
+msgid "No data available"
+msgstr "Brak dostępnych danych"
+
+msgid "No domains found"
+msgstr "Nie znaleziono domen"
+
+msgid "No more domains in this direction"
+msgstr ""
+
+msgid "No provider data available"
+msgstr ""
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr ""
+
+msgid "Organization"
+msgstr "Organizacja"
+
+msgid "Overall"
+msgstr ""
+
+msgid "Overall Score"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Previous"
+msgstr "Poprzedni"
+
+msgid "Provider"
+msgstr ""
+
+msgid "Recent Check Runs"
+msgstr ""
+
+msgid "Record Type"
+msgstr "Typ rekordu"
+
+msgid "Record Value"
+msgstr ""
+
+msgid "Run ID required"
+msgstr ""
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr ""
+
+msgid "Score"
+msgstr "Wynik"
+
+msgid "Score (High to Low)"
+msgstr ""
+
+msgid "Score (Low to High)"
+msgstr ""
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Sector"
+msgstr ""
+
+msgid "Sector Statistics"
+msgstr ""
+
+msgid "Sort by"
+msgstr ""
+
+msgid "Start New Check Run"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Swedish"
+msgstr "Szwedzki"
+
+msgid "Total Domains"
+msgstr ""
+
+msgid "Total Records"
+msgstr ""
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr ""
+
+msgid "Unknown"
+msgstr "Nieznany"
+
+msgid "View Details"
+msgstr ""
+
+msgid "View Public Dashboard"
+msgstr ""
+
+msgid "Web"
+msgstr ""
+
+msgid "compliant"
+msgstr "zgodny"
+
+msgid "record(s)"
+msgstr ""
+
+msgid "{days} Days"
+msgstr ""

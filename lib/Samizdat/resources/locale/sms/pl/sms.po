@@ -1,0 +1,138 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Actions"
+msgstr "Akcje"
+
+msgid "Are you sure you want to delete this message?"
+msgstr ""
+
+msgid "Back"
+msgstr "Wstecz"
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Connection error. Please try again."
+msgstr "Błąd połączenia. Spróbuj ponownie."
+
+msgid "Conversation with"
+msgstr ""
+
+msgid "Failed to delete message"
+msgstr ""
+
+msgid "Failed to load conversation"
+msgstr ""
+
+msgid "Failed to send SMS"
+msgstr ""
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "Message Details"
+msgstr ""
+
+msgid "Message must be 160 characters or less"
+msgstr ""
+
+msgid "Messages will appear here once sent or received"
+msgstr ""
+
+msgid "No messages found"
+msgstr "Nie znaleziono wiadomości"
+
+msgid "No messages yet"
+msgstr ""
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Phone Number"
+msgstr "Numer telefonu"
+
+msgid "Please enter a message"
+msgstr ""
+
+msgid "Please enter a valid phone number"
+msgstr ""
+
+msgid "SMS"
+msgstr ""
+
+msgid "SMS Conversation"
+msgstr ""
+
+msgid "SMS sent successfully"
+msgstr ""
+
+msgid "SMS sent successfully!"
+msgstr ""
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Search field for {what}"
+msgstr "Pole wyszukiwania dla {what}"
+
+msgid "Search for SMS"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Sending..."
+msgstr ""
+
+msgid "Start a conversation by sending a message"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Sync Messages"
+msgstr ""
+
+msgid "Sync completed!"
+msgstr ""
+
+msgid "Sync failed"
+msgstr ""
+
+msgid "Sync messages"
+msgstr ""
+
+msgid "Syncing..."
+msgstr ""
+
+msgid "This field is required"
+msgstr "To pole jest wymagane"
+
+msgid "Time"
+msgstr "Czas"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "characters"
+msgstr "znaków"
+
+msgid "new messages retrieved."
+msgstr ""

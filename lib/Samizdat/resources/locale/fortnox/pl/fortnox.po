@@ -1,0 +1,384 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "Celem podrzędnym jest testowanie otwartej rachunkowości, gdzie liczby mogą być przedstawiane ciągle publicznie po anonimizacji."
+
+msgid "API docs"
+msgstr "Dokumentacja API"
+
+msgid "About Fortnox"
+msgstr "O Fortnox"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Aktywuj integrację Samizdat Fortnox"
+
+msgid "Activate integration"
+msgstr "Aktywuj integrację"
+
+msgid "Active"
+msgstr "Aktywny"
+
+msgid "Address"
+msgstr "Adres"
+
+msgid "Address 1"
+msgstr "Adres 1"
+
+msgid "Address 2"
+msgstr "Adres 2"
+
+msgid "All Customers"
+msgstr ""
+
+msgid "All Invoices"
+msgstr "Wszystkie faktury"
+
+msgid "All payments"
+msgstr ""
+
+msgid "Amount"
+msgstr "Kwota"
+
+msgid "Article"
+msgstr "Artykuł"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Basic Information"
+msgstr "Podstawowe informacje"
+
+msgid "Captcha code from image"
+msgstr "Kod captcha z obrazka"
+
+msgid "Captcha image"
+msgstr "Obraz captcha"
+
+msgid "Captcha was wrong"
+msgstr "Captcha była nieprawidłowa"
+
+msgid "Cash invoice"
+msgstr ""
+
+msgid "City"
+msgstr "Miasto"
+
+msgid "Comments"
+msgstr "Komentarze"
+
+msgid "Contact Information"
+msgstr "Informacje kontaktowe"
+
+msgid "Country"
+msgstr "Kraj"
+
+msgid "Credit invoice"
+msgstr "Faktura korygująca"
+
+msgid "Currency"
+msgstr "Waluta"
+
+msgid "Customer"
+msgstr "Klient"
+
+msgid "Customer Number"
+msgstr "Numer klienta"
+
+msgid "Customers"
+msgstr "Klienci"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "Klienci otrzymują listę faktur i otwarte pozycje faktur"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Debt"
+msgstr "Dług"
+
+msgid "Delivery Address"
+msgstr "Adres dostawy"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Developer docs"
+msgstr "Dokumentacja dla deweloperów"
+
+msgid "Development"
+msgstr "Rozwój"
+
+msgid "Discount"
+msgstr "Rabat"
+
+msgid "Due Date"
+msgstr ""
+
+msgid "Due date"
+msgstr "Termin płatności"
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Email Invoice"
+msgstr "Wyślij fakturę e-mailem"
+
+msgid "Email Offer"
+msgstr "Wyślij ofertę e-mailem"
+
+msgid "Email Order"
+msgstr "Wyślij zamówienie e-mailem"
+
+msgid "Empty name"
+msgstr "Pusta nazwa"
+
+msgid "Enter code"
+msgstr "Wprowadź kod"
+
+msgid "Enter valid email"
+msgstr "Wprowadź prawidłowy e-mail"
+
+msgid "File archive"
+msgstr "Archiwum plików"
+
+msgid "Financial Information"
+msgstr "Informacje finansowe"
+
+msgid "For more information, visit the Fortnox website:"
+msgstr "Aby uzyskać więcej informacji, odwiedź stronę internetową Fortnox:"
+
+msgid "Fortnox authorization required"
+msgstr "Wymagana autoryzacja Fortnox"
+
+msgid "Fortnox integration"
+msgstr "Integracja Fortnox"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox to szwedzkie oprogramowanie księgowe oparte na chmurze, które oferuje szereg usług, w tym fakturowanie, prowadzenie ksiąg i zarządzanie finansami."
+
+msgid "Fortnox panel"
+msgstr "Panel Fortnox"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox została założona w 2001 roku z siedzibą w Växjö."
+
+msgid "Highlights"
+msgstr "Najważniejsze informacje"
+
+msgid "Interest invoice"
+msgstr ""
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice Date"
+msgstr ""
+
+msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice Number"
+msgstr ""
+
+msgid "Invoice Rows"
+msgstr ""
+
+msgid "Invoice Type"
+msgstr ""
+
+msgid "Invoice number"
+msgstr "Numer faktury"
+
+msgid "Invoices"
+msgstr "Faktury"
+
+msgid "Invoices are created with LATEX type setting software"
+msgstr "Faktury są tworzone za pomocą oprogramowania do składu LATEX"
+
+msgid "It is currently only available to Rymdweb."
+msgstr "Aktualnie dostępne tylko dla Rymdweb."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "Zostało zaprojektowane, aby pomóc małym i średnim przedsiębiorstwom efektywnie zarządzać swoimi finansami."
+
+msgid "Log out"
+msgstr "Wyloguj się"
+
+msgid "Mail sent through own servers"
+msgstr "Poczta wysyłana przez własne serwery"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "Minimalne lokalne dane klientów są przechowywane w Fortnox."
+
+msgid "Multiple languages and country specific modifications"
+msgstr "Wiele języków i modyfikacje specyficzne dla kraju"
+
+msgid "Name"
+msgstr "Nazwa"
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Next"
+msgstr "Następny"
+
+msgid "No"
+msgstr "Nie"
+
+msgid "No invoice rows"
+msgstr ""
+
+msgid "No invoices found"
+msgstr "Nie znaleziono faktur"
+
+msgid "No payments"
+msgstr ""
+
+msgid "No payments selected"
+msgstr "Nie wybrano płatności"
+
+msgid "Org.no."
+msgstr "Nr org."
+
+msgid "Organisation Number"
+msgstr "Numer organizacji"
+
+msgid "Our Reference"
+msgstr "Nasze oznaczenie"
+
+msgid "Over time, more web hosting features have been added."
+msgstr "Z czasem dodano więcej funkcji hostingu internetowego."
+
+msgid "Paid"
+msgstr "Zapłacono"
+
+msgid "Payments"
+msgstr "Płatności"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Previous"
+msgstr "Poprzedni"
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Price List"
+msgstr "Cennik"
+
+msgid "Process"
+msgstr "Przetwórz"
+
+msgid "Process selected"
+msgstr "Przetwórz wybrane"
+
+msgid "Processed"
+msgstr "Przetworzono"
+
+msgid "Processing failed"
+msgstr "Przetwarzanie nie powiodło się"
+
+msgid "Quantity"
+msgstr "Ilość"
+
+msgid "References"
+msgstr "Referencje"
+
+msgid "Refresh"
+msgstr "Odśwież"
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "Zarejestrowane płatności i faktury dostawców są pobierane z Fortnox i wyświetlane w lokalnym interfejsie."
+
+msgid "Remarks"
+msgstr "Uwagi"
+
+msgid "Samizdat"
+msgstr ""
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat jest częścią projektu tworzenia statycznego HTML z plików markdown przesłanych na GitHub."
+
+msgid "Source code on Github"
+msgstr "Kod źródłowy na Github"
+
+msgid "Strictly for Rymdweb"
+msgstr "Wyłącznie dla Rymdweb"
+
+msgid "Supplier invoices"
+msgstr "Faktury dostawców"
+
+msgid "Terms of Payment"
+msgstr "Warunki płatności"
+
+msgid "Test customer"
+msgstr "Testowy klient"
+
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "Akcje są notowane na głównej liście Nasdaq Stockholm."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "Ta integracja obsługuje fakturowanie niezależnie i synchronizuje faktury z Fortnox."
+
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "Ta integracja jest opracowywana i utrzymywana przez Rymdweb AB."
+
+msgid "Total"
+msgstr "Razem"
+
+msgid "Total: {count} customers"
+msgstr "Razem: {count} klientów"
+
+msgid "Totals"
+msgstr ""
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unprocessed"
+msgstr ""
+
+msgid "VAT"
+msgstr "VAT"
+
+msgid "VAT Number"
+msgstr "Numer VAT"
+
+msgid "VAT Type"
+msgstr "Typ VAT"
+
+msgid "Yes"
+msgstr "Tak"
+
+msgid "Your Reference"
+msgstr "Państwa oznaczenie"
+
+msgid "Your email"
+msgstr "Twój e-mail"
+
+msgid "Your name"
+msgstr "Twoje imię"
+
+msgid "Zip Code"
+msgstr "Kod pocztowy"
+
+msgid "payments"
+msgstr "płatności"

@@ -1,0 +1,1389 @@
+# FAKE Medium -
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01\n"
+"PO-Revision-Date: 2025-05-17\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "(No parent - top level)"
+msgstr ""
+
+msgid "404: Missing document"
+msgstr "404: Страница не найдена"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "Ссылка для подтверждения отправлена на {email}."
+
+msgid "About"
+msgstr "О нас"
+
+msgid "Access denied"
+msgstr "Доступ запрещен"
+
+msgid "Account"
+msgstr "Аккаунт"
+
+msgid "Account settings"
+msgstr "Настройки аккаунта"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Active"
+msgstr "Активный"
+
+msgid "Add"
+msgstr "Добавить"
+
+msgid "Add content"
+msgstr "Добавить контент"
+
+msgid "Add customer"
+msgstr "Новый клиент"
+
+msgid "Add group"
+msgstr "Добавить группу"
+
+msgid "Add item"
+msgstr "Добавить элемент"
+
+msgid "Add page"
+msgstr "Добавить страницу"
+
+msgid "Add product"
+msgstr "Новый продукт"
+
+msgid "Add side content"
+msgstr "Добавить боковое содержимое"
+
+msgid "Add subscription"
+msgstr "Новая подписка"
+
+msgid "Add user"
+msgstr "Добавить пользователя"
+
+msgid "Address"
+msgstr "Адрес"
+
+msgid "Address (billing)"
+msgstr "Адрес (для счетов)"
+
+msgid "Address check"
+msgstr "Проверка адреса"
+
+msgid "Admin access required"
+msgstr "Требуется доступ администратора"
+
+msgid "Admininistration panel"
+msgstr "Панель управления"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "После регистрации вы сможете добавить больше данных о себе, изменить настройки доступа и настроить свой опыт."
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "Разрешить cookies для вставки кода подтверждения из email"
+
+msgid "Amount"
+msgstr "Сумма"
+
+msgid "An error occurred"
+msgstr "Произошла ошибка"
+
+msgid "An error occurred during login. Please try again."
+msgstr ""
+
+msgid "Are you sure you want to delete this cache entry?"
+msgstr ""
+
+msgid "Are you sure you want to delete this item?"
+msgstr ""
+
+msgid "Are you sure you want to delete this menu?"
+msgstr ""
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr ""
+
+msgid "Are you sure you want to purge all cache?"
+msgstr "Вы уверены, что хотите очистить весь кэш?"
+
+msgid "Ask an existing customer to invite you, or create a new customer account."
+msgstr ""
+
+msgid "At least {min} characters from: {chars}"
+msgstr "Минимум {min} символов из: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "Минимум {min} символов: {upper} заглавных, {lower} строчных, {num} цифр, {special} спецсимволов"
+
+msgid "Authentication required"
+msgstr "Требуется аутентификация"
+
+msgid "Back to menu"
+msgstr "Вернуться в меню"
+
+msgid "Back to menus"
+msgstr ""
+
+msgid "Barred"
+msgstr "Заблокировано"
+
+msgid "Base URL"
+msgstr "Базовый URL"
+
+msgid "Billing"
+msgstr "Финансы"
+
+msgid "Blocked"
+msgstr "Заблокирован"
+
+msgid "Body"
+msgstr "Текст"
+
+msgid "Bold"
+msgstr "Жирный"
+
+msgid "Bootstrap icons"
+msgstr "Иконки Bootstrap"
+
+msgid "Bootstrap icons helper"
+msgstr "Помощник иконок Bootstrap"
+
+msgid "Bullet List"
+msgstr "Маркированный список"
+
+msgid "Buy {slug} a coffee"
+msgstr "Купить {slug} кофе"
+
+msgid "By default no information about you is shared."
+msgstr "По умолчанию информация о вас не передается третьим лицам."
+
+msgid "Cache"
+msgstr "Кэш"
+
+msgid "Cache Entry Details"
+msgstr "Детали записи кэша"
+
+msgid "Cache Management"
+msgstr "Управление кэшем"
+
+msgid "Cache entry deleted successfully"
+msgstr "Запись кэша успешно удалена"
+
+msgid "Cache entry not found or could not be deleted"
+msgstr ""
+
+msgid "Cache purged"
+msgstr "Кэш очищен"
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "Вызов помощника добавляет SVG-код в таблицу символов в начале документа, а также встроенную ссылку на него."
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Captcha code from image"
+msgstr "Код с картинки капчи"
+
+msgid "Captcha image"
+msgstr "Изображение капчи"
+
+msgid "Captcha was wrong"
+msgstr "Неверная капча"
+
+msgid "Change password"
+msgstr "Изменить пароль"
+
+msgid "Choose a password"
+msgstr "Выберите пароль"
+
+msgid "Choose a username"
+msgstr "Выберите имя пользователя"
+
+msgid "Choose language"
+msgstr "Выберите язык"
+
+msgid "City"
+msgstr "Город"
+
+msgid "City (billing)"
+msgstr "Город (для счетов)"
+
+msgid "Click to pop dialog."
+msgstr "Нажмите для открытия диалога."
+
+msgid "Click to pop login dialog."
+msgstr "Нажмите, чтобы открыть окно входа."
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Company"
+msgstr "Компания"
+
+msgid "Components"
+msgstr ""
+
+msgid "Confirm"
+msgstr "Подтвердить"
+
+msgid "Confirmation Failed"
+msgstr "Подтверждение не удалось"
+
+msgid "Confirmation code"
+msgstr "Код подтверждения"
+
+msgid "Confirmation failed"
+msgstr "Подтверждение не удалось"
+
+msgid "Connection error. Please try again."
+msgstr "Ошибка соединения. Попробуйте снова."
+
+msgid "Contact"
+msgstr "Контакт"
+
+msgid "Contribute"
+msgstr "Внести вклад"
+
+msgid "Control panel"
+msgstr "Панель управления"
+
+msgid "Couldn't use code for verification."
+msgstr "Не удалось использовать код для проверки."
+
+msgid "Country"
+msgstr "Страна"
+
+msgid "Country (billing)"
+msgstr "Страна (для счетов)"
+
+msgid "Country selector"
+msgstr "Выбор страны"
+
+msgid "Create"
+msgstr "Создать"
+
+msgid "Create customer"
+msgstr "Создать клиента"
+
+msgid "Created"
+msgstr "Создано"
+
+msgid "Created {created} by {creator}"
+msgstr "Создано {created} пользователем {creator}"
+
+msgid "Credit trustability"
+msgstr "Кредитоспособность"
+
+msgid "Customer"
+msgstr "Клиент"
+
+msgid "Customer Id"
+msgstr "Номер клиента"
+
+msgid "Customers"
+msgstr "Клиенты"
+
+msgid "DNS zones"
+msgstr "DNS-зоны"
+
+msgid "Data usage: {usage}"
+msgstr "Использование данных: {usage}"
+
+msgid "Database"
+msgstr "База данных"
+
+msgid "Database error occurred"
+msgstr "Произошла ошибка базы данных"
+
+msgid "Databases"
+msgstr "Базы данных"
+
+msgid "Date"
+msgstr "Дата"
+
+msgid "Date of birth"
+msgstr ""
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "Выберите, какие части ваших личных данных вы хотите показывать разным группам."
+
+msgid "Definitions"
+msgstr "Определения"
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "Определяет, из какой подпапки загружать SVG-файлы. По умолчанию используются иконки Bootstrap."
+
+msgid "Display name"
+msgstr "Отображаемое имя"
+
+msgid "Domain"
+msgstr "Домен"
+
+msgid "Domains"
+msgstr "Домены"
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Edit menu item: {id}"
+msgstr ""
+
+msgid "Edit menu: {name}"
+msgstr ""
+
+msgid "Edit page {docpath}"
+msgstr ""
+
+msgid "Edit this page"
+msgstr "Редактировать эту страницу"
+
+msgid "Email"
+msgstr "Эл. почта"
+
+msgid "Email %s has been verified"
+msgstr "Email %s был подтверждён"
+
+msgid "Email (billing)"
+msgstr "Эл. почта (для счетов)"
+
+msgid "Email confirmation"
+msgstr "Подтверждение email"
+
+msgid "Email not valid"
+msgstr "Недействительный адрес эл. почты"
+
+msgid "Email someone about {what}"
+msgstr "Отправить эл. письмо о {what}"
+
+msgid "Empty VAT"
+msgstr "Пустой номер НДС"
+
+msgid "Empty VAT number"
+msgstr "Пустой номер НДС"
+
+msgid "Empty address"
+msgstr "Пустой адрес"
+
+msgid "Empty billingaddress"
+msgstr "Пустой адрес для счетов"
+
+msgid "Empty city"
+msgstr "Пустой город"
+
+msgid "Empty code"
+msgstr "Пустой код"
+
+msgid "Empty company name"
+msgstr "Пустое название компании"
+
+msgid "Empty country"
+msgstr "Пустая страна"
+
+msgid "Empty directory"
+msgstr ""
+
+msgid "Empty first name"
+msgstr "Пустое имя"
+
+msgid "Empty freetext"
+msgstr "Пустой свободный текст"
+
+msgid "Empty last name"
+msgstr "Пустая фамилия"
+
+msgid "Empty mobile"
+msgstr "Пустой мобильный телефон"
+
+msgid "Empty postal code"
+msgstr "Пустой почтовый индекс"
+
+msgid "Empty recommendation"
+msgstr "Пустая рекомендация"
+
+msgid "Empty reference"
+msgstr "Пустая ссылка"
+
+msgid "Empty telephone"
+msgstr "Пустой телефон"
+
+msgid "End main content"
+msgstr "Конец основного содержания"
+
+msgid "End side content"
+msgstr "Конец бокового содержания"
+
+msgid "English"
+msgstr "Английский"
+
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
+msgid "Enter a title first to translate from"
+msgstr ""
+
+msgid "Enter code"
+msgstr "Введите код"
+
+msgid "Enter code from captcha image"
+msgstr "Введите код с изображения капчи"
+
+msgid "Enter password"
+msgstr "Введите пароль"
+
+msgid "Enter username"
+msgstr "Введите имя пользователя"
+
+msgid "Enter your email"
+msgstr "Введите ваш адрес эл. почты"
+
+msgid "Euro"
+msgstr "Евро"
+
+msgid "Examples"
+msgstr "Примеры"
+
+msgid "Exception Occurred"
+msgstr ""
+
+msgid "Expand menu"
+msgstr "Развернуть меню"
+
+msgid "Expand personal menu."
+msgstr "Развернуть личное меню"
+
+msgid "Expires"
+msgstr "Истекает"
+
+msgid "Failed to purge cache"
+msgstr "Не удалось очистить кэш"
+
+msgid "Failed to save"
+msgstr ""
+
+msgid "File"
+msgstr "Файл"
+
+msgid "File: stored in src/public. Database: stored in PostgreSQL."
+msgstr ""
+
+msgid "First name"
+msgstr "Имя"
+
+msgid "Full"
+msgstr "Полный"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "Оказать небольшую финансовую поддержку {slug} на buymeacoffee"
+
+msgid "Group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Groups"
+msgstr "Группы"
+
+msgid "HTML result"
+msgstr "Результат HTML"
+
+msgid "Halfyear"
+msgstr "Полгода"
+
+msgid "Heading 1"
+msgstr "Заголовок 1"
+
+msgid "Heading 2"
+msgstr "Заголовок 2"
+
+msgid "Heading 3"
+msgstr "Заголовок 3"
+
+msgid "I accept the terms for registration."
+msgstr "Я принимаю условия регистрации."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Identification code"
+msgstr "Идентификационный код"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "Если вы не регистрировали аккаунт, пожалуйста, проигнорируйте это письмо."
+
+msgid "In"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Invalid confirmation link"
+msgstr "Недействительная ссылка подтверждения"
+
+msgid "Invalid email"
+msgstr "Недействительный адрес эл. почты"
+
+msgid "Invalid password"
+msgstr "Недействительный пароль"
+
+msgid "Invalid username"
+msgstr "Недействительное имя пользователя"
+
+msgid "Invoice"
+msgstr "Счет"
+
+msgid "Invoice address"
+msgstr "Адрес для счетов"
+
+msgid "Invoice currency"
+msgstr "Валюта счета"
+
+msgid "Invoice currency is {currency}."
+msgstr "Валюта счета - {currency}."
+
+msgid "Invoice customer #{customerid}"
+msgstr "Счет клиента #{customerid}"
+
+msgid "Invoice period"
+msgstr "Период счета"
+
+msgid "Invoice type"
+msgstr "Тип счета"
+
+msgid "Invoices"
+msgstr "Счета"
+
+msgid "Italic"
+msgstr "Курсив"
+
+msgid "Item deleted"
+msgstr ""
+
+msgid "Item saved"
+msgstr ""
+
+msgid "Key"
+msgstr "Ключ"
+
+msgid "Language"
+msgstr "Язык"
+
+msgid "Language:"
+msgstr ""
+
+msgid "Languages"
+msgstr "Языки"
+
+msgid "Last name"
+msgstr "Фамилия"
+
+msgid "Leave empty for items without a link"
+msgstr ""
+
+msgid "License"
+msgstr ""
+
+msgid "Link"
+msgstr "Ссылка"
+
+msgid "Link to control panel"
+msgstr "Ссылка на панель управления"
+
+msgid "Link to personal settings"
+msgstr "Ссылка на личные настройки"
+
+msgid "Loading"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Log in"
+msgstr "Войти"
+
+msgid "Log out"
+msgstr "Выйти"
+
+msgid "Log out and end current session"
+msgstr "Выйти и завершить текущую сессию"
+
+msgid "Login blocked"
+msgstr "Вход заблокирован"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "Вход временно заблокирован из-за чрезмерного количества неудачных попыток с {ip}."
+
+msgid "Logotype"
+msgstr "Логотип"
+
+msgid "Logotype leading to start"
+msgstr "Логотип ведет на главную"
+
+msgid "Logotype leading to start page"
+msgstr "Логотип ведет на главную страницу"
+
+msgid "Logotype linked to {site}"
+msgstr "Логотип ссылается на {site}"
+
+msgid "Lookup"
+msgstr ""
+
+msgid "Lost password?"
+msgstr "Забыли пароль?"
+
+msgid "MB"
+msgstr "МБ"
+
+msgid "Mail domains"
+msgstr "Почтовые домены"
+
+msgid "Mail dump"
+msgstr "Свалка почты"
+
+msgid "Manager"
+msgstr "Менеджер"
+
+msgid "Manuals"
+msgstr "Руководства"
+
+msgid "Member since"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Menu Items"
+msgstr ""
+
+msgid "Menu Settings"
+msgstr ""
+
+msgid "Menu created"
+msgstr ""
+
+msgid "Menu deleted"
+msgstr ""
+
+msgid "Menu saved"
+msgstr ""
+
+msgid "Menus"
+msgstr "Меню"
+
+msgid "Messages pagination"
+msgstr ""
+
+msgid "Missing file, our bad?"
+msgstr "Отсутствующий файл, наша ошибка?"
+
+msgid "Missing username or password"
+msgstr "Отсутствует имя пользователя или пароль"
+
+msgid "Mobile"
+msgstr "Мобильный"
+
+msgid "Modifications were saved."
+msgstr "Изменения сохранены."
+
+msgid "Month"
+msgstr "Месяц"
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Network error - please try again"
+msgstr "Сетевая ошибка - попробуйте снова"
+
+msgid "Never"
+msgstr "Никогда"
+
+msgid "Never expires"
+msgstr ""
+
+msgid "New Menu"
+msgstr "Новое меню"
+
+msgid "New account"
+msgstr "Новый аккаунт"
+
+msgid "New customer"
+msgstr "Новый клиент"
+
+msgid "New folder"
+msgstr "Новая папка"
+
+msgid "New group"
+msgstr ""
+
+msgid "New menu"
+msgstr "Новое меню"
+
+msgid "New menu item"
+msgstr ""
+
+msgid "Newest"
+msgstr "Новейшие"
+
+msgid "Newsletter"
+msgstr "Рассылка"
+
+msgid "Next"
+msgstr "Далее"
+
+msgid "No cache entries found"
+msgstr ""
+
+msgid "No groups found"
+msgstr ""
+
+msgid "No invoicing"
+msgstr "Без выставления счетов"
+
+msgid "No menu items. Click \"Add item\" to create one."
+msgstr ""
+
+msgid "No menus found"
+msgstr ""
+
+msgid "No pages found."
+msgstr "Страницы не найдены."
+
+msgid "No services available"
+msgstr ""
+
+msgid "No title"
+msgstr "Без названия"
+
+msgid "No users found"
+msgstr "Пользователи не найдены"
+
+msgid "None (root level)"
+msgstr ""
+
+msgid "Normal"
+msgstr "Обычный"
+
+msgid "Not found"
+msgstr "Не найдено"
+
+msgid "Notes"
+msgstr "Примечания"
+
+msgid "Number"
+msgstr "Номер"
+
+msgid "Numbered List"
+msgstr "Нумерованный список"
+
+msgid "Open invoice"
+msgstr "Открыть счет"
+
+msgid "Open invoice items"
+msgstr "Неоплаченные позиции"
+
+msgid "Open list"
+msgstr "Открыть список"
+
+msgid "Operation ID:"
+msgstr ""
+
+msgid "Options"
+msgstr "Параметры"
+
+msgid "Order saved"
+msgstr ""
+
+msgid "Organization"
+msgstr "Организация"
+
+msgid "Our reference"
+msgstr "Наша ссылка"
+
+msgid "PageSpeed result 100 100 100 100"
+msgstr "Результат PageSpeed 100 100 100 100"
+
+msgid "Pagination"
+msgstr ""
+
+msgid "Paid"
+msgstr "Оплачено"
+
+msgid "Panel"
+msgstr "Панель"
+
+msgid "Paragraph"
+msgstr ""
+
+msgid "Parameters"
+msgstr ""
+
+msgid "Parent Item"
+msgstr ""
+
+msgid "Password"
+msgstr "Пароль"
+
+msgid "Password must be at least {min} characters"
+msgstr "Пароль должен содержать минимум {min} символов"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "Пароль должен содержать минимум {min} строчных букв"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "Пароль должен содержать минимум {min} цифр"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "Пароль должен содержать минимум {min} специальных символов"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "Пароль должен содержать минимум {min} заглавных букв"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "Неверный пароль или имя пользователя не существует."
+
+msgid "People rocketing to the sky"
+msgstr "Люди, летящие к небу"
+
+msgid "Personal"
+msgstr "Личный"
+
+msgid "Personal menu"
+msgstr "Личное меню"
+
+msgid "Please check your confirmation link or register again."
+msgstr "Пожалуйста, проверьте ссылку подтверждения или зарегистрируйтесь снова."
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "Пожалуйста, подтвердите ваш адрес электронной почты, нажав на следующую ссылку:"
+
+msgid "Please enter a valid email address"
+msgstr "Пожалуйста, введите действительный адрес электронной почты"
+
+msgid "Please login to access resource."
+msgstr "Пожалуйста, войдите, чтобы получить доступ к ресурсу."
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "Пожалуйста, выйдите и войдите как пользователь с соответствующими правами."
+
+msgid "Postal code"
+msgstr "Почтовый индекс"
+
+msgid "Postal code (billing)"
+msgstr "Почтовый индекс (для счетов)"
+
+msgid "Postal mail"
+msgstr "Обычная почта"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Нажмите \"{buttontext}\" для новой капчи"
+
+msgid "Preview"
+msgstr "Предпросмотр"
+
+msgid "Previous"
+msgstr "Назад"
+
+msgid "Privilege sets"
+msgstr "Наборы привилегий"
+
+msgid "Privileges"
+msgstr "Привилегии"
+
+msgid "Products"
+msgstr "Продукты"
+
+msgid "Purge"
+msgstr "Очистить"
+
+msgid "Purge All"
+msgstr "Очистить всё"
+
+msgid "Purged %d cache entries"
+msgstr ""
+
+msgid "Purging all cache requires confirmation"
+msgstr ""
+
+msgid "Quarter"
+msgstr "Квартал"
+
+msgid "Quote"
+msgstr "Цитата"
+
+msgid "Recommended by"
+msgstr "Рекомендовано"
+
+msgid "Register"
+msgstr "Регистрация"
+
+msgid "Register account"
+msgstr "Зарегистрировать аккаунт"
+
+msgid "Register to create and publish content."
+msgstr "Зарегистрируйтесь, чтобы создавать и публиковать контент."
+
+msgid "Registration is currently non-functional"
+msgstr "Регистрация в настоящее время не работает"
+
+msgid "Rename"
+msgstr ""
+
+msgid "Required"
+msgstr "Обязательно"
+
+msgid "Resources"
+msgstr "Ресурсы"
+
+msgid "Response"
+msgstr ""
+
+msgid "Roles"
+msgstr "Роли"
+
+msgid "SEK"
+msgstr "SEK"
+
+msgid "SMS sent successfully!"
+msgstr ""
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "Samizdat использует иконки Bootstrap от {link}."
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save failed"
+msgstr ""
+
+msgid "Save options"
+msgstr ""
+
+msgid "Save to database"
+msgstr ""
+
+msgid "Save to file"
+msgstr ""
+
+msgid "Saved"
+msgstr ""
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search cache"
+msgstr ""
+
+msgid "Search content"
+msgstr "Поиск содержания"
+
+msgid "Search field for {what}"
+msgstr "Поле поиска для {what}"
+
+msgid "Search for customer"
+msgstr "Поиск клиента"
+
+msgid "Search for product"
+msgstr "Поиск продукта"
+
+msgid "Search for user or group"
+msgstr "Поиск пользователя или группы"
+
+msgid "Search menus..."
+msgstr ""
+
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr ""
+
+msgid "Search web content"
+msgstr "Поиск веб-содержания"
+
+msgid "Select Format"
+msgstr ""
+
+msgid "Select country"
+msgstr "Выбрать страну"
+
+msgid "Select country or click flags to see detail"
+msgstr "Выберите страну или нажмите на флаги для просмотра деталей"
+
+msgid "Select state"
+msgstr ""
+
+msgid "Send SMS"
+msgstr ""
+
+msgid "Sending..."
+msgstr ""
+
+msgid "Set the height attribute."
+msgstr "Установить атрибут height."
+
+msgid "Set the id attribute."
+msgstr "Установить атрибут id."
+
+msgid "Set the title attribute."
+msgstr "Установить атрибут title."
+
+msgid "Set the width attribute."
+msgstr "Установить атрибут width."
+
+msgid "Settings"
+msgstr "Настройки"
+
+msgid "Settings saved"
+msgstr ""
+
+msgid "Share {what} on {where}"
+msgstr "Поделиться {what} на {where}"
+
+msgid "Shown as"
+msgstr "Отображается как"
+
+msgid "Side content"
+msgstr ""
+
+msgid "Sidecard name"
+msgstr ""
+
+msgid "Site"
+msgstr "Сайт"
+
+msgid "Site content"
+msgstr "Содержимое сайта"
+
+msgid "Skip links"
+msgstr ""
+
+msgid "Skip to main content"
+msgstr ""
+
+msgid "Snapback evaluation"
+msgstr "Оценка Snapback"
+
+msgid "Snapback scheduler"
+msgstr "Планировщик Snapback"
+
+msgid "Source files"
+msgstr ""
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "Список дополнительных классов через пробел для добавления к стандартным классам с префиксом."
+
+msgid "Start main content"
+msgstr "Начало основного содержания"
+
+msgid "Start side content"
+msgstr "Начало бокового содержания"
+
+msgid "State"
+msgstr ""
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Storage"
+msgstr ""
+
+msgid "Storage target"
+msgstr ""
+
+msgid "Stuff"
+msgstr "Разное"
+
+msgid "Super panel"
+msgstr "Супер-панель"
+
+msgid "Superadmin access required"
+msgstr ""
+
+msgid "Swedish"
+msgstr "Шведский"
+
+msgid "TTL"
+msgstr ""
+
+msgid "Telephone"
+msgstr "Телефон"
+
+msgid "Terms of service"
+msgstr ""
+
+msgid "Text Editor"
+msgstr ""
+
+msgid "The Samizdat project"
+msgstr "Проект Samizdat"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "По умолчанию используется набор иконок Bootstrap."
+
+msgid "The form was submitted from {ip}"
+msgstr "Форма была отправлена с IP {ip}"
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "Ограничение: {blocklimit} попыток за {blocktime} минут."
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "Функция входа использует JavaScript, cookies и AJAX."
+
+msgid "The page {docpath} wasn't found."
+msgstr "Страница {docpath} не найдена."
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "Данная ссылка подтверждения недействительна или срок её действия истёк"
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "Эта демонстрация показывает результат работы SVG-помощника Samizdat."
+
+msgid "This field is required"
+msgstr "Это поле обязательно для заполнения"
+
+msgid "This resource has no input parameters."
+msgstr ""
+
+msgid "This resource is deprecated!"
+msgstr ""
+
+msgid "This resource is not documented."
+msgstr ""
+
+msgid "Titles by Language"
+msgstr ""
+
+msgid "Toggle Dropdown"
+msgstr ""
+
+msgid "Toggle menu"
+msgstr "Переключить меню"
+
+msgid "Translate"
+msgstr ""
+
+msgid "Translating..."
+msgstr ""
+
+msgid "Translation complete"
+msgstr ""
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "URI Path"
+msgstr ""
+
+msgid "Unauthenticated"
+msgstr "Не аутентифицирован"
+
+msgid "Underline"
+msgstr "Подчёркнутый"
+
+msgid "Untitled"
+msgstr ""
+
+msgid "Update and send"
+msgstr ""
+
+msgid "Update customer"
+msgstr "Обновить клиента"
+
+msgid "Updated customer"
+msgstr "Клиент обновлен"
+
+msgid "Updated {updated} by {updater}"
+msgstr "Обновлено {updated} пользователем {updater}"
+
+msgid "Usage"
+msgstr "Использование"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "Используйте <code>flags</code> для иконок флагов или <code>anysvg</code> для домашней страницы приложения."
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "Используйте это, если вам не нужны классы по умолчанию с префиксом."
+
+msgid "Used to make class names."
+msgstr "Используется для создания имен классов."
+
+msgid "User"
+msgstr "Пользователь"
+
+msgid "User manual"
+msgstr "Руководство пользователя"
+
+msgid "User not found"
+msgstr ""
+
+msgid "User registration"
+msgstr "Регистрация пользователя"
+
+msgid "Username"
+msgstr "Имя пользователя"
+
+msgid "Username already exists"
+msgstr "Имя пользователя уже существует"
+
+msgid "Username can only contain {chars}"
+msgstr "Имя пользователя может содержать только {chars}"
+
+msgid "Username could not be created"
+msgstr "Не удалось создать имя пользователя"
+
+msgid "Username must be at least {min} characters"
+msgstr "Имя пользователя должно содержать минимум {min} символов"
+
+msgid "Users"
+msgstr "Пользователи"
+
+msgid "VAT Number"
+msgstr "Номер НДС"
+
+msgid "VAT Number Lookup"
+msgstr ""
+
+msgid "VAT lookup, {vatno}"
+msgstr "Проверка номера НДС, {vatno}"
+
+msgid "VAT number"
+msgstr "Номер НДС"
+
+msgid "VAT number lookup"
+msgstr "Проверка номера НДС"
+
+msgid "VAT number not valid"
+msgstr ""
+
+msgid "VAT percentage"
+msgstr "Процент НДС"
+
+msgid "Valid"
+msgstr ""
+
+msgid "Value"
+msgstr "Значение"
+
+msgid "Value for the class attribute."
+msgstr "Значение для атрибута class."
+
+msgid "Version"
+msgstr "Версия"
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr ""
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "Мы также сохраним это для статистики и предотвращения регистрации роботов."
+
+msgid "We will email a confirmation request."
+msgstr "Мы отправим запрос на подтверждение по электронной почте."
+
+msgid "Web sites"
+msgstr "Веб-сайты"
+
+msgid "Website"
+msgstr "Сайт"
+
+msgid "Websites"
+msgstr "Веб-сайты"
+
+msgid "Whois data for {ip}"
+msgstr "Данные Whois для {ip}"
+
+msgid "Year"
+msgstr "Год"
+
+msgid "You are not connected to any customer accounts."
+msgstr ""
+
+msgid "You can also post in our discussions."
+msgstr "Вы также можете оставить сообщение в наших обсуждениях."
+
+msgid "You can now log in to your account."
+msgstr "Теперь вы можете войти в свою учётную запись."
+
+msgid "You have registered a new user account on {site}."
+msgstr "Вы зарегистрировали новый аккаунт пользователя на {site}."
+
+msgid "You have {remaining} tries left."
+msgstr "У вас осталось {remaining} попыток."
+
+msgid "You need to accept registration terms."
+msgstr "Вам необходимо принять условия регистрации."
+
+msgid "Your email"
+msgstr "Ваш адрес эл. почты"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "Ваш IP {ip} будет добавлен к запросу подтверждения."
+
+msgid "cache"
+msgstr "кэш"
+
+msgid "content"
+msgstr "содержание"
+
+msgid "customer"
+msgstr "клиент"
+
+msgid "msg"
+msgstr ""
+
+msgid "product"
+msgstr "продукт"
+
+msgid "seconds"
+msgstr ""
+
+msgid "supporters"
+msgstr "сторонники"
+
+msgid "user"
+msgstr "пользователь"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: Требуется авторизация"
+
+msgid "{code}: No authorization"
+msgstr "{code}: Нет прав доступа"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: Не в этой вселенной"
+
+msgid "{server}, main firewall"
+msgstr "{server}, основной файрвол"
+
+msgid "{server}, standby firewall"
+msgstr "{server}, резервный файрвол"
+
+msgid "{sitename} by country"
+msgstr "{sitename} по странам"
+
+msgid "{sitename} in {country}"
+msgstr "{sitename} в {country}"

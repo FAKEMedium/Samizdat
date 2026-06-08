@@ -1,0 +1,384 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "Ett delmål är att testa öppen redovisning, där siffror kan presenteras kontinuerligt offentligt efter anonymisering."
+
+msgid "API docs"
+msgstr "API-dokument"
+
+msgid "About Fortnox"
+msgstr "Om Fortnox"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "Aktivera Samizdat Fortnox-integration"
+
+msgid "Activate integration"
+msgstr "Aktivera integration"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Address"
+msgstr "Adress"
+
+msgid "Address 1"
+msgstr "Adress 1"
+
+msgid "Address 2"
+msgstr "Adress 2"
+
+msgid "All Customers"
+msgstr "Alla kunder"
+
+msgid "All Invoices"
+msgstr "Alla fakturor"
+
+msgid "All payments"
+msgstr ""
+
+msgid "Amount"
+msgstr "Summa"
+
+msgid "Article"
+msgstr "Artikel"
+
+msgid "Balance"
+msgstr "Balans"
+
+msgid "Basic Information"
+msgstr "Grundinformation"
+
+msgid "Captcha code from image"
+msgstr "Kod från captcha-bild"
+
+msgid "Captcha image"
+msgstr "Captcha-bild"
+
+msgid "Captcha was wrong"
+msgstr "Felaktig captcha"
+
+msgid "Cash invoice"
+msgstr "Kontantfaktura"
+
+msgid "City"
+msgstr "Stad"
+
+msgid "Comments"
+msgstr "Kommentarer"
+
+msgid "Contact Information"
+msgstr "Kontaktinformation"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Credit invoice"
+msgstr "Kreditfaktura"
+
+msgid "Currency"
+msgstr "Valuta"
+
+msgid "Customer"
+msgstr "Kund"
+
+msgid "Customer Number"
+msgstr "Kundnummer"
+
+msgid "Customers"
+msgstr "Kunder"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "Kunder får en lista över fakturor och öppna fakturaposter"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Debt"
+msgstr "Skuld"
+
+msgid "Delivery Address"
+msgstr "Leveransadress"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Developer docs"
+msgstr "Utvecklardokument"
+
+msgid "Development"
+msgstr "Utveckling"
+
+msgid "Discount"
+msgstr "Rabatt"
+
+msgid "Due Date"
+msgstr "Förfallodatum"
+
+msgid "Due date"
+msgstr "Förfallodatum"
+
+msgid "Email"
+msgstr "Epost"
+
+msgid "Email Invoice"
+msgstr "Maila faktura"
+
+msgid "Email Offer"
+msgstr "Maila offert"
+
+msgid "Email Order"
+msgstr "Maila order"
+
+msgid "Empty name"
+msgstr "Namn saknas"
+
+msgid "Enter code"
+msgstr "Skriv in koden"
+
+msgid "Enter valid email"
+msgstr "Ange giltig epostadress"
+
+msgid "File archive"
+msgstr "Filarkiv"
+
+msgid "Financial Information"
+msgstr "Ekonomisk information"
+
+msgid "For more information, visit the Fortnox website:"
+msgstr "För mer information, besök Fortnoxs webbplats:"
+
+msgid "Fortnox authorization required"
+msgstr "Fortnox-auktorisering krävs"
+
+msgid "Fortnox integration"
+msgstr "Fortnox-integration"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox är en svensk molnbaserad redovisningsprogramvara som erbjuder en rad tjänster inklusive fakturering, bokföring och finansiell hantering."
+
+msgid "Fortnox panel"
+msgstr "Fortnoxpanel"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "Fortnox grundades 2001 med huvudkontor i Växjö."
+
+msgid "Highlights"
+msgstr "Höjdpunkter"
+
+msgid "Interest invoice"
+msgstr "Räntefaktura"
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice Date"
+msgstr "Fakturadatum"
+
+msgid "Invoice Details"
+msgstr "Fakturadetaljer"
+
+msgid "Invoice Number"
+msgstr "Fakturanummer"
+
+msgid "Invoice Rows"
+msgstr "Fakturarader"
+
+msgid "Invoice Type"
+msgstr "Fakturatyp"
+
+msgid "Invoice number"
+msgstr "Fakturanummer"
+
+msgid "Invoices"
+msgstr "Fakturor"
+
+msgid "Invoices are created with LATEX type setting software"
+msgstr "Fakturor skapas med typsättningsprogramvaran LATEX"
+
+msgid "It is currently only available to Rymdweb."
+msgstr "Den är för närvarande endast tillgänglig för Rymdweb."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "Det är utformat för att hjälpa små och medelstora företag att hantera sin ekonomi effektivt."
+
+msgid "Log out"
+msgstr "Logga ut"
+
+msgid "Mail sent through own servers"
+msgstr "Mail skickas genom egna servrar"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "Minimal lokal kunddata lagras i Fortnox."
+
+msgid "Multiple languages and country specific modifications"
+msgstr "Flera språk och landsspecifika anpassningar"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Next"
+msgstr "Nästa"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "No invoice rows"
+msgstr "Inga fakturarader"
+
+msgid "No invoices found"
+msgstr "Inga fakturor hittades"
+
+msgid "No payments"
+msgstr ""
+
+msgid "No payments selected"
+msgstr "Inga betalningar valda"
+
+msgid "Org.no."
+msgstr "Org.nr."
+
+msgid "Organisation Number"
+msgstr "Organisationsnummer"
+
+msgid "Our Reference"
+msgstr "Vår referens"
+
+msgid "Over time, more web hosting features have been added."
+msgstr "Med tiden har fler webbhotell-funktioner lagts till."
+
+msgid "Paid"
+msgstr "Betalad"
+
+msgid "Payments"
+msgstr "Betalningar"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Previous"
+msgstr "Föregående"
+
+msgid "Price"
+msgstr "Pris"
+
+msgid "Price List"
+msgstr "Prislista"
+
+msgid "Process"
+msgstr "Bearbeta"
+
+msgid "Process selected"
+msgstr "Bearbeta valda"
+
+msgid "Processed"
+msgstr "Bearbetad"
+
+msgid "Processing failed"
+msgstr "Bearbetning misslyckades"
+
+msgid "Quantity"
+msgstr "Antal"
+
+msgid "References"
+msgstr "Referenser"
+
+msgid "Refresh"
+msgstr "Uppdatera"
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "Registrerade betalningar och leverantörsfakturor hämtas från Fortnox och visas i det lokala gränssnittet."
+
+msgid "Remarks"
+msgstr "Anmärkningar"
+
+msgid "Samizdat"
+msgstr "Samizdat"
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat är en del av ett projekt för att skapa statisk HTML från markdown-filer som laddats upp till GitHub."
+
+msgid "Source code on Github"
+msgstr "Källkod på Github"
+
+msgid "Strictly for Rymdweb"
+msgstr "Endast för Rymdweb"
+
+msgid "Supplier invoices"
+msgstr "Lererantörsfakturor"
+
+msgid "Terms of Payment"
+msgstr "Betalningsvillkor"
+
+msgid "Test customer"
+msgstr "Testkund"
+
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "Aktien är noterad på Nasdaq Stockholms huvudlista."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "Denna integration hanterar fakturering självständigt och synkroniserar fakturor med Fortnox."
+
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "Denna integration utvecklas och underhålls av Rymdweb AB."
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "Total: {count} customers"
+msgstr "Totalt: {count} kunder"
+
+msgid "Totals"
+msgstr "Summor"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unprocessed"
+msgstr ""
+
+msgid "VAT"
+msgstr "Moms"
+
+msgid "VAT Number"
+msgstr "Momsregistreringsnummer"
+
+msgid "VAT Type"
+msgstr "Momstyp"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Your Reference"
+msgstr "Er referens"
+
+msgid "Your email"
+msgstr "Din epostadress"
+
+msgid "Your name"
+msgstr "Ditt namn"
+
+msgid "Zip Code"
+msgstr "Postnummer"
+
+msgid "payments"
+msgstr "betalningar"

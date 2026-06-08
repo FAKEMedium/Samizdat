@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Amount"
+msgstr "Kwota"
+
+msgid "Amount:"
+msgstr "Kwota:"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
+msgid "Completed"
+msgstr "Zakończone"
+
+msgid "Currency"
+msgstr "Waluta"
+
+msgid "Date"
+msgstr "Data"
+
+msgid "End Date"
+msgstr "Data końcowa"
+
+msgid "Error fetching transactions"
+msgstr "Błąd podczas pobierania transakcji"
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Fetch from PayPal"
+msgstr "Pobierz z PayPal"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
+
+msgid "Item Number"
+msgstr ""
+
+msgid "Item:"
+msgstr ""
+
+msgid "Live Transactions"
+msgstr "Aktualne transakcje"
+
+msgid "Loading..."
+msgstr "Ładowanie..."
+
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "No transactions found for selected date range"
+msgstr "Nie znaleziono transakcji dla wybranego zakresu dat"
+
+msgid "PayPal Payments"
+msgstr ""
+
+msgid "Payer"
+msgstr "Płatnik"
+
+msgid "Payer Email"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Pending"
+msgstr "Oczekujące"
+
+msgid "Please select both start and end dates"
+msgstr "Proszę wybrać datę początkową i końcową"
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Start Date"
+msgstr "Data początkowa"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Subject"
+msgstr "Temat"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr ""
+
+msgid "Total"
+msgstr "Razem"
+
+msgid "Transaction ID"
+msgstr ""
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You have cancelled the payment process."
+msgstr ""
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "from PayPal API"
+msgstr "z API PayPal"
+
+msgid "from database"
+msgstr "z bazy danych"
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr "płatności"
+
+msgid "refunded"
+msgstr ""
+
+msgid "transactions"
+msgstr "transakcje"

@@ -1,0 +1,348 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Add contact"
+msgstr "Kontakt hinzufügen"
+
+msgid "Add nameserver"
+msgstr "Nameserver hinzufügen"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Admin contact"
+msgstr "Admin-Kontakt"
+
+msgid "All customers"
+msgstr "Alle Kunden"
+
+msgid "All domains"
+msgstr "Alle Domains"
+
+msgid "Are you sure you want to delete this contact?"
+msgstr "Sind Sie sicher, dass Sie diesen Kontakt löschen möchten?"
+
+msgid "Auth code"
+msgstr ""
+
+msgid "Auth-Info code from current registrar"
+msgstr "Auth-Info-Code vom aktuellen Registrar"
+
+msgid "Authorization code"
+msgstr "Autorisierungscode"
+
+msgid "Back to list"
+msgstr "Zurück zur Liste"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "City"
+msgstr "Stadt"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact created successfully"
+msgstr "Kontakt erfolgreich erstellt"
+
+msgid "Contact deleted"
+msgstr "Kontakt gelöscht"
+
+msgid "Contact not found"
+msgstr "Kontakt nicht gefunden"
+
+msgid "Contact updated successfully"
+msgstr "Kontakt erfolgreich aktualisiert"
+
+msgid "Contacts"
+msgstr "Kontakte"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Create Contact"
+msgstr "Kontakt erstellen"
+
+msgid "Created"
+msgstr "Erstellt"
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Do not renew"
+msgstr "Nicht verlängern"
+
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Domain name"
+msgstr "Domain-Name"
+
+msgid "Domain registered"
+msgstr "Domain registriert"
+
+msgid "Domain transfer initiated"
+msgstr "Domain-Transfer eingeleitet"
+
+msgid "Domains"
+msgstr "Domains"
+
+msgid "Due"
+msgstr ""
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Edit contact"
+msgstr "Kontakt bearbeiten"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Expiring"
+msgstr "Läuft ab"
+
+msgid "Expiring domains"
+msgstr "Ablaufende Domains"
+
+msgid "Expiry"
+msgstr "Ablauf"
+
+msgid "Export"
+msgstr "Exportieren"
+
+msgid "Failed to create contact"
+msgstr "Kontakt konnte nicht erstellt werden"
+
+msgid "Failed to delete contact"
+msgstr "Kontakt konnte nicht gelöscht werden"
+
+msgid "Failed to initiate transfer"
+msgstr "Transfer konnte nicht eingeleitet werden"
+
+msgid "Failed to load domain"
+msgstr "Domain konnte nicht geladen werden"
+
+msgid "Failed to register domain"
+msgstr "Domain konnte nicht registriert werden"
+
+msgid "Failed to update contact"
+msgstr "Kontakt konnte nicht aktualisiert werden"
+
+msgid "Fax"
+msgstr "Fax"
+
+msgid "First"
+msgstr ""
+
+msgid "Found"
+msgstr "Gefunden"
+
+msgid "Handle"
+msgstr "Handle"
+
+msgid "Handle required for"
+msgstr "Handle erforderlich für"
+
+msgid "I am acting as designated agent for this email change"
+msgstr "Ich handle als Designated Agent für diese E-Mail-Änderung"
+
+msgid "International format: +CC.NNNNNNNN"
+msgstr "Internationales Format: +CC.NNNNNNNN"
+
+msgid "Last"
+msgstr ""
+
+msgid "Loading from registry..."
+msgstr ""
+
+msgid "Loading..."
+msgstr "Wird geladen..."
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Nameservers"
+msgstr "Nameserver"
+
+msgid "New contact"
+msgstr "Neuer Kontakt"
+
+msgid "Next"
+msgstr "Weiter"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "No matches found"
+msgstr "Keine Übereinstimmungen gefunden"
+
+msgid "Org number"
+msgstr "Org.-Nummer"
+
+msgid "Org number cannot be changed for SE/NU contacts"
+msgstr "Org.-Nummer kann für SE/NU-Kontakte nicht geändert werden"
+
+msgid "Org. Number"
+msgstr "Org.-Nummer"
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "Page navigation"
+msgstr "Seitennavigation"
+
+msgid "Period"
+msgstr "Zeitraum"
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Please select at least one registry"
+msgstr "Bitte wählen Sie mindestens eine Registry aus"
+
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Register"
+msgstr "Registrieren"
+
+msgid "Register domain"
+msgstr "Domain registrieren"
+
+msgid "Registrant"
+msgstr "Registrant"
+
+msgid "Registrant contact"
+msgstr "Registrant-Kontakt"
+
+msgid "Registrar"
+msgstr "Registrar"
+
+msgid "Registries & Handles"
+msgstr "Registrierungsstellen & Handles"
+
+msgid "Renew"
+msgstr "Verlängern"
+
+msgid "Renewal"
+msgstr ""
+
+msgid "Required for most TLDs. Get this from your current registrar."
+msgstr "Erforderlich für die meisten TLDs. Erhalten Sie dies von Ihrem aktuellen Registrar."
+
+msgid "Same as registrant"
+msgstr "Gleich wie Registrant"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Search contact"
+msgstr "Kontakt suchen"
+
+msgid "Search customer (min 3 chars)..."
+msgstr "Kunde suchen (min. 3 Zeichen)..."
+
+msgid "Search domain"
+msgstr "Domain suchen"
+
+msgid "Search field for {what}"
+msgstr "Suchfeld für {what}"
+
+msgid "Search for domain"
+msgstr "Domain suchen"
+
+msgid "Select all"
+msgstr "Alle auswählen"
+
+msgid "Select contact..."
+msgstr "Kontakt auswählen..."
+
+msgid "Select country..."
+msgstr "Land auswählen..."
+
+msgid "Select customer first..."
+msgstr "Zuerst Kunden auswählen..."
+
+msgid "Select registries and set handles for each"
+msgstr "Registrierungsstellen auswählen und Handles für jede festlegen"
+
+msgid "State/Province"
+msgstr "Bundesland/Provinz"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Street Address"
+msgstr "Straßenadresse"
+
+msgid "Street address (one line per row)"
+msgstr "Straßenadresse (eine Zeile pro Reihe)"
+
+msgid "Tech contact"
+msgstr "Technischer Kontakt"
+
+msgid "Transfer"
+msgstr "Überweisung"
+
+msgid "Transfer domain"
+msgstr "Domain übertragen"
+
+msgid "Update Contact"
+msgstr "Kontakt aktualisieren"
+
+msgid "VAT Number"
+msgstr "MwSt.-Nummer"
+
+msgid "VAT number"
+msgstr "MwSt.-Nummer"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "customers"
+msgstr "Kunden"
+
+msgid "domain"
+msgstr "Domain"
+
+msgid "of"
+msgstr "von"
+
+msgid "selected"
+msgstr "ausgewählt"
+
+msgid "year"
+msgstr "Jahr"
+
+msgid "years"
+msgstr "Jahre"

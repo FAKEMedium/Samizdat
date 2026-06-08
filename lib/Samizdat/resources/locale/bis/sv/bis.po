@@ -1,0 +1,387 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "1 Year"
+msgstr "1 år"
+
+msgid "A"
+msgstr "A"
+
+msgid "A Records"
+msgstr "A-poster"
+
+msgid "A/AAAA Records"
+msgstr "A/AAAA-poster"
+
+msgid "AS Name"
+msgstr "AS-namn"
+
+msgid "ASN"
+msgstr "ASN"
+
+msgid "All"
+msgstr "Alla"
+
+msgid "All Sectors"
+msgstr "Alla sektorer"
+
+msgid "Average Score"
+msgstr "Genomsnittlig poäng"
+
+msgid "Avg Score"
+msgstr "Genomsnittlig poäng"
+
+msgid "Avg score"
+msgstr "Genomsnittlig poäng"
+
+msgid "BIS - $sector"
+msgstr "BIS - $sector"
+
+msgid "BIS - Compliance Trends"
+msgstr "BIS - Regelefterlevnadstrender"
+
+msgid "BIS - Hosting Providers"
+msgstr "BIS - Hostingleverantörer"
+
+msgid "BIS Badge"
+msgstr "BIS-märke"
+
+msgid "BIS Badge (100% compliant)"
+msgstr "BIS-märke (100% kompatibel)"
+
+msgid "BIS Badges"
+msgstr "BIS-märken"
+
+msgid "BIS Check"
+msgstr "BIS-kontroll"
+
+msgid "BIS Manager"
+msgstr "BIS-hanterare"
+
+msgid "Back to Dashboard"
+msgstr "Tillbaka till sammanställning"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr "Based in Sweden - sammanställning"
+
+msgid "Cloud Act"
+msgstr "Cloud Act"
+
+msgid "Cloud Act Applies (US provider)"
+msgstr "Cloud Act gäller (US-leverantör)"
+
+msgid "Completed"
+msgstr "Slutförd"
+
+msgid "Compliance"
+msgstr "Regelefterlevnad"
+
+msgid "Compliance Rate"
+msgstr "Efterlevnadsgrad"
+
+msgid "Compliance Trends"
+msgstr "Efterlevnadstrender"
+
+msgid "Compliance by Sector"
+msgstr "Efterlevnad per sektor"
+
+msgid "Compliance score"
+msgstr "Efterlevnadspoäng"
+
+msgid "Compliant"
+msgstr "Efterlevnad"
+
+msgid "Compliant (Swedish hosting)"
+msgstr "Kompatibel (svensk hosting)"
+
+msgid "Compliant Domains"
+msgstr "Kompatibla domäner"
+
+msgid "Country"
+msgstr "Land"
+
+msgid "Critical"
+msgstr "Kritisk"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid "DNS Check Results"
+msgstr "DNS-kontrollresultat"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Domain"
+msgstr "Domän"
+
+msgid "Domain (A-Z)"
+msgstr "Domän (A-Ö)"
+
+msgid "Domain (Z-A)"
+msgstr "Domän (Ö-A)"
+
+msgid "Domain Compliance Scores"
+msgstr "Domänregelefterlevnadspoäng"
+
+msgid "Domain not found"
+msgstr "Domänen hittades inte"
+
+msgid "Domain required"
+msgstr "Domän krävs"
+
+msgid "Domain specific compliance with standard of Based in Sweden"
+msgstr "Domänspecifik efterlevnad av Based in Sweden-standarden"
+
+msgid "Domains"
+msgstr "Domäner"
+
+msgid "Domains in this Sector"
+msgstr "Domäner i denna sektor"
+
+msgid "Failed to add domain"
+msgstr "Kunde inte lägga till domän"
+
+msgid "Failed to add provider"
+msgstr "Kunde inte lägga till leverantör"
+
+msgid "Failed to add tag"
+msgstr "Kunde inte lägga till tagg"
+
+msgid "Failed to check run"
+msgstr "Kunde inte kontrollera körning"
+
+msgid "Failed to delete domain"
+msgstr "Misslyckades ta bort domän"
+
+msgid "Failed to load dashboard data"
+msgstr "Misslyckades ladda sammanställningsdata"
+
+msgid "Failed to load domain"
+msgstr "Kunde inte ladda domän"
+
+msgid "Failed to load domain details"
+msgstr "Misslyckades ladda domändetaljer"
+
+msgid "Failed to navigate"
+msgstr "Kunde inte navigera"
+
+msgid "Failed to start run"
+msgstr "Kunde inte starta körning"
+
+msgid "Failed to update domain"
+msgstr "Misslyckades uppdatera domän"
+
+msgid "Foreign"
+msgstr "Utländsk"
+
+msgid "High"
+msgstr "Hög"
+
+msgid "Historical Data"
+msgstr "Historisk data"
+
+msgid "Historical compliance trends over time"
+msgstr "Historiska efterlevnadstrender över tid"
+
+msgid "Hosting Provider Summary"
+msgstr "Hosting leverantörsammanfattning"
+
+msgid "Hosting Providers"
+msgstr "Webbhotellsleverantörer"
+
+msgid "Hosting provider statistics for tracked domains"
+msgstr "Webbhotellsleverantörsstatistik för spårade domäner"
+
+msgid "How well different Swedish organizations comply with having control of own infrastructure"
+msgstr "Hur väl olika svenska organisationer efterlever kravet på kontroll över egen infrastruktur"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "ID required"
+msgstr "ID krävs"
+
+msgid "IP Address"
+msgstr "IP-adress"
+
+msgid "Invalid request"
+msgstr "Ogiltigt anrop"
+
+msgid "Key and display_name required"
+msgstr "Nyckel och visningsnamn krävs"
+
+msgid "Key, name and country_code required"
+msgstr "Nyckel, namn och landskod krävs"
+
+msgid "Legend"
+msgstr "Teckenförklaring"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Low"
+msgstr "Låg"
+
+msgid "MX"
+msgstr "MX"
+
+msgid "MX Records"
+msgstr "MX-poster"
+
+msgid "Mail"
+msgstr "Epost"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr "Hantera Based in Sweden-efterlevnadsspårning"
+
+msgid "Medium"
+msgstr "Medel"
+
+msgid "NS"
+msgstr "NS"
+
+msgid "NS Records"
+msgstr "NS-poster"
+
+msgid "Next"
+msgstr "Nästa"
+
+msgid "No A/AAAA records"
+msgstr "Inga A/AAAA-poster"
+
+msgid "No MX records"
+msgstr "Inga MX-poster"
+
+msgid "No check data available"
+msgstr "Ingen kontrolldata tillgänglig"
+
+msgid "No data available"
+msgstr "Ingen tillgänglig data"
+
+msgid "No domains found"
+msgstr "Inga domäner hittades"
+
+msgid "No more domains in this direction"
+msgstr "Inga fler domäner i denna riktning"
+
+msgid "No provider data available"
+msgstr "Ingen leverantörsdata tillgänglig"
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr "Ej kompatibel (utländsk hosting)"
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "Overall"
+msgstr "Totalt"
+
+msgid "Overall Score"
+msgstr "Total poäng"
+
+msgid "Page navigation"
+msgstr "Sidnavigering"
+
+msgid "Previous"
+msgstr "Föregående"
+
+msgid "Provider"
+msgstr "Leverantör"
+
+msgid "Recent Check Runs"
+msgstr "Senaste kontrollkörningar"
+
+msgid "Record Type"
+msgstr "Post-typ"
+
+msgid "Record Value"
+msgstr "Postvärde"
+
+msgid "Run ID required"
+msgstr "Körnings-ID krävs"
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr "Körning startad. Använd /manager/bis/runs/:id/check för att börja kontrollera domäner."
+
+msgid "Score"
+msgstr "Poäng"
+
+msgid "Score (High to Low)"
+msgstr "Poäng (Hög till Låg)"
+
+msgid "Score (Low to High)"
+msgstr "Poäng (Låg till Hög)"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search domains..."
+msgstr "Sök domäner..."
+
+msgid "Sector"
+msgstr "Sektor"
+
+msgid "Sector Statistics"
+msgstr "Sektorstatistik"
+
+msgid "Sort by"
+msgstr "Sortera efter"
+
+msgid "Start New Check Run"
+msgstr "Starta ny kontrollkörning"
+
+msgid "Started"
+msgstr "Startad"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Swedish"
+msgstr "Svenska"
+
+msgid "Total Domains"
+msgstr "Totalt antal domäner"
+
+msgid "Total Records"
+msgstr "Totalt antal poster"
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr "Spårar svenska organisationers hosting-efterlevnad för datasuveränitet"
+
+msgid "Unknown"
+msgstr "Okänd"
+
+msgid "View Details"
+msgstr "Visa detaljer"
+
+msgid "View Public Dashboard"
+msgstr "Visa offentlig instrumentpanel"
+
+msgid "Web"
+msgstr "Webb"
+
+msgid "compliant"
+msgstr "kompatibel"
+
+msgid "record(s)"
+msgstr "post(er)"
+
+msgid "{days} Days"
+msgstr "{days} dagar"

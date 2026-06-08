@@ -1,0 +1,387 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "1 Year"
+msgstr "1 An"
+
+msgid "A"
+msgstr "A"
+
+msgid "A Records"
+msgstr "Enregistrements A"
+
+msgid "A/AAAA Records"
+msgstr "Enregistrements A/AAAA"
+
+msgid "AS Name"
+msgstr "Nom AS"
+
+msgid "ASN"
+msgstr "ASN"
+
+msgid "All"
+msgstr "Tout"
+
+msgid "All Sectors"
+msgstr "Tous les secteurs"
+
+msgid "Average Score"
+msgstr "Score moyen"
+
+msgid "Avg Score"
+msgstr "Score Moy."
+
+msgid "Avg score"
+msgstr "Score moy."
+
+msgid "BIS - $sector"
+msgstr ""
+
+msgid "BIS - Compliance Trends"
+msgstr ""
+
+msgid "BIS - Hosting Providers"
+msgstr ""
+
+msgid "BIS Badge"
+msgstr "Badge BIS"
+
+msgid "BIS Badge (100% compliant)"
+msgstr ""
+
+msgid "BIS Badges"
+msgstr "Badges BIS"
+
+msgid "BIS Check"
+msgstr "Vérification BIS"
+
+msgid "BIS Manager"
+msgstr "Gestionnaire BIS"
+
+msgid "Back to Dashboard"
+msgstr "Retour au tableau de bord"
+
+msgid "Based in Sweden - Compliance Dashboard"
+msgstr "Basé en Suède - Tableau de bord de conformité"
+
+msgid "Cloud Act"
+msgstr "Cloud Act"
+
+msgid "Cloud Act Applies (US provider)"
+msgstr "Cloud Act s'applique (fournisseur US)"
+
+msgid "Completed"
+msgstr "Terminé"
+
+msgid "Compliance"
+msgstr "Conformité"
+
+msgid "Compliance Rate"
+msgstr "Taux de conformité"
+
+msgid "Compliance Trends"
+msgstr "Tendances de conformité"
+
+msgid "Compliance by Sector"
+msgstr "Conformité par secteur"
+
+msgid "Compliance score"
+msgstr "Score de conformité"
+
+msgid "Compliant"
+msgstr "Conforme"
+
+msgid "Compliant (Swedish hosting)"
+msgstr ""
+
+msgid "Compliant Domains"
+msgstr "Domaines conformes"
+
+msgid "Country"
+msgstr "Pays"
+
+msgid "Critical"
+msgstr "Critique"
+
+msgid "DNS"
+msgstr "DNS"
+
+msgid "DNS Check Results"
+msgstr "Résultats de vérification DNS"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Domain"
+msgstr "Domaine"
+
+msgid "Domain (A-Z)"
+msgstr ""
+
+msgid "Domain (Z-A)"
+msgstr ""
+
+msgid "Domain Compliance Scores"
+msgstr "Scores de conformité des domaines"
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domain required"
+msgstr ""
+
+msgid "Domain specific compliance with standard of Based in Sweden"
+msgstr ""
+
+msgid "Domains"
+msgstr "Domaines"
+
+msgid "Domains in this Sector"
+msgstr ""
+
+msgid "Failed to add domain"
+msgstr ""
+
+msgid "Failed to add provider"
+msgstr ""
+
+msgid "Failed to add tag"
+msgstr ""
+
+msgid "Failed to check run"
+msgstr ""
+
+msgid "Failed to delete domain"
+msgstr ""
+
+msgid "Failed to load dashboard data"
+msgstr ""
+
+msgid "Failed to load domain"
+msgstr ""
+
+msgid "Failed to load domain details"
+msgstr ""
+
+msgid "Failed to navigate"
+msgstr ""
+
+msgid "Failed to start run"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Foreign"
+msgstr ""
+
+msgid "High"
+msgstr ""
+
+msgid "Historical Data"
+msgstr ""
+
+msgid "Historical compliance trends over time"
+msgstr ""
+
+msgid "Hosting Provider Summary"
+msgstr ""
+
+msgid "Hosting Providers"
+msgstr ""
+
+msgid "Hosting provider statistics for tracked domains"
+msgstr ""
+
+msgid "How well different Swedish organizations comply with having control of own infrastructure"
+msgstr ""
+
+msgid "ID"
+msgstr "ID"
+
+msgid "ID required"
+msgstr ""
+
+msgid "IP Address"
+msgstr ""
+
+msgid "Invalid request"
+msgstr ""
+
+msgid "Key and display_name required"
+msgstr ""
+
+msgid "Key, name and country_code required"
+msgstr ""
+
+msgid "Legend"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Chargement..."
+
+msgid "Low"
+msgstr ""
+
+msgid "MX"
+msgstr ""
+
+msgid "MX Records"
+msgstr ""
+
+msgid "Mail"
+msgstr "Courriel"
+
+msgid "Manage Based in Sweden compliance tracking"
+msgstr ""
+
+msgid "Medium"
+msgstr ""
+
+msgid "NS"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
+msgid "Next"
+msgstr "Suivant"
+
+msgid "No A/AAAA records"
+msgstr ""
+
+msgid "No MX records"
+msgstr ""
+
+msgid "No check data available"
+msgstr ""
+
+msgid "No data available"
+msgstr ""
+
+msgid "No domains found"
+msgstr ""
+
+msgid "No more domains in this direction"
+msgstr ""
+
+msgid "No provider data available"
+msgstr ""
+
+msgid "Non-compliant (Foreign hosting)"
+msgstr ""
+
+msgid "Organization"
+msgstr "Organisation"
+
+msgid "Overall"
+msgstr ""
+
+msgid "Overall Score"
+msgstr ""
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Previous"
+msgstr "Précédent"
+
+msgid "Provider"
+msgstr "Fournisseur"
+
+msgid "Recent Check Runs"
+msgstr ""
+
+msgid "Record Type"
+msgstr "Type d'enregistrement"
+
+msgid "Record Value"
+msgstr ""
+
+msgid "Run ID required"
+msgstr ""
+
+msgid "Run started. Use /manager/bis/runs/:id/check to begin checking domains."
+msgstr ""
+
+msgid "Score"
+msgstr "Score"
+
+msgid "Score (High to Low)"
+msgstr ""
+
+msgid "Score (Low to High)"
+msgstr ""
+
+msgid "Search"
+msgstr "Rechercher"
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Sector"
+msgstr "Secteur"
+
+msgid "Sector Statistics"
+msgstr ""
+
+msgid "Sort by"
+msgstr ""
+
+msgid "Start New Check Run"
+msgstr ""
+
+msgid "Started"
+msgstr ""
+
+msgid "Status"
+msgstr "Statut"
+
+msgid "Swedish"
+msgstr "Suédois"
+
+msgid "Total Domains"
+msgstr ""
+
+msgid "Total Records"
+msgstr ""
+
+msgid "Tracking Swedish organizations' hosting compliance for data sovereignty"
+msgstr ""
+
+msgid "Unknown"
+msgstr "Inconnu"
+
+msgid "View Details"
+msgstr ""
+
+msgid "View Public Dashboard"
+msgstr ""
+
+msgid "Web"
+msgstr ""
+
+msgid "compliant"
+msgstr "conforme"
+
+msgid "record(s)"
+msgstr ""
+
+msgid "{days} Days"
+msgstr ""

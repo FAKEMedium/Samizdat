@@ -1,0 +1,258 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Actions"
+msgstr "Åtgärder"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Add"
+msgstr "Lägg till"
+
+msgid "Add Domain"
+msgstr "Lägg till domän"
+
+msgid "Add website"
+msgstr "Ny webbplats"
+
+msgid "Additional Apache/Nginx configuration directives"
+msgstr "Ytterligare Apache/Nginx-konfigurationsdirektiv"
+
+msgid "Are you sure you want to delete this configuration?"
+msgstr "Vill du verkligen ta bort denna konfiguration?"
+
+msgid "Are you sure you want to delete this domain?"
+msgstr "Är du säker på att du vill ta bort denna domän?"
+
+msgid "Are you sure you want to delete this website?"
+msgstr "Vill du verkligen ta bort denna webbplats?"
+
+msgid "Back to List"
+msgstr "Tillbaka till listan"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Configuration deleted"
+msgstr "Tog bort konfiguration"
+
+msgid "Configuration saved"
+msgstr "Sparade konfiguration"
+
+msgid "Customer"
+msgstr "Kund"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Delete domain"
+msgstr "Ta bort domän"
+
+msgid "Domain"
+msgstr "Domän"
+
+msgid "Domain Name"
+msgstr "Domännamn"
+
+msgid "Domain added"
+msgstr "La till domän"
+
+msgid "Domain deleted"
+msgstr "Domän borttagen"
+
+msgid "Domain name is required"
+msgstr "Domännamn krävs"
+
+msgid "Domains"
+msgstr "Domäner"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit Website"
+msgstr "Redigera webbplats"
+
+msgid "Enter domain name:"
+msgstr "Skriv in domännamn:"
+
+msgid "Failed to add domain"
+msgstr "Kunde inte lägga till domän"
+
+msgid "Failed to delete configuration"
+msgstr "Misslyckades ta bort konfiguration"
+
+msgid "Failed to delete domain"
+msgstr "Misslyckades ta bort domän"
+
+msgid "Failed to save configuration"
+msgstr "Misslyckades spara konfiguration"
+
+msgid "Home"
+msgstr "Hem"
+
+msgid "Home Directory"
+msgstr "Hemkatalog"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "IP Only"
+msgstr "Endast IP"
+
+msgid "IPv4"
+msgstr "IPv4"
+
+msgid "IPv4 Override"
+msgstr "IPv4 åsidosättning"
+
+msgid "IPv6"
+msgstr "IPv6"
+
+msgid "IPv6 Override"
+msgstr "IPv6 åsidosättning"
+
+msgid "If set, all requests will redirect to this URL"
+msgstr "Omdirigera till denna URL om den är angiven"
+
+msgid "In Cert"
+msgstr "I certifikat"
+
+msgid "Inactive"
+msgstr "Inaktiv"
+
+msgid "Include in certificate"
+msgstr "Inkludera i certifikat"
+
+msgid "Leave empty for server default"
+msgstr "Håll tomt för serverstandard"
+
+msgid "Manager"
+msgstr "Hanterare"
+
+msgid "New Website"
+msgstr "Ny webbplats"
+
+msgid "Next"
+msgstr "Nästa"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "No domain"
+msgstr "Ingen domän"
+
+msgid "No domains"
+msgstr "Inga domäner"
+
+msgid "No websites found"
+msgstr "Hittade inga webbplatser"
+
+msgid "PHP"
+msgstr "PHP"
+
+msgid "PHP Configuration"
+msgstr "PHP-konfiguration"
+
+msgid "PHP-FPM pool configuration. Will be merged with default .php.conf"
+msgstr "PHP-FPM poolkonfiguration. Slås samman med standard .php.conf"
+
+msgid "Previous"
+msgstr "Föregående"
+
+msgid "Primary"
+msgstr "Primär"
+
+msgid "Primary Domain"
+msgstr "Huvuddomän"
+
+msgid "Redirect URL"
+msgstr "Omdirigerings-URL"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save the website first"
+msgstr "Spara webbplatsen först"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
+msgid "Search for website"
+msgstr "Sök webbplats"
+
+msgid "Search websites..."
+msgstr "Sök webbplatser..."
+
+msgid "Select server..."
+msgstr "Välj server..."
+
+msgid "Select shell..."
+msgstr "Välj shell..."
+
+msgid "Server"
+msgstr "Server"
+
+msgid "Server Extra"
+msgstr "Server xxtra"
+
+msgid "Server Extra Configuration"
+msgstr "Server extra-konfiguration"
+
+msgid "Server default"
+msgstr "Serverstandard"
+
+msgid "Servers"
+msgstr "Servrar"
+
+msgid "Set as primary"
+msgstr "Sätt som primär"
+
+msgid "Shell"
+msgstr "Shell"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Website"
+msgstr "Webbplats"
+
+msgid "Website Configuration"
+msgstr "Webbplatskonfiguration"
+
+msgid "Website Details"
+msgstr "Webbplatsuppgifter"
+
+msgid "Website deleted successfully"
+msgstr "Tog bort webbplats"
+
+msgid "Website saved successfully"
+msgstr "Sparade webbplats"
+
+msgid "Websites"
+msgstr "Webbplatser"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "website"
+msgstr "webbplats"

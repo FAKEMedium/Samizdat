@@ -1,0 +1,105 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Importe"
+
+msgid "Balance"
+msgstr "Saldo"
+
+msgid "Continue"
+msgstr "Continuar"
+
+msgid "Customer"
+msgstr "Cliente"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Error loading payments"
+msgstr "Error al cargar pagos"
+
+msgid "Failed/Refunded"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Method"
+msgstr ""
+
+msgid "No payments found"
+msgstr "No se encontraron pagos"
+
+msgid "Pay"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Intent"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment:"
+msgstr ""
+
+msgid "Pending"
+msgstr "Pendiente"
+
+msgid "Recent Payments"
+msgstr "Pagos recientes"
+
+msgid "Session:"
+msgstr ""
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Stripe Payments"
+msgstr ""
+
+msgid "Succeeded"
+msgstr ""
+
+msgid "Thank you for your payment."
+msgstr ""
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr ""
+
+msgid "failed"
+msgstr "fallido"
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr "pagos"
+
+msgid "refunded"
+msgstr "reembolsado"

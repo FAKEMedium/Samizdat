@@ -1,0 +1,741 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "0 = reply once per sender"
+msgstr "0 = einmal pro Absender antworten"
+
+msgid "About to delete"
+msgstr ""
+
+msgid "Action"
+msgstr "Aktion"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Active from"
+msgstr "Aktiv von"
+
+msgid "Active until"
+msgstr "Aktiv bis"
+
+msgid "Add admin"
+msgstr "Administrator hinzufügen"
+
+msgid "Add alias"
+msgstr "Alias hinzufügen"
+
+msgid "Add domain"
+msgstr "Domain hinzufügen"
+
+msgid "Add forwarding"
+msgstr "Weiterleitung hinzufügen"
+
+msgid "Add mailbox"
+msgstr "Postfach hinzufügen"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Address is required"
+msgstr "Adresse ist erforderlich"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "Admin created successfully"
+msgstr "Administrator erfolgreich erstellt"
+
+msgid "Admin deleted successfully"
+msgstr "Administrator erfolgreich gelöscht"
+
+msgid "Admin not found"
+msgstr "Administrator nicht gefunden"
+
+msgid "Admin saved successfully"
+msgstr "Administrator erfolgreich gespeichert"
+
+msgid "Admin updated successfully"
+msgstr "Administrator erfolgreich aktualisiert"
+
+msgid "Administrators"
+msgstr "Administratoren"
+
+msgid "Admins"
+msgstr "Admins"
+
+msgid "Alias"
+msgstr "Alias"
+
+msgid "Alias Address"
+msgstr "Alias-Adresse"
+
+msgid "Alias created successfully"
+msgstr "Alias erfolgreich erstellt"
+
+msgid "Alias deleted successfully"
+msgstr "Alias erfolgreich gelöscht"
+
+msgid "Alias domain"
+msgstr "Alias-Domain"
+
+msgid "Alias domains"
+msgstr "Alias-Domains"
+
+msgid "Alias not found"
+msgstr "Alias nicht gefunden"
+
+msgid "Alias saved successfully"
+msgstr "Alias erfolgreich gespeichert"
+
+msgid "Alias updated successfully"
+msgstr "Alias erfolgreich aktualisiert"
+
+msgid "All actions"
+msgstr "Alle Aktionen"
+
+msgid "Alternative email"
+msgstr "Alternative E-Mail"
+
+msgid "Apply"
+msgstr "Anwenden"
+
+msgid "Are you sure you want to delete this alias?"
+msgstr "Sind Sie sicher, dass Sie diesen Alias löschen möchten?"
+
+msgid "Arrival"
+msgstr ""
+
+msgid "At least one valid forward address is required"
+msgstr "Mindestens eine gültige Weiterleitungsadresse ist erforderlich"
+
+msgid "Back"
+msgstr "Zurück"
+
+msgid "Back to queue"
+msgstr ""
+
+msgid "Can manage all domains"
+msgstr "Kann alle Domains verwalten"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Cannot be alias domain (has alias domains pointing to it)"
+msgstr "Kann keine Alias-Domain sein (hat Alias-Domains, die darauf verweisen)"
+
+msgid "Cannot make this domain an alias domain - it has alias domains pointing to it"
+msgstr "Diese Domain kann nicht zu einer Alias-Domain gemacht werden - sie hat Alias-Domains, die darauf verweisen"
+
+msgid "Cannot make this domain an alias domain - it has forwardings"
+msgstr "Diese Domain kann nicht zu einer Alias-Domain gemacht werden - sie hat Weiterleitungen"
+
+msgid "Cannot make this domain an alias domain - it has mailboxes"
+msgstr "Diese Domain kann nicht zu einer Alias-Domain gemacht werden - sie hat Postfächer"
+
+msgid "Cannot purge"
+msgstr ""
+
+msgid "Clear"
+msgstr "Löschen"
+
+msgid "Close"
+msgstr "Schließen"
+
+msgid "Confirm purge"
+msgstr ""
+
+msgid "Copy messages between an external IMAP account and this mailbox. Runs as a background job using imapsync."
+msgstr ""
+
+msgid "Create admin"
+msgstr "Administrator erstellen"
+
+msgid "Create forwarding"
+msgstr "Weiterleitung erstellen"
+
+msgid "Create mailbox"
+msgstr "Postfach erstellen"
+
+msgid "Currently managed"
+msgstr "Aktuell verwaltet"
+
+msgid "Customer"
+msgstr "Kunde"
+
+msgid "Customer ID is required"
+msgstr "Kundennummer ist erforderlich"
+
+msgid "Data"
+msgstr "Daten"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Delete admin"
+msgstr "Administrator löschen"
+
+msgid "Delete from source after copy"
+msgstr ""
+
+msgid "Delete this alias domain?"
+msgstr "Diese Alias-Domain löschen?"
+
+msgid "Delete this alias?"
+msgstr "Diesen Alias löschen?"
+
+msgid "Delete this domain and all its mailboxes?"
+msgstr "Diese Domain und alle zugehörigen Postfächer löschen?"
+
+msgid "Delete this mailbox?"
+msgstr "Dieses Postfach löschen?"
+
+msgid "Delete this queued message?"
+msgstr ""
+
+msgid "Delete vacation settings?"
+msgstr "Abwesenheitseinstellungen löschen?"
+
+msgid "Deleted"
+msgstr ""
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Destination (local)"
+msgstr ""
+
+msgid "Display name"
+msgstr "Anzeigename"
+
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Domain added successfully"
+msgstr "Domain erfolgreich hinzugefügt"
+
+msgid "Domain created successfully"
+msgstr "Domain erfolgreich erstellt"
+
+msgid "Domain deleted"
+msgstr "Domain gelöscht"
+
+msgid "Domain deleted successfully"
+msgstr "Domain erfolgreich gelöscht"
+
+msgid "Domain name"
+msgstr "Domain-Name"
+
+msgid "Domain name is required"
+msgstr "Domain-Name ist erforderlich"
+
+msgid "Domain not found"
+msgstr "Domain nicht gefunden"
+
+msgid "Domain quota"
+msgstr "Domain-Kontingent"
+
+msgid "Domain removed successfully"
+msgstr "Domain erfolgreich entfernt"
+
+msgid "Domain saved successfully"
+msgstr "Domain erfolgreich gespeichert"
+
+msgid "Domain updated successfully"
+msgstr "Domain erfolgreich aktualisiert"
+
+msgid "Domains"
+msgstr "Domains"
+
+msgid "Dry run (no changes)"
+msgstr ""
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Edit admin"
+msgstr "Administrator bearbeiten"
+
+msgid "Edit forwarding"
+msgstr "Weiterleitung bearbeiten"
+
+msgid "Edit mailbox"
+msgstr "Postfach bearbeiten"
+
+msgid "Email Admins"
+msgstr "E-Mail-Administratoren"
+
+msgid "Email Domain Management"
+msgstr "E-Mail-Domain-Verwaltung"
+
+msgid "Email Log"
+msgstr "E-Mail-Protokoll"
+
+msgid "Email Mailboxes"
+msgstr "E-Mail-Postfächer"
+
+msgid "Email address"
+msgstr "E-Mail-Adresse"
+
+msgid "Enqueuing sync job..."
+msgstr ""
+
+msgid "Failed to add admin"
+msgstr "Administrator konnte nicht hinzugefügt werden"
+
+msgid "Failed to add domain"
+msgstr "Domain konnte nicht hinzugefügt werden"
+
+msgid "Failed to delete admin"
+msgstr "Administrator konnte nicht gelöscht werden"
+
+msgid "Failed to delete alias"
+msgstr "Alias konnte nicht gelöscht werden"
+
+msgid "Failed to delete alias domain"
+msgstr "Alias-Domain konnte nicht gelöscht werden"
+
+msgid "Failed to delete domain"
+msgstr "Domain konnte nicht gelöscht werden"
+
+msgid "Failed to delete mailbox"
+msgstr "Postfach konnte nicht gelöscht werden"
+
+msgid "Failed to delete vacation settings"
+msgstr "Abwesenheitseinstellungen konnten nicht gelöscht werden"
+
+msgid "Failed to enqueue sync job"
+msgstr ""
+
+msgid "Failed to remove admin"
+msgstr "Administrator konnte nicht entfernt werden"
+
+msgid "Failed to remove domain"
+msgstr "Domain konnte nicht entfernt werden"
+
+msgid "Failed to save admin"
+msgstr "Administrator konnte nicht gespeichert werden"
+
+msgid "Failed to save alias"
+msgstr "Alias konnte nicht gespeichert werden"
+
+msgid "Failed to save domain"
+msgstr "Domain konnte nicht gespeichert werden"
+
+msgid "Failed to save mailbox"
+msgstr "Postfach konnte nicht gespeichert werden"
+
+msgid "Failed to save vacation settings"
+msgstr "Abwesenheitseinstellungen konnten nicht gespeichert werden"
+
+msgid "Failed to update admin"
+msgstr "Administrator konnte nicht aktualisiert werden"
+
+msgid "Failed to update alias"
+msgstr "Alias konnte nicht aktualisiert werden"
+
+msgid "Failed to update domain"
+msgstr "Domain konnte nicht aktualisiert werden"
+
+msgid "Failed to update mailbox"
+msgstr "Postfach konnte nicht aktualisiert werden"
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter by customer"
+msgstr "Nach Kunde filtern"
+
+msgid "Filter by domain"
+msgstr "Nach Domain filtern"
+
+msgid "Filter by username"
+msgstr "Nach Benutzername filtern"
+
+msgid "Flush"
+msgstr ""
+
+msgid "Flush deferred queue"
+msgstr ""
+
+msgid "Forward To"
+msgstr "Weiterleiten an"
+
+msgid "Forward to"
+msgstr "Weiterleiten an"
+
+msgid "Forwarding"
+msgstr "Weiterleitung"
+
+msgid "Forwards"
+msgstr "Weiterleitungen"
+
+msgid "Forwards to"
+msgstr "Weiterleitung an"
+
+msgid "From address"
+msgstr "Absenderadresse"
+
+msgid "Held"
+msgstr ""
+
+msgid "Hold"
+msgstr ""
+
+msgid "Host"
+msgstr ""
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Invalid domain name syntax"
+msgstr ""
+
+msgid "Invalid email addresses"
+msgstr "Ungültige E-Mail-Adressen"
+
+msgid "Job ID"
+msgstr ""
+
+msgid "Leave blank to keep current"
+msgstr "Leer lassen, um aktuelles beizubehalten"
+
+msgid "Loading..."
+msgstr "Wird geladen..."
+
+msgid "Log"
+msgstr "Protokoll"
+
+msgid "Mail"
+msgstr "E-Mail"
+
+msgid "Mail Queue"
+msgstr ""
+
+msgid "Mail queue"
+msgstr ""
+
+msgid "Mailbox"
+msgstr "Postfach"
+
+msgid "Mailbox created successfully"
+msgstr "Postfach erfolgreich erstellt"
+
+msgid "Mailbox deleted successfully"
+msgstr "Postfach erfolgreich gelöscht"
+
+msgid "Mailbox domain must match the current domain"
+msgstr "Postfach-Domain muss mit der aktuellen Domain übereinstimmen"
+
+msgid "Mailbox not found"
+msgstr "Postfach nicht gefunden"
+
+msgid "Mailbox quota"
+msgstr "Postfach-Kontingent"
+
+msgid "Mailbox saved successfully"
+msgstr "Postfach erfolgreich gespeichert"
+
+msgid "Mailbox updated successfully"
+msgstr "Postfach erfolgreich aktualisiert"
+
+msgid "Mailboxes"
+msgstr "Postfächer"
+
+msgid "Managed domains"
+msgstr "Verwaltete Domains"
+
+msgid "Manager"
+msgstr "Verwaltung"
+
+msgid "Message"
+msgstr "Nachricht"
+
+msgid "Method not allowed"
+msgstr "Methode nicht erlaubt"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "New domain"
+msgstr "Neue Domain"
+
+msgid "No"
+msgstr "Nein"
+
+msgid "No activity"
+msgstr "Keine Aktivität"
+
+msgid "No administrators"
+msgstr "Keine Administratoren"
+
+msgid "No alias domains"
+msgstr "Keine Alias-Domains"
+
+msgid "No aliases"
+msgstr "Keine Aliase"
+
+msgid "No domains"
+msgstr "Keine Domains"
+
+msgid "No log entries"
+msgstr "Keine Protokolleinträge"
+
+msgid "No mailboxes"
+msgstr "Keine Postfächer"
+
+msgid "No results"
+msgstr "Keine Ergebnisse"
+
+msgid "No results found"
+msgstr "Keine Ergebnisse gefunden"
+
+msgid "Not found"
+msgstr "Nicht gefunden"
+
+msgid "One email per line, or separated by comma/space"
+msgstr "Eine E-Mail pro Zeile, oder durch Komma/Leerzeichen getrennt"
+
+msgid "Options"
+msgstr "Optionen"
+
+msgid "Out of office"
+msgstr "Abwesend"
+
+msgid "Page navigation"
+msgstr "Seitennavigation"
+
+msgid "Password"
+msgstr "Passwort"
+
+msgid "Password is required"
+msgstr "Passwort ist erforderlich"
+
+msgid "Password requires: "
+msgstr "Passwort erfordert: "
+
+msgid "Phone"
+msgstr "Telefon"
+
+msgid "Port"
+msgstr "Port"
+
+msgid "Purge"
+msgstr "Bereinigen"
+
+msgid "Purge matching messages"
+msgstr ""
+
+msgid "Queue"
+msgstr ""
+
+msgid "Queue empty"
+msgstr ""
+
+msgid "Queue flushed"
+msgstr ""
+
+msgid "Queue regex"
+msgstr ""
+
+msgid "Queued Message"
+msgstr ""
+
+msgid "Quota (MB)"
+msgstr "Kontingent (MB)"
+
+msgid "Quota updated successfully"
+msgstr "Kontingent erfolgreich aktualisiert"
+
+msgid "Recent activity"
+msgstr "Letzte Aktivität"
+
+msgid "Recipient regex"
+msgstr ""
+
+msgid "Recipients"
+msgstr ""
+
+msgid "Release"
+msgstr ""
+
+msgid "Released"
+msgstr ""
+
+msgid "Reply interval (seconds)"
+msgstr "Antwortintervall (Sekunden)"
+
+msgid "Route all mail to another domain"
+msgstr "Alle E-Mails an eine andere Domain weiterleiten"
+
+msgid "Save"
+msgstr "Speichern"
+
+msgid "Save changes"
+msgstr "Änderungen speichern"
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "Search admin to add"
+msgstr "Admin zum Hinzufügen suchen"
+
+msgid "Search customer (min 3 chars)..."
+msgstr "Kunde suchen (min. 3 Zeichen)..."
+
+msgid "Search domain to add"
+msgstr "Domain zum Hinzufügen suchen"
+
+msgid "Search field for {what}"
+msgstr "Suchfeld für {what}"
+
+msgid "Search for admin"
+msgstr "Nach Admin suchen"
+
+msgid "Search for mail domain"
+msgstr "Mail-Domain suchen"
+
+msgid "Search for mailbox"
+msgstr "Nach Postfach suchen"
+
+msgid "Select customer"
+msgstr "Kunden auswählen"
+
+msgid "Select target domain"
+msgstr "Ziel-Domain auswählen"
+
+msgid "Sender"
+msgstr ""
+
+msgid "Sender regex"
+msgstr ""
+
+msgid "Size"
+msgstr ""
+
+msgid "Skip messages already present"
+msgstr ""
+
+msgid "Source (remote)"
+msgstr ""
+
+msgid "Start sync"
+msgstr ""
+
+msgid "Subject"
+msgstr "Betreff"
+
+msgid "Superadmin"
+msgstr "Superadmin"
+
+msgid "Sync"
+msgstr ""
+
+msgid "Sync job enqueued"
+msgstr ""
+
+msgid "Sync mailbox"
+msgstr ""
+
+msgid "Target domain"
+msgstr "Ziel-Domain"
+
+msgid "This deletes queued messages permanently."
+msgstr ""
+
+msgid "Timestamp"
+msgstr "Zeitstempel"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Use SSL/TLS"
+msgstr ""
+
+msgid "User"
+msgstr "Benutzer"
+
+msgid "Username"
+msgstr "Benutzername"
+
+msgid "Username (email)"
+msgstr "Benutzername (E-Mail)"
+
+msgid "Username is required"
+msgstr "Benutzername ist erforderlich"
+
+msgid "Vacation"
+msgstr "Abwesenheit"
+
+msgid "Vacation / Auto-reply"
+msgstr "Abwesenheit / Automatische Antwort"
+
+msgid "Vacation settings deleted"
+msgstr "Abwesenheitseinstellungen gelöscht"
+
+msgid "Vacation settings saved"
+msgstr "Abwesenheitseinstellungen gespeichert"
+
+msgid "View all"
+msgstr "Alle ansehen"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "at least {length} characters"
+msgstr "mindestens {length} Zeichen"
+
+msgid "disable"
+msgstr "deaktivieren"
+
+msgid "mail domain"
+msgstr "Mail-Domain"
+
+msgid "matching the filter"
+msgstr ""
+
+msgid "messages"
+msgstr ""
+
+msgid "the ENTIRE queue"
+msgstr ""
+
+msgid "to confirm"
+msgstr ""
+
+msgid "unlimited"
+msgstr "unbegrenzt"
+
+msgid "{count} lowercase"
+msgstr "{count} Kleinbuchstaben"
+
+msgid "{count} number(s)"
+msgstr "{count} Zahl(en)"
+
+msgid "{count} special character(s)"
+msgstr "{count} Sonderzeichen"
+
+msgid "{count} uppercase"
+msgstr "{count} Großbuchstaben"
+
+msgid "{side} {field} is required"
+msgstr ""

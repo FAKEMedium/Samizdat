@@ -1,0 +1,111 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "#{number}: {firstname} {lastname}, {city}, {country}"
+msgstr "#{number}: {firstname} {lastname}, {city}, {country}"
+
+msgid "Add poll"
+msgstr "Add poll"
+
+msgid "Captcha code from image"
+msgstr "Captcha code from image"
+
+msgid "Captcha image"
+msgstr "Captcha image"
+
+msgid "City"
+msgstr "City"
+
+msgid "Confirm poll signature"
+msgstr "Confirm poll signature"
+
+msgid "Confirmation request sent"
+msgstr "Confirmation request sent"
+
+msgid "Continue"
+msgstr "Continue"
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email not valid"
+msgstr "Email not valid"
+
+msgid "Empty city"
+msgstr "Empty city"
+
+msgid "Empty country"
+msgstr "Empty country"
+
+msgid "Empty first name"
+msgstr "Empty first name"
+
+msgid "Empty postal code"
+msgstr "Empty postal code"
+
+msgid "Empty surname"
+msgstr "Empty surname"
+
+msgid "First name"
+msgstr "First name"
+
+msgid "Go to {confirmationlink} to confirm your signature and claim your image."
+msgstr "Go to {confirmationlink} to confirm your signature and claim your image."
+
+msgid "Kick Russian defense minister Sergei Shoigu!"
+msgstr "Kick Russian defense minister Sergei Shoigu!"
+
+msgid "Polls"
+msgstr "Polls"
+
+msgid "Postal code"
+msgstr "Postal code"
+
+msgid "Recent signatures"
+msgstr "Recent signatures"
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search field for {what}"
+msgstr "Search field for {what}"
+
+msgid "Search for poll"
+msgstr "Search for poll"
+
+msgid "Select country"
+msgstr "Select country"
+
+msgid "Sign poll!"
+msgstr "Sign poll!"
+
+msgid "Surname"
+msgstr "Surname"
+
+msgid "Wrong captcha"
+msgstr "Wrong captcha"
+
+msgid "poll"
+msgstr "poll"
+
+msgid "{number} signatures since {date}"
+msgstr "{number} signatures since {date}"

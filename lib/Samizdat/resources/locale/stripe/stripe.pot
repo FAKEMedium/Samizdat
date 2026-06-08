@@ -1,0 +1,93 @@
+# Rymdweb translations for the stripe module
+msgid ""
+msgstr ""
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Amount"
+msgstr ""
+
+msgid "Balance"
+msgstr ""
+
+msgid "Continue"
+msgstr ""
+
+msgid "Customer"
+msgstr ""
+
+msgid "Date"
+msgstr ""
+
+msgid "Description"
+msgstr ""
+
+msgid "Error loading payments"
+msgstr ""
+
+msgid "Failed/Refunded"
+msgstr ""
+
+msgid "Go Back"
+msgstr ""
+
+msgid "Loading..."
+msgstr ""
+
+msgid "Method"
+msgstr ""
+
+msgid "No payments found"
+msgstr ""
+
+msgid "Pay"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Intent"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment:"
+msgstr ""
+
+msgid "Pending"
+msgstr ""
+
+msgid "Recent Payments"
+msgstr ""
+
+msgid "Session:"
+msgstr ""
+
+msgid "Status"
+msgstr ""
+
+msgid "Stripe Payments"
+msgstr ""
+
+msgid "Succeeded"
+msgstr ""
+
+msgid "Thank you for your payment."
+msgstr ""
+
+msgid "Your payment was cancelled. No charges were made."
+msgstr ""
+
+msgid "failed"
+msgstr ""
+
+msgid "net balance"
+msgstr ""
+
+msgid "payments"
+msgstr ""
+
+msgid "refunded"
+msgstr ""

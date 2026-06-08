@@ -1,0 +1,456 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Action"
+msgstr "إجراء"
+
+msgid "Actions"
+msgstr "إجراءات"
+
+msgid "Add Nameserver"
+msgstr "إضافة خادم أسماء"
+
+msgid "Add New"
+msgstr "إضافة جديد"
+
+msgid "Address"
+msgstr "العنوان"
+
+msgid "Address line 1"
+msgstr "سطر العنوان 1"
+
+msgid "Address line 2 (optional)"
+msgstr "سطر العنوان 2 (اختياري)"
+
+msgid "Admin"
+msgstr "المسؤول"
+
+msgid "Admin Contact"
+msgstr "جهة الاتصال الإدارية"
+
+msgid "Algorithm"
+msgstr "الخوارزمية"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Are you sure you want to delete contact"
+msgstr ""
+
+msgid "Auto Renew"
+msgstr "تجديد تلقائي"
+
+msgid "Billable Items"
+msgstr "العناصر القابلة للفوترة"
+
+msgid "Billing"
+msgstr "الفواتير"
+
+msgid "Billing Contact"
+msgstr "جهة اتصال الفوترة"
+
+msgid "Cancel"
+msgstr "إلغاء"
+
+msgid "City"
+msgstr "المدينة"
+
+msgid "Close"
+msgstr "إغلاق"
+
+msgid "Closing balance"
+msgstr ""
+
+msgid "Contact Details"
+msgstr "تفاصيل الاتصال"
+
+msgid "Contact created successfully"
+msgstr "تم إنشاء جهة الاتصال بنجاح"
+
+msgid "Contact deleted successfully"
+msgstr "تم حذف جهة الاتصال بنجاح"
+
+msgid "Contact details"
+msgstr "تفاصيل الاتصال"
+
+msgid "Contact handle"
+msgstr "معرف جهة الاتصال"
+
+msgid "Contact not found"
+msgstr "جهة الاتصال غير موجودة"
+
+msgid "Contacts"
+msgstr "جهات الاتصال"
+
+msgid "Country"
+msgstr "البلد"
+
+msgid "Create"
+msgstr "إنشاء"
+
+msgid "Create Contact"
+msgstr "إنشاء جهة اتصال"
+
+msgid "Created"
+msgstr "تم الإنشاء"
+
+msgid "Current balance"
+msgstr ""
+
+msgid "Current expiry"
+msgstr ""
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "DNSSEC Key Data"
+msgstr ""
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Delete"
+msgstr "حذف"
+
+msgid "Disabled"
+msgstr "معطل"
+
+msgid "Domain"
+msgstr "النطاق"
+
+msgid "Domain Name"
+msgstr ""
+
+msgid "Domain details"
+msgstr ""
+
+msgid "Domain not found"
+msgstr "النطاق غير موجود"
+
+msgid "Domains"
+msgstr "النطاقات"
+
+msgid "Edit"
+msgstr "تعديل"
+
+msgid "Edit Domain"
+msgstr "تحرير النطاق"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Enabled"
+msgstr "مفعل"
+
+msgid "End date"
+msgstr ""
+
+msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading price list"
+msgstr ""
+
+msgid "Error loading transaction"
+msgstr ""
+
+msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
+msgstr ""
+
+msgid "Error updating domain"
+msgstr "خطأ في تحديث النطاق"
+
+msgid "Expires"
+msgstr "تنتهي الصلاحية"
+
+msgid "Failed to create contact"
+msgstr ""
+
+msgid "Failed to delete contact"
+msgstr ""
+
+msgid "Failed to load price list"
+msgstr ""
+
+msgid "Failed to load transactions"
+msgstr ""
+
+msgid "Failed to renew domain"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter TLD"
+msgstr ""
+
+msgid "Financial Transactions"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "أنا أتصرف كوكيل معين لهذا التغيير في المسجل"
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Ingoing"
+msgstr ""
+
+msgid "International format: +CC.NNNNNNNN"
+msgstr ""
+
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Name Servers"
+msgstr ""
+
+msgid "New Contact"
+msgstr "جهة اتصال جديدة"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No"
+msgstr "لا"
+
+msgid "No changes to save"
+msgstr "لا توجد تغييرات للحفظ"
+
+msgid "No contacts found"
+msgstr ""
+
+msgid "No domains found"
+msgstr "لم يتم العثور على نطاقات"
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No price data available"
+msgstr ""
+
+msgid "No transactions found"
+msgstr ""
+
+msgid "Only letters, numbers, underscore and hyphen"
+msgstr ""
+
+msgid "Opening balance"
+msgstr ""
+
+msgid "Organization"
+msgstr "المنظمة"
+
+msgid "Outgoing"
+msgstr ""
+
+msgid "Page"
+msgstr "صفحة"
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Postal Code"
+msgstr "الرمز البريدي"
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Price List"
+msgstr "قائمة الأسعار"
+
+msgid "Price list pagination"
+msgstr ""
+
+msgid "Prices"
+msgstr "الأسعار"
+
+msgid "Privacy Protection"
+msgstr ""
+
+msgid "Process ID"
+msgstr ""
+
+msgid "Product"
+msgstr "منتج"
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Public Key"
+msgstr "المفتاح العام"
+
+msgid "Qty"
+msgstr "الكمية"
+
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Registrant"
+msgstr "المسجل"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr "السجل"
+
+msgid "Registry Lock"
+msgstr ""
+
+msgid "Remove"
+msgstr "إزالة"
+
+msgid "Renew"
+msgstr "تجديد"
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Save"
+msgstr "حفظ"
+
+msgid "Search contacts..."
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Select country..."
+msgstr ""
+
+msgid "Select customer first..."
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "State/Province"
+msgstr ""
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Street Address"
+msgstr ""
+
+msgid "Support for both production and test environments"
+msgstr ""
+
+msgid "TLD"
+msgstr ""
+
+msgid "Tech"
+msgstr ""
+
+msgid "Tech Contact"
+msgstr "جهة الاتصال التقنية"
+
+msgid "Transaction"
+msgstr ""
+
+msgid "Transaction Details"
+msgstr ""
+
+msgid "Transaction not found"
+msgstr ""
+
+msgid "Transactions"
+msgstr "المعاملات"
+
+msgid "Transfer"
+msgstr "تحويل"
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Unique identifier for this contact"
+msgstr ""
+
+msgid "Updated"
+msgstr "محدث"
+
+msgid "View"
+msgstr "عرض"
+
+msgid "View and manage domain registrations"
+msgstr ""
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "customers"
+msgstr "العملاء"
+
+msgid "months"
+msgstr ""
+
+msgid "years"
+msgstr ""

@@ -1,0 +1,102 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Summa"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Declined"
+msgstr "Avvisad"
+
+msgid "Error loading payments"
+msgstr "Fel vid laddning av betalningar"
+
+msgid "Errors"
+msgstr "Fel"
+
+msgid "Flow"
+msgstr "Flöde"
+
+msgid "Instruction ID"
+msgstr "Instruktions-ID"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Message"
+msgstr "Meddelande"
+
+msgid "No payments found"
+msgstr "Inga betalningar hittades"
+
+msgid "Open Swish App"
+msgstr "Öppna Swish-appen"
+
+msgid "Paid"
+msgstr "Betalad"
+
+msgid "Payer"
+msgstr "Betalare"
+
+msgid "Payment Cancelled"
+msgstr "Betalning avbruten"
+
+msgid "Payment ID:"
+msgstr "Betalnings-ID:"
+
+msgid "Payment Successful"
+msgstr "Betalning lyckades"
+
+msgid "Pending"
+msgstr "Väntande"
+
+msgid "Recent Payments"
+msgstr "Senaste betalningar"
+
+msgid "Return to Home"
+msgstr "Återgå till start"
+
+msgid "Scan QR code or tap button to pay with Swish"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Swish Payments"
+msgstr "Swish-betalningar"
+
+msgid "Thank you for your payment. Your Swish transaction has been completed."
+msgstr "Tack för din betalning. Din Swish-transaktion har slutförts."
+
+msgid "You can try again or choose a different payment method."
+msgstr "Du kan försöka igen eller välja en annan betalningsmetod."
+
+msgid "Your Swish payment was cancelled or declined."
+msgstr "Din Swish-betalning avbröts eller avvisades."
+
+msgid "declined"
+msgstr "avvisad"
+
+msgid "errors"
+msgstr "fel"
+
+msgid "payments"
+msgstr "betalningar"

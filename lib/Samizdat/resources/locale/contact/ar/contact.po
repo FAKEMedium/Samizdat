@@ -1,0 +1,84 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Captcha code from image"
+msgstr "رمز الكابتشا من الصورة"
+
+msgid "Captcha image"
+msgstr "صورة الكابتشا"
+
+msgid "Captcha was wrong"
+msgstr "الكابتشا كانت خاطئة"
+
+msgid "Contact"
+msgstr "اتصال"
+
+msgid "Empty message"
+msgstr "الرسالة فارغة"
+
+msgid "Empty name"
+msgstr "الاسم فارغ"
+
+msgid "Empty subject"
+msgstr "الموضوع فارغ"
+
+msgid "Enter code"
+msgstr "أدخل الرمز"
+
+msgid "Enter valid email"
+msgstr "أدخل بريدًا إلكترونيًا صالحًا"
+
+msgid "From"
+msgstr "من"
+
+msgid "Message"
+msgstr "الرسالة"
+
+msgid "Paper in typewriter"
+msgstr "ورق في آلة الكتابة"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "اضغط على \"{buttontext}\" لإعادة الإنشاء"
+
+msgid "Send message"
+msgstr "إرسال رسالة"
+
+msgid "Subject"
+msgstr "الموضوع"
+
+msgid "Thank you for contacting us."
+msgstr "شكرًا لاتصالك بنا."
+
+msgid "This field is required"
+msgstr "هذا الحقل مطلوب"
+
+msgid "We will reply as soon as possible."
+msgstr "سنرد في أقرب وقت ممكن."
+
+msgid "Your email"
+msgstr "بريدك الإلكتروني"
+
+msgid "Your ip {ip} will be appended to the message."
+msgstr "سيتم إضافة عنوان IP الخاص بك {ip} إلى الرسالة."
+
+msgid "Your message appears below."
+msgstr "تظهر رسالتك أدناه."
+
+msgid "Your name"
+msgstr "اسمك"

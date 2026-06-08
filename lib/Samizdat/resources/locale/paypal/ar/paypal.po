@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Amount:"
+msgstr "المبلغ:"
+
+msgid "Balance"
+msgstr "الرصيد"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr ""
+
+msgid "Completed"
+msgstr "مكتمل"
+
+msgid "Currency"
+msgstr "العملة"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+msgid "Error fetching transactions"
+msgstr "خطأ في جلب المعاملات"
+
+msgid "Error loading payments"
+msgstr "خطأ في تحميل المدفوعات"
+
+msgid "Fetch from PayPal"
+msgstr "جلب من PayPal"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr ""
+
+msgid "Item Number"
+msgstr "رقم العنصر"
+
+msgid "Item:"
+msgstr ""
+
+msgid "Live Transactions"
+msgstr "المعاملات المباشرة"
+
+msgid "Loading..."
+msgstr "جاري التحميل..."
+
+msgid "No charges have been made to your account."
+msgstr ""
+
+msgid "No payments found"
+msgstr "لم يتم العثور على مدفوعات"
+
+msgid "No transactions found for selected date range"
+msgstr "لم يتم العثور على معاملات للفترة المحددة"
+
+msgid "PayPal Payments"
+msgstr "مدفوعات PayPal"
+
+msgid "Payer"
+msgstr "الدافع"
+
+msgid "Payer Email"
+msgstr "بريد الدافع"
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Paypal"
+msgstr "باي بال"
+
+msgid "Pending"
+msgstr "قيد الانتظار"
+
+msgid "Please select both start and end dates"
+msgstr "يرجى تحديد تاريخي البداية والنهاية"
+
+msgid "Recent Payments"
+msgstr "المدفوعات الأخيرة"
+
+msgid "Refunded/Failed"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Start Date"
+msgstr "تاريخ البداية"
+
+msgid "Status"
+msgstr "الحالة"
+
+msgid "Subject"
+msgstr "الموضوع"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr ""
+
+msgid "Total"
+msgstr "المجموع"
+
+msgid "Transaction ID"
+msgstr "رقم المعاملة"
+
+msgid "Transaction ID:"
+msgstr ""
+
+msgid "You have cancelled the payment process."
+msgstr ""
+
+msgid "You will receive a confirmation email shortly."
+msgstr ""
+
+msgid "failed"
+msgstr "فشل"
+
+msgid "from PayPal API"
+msgstr "من API PayPal"
+
+msgid "from database"
+msgstr "من قاعدة البيانات"
+
+msgid "net balance"
+msgstr "الرصيد الصافي"
+
+msgid "payments"
+msgstr "المدفوعات"
+
+msgid "refunded"
+msgstr "مسترد"
+
+msgid "transactions"
+msgstr "المعاملات"

@@ -1,0 +1,456 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01 12:00+0000\n"
+"PO-Revision-Date: 2023-05-18 12:00+0000\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: hi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Action"
+msgstr "कार्रवाई"
+
+msgid "Actions"
+msgstr "कार्य"
+
+msgid "Add Nameserver"
+msgstr "नेमसर्वर जोड़ें"
+
+msgid "Add New"
+msgstr ""
+
+msgid "Address"
+msgstr "पता"
+
+msgid "Address line 1"
+msgstr "पता पंक्ति 1"
+
+msgid "Address line 2 (optional)"
+msgstr "पता पंक्ति 2 (वैकल्पिक)"
+
+msgid "Admin"
+msgstr "व्यवस्थापक"
+
+msgid "Admin Contact"
+msgstr "व्यवस्थापक संपर्क"
+
+msgid "Algorithm"
+msgstr ""
+
+msgid "Amount"
+msgstr "राशि"
+
+msgid "Are you sure you want to delete contact"
+msgstr ""
+
+msgid "Auto Renew"
+msgstr ""
+
+msgid "Billable Items"
+msgstr ""
+
+msgid "Billing"
+msgstr "बिलिंग"
+
+msgid "Billing Contact"
+msgstr "बिलिंग संपर्क"
+
+msgid "Cancel"
+msgstr "रद्द करें"
+
+msgid "City"
+msgstr "शहर"
+
+msgid "Close"
+msgstr "बंद करें"
+
+msgid "Closing balance"
+msgstr ""
+
+msgid "Contact Details"
+msgstr ""
+
+msgid "Contact created successfully"
+msgstr "संपर्क सफलतापूर्वक बनाया गया"
+
+msgid "Contact deleted successfully"
+msgstr "संपर्क सफलतापूर्वक हटाया गया"
+
+msgid "Contact details"
+msgstr "संपर्क विवरण"
+
+msgid "Contact handle"
+msgstr "संपर्क पहचानकर्ता"
+
+msgid "Contact not found"
+msgstr "संपर्क नहीं मिला"
+
+msgid "Contacts"
+msgstr "संपर्क"
+
+msgid "Country"
+msgstr "देश"
+
+msgid "Create"
+msgstr "बनाएं"
+
+msgid "Create Contact"
+msgstr "संपर्क बनाएं"
+
+msgid "Created"
+msgstr "बनाया गया"
+
+msgid "Current balance"
+msgstr ""
+
+msgid "Current expiry"
+msgstr ""
+
+msgid "Customer"
+msgstr "ग्राहक"
+
+msgid "DNSSEC Key Data"
+msgstr ""
+
+msgid "Date"
+msgstr "तिथि"
+
+msgid "Delete"
+msgstr "हटाएं"
+
+msgid "Disabled"
+msgstr "अक्षम"
+
+msgid "Domain"
+msgstr "डोमेन"
+
+msgid "Domain Name"
+msgstr ""
+
+msgid "Domain details"
+msgstr ""
+
+msgid "Domain not found"
+msgstr ""
+
+msgid "Domains"
+msgstr "डोमेन"
+
+msgid "Edit"
+msgstr "संपादित करें"
+
+msgid "Edit Domain"
+msgstr "डोमेन संपादित करें"
+
+msgid "Email"
+msgstr "ईमेल"
+
+msgid "Enabled"
+msgstr "सक्षम"
+
+msgid "End date"
+msgstr ""
+
+msgid "Error deleting contact"
+msgstr ""
+
+msgid "Error loading contact details"
+msgstr ""
+
+msgid "Error loading contacts"
+msgstr ""
+
+msgid "Error loading domain details"
+msgstr ""
+
+msgid "Error loading domains"
+msgstr ""
+
+msgid "Error loading price list"
+msgstr ""
+
+msgid "Error loading transaction"
+msgstr ""
+
+msgid "Error loading transactions"
+msgstr ""
+
+msgid "Error renewing domain"
+msgstr ""
+
+msgid "Error updating domain"
+msgstr "डोमेन अपडेट करने में त्रुटि"
+
+msgid "Expires"
+msgstr "समाप्त होता है"
+
+msgid "Failed to create contact"
+msgstr ""
+
+msgid "Failed to delete contact"
+msgstr ""
+
+msgid "Failed to load price list"
+msgstr ""
+
+msgid "Failed to load transactions"
+msgstr ""
+
+msgid "Failed to renew domain"
+msgstr ""
+
+msgid "Failed to update domain"
+msgstr ""
+
+msgid "Filter"
+msgstr ""
+
+msgid "Filter TLD"
+msgstr ""
+
+msgid "Financial Transactions"
+msgstr ""
+
+msgid "Flags"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "Handle"
+msgstr ""
+
+msgid "Handle contact information"
+msgstr ""
+
+msgid "I am acting as Designated Agent for this registrant change"
+msgstr "मैं इस पंजीयक परिवर्तन के लिए नामित एजेंट के रूप में कार्य कर रहा हूं"
+
+msgid "Identifier"
+msgstr ""
+
+msgid "Ingoing"
+msgstr ""
+
+msgid "International format: +CC.NNNNNNNN"
+msgstr ""
+
+msgid "Loading..."
+msgstr "लोड हो रहा है..."
+
+msgid "Manage domains and contacts through the RealtimeRegister API."
+msgstr ""
+
+msgid "Name"
+msgstr "नाम"
+
+msgid "Name Servers"
+msgstr ""
+
+msgid "New Contact"
+msgstr "नया संपर्क"
+
+msgid "Next"
+msgstr "अगला"
+
+msgid "No"
+msgstr "नहीं"
+
+msgid "No changes to save"
+msgstr "सहेजने के लिए कोई परिवर्तन नहीं"
+
+msgid "No contacts found"
+msgstr ""
+
+msgid "No domains found"
+msgstr "कोई डोमेन नहीं मिला"
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No price data available"
+msgstr ""
+
+msgid "No transactions found"
+msgstr ""
+
+msgid "Only letters, numbers, underscore and hyphen"
+msgstr ""
+
+msgid "Opening balance"
+msgstr ""
+
+msgid "Organization"
+msgstr "संगठन"
+
+msgid "Outgoing"
+msgstr ""
+
+msgid "Page"
+msgstr "पृष्ठ"
+
+msgid "Page navigation"
+msgstr ""
+
+msgid "Phone"
+msgstr "फोन"
+
+msgid "Postal Code"
+msgstr "पोस्टल कोड"
+
+msgid "Previous"
+msgstr "पिछला"
+
+msgid "Price List"
+msgstr "मूल्य सूची"
+
+msgid "Price list pagination"
+msgstr ""
+
+msgid "Prices"
+msgstr "मूल्य"
+
+msgid "Privacy Protection"
+msgstr ""
+
+msgid "Process ID"
+msgstr ""
+
+msgid "Product"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Public Key"
+msgstr "सार्वजनिक कुंजी"
+
+msgid "Qty"
+msgstr "मात्रा"
+
+msgid "Realtime Register"
+msgstr ""
+
+msgid "RealtimeRegister API Integration"
+msgstr ""
+
+msgid "Registrant"
+msgstr "पंजीयक"
+
+msgid "Registries"
+msgstr ""
+
+msgid "Registry"
+msgstr "रजिस्ट्री"
+
+msgid "Registry Lock"
+msgstr ""
+
+msgid "Remove"
+msgstr "हटाएं"
+
+msgid "Renew"
+msgstr ""
+
+msgid "Renew Domain"
+msgstr ""
+
+msgid "Renewal period"
+msgstr ""
+
+msgid "Restore"
+msgstr ""
+
+msgid "Save"
+msgstr "सहेजें"
+
+msgid "Search contacts..."
+msgstr ""
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search domains..."
+msgstr ""
+
+msgid "Select country..."
+msgstr ""
+
+msgid "Select customer first..."
+msgstr ""
+
+msgid "Start date"
+msgstr ""
+
+msgid "State/Province"
+msgstr ""
+
+msgid "Status"
+msgstr "स्थिति"
+
+msgid "Street Address"
+msgstr ""
+
+msgid "Support for both production and test environments"
+msgstr ""
+
+msgid "TLD"
+msgstr ""
+
+msgid "Tech"
+msgstr ""
+
+msgid "Tech Contact"
+msgstr "तकनीकी संपर्क"
+
+msgid "Transaction"
+msgstr ""
+
+msgid "Transaction Details"
+msgstr ""
+
+msgid "Transaction not found"
+msgstr ""
+
+msgid "Transactions"
+msgstr ""
+
+msgid "Transfer"
+msgstr "ट्रांसफर"
+
+msgid "Type"
+msgstr "प्रकार"
+
+msgid "Unique identifier for this contact"
+msgstr ""
+
+msgid "Updated"
+msgstr "अपडेट किया गया"
+
+msgid "View"
+msgstr "देखें"
+
+msgid "View and manage domain registrations"
+msgstr ""
+
+msgid "Yes"
+msgstr "हाँ"
+
+msgid "customers"
+msgstr "ग्राहक"
+
+msgid "months"
+msgstr ""
+
+msgid "years"
+msgstr ""

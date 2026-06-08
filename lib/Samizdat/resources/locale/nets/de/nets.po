@@ -1,0 +1,177 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "After refunds"
+msgstr "Nach Erstattungen"
+
+msgid "Amount"
+msgstr "Betrag"
+
+msgid "Amount and items are required"
+msgstr "Betrag und Posten sind erforderlich"
+
+msgid "Amount in Swedish Kronor"
+msgstr "Betrag in Schwedischen Kronen"
+
+msgid "Amount is required"
+msgstr "Betrag ist erforderlich"
+
+msgid "An error occurred"
+msgstr "Ein Fehler ist aufgetreten"
+
+msgid "Card Payment"
+msgstr "Kartenzahlung"
+
+msgid "Charged"
+msgstr "Belastet"
+
+msgid "Charged At"
+msgstr "Belastet am"
+
+msgid "Create Payment"
+msgstr "Zahlung erstellen"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Error loading payments"
+msgstr "Fehler beim Laden der Zahlungen"
+
+msgid "Failed to create payment"
+msgstr "Zahlung konnte nicht erstellt werden"
+
+msgid "Failed to process refund"
+msgstr "Rückerstattung konnte nicht verarbeitet werden"
+
+msgid "Invalid items format"
+msgstr "Ungültiges Positionsformat"
+
+msgid "Loading..."
+msgstr "Wird geladen..."
+
+msgid "Method"
+msgstr "Methode"
+
+msgid "Missing payment ID"
+msgstr "Fehlende Zahlungs-ID"
+
+msgid "Net Amount"
+msgstr "Nettobetrag"
+
+msgid "Nets Payments"
+msgstr "Nets-Zahlungen"
+
+msgid "No payments found"
+msgstr "Keine Zahlungen gefunden"
+
+msgid "Note"
+msgstr "Notiz"
+
+msgid "Order number or reference"
+msgstr "Bestellnummer oder Referenz"
+
+msgid "Payment Cancelled"
+msgstr "Zahlung storniert"
+
+msgid "Payment Details"
+msgstr "Zahlungsdetails"
+
+msgid "Payment ID"
+msgstr "Zahlungs-ID"
+
+msgid "Payment Method"
+msgstr "Zahlungsmethode"
+
+msgid "Payment Successful"
+msgstr "Zahlung erfolgreich"
+
+msgid "Payment for..."
+msgstr "Zahlung für..."
+
+msgid "Payment must be charged before refund"
+msgstr "Zahlung muss vor Erstattung belastet werden"
+
+msgid "Payment not found"
+msgstr "Zahlung nicht gefunden"
+
+msgid "Payment with Nets Easy"
+msgstr "Zahlung mit Nets Easy"
+
+msgid "Proceed to Payment"
+msgstr "Zur Zahlung fortfahren"
+
+msgid "Recent Payments"
+msgstr "Letzte Zahlungen"
+
+msgid "Reference"
+msgstr "Referenz"
+
+msgid "Refund amount exceeds available amount"
+msgstr "Erstattungsbetrag übersteigt verfügbaren Betrag"
+
+msgid "Refunded"
+msgstr "Erstattet"
+
+msgid "Return to Home"
+msgstr "Zur Startseite zurückkehren"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Thank you! Your payment has been processed successfully."
+msgstr "Vielen Dank! Ihre Zahlung wurde erfolgreich verarbeitet."
+
+msgid "The payment process was interrupted. This could be because:"
+msgstr "Der Zahlungsvorgang wurde unterbrochen. Dies könnte daran liegen:"
+
+msgid "The payment session expired"
+msgstr "Die Zahlungssitzung ist abgelaufen"
+
+msgid "There was an issue with your payment method"
+msgstr "Es gab ein Problem mit Ihrer Zahlungsmethode"
+
+msgid "Total"
+msgstr "Gesamt"
+
+msgid "Total refunds"
+msgstr "Erstattungen gesamt"
+
+msgid "Try Again"
+msgstr "Erneut versuchen"
+
+msgid "What happened?"
+msgstr "Was ist passiert?"
+
+msgid "You clicked the back or cancel button"
+msgstr "Sie haben die Zurück- oder Abbrechen-Taste geklickt"
+
+msgid "You will be redirected to Nets secure checkout page."
+msgstr "Sie werden zur sicheren Nets-Checkout-Seite weitergeleitet."
+
+msgid "Your payment was cancelled or failed."
+msgstr "Ihre Zahlung wurde storniert oder ist fehlgeschlagen."
+
+msgid "charged"
+msgstr "belastet"
+
+msgid "payments"
+msgstr "Zahlungen"

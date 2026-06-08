@@ -1,0 +1,384 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2023-05-17 00:00+0100\n"
+"PO-Revision-Date: 2023-05-17 00:00+0100\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ar\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5);\n"
+
+msgid "A sub-goal is to test open accounting, where figures can be presented continuously in public after being anonymized."
+msgstr "الهدف الفرعي هو اختبار المحاسبة المفتوحة، حيث يمكن عرض الأرقام بشكل مستمر علنيًا بعد إخفاء الهوية."
+
+msgid "API docs"
+msgstr "وثائق API"
+
+msgid "About Fortnox"
+msgstr "حول Fortnox"
+
+msgid "Activate Samizdat Fortnox integration"
+msgstr "تفعيل تكامل Samizdat Fortnox"
+
+msgid "Activate integration"
+msgstr "تفعيل التكامل"
+
+msgid "Active"
+msgstr "نشط"
+
+msgid "Address"
+msgstr "العنوان"
+
+msgid "Address 1"
+msgstr "العنوان 1"
+
+msgid "Address 2"
+msgstr "العنوان 2"
+
+msgid "All Customers"
+msgstr ""
+
+msgid "All Invoices"
+msgstr "جميع الفواتير"
+
+msgid "All payments"
+msgstr ""
+
+msgid "Amount"
+msgstr "المبلغ"
+
+msgid "Article"
+msgstr "مقال"
+
+msgid "Balance"
+msgstr "الرصيد"
+
+msgid "Basic Information"
+msgstr "المعلومات الأساسية"
+
+msgid "Captcha code from image"
+msgstr "رمز الكابتشا من الصورة"
+
+msgid "Captcha image"
+msgstr "صورة الكابتشا"
+
+msgid "Captcha was wrong"
+msgstr "الكابتشا كانت خاطئة"
+
+msgid "Cash invoice"
+msgstr "فاتورة نقدية"
+
+msgid "City"
+msgstr "المدينة"
+
+msgid "Comments"
+msgstr "التعليقات"
+
+msgid "Contact Information"
+msgstr "معلومات الاتصال"
+
+msgid "Country"
+msgstr "البلد"
+
+msgid "Credit invoice"
+msgstr "فاتورة ائتمان"
+
+msgid "Currency"
+msgstr "العملة"
+
+msgid "Customer"
+msgstr "العميل"
+
+msgid "Customer Number"
+msgstr "رقم العميل"
+
+msgid "Customers"
+msgstr "العملاء"
+
+msgid "Customers get a list of invoices and open invoice items"
+msgstr "يحصل العملاء على قائمة بالفواتير وعناصر الفواتير المفتوحة"
+
+msgid "Date"
+msgstr "التاريخ"
+
+msgid "Debt"
+msgstr "الدين"
+
+msgid "Delivery Address"
+msgstr "عنوان التسليم"
+
+msgid "Description"
+msgstr "الوصف"
+
+msgid "Developer docs"
+msgstr "وثائق المطور"
+
+msgid "Development"
+msgstr "التطوير"
+
+msgid "Discount"
+msgstr "خصم"
+
+msgid "Due Date"
+msgstr ""
+
+msgid "Due date"
+msgstr "تاريخ الاستحقاق"
+
+msgid "Email"
+msgstr "البريد الإلكتروني"
+
+msgid "Email Invoice"
+msgstr "فاتورة البريد الإلكتروني"
+
+msgid "Email Offer"
+msgstr "عرض البريد الإلكتروني"
+
+msgid "Email Order"
+msgstr "طلب البريد الإلكتروني"
+
+msgid "Empty name"
+msgstr "الاسم فارغ"
+
+msgid "Enter code"
+msgstr "أدخل الرمز"
+
+msgid "Enter valid email"
+msgstr "أدخل بريدًا إلكترونيًا صالحًا"
+
+msgid "File archive"
+msgstr "أرشيف الملفات"
+
+msgid "Financial Information"
+msgstr "المعلومات المالية"
+
+msgid "For more information, visit the Fortnox website:"
+msgstr "لمزيد من المعلومات، قم بزيارة موقع Fortnox:"
+
+msgid "Fortnox authorization required"
+msgstr "مطلوب تفويض Fortnox"
+
+msgid "Fortnox integration"
+msgstr "تكامل Fortnox"
+
+msgid "Fortnox is a Swedish cloud-based accounting software that offers a range of services including invoicing, bookkeeping, and financial management."
+msgstr "Fortnox هو برنامج محاسبة سويدي قائم على السحابة يقدم مجموعة من الخدمات بما في ذلك الفوترة ومسك الدفاتر والإدارة المالية."
+
+msgid "Fortnox panel"
+msgstr "لوحة Fortnox"
+
+msgid "Fortnox was founded in 2001 with headquarters in VÃ¤xjÃ¶."
+msgstr "تأسست Fortnox في عام 2001 بمقرها الرئيسي في فيكشو."
+
+msgid "Highlights"
+msgstr "أبرز النقاط"
+
+msgid "Interest invoice"
+msgstr ""
+
+msgid "Invoice"
+msgstr "فاتورة"
+
+msgid "Invoice Date"
+msgstr ""
+
+msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice Number"
+msgstr ""
+
+msgid "Invoice Rows"
+msgstr ""
+
+msgid "Invoice Type"
+msgstr ""
+
+msgid "Invoice number"
+msgstr "رقم الفاتورة"
+
+msgid "Invoices"
+msgstr "الفواتير"
+
+msgid "Invoices are created with LATEX type setting software"
+msgstr "يتم إنشاء الفواتير بواسطة برنامج التنسيق من نوع LATEX"
+
+msgid "It is currently only available to Rymdweb."
+msgstr "حاليًا متاح فقط لـ Rymdweb."
+
+msgid "It is designed to help small and medium-sized businesses manage their finances efficiently."
+msgstr "صُمم لمساعدة الشركات الصغيرة والمتوسطة على إدارة شؤونها المالية بكفاءة."
+
+msgid "Log out"
+msgstr "تسجيل الخروج"
+
+msgid "Mail sent through own servers"
+msgstr "البريد المرسل عبر الخوادم الخاصة"
+
+msgid "Minimal local customer data is stored in Fortnox."
+msgstr "يتم تخزين الحد الأدنى من بيانات العميل المحلي في Fortnox."
+
+msgid "Multiple languages and country specific modifications"
+msgstr "لغات متعددة وتعديلات خاصة بالبلد"
+
+msgid "Name"
+msgstr "الاسم"
+
+msgid "Net"
+msgstr "صافي"
+
+msgid "Next"
+msgstr "التالي"
+
+msgid "No"
+msgstr "لا"
+
+msgid "No invoice rows"
+msgstr ""
+
+msgid "No invoices found"
+msgstr "لم يتم العثور على فواتير"
+
+msgid "No payments"
+msgstr ""
+
+msgid "No payments selected"
+msgstr "لم يتم تحديد مدفوعات"
+
+msgid "Org.no."
+msgstr "رقم المؤسسة"
+
+msgid "Organisation Number"
+msgstr "رقم المؤسسة"
+
+msgid "Our Reference"
+msgstr "مرجعنا"
+
+msgid "Over time, more web hosting features have been added."
+msgstr "بمرور الوقت، تمت إضافة المزيد من ميزات استضافة الويب."
+
+msgid "Paid"
+msgstr "مدفوع"
+
+msgid "Payments"
+msgstr "المدفوعات"
+
+msgid "Phone"
+msgstr "الهاتف"
+
+msgid "Previous"
+msgstr "السابق"
+
+msgid "Price"
+msgstr "السعر"
+
+msgid "Price List"
+msgstr "قائمة الأسعار"
+
+msgid "Process"
+msgstr "معالجة"
+
+msgid "Process selected"
+msgstr "معالجة المحدد"
+
+msgid "Processed"
+msgstr "تمت المعالجة"
+
+msgid "Processing failed"
+msgstr "فشلت المعالجة"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "References"
+msgstr "المراجع"
+
+msgid "Refresh"
+msgstr "تحديث"
+
+msgid "Registered payments and supplier invoices are retrieved from Fortnox and displayed in the local interface."
+msgstr "يتم استرداد المدفوعات المسجلة وفواتير الموردين من Fortnox وعرضها في الواجهة المحلية."
+
+msgid "Remarks"
+msgstr "ملاحظات"
+
+msgid "Samizdat"
+msgstr ""
+
+msgid "Samizdat is part of a project to create static HTML from markdown files uploaded to GitHub."
+msgstr "Samizdat هو جزء من مشروع لإنشاء HTML ثابت من ملفات markdown المحملة على GitHub."
+
+msgid "Source code on Github"
+msgstr "الكود المصدري على Github"
+
+msgid "Strictly for Rymdweb"
+msgstr "حصريًا لـ Rymdweb"
+
+msgid "Supplier invoices"
+msgstr "فواتير المورد"
+
+msgid "Terms of Payment"
+msgstr "شروط الدفع"
+
+msgid "Test customer"
+msgstr "عميل اختبار"
+
+msgid "The stock is listed on Nasdaq Stockholm's main list."
+msgstr "السهم مدرج في القائمة الرئيسية لبورصة ناسداك ستوكهولم."
+
+msgid "This integration handles invoicing independently and synchronizes invoices with Fortnox."
+msgstr "يتعامل هذا التكامل مع الفوترة بشكل مستقل ويزامن الفواتير مع Fortnox."
+
+msgid "This integration is developed and maintained by Rymdweb AB."
+msgstr "تم تطوير هذا التكامل وصيانته من قبل Rymdweb AB."
+
+msgid "Total"
+msgstr "المجموع"
+
+msgid "Total: {count} customers"
+msgstr "المجموع: {count} عميل"
+
+msgid "Totals"
+msgstr ""
+
+msgid "Type"
+msgstr "النوع"
+
+msgid "Unprocessed"
+msgstr ""
+
+msgid "VAT"
+msgstr "ضريبة القيمة المضافة"
+
+msgid "VAT Number"
+msgstr "رقم ضريبة القيمة المضافة"
+
+msgid "VAT Type"
+msgstr "نوع ضريبة القيمة المضافة"
+
+msgid "Yes"
+msgstr "نعم"
+
+msgid "Your Reference"
+msgstr "مرجعك"
+
+msgid "Your email"
+msgstr "بريدك الإلكتروني"
+
+msgid "Your name"
+msgstr "اسمك"
+
+msgid "Zip Code"
+msgstr "الرمز البريدي"
+
+msgid "payments"
+msgstr "المدفوعات"

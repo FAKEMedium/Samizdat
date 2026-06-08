@@ -1,0 +1,102 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Amount"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Declined"
+msgstr "Declined"
+
+msgid "Error loading payments"
+msgstr "Error loading payments"
+
+msgid "Errors"
+msgstr "Errors"
+
+msgid "Flow"
+msgstr "Flow"
+
+msgid "Instruction ID"
+msgstr "Instruction ID"
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "Message"
+msgstr "Message"
+
+msgid "No payments found"
+msgstr "No payments found"
+
+msgid "Open Swish App"
+msgstr "Open Swish App"
+
+msgid "Paid"
+msgstr "Paid"
+
+msgid "Payer"
+msgstr "Payer"
+
+msgid "Payment Cancelled"
+msgstr "Payment Cancelled"
+
+msgid "Payment ID:"
+msgstr "Payment ID:"
+
+msgid "Payment Successful"
+msgstr "Payment Successful"
+
+msgid "Pending"
+msgstr "Pending"
+
+msgid "Recent Payments"
+msgstr "Recent Payments"
+
+msgid "Return to Home"
+msgstr "Return to Home"
+
+msgid "Scan QR code or tap button to pay with Swish"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Swish Payments"
+msgstr "Swish Payments"
+
+msgid "Thank you for your payment. Your Swish transaction has been completed."
+msgstr "Thank you for your payment. Your Swish transaction has been completed."
+
+msgid "You can try again or choose a different payment method."
+msgstr "You can try again or choose a different payment method."
+
+msgid "Your Swish payment was cancelled or declined."
+msgstr "Your Swish payment was cancelled or declined."
+
+msgid "declined"
+msgstr "declined"
+
+msgid "errors"
+msgstr "errors"
+
+msgid "payments"
+msgstr "payments"

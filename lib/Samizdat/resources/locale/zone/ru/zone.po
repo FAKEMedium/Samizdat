@@ -1,0 +1,543 @@
+# FAKE Medium -
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2022-01-01\n"
+"PO-Revision-Date: 2025-05-17\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Account"
+msgstr "Аккаунт"
+
+msgid "Actions"
+msgstr "Действия"
+
+msgid "Active"
+msgstr "Активный"
+
+msgid "Add Key"
+msgstr "Добавить ключ"
+
+msgid "Add New Key"
+msgstr "Добавить новый ключ"
+
+msgid "Add zone"
+msgstr "Добавить зону"
+
+msgid "Admin Email"
+msgstr "Email администратора"
+
+msgid "Algorithm"
+msgstr "Алгоритм"
+
+msgid "All accounts"
+msgstr "Все аккаунты"
+
+msgid "Are you sure you want to delete this key?"
+msgstr ""
+
+msgid "Are you sure you want to delete this record?"
+msgstr "Вы уверены, что хотите удалить эту запись?"
+
+msgid "Are you sure you want to delete this zone?"
+msgstr ""
+
+msgid "BIND/AXFR format with fully qualified names (as exported by DNS servers)"
+msgstr ""
+
+msgid "Back to Zones"
+msgstr "Вернуться к зонам"
+
+msgid "Background"
+msgstr "Фон"
+
+msgid "Cancel"
+msgstr "Отмена"
+
+msgid "Check"
+msgstr "Проверить"
+
+msgid "Check failed"
+msgstr "Проверка не удалась"
+
+msgid "Check queued"
+msgstr ""
+
+msgid "Check zones"
+msgstr "Проверить зоны"
+
+msgid "Click to search matching records."
+msgstr "Нажмите для поиска соответствующих записей."
+
+msgid "Click to search matching zones."
+msgstr "Нажмите для поиска соответствующих зон."
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "Combined Value"
+msgstr ""
+
+msgid "Content"
+msgstr "Содержание"
+
+msgid "Cryptokey created successfully"
+msgstr ""
+
+msgid "Cryptokey deleted successfully"
+msgstr ""
+
+msgid "Customer"
+msgstr "Клиент"
+
+msgid "DNS Zones"
+msgstr "DNS-зоны"
+
+msgid "DNS Zones for customer {id}"
+msgstr ""
+
+msgid "DNS zone"
+msgstr "DNS-зона"
+
+msgid "DNSSEC Keys"
+msgstr "Ключи DNSSEC"
+
+msgid "DS Records"
+msgstr ""
+
+msgid "Delete"
+msgstr "Удалить"
+
+msgid "Delete this record?"
+msgstr ""
+
+msgid "Delete this template and all its records?"
+msgstr ""
+
+msgid "Description"
+msgstr "Описание"
+
+msgid "Duplicate"
+msgstr ""
+
+msgid "Edit"
+msgstr "Редактировать"
+
+msgid "Edit Record"
+msgstr ""
+
+msgid "Edit record"
+msgstr ""
+
+msgid "Edit zone"
+msgstr "Редактировать зону"
+
+msgid "Enter record name"
+msgstr "Введите имя записи"
+
+msgid "Enter zone name"
+msgstr "Введите имя зоны"
+
+msgid "Expire"
+msgstr ""
+
+msgid "Export zone file"
+msgstr ""
+
+msgid "Failed"
+msgstr "Ошибка"
+
+msgid "Failed to create cryptokey"
+msgstr ""
+
+msgid "Failed to create key"
+msgstr ""
+
+msgid "Failed to create record"
+msgstr "Не удалось создать запись"
+
+msgid "Failed to create zone"
+msgstr "Не удалось создать зону"
+
+msgid "Failed to delete cryptokey"
+msgstr ""
+
+msgid "Failed to delete key"
+msgstr ""
+
+msgid "Failed to delete record"
+msgstr "Не удалось удалить запись"
+
+msgid "Failed to delete zone"
+msgstr "Не удалось удалить зону"
+
+msgid "Failed to export zone"
+msgstr ""
+
+msgid "Failed to import zone"
+msgstr ""
+
+msgid "Failed to save record"
+msgstr ""
+
+msgid "Failed to save zone"
+msgstr ""
+
+msgid "Failed to update record"
+msgstr "Не удалось обновить запись"
+
+msgid "Failed to update zone"
+msgstr "Не удалось обновить зону"
+
+msgid "Flags"
+msgstr ""
+
+msgid "Forward zones"
+msgstr ""
+
+msgid "Found"
+msgstr ""
+
+msgid "From Template"
+msgstr ""
+
+msgid "Hostname"
+msgstr ""
+
+msgid "IP"
+msgstr ""
+
+msgid "IPv4 Address"
+msgstr ""
+
+msgid "IPv4 reverse"
+msgstr ""
+
+msgid "IPv6 Address"
+msgstr ""
+
+msgid "IPv6 reverse"
+msgstr ""
+
+msgid "Import"
+msgstr "Импорт"
+
+msgid "Import zone"
+msgstr ""
+
+msgid "Inactive"
+msgstr ""
+
+msgid "Issues found"
+msgstr ""
+
+msgid "Job failed"
+msgstr ""
+
+msgid "Job queued"
+msgstr ""
+
+msgid "Key Type"
+msgstr ""
+
+msgid "Key created"
+msgstr ""
+
+msgid "Key deleted"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Загрузка..."
+
+msgid "Lower values have higher priority"
+msgstr ""
+
+msgid "Mail Server"
+msgstr ""
+
+msgid "Minimum TTL"
+msgstr ""
+
+msgid "NS Records"
+msgstr ""
+
+msgid "Name"
+msgstr "Имя"
+
+msgid "Nameserver"
+msgstr "Сервер имён"
+
+msgid "Nameserver Checks"
+msgstr ""
+
+msgid "Nameservers"
+msgstr "Серверы имён"
+
+msgid "New Record"
+msgstr ""
+
+msgid "New Template"
+msgstr ""
+
+msgid "New record"
+msgstr "Новая запись"
+
+msgid "New zone"
+msgstr "Новая зона"
+
+msgid "No DNSSEC keys configured"
+msgstr ""
+
+msgid "No account"
+msgstr ""
+
+msgid "No customer assigned"
+msgstr ""
+
+msgid "No matches found"
+msgstr ""
+
+msgid "No records"
+msgstr ""
+
+msgid "No records found"
+msgstr ""
+
+msgid "No template (empty zone)"
+msgstr ""
+
+msgid "No templates yet"
+msgstr ""
+
+msgid "OK"
+msgstr "ОК"
+
+msgid "Order"
+msgstr "Заказ"
+
+msgid "Port"
+msgstr "Порт"
+
+msgid "Pre-populate zone with template records"
+msgstr ""
+
+msgid "Preference"
+msgstr ""
+
+msgid "Primary NS"
+msgstr ""
+
+msgid "Priority"
+msgstr "Приоритет"
+
+msgid "Record"
+msgstr "Запись"
+
+msgid "Record Name"
+msgstr "Имя записи"
+
+msgid "Record Type"
+msgstr "Тип записи"
+
+msgid "Record added"
+msgstr "Запись добавлена"
+
+msgid "Record created successfully"
+msgstr "Запись успешно создана"
+
+msgid "Record deleted"
+msgstr "Запись удалена"
+
+msgid "Record deleted successfully"
+msgstr "Запись успешно удалена"
+
+msgid "Record not found"
+msgstr "Запись не найдена"
+
+msgid "Record saved successfully"
+msgstr "Запись успешно сохранена"
+
+msgid "Record updated"
+msgstr "Запись обновлена"
+
+msgid "Record updated successfully"
+msgstr "Запись успешно обновлена"
+
+msgid "Records"
+msgstr "Записи"
+
+msgid "Refresh"
+msgstr "Обновить"
+
+msgid "Regexp"
+msgstr ""
+
+msgid "Registrar"
+msgstr "Регистратор"
+
+msgid "Replacement"
+msgstr ""
+
+msgid "Response"
+msgstr ""
+
+msgid "Retry"
+msgstr ""
+
+msgid "Running checks..."
+msgstr ""
+
+msgid "SOA Serial"
+msgstr ""
+
+msgid "Save"
+msgstr "Сохранить"
+
+msgid "Save Template"
+msgstr ""
+
+msgid "Search"
+msgstr "Поиск"
+
+msgid "Search customer (min 3 chars)..."
+msgstr ""
+
+msgid "Search field for {what}"
+msgstr "Поле поиска для {what}"
+
+msgid "Search for zone"
+msgstr "Поиск зоны"
+
+msgid "Select a template to edit or create a new one"
+msgstr ""
+
+msgid "Select type"
+msgstr ""
+
+msgid "Serial"
+msgstr ""
+
+msgid "Service"
+msgstr "Сервис"
+
+msgid "Status"
+msgstr "Статус"
+
+msgid "Submit"
+msgstr "Отправить"
+
+msgid "TTL"
+msgstr ""
+
+msgid "Tag"
+msgstr "Тег"
+
+msgid "Target"
+msgstr "Цель"
+
+msgid "Template"
+msgstr "Шаблон"
+
+msgid "Template created"
+msgstr ""
+
+msgid "Template deleted"
+msgstr ""
+
+msgid "Template duplicated"
+msgstr ""
+
+msgid "Template updated"
+msgstr ""
+
+msgid "Templates"
+msgstr "Шаблоны"
+
+msgid "Text"
+msgstr "Текст"
+
+msgid "Type"
+msgstr "Тип"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Use @ for the zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex"
+msgstr ""
+
+msgid "Use @ for zone apex, or subdomain name"
+msgstr ""
+
+msgid "Value"
+msgstr "Значение"
+
+msgid "Weight"
+msgstr ""
+
+msgid "Whois Information"
+msgstr ""
+
+msgid "Zone Check"
+msgstr ""
+
+msgid "Zone File Content"
+msgstr ""
+
+msgid "Zone Kind"
+msgstr "Тип зоны"
+
+msgid "Zone Name"
+msgstr "Имя зоны"
+
+msgid "Zone Records"
+msgstr ""
+
+msgid "Zone Templates"
+msgstr ""
+
+msgid "Zone created successfully"
+msgstr "Зона успешно создана"
+
+msgid "Zone deleted"
+msgstr ""
+
+msgid "Zone deleted successfully"
+msgstr "Зона успешно удалена"
+
+msgid "Zone imported successfully"
+msgstr ""
+
+msgid "Zone not found"
+msgstr "Зона не найдена"
+
+msgid "Zone records"
+msgstr "Записи зоны"
+
+msgid "Zone saved successfully"
+msgstr ""
+
+msgid "Zone updated successfully"
+msgstr "Зона успешно обновлена"
+
+msgid "customers"
+msgstr "клиенты"
+
+msgid "for registrar"
+msgstr ""
+
+msgid "records"
+msgstr "записи"

@@ -1,0 +1,156 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Amount"
+msgstr "Summa"
+
+msgid "Amount:"
+msgstr "Belopp:"
+
+msgid "Balance"
+msgstr "Balans"
+
+msgid "Click \"Fetch from PayPal\" to load live transactions"
+msgstr "Klicka på \"Hämta från PayPal\" för att ladda aktuella transaktioner"
+
+msgid "Completed"
+msgstr "Slutförd"
+
+msgid "Currency"
+msgstr "Valuta"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "End Date"
+msgstr "Slutdatum"
+
+msgid "Error fetching transactions"
+msgstr "Fel vid hämtning av transaktioner"
+
+msgid "Error loading payments"
+msgstr "Fel vid laddning av betalningar"
+
+msgid "Fetch from PayPal"
+msgstr "Hämta från PayPal"
+
+msgid "If you experienced any issues, please contact our support team."
+msgstr "Om du upplevde några problem, kontakta vårt supportteam."
+
+msgid "Item Number"
+msgstr "Artikelnummer"
+
+msgid "Item:"
+msgstr "Artikel:"
+
+msgid "Live Transactions"
+msgstr "Aktuella transaktioner"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "No charges have been made to your account."
+msgstr "Inga debiteringar har gjorts på ditt konto."
+
+msgid "No payments found"
+msgstr "Inga betalningar hittades"
+
+msgid "No transactions found for selected date range"
+msgstr "Inga transaktioner hittades för valt datumintervall"
+
+msgid "PayPal Payments"
+msgstr "PayPal-betalningar"
+
+msgid "Payer"
+msgstr "Betalare"
+
+msgid "Payer Email"
+msgstr "Betalarens e-post"
+
+msgid "Payment Cancelled"
+msgstr "Betalning avbruten"
+
+msgid "Payment Successful"
+msgstr "Betalning lyckades"
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Pending"
+msgstr "Väntande"
+
+msgid "Please select both start and end dates"
+msgstr "Vänligen välj både start- och slutdatum"
+
+msgid "Recent Payments"
+msgstr "Senaste betalningar"
+
+msgid "Refunded/Failed"
+msgstr "Återbetald/Misslyckad"
+
+msgid "Return to Home"
+msgstr "Återgå till start"
+
+msgid "Start Date"
+msgstr "Startdatum"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Subject"
+msgstr "Ämne"
+
+msgid "Thank you for your payment. Your transaction has been completed."
+msgstr "Tack för din betalning. Din transaktion har slutförts."
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "Transaction ID"
+msgstr "Transaktions-ID"
+
+msgid "Transaction ID:"
+msgstr "Transaktions-ID:"
+
+msgid "You have cancelled the payment process."
+msgstr "Du har avbrutit betalningsprocessen."
+
+msgid "You will receive a confirmation email shortly."
+msgstr "Du kommer snart att få ett bekräftelsemail."
+
+msgid "failed"
+msgstr "misslyckades"
+
+msgid "from PayPal API"
+msgstr "från PayPal API"
+
+msgid "from database"
+msgstr "från databas"
+
+msgid "net balance"
+msgstr "nettosaldo"
+
+msgid "payments"
+msgstr "betalningar"
+
+msgid "refunded"
+msgstr "återbetald"
+
+msgid "transactions"
+msgstr "transaktioner"

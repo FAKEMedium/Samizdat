@@ -1,0 +1,591 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgid "Amount"
+msgstr "Kwota"
+
+msgid "Amount due"
+msgstr "Kwota do zapłaty"
+
+msgid "Amount to pay incl. VAT: {totalcost} {currency}"
+msgstr "Kwota do zapłaty z VAT: {totalcost} {currency}"
+
+msgid "Approved for F-tax"
+msgstr ""
+
+msgid "Are you sure you want to resend this invoice?"
+msgstr ""
+
+msgid "Article"
+msgstr "Artykuł"
+
+msgid "Authentication required"
+msgstr "Wymagane uwierzytelnienie"
+
+msgid "BIC/Swift"
+msgstr "BIC/Swift"
+
+msgid "BIC/Swift address"
+msgstr "Adres BIC/Swift"
+
+msgid "Bankgiro"
+msgstr "Bankgiro"
+
+msgid "Bankgiro number remains unchanged, but IBAN and BIC/SWIFT are different."
+msgstr ""
+
+msgid "Cancel"
+msgstr "Anuluj"
+
+msgid "Cannot credit invoice: Original invoice is not booked in Fortnox. Please book it first."
+msgstr ""
+
+msgid "Changed status."
+msgstr "Zmieniono status."
+
+msgid "Click to pop reminder dialog."
+msgstr "Kliknij, aby wyświetlić okno przypomnienia."
+
+msgid "Click to regenerate PDF."
+msgstr "Kliknij, aby ponownie wygenerować PDF."
+
+msgid "Click to register payment."
+msgstr ""
+
+msgid "Click to send a credit invoice."
+msgstr "Kliknij, aby wysłać fakturę korygującą."
+
+msgid "Click to send again."
+msgstr "Kliknij, aby wysłać ponownie."
+
+msgid "Close"
+msgstr "Zamknij"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Contact: {email} or call us directly."
+msgstr ""
+
+msgid "Continues on next page..."
+msgstr "Kontynuacja na następnej stronie..."
+
+msgid "Credit invoice"
+msgstr "Faktura korygująca"
+
+msgid "Credit invoice {number}"
+msgstr "Faktura korygująca {number}"
+
+msgid "Credited"
+msgstr ""
+
+msgid "Credited amount incl. VAT: {totalcost} {currency}"
+msgstr "Kwota uznana z VAT: {totalcost} {currency}"
+
+msgid "Credited invoice"
+msgstr "Skorygowana faktura"
+
+msgid "Credited invoice: {number}"
+msgstr "Skorygowana faktura: {number}"
+
+msgid "Customer"
+msgstr "Klient"
+
+msgid "Customer Id"
+msgstr "ID klienta"
+
+msgid "Customer {id} not found in Fortnox. Create customer first."
+msgstr ""
+
+msgid "Date"
+msgstr "Data"
+
+msgid "Dear"
+msgstr "Szanowny/a"
+
+msgid "Debt"
+msgstr "Dług"
+
+msgid "Description"
+msgstr "Opis"
+
+msgid "Despite previous reminders, payment has not been received."
+msgstr ""
+
+msgid "Do you want to credit the invoice?"
+msgstr "Czy chcesz skorygować fakturę?"
+
+msgid "Download Invoice PDF"
+msgstr ""
+
+msgid "Download Invoice PDF - PAY NOW"
+msgstr ""
+
+msgid "Due date"
+msgstr "Termin płatności"
+
+msgid "Due to"
+msgstr "Termin"
+
+msgid "Error reprinting invoice"
+msgstr ""
+
+msgid "Error resending invoice"
+msgstr ""
+
+msgid "Error sending reminder"
+msgstr ""
+
+msgid "Failed to load payment form"
+msgstr ""
+
+msgid "Failed to regenerate invoice PDF"
+msgstr ""
+
+msgid "Failed to register payment"
+msgstr ""
+
+msgid "Failed to reprint invoice"
+msgstr ""
+
+msgid "Failed to resend invoice"
+msgstr ""
+
+msgid "Failed to resend invoice email"
+msgstr ""
+
+msgid "Failed to send reminder"
+msgstr ""
+
+msgid "Fill the form correctly!"
+msgstr "Wypełnij formularz poprawnie!"
+
+msgid "Final Payment Reminder"
+msgstr ""
+
+msgid "Final payment reminder - Invoice {number}"
+msgstr ""
+
+msgid "Find the credit invoice attached as PDF."
+msgstr "Znajdź załączoną fakturę korygującą w formacie PDF."
+
+msgid "Find your invoice attached as PDF."
+msgstr "Znajdź załączoną fakturę w formacie PDF."
+
+msgid "For questions, please contact us at {email}."
+msgstr ""
+
+msgid "Fortnox"
+msgstr "Fortnox"
+
+msgid "Fortnox Warning"
+msgstr ""
+
+msgid "Fortnox error: {error}"
+msgstr ""
+
+msgid "From 2025-11-01 we are using Sparbanken Syd."
+msgstr ""
+
+msgid "Gross"
+msgstr "Brutto"
+
+msgid "Handled invoice"
+msgstr "Obsługiwana faktura"
+
+msgid "IBAN"
+msgstr "IBAN"
+
+msgid "If payment is not received within 7 days from the date of this notice, the matter will be handed over to our collection agency."
+msgstr ""
+
+msgid "If you have already made payment, please contact us IMMEDIATELY with proof of payment."
+msgstr ""
+
+msgid "If you have already paid, please disregard this reminder."
+msgstr ""
+
+msgid "Immediate action is required to avoid additional fees and potential collection proceedings."
+msgstr ""
+
+msgid "Immediate payment required!!!"
+msgstr ""
+
+msgid "Including VAT"
+msgstr "Z VAT"
+
+msgid "Invalid invoice ID"
+msgstr ""
+
+msgid "Invalid request"
+msgstr ""
+
+msgid "Invoice"
+msgstr "Faktura"
+
+msgid "Invoice (credited)"
+msgstr "Faktura (skorygowana)"
+
+msgid "Invoice Details"
+msgstr ""
+
+msgid "Invoice date"
+msgstr "Data faktury"
+
+msgid "Invoice for completed services"
+msgstr "Faktura za zakończone usługi"
+
+msgid "Invoice is credited"
+msgstr "Faktura jest skorygowana"
+
+msgid "Invoice must be in fakturerad state to send reminders"
+msgstr ""
+
+msgid "Invoice not found"
+msgstr ""
+
+msgid "Invoice number"
+msgstr "Numer faktury"
+
+msgid "Invoice questions can be directed to {url}."
+msgstr "Pytania dotyczące faktury można kierować na {url}."
+
+msgid "Invoice reminder, {number}"
+msgstr "Przypomnienie o fakturze, {number}"
+
+msgid "Invoice reprinted successfully"
+msgstr ""
+
+msgid "Invoice resent successfully"
+msgstr ""
+
+msgid "Invoice {fakturanummer} has been credited."
+msgstr "Faktura {fakturanummer} została skorygowana."
+
+msgid "Invoice {number}"
+msgstr "Faktura {number}"
+
+msgid "Invoices"
+msgstr "Faktury"
+
+msgid "Invoicing"
+msgstr "Fakturowanie"
+
+msgid "It's also available at"
+msgstr "Jest również dostępne na"
+
+msgid "It's also available at {url}."
+msgstr "Jest również dostępne na {url}."
+
+msgid "Last reminder"
+msgstr ""
+
+msgid "Make invoice"
+msgstr "Utwórz fakturę"
+
+msgid "Mark payment"
+msgstr "Oznacz płatność"
+
+msgid "Message"
+msgstr "Wiadomość"
+
+msgid "Mild"
+msgstr "Łagodne"
+
+msgid "Missing customer or invoice ID"
+msgstr ""
+
+msgid "Missing invoice information"
+msgstr ""
+
+msgid "Modifications were saved."
+msgstr "Zmiany zostały zapisane."
+
+msgid "Net"
+msgstr "Netto"
+
+msgid "Net amount"
+msgstr "Kwota netto"
+
+msgid "Nets"
+msgstr ""
+
+msgid "No payment methods are currently available."
+msgstr ""
+
+msgid "OVERDUE"
+msgstr ""
+
+msgid "Open invoice"
+msgstr "Otwarta faktura"
+
+msgid "Open invoice for customer"
+msgstr "Otwarta faktura dla klienta"
+
+msgid "Open invoices"
+msgstr "Otwarte faktury"
+
+msgid "Organizational number"
+msgstr "Numer organizacyjny"
+
+msgid "Original due date"
+msgstr ""
+
+msgid "Overdue Invoice Details"
+msgstr ""
+
+msgid "Overdue payments will be charged a reminder fee  and {rate} interest."
+msgstr "Za opóźnione płatności zostanie naliczona opłata za przypomnienie i odsetki w wysokości {rate}."
+
+msgid "PDF viewer"
+msgstr "Przeglądarka PDF"
+
+msgid "Page {number} of {total}"
+msgstr "Strona {number} z {total}"
+
+msgid "Paid"
+msgstr "Zapłacono"
+
+msgid "Paid amount"
+msgstr "Zapłacona kwota"
+
+msgid "Pay"
+msgstr "Zapłać"
+
+msgid "Pay instantly with Swish"
+msgstr ""
+
+msgid "Pay invoice {number}"
+msgstr ""
+
+msgid "Pay with Nets"
+msgstr ""
+
+msgid "Pay with Swish"
+msgstr ""
+
+msgid "PayPal"
+msgstr ""
+
+msgid "Payment"
+msgstr "Płatność"
+
+msgid "Payment Information"
+msgstr ""
+
+msgid "Payment Reminder"
+msgstr "Przypomnienie o płatności"
+
+msgid "Payment date"
+msgstr "Data płatności"
+
+msgid "Payment method"
+msgstr ""
+
+msgid "Payment modal not available"
+msgstr ""
+
+msgid "Payment registered successfully"
+msgstr ""
+
+msgid "Payment reminder: Invoice {number}"
+msgstr ""
+
+msgid "Payment terms"
+msgstr "Warunki płatności"
+
+msgid "Payments"
+msgstr "Płatności"
+
+msgid "Payments may take up to one week to become visible in the control panel."
+msgstr "Płatności mogą być widoczne w panelu sterowania do tygodnia."
+
+msgid "Paypal"
+msgstr "Paypal"
+
+msgid "Please enter a payment date"
+msgstr ""
+
+msgid "Please find attached invoice"
+msgstr ""
+
+msgid "Please include the invoice number as reference when making the payment."
+msgstr ""
+
+msgid "Plusgiro"
+msgstr "Plusgiro"
+
+msgid "Price"
+msgstr "Cena"
+
+msgid "Qty"
+msgstr "Ilość"
+
+msgid "Receiver"
+msgstr "Odbiorca"
+
+msgid "Register payment"
+msgstr "Zarejestruj płatność"
+
+msgid "Registered office"
+msgstr "Siedziba zarejestrowana"
+
+msgid "Remind"
+msgstr "Przypomnij"
+
+msgid "Reminder sent successfully"
+msgstr ""
+
+msgid "Reprint"
+msgstr "Wydrukuj ponownie"
+
+msgid "Reprint invoice"
+msgstr ""
+
+msgid "Request failed"
+msgstr ""
+
+msgid "Resend"
+msgstr "Wyślij ponownie"
+
+msgid "Resend invoice"
+msgstr ""
+
+msgid "Rounding"
+msgstr ""
+
+msgid "SWISH"
+msgstr ""
+
+msgid "Scan the QR code with your Swish app for immediate payment."
+msgstr ""
+
+msgid "Scan the QR code with your Swish app or enter the details manually."
+msgstr ""
+
+msgid "Search"
+msgstr "Szukaj"
+
+msgid "Search field for {what}"
+msgstr "Pole wyszukiwania dla {what}"
+
+msgid "Search for invoice"
+msgstr "Szukaj faktury"
+
+msgid "Select"
+msgstr "Wybierz"
+
+msgid "Send again"
+msgstr "Wyślij ponownie"
+
+msgid "Send reminder"
+msgstr "Wyślij przypomnienie"
+
+msgid "Stripe"
+msgstr ""
+
+msgid "Subject"
+msgstr "Temat"
+
+msgid "Summa"
+msgstr "Suma"
+
+msgid "Swish number"
+msgstr ""
+
+msgid "Text"
+msgstr "Tekst"
+
+msgid "Thank you for your business"
+msgstr ""
+
+msgid "This is a final reminder regarding your overdue invoice."
+msgstr ""
+
+msgid "This is an automated reminder. Failure to pay may result in service interruption and legal action."
+msgstr ""
+
+msgid "This might be an oversight, so we wanted to send a friendly reminder."
+msgstr ""
+
+msgid "This will result in additional fees and may affect your credit rating."
+msgstr ""
+
+msgid "Total to pay"
+msgstr ""
+
+msgid "Tough"
+msgstr "Trudne"
+
+msgid "Unknown error"
+msgstr ""
+
+msgid "Unpaid"
+msgstr "Niezapłacone"
+
+msgid "Update"
+msgstr "Aktualizuj"
+
+msgid "Updated invoice"
+msgstr "Zaktualizowana faktura"
+
+msgid "VAT"
+msgstr "VAT"
+
+msgid "VAT ({percent}%)"
+msgstr ""
+
+msgid "VAT number"
+msgstr "Numer VAT"
+
+msgid "VAT {rate}\\%"
+msgstr "VAT {rate}\\%"
+
+msgid "WARNING: Legal Action Pending"
+msgstr ""
+
+msgid "We noticed that we have not yet received payment for the invoice below."
+msgstr ""
+
+msgid "You MUST include the invoice number as reference when making the payment."
+msgstr ""
+
+msgid "Your contact"
+msgstr "Twój kontakt"
+
+msgid "add {fee}"
+msgstr "dodaj {fee}"
+
+msgid "invoice"
+msgstr "faktura"
+
+msgid "our web"
+msgstr "nasza strona"
+
+msgid "reverse charge"
+msgstr ""
+
+msgid "{cost}"
+msgstr "{cost}"
+
+msgid "{number} days"
+msgstr "{number} dni"
+
+msgid "{reminder_type} reminder sent successfully"
+msgstr ""

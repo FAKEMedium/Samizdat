@@ -1,0 +1,177 @@
+# Fake News - Samizdat
+# Copyright (C) 2025 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: 2025-05-17 12:00+0200\n"
+"PO-Revision-Date: 2025-05-17 12:00+0200\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "After refunds"
+msgstr "Después de reembolsos"
+
+msgid "Amount"
+msgstr "Importe"
+
+msgid "Amount and items are required"
+msgstr "El monto y los artículos son requeridos"
+
+msgid "Amount in Swedish Kronor"
+msgstr "Monto en coronas suecas"
+
+msgid "Amount is required"
+msgstr "El monto es requerido"
+
+msgid "An error occurred"
+msgstr "Ocurrió un error"
+
+msgid "Card Payment"
+msgstr "Pago con tarjeta"
+
+msgid "Charged"
+msgstr "Cobrado"
+
+msgid "Charged At"
+msgstr "Cobrado el"
+
+msgid "Create Payment"
+msgstr "Crear pago"
+
+msgid "Date"
+msgstr "Fecha"
+
+msgid "Description"
+msgstr "Descripción"
+
+msgid "Error loading payments"
+msgstr "Error al cargar pagos"
+
+msgid "Failed to create payment"
+msgstr ""
+
+msgid "Failed to process refund"
+msgstr ""
+
+msgid "Invalid items format"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Cargando..."
+
+msgid "Method"
+msgstr ""
+
+msgid "Missing payment ID"
+msgstr ""
+
+msgid "Net Amount"
+msgstr ""
+
+msgid "Nets Payments"
+msgstr ""
+
+msgid "No payments found"
+msgstr "No se encontraron pagos"
+
+msgid "Note"
+msgstr ""
+
+msgid "Order number or reference"
+msgstr ""
+
+msgid "Payment Cancelled"
+msgstr ""
+
+msgid "Payment Details"
+msgstr ""
+
+msgid "Payment ID"
+msgstr ""
+
+msgid "Payment Method"
+msgstr ""
+
+msgid "Payment Successful"
+msgstr ""
+
+msgid "Payment for..."
+msgstr ""
+
+msgid "Payment must be charged before refund"
+msgstr ""
+
+msgid "Payment not found"
+msgstr ""
+
+msgid "Payment with Nets Easy"
+msgstr ""
+
+msgid "Proceed to Payment"
+msgstr ""
+
+msgid "Recent Payments"
+msgstr "Pagos recientes"
+
+msgid "Reference"
+msgstr ""
+
+msgid "Refund amount exceeds available amount"
+msgstr ""
+
+msgid "Refunded"
+msgstr ""
+
+msgid "Return to Home"
+msgstr ""
+
+msgid "Status"
+msgstr "Estado"
+
+msgid "Thank you! Your payment has been processed successfully."
+msgstr ""
+
+msgid "The payment process was interrupted. This could be because:"
+msgstr ""
+
+msgid "The payment session expired"
+msgstr ""
+
+msgid "There was an issue with your payment method"
+msgstr ""
+
+msgid "Total"
+msgstr "Total"
+
+msgid "Total refunds"
+msgstr ""
+
+msgid "Try Again"
+msgstr ""
+
+msgid "What happened?"
+msgstr ""
+
+msgid "You clicked the back or cancel button"
+msgstr ""
+
+msgid "You will be redirected to Nets secure checkout page."
+msgstr ""
+
+msgid "Your payment was cancelled or failed."
+msgstr ""
+
+msgid "charged"
+msgstr "cobrado"
+
+msgid "payments"
+msgstr "pagos"

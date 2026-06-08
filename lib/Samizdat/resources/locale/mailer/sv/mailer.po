@@ -1,0 +1,564 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: sv\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Actions"
+msgstr "Åtgärder"
+
+msgid "Add"
+msgstr "Lägg till"
+
+msgid "Address"
+msgstr "Adress"
+
+msgid "Address deleted"
+msgstr "Tog bort adress"
+
+msgid "Addresses"
+msgstr "Adresser"
+
+msgid "All"
+msgstr "Alla"
+
+msgid "All sources"
+msgstr "Alla källor"
+
+msgid "All types"
+msgstr "Alla typer"
+
+msgid "An error occurred"
+msgstr "Ett fel uppstod"
+
+msgid "Are you sure you want to delete all your data? This cannot be undone."
+msgstr "Vill du verkligen ta bort all din data? Detta kan inte ångras."
+
+msgid "Body (Markdown)"
+msgstr "Innehåll (Markdown)"
+
+msgid "Bounce"
+msgstr "Sstuds"
+
+msgid "Bounce deleted"
+msgstr "Raderade studs"
+
+msgid "Bounced"
+msgstr "Studsade"
+
+msgid "Bounces"
+msgstr "Studsar"
+
+msgid "CSV"
+msgstr "CSV"
+
+msgid "Cancel"
+msgstr "Avbryt"
+
+msgid "Click the button below to unsubscribe from our mailing list."
+msgstr "Klicka på knappen nedan för att avregistrera dig från vår e-postlista."
+
+msgid "Close"
+msgstr "Stäng"
+
+msgid "Code"
+msgstr "Kod"
+
+msgid "Common settings"
+msgstr "Delade inställningar"
+
+msgid "Complaint"
+msgstr "Klagomål"
+
+msgid "Completed"
+msgstr "Slutförd"
+
+msgid "Content"
+msgstr "Innehåll"
+
+msgid "Content saved"
+msgstr "Sparade innehåll"
+
+msgid "Copy"
+msgstr "Kopiera"
+
+msgid "Copy as draft"
+msgstr "Kopiera som utkast"
+
+msgid "Created"
+msgstr "Skapad"
+
+msgid "Data not found"
+msgstr "Hittade ingen data"
+
+msgid "Date"
+msgstr "Datum"
+
+msgid "Default From email"
+msgstr "Standard Från-e-post"
+
+msgid "Default From name"
+msgstr "Standard Från-namn"
+
+msgid "Delayed"
+msgstr "Uppskjuten"
+
+msgid "Delete"
+msgstr "Ta bort"
+
+msgid "Delete All My Data"
+msgstr "Ta bort all min data"
+
+msgid "Delete My Data"
+msgstr "Ta bort min data"
+
+msgid "Delete this address?"
+msgstr "Ta bort denna adress?"
+
+msgid "Delete this bounce record?"
+msgstr "Ta bort denna studs-post?"
+
+msgid "Delete this list?"
+msgstr "Ta bort denna lista?"
+
+msgid "Delete this mail?"
+msgstr "Ta bort detta mail?"
+
+msgid "Description"
+msgstr "Beskrivning"
+
+msgid "Diagnostic"
+msgstr "Diagnostik"
+
+msgid "Draft"
+msgstr "Utkast"
+
+msgid "Edit"
+msgstr "Redigera"
+
+msgid "Edit mail"
+msgstr "Redigera mail"
+
+msgid "Email"
+msgstr "Epost"
+
+msgid "Email column"
+msgstr "E-postkolumn"
+
+msgid "Enter your email address to receive a link to view your data."
+msgstr "Skriv in din e-postadress för att få en länk för att visa dina data."
+
+msgid "Enter your email address to receive an unsubscribe link."
+msgstr "Skriv in din e-postadress för att få en avregistreringslänk."
+
+msgid "Failed"
+msgstr "Misslyckades"
+
+msgid "Failed to process unsubscription."
+msgstr "Misslyckades med att behandla avregistrering."
+
+msgid "Failed to unsubscribe."
+msgstr "Kunde inte avregistrera."
+
+msgid "Failed to verify token."
+msgstr "Misslyckades verifiera token."
+
+msgid "First name"
+msgstr "Förnamn"
+
+msgid "First name col"
+msgstr "Förnamnskolumn"
+
+msgid "Footer added to all emails"
+msgstr "Sidfot tillagd i alla e-postmeddelanden"
+
+msgid "Found"
+msgstr "Hittades"
+
+msgid "Hard bounce"
+msgstr "Hård studs"
+
+msgid "Hard bounces and complaints are pre-selected for removal. Soft bounces with 3+ occurrences are also suggested."
+msgstr "Hårda studsar och klagomål är förvalda för borttagning. Mjuka studsar med 3+ förekomster föreslås också."
+
+msgid "If this email is in our system, you will receive a link shortly."
+msgstr "Om denna e-post finns i vårt system, kommer du snart att få en länk."
+
+msgid "Import"
+msgstr "Importera"
+
+msgid "Import addresses"
+msgstr "Importera adresser"
+
+msgid "Import complete"
+msgstr "Importering klar"
+
+msgid "Imported"
+msgstr "Importerad"
+
+msgid "Imported {count} addresses"
+msgstr "Importerade {count} adresser"
+
+msgid "Invalid or expired token."
+msgstr "Ogiltig eller utgången token."
+
+msgid "Invalid or missing unsubscribe token."
+msgstr "Ogiltig eller saknad avregistreringstoken."
+
+msgid "Key"
+msgstr "Nyckel"
+
+msgid "Language"
+msgstr "Språk"
+
+msgid "Last name"
+msgstr "Efternamn"
+
+msgid "Last name col"
+msgstr "Efternamnskolumn"
+
+msgid "Linked"
+msgstr "Länkad"
+
+msgid "List"
+msgstr "Lista"
+
+msgid "List Memberships"
+msgstr "Listmedlemskap"
+
+msgid "List name:"
+msgstr "Listnamn:"
+
+msgid "Lists"
+msgstr "Listor"
+
+msgid "Loading..."
+msgstr "Laddar..."
+
+msgid "Mail"
+msgstr "Epost"
+
+msgid "Mail History"
+msgstr "Mailhistorik"
+
+msgid "Mail copied as draft"
+msgstr "Mail kopierad som utkast"
+
+msgid "Mail created"
+msgstr "Mail skapad"
+
+msgid "Mail deleted"
+msgstr "Tog bort mail"
+
+msgid "Mail updated"
+msgstr "Uppdaterade mail"
+
+msgid "Mailer"
+msgstr "Mailer"
+
+msgid "Mailing Lists"
+msgstr "Mailinglistor"
+
+msgid "Mails"
+msgstr "Mail"
+
+msgid "Manual"
+msgstr "Manuell"
+
+msgid "Name"
+msgstr "Namn"
+
+msgid "Name column"
+msgstr "Namnkolumn"
+
+msgid "Never subscribed"
+msgstr "Har aldrig prenumererat"
+
+msgid "New"
+msgstr "Ny"
+
+msgid "New list"
+msgstr "Ny lista"
+
+msgid "New mail"
+msgstr "Nytt mail"
+
+msgid "No"
+msgstr "Nej"
+
+msgid "No addresses"
+msgstr "Inga adresser"
+
+msgid "No bounces"
+msgstr "Inga studsar"
+
+msgid "No content defined yet"
+msgstr "Inget innehåll ännu"
+
+msgid "No details available"
+msgstr "Detaljer saknas"
+
+msgid "No lists"
+msgstr "Inga listor"
+
+msgid "No longer interested"
+msgstr "Inte längre intresserad"
+
+msgid "No mails"
+msgstr "Inga mail"
+
+msgid "No mails received"
+msgstr "Inga mail mottagna"
+
+msgid "No results found"
+msgstr "Inga resultat hittades"
+
+msgid "No settings configured"
+msgstr "Inga inställningar konfigurerade"
+
+msgid "No source content to translate"
+msgstr "Inget innehåll att översätta"
+
+msgid "No unsubscriptions"
+msgstr "Inga avregistreringar"
+
+msgid "Not subscribed to any lists"
+msgstr "Prenumererar inte på några listor"
+
+msgid "Organization header"
+msgstr "Organisationshuvud"
+
+msgid "Other"
+msgstr "Annat"
+
+msgid "Page navigation"
+msgstr "Sidnavigering"
+
+msgid "Paste CSV data. Map columns below (only email is required)."
+msgstr "Klistra in CSV-data. Kartlägg kolumner nedan (endast e-post krävs)."
+
+msgid "Paste CSV here..."
+msgstr "Klistra in CSV här..."
+
+msgid "Paste emails here..."
+msgstr "Klistra in e-postadresser här..."
+
+msgid "Paste text containing email addresses. They will be extracted automatically."
+msgstr "Klistra in text som innehåller e-postadresser. De kommer att extraheras automatiskt."
+
+msgid "Pending"
+msgstr "Väntande"
+
+msgid "Personal Information"
+msgstr "Personlig information"
+
+msgid "Public"
+msgstr "Publik"
+
+msgid "Purchase"
+msgstr "Köp"
+
+msgid "Queue"
+msgstr "Kö"
+
+msgid "Queue this mail for sending?"
+msgstr "Kölägg detta mail för utskick?"
+
+msgid "Reason"
+msgstr "Anledning"
+
+msgid "Reason (optional)"
+msgstr "Anledning (valfritt)"
+
+msgid "Received"
+msgstr "Mottagen"
+
+msgid "Remove"
+msgstr "Ta bort"
+
+msgid "Remove marked"
+msgstr "Ta bort markerade"
+
+msgid "Remove this unsubscription? The email will be eligible for mailings again."
+msgstr "Ta bort denna avregistrering? E-posten blir då återigen berättigad till utskick."
+
+msgid "Removed {count} addresses"
+msgstr "Tog bort {count} adresser"
+
+msgid "Reply-To address"
+msgstr "Adress för Svara-till"
+
+msgid "Review"
+msgstr "Granska"
+
+msgid "Review imported addresses"
+msgstr "Granska importerade adresser"
+
+msgid "Save"
+msgstr "Spara"
+
+msgid "Save content"
+msgstr "Spara innehåll"
+
+msgid "Scheduled"
+msgstr "Schemalagd"
+
+msgid "Scrape"
+msgstr "Skrapa"
+
+msgid "Search"
+msgstr "Sök"
+
+msgid "Search field for {what}"
+msgstr "Sökfält för {what}"
+
+msgid "Select a reason..."
+msgstr "Välj en anledning..."
+
+msgid "Send link"
+msgstr "Skicka länk"
+
+msgid "Sending"
+msgstr "Skickar"
+
+msgid "Sent"
+msgstr "Skickat"
+
+msgid "Setting deleted"
+msgstr "Inställning borttagen"
+
+msgid "Setting key"
+msgstr "Inställningsnyckel"
+
+msgid "Setting saved"
+msgstr "Sparade inställning"
+
+msgid "Settings"
+msgstr "Inställningar"
+
+msgid "Signup"
+msgstr "Anmälan"
+
+msgid "Soft bounce"
+msgstr "Mjuk studs"
+
+msgid "Source"
+msgstr "Källa"
+
+msgid "Statistics"
+msgstr "Statistik"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Subject"
+msgstr "Ämne"
+
+msgid "Subscribed"
+msgstr "Prenumererad"
+
+msgid "Text"
+msgstr "Text"
+
+msgid "This will permanently delete all your data from our system. This action cannot be undone."
+msgstr "Detta kommer permanent att radera all din data från vårt system. Denna åtgärd kan inte ångras."
+
+msgid "Too many emails"
+msgstr "För många e-postmeddelanden"
+
+msgid "Total"
+msgstr "Totalt"
+
+msgid "Translate"
+msgstr "Översätt"
+
+msgid "Translation complete"
+msgstr "Översättning klar"
+
+msgid "Translation failed"
+msgstr "Översättning misslyckades"
+
+msgid "Type"
+msgstr "Typ"
+
+msgid "Unsubscribe"
+msgstr "Avregistrera"
+
+msgid "Unsubscribe from mailings"
+msgstr "Avregistrera från utskick"
+
+msgid "Unsubscription removed"
+msgstr "Avregistrering borttagen"
+
+msgid "Unsubscriptions"
+msgstr "Avregistreringar"
+
+msgid "Value"
+msgstr "Värde"
+
+msgid "View details"
+msgstr "Se detaljer"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "You have been successfully unsubscribed."
+msgstr "Du har avregistrerats."
+
+msgid "You have been unsubscribed"
+msgstr "Du har avregistrerats"
+
+msgid "Your Data"
+msgstr "Dina data"
+
+msgid "Your data has been deleted"
+msgstr "Dina data har raderats"
+
+msgid "Your data has been deleted."
+msgstr "Dina data har raderats."
+
+msgid "addresses"
+msgstr "adressser"
+
+msgid "bounces"
+msgstr "studsar"
+
+msgid "created"
+msgstr "skapad"
+
+msgid "existing"
+msgstr "existerande"
+
+msgid "linked"
+msgstr "länkad"
+
+msgid "mail"
+msgstr "e-post"
+
+msgid "need review"
+msgstr "behöver granskning"
+
+msgid "new"
+msgstr "ny"
+
+msgid "results"
+msgstr "resultat"
+
+msgid "sent"
+msgstr "skickat"
+
+msgid "unsubscribed"
+msgstr "avregistrerad"

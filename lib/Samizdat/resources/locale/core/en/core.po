@@ -1,0 +1,1389 @@
+# Fake News - Samizdat
+# Copyright (C) 2022 Webmaster <webmaster@fakenews.com>
+# This file is distributed under the same license as the Samizdat package.
+# Webmaster <webmaster@fakenews.com>, 2022.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Samizdat\n"
+"Report-Msgid-Bugs-To: Webmaster <webmaster@fakenews.com>\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Webmaster <webmaster@fakenews.com>\n"
+"Language-Team: Webmaster <webmaster@fakenews.com>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "&copy;{year}&nbsp;{author}"
+msgstr "&copy;{year}&nbsp;{author}"
+
+msgid "(No parent - top level)"
+msgstr "(No parent - top level)"
+
+msgid "404: Missing document"
+msgstr "404: Missing document"
+
+msgid "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+msgstr "<a href=\"{url}\" target=\"_blank\">{url}</a>"
+
+msgid "A confirmation link was mailed to {email}."
+msgstr "A confirmation link was mailed to {email}."
+
+msgid "About"
+msgstr "About"
+
+msgid "Access denied"
+msgstr "Access denied"
+
+msgid "Account"
+msgstr "Account"
+
+msgid "Account settings"
+msgstr "Account settings"
+
+msgid "Actions"
+msgstr "Actions"
+
+msgid "Active"
+msgstr "Active"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Add content"
+msgstr "Add content"
+
+msgid "Add customer"
+msgstr "Add customer"
+
+msgid "Add group"
+msgstr "Add group"
+
+msgid "Add item"
+msgstr "Add item"
+
+msgid "Add page"
+msgstr "Add page"
+
+msgid "Add product"
+msgstr "Add product"
+
+msgid "Add side content"
+msgstr "Add side content"
+
+msgid "Add subscription"
+msgstr "Add subscription"
+
+msgid "Add user"
+msgstr "Add user"
+
+msgid "Address"
+msgstr "Address"
+
+msgid "Address (billing)"
+msgstr "Address (billing)"
+
+msgid "Address check"
+msgstr "Address check"
+
+msgid "Admin access required"
+msgstr "Admin access required"
+
+msgid "Admininistration panel"
+msgstr "Admininistration panel"
+
+msgid "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+msgstr "After registration you can add more data about yourself, loosen your sharing policy, and customize your experience."
+
+msgid "Allow cookies to paste confirmation code from email"
+msgstr "Allow cookies to paste confirmation code from email"
+
+msgid "Amount"
+msgstr "Amount"
+
+msgid "An error occurred"
+msgstr "An error occurred"
+
+msgid "An error occurred during login. Please try again."
+msgstr "An error occurred during login. Please try again."
+
+msgid "Are you sure you want to delete this cache entry?"
+msgstr "Are you sure you want to delete this cache entry?"
+
+msgid "Are you sure you want to delete this item?"
+msgstr "Are you sure you want to delete this item?"
+
+msgid "Are you sure you want to delete this menu?"
+msgstr "Are you sure you want to delete this menu?"
+
+msgid "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+msgstr "Are you sure you want to purge ALL cache entries? This cannot be undone!"
+
+msgid "Are you sure you want to purge all cache?"
+msgstr "Are you sure you want to purge all cache?"
+
+msgid "Ask an existing customer to invite you, or create a new customer account."
+msgstr ""
+
+msgid "At least {min} characters from: {chars}"
+msgstr "At least {min} characters from: {chars}"
+
+msgid "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+msgstr "At least {min} characters: {upper} uppercase, {lower} lowercase, {num} number(s), {special} special character(s)"
+
+msgid "Authentication required"
+msgstr "Authentication required"
+
+msgid "Back to menu"
+msgstr "Back to menu"
+
+msgid "Back to menus"
+msgstr "Back to menus"
+
+msgid "Barred"
+msgstr "Barred"
+
+msgid "Base URL"
+msgstr "Base URL"
+
+msgid "Billing"
+msgstr "Billing"
+
+msgid "Blocked"
+msgstr "Blocked"
+
+msgid "Body"
+msgstr "Body"
+
+msgid "Bold"
+msgstr "Bold"
+
+msgid "Bootstrap icons"
+msgstr "Bootstrap icons"
+
+msgid "Bootstrap icons helper"
+msgstr "Bootstrap icons helper"
+
+msgid "Bullet List"
+msgstr "Bullet List"
+
+msgid "Buy {slug} a coffee"
+msgstr "Buy {slug} a coffee"
+
+msgid "By default no information about you is shared."
+msgstr "By default no information about you is shared."
+
+msgid "Cache"
+msgstr "Cache"
+
+msgid "Cache Entry Details"
+msgstr "Cache Entry Details"
+
+msgid "Cache Management"
+msgstr "Cache Management"
+
+msgid "Cache entry deleted successfully"
+msgstr "Cache entry deleted successfully"
+
+msgid "Cache entry not found or could not be deleted"
+msgstr "Cache entry not found or could not be deleted"
+
+msgid "Cache purged"
+msgstr "Cache purged"
+
+msgid "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+msgstr "Calling the helper adds the svg code to the symbol table in the beginning of the document, plus an inline reference to it."
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Captcha code from image"
+msgstr "Captcha code from image"
+
+msgid "Captcha image"
+msgstr "Captcha image"
+
+msgid "Captcha was wrong"
+msgstr "Captcha was wrong"
+
+msgid "Change password"
+msgstr "Change password"
+
+msgid "Choose a password"
+msgstr "Choose a password"
+
+msgid "Choose a username"
+msgstr "Choose a username"
+
+msgid "Choose language"
+msgstr "Choose language"
+
+msgid "City"
+msgstr "City"
+
+msgid "City (billing)"
+msgstr "City (billing)"
+
+msgid "Click to pop dialog."
+msgstr "Click to pop dialog."
+
+msgid "Click to pop login dialog."
+msgstr "Click to pop login dialog."
+
+msgid "Close"
+msgstr "Close"
+
+msgid "Company"
+msgstr "Company"
+
+msgid "Components"
+msgstr "Components"
+
+msgid "Confirm"
+msgstr "Confirm"
+
+msgid "Confirmation Failed"
+msgstr "Confirmation Failed"
+
+msgid "Confirmation code"
+msgstr "Confirmation code"
+
+msgid "Confirmation failed"
+msgstr "Confirmation failed"
+
+msgid "Connection error. Please try again."
+msgstr "Connection error. Please try again."
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Contribute"
+msgstr "Contribute"
+
+msgid "Control panel"
+msgstr "Control panel"
+
+msgid "Couldn't use code for verification."
+msgstr "Couldn't use code for verification."
+
+msgid "Country"
+msgstr "Country"
+
+msgid "Country (billing)"
+msgstr "Country (billing)"
+
+msgid "Country selector"
+msgstr "Country selector"
+
+msgid "Create"
+msgstr "Create"
+
+msgid "Create customer"
+msgstr "Create customer"
+
+msgid "Created"
+msgstr "Created"
+
+msgid "Created {created} by {creator}"
+msgstr "Created {created} by {creator}"
+
+msgid "Credit trustability"
+msgstr "Credit trustability"
+
+msgid "Customer"
+msgstr "Customer"
+
+msgid "Customer Id"
+msgstr "Customer Id"
+
+msgid "Customers"
+msgstr "Customers"
+
+msgid "DNS zones"
+msgstr "DNS zones"
+
+msgid "Data usage: {usage}"
+msgstr "Data usage: {usage}"
+
+msgid "Database"
+msgstr "Database"
+
+msgid "Database error occurred"
+msgstr "Database error occurred"
+
+msgid "Databases"
+msgstr "Databases"
+
+msgid "Date"
+msgstr "Date"
+
+msgid "Date of birth"
+msgstr ""
+
+msgid "Decide which parts of your personal data you want to show different groups."
+msgstr "Decide which parts of your personal data you want to show different groups."
+
+msgid "Definitions"
+msgstr "Definitions"
+
+msgid "Delete"
+msgstr "Delete"
+
+msgid "Description"
+msgstr "Description"
+
+msgid "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+msgstr "Determines what subdirectory to load svg files from. The default is Bootstrap icons."
+
+msgid "Display name"
+msgstr "Display name"
+
+msgid "Domain"
+msgstr "Domain"
+
+msgid "Domains"
+msgstr "Domains"
+
+msgid "Edit"
+msgstr "Edit"
+
+msgid "Edit group"
+msgstr ""
+
+msgid "Edit menu item: {id}"
+msgstr "Edit menu item: {id}"
+
+msgid "Edit menu: {name}"
+msgstr "Edit menu: {name}"
+
+msgid "Edit page {docpath}"
+msgstr "Edit page {docpath}"
+
+msgid "Edit this page"
+msgstr "Edit this page"
+
+msgid "Email"
+msgstr "Email"
+
+msgid "Email %s has been verified"
+msgstr "Email %s has been verified"
+
+msgid "Email (billing)"
+msgstr "Email (billing)"
+
+msgid "Email confirmation"
+msgstr "Email confirmation"
+
+msgid "Email not valid"
+msgstr "Email not valid"
+
+msgid "Email someone about {what}"
+msgstr "Email someone about {what}"
+
+msgid "Empty VAT"
+msgstr "Empty VAT"
+
+msgid "Empty VAT number"
+msgstr "Empty VAT number"
+
+msgid "Empty address"
+msgstr "Empty address"
+
+msgid "Empty billingaddress"
+msgstr "Empty billingaddress"
+
+msgid "Empty city"
+msgstr "Empty city"
+
+msgid "Empty code"
+msgstr "Empty code"
+
+msgid "Empty company name"
+msgstr "Empty company name"
+
+msgid "Empty country"
+msgstr "Empty country"
+
+msgid "Empty directory"
+msgstr "Empty directory"
+
+msgid "Empty first name"
+msgstr "Empty first name"
+
+msgid "Empty freetext"
+msgstr "Empty freetext"
+
+msgid "Empty last name"
+msgstr "Empty last name"
+
+msgid "Empty mobile"
+msgstr "Empty mobile"
+
+msgid "Empty postal code"
+msgstr "Empty postal code"
+
+msgid "Empty recommendation"
+msgstr "Empty recommendation"
+
+msgid "Empty reference"
+msgstr "Empty reference"
+
+msgid "Empty telephone"
+msgstr "Empty telephone"
+
+msgid "End main content"
+msgstr "End main content"
+
+msgid "End side content"
+msgstr "End side content"
+
+msgid "English"
+msgstr "English"
+
+msgid "Enter VAT number with country prefix (e.g., SE, DE, FR)"
+msgstr ""
+
+msgid "Enter a title first to translate from"
+msgstr "Enter a title first to translate from"
+
+msgid "Enter code"
+msgstr "Enter code"
+
+msgid "Enter code from captcha image"
+msgstr "Enter code from captcha image"
+
+msgid "Enter password"
+msgstr "Enter password"
+
+msgid "Enter username"
+msgstr "Enter username"
+
+msgid "Enter your email"
+msgstr "Enter your email"
+
+msgid "Euro"
+msgstr "Euro"
+
+msgid "Examples"
+msgstr "Examples"
+
+msgid "Exception Occurred"
+msgstr "Exception Occurred"
+
+msgid "Expand menu"
+msgstr "Expand menu"
+
+msgid "Expand personal menu."
+msgstr "Expand personal menu."
+
+msgid "Expires"
+msgstr "Expires"
+
+msgid "Failed to purge cache"
+msgstr "Failed to purge cache"
+
+msgid "Failed to save"
+msgstr ""
+
+msgid "File"
+msgstr "File"
+
+msgid "File: stored in src/public. Database: stored in PostgreSQL."
+msgstr "File: stored in src/public. Database: stored in PostgreSQL."
+
+msgid "First name"
+msgstr "First name"
+
+msgid "Full"
+msgstr "Full"
+
+msgid "Give small financial support to {slug} at buymeacoffee"
+msgstr "Give small financial support to {slug} at buymeacoffee"
+
+msgid "Group"
+msgstr ""
+
+msgid "Group name"
+msgstr ""
+
+msgid "Groups"
+msgstr "Groups"
+
+msgid "HTML result"
+msgstr "HTML result"
+
+msgid "Halfyear"
+msgstr "Halfyear"
+
+msgid "Heading 1"
+msgstr "Heading 1"
+
+msgid "Heading 2"
+msgstr "Heading 2"
+
+msgid "Heading 3"
+msgstr "Heading 3"
+
+msgid "I accept the terms for registration."
+msgstr "I accept the terms for registration."
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Identification code"
+msgstr "Identification code"
+
+msgid "If you did not register an account, please ignore this email."
+msgstr "If you did not register an account, please ignore this email."
+
+msgid "In"
+msgstr "In"
+
+msgid "Inactive"
+msgstr "Inactive"
+
+msgid "Invalid confirmation link"
+msgstr "Invalid confirmation link"
+
+msgid "Invalid email"
+msgstr "Invalid email"
+
+msgid "Invalid password"
+msgstr "Invalid password"
+
+msgid "Invalid username"
+msgstr "Invalid username"
+
+msgid "Invoice"
+msgstr "Invoice"
+
+msgid "Invoice address"
+msgstr "Invoice address"
+
+msgid "Invoice currency"
+msgstr "Invoice currency"
+
+msgid "Invoice currency is {currency}."
+msgstr "Invoice currency is {currency}."
+
+msgid "Invoice customer #{customerid}"
+msgstr "Invoice customer #{customerid}"
+
+msgid "Invoice period"
+msgstr "Invoice period"
+
+msgid "Invoice type"
+msgstr "Invoice type"
+
+msgid "Invoices"
+msgstr "Invoices"
+
+msgid "Italic"
+msgstr "Italic"
+
+msgid "Item deleted"
+msgstr "Item deleted"
+
+msgid "Item saved"
+msgstr "Item saved"
+
+msgid "Key"
+msgstr "Key"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Language:"
+msgstr "Language:"
+
+msgid "Languages"
+msgstr "Languages"
+
+msgid "Last name"
+msgstr "Last name"
+
+msgid "Leave empty for items without a link"
+msgstr "Leave empty for items without a link"
+
+msgid "License"
+msgstr "License"
+
+msgid "Link"
+msgstr "Link"
+
+msgid "Link to control panel"
+msgstr "Link to control panel"
+
+msgid "Link to personal settings"
+msgstr "Link to personal settings"
+
+msgid "Loading"
+msgstr ""
+
+msgid "Loading..."
+msgstr "Loading..."
+
+msgid "Log in"
+msgstr "Log in"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Log out and end current session"
+msgstr "Log out and end current session"
+
+msgid "Login blocked"
+msgstr "Login blocked"
+
+msgid "Login is temporarily blocked due to excessive failed attempts from {ip}."
+msgstr "Login is temporarily blocked due to excessive failed attempts from {ip}."
+
+msgid "Logotype"
+msgstr "Logotype"
+
+msgid "Logotype leading to start"
+msgstr "Logotype leading to start"
+
+msgid "Logotype leading to start page"
+msgstr "Logotype leading to start page"
+
+msgid "Logotype linked to {site}"
+msgstr "Logotype linked to {site}"
+
+msgid "Lookup"
+msgstr ""
+
+msgid "Lost password?"
+msgstr "Lost password?"
+
+msgid "MB"
+msgstr "MB"
+
+msgid "Mail domains"
+msgstr "Mail domains"
+
+msgid "Mail dump"
+msgstr "Mail dump"
+
+msgid "Manager"
+msgstr "Manager"
+
+msgid "Manuals"
+msgstr "Manuals"
+
+msgid "Member since"
+msgstr ""
+
+msgid "Members"
+msgstr ""
+
+msgid "Menu Items"
+msgstr "Menu Items"
+
+msgid "Menu Settings"
+msgstr "Menu Settings"
+
+msgid "Menu created"
+msgstr "Menu created"
+
+msgid "Menu deleted"
+msgstr "Menu deleted"
+
+msgid "Menu saved"
+msgstr "Menu saved"
+
+msgid "Menus"
+msgstr "Menus"
+
+msgid "Messages pagination"
+msgstr "Messages pagination"
+
+msgid "Missing file, our bad?"
+msgstr "Missing file, our bad?"
+
+msgid "Missing username or password"
+msgstr "Missing username or password"
+
+msgid "Mobile"
+msgstr "Mobile"
+
+msgid "Modifications were saved."
+msgstr "Modifications were saved."
+
+msgid "Month"
+msgstr "Month"
+
+msgid "Name"
+msgstr "Name"
+
+msgid "Network error - please try again"
+msgstr "Network error - please try again"
+
+msgid "Never"
+msgstr "Never"
+
+msgid "Never expires"
+msgstr "Never expires"
+
+msgid "New Menu"
+msgstr "New Menu"
+
+msgid "New account"
+msgstr "New account"
+
+msgid "New customer"
+msgstr "New customer"
+
+msgid "New folder"
+msgstr "New folder"
+
+msgid "New group"
+msgstr ""
+
+msgid "New menu"
+msgstr "New menu"
+
+msgid "New menu item"
+msgstr "New menu item"
+
+msgid "Newest"
+msgstr "Newest"
+
+msgid "Newsletter"
+msgstr "Newsletter"
+
+msgid "Next"
+msgstr "Next"
+
+msgid "No cache entries found"
+msgstr "No cache entries found"
+
+msgid "No groups found"
+msgstr ""
+
+msgid "No invoicing"
+msgstr "No invoicing"
+
+msgid "No menu items. Click \"Add item\" to create one."
+msgstr "No menu items. Click \"Add item\" to create one."
+
+msgid "No menus found"
+msgstr "No menus found"
+
+msgid "No pages found."
+msgstr "No pages found."
+
+msgid "No services available"
+msgstr ""
+
+msgid "No title"
+msgstr "No title"
+
+msgid "No users found"
+msgstr "No users found"
+
+msgid "None (root level)"
+msgstr "None (root level)"
+
+msgid "Normal"
+msgstr "Normal"
+
+msgid "Not found"
+msgstr "Not found"
+
+msgid "Notes"
+msgstr "Notes"
+
+msgid "Number"
+msgstr "Number"
+
+msgid "Numbered List"
+msgstr "Numbered List"
+
+msgid "Open invoice"
+msgstr "Open invoice"
+
+msgid "Open invoice items"
+msgstr "Open invoice items"
+
+msgid "Open list"
+msgstr "Open list"
+
+msgid "Operation ID:"
+msgstr "Operation ID:"
+
+msgid "Options"
+msgstr "Options"
+
+msgid "Order saved"
+msgstr "Order saved"
+
+msgid "Organization"
+msgstr "Organization"
+
+msgid "Our reference"
+msgstr "Our reference"
+
+msgid "PageSpeed result 100 100 100 100"
+msgstr "PageSpeed result 100 100 100 100"
+
+msgid "Pagination"
+msgstr "Pagination"
+
+msgid "Paid"
+msgstr "Paid"
+
+msgid "Panel"
+msgstr "Panel"
+
+msgid "Paragraph"
+msgstr "Paragraph"
+
+msgid "Parameters"
+msgstr "Parameters"
+
+msgid "Parent Item"
+msgstr "Parent Item"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Password must be at least {min} characters"
+msgstr "Password must be at least {min} characters"
+
+msgid "Password must contain at least {min} lowercase letter(s)"
+msgstr "Password must contain at least {min} lowercase letter(s)"
+
+msgid "Password must contain at least {min} number(s)"
+msgstr "Password must contain at least {min} number(s)"
+
+msgid "Password must contain at least {min} special character(s)"
+msgstr "Password must contain at least {min} special character(s)"
+
+msgid "Password must contain at least {min} uppercase letter(s)"
+msgstr "Password must contain at least {min} uppercase letter(s)"
+
+msgid "Password was wrong or username doesn't exist."
+msgstr "Password was wrong or username doesn't exist."
+
+msgid "People rocketing to the sky"
+msgstr "People rocketing to the sky"
+
+msgid "Personal"
+msgstr "Personal"
+
+msgid "Personal menu"
+msgstr "Personal menu"
+
+msgid "Please check your confirmation link or register again."
+msgstr "Please check your confirmation link or register again."
+
+msgid "Please confirm your email address by clicking the following link:"
+msgstr "Please confirm your email address by clicking the following link:"
+
+msgid "Please enter a valid email address"
+msgstr "Please enter a valid email address"
+
+msgid "Please login to access resource."
+msgstr "Please login to access resource."
+
+msgid "Please logout and login as a user with proper authorization instead."
+msgstr "Please logout and login as a user with proper authorization instead."
+
+msgid "Postal code"
+msgstr "Postal code"
+
+msgid "Postal code (billing)"
+msgstr "Postal code (billing)"
+
+msgid "Postal mail"
+msgstr "Postal mail"
+
+msgid "Press \"{buttontext}\" to regenerate"
+msgstr "Press \"{buttontext}\" to regenerate"
+
+msgid "Preview"
+msgstr "Preview"
+
+msgid "Previous"
+msgstr "Previous"
+
+msgid "Privilege sets"
+msgstr "Privilege sets"
+
+msgid "Privileges"
+msgstr "Privileges"
+
+msgid "Products"
+msgstr "Products"
+
+msgid "Purge"
+msgstr "Purge"
+
+msgid "Purge All"
+msgstr "Purge All"
+
+msgid "Purged %d cache entries"
+msgstr "Purged %d cache entries"
+
+msgid "Purging all cache requires confirmation"
+msgstr "Purging all cache requires confirmation"
+
+msgid "Quarter"
+msgstr "Quarter"
+
+msgid "Quote"
+msgstr "Quote"
+
+msgid "Recommended by"
+msgstr "Recommended by"
+
+msgid "Register"
+msgstr "Register"
+
+msgid "Register account"
+msgstr "Register account"
+
+msgid "Register to create and publish content."
+msgstr "Register to create and publish content."
+
+msgid "Registration is currently non-functional"
+msgstr "Registration is currently non-functional"
+
+msgid "Rename"
+msgstr "Rename"
+
+msgid "Required"
+msgstr "Required"
+
+msgid "Resources"
+msgstr "Resources"
+
+msgid "Response"
+msgstr "Response"
+
+msgid "Roles"
+msgstr "Roles"
+
+msgid "SEK"
+msgstr "SEK"
+
+msgid "SMS sent successfully!"
+msgstr "SMS sent successfully!"
+
+msgid "Samizdat uses the Bootstrap icons from {link}."
+msgstr "Samizdat uses the Bootstrap icons from {link}."
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Save failed"
+msgstr "Save failed"
+
+msgid "Save options"
+msgstr "Save options"
+
+msgid "Save to database"
+msgstr "Save to database"
+
+msgid "Save to file"
+msgstr "Save to file"
+
+msgid "Saved"
+msgstr ""
+
+msgid "Search"
+msgstr "Search"
+
+msgid "Search cache"
+msgstr "Search cache"
+
+msgid "Search content"
+msgstr "Search content"
+
+msgid "Search field for {what}"
+msgstr "Search field for {what}"
+
+msgid "Search for customer"
+msgstr "Search for customer"
+
+msgid "Search for product"
+msgstr "Search for product"
+
+msgid "Search for user or group"
+msgstr "Search for user or group"
+
+msgid "Search menus..."
+msgstr "Search menus..."
+
+msgid "Search pattern (e.g. fortnox:*, user:*)"
+msgstr "Search pattern (e.g. fortnox:*, user:*)"
+
+msgid "Search web content"
+msgstr "Search web content"
+
+msgid "Select Format"
+msgstr "Select Format"
+
+msgid "Select country"
+msgstr "Select country"
+
+msgid "Select country or click flags to see detail"
+msgstr "Select country or click flags to see detail"
+
+msgid "Select state"
+msgstr ""
+
+msgid "Send SMS"
+msgstr "Send SMS"
+
+msgid "Sending..."
+msgstr "Sending..."
+
+msgid "Set the height attribute."
+msgstr "Set the height attribute."
+
+msgid "Set the id attribute."
+msgstr "Set the id attribute."
+
+msgid "Set the title attribute."
+msgstr "Set the title attribute."
+
+msgid "Set the width attribute."
+msgstr "Set the width attribute."
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Settings saved"
+msgstr ""
+
+msgid "Share {what} on {where}"
+msgstr "Share {what} on {where}"
+
+msgid "Shown as"
+msgstr "Shown as"
+
+msgid "Side content"
+msgstr "Side content"
+
+msgid "Sidecard name"
+msgstr "Sidecard name"
+
+msgid "Site"
+msgstr "Site"
+
+msgid "Site content"
+msgstr "Site content"
+
+msgid "Skip links"
+msgstr "Skip links"
+
+msgid "Skip to main content"
+msgstr "Skip to main content"
+
+msgid "Snapback evaluation"
+msgstr "Snapback evaluation"
+
+msgid "Snapback scheduler"
+msgstr "Snapback scheduler"
+
+msgid "Source files"
+msgstr "Source files"
+
+msgid "Space separated list of extra classes to append the prefixed default classes."
+msgstr "Space separated list of extra classes to append the prefixed default classes."
+
+msgid "Start main content"
+msgstr "Start main content"
+
+msgid "Start side content"
+msgstr "Start side content"
+
+msgid "State"
+msgstr ""
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Storage"
+msgstr "Storage"
+
+msgid "Storage target"
+msgstr "Storage target"
+
+msgid "Stuff"
+msgstr "Stuff"
+
+msgid "Super panel"
+msgstr "Super panel"
+
+msgid "Superadmin access required"
+msgstr "Superadmin access required"
+
+msgid "Swedish"
+msgstr "Swedish"
+
+msgid "TTL"
+msgstr "TTL"
+
+msgid "Telephone"
+msgstr "Telephone"
+
+msgid "Terms of service"
+msgstr "Terms of service"
+
+msgid "Text Editor"
+msgstr "Text Editor"
+
+msgid "The Samizdat project"
+msgstr "The Samizdat project"
+
+msgid "The default is used for the Bootstrap icons set."
+msgstr "The default is used for the Bootstrap icons set."
+
+msgid "The form was submitted from {ip}"
+msgstr "The form was submitted from {ip}"
+
+msgid "The limit is {blocklimit} attempts per {blocktime} minutes."
+msgstr "The limit is {blocklimit} attempts per {blocktime} minutes."
+
+msgid "The login function uses javascript, cookies and AJAX."
+msgstr "The login function uses javascript, cookies and AJAX."
+
+msgid "The page {docpath} wasn't found."
+msgstr "The page {docpath} wasn't found."
+
+msgid "This confirmation link is invalid or has expired"
+msgstr "This confirmation link is invalid or has expired"
+
+msgid "This demonstration shows the result of Samizdat's SVG template helper."
+msgstr "This demonstration shows the result of Samizdat's SVG template helper."
+
+msgid "This field is required"
+msgstr "This field is required"
+
+msgid "This resource has no input parameters."
+msgstr "This resource has no input parameters."
+
+msgid "This resource is deprecated!"
+msgstr "This resource is deprecated!"
+
+msgid "This resource is not documented."
+msgstr "This resource is not documented."
+
+msgid "Titles by Language"
+msgstr "Titles by Language"
+
+msgid "Toggle Dropdown"
+msgstr "Toggle Dropdown"
+
+msgid "Toggle menu"
+msgstr "Toggle menu"
+
+msgid "Translate"
+msgstr "Translate"
+
+msgid "Translating..."
+msgstr "Translating..."
+
+msgid "Translation complete"
+msgstr "Translation complete"
+
+msgid "Type"
+msgstr "Type"
+
+msgid "URI Path"
+msgstr "URI Path"
+
+msgid "Unauthenticated"
+msgstr "Unauthenticated"
+
+msgid "Underline"
+msgstr "Underline"
+
+msgid "Untitled"
+msgstr "Untitled"
+
+msgid "Update and send"
+msgstr ""
+
+msgid "Update customer"
+msgstr "Update customer"
+
+msgid "Updated customer"
+msgstr "Updated customer"
+
+msgid "Updated {updated} by {updater}"
+msgstr "Updated {updated} by {updater}"
+
+msgid "Usage"
+msgstr "Usage"
+
+msgid "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+msgstr "Use <code>flags</code> for flag-icons or <code>anysvg</code> for the application's home."
+
+msgid "Use this if you don't need the prefixed default classes."
+msgstr "Use this if you don't need the prefixed default classes."
+
+msgid "Used to make class names."
+msgstr "Used to make class names."
+
+msgid "User"
+msgstr "User"
+
+msgid "User manual"
+msgstr "User manual"
+
+msgid "User not found"
+msgstr ""
+
+msgid "User registration"
+msgstr "User registration"
+
+msgid "Username"
+msgstr "Username"
+
+msgid "Username already exists"
+msgstr "Username already exists"
+
+msgid "Username can only contain {chars}"
+msgstr "Username can only contain {chars}"
+
+msgid "Username could not be created"
+msgstr "Username could not be created"
+
+msgid "Username must be at least {min} characters"
+msgstr "Username must be at least {min} characters"
+
+msgid "Users"
+msgstr "Users"
+
+msgid "VAT Number"
+msgstr "VAT Number"
+
+msgid "VAT Number Lookup"
+msgstr ""
+
+msgid "VAT lookup, {vatno}"
+msgstr "VAT lookup, {vatno}"
+
+msgid "VAT number"
+msgstr "VAT number"
+
+msgid "VAT number lookup"
+msgstr "VAT number lookup"
+
+msgid "VAT number not valid"
+msgstr ""
+
+msgid "VAT percentage"
+msgstr "VAT percentage"
+
+msgid "Valid"
+msgstr ""
+
+msgid "Value"
+msgstr "Value"
+
+msgid "Value for the class attribute."
+msgstr "Value for the class attribute."
+
+msgid "Version"
+msgstr "Version"
+
+msgid "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+msgstr "View and manage Redis cache entries. Use patterns like \"fortnox:*\", \"user:*\", or \"*\" to filter entries."
+
+msgid "We will also store it for statistics and to prevent robot registrations."
+msgstr "We will also store it for statistics and to prevent robot registrations."
+
+msgid "We will email a confirmation request."
+msgstr "We will email a confirmation request."
+
+msgid "Web sites"
+msgstr "Web sites"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Websites"
+msgstr "Websites"
+
+msgid "Whois data for {ip}"
+msgstr "Whois data for {ip}"
+
+msgid "Year"
+msgstr "Year"
+
+msgid "You are not connected to any customer accounts."
+msgstr ""
+
+msgid "You can also post in our discussions."
+msgstr "You can also post in our discussions."
+
+msgid "You can now log in to your account."
+msgstr "You can now log in to your account."
+
+msgid "You have registered a new user account on {site}."
+msgstr "You have registered a new user account on {site}."
+
+msgid "You have {remaining} tries left."
+msgstr "You have {remaining} tries left."
+
+msgid "You need to accept registration terms."
+msgstr "You need to accept registration terms."
+
+msgid "Your email"
+msgstr "Your email"
+
+msgid "Your ip {ip} will be appended to the confirmation request."
+msgstr "Your ip {ip} will be appended to the confirmation request."
+
+msgid "cache"
+msgstr "cache"
+
+msgid "content"
+msgstr "content"
+
+msgid "customer"
+msgstr "customer"
+
+msgid "msg"
+msgstr ""
+
+msgid "product"
+msgstr "product"
+
+msgid "seconds"
+msgstr "seconds"
+
+msgid "supporters"
+msgstr "supporters"
+
+msgid "user"
+msgstr "user"
+
+msgid "{code}: Authentication required"
+msgstr "{code}: Authentication required"
+
+msgid "{code}: No authorization"
+msgstr "{code}: No authorization"
+
+msgid "{code}: Not in this universe"
+msgstr "{code}: Not in this universe"
+
+msgid "{server}, main firewall"
+msgstr "{server}, main firewall"
+
+msgid "{server}, standby firewall"
+msgstr "{server}, standby firewall"
+
+msgid "{sitename} by country"
+msgstr "{sitename} by country"
+
+msgid "{sitename} in {country}"
+msgstr "{sitename} in {country}"

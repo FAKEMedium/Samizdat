@@ -2,9 +2,9 @@ package Samizdat::Command::makei18n;
 
 use Mojo::Base 'Mojolicious::Command', -signatures;
 use Mojo::Home;
+use Mojo::File qw(tempfile);
 use Locale::TextDomain::OO::Extract::Perl;
 use Locale::TextDomain::OO::Extract::JavaScript;
-use Locale::TextDomain::OO::Extract::Process;
 use Encode qw(encode);
 
 my $plurals = {
@@ -17,140 +17,135 @@ my $plurals = {
   pl => 'nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);',
 };
 
-my $lexicon = {};
+# Core dist owns the framework, core plugins, shared layouts/chunks and bundle JS.
+# Everything else gets its own per-module textdomain so each plugin dist ships
+# its own translations (merged flat at runtime; see lib/Samizdat.pm).
+my %CORE = map { $_ => 1 } qw(Account Customer Web Cache Public Icons Manager Captcha Shortbytes);
+my %PLUGIN;  # lc plugin names (populated in run); non-plugin template dirs fold into core
 
-has description => 'Managing updates of internationalization data.';
+has description => 'Rebuild per-module i18n (.pot/.po/.mo) under resources/locale/<module>/.';
 has usage => sub ($self) { $self->extract_usage };
 
+sub _po_escape ($s) {
+  $s =~ s/\\/\\\\/g;
+  $s =~ s/"/\\"/g;
+  $s =~ s/\n/\\n/g;
+  $s =~ s/\t/\\t/g;
+  return $s;
+}
+
+# Which module a source file belongs to.
+sub _module_of ($file) {
+  if ($file =~ m{/Samizdat/(?:Plugin|Controller|Model|Command)/([A-Za-z0-9]+)}) {
+    return $CORE{$1} ? 'core' : lc $1;
+  }
+  if ($file =~ m{/resources/templates/([^/]+)/}) {
+    my $d = $1;
+    return 'core' if $d eq 'layouts' || $d eq 'chunks' || $CORE{ucfirst $d};
+    return $PLUGIN{$d} ? $d : 'core';
+  }
+  return 'core';  # Samizdat.pm, bundle JS, anything else
+}
+
 sub run ($self, @args) {
-  my $path;
   my $app = $self->app;
-  my $year = '2022';
+  my $loc = $app->{config}->{locale};
+  my $td  = $loc->{textdomain};
 
-  my $pot = sprintf("# %s - %s\n", $app->{config}->{sitename}, $app->{config}->{locale}->{'Project-Id-Version'});
-  $pot .= sprintf("# Copyright (C) %s %s\n", $year, $app->{config}->{locale}->{'Language-Team'});
-  $pot .= sprintf("# %s\n",
-    $app->__x('This file is distributed under the same license as the {project} package.',
-      project => $app->{config}->{locale}->{project}
-    )
-  );
-  $pot .= sprintf("# %s, %s.\n",
-    $app->{config}->{locale}->{'Report-Msgid-Bugs-To'},
-    $year
-  );
-  $pot .= sprintf("#\n");
-  $pot .= sprintf("%s\n", 'msgid ""');
-  $pot .= sprintf("%s\n", 'msgstr ""');
-  for my $header (qw(
-    Project-Id-Version Report-Msgid-Bugs-To Last-Translator PO-Revision-Date POT-Creation-Date
-    Language-Team MIME-Version Content-Type Content-Transfer-Encoding Language
-  )) {
-    $pot .= sprintf("\"%s: %s\\n\"\n", $header, $app->{config}->{locale}->{$header});
-  }
+  my %skip = map { $_ => 1 } @{ $loc->{skip_messages} // [] };
+  my @languages = grep { !$skip{$_} } sort keys %{ $loc->{languages} };
 
-  my $extractor = Locale::TextDomain::OO::Extract::Perl->new(
-    lexicon_ref => $lexicon,
-    project     => $app->{config}->{locale}->{project},
-    domain      => $app->{config}->{locale}->{textdomain},
-  );
+  %PLUGIN = map { lc(($_->basename =~ s/\.pm$//r)) => 1 }
+    @{ $app->home->child('lib', 'Samizdat', 'Plugin')->list->to_array };
 
-  # Extract from Perl files
-  $path = Mojo::Home->new('lib/');
-  $path->list_tree({dir => 0})->each(sub ($file, $num) {
-    $extractor->clear;
-    $extractor->filename($file->to_string);
-    $extractor->content_ref( \( $file->slurp ) );
-    $extractor->extract;
+  my $localebase = $app->resource('locale');     # lib/Samizdat/resources/locale
+  my $legacy     = $app->home->child('locale');  # old single-domain tree (first-time seed)
+
+  # 1. Extract msgids per file, bucketed by module.
+  my %modmsg;  # module => { msgid => 1 }
+  my $extract = sub ($file, $class) {
+    my $lex = {};
+    my $ex  = $class->new(lexicon_ref => $lex, project => $loc->{project}, domain => $td);
+    $ex->clear;
+    $ex->filename($file->to_string);
+    $ex->content_ref(\($file->slurp));
+    eval { $ex->extract; 1 } or do { warn "extract failed for $file: $@"; return };
+    my $module = _module_of($file->to_string);
+    $modmsg{$module}{$_} = 1 for grep { length } keys %{ $lex->{'i-default::'} // {} };
+  };
+
+  # Perl modules
+  $app->home->child('lib')->list_tree({dir => 0})->each(sub ($f, $n) {
+    $extract->($f, 'Locale::TextDomain::OO::Extract::Perl') if $f =~ /\.(pm|pl)$/;
   });
-
-  #  Extract from embedded Perl in templates
-  $path = $self->app->resource('templates');
-  $path->list_tree({dir => 0})->each(sub ($file, $num) {
-    $extractor->clear;
-    $extractor->filename($file->to_string);
-    $extractor->content_ref( \( $file->slurp ) );
-    $extractor->extract;
+  # Embedded Perl in templates
+  $app->resource('templates')->list_tree({dir => 0})->each(sub ($f, $n) {
+    $extract->($f, 'Locale::TextDomain::OO::Extract::Perl');
   });
-
-  $extractor = Locale::TextDomain::OO::Extract::JavaScript->new(
-    lexicon_ref => $lexicon,
-    project     => $app->{config}->{locale}->{project},
-    domain      => $app->{config}->{locale}->{textdomain},
-  );
-
-  #  Extract from javascript files
-  $path = Mojo::Home->new('public/js/');
-  $path->list_tree({dir => 0})->each(sub ($file, $num) {
-    if ('js' eq $file->extname) {
-      $extractor->clear;
-      $extractor->filename($file->to_string);
-      $extractor->content_ref(\($file->slurp));
-      $extractor->extract;
-    }
-  });
-
-  for my $msgid (keys %{ $lexicon->{'i-default::'} } ) {
-    if ($msgid) {
-      $pot .= sprintf("\nmsgid \"%s\"\nmsgstr \"\"\n", $msgid);
-    }
-  }
-
-  Mojo::Home->new(sprintf('locale/%s.pot', $app->{config}->{locale}->{textdomain}))->spew(encode('UTF-8', $pot));
-
-  my $skip = { };
-  for my $language (@{ $app->{config}->{locale}->{skip_messages} }) {
-    $skip->{$language} = 1;
-  }
-  for my $language (sort {$a cmp $b} keys %{ $app->{config}->{locale}->{languages} }) {
-    next if ($skip->{$language});
-    my $process = Locale::TextDomain::OO::Extract::Process->new(
-      domain      => $app->{config}->{locale}->{textdomain},
-      language    => $language,
-      lexicon_ref => $lexicon,
-      plugin_ref  => {
-        po => 'PO',
-        mo => 'MO',
-      },
-    );
-
-    # Make sure directory exists
-    Mojo::Home->new(sprintf('locale/%s/', $language))->make_path({mode => 0755});
-
-    $path = Mojo::Home->new(sprintf('locale/%s/%s.po',
-      $language, $app->{config}->{locale}->{textdomain}));
-
-    # Create initial po file if it dosn't exist
-    if (!-f $path->to_string) {
-      my $potcopy = $pot;
-      my $search = '"Language: en\\n"';
-      my $replace = sprintf("\"Language\: %s\\n\"\n", $language);
-      $replace .= sprintf("\"Plural-Forms: %s\\n\"",
-        exists($plurals->{$language}) ?
-          $plurals->{$language} :
-          'nplurals=2; plural=(n != 1);'
-      );
-      $potcopy =~ s /"Language: en\\n"/$replace/sm;
-      say sprintf("Created %s", $path->to_string);
-      $path->spew(encode('UTF-8', $potcopy));
-    }
-
-    # Read existing po file for the language
-    $process->language($language);
-    $process->slurp(po => $path->to_string);
-
-    $process->remove_all_reference;
-    $process->remove_all_automatic;
-
-    $process->merge_extract({
-      lexicon_ref => $lexicon,
+  # Bundle JavaScript -> core
+  my $jsdir = $app->datadir->child('js');
+  if (-d $jsdir->to_string) {
+    $jsdir->list_tree({dir => 0})->each(sub ($f, $n) {
+      $extract->($f, 'Locale::TextDomain::OO::Extract::JavaScript') if 'js' eq $f->extname;
     });
+  }
 
-    # Write back po files
-    $process->spew(po => $path->to_string);
+  # 2. Per module: write .pot, seed translations from the merged/legacy .po, compile .mo.
+  for my $module (sort keys %modmsg) {
+    my $moddir = $localebase->child($module);
+    $moddir->make_path;
 
-    # Write mo files
-    $process->spew(mo => sprintf('locale/%s/%s.mo',
-      $language, $app->{config}->{locale}->{textdomain}));
+    my $pot = sprintf("# %s translations for the %s module\n", $app->{config}->{sitename}, $module)
+            . "msgid \"\"\nmsgstr \"\"\n"
+            . "\"MIME-Version: 1.0\\n\"\n"
+            . "\"Content-Type: text/plain; charset=UTF-8\\n\"\n"
+            . "\"Content-Transfer-Encoding: 8bit\\n\"\n";
+    $pot .= sprintf("\nmsgid \"%s\"\nmsgstr \"\"\n", _po_escape($_))
+      for sort keys %{ $modmsg{$module} };
+    my $potfile = $moddir->child("$module.pot");
+    $potfile->spew(encode('UTF-8', $pot));
+
+    for my $lang (@languages) {
+      my $langdir = $moddir->child($lang);
+      $langdir->make_path;
+      my $pofile = $langdir->child("$module.po");
+
+      # Seed source: this module's existing .po, else the legacy merged .po.
+      my $seed = -f $pofile->to_string ? $pofile->to_string
+               : $legacy->child($lang, "$td.po")->to_string;
+
+      if (-f $seed) {
+        my $tmp = tempfile;
+        # Pull translations for this module's msgids from the seed; drop the rest.
+        system('msgmerge', '--quiet', '--no-fuzzy-matching', '--no-wrap',
+          '-o', $tmp->to_string, $seed, $potfile->to_string) == 0
+          or die "msgmerge failed for $module/$lang\n";
+        system('msgattrib', '--no-obsolete', '--no-wrap',
+          '-o', $pofile->to_string, $tmp->to_string) == 0
+          or die "msgattrib failed for $module/$lang\n";
+      } else {
+        # No seed yet: start from the .pot with a Language header.
+        my $hdr = sprintf("\"Language: %s\\n\"\n\"Plural-Forms: %s\\n\"\n",
+          $lang, $plurals->{$lang} // 'nplurals=2; plural=(n != 1);');
+        (my $po = $pot) =~ s/("Content-Transfer-Encoding: 8bit\\n"\n)/$1$hdr/;
+        $pofile->spew(encode('UTF-8', $po));
+      }
+    }
+    say sprintf("%-16s %d strings -> %s", $module, scalar keys %{ $modmsg{$module} }, $moddir->to_string);
+  }
+
+  # Merged runtime catalog per language: msgcat every module's .po into one .mo
+  # that the app loads flat (LTOO overwrites rather than merges multiple files, so
+  # we hand it a single pre-merged file per language). Per-module .po stay the
+  # owned source; for multi-dist installs this merge step moves to deploy time.
+  for my $lang (@languages) {
+    my @pos = grep { -f } map { $localebase->child($_, $lang, "$_.po")->to_string } sort keys %modmsg;
+    next unless @pos;
+    my $merged = tempfile;
+    system('msgcat', '--use-first', '--no-wrap', '-o', $merged->to_string, @pos) == 0
+      or die "msgcat failed for $lang\n";
+    system('msgfmt', '-o', $localebase->child("$lang.mo")->to_string, $merged->to_string) == 0
+      or die "msgfmt(merged) failed for $lang\n";
   }
 }
 
@@ -158,6 +153,11 @@ sub run ($self, @args) {
 
   Usage: samizdat makei18n
 
+Rebuilds per-module gettext catalogs under
+C<lib/Samizdat/resources/locale/E<lt>moduleE<gt>/E<lt>langE<gt>/E<lt>moduleE<gt>.{po,mo}>.
+On first run, translations are seeded from the legacy single-domain
+C<locale/E<lt>langE<gt>/E<lt>textdomainE<gt>.po> tree; afterwards each module's own
+C<.po> is the source of truth.
 
 =cut
 
