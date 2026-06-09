@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`) · next: the Database←Domain←Email hosting chain, `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`) · next: **Domain** (registry backends/EPP/RTR — needs a plan), `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -284,6 +284,23 @@ unchanged. **Still in core (the entangled hosting chain, a separate increment):*
 **Domain** ← **Email** (Email depends on Domain+Database; Domain on Database) — these are the
 *enabled* offerable modules and need dependency-aware guard work, not a mechanical extraction. Dev
 runs now want all five sibling `lib/` dirs on `PERL5LIB`.
+
+**E hosting modules — Database + Email done (2026-06-09, branch `packaging/e-database-email`)** — the
+feared "Database←Domain←Email chain" was a **naming-collision mirage**: core models carry their own
+`database` attribute (a Mojo::Pg handle; `$self->database->db`), Email's "domains" are postfix **mail**
+domains (not registrar domains), and `Email`'s `$self->domain` is its own controller action. The three
+hosting modules are actually **independent** — no inter-module deps; each only needs core's
+`pg`/`mysql` + `Cache`. So:
+- **Database** → `samizdat-database` (clean leaf; Customer's `databases` read already guarded).
+- **Email** → `samizdat-email` — carries its own `Model::Email::Postfix` sub-model (separate
+  postfixadmin DB), the `email` command, and its `account/email/*` customer-facing views (file-level
+  ownership in the `account/` namespace). Customer's mail-domain read guarded (`helpers->{email}`).
+- Both **enabled** in `extraplugins`; verified via live `bin/samizdat routes` (byte-identical to
+  baseline), helpers present, Email's plugin+Postfix submodel+templates resolving from the sibling.
+- **Domain deferred (needs its own plan):** `Model/Domain/Registry/{EPP,RTR}.pm` registry backends,
+  the **EPP-private** boundary, the **RealtimeRegister** relationship, the `syncexpiries` command, and
+  `customer/domains` + `bis/` cross-namespace templates. This is the one genuinely-entangled offerable
+  module and ties into the EPP-private + RealtimeRegister work — not mechanical.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
