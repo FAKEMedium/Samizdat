@@ -34,21 +34,56 @@ sub startup {
   ) // $home->child('src');
   $app->helper(sharedir => sub { $sharedir });
 
-  # Read-only dist resources by kind: installed resources tree first, checkout last.
+  # Read-only dist resources by kind, unioned across every place a dist can ship
+  # them: an explicit SAMIZDAT_RESOURCES override, core's own tree, every other
+  # Samizdat/resources tree found on @INC (each installed/sibling plugin dist), and
+  # the checkout home last. This makes a real install (one shared site_perl tree)
+  # AND a dev checkout (sibling dists on PERL5LIB, each with its own resources/)
+  # resolve uniformly — a polyrepo plugin's templates/settings/locale are found
+  # wherever it lives. Core stays first so dir-mode lookups and build tools
+  # (makei18n, makeswcache) keep resolving to core even when PERL5LIB prepends siblings.
   my $res_env = $ENV{SAMIZDAT_RESOURCES} ? Mojo::Home->new($ENV{SAMIZDAT_RESOURCES}) : undef;
-  my $res_inc = Mojo::Home->new($INC{'Samizdat.pm'})->dirname->child('Samizdat', 'resources');
-  my %resource = (
-    templates  => [ ($res_env ? $res_env->child('templates')  : ()), $res_inc->child('templates'),  $home->child('templates')       ],
-    static     => [ ($res_env ? $res_env->child('public')     : ()), $res_inc->child('public')                                       ],
-    migrations => [ ($res_env ? $res_env->child('migrations') : ()), $res_inc->child('migrations'),  $home->child('migrations', 'pg') ],
-    locale     => [ ($res_env ? $res_env->child('locale')     : ()), $res_inc->child('locale'),      $home->child('locale')          ],
-    settings   => [ ($res_env ? $res_env->child('settings')   : ()), $res_inc->child('settings')                                     ],
-  );
+  my @res_roots;
+  my %seen_root;
+  my $add_root = sub {
+    my $root = shift or return;
+    return if $seen_root{$root->to_string}++;
+    push @res_roots, $root;
+  };
+  $add_root->($res_env);
+  $add_root->(Mojo::Home->new($INC{'Samizdat.pm'})->dirname->child('Samizdat', 'resources'));
+  $add_root->(Mojo::Home->new("$_")->child('Samizdat', 'resources')) for grep { !ref } @INC;
+
+  my %res_subdir = (templates => 'templates', static => 'public',
+                    migrations => 'migrations', locale => 'locale', settings => 'settings');
+  my %res_home   = (templates  => [ $home->child('templates') ],
+                    migrations => [ $home->child('migrations', 'pg') ],
+                    locale     => [ $home->child('locale') ]);
+  my %resource;
+  for my $kind (keys %res_subdir) {
+    my @cands = grep { -d $_->to_string } map { $_->child($res_subdir{$kind}) } @res_roots;
+    push @cands, @{ $res_home{$kind} // [] };
+    $resource{$kind} = \@cands;
+  }
+
+  # resource($kind, @rel): a single Mojo::File. With @rel it returns the first
+  # candidate dir that actually CONTAINS that relative path (so a module's
+  # schema/template resolves to whichever dist ships it); without @rel, the first
+  # existing dir (core, by ordering above).
   $app->helper(resource => sub {
     my ($c, $kind, @rel) = @_;
     my $cands = $resource{$kind} // [ $home->child($kind) ];
-    my $dir = $first_existing->(@$cands) // $cands->[-1];
-    return @rel ? $dir->child(@rel) : $dir;
+    if (@rel) {
+      for my $d (@$cands) { return $d->child(@rel) if -e $d->child(@rel)->to_string }
+      return $cands->[-1]->child(@rel);
+    }
+    return $first_existing->(@$cands) // $cands->[-1];
+  });
+  # resources($kind): ALL existing candidate dirs of a kind, for path lists
+  # (renderer / static / locale) that must search every dist's tree.
+  $app->helper(resources => sub {
+    my ($c, $kind) = @_;
+    return [ grep { -d $_->to_string } @{ $resource{$kind} // [] } ];
   });
 
   # Mutable output base (static cache: html, webp, gz/br, symlinks).
@@ -74,13 +109,13 @@ sub startup {
   $app->helper(confdir => sub { my ($c, @rel) = @_; @rel ? $confdir->child(@rel) : $confdir });
 
   # Templates: main resources path first, then Mojolicious fallback templates.
-  @{$app->renderer->paths} = ($app->resource('templates')->to_string, @{$config->{extratemplates}});
+  @{$app->renderer->paths} = ((map { $_->to_string } @{$app->resources('templates')}), @{$config->{extratemplates} // []});
   # Static, override order front->back: generated cache, then per-site content
   # (favicon/media), then the shipped read-only bundle (resources/public/assets).
   @{$app->static->paths} = (
     $app->datadir->to_string,                       # generated cache (public/)
     $app->home->child('src', 'public')->to_string,  # content static (manager.web.src content)
-    $app->resource('static')->to_string,            # shipped bundle (resources/public)
+    (map { $_->to_string } @{$app->resources('static')}),   # shipped bundles (every dist's resources/public)
   );
   $app->secrets($config->{secrets});
   $app->types(MojoX::MIME::Types->new);
@@ -245,7 +280,7 @@ sub startup {
   # flat under the empty domain, so __('msg') resolves in code AND templates
   # regardless of the calling package.
   $app->lexicon({
-    search_dirs => [ $app->resource('locale')->to_string ],
+    search_dirs => [ map { $_->to_string } @{$app->resources('locale')} ],
     gettext_to_maketext => 0,
     decode => 1,
     data => [
