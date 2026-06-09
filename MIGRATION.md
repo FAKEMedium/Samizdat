@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`) · **next: the per-plugin pg+mysql migration re-architecture** (deferred; see ⚠ below), then payment plugins, `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`), per-plugin pg migrations + new loader (`packaging/e-migrations`) · **next:** extract payment plugins (Nets/PayPal/Stripe/Swish), `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -319,18 +319,25 @@ So Domain has *optional, guarded* runtime deps. Extracted three modules:
   works (`Domain registries built: rtr,se` — the EPP+RTR adapters construct with injected clients from
   the epp/realtimeregister dists); all views resolve from the right siblings; core suite unchanged.
 
-> **⚠ DEFERRED — per-plugin migration re-architecture (next dedicated effort, user-confirmed approach).**
-> Today migrations are a **monolithic 24-step PG sequence** (`resources/migrations/<N>/`, one unnamed
-> Mojo::Pg set, **no mysql**). Target: **drop the old numbered steps**; each plugin ships a **fresh
-> current-schema snapshot** (via `pg_dump`/`mysqldump --schema-only` against the live dev DB) under its
-> dist's `resources/migrations/{pg,mysql}/`, loaded as a **named** Mojo migration set per plugin
-> (`->name('samizdat-<plugin>')`), for BOTH pg and mysql trees. The loader (`Samizdat.pm:179`, single
-> `pg->migrations->from_dir`) must change to iterate every dist's per-kind migration dir (the `@INC`
-> resolver already finds them). Move `schema/bis.sql`→Domain and `schema/{nets,paypal,stripe,swish}.sql`
-> →their payment plugins. Note the **cross-schema case**: Invoice's tables live in the `customer`
-> schema. Acceptance: a **fresh install** builds every schema. Mapping is mostly schema=plugin
-> (account/customer/web/poll/article/example/sms/mailer/stats→core; certificate/database/website/zone/
-> domain+bis/postfix(email, mysql)→dists).
+**Per-plugin migration re-architecture done (2026-06-10, branch `packaging/e-migrations`)** — the
+monolithic 24-step PG sequence is replaced by **one fresh-snapshot migration per schema**
+(`pg_dump --schema-only` of the live dev DB), each loaded as its own **named** Mojo set. Files live at
+`resources/migrations/pg/<NN>-<schema>.sql` in the owning repo (core keeps `public/account/article/
+customer/web/mailer/poll/sms/stats/example/paypal/swish/nets/stripe`; dists ship their own —
+`website`, `certificate`, `bis`→domain, `postfix`→email, `database`, `zone`). The new `run_migrations`
+helper (replacing the single `from_dir` at `Samizdat.pm:179`) globs `resources/migrations/{pg,mysql}/
+*.sql` across every dist on `@INC`, sorts by basename, runs each named set; the `<NN>` prefix encodes
+cross-schema FK **dependency tiers** (10 public → 20 account/article → 30 customer → 40 deps → 50
+website → 60 web). **Existing deployments are grandfathered** (a snapshot whose first table already
+exists is stamped, not re-run). The one cross-schema **cycle FK** `customer.services→website.websites`
+was dropped (core shouldn't FK into a dist schema; app-enforced soft ref now). `schema/*.sql` removed:
+`bis/paypal/swish` were already captured from the live DB; `nets/stripe` converted to core migrations.
+A **mysql** tree is wired in the loader (capability) but no plugin ships mysql migrations yet (the only
+mysql is the legacy/external `system2`/`powerdns`). **Validated on scratch DBs**: fresh install builds
+20 schemas/124 tables in dependency order; grandfather leaves an existing schema untouched; re-runs are
+no-ops; live boot grandfathered 18 sets + applied nets/stripe with the table count otherwise unchanged.
+Pre-req for fresh installs on fakenews/rymdweb. (Remaining: extract the payment plugins; `Samizdat-
+Resources`; `samizdat-site`; remotes/CI.)
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site

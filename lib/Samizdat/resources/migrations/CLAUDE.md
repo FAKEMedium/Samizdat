@@ -1,12 +1,28 @@
-# Database migrations files
+# Database migrations
 
-This folder contains all database migration files used to manage changes to the
-database schema over time. Each migration file is responsible for applying a specific
-change to the database structure, such as adding or modifying tables, columns, indexes,
-or constraints.
+## Per-plugin fresh-snapshot migrations (current convention)
 
-Development is mainly targeted at PostgreSQL (Mojo::Pg), but we also aim to support
-other databases like SQLite (Mojo::SQLite) and MySQL (Mojo::mysql) too.
+Each PostgreSQL schema has ONE fresh-snapshot migration that creates its current
+tables, named `pg/<NN>-<schema>.sql` (a Mojo migration with `-- 1 up` / `-- 1 down`
+markers). Every plugin distribution ships its own schema's migration under its
+`resources/migrations/pg/` — this core tree holds only the **core** schemas; the
+offerable/dist schemas live in their dist repos (e.g. `website` in samizdat-website,
+`certificate` in samizdat-certificate, `bis` in samizdat-domain, `postfix` in
+samizdat-email, `database` in samizdat-database, `zone` in samizdat-zone).
+
+The `run_migrations` helper in `Samizdat.pm` globs `resources/migrations/{pg,mysql}/
+*.sql` across every dist on `@INC`, sorts by basename, and runs each as its own named
+set (`samizdat-<schema>`). The `<NN>` prefix encodes cross-schema **dependency tiers**
+so a fresh install builds schemas in FK order: `10` public → `20` account/article →
+`30` customer → `40` everything that depends only on those → `50` website → `60` web.
+Existing databases are **grandfathered** (a snapshot whose first table already exists
+is stamped as applied, not re-run). To regenerate a snapshot: `pg_dump --schema-only
+--no-owner --no-privileges --schema=<s>`, strip `\restrict`/`SET search_path` lines,
+wrap in up/down. There is no cross-schema FK from a core schema into a dist schema
+(the old `customer.services → website.websites` FK was dropped — app-enforced now).
+
+A `mysql/` tree is supported by the loader for plugins that need it (none yet).
+The numbered-step history below ("added migration N") is historical context only.
 
 ## Schema Design
 
@@ -15,10 +31,10 @@ other databases like SQLite (Mojo::SQLite) and MySQL (Mojo::mysql) too.
 - `public` - Shared reference data (languages, currencies, countries)
 - `account` - User accounts, contacts, passwords, authentication
 - `customer` - Customer entities, billing, invoices, services
-- `database` - Database management (added migration 22)
+- `database` - Database management (now in samizdat-database)
 - `web` - Samizdat app content (resources, menus, templates)
-- `website` - Web hosting infrastructure (webservices, domains, servers) (added migration 24)
-- `certificate` - SSL certificate management (added migration 24)
+- `website` - Web hosting infrastructure (now in samizdat-website)
+- `certificate` - SSL certificate management (now in samizdat-certificate)
 - `mailer` - Email system (lists, addresses, mails, deliveries)
 - `poll` - Polling/survey system
 
