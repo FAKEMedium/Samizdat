@@ -321,12 +321,14 @@ So Domain has *optional, guarded* runtime deps. Extracted three modules:
 
 **Per-plugin migration re-architecture done (2026-06-10, branch `packaging/e-migrations`)** — the
 monolithic 24-step PG sequence is replaced by **one fresh-snapshot migration per schema**
-(`pg_dump --schema-only` of the live dev DB), each loaded as its own **named** Mojo set. Files live at
-`resources/migrations/pg/<NN>-<schema>.sql` in the owning repo (core keeps `public/account/article/
-customer/web/mailer/poll/sms/stats/example/paypal/swish/nets/stripe`; dists ship their own —
-`website`, `certificate`, `bis`→domain, `postfix`→email, `database`, `zone`). The new `run_migrations`
-helper (replacing the single `from_dir` at `Samizdat.pm:179`) globs `resources/migrations/{pg,mysql}/
-*.sql` across every dist on `@INC`, sorts by basename, runs each named set; the `<NN>` prefix encodes
+(`pg_dump --schema-only` of the live dev DB), each loaded as its own **named** Mojo set. Each set is a
+directory `resources/migrations/pg/<NN>-<schema>/<version>/{up,down}.sql` (the `from_dir` layout —
+version 1 is the snapshot; later pgModeler schema-diff dumps drop in as new version dirs) in the owning
+repo (core keeps `public/account/article/customer/web/mailer/poll/sms/stats/example`; payment schemas
+`nets/paypal/stripe/swish` and the dist schemas `website/certificate/bis(domain)/postfix(email)/
+database/zone` ship in their dists). The new `run_migrations` helper (replacing the single `from_dir`
+at `Samizdat.pm:179`) globs the `<NN>-<schema>` dirs under `resources/migrations/{pg,mysql}/` across
+every dist on `@INC`, sorts by basename, loads each via `->from_dir`; the `<NN>` prefix encodes
 cross-schema FK **dependency tiers** (10 public → 20 account/article → 30 customer → 40 deps → 50
 website → 60 web). **Existing deployments are grandfathered** (a snapshot whose first table already
 exists is stamped, not re-run). The one cross-schema **cycle FK** `customer.services→website.websites`

@@ -2,24 +2,29 @@
 
 ## Per-plugin fresh-snapshot migrations (current convention)
 
-Each PostgreSQL schema has ONE fresh-snapshot migration that creates its current
-tables, named `pg/<NN>-<schema>.sql` (a Mojo migration with `-- 1 up` / `-- 1 down`
-markers). Every plugin distribution ships its own schema's migration under its
-`resources/migrations/pg/` — this core tree holds only the **core** schemas; the
-offerable/dist schemas live in their dist repos (e.g. `website` in samizdat-website,
-`certificate` in samizdat-certificate, `bis` in samizdat-domain, `postfix` in
-samizdat-email, `database` in samizdat-database, `zone` in samizdat-zone).
+Each PostgreSQL schema has its own migration **set**, a directory
+`pg/<NN>-<schema>/<version>/{up,down}.sql` (the Mojo `from_dir` layout). Version 1 is
+the fresh-snapshot baseline; later schema changes go in as new numbered version dirs
+(`.../2/up.sql` + `down.sql`, etc.) — this is the format pgModeler emits when you dump
+a schema **diff**, so its output drops straight in. Every plugin distribution ships its
+own schema's set under its `resources/migrations/pg/` — this core tree holds only the
+**core** schemas; the offerable/dist schemas live in their dist repos (e.g. `website`
+in samizdat-website, `certificate` in samizdat-certificate, `bis` in samizdat-domain,
+`postfix` in samizdat-email, `database` in samizdat-database, `zone` in samizdat-zone,
+and the payment schemas in samizdat-{nets,paypal,stripe,swish}).
 
-The `run_migrations` helper in `Samizdat.pm` globs `resources/migrations/{pg,mysql}/
-*.sql` across every dist on `@INC`, sorts by basename, and runs each as its own named
-set (`samizdat-<schema>`). The `<NN>` prefix encodes cross-schema **dependency tiers**
-so a fresh install builds schemas in FK order: `10` public → `20` account/article →
-`30` customer → `40` everything that depends only on those → `50` website → `60` web.
-Existing databases are **grandfathered** (a snapshot whose first table already exists
-is stamped as applied, not re-run). To regenerate a snapshot: `pg_dump --schema-only
---no-owner --no-privileges --schema=<s>`, strip `\restrict`/`SET search_path` lines,
-wrap in up/down. There is no cross-schema FK from a core schema into a dist schema
-(the old `customer.services → website.websites` FK was dropped — app-enforced now).
+The `run_migrations` helper in `Samizdat.pm` globs the `<NN>-<schema>` directories under
+`resources/migrations/{pg,mysql}/` across every dist on `@INC`, sorts by basename, and
+loads each via `->from_dir` as its own named set (`samizdat-<schema>`). The `<NN>` prefix
+encodes cross-schema **dependency tiers** so a fresh install builds schemas in FK order:
+`10` public → `20` account/article → `30` customer → `40` everything that depends only on
+those → `50` website → `60` web. Existing databases are **grandfathered** (a set whose
+first version's first table already exists is stamped as applied, not re-run). To author
+a baseline snapshot: `pg_dump --schema-only --no-owner --no-privileges --schema=<s>`,
+strip `\restrict`/`SET search_path` lines, save as `<NN>-<schema>/1/up.sql` with a
+`<NN>-<schema>/1/down.sql` of `DROP SCHEMA IF EXISTS <s> CASCADE;`. There is no
+cross-schema FK from a core schema into a dist schema (the old `customer.services →
+website.websites` FK was dropped — app-enforced now).
 
 A `mysql/` tree is supported by the loader for plugins that need it (none yet).
 The numbered-step history below ("added migration N") is historical context only.
