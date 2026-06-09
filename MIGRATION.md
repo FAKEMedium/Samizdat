@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`), per-plugin pg migrations + new loader (`packaging/e-migrations`) · **next:** extract payment plugins (Nets/PayPal/Stripe/Swish), `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`), per-plugin pg migrations + new loader (`packaging/e-migrations`), payment plugins (`packaging/e-payments`) · **14 dists extracted** · **next:** `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -338,6 +338,17 @@ mysql is the legacy/external `system2`/`powerdns`). **Validated on scratch DBs**
 no-ops; live boot grandfathered 18 sets + applied nets/stripe with the table count otherwise unchanged.
 Pre-req for fresh installs on fakenews/rymdweb. (Remaining: extract the payment plugins; `Samizdat-
 Resources`; `samizdat-site`; remotes/CI.)
+
+**E payment plugins done (2026-06-10, branch `packaging/e-payments`)** — **Nets, PayPal, Stripe, Swish**
+extracted to `samizdat-{nets,paypal,stripe,swish}` (operator). Each was a clean self-contained module:
+trio + operator settings schema (writeOnly secrets) + templates + locale + **its own pg migration**
+(`40-<name>.sql`, which now travels with the plugin — the first time a per-plugin migration moved out
+of core with its plugin). **No core decoupling needed** — core never used the payment helpers; the only
+consumers are Invoice's helper-guarded pay-modal flags, and Invoice is a sibling dist. Verified: routes
+byte-identical to baseline; the migration loader finds all 20 named sets with the 4 payment migrations
+resolving from their sibling repos; core suite unchanged. Payment certs (Swish `.p12`, etc.) stay
+deployment secrets — never shipped. **14 sibling dists now.** Remaining: `Samizdat-Resources` (vendored
+3rd-party assets), `samizdat-site`, GitHub remotes/CI, the `.claude` plugin, `samizdat-plugin-template`.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
