@@ -369,10 +369,13 @@ deployment secrets — never shipped. **14 sibling dists now.** Remaining: `Sami
   `paths.content` → the site repo. The static content path now follows `contentdir` (not a hardcoded
   `src/public`). Verified: `GET /` renders the home page from the site content via the symlink.
 
-**The extraction is complete** — core ships only core modules + core schemas; every feature module,
-the vendored runtime data, and the site content live in their own repos (**16 sibling repos**: 13
-public plugin dists + private EPP + Samizdat-Resources + fakenews.com-src). Remaining is the
-**productionize tail**: GitHub remotes + CI per dist, the `.claude` automations plugin, and the
+**The extraction is complete** — core ships only core modules + core schemas (plus a minimal default
+`src/public/README_en.md` "It works!" landing page that links to the docs); every feature module,
+the vendored runtime data, and per-site content live in their own repos (**17 sibling repos**: 13
+public plugin dists + private EPP + Samizdat-Resources + two site repos **fakenews.com-src** and
+**samizdat.foundation-src**). `samizdat.foundation-src` carries the project site + early
+documentation (architecture, distributions, per-plugin migrations, content model, install). Remaining
+is the **productionize tail**: GitHub remotes + CI per dist, the `.claude` automations plugin, and the
 `samizdat-plugin-template` — none of which pulls code out of core.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
