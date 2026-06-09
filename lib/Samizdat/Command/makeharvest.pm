@@ -13,7 +13,7 @@ has usage => sub ($self) { $self->extract_usage };
 Hash::Merge::set_behavior('RETAINMENT_PRECEDENT');
 
 sub run ($self, @args) {
-  my $path = Mojo::Home->new('public/');
+  my $path = $self->app->datadir;
   my $sources = {};
   $path->list_tree({dir => 0})->each(sub ($file, $num) {
       if ('yml' eq $file->path->extname()) {

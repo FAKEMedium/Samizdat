@@ -15,7 +15,8 @@ has 'config';
 has 'database';
 has 'locale';
 has 'routes';
-has 'datadir';  # mutable static-cache output base (install-aware; see MIGRATION.md A1)
+has 'datadir';     # mutable static-cache output base (install-aware; see MIGRATION.md A1)
+has 'contentdir';  # per-site content root (manager.web.src/public; install-aware)
 has 'public' => sub ($self) {
   return Samizdat::Model::Public->new(pg => $self->database);
 };
@@ -49,7 +50,7 @@ say $save_docpath;
   }
 
   # Fall back to markdown file processing
-  my $path = Mojo::Home->new($self->config->{src} // 'src')->child('public')->child($url);
+  my $path = $self->contentdir->child($url);
   my $found = 0;
   my $selectedimage = {};
   my $requested_language = $options->{language} // $self->locale->{default_language} // 'en';
@@ -59,7 +60,7 @@ say $save_docpath;
   # Helper to process files for a given language
   my $process_files = sub ($target_lang) {
     $path->list({ dir => 0 })->sort(sub { $a cmp $b })->each(sub ($file, $num) {
-      my $docpath = $file->to_rel(Mojo::Home->new($self->config->{src} // 'src')->child('public'))->to_string;
+      my $docpath = $file->to_rel($self->contentdir)->to_string;
       my $datasrc = $docpath;
       if ('md' eq $file->path->extname()) {
         # Only process files matching the target language
@@ -192,7 +193,7 @@ say $save_docpath;
 # All markdown files now require language suffix (e.g., README_en.md, README_sv.md)
 sub geturis ($self, $options = {}) {
   my $uris = {};
-  my $publicsrc = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $publicsrc = $self->contentdir;
   my $path = $publicsrc;
   $path->list_tree({ dir => 0 })->each(sub ($file, $num) {
     if ('md' eq $file->path->extname()) {
@@ -994,7 +995,7 @@ sub save_content_to_file ($self, $params) {
   my $frontmatter = $params->{frontmatter};
   my $language = $params->{language};
 
-  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $src_public = $self->contentdir;
 
   # Determine the file path based on element_id
   my ($markdown_src, $sidecard_base);
@@ -1254,7 +1255,7 @@ sub get_source_content ($self, $docpath, $language) {
   }
 
   # Fall back to reading source markdown files
-  my $public_src = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $public_src = $self->contentdir;
 
   # Helper to read markdown file and extract title
   my $read_markdown = sub ($src_path) {
@@ -1611,7 +1612,7 @@ sub invalidate_cache ($self, $docpath, $language = undef) {
 # File tree operations for content management
 
 sub filetree_list ($self, $path = '') {
-  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $src_public = $self->contentdir;
 
   # Sanitize path - prevent directory traversal
   $path =~ s|^/+||;
@@ -1697,7 +1698,7 @@ sub filetree_list ($self, $path = '') {
 
 
 sub filetree_create ($self, $path, $type, $language = undef, $target = 'file') {
-  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $src_public = $self->contentdir;
 
   # Sanitize path
   $path =~ s|^/+||;
@@ -1795,7 +1796,7 @@ sub _create_content ($self, $src_public, $filename, $alias, $content, $language,
 
 
 sub filetree_rename ($self, $old_path, $new_path) {
-  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $src_public = $self->contentdir;
 
   # Sanitize paths
   $old_path =~ s|^/+||;
@@ -1822,7 +1823,7 @@ sub filetree_rename ($self, $old_path, $new_path) {
 
 
 sub filetree_delete ($self, $path) {
-  my $src_public = Mojo::Home->new($self->config->{src} // 'src')->child('public');
+  my $src_public = $self->contentdir;
 
   # Sanitize path
   $path =~ s|^/+||;

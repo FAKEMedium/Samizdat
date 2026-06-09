@@ -83,7 +83,8 @@ sub register ($self, $app, $conf) {
       config       => $self->settings->resolve('web'),
       database     => $self->app->pg,
       locale       => $self->config->{locale},
-      datadir      => $self->app->datadir
+      datadir      => $self->app->datadir,
+      contentdir   => $self->app->contentdir
     );
     return $model;
   });
@@ -387,7 +388,7 @@ sub register ($self, $app, $conf) {
         }
       }
       if ($c->config->{manager}->{web}->{imageconversion}->{format}->{webp} && ($c->{stash}->{web}->{url} =~ /\.webp$/)) {
-        my $publicsrc = Mojo::Home->new($c->config->{manager}->{web}->{src} // 'src')->child('public');
+        my $publicsrc = $c->app->contentdir;
         my $url = $c->{stash}->{web}->{url} // '';
         $url =~ s/\.webp$//;
         my $wantedsize = 0;

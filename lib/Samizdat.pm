@@ -56,6 +56,15 @@ sub startup {
     ? Mojo::Home->new($config->{paths}->{data}) : $home->child('public');
   $app->helper(datadir => sub { my ($c, @rel) = @_; @rel ? $datadir->child(@rel) : $datadir });
 
+  # Per-site content root (the manager.web.src content tree: markdown source, media,
+  # uploads, logos). CWD-independent; an absolute paths.content / manager.web.src
+  # points at a per-site www tree in an install.
+  my $content_base = $config->{paths}{content} // $config->{manager}{web}{src} // 'src';
+  my $contentdir = ($content_base =~ m{^/})
+    ? Mojo::Home->new($content_base)->child('public')
+    : $home->child($content_base, 'public');
+  $app->helper(contentdir => sub { my ($c, @rel) = @_; @rel ? $contentdir->child(@rel) : $contentdir });
+
   # Config base (thin seam for installed deployments).
   my $confdir = $first_existing->(
     ($ENV{SAMIZDAT_ETC} ? Mojo::Home->new($ENV{SAMIZDAT_ETC}) : ()),

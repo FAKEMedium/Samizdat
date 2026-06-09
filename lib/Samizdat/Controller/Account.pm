@@ -778,7 +778,7 @@ sub upload_image ($self) {
     $ext = 'jpg' if $ext eq 'jpeg';
     
     my $filename = "${user_uuid}.${ext}";
-    my $user_dir = Mojo::Home->new('src/public/user');
+    my $user_dir = $self->contentdir->child('user');
     $user_dir->make_path unless -d $user_dir;
     
     my $file_path = $user_dir->child($filename);

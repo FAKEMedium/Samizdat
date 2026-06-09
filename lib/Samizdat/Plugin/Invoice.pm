@@ -165,7 +165,7 @@ sub register ($self, $app, $conf) {
 
       # Add logo if not present
       if (!$invoicedata->{svglogotype}) {
-        my $logo_path = Mojo::Home->new()->child('src/public/' . $config->{logotype});
+        my $logo_path = $self->contentdir->child($config->{logotype});
         if (-e $logo_path) {
           my $svg = $logo_path->slurp;
           $svg = Mojo::Util::b64_encode($svg);
