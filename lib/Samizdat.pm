@@ -176,7 +176,38 @@ sub startup {
     $dbh->{pg_server_prepare} = 0;
     $pg->max_connections(32);
   });
-  $app->pg->migrations->from_dir($app->resource('migrations')->to_string)->migrate;
+  # Per-plugin migrations: every dist ships fresh-snapshot migrations under
+  # resources/migrations/{pg,mysql}/<NN>-<schema>.sql, each loaded as its own named
+  # Mojo migration set. Files are run in basename order across ALL dist trees (the
+  # <NN> prefix encodes cross-schema dependency tiers), so a fresh install builds
+  # every schema in order. Existing deployments are grandfathered: if a snapshot's
+  # tables already exist (from the legacy monolithic migrations), it is recorded as
+  # applied instead of re-run. See MIGRATION.md.
+  $app->helper(run_migrations => sub ($c, $db, $kind) {
+    my @files = sort { Mojo::File->new($a)->basename cmp Mojo::File->new($b)->basename }
+      map { glob($_->child($kind)->to_string . '/*.sql') } @{ $c->app->resources('migrations') };
+    for my $f (@files) {
+      (my $name = Mojo::File->new($f)->basename) =~ s/^\d+-//;
+      $name =~ s/\.sql$//;
+      my $m = $db->migrations->name("samizdat-$name")->from_file($f);
+      next if $m->active >= $m->latest;
+      if ($m->active == 0 && $kind eq 'pg') {
+        # Grandfather: if the schema's first table is already present, stamp the
+        # set as applied rather than re-running its CREATEs on a live database.
+        if (my ($tbl) = Mojo::File->new($f)->slurp =~ /CREATE TABLE (?:IF NOT EXISTS\s+)?(\S+?)\s*\(/) {
+          if (defined $db->db->query('SELECT to_regclass(?) AS r', $tbl)->hash->{r}) {
+            $db->db->query(
+              'INSERT INTO mojo_migrations (name, version) VALUES (?, ?)
+               ON CONFLICT (name) DO UPDATE SET version = EXCLUDED.version',
+              "samizdat-$name", $m->latest);
+            next;
+          }
+        }
+      }
+      $m->migrate;
+    }
+  });
+  $app->run_migrations($app->pg, 'pg');
   $app->pg->db->dbh->{pg_server_prepare} = 1;
 
   if (exists($config->{import}->{dsn})) {
@@ -185,6 +216,9 @@ sub startup {
       my ($mysql, $dbh) = @_;
       $mysql->max_connections(5);
     });
+    # mysql per-plugin migrations (resources/migrations/mysql/*.sql) — capability is
+    # in place; no plugin ships mysql migrations yet (legacy/external schemas).
+    $app->run_migrations($app->mysql, 'mysql');
   }
 
   # Make web root reusable for other plugins as $app->routes->home
