@@ -275,13 +275,13 @@ sub _getdata ($self, $customerid) {
     customer      => $self->app->customer->get($params)->[0],
     databases     => $self->app->renderer->helpers->{database} ? $self->app->database->get($params) : [],
     sites         => $self->app->renderer->helpers->{website} ? $self->app->website->get_by_customer($customerid) : [],
-    domains       => $self->app->domain->get($params),
+    domains       => $self->app->renderer->helpers->{domain} ? $self->app->domain->get($params) : [],
     maildomains   => $self->app->renderer->helpers->{email} ? $self->app->email->get_domains($params) : [],
     userlogins    => $self->app->customer->userlogins($params),
   };
 
   $params->{where}->{dns} = 1;
-  $formdata->{dnsdomains} = $self->app->domain->get($params);
+  $formdata->{dnsdomains} = $self->app->renderer->helpers->{domain} ? $self->app->domain->get($params) : [];
 
   $params->{where} = { 'invoice.customerid' => $customerid, state => {'!=', 'obehandlad'} };
   $formdata->{invoices} = $self->app->renderer->helpers->{invoice} ? $self->app->invoice->get($params) : [];
