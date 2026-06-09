@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D-spike done · core stacked into `main` · D productionize (delete-from-core, remote, CI) + Phase E next · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** (Invoice extracted + Fortnox/Invoice retired from core on `packaging/e-invoice`; multi-dist resolver landed) · next: offerable modules, `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -227,14 +227,48 @@ question ("can a feature module become an installable dist whose resources reach
   `…/lib/perl5/Samizdat/{Plugin,Controller,Model,Command}/Fortnox*.pm` **and**
   `…/lib/perl5/Samizdat/resources/{settings,templates,locale}/fortnox/…`. The installed
   module loads from the prefix and its schema sits at the resolver's `$res_inc` path.
-- **Productionize follow-ups (deferred, not yet done):** delete-from-core (the paired
-  removal — core still ships Fortnox so the checkout keeps running); GitHub remote + CI;
-  the `.claude` automations plugin; the `samizdat-plugin-template`; publish/PREREQ-enforce
-  core. EUMM chosen over the dzil/Minilla bundle named in D2.
+- **Productionize follow-ups:** delete-from-core **done in Phase E** (paired with Invoice);
+  GitHub remote + CI, the `.claude` automations plugin, the `samizdat-plugin-template`, and
+  publish/PREREQ-enforce core remain deferred. EUMM chosen over the dzil/Minilla bundle named in D2.
 
 ### Phase E — Replicate
 - Invoice → offerable modules → `Samizdat-Resources` → EPP (private repo) → stand up
   `samizdat-site`. Mechanical once D's pattern exists.
+
+**E started (2026-06-09, branch `packaging/e-invoice`)** — Invoice extracted **and** the
+deferred D delete-from-core done for **both** operator dists:
+- **Multi-dist resolver (core)** — the keystone. The resolver anchored every resource kind
+  on a single core `Samizdat/resources` dir; now it **unions all `Samizdat/resources` trees
+  on `@INC`** (+ `SAMIZDAT_RESOURCES`, checkout home), core first. `resource($kind,@rel)`
+  does a file-existence lookup (a module's schema/template resolves to whichever dist ships
+  it); new `resources($kind)` feeds the renderer/static/locale path lists. Makes the
+  dev-checkout (siblings on `PERL5LIB`) and a real install (shared `site_perl`) resolve
+  uniformly. Backward-compatible (routes byte-identical with everything in core).
+- **Invoice → `~/IdeaProjects/samizdat-invoice`** (native `git filter-branch`, 66 commits) —
+  EUMM dist like Fortnox; `make test` green; installs the 4 modules + resources to the
+  projected `site_perl` layout, **including the invoice-owned `customer/*` views and
+  `chunks/invoicetable`** (file-level ownership in shared namespaces works).
+- **Decoupling** — core `Customer` guarded its 5 `$app->invoice->…` calls with
+  `helpers->{invoice}` (so core boots standalone, empty invoice sections without the dist).
+  Invoice **requires** core's `Customer` plugin (load order); **optionally** integrates with
+  Fortnox (helper-guarded; `recommends` in META). `makereminders` (invoice-reminder command)
+  moved to the Invoice dist too.
+- **Delete-from-core (paired)** — Fortnox + Invoice code/resources removed from core; the
+  checkout runs both via `extraplugins` (already in `samizdat.yml`) **+ `PERL5LIB` pointing at
+  the sibling `lib/` dirs**. Verified: `bin/samizdat routes` byte-identical to baseline; moved
+  templates + settings schemas resolve at runtime; `samizdat {fortnox,invoice,makereminders}`
+  commands discoverable; core test suite unchanged (same pre-existing env failures). The
+  `src/public/samizdat/*fortnox*` markdown stays — it's per-site content, not module code.
+- **Dev-run note:** the checkout now needs `PERL5LIB=~/IdeaProjects/samizdat-fortnox/lib:`
+  `~/IdeaProjects/samizdat-invoice/lib` for `make debug`/`server`/`routes` (or install the dists).
+- **Known gaps (follow-ups):** (1) **i18n rebuild** — core's merged per-language `.mo` still
+  has the moved modules' strings baked in; a fresh `make i18n` in core would drop them. The
+  dists ship `.po` but nothing yet builds them into the runtime merged `.mo`; per-dist i18n
+  build / install-time merge is unsolved. (2) `Command/{invoice,makereminders}.pm` moved as
+  working-tree copies **without git history** (weren't in the filter keep-set). (3) The
+  Customer-side **hook** that would replace core's `include 'customer/invoices'` (so the dist
+  injects its tab instead of core referencing it) is still future work. (4) GitHub remotes +
+  CI for the dists; `.claude` plugin; `samizdat-plugin-template` — still deferred.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
