@@ -173,7 +173,7 @@ sub billing ($self) {
     $params->{where} = { customerid => $customerid };
     my $customer = $self->app->customer->get($params)->[0];
     $params->{where}->{invoiceid} = $invoiceid if $invoiceid;
-    my $invoices = $self->app->invoice->get($params);
+    my $invoices = $self->app->renderer->helpers->{invoice} ? $self->app->invoice->get($params) : [];
     $self->stash(
       customer        => $customer,
       invoices        => $invoices,
@@ -271,7 +271,7 @@ sub _getdata ($self, $customerid) {
   };
 
   my $formdata = {
-    subscriptions => $self->app->invoice->subscriptions($params),
+    subscriptions => $self->app->renderer->helpers->{invoice} ? $self->app->invoice->subscriptions($params) : [],
     customer      => $self->app->customer->get($params)->[0],
     databases     => $self->app->renderer->helpers->{database} ? $self->app->database->get($params) : [],
     sites         => $self->app->renderer->helpers->{website} ? $self->app->website->get_by_customer($customerid) : [],
@@ -284,10 +284,10 @@ sub _getdata ($self, $customerid) {
   $formdata->{dnsdomains} = $self->app->domain->get($params);
 
   $params->{where} = { 'invoice.customerid' => $customerid, state => {'!=', 'obehandlad'} };
-  $formdata->{invoices} = $self->app->invoice->get($params);
+  $formdata->{invoices} = $self->app->renderer->helpers->{invoice} ? $self->app->invoice->get($params) : [];
 
   $params->{where}->{state} = 'obehandlad';
-  $formdata->{invoiceitems} = $self->app->invoice->invoiceitems($params);
+  $formdata->{invoiceitems} = $self->app->renderer->helpers->{invoice} ? $self->app->invoice->invoiceitems($params) : [];
 
   $formdata->{customer}->{vat} *= 100;
   return $formdata;
@@ -355,7 +355,7 @@ sub products ($self) {
     # Require admin access for product data
     return unless $self->access({ admin => 1 });
 
-    my $products = $self->app->invoice->products({ where => { }});
+    my $products = $self->app->renderer->helpers->{invoice} ? $self->app->invoice->products({ where => { }}) : [];
     return $self->render(json => { products => $products, customerid => $customerid });
   }
 }
