@@ -1,1 +1,0 @@
-<a href="<%= url_for('bis_index') %>" class="btn btn-sm btn-outline-secondary">← <%= __('Back to Dashboard') %></a>
