@@ -132,7 +132,7 @@ sub startup {
   # (favicon/media), then the shipped read-only bundle (resources/public/assets).
   @{$app->static->paths} = (
     $app->datadir->to_string,                       # generated cache (public/)
-    $app->home->child('src', 'public')->to_string,  # content static (manager.web.src content)
+    $app->contentdir->to_string,                    # per-site content static (favicon/media; follows paths.content)
     (map { $_->to_string } @{$app->resources('static')}),   # shipped bundles (every dist's resources/public)
   );
   $app->secrets($config->{secrets});

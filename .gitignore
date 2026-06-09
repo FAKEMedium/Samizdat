@@ -45,3 +45,4 @@
 *.pem
 *.js.ep
 *.css.ep
+src/public
