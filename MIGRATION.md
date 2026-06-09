@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** (Invoice extracted + Fortnox/Invoice retired from core on `packaging/e-invoice`; multi-dist resolver landed) · next: offerable modules, `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`) · next: the Database←Domain←Email hosting chain, `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -269,6 +269,21 @@ deferred D delete-from-core done for **both** operator dists:
   Customer-side **hook** that would replace core's `include 'customer/invoices'` (so the dist
   injects its tab instead of core referencing it) is still future work. (4) GitHub remotes +
   CI for the dists; `.claude` plugin; `samizdat-plugin-template` — still deferred.
+
+**E offerable leaves done (2026-06-09, branch `packaging/e-offerable-leaves`, stacked on
+`packaging/e-invoice`)** — the three **independent** offerable modules extracted, each to its own
+history-preserving EUMM dist: **Website** → `samizdat-website`, **Zone** (helper `pdns`) →
+`samizdat-zone`, **Certificate** → `samizdat-certificate`. These were the easy ones: **zero core
+coupling** (Website's only core reference — Customer's site list — was already `helpers->{website}`-
+guarded; Zone/Certificate had none), no inter-module deps, no cross-namespace templates, no settings
+schema, no command — so no decoupling commits were needed. All three are **disabled** in
+`samizdat.yml` `extraplugins` by default. Each builds, tests, and installs to the projected
+`site_perl` layout; verified loading from the sibling dist with routes + templates resolving via the
+`@INC` resolver. Deletion from core (85 files) left `routes` byte-identical to baseline; core suite
+unchanged. **Still in core (the entangled hosting chain, a separate increment):** **Database** ←
+**Domain** ← **Email** (Email depends on Domain+Database; Domain on Database) — these are the
+*enabled* offerable modules and need dependency-aware guard work, not a mechanical extraction. Dev
+runs now want all five sibling `lib/` dirs on `PERL5LIB`.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
