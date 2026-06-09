@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phase A1 done (install-aware path-resolution contract) · A2 next · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D-spike done · core stacked into `main` · D productionize (delete-from-core, remote, CI) + Phase E next · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -214,6 +214,23 @@ for IP/security reasons.
   installed tree (not the checkout).
 - **Acceptance:** Fortnox runs both from the umbrella checkout and from a clean install;
   `pkg info -l` matches the projected layout; core no longer ships Fortnox files.
+
+**D spike done (2026-06-09, branch `packaging/d-fortnox-dist`)** — the de-risking
+question ("can a feature module become an installable dist whose resources reach
+`site_perl` where the A1 resolver finds them?") is answered **yes**:
+- Extracted `~/IdeaProjects/samizdat-fortnox` with **native `git filter-branch`** (no
+  python/`git-filter-repo`) — 60 commits, history for Fortnox's paths preserved.
+- Packaged with **plain EUMM** (`Makefile.PL`), not dzil: a `File::Find` PM-hash over
+  `lib/` ships the `.ep`/`.yml`/`.mo`/`.svg` resources, which EUMM's default `.pm`-only
+  detection would skip. `make test` green (modules load, schema resolves, audience=operator).
+- `make install INSTALL_BASE=/tmp/fortnox-prefix` lands exactly the projected layout:
+  `…/lib/perl5/Samizdat/{Plugin,Controller,Model,Command}/Fortnox*.pm` **and**
+  `…/lib/perl5/Samizdat/resources/{settings,templates,locale}/fortnox/…`. The installed
+  module loads from the prefix and its schema sits at the resolver's `$res_inc` path.
+- **Productionize follow-ups (deferred, not yet done):** delete-from-core (the paired
+  removal — core still ships Fortnox so the checkout keeps running); GitHub remote + CI;
+  the `.claude` automations plugin; the `samizdat-plugin-template`; publish/PREREQ-enforce
+  core. EUMM chosen over the dzil/Minilla bundle named in D2.
 
 ### Phase E — Replicate
 - Invoice → offerable modules → `Samizdat-Resources` → EPP (private repo) → stand up
