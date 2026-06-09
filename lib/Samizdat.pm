@@ -177,24 +177,27 @@ sub startup {
     $pg->max_connections(32);
   });
   # Per-plugin migrations: every dist ships fresh-snapshot migrations under
-  # resources/migrations/{pg,mysql}/<NN>-<schema>.sql, each loaded as its own named
-  # Mojo migration set. Files are run in basename order across ALL dist trees (the
-  # <NN> prefix encodes cross-schema dependency tiers), so a fresh install builds
-  # every schema in order. Existing deployments are grandfathered: if a snapshot's
-  # tables already exist (from the legacy monolithic migrations), it is recorded as
-  # applied instead of re-run. See MIGRATION.md.
+  # resources/migrations/{pg,mysql}/<NN>-<schema>/<version>/{up,down}.sql — the Mojo
+  # from_dir layout (numbered version dirs, so pgModeler schema-diff dumps drop
+  # straight in as new versions). Each <NN>-<schema> dir is one named Mojo set; sets
+  # run in basename order across ALL dist trees (the <NN> prefix encodes cross-schema
+  # dependency tiers), so a fresh install builds every schema in order. Existing
+  # deployments are grandfathered: if a set's first table already exists (from the
+  # legacy monolithic migrations), it is recorded as applied instead of re-run. See
+  # MIGRATION.md.
   $app->helper(run_migrations => sub ($c, $db, $kind) {
-    my @files = sort { Mojo::File->new($a)->basename cmp Mojo::File->new($b)->basename }
-      map { glob($_->child($kind)->to_string . '/*.sql') } @{ $c->app->resources('migrations') };
-    for my $f (@files) {
-      (my $name = Mojo::File->new($f)->basename) =~ s/^\d+-//;
-      $name =~ s/\.sql$//;
-      my $m = $db->migrations->name("samizdat-$name")->from_file($f);
+    my @dirs = sort { Mojo::File->new($a)->basename cmp Mojo::File->new($b)->basename }
+      grep { -d } map { glob($_->child($kind)->to_string . '/*') } @{ $c->app->resources('migrations') };
+    for my $dir (@dirs) {
+      (my $name = Mojo::File->new($dir)->basename) =~ s/^\d+-//;
+      my $m = $db->migrations->name("samizdat-$name")->from_dir($dir);
       next if $m->active >= $m->latest;
       if ($m->active == 0 && $kind eq 'pg') {
-        # Grandfather: if the schema's first table is already present, stamp the
-        # set as applied rather than re-running its CREATEs on a live database.
-        if (my ($tbl) = Mojo::File->new($f)->slurp =~ /CREATE TABLE (?:IF NOT EXISTS\s+)?(\S+?)\s*\(/) {
+        # Grandfather: if the first version's first table is already present, stamp
+        # the set as applied rather than re-running its CREATEs on a live database.
+        my ($first_up) = sort { ($a =~ m{/(\d+)/up\.sql$})[0] <=> ($b =~ m{/(\d+)/up\.sql$})[0] }
+          glob("$dir/*/up.sql");
+        if ($first_up and my ($tbl) = Mojo::File->new($first_up)->slurp =~ /CREATE TABLE (?:IF NOT EXISTS\s+)?(\S+?)\s*\(/) {
           if (defined $db->db->query('SELECT to_regclass(?) AS r', $tbl)->hash->{r}) {
             $db->db->query(
               'INSERT INTO mojo_migrations (name, version) VALUES (?, ?)

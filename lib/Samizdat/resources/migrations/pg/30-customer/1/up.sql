@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -778,6 +777,3 @@ ALTER TABLE ONLY customer.entityroleusers
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS customer CASCADE;

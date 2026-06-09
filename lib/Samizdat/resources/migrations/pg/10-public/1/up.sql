@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -670,6 +669,3 @@ ALTER TABLE ONLY public.statenames
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
--- (public is the default schema; not dropped)

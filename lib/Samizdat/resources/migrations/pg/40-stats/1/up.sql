@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -113,6 +112,3 @@ ALTER TABLE ONLY stats.visitcaches
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS stats CASCADE;

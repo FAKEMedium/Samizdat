@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -200,6 +199,3 @@ ALTER TABLE ONLY article.articlevatrates
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS article CASCADE;

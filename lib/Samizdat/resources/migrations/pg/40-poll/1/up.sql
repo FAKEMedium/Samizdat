@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -189,6 +188,3 @@ ALTER TABLE ONLY poll.signers
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS poll CASCADE;

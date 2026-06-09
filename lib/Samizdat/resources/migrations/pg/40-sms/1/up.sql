@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -109,6 +108,3 @@ CREATE INDEX idx_sms_messages_status ON sms.messages USING btree (status);
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS sms CASCADE;

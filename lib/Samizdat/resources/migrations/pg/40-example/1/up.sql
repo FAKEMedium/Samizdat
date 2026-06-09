@@ -1,4 +1,3 @@
--- 1 up
 --
 -- PostgreSQL database dump
 --
@@ -238,6 +237,3 @@ CREATE INDEX idx_example_tags ON example.example USING gin (tags);
 --
 -- PostgreSQL database dump complete
 --
-
--- 1 down
-DROP SCHEMA IF EXISTS example CASCADE;
