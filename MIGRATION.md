@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`) · next: **Domain** (registry backends/EPP/RTR — needs a plan), `Samizdat-Resources`, EPP, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`) · **next: the per-plugin pg+mysql migration re-architecture** (deferred; see ⚠ below), then payment plugins, `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -301,6 +301,36 @@ hosting modules are actually **independent** — no inter-module deps; each only
   the **EPP-private** boundary, the **RealtimeRegister** relationship, the `syncexpiries` command, and
   `customer/domains` + `bis/` cross-namespace templates. This is the one genuinely-entangled offerable
   module and ties into the EPP-private + RealtimeRegister work — not mechanical.
+
+**E Domain + registry deps done (2026-06-09, branch `packaging/e-domain`)** — the entanglement turned
+out to be **clean dependency injection**: Domain's registry adapters
+`Model/Domain/Registry/{EPP,RTR}.pm` take an injected `client` (no hard `use`), and `Plugin/Domain.pm`
+builds an adapter only when that registry's helper is present (`helpers->{epp}`/`{realtimeregister}`).
+So Domain has *optional, guarded* runtime deps. Extracted three modules:
+- **Domain** → `samizdat-domain` (offerable): trio + the two registry adapters + `syncexpiries`
+  command + `domain/`+`bis/`+`customer/domains/` views. `recommends` RealtimeRegister + EPP. Customer's
+  domain reads guarded (`helpers->{domain}`).
+- **RealtimeRegister** → `samizdat-realtimeregister` (operator): registrar-API integration, used only
+  by Domain via injected client; no core coupling.
+- **EPP** → `samizdat-epp` (**PRIVATE**): EPP protocol client + `Model/EPP/*.xml.ep` templates. Was
+  **untracked** in core → fresh repo (no history). `t/05-epp.t` stays in core's suite (full-app
+  Test::Mojo, skips without EPP config).
+- Verified with all 10 siblings on `PERL5LIB`: `routes` byte-identical to baseline; the cross-dist DI
+  works (`Domain registries built: rtr,se` — the EPP+RTR adapters construct with injected clients from
+  the epp/realtimeregister dists); all views resolve from the right siblings; core suite unchanged.
+
+> **⚠ DEFERRED — per-plugin migration re-architecture (next dedicated effort, user-confirmed approach).**
+> Today migrations are a **monolithic 24-step PG sequence** (`resources/migrations/<N>/`, one unnamed
+> Mojo::Pg set, **no mysql**). Target: **drop the old numbered steps**; each plugin ships a **fresh
+> current-schema snapshot** (via `pg_dump`/`mysqldump --schema-only` against the live dev DB) under its
+> dist's `resources/migrations/{pg,mysql}/`, loaded as a **named** Mojo migration set per plugin
+> (`->name('samizdat-<plugin>')`), for BOTH pg and mysql trees. The loader (`Samizdat.pm:179`, single
+> `pg->migrations->from_dir`) must change to iterate every dist's per-kind migration dir (the `@INC`
+> resolver already finds them). Move `schema/bis.sql`→Domain and `schema/{nets,paypal,stripe,swish}.sql`
+> →their payment plugins. Note the **cross-schema case**: Invoice's tables live in the `customer`
+> schema. Acceptance: a **fresh install** builds every schema. Mapping is mostly schema=plugin
+> (account/customer/web/poll/article/example/sms/mailer/stats→core; certificate/database/website/zone/
+> domain+bis/postfix(email, mysql)→dists).
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
