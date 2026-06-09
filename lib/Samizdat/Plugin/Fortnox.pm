@@ -15,7 +15,7 @@ sub register ($self, $app, $conf) {
   $app->config->{openapi_fragments}{Fortnox} = $openapi_yaml if $openapi_yaml;
 
   # For service accounts, use a dedicated Fortnox session cookie
-  my $fortnox_config = $app->config->{manager}->{fortnox} // {};
+  my $fortnox_config = $app->settings->resolve('fortnox');
   my $is_service = ($fortnox_config->{account_type} // '') eq 'service';
   if ($is_service) {
     $app->sessions->cookie_name('fortnox');

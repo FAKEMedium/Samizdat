@@ -1,0 +1,53 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "samizdat:settings:fortnox"
+title: Fortnox
+description: Fortnox accounting integration (operator back-office).
+type: object
+x-samizdat-audience: operator
+x-samizdat-version: 1
+properties:
+  cardnumber:
+    type: integer
+    description: Manager-panel card position.
+  dbtype:
+    type: string
+    enum: [postgresql, mysql, redis]
+    default: postgresql
+  apiurl:
+    type: string
+    default: "https://api.fortnox.se/3/"
+  attachmentsurl:
+    type: string
+    default: "https://api.fortnox.se/api/fileattachments/attachments-v1"
+  oauth2:
+    type: object
+    properties:
+      client_id:
+        type: string
+        x-samizdat-scope: platform
+        description: Fortnox app Client ID.
+      secret:
+        type: string
+        writeOnly: true
+        x-samizdat-scope: platform
+        description: Fortnox app client secret.
+      authorize_url:
+        type: string
+        default: "https://apps.fortnox.se/oauth-v1/auth?response_type=code"
+      token_url:
+        type: string
+        default: "https://apps.fortnox.se/oauth-v1/token"
+      redirect_uri:
+        type: string
+        description: Must exactly match the Fortnox app registration.
+      scope:
+        type: string
+        default: "invoice customer payment"
+      access_type:
+        type: string
+        default: offline
+      account_type:
+        type: string
+        default: service
+    required: [client_id, secret]
+required: [oauth2]

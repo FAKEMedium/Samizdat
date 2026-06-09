@@ -42,6 +42,7 @@ sub startup {
     static     => [ ($res_env ? $res_env->child('public')     : ()), $res_inc->child('public')                                       ],
     migrations => [ ($res_env ? $res_env->child('migrations') : ()), $res_inc->child('migrations'),  $home->child('migrations', 'pg') ],
     locale     => [ ($res_env ? $res_env->child('locale')     : ()), $res_inc->child('locale'),      $home->child('locale')          ],
+    settings   => [ ($res_env ? $res_env->child('settings')   : ()), $res_inc->child('settings')                                     ],
   );
   $app->helper(resource => sub {
     my ($c, $kind, @rel) = @_;
@@ -161,6 +162,9 @@ sub startup {
     my $manager = $route->any($path);
     return $manager;
   });
+
+  # Core layered-config resolver — load early so plugins can resolve their settings.
+  $app->plugin('Settings');
 
   # Load OAuth2 plugin and register providers from config
   $app->plugin('OAuth2');
