@@ -30,7 +30,7 @@ sub register ($self, $app, $conf) {
   # Helper for accessing the RealtimeRegister API model
   $app->helper(realtimeregister => sub ($c) {
     state $model = Samizdat::Model::RealtimeRegister->new({
-      config => $app->config->{manager}->{realtimeregister},
+      config => $app->settings->resolve('realtimeregister'),
     });
     return $model;
   });

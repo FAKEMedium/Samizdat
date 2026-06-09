@@ -32,7 +32,7 @@ sub register ($self, $app, $conf) {
   $app->helper(website => sub ($c) {
     state $model = Samizdat::Model::Website->new(
       pg     => $app->pg,
-      config => $app->config->{manager}->{website} // {},
+      config => $app->settings->resolve('website'),
     );
     return $model;
   });

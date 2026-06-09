@@ -51,7 +51,7 @@ sub register ($self, $app, $conf) {
   # Helper to access email model
   $app->helper(email => sub ($self) {
     state $model = Samizdat::Model::Email->new({
-      config       => $self->config->{manager}->{email} || {},
+      config       => $self->settings->resolve('email'),
       fallback_dsn => $self->config->{dsn}{pg},
     });
     # Set current user for logging

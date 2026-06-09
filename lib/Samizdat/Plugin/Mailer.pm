@@ -35,7 +35,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(mailer => sub ($c) {
     state $model = Samizdat::Model::Mailer->new({
-      config => $c->config->{manager}->{mailer},
+      config => $c->settings->resolve('mailer'),
       pg     => $c->pg,
       minion => $c->app->renderer->helpers->{minion} ? $c->minion : undef,
     });

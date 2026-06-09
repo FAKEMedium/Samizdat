@@ -28,7 +28,7 @@ sub register ($self, $app, $config = {}) {
 
     eval {
       $model = Samizdat::Model::PayPal->new(
-        config => $c->app->config->{manager}->{paypal},
+        config => $c->app->settings->resolve('paypal'),
         redis  => $c->app->redis,
         pg     => $c->app->pg,
       );

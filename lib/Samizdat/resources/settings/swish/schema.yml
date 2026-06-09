@@ -1,0 +1,34 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "samizdat:settings:swish"
+title: Swish
+description: Swish mobile payments (operator).
+type: object
+x-samizdat-audience: operator
+x-samizdat-version: 1
+properties:
+  cardnumber: { type: integer }
+  dbtype: { type: string, enum: [postgresql, mysql, redis], default: postgresql }
+  currency: { type: string, default: SEK }
+  default_env: { type: string, default: test }
+  commerce:
+    type: object
+    description: Per-environment API endpoint, payee and mTLS certificates.
+    additionalProperties:
+      type: object
+      properties:
+        api: { type: string }
+        payee_alias: { type: string }
+        callback_url: { type: string }
+        cert:
+          type: object
+          properties:
+            client_cert: { type: string, writeOnly: true }
+            client_key:  { type: string, writeOnly: true }
+            ca_cert:     { type: string, writeOnly: true }
+  company:
+    type: object
+    description: Per-environment merchant payee alias.
+    additionalProperties:
+      type: object
+      properties:
+        payee_alias: { type: string }

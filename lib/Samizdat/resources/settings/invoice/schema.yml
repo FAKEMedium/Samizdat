@@ -1,0 +1,40 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "samizdat:settings:invoice"
+title: Invoice
+description: Invoicing (operator back-office).
+type: object
+x-samizdat-audience: operator
+x-samizdat-version: 1
+properties:
+  cardnumber: { type: integer }
+  dbtype: { type: string, enum: [postgresql, mysql, redis], default: mysql }
+  sender: { type: string }
+  sendername: { type: string }
+  invoicedir: { type: string }
+  invoiceurl: { type: string, default: "invoice/" }
+  logotype: { type: string }
+  duedays: { type: integer, default: 30 }
+  overdueinterest: { type: number, default: 8 }
+  duedaysremind: { type: integer, default: 10 }
+  debug: { type: integer }
+  bankgiro: { type: string }
+  plusgiro: { type: string }
+  iban: { type: string }
+  bicswift: { type: string }
+  paypal: { type: string }
+  paypalfee: { type: string }
+  orgno: { type: string }
+  vatno: { type: string }
+  office: { type: string }
+  ftax: { type: integer }
+  phone:
+    type: object
+    properties:
+      loc: { type: string }
+      int: { type: string }
+  address: { type: string }
+  contact: { type: string }
+  billingcontact: { type: string }
+  preferredcurrency: { type: string, default: SEK }
+  currencies: { type: array, items: { type: string } }
+  paymentdifference: { type: number, default: 1 }

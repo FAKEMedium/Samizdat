@@ -27,7 +27,7 @@ sub register ($self, $app, $config = {}) {
 
     eval {
       $model = Samizdat::Model::Stripe->new(
-        config => $c->app->config->{manager}->{stripe},
+        config => $c->app->settings->resolve('stripe'),
         redis  => $c->app->redis,
         pg     => $c->app->pg,
       );

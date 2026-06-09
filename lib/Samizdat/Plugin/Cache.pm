@@ -22,7 +22,7 @@ sub register ($self, $app, $conf) {
   $app->helper(cache => sub ($c) {
     state $model = Samizdat::Model::Cache->new({
       redis  => $c->redis,
-      config => $app->config->{manager}->{cache},
+      config => $app->settings->resolve('cache'),
     });
 
     # Update session reference for encryption

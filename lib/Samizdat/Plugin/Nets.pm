@@ -22,7 +22,7 @@ sub register ($self, $app, $config = {}) {
   # Register model helper following the established pattern
   $app->helper(nets => sub ($c) {
     state $model = Samizdat::Model::Nets->new({
-      config => $c->config->{manager}->{nets},
+      config => $c->settings->resolve('nets'),
       redis  => $c->app->redis,
       pg     => $c->app->pg,
     });

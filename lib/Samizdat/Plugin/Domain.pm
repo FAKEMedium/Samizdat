@@ -37,7 +37,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(domain => sub ($self) {
     state $model = do {
-      my $domain_config = $self->config->{manager}->{domain};
+      my $domain_config = $self->settings->resolve('domain');
       my $has_epp = $app->renderer->helpers->{epp};
       my $has_rtr = $app->renderer->helpers->{realtimeregister};
 

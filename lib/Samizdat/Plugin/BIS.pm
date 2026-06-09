@@ -34,7 +34,7 @@ sub register ($self, $app, $config = {}) {
   # Register model helper
   $app->helper(bis => sub ($c) {
     state $model = Samizdat::Model::BIS->new({
-      config => $c->config->{manager}->{bis},
+      config => $c->settings->resolve('bis'),
       redis  => $c->app->redis,
       pg     => $c->app->pg,
     });

@@ -28,7 +28,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(poll => sub {
     state $model = Samizdat::Model::Poll->new({
-      config   => $app->config->{manager}->{poll},
+      config   => $app->settings->resolve('poll'),
       database => shift->pg,
     });
     return $model;

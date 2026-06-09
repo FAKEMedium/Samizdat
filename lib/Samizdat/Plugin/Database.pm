@@ -30,7 +30,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(database => sub ($self) {
     state $model = do {
-      my $opts = { config => $self->config->{manager}->{database} // {} };
+      my $opts = { config => $self->settings->resolve('database') };
       $opts->{pg}    = $self->pg    if $app->renderer->helpers->{pg};
       $opts->{mysql} = $self->mysql if $app->renderer->helpers->{mysql};
       Samizdat::Model::Database->new($opts);

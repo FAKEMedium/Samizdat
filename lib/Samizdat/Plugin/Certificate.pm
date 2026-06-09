@@ -29,7 +29,7 @@ sub register ($self, $app, $conf) {
   $app->helper(certificate => sub {
     state $model = Samizdat::Model::Certificate->new({
       pg => $app->pg,
-      config => $app->config->{manager}->{certificate}
+      config => $app->settings->resolve('certificate')
     });
     return $model;
   });

@@ -53,7 +53,7 @@ sub register($self, $app, $conf) {
   # Helper for accessing the Zone API model.
   $app->helper(zone => sub($c) {
     state $model = Samizdat::Model::Zone->new({
-      config => $c->config->{manager}->{zone},
+      config => $c->settings->resolve('zone'),
       cache  => $c->cache,
       pdns   => $c->pdns,   # PowerDNS database
       pg     => $c->pg,     # Main Samizdat database (for templates)

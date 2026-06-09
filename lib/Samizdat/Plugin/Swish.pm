@@ -34,7 +34,7 @@ sub register ($self, $app, $config = {}) {
 
     eval {
       $model = Samizdat::Model::Swish->new(
-        config => $c->app->config->{manager}->{swish},
+        config => $c->app->settings->resolve('swish'),
         redis  => $c->app->redis,
         pg     => $c->app->pg,
       );

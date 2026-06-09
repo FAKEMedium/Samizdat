@@ -47,7 +47,7 @@ sub register ($self, $app, $conf) {
 
   $app->helper(account => sub ($self) {
     state $model = Samizdat::Model::Account->new({
-      config       => $self->app->config->{manager}->{account},
+      config       => $self->app->settings->resolve('account'),
       database     => $self->app->pg,
       redis        => $self->app->redis,
     });

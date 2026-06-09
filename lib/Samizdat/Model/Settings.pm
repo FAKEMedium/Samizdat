@@ -76,7 +76,12 @@ sub _defaults ($self, $schema) {
 }
 
 sub _validate ($self, $module, $schema, $data) {
-  my @errors = eval { JSON::Validator->new->schema($schema)->validate($data) };
+  my $jv = JSON::Validator->new;
+  # Config comes from YAML where numbers/booleans often arrive as strings; coerce
+  # so the schema's integer/number/boolean types don't false-positive (this also
+  # leaves the resolved config with proper types).
+  eval { $jv->coerce('booleans,numbers') };
+  my @errors = eval { $jv->schema($schema)->validate($data) };
   return $self->_warn("settings($module): schema error: $@") if $@;
   $self->_warn(sprintf 'settings(%s): %s', $module, $_->to_string) for @errors;
 }

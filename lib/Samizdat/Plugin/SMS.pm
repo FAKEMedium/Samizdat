@@ -30,7 +30,7 @@ sub register ($self, $app, $conf) {
   # Register helper
   $app->helper(sms => sub ($c) {
     state $model = Samizdat::Model::SMS->new({
-      config   => $app->config->{manager}->{sms},
+      config   => $app->settings->resolve('sms'),
       database => $c->pg,
       app      => $app,
     });

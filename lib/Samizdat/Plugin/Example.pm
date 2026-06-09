@@ -23,7 +23,7 @@ sub register ($self, $app, $conf) {
   $app->helper(example => sub {
     state $model = Samizdat::Model::Example->new({
       pg => $app->pg,
-      config => $app->config->{manager}->{example}
+      config => $app->settings->resolve('example')
     });
     return $model;
   });

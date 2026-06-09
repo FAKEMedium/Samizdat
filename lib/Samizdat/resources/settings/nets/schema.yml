@@ -1,0 +1,25 @@
+$schema: "https://json-schema.org/draft/2020-12/schema"
+$id: "samizdat:settings:nets"
+title: Nets
+description: Nets / Nexi Checkout payments (operator).
+type: object
+x-samizdat-audience: operator
+x-samizdat-version: 1
+properties:
+  cardnumber: { type: integer }
+  dbtype: { type: string, enum: [postgresql, mysql, redis], default: postgresql }
+  currency: { type: string, default: SEK }
+  default_env: { type: string, default: test }
+  env:
+    type: object
+    description: Per-environment API base, secret key, checkout JS and webhook origin.
+    additionalProperties:
+      type: object
+      properties:
+        api: { type: string }
+        api_key: { type: string, writeOnly: true }
+        checkoutjs: { type: string }
+        webhook:
+          type: object
+          properties:
+            origin: { type: string }
