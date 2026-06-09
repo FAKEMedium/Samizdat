@@ -40,8 +40,8 @@ sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
   # Vendored flag/icon SVGs via the install-aware shared-data resolver.
-  my $flagsrepo = $app->sharedir->child('flag-icons');
-  my $iconrepo  = $app->sharedir->child('icons', 'icons');
+  my $flagsrepo = $app->sharedir('flag-icons');
+  my $iconrepo  = $app->sharedir('icons', 'icons');
   # GET for HTML page, API routes handled by OpenAPI
   $r->get('/project/icons')->to(controller => 'Icons', action => 'icons')->name('icons_index');
 

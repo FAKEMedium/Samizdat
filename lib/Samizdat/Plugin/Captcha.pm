@@ -26,13 +26,13 @@ sub register ($self, $app, $conf) {
 
     # Build font path via the install-aware shared-data resolver (src/fonts).
     my $font_rel = $options->{fontpath} || $lang_config->{font};
-    my $font_path = $c->app->sharedir->child('fonts', $font_rel)->to_string;
+    my $font_path = $c->app->sharedir('fonts', $font_rel)->to_string;
 
     # Fall back to default language if not found
     unless (-f $font_path) {
       $lang_config = $config->{language}->{default};
       $font_rel = $lang_config->{font};
-      $font_path = $c->app->sharedir->child('fonts', $font_rel)->to_string;
+      $font_path = $c->app->sharedir('fonts', $font_rel)->to_string;
     }
 
     # Get charset and process character ranges like 'A-Z'

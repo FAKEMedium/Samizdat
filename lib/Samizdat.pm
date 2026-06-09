@@ -26,13 +26,31 @@ sub startup {
   my $home = $app->home;
   my $first_existing = sub { (grep { -d $_->to_string } @_)[0] };
 
-  # Read-only vendored data (countries / flags / icons / fonts).
-  my $sharedir = $first_existing->(
-    ($ENV{SAMIZDAT_SHARED_SRC} ? Mojo::Home->new($ENV{SAMIZDAT_SHARED_SRC}) : ()),
-    Mojo::Home->new('/usr/local/share/samizdat/src'),
-    $home->child('src'),
-  ) // $home->child('src');
-  $app->helper(sharedir => sub { $sharedir });
+  # Read-only vendored third-party data (countries / languages / fonts; the raw
+  # icons/flag-icons are build-time only). Resolved across: a SAMIZDAT_SHARED_SRC
+  # override, the install share dir, every Samizdat/resources/shared tree on @INC
+  # (the Samizdat-Resources dist), and the checkout src/ last. sharedir(@rel) returns
+  # the first root that actually CONTAINS @rel (so a moved asset resolves to whichever
+  # dist ships it); bare sharedir() returns the first existing root.
+  my @shared_roots;
+  my %seen_shared;
+  my $add_shared = sub {
+    my $root = shift or return;
+    return if $seen_shared{$root->to_string}++;
+    push @shared_roots, $root;
+  };
+  $add_shared->($ENV{SAMIZDAT_SHARED_SRC} ? Mojo::Home->new($ENV{SAMIZDAT_SHARED_SRC}) : undef);
+  $add_shared->(Mojo::Home->new('/usr/local/share/samizdat/src'));
+  $add_shared->(Mojo::Home->new("$_")->child('Samizdat', 'resources', 'shared')) for grep { !ref } @INC;
+  $add_shared->($home->child('src'));
+  $app->helper(sharedir => sub {
+    my ($c, @rel) = @_;
+    if (@rel) {
+      for my $d (@shared_roots) { return $d->child(@rel) if -e $d->child(@rel)->to_string }
+      return $shared_roots[-1]->child(@rel);
+    }
+    return $first_existing->(@shared_roots) // $home->child('src');
+  });
 
   # Read-only dist resources by kind, unioned across every place a dist can ship
   # them: an explicit SAMIZDAT_RESOURCES override, core's own tree, every other

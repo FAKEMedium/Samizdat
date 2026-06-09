@@ -10,7 +10,7 @@ sub register ($self, $app, $conf) {
   my $r = $app->routes;
 
   # Vendored country data via the install-aware shared-data resolver.
-  my $countriesrepo = $app->sharedir->child('countries-data-json', 'data');
+  my $countriesrepo = $app->sharedir('countries-data-json', 'data');
 
   $r->get('/country')->to(controller => 'Public', action => 'countries');
   $r->get('/country/#country')->to(controller => 'Public', action => 'country');

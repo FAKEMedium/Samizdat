@@ -15,9 +15,9 @@ my $xml = Mojo::DOM->new->xml(1);
 sub run ($self, @args) {
   my $db = $self->app->pg->db;
 
-  my $languagesrepo = $self->app->sharedir->child('i18n-iso-languages');
-  my $countriesrepo = $self->app->sharedir->child('countries-data-json');
-  my $flagsrepo     = $self->app->sharedir->child('flag-icons');
+  my $languagesrepo = $self->app->sharedir('i18n-iso-languages');
+  my $countriesrepo = $self->app->sharedir('countries-data-json');
+  my $flagsrepo     = $self->app->sharedir('flag-icons');
 
   say "Be patient. Importing data may take many minutes.";
   my $languages = {};
