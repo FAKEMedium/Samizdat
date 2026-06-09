@@ -1,6 +1,6 @@
 # Samizdat Packaging & Multi-Repo Migration
 
-**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`), per-plugin pg migrations + new loader (`packaging/e-migrations`), payment plugins (`packaging/e-payments`) · **14 dists extracted** · **next:** `Samizdat-Resources`, `samizdat-site`, remotes/CI · **Owner:** Hans · **Started:** 2026-06-03
+**Status:** Phases A1–A3, B, D done · **E in progress** — extracted + retired from core: Fortnox, Invoice (`packaging/e-invoice`, multi-dist resolver), Website/Zone/Certificate (`packaging/e-offerable-leaves`), Database/Email (`packaging/e-database-email`), Domain+RealtimeRegister+EPP (`packaging/e-domain`), per-plugin pg migrations + new loader (`packaging/e-migrations`), payment plugins (`packaging/e-payments`), Resources + fakenews.com-src (`packaging/e-resources`) · **extraction COMPLETE — 16 sibling repos** · **next:** GitHub remotes/CI, `.claude` plugin, `samizdat-plugin-template` (productionize) · **Owner:** Hans · **Started:** 2026-06-03
 
 This is the durable plan for splitting the Samizdat monorepo into installable CPAN/pkg
 distributions across multiple git repos, and for the layered multi-customer/multi-site
@@ -351,6 +351,29 @@ byte-identical to baseline; the migration loader finds all 20 named sets with th
 resolving from their sibling repos; core suite unchanged. Payment certs (Swish `.p12`, etc.) stay
 deployment secrets — never shipped. **14 sibling dists now.** Remaining: `Samizdat-Resources` (vendored
 3rd-party assets), `samizdat-site`, GitHub remotes/CI, the `.claude` plugin, `samizdat-plugin-template`.
+
+**E Resources + site repo done (2026-06-10, branch `packaging/e-resources`)** — the last extractions:
+- **`Samizdat-Resources`** (`~/IdeaProjects/samizdat-resources`) — vendors the read-only **runtime**
+  third-party data (`countries-data-json/data`, `i18n-iso-languages/langs`, Noto `fonts`; MIT + SIL OFL)
+  under `lib/Samizdat/resources/shared/`, so installs are offline (no `make fetchall`/git/npm). Raw
+  bootstrap-icons/flag-icons stay build-time (their processed bundle ships in core). The **`sharedir`
+  helper became a multi-root resolver** (like the resource resolver): `SAMIZDAT_SHARED_SRC` → install
+  share → every `Samizdat/resources/shared` on `@INC` → checkout `src/`; `sharedir(@rel)` returns the
+  first root that contains `@rel`; consumers moved from `sharedir->child(x)` to `sharedir(x)`. Noto
+  fonts removed from core `src/`. Verified: routes identical; `sharedir` resolves fonts/countries/
+  languages from Resources.
+- **`fakenews.com-src`** (`~/IdeaProjects/fakenews.com-src`) — the **per-site deploy repo** (the source
+  for fakenews.com). Holds the site **content** (`public/`, moved out of core so core is content-free),
+  a `samizdat.dist.yml` template, and a secrets `.gitignore`. Core keeps a gitignored `src/public`
+  symlink so the dev checkout still renders with the default config; a real deploy sets
+  `paths.content` → the site repo. The static content path now follows `contentdir` (not a hardcoded
+  `src/public`). Verified: `GET /` renders the home page from the site content via the symlink.
+
+**The extraction is complete** — core ships only core modules + core schemas; every feature module,
+the vendored runtime data, and the site content live in their own repos (**16 sibling repos**: 13
+public plugin dists + private EPP + Samizdat-Resources + fakenews.com-src). Remaining is the
+**productionize tail**: GitHub remotes + CI per dist, the `.claude` automations plugin, and the
+`samizdat-plugin-template` — none of which pulls code out of core.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
