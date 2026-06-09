@@ -1,6 +1,0 @@
-<% layout config->{layout}; %>
-% use vars qw($web);
-%= $test->{company}
-<pre>
-%= $web->{main}
-</pre>
