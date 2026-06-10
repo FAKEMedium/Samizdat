@@ -137,11 +137,15 @@ for IP/security reasons.
   not a global `state $model` singleton). Phase 1 has one tenant (operator), but new code
   takes a context and scopes its cache so Phase 2 is additive, not a singleton-unwind.
 
-### 2.9 Foundational entities live in core (Account, Customer)
-- `Account` (identity/auth) and `Customer` live in the **core** dist. `Customer` is the
-  relationship hub that ties services — invoices, domains, email, payments — by `customerid`,
-  so it must be a stable, single-owner entity every feature dist can depend on. Feature dists
-  depend on core for them and never redefine them.
+### 2.9 Foundational entities (Account in core; Customer is now a foundational dist)
+- **SUPERSEDED (2026-06-10):** `Customer` was extracted to its own dist
+  `Samizdat-Plugin-Customer` (`packaging/e-customer`). It's still the relationship hub that ties
+  services by `customerid` and is *required* for a working install, but it doesn't need to live
+  **in** core to do so — core never used the `customer` helper (it was already an `extraplugins`
+  entry), so it extracted cleanly. It is now a **foundational dist**: a single-owner entity every
+  feature dist depends on, just shipped separately. `Account` (identity/auth) remains in core.
+- `Account` (identity/auth) lives in the **core** dist. Feature dists depend on it and never
+  redefine it.
 - Audience nuance: the **entity is core**; its *management* is operator-facing back-office,
   while the *customer's* self-view is a thin read surface drawn mostly from the Account schema.
   ("core entity + operator admin UI + thin customer self-view" — not a single audience tier.)
@@ -374,9 +378,20 @@ deployment secrets — never shipped. **14 sibling dists now.** Remaining: `Sami
 the vendored runtime data, and per-site content live in their own repos (**17 sibling repos**: 13
 public plugin dists + private EPP + Samizdat-Resources + two site repos **fakenews.com-src** and
 **samizdat.foundation-src**). `samizdat.foundation-src` carries the project site + early
-documentation (architecture, distributions, per-plugin migrations, content model, install). Remaining
-is the **productionize tail**: GitHub remotes + CI per dist, the `.claude` automations plugin, and the
-`samizdat-plugin-template` — none of which pulls code out of core.
+documentation (architecture, distributions, per-plugin migrations, content model, install).
+
+**Customer extracted too (2026-06-10, `packaging/e-customer`)** — see §2.9 (superseded). `Customer` →
+`Samizdat-Plugin-Customer` (foundational dist): trio + templates + the `30-customer` migration (which
+also holds the invoice/payment tables). No core decoupling (core never used the helper). It's a
+**dependency hub**: certificate/database/website/paypal/stripe/swish + core's `mailer` schema FK into
+`customer.customers`, and Invoice's data lives in the customer schema — so it's effectively **required**
+for a fresh install (loader runs it at tier 30, before its dependents). Verified: routes identical;
+fresh install builds all 20 schemas incl. customer (with invoices/payments) from the dist. **18 sibling
+repos now.** Known follow-up: `t/02-webp.t` fetches a `/test/…webp` image that moved to fakenews.com-src
+with the content (core is content-free) — the test needs a core fixture or to move to the site repo.
+
+Remaining is the **productionize tail**: GitHub remotes + CI per dist, the `.claude` automations
+plugin, and the `samizdat-plugin-template` — none of which pulls code out of core.
 
 ### Phase F — Phase 2 (later, when SaaS) · out of scope now
 - DB config layers, ceiling enforcement, entitlement, customer/site UI, multi-site
