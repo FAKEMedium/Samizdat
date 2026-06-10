@@ -397,7 +397,7 @@ a prior mistake:** the `bis` templates/locale + `40-bis` migration had been wron
 samizdat-domain during the Domain extraction — they belong to BIS and are now in samizdat-bis (Domain
 has no PG schema of its own — registrar data is legacy mysql/external). Verified: routes identical
 (Chat loads from its sibling; the rest weren't in `extraplugins`); fresh install builds all 20 schemas
-incl. bis/mailer/poll/sms from their dists. **24 sibling repos now** (21 plugin dists + Samizdat-
+incl. bis/mailer/poll/sms from their dists. **25 sibling repos now** (22 plugin dists incl. Example + Samizdat-
 Resources + 2 site repos). Core's remaining schemas: public/account/article/example/stats/web.
 
 Remaining is the **productionize tail**: GitHub remotes + CI per dist, the `.claude` automations
