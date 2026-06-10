@@ -386,9 +386,19 @@ also holds the invoice/payment tables). No core decoupling (core never used the 
 **dependency hub**: certificate/database/website/paypal/stripe/swish + core's `mailer` schema FK into
 `customer.customers`, and Invoice's data lives in the customer schema — so it's effectively **required**
 for a fresh install (loader runs it at tier 30, before its dependents). Verified: routes identical;
-fresh install builds all 20 schemas incl. customer (with invoices/payments) from the dist. **18 sibling
-repos now.** Known follow-up: `t/02-webp.t` fetches a `/test/…webp` image that moved to fakenews.com-src
-with the content (core is content-free) — the test needs a core fixture or to move to the site repo.
+fresh install builds all 20 schemas incl. customer (with invoices/payments) from the dist. Known
+follow-up: `t/02-webp.t` fetches a `/test/…webp` image that moved to fakenews.com-src with the content
+(core is content-free) — the test needs a core fixture or to move to the site repo.
+
+**Six more modules extracted (2026-06-10, `packaging/e-misc`)** — **Mailer, BIS, BuyMeACoffee, Chat,
+Poll, SMS** → `samizdat-{mailer,bis,buymeacoffee,chat,poll,sms}`. All clean (no core coupling). Mailer/
+Poll/SMS carry their pg migration out; BIS its `bischeck`/`biscollect`/`bisimport` commands. **Corrected
+a prior mistake:** the `bis` templates/locale + `40-bis` migration had been wrongly bundled into
+samizdat-domain during the Domain extraction — they belong to BIS and are now in samizdat-bis (Domain
+has no PG schema of its own — registrar data is legacy mysql/external). Verified: routes identical
+(Chat loads from its sibling; the rest weren't in `extraplugins`); fresh install builds all 20 schemas
+incl. bis/mailer/poll/sms from their dists. **24 sibling repos now** (21 plugin dists + Samizdat-
+Resources + 2 site repos). Core's remaining schemas: public/account/article/example/stats/web.
 
 Remaining is the **productionize tail**: GitHub remotes + CI per dist, the `.claude` automations
 plugin, and the `samizdat-plugin-template` — none of which pulls code out of core.
