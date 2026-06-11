@@ -66,10 +66,6 @@ harvest:
 nginx:
 	bin/samizdat makenginx
 
-eplinks:
-	find lib/Samizdat/resources/templates/ -type l -delete
-	bin/samizdat makeeplinks
-
 iso: static_all
 	xorrisofs -r -hfsplus -joliet -V Z`date +%Y%m%d_%H%M%S` --modification-date=`date +%Y%m%d%H%M%S00` -exclude public/iso/ -output public/iso/samizdat.iso public/
 
