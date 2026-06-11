@@ -11,7 +11,16 @@ src/js/**     linguist-documentation
 src/scss/**   linguist-documentation
 src/misc/**   linguist-vendored
 
-*.ep   linguist-documentation
+# Mojolicious templates: keep out of the language stats, but tell GitHub how to
+# syntax-highlight each by its format suffix (name.<format>.ep) instead of leaving
+# the renamed *.js.ep / *.css.ep source unrecognized.
+*.ep        linguist-documentation
+*.html.ep   linguist-language=HTML
+*.js.ep     linguist-language=JavaScript
+*.css.ep    linguist-language=CSS
+*.tex.ep    linguist-language=TeX
+*.mail.ep   linguist-language=HTML
+*.xml.ep    linguist-language=XML
 *.po   linguist-vendored
 *.pot  linguist-vendored
 *.mo   binary
