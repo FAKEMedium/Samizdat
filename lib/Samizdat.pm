@@ -181,7 +181,15 @@ sub startup {
   $app->helper(uuid => sub {state $uuid = Data::UUID->new});
 
   $app->helper(redis => sub {
-    state $redis = Mojo::Redis->new($config->{dsn}->{redis});
+    # Redis/Valkey is the cache + session backend. Config lives under manager.cache.redis
+    # (legacy top-level dsn.redis is still honoured). When neither is set, fall back to an
+    # in-process hash store so the app boots for dev / first-run without a redis server.
+    # The fallback is single-process and non-persistent — fine for setup, not for a
+    # multi-worker production deploy (sessions/cache would not be shared across workers).
+    state $redis = do {
+      my $url = $config->{manager}{cache}{redis} // $config->{dsn}{redis};
+      $url ? Mojo::Redis->new($url) : Samizdat::RedisFallback->new;
+    };
     return $redis;
   });
   # PostgreSQL is OPTIONAL: only wire it up (and run migrations below) when a dsn is
@@ -524,5 +532,116 @@ sub enqueue      ($self, @args) { undef }
 sub perform_jobs ($self, @args) { $self }
 sub jobs         ($self, @args) { Mojo::Collection->new }
 sub job          ($self, @args) { undef }
+
+
+# In-process Redis fallback used when manager.cache.redis (and legacy dsn.redis) is
+# unset. Implements the command subset the app uses via $app->redis->db->... so the
+# Cache model (strings) and Account sessions (hashes) work without a redis server.
+# Single-process and non-persistent: data lives in one Perl hash, lost on restart and
+# NOT shared across hypnotoad workers. Intended for dev / first-run setup only.
+package Samizdat::RedisFallback;
+use Mojo::Base -base, -signatures;
+
+has store => sub { {} };
+
+# Every db() shares the one store, mirroring how $redis->db hands out connections to a
+# single server.
+sub db ($self) { Samizdat::RedisFallback::Database->new(store => $self->store) }
+
+
+package Samizdat::RedisFallback::Database;
+use Mojo::Base -base, -signatures;
+
+has 'store';
+
+# Lazy-expire: a key past its TTL is treated as absent (and reaped on access).
+sub _live ($self, $key) {
+  my $e = $self->store->{$key} or return 0;
+  if (defined $e->{exp} && $e->{exp} <= time) { delete $self->store->{$key}; return 0 }
+  return 1;
+}
+
+sub _glob ($self, $pattern) {
+  (my $re = quotemeta $pattern) =~ s/\\\*/.*/g;
+  $re =~ s/\\\?/./g;
+  return qr/\A$re\z/;
+}
+
+# --- strings ---
+sub get ($self, $key) { $self->_live($key) ? $self->store->{$key}{v} : undef }
+
+sub set ($self, $key, $value) {
+  $self->store->{$key} = { v => "$value", type => 'string', exp => undef };
+  return 'OK';
+}
+
+sub setex ($self, $key, $ttl, $value) {
+  $self->store->{$key} = { v => "$value", type => 'string', exp => time + $ttl };
+  return 'OK';
+}
+
+sub incr ($self, $key) {
+  my $exp = $self->_live($key) ? $self->store->{$key}{exp} : undef;
+  my $v = ($self->_live($key) ? $self->store->{$key}{v} : 0) + 1;
+  $self->store->{$key} = { v => $v, type => 'string', exp => $exp };
+  return $v;
+}
+
+sub decr ($self, $key) {
+  my $exp = $self->_live($key) ? $self->store->{$key}{exp} : undef;
+  my $v = ($self->_live($key) ? $self->store->{$key}{v} : 0) - 1;
+  $self->store->{$key} = { v => $v, type => 'string', exp => $exp };
+  return $v;
+}
+
+sub mget ($self, @keys) { [ map { $self->get($_) } @keys ] }
+
+# --- hashes (sessions) ---
+sub hmset ($self, $key, %fields) {
+  my $exp = $self->_live($key) ? $self->store->{$key}{exp} : undef;
+  my $h   = $self->_live($key) && $self->store->{$key}{type} eq 'hash'
+    ? $self->store->{$key}{v} : {};
+  $self->store->{$key} = { v => { %$h, %fields }, type => 'hash', exp => $exp };
+  return 'OK';
+}
+
+sub hgetall ($self, $key) {
+  return {} unless $self->_live($key) && $self->store->{$key}{type} eq 'hash';
+  return { %{ $self->store->{$key}{v} } };
+}
+
+# --- keys / metadata ---
+sub del ($self, @keys) {
+  my $n = 0;
+  for my $key (@keys) { $n++ if $self->_live($key); delete $self->store->{$key} }
+  return $n;
+}
+
+sub exists ($self, $key) { $self->_live($key) ? 1 : 0 }
+
+sub expire ($self, $key, $seconds) {
+  return 0 unless $self->_live($key);
+  $self->store->{$key}{exp} = time + $seconds;
+  return 1;
+}
+
+sub ttl ($self, $key) {
+  return -2 unless $self->_live($key);
+  my $e = $self->store->{$key}{exp};
+  return defined $e ? $e - time : -1;
+}
+
+sub type ($self, $key) { $self->_live($key) ? $self->store->{$key}{type} : 'none' }
+
+sub keys ($self, $pattern = '*') {
+  my $re = $self->_glob($pattern);
+  return [ grep { $self->_live($_) && $_ =~ $re } keys %{ $self->store } ];
+}
+
+# The fallback never stores list/set/zset types, so the cache-manager listing of those
+# (lrange/smembers/zrange) is simply empty rather than an error.
+sub lrange   ($self, @args) { [] }
+sub smembers ($self, @args) { [] }
+sub zrange   ($self, @args) { [] }
 
 1;

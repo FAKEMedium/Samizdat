@@ -296,6 +296,10 @@ manager:
   cache:
     cardnumber: 13
     dbtype: redis
+    redis: redis://127.0.0.1:6379/1  # Redis/Valkey connection for cache + sessions
+#   redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fvalkey%2Fvalkey.sock/1"  # Local redis socket
+                                   # If `redis` is unset, Samizdat falls back to an in-process hash
+                                   # store (single-process, non-persistent — dev / first-run only).
     lifetime: 7200                 # Seconds to live (default TTL for cached items)
     encrypt: 1                     # Enable AES-256-GCM encryption for cached data (requires session)
   fortnox:
@@ -545,8 +549,7 @@ bundlename: samizdat
 timezone: Etc/UTC
 dsn:
   pg: postgresql://samizdat:s3cr3t@%2Fvar%2Frun%2Fpostgresql/samizdat
-  redis: redis://127.0.0.1:6379/1
-#  redis: "redis://:s3cr3t@%2Fvar%2Frun%2Fvalkey%2Fvalkey.sock/1"  # Local redis socket
+  # redis moved to manager.cache.redis (above) — it is the cache/session backend, not a core dsn.
 piratebay:
   login: username
   password: s3cr3t
