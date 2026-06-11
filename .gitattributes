@@ -1,0 +1,22 @@
+# Samizdat is a Perl distribution. Base GitHub Linguist's language stats on the Perl
+# code (lib/, bin/), and treat the view layer, frontend assets, translations and
+# generated/snapshot files as documentation/vendored rather than the project language.
+
+lib/Samizdat/resources/templates/**   linguist-documentation
+lib/Samizdat/resources/migrations/**  linguist-documentation
+lib/Samizdat/resources/locale/**      linguist-vendored
+lib/Samizdat/resources/public/**      linguist-vendored
+
+src/js/**     linguist-documentation
+src/scss/**   linguist-documentation
+src/misc/**   linguist-vendored
+
+*.ep   linguist-documentation
+*.po   linguist-vendored
+*.pot  linguist-vendored
+*.mo   binary
+
+# Treat .pm/.pl/.t as Perl (belt-and-suspenders)
+*.pm linguist-language=Perl
+*.pl linguist-language=Perl
+*.t  linguist-language=Perl
