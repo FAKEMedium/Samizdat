@@ -184,16 +184,23 @@ sub startup {
     state $redis = Mojo::Redis->new($config->{dsn}->{redis});
     return $redis;
   });
-  $app->helper(pg => sub {
-    state $pg = Mojo::Pg->new($config->{dsn}->{pg});
-    return $pg;
-  });
-  $app->pg->on(connection => sub {
-    my ($pg, $dbh) = @_;
-    $dbh->do('SET search_path TO public');
-    $dbh->{pg_server_prepare} = 0;
-    $pg->max_connections(32);
-  });
+  # PostgreSQL is OPTIONAL: only wire it up (and run migrations below) when a dsn is
+  # configured, so the app can boot for first-run setup — the config `superadmins` can
+  # log in without a database (Controller/Account.pm) — before one exists. Plugins
+  # already guard DB use on helpers->{pg}; registering pg conditionally makes that
+  # guard real (helpers->{pg} is false when there is no dsn).
+  if ($config->{dsn}->{pg}) {
+    $app->helper(pg => sub {
+      state $pg = Mojo::Pg->new($config->{dsn}->{pg});
+      return $pg;
+    });
+    $app->pg->on(connection => sub {
+      my ($pg, $dbh) = @_;
+      $dbh->do('SET search_path TO public');
+      $dbh->{pg_server_prepare} = 0;
+      $pg->max_connections(32);
+    });
+  }
   # Per-plugin migrations: every dist ships fresh-snapshot migrations under
   # resources/migrations/{pg,mysql}/<NN>-<schema>/<version>/{up,down}.sql — the Mojo
   # from_dir layout (numbered version dirs, so pgModeler schema-diff dumps drop
@@ -228,8 +235,10 @@ sub startup {
       $m->migrate;
     }
   });
-  $app->run_migrations($app->pg, 'pg');
-  $app->pg->db->dbh->{pg_server_prepare} = 1;
+  if ($config->{dsn}->{pg}) {
+    $app->run_migrations($app->pg, 'pg');
+    $app->pg->db->dbh->{pg_server_prepare} = 1;
+  }
 
   if (exists($config->{import}->{dsn})) {
     $app->helper(mysql => sub {state $mysql = Mojo::mysql->new($config->{import}->{dsn})});
@@ -298,7 +307,15 @@ sub startup {
       say "Registered OAuth2 provider: $module";
     }
   }
-  $app->plugin('Minion', { Pg => $config->{dsn}->{pg} });
+  if ($config->{dsn}->{pg}) {
+    $app->plugin('Minion', { Pg => $config->{dsn}->{pg} });
+  }
+  else {
+    # No database → Minion has no backend. Register a no-op stub so plugins can still
+    # register their job tasks at boot (add_task) and the app starts for first-run
+    # setup; enqueue/jobs become harmless no-ops (real jobs need a database).
+    $app->helper(minion => sub { state $stub = Samizdat::MinionStub->new });
+  }
   $app->plugin('Cache');
   $app->plugin('Account');
   $app->plugin('Public');
@@ -493,5 +510,19 @@ sub _fix_booleans {
   }
   return $data;
 }
+
+
+# No-op Minion backend used when the app boots without a database (no dsn). Lets
+# plugins register their job tasks at boot (add_task) and the app start for first-run
+# setup; jobs are silently dropped until a real Pg-backed Minion is configured.
+package Samizdat::MinionStub;
+use Mojo::Base -base, -signatures;
+use Mojo::Collection ();
+
+sub add_task     ($self, @args) { $self }
+sub enqueue      ($self, @args) { undef }
+sub perform_jobs ($self, @args) { $self }
+sub jobs         ($self, @args) { Mojo::Collection->new }
+sub job          ($self, @args) { undef }
 
 1;
