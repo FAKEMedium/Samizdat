@@ -1,6 +1,12 @@
 SHELL := /bin/bash
 PATH := bin:$(PATH)
 
+# Build-time / frontend tooling lives in the samizdat-dev sibling dist. The asset commands
+# run here in core's tree with samizdat-dev's Command modules on PERL5LIB; the webpack build
+# runs in samizdat-dev and writes its bundles back into core (SAMIZDAT_HOME defaults to ../Samizdat).
+DEV ?= ../samizdat-dev
+DEVRUN := PERL5LIB=$(DEV)/lib:lib bin/samizdat
+
 migratemysql:
 	bin/samizdat migratemysql --purge
 	bin/samizdat migratemysql --table=customer
@@ -54,7 +60,7 @@ static_all: static_en static_sv static_de static_fr static_es static_pl static_p
 	echo "All static files generated. Cache is warm."
 
 swcache:
-	bin/samizdat makeswcache
+	$(DEVRUN) makeswcache
 
 clean:
 	rm -rf public/*
@@ -79,7 +85,7 @@ devtools:
 i18n:
 	rm -f ./src/countries-data-json/data/translations/countries-zh.json
 	ln -s -r src/countries-data-json/data/translations/countries-zh_CN.json ./src/countries-data-json/data/translations/countries-zh.json
-	bin/samizdat makei18n
+	$(DEVRUN) makei18n
 
 cert:
 	openssl req -x509 -newkey rsa:4096 -sha256 -days 5000 -nodes \
@@ -167,35 +173,17 @@ fetchswish:
 fetchall: fetchicons fetchflags fetchcountries fetchlanguages fetchswish
 
 speedtest:
-	bin/samizdat speedtest
+	$(DEVRUN) speedtest
 
+# Frontend toolchain moved to the samizdat-dev sibling; install its deps there.
 webpackinit:
-	npm init -y
-	npm i --save-dev webpack webpack-cli webpack-dev-server html-webpack-plugin webpack-merge
-	npm i --save-dev autoprefixer css-loader postcss-loader sass sass-loader style-loader
-	npm i --save-dev purgecss purgecss-webpack-plugin
-	npm i --save-dev mini-css-extract-plugin
-	npm i --save-dev css-minimizer-webpack-plugin clean-webpack-plugin
-	npm i --save-dev image-minimizer-webpack-plugin svgo sharp katex
-	npm i --save bootstrap @popperjs/core
-	npm i --save bootstrap-icons
-	npm i --save sprintf-js
+	cd $(DEV) && npm install
 
+# Build the bundles in samizdat-dev; its webpack writes them into this core tree
+# (SAMIZDAT_HOME defaults to ../Samizdat) and PurgeCSS scans core + every samizdat-* sibling.
 webpack:
-	mkdir -p lib/Samizdat/resources/public/assets .npm-cache
-	@if [ ! -L node_modules ] && [ ! -d node_modules ]; then \
-		if [ -d /usr/local/share/samizdat/node_modules ]; then \
-			echo "Linking to system-wide node_modules"; \
-			ln -s /usr/local/share/samizdat/node_modules node_modules; \
-		elif [ -d "$$HOME/samizdat-shared/node_modules" ]; then \
-			echo "Linking to user-level shared node_modules"; \
-			ln -s "$$HOME/samizdat-shared/node_modules" node_modules; \
-		else \
-			echo "Installing node_modules locally"; \
-			HOME=$(shell pwd) npm_config_cache=$(shell pwd)/.npm-cache npm install; \
-		fi \
-	fi
-	HOME=$(shell pwd) MOJO_MODE=production npm run build
+	mkdir -p lib/Samizdat/resources/public/assets
+	cd $(DEV) && MOJO_MODE=production npm run build
 
 favicon:
 	convert src/svg/f.svg -background none -bordercolor white -border 0 \
@@ -208,7 +196,7 @@ favicon:
 	brotli -f -k -q 11 public/favicon.ico
 
 icons:
-	bin/samizdat makeicons
+	$(DEVRUN) makeicons
 
 install: clean favicon icons static_all webpack zip
 #	chown -R www:www .
