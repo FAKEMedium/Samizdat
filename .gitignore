@@ -43,3 +43,12 @@
 *.crt
 *.csr
 *.pem
+
+# ExtUtils::MakeMaker output (dev targets live in GNUmakefile)
+/Makefile
+/Makefile.old
+/MYMETA.*
+/blib/
+/pm_to_blib
+/Samizdat-*
+/MANIFEST.SKIP.bak
